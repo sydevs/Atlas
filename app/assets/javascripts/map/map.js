@@ -9,6 +9,7 @@ const Map = {
     Map.instance = L.map('map', {
       attributionControl: false,
       zoomControl: false,
+      gestureHandling: true,
     })
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(Map.instance)
@@ -40,7 +41,8 @@ const Map = {
     }
 
     Map.instance.addLayer(markers)
-    Map.instance.setView([0, 0], 2)
+    //Map.instance.setView([0, 0], 2)
+    Map.instance.fitBounds(markers.getBounds().pad(0.1))
     Map.initial_zoom = Map.instance.getZoom()
   },
 
