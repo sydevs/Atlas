@@ -1,0 +1,50 @@
+
+= simple_form_for [ @venue ], html: { id: 'page-form', class: "#{'error' if @venue.errors.present?}", novalidate: true } do |f|
+  = f.error :base
+
+  = f.input :name, placeholder: @venue.address_street
+  //= f.input :address, wrapper: :ui_input, icon: ''
+  .required.field
+    = f.label :address
+    .fields
+      .twelve.wide.field
+        = f.input_field :address_street, placeholder: 'Street Address'
+      .four.wide.field
+        = f.input_field :address_room, placeholder: 'Room'
+    .three.fields
+      .field
+        = f.input_field :address_municipality, placeholder: 'City'
+      .field
+        = f.input_field :address_subnational, placeholder: 'State / County'
+    .fields
+      .twelve.wide.field
+        = f.input_field :address_country, prompt: 'Country'
+      .four.wide.field
+        = f.input_field :address_postcode, placeholder: 'Postal Code'
+
+    = f.hidden_field :latitude
+    = f.hidden_field :longitude
+
+  button.lookup.ui.fluid.button type='button'
+    i.search.icon
+    | Find Marker
+
+  #map
+  .ui.map.message class="#{'active' unless @venue.has_coordinates?}"
+    .header No map marker has been set
+    p You must press 'Find Marker' above to automatically detect the coordinates of the venue's address.
+  .ui.negative.map.message.for-failure
+    .header Couldn't find address
+    p The address you entered could not be found, try adding more information.
+  .ui.info.map.message.for-success class="#{'active' if @venue.has_coordinates?}"
+    .header Map marker set!
+    p Make sure to check that the map is correct.
+
+  = f.input :contact_email
+
+  p
+    a.ui.basic.button href=url_for(@venue || Venue)
+      i.left.arrow.icon
+      | Back
+
+    button.ui.basic.positive.button Save

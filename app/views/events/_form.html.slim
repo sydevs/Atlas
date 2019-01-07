@@ -1,0 +1,26 @@
+
+= f.error :base
+= f.hidden_field :venue_id
+
+= f.input :name, placeholder: @event.category_name
+= f.input :category, collection: Event.categories.map {|k, v| [k.to_s.titleize, k]}
+= f.input :description, as: :text, placeholder: @event.category_description
+= f.input :room, placeholder: @event.venue.address_room
+= f.input :contact_email, placeholder: @event.venue.contact_email
+
+.two.fields
+  = f.input :start_date, as: :string, wrapper: :ui_date_calendar, wrapper_html: { class: 'start' }
+  = f.input :end_date, as: :string, wrapper: :ui_date_calendar, wrapper_html: { class: 'end' }, input_html: { placeholder: 'Never' }
+
+.two.fields
+  = f.input :start_time, wrapper: :ui_time_calendar, wrapper_html: { class: 'start' }, input_html: { autocomplete: 'off' }
+  = f.input :end_time, wrapper: :ui_time_calendar, wrapper_html: { class: 'end' }, input_html: { autocomplete: 'off', placeholder: 'Unspecified' }
+
+= f.input :recurrence, collection: Event.recurrences.map {|k, v| ["Every #{k.humanize}", k]}
+
+p
+  a.ui.basic.button href=url_for(@venue)
+    i.left.arrow.icon
+    | Back
+
+  button.ui.basic.positive.button Save

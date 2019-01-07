@@ -1,0 +1,23 @@
+
+= simple_form_for venues_path, html: { method: 'GET', data: { remote: 'true' } }
+  #search.ui.fluid.left.icon.action.input
+    input name='q' type='text' placeholder='Search venues...' value=(params[:q] || '')
+    i.search.icon
+
+    a.ui.basic.button href=url_for([:new, 'venue'])
+      i.plus.icon
+      | New Venue
+
+#list.ui.list
+  - if @venues
+    - if @venues.count > 0
+      - @venues.each do |venue|
+        .item
+          i.map.marker.icon
+          .content
+            a.header href=url_for(venue) = venue.label
+            .description #{venue.address(:full)} - #{pluralize venue.events.count, 'event'}
+    - else
+      | No venues for the search term "#{params[:q]}"
+  - else
+    | #{pluralize @venues_count, 'venue'} in the database

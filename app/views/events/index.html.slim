@@ -1,0 +1,6 @@
+
+- @events.each do |event|
+  .event id=dom_id(event)
+    strong.event-header = event.name || event.category_name
+    .venue-address = event.venue.address(:full)
+    .venue-timing = event.timing

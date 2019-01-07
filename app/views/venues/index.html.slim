@@ -1,0 +1,11 @@
+
+- @venues.each do |venue|
+  .venue id=dom_id(venue)
+    strong.venue-header = venue.label
+    .venue-address = venue.address(:full)
+    ul.venue-events
+      - venue.events.each do |event|
+        li.venue-event
+          strong.venue-event-name = event.name || event.category_name
+          span.venue-event-separator = ', '
+          span.venue-event-timing = event.timing
