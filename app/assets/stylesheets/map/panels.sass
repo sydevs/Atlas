@@ -1,0 +1,23 @@
+@import '../mixins'
+
+#sidebar-list
+  padding-top: 50px
+
+  > *:not(.show)
+    display: none
+
+  > .panel-close, #sidebar-search
+    display: block
+
+/*#sidebar-result
+  @media (min-width: $threshold-large)
+    @include widths($width-large * 2)
+
+  @media (min-width: $threshold-medium)
+    @include widths($width-medium * 2)
+
+  @media (min-width: $threshold-small)
+    @include widths($width-small * 2)
+
+  @media (max-width: $threshold-small - 1px)
+    @include widths($width-extra-small * 2)

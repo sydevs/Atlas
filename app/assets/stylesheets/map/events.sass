@@ -1,0 +1,64 @@
+
+#event-list
+  list-style: none
+  margin: 0 -18px
+  padding: 0
+
+#venue-filter
+  &-reset
+    cursor: pointer
+    text-decoration: underline
+    opacity: 0.9
+
+.event
+  position: relative
+  padding: 8px 18px
+  background: white
+  transition: background 0.2s
+
+  &.active
+    background: lighten(lightgray, 10%)
+
+  &.hidden
+    display: none
+
+  &-info
+    margin-right: 70px
+
+  &-title
+    font-size: 16px
+    margin-bottom: 4px
+
+  &-actions
+    position: absolute
+    right: 18px
+    top: 1em
+    bottom: 1em
+    width: 60px
+
+  &-register
+    border: 2px solid darkgray
+    padding: 4px
+    text-align: center
+    margin-bottom: 1em
+
+  &-expand
+    text-align: center
+    border-bottom: 2px solid darkgray
+
+  &-register, &-expand
+    &:hover
+      cursor: pointer
+      border-color: black
+
+  &-details
+    margin-top: 2px
+    overflow: hidden
+    transition: height 0.2s ease
+    opacity: 0.8
+
+    > *
+      margin-bottom: 1px
+
+  &:not(.expand) > .event-details
+    max-height: 0

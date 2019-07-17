@@ -1,4 +1,5 @@
 class Event < ApplicationRecord
+
   nilify_blanks
   belongs_to :venue
   has_many :registrations
@@ -50,7 +51,7 @@ class Event < ApplicationRecord
   def timing
     result = ''
 
-    if start_date == end_date || (end_date == nil and recurrence == 'day')
+    if start_date == end_date || (end_date.nil? and recurrence == 'day')
       result += start_date.to_s(:short)
     elsif recurrence == 'day'
       result += "#{start_date.to_s(:short)} - #{end_date.to_s(:short)}"
@@ -66,7 +67,7 @@ class Event < ApplicationRecord
   def next_date
     date = nil
 
-    if start_date == end_date || (end_date == nil and recurrence == 'day')
+    if start_date == end_date || (end_date.nil? and recurrence == 'day')
       date = start_date
     elsif recurrence == 'day'
       date = [start_date, Date.today].min
@@ -78,9 +79,11 @@ class Event < ApplicationRecord
   end
 
   private
+
     def date_of_next day
-      date  = Date.parse(day)
+      date = Date.parse(day)
       delta = date > Date.today ? 0 : 7
       date + delta
     end
+
 end

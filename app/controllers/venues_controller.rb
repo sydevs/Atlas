@@ -1,11 +1,9 @@
 class VenuesController < ApplicationController
-  before_action :set_venue!, only: [:show, :edit, :update, :destroy]
-  before_action :set_venues!, only: [:index, :map]
+
+  before_action :set_venue!, only: %i[show edit update destroy]
 
   def index
-  end
-
-  def map
+    @venue = Venue.find(params[:id])
   end
 
   def show
@@ -19,7 +17,7 @@ class VenuesController < ApplicationController
     @venue = Venue.new venue_params
 
     if @venue.save
-      redirect_to @venue, flash: { info: "Created venue" }
+      redirect_to @venue, flash: { info: 'Created venue' }
     else
       render :new
     end
@@ -30,7 +28,7 @@ class VenuesController < ApplicationController
 
   def update
     if @venue.update venue_params
-      redirect_to @venue, flash: { info: "Created venue" }
+      redirect_to @venue, flash: { info: 'Created venue' }
     else
       render :edit
     end
@@ -41,9 +39,6 @@ class VenuesController < ApplicationController
   end
 
   private
-    def set_venue!
-      @venue = Venue.find(params[:id])
-    end
 
     def set_venues!
       if params[:q]
@@ -51,7 +46,7 @@ class VenuesController < ApplicationController
         @venues = Venue.where('(name LIKE ?) OR (address LIKE ?)', term, term)
       else
         @venues = Venue.includes(:events).limit(10)
-        #@venues_count = Venue.all.count
+        # @venues_count = Venue.all.count
       end
     end
 
@@ -61,4 +56,5 @@ class VenuesController < ApplicationController
         :address_room, :address_street, :address_municipality, :address_subnational, :address_country
       )
     end
+
 end

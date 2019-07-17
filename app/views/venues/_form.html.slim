@@ -30,13 +30,13 @@
     | Find Marker
 
   #map
-  .ui.map.message class="#{'active' unless @venue.has_coordinates?}"
+  .ui.map.message class="#{'active' unless @venue.coordinates?}"
     .header No map marker has been set
     p You must press 'Find Marker' above to automatically detect the coordinates of the venue's address.
   .ui.negative.map.message.for-failure
     .header Couldn't find address
     p The address you entered could not be found, try adding more information.
-  .ui.info.map.message.for-success class="#{'active' if @venue.has_coordinates?}"
+  .ui.info.map.message.for-success class="#{'active' if @venue.coordinates?}"
     .header Map marker set!
     p Make sure to check that the map is correct.
 

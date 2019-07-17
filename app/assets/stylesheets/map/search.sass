@@ -1,0 +1,62 @@
+@import '../mixins'
+
+#sidebar-search
+  position: absolute
+  top: 0
+  left: 0
+  padding: 5px 0
+
+  input
+    height: 40px
+    width: 250px
+    font-size: 16px
+    padding: 1em
+    border: none
+    border-right: 1px solid black
+
+    &:focus
+      outline: none
+      background: lighten(lightblue, 20%)
+
+.leaflet-searchbox
+  background: white
+  border: 2px solid rgba(0,0,0,0.2)
+  border-radius: 4px
+  padding: 5px
+  box-sizing: border-box
+  display: flex
+
+  @media (min-width: $threshold-large)
+    width: $width-large
+
+  @media (min-width: $threshold-medium)
+    width: $width-medium
+
+  @media (min-width: $threshold-small)
+    width: $width-small
+
+  @media (max-width: $threshold-small - 1px)
+    width: $width-extra-small
+
+  > *
+    margin: 0
+    display: inline-block
+
+#sidebar-button
+  font-weight: bold
+  opacity: 1
+  transition: 0.2s opacity
+  height: 100%
+  padding: 0 10px
+  line-height: 28.5px
+  cursor: pointer
+
+  &:not(.disabled):hover
+    opacity: 0.8
+
+  &.disabled
+    opacity: 0.5
+
+#search
+  border: none
+  border-left: 1px solid black

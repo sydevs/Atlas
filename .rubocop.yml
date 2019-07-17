@@ -1,0 +1,60 @@
+# Enable this when the VSC rubocop extension supports rails
+#inherit_from: ./config/rails.rubocop.yml
+
+Metrics:
+  Enabled: False
+
+Style/Documentation:
+  Enabled: False
+
+Style/EmptyMethod:
+  EnforcedStyle: expanded
+
+Style/FrozenStringLiteralComment:
+  Enabled: False
+
+Style/MethodDefParentheses:
+  EnforcedStyle: require_no_parentheses
+
+Style/AndOr:
+  Enabled: False
+
+Style/Not:
+  Enabled: False
+
+Style/ConditionalAssignment:
+  Enabled: False
+
+Style/TrailingCommaInHashLiteral:
+  EnforcedStyleForMultiline: consistent_comma
+
+Style/TrailingCommaInArrayLiteral:
+  EnforcedStyleForMultiline: consistent_comma
+
+Style/ClassAndModuleChildren:
+  Enabled: False
+  # EnforcedStyle: compact
+
+Style/BracesAroundHashParameters:
+  Enabled: False
+
+Style/BlockDelimiters:
+  Enabled: False
+
+Style/NumericLiterals:
+  Enabled: False
+
+Layout/EmptyLinesAroundClassBody:
+  EnforcedStyle: empty_lines_except_namespace
+
+Layout/EmptyLinesAroundModuleBody:
+  EnforcedStyle: empty_lines_except_namespace
+
+Layout/IndentationConsistency:
+  EnforcedStyle: rails
+
+Layout/IndentHash:
+  EnforcedStyle: consistent
+
+Layout/SpaceInLambdaLiteral:
+  EnforcedStyle: require_space

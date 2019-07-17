@@ -1,117 +1,101 @@
-
-$color: #0074d9
-$hover-background: transparentize(lighten($color, 50%), 0.75)
+@import '../mixins'
 
 .leaflet-sidebar
-  &-header
-    margin-top: -10px !important
+  position: absolute
+  height: 100%
+  left: 0
+  max-width: 100%
 
-  &.collapsed
-    .leaflet-sidebar-close
+  z-index: 2000
+  box-sizing: border-box
+  transition: left $transition-duration, width $transition-duration
+
+  padding: 10px
+  padding-right: 0
+
+  display: flex
+  justify-content: space-between
+
+  @media (min-width: $threshold-large)
+    @include sidebar-sizing($width-large)
+
+  @media (min-width: $threshold-medium)
+    @include sidebar-sizing($width-medium)
+
+  @media (min-width: $threshold-small)
+    @include sidebar-sizing($width-small)
+
+  @media (max-width: $threshold-small - 1px)
+    @include sidebar-sizing($width-extra-small)
+
+  .panel-wrapper
+    width: 0
+    height: 100%
+    transition: all 0.5s
+
+    &:not(.visible)
       display: none
 
-  button, input, textarea
+    &.disabled
+      opacity: 0.9
+
+      .panel
+        cursor: pointer
+
+      .panel > *
+        opacity: 0.6
+
+      &:hover
+        opacity: 1
+
+  .panel
+    height: 100%
     width: 100%
-    margin-top: 1em
-    font-size: 1.25em
-    font-family: inherit
-    border: none
-    border-radius: 0
+    overflow: auto
+    box-sizing: border-box
 
-    &.active,
-    &.active:hover
+    padding: 8px 18px
+    font-size: 1.1em
+    background: white
+    box-shadow: 0 1px 7px rgba(0,0,0,0.65)
+    //border-radius: 4px
+    margin-right: 5px
+    display: inline-block
+    clear: none
+
+    .leaflet-tour &
       box-shadow: none
+      border: 2px solid rgba(0,0,0,0.2)
+      background-clip: padding-box
 
-    &:focus
-      outline: none
-      border-color: lighten($color, 20%)
+    @media (min-width: $threshold-large)
+      @include widths($width-large)
 
-  input, textarea
-    background: none
-    border-bottom: 2px solid darkgray
-    padding: 0.5em 0
+    @media (min-width: $threshold-medium)
+      @include widths($width-medium)
 
-  textarea
-    resize: vertical
+    @media (min-width: $threshold-small)
+      @include widths($width-small)
 
-  button
-    border: 1px solid darkgray
-    padding: 0.5em
+    @media (max-width: $threshold-small - 1px)
+      @include widths($width-extra-small)
+
+  .panel-close
+    position: absolute
+    right: 5px
+    top: 5px
+    font-size: 25pt
+    width: 1em
+    height: 1em
+    line-height: 1em
+
+    color: #333
+    text-align: center
+    //background: white
+    //border-radius: 16px
     cursor: pointer
 
-    &:hover
-      border-color: $color
-      opacity: 0.8
+    z-index: 8
 
-.venues,
-.venue-events
-  &-list
-    list-style: none
-    margin: 0 -20px
-    padding: 0
-
-  &-item
-    padding: 20px
-    transition: background 0.2s ease
-    cursor: pointer
-
-    &:hover
-      background: $hover-background
-
-.venue,
-.event
-  &-title
-    font-size: 1.5em
-    margin-bottom: 0.25em
-
-.venues
-  &-item
-    padding: 10px 20px
-
-  &-title
-    font-size: 1.3em
-    margin-bottom: 0.25em
-
-.venue
-  &-events
-    &-list
-      border-top: 1px solid darkgray
-
-      &-title
-        font-size: 1.25em
-        margin-top: 2em
-        margin-bottom: 0.4em
-
-    &-item
-      padding: 10px 20px
-
-    &-title
-      font-size: 1.25em
-      margin-bottom: 0.1em
-
-.event
-  &-description
-    margin: 1em 0
-
-  &-registration
-    margin-top: 1.5em
-
-    &-title
-      margin: 0
-      margin-top: 1em
-      font-size: 1.25em
-
-#registration-message
-  margin: 0.5em 0
-
-  &.positive
-    color: darkgreen
-
-  &.negative
-    color: darkred
-
-.registration-fields > *:first-child
-  margin: 0
-
-#venues-search
-  margin: 0.5em 0
+.leaflet-left
+  transition: left $transition-duration

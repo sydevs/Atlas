@@ -12,6 +12,5 @@
 //
 //= require jquery
 //= require rails-ujs
-//= require semantic-ui
 //= require leaflet
 //= require_tree ./map

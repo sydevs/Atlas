@@ -1,73 +1,157 @@
 
 const Sidebar = {
-  instance: null,
+  container: null,
 
-  init() {
-    console.log('loading sidebar.js')
-    Sidebar.instance = L.control.sidebar({
-      autopan: true,
-      closeButton: true,
-      container: 'sidebar', // the DOM container or #ID of a predefined sidebar container that should be used
-      position: 'left', // left or right
-    }).addTo(Map.instance)
-
-    $('.venues-item').click(event => {
-      let id = $(event.currentTarget).data('id')
-      Sidebar.show_venue(Map.data[id])
-    })
-
-    $('.venue-events-list').on('click', '.venue-events-item', event => {
-      Sidebar.show_event($(event.currentTarget).data('event'))
-    })
-
-    document.getElementById('zoom-in').onclick = () => { if (!$(this).hasClass('disabled')) Map.zoom_in() }
-    document.getElementById('zoom-out').onclick = () => { if (!$(this).hasClass('disabled')) Map.zoom_out() }
-    document.getElementById('reset').onclick = () => { if (!$(this).hasClass('disabled')) Map.reset() }
-    Map.instance.on('zoomend', Sidebar._on_zoom_end)
+  panels: {
+    list: null,
+    details: null,
+    register: null,
+    result: null,
   },
 
-  show_venue(venue) {
-    $venue = $('#venue')
-    $venue.children('.venue-title').text(venue.name)
-    $venue.children('.venue-address').text(venue.full_address)
-
-    $events = $venue.children('.venue-events-list')
-    $events.empty()
-    venue.events.forEach(event => {
-      let $event = Map.event_template.clone()
-      $event.children('.venue-events-title').text(event.name)
-      $event.children('.venue-events-category').text(event.category)
-      $event.children('.venue-events-timing').text(event.timing)
-
-      event.address = venue.full_address
-      $event.data('event', event)
-      $events.append($event)
-    })
-
-    Sidebar.instance.disablePanel('event').enablePanel('venue').open('venue')
-    Map.set_highlight_marker(venue.marker, true)
+  details: {
+    title: null,
+    subtitle: null,
+    description: null,
+    address: null,
+    timing: null,
   },
 
-  show_event(event) {
-    $event = $('#event')
-    $event.children('.event-title').text(event.name)
-    $event.children('.event-address').text(event.address)
-    $event.children('.event-category').text(event.category)
-    $event.children('.event-timing').text(event.timing)
-    $event.children('.event-description').text(event.description)
-    $('#registration-event').val(event.id)
+  registration: {
+    id: null,
+    date: null,
+  },
 
-    if (event.room != null) {
-      $event.children('.event-room').text(event.room)
+  result: {
+    invite: null,
+  },
+
+  visible_panel_count: 0,
+
+  load() {
+    Sidebar.container = document.getElementById('sidebar')
+
+    Sidebar.panels.list = document.getElementById('sidebar-list')
+    Sidebar.panels.details = document.getElementById('sidebar-details')
+    Sidebar.panels.register = document.getElementById('sidebar-register')
+    Sidebar.panels.result = document.getElementById('sidebar-result')
+
+    Sidebar.details.title = document.getElementById('details-title')
+    Sidebar.details.subtitle = document.getElementById('details-subtitle')
+    Sidebar.details.description = document.getElementById('details-description')
+    Sidebar.details.address = document.getElementById('details-meta-address')
+    Sidebar.details.timing = document.getElementById('details-meta-timing')
+
+    Sidebar.registration.id = document.getElementById('register-id')
+
+    Sidebar.result.invite = document.getElementById('result-invite')
+
+    // Set up click handlers for selecting
+    let elements = document.getElementsByClassName('panel')
+    for (let i = 0; i < elements.length; i++) {
+      //L.DomEvent.on(elements[i], 'click', Sidebar._onPanelClick)
+      elements[i].addEventListener('click', Sidebar._onPanelClick)
     }
 
-    Sidebar.instance.enablePanel('event').open('event')
+    //L.DomEvent.on(document.getElementById('register-form'), 'submit', Sidebar.submitRegistration)
+    document.getElementById('register-form').addEventListener('submit', Sidebar.submitRegistration)
+    Sidebar.result.invite.addEventListener('focus', function() { this.select() })
+    Sidebar.setActive('list')
   },
 
-  _on_zoom_end() {
-    let zoom = Map.instance.getZoom()
-    $('#zoom-in-button').toggleClass('disabled', zoom == Map.instance.getMaxZoom())
-    $('#zoom-out-button').toggleClass('disabled', zoom == Map.instance.getMinZoom())
-    $('#reset-button').toggleClass('disabled', zoom == Map.initial_zoom)
+  openPanel(panel_id, event_id) {
+    let event = Data.events[event_id]
+
+    switch (panel_id) {
+      case 'details':
+        Sidebar.details.title.innerText = event.name
+        Sidebar.details.subtitle.innerText = event.category
+        Sidebar.details.description.innerText = event.description
+        Sidebar.details.address.innerText = event.venue.address.street
+        Sidebar.details.timing.innerText = event.timing
+
+        Sidebar.panels.details.dataset.id = event_id
+        Events.setActive(event_id)
+        break;
+      case 'register':
+        Sidebar.registration.id.value = event_id
+        DateInput.setDates(event.upcoming_dates)
+        Events.setActive(event_id)
+        break;
+      case 'result':
+        Sidebar.result.invite.value = event.url + '?invite'
+        break;
+    }
+
+    Sidebar.setActive(panel_id)
+  },
+
+  closePanel(panel_id) {
+    let panel = Sidebar.panels[panel_id]
+    let wrapper = panel.parentNode.previousSibling
+
+    while (wrapper != null && !L.DomUtil.hasClass(wrapper, 'visible')) {
+      wrapper = wrapper.previousSibling
+    }
+
+    Sidebar.setActive(wrapper != null ? wrapper.dataset.panel : null)
+  },
+
+  setActive(active_id) {
+    let visible_panel_count = 0
+
+    let before_active = (active_id != null)
+    for (let panel_id in Sidebar.panels) {
+      if (panel_id == active_id) {
+        L.DomUtil.removeClass(Sidebar.panels[panel_id].parentNode, 'disabled')
+        L.DomUtil.addClass(Sidebar.panels[panel_id].parentNode, 'visible')
+        visible_panel_count++
+        before_active = false
+      } else if (before_active) {
+        if (L.DomUtil.hasClass(Sidebar.panels[panel_id].parentNode, 'visible')) {
+          visible_panel_count++
+          L.DomUtil.addClass(Sidebar.panels[panel_id].parentNode, 'disabled')
+        }
+      } else {
+        L.DomUtil.removeClass(Sidebar.panels[panel_id].parentNode, 'disabled')
+        L.DomUtil.removeClass(Sidebar.panels[panel_id].parentNode, 'visible')
+
+        if (panel_id == 'details') {
+          Events.setActive(null)
+        }
+      }
+    }
+
+    L.DomUtil.addClass(Sidebar.container, 'width-'+visible_panel_count)
+    L.DomUtil.removeClass(Sidebar.container, 'width-'+Sidebar.visible_panel_count)
+    Sidebar.visible_panel_count = visible_panel_count
+  },
+
+  submitRegistration(event) {
+    if (typeof event !== 'undefined') event.preventDefault()
+    Sidebar.openPanel('result', Sidebar.registration.id.value)
+  },
+
+  _onPanelClick(event) {
+    let panel_id = this.parentNode.dataset.panel
+
+    if (L.DomUtil.hasClass(Sidebar.panels[panel_id].parentNode, 'disabled')) {
+      Sidebar.setActive(panel_id)
+    } else if (event.target.className == 'panel-close') {
+      Sidebar.closePanel(this.parentNode.dataset.panel)
+    } else if (event.target.className == 'event-register') {
+      event_id = event.target.parentNode.parentNode.dataset.id
+      Sidebar.openPanel('register', event_id)
+    } else if (event.target.className == 'event-expand') {
+      let event_element = event.target.parentNode.parentNode
+      Events.toggleDetails(event_element)
+      event.target.innerText = (L.DomUtil.hasClass(event_element, 'expand') ? 'less info' : 'more info')
+    //} else if (event.target.className.lastIndexOf('event-', 0) === 0) {
+    //  event_id = event.target.parentNode.parentNode.dataset.id
+    //  Sidebar.openPanel('details', event_id)
+    } else if (event.target.id == 'details-register') {
+      event_id = event.target.parentNode.dataset.id
+      Sidebar.openPanel('register', event_id)
+    }
   },
 }

@@ -1,6 +1,6 @@
 
 const Registration = {
-  init() {
+  load() {
     console.log('loading registration.js')
     $('.event-registration').submit(Registration._on_submit)
   },
@@ -62,5 +62,3 @@ const Registration = {
     ].join(''))
   },
 }
-
-$(document).on('ready', function() { Registration.init() })

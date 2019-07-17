@@ -1,0 +1,117 @@
+
+$color: #0074d9
+$hover-background: transparentize(lighten($color, 50%), 0.75)
+
+.leaflet-sidebar
+  &-header
+    margin-top: -10px !important
+
+  &.collapsed
+    .leaflet-sidebar-close
+      display: none
+
+  button, input, textarea
+    width: 100%
+    margin-top: 1em
+    font-size: 1.25em
+    font-family: inherit
+    border: none
+    border-radius: 0
+
+    &.active,
+    &.active:hover
+      box-shadow: none
+
+    &:focus
+      outline: none
+      border-color: lighten($color, 20%)
+
+  input, textarea
+    background: none
+    border-bottom: 2px solid darkgray
+    padding: 0.5em 0
+
+  textarea
+    resize: vertical
+
+  button
+    border: 1px solid darkgray
+    padding: 0.5em
+    cursor: pointer
+
+    &:hover
+      border-color: $color
+      opacity: 0.8
+
+.venues,
+.venue-events
+  &-list
+    list-style: none
+    margin: 0 -20px
+    padding: 0
+
+  &-item
+    padding: 20px
+    transition: background 0.2s ease
+    cursor: pointer
+
+    &:hover
+      background: $hover-background
+
+.venue,
+.event
+  &-title
+    font-size: 1.5em
+    margin-bottom: 0.25em
+
+.venues
+  &-item
+    padding: 10px 20px
+
+  &-title
+    font-size: 1.3em
+    margin-bottom: 0.25em
+
+.venue
+  &-events
+    &-list
+      border-top: 1px solid darkgray
+
+      &-title
+        font-size: 1.25em
+        margin-top: 2em
+        margin-bottom: 0.4em
+
+    &-item
+      padding: 10px 20px
+
+    &-title
+      font-size: 1.25em
+      margin-bottom: 0.1em
+
+.event
+  &-description
+    margin: 1em 0
+
+  &-registration
+    margin-top: 1.5em
+
+    &-title
+      margin: 0
+      margin-top: 1em
+      font-size: 1.25em
+
+#registration-message
+  margin: 0.5em 0
+
+  &.positive
+    color: darkgreen
+
+  &.negative
+    color: darkred
+
+.registration-fields > *:first-child
+  margin: 0
+
+#venues-search
+  margin: 0.5em 0

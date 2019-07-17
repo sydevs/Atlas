@@ -2,7 +2,9 @@
 const Map = {
   instance: null,
   initial_zoom: null,
-  data: null,
+  //data: null,
+  markers: null,
+  active_marker: null,
 
   load() {
     console.log('loading map.js')
@@ -13,16 +15,17 @@ const Map = {
     })
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(Map.instance)
+
     Map.event_template = $('.venue-events-item').remove()
-    Sidebar.init()
 
     let markers = L.markerClusterGroup({
       spiderfyOnMaxZoom: true,
       showCoverageOnHover: true,
       zoomToBoundsOnClick: true,
     }).on('click', (event) => {
-      Sidebar.show_venue(Map.data[event.layer.options.venue_id])
-      Map.set_highlight_marker(event.layer, true)
+      Events.filterByVenue(event.layer.options.venue_id)
+      Sidebar.openPanel('list')
+      Map.highlightMarker(event.layer)
     })
 
     let icon = L.divIcon({
@@ -30,10 +33,10 @@ const Map = {
       html: '<i class="large blue map marker alternate icon"></i>'
     })
 
-    Map.data = $('#map').data('markers')
-    for (let id in Map.data) {
-      let item = Map.data[id]
-      Map.data[id]['marker'] = L.marker([item['latitude'], item['longitude']], {
+    Map.markers = {}
+    for (let id in Data.venues) {
+      let item = Data.venues[id]
+      Map.markers[id] = L.marker([item['latitude'], item['longitude']], {
         title: item['name'],
         //icon: icon,
         venue_id: id,
@@ -44,29 +47,31 @@ const Map = {
     //Map.instance.setView([0, 0], 2)
     Map.instance.fitBounds(markers.getBounds().pad(0.1))
     Map.initial_zoom = Map.instance.getZoom()
-  },
 
-  zoom_in() {
-    Map.instance.setZoom(Map.instance.getZoom() + 1)
-  },
-
-  zoom_out() {
-    Map.instance.setZoom(Map.instance.getZoom() - 1)
+    L.control.zoom({ position: 'topright' }).addTo(Map.instance)
+    L.control.sidebar({ container: 'sidebar' }).addTo(Map.instance)
+    L.control.searchbox({ position: 'topleft' }).addTo(Map.instance)
   },
 
   reset() {
     Map.instance.setZoom(Map.initial_zoom)
+    Map.highlightMarker(null)
   },
 
-  set_highlight_marker(marker, highlight) {
-    if (highlight) {
-      let overlayWidth = Number.parseInt($('.leaflet-sidebar').css('max-width'))
-      let targetZoom = 13
+  highlightMarker(marker) {
+    const targetZoom = 13
+
+    if (Map.active_marker != null) {
+
+    }
+
+    Map.active_marker = marker
+
+    if (Map.active_marker != null) {
+      let overlayWidth = Number.parseInt(document.getElementById('sidebar').offsetWidth)
       let targetPoint = Map.instance.project(marker.getLatLng(), targetZoom).subtract([overlayWidth / 2, 0])
       let targetLatLng = Map.instance.unproject(targetPoint, targetZoom)
       Map.instance.setView(targetLatLng, targetZoom)
     }
   },
 }
-
-$(document).on('ready', function() { Map.load() })

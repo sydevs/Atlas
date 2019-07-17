@@ -1,0 +1,77 @@
+
+#data data-events=events_json.to_json
+#map
+
+#sidebar
+  .panel-wrapper.visible data-panel='list'
+    #sidebar-list.panel
+      #sidebar-search
+        input type='text' placeholder='Search...'
+      .panel-close &times;
+      #empty-list
+        p There are no classes in your area, the closest free meditation class is in
+        a.search-link Name of the city
+      #suggestion-list
+        .suggestion
+      #venue-filter
+        p Classes at <span id="venue-filter-name">Sahaj Center</span>
+        p#venue-filter-reset Reset
+      ul#event-list.show
+        - @events.each do |event|
+          li.event id=dom_id(event) data-id=event.id
+            .event-info
+              h2.event-title = event.name || event.category_name
+              p.event-address = event.venue.address(:full)
+              p.event-timing = event.timing
+              .event-distance
+            .event-actions
+              .event-register Register now
+              .event-expand more info
+            .event-details
+              .event-description Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              .event-category Introductory Class
+              .event-venue Sahaja Yoga Meditation Center
+
+  .panel-wrapper data-panel='details'
+    #sidebar-details.panel
+      .panel-close &times;
+      h2#details-title Event Title
+      h3#details-subtitle Introductory Class
+      #details-description Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sint minus tempore dolore facere blanditiis nemo quam rerum ratione quis quas, tenetur, consectetur fugiat exercitationem voluptates natus ex facilis ea rem?
+      #details-meta
+        #details-meta-address 44 Chelsham Road, London, UK
+        #details-meta-timing Every Friday, 7pm
+      button#details-register Register Now
+
+  .panel-wrapper data-panel='register'
+    #sidebar-register.panel
+      .panel-close &times;
+      h2 Register for event
+      form#register-form action=registrations_path method='PUT'
+        input#register-id type='hidden'
+        input type='email' placeholder='Email'
+        input type='text' placeholder='Name'
+        textarea placeholder='Comment'
+        input#register-date-input type='text' placeholder='Date (not implemented)'
+        #register-date
+          #register-month
+            #register-month-prev
+            #register-month-current January 2019
+            #register-month-next
+          #register-weekday Monday
+          #register-day-list
+            .register-day 01
+            .register-day 08
+            .register-day 15
+            .register-day 22
+            .register-day 28
+        button Confirm
+
+  .panel-wrapper data-panel='result'
+    #sidebar-result.panel
+      .panel-close &times;
+      h2#result-title Thank you for registering
+      p#result-description you will receive an email shortly
+      h3#result-subtitle Invite your friends
+      input#result-invite
+

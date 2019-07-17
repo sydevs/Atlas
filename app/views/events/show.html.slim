@@ -1,0 +1,33 @@
+
+.column
+  - if request[:invite]
+    p.leader You have been invited to
+
+  h1.title = @event.label
+  - if @event.category_name != @event.label
+    h2.subtitle = @event.category_name
+  p.address = @event.venue.address(:full)
+  p.timing = @event.timing
+  p.description = @event.description
+
+.column
+  h2 Register for event
+  form#register-form action=registrations_path method='PUT'
+    input#register-id type='hidden' value=@event.id
+    input type='email' placeholder='Email'
+    input type='text' placeholder='Name'
+    textarea placeholder='Comment'
+    input#register-date-input type='text' placeholder='Date (not implemented)'
+    #register-date data-dates=upcoming_dates(@event)
+      #register-month
+        #register-month-prev
+        #register-month-current January 2019
+        #register-month-next
+      #register-weekday Monday
+      #register-day-list
+        .register-day 01
+        .register-day 08
+        .register-day 15
+        .register-day 22
+        .register-day 28
+    button Confirm

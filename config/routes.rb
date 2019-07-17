@@ -3,14 +3,15 @@ Rails.application.routes.draw do
 
   root to: 'application#index'
   get :manage, to: 'application#manage'
+  get :map, to: 'application#map'
 
   resources :venues do
-    resources :events, only: [:index, :new, :create]
-    get :map, on: :collection
+    resources :events, only: %i[index new create]
   end
 
-  resources :events, only: [:index, :edit, :update, :destroy] do
-    resources :registrations, only: [:index, :create, :update]
-    get :map, on: :collection
+  resources :events, only: %i[show index edit update destroy] do
+    resources :registrations, only: %i[index]
   end
+
+  resource :registrations, only: %i[create update]
 end

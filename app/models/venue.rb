@@ -1,4 +1,5 @@
 class Venue < ApplicationRecord
+
   nilify_blanks
   has_many :events
 
@@ -10,7 +11,7 @@ class Venue < ApplicationRecord
   end
 
   # Check if coordinates have been defined
-  def has_coordinates?
+  def coordinates?
     latitude.present? and longitude.present?
   end
 
