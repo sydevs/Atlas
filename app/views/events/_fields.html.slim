@@ -1,6 +1,11 @@
 
 = f.error :base
-= f.hidden_field :venue_id
+
+= f.input :venue do
+  = f.hidden_field :venue_id
+  .ui.label
+    i.pin.icon
+    = @venue.label
 
 = f.input :name, placeholder: @event.category_name
 = f.input :category, collection: Event.categories.map {|k, v| [k.to_s.titleize, k]}
@@ -17,10 +22,3 @@
   = f.input :end_time, wrapper: :ui_time_calendar, wrapper_html: { class: 'end' }, input_html: { autocomplete: 'off', placeholder: 'Unspecified' }
 
 = f.input :recurrence, collection: Event.recurrences.map {|k, v| ["Every #{k.humanize}", k]}
-
-p
-  a.ui.basic.button href=url_for(@venue)
-    i.left.arrow.icon
-    | Back
-
-  button.ui.basic.positive.button Save

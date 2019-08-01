@@ -1,6 +1,14 @@
 
 - content_for :title, "Edit Event"
 
-h1.ui.header Edit Event - #{@event.label}
-= simple_form_for [ @event ], html: { class: "#{'error' if @event.errors.present?}" } do |f|
-  = render 'form', f: f
+= simple_form_for @event, html: { id: 'page-form', class: "#{'error' if @event.errors.present?}", novalidate: true } do |f|
+  .ui.segment
+    h1.ui.header Edit Event
+    = render 'fields', f: f
+
+  p
+    a.ui.basic.button href=event_path(@event)
+      i.left.arrow.icon
+      | Back
+
+    button.ui.basic.positive.button Save

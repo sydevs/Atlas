@@ -13,4 +13,25 @@ html
     = javascript_include_tag 'admin'
 
   body class="admin #{controller_name} #{controller.action_name}"
+    header
+      a.ui.right.floated.basic.button href=map_path target='_blank'
+        i.globe.icon
+        | View Map
+
+      h1 SY Database
+
+    .ui.stackable.menu
+      a.item href=dashboard_path class="#{'active' if action_name == 'dashboard'}"
+        | Dashboard
+      a.item href=venues_path class="#{'active' if %w[venues events].include? controller_name}"
+        | Programs
+      a.disabled.item class="#{'active' if controller_name == 'admins'}"
+        | Admins
+
+      .right.menu
+        a.item href=statistics_path class="#{'active' if action_name == 'statistics'}"
+          | Statistics
+
     = yield
+
+    .ui.hidden.divider

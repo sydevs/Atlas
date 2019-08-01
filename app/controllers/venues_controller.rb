@@ -3,7 +3,14 @@ class VenuesController < ApplicationController
   before_action :set_venue!, only: %i[show edit update destroy]
 
   def index
-    @venue = Venue.find(params[:id])
+    scope = Venue
+
+    if params[:q]
+      term = "%#{params[:q]}%"
+      scope = scope.where('(name LIKE ?) OR (address LIKE ?)', term, term)
+    end
+
+    @venues = scope.includes(:events).page(params[:page]).per(10)
   end
 
   def show
@@ -40,14 +47,8 @@ class VenuesController < ApplicationController
 
   private
 
-    def set_venues!
-      if params[:q]
-        term = "%#{params[:q]}%"
-        @venues = Venue.where('(name LIKE ?) OR (address LIKE ?)', term, term)
-      else
-        @venues = Venue.includes(:events).limit(10)
-        # @venues_count = Venue.all.count
-      end
+    def set_venue!
+      @venue = Venue.find(params[:id])
     end
 
     def venue_params

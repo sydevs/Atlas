@@ -6,13 +6,15 @@ class Event < ApplicationRecord
   enum category: { intro: 1, intermediate: 2, course: 3, public_event: 4, concert: 5 }
   enum recurrence: { day: 0, monday: 1, tuesday: 2, wednesday: 3, thursday: 4, friday: 5, saturday: 6, sunday: 7 }
 
-  validates :name, presence: true, length: { maximum: 255 }
+  validates :name, length: { maximum: 255 }
   validates :category, presence: true
   validates :start_date, presence: true
   validates :start_time, presence: true
   validates :recurrence, presence: true
-  validates :description, length: { minimum: 20, maximum: 255 }
+  validates :description, length: { minimum: 20, maximum: 255, allow_nil: true }
   validates :contact_email, format: { with: URI::MailTo::EMAIL_REGEXP, allow_blank: true, message: 'must be a valid email' }
+
+  delegate :address, to: :venue
 
   def label
     name || category_name
