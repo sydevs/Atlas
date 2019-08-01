@@ -1,6 +1,5 @@
 
 .item
+  .right.floated.content = registration.created_at.to_s(:short)
   i.user.icon
-  .content
-    .header = registration.name
-    .description #{registration.created_at.to_s(:short)} - #{registration.email}
+  .content #{registration.name} - <em>#{registration.email}</em>
