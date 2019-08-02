@@ -53,15 +53,15 @@ SimpleForm.setup do |config|
   config.wrappers :semantic, tag: 'div', class: "field", error_class: 'error', hint_class: 'with_hint' do |b|
     b.use :html5
     b.use :placeholder
-    b.use :label_input
+    b.use :label
+    b.use :hint,  wrap_with: { tag: 'div', class: 'hint' }
+    b.use :input
     b.optional :maxlength
     b.optional :pattern
     b.optional :min_max
     b.optional :readonly
-    b.use :hint,  wrap_with: { tag: 'div', class: 'hint' }
     b.use :error, wrap_with: { tag: 'div', class: 'ui red pointing above label error' }
-
-      end
+  end
 
   config.wrappers :semantic_checkbox, tag: 'div', class: "inline field", error_class: 'error', hint_class: 'with_hint' do |b|
     b.use :html5
@@ -70,7 +70,9 @@ SimpleForm.setup do |config|
       input.wrapper tag: 'label' do |box| end
         end
     b.use :label
-    end
+    b.use :hint, wrap_with: { tag: 'div', class: 'hint' }
+    b.use :error, wrap_with: { tag: 'div', class: 'ui red pointing above label error' }
+  end
 
   config.wrappers :semantic_checkbox_slider, tag: 'div', class: "inline field", error_class: 'error', hint_class: 'with_hint' do |b|
     b.use :html5
@@ -79,6 +81,8 @@ SimpleForm.setup do |config|
       input.wrapper tag: 'label' do |slide| end
     end
     b.use :label
+    b.use :hint, wrap_with: { tag: 'div', class: 'hint' }
+    b.use :error, wrap_with: { tag: 'div', class: 'ui red pointing above label error' }
   end
 
   config.wrappers :semantic_checkbox_toggle, tag: 'div', class: "inline field", error_class: 'error', hint_class: 'with_hint' do |b|
@@ -88,36 +92,42 @@ SimpleForm.setup do |config|
       input.wrapper tag: 'label' do |slide| end
     end
     b.use :label
+    b.use :hint, wrap_with: { tag: 'div', class: 'hint' }
+    b.use :error, wrap_with: { tag: 'div', class: 'ui red pointing above label error' }
   end
 
   config.wrappers :semantic_select, tag: 'div', class: 'field', error_class: 'error', hint_class: 'with_hint' do |b|
     b.use :html5
     b.use :label
+    b.use :hint, wrap_with: { tag: 'div', class: 'hint' }
     b.use :input, class: 'ui fluid dropdown'
+    b.use :error, wrap_with: { tag: 'div', class: 'ui red pointing above label error' }
   end
 
   config.wrappers :semantic_date, tag: 'div', class: 'field', error_class: 'error', hint_class: 'with_hint' do |b|
     b.use :html5
     b.use :label
+    b.use :hint, wrap_with: { tag: 'div', class: 'hint' }
     b.wrapper tag: 'div', class: 'ui date calendar' do |calendar|
       calendar.wrapper tag: 'div', class: 'ui input left icon' do |input|
         input.wrapper tag: 'i', class: 'calendar icon' do end
         input.use :input
       end
-      calendar.use :hint, wrap_with: { tag: 'div', class: 'hint' }
     end
+    b.use :error, wrap_with: { tag: 'div', class: 'ui red pointing above label error' }
   end
 
   config.wrappers :semantic_time, tag: 'div', class: 'field', error_class: 'error', hint_class: 'with_hint' do |b|
     b.use :html5
     b.use :label
+    b.use :hint, wrap_with: { tag: 'div', class: 'hint' }
     b.wrapper tag: 'div', class: 'ui time calendar' do |calendar|
       calendar.wrapper tag: 'div', class: 'ui input left icon' do |input|
         input.wrapper tag: 'i', class: 'time icon' do end
         input.use :input
       end
-      calendar.use :hint, wrap_with: { tag: 'div', class: 'hint' }
     end
+    b.use :error, wrap_with: { tag: 'div', class: 'ui red pointing above label error' }
   end
 
   # The default wrapper to be used by the FormBuilder.

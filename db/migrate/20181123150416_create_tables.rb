@@ -4,13 +4,13 @@ class CreateTables < ActiveRecord::Migration[5.1]
       t.string :name
       t.float :latitude
       t.float :longitude
+      t.string :contact_name
       t.string :contact_email
-      t.string :address_street
-      t.string :address_room
-      t.string :address_municipality
-      t.string :address_subnational
-      t.string :address_country
-      t.string :address_postcode
+      t.string :street
+      t.string :municipality
+      t.string :subnational
+      t.string :country_code, length: 2
+      t.string :postcode
       t.timestamps
     end
 
@@ -19,8 +19,10 @@ class CreateTables < ActiveRecord::Migration[5.1]
       t.integer :category, default: 0
       t.string :name
       t.string :room
+      t.string :contact_name
       t.string :contact_email
       t.string :description
+      t.string :languages, array: true
 
       t.date :start_date
       t.date :end_date
@@ -30,6 +32,8 @@ class CreateTables < ActiveRecord::Migration[5.1]
 
       t.timestamps
     end
+
+    add_index :events, :languages, using: 'gin'
 
     create_table :registrations do |t|
       t.belongs_to :event

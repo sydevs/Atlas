@@ -8,14 +8,14 @@ module ApplicationHelper
       name: venue.label,
       latitude: venue.latitude,
       longitude: venue.longitude,
-      full_address: venue.address(:full),
+      full_address: venue.full_address,
       address: venue.address,
       events: venue.events.collect { |event|
         {
           id: event.id,
           name: event.label,
           description: event.description || event.category_description,
-          room: event.room || venue.address_room,
+          room: event.room,
           category: event.category_name,
           raw_category: event.category,
           next_date: event.next_date,

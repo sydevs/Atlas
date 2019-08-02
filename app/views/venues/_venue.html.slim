@@ -3,4 +3,4 @@
   i.map.marker.icon
   .content
     a.header href=venue_path(venue) = venue.label
-    .description #{venue.address(:full)} - #{pluralize venue.events.count, 'event'}
+    .description #{venue.full_address} - #{pluralize venue.events.count, 'event'}

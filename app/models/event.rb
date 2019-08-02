@@ -14,40 +14,22 @@ class Event < ApplicationRecord
   validates :description, length: { minimum: 20, maximum: 255, allow_nil: true }
   validates :contact_email, format: { with: URI::MailTo::EMAIL_REGEXP, allow_blank: true, message: 'must be a valid email' }
 
-  delegate :address, to: :venue
+  delegate :full_address, to: :venue
 
   def label
     name || category_name
   end
 
+  def address
+    { room: room }.merge(venue.address)
+  end
+
   def category_name
-    case category
-    when 'intro'
-      'Intro Meditation Class'
-    when 'intermediate'
-      'Intermediate Meditation Class'
-    when 'course'
-      'Meditation Course'
-    when 'public_event'
-      'Stall at Public Event'
-    when 'concert'
-      'Meditation & Music Concert'
-    end
+    I18n.translate(category, scope: %i[category title])
   end
 
   def category_description
-    case category
-    when 'intro'
-      'The first introductions to this kind of meditation.'
-    when 'intermediate'
-      'A going deeper class for those who have already attended an introductory class.'
-    when 'course'
-      'A several week course that takes you through various techniques of meditation.'
-    when 'public_event'
-      'Offering free meditation instruction at a public event.'
-    when 'concert'
-      'A performance combining meditation and music or dance.'
-    end
+    I18n.translate(category, scope: %i[category description])
   end
 
   def timing

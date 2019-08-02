@@ -12,9 +12,12 @@
 
 ActiveRecord::Schema.define(version: 20181123150416) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "authorizations", force: :cascade do |t|
     t.string "model_type"
-    t.integer "model_id"
+    t.bigint "model_id"
     t.string "uuid"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -22,12 +25,14 @@ ActiveRecord::Schema.define(version: 20181123150416) do
   end
 
   create_table "events", force: :cascade do |t|
-    t.integer "venue_id"
+    t.bigint "venue_id"
     t.integer "category", default: 0
     t.string "name"
     t.string "room"
+    t.string "contact_name"
     t.string "contact_email"
     t.string "description"
+    t.string "languages", array: true
     t.date "start_date"
     t.date "end_date"
     t.string "start_time"
@@ -35,11 +40,12 @@ ActiveRecord::Schema.define(version: 20181123150416) do
     t.integer "recurrence", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["languages"], name: "index_events_on_languages", using: :gin
     t.index ["venue_id"], name: "index_events_on_venue_id"
   end
 
   create_table "registrations", force: :cascade do |t|
-    t.integer "event_id"
+    t.bigint "event_id"
     t.string "name"
     t.string "email"
     t.text "comment"
@@ -52,13 +58,13 @@ ActiveRecord::Schema.define(version: 20181123150416) do
     t.string "name"
     t.float "latitude"
     t.float "longitude"
+    t.string "contact_name"
     t.string "contact_email"
-    t.string "address_street"
-    t.string "address_room"
-    t.string "address_municipality"
-    t.string "address_subnational"
-    t.string "address_country"
-    t.string "address_postcode"
+    t.string "street"
+    t.string "municipality"
+    t.string "subnational"
+    t.string "country_code"
+    t.string "postcode"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

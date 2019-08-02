@@ -8,13 +8,14 @@
     .sub.header
       = @event.label
       br
-      = @event.address(:full)
+      = @event.full_address
 
   #map data-latitude=@venue.latitude data-longitude=@venue.longitude
 
 .ui.segment
   h3.ui.header
-    = floating_action 'Download CSV', 'download', nil
+    - if @registrations.present?
+      = floating_action 'Download CSV', 'download', nil
     .content Recent registrations for this event
 
   .ui.divided.list

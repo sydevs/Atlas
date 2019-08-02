@@ -3,31 +3,48 @@ class Venue < ApplicationRecord
   nilify_blanks
   has_many :events
 
-  validates :address_street, presence: true
+  validates :street, presence: true
+  validates :country_code, presence: true
+  validates :latitude, :longitude, presence: true
+  validates :contact_name, presence: true
   validates :contact_email, presence: true, format: { with: URI::MailTo::EMAIL_REGEXP }
 
   def label
-    name || address_street
+    name || street
   end
 
   # Check if coordinates have been defined
   def coordinates?
-    latitude.present? and longitude.present?
+    latitude.present? && longitude.present?
   end
 
-  def address format = nil
-    if format == :full
-      [address_street, address_municipality, address_subnational, address_country].compact.join(', ')
-    else
-      {
-        room: address_room,
-        street: address_street,
-        municipality: address_municipality,
-        subnational: address_subnational,
-        country: address_country,
-        postcode: address_postcode,
-      }
-    end
+  def full_address
+    [street, municipality, subnational, country].compact.join(', ')
+  end
+
+  def address
+    {
+      street: street,
+      municipality: municipality,
+      subnational: subnational,
+      country: country,
+      postcode: postcode,
+    }
+  end
+
+  def country
+    I18nData.countries(I18n.locale)[country_code]
+  end
+
+  def country_code= value
+    value = value.to_s.upcase
+    # Only accept country codes which are in the language list
+    super value if I18nData.countries.keys.include?(value)
+  end
+
+  def languages= value
+    # Only accept languages which are in the language list
+    super value & I18nData.languages.keys
   end
 
 end
