@@ -18,6 +18,8 @@ def load_venue address, country_code, index
     subnational: address[2],
     country_code: country_code,
     postcode: address[3],
+    latitude: address[4],
+    longitude: address[5],
   })
 
   venue.events.destroy_all

@@ -61,11 +61,11 @@ const Map = {
     $button.addClass('loading')
 
     let value = [
-      document.getElementById('venue_address_street').value,
-      document.getElementById('venue_address_municipality').value,
-      document.getElementById('venue_address_subnational').value,
-      document.getElementById('venue_address_country').value,
-      document.getElementById('venue_address_postcode').value,
+      document.getElementById('venue_street').value,
+      document.getElementById('venue_municipality').value,
+      document.getElementById('venue_subnational').value,
+      document.getElementById('venue_country_code').value,
+      document.getElementById('venue_postcode').value,
     ].filter(Boolean).join(', ')
 
     console.log('Geocoding', value)
