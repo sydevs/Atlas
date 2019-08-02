@@ -13,12 +13,14 @@
 = f.input :room, placeholder: @event.venue.address_room
 = f.input :contact_email, placeholder: @event.venue.contact_email
 
-.two.fields
-  = f.input :start_date, as: :string, wrapper: :ui_date_calendar, wrapper_html: { class: 'start' }
-  = f.input :end_date, as: :string, wrapper: :ui_date_calendar, wrapper_html: { class: 'end' }, input_html: { placeholder: 'Never' }
-
-.two.fields
-  = f.input :start_time, wrapper: :ui_time_calendar, wrapper_html: { class: 'start' }, input_html: { autocomplete: 'off' }
-  = f.input :end_time, wrapper: :ui_time_calendar, wrapper_html: { class: 'end' }, input_html: { autocomplete: 'off', placeholder: 'Unspecified' }
+.ui.divider
 
 = f.input :recurrence, collection: Event.recurrences.map {|k, v| ["Every #{k.humanize}", k]}
+
+.two.fields
+  = f.input :start_date, as: :string, wrapper: :semantic_date, wrapper_html: { class: 'start' }
+  = f.input :end_date, as: :string, wrapper: :semantic_date, wrapper_html: { class: 'end' }, input_html: { placeholder: 'Never' }
+
+.two.fields
+  = f.input :start_time, wrapper: :semantic_time, wrapper_html: { class: 'start' }, input_html: { autocomplete: 'off' }
+  = f.input :end_time, wrapper: :semantic_time, wrapper_html: { class: 'end' }, input_html: { autocomplete: 'off', placeholder: 'Unspecified' }

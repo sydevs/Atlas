@@ -11,7 +11,6 @@
 // about supported directives.
 //
 //= require jquery
-//= require semantic-ui
 //= require leaflet
 //= require_tree ./map
 

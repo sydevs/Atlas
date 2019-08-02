@@ -2,23 +2,21 @@
 = f.error :base
 
 = f.input :name, placeholder: @venue.address_street
-//= f.input :address, wrapper: :ui_input, icon: ''
+= f.input :contact_email
+
 .required.field
   = f.label :address
   .fields
-    .twelve.wide.field
+    .eleven.wide.field
       = f.input_field :address_street, placeholder: 'Street Address'
-    .four.wide.field
-      = f.input_field :address_room, placeholder: 'Room'
-  .three.fields
-    .field
+    .five.wide.field
       = f.input_field :address_municipality, placeholder: 'City'
-    .field
-      = f.input_field :address_subnational, placeholder: 'State / County'
   .fields
-    .twelve.wide.field
-      = f.input_field :address_country, prompt: 'Country'
-    .four.wide.field
+    .five.wide.field
+      = f.input_field :address_subnational, placeholder: 'State / County'
+    .eight.wide.field
+      = f.input_field :address_country, prompt: 'Country', class: 'search'
+    .three.wide.field
       = f.input_field :address_postcode, placeholder: 'Postal Code'
 
   = f.hidden_field :latitude
@@ -29,14 +27,12 @@ button.lookup.ui.fluid.button type='button'
   | Find Marker
 
 #map
-.ui.map.message class="#{'active' unless @venue.coordinates?}"
+.ui.map.message class="#{'hidden' if @venue.coordinates?}"
   .header No map marker has been set
   p You must press 'Find Marker' above to automatically detect the coordinates of the venue's address.
-.ui.negative.map.message.for-failure
+.ui.negative.map.message.for-failure class='hidden'
   .header Couldn't find address
   p The address you entered could not be found, try adding more information.
-.ui.info.map.message.for-success class="#{'active' if @venue.coordinates?}"
+.ui.info.map.message.for-success class="#{'hidden' unless @venue.coordinates?}"
   .header Map marker set!
   p Make sure to check that the map is correct.
-
-= f.input :contact_email
