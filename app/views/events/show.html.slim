@@ -1,33 +1,29 @@
 
-.column
-  - if request[:invite]
-    p.leader You have been invited to
+- content_for :title, @event.name
 
-  h1.title = @event.label
-  - if @event.category_name != @event.label
-    h2.subtitle = @event.category_name
-  p.address = @event.venue.address(:full)
-  p.timing = @event.timing
-  p.description = @event.description
+.ui.segment
+  h2.ui.header
+    = floating_action 'Edit Event', 'pencil', edit_event_path(@event)
+    .content Event
+    .sub.header
+      = @event.label
+      br
+      = @event.full_address
 
-.column
-  h2 Register for event
-  form#register-form action=registrations_path method='PUT'
-    input#register-id type='hidden' value=@event.id
-    input type='email' placeholder='Email'
-    input type='text' placeholder='Name'
-    textarea placeholder='Comment'
-    input#register-date-input type='text' placeholder='Date (not implemented)'
-    #register-date data-dates=upcoming_dates(@event)
-      #register-month
-        #register-month-prev
-        #register-month-current January 2019
-        #register-month-next
-      #register-weekday Monday
-      #register-day-list
-        .register-day 01
-        .register-day 08
-        .register-day 15
-        .register-day 22
-        .register-day 28
-    button Confirm
+  #map data-latitude=@venue.latitude data-longitude=@venue.longitude
+
+.ui.segment
+  h3.ui.header
+    - if @event.registrations.present?
+      / TODO: Implement a CSV download for registrations and better registration views
+      = floating_action 'Download CSV', 'download', nil
+      
+    .content Recent registrations for this event
+
+  .ui.divided.list
+    = render @event.registrations, cache: true
+
+p
+  a.ui.basic.button href=venue_path(@venue)
+    i.left.arrow.icon
+    | Back to Venue

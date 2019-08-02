@@ -2,24 +2,13 @@
 body
   padding: 1em
   max-width: 100%
-  width: 600px
+  width: 728px
+  margin: auto
 
-body.venues
-  &.show #map
-    margin-bottom: 1em
-    border-radius: 0.28571429rem
-    height: 0
-    opacity: 0
-    transition: opacity 0.5s ease
+.ui.form .hint
+  font-size: 90%
+  opacity: 0.6
+  margin-bottom: 6px
 
-  &.edit, &.new
-    #map
-      margin: 1em 0
-
-.map.message:not(.active)
-  display: none
-
-.ui.header
-  .ui.label
-    float: right
-    margin-top: 0
+.leaflet-pane
+  z-index: 0

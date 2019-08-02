@@ -5,63 +5,63 @@ phoenix_center:
   latitude: 33.4878679
   longitude: -112.0307763
   contact_email: azsahajayoga@gmail.com
-  address_street: 2434 E Osborn Rd
-  address_municipality: Phoenix
-  address_subnational: AZ
-  address_country: USA
-  address_postcode: '85016'
+  street: 2434 E Osborn Rd
+  municipality: Phoenix
+  subnational: AZ
+  country_code: US
+  postcode: '85016'
 
 chula_vista_eastlake:
   name: Eastlake Beach Club Pavilion
   latitude: 32.6534345
   longitude: -116.9805553
   contact_email: test@test.com
-  address_street: 2434 E Osborn Rd
-  address_municipality: Phoenix
-  address_subnational: AZ
-  address_country: USA
-  address_postcode: '85016'
+  street: 2434 E Osborn Rd
+  municipality: Phoenix
+  subnational: AZ
+  country_code: US
+  postcode: '85016'
 
 oak_park_community:
   name: Oak Park Community Center
   latitude: 34.1813733
   longitude: -118.7743102
   contact_email: test@test.com
-  address_street: 1000 Kanan Road
-  address_municipality: Oak Park
-  address_subnational: CA
-  address_country: USA
-  address_postcode: '91377'
+  street: 1000 Kanan Road
+  municipality: Oak Park
+  subnational: CA
+  country_code: US
+  postcode: '91377'
 
 burbank_rec_center:
   name: McCambridge Recreation Center
   latitude: 34.1927014
   longitude: -118.3230303
   contact_email: test@test.com
-  address_street: 1515 N Glenoaks Blvd
-  address_municipality: Burbank
-  address_subnational: CA
-  address_country: USA
-  address_postcode: '91504'
+  street: 1515 N Glenoaks Blvd
+  municipality: Burbank
+  subnational: CA
+  country_code: US
+  postcode: '91504'
 
 folsom_dance_studio:
   name: Cynthia Dance Studio
   latitude: 38.6667772
   longitude: -121.1358095
   contact_email: test@test.com
-  address_street: 304 S Lexington Dr
-  address_municipality: Folsom
-  address_subnational: CA
-  address_country: USA
-  address_postcode: '95630'
+  street: 304 S Lexington Dr
+  municipality: Folsom
+  subnational: CA
+  country_code: US
+  postcode: '95630'
 
 fremont_center:
   name: Fremont Meditation Center
   latitude: 37.5780345
   longitude: -121.9848458
   contact_email: test@test.com
-  address_street: 37138 Niles Blvd
-  address_municipality: Fremont
-  address_subnational: CA
-  address_country: USA
-  address_postcode: '94536'
+  street: 37138 Niles Blvd
+  municipality: Fremont
+  subnational: CA
+  country_code: US
+  postcode: '94536'

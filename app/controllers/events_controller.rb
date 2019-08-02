@@ -32,7 +32,7 @@ class EventsController < ApplicationController
     @event = @venue.events.new event_params
 
     if @event.save
-      redirect_to @venue, flash: { info: 'Created event' }
+      redirect_to @event, flash: { success: 'Created event' }
     else
       render :new
     end
@@ -43,7 +43,7 @@ class EventsController < ApplicationController
 
   def update
     if @event.update event_params
-      redirect_to @venue, flash: { info: 'Created event' }
+      redirect_to [:edit, @event], flash: { success: 'Saved event' }
     else
       render :edit
     end
@@ -65,8 +65,11 @@ class EventsController < ApplicationController
     end
 
     def event_params
-      params.fetch(:event, {}).permit(
-        :name, :room, :category, :contact_email, :start_date, :end_date, :start_time, :end_time, :recurrence
+      result = params.fetch(:event, {}).permit(
+        :name, :description, :room, :category,
+        :contact_name, :contact_email,
+        :recurrence, :start_date, :end_date, :start_time, :end_time,
+        languages: [],
       )
     end
 

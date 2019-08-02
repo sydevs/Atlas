@@ -1,2 +1,4 @@
-$('#list').html('<%= render @venues, list: true %>');
+$('#list').html(`<%= render @venues %>`)
+$('#pagination').html(`<%= paginate @venues %>`)
+$('#pagination-info').html(`<%= page_entries_info @venues %>`)
 $('#search').removeClass('loading')

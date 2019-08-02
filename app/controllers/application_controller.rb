@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
 
-  layout -> { %w[index map].include?(action_name) ? 'map' : 'admin' }
-  # before_action :allow_embed, only: [:map, :index]
+  layout -> { %w[map].include?(action_name) ? 'map' : 'admin' }
+  before_action :allow_embed, only: %i[map]
   protect_from_forgery with: :exception
 
   def map
@@ -9,8 +9,10 @@ class ApplicationController < ActionController::Base
     @events = Event.all
   end
 
-  def manage
-    @venues = Venue.limit(10)
+  def dashboard
+  end
+
+  def statistics
   end
 
   protected

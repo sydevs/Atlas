@@ -21,7 +21,7 @@
           li.event id=dom_id(event) data-id=event.id
             .event-info
               h2.event-title = event.name || event.category_name
-              p.event-address = event.venue.address(:full)
+              p.event-address = event.venue.full_address
               p.event-timing = event.timing
               .event-distance
             .event-actions

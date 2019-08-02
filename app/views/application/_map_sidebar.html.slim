@@ -49,7 +49,7 @@
         - @venues.each do |venue|
           li.venues-item data-id=venue.id
             h2.venues-title = venue.name
-            p.venues-address = venue.address(:full)
+            p.venues-address = venue.full_address
             //p.venues-events = pluralize venue.events.length, 'event'
 
     .leaflet-sidebar-pane id='venue'

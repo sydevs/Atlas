@@ -1,0 +1,29 @@
+14 Taylor St, St. Stephens Ward, Kent, CT2 7PP, 51.2891439423823, 1.08754947894881
+5 Binney St, Abbey Ward, Buckinghamshire, HP11 2AX, 51.6291634, -0.7512987
+8 Moor Place, East Southbourne and Tuckton W, Bournemouth, BH6 3BE, 50.7252152793635, -1.79296418826939
+505 Exeter Rd, Hawerby cum Beesby, Lincolnshire, DN36 5RP, 53.4484290374748, -0.0965832607838051
+5396 Forth Street, Greets Green and Lyng Ward, West Midlands, B70 9DT, 52.5169714568563, -2.02323999652462
+9472 Lind St, Desborough, Northamptonshire, NN14 2GH, 52.4457592300734, -0.81451910075148
+7457 Cowl St #70, Bargate Ward, Southampton, SO14 3TY, 50.8940981813845, -1.38949639507013
+20 Gloucester Pl #96, Chirton Ward, Tyne & Wear, NE29 7AD, 55.0038640817335, -1.47184434825703
+929 Augustine St, Staple Hill Ward, South Gloucestershire, BS16 4LL, 51.4809864182972, -2.51488834148402
+45 Bradfield St #166, Parwich, Derbyshire, DE6 1QN, 53.0910270509451, -1.74408760277627
+620 Northampton St, Wilmington, Kent, DA2 7PP, 51.4244415968348, 0.201824384521648
+5 Hygeia St, Loundsley Green Ward, Derbyshire, S40 4LY, 53.2468461024388, -1.45795931367989
+2150 Morley St, Dee Ward, Dumfries and Galloway, DG8 7DE, 54.9208678728493, -4.39627381149735
+24 Bolton St, Broxburn, Uphall and Winchburg, West Lothian, EH52 5TL, 55.9300523734745, -3.48402591671534
+4 Forrest St, Weston-Super-Mare, North Somerset, BS23 3HG, 51.346074384022, -2.9582171760115
+89 Noon St, Carbrooke, Norfolk, IP25 6JQ, 52.5713534, 0.86319005
+99 Guthrie St, New Milton, Hampshire, BH25 5DF, 50.7567168332603, -1.64394071107135
+7 Richmond St, Parkham, Devon, EX39 5DJ, 50.9843106719033, -4.31504852019566
+9165 Primrose St, Darnall Ward, Yorkshire, South, S4 7WN, 53.3909859045979, -1.44716885151803
+9 Pengwern St, Marldon, Devon, TQ3 1SA, 50.473445762687, -3.58982191494587
+4410 Tarlton St, Prestatyn Community, Denbighshire, LL19 9EG, 53.332088365276, -3.39435717474302
+6949 Bourne St, Lye and Stourbridge North Ward, West Midlands, DY5 2QP, 52.4633088046751, -2.12559352292766
+148 Rembrandt St, Warlingham, Surrey, CR6 9SW, 51.3104279601144, -0.0455013860765188
+2200 Nelson St #58, Newport, Isle of Wight, PO30 5AL, 50.7016051039251, -1.2949817652909
+41 Canning St, Steornabhagh a Deas Ward, Western Isles, HS1 2PZ, 58.2102490488723, -6.38018082627206
+8289 Cadogan St, South Ward, North Eart Lincolnshire, DN33 1AU, 53.5502389438986, -0.106765140815445
+211 Hobart St, Newquay, Cornwall, TR7 1LS, 50.4162761, -5.09039055
+114 Falkland St #8845, Brimpton, Berkshire, RG7 4RF, 51.3664499261741, -1.18759121270973
+1 Birkett St, Shard End Ward, West Midlands, B33 0NH, 52.47804185, -1.7699558094452

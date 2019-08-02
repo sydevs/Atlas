@@ -1,31 +1,27 @@
 
 - content_for :title, @venue.name
 
-h1.ui.header
-  .content = @venue.label
-  a.ui.right.floated.label href=url_for([:edit, @venue])
-    i.pencil.icon
-    | Edit Venue
-  .sub.header = @venue.address(:full)
+.ui.segment
+  h2.ui.header
+    = floating_action 'Edit Venue', 'pencil', edit_venue_path(@venue)
+    .content Venue
+    .sub.header
+      - if @venue.name
+        = @venue.name
+        br
+      = @venue.full_address
 
-#map data-latitude=@venue.latitude data-longitude=@venue.longitude
+  #map data-latitude=@venue.latitude data-longitude=@venue.longitude
 
-h2.ui.header
-  .content Events
-  a.ui.right.floated.label href=url_for([:new, @venue, 'event'])
-    i.plus.icon
-    | Add Event
+.ui.segment
+  h3.ui.header
+    = floating_action 'Add Event', 'plus', new_venue_event_path(@venue)
+    .content Events at this venue
 
-.ui.list
-  - @venue.events.each do |event|
-    .item
-      i.calendar.icon
-      .content
-        a.header href=url_for([:edit, event]) = event.label
-        .description #{event.category.humanize.titleize} / #{"#{event.room}, " if event.room}#{event.timing}
+  .ui.list
+    = render @venue.events, cache: true
 
-hr
 p
-  a.ui.basic.button href=manage_path
+  a.ui.basic.button href=venues_path
     i.left.arrow.icon
-    | Venue List
+    | Back to Venues
