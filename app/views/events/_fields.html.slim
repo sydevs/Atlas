@@ -5,7 +5,6 @@
 = f.error :base
 
 = f.input :venue do
-  = f.hidden_field :venue_id
   .hint = @venue.name ? "#{@venue.name} - #{@venue.full_address}" : @venue.full_address
 
 = f.input :name, placeholder: @event.category_name

@@ -1,10 +1,12 @@
 
+- content_for :title, "Venues"
+
 .ui.segment
   h2.ui.header
     = floating_action 'Add Venue', 'plus', new_venue_path
     .content Venues
 
-  = simple_form_for venues_path, html: { method: 'GET', data: { remote: 'true' } }
+  = simple_form_for venues_path, html: { method: 'GET', data: { remote: 'true' }, autocomplete: 'off' }
     #search.ui.fluid.icon.input
       input name='q' type='text' placeholder='Search venues...' value=(params[:q] || '')
       i.search.icon
@@ -20,5 +22,5 @@
     - else
       | #{pluralize @venues_count, 'venue'} in the database
 
-  = page_entries_info @venues
-  = paginate @venues
+  #pagination-info = page_entries_info @venues
+  #pagination = paginate @venues

@@ -32,6 +32,10 @@ html
         a.item href=statistics_path class="#{'active' if action_name == 'statistics'}"
           | Statistics
 
+    - flash.each do |key, message|
+      .ui.message class=key
+        = message
+
     = yield
 
     .ui.hidden.divider

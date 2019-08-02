@@ -1,7 +1,7 @@
 
 - content_for :title, "New Venue"
 
-= simple_form_for @venue, html: { id: 'page-form', class: "#{'error' if @venue.errors.present?}", novalidate: true } do |f|
+= simple_form_for @venue, html: { id: 'page-form', class: "#{'error' if @venue.errors.present?}", novalidate: true, autocomplete: 'off' } do |f|
   .ui.segment
     h1.ui.header New Venue
     = render 'fields', f: f

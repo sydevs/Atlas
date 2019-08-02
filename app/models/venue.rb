@@ -42,9 +42,4 @@ class Venue < ApplicationRecord
     super value if I18nData.countries.keys.include?(value)
   end
 
-  def languages= value
-    # Only accept languages which are in the language list
-    super value & I18nData.languages.keys
-  end
-
 end

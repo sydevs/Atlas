@@ -20,6 +20,11 @@ class Event < ApplicationRecord
     name || category_name
   end
 
+  def languages= value
+    # Only accept languages which are in the language list
+    super value & I18nData.languages.keys
+  end
+
   def address
     { room: room }.merge(venue.address)
   end

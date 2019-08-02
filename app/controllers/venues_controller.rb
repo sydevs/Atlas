@@ -7,7 +7,7 @@ class VenuesController < ApplicationController
 
     if params[:q]
       term = "%#{params[:q]}%"
-      scope = scope.where('(name LIKE ?) OR (address LIKE ?)', term, term)
+      scope = scope.where('(name LIKE ?) OR (street LIKE ?) OR (municipality LIKE ?) OR (subnational LIKE ?) OR (country_code LIKE ?)', term, term, term, term, term)
     end
 
     @venues = scope.includes(:events).page(params[:page]).per(10)
@@ -24,7 +24,7 @@ class VenuesController < ApplicationController
     @venue = Venue.new venue_params
 
     if @venue.save
-      redirect_to @venue, flash: { info: 'Created venue' }
+      redirect_to @venue, flash: { success: 'Created venue' }
     else
       render :new
     end
@@ -35,7 +35,7 @@ class VenuesController < ApplicationController
 
   def update
     if @venue.update venue_params
-      redirect_to @venue, flash: { info: 'Created venue' }
+      redirect_to @venue, flash: { success: 'Saved venue' }
     else
       render :edit
     end

@@ -14,8 +14,10 @@
 
 .ui.segment
   h3.ui.header
-    - if @registrations.present?
+    - if @event.registrations.present?
+      / TODO: Implement a CSV download for registrations and better registration views
       = floating_action 'Download CSV', 'download', nil
+      
     .content Recent registrations for this event
 
   .ui.divided.list

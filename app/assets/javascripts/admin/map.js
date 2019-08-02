@@ -73,7 +73,7 @@ const Map = {
     Map.geocoder.search({
       query: value,
     }).then(function(results) {
-      Map.messages.removeClass('active')
+      Map.messages.addClass('hidden')
 
       if (results.length > 0) {
         var result = results[0]
@@ -81,9 +81,9 @@ const Map = {
         $('#venue_latitude').val(result.y)
         $('#venue_longitude').val(result.x)
         Map.set_marker(result.y, result.x)
-        Map.messages.filter('.for-success').addClass('active')
+        Map.messages.filter('.for-success').removeClass('hidden')
       } else {
-        Map.messages.filter('.for-failure').addClass('active')
+        Map.messages.filter('.for-failure').removeClass('hidden')
       }
 
       $button.removeClass('loading')
