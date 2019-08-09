@@ -15,13 +15,12 @@
 .ui.segment
   h3.ui.header
     - if @event.registrations.present?
-      / TODO: Implement a CSV download for registrations and better registration views
-      = floating_action 'Download CSV', 'download', nil
+      = floating_action 'View all', 'list', event_registrations_path(@event)
       
     .content Recent registrations for this event
 
-  .ui.divided.list
-    = render @event.registrations, cache: true
+  .ui.divided.registration.list
+    = render @event.registrations.limit(10), cache: true
 
 p
   a.ui.basic.button href=venue_path(@venue)
