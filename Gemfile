@@ -28,6 +28,11 @@ gem 'recurrence' # For recurring events
 gem 'nilify_blanks' # Convert empty string to null in the database
 gem 'kaminari' # Pagination
 
+# File uploads
+gem 'carrierwave' # Serverside image uploader
+gem 'carrierwave-google-storage' # Serverside image uploader
+gem 'mini_magick' # Image processing during upload
+
 ### Internationalization
 gem 'i18n_data' # Adds localized lists of countries and languages
 
