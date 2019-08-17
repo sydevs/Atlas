@@ -1,5 +1,7 @@
 class Event < ApplicationRecord
 
+  include Manageable
+  
   nilify_blanks
   belongs_to :venue
   has_many :registrations
@@ -12,7 +14,6 @@ class Event < ApplicationRecord
   validates :start_time, presence: true
   validates :recurrence, presence: true
   validates :description, length: { minimum: 20, maximum: 255, allow_nil: true }
-  validates :contact_email, format: { with: URI::MailTo::EMAIL_REGEXP, allow_blank: true, message: 'must be a valid email' }
 
   delegate :full_address, to: :venue
 

@@ -27,6 +27,7 @@ gem 'recurrence' # For recurring events
 # gem 'autosize' # To automatically grow text areas
 gem 'nilify_blanks' # Convert empty string to null in the database
 gem 'kaminari' # Pagination
+gem 'passwordless' # For email based user authentication
 
 ### Internationalization
 gem 'i18n_data' # Adds localized lists of countries and languages

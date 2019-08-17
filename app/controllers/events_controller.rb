@@ -65,10 +65,10 @@ class EventsController < ApplicationController
     end
 
     def event_params
-      result = params.fetch(:event, {}).permit(
+      params.fetch(:event, {}).permit(
         :name, :description, :room, :category,
-        :contact_name, :contact_email,
         :recurrence, :start_date, :end_date, :start_time, :end_time,
+        manager: {},
         languages: [],
       )
     end

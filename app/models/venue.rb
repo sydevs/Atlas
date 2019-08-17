@@ -1,13 +1,13 @@
 class Venue < ApplicationRecord
 
+  include Manageable
+  
   nilify_blanks
   has_many :events
 
   validates :street, presence: true
   validates :country_code, presence: true
   validates :latitude, :longitude, presence: true
-  validates :contact_name, presence: true
-  validates :contact_email, presence: true, format: { with: URI::MailTo::EMAIL_REGEXP }
 
   def label
     name || street

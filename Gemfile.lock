@@ -43,6 +43,7 @@ GEM
     arel (8.0.0)
     autoprefixer-rails (9.6.1)
       execjs
+    bcrypt (3.1.13)
     bindex (0.8.1)
     builder (3.2.3)
     byebug (11.0.1)
@@ -107,6 +108,9 @@ GEM
     nokogiri (1.10.3)
       mini_portile2 (~> 2.4.0)
     normalize-rails (4.1.1)
+    passwordless (0.8.1)
+      bcrypt (~> 3.1.11)
+      rails (>= 5.1.4)
     pg (0.21.0)
     public_suffix (3.1.1)
     puma (3.12.1)
@@ -220,6 +224,7 @@ DEPENDENCIES
   listen (>= 3.0.5, < 3.2)
   nilify_blanks
   normalize-rails
+  passwordless
   pg (~> 0.18)
   puma (~> 3.7)
   rails (~> 5.1.6)
@@ -236,4 +241,4 @@ DEPENDENCIES
   web-console (>= 3.3.0)
 
 BUNDLED WITH
-   1.17.2
+   1.17.3

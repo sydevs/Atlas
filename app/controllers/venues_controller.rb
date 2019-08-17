@@ -52,11 +52,11 @@ class VenuesController < ApplicationController
     end
 
     def venue_params
-      params.fetch(:venue, {}).permit(%i[
-        name category latitude longitude
-        contact_name contact_email
-        street municipality subnational country_code
-      ])
+      params.fetch(:venue, {}).permit(
+        :name, :category, :latitude, :longitude,
+        :street, :municipality, :subnational, :country_code,
+        manager: {}
+      )
     end
 
 end
