@@ -14,22 +14,34 @@ body
   .image
     position: relative
     margin-bottom: 4px
+    margin-right: 4px
 
-    width: 100%
     max-width: 320px
-    height: 215px
+    width: 100%
 
     &:not(:hover) .labels
       display: none
 
-  @media (min-width: 540px)
-    text-align: center
-
+  @media (max-width: 380px)
     .image
-      width: calc(50% - 8px)
+      height: 180px
+      margin-right: 0
 
-    .image:nth-child(2n + 1)
-      margin-right: 4px
+  @media (min-width: 381px) and (max-width: 680px)
+    .image
+      width: calc(50% - 4px)
+      height: 150px
+
+    .image:nth-child(2n + 2)
+      margin-right: 0
+
+  @media (min-width: 681px)
+    .image
+      width: calc(33% - 8px)
+      height: 120px
+
+    .image:nth-child(3n + 3)
+      margin-right: 0
 
   .labels
     position: absolute
