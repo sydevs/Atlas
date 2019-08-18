@@ -26,4 +26,4 @@
 8289 Cadogan St, South Ward, North Eart Lincolnshire, DN33 1AU, 53.5502389438986, -0.106765140815445
 211 Hobart St, Newquay, Cornwall, TR7 1LS, 50.4162761, -5.09039055
 114 Falkland St #8845, Brimpton, Berkshire, RG7 4RF, 51.3664499261741, -1.18759121270973
-1 Birkett St, Shard End Ward, West Midlands, B33 0NH, 52.47804185, -1.7699558094452
+1 Birkett St, Shard End Ward, West Midlands, B33 0NH, 52.4782479243264, -1.77007466525425
