@@ -14,6 +14,17 @@
 
 .ui.segment
   h3.ui.header
+    = floating_action 'Upload Images', 'upload', id: 'upload-button', data: { endpoint: event_upload_image_path(@event) }
+
+    .content Images
+  
+  #uploaded-images = render 'images', event: @event
+
+  template id='upload-template'
+    = render 'images', template: true
+
+.ui.segment
+  h3.ui.header
     - if @event.registrations.present?
       = floating_action 'View all', 'list', event_registrations_path(@event)
       
