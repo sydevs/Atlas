@@ -1,62 +1,168 @@
-@import '../mixins'
+@import "../mixins/*"
 
-#sidebar-search
+$single-panel-width: 35%
+$first-panel-left-offset: 10%
+
+.box-shadow-div
+  @include laptop-or-larger
+    z-index: 999
+    top: 8%
+    position: absolute
+    left: $first-panel-left-offset
+    height: 100%
+    width: $single-panel-width
+    max-height: 80%
+    overflow-y: scroll
+    background-color: white
+    box-shadow: 0 2px 50px 0 rgba(0,0,0,0.5);
+
+.width-panel-double
+  width: $single-panel-width * 2 !important
+
+.search-container
+  z-index: 999
+  top: 8%
   position: absolute
-  top: 0
+  left: $first-panel-left-offset
+  width: 35%
+  max-height: 80%
+  overflow-y: scroll
+  background-color: white
+  @include mobile
+    left: 5%;
+    width: 90%;
+
+#infoPanel
+  display: none
+
+.info-panel-text
+  padding-top: 20%
+  padding-left: 15%
+  padding-right: 15%
+
+.less-info-container
+  top: 10px;
+  position: absolute;
+  right: 10%;  
+
+.first-side-panel
+  @include mobile
+    height: 100%
+  @include laptop-or-larger
+    border-left: 0.5px solid #D8D8D8
+    left: $first-panel-left-offset + $single-panel-width
+    height: 80%
+
+.autocomplete
+  position: relative
+  display: inline-block
+
+.autocomplete-items
+  position: absolute
+  border: 1px solid #d4d4d4
+  border-bottom: none
+  border-top: none
+  z-index: 99
+  top: 100%
   left: 0
-  padding: 5px 0
+  right: 0
+  div
+    padding: 10px
+    cursor: pointer
+    background-color: #fff
+    border-bottom: 1px solid #d4d4d4
+    &:hover
+      background-color: #e9e9e9
 
-  input
-    height: 40px
-    width: 250px
-    font-size: 16px
-    padding: 1em
-    border: none
-    border-right: 1px solid black
+.autocomplete-active
+  background-color: DodgerBlue !important
+  color: #ffffff
 
-    &:focus
-      outline: none
-      background: lighten(lightblue, 20%)
-
-.leaflet-searchbox
-  background: white
-  border: 2px solid rgba(0,0,0,0.2)
-  border-radius: 4px
-  padding: 5px
-  box-sizing: border-box
+.search-box
   display: flex
+  box-shadow: 0 2px 25px 0 rgba(0, 0, 0, 0.2)
 
-  @media (min-width: $threshold-large)
-    width: $width-large
+.search-text
+  width: 80%
+  height: 50px
 
-  @media (min-width: $threshold-medium)
-    width: $width-medium
-
-  @media (min-width: $threshold-small)
-    width: $width-small
-
-  @media (max-width: $threshold-small - 1px)
-    width: $width-extra-small
-
-  > *
-    margin: 0
-    display: inline-block
-
-#sidebar-button
-  font-weight: bold
-  opacity: 1
-  transition: 0.2s opacity
-  height: 100%
-  padding: 0 10px
-  line-height: 28.5px
-  cursor: pointer
-
-  &:not(.disabled):hover
-    opacity: 0.8
-
-  &.disabled
-    opacity: 0.5
-
-#search
+.search-close
   border: none
-  border-left: 1px solid black
+  background-color: white
+  color: #979797
+  width: 20%
+
+input
+  border: 1px solid transparent
+  padding: 10px
+  font-size: 16px
+
+input[type=submit]
+  background-color: DodgerBlue
+  color: #fff
+
+.result-container
+  display: flex
+  padding: 5%
+
+.event-info-container
+  width: 60%
+  color: #7B7B7B
+  font-family: Raleway;  
+  display: flex
+  flex-direction: column
+  .event-name
+    color: #555555
+    font-weight: 600
+    line-height: 20px
+    font-size: 17px
+  .event-address
+    letter-spacing: 0.36px
+    line-height: 14px
+    font-size: 13px
+  .time-details
+    .day
+      color: #7B7B7B
+      font-family: Raleway
+      font-size: 11px
+      letter-spacing: 0.36px
+      line-height: 25px
+    .time
+      color: #7B7B7B
+      font-family: Raleway
+      font-size: 15px
+      font-weight: 500
+      letter-spacing: 0.49px
+      line-height: 25px
+
+.event-actions-container
+  width: 40%
+  display: flex
+  justify-content: center
+  align-items: center
+  flex-direction: column
+  .link-container
+    font-family: raleway
+    .more-info-link
+      font-size: 13px
+      color: #7B7B7B
+      letter-spacing: 0.16px
+      line-height: 15px
+      text-decoration: none
+  .button-container
+    padding-bottom: 5%
+    font-family: raleway
+    .register-button
+      color: #7B7B7B
+      width: 100px
+      height: 50px    
+      background-color: white;
+      border: 1px solid #979797;
+      font-size: 14px
+      font-weight: 600
+
+.divider
+  display: block
+  border: 0.5px solid #D8D8D8
+  margin-left: 10%
+  margin-right: 10%

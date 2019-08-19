@@ -1,0 +1,108 @@
+@import './vars'
+
+/* FUNCTIONS
+  This file defines functions that are used through the front-end sass code.
+  */
+
+// When you use purely transparent values it can mess up gradient rendering on some sites.
+@mixin gradient($direction, $color)
+  background: linear-gradient($direction, rgba(255,255,255,.01) 0, rgba(255,255,255,0.18) 25%, map-get($color-gradient, #{$color}) 100%)
+
+// A shorthand to create an absolute positioning
+@mixin overlay($top: 0, $bottom: 0, $left: 0, $right: 0)
+  position: absolute
+  top: $top
+  bottom: $bottom
+  left: $left
+  right: $right
+
+// Animate the border
+@mixin animate-border-box($color, $width, $delay: 1)
+  position: relative
+  box-shadow: inset 0 0 0 $width transparent
+  transition: color 0.5s 0.5s
+
+  &:before, &:after
+    border: 0 solid transparent
+    box-sizing: border-box
+    content: ''
+    pointer-events: none
+    position: absolute
+    width: 0
+    height: 0
+
+  &:before
+    top: 0
+    right: 0
+    border-bottom-width: $width
+    border-right-width: $width
+
+  &:after
+    left: 0
+    bottom: 0
+    border-top-width: $width
+    border-left-width: $width
+
+  &.animate
+    color: $color
+
+    &:before, &:after
+      border-color: $color
+      transition: border-color 0s, height 0.5s, width 0.5s
+      width: 100%
+      height: 100%
+
+    &:before
+      transition-delay: $delay + 1s, $delay + 1s, $delay + 1.5s
+
+    &:after
+      transition-delay: $delay + 0s, $delay + 0s, $delay + 0.5s
+
+// Complete definition for a font
+@mixin font-face($font-family, $file-path, $weight: normal, $style: normal)
+  @font-face
+    font-family: $font-family
+    font-weight: $weight
+    font-style: $style
+
+    src: font-url('#{$file-path}.eot')
+    src: font-url('#{$file-path}.eot?#iefix') format('embedded-opentype'), font-url('#{$file-path}.woff') format('woff'), font-url('#{$file-path}.ttf') format('truetype')
+
+// A standard pulse animation which is used throughout the site
+@mixin pulse-animation
+  animation: pulse 2s infinite
+
+@keyframes pulse
+  from
+    transform: scale3d(1, 1, 1)
+  50%
+    transform: scale3d(1.05, 1.05, 1.05)
+  to
+    transform: scale3d(1, 1, 1)
+
+// Implements a background image which is roughly responsive to screen size and dpi.
+// Assumes that the file has `mobile`, `tablet`, and `desktop` variations.
+@mixin responsive-background($path, $extension)
+  background-image: image-url("#{$path}-mobile.#{$extension}")
+
+  @media (min-width: #{$tablet-width}) and (max-width: #{$laptop-width - 1px}), (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi)
+    background-image: image-url("#{$path}-tablet.#{$extension}")
+
+  @media (min-width: #{$laptop-width}), (min-width: #{$tablet-width}) and (-webkit-min-device-pixel-ratio: 2), (min-width: #{$tablet-width}) and (min-resolution: 192dpi)
+    background-image: image-url("#{$path}-desktop.#{$extension}")
+
+
+// These mixins are used to animate the equalizer animation that is shown in the play button when you are listening to a music track.
+@mixin equalizer-animation
+  animation: equalizer 0.5s ease infinite
+
+@mixin equalizer-animation-2
+  animation: equalizer 0.5s linear infinite
+
+@keyframes equalizer
+  from
+    transform: translate3d(0,0,0)
+  50%
+    transform: translate3d(0,80%,0)
+  to
+    transform: translate3d(0,0,0)

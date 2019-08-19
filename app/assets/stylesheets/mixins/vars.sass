@@ -1,0 +1,154 @@
+
+/* VARIABLES
+  This file defines variables that are used through the front-end sass code.
+  */
+
+// ===== FONTS ===== //
+$font-text: "raleway", sans-serif
+$font-number: "futura-book", sans-serif
+$font-icons: 'wemeditate-icons' // This is the font to use for icons
+
+$font-lighter: 100
+$font-light: 200
+$font-normal: 300
+$font-medium: 400
+$font-semibold: 500
+$font-bold: 600
+
+
+// ===== SIZES ===== //
+// These are the minimum widths for each device
+// Devices smaller than 320px width are not supported.
+$mobile-width: 320px // This variable is not actually used
+$tablet-width: 768px
+$laptop-width: 1024px
+$desktop-width: 1600px
+$widescreen-width: 2180px
+
+$narrow-content-width: 766px
+$laptop-content-width: 1150px
+$desktop-content-width: 1250px
+$widescreen-content-width: 1500px
+
+$gutter-width: 24px
+$scrollspy-width: 3px
+
+// ===== COLOURS ===== //
+$color-text-darkest: black
+$color-text-darker: #5e6063
+$color-text-dark: #7b7b7b // TODO: Refactor this
+$color-text-normal: #7b7b7b
+$color-text-light: #9d9d9c
+$color-text-lighter: #c6c6c6
+$color-text-lightest: #d7d7d6
+
+$color-text-sidetext: #d8d5d5
+$color-text-inverse: white
+$color-text-orange: #e08e79
+$color-text-blue: #c5e0dc
+
+$color-header: #555555
+$color-header-light: #7b7b7b
+$color-scrollspy: #c5e0dc
+$color-error: #cc5e5e
+$color-graphic-normal: #c6c6c6
+$color-graphic-dark: #9d9d9c
+$color-graphic-darker: #5e6063
+
+$color-gradient: ('blue': rgba(197, 224, 220, 0.3), 'orange': rgba(241, 212, 175, 0.7), 'gray': rgba(232, 232, 232, 0.5), 'wisdom': rgba(255, 196, 175, 0.7), 'form': #FAF0E3)
+
+$color-player: #d7d7d6
+$color-player-light: #eeeeee
+$color-player-blue: #c5e0dc
+$color-box-orange: #ff856f
+
+$color-button-blue: #ebf4f3
+$color-button-blue-dark: #c5e0dc
+$color-button-video: #dcdcdc
+
+// TODO: Remove these old color definitions
+$background-gray: #f6f6f6
+$background-blue: #c5e0dc
+$background-white: #ffffff
+
+$color-gradient-blue: blue
+$color-gradient-orange: orange
+$color-gradient-gray: gray
+
+
+// ===== Z-INDEX POSITIONING ===== //
+// TODO: Better implement the use of these variables across the code base.
+$z-popup: 2000
+$z-header: 1000
+$z-header-menu: 900
+$z-dropdown: 90
+
+
+// ====== ICONS ===== //
+// The icon font was generated using Icomoon.io, and can be reimported and edited there.
+$icon-arrow-left: '\e900'
+$icon-arrow-right: '\e901'
+$icon-arrow: ('left': $icon-arrow-left, 'right': $icon-arrow-right)
+
+$icon-breadcrumb: '\e906'
+$icon-play: '\e905'
+$icon-volume: '\e90a'
+$icon-volume-muted: '\e913'
+$icon-filters: '\e917'
+$icon-search: '\e986'
+
+$icon-meditation: '\e909'
+$icon-location: '\e914'
+$icon-computer: '\e90f'
+
+$icon-facebook: '\e902'
+$icon-instagram: '\e903'
+$icon-pinterest: '\e904'
+$icon-vk: '\e90b'
+$icon-whatsapp: '\e90c'
+$icon-telegram: '\ea95'
+$icon-twitter: '\e907'
+$icon-vimeo: '\e908'
+
+
+// ===== MEDIA QUERIES ===== //
+@mixin mobile
+  @media only screen and (max-width: #{$tablet-width - 1px})
+    @content
+
+@mixin tablet
+  @media only screen and (min-width: #{$tablet-width}) and (max-width: #{$laptop-width - 1px})
+    @content
+
+@mixin laptop
+  @media only screen and (min-width: #{$laptop-width}) and (max-width: #{$desktop-width - 1px})
+    @content
+
+@mixin desktop
+  @media only screen and (min-width: #{$desktop-width})
+    @content
+
+@mixin widescreen
+  @media only screen and (min-width: #{$widescreen-width})
+    @content
+
+
+@mixin tablet-or-smaller
+  @media only screen and (max-width: #{$laptop-width - 1px})
+    @content
+
+@mixin tablet-or-larger
+  @media only screen and (min-width: #{$tablet-width})
+    @content
+
+@mixin laptop-or-smaller
+  @media only screen and (max-width: #{$desktop-width - 1px})
+    @content
+
+@mixin laptop-or-larger
+  @media only screen and (min-width: #{$laptop-width})
+    @content
+
+@mixin desktop-or-smaller
+  @media only screen and (max-width: #{$desktop-width - 1px})
+    @content

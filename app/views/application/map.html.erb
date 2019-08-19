@@ -1,0 +1,54 @@
+<div id="mapid"></div>
+<div id="boxShadowDiv" class="box-shadow-div"></div>
+<div class="search-container">
+  <div class="autocomplete search-box">
+   <input class="search-text" id="myInput" type="text" name="myCountry" placeholder="Search">
+   <button id="searchCloseButton" class="search-close" >X</button>
+  </div>
+  <div class="search-results">
+    <% @events.limit(5).each do |event| %>
+    <div class="result-container">
+      <div class="event-info-container">
+        <span class="event-name"><%= event.name %></span>
+        <span class="event-address"><%= event.venue&.address&.values.join(", ") %></span>
+        <span class="time-details">
+          <span class="day">
+            <%= event.recurrence.upcase %> 
+          </span>
+            |
+          <span class="time">
+            <%= event.start_time %> - <%= event.end_time %>
+          </span>
+        </span>
+      </div>
+      <div class="event-actions-container">
+        <div class="button-container">
+          <button id="registerButton" class="register-button">
+            Register
+          </button>
+        </div>
+        <div class="link-container">
+          <a id="moreInfoLink" class="more-info-link" href="/">
+            More Info
+          </a>
+        </div>
+      </div>
+    </div>
+    <span class="divider">
+    </span>
+    <% end %>
+  </div>
+</div>
+<div class="search-container first-side-panel" id="infoPanel">
+  <div class="less-info-container">
+    <a class="less-info-text" id="lessInfoLink">less info</a>
+  </div>
+  <div class="info-panel-text">
+    <div class="info-panel-header">
+      <%= @events.first.name %>
+    </div>
+    <div class="info-panel-description">
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    </div>
+  </div>
+</div> 
