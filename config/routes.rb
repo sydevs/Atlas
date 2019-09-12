@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   get :statistics, to: 'application#statistics'
 
   resources :managers
+  resources :regions
 
   resources :venues do
     resources :events, only: %i[new create]

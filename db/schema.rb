@@ -54,6 +54,11 @@ ActiveRecord::Schema.define(version: 20190912130245) do
     t.index ["email"], name: "index_managers_on_email"
   end
 
+  create_table "managers_regions", id: false, force: :cascade do |t|
+    t.bigint "manager_id", null: false
+    t.bigint "region_id", null: false
+  end
+
   create_table "passwordless_sessions", force: :cascade do |t|
     t.string "authenticatable_type"
     t.bigint "authenticatable_id"
@@ -66,6 +71,19 @@ ActiveRecord::Schema.define(version: 20190912130245) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["authenticatable_type", "authenticatable_id"], name: "authenticatable"
+  end
+
+  create_table "regions", force: :cascade do |t|
+    t.string "name"
+    t.string "identifier"
+    t.string "subnational"
+    t.string "country_code"
+    t.float "latitude"
+    t.float "longitude"
+    t.float "radius"
+    t.integer "restriction", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "registrations", force: :cascade do |t|

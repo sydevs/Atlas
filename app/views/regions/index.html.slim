@@ -1,0 +1,21 @@
+
+- content_for :title, "Regions"
+
+.ui.segment
+  h2.ui.header
+    = floating_action 'Add Region', 'plus', new_region_path
+    .content Regions
+
+  = simple_form_for regions_path, html: { method: 'GET', data: { remote: 'true' }, autocomplete: 'off' }
+    #search.ui.fluid.icon.input
+      input name='q' type='text' placeholder='Search regions...' value=(params[:q] || '')
+      i.search.icon
+        
+  #list.ui.relaxed.list
+    - if @regions.count > 0
+      = render @regions, cache: true
+    - elsif params[:q]
+      | No regions for the search term "#{params[:q]}"
+
+  #pagination-info = page_entries_info @regions
+  #pagination = paginate @regions

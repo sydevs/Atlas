@@ -14,13 +14,14 @@
       br
       = @manager.email
 
-.ui.segment
-  h3.ui.header
-    = floating_action 'List Venues', 'edit', venues_path
-    = floating_action 'Venues Map', 'map', root_path
-    .content Regions managed
+- if @manager.regions.present?
+  .ui.segment
+    h3.ui.header
+      = floating_action 'List Venues', 'list', venues_path
+      = floating_action 'Venues Map', 'map', root_path
+      .content Regions managed
 
-  /#map data-latitude=@manager.latitude data-longitude=@manager.longitude
+    /#map data-latitude=@manager.latitude data-longitude=@manager.longitude
 
 p
   a.ui.basic.button href=managers_path

@@ -1,0 +1,14 @@
+
+- content_for :title, "Edit Region"
+
+= simple_form_for @region, html: { id: 'page-form', class: "#{'error' if @region.errors.present?}", novalidate: true } do |f|
+  .ui.segment
+    h1.ui.header Edit Region
+    = render 'fields', f: f
+
+  p
+    a.ui.basic.button href=region_path(@region)
+      i.left.arrow.icon
+      | Back
+
+    button.ui.basic.positive.button Save
