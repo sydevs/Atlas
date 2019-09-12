@@ -18,7 +18,7 @@ gem 'jbuilder', '~> 2.5' # Build JSON APIs with ease. Read more: https://github.
 gem 'jquery-rails' # Add jQuery
 gem 'normalize-rails' # To normalize CSS
 gem 'autoprefixer-rails' # For automatic cross browser CSS compatibility
-gem 'semantic-ui-sass' # Integrate Semantic UI for general styling
+gem 'fomantic-ui-sass' # Integrate Semantic UI for general styling
 gem 'leaflet-rails' # Integrate Leaflet for maps
 
 ### Administration
@@ -28,6 +28,7 @@ gem 'recurrence' # For recurring events
 gem 'nilify_blanks' # Convert empty string to null in the database
 gem 'kaminari' # Pagination
 gem 'passwordless' # For email based user authentication
+gem 'pundit' # Permissions
 
 ### Internationalization
 gem 'i18n_data' # Adds localized lists of countries and languages
@@ -44,6 +45,7 @@ group :development do
   gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'spring' # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'switch_user'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

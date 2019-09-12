@@ -1,6 +1,8 @@
 class ApplicationController < ActionController::Base
 
   include Passwordless::ControllerHelpers
+  include Pundit
+  
   layout -> { action_name == 'map' ? 'map' : 'admin' }
   helper_method :current_user
 

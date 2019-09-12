@@ -4,7 +4,8 @@ class ManagersController < ApplicationController
   before_action :set_manager!, only: %i[show edit update destroy]
 
   def index
-    scope = Manager
+    authorize! Manager
+    scope = policy_scope(Manager)
 
     if params[:q]
       term = "%#{params[:q]}%"
