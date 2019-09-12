@@ -10,10 +10,10 @@ Rails.application.routes.draw do
   resources :managers
 
   resources :venues do
-    resources :events, only: %i[index new create]
+    resources :events, only: %i[new create]
   end
 
-  resources :events, only: %i[show index edit update destroy] do
+  resources :events, only: %i[show edit update destroy] do
     resources :registrations, only: %i[index]
   end
 
