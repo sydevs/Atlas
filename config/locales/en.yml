@@ -13,4 +13,7 @@ en:
       course: "A several week course that takes you through various techniques of meditation."
       public_event: "Offering free meditation instruction at a public event."
       concert: "A performance combining meditation and music or dance."
-      
+  restriction:
+    no: "No Restriction"
+    subnational: "Limit to State Boundaries"
+    country: "Limit to Country Borders"      

@@ -7,6 +7,8 @@ Rails.application.routes.draw do
   get :dashboard, to: 'application#dashboard'
   get :statistics, to: 'application#statistics'
 
+  resources :managers
+
   resources :venues do
     resources :events, only: %i[index new create]
   end

@@ -1,0 +1,4 @@
+$('#list').html(`<%= render @managers %>`)
+$('#pagination').html(`<%= paginate @managers %>`)
+$('#pagination-info').html(`<%= page_entries_info @managers %>`)
+$('#search').removeClass('loading')

@@ -1,0 +1,24 @@
+
+- content_for :title, @manager.name
+
+.ui.segment
+  h2.ui.header
+    = floating_action 'Edit Manager', 'pencil', edit_manager_path(@manager)
+    .content Manager
+    .sub.header
+      = @manager.name
+      br
+      = @manager.email
+
+.ui.segment
+  h3.ui.header
+    = floating_action 'List Venues', 'edit', venues_path
+    = floating_action 'Venues Map', 'map', root_path
+    .content Regions managed
+
+  /#map data-latitude=@manager.latitude data-longitude=@manager.longitude
+
+p
+  a.ui.basic.button href=managers_path
+    i.left.arrow.icon
+    | Back to Managers

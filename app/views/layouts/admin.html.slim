@@ -31,8 +31,8 @@ html
           | Dashboard
         a.item href=venues_path class="#{'active' if %w[venues events].include? controller_name}"
           | Programs
-        a.disabled.item class="#{'active' if controller_name == 'admins'}"
-          | Admins
+        a.item href=managers_path class="#{'active' if controller_name == 'managers'}"
+          | Managers
 
         .right.menu
           a.item href=statistics_path class="#{'active' if action_name == 'statistics'}"
