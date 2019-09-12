@@ -5,17 +5,17 @@ class EventsController < ApplicationController
   before_action :set_event!, only: %i[show edit update destroy]
 
   def show
-    authorize! @event
+    authorize @event
   end
 
   def new
     @event = @venue.events.new
-    authorize! @event
+    authorize @event
   end
 
   def create
     @event = @venue.events.new event_params
-    authorize! @event
+    authorize @event
 
     if @event.save
       redirect_to @event, flash: { success: 'Created event' }
@@ -25,11 +25,11 @@ class EventsController < ApplicationController
   end
 
   def edit
-    authorize! @event
+    authorize @event
   end
 
   def update
-    authorize! @event
+    authorize @event
     if @event.update event_params
       redirect_to [:edit, @event], flash: { success: 'Saved event' }
     else
@@ -38,7 +38,7 @@ class EventsController < ApplicationController
   end
 
   def destroy
-    authorize! @event
+    authorize @event
     @event.destroy
   end
 

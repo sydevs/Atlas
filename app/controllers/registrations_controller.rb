@@ -4,7 +4,7 @@ class RegistrationsController < ApplicationController
   before_action :set_event!, only: %i[index create]
 
   def index
-    authorize! @event, :registrations?
+    authorize @event, :registrations?
     @registrations = @event.registrations
   end
 

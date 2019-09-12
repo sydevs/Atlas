@@ -4,7 +4,7 @@ class VenuesController < ApplicationController
   before_action :set_venue!, only: %i[show edit update destroy]
 
   def index
-    authorize! Venue
+    authorize Venue
     scope = policy_scope(Venue)
 
     if params[:q]
@@ -16,17 +16,17 @@ class VenuesController < ApplicationController
   end
 
   def show
-    authorize! @venue
+    authorize @venue
   end
 
   def new
     @venue = Venue.new
-    authorize! @venue
+    authorize @venue
   end
 
   def create
     @venue = Venue.new venue_params
-    authorize! @venue
+    authorize @venue
 
     if @venue.save
       redirect_to @venue, flash: { success: 'Created venue' }
@@ -36,11 +36,11 @@ class VenuesController < ApplicationController
   end
 
   def edit
-    authorize! @venue
+    authorize @venue
   end
 
   def update
-    authorize! @venue
+    authorize @venue
     if @venue.update venue_params
       redirect_to @venue, flash: { success: 'Saved venue' }
     else
@@ -49,7 +49,7 @@ class VenuesController < ApplicationController
   end
 
   def destroy
-    authorize! @venue
+    authorize @venue
     @venue.destroy
   end
 
