@@ -13,7 +13,7 @@ class EventPolicy < ApplicationPolicy
   end
 
   def destroy?
-    false
+    record.venue.manager == user || user.administrator?
   end
 
   def registrations?

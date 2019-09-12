@@ -1,14 +1,14 @@
 
 class VenuePolicy < ApplicationPolicy
   def create?
-    false
+    user.administrator?
   end
 
   def update?
-    record.manager == user
+    record.manager == user || user.administrator?
   end
 
   def destroy?
-    false
+    user.administrator?
   end
 end

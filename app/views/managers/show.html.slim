@@ -4,7 +4,11 @@
 .ui.segment
   h2.ui.header
     = floating_action 'Edit Manager', 'pencil', edit_manager_path(@manager)
-    .content Manager
+    .content
+      - if @manager.administrator?
+        | Administrator
+      - else
+        | Manager
     .sub.header
       = @manager.name
       br

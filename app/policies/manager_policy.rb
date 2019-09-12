@@ -1,14 +1,14 @@
 
 class ManagerPolicy < ApplicationPolicy
   def create?
-    record.venue.manager == user
+    user.administrator?
   end
 
   def update?
-    record.manager == user # || user.administrator?
+    record.manager == user || user.administrator?
   end
 
   def destroy?
-    false
+    user.administrator?
   end
 end
