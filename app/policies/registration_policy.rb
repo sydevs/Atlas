@@ -1,4 +1,5 @@
-class RegistrationPolicy
+
+class RegistrationPolicy < ApplicationPolicy
   def create?
     true
   end

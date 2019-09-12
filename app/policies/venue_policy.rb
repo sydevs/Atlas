@@ -1,4 +1,5 @@
-class VenuePolicy
+
+class VenuePolicy < ApplicationPolicy
   def create?
     false
   end

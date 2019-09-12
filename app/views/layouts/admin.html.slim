@@ -14,12 +14,13 @@ html
 
   body class="admin #{controller_name} #{controller.action_name}"
     header
-      a.ui.right.floated.basic.button href=map_path target='_blank'
-        i.globe.icon
-        | View Map
-      a.ui.right.floated.basic.disabled.button href='#' target='_blank'
-        | About
-      - unless current_user
+      - if current_user
+        a.ui.right.floated.basic.button href=map_path target='_blank'
+          i.globe.icon
+          | View Map
+        a.ui.right.floated.basic.disabled.button href='#' target='_blank'
+          | About
+      - else
         a.ui.right.floated.basic.button href=managers.sign_in_path
           | Login
 

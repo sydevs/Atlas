@@ -1,4 +1,5 @@
-class ManagerPolicy
+
+class ManagerPolicy < ApplicationPolicy
   def create?
     record.venue.manager == user
   end

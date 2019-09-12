@@ -1,4 +1,5 @@
-class EventPolicy
+
+class EventPolicy < ApplicationPolicy
   def show?
     true
   end
