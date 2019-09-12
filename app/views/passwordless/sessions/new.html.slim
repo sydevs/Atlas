@@ -1,0 +1,11 @@
+
+- content_for :title, "Login"
+
+= simple_form_for @session, url: send(Passwordless.mounted_as).sign_in_path do |f|
+  .ui.segment
+    h2.ui.header Request login
+    = f.input :email, hint: "All login is managed via email. Enter your email address below, and you will be sent a link to login" do
+      - email_field_name = "passwordless[#{@email_field}]".to_sym
+      = text_field_tag email_field_name, params.fetch(email_field_name, nil)
+
+  = f.submit translate('passwordless.sessions.new.submit'), class: 'ui basic button'

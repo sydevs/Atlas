@@ -1,5 +1,6 @@
 class EventsController < ApplicationController
 
+  before_action :require_login!
   before_action :set_venue!, only: %i[new create]
   before_action :set_event!, only: %i[show edit update destroy]
 

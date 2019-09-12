@@ -1,5 +1,7 @@
 class Manager < ApplicationRecord
 
+  passwordless_with :email
+
   has_many :venues
   has_many :events
   has_many :registrations, through: :events

@@ -1,5 +1,6 @@
 class RegistrationsController < ApplicationController
 
+  before_action :require_login!
   before_action :set_event!, only: %i[index create]
 
   def index

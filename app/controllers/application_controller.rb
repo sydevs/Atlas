@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   layout -> { action_name == 'map' ? 'map' : 'admin' }
   helper_method :current_user
 
-  # before_action :require_login!, except: %i[map]
+  before_action :require_login!, only: %i[dashboard statistics]
   before_action :allow_embed, only: %i[map]
   protect_from_forgery with: :exception
 
@@ -36,7 +36,7 @@ class ApplicationController < ActionController::Base
       return if current_user
 
       save_passwordless_redirect_location! Manager
-      redirect_to root_path, flash: { error: 'You are not logged in!' }
+      redirect_to managers.sign_in_path, flash: { error: 'You are not logged in!' }
     end
 
 end
