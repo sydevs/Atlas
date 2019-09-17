@@ -1,0 +1,33 @@
+
+- content_for :title, @province.province_name
+
+.ui.segment
+  h2.ui.header
+    = floating_action 'Edit Province', 'pencil', edit_regions_province_path(@province)
+    .content Province / State / County
+    .sub.header
+      = @province.province_name
+
+.ui.segment
+  h3.ui.header Managers for this region
+
+  .ui.list
+    = render @province.managers, cache: true
+
+  - if @province.country.managers.present?
+    .ui.divider
+    .ui.list
+      = render @province.country.managers, cache: true
+
+.ui.segment
+  h3.ui.header
+    = floating_action 'Create Area', 'plus', new_regions_province_local_area_path(@province)
+    .content Local Areas
+
+  .ui.list
+    = render @province.local_areas, cache: true
+
+p
+  a.ui.basic.button href=url_for(@province.country)
+    i.left.arrow.icon
+    | Back to #{@province.country.name}

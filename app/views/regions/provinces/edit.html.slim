@@ -1,0 +1,15 @@
+
+- country_name = Regions::Country.get_name @province.country_code
+- content_for :title, "Edit Province within #{country_name}"
+
+= simple_form_for @province, url: provice_path(@province), html: { id: 'page-form', class: "#{'error' if @province.errors.present?}", novalidate: true } do |f|
+  .ui.segment
+    h1.ui.header Edit Province within #{country_name}
+    = render 'fields', f: f
+
+  p
+    a.ui.basic.button href=url_for(@province)
+      i.left.arrow.icon
+      | Back
+
+    button.ui.basic.positive.button Save

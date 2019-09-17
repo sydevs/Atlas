@@ -1,0 +1,14 @@
+
+- content_for :title, @title
+
+= simple_form_for @local_area, html: { id: 'page-form', class: "#{'error' if @local_area.errors.present?}", novalidate: true } do |f|
+  .ui.segment
+    h1.ui.header = @title
+    = render 'fields', f: f
+
+  p
+    a.ui.basic.button href=url_for(@local_area)
+      i.left.arrow.icon
+      | Back
+
+    button.ui.basic.positive.button Save

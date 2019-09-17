@@ -1,0 +1,37 @@
+
+- content_for :title, @country.name
+
+.ui.segment
+  h2.ui.header = @country.name
+
+.ui.segment
+  h3.ui.header Managers for this country
+
+  .ui.list
+    = render @country.managers, cache: true
+
+.ui.segment
+  h3.ui.header Provinces / States / Counties
+
+  .ui.list
+    = render @country.provinces, cache: true
+
+  .ui.list
+    - @unpersisted_provinces.each do |index, name|
+      a.item href=url_for([:new, @country, :province, name: name])
+        i.globe.icon
+        .content
+          .header = name
+
+.ui.segment
+  h3.ui.header
+    = floating_action 'Create Area', 'plus', new_regions_country_local_area_path(@country)
+    .content Local Areas
+
+  .ui.list
+    = render @country.local_areas, cache: true
+
+p
+  a.ui.basic.button href=regions_countries_path
+    i.left.arrow.icon
+    | Back to Countries

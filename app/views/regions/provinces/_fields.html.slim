@@ -1,0 +1,10 @@
+
+- if f.object.errors.present?
+  .ui.error.message
+    .header Errors
+    ul.list
+      - f.object.errors.full_messages.each do |message|
+        li = message
+
+- provinces = SubdivisionSelect::SubdivisionsHelper.get_subdivisions(@country.country_code).values
+= f.input :province_name, label: 'Province / State / County', prompt: 'Choose Region', collection: provinces, wrapper_html: { class: 'search' }

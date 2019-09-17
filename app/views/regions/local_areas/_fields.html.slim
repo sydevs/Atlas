@@ -1,0 +1,23 @@
+
+- if f.object.errors.present?
+  .ui.error.message
+    .header Errors
+    ul.list
+      - f.object.errors.full_messages.each do |message|
+        li = message
+
+.field
+  = f.label :location
+  .two.fields
+    .field
+      = f.input_field :latitude, placeholder: 'Latitude'
+    .field
+      = f.input_field :longitude, placeholder: 'Longitude'
+
+= f.input :radius, label: 'Radius (km)'
+
+= f.input :name
+= f.input :identifier
+
+- if @local_area.latitude && @local_area.longitude && @local_area.radius
+  #local_area-map data-latitude=@local_area.latitude data-longitude=@local_area.longitude data-radius=@local_area.radius

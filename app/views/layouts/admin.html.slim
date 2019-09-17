@@ -32,7 +32,7 @@ html
           | Dashboard
         a.item href=venues_path class="#{'active' if %w[venues events].include? controller_name}"
           | Programs
-        a.item href=regions_path class="#{'active' if controller_name == 'regions'}"
+        a.item href=regions_countries_path class="#{'active' if %w[countries provinces local_areas].include? controller_name}"
           | Regions
         a.item href=managers_path class="#{'active' if controller_name == 'managers'}"
           | Managers

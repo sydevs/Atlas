@@ -20,12 +20,24 @@ class RegionsController < ApplicationController
   end
 
   def new
-    @region = Region.new
+    @parent = Region.find(params[:id]) if params[:id]
+    @region = @parent ? @parent.subregions.new : Region.new
+    @region.type = @parent[:type] - 1
     authorize @region
+
+    if @region.local?
+      @title = "Create Region within #{@region.state_name}, #{@region.country}"
+    elsif @region.state?
+      @title = "Create Region within #{@region.country_name}"
+    else
+      @title = "Create Region"
+    end
   end
 
   def create
-    @region = Region.new region_params
+    @parent = Region.find(params[:id]) if params[:id]
+    @region = @parent ? @parent.subregions.new(region_params) : Region.new(region_params)
+    @region.type = @parent[:type] - 1
     authorize @region
 
     if @region.save
@@ -37,6 +49,14 @@ class RegionsController < ApplicationController
 
   def edit
     authorize @region
+
+    if @region.local?
+      @title = "Create Region within #{@region.state_name}, #{@region.country}"
+    elsif @region.state?
+      @title = "Create Region within #{@region.country_name}"
+    else
+      @title = "Create Region"
+    end
   end
 
   def update
@@ -61,7 +81,7 @@ class RegionsController < ApplicationController
 
     def region_params
       params.fetch(:region, {}).permit(
-        :name, :identifier, :country_code, :subnational,
+        :name, :identifier, :country, :subnational,
         :latitude, :longitude, :radius, :restriction
       )
     end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190912130245) do
+ActiveRecord::Schema.define(version: 20190915133831) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,14 @@ ActiveRecord::Schema.define(version: 20190912130245) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["model_type", "model_id"], name: "index_authorizations_on_model_type_and_model_id"
+  end
+
+  create_table "countries", force: :cascade do |t|
+    t.string "country_code", null: false
+    t.string "identifier"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["country_code"], name: "index_countries_on_country_code", unique: true
   end
 
   create_table "events", force: :cascade do |t|
@@ -45,6 +53,25 @@ ActiveRecord::Schema.define(version: 20190912130245) do
     t.index ["venue_id"], name: "index_events_on_venue_id"
   end
 
+  create_table "local_areas", force: :cascade do |t|
+    t.string "country_code", null: false
+    t.string "province_name"
+    t.string "name"
+    t.string "identifier"
+    t.float "latitude"
+    t.float "longitude"
+    t.float "radius"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "managed_regions", id: false, force: :cascade do |t|
+    t.integer "manager_id"
+    t.integer "region_id"
+    t.string "region_type"
+    t.index ["region_id", "region_type"], name: "index_managed_regions_on_region_id_and_region_type"
+  end
+
   create_table "managers", force: :cascade do |t|
     t.string "name"
     t.string "email"
@@ -52,11 +79,6 @@ ActiveRecord::Schema.define(version: 20190912130245) do
     t.datetime "updated_at", null: false
     t.boolean "administrator"
     t.index ["email"], name: "index_managers_on_email"
-  end
-
-  create_table "managers_regions", id: false, force: :cascade do |t|
-    t.bigint "manager_id", null: false
-    t.bigint "region_id", null: false
   end
 
   create_table "passwordless_sessions", force: :cascade do |t|
@@ -73,17 +95,13 @@ ActiveRecord::Schema.define(version: 20190912130245) do
     t.index ["authenticatable_type", "authenticatable_id"], name: "authenticatable"
   end
 
-  create_table "regions", force: :cascade do |t|
-    t.string "name"
+  create_table "provinces", force: :cascade do |t|
+    t.string "country_code", null: false
+    t.string "province_name"
     t.string "identifier"
-    t.string "subnational"
-    t.string "country_code"
-    t.float "latitude"
-    t.float "longitude"
-    t.float "radius"
-    t.integer "restriction", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["province_name"], name: "index_provinces_on_province_name", unique: true
   end
 
   create_table "registrations", force: :cascade do |t|

@@ -1,0 +1,42 @@
+
+- content_for :title, @local_area.name
+
+.ui.segment
+  h2.ui.header
+    = floating_action 'Edit Area', 'pencil', edit_regions_local_area_path(@local_area)
+    .content Local Area
+    .sub.header
+      = @local_area.name
+      br
+      - if @local_area.province_name.present?
+        | #{@local_area.province_name}, #{@local_area.country_code}
+      - else
+        = Regions::Country.get_name @local_area.country_code
+
+  #region-map data-latitude=@local_area.latitude data-longitude=@local_area.longitude data-radius=@local_area.radius
+
+.ui.segment
+  h3.ui.header Managers for this local area
+
+  .ui.list
+    = render @local_area.managers, cache: true
+  
+  - if @local_area.province_name? && @local_area.province&.managers.present?
+    .ui.divider
+    .ui.list
+      = render @local_area.province&.managers, cache: true
+
+  - if @local_area.country_code? && @local_area.country&.managers.present?
+    .ui.divider
+    .ui.list
+      = render @local_area.country&.managers, cache: true
+
+p
+  - if @local_area.province.present?
+    a.ui.basic.button href=url_for(@local_area.province)
+      i.left.arrow.icon
+      | Back to #{@local_area.province_name}
+  - else
+    a.ui.basic.button href=url_for(@local_area.country)
+      i.left.arrow.icon
+      | Back to #{@local_area.country.name}
