@@ -24,9 +24,12 @@
 .ui.segment
   h3.ui.header Managers for this local area
 
-  .ui.list
-    = render collection: @local_area.managers, partial: 'managers/manager', cache: true
-  
+  - if @local_area.managers.present?
+    .ui.list
+      = render collection: @local_area.managers, partial: 'managers/manager', cache: true
+  - else
+    | No managers have been set for this area yet.
+
   - if @local_area.province_name? && @local_area.province&.managers.present?
     h4.ui.header Managers for all of #{@local_area.province.name}
     .ui.list

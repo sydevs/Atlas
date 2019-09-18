@@ -23,12 +23,12 @@ Rails.application.routes.draw do
 
   # ===== REGIONS ===== #
   namespace :regions, path: '' do
-    resources :countries do
+    resources :countries, only: %i[index show new create edit destroy] do
       resources :provinces, only: %i[new create]
       resources :local_areas, only: %i[new create]
     end
 
-    resources :provinces, only: %i[show edit update destroy] do
+    resources :provinces, only: %i[show edit destroy] do
       resources :local_areas, only: %i[new create]
     end
 
