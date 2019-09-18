@@ -1,6 +1,6 @@
 
 const RegionMap = {
-  subnationalDataUrl: 'assets/map-data/ne_10m_admin_1_states_provinces.zip',
+  provinceDataUrl: 'assets/map-data/ne_10m_admin_1_states_provinces.zip',
   countriesDataUrl: 'assets/map-data/ne_110m_admin_0_countries_lakes.zip',
   instance: null,
 
@@ -36,7 +36,7 @@ const RegionMap = {
     if (data.country) {
       RegionMap.loadCountryVectors()
       RegionMap.instance.setView([40, 0], 1.25)
-    } else if (data.subnational) {
+    } else if (data.province) {
       RegionMap.loadSubnationalVectors()
       RegionMap.instance.setView([40, 0], 1.25)
     } else {
@@ -60,8 +60,8 @@ const RegionMap = {
     RegionMap.country = country
   },
 
-  setSubnational(subnational) {
-    RegionMap.subnational = subnational
+  setSubnational(province) {
+    RegionMap.province = province
   },
 
   loadCountryVectors() {
@@ -78,14 +78,14 @@ const RegionMap = {
   },
 
   loadSubnationalVectors() {
-    console.log('loading subnation features', RegionMap.subnationalDataUrl)
-    RegionMap.subnations = new L.Shapefile(RegionMap.subnationalDataUrl, {
+    console.log('loading province features', RegionMap.provinceDataUrl)
+    RegionMap.provinces = new L.Shapefile(RegionMap.provinceDataUrl, {
 			onEachFeature: function(feature, layer) {
 				console.log('loaded feature', feature, layer)
 			}
     })
-    RegionMap.subnations.addTo(RegionMap.instance)
-    RegionMap.subnations.once("data:loaded", function() {
+    RegionMap.provinces.addTo(RegionMap.instance)
+    RegionMap.provinces.once("data:loaded", function() {
 			console.log("finished loaded shapefile");
 		})
   },

@@ -23,10 +23,10 @@
     .eleven.wide.field
       = f.input_field :street, placeholder: 'Street Address'
     .five.wide.field
-      = f.input_field :municipality, placeholder: 'City'
+      = f.input_field :city, placeholder: 'City'
   .fields
     .five.wide.field
-      = f.input_field :subnational, placeholder: 'State / County'
+      = f.input_field :province, placeholder: 'State / County'
     .eight.wide.field
       = f.input_field :country_code, collection: I18nData.countries(I18n.locale).map{ |k,v| [v, k] }, prompt: 'Country', class: 'search'
     .three.wide.field

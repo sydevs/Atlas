@@ -1,20 +1,19 @@
 
 - content_for :title, "Countries"
 
-.ui.segment
-  h2.ui.header Countries
+.ui.segments
+  .ui.segment
+    h2.ui.header Countries
+      
+    .ui.relaxed.list
+      = render @countries, cache: true
 
-  = simple_form_for regions_countries_path, html: { method: 'GET', data: { remote: 'true' }, autocomplete: 'off' }
-    #search.ui.fluid.icon.input
-      input name='q' type='text' placeholder='Search countries...' value=(params[:q] || '')
-      i.search.icon
-        
-  #list.ui.relaxed.list
-    = render @countries, cache: true
-    
-  #unpersisted-list.ui.relaxed.link.list
-    - @unpersisted_countries.each do |name, country_code|
-      a.item href=new_regions_country_path(country_code: country_code)
-        i.globe.icon
-        .content
-          .header = name
+  .ui.secondary.segment  
+    h4.ui.header Untracked Countries
+    p Click any of the following links to begin tracking a new country.
+    .ui.relaxed.link.list
+      - @unpersisted_countries.each do |name, country_code|
+        a.item href=new_regions_country_path(country_code: country_code)
+          i.globe.icon
+          .content
+            .header = name

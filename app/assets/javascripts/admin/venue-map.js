@@ -60,8 +60,8 @@ const VenueMap = {
 
     let value = [
       document.getElementById('venue_street').value,
-      document.getElementById('venue_municipality').value,
-      document.getElementById('venue_subnational').value,
+      document.getElementById('venue_city').value,
+      document.getElementById('venue_province').value,
       document.getElementById('venue_country_code').value,
       document.getElementById('venue_postcode').value,
     ].filter(Boolean).join(', ')

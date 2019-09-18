@@ -13,23 +13,29 @@
       - else
         = Regions::Country.get_name @local_area.country_code
 
+  i.calendar.icon
+  = pluralize @local_area.events.count, 'Event'
+  br
+  i.marker.icon
+  = pluralize @local_area.venues.count, 'Venue'
+
   #region-map data-latitude=@local_area.latitude data-longitude=@local_area.longitude data-radius=@local_area.radius
 
 .ui.segment
   h3.ui.header Managers for this local area
 
   .ui.list
-    = render @local_area.managers, cache: true
+    = render collection: @local_area.managers, partial: 'managers/manager', cache: true
   
   - if @local_area.province_name? && @local_area.province&.managers.present?
-    .ui.divider
+    h4.ui.header Managers for all of #{@local_area.province.name}
     .ui.list
-      = render @local_area.province&.managers, cache: true
+      = render collection: @local_area.province.managers, partial: 'managers/manager', cache: true
 
   - if @local_area.country_code? && @local_area.country&.managers.present?
-    .ui.divider
+    h4.ui.header Managers for all of #{@local_area.country.name}
     .ui.list
-      = render @local_area.country&.managers, cache: true
+      = render collection: @local_area.country.managers, partial: 'managers/manager', cache: true
 
 p
   - if @local_area.province.present?

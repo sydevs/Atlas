@@ -6,7 +6,11 @@ class Regions::Province < ApplicationRecord
   has_many :managed_regions, as: :region
   has_many :managers, through: :managed_regions
 
-  scope :venues, -> { Venue.where(province_name: province_name, country_code: country_code) }
-  scope :events, -> { Event.includes(:venue).where(venues: { province_name: province_name, country_code: country_code }) }
+  has_many :venues, foreign_key: :province, primary_key: :province_name
+  has_many :events, through: :venues
+
+  def name
+    "#{province_name}, #{country_code}"
+  end
 
 end

@@ -19,14 +19,14 @@ class Venue < ApplicationRecord
   end
 
   def full_address
-    [street, municipality, subnational, country].compact.join(', ')
+    [street, city, province, country].compact.join(', ')
   end
 
   def address
     {
       street: street,
-      municipality: municipality,
-      subnational: subnational,
+      city: city,
+      province: province,
       country: country,
       postcode: postcode,
     }

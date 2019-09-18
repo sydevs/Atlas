@@ -1,5 +1,6 @@
 
 - content_for :title, @manager.name
+- has_regions = @manager.countries.present? || @manager.provinces.present? || @manager.local_areas.present?
 
 .ui.segment
   h2.ui.header
@@ -14,14 +15,24 @@
       br
       = @manager.email
 
-- if @manager.regions.present?
-  .ui.segment
-    h3.ui.header
+.ui.segment
+  h3.ui.header
+    - if has_regions
       = floating_action 'List Venues', 'list', venues_path
       = floating_action 'Venues Map', 'map', root_path
-      .content Regions managed
+    .content Regions managed
 
-    /#region-map data-latitude=@manager.latitude data-longitude=@manager.longitude
+  - if has_regions
+    h4 Countries
+    .ui.list = render @manager.countries, cached: true
+    .ui.divider
+    .ui.list = render @manager.provinces, cached: true
+    .ui.divider
+    .ui.list = render @manager.local_areas, cached: true
+  - else
+    | None
+
+  /#region-map data-latitude=@manager.latitude data-longitude=@manager.longitude
 
 p
   a.ui.basic.button href=managers_path

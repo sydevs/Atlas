@@ -1,7 +1,4 @@
 
-- restrictions = Region.restrictions.map { |k, v| [translate(k, scope: :restriction), k] }
-- countries = I18nData.countries(I18n.locale).map { |k,v| [v, k] }
-
 - if f.object.errors.present?
   .ui.error.message
     .header Errors
@@ -12,3 +9,8 @@
 = f.input :name
 = f.input :email
 = f.input :administrator, as: :boolean, wrapper: :semantic_checkbox
+
+h4.ui.header Can manage venues/events in the following regions
+= f.association :countries, label: 'Countries'
+= f.association :provinces, label: 'Provinces / States / Counties'
+= f.association :local_areas, label: 'Local Areas'

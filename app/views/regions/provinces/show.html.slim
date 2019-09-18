@@ -5,19 +5,24 @@
   h2.ui.header
     = floating_action 'Edit Province', 'pencil', edit_regions_province_path(@province)
     .content Province / State / County
-    .sub.header
-      = @province.province_name
+    .sub.header = @province.province_name
+
+  i.calendar.icon
+  = pluralize @province.events.count, 'Event'
+  br
+  i.marker.icon
+  = pluralize @province.venues.count, 'Venue'
 
 .ui.segment
-  h3.ui.header Managers for this region
+  h3.ui.header Managers for this province / state / county
 
   .ui.list
-    = render @province.managers, cache: true
+    = render collection: @province.managers, partial: 'managers/manager', cache: true
 
   - if @province.country.managers.present?
-    .ui.divider
+    h4.ui.header Managers for all of #{@province.country.name}
     .ui.list
-      = render @province.country.managers, cache: true
+      = render collection: @province.country.managers, partial: 'managers/manager', cache: true
 
 .ui.segment
   h3.ui.header

@@ -15,5 +15,5 @@ en:
       concert: "A performance combining meditation and music or dance."
   restriction:
     no: "No Restriction"
-    subnational: "Limit to State Boundaries"
+    province: "Limit to State Boundaries"
     country: "Limit to Country Borders"      

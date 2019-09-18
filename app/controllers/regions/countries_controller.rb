@@ -5,14 +5,7 @@ class Regions::CountriesController < ApplicationController
 
   def index
     authorize Regions::Country
-    scope = policy_scope(Regions::Country)
-
-    if params[:q]
-      term = "%#{params[:q]}%"
-      scope = scope.where('(name LIKE ?) OR (country LIKE ?) OR (city LIKE ?)', term, term, term)
-    end
-
-    @countries = scope.page(params[:page]).per(10)
+    @countries = policy_scope(Regions::Country)
     country_codes = @countries.map(&:country_code)
     @unpersisted_countries = I18nData.countries(I18n.locale).map { |k,v| [v, k] unless country_codes.include?(k) }.compact
   end
@@ -20,7 +13,7 @@ class Regions::CountriesController < ApplicationController
   def show
     authorize @country
 
-    @unpersisted_provinces = ::SubdivisionSelect::SubdivisionsHelper.get_subdivisions(@country.country_code)
+    @unpersisted_provinces = ::SubdivisionSelect::SubdivisionsHelper.get_subdivisions(@country.country_code) || false
   end
 
   def new
