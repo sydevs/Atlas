@@ -30,6 +30,9 @@ gem 'kaminari' # Pagination
 gem 'passwordless' # For email based user authentication
 gem 'pundit' # Permissions
 
+### Geocoding
+gem 'geokit-rails'
+
 ### Internationalization
 gem 'i18n_data' # Adds localized lists of countries and languages
 gem 'subdivision_select' # For selecting states/provinces/counties in different countries

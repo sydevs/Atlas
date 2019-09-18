@@ -13,11 +13,12 @@
       - else
         = Regions::Country.get_name @local_area.country_code
 
-  i.calendar.icon
-  = pluralize @local_area.events.count, 'Event'
-  br
-  i.marker.icon
-  = pluralize @local_area.venues.count, 'Venue'
+  p
+    i.calendar.icon
+    = pluralize @local_area.events.count, 'Event'
+    br
+    i.marker.icon
+    = pluralize @local_area.venues.count, 'Venue'
 
   #region-map data-latitude=@local_area.latitude data-longitude=@local_area.longitude data-radius=@local_area.radius
 
