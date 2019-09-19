@@ -28,7 +28,7 @@ class Regions::LocalAreasController < ApplicationController
     @local_area.country_code = @country.country_code if @province
 
     if @local_area.save
-      redirect_to @local_area, flash: { success: 'Created local_area' }
+      redirect_to @local_area, flash: { success: 'Created local area' }
     else
       setup_new_form!
       render :new
@@ -58,6 +58,15 @@ class Regions::LocalAreasController < ApplicationController
 
   def destroy
     authorize @local_area
+    flash[:success] = translate('messages.successfully_deleted_region', region: 'Local area')
+    if @local_area.province.present?
+      redirect_to @local_area.province
+    elsif @local_area.country.present?
+      redirect_to @local_area.country
+    else
+      redirect_to regions_countries_path
+    end
+
     @local_area.destroy
   end
 

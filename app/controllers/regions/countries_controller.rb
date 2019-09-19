@@ -48,6 +48,8 @@ class Regions::CountriesController < ApplicationController
 
   def destroy
     authorize @country
+    flash[:success] = translate('messages.successfully_deleted_region', region: 'Country')
+    redirect_to regions_countries_path
     @country.destroy
   end
 

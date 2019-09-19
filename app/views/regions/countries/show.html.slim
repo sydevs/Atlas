@@ -3,6 +3,7 @@
 
 .ui.segment
   h2.ui.header
+    = floating_action 'Delete', 'trash', regions_country_path(@country), data: { method: 'DELETE', confirm: translate('messages.confirm_delete_region') }
     .content = @country.name
 
   i.calendar.icon

@@ -3,6 +3,7 @@
 
 .ui.segment
   h2.ui.header
+    = floating_action 'Delete', 'trash', regions_province_path(@province), data: { method: 'DELETE', confirm: translate('messages.confirm_delete_region') }
     .content = @province.province_name
     .sub.header = Regions::Country.get_name @province.country_code
 

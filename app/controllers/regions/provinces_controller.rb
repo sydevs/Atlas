@@ -39,6 +39,8 @@ class Regions::ProvincesController < ApplicationController
 
   def destroy
     authorize @province
+    flash[:success] = translate('messages.successfully_deleted_region', region: 'Province')
+    redirect_to @province.country
     @province.destroy
   end
 

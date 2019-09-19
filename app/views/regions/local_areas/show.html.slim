@@ -3,6 +3,7 @@
 
 .ui.segment
   h2.ui.header
+    = floating_action 'Delete', 'trash', regions_local_area_path(@local_area), data: { method: 'DELETE', confirm: translate('messages.confirm_delete_region') }
     = floating_action 'Edit Area', 'pencil', edit_regions_local_area_path(@local_area)
     .content
       - if @local_area.province_name.present? || @local_area.country_code.present?
