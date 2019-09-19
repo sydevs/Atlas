@@ -15,6 +15,8 @@
 //= require_tree ./map
 
 document.addEventListener('DOMContentLoaded', function() {
+  Data.load()
   Map.load()
+  // DateInput.load()
   Search.load()
 })

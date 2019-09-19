@@ -1,3 +1,4 @@
+#data data-events=events_json.to_json
 #mapid
 #boxShadowDiv.box-shadow-div
 .search-container
@@ -20,10 +21,10 @@
               = event.end_time
         .event-actions-container
           .button-container
-            button#registerButton.register-button
+            button.registerButton.register-button data-eventId=event.id
               | Register
           .link-container
-            a#moreInfoLink.more-info-link href="/" 
+            a.moreInfoLink.more-info-link href="/" data-eventId=event.id
               | More Info
       span.divider
 
@@ -34,7 +35,8 @@
     .info-panel-header
       | Register for
     .info-panel-description
-      = @events.first.name
+      #registrationPanelDescription
+        = @events.first.name
       form.event-registration
         = csrf_meta_tags
         p#registration-message
@@ -51,6 +53,8 @@
     a#lessInfoLink.less-info-text Less info
   .info-panel-text
     .info-panel-header
-      = @events.first.name
+      #infoPanelEventName
+        placeholder name dynamically generated
     .info-panel-description
-      p Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+      #infoPanelEventDescription
+        placeholder description dynamically generated
