@@ -1,0 +1,56 @@
+#mapid
+#boxShadowDiv.box-shadow-div
+.search-container
+  .autocomplete.search-box
+    input#myInput.search-text name="myCountry" placeholder="Search" type="text" /
+    button#searchCloseButton.search-close X
+  .search-results
+    - @events.limit(5).each do |event|
+      .result-container
+        .event-info-container
+          span.event-name= event.name
+          span.event-address= event.venue&.address&.values.join(", ")
+          span.time-details
+            span.day
+              = event.recurrence.upcase
+            | &nbsp
+            span.time
+              = event.start_time
+              | - 
+              = event.end_time
+        .event-actions-container
+          .button-container
+            button#registerButton.register-button
+              | Register
+          .link-container
+            a#moreInfoLink.more-info-link href="/" 
+              | More Info
+      span.divider
+
+#registrationPanel.search-container.first-side-panel
+  .less-info-container
+    a#cancelRegisterLink.less-info-text Cancel
+  .info-panel-text
+    .info-panel-header
+      | Register for
+    .info-panel-description
+      = @events.first.name
+      form.event-registration
+        = csrf_meta_tags
+        p#registration-message
+        input#registration-event type='hidden' name='registration[event_id]'
+
+        .registration-fields
+          input.text-input type='text' name='registration[name]' placeholder='Name'
+          input.text-input type='text' name='registration[email]' placeholder='Email'
+
+        button#confirmButton.register-button Confirm
+    
+#infoPanel.search-container.first-side-panel
+  .less-info-container
+    a#lessInfoLink.less-info-text Less info
+  .info-panel-text
+    .info-panel-header
+      = @events.first.name
+    .info-panel-description
+      p Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
