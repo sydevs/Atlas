@@ -19,6 +19,11 @@ class Event < ApplicationRecord
 
   delegate :full_address, to: :venue
 
+  def managed_by? manager, super_manager: false
+    return true if self.manager == manager && !super_manager
+    return self.venue.managed_by?(manager)
+  end
+
   def label
     name || category_name
   end

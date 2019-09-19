@@ -1,19 +1,19 @@
 
 class EventPolicy < ApplicationPolicy
   def show?
-    true
+    user.administrator? || record.managed_by?(user)
   end
 
   def create?
-    record.venue.manager == user
+    user.administrator? || record.venue.managed_by?(user)
   end
 
   def update?
-    record.manager == user || record.venue.manager == user
+    user.administrator? || record.managed_by?(user)
   end
 
   def destroy?
-    record.venue.manager == user || user.administrator?
+    user.administrator? || record.managed_by?(user, super_manager: true)
   end
 
   def registrations?

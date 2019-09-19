@@ -1,18 +1,22 @@
 
 class RegionPolicy < ApplicationPolicy
+  def show?
+    true
+  end
+
   def index?
-    user.administrator?
+    true
   end
 
   def create?
-    user.administrator?
+    user.administrator? || record.managed_by?(user, super_manager: true)
   end
 
   def update?
-    user.administrator?
+    user.administrator? || record.managed_by?(user, super_manager: true)
   end
 
   def destroy?
-    user.administrator?
+    user.administrator? || record.managed_by?(user, super_manager: true)
   end
 end

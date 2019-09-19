@@ -7,6 +7,18 @@ class ApplicationPolicy
     @record = record
   end
 
+  def map?
+    true
+  end
+
+  def dashboard?
+    user.present?
+  end
+
+  def statistics?
+    user.present?
+  end
+
   def index?
     user.present?
   end

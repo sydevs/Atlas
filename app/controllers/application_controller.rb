@@ -11,14 +11,17 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   def map
+    authorize nil, policy_class: ApplicationPolicy
     @venues = Venue.all
     @events = Event.all
   end
 
   def dashboard
+    authorize nil, policy_class: ApplicationPolicy
   end
 
   def statistics
+    authorize nil, policy_class: ApplicationPolicy
   end
 
   protected

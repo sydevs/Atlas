@@ -5,6 +5,5 @@ class RegistrationPolicy < ApplicationPolicy
   end
 
   def update?
-    record.event.manager == user || record.event.venue.manager == user || user.administrator?
-  end
+    user.administrator? || record.event.managed_by?(user)
 end

@@ -19,6 +19,15 @@ class Regions::Country < ApplicationRecord
     I18nData.countries(I18n.locale)[country_code]
   end
 
+  def contains? venue
+    venue.country_code == country_code
+  end
+
+  def managed_by? manager, super_manager: false
+    return managers.include?(manager) unless super_manager
+    return false
+  end
+
   def unrestricted_local_areas
     @unrestricted_local_areas ||= local_areas.where(province_name: nil)
   end

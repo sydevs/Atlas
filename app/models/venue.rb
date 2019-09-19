@@ -10,6 +10,24 @@ class Venue < ApplicationRecord
   validates :country_code, presence: true
   validates :latitude, :longitude, presence: true
 
+  def managed_by? manager, super_manager: false
+    return true if self.manager == manager && !super_manager
+
+    manager.countries.each do |country|
+      return true if country.contains?(venue)
+    end
+
+    manager.provinces.each do |province|
+      return true if province.contains?(venue)
+    end
+
+    manager.local_areas.each do |local_area|
+      return true if local_area.contains?(venue)
+    end
+
+    return false
+  end
+
   def label
     name || street
   end

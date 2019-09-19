@@ -15,4 +15,13 @@ class Regions::Province < ApplicationRecord
     "#{province_name}, #{country_code}"
   end
 
+  def contains? venue
+    venue.province == province_name
+  end
+
+  def managed_by? manager, super_manager: false
+    return true if managers.include?(manager) && !super_manager
+    return country.managed_by?(manager)
+  end
+
 end
