@@ -9,6 +9,8 @@ class Regions::Country < ApplicationRecord
   has_many :venues, foreign_key: :country_code, primary_key: :country_code
   has_many :events, through: :venues
 
+  validates_presence_of :country_code
+
   def name
     I18nData.countries(I18n.locale)[country_code]
   end

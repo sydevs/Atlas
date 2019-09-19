@@ -8,6 +8,7 @@ class Regions::CountriesController < ApplicationController
     @countries = policy_scope(Regions::Country)
     country_codes = @countries.map(&:country_code)
     @unpersisted_countries = I18nData.countries(I18n.locale).map { |k,v| [v, k] unless country_codes.include?(k) }.compact
+    @unrestricted_local_areas = Regions::LocalArea.where(province_name: nil, country_code: nil)
   end
 
   def show

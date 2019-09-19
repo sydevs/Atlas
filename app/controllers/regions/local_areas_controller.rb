@@ -9,7 +9,14 @@ class Regions::LocalAreasController < ApplicationController
   end
 
   def new
-    @local_area = @province ? @province.local_areas.new : @country.local_areas.new
+    if @province
+      @local_area = @province.local_areas.new
+    elsif @country
+      @local_area = @country.local_areas.new
+    else
+      @local_area = Regions::LocalArea.new
+    end
+
     authorize @local_area
     @local_area.country_code = @country.country_code if @province
     setup_new_form!
@@ -33,8 +40,10 @@ class Regions::LocalAreasController < ApplicationController
 
     if @local_area.province_name?
       @title = "Edit Local Area within #{@local_area.province_name}, #{@local_area.country_code}"
-    else
+    elsif @local_area.country_code?
       @title = "Edit Local Area within #{Regions::Country.get_name @local_area.country_code}"
+    else
+      @title = "Edit Custom International Area"
     end
   end
 
@@ -55,12 +64,15 @@ class Regions::LocalAreasController < ApplicationController
   private
 
     def setup_new_form!
-      if @local_area.province_name?
+      if @province
         @title = "Create Local Area within #{@province.province_name}, #{@province.country_code}"
         @url = regions_province_local_areas_path(@province, @local_area)
-      else
+      elsif @country
         @title = "Create Local Area within #{@country.name}"
         @url = regions_country_local_areas_path(@country, @local_area)
+      else
+        @title = "Create Custom International Area"
+        @url = regions_local_areas_path(@local_area)
       end
     end
 

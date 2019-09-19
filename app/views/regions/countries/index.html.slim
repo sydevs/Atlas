@@ -17,3 +17,14 @@
           i.globe.icon
           .content
             .header = name
+
+.ui.segment
+  h3.ui.header
+    = floating_action 'Create Area', 'plus', new_regions_local_area_path
+    .content Custom International Areas
+
+  - if @unrestricted_local_areas.present?
+    .ui.list
+      = render @unrestricted_local_areas, cache: true
+  - else
+    | No custom international areas are currently being tracked

@@ -1,7 +1,7 @@
 
 - content_for :title, @title
 
-= simple_form_for @local_area, html: { id: 'page-form', class: "#{'error' if @local_area.errors.present?}", novalidate: true } do |f|
+= simple_form_for @local_area, html: { id: 'page-form', class: "#{'error' if @local_area.errors.present?}", novalidate: true, autocomplete: 'off' } do |f|
   .ui.segment
     h1.ui.header = @title
     = render 'fields', f: f

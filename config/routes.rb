@@ -32,6 +32,6 @@ Rails.application.routes.draw do
       resources :local_areas, only: %i[new create]
     end
 
-    resources :local_areas, only: %i[show edit update destroy]
+    resources :local_areas
   end
 end

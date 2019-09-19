@@ -44,13 +44,13 @@
 .ui.segment
   h3.ui.header
     = floating_action 'Create Area', 'plus', new_regions_country_local_area_path(@country)
-    .content Local Areas
+    .content #{@unpersisted_provinces == false ? 'Local' : 'Cross-Regional'} Areas
 
   - if @country.unrestricted_local_areas.present?
     .ui.list
       = render @country.unrestricted_local_areas, cache: true
   - else
-    | No regions are currently being tracked for this country
+    | No custom areas are currently being tracked for this country
 
 p
   a.ui.basic.button href=regions_countries_path

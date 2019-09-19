@@ -9,6 +9,8 @@ class Regions::Province < ApplicationRecord
   has_many :venues, foreign_key: :province, primary_key: :province_name
   has_many :events, through: :venues
 
+  validates_presence_of :province_name, :country_code
+
   def name
     "#{province_name}, #{country_code}"
   end
