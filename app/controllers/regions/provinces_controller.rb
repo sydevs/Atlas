@@ -9,7 +9,7 @@ class Regions::ProvincesController < ApplicationController
   end
 
   def new
-    @province = @country.provinces.new(province_name: params[:province_name])
+    @province = @country.provinces.new(province_name: params[:name])
     authorize @province
   end
 
