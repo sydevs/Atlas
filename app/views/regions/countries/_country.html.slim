@@ -1,5 +1,10 @@
 
+- return if country.new_record?
+
 .item
   i.globe.americas.icon
   .content
-    a.header href=url_for(country) = country.name
+    - if policy(country).show?
+      a.header href=url_for(country) = country.name
+    - else
+      .header = country.name

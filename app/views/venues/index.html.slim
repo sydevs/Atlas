@@ -3,7 +3,8 @@
 
 .ui.segment
   h2.ui.header
-    = floating_action 'Add Venue', 'plus', new_venue_path
+    - if policy(Venue).new?
+      = floating_action 'Add Venue', 'plus', new_venue_path
     .content Venues
 
   = simple_form_for venues_path, html: { method: 'GET', data: { remote: 'true' }, autocomplete: 'off' }

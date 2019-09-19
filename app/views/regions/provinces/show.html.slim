@@ -1,9 +1,11 @@
 
+- allow = policy(@province)
 - content_for :title, @province.province_name
 
 .ui.segment
   h2.ui.header
-    = floating_action 'Delete', 'trash', regions_province_path(@province), data: { method: 'DELETE', confirm: translate('messages.confirm_delete_region') }
+    - if allow.destroy?
+      = floating_action 'Delete', 'trash', regions_province_path(@province), data: { method: 'DELETE', confirm: translate('messages.confirm_delete_region') }
     .content = @province.province_name
     .sub.header = Regions::Country.get_name @province.country_code
 
@@ -29,7 +31,8 @@
 
 .ui.segment
   h3.ui.header
-    = floating_action 'Create Area', 'plus', new_regions_province_local_area_path(@province)
+    - if policy(@province.local_areas.new).new?
+      = floating_action 'Create Area', 'plus', new_regions_province_local_area_path(@province)
     .content Local Areas
 
   - if @province.local_areas.present?
@@ -38,7 +41,8 @@
   - else
     | No local areas are currently being tracked for this region
 
-p
-  a.ui.basic.button href=url_for(@province.country)
-    i.left.arrow.icon
-    | Back to #{@province.country.name}
+- if policy(@province.country).show?
+  p
+    a.ui.basic.button href=url_for(@province.country)
+      i.left.arrow.icon
+      | Back to #{@province.country.name}

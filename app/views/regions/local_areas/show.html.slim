@@ -1,10 +1,13 @@
 
+- allow = policy(@local_area)
 - content_for :title, @local_area.name
 
 .ui.segment
   h2.ui.header
-    = floating_action 'Delete', 'trash', regions_local_area_path(@local_area), data: { method: 'DELETE', confirm: translate('messages.confirm_delete_region') }
-    = floating_action 'Edit Area', 'pencil', edit_regions_local_area_path(@local_area)
+    - if allow.destroy?
+      = floating_action 'Delete', 'trash', regions_local_area_path(@local_area), data: { method: 'DELETE', confirm: translate('messages.confirm_delete_region') }
+    - if allow.edit?
+      = floating_action 'Edit Area', 'pencil', edit_regions_local_area_path(@local_area)
     .content
       - if @local_area.province_name.present? || @local_area.country_code.present?
         | Local Area
@@ -48,14 +51,17 @@
 
 p
   - if @local_area.province.present?
-    a.ui.basic.button href=url_for(@local_area.province)
-      i.left.arrow.icon
-      | Back to #{@local_area.province_name}
+    - if policy(@local_area.province).show?
+      a.ui.basic.button href=url_for(@local_area.province)
+        i.left.arrow.icon
+        | Back to #{@local_area.province_name}
   - elsif @local_area.country.present?
-    a.ui.basic.button href=url_for(@local_area.country)
-      i.left.arrow.icon
-      | Back to #{@local_area.country.name}
+    - if policy(@local_area.country).show?
+      a.ui.basic.button href=url_for(@local_area.country)
+        i.left.arrow.icon
+        | Back to #{@local_area.country.name}
   - else
-    a.ui.basic.button href=regions_countries_path
-      i.left.arrow.icon
-      | Back to Regions
+    - if policy(Regions::Country).index?
+      a.ui.basic.button href=regions_countries_path
+        i.left.arrow.icon
+        | Back to Regions

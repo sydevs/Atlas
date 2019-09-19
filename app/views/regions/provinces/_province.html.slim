@@ -1,5 +1,10 @@
 
+- return if province.new_record?
+
 .item
   i.map.icon
   .content
-    a.header href=url_for(province) = province.province_name
+    - if policy(province).show?
+      a.header href=url_for(province) = province.province_name
+    - else
+      .header = province.province_name
