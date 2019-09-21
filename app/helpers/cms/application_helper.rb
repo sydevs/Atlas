@@ -11,7 +11,7 @@ module CMS::ApplicationHelper
     registrations: 'user',
   }
 
-  def floating_action text, icon, url, **args
+  def floating_action text, icon, url = nil, **args
     content_tag :a, class: 'ui basic right floated compact tiny button', href: url, **args do
       concat tag.i class: "#{icon} icon"
       concat text

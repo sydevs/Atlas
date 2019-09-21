@@ -18,7 +18,8 @@ h2.ui.header
 - else
   .ui.stackable.secondary.pointing.menu
     = menu_item 'Info', @context, action: 'show'
-    = menu_item 'Regions', @context, index: 'regions' if allow.index_regions? && (@context.nil? || @context.respond_to?(:managed_records))
+    = menu_item 'Images', @context, index: 'images' if @context&.respond_to?(:images)
+    = menu_item 'Regions', @context, index: 'regions' if allow.index_regions? && (@context.nil? || @context.respond_to?(:countries) || @context.respond_to?(:provinces) || @context.respond_to?(:local_areas))
     = menu_item 'Managers', @context, index: 'managers' if allow.index_managers? && (@context.nil? || @context.respond_to?(:managers))
     = menu_item 'Venues', @context, index: 'venues' if allow.index_venues? && (@context.nil? || @context.respond_to?(:venues))
     = menu_item 'Events', @context, index: 'events' if allow.index_events? && (@context.nil? || @context.respond_to?(:events))

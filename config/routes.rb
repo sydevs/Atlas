@@ -41,6 +41,9 @@ Rails.application.routes.draw do
     end
 
     resources :events do
+      get :images, to: 'events#images'
+      post :images, to: 'events#upload_image', as: :upload_image
+      delete 'images/:index', to: 'events#destroy_image', as: :destroy_image
       get :regions
       resources :managers, only: %i[index new create destroy]
       resources :registrations, only: %i[index]

@@ -9,8 +9,8 @@ class CMS::ApplicationController < ActionController::Base
 
   before_action :require_login!
   before_action :set_model_name!
-  before_action :set_context!, only: %i[index new create regions destroy]
-  before_action :set_scope!, except: %i[regions]
+  before_action :set_context!, only: %i[index new create regions destroy images]
+  before_action :set_scope!, except: %i[regions images]
   before_action :set_record!, only: %i[show edit update destroy]
   protect_from_forgery with: :exception
   
@@ -98,6 +98,11 @@ class CMS::ApplicationController < ActionController::Base
     render 'cms/views/regions'
   end
 
+  def images
+    authorize @context, :show?
+    render 'cms/views/images'
+  end
+
   private
 
     def current_user
@@ -126,16 +131,18 @@ class CMS::ApplicationController < ActionController::Base
         @context_key = keys.route_key
         @context = context_record
       end
+
+      puts "SET CONTEXT #{@context.inspect}"
     end
 
     def set_scope!
       @scope = @context ? @context.send(@model.table_name) : @model
-      puts "SET SCOPE #{@scope}"
+      puts "SET SCOPE #{@scope.inspect}"
     end
 
     def set_record!
       @record = @scope&.find(params[:id])
-      puts "SET RECORD #{@record}"
+      puts "SET RECORD #{@record.inspect}"
     end
 
 end
