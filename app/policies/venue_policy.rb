@@ -1,14 +1,18 @@
 
 class VenuePolicy < ApplicationPolicy
+  def new?
+    user.administrator? || user.regions.present?
+  end
+
   def create?
-    user.administrator?
+    user.administrator? || record.managed_by?(user)
   end
 
   def update?
-    record.manager == user || user.administrator?
+    user.administrator? || record.managed_by?(user)
   end
 
   def destroy?
-    user.administrator?
+    user.administrator? || record.managed_by?(user, super_manager: true)
   end
 end

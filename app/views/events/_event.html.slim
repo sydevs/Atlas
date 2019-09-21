@@ -1,6 +1,11 @@
 
+- return if event.new_record?
+
 .item
   i.calendar.icon
   .content
-    a.header href=event_path(event) = event.label
+    - if policy(event).show?
+      a.header href=event_path(event) = event.label
+    - else
+      .header = event.label
     .description #{event.category.humanize.titleize} / #{"#{event.room}, " if event.room}#{event.timing}

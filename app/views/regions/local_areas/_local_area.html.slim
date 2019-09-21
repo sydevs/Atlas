@@ -1,5 +1,10 @@
 
+- return if local_area.new_record?
+
 .item
   i.marker.icon
   .content
-    a.header href=url_for(local_area) = local_area.name
+    - if policy(local_area).show?
+      a.header href=url_for(local_area) = local_area.name
+    - else
+      .header = local_area.name

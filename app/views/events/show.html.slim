@@ -1,9 +1,11 @@
 
+- allow = policy(@event)
 - content_for :title, @event.name
 
 .ui.segment
   h2.ui.header
-    = floating_action 'Edit Event', 'pencil', edit_event_path(@event)
+    - if allow.edit?
+      = floating_action 'Edit Event', 'pencil', edit_event_path(@event)
     .content Event
     .sub.header
       = @event.label
@@ -12,6 +14,7 @@
 
   #venue-map data-latitude=@venue.latitude data-longitude=@venue.longitude
 
+- if allow.registrations?
 .ui.segment
   h3.ui.header
     = floating_action 'Upload Images', 'upload', id: 'upload-button', data: { endpoint: event_upload_image_path(@event) }
@@ -25,15 +28,24 @@
 
 .ui.segment
   h3.ui.header
-    - if @event.registrations.present?
-      = floating_action 'View all', 'list', event_registrations_path(@event)
+    - if allow.registrations? && @event.registrations.present?
+      / TODO: Implement a CSV download for registrations and better registration views
+      = floating_action 'Download CSV', 'download', nil
       
     .content Recent registrations for this event
 
-  .ui.divided.registration.list
-    = render @event.registrations.limit(10), cache: true
+  - if allow.registrations?
+    - if @event.registrations.present?
+      .ui.divided.list
+        = render @event.registrations, cache: true
+    - else
+      | No registrations for this event yet.
+  - else
+    = pluralize @event.registrations.count, "Registration"
+    |  since this event was created.
 
-p
-  a.ui.basic.button href=venue_path(@venue)
-    i.left.arrow.icon
-    | Back to Venue
+- if policy(@venue).show?
+  p
+    a.ui.basic.button href=venue_path(@venue)
+      i.left.arrow.icon
+      | Back to Venue

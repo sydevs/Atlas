@@ -1,6 +1,11 @@
 
+- return if manager.new_record?
+
 .item
   i.user.icon
   .content
-    a.header href=manager_path(manager) = manager.name
+    - if policy(manager).show?
+      a.header href=manager_path(manager) = manager.name
+    - else
+      .header = manager.name
     .description = manager.email

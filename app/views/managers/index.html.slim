@@ -3,7 +3,8 @@
 
 .ui.segment
   h2.ui.header
-    = floating_action 'Add Manager', 'plus', new_manager_path
+    - if policy(Manager).new?
+      = floating_action 'Add Manager', 'plus', new_manager_path
     .content Managers
 
   = simple_form_for managers_path, html: { method: 'GET', data: { remote: 'true' }, autocomplete: 'off' }

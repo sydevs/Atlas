@@ -27,6 +27,17 @@ class Regions::LocalArea < ApplicationRecord
     scope
   end
 
+  def contains? venue
+    distance_to(venue) <= radius
+  end
+
+  def managed_by? manager, super_manager: false
+    return true if managers.include?(manager) && !super_manager
+    return true if province.present? && province.managed_by?(manager)
+    return true if country.present? && country.managed_by?(manager)
+    return false
+  end
+
   private
 
     def ensure_country_consistency

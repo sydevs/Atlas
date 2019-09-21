@@ -1,15 +1,23 @@
 
 class ManagerPolicy < ApplicationPolicy
+  def show?
+    user.administrator?
+  end
+
   def index?
     user.administrator?
   end
 
+  def new?
+    user.administrator? || user.countries.present? || user.provinces.present?
+  end
+
   def create?
-    user.administrator?
+    user.administrator? || record.managed_by?(user)
   end
 
   def update?
-    record.manager == user || user.administrator?
+    user.administrator? || record.managed_by?(user)
   end
 
   def destroy?
