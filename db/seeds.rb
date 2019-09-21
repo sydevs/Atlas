@@ -121,3 +121,36 @@ File.open('db/seeds/uk.addresses.txt', 'r').each_line do |line|
   load_venue(line, 'GB', counter)
   counter += 1
 end
+
+local_area = LocalArea.find_or_initialize_by(identifier: 'nyc')
+if local_area.new_record?
+  local_area.update!({
+    name: 'New York',
+    latitude: 40.730610,
+    longitude: -73.935242,
+    radius: 30,
+    country_code: load_country('US'),
+  })
+end
+
+local_area = LocalArea.find_or_initialize_by(identifier: 'benelux')
+if local_area.new_record?
+  local_area.update!({
+    name: 'Benelux',
+    latitude: 51.260197,
+    longitude: 4.402771,
+    radius: 240,
+  })
+end
+
+local_area = LocalArea.find_or_initialize_by(identifier: 'boston')
+if local_area.new_record?
+  local_area.update!({
+    name: 'Boston',
+    latitude: 42.361145,
+    longitude: -71.057083,
+    radius: 25,
+    province_name: load_province('Massachusetts'),
+    country_code: load_country('US'),
+  })
+end

@@ -1,9 +1,9 @@
 
-- content_for :title, "New #{@model} | #{@context}"
+- content_for :title, "New #{@model_name.singular.titleize} | #{@context}"
 
 = render 'cms/views/context' do
   = simple_form_for [:cms, @context, @record], html: { id: 'page-form', class: "#{'error' if @record.errors.present?}", novalidate: true, autocomplete: 'off' } do |f|
-    h3.ui.header New #{@model}
+    h3.ui.header New #{@model_name.singular.titleize}
     
     - if @record.errors.present?
       .ui.error.message

@@ -1,11 +1,15 @@
 
+h3.ui.dividing.header Details
 p
   = model_icon Event
-  = pluralize Event.count, 'Event'
+  = number_with_delimiter Event.count
+  = ' Event'.pluralize(Event.count)
   br
   = model_icon Venue
-  = pluralize Venue.count, 'Venue'
+  = number_with_delimiter Venue.count
+  = ' Venue'.pluralize(Venue.count)
   br
   = model_icon Registration
-  = pluralize Registration.recent.count, 'Registration'
+  = number_with_delimiter Registration.recent.count
+  = ' Registration'.pluralize(Registration.recent.count)
   |  in the last 30 days.

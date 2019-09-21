@@ -2,15 +2,6 @@
 = f.input :name, placeholder: f.object.street
 
 .required.field
-  = f.label :contact
-  .two.fields
-    = f.simple_fields_for :manager, f.object.manager do |ff|
-      .field
-        = ff.input_field :name, placeholder: 'Name'
-      .field
-        = ff.input_field :email, placeholder: 'Email'
-
-.required.field
   = f.label :address
   .fields
     .eleven.wide.field

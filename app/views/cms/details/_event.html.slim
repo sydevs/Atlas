@@ -1,5 +1,7 @@
 
+h3.ui.dividing.header Details
 p
   = model_icon Registration
-  = pluralize @record.registrations.recent.count, 'Registration'
+  = number_with_delimiter @context.registrations.recent.count
+  = ' Registration'.pluralize(@context.registrations.recent.count)
   |  in the last 30 days.
