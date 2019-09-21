@@ -12,15 +12,10 @@
       i.search.icon
 
   #list.ui.relaxed.list
-    - if @venues
-      - if @venues.count > 0
-        = render @venues, cache: true
-      - elsif params[:q]
-        | No venues for the search term "#{params[:q]}"
-      - else
-        | No venues
-    - else
-      | #{pluralize @venues_count, 'venue'} in the database
+    - if @venues.count > 0
+      = render @venues, cache: true
+    - elsif params[:q]
+      | No venues for the search term "#{params[:q]}"
 
   #pagination-info = page_entries_info @venues
   #pagination = paginate @venues

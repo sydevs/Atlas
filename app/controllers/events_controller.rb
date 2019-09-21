@@ -1,36 +1,22 @@
 class EventsController < ApplicationController
 
+  before_action :require_login!
   before_action :set_venue!, only: %i[new create]
   before_action :set_event!, only: %i[show edit update destroy upload_image destroy_image]
   skip_before_action :verify_authenticity_token, only: %i[upload_image]
 
-  def index
-    if params[:venue_id]
-      set_venue!
-      @events = @venue.events.all
-    else
-      @events = Event.all
-    end
-  end
-
   def show
-  end
-
-  def manage
-    if params[:venue_id]
-      set_venue!
-      @events = @venue.events.all
-    else
-      @events = Event.all
-    end
+    authorize @event
   end
 
   def new
     @event = @venue.events.new
+    authorize @event
   end
 
   def create
     @event = @venue.events.new event_params
+    authorize @event
 
     if @event.save
       redirect_to @event, flash: { success: 'Created event' }
@@ -40,9 +26,11 @@ class EventsController < ApplicationController
   end
 
   def edit
+    authorize @event
   end
 
   def update
+    authorize @event
     if @event.update event_params
       redirect_to [:edit, @event], flash: { success: 'Saved event' }
     else
@@ -51,6 +39,7 @@ class EventsController < ApplicationController
   end
 
   def destroy
+    authorize @event
     @event.destroy
   end
 
@@ -94,10 +83,10 @@ class EventsController < ApplicationController
     end
 
     def event_params
-      result = params.fetch(:event, {}).permit(
+      params.fetch(:event, {}).permit(
         :name, :description, :room, :category,
-        :contact_name, :contact_email,
         :recurrence, :start_date, :end_date, :start_time, :end_time,
+        manager: {},
         languages: [],
       )
     end

@@ -10,6 +10,12 @@ if Rails.env.production?
   return
 end
 
+def load_manager name
+  manager = Manager.find_or_initialize_by(params[:email])
+  manager.name = params[:name] if params[:name].present?
+  manager.save!
+end
+
 def load_venue address, country_code, index
   address = address.split(', ')
   contact = "#{Faker::Name.first_name} #{Faker::Name.last_name}"
@@ -17,8 +23,7 @@ def load_venue address, country_code, index
   venue = Venue.find_or_initialize_by(street: address[0])
   venue.update!({
     name: [true, false].sample ? Faker::Address.community : nil,
-    contact_name: contact,
-    contact_email: "#{contact.parameterize(separator: '_')}@example.com",
+    manager: MANAGERS.sample,
     street: address[0],
     municipality: address[1],
     subnational: address[2],
@@ -44,8 +49,7 @@ def load_venue address, country_code, index
     event = venue.events.create!({
       name: [true, false].sample ? Faker::Address.community : nil,
       description: [true, false].sample ? Faker::Lorem.paragraph : nil,
-      contact_name: contact,
-      contact_email: contact ? "#{contact.parameterize(separator: '_')}@example.com" : nil,
+      manager: [true, false].sample ? MANAGERS.sample : nil,
       room: [true, false].sample ? "#{Faker::Address.city_prefix} Room" : nil,
       start_date: start_date,
       end_date: [true, false].sample ? Faker::Date.between(from: start_date, to: 6.months.since(start_date)) : nil,
@@ -72,6 +76,14 @@ def load_venue address, country_code, index
       puts "    |-> Created Registration - #{registration.name} <#{registration.email}>"
     end
   end
+end
+
+MANAGERS = Manager.limit(10).to_a
+
+MANAGERS.count.upto(10).each do |index|
+  name = "#{Faker::Name.first_name} #{Faker::Name.last_name}"
+  email = "#{name.parameterize(separator: '_')}@example.com"
+  MANAGERS << Manager.create(name: name, email: email)
 end
 
 counter = 1

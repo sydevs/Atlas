@@ -1,26 +1,11 @@
 class RegistrationsController < ApplicationController
 
+  before_action :require_login!, except: %i[create]
   before_action :set_event!, only: %i[index create]
 
   def index
-    scope = @event.registrations
-      
-    if params[:q]
-      term = "%#{params[:q]}%"
-      scope = scope.where('(name LIKE ?) OR (email LIKE ?) OR (comment LIKE ?)', term, term, term)
-    end
-
-    if params[:format] != :csv
-      scope = scope.page(params[:page]).per(30)
-    end
-
-    @registrations = scope
-
-    respond_to do |format|
-      format.html
-      format.js
-      format.csv { send_data @registrations.to_csv, filename: "registrations-#{Date.today}.csv" }
-    end
+    authorize @event, :registrations?
+    @registrations = @event.registrations
   end
 
   def create

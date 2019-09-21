@@ -17,11 +17,11 @@
   = f.label :contact
   .hint Which yogi runs this program? This person will receive registration notifications, and be contacted automatically by the database to keep this event up to date.
   .two.fields
-    - has_contact = @event.contact_name? || @event.contact_email?
-    .field
-      = f.input_field :contact_name, placeholder: (has_contact ? 'Name' : @event.venue.contact_name)
-    .field
-      = f.input_field :contact_email, placeholder: (has_contact ? 'Email' : @event.venue.contact_email)
+    = f.simple_fields_for :manager, f.object.manager do |ff|
+      .field
+        = ff.input_field :name, placeholder: (@event.manager.present? ? 'Name' : @event.venue.manager.name)
+      .field
+        = ff.input_field :email, placeholder: (@event.manager.present? ? 'Email' : @event.venue.manager.email)
 
 .ui.divider
 

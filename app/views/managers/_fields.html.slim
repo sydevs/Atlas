@@ -1,0 +1,8 @@
+
+- restrictions = Region.restrictions.map { |k, v| [translate(k, scope: :restriction), k] }
+- countries = I18nData.countries(I18n.locale).map { |k,v| [v, k] }
+
+= f.error :base
+
+= f.input :name
+= f.input :email

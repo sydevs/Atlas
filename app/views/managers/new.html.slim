@@ -1,0 +1,14 @@
+
+- content_for :title, "New Manager"
+
+= simple_form_for @manager, html: { id: 'page-form', class: "#{'error' if @manager.errors.present?}", novalidate: true, autocomplete: 'off' } do |f|
+  .ui.segment
+    h1.ui.header New Manager
+    = render 'fields', f: f
+
+  p
+    a.ui.basic.button href=managers_path
+      i.left.arrow.icon
+      | Back to Managers
+
+    button.ui.basic.positive.button Save

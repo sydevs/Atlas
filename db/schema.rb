@@ -10,7 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
+ActiveRecord::Schema.define(version: 20190912130245) do
+=======
 ActiveRecord::Schema.define(version: 20190816124106) do
+>>>>>>> master
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,8 +33,6 @@ ActiveRecord::Schema.define(version: 20190816124106) do
     t.integer "category", default: 0
     t.string "name"
     t.string "room"
-    t.string "contact_name"
-    t.string "contact_email"
     t.string "description"
     t.string "languages", array: true
     t.date "start_date"
@@ -41,8 +43,33 @@ ActiveRecord::Schema.define(version: 20190816124106) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.jsonb "images"
+    t.bigint "manager_id"
     t.index ["languages"], name: "index_events_on_languages", using: :gin
+    t.index ["manager_id"], name: "index_events_on_manager_id"
     t.index ["venue_id"], name: "index_events_on_venue_id"
+  end
+
+  create_table "managers", force: :cascade do |t|
+    t.string "name"
+    t.string "email"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "administrator"
+    t.index ["email"], name: "index_managers_on_email"
+  end
+
+  create_table "passwordless_sessions", force: :cascade do |t|
+    t.string "authenticatable_type"
+    t.bigint "authenticatable_id"
+    t.datetime "timeout_at", null: false
+    t.datetime "expires_at", null: false
+    t.datetime "claimed_at"
+    t.text "user_agent", null: false
+    t.string "remote_addr", null: false
+    t.string "token", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["authenticatable_type", "authenticatable_id"], name: "authenticatable"
   end
 
   create_table "registrations", force: :cascade do |t|
@@ -59,8 +86,6 @@ ActiveRecord::Schema.define(version: 20190816124106) do
     t.string "name"
     t.float "latitude"
     t.float "longitude"
-    t.string "contact_name"
-    t.string "contact_email"
     t.string "street"
     t.string "municipality"
     t.string "subnational"
@@ -68,6 +93,8 @@ ActiveRecord::Schema.define(version: 20190816124106) do
     t.string "postcode"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "manager_id"
+    t.index ["manager_id"], name: "index_venues_on_manager_id"
   end
 
 end
