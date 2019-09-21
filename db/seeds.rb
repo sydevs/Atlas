@@ -18,13 +18,21 @@ end
 
 def load_country country_code
   country = Country.find_or_initialize_by(country_code: country_code)
-  country.save! if country.new_record?
+  if country.new_record?
+    country.managers = MANAGERS.sample(rand(0..4))
+    country.save!
+  end
+
   country_code
 end
 
 def load_province province_name, country_code
   province = Province.find_or_initialize_by(province_name: province_name, country_code: country_code)
-  province.save! if province.new_record?
+  if province.new_record?
+    province.managers = MANAGERS.sample(rand(0..4))
+    province.save!
+  end
+
   province_name
 end
 
@@ -43,7 +51,7 @@ def load_venue address, country_code, index
     latitude: address[4],
     longitude: address[5],
   })
-  venue.managers << MANAGERS.sample
+  venue.managers = [MANAGERS.sample]
   venue.save!
 
   venue.events.destroy_all
