@@ -11,9 +11,21 @@ if Rails.env.production?
 end
 
 def load_manager name
-  manager = Manager.find_or_initialize_by(params[:email])
+  manager = Manager.find_or_initialize_by(email: params[:email])
   manager.name = params[:name] if params[:name].present?
   manager.save!
+end
+
+def load_country country_code
+  country = Country.find_or_initialize_by(country_code: country_code)
+  country.save! if country.new_record?
+  country_code
+end
+
+def load_province province_name, country_code
+  province = Province.find_or_initialize_by(province_name: province_name, country_code: country_code)
+  province.save! if province.new_record?
+  province_name
 end
 
 def load_venue address, country_code, index
@@ -23,15 +35,16 @@ def load_venue address, country_code, index
   venue = Venue.find_or_initialize_by(street: address[0])
   venue.update!({
     name: [true, false].sample ? Faker::Address.community : nil,
-    manager: MANAGERS.sample,
     street: address[0],
     city: address[1],
-    province: address[2],
-    country_code: country_code,
+    country_code: load_country(country_code),
+    province_name: load_province(address[2], country_code),
     postcode: address[3],
     latitude: address[4],
     longitude: address[5],
   })
+  venue.managers << MANAGERS.sample
+  venue.save!
 
   venue.events.destroy_all
 
@@ -49,7 +62,6 @@ def load_venue address, country_code, index
     event = venue.events.create!({
       name: [true, false].sample ? Faker::Address.community : nil,
       description: [true, false].sample ? Faker::Lorem.paragraph : nil,
-      manager: [true, false].sample ? MANAGERS.sample : nil,
       room: [true, false].sample ? "#{Faker::Address.city_prefix} Room" : nil,
       start_date: start_date,
       end_date: [true, false].sample ? Faker::Date.between(from: start_date, to: 6.months.since(start_date)) : nil,
@@ -60,6 +72,11 @@ def load_venue address, country_code, index
       category: category,
       images: Dir.glob("#{images_folder}/*.jpg").map { |f| File.open(f, 'r') },
     })
+
+    if [true, false].sample
+      event.managers << MANAGERS.sample
+      event.save!
+    end
 
     puts " |-> Created Event - #{event.label}"
     next unless [true, true, false].sample
