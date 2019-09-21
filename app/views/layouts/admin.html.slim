@@ -15,36 +15,42 @@ html
   body class="admin #{controller_name} #{controller.action_name}"
     header
       - if current_user
-        a.ui.right.floated.basic.button href=map_path target='_blank'
-          i.globe.icon
-          | View Map
-        a.ui.right.floated.basic.disabled.button href='#' target='_blank'
-          | About
+        .ui.basic.top.right.floated.pointing.dropdown.icon.button
+          i.bars.icon
+          .menu
+            - if policy(:page).database?
+              a.item href=cms_root_path
+                i.archive.icon
+                | Program Database
+            a.item href=about_path
+              i.question.circle.icon
+              | About SYDB
+            - if policy(:page).statistics?
+              a.item href=statistics_path
+                i.chart.bar.icon
+                | Statistics
+            a.item href=map_path target='_blank'
+              i.globe.icon
+              | View Map
+
+        a.ui.right.floated.basic.button href=managers.sign_out_path
+          | Logout
       - else
         a.ui.right.floated.basic.button href=managers.sign_in_path
           | Login
 
       h1 SY Database
+      .ui.divider
 
-    - if current_user.present?
-      .ui.stackable.menu
-        - if policy(:page).dashboard?
-          a.item href=dashboard_path class="#{'active' if action_name == 'dashboard'}"
-            | Dashboard
-        - if policy(Venue).index?
-          a.item href=venues_path class="#{'active' if %w[venues events].include? controller_name}"
-            | Programs
-        - if policy(:region).index?
-          a.item href=regions_countries_path class="#{'active' if %w[countries provinces local_areas].include? controller_name}"
-            | Regions
-        - if policy(Manager).index?
-          a.item href=managers_path class="#{'active' if controller_name == 'managers'}"
-            | Managers
-
-        - if policy(:page).statistics?
-          .right.menu
-            a.item href=statistics_path class="#{'active' if action_name == 'statistics'}"
-              | Statistics
+      - if @context && @context.respond_to?(:ancestors)
+        .ui.breadcrumbs
+          a.section href=cms_root_url
+            i.globe.icon
+          i.right.angle.icon.divider
+          - @context.ancestors.each do |ancestor|
+            a.section href=url_for([:cms, ancestor]) = ancestor.label
+            i.right.angle.icon.divider
+          span.active.section = @context.label
 
     - flash.each do |key, message|
       .ui.message class=key

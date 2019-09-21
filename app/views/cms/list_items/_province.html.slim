@@ -1,0 +1,10 @@
+
+- return if province.new_record?
+
+.item
+  = model_icon Province
+  .content
+    - if policy(province).show?
+      a.header href=url_for([:cms, province]) = province.province_name
+    - else
+      .header = province.province_name

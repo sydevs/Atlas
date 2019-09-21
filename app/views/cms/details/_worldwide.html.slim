@@ -1,0 +1,11 @@
+
+p
+  = model_icon Event
+  = pluralize Event.count, 'Event'
+  br
+  = model_icon Venue
+  = pluralize Venue.count, 'Venue'
+  br
+  = model_icon Registration
+  = pluralize Registration.recent.count, 'Registration'
+  |  in the last 30 days.

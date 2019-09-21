@@ -1,6 +1,6 @@
 
 class PagePolicy < Struct.new(:user, :page)
-  def dashboard?
+  def database?
     user.present?
   end
 

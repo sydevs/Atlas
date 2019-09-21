@@ -1,0 +1,44 @@
+
+= f.input :name, placeholder: f.object.street
+
+.required.field
+  = f.label :contact
+  .two.fields
+    = f.simple_fields_for :manager, f.object.manager do |ff|
+      .field
+        = ff.input_field :name, placeholder: 'Name'
+      .field
+        = ff.input_field :email, placeholder: 'Email'
+
+.required.field
+  = f.label :address
+  .fields
+    .eleven.wide.field
+      = f.input_field :street, placeholder: 'Street Address'
+    .five.wide.field
+      = f.input_field :city, placeholder: 'City'
+  .fields
+    .five.wide.field
+      = f.input_field :province_name, placeholder: 'State / County'
+    .eight.wide.field
+      = f.input_field :country_code, collection: I18nData.countries(I18n.locale).map{ |k,v| [v, k] }, prompt: 'Country', class: 'search'
+    .three.wide.field
+      = f.input_field :postcode, placeholder: 'Postal Code'
+
+  = f.hidden_field :latitude
+  = f.hidden_field :longitude
+
+button.lookup.ui.fluid.button type='button'
+  i.search.icon
+  | Find Marker
+
+#venue-map data-editable=true
+.ui.map.message class="#{'hidden' if f.object.coordinates?}"
+  .header Map marker has not been set
+  p You must press 'Find Marker' above to automatically detect the coordinates of the venue's address.
+.ui.negative.map.message.for-failure class='hidden'
+  .header Couldn't find address
+  p The address you entered could not be found, try adding more information.
+.ui.info.map.message.for-success class="#{'hidden' unless f.object.coordinates?}"
+  .header Map marker set!
+  p Make sure that the location shown on the map looks correct.

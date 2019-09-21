@@ -1,0 +1,31 @@
+
+- content_for :title, "Regions | #{@context}"
+
+= render 'cms/views/context' do
+  - if @countries
+    h3.ui.dividing.header
+      - if policy(Country.new).new?
+        = floating_action 'Add Country', 'plus', url_for([:new, :cms, :country])
+      .content Countries
+    .ui.list
+      = render partial: 'cms/list_items/country', collection: @countries, cache: true
+
+  - if @provinces
+    h3.ui.dividing.header
+      - if policy(@context.provinces.new).new?
+        = floating_action 'Add Region', 'plus', url_for([:new, :cms, @context, :province])
+      .content Provinces / States / Counties
+    .ui.list
+      = render partial: 'cms/list_items/province', collection: @provinces, cache: true
+
+  - if @local_areas
+    h3.ui.dividing.header
+      - if @context
+        = floating_action 'Add Area', 'plus', url_for([:new, :cms, @context, :local_area]) if policy(@context.local_areas.new).new?
+        .content = @context.is_a?(Province) ? "Local Areas" : "Custom Areas"
+      - else
+        = floating_action 'Add Area', 'plus', url_for([:new, :cms, :local_area]) if policy(LocalArea.new).new?
+        .content Custom Intenational Areas 
+
+    .ui.list
+      = render partial: 'cms/list_items/local_area', collection: @local_areas, cache: true

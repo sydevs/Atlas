@@ -16,16 +16,18 @@ class Event < ApplicationRecord
   validates :start_time, presence: true
   validates :recurrence, presence: true
   validates :description, length: { minimum: 20, maximum: 255, allow_nil: true }
+  searchable_columns %w[name category description]
 
   delegate :full_address, to: :venue
+  alias_method :parent, :venue
+
+  def label
+    name || category_name
+  end
 
   def managed_by? manager, super_manager: false
     return true if self.manager == manager && !super_manager
     return self.venue.managed_by?(manager)
-  end
-
-  def label
-    name || category_name
   end
 
   def languages= value

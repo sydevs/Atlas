@@ -1,0 +1,3 @@
+
+- countries = I18nData.countries(I18n.locale).map { |k,v| [v, k] }
+= f.input :country_code, label: 'Country', collection: countries, wrapper_html: { class: 'search' }

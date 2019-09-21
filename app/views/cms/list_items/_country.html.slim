@@ -1,0 +1,10 @@
+
+- return if country.new_record?
+
+.item
+  = model_icon Country
+  .content
+    - if policy(country).show?
+      a.header href=url_for([:cms, country]) = country.label
+    - else
+      .header = country.label

@@ -1,0 +1,22 @@
+
+- content_for :title, "Edit #{@model_name.human}"
+
+= render 'cms/views/context' do
+  = simple_form_for [:cms, @record], html: { id: 'page-form', class: "#{'error' if @record.errors.present?}", novalidate: true, autocomplete: 'off' } do |f|
+    h3.ui.header Edit #{@model_name.human}
+
+    - if @record.errors.present?
+      .ui.error.message
+        .header Errors
+        ul.list
+          - @record.errors.full_messages.each do |message|
+            li = message
+
+    = render "cms/fields/#{@model_name.singular_route_key}", f: f
+
+    p
+      a.ui.basic.button href=url_for([:cms, @context, @model])
+        i.left.arrow.icon
+        | Back
+
+      button.ui.basic.positive.button Save

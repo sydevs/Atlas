@@ -3,13 +3,59 @@ Rails.application.routes.draw do
   passwordless_for :managers
   mount SubdivisionSelect::Engine, at: 'subdivisions'
   
-  root to: 'application#map'
+  root to: 'application#about'
   get :map, to: 'application#map'
-  get :dashboard, to: 'application#dashboard'
+  get :about, to: 'application#about'
   get :statistics, to: 'application#statistics'
 
-  resources :managers
+  namespace :cms do
+    root to: 'application#show'
+    get :regions, to: 'application#regions'
 
+    resources :countries, except: %i[edit update] do
+      get :regions
+      resources :managers, only: %i[index]
+      resources :venues, only: %i[index]
+      resources :events, only: %i[index]
+      resources :provinces, only: %i[new create]
+      resources :local_areas, only: %i[new create]
+    end
+
+    resources :provinces, except: %i[edit update index] do
+      get :regions
+      resources :managers, only: %i[index]
+      resources :venues, only: %i[index]
+      resources :events, only: %i[index]
+      resources :local_areas, only: %i[new create]
+    end
+
+    resources :local_areas, except: %i[index] do
+      resources :managers, only: %i[index]
+      resources :venues, only: %i[index]
+      resources :events, only: %i[index]
+    end
+
+    resources :venues do
+      resources :managers, only: %i[index]
+      resources :events, only: %i[index]
+    end
+
+    resources :events do
+      get :regions
+      resources :managers, only: %i[index]
+      resources :registrations, only: %i[index]
+    end
+
+    resources :managers do
+      get :regions
+      resources :venues, only: %i[index]
+      resources :events, only: %i[index]
+    end
+
+    resources :registrations, only: %i[index]
+  end
+
+=begin
   # ===== VENUES AND EVENTS ===== #
   resources :venues do
     resources :events, only: %i[new create]
@@ -34,4 +80,5 @@ Rails.application.routes.draw do
 
     resources :local_areas
   end
+=end
 end

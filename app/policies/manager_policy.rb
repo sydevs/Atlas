@@ -1,5 +1,5 @@
 
-class ManagerPolicy < ApplicationPolicy
+class ManagerPolicy < DatabasePolicy
   def show?
     user.administrator?
   end

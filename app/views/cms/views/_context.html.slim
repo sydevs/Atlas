@@ -1,0 +1,24 @@
+
+- allow = @context ? policy(@context) : policy(:worldwide)
+
+h2.ui.header
+  - if allow.destroy?
+    = floating_action 'Delete', 'trash', url_for([:cms, @context]), data: { method: 'DELETE', confirm: translate('messages.confirm_delete_region') }
+  - if allow.edit?
+    = floating_action 'Edit', 'edit', url_for([:edit, :cms, @context])
+  .content = @context&.label || 'Worldwide Data'
+
+- if %w[edit new].include?(action_name)
+  .ui.divider
+  = yield
+- else
+  .ui.stackable.secondary.pointing.menu
+    = menu_item 'Info', @context, action: 'show'
+    = menu_item 'Regions', @context, index: 'regions' if allow.index_regions? && (@context.nil? || @context.respond_to?(:managed_regions))
+    = menu_item 'Managers', @context, index: 'managers' if allow.index_managers? && (@context.nil? || @context.respond_to?(:managers))
+    = menu_item 'Venues', @context, index: 'venues' if allow.index_venues? && (@context.nil? || @context.respond_to?(:venues))
+    = menu_item 'Events', @context, index: 'events' if allow.index_events? && (@context.nil? || @context.respond_to?(:events))
+    = menu_item 'Registrations', @context, index: 'registrations' if allow.index_registrations? && (@context.nil? || @context.respond_to?(:registrations))
+
+  .ui.basic.segment
+    = yield

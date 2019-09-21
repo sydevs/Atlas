@@ -1,5 +1,5 @@
 
-class RegionPolicy < ApplicationPolicy
+class RegionPolicy < DatabasePolicy
   def show?
     true
   end

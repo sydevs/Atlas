@@ -1,5 +1,5 @@
 
-class EventPolicy < ApplicationPolicy
+class EventPolicy < DatabasePolicy
   def show?
     user.administrator? || record.managed_by?(user)
   end

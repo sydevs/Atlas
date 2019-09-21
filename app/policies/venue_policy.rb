@@ -1,7 +1,8 @@
 
-class VenuePolicy < ApplicationPolicy
+class VenuePolicy < DatabasePolicy
   def new?
-    user.administrator? || user.regions.present?
+    #(record.province.present? || record.local_area.present?) && (user.administrator? || user.regions.present?)
+    (record.province.present?) && (user.administrator? || user.regions.present?)
   end
 
   def create?
