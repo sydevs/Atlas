@@ -1,0 +1,14 @@
+
+- content_for :title, "New Country"
+
+= simple_form_for @country, html: { id: 'page-form', class: "#{'error' if @country.errors.present?}", novalidate: true, autocomplete: 'off' } do |f|
+  .ui.segment
+    h1.ui.header New Country
+    = render 'fields', f: f
+
+  p
+    a.ui.basic.button href=regions_countries_path
+      i.left.arrow.icon
+      | Back to Countries
+
+    button.ui.basic.positive.button Save

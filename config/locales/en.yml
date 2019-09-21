@@ -1,5 +1,10 @@
 
 en:
+  messages:
+    confirm_delete: "Are you sure you want to delete this?  This cannot be undone."
+    confirm_delete_region: "Are you sure you want to delete this? This cannot be undone. Venues and events in this region will not be removed."
+    successfully_deleted: "%{record} successfully deleted. This cannot be undone."
+    successfully_deleted_region: "%{region} successfully deleted. This cannot be undone. Venues and events in this region have not be removed."
   category:
     title:
       intro: "Intro Meditation Class"
@@ -15,5 +20,5 @@ en:
       concert: "A performance combining meditation and music or dance."
   restriction:
     no: "No Restriction"
-    subnational: "Limit to State Boundaries"
+    province: "Limit to State Boundaries"
     country: "Limit to Country Borders"      

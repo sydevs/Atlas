@@ -10,11 +10,11 @@ const General = {
     $('.start.field .ui.time.calendar').calendar({ type: 'time', ampm: false, endCalendar: $('.end.field .ui.time.calendar') })
     $('.end.field .ui.time.calendar').calendar({ type: 'time', ampm: false, startCalendar: $('.start.field .ui.time.calendar') })
 
-    $('#search').parent().submit(General.on_search_submit)
-    $('.ui.radio.menu .item').click(General.on_radio_menu_select)
+    $('#search').parent().submit(General.onSearchSubmit)
+    $('.ui.radio.menu .item').click(General.onRadioMenuSelect)
   },
 
-  on_search_submit: function() {
+  onSearchSubmit: function() {
     $search = $('#search')
     $input = $search.children('input')
     $search.addClass('loading')
@@ -24,7 +24,7 @@ const General = {
     window.history.pushState({ path: url }, '', url);
   },
 
-  on_radio_menu_select: function() {
+  onRadioMenuSelect: function() {
     $item = $(this)
     console.log($item)
     $item.siblings('input').val($item.data('value'))
