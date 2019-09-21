@@ -2,4 +2,10 @@
 .item
   .right.floated.content = registration.created_at.to_s(:short)
   i.user.icon
-  .content #{registration.name} - <em>#{registration.email}</em>
+  - if local_assigns[:show_comments]
+    .content
+      div #{registration.name} - <em>#{registration.email}</em>
+      - if registration.comment.present?
+        .description = registration.comment
+  - else
+    .content #{registration.name} - <em>#{registration.email}</em>

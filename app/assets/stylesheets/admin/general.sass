@@ -10,5 +10,58 @@ body
   opacity: 0.6
   margin-bottom: 6px
 
+.ui.registration.list
+  margin-top: 20px
+
+  .description
+    margin-top: 4px
+    margin-left: 10px
+
+#uploaded-images
+  .image
+    position: relative
+    margin-bottom: 4px
+    margin-right: 4px
+
+    max-width: 320px
+    width: 100%
+
+    &:not(:hover) .labels
+      display: none
+
+  @media (max-width: 380px)
+    .image
+      height: 180px
+      margin-right: 0
+
+  @media (min-width: 381px) and (max-width: 680px)
+    .image
+      width: calc(50% - 4px)
+      height: 150px
+
+    .image:nth-child(2n + 2)
+      margin-right: 0
+
+  @media (min-width: 681px)
+    .image
+      width: calc(33% - 8px)
+      height: 120px
+
+    .image:nth-child(3n + 3)
+      margin-right: 0
+
+  .labels
+    position: absolute
+    bottom: 0
+    right: 0
+
+  .label
+    border: 1px solid black
+
+  img
+    width: 100%
+    height: 100%
+    object-fit: cover
+  
 .leaflet-pane
   z-index: 0

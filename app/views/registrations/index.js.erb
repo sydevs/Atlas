@@ -1,0 +1,4 @@
+$('#list').html(`<%= render @registrations, show_comments: true, cache: true %>`)
+$('#pagination').html(`<%= paginate @registrations %>`)
+$('#pagination-info').html(`<%= page_entries_info @registrations %>`)
+$('#search').removeClass('loading')
