@@ -1,5 +1,10 @@
 
-= f.error :base
+- if f.object.errors.present?
+  .ui.error.message
+    .header Errors
+    ul.list
+      - f.object.errors.full_messages.each do |message|
+        li = message
 
 = f.input :name, placeholder: @venue.street
 
@@ -18,10 +23,10 @@
     .eleven.wide.field
       = f.input_field :street, placeholder: 'Street Address'
     .five.wide.field
-      = f.input_field :municipality, placeholder: 'City'
+      = f.input_field :city, placeholder: 'City'
   .fields
     .five.wide.field
-      = f.input_field :subnational, placeholder: 'State / County'
+      = f.input_field :province, placeholder: 'State / County'
     .eight.wide.field
       = f.input_field :country_code, collection: I18nData.countries(I18n.locale).map{ |k,v| [v, k] }, prompt: 'Country', class: 'search'
     .three.wide.field
@@ -34,7 +39,7 @@ button.lookup.ui.fluid.button type='button'
   i.search.icon
   | Find Marker
 
-#map
+#venue-map data-editable=true
 .ui.map.message class="#{'hidden' if @venue.coordinates?}"
   .header Map marker has not been set
   p You must press 'Find Marker' above to automatically detect the coordinates of the venue's address.

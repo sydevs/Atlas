@@ -1,6 +1,7 @@
 class Venue < ApplicationRecord
 
   include Manageable
+  acts_as_mappable lat_column_name: :latitude, lng_column_name: :longitude
   
   nilify_blanks
   has_many :events
@@ -17,16 +18,16 @@ class Venue < ApplicationRecord
   def coordinates?
     latitude.present? && longitude.present?
   end
-
+  
   def full_address
-    [street, municipality, subnational, country].compact.join(', ')
+    [street, city, province, country].compact.join(', ')
   end
 
   def address
     {
       street: street,
-      municipality: municipality,
-      subnational: subnational,
+      city: city,
+      province: province,
       country: country,
       postcode: postcode,
     }

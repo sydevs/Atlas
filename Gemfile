@@ -30,6 +30,9 @@ gem 'kaminari' # Pagination
 gem 'passwordless' # For email based user authentication
 gem 'pundit' # Permissions
 
+### Geocoding
+gem 'geokit-rails'
+
 # File uploads
 gem 'carrierwave' # Serverside image uploader
 gem 'carrierwave-google-storage' # Serverside image uploader
@@ -37,6 +40,7 @@ gem 'mini_magick' # Image processing during upload
 
 ### Internationalization
 gem 'i18n_data' # Adds localized lists of countries and languages
+gem 'subdivision_select' # For selecting states/provinces/counties in different countries
 
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw] # Call 'byebug' anywhere in the code to stop execution and get a debugger console

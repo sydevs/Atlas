@@ -1,0 +1,59 @@
+
+- content_for :title, @country.name
+
+.ui.segment
+  h2.ui.header
+    = floating_action 'Delete', 'trash', regions_country_path(@country), data: { method: 'DELETE', confirm: translate('messages.confirm_delete_region') }
+    .content = @country.name
+
+  i.calendar.icon
+  = pluralize @country.events.count, 'Event'
+  br
+  i.marker.icon
+  = pluralize @country.venues.count, 'Venue'
+
+.ui.segment
+  h3.ui.header Managers for this country
+
+  - if @country.managers.present?
+    .ui.list
+      = render collection: @country.managers, partial: 'managers/manager', cache: true
+  - else
+    | No managers have been set for this country yet.
+
+- if @unpersisted_provinces != false
+  .ui.segments
+    .ui.segment
+      h3.ui.header Provinces / States / Counties
+
+      - if @country.provinces.present?
+        .ui.list
+          = render @country.provinces, cache: true
+      - else
+        | No regions are currently being tracked for this country
+
+    .ui.secondary.segment
+      h4.ui.header Untracked regions
+      p Click any of the following links to begin tracking a new region.
+      .ui.list
+        - @unpersisted_provinces.each do |index, name|
+          a.item href=url_for([:new, @country, :province, name: name])
+            i.map.outline.icon
+            .content
+              .header = name
+
+.ui.segment
+  h3.ui.header
+    = floating_action 'Create Area', 'plus', new_regions_country_local_area_path(@country)
+    .content #{@unpersisted_provinces == false ? 'Local' : 'Cross-Regional'} Areas
+
+  - if @country.unrestricted_local_areas.present?
+    .ui.list
+      = render @country.unrestricted_local_areas, cache: true
+  - else
+    | No custom areas are currently being tracked for this country
+
+p
+  a.ui.basic.button href=regions_countries_path
+    i.left.arrow.icon
+    | Back to Countries

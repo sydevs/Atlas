@@ -9,7 +9,7 @@ class VenuesController < ApplicationController
 
     if params[:q]
       term = "%#{params[:q]}%"
-      scope = scope.where('(name LIKE ?) OR (street LIKE ?) OR (municipality LIKE ?) OR (subnational LIKE ?) OR (country_code LIKE ?)', term, term, term, term, term)
+      scope = scope.where('(name LIKE ?) OR (street LIKE ?) OR (city LIKE ?) OR (province LIKE ?) OR (country_code LIKE ?)', term, term, term, term, term)
     end
 
     @venues = scope.includes(:events).page(params[:page]).per(10)
@@ -62,7 +62,7 @@ class VenuesController < ApplicationController
     def venue_params
       params.fetch(:venue, {}).permit(
         :name, :category, :latitude, :longitude,
-        :street, :municipality, :subnational, :country_code,
+        :street, :city, :province, :country_code,
         manager: {}
       )
     end

@@ -1,0 +1,30 @@
+
+- content_for :title, "Countries"
+
+.ui.segments
+  .ui.segment
+    h2.ui.header Countries
+      
+    .ui.relaxed.list
+      = render @countries, cache: true
+
+  .ui.secondary.segment  
+    h4.ui.header Untracked Countries
+    p Click any of the following links to begin tracking a new country.
+    .ui.relaxed.link.list
+      - @unpersisted_countries.each do |name, country_code|
+        a.item href=new_regions_country_path(country_code: country_code)
+          i.globe.icon
+          .content
+            .header = name
+
+.ui.segment
+  h3.ui.header
+    = floating_action 'Create Area', 'plus', new_regions_local_area_path
+    .content Custom International Areas
+
+  - if @unrestricted_local_areas.present?
+    .ui.list
+      = render @unrestricted_local_areas, cache: true
+  - else
+    | No custom international areas are currently being tracked

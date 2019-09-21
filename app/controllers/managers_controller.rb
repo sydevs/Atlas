@@ -55,7 +55,8 @@ class ManagersController < ApplicationController
 
     def manager_params
       params.fetch(:manager, {}).permit(
-        :name, :email, :administrator
+        :name, :email, :administrator,
+        country_ids: [], province_ids: [], local_area_ids: []
       )
     end
 
