@@ -1,0 +1,18 @@
+
+- if local_assigns[:template]
+  .ui.rounded.image
+    .ui.circular.link.labels
+      a.ui.view.label href=nil target='_blank'
+        i.fitted.eye.icon
+      a.ui.destroy.label href=nil data-method='DELETE' data-remote=true data-confirm='Are you sure?'
+        i.fitted.close.icon
+    img src=nil
+- else
+  - event.images.each_with_index do |image, index|
+    .ui.rounded.image
+      .ui.circular.link.labels
+        a.ui.view.label href=image.url target='_blank'
+          i.fitted.eye.icon
+        a.ui.destroy.label href=event_destroy_image_path(event, index: index) data-method='DELETE' data-remote=true data-confirm='Are you sure?'
+          i.fitted.close.icon
+      img src=image.thumbnail.url

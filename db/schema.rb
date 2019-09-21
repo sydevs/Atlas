@@ -10,7 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20190921093026) do
+=======
+ActiveRecord::Schema.define(version: 20190816124106) do
+>>>>>>> master
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,7 +51,10 @@ ActiveRecord::Schema.define(version: 20190921093026) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.jsonb "images"
+<<<<<<< HEAD
     t.bigint "manager_id"
+=======
+>>>>>>> master
     t.index ["languages"], name: "index_events_on_languages", using: :gin
     t.index ["manager_id"], name: "index_events_on_manager_id"
     t.index ["venue_id"], name: "index_events_on_venue_id"
