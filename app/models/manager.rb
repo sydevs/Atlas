@@ -2,15 +2,13 @@ class Manager < ApplicationRecord
 
   passwordless_with :email
 
-  has_many :managed_regions
-  has_many :countries, through: :managed_regions, source: :region, source_type: 'Country'
-  has_many :provinces, through: :managed_regions, source: :region, source_type: 'Province'
-  has_many :local_areas, through: :managed_regions, source: :region, source_type: 'LocalArea'
+  has_many :managed_records
+  has_many :countries, through: :managed_records, source: :record, source_type: 'Country'
+  has_many :provinces, through: :managed_records, source: :record, source_type: 'Province'
+  has_many :local_areas, through: :managed_records, source: :record, source_type: 'LocalArea'
+  has_many :venues, through: :managed_records, source: :record, source_type: 'Venue'
+  has_many :events, through: :managed_records, source: :record, source_type: 'Event'
 
-  has_many :venues
-  has_many :events
-
-  accepts_nested_attributes_for :managed_regions
   validates :name, presence: true
   validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
   searchable_columns %w[name email]

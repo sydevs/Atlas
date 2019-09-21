@@ -14,7 +14,7 @@ Rails.application.routes.draw do
 
     resources :countries, except: %i[edit update] do
       get :regions
-      resources :managers, only: %i[index]
+      resources :managers, only: %i[index new create destroy]
       resources :venues, only: %i[index]
       resources :events, only: %i[index]
       resources :provinces, only: %i[new create]
@@ -23,26 +23,26 @@ Rails.application.routes.draw do
 
     resources :provinces, except: %i[edit update index] do
       get :regions
-      resources :managers, only: %i[index]
-      resources :venues, only: %i[index]
+      resources :managers, only: %i[index new create destroy]
+      resources :venues, only: %i[index new create]
       resources :events, only: %i[index]
       resources :local_areas, only: %i[new create]
     end
 
     resources :local_areas, except: %i[index] do
-      resources :managers, only: %i[index]
-      resources :venues, only: %i[index]
+      resources :managers, only: %i[index new create destroy]
+      resources :venues, only: %i[index new create]
       resources :events, only: %i[index]
     end
 
     resources :venues do
-      resources :managers, only: %i[index]
-      resources :events, only: %i[index]
+      resources :managers, only: %i[index new create destroy]
+      resources :events, only: %i[index new create]
     end
 
     resources :events do
       get :regions
-      resources :managers, only: %i[index]
+      resources :managers, only: %i[index new create destroy]
       resources :registrations, only: %i[index]
     end
 

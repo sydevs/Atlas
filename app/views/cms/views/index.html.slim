@@ -1,7 +1,9 @@
 
-- content_for :title, "#{@model_name.human(count: -1)} | #{@context}"
+- content_for :title, "#{@model_name.plural.titleize} | #{@context}"
 
 = render 'cms/views/context' do
+  h3.ui.dividing.header = @model_name.plural.titleize
+
   - if @records.present? || params[:q]
     = simple_form_for url_for([:cms, @model]), html: { method: 'GET', data: { remote: 'true' }, autocomplete: 'off' }
       .search.ui.fluid.icon.small.input data-search=@model_name.route_key
@@ -12,7 +14,13 @@
     = render partial: "cms/list_items/#{@model_name.singular_route_key}", collection: @records, cache: true
 
   - if policy(@scope.new).new?
-    = floating_action "Add #{@model}", 'plus', url_for([:new, :cms, @model_name.singular_route_key])
+    = floating_action "Add #{@model}", 'plus', url_for([:new, :cms, @context, @model_name.singular_route_key])
 
   .pagination-info data-search=@model_name.route_key = page_entries_info @records
   .pagination data-search=@model_name.route_key = paginate @records
+
+  - if controller_name == 'managers' && @context&.parent_managers.present?
+    h3.ui.dividing.header Managers for all of #{@context.parent.label}
+
+    .ui.relaxed.list
+      = render partial: 'cms/list_items/manager', collection: @context.parent_managers, cache: true, locals: { allow_destroy: false }

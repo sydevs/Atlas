@@ -20,21 +20,13 @@ class Venue < ApplicationRecord
   end
 
   def managed_by? manager, super_manager: false
-    return true if self.manager == manager && !super_manager
-
-    manager.countries.each do |country|
-      return true if country.contains?(venue)
-    end
-
-    manager.provinces.each do |province|
-      return true if province.contains?(venue)
-    end
-
+    return true if !super_manager && managers.include?(manager)
+    
     manager.local_areas.each do |local_area|
       return true if local_area.contains?(venue)
     end
 
-    return false
+    return parent.managed_by?(manager)
   end
 
   # Check if coordinates have been defined

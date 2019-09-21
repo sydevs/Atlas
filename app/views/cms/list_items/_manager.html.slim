@@ -2,9 +2,9 @@
 - return if manager.new_record?
 
 .item
-  - if @context
+  - if @context && local_assigns[:allow_destroy] != false
     .right.floated.content
-      a.ui.basic.circular.icon.label href=url_for([:cms, manager]) data={ method: 'DELETE', confirm: translate('messages.confirm_delete') }
+      a.ui.basic.circular.icon.label href=url_for([:cms, @context, manager]) data={ method: 'DELETE', confirm: translate('messages.confirm_delete') }
         i.trash.icon
   = model_icon Manager
   .content

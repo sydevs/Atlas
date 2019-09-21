@@ -2,9 +2,9 @@
 - content_for :title, "New #{@model} | #{@context}"
 
 = render 'cms/views/context' do
-  = simple_form_for [:cms, @record], html: { id: 'page-form', class: "#{'error' if @record.errors.present?}", novalidate: true, autocomplete: 'off' } do |f|
+  = simple_form_for [:cms, @context, @record], html: { id: 'page-form', class: "#{'error' if @record.errors.present?}", novalidate: true, autocomplete: 'off' } do |f|
     h3.ui.header New #{@model}
-      
+    
     - if @record.errors.present?
       .ui.error.message
         .header Errors

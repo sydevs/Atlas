@@ -9,7 +9,7 @@ class CMS::ApplicationController < ActionController::Base
 
   before_action :require_login!
   before_action :set_model_name!
-  before_action :set_context!, only: %i[index new create regions]
+  before_action :set_context!, only: %i[index new create regions destroy]
   before_action :set_scope!, except: %i[regions]
   before_action :set_record!, only: %i[show edit update destroy]
   protect_from_forgery with: :exception
@@ -78,9 +78,10 @@ class CMS::ApplicationController < ActionController::Base
 
   def destroy
     authorize @record
-    flash[:success] = translate('messages.successfully_deleted_region', region: @model_name.human)
-    redirect_to @model
     @record.destroy
+
+    flash[:success] = translate('messages.successfully_deleted')
+    redirect_to [:cms, @context, @model]
   end
 
   def regions

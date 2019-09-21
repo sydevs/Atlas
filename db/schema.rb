@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190920164035) do
+ActiveRecord::Schema.define(version: 20190921093026) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -65,11 +65,11 @@ ActiveRecord::Schema.define(version: 20190920164035) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "managed_regions", id: false, force: :cascade do |t|
+  create_table "managed_records", id: false, force: :cascade do |t|
     t.integer "manager_id"
-    t.integer "region_id"
-    t.string "region_type"
-    t.index ["region_id", "region_type"], name: "index_managed_regions_on_region_id_and_region_type"
+    t.integer "record_id"
+    t.string "record_type"
+    t.index ["record_id", "record_type"], name: "index_managed_records_on_record_id_and_record_type"
   end
 
   create_table "managers", force: :cascade do |t|
