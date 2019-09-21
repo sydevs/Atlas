@@ -33,6 +33,11 @@ gem 'pundit' # Permissions
 ### Geocoding
 gem 'geokit-rails'
 
+# File uploads
+gem 'carrierwave' # Serverside image uploader
+gem 'carrierwave-google-storage' # Serverside image uploader
+gem 'mini_magick' # Image processing during upload
+
 ### Internationalization
 gem 'i18n_data' # Adds localized lists of countries and languages
 gem 'subdivision_select' # For selecting states/provinces/counties in different countries

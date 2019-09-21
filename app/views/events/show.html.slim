@@ -17,6 +17,17 @@
 - if allow.registrations?
 .ui.segment
   h3.ui.header
+    = floating_action 'Upload Images', 'upload', id: 'upload-button', data: { endpoint: event_upload_image_path(@event) }
+
+    .content Images
+  
+  #uploaded-images = render 'images', event: @event
+
+  template id='upload-template'
+    = render 'images', template: true
+
+.ui.segment
+  h3.ui.header
     - if allow.registrations? && @event.registrations.present?
       / TODO: Implement a CSV download for registrations and better registration views
       = floating_action 'Download CSV', 'download', nil
