@@ -11,6 +11,8 @@ class Country < ApplicationRecord
   validates_presence_of :country_code
   searchable_columns %w[country_code]
 
+  default_scope { order(country_code: :desc) }
+
   def label
     I18nData.countries(I18n.locale)[country_code]
   end

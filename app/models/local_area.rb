@@ -13,6 +13,7 @@ class LocalArea < ApplicationRecord
   validates_presence_of :latitude, :longitude, :radius, :name, :identifier
   searchable_columns %w[name identifier province_name country_code]
 
+  default_scope { order(name: :desc) }
   scope :cross_province, -> { where(province_name: nil) }
   scope :international, -> { cross_province.where(country_code: nil) }
 

@@ -11,6 +11,8 @@ class Province < ApplicationRecord
   searchable_columns %w[province_name country_code]
   alias_method :parent, :country
 
+  default_scope { order(province_name: :desc) }
+
   validates_presence_of :province_name, :country_code
 
   def label

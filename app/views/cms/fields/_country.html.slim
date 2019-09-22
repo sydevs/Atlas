@@ -1,3 +1,6 @@
 
-- countries = I18nData.countries(I18n.locale).map { |k,v| [v, k] }
-= f.input :country_code, label: 'Country', collection: countries, wrapper_html: { class: 'search' }
+- existing_countries = Country.pluck(:country_code)
+- countries = I18nData.countries(I18n.locale).map { |k,v| [v, k] unless existing_countries.include?(k) }.compact
+
+.hint Only countries which haven't already been added are listed below.
+= f.input :country_code, label: false, prompt: 'Choose a country', collection: countries, input_html: { class: 'search' }

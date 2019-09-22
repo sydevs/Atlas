@@ -15,11 +15,5 @@
 - if @record.latitude && @record.longitude && @record.radius
   #local_area-map data-latitude=@record.latitude data-longitude=@record.longitude data-radius=@record.radius
 
-.field
-  = f.label :restrictions, label: 'Restricted this region to certain borders'
-  .hint If you select a province/state/county, the country will be overridden.
-  .two.fields
-    = f.hidden_field :province_name, value: ''
-    = f.hidden_field :country_code, value: ''
-    = f.association :province, prompt: 'Unrestricted', label: 'Province / State / County', collection: Province.all.map { |p| [p.label, p.province_name] }, input_html: { class: 'clearable search' }
-    = f.association :country, prompt: 'Unrestricted', collection: Country.all.map { |c| [c.label, c.country_code] }, input_html: { class: 'clearable search' }
+= f.hidden_field :province_name
+= f.hidden_field :country_code

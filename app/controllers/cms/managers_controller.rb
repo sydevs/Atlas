@@ -5,11 +5,12 @@ class CMS::ManagersController < CMS::ApplicationController
   def create
     @record = Manager.find_or_initialize_by(email: parameters[:email])
     authorize @record
-    @record.name = parameters[:name] if @record.new_record?
+    new_record = @record.new_record?
+    @record.name = parameters[:name] if new_record
     @context.managers << @record if @context
 
-    if !@record.new_record? || @record.save
-      if @record.new_record? || @context.present?
+    if !new_record || @record.save
+      if new_record || @context.present?
         flash[:success] = "Added #{@model_name.human} successfully"
       else
         flash[:notice] = "#{@record.name} <#{@record.email}> already exists"

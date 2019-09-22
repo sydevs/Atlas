@@ -1,31 +1,45 @@
 
+- allow = @context ? policy(@context) : policy(:worldwide)
 - content_for :title, "Regions | #{@context}"
 
 = render 'cms/views/context' do
   - if @countries
     h3.ui.dividing.header
-      - if policy(Country.new).new?
+      - if allow.new_association?(:countries) && policy(Country).new?
         = floating_action 'Add Country', 'plus', url_for([:new, :cms, :country])
       .content Countries
-    .ui.list
-      = render partial: 'cms/list_items/country', collection: @countries, cache: true
+
+    - if @countries.present?
+      .ui.list
+        = render partial: 'cms/list_items/country', collection: @countries, cache: true
+    - else
+      p No countries found.
 
   - if @provinces
     h3.ui.dividing.header
-      - if policy(@context.provinces.new).new?
+      - if allow.new_association?(:provinces) && policy(Province).new?
         = floating_action 'Add Region', 'plus', url_for([:new, :cms, @context, :province])
       .content Provinces / States / Counties
-    .ui.list
-      = render partial: 'cms/list_items/province', collection: @provinces, cache: true
+
+    - if @provinces.present?
+      .ui.list
+        = render partial: 'cms/list_items/province', collection: @provinces, cache: true
+    - else
+      p No provinces / states / counties found.
 
   - if @local_areas
     h3.ui.dividing.header
       - if @context
-        = floating_action 'Add Area', 'plus', url_for([:new, :cms, @context, :local_area]) if policy(@context.local_areas.new).new?
+        - if allow.new_association?(:local_areas) && policy(LocalArea).new?
+          = floating_action 'Add Area', 'plus', url_for([:new, :cms, @context, :local_area])
         .content = @context.is_a?(Province) ? "Local Areas" : "Custom Areas"
       - else
-        = floating_action 'Add Area', 'plus', url_for([:new, :cms, :local_area]) if policy(LocalArea.new).new?
+        - if allow.new_association?(:local_areas) && policy(LocalArea).new?
+          = floating_action 'Add Area', 'plus', url_for([:new, :cms, :local_area])
         .content Custom Intenational Areas 
 
-    .ui.list
-      = render partial: 'cms/list_items/local_area', collection: @local_areas, cache: true
+    - if @local_areas.present?
+      .ui.list
+        = render partial: 'cms/list_items/local_area', collection: @local_areas, cache: true
+    - else
+      p No provinces, states, or counties found.

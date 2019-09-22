@@ -11,7 +11,7 @@ class CMS::CountriesController < CMS::ApplicationController
   end
 
   def regions
-    authorize @context, :index_regions?, policy_class: (WorldwidePolicy if @context.nil?)
+    authorize_association! :regions
 
     @provinces = @context.provinces
     @local_areas = @context.local_areas.cross_province

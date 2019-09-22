@@ -1,5 +1,6 @@
 
 class PagePolicy < Struct.new(:user, :page)
+  
   def database?
     user.present?
   end
@@ -15,4 +16,5 @@ class PagePolicy < Struct.new(:user, :page)
   def about?
     true
   end
+
 end

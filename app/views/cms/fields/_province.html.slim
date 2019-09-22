@@ -1,3 +1,6 @@
 
-- provinces = SubdivisionSelect::SubdivisionsHelper.get_subdivisions(@record.country_code).values
-= f.input :province_name, label: 'Province / State / County', prompt: 'Choose Region', collection: provinces, wrapper_html: { class: 'search' }
+- existing_provinces = @record.country.provinces.pluck(:province_name)
+- provinces = SubdivisionSelect::SubdivisionsHelper.get_subdivisions(@record.country_code).values - existing_provinces
+
+.hint Only regions which haven't already been added are listed below.
+= f.input :province_name, label: false, prompt: 'Choose Province / State / County', collection: provinces, input_html: { class: 'search' }

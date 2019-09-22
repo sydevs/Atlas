@@ -1,12 +1,16 @@
 class ApplicationRecord < ActiveRecord::Base
-
-  include Searchable
-  include Parentable
   
   self.abstract_class = true
 
+  include Searchable
+  include Parentable
+
   def label
     name
+  end
+
+  def has_region_association?
+    respond_to?(:countries) || respond_to?(:provinces) || respond_to?(:local_areas)
   end
 
 end

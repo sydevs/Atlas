@@ -2,7 +2,7 @@
 .item
   .right.floated.content = registration.created_at.to_s(:short)
   = model_icon Registration
-  - if policy(registration.event).registrations?
+  - if policy(registration.event).manage?
     .content #{registration.label} - <em>#{registration.email}</em>
   - else
     .content = registration.label

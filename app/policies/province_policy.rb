@@ -5,4 +5,8 @@ class ProvincePolicy < RegionPolicy
     false
   end
 
+  def new_association? association = nil
+    %i[local_areas managers venues].include?(association) && super
+  end
+
 end

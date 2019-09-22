@@ -125,7 +125,7 @@ end
 local_area = LocalArea.find_or_initialize_by(identifier: 'nyc')
 if local_area.new_record?
   local_area.update!({
-    name: 'New York',
+    name: 'Tri-State Area (NYC)',
     latitude: 40.730610,
     longitude: -73.935242,
     radius: 30,

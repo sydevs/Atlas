@@ -20,16 +20,7 @@ class CMS::ApplicationController < ActionController::Base
   # END TODO
 
   def index
-    permission = "index_#{@model.table_name}?".to_sym
-
-    if @context
-      authorize @context, permission
-      scope = @context.send(@model.table_name)
-    else
-      authorize nil, permission, policy_class: WorldwidePolicy
-      scope = @model
-    end
-
+    authorize_association! @model
     @records = policy_scope(@scope).page(params[:page]).per(10).search(params[:q])
     render 'cms/views/index'
   end
@@ -85,7 +76,7 @@ class CMS::ApplicationController < ActionController::Base
   end
 
   def regions
-    authorize @context, :index_regions?, policy_class: (WorldwidePolicy if @context.nil?)
+    authorize_association! :regions
 
     if @context
       @provinces = @context.provinces if @context.respond_to?(:provinces)
@@ -143,6 +134,14 @@ class CMS::ApplicationController < ActionController::Base
     def set_record!
       @record = @scope&.find(params[:id])
       puts "SET RECORD #{@record.inspect}"
+    end
+
+    def authorize_association! key
+      skip_authorization
+      allow = @context ? policy(@context) : policy(:worldwide)
+      key = key.table_name.to_sym if key.is_a?(ActiveRecord.class)
+      return if allow.index_association?(key)
+      raise Pundit::NotAuthorizedError, "not allowed to index? #{@model} for #{@context || 'Worldwide'}"
     end
 
 end

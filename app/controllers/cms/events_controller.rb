@@ -14,7 +14,7 @@ class CMS::EventsController < CMS::ApplicationController
   # TODO: Multi-file uploads do not work
   def upload_image
     set_context!
-    authorize @context, :edit?
+    authorize @context, :update?
     images = @context.images 
     images += params[:files]
     @context.images = images
@@ -30,7 +30,7 @@ class CMS::EventsController < CMS::ApplicationController
 
   def destroy_image
     set_context!
-    authorize @context, :edit?
+    authorize @context, :update?
     kept_images = @context.images
     index = params[:index].to_i
     if index == 0 && @context.images.size == 1

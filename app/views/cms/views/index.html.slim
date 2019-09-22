@@ -1,9 +1,10 @@
 
+- allow = @context ? policy(@context) : policy(:worldwide)
 - content_for :title, "#{@model_name.plural.titleize} | #{@context}"
 
 = render 'cms/views/context' do
   h3.ui.dividing.header
-    - if policy(@scope.new).new?
+    - if allow.new_association?(@model.table_name.to_sym) && policy(@model).new?
       = floating_action "Add #{@model}", 'plus', url_for([:new, :cms, @context, @model_name.singular_route_key])
     .content = @model_name.plural.titleize
 
@@ -20,7 +21,7 @@
   .pagination data-search=@model_name.route_key = paginate @records
 
   - if controller_name == 'managers' && @context&.parent_managers.present?
-    h3.ui.dividing.header Managers for all of #{@context.parent.label}
+    h3.ui.dividing.header Managers for #{@context.parent.label}
 
     .ui.relaxed.list
-      = render partial: 'cms/list_items/manager', collection: @context.parent_managers, cache: true, locals: { allow_destroy: false }
+      = render partial: 'cms/list_items/manager', collection: @context.parent_managers, cache: true

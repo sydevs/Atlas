@@ -50,7 +50,9 @@ html
           - @context.ancestors.each do |ancestor|
             a.section href=url_for([:cms, ancestor]) = ancestor.label
             i.right.angle.icon.divider
-          span.active.section = @context.label
+          span.active.section
+            = model_icon @context.class
+            = @context.label
 
     = yield
 

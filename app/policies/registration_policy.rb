@@ -1,5 +1,6 @@
 
 class RegistrationPolicy < DatabasePolicy
+  
   def new?
     false
   end
@@ -8,7 +9,4 @@ class RegistrationPolicy < DatabasePolicy
     true
   end
 
-  def update?
-    user.administrator? || record.event.managed_by?(user)
-  end
 end

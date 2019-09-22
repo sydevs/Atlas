@@ -13,8 +13,11 @@ class Manager < ApplicationRecord
   validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
   searchable_columns %w[name email]
 
+  default_scope { order(updated_at: :desc) }
+
   def parent
-    countries.first || local_areas.international.first || provinces.first || local_areas.cross_province.first || local_areas.first
+    parent = countries.first || local_areas.international.first || provinces.first || local_areas.cross_province.first || local_areas.first || venues.first || events.first
+    parent unless parent&.new_record?
   end
 
   def managed_by? manager, super_manager: false

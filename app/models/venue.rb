@@ -15,6 +15,8 @@ class Venue < ApplicationRecord
   searchable_columns %w[name street city province_name country_code]
   alias_method :parent, :province
 
+  default_scope { order(updated_at: :desc) }
+
   def label
     name || street
   end

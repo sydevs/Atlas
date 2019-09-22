@@ -1,8 +1,8 @@
 
 class LocalAreaPolicy < RegionPolicy
 
-  def index_regions?
-    false
+  def new_association? association = nil
+    %i[managers venues].include?(association) && super
   end
-  
+
 end

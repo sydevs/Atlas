@@ -1,26 +1,37 @@
 
 class DatabasePolicy < ApplicationPolicy
-  def new?
-    record.respond_to?(:parent) ? record.parent.present? : true
+
+  def manage? super_manager: false
+    user.administrator? || record.managed_by?(user, super_manager: super_manager)
   end
 
-  def index_registrations?
-    user.administrator?
+  def show?
+    manage?
   end
 
-  def index_events?
-    user.administrator?
+  def create?
+    manage? super_manager: true
   end
 
-  def index_venues?
-    user.administrator?
+  def update?
+    manage?
   end
 
-  def index_managers?
-    user.administrator?
+  def destroy?
+    manage? super_manager: true
   end
 
-  def index_regions?
-    user.present?
+  def index_association? association = nil
+    return false unless manage?
+    return record.has_region_association? if association == :regions
+    return record.respond_to?(association)
+  end
+
+  def new_association? association = nil
+    record.respond_to?(association) && manage?
+  end
+
+  def destroy_association? association = nil
+    user.administrator? && association == :managers
   end
 end
