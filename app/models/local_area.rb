@@ -8,13 +8,13 @@ class LocalArea < ApplicationRecord
 
   nilify_blanks
   belongs_to :country, foreign_key: :country_code, primary_key: :country_code, optional: true
-  belongs_to :province, foreign_key: :province_name, primary_key: :province_name, optional: true
+  belongs_to :province, foreign_key: :province_code, primary_key: :province_code, optional: true
 
   validates_presence_of :latitude, :longitude, :radius, :name, :identifier
-  searchable_columns %w[name identifier province_name country_code]
+  searchable_columns %w[name identifier province_code country_code]
 
   default_scope { order(name: :desc) }
-  scope :cross_province, -> { where(province_name: nil) }
+  scope :cross_province, -> { where(province_code: nil) }
   scope :international, -> { cross_province.where(country_code: nil) }
 
   def parent
@@ -24,14 +24,14 @@ class LocalArea < ApplicationRecord
   def venues
     scope = Venue.within(radius, origin: self)
     scope = scope.where(country_code: country_code) if country_code?
-    scope = scope.where(province: province_name) if province_name?
+    scope = scope.where(province: province_code) if province_code?
     scope
   end
 
   def events
     scope = Event.joins(:venue).within(radius, origin: self)
     scope = scope.where(venues: { country_code: country_code }) if country_code?
-    scope = scope.where(venues: { province: province_name }) if province_name?
+    scope = scope.where(venues: { province: province_code }) if province_code?
     scope
   end
 

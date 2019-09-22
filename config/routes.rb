@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   passwordless_for :managers
-  mount SubdivisionSelect::Engine, at: 'subdivisions'
   
   root to: 'application#about'
   get :map, to: 'application#map'

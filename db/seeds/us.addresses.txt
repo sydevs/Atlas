@@ -1,234 +1,234 @@
-777 Brockton Avenue, Abington, Massachusetts, 2351, -4.5271203, 120.2077887
-30 Memorial Drive, Avon, Massachusetts, 2322, -4.5271203, 120.2077887
-250 Hartford Avenue, Bellingham, Massachusetts, 2019, -4.5271203, 120.2077887
-700 Oak Street, Brockton, Massachusetts, 2301, -4.5271203, 120.2077887
-66-4 Parkhurst Rd, Chelmsford, Massachusetts, 1824, -4.5271203, 120.2077887
-591 Memorial Dr, Chicopee, Massachusetts, 1020, -4.5271203, 120.2077887
-55 Brooksby Village Way, Danvers, Massachusetts, 1923, -4.5271203, 120.2077887
-137 Teaticket Hwy, East Falmouth, Massachusetts, 2536, -4.5271203, 120.2077887
-42 Fairhaven Commons Way, Fairhaven, Massachusetts, 2719, -4.5271203, 120.2077887
-374 William S Canning Blvd, Fall River, Massachusetts, 2721, -4.5271203, 120.2077887
-121 Worcester Rd, Framingham, Massachusetts, 1701, -4.5271203, 120.2077887
-677 Timpany Blvd, Gardner, Massachusetts, 1440, 40.372578, -79.5745836
-337 Russell St, Hadley, Massachusetts, 1035, -4.5271203, 120.2077887
-295 Plymouth Street, Halifax, Massachusetts, 2338, -4.5271203, 120.2077887
-1775 Washington St, Hanover, Massachusetts, 2339, -4.5271203, 120.2077887
-280 Washington Street, Hudson, Massachusetts, 1749, -4.5271203, 120.2077887
-20 Soojian Dr, Leicester, Massachusetts, 1524, -4.5271203, 120.2077887
-11 Jungle Road, Leominster, Massachusetts, 1453, -4.5271203, 120.2077887
-301 Massachusetts Ave, Lunenburg, Massachusetts, 1462, 40.3711719, -79.584742
-780 Lynnway, Lynn, Massachusetts, 1905, -4.5271203, 120.2077887
-70 Pleasant Valley Street, Methuen, Massachusetts, 1844, -4.5271203, 120.2077887
-830 Curran Memorial Hwy, North Adams, Massachusetts, 1247, -4.5271203, 120.2077887
-1470 S Washington St, North Attleboro, Massachusetts, 2760, -4.5271203, 120.2077887
-506 State Road, North Dartmouth, Massachusetts, 2747, -4.5271203, 120.2077887
-742 Main Street, North Oxford, Massachusetts, 1537, -4.5271203, 120.2077887
-72 Main St, North Reading, Massachusetts, 1864, -4.5271203, 120.2077887
-200 Otis Street, Northborough, Massachusetts, 1532, -4.5271203, 120.2077887
-180 North King Street, Northhampton, Massachusetts, 1060, 42.3375755191606, -72.6485729220792
-555 East Main St, Orange, Massachusetts, 1364, -4.5271203, 120.2077887
-555 Hubbard Ave-Suite 12, Pittsfield, Massachusetts, 1201, -4.5271203, 120.2077887
-300 Colony Place, Plymouth, Massachusetts, 2360, -4.5271203, 120.2077887
-301 Falls Blvd, Quincy, Massachusetts, 2169, -4.5271203, 120.2077887
-36 Paramount Drive, Raynham, Massachusetts, 2767, -4.5271203, 120.2077887
-450 Highland Ave, Salem, Massachusetts, 1970, -4.5271203, 120.2077887
-1180 Fall River Avenue, Seekonk, Massachusetts, 2771, -4.5271203, 120.2077887
-1105 Boston Road, Springfield, Massachusetts, 1119, -4.5271203, 120.2077887
-100 Charlton Road, Sturbridge, Massachusetts, 1566, -4.5271203, 120.2077887
-262 Swansea Mall Dr, Swansea, Massachusetts, 2777, 35.9793388, -78.9084572
-333 Main Street, Tewksbury, Massachusetts, 1876, -4.5271203, 120.2077887
-550 Providence Hwy, Walpole, Massachusetts, 2081, -4.5271203, 120.2077887
-352 Palmer Road, Ware, Massachusetts, 1082, -4.5271203, 120.2077887
-3005 Cranberry Hwy Rt 6 28, Wareham, Massachusetts, 2538, -4.5271203, 120.2077887
-250 Rt 59, Airmont, New York, 10901, 41.1260837277951, -74.1129376790605
-141 Washington Ave Extension, Albany, New York, 12205, 42.71185, -73.8671987
-13858 Rt 31 W, Albion, New York, 14411, 43.2444652, -78.0909645
-2055 Niagara Falls Blvd, Amherst, New York, 14228, 43.0071495, -78.8085471
-101 Sanford Farm Shpg Center, Amsterdam, New York, 12010, 42.940482272666, -74.1847101959755
-297 Grant Avenue, Auburn, New York, 13021, 42.9258279773786, -76.5620423690071
-4133 Veterans Memorial Drive, Batavia, New York, 14020, 42.9995689, -78.1850385
-6265 Brockport Spencerport Rd, Brockport, New York, 14420, 43.2186935455311, -77.9336154370068
-5399 W Genesse St, Camillus, New York, 13031, 43.0418754071579, -76.2845974729668
-3191 County rd 10, Canandaigua, New York, 14424, 42.7407471, -77.426155
-30 Catskill, Catskill, New York, 12414, 42.2283956749208, -73.8969167024526
-161 Centereach Mall, Centereach, New York, 11720, -4.5271203, 120.2077887
-3018 East Ave, Central Square, New York, 13036, 43.2867728438771, -76.1597446865176
-100 Thruway Plaza, Cheektowaga, New York, 14225, 42.9281194302113, -78.7627046330652
-8064 Brewerton Rd, Cicero, New York, 13039, 43.1694462465549, -76.0993088483177
-5033 Transit Road, Clarence, New York, 14031, 42.9798748312943, -78.6228656188481
-3949 Route 31, Clay, New York, 13041, 43.1707331329387, -76.190286448559
-139 Merchant Place, Cobleskill, New York, 12043, 42.6804103779452, -74.4848230916564
-85 Crooked Hill Road, Commack, New York, 11725, 40.8428049529926, -73.2810292917172
-872 Route 13, Cortlandville, New York, 13045, 42.5907150041812, -76.193175994147
-279 Troy Road, East Greenbush, New York, 12061, 42.5991076763056, -73.6709169176435
-2465 Hempstead Turnpike, East Meadow, New York, 11554, 40.7109735953795, -73.5549752436778
-6438 Basile Rowe, East Syracuse, New York, 13057, 43.087386, -76.078782
-25737 US Rt 11, Evans Mills, New York, 13637, 44.0761829757952, -75.8200770900882
-901 Route 110, Farmingdale, New York, 11735, 40.7298664274722, -73.4303597348995
-2400 Route 9, Fishkill, New York, 12524, 41.5393040241354, -73.8968353063423
-10401 Bennett Road, Fredonia, New York, 14063, 42.4361970749719, -79.3380339273107
-1818 State Route 3, Fulton, New York, 13069, 43.3187444422337, -76.4024684846102
-4300 Lakeville Road, Geneseo, New York, 14454, 42.7922118733155, -77.7767444080884
-990 Route 5 20, Geneva, New York, 14456, 42.8554303590694, -76.9870159204104
-311 RT 9W, Glenmont, New York, 12077, 42.6001038537803, -73.7956305989415
-200 Dutch Meadows Ln, Glenville, New York, 12302, 42.8586437478212, -73.9572763973579
-100 Elm Ridge Center Dr, Greece, New York, 14626, 43.2094377, -77.6877373
-1549 Rt 9, Halfmoon, New York, 12065, 42.8559423952926, -73.7853475906328
-5360 Southwestern Blvd, Hamburg, New York, 14075, 42.7358955462598, -78.8386101410717
-103 North Caroline St, Herkimer, New York, 13350, 43.0302075333931, -74.9894073608165
-1000 State Route 36, Hornell, New York, 14843, 42.3139476, -77.6534657
-1400 County Rd 64, Horseheads, New York, 14845, 42.178806883539, -76.8408589455752
-135 Fairgrounds Memorial Pkwy, Ithaca, New York, 14850, 42.4477090437755, -76.4907054406706
-2 Gannett Dr, Johnson City, New York, 13790, 42.1088363, -75.9667228
-233 5th Ave Ext, Johnstown, New York, 12095, 43.00916046685, -74.3723635184581
-601 Frank Stottile Blvd, Kingston, New York, 12401, 41.9500263, -74.0431978
-350 E Fairmount Ave, Lakewood, New York, 14750, 42.0985255559372, -79.32461334157
-4975 Transit Rd, Lancaster, New York, 14086, 42.8980255340928, -78.6584498356256
-579 Troy-Schenectady Road, Latham, New York, 12110, 42.7539812636457, -73.7746250262333
-5783 So Transit Road, Lockport, New York, 14094, 43.131169, -78.6749541719895
-7155 State Rt 12 S, Lowville, New York, 13367, 43.7893172129187, -75.4830032596723
-425 Route 31, Macedon, New York, 14502, 43.0935085716528, -77.3455469507602
-3222 State Rt 11, Malone, New York, 12953, 44.849472283833, -74.2864746516802
-200 Sunrise Mall, Massapequa, New York, 11758, 40.6830377, -73.4317021
-43 Stephenville St, Massena, New York, 13662, 44.9289988044823, -74.8902207207056
-750 Middle Country Road, Middle Island, New York, 11953, 40.8845088432882, -72.9540588716714
-470 Route 211 East, Middletown, New York, 10940, 41.429792, -74.4211324
-3133 E Main St, Mohegan Lake, New York, 10547, 41.3163013715453, -73.8510560451983
-288 Larkin, Monroe, New York, 10950, 41.3250300141583, -74.1932215722306
-41 Anawana Lake Road, Monticello, New York, 12701, 41.6469706000077, -74.7030021724989
-4765 Commercial Drive, New Hartford, New York, 13413, 43.0716066349683, -75.2975313771995
-1201 Rt 300, Newburgh, New York, 12550, 41.5049647, -74.0780784
-255 W Main St, Avon, Connecticut, 6001, -4.5271203, 120.2077887
-120 Commercial Parkway, Branford, Connecticut, 6405, -4.5271203, 120.2077887
-1400 Farmington Ave, Bristol, Connecticut, 6010, -4.5271203, 120.2077887
-161 Berlin Road, Cromwell, Connecticut, 6416, -4.5271203, 120.2077887
-67 Newton Rd, Danbury, Connecticut, 6810, -4.5271203, 120.2077887
-656 New Haven Ave, Derby, Connecticut, 6418, -4.5271203, 120.2077887
-69 Prospect Hill Road, East Windsor, Connecticut, 6088, -4.5271203, 120.2077887
-150 Gold Star Hwy, Groton, Connecticut, 6340, -4.5271203, 120.2077887
-900 Boston Post Road, Guilford, Connecticut, 6437, -4.5271203, 120.2077887
-2300 Dixwell Ave, Hamden, Connecticut, 6514, -4.5271203, 120.2077887
-495 Flatbush Ave, Hartford, Connecticut, 6106, 42.110738907282, -88.4689226598527
-180 River Rd, Lisbon, Connecticut, 6351, -4.5271203, 120.2077887
-420 Buckland Hills Dr, Manchester, Connecticut, 6040, -4.5271203, 120.2077887
-1365 Boston Post Road, Milford, Connecticut, 6460, -4.5271203, 120.2077887
-1100 New Haven Road, Naugatuck, Connecticut, 6770, -4.5271203, 120.2077887
-315 Foxon Blvd, New Haven, Connecticut, 6513, -4.5271203, 120.2077887
-164 Danbury Rd, New Milford, Connecticut, 6776, -4.5271203, 120.2077887
-3164 Berlin Turnpike, Newington, Connecticut, 6111, -4.5271203, 120.2077887
-474 Boston Post Road, North Windham, Connecticut, 6256, -4.5271203, 120.2077887
-650 Main Ave, Norwalk, Connecticut, 6851, -4.5271203, 120.2077887
-680 Connecticut Avenue, Norwalk, Connecticut, 6854, -4.5271203, 120.2077887
-220 Salem Turnpike, Norwich, Connecticut, 6360, -4.5271203, 120.2077887
-655 Boston Post Rd, Old Saybrook, Connecticut, 6475, -4.5271203, 120.2077887
-625 School Street, Putnam, Connecticut, 6260, -4.5271203, 120.2077887
-80 Town Line Rd, Rocky Hill, Connecticut, 6067, -4.5271203, 120.2077887
-465 Bridgeport Avenue, Shelton, Connecticut, 6484, -4.5271203, 120.2077887
-235 Queen St, Southington, Connecticut, 6489, -4.5271203, 120.2077887
-150 Barnum Avenue Cutoff, Stratford, Connecticut, 6614, -4.5271203, 120.2077887
-970 Torringford Street, Torrington, Connecticut, 6790, -4.5271203, 120.2077887
-844 No Colony Road, Wallingford, Connecticut, 6492, -4.5271203, 120.2077887
-910 Wolcott St, Waterbury, Connecticut, 6705, -4.5271203, 120.2077887
-155 Waterford Parkway No, Waterford, Connecticut, 6385, -4.5271203, 120.2077887
-515 Sawmill Road, West Haven, Connecticut, 6516, -4.5271203, 120.2077887
-2473 Hackworth Road, Adamsville, Alabama, 35005, 33.59441, -86.941073
-630 Coonial Promenade Pkwy, Alabaster, Alabama, 35007, 33.2357022999495, -86.8161144630436
-2643 Hwy 280 West, Alexander City, Alabama, 35010, 32.9243000713076, -85.9374682044102
-540 West Bypass, Andalusia, Alabama, 36420, 31.3034025999079, -86.480453627573
-5560 Mcclellan Blvd, Anniston, Alabama, 36206, 33.723813, -85.815279
-1450 No Brindlee Mtn Pkwy, Arab, Alabama, 35016, 34.3309247150784, -86.4951795187125
-1011 US Hwy 72 East, Athens, Alabama, 35611, 34.775431, -87.267747
-973 Gilbert Ferry Road Se, Attalla, Alabama, 35954, 33.9829151, -86.1422256
-1717 South College Street, Auburn, Alabama, 36830, 32.6011766832819, -85.4714954525179
-701 Mcmeans Ave, Bay Minette, Alabama, 36507, 30.8773000874694, -87.7816468099776
-750 Academy Drive, Bessemer, Alabama, 35022, 33.3463772007884, -86.9589954116879
-312 Palisades Blvd, Birmingham, Alabama, 35209, 33.478893, -86.787018
-1600 Montclair Rd, Birmingham, Alabama, 35210, 33.5346958495908, -86.6844817180751
-5919 Trussville Crossings Pkwy, Birmingham, Alabama, 35235, 33.6189946401628, -86.6607164498007
-9248 Parkway East, Birmingham, Alabama, 35206, 33.5679526425801, -86.7214076113811
-1972 Hwy 431, Boaz, Alabama, 35957, 34.2032046152773, -86.179018461514
-10675 Hwy 5, Brent, Alabama, 35034, 32.9309169308274, -87.1884784156025
-2041 Douglas Avenue, Brewton, Alabama, 36426, 31.1158273287022, -87.0726148722069
-5100 Hwy 31, Calera, Alabama, 35040, 33.1141952273605, -86.7509411118558
-1916 Center Point Rd, Center Point, Alabama, 35215, 33.6358561074828, -86.6925650958384
-1950 W Main St, Centre, Alabama, 35960, 34.1478247367634, -85.6080878016962
-16077 Highway 280, Chelsea, Alabama, 35043, 33.3236923754575, -86.6552095129861
-1415 7Th Street South, Clanton, Alabama, 35045, 32.8354493020361, -86.641621207362
-626 Olive Street Sw, Cullman, Alabama, 35055, 34.18765, -86.681169
-27520 Hwy 98, Daphne, Alabama, 36526, 30.654614, -87.912104
-2800 Spring Avn SW, Decatur, Alabama, 35603, 34.5469860577507, -86.9854445969269
-969 Us Hwy 80 West, Demopolis, Alabama, 36732, 32.4958979017943, -87.843085452948
-3300 South Oates Street, Dothan, Alabama, 36301, 31.1855775608609, -85.4019598584018
-4310 Montgomery Hwy, Dothan, Alabama, 36303, 31.253016694633, -85.412109749977
-600 Boll Weevil Circle, Enterprise, Alabama, 36330, 31.3151848373945, -85.8350172919611
-3176 South Eufaula Avenue, Eufaula, Alabama, 36027, 31.8884053405611, -85.1694336884198
-7100 Aaron Aronov Drive, Fairfield, Alabama, 35064, 33.4784967472038, -86.916036508532
-10040 County Road 48, Fairhope, Alabama, 36533, 30.5392227284095, -87.8968828885586
-3186 Hwy 171 North, Fayette, Alabama, 35555, 33.6739961825235, -87.8218040879137
-3100 Hough Rd, Florence, Alabama, 35630, 34.8054517, -87.6631575
-2200 South Mckenzie St, Foley, Alabama, 36535, 30.393327, -87.671102
-2001 Glenn Bldv Sw, Fort Payne, Alabama, 35968, 34.471197020846, -85.7666807165783
-340 East Meighan Blvd, Gadsden, Alabama, 35903, 33.9992277811127, -85.9288314399814
-890 Odum Road, Gardendale, Alabama, 35071, 33.6649576825415, -86.8189537789734
-1608 W Magnolia Ave, Geneva, Alabama, 36340, 31.0287758671056, -85.8853713056253
-501 Willow Lane, Greenville, Alabama, 36037, 31.8254027011368, -86.6218062822819
-170 Fort Morgan Road, Gulf Shores, Alabama, 36542, 30.265131, -87.693861
-11697 US Hwy 431, Guntersville, Alabama, 35976, 34.3465626032196, -86.3164064758976
-42417 Hwy 195, Haleyville, Alabama, 35565, 34.2289275057779, -87.6094168987022
-1706 Military Street South, Hamilton, Alabama, 35570, 34.1566857578791, -87.9962917998913
-1201 Hwy 31 NW, Hartselle, Alabama, 35640, 34.4471977077214, -86.9372360836774
-209 Lakeshore Parkway, Homewood, Alabama, 35209, 33.478893, -86.787018
-2780 John Hawkins Pkwy, Hoover, Alabama, 35244, 33.356085, -86.858288
-5335 Hwy 280 South, Hoover, Alabama, 35242, 33.4282252, -86.701439
-1007 Red Farmer Drive, Hueytown, Alabama, 35023, 33.4560922629662, -87.0316199559214
-2900 S Mem PkwyDrake Ave, Huntsville, Alabama, 35801, 34.708725, -86.566239
-11610 Memorial Pkwy South, Huntsville, Alabama, 35803, 34.641155, -86.5386006
-2200 Sparkman Drive, Huntsville, Alabama, 35810, 34.80073, -86.60345
-330 Sutton Rd, Huntsville, Alabama, 35763, 34.672501, -86.468207
-6140A Univ Drive, Huntsville, Alabama, 35806, 34.745304, -86.684766
-4206 N College Ave, Jackson, Alabama, 36545, 31.5289158955736, -87.8893230744226
-1625 Pelham South, Jacksonville, Alabama, 36265, 33.8196906328811, -85.7726741589693
-1801 Hwy 78 East, Jasper, Alabama, 35501, 33.8258937265917, -87.2697454227614
-8551 Whitfield Ave, Leeds, Alabama, 35094, -4.5271203, 120.2077887
-8650 Madison Blvd, Madison, Alabama, 35758, 34.708655, -86.743585
-145 Kelley Blvd, Millbrook, Alabama, 36054, 32.497476839989, -86.3688909612543
-1970 S University Blvd, Mobile, Alabama, 36609, 30.660376229356, -88.1650095126005
-6350 Cottage Hill Road, Mobile, Alabama, 36609, 30.660376229356, -88.1650095126005
-101 South Beltline Highway, Mobile, Alabama, 36606, 30.674358, -88.098024
-2500 Dawes Road, Mobile, Alabama, 36695, 30.666793, -88.1907
-5245 Rangeline Service Rd, Mobile, Alabama, 36619, 30.5941807308487, -88.1964584970253
-685 Schillinger Rd, Mobile, Alabama, 36695, 30.666793, -88.1907
-3371 S Alabama Ave, Monroeville, Alabama, 36460, 31.5051606922178, -87.3253038478395
-10710 Chantilly Pkwy, Montgomery, Alabama, 36117, 32.3837665, -86.2104677
-3801 Eastern Blvd, Montgomery, Alabama, 36116, 32.3132766268486, -86.2244658738687
-6495 Atlanta Hwy, Montgomery, Alabama, 36117, 32.3837665, -86.2104677
-851 Ann St, Montgomery, Alabama, 36107, 32.3783521779686, -86.2777898493794
-15445 Highway 24, Moulton, Alabama, 35650, 34.4952514668694, -87.2800352409298
-517 West Avalon Ave, Muscle Shoals, Alabama, 35661, 34.7569037871829, -87.6255064810864
-5710 Mcfarland Blvd, Northport, Alabama, 35476, 33.2292945051431, -87.582268747814
-2453 2Nd Avenue East, Oneonta, Alabama, 35121, 33.9397849326998, -86.4550405722413
-2900 Pepperrell Pkwy, Opelika, Alabama, 36801, 32.6509541337206, -85.390851871801
-92 Plaza Lane, Oxford, Alabama, 36203, 33.5966639030435, -85.8455524245107
-1537 Hwy 231 South, Ozark, Alabama, 36360, 31.4339825793038, -85.6471033645793
-2181 Pelham Pkwy, Pelham, Alabama, 35124, 33.3176119354255, -86.7933067621572
-165 Vaughan Ln, Pell City, Alabama, 35125, 33.625397, -86.286934
-3700 Hwy 280-431 N, Phenix City, Alabama, 36867, 32.488046765615, -85.0205926488804
-1903 Cobbs Ford Rd, Prattville, Alabama, 36066, 32.4708143364896, -86.4312811790998
-4180 Us Hwy 431, Roanoke, Alabama, 36274, 33.1396809517651, -85.3763348460235
-13675 Hwy 43, Russellville, Alabama, 35653, 34.4738399, -87.8671564
-1095 Industrial Pkwy, Saraland, Alabama, 36571, 30.8251083477657, -88.0944454668639
-24833 Johnt Reidprkw, Scottsboro, Alabama, 35768, 34.6901529445928, -86.0508122785545
-1501 Hwy 14 East, Selma, Alabama, 36703, 32.4321905607849, -86.9751083408702
-7855 Moffett Rd, Semmes, Alabama, 36575, 30.72738, -88.238999
-150 Springville Station Blvd, Springville, Alabama, 35146, 33.7826519303224, -86.453534308199
-690 Hwy 78, Sumiton, Alabama, 35148, 33.7536793933521, -87.0445199707289
-41301 US Hwy 280, Sylacauga, Alabama, 35150, 33.1796096318931, -86.2593060480577
-214 Haynes Street, Talladega, Alabama, 35160, 33.4362410274519, -86.1249265763978
-1300 Gilmer Ave, Tallassee, Alabama, 36078, 32.5445, -86.19134
-34301 Hwy 43, Thomasville, Alabama, 36784, 31.9266346670116, -87.7530393868583
-1420 Us 231 South, Troy, Alabama, 36081, 31.8087420251946, -85.9597556602569
-1501 Skyland Blvd E, Tuscaloosa, Alabama, 35405, 33.1389332, -87.549251
-3501 20th Av, Valley, Alabama, 36854, 32.7851431117657, -85.1766678376201
-1300 Montgomery Highway, Vestavia Hills, Alabama, 35216, 33.4401596, -86.8079348
-4538 Us Hwy 231, Wetumpka, Alabama, 36092, 32.5877702825382, -86.2164407319332
-2575 Us Hwy 43, Winfield, Alabama, 35594, 33.9244302917176, -87.7968992099109
+777 Brockton Avenue, Abington, MA, 2351, -4.5271203, 120.2077887
+30 Memorial Drive, Avon, MA, 2322, -4.5271203, 120.2077887
+250 Hartford Avenue, Bellingham, MA, 2019, -4.5271203, 120.2077887
+700 Oak Street, Brockton, MA, 2301, -4.5271203, 120.2077887
+66-4 Parkhurst Rd, Chelmsford, MA, 1824, -4.5271203, 120.2077887
+591 Memorial Dr, Chicopee, MA, 1020, -4.5271203, 120.2077887
+55 Brooksby Village Way, Danvers, MA, 1923, -4.5271203, 120.2077887
+137 Teaticket Hwy, East Falmouth, MA, 2536, -4.5271203, 120.2077887
+42 Fairhaven Commons Way, Fairhaven, MA, 2719, -4.5271203, 120.2077887
+374 William S Canning Blvd, Fall River, MA, 2721, -4.5271203, 120.2077887
+121 Worcester Rd, Framingham, MA, 1701, -4.5271203, 120.2077887
+677 Timpany Blvd, Gardner, MA, 1440, 40.372578, -79.5745836
+337 Russell St, Hadley, MA, 1035, -4.5271203, 120.2077887
+295 Plymouth Street, Halifax, MA, 2338, -4.5271203, 120.2077887
+1775 Washington St, Hanover, MA, 2339, -4.5271203, 120.2077887
+280 Washington Street, Hudson, MA, 1749, -4.5271203, 120.2077887
+20 Soojian Dr, Leicester, MA, 1524, -4.5271203, 120.2077887
+11 Jungle Road, Leominster, MA, 1453, -4.5271203, 120.2077887
+301 Massachusetts Ave, Lunenburg, MA, 1462, 40.3711719, -79.584742
+780 Lynnway, Lynn, MA, 1905, -4.5271203, 120.2077887
+70 Pleasant Valley Street, Methuen, MA, 1844, -4.5271203, 120.2077887
+830 Curran Memorial Hwy, North Adams, MA, 1247, -4.5271203, 120.2077887
+1470 S Washington St, North Attleboro, MA, 2760, -4.5271203, 120.2077887
+506 State Road, North Dartmouth, MA, 2747, -4.5271203, 120.2077887
+742 Main Street, North Oxford, MA, 1537, -4.5271203, 120.2077887
+72 Main St, North Reading, MA, 1864, -4.5271203, 120.2077887
+200 Otis Street, Northborough, MA, 1532, -4.5271203, 120.2077887
+180 North King Street, Northhampton, MA, 1060, 42.3375755191606, -72.6485729220792
+555 East Main St, Orange, MA, 1364, -4.5271203, 120.2077887
+555 Hubbard Ave-Suite 12, Pittsfield, MA, 1201, -4.5271203, 120.2077887
+300 Colony Place, Plymouth, MA, 2360, -4.5271203, 120.2077887
+301 Falls Blvd, Quincy, MA, 2169, -4.5271203, 120.2077887
+36 Paramount Drive, Raynham, MA, 2767, -4.5271203, 120.2077887
+450 Highland Ave, Salem, MA, 1970, -4.5271203, 120.2077887
+1180 Fall River Avenue, Seekonk, MA, 2771, -4.5271203, 120.2077887
+1105 Boston Road, Springfield, MA, 1119, -4.5271203, 120.2077887
+100 Charlton Road, Sturbridge, MA, 1566, -4.5271203, 120.2077887
+262 Swansea Mall Dr, Swansea, MA, 2777, 35.9793388, -78.9084572
+333 Main Street, Tewksbury, MA, 1876, -4.5271203, 120.2077887
+550 Providence Hwy, Walpole, MA, 2081, -4.5271203, 120.2077887
+352 Palmer Road, Ware, MA, 1082, -4.5271203, 120.2077887
+3005 Cranberry Hwy Rt 6 28, Wareham, MA, 2538, -4.5271203, 120.2077887
+250 Rt 59, Airmont, NY, 10901, 41.1260837277951, -74.1129376790605
+141 Washington Ave Extension, Albany, NY, 12205, 42.71185, -73.8671987
+13858 Rt 31 W, Albion, NY, 14411, 43.2444652, -78.0909645
+2055 Niagara Falls Blvd, Amherst, NY, 14228, 43.0071495, -78.8085471
+101 Sanford Farm Shpg Center, Amsterdam, NY, 12010, 42.940482272666, -74.1847101959755
+297 Grant Avenue, Auburn, NY, 13021, 42.9258279773786, -76.5620423690071
+4133 Veterans Memorial Drive, Batavia, NY, 14020, 42.9995689, -78.1850385
+6265 Brockport Spencerport Rd, Brockport, NY, 14420, 43.2186935455311, -77.9336154370068
+5399 W Genesse St, Camillus, NY, 13031, 43.0418754071579, -76.2845974729668
+3191 County rd 10, Canandaigua, NY, 14424, 42.7407471, -77.426155
+30 Catskill, Catskill, NY, 12414, 42.2283956749208, -73.8969167024526
+161 Centereach Mall, Centereach, NY, 11720, -4.5271203, 120.2077887
+3018 East Ave, Central Square, NY, 13036, 43.2867728438771, -76.1597446865176
+100 Thruway Plaza, Cheektowaga, NY, 14225, 42.9281194302113, -78.7627046330652
+8064 Brewerton Rd, Cicero, NY, 13039, 43.1694462465549, -76.0993088483177
+5033 Transit Road, Clarence, NY, 14031, 42.9798748312943, -78.6228656188481
+3949 Route 31, Clay, NY, 13041, 43.1707331329387, -76.190286448559
+139 Merchant Place, Cobleskill, NY, 12043, 42.6804103779452, -74.4848230916564
+85 Crooked Hill Road, Commack, NY, 11725, 40.8428049529926, -73.2810292917172
+872 Route 13, Cortlandville, NY, 13045, 42.5907150041812, -76.193175994147
+279 Troy Road, East Greenbush, NY, 12061, 42.5991076763056, -73.6709169176435
+2465 Hempstead Turnpike, East Meadow, NY, 11554, 40.7109735953795, -73.5549752436778
+6438 Basile Rowe, East Syracuse, NY, 13057, 43.087386, -76.078782
+25737 US Rt 11, Evans Mills, NY, 13637, 44.0761829757952, -75.8200770900882
+901 Route 110, Farmingdale, NY, 11735, 40.7298664274722, -73.4303597348995
+2400 Route 9, Fishkill, NY, 12524, 41.5393040241354, -73.8968353063423
+10401 Bennett Road, Fredonia, NY, 14063, 42.4361970749719, -79.3380339273107
+1818 State Route 3, Fulton, NY, 13069, 43.3187444422337, -76.4024684846102
+4300 Lakeville Road, Geneseo, NY, 14454, 42.7922118733155, -77.7767444080884
+990 Route 5 20, Geneva, NY, 14456, 42.8554303590694, -76.9870159204104
+311 RT 9W, Glenmont, NY, 12077, 42.6001038537803, -73.7956305989415
+200 Dutch Meadows Ln, Glenville, NY, 12302, 42.8586437478212, -73.9572763973579
+100 Elm Ridge Center Dr, Greece, NY, 14626, 43.2094377, -77.6877373
+1549 Rt 9, Halfmoon, NY, 12065, 42.8559423952926, -73.7853475906328
+5360 Southwestern Blvd, Hamburg, NY, 14075, 42.7358955462598, -78.8386101410717
+103 North Caroline St, Herkimer, NY, 13350, 43.0302075333931, -74.9894073608165
+1000 State Route 36, Hornell, NY, 14843, 42.3139476, -77.6534657
+1400 County Rd 64, Horseheads, NY, 14845, 42.178806883539, -76.8408589455752
+135 Fairgrounds Memorial Pkwy, Ithaca, NY, 14850, 42.4477090437755, -76.4907054406706
+2 Gannett Dr, Johnson City, NY, 13790, 42.1088363, -75.9667228
+233 5th Ave Ext, Johnstown, NY, 12095, 43.00916046685, -74.3723635184581
+601 Frank Stottile Blvd, Kingston, NY, 12401, 41.9500263, -74.0431978
+350 E Fairmount Ave, Lakewood, NY, 14750, 42.0985255559372, -79.32461334157
+4975 Transit Rd, Lancaster, NY, 14086, 42.8980255340928, -78.6584498356256
+579 Troy-Schenectady Road, Latham, NY, 12110, 42.7539812636457, -73.7746250262333
+5783 So Transit Road, Lockport, NY, 14094, 43.131169, -78.6749541719895
+7155 State Rt 12 S, Lowville, NY, 13367, 43.7893172129187, -75.4830032596723
+425 Route 31, Macedon, NY, 14502, 43.0935085716528, -77.3455469507602
+3222 State Rt 11, Malone, NY, 12953, 44.849472283833, -74.2864746516802
+200 Sunrise Mall, Massapequa, NY, 11758, 40.6830377, -73.4317021
+43 Stephenville St, Massena, NY, 13662, 44.9289988044823, -74.8902207207056
+750 Middle Country Road, Middle Island, NY, 11953, 40.8845088432882, -72.9540588716714
+470 Route 211 East, Middletown, NY, 10940, 41.429792, -74.4211324
+3133 E Main St, Mohegan Lake, NY, 10547, 41.3163013715453, -73.8510560451983
+288 Larkin, Monroe, NY, 10950, 41.3250300141583, -74.1932215722306
+41 Anawana Lake Road, Monticello, NY, 12701, 41.6469706000077, -74.7030021724989
+4765 Commercial Drive, New Hartford, NY, 13413, 43.0716066349683, -75.2975313771995
+1201 Rt 300, Newburgh, NY, 12550, 41.5049647, -74.0780784
+255 W Main St, Avon, CT, 6001, -4.5271203, 120.2077887
+120 Commercial Parkway, Branford, CT, 6405, -4.5271203, 120.2077887
+1400 Farmington Ave, Bristol, CT, 6010, -4.5271203, 120.2077887
+161 Berlin Road, Cromwell, CT, 6416, -4.5271203, 120.2077887
+67 Newton Rd, Danbury, CT, 6810, -4.5271203, 120.2077887
+656 New Haven Ave, Derby, CT, 6418, -4.5271203, 120.2077887
+69 Prospect Hill Road, East Windsor, CT, 6088, -4.5271203, 120.2077887
+150 Gold Star Hwy, Groton, CT, 6340, -4.5271203, 120.2077887
+900 Boston Post Road, Guilford, CT, 6437, -4.5271203, 120.2077887
+2300 Dixwell Ave, Hamden, CT, 6514, -4.5271203, 120.2077887
+495 Flatbush Ave, Hartford, CT, 6106, 42.110738907282, -88.4689226598527
+180 River Rd, Lisbon, CT, 6351, -4.5271203, 120.2077887
+420 Buckland Hills Dr, Manchester, CT, 6040, -4.5271203, 120.2077887
+1365 Boston Post Road, Milford, CT, 6460, -4.5271203, 120.2077887
+1100 New Haven Road, Naugatuck, CT, 6770, -4.5271203, 120.2077887
+315 Foxon Blvd, New Haven, CT, 6513, -4.5271203, 120.2077887
+164 Danbury Rd, New Milford, CT, 6776, -4.5271203, 120.2077887
+3164 Berlin Turnpike, Newington, CT, 6111, -4.5271203, 120.2077887
+474 Boston Post Road, North Windham, CT, 6256, -4.5271203, 120.2077887
+650 Main Ave, Norwalk, CT, 6851, -4.5271203, 120.2077887
+680 Connecticut Avenue, Norwalk, CT, 6854, -4.5271203, 120.2077887
+220 Salem Turnpike, Norwich, CT, 6360, -4.5271203, 120.2077887
+655 Boston Post Rd, Old Saybrook, CT, 6475, -4.5271203, 120.2077887
+625 School Street, Putnam, CT, 6260, -4.5271203, 120.2077887
+80 Town Line Rd, Rocky Hill, CT, 6067, -4.5271203, 120.2077887
+465 Bridgeport Avenue, Shelton, CT, 6484, -4.5271203, 120.2077887
+235 Queen St, Southington, CT, 6489, -4.5271203, 120.2077887
+150 Barnum Avenue Cutoff, Stratford, CT, 6614, -4.5271203, 120.2077887
+970 Torringford Street, Torrington, CT, 6790, -4.5271203, 120.2077887
+844 No Colony Road, Wallingford, CT, 6492, -4.5271203, 120.2077887
+910 Wolcott St, Waterbury, CT, 6705, -4.5271203, 120.2077887
+155 Waterford Parkway No, Waterford, CT, 6385, -4.5271203, 120.2077887
+515 Sawmill Road, West Haven, CT, 6516, -4.5271203, 120.2077887
+2473 Hackworth Road, Adamsville, AL, 35005, 33.59441, -86.941073
+630 Coonial Promenade Pkwy, Alabaster, AL, 35007, 33.2357022999495, -86.8161144630436
+2643 Hwy 280 West, Alexander City, AL, 35010, 32.9243000713076, -85.9374682044102
+540 West Bypass, Andalusia, AL, 36420, 31.3034025999079, -86.480453627573
+5560 Mcclellan Blvd, Anniston, AL, 36206, 33.723813, -85.815279
+1450 No Brindlee Mtn Pkwy, Arab, AL, 35016, 34.3309247150784, -86.4951795187125
+1011 US Hwy 72 East, Athens, AL, 35611, 34.775431, -87.267747
+973 Gilbert Ferry Road Se, Attalla, AL, 35954, 33.9829151, -86.1422256
+1717 South College Street, Auburn, AL, 36830, 32.6011766832819, -85.4714954525179
+701 Mcmeans Ave, Bay Minette, AL, 36507, 30.8773000874694, -87.7816468099776
+750 Academy Drive, Bessemer, AL, 35022, 33.3463772007884, -86.9589954116879
+312 Palisades Blvd, Birmingham, AL, 35209, 33.478893, -86.787018
+1600 Montclair Rd, Birmingham, AL, 35210, 33.5346958495908, -86.6844817180751
+5919 Trussville Crossings Pkwy, Birmingham, AL, 35235, 33.6189946401628, -86.6607164498007
+9248 Parkway East, Birmingham, AL, 35206, 33.5679526425801, -86.7214076113811
+1972 Hwy 431, Boaz, AL, 35957, 34.2032046152773, -86.179018461514
+10675 Hwy 5, Brent, AL, 35034, 32.9309169308274, -87.1884784156025
+2041 Douglas Avenue, Brewton, AL, 36426, 31.1158273287022, -87.0726148722069
+5100 Hwy 31, Calera, AL, 35040, 33.1141952273605, -86.7509411118558
+1916 Center Point Rd, Center Point, AL, 35215, 33.6358561074828, -86.6925650958384
+1950 W Main St, Centre, AL, 35960, 34.1478247367634, -85.6080878016962
+16077 Highway 280, Chelsea, AL, 35043, 33.3236923754575, -86.6552095129861
+1415 7Th Street South, Clanton, AL, 35045, 32.8354493020361, -86.641621207362
+626 Olive Street Sw, Cullman, AL, 35055, 34.18765, -86.681169
+27520 Hwy 98, Daphne, AL, 36526, 30.654614, -87.912104
+2800 Spring Avn SW, Decatur, AL, 35603, 34.5469860577507, -86.9854445969269
+969 Us Hwy 80 West, Demopolis, AL, 36732, 32.4958979017943, -87.843085452948
+3300 South Oates Street, Dothan, AL, 36301, 31.1855775608609, -85.4019598584018
+4310 Montgomery Hwy, Dothan, AL, 36303, 31.253016694633, -85.412109749977
+600 Boll Weevil Circle, Enterprise, AL, 36330, 31.3151848373945, -85.8350172919611
+3176 South Eufaula Avenue, Eufaula, AL, 36027, 31.8884053405611, -85.1694336884198
+7100 Aaron Aronov Drive, Fairfield, AL, 35064, 33.4784967472038, -86.916036508532
+10040 County Road 48, Fairhope, AL, 36533, 30.5392227284095, -87.8968828885586
+3186 Hwy 171 North, Fayette, AL, 35555, 33.6739961825235, -87.8218040879137
+3100 Hough Rd, Florence, AL, 35630, 34.8054517, -87.6631575
+2200 South Mckenzie St, Foley, AL, 36535, 30.393327, -87.671102
+2001 Glenn Bldv Sw, Fort Payne, AL, 35968, 34.471197020846, -85.7666807165783
+340 East Meighan Blvd, Gadsden, AL, 35903, 33.9992277811127, -85.9288314399814
+890 Odum Road, Gardendale, AL, 35071, 33.6649576825415, -86.8189537789734
+1608 W Magnolia Ave, Geneva, AL, 36340, 31.0287758671056, -85.8853713056253
+501 Willow Lane, Greenville, AL, 36037, 31.8254027011368, -86.6218062822819
+170 Fort Morgan Road, Gulf Shores, AL, 36542, 30.265131, -87.693861
+11697 US Hwy 431, Guntersville, AL, 35976, 34.3465626032196, -86.3164064758976
+42417 Hwy 195, Haleyville, AL, 35565, 34.2289275057779, -87.6094168987022
+1706 Military Street South, Hamilton, AL, 35570, 34.1566857578791, -87.9962917998913
+1201 Hwy 31 NW, Hartselle, AL, 35640, 34.4471977077214, -86.9372360836774
+209 Lakeshore Parkway, Homewood, AL, 35209, 33.478893, -86.787018
+2780 John Hawkins Pkwy, Hoover, AL, 35244, 33.356085, -86.858288
+5335 Hwy 280 South, Hoover, AL, 35242, 33.4282252, -86.701439
+1007 Red Farmer Drive, Hueytown, AL, 35023, 33.4560922629662, -87.0316199559214
+2900 S Mem PkwyDrake Ave, Huntsville, AL, 35801, 34.708725, -86.566239
+11610 Memorial Pkwy South, Huntsville, AL, 35803, 34.641155, -86.5386006
+2200 Sparkman Drive, Huntsville, AL, 35810, 34.80073, -86.60345
+330 Sutton Rd, Huntsville, AL, 35763, 34.672501, -86.468207
+6140A Univ Drive, Huntsville, AL, 35806, 34.745304, -86.684766
+4206 N College Ave, Jackson, AL, 36545, 31.5289158955736, -87.8893230744226
+1625 Pelham South, Jacksonville, AL, 36265, 33.8196906328811, -85.7726741589693
+1801 Hwy 78 East, Jasper, AL, 35501, 33.8258937265917, -87.2697454227614
+8551 Whitfield Ave, Leeds, AL, 35094, -4.5271203, 120.2077887
+8650 Madison Blvd, Madison, AL, 35758, 34.708655, -86.743585
+145 Kelley Blvd, Millbrook, AL, 36054, 32.497476839989, -86.3688909612543
+1970 S University Blvd, Mobile, AL, 36609, 30.660376229356, -88.1650095126005
+6350 Cottage Hill Road, Mobile, AL, 36609, 30.660376229356, -88.1650095126005
+101 South Beltline Highway, Mobile, AL, 36606, 30.674358, -88.098024
+2500 Dawes Road, Mobile, AL, 36695, 30.666793, -88.1907
+5245 Rangeline Service Rd, Mobile, AL, 36619, 30.5941807308487, -88.1964584970253
+685 Schillinger Rd, Mobile, AL, 36695, 30.666793, -88.1907
+3371 S Alabama Ave, Monroeville, AL, 36460, 31.5051606922178, -87.3253038478395
+10710 Chantilly Pkwy, Montgomery, AL, 36117, 32.3837665, -86.2104677
+3801 Eastern Blvd, Montgomery, AL, 36116, 32.3132766268486, -86.2244658738687
+6495 Atlanta Hwy, Montgomery, AL, 36117, 32.3837665, -86.2104677
+851 Ann St, Montgomery, AL, 36107, 32.3783521779686, -86.2777898493794
+15445 Highway 24, Moulton, AL, 35650, 34.4952514668694, -87.2800352409298
+517 West Avalon Ave, Muscle Shoals, AL, 35661, 34.7569037871829, -87.6255064810864
+5710 Mcfarland Blvd, Northport, AL, 35476, 33.2292945051431, -87.582268747814
+2453 2Nd Avenue East, Oneonta, AL, 35121, 33.9397849326998, -86.4550405722413
+2900 Pepperrell Pkwy, Opelika, AL, 36801, 32.6509541337206, -85.390851871801
+92 Plaza Lane, Oxford, AL, 36203, 33.5966639030435, -85.8455524245107
+1537 Hwy 231 South, Ozark, AL, 36360, 31.4339825793038, -85.6471033645793
+2181 Pelham Pkwy, Pelham, AL, 35124, 33.3176119354255, -86.7933067621572
+165 Vaughan Ln, Pell City, AL, 35125, 33.625397, -86.286934
+3700 Hwy 280-431 N, Phenix City, AL, 36867, 32.488046765615, -85.0205926488804
+1903 Cobbs Ford Rd, Prattville, AL, 36066, 32.4708143364896, -86.4312811790998
+4180 Us Hwy 431, Roanoke, AL, 36274, 33.1396809517651, -85.3763348460235
+13675 Hwy 43, Russellville, AL, 35653, 34.4738399, -87.8671564
+1095 Industrial Pkwy, Saraland, AL, 36571, 30.8251083477657, -88.0944454668639
+24833 Johnt Reidprkw, Scottsboro, AL, 35768, 34.6901529445928, -86.0508122785545
+1501 Hwy 14 East, Selma, AL, 36703, 32.4321905607849, -86.9751083408702
+7855 Moffett Rd, Semmes, AL, 36575, 30.72738, -88.238999
+150 Springville Station Blvd, Springville, AL, 35146, 33.7826519303224, -86.453534308199
+690 Hwy 78, Sumiton, AL, 35148, 33.7536793933521, -87.0445199707289
+41301 US Hwy 280, Sylacauga, AL, 35150, 33.1796096318931, -86.2593060480577
+214 Haynes Street, Talladega, AL, 35160, 33.4362410274519, -86.1249265763978
+1300 Gilmer Ave, Tallassee, AL, 36078, 32.5445, -86.19134
+34301 Hwy 43, Thomasville, AL, 36784, 31.9266346670116, -87.7530393868583
+1420 Us 231 South, Troy, AL, 36081, 31.8087420251946, -85.9597556602569
+1501 Skyland Blvd E, Tuscaloosa, AL, 35405, 33.1389332, -87.549251
+3501 20th Av, Valley, AL, 36854, 32.7851431117657, -85.1766678376201
+1300 Montgomery Highway, Vestavia Hills, AL, 35216, 33.4401596, -86.8079348
+4538 Us Hwy 231, Wetumpka, AL, 36092, 32.5877702825382, -86.2164407319332
+2575 Us Hwy 43, Winfield, AL, 35594, 33.9244302917176, -87.7968992099109

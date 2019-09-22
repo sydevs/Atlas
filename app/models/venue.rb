@@ -5,14 +5,14 @@ class Venue < ApplicationRecord
   
   nilify_blanks
   belongs_to :country, foreign_key: :country_code, primary_key: :country_code, optional: true
-  belongs_to :province, foreign_key: :province_name, primary_key: :province_name, optional: true
+  belongs_to :province, foreign_key: :province_code, primary_key: :province_code, optional: true
   has_many :events
 
   validates :street, presence: true
   validates :country_code, presence: true
   validates :latitude, :longitude, presence: true
 
-  searchable_columns %w[name street city province_name country_code]
+  searchable_columns %w[name street city province_code country_code]
   alias_method :parent, :province
 
   default_scope { order(updated_at: :desc) }
@@ -37,14 +37,14 @@ class Venue < ApplicationRecord
   end
   
   def full_address
-    [street, city, province_name, country_code].compact.join(', ')
+    [street, city, province_code, country_code].compact.join(', ')
   end
 
   def address
     {
       street: street,
       city: city,
-      province: province_name,
+      province: province_code,
       country: country_code,
       postcode: postcode,
     }

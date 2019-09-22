@@ -13,7 +13,7 @@ class CMS::ProvincesController < CMS::ApplicationController
   private
 
     def parameters
-      params.fetch(:province, {}).permit(:country_code, :province_name)
+      params.fetch(:province, {}).permit(:country_code, :province_code)
     end
 
 end

@@ -19,6 +19,7 @@ end
 def load_country country_code
   country = Country.find_or_initialize_by(country_code: country_code)
   if country.new_record?
+    country.save!
     country.managers = MANAGERS.sample(rand(0..4))
     country.save!
   end
@@ -26,14 +27,16 @@ def load_country country_code
   country_code
 end
 
-def load_province province_name, country_code
-  province = Province.find_or_initialize_by(province_name: province_name, country_code: country_code)
+def load_province province_code, country_code
+  province_code = ISO3166::Country[country_code].subdivisions.find { |k,s| s['name'] == province_code }[0] if province_code.length > 3
+  province = Province.find_or_initialize_by(province_code: province_code, country_code: country_code)
   if province.new_record?
+    province.save!
     province.managers = MANAGERS.sample(rand(0..4))
     province.save!
   end
 
-  province_name
+  province_code
 end
 
 def load_venue address, country_code, index
@@ -46,7 +49,7 @@ def load_venue address, country_code, index
     street: address[0],
     city: address[1],
     country_code: load_country(country_code),
-    province_name: load_province(address[2], country_code),
+    province_code: load_province(address[2], country_code),
     postcode: address[3],
     latitude: address[4],
     longitude: address[5],
@@ -150,7 +153,7 @@ if local_area.new_record?
     latitude: 42.361145,
     longitude: -71.057083,
     radius: 25,
-    province_name: load_province('Massachusetts'),
+    province_code: load_province('MA', 'US'),
     country_code: load_country('US'),
   })
 end

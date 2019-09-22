@@ -14,11 +14,11 @@ class Country < ApplicationRecord
   default_scope { order(country_code: :desc) }
 
   def label
-    I18nData.countries(I18n.locale)[country_code]
+    ISO3166::Country[country_code].name
   end
 
   def self.get_label country_code
-    I18nData.countries(I18n.locale)[country_code]
+    ISO3166::Country[country_code].name
   end
 
   def contains? venue
@@ -28,6 +28,10 @@ class Country < ApplicationRecord
   def managed_by? manager, super_manager: false
     return managers.include?(manager) unless super_manager
     return false
+  end
+
+  def to_s
+    label
   end
 
 end

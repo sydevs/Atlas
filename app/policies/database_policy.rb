@@ -9,6 +9,10 @@ class DatabasePolicy < ApplicationPolicy
     manage?
   end
 
+  def new?
+    user.present?
+  end
+
   def create?
     manage? super_manager: true
   end
@@ -22,8 +26,8 @@ class DatabasePolicy < ApplicationPolicy
   end
 
   def index_association? association = nil
-    return false unless manage?
     return record.has_region_association? if association == :regions
+    return false unless manage?
     return record.respond_to?(association)
   end
 

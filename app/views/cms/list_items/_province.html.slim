@@ -3,6 +3,6 @@
   = model_icon Province
   .content
     - if policy(province).show?
-      a.header href=url_for([:cms, province]) = province.province_name
+      a.header href=url_for([:cms, province]) = province.name
     - else
-      .header = province.province_name
+      .header = province.name

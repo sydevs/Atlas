@@ -17,7 +17,7 @@ const VenueMap = {
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(VenueMap.instance)
 
-    if (VenueMap.data['editable'] == 'true') {
+    if (VenueMap.data['editable'] == true) {
       VenueMap.initEditableMap()
     } else {
       VenueMap.initPreviewMap()
@@ -61,7 +61,7 @@ const VenueMap = {
     let value = [
       document.getElementById('venue_street').value,
       document.getElementById('venue_city').value,
-      document.getElementById('venue_province').value,
+      document.getElementById('venue_province_code').value,
       document.getElementById('venue_country_code').value,
       document.getElementById('venue_postcode').value,
     ].filter(Boolean).join(', ')
