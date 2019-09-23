@@ -23,7 +23,10 @@ class Manager < ApplicationRecord
   def managed_by? manager, super_manager: false
     return true if self == manager && !super_manager
     return manager.administrator?
-    # TODO: Allow managers to manage other users within their own regions.
+  end
+
+  def to_s
+    name
   end
 
 end

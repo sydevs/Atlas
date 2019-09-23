@@ -1,9 +1,11 @@
 
-h3.ui.dividing.header Details
-p
-  = model_icon Event
-  = number_with_delimiter @record.events.count
-  = ' Event'.pluralize(@record.events.count)
+h3.ui.dividing.header Details for #{@record.label}
+.ui.list
+  .item
+    = model_icon Event
+    .content
+      = number_with_delimiter @record.events.count
+      = ' Event'.pluralize(@record.events.count)
 
 h3.ui.dividing.header Location of this venue
 p = @record.full_address

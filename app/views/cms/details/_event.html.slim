@@ -1,7 +1,31 @@
 
 h3.ui.dividing.header Details
-p
-  = model_icon Registration
-  = number_with_delimiter @context.registrations.recent.count
-  = ' Registration'.pluralize(@context.registrations.recent.count)
-  |  in the last 30 days.
+.ui.list
+  .item
+    i.hashtag.icon
+    .content
+      .header = @record.category_name
+      .description = @record.category_description
+  .item
+    i.calendar.icon
+    .content = @record.timing
+  .item
+    i.language.icon
+    .content
+      ' Offered in 
+      = @record.languages.map { |lang| I18nData.languages(I18n.locale)[lang] }.join(', ')
+  .item
+    i.clock.icon
+    .content
+      ' Last updated
+      = time_ago_in_words @record.updated_at
+  .item
+    = model_icon Registration
+    .content
+      = number_with_delimiter @context.registrations.recent.count
+      = ' Registration'.pluralize(@context.registrations.recent.count)
+      |  in the last 30 days.
+
+h3.ui.dividing.header Location of this event
+p = [@record.room, @record.full_address].compact.join(' - ')
+#venue-map data-latitude=@record.venue.latitude data-longitude=@record.venue.longitude

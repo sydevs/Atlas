@@ -1,15 +1,19 @@
 
-h3.ui.dividing.header Details
-p
-  = model_icon Event
-  = number_with_delimiter Event.count
-  = ' Event'.pluralize(Event.count)
-  br
-  = model_icon Venue
-  = number_with_delimiter Venue.count
-  = ' Venue'.pluralize(Venue.count)
-  br
-  = model_icon Registration
-  = number_with_delimiter Registration.recent.count
-  = ' Registration'.pluralize(Registration.recent.count)
-  |  in the last 30 days.
+h3.ui.dividing.header Global Statistics
+.ui.list
+  .item
+    = model_icon Event
+    .content
+      = number_with_delimiter Event.count
+      = ' Event'.pluralize(Event.count)
+  .item
+    = model_icon Venue
+    .content
+      = number_with_delimiter Venue.count
+      = ' Venue'.pluralize(Venue.count)
+  .item
+    = model_icon Registration
+    .content
+      = number_with_delimiter Registration.recent.count
+      = ' Registration'.pluralize(Registration.recent.count)
+      |  in the last 30 days

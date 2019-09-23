@@ -1,13 +1,16 @@
 
-h3.ui.dividing.header Details
-p
-  = model_icon Event
-  = number_with_delimiter @record.events.count
-  = ' Event'.pluralize(@record.events.count)
-  br
-  = model_icon Venue
-  = number_with_delimiter @record.venues.count
-  = ' Venue'.pluralize(@record.venues.count)
+h3.ui.dividing.header Details for #{@record.label}
+.ui.list
+  .item
+    = model_icon Event
+    .content
+      = number_with_delimiter @record.events.count
+      = ' Event'.pluralize(@record.events.count)
+  .item
+    = model_icon Venue
+    .content
+      = number_with_delimiter @record.venues.count
+      = ' Venue'.pluralize(@record.venues.count)
 
 h3.ui.dividing.header Map of this area
 p #{@record.radius} km around #{@record.latitude}, #{@record.longitude}

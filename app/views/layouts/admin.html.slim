@@ -44,11 +44,18 @@ html
 
       - if @context && @context.respond_to?(:ancestors)
         .ui.breadcrumbs
-          a.section href=cms_root_url
-            i.globe.icon
+          - if current_user.administrator?
+            a.section href=cms_root_url
+              i.globe.icon
+          - else
+            a.section href=url_for(current_user)
+              i.globe.icon
           i.right.angle.icon.divider
           - @context.ancestors.each do |ancestor|
-            a.section href=url_for([:cms, ancestor]) = ancestor.label
+            - if policy(ancestor).show?
+              a.section href=url_for([:cms, ancestor]) = ancestor.label
+            - else
+              .section = ancestor.label
             i.right.angle.icon.divider
           span.active.section
             = model_icon @context.class
