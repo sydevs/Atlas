@@ -34,7 +34,7 @@ const Uploader = {
     })
 
     this.instance.on('upload-success', (file, response) => {
-      const $element = $(this.template.content)
+      const $element = $(this.template.content).clone()
       $element.find('a.view.label').attr('href', response.url)
       $element.find('a.destroy.label').attr('href', response.delete_url)
       $element.find('img').attr('src', response.thumbnail_url)
