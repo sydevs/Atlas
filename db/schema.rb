@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190919134606) do
+ActiveRecord::Schema.define(version: 20190922195929) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -55,7 +55,6 @@ ActiveRecord::Schema.define(version: 20190919134606) do
 
   create_table "local_areas", force: :cascade do |t|
     t.string "country_code"
-    t.string "province_name"
     t.string "name"
     t.string "identifier"
     t.float "latitude"
@@ -63,13 +62,14 @@ ActiveRecord::Schema.define(version: 20190919134606) do
     t.float "radius"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "province_code", limit: 3
   end
 
-  create_table "managed_regions", id: false, force: :cascade do |t|
+  create_table "managed_records", id: false, force: :cascade do |t|
     t.integer "manager_id"
-    t.integer "region_id"
-    t.string "region_type"
-    t.index ["region_id", "region_type"], name: "index_managed_regions_on_region_id_and_region_type"
+    t.integer "record_id"
+    t.string "record_type"
+    t.index ["record_id", "record_type"], name: "index_managed_records_on_record_id_and_record_type"
   end
 
   create_table "managers", force: :cascade do |t|
@@ -97,11 +97,10 @@ ActiveRecord::Schema.define(version: 20190919134606) do
 
   create_table "provinces", force: :cascade do |t|
     t.string "country_code", null: false
-    t.string "province_name"
     t.string "identifier"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["province_name"], name: "index_provinces_on_province_name", unique: true
+    t.string "province_code", limit: 3
   end
 
   create_table "registrations", force: :cascade do |t|
@@ -120,12 +119,12 @@ ActiveRecord::Schema.define(version: 20190919134606) do
     t.float "longitude"
     t.string "street"
     t.string "city"
-    t.string "province"
     t.string "country_code"
     t.string "postcode"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "manager_id"
+    t.string "province_code", limit: 3
     t.index ["manager_id"], name: "index_venues_on_manager_id"
   end
 

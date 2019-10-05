@@ -1,18 +1,12 @@
 
-class ManagerPolicy < ApplicationPolicy
-  def index?
-    user.administrator?
-  end
-
-  def create?
-    user.administrator?
-  end
-
-  def update?
-    record.manager == user || user.administrator?
-  end
+class ManagerPolicy < DatabasePolicy
 
   def destroy?
-    user.administrator?
+    user.administrator? && @context.present?
   end
+
+  def new_association? association = nil
+    false
+  end
+
 end

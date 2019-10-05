@@ -1,0 +1,19 @@
+
+h3.ui.dividing.header Details for #{@record.label}
+.ui.list
+  - if @record.administrator?
+    .item
+      i.user.secret.icon
+      .content #{@record.name} is a database administrator
+  .item
+    = model_icon Event
+    .content
+      = number_with_delimiter @record.events.count
+      = ' Event'.pluralize(@record.events.count)
+      |  managed
+  .item
+    = model_icon Venue
+    .content
+      = number_with_delimiter @record.venues.count
+      = ' Venue'.pluralize(@record.venues.count)
+      |  managed

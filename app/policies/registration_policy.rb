@@ -1,10 +1,12 @@
 
-class RegistrationPolicy < ApplicationPolicy
+class RegistrationPolicy < DatabasePolicy
+  
+  def new?
+    false
+  end
+
   def create?
     true
   end
 
-  def update?
-    record.event.manager == user || record.event.venue.manager == user || user.administrator?
-  end
 end

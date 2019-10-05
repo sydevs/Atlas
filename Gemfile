@@ -40,7 +40,7 @@ gem 'mini_magick' # Image processing during upload
 
 ### Internationalization
 gem 'i18n_data' # Adds localized lists of countries and languages
-gem 'subdivision_select' # For selecting states/provinces/counties in different countries
+gem 'countries' # Adds localized lists of countries and subdivisions
 
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw] # Call 'byebug' anywhere in the code to stop execution and get a debugger console

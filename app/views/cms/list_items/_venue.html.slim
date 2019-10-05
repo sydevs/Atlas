@@ -1,0 +1,9 @@
+
+.item
+  = model_icon Venue
+  .content
+    - if policy(venue).show?
+      a.header href=url_for([:cms, venue]) = venue.label
+    - else
+      .header = venue.label
+    .description #{venue.full_address} - #{pluralize venue.events.count, 'event'}

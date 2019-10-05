@@ -1,18 +1,16 @@
 
-class RegionPolicy < ApplicationPolicy
-  def index?
-    user.administrator?
+class RegionPolicy < DatabasePolicy
+
+  def show?
+    true
   end
 
-  def create?
-    user.administrator?
+  def index?
+    true
   end
 
   def update?
-    user.administrator?
+    manage? super_manager: true
   end
 
-  def destroy?
-    user.administrator?
-  end
 end

@@ -1,0 +1,15 @@
+
+- content_for :title, "Images | #{@context}"
+
+= render 'cms/views/context' do
+  h3.ui.header
+    - if policy(@context).update?
+      = floating_action 'Upload Images', 'upload', id: 'upload-button', data: { endpoint: cms_event_upload_image_path(@context) }
+    .content Images of this event
+
+  .ui.small.images id='uploaded-images'
+    = render partial: 'cms/views/image', collection: @context.images, cached: true
+
+  template id='upload-template'
+    = render 'cms/views/image', template: true
+    
