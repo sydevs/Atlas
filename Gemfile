@@ -28,6 +28,7 @@ gem 'recurrence' # For recurring events
 gem 'nilify_blanks' # Convert empty string to null in the database
 gem 'kaminari' # Pagination
 gem 'passwordless' # For email based user authentication
+gem 'premailer-rails' # Generate inline styles for emails
 gem 'pundit' # Permissions
 
 ### Geocoding
@@ -47,6 +48,7 @@ group :development, :test do
   gem 'capybara', '~> 2.13' # Adds support for Capybara system testing and selenium driver
   gem 'selenium-webdriver'
   gem 'faker' # To generate fake data
+  gem 'letter_opener' # Let's us capture test emails to verify that they were sent, and what markup was actually sent.
 end
 
 group :development do

@@ -1,0 +1,15 @@
+Program Details
+---------------
+Type:
+ | <%= @event.category_name %>
+ | <%= @event.category_description %>
+
+Location:
+ | <%= @event.full_address %>
+ | Latitude and Longitude: <%= @event.venue.coordinates.join(', ')} %>
+
+Timing:
+ | <%= @event.timing %>
+
+Languages Offered:
+ | <%= @event.language_names.join(', ') %>

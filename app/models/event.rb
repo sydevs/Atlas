@@ -38,6 +38,11 @@ class Event < ApplicationRecord
     super value & I18nData.languages.keys
   end
 
+  def language_names
+    data = I18nData.languages(I18n.locale)
+    languages.map { |l| data[l] }
+  end
+
   def address
     { room: room }.merge(venue.address)
   end

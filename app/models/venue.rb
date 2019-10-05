@@ -35,6 +35,10 @@ class Venue < ApplicationRecord
   def coordinates?
     latitude.present? && longitude.present?
   end
+
+  def coordinates
+    [latitude, longitude]
+  end
   
   def full_address
     [street, city, province_code, country_code].compact.join(', ')
