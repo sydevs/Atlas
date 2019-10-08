@@ -9,10 +9,18 @@ namespace :mail do
     end    
   end
 
-  desc "Send a verification email to the mannagers of out-of-date events"
+  desc "Send a verification email to the managers of out-of-date events"
   task :verification => :environment do
-    Event.where('updated_at < ?', 2.months.ago).in_batches.each_record do |event|
-      event.managers.in_batches.each_record do |manager|
+    Event.needs_review.in_batches.each_record do |event|
+      managers = []
+
+      if event.needs_review?(:urgent)
+        managers = event.venue.parent.managers
+      else
+        managers = event.managers
+      end
+
+      managers.in_batches.each_record do |manager|
         ManagerMailer.with(manager: manager, event: event).verification.deliver_now
       end
     end    

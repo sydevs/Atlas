@@ -2,6 +2,7 @@ class Event < ApplicationRecord
 
   # Extensions
   include Manageable
+  include Expirable
 
   nilify_blanks
   searchable_columns %w[name category description]
