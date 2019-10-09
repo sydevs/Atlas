@@ -2,6 +2,7 @@ class Event < ApplicationRecord
 
   # Extensions
   include Manageable
+  include Publishable
   include Expirable
 
   nilify_blanks
@@ -43,5 +44,4 @@ class Event < ApplicationRecord
     # Only accept languages which are in the language list
     super value & I18nData.languages.keys
   end
-
 end
