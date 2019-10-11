@@ -10,7 +10,7 @@ en:
         description: "The Sahaj Atlas is a project to centralize the list of all public programs and ensure that this program list is always up to date so that seekers may always find active programs near them."
       alert:
         title: "Alert!"
-        description: "This email contains sensitive links that allow access and editing for the SY Program Database. Please do not forward this email to anyone!"
+        description: "This email contains sensitive links that allow access and editing for the Sahaj Atlas Database. Please do not forward this email to anyone!"
       event:
         title: "Program Details"
         name: "Name"
