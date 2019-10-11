@@ -12,16 +12,17 @@ en:
         title: "Alert!"
         description: "This email contains sensitive links that allow access and editing for the Sahaj Atlas Database. Please do not forward this email to anyone!"
       event:
-        title: "Program Details"
-        name: "Name"
+        title: "Event Details"
+        name: "Event"
         type: "Type"
         location: "Location"
         latlng: "Latitude & Longitude"
         timing: "Timing"
         languages: "Languages Offered"
+        no_description: "(No Description)"
 
     welcome:
-      subject: "Welcome to Sahaj Atlas since - %{event} Program"
+      subject: "Welcome to Sahaj Atlas - %{event} Program"
       intro: "You have been listed as a manager for the %{event} sahaj public program."
       purpose: "From now on you will:"
       purposes:
@@ -40,6 +41,7 @@ en:
         person: "Person"
         comment: "Comment"
         registered_at: "Registered"
+        no_comment: "(No Comment)"
       view_all: "View all registrations on the Atlas"
       unsubscribe: "Stop sending me registration lists"
 
@@ -49,7 +51,7 @@ en:
       purpose: "In order to ensure that the global sahaj program database is up to date, please check that the following details of the event are still up to date, and then choose an action below."
       escalate:
         title: "Alert!"
-        description: "If you do not respond to this email within %{escalates_in_days}, we will attempt to contact a manager for the %{region} region. If this event is not verified within %{expires_in_days}, it will be hidden from the public."
+        description: "If you do not respond to this email within %{escalates_in_days}, we will attempt to contact a manager for the %{region} region. If this event is not verified after %{expires_in_days}, it will be hidden from the public."
       call_to_action: "Please click below if you wish to respond to this email."
       confirm: "These details are correct"
       update: "These details need to be updated"
@@ -61,5 +63,9 @@ en:
       purpose: "In order to ensure that the global sahaj program database is up to date, please get in touch with any of the managers of this program, and encourage them to check the data."
       escalate:
         title: "Alert!"
-        description: "If this event is not verified within %{expires_in_days}, it will be hidden from the public."
+        description: "If this event is not verified after %{expires_in_days}, it will be hidden from the public."
       call_to_action: "Please get in touch with the managers of this program"
+
+    confirmation:
+      subject: "Registration Confirmation - %{event}"
+      intro: "Your registration for the %{event} event is confirmed! Please write to us if you have any questions."

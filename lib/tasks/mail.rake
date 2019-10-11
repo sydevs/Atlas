@@ -27,6 +27,16 @@ namespace :mail do
   end
 
   namespace :test do
+    desc "Generates one of each email type for testing purposes"
+    task :all => :environment do
+      %w[welcome registrations verification escalation confirmation].each_with_index do |test, index|
+        puts "Press enter to proceed to the next test (mail:#{test})" unless index == 0
+        STDIN.gets unless index == 0
+        puts "Testing: mail:#{test}"
+        Rake::Task["mail:test:#{test}"].invoke
+      end
+    end
+
     desc "Generates an email welcoming a manager who has been newly assigned to an event"
     task :welcome => :environment do
       ActionMailer::Base.delivery_method = :letter_opener
@@ -59,8 +69,16 @@ namespace :mail do
       ActionMailer::Base.delivery_method = :letter_opener
       event = Event.first
       manager = event.managers.first
-      puts "Sending mail to #{manager.name} for #{event.name || event.venue.street_address}"
+      puts "Sending mail to #{manager.name} for #{event.name || event.venue.street}"
       ManagerMailer.with(manager: manager, event: event).escalation.deliver_now
+    end
+
+    desc "Sends a confirmation email to one registration"
+    task :confirmation => :environment do
+      ActionMailer::Base.delivery_method = :letter_opener
+      registration = Registration.joins(:event).where.not(events: { description: nil }).first
+      puts "Sending mail to #{registration.name} for #{registration.event.name || registration.event.venue.street}"
+      RegistrationMailer.with(registration: registration).confirmation.deliver_now
     end
   end
 end

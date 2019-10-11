@@ -1,10 +1,13 @@
 
 div: strong = translate('mail.common.event.title')
 dl
-  dt = translate('mail.common.event.name')
-  dd
-    div = @event.label
-    .faded = @event.description || translate('mail.common.event.no_description')
+  - if @event.name || @event.description
+    dt = translate('mail.common.event.name')
+    dd
+      - if @event.name
+        div = @event.name || @event.venue.street
+      - if @event.description
+        .faded = @event.description
 
   dt = translate('mail.common.event.type')
   dd
@@ -14,10 +17,6 @@ dl
   dt = translate('mail.common.event.location')
   dd
     div = @event.full_address
-    .faded 
-      = translate('mail.common.event.latlng')
-      ' : 
-      = @event.venue.coordinates.join(', ')
 
   dt = translate('mail.common.event.timing')
   dd = @event.timing

@@ -1,6 +1,7 @@
 
 class ManagerMailer < ApplicationMailer
- 
+  layout 'mailer/cms'
+
   def welcome
     setup
     subject = I18n.translate('mail.welcome.subject', event: @event.label)

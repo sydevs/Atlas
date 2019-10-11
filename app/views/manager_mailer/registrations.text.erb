@@ -7,7 +7,7 @@
 <% @registrations.each do |registration| %>
  - <%= registration.name %> - <%= registration.email %>
    <%= registration.created_at.to_s(:long) %>
-   <%= registration.comment || '(No Comment)' %>
+   <%= registration.comment || translate('mail.registrations.listing.no_comment') %>
 
 <% end %>
 
