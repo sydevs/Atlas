@@ -1,11 +1,18 @@
 
-p: em This is an automated email.
-
-p You have been listed as a manager for the <b>#{@event.label}</b> sahaj public program
+/ TODO: Check that this would actually be html safe
+p = translate('mail.welcome.intro', event: tag.b(@event.label)).html_safe
 
 = render 'about'
+
+div: strong = translate('mail.welcome.purpose', event: tag.b(@event.label)).html_safe
+ul
+  - translate('mail.welcome.purposes').each do |purpose|
+    li = purpose.gsub('%{event}', @event.label)
+
 = render 'event'
 
-p Please click below if you wish to change these details.
-a.button.button-outline href='#'
-  | Update program
+div: strong = translate('mail.common.actions')
+p = translate('mail.welcome.call_to_action')
+p
+  a.button.button-outline href=@magic_link
+    = translate('mail.welcome.update')

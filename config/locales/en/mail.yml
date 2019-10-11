@@ -1,0 +1,65 @@
+
+en:
+  mail:
+    common:
+      automated: "This is an automated email. Please use the links in this email to respond, or email %{email} if you need help."
+      unsubscribe: "If you don't know why you received this email, or no longer want to receive these emails please write to %{email}."
+      actions: "Actions"
+      about:
+        title: "About Sahaj Atlas"
+        description: "The Sahaj Atlas is a project to centralize the list of all public programs and ensure that this program list is always up to date so that seekers may always find active programs near them."
+      alert:
+        title: "Alert!"
+        description: "This email contains sensitive links that allow access and editing for the SY Program Database. Please do not forward this email to anyone!"
+      event:
+        title: "Program Details"
+        name: "Name"
+        type: "Type"
+        location: "Location"
+        latlng: "Latitude & Longitude"
+        timing: "Timing"
+        languages: "Languages Offered"
+
+    welcome:
+      subject: "Welcome to Sahaj Atlas since - %{event} Program"
+      intro: "You have been listed as a manager for the %{event} sahaj public program."
+      purpose: "From now on you will:"
+      purposes:
+        - "Be able to modify the details of the %{event} program."
+        - "Will receive a digest email each week of any new registrations from seekers, for the program."
+        - "Every couple months you may receive an email asking you to confirm that the program details are still up to date."
+      call_to_action: "Please click below if you wish to change these details."
+      update: "Update program"
+
+    registrations:
+      subject: "Public Program Registrations since %{date}"
+      intro: "You are receiving this email because you are a manager for the %{event} sahaj public program."
+      purpose: "This email is to inform you about new registrations for the program since %{date}. There have been %{count} registrations since then."
+      listing:
+        title: "Registrations"
+        person: "Person"
+        comment: "Comment"
+        registered_at: "Registered"
+      view_all: "View all registrations on the Atlas"
+      unsubscribe: "Stop sending me registration lists"
+
+    verification:
+      subject: "Public Program Verification - %{event}"
+      intro: "You are receiving this email because you are a manager for the %{event} sahaj public program, which has not been updated since %{date}"
+      purpose: "In order to ensure that the global sahaj program database is up to date, please check that the following details of the event are still up to date, and then choose an action below."
+      escalate:
+        title: "Alert!"
+        description: "If you do not respond to this email within %{escalates_in_days}, we will attempt to contact a manager for the %{region} region. If this event is not verified within %{expires_in_days}, it will be hidden from the public."
+      call_to_action: "Please click below if you wish to respond to this email."
+      confirm: "These details are correct"
+      update: "These details need to be updated"
+      or: "or"
+
+    escalation:
+      subject: "Urgent Public Program Verification - %{event}"
+      intro: "You are receiving this email because you are a manager for the %{region} region. The %{event} sahaj public program in your region has has not been updated since %{date}"
+      purpose: "In order to ensure that the global sahaj program database is up to date, please get in touch with any of the managers of this program, and encourage them to check the data."
+      escalate:
+        title: "Alert!"
+        description: "If this event is not verified within %{expires_in_days}, it will be hidden from the public."
+      call_to_action: "Please get in touch with the managers of this program"

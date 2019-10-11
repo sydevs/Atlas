@@ -27,31 +27,40 @@ namespace :mail do
   end
 
   namespace :test do
-    desc "Send list of recent registrations to one program manager"
-    task :registrations => :environment do
-      ActionMailer::Base.delivery_method = :letter_opener
-      event = Event.first
-      manager = event.managers.first
-      puts "Sending mail to #{manager.label} for #{event.label}"
-      ManagerMailer.with(manager: manager, event: event, since: 1.year.ago).registrations.deliver_now
-    end
-
-    desc "Send a verification email to the mannagers of one out-of-date event"
-    task :verification => :environment do
-      ActionMailer::Base.delivery_method = :letter_opener
-      event = Event.first
-      manager = event.managers.first
-      puts "Sending mail to #{manager.label} for #{event.label}"
-      ManagerMailer.with(manager: manager, event: event).verification.deliver_now
-    end
-
-    desc "Send a verification email to the mannagers of one out-of-date event"
+    desc "Generates an email welcoming a manager who has been newly assigned to an event"
     task :welcome => :environment do
       ActionMailer::Base.delivery_method = :letter_opener
       event = Event.first
       manager = event.managers.first
-      puts "Sending mail to #{manager.label} for #{event.label}"
+      puts "Sending mail to #{manager.name} for #{event.name || event.venue.street_address}"
       ManagerMailer.with(manager: manager, event: event).welcome.deliver_now
+    end
+
+    desc "Sends list of recent registrations to one program manager"
+    task :registrations => :environment do
+      ActionMailer::Base.delivery_method = :letter_opener
+      event = Event.first
+      manager = event.managers.first
+      puts "Sending mail to #{manager.name} for #{event.name || event.venue.street_address}"
+      ManagerMailer.with(manager: manager, event: event, since: 1.year.ago).registrations.deliver_now
+    end
+
+    desc "Sends a verification email to one of the managers of one out-of-date event"
+    task :verification => :environment do
+      ActionMailer::Base.delivery_method = :letter_opener
+      event = Event.first
+      manager = event.managers.first
+      puts "Sending mail to #{manager.name} for #{event.name || event.venue.street_address}"
+      ManagerMailer.with(manager: manager, event: event).verification.deliver_now
+    end
+
+    desc "Sends a verification email to one of the super managers of one out-of-date event"
+    task :escalation => :environment do
+      ActionMailer::Base.delivery_method = :letter_opener
+      event = Event.first
+      manager = event.managers.first
+      puts "Sending mail to #{manager.name} for #{event.name || event.venue.street_address}"
+      ManagerMailer.with(manager: manager, event: event).escalation.deliver_now
     end
   end
 end

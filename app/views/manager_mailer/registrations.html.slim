@@ -1,14 +1,15 @@
 
-p You are receiving this email because you are a manager for the <b>#{@event.label}</b> sahaj public program.</em>
+/ TODO: Check that this would actually be html safe
+p = translate('mail.registrations.intro', event: tag.b(@event.label)).html_safe
+p = translate('mail.registrations.purpose', date: @since.to_s(:short), count: @registrations.count)
 
-p This email is to inform you about new registrations for the program since #{@since.to_s(:short)}. There have been #{@registrations.count} registrations since then.
-
+div: strong = translate('mail.registrations.listing.title')
 table
   thead
     tr
-      th Person
-      th Comment
-      th Registered
+      th = translate('mail.registrations.listing.person')
+      th = translate('mail.registrations.listing.comment')
+      th = translate('mail.registrations.listing.registered_at')
   tbody
     - @registrations.each do |registration|
       tr.headline
@@ -18,10 +19,12 @@ table
         td = registration.comment
         td = registration.created_at.to_s(:short)
 
-a.button.button-outline href='#'
-  | View all registrations on SYDB
-br
-a.button.button-outline href='#'
-  | Stop sending me registration lists
+div: strong = translate('mail.common.actions')
+p
+  a.button.button-outline href=@magic_link
+    = translate('mail.registrations.view_all')
+  br
+  a.button.button-outline href=@magic_link
+    = translate('mail.registrations.unsubscribe')
 
 = render 'about'

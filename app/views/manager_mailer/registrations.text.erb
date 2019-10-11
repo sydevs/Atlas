@@ -1,9 +1,20 @@
+<%= translate('mail.registrations.intro', event: "*#{@event.label}*") %>
 
-There have been <%= @registrations.count %> registrations in since <%= @since.to_s(:long) %>
+<%= translate('mail.registrations.purpose', date: @since.to_s(:short), count: @registrations.count) %>
 
+<%= translate('mail.registrations.listing.title') %>
+<%= '=' * translate('mail.registrations.listing.title').length %>
 <% @registrations.each do |registration| %>
-  <%= registration.name %> - <%= registration.email %>
-  <%= registration.created_at.to_s(:long) %>
-  <%= registration.comment || '(No Comment)' %>
-  
+ - <%= registration.name %> - <%= registration.email %>
+   <%= registration.created_at.to_s(:long) %>
+   <%= registration.comment || '(No Comment)' %>
+
 <% end %>
+
+<%= translate('mail.common.actions') %>
+<%= '=' * translate('mail.common.actions').length %>
+<%= translate('mail.registrations.view_all') %> - <%= @magic_link %>
+<%= translate('mail.registrations.unsubscribe') %> - <%= @magic_link %>
+
+
+<%= render 'about' %>

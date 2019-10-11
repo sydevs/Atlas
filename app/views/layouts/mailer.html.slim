@@ -24,8 +24,8 @@ html
         opacity: 0.65
 
   body
-    p: em This is an automated email. Please use the links in this email to respond, or email <a href="mailto:contact@sydevelopers.com">contact@sydevelopers.com</a> if you need help.
+    p: em = translate('mail.common.automated', email: mail_to('contact@sydevelopers.com')).html_safe
 
     = yield
 
-    p: em If you don't know why you received this email, or no longer want to receive these emails please write to <a href="mailto:contact@sydevelopers.com">contact@sydevelopers.com</a>
+    p: em = translate('mail.common.unsubscribe', email: mail_to('contact@sydevelopers.com')).html_safe

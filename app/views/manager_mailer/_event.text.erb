@@ -1,0 +1,18 @@
+<%= translate('mail.common.event.title') %>
+<%= '=' * translate('mail.common.event.title').length %>
+<%= translate('mail.common.event.name') %>:
+ | <%= @event.name %>
+
+<%= translate('mail.common.event.type') %>:
+ | <%= @event.category_name %>
+ | <%= @event.category_description %>
+
+<%= translate('mail.common.event.location') %>:
+ | <%= @event.full_address %>
+ | <%= translate('mail.common.event.latlng') %>: <%= @event.venue.coordinates.join(', ') %>
+
+<%= translate('mail.common.event.timing') %>:
+ | <%= @event.timing %>
+
+<%= translate('mail.common.event.languages') %>:
+ | <%= @event.language_names.join(', ') %>

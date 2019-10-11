@@ -51,6 +51,14 @@ module EventDecorator
     date.to_s
   end
 
+  def escalates_in_days_in_words
+    distance_of_time_in_words(Time.now, escalation_date)
+  end
+
+  def expires_in_days_in_words
+    distance_of_time_in_words(Time.now, expiration_date)
+  end
+
   private
 
     def date_of_next day
