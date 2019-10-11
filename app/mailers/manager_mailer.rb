@@ -29,13 +29,19 @@ class ManagerMailer < ApplicationMailer
     mail(to: @manager.email, subject: subject)
   end
 
+  def expired
+    setup session: :auto
+    subject = I18n.translate('mail.expired.subject', event: @event.label)
+    mail(to: @manager.email, subject: subject)
+  end
+
   private
 
     def setup session: true
       @manager = params[:manager]
       @event = params[:event]
 
-      if session
+      if session || (session == :auto && @event.managers.include?(@manager))
         session = Passwordless::Session.new({
           authenticatable: @manager,
           user_agent: 'Command Line',

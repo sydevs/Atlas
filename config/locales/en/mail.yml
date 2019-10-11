@@ -5,6 +5,7 @@ en:
       automated: "This is an automated email. Please use the links in this email to respond, or email %{email} if you need help."
       unsubscribe: "If you don't know why you received this email, or no longer want to receive these emails please write to %{email}."
       actions: "Actions"
+      or: "or"
       about:
         title: "About Sahaj Atlas"
         description: "The Sahaj Atlas is a project to centralize the list of all public programs and ensure that this program list is always up to date so that seekers may always find active programs near them."
@@ -55,7 +56,6 @@ en:
       call_to_action: "Please click below if you wish to respond to this email."
       confirm: "These details are correct"
       update: "These details need to be updated"
-      or: "or"
 
     escalation:
       subject: "Urgent Public Program Verification - %{event}"
@@ -65,6 +65,14 @@ en:
         title: "Alert!"
         description: "If this event is not verified after %{expires_in_days}, it will be hidden from the public."
       call_to_action: "Please get in touch with the managers of this program"
+
+    expired:
+      subject: "Urgent! Public Program Expiration - %{event}"
+      intro: "You are receiving this email because you are a manager for the %{event} sahaj event. This event has has not been updated since %{date}"
+      purpose: "Because this event has not been updated for %{duration}, it has been removed from the public map of events! If you wish to have it republished, you must confirm that the event details are correct, or update them."
+      call_to_action: "Please click below if you wish to respond to this email."
+      confirm: "These details are correct"
+      update: "These details need to be updated"
 
     confirmation:
       subject: "Registration Confirmation - %{event}"
