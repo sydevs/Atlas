@@ -1,21 +1,26 @@
 class LocalArea < ApplicationRecord
 
+  # Extensions
   include Manageable
 
-  before_validation :ensure_country_consistency
-
-  acts_as_mappable lat_column_name: :latitude, lng_column_name: :longitude
-
   nilify_blanks
+  acts_as_mappable lat_column_name: :latitude, lng_column_name: :longitude
+  searchable_columns %w[name identifier province_code country_code]
+
+  # Associations
   belongs_to :country, foreign_key: :country_code, primary_key: :country_code, optional: true
   belongs_to :province, foreign_key: :province_code, primary_key: :province_code, optional: true
 
+  # Validations
+  before_validation :ensure_country_consistency
   validates_presence_of :latitude, :longitude, :radius, :name, :identifier
-  searchable_columns %w[name identifier province_code country_code]
 
+  # Scopes
   default_scope { order(name: :desc) }
   scope :cross_province, -> { where(province_code: nil) }
   scope :international, -> { cross_province.where(country_code: nil) }
+
+  # Methods
 
   def parent
     province || country || nil

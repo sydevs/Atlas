@@ -1,0 +1,21 @@
+
+p You are receiving this email because you are a manager for the <b>#{@event.label}</b> sahaj public program, which has not been updated since <em>#{@event.updated_at.to_s(:long)}</em>
+
+p In order to ensure that the global sahaj program database is up to date, please check that the following details of the event are still up to date, and then choose an action below.
+
+blockquote
+  strong>Alert!
+  |  If you do not respond to this email within 1 week, we will attempt to contact a manager for the #{@event.venue.parent.label} region. If this event is not verified within 2 weeks, it will be removed from the public database.
+
+= render 'event'
+
+p Please click one of these buttons to respond to this email.
+
+p
+  a.button.button-outline href="http://database.sydevelopers.com"
+    | These details are correct
+  '  OR 
+  a.button.button-outline href="http://database.sydevelopers.com"
+    | These details need to be updated
+
+= render 'about'

@@ -2,6 +2,8 @@ require 'json'
 
 module ApplicationHelper
 
+  # TODO: Move all these JSON helpers into decorators
+
   def venue_json venue
     {
       id: venue.id,

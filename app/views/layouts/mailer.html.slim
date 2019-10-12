@@ -1,0 +1,31 @@
+doctype html
+
+html
+  head
+    meta http-equiv="Content-Type" content="text/html; charset=utf-8"
+    /= stylesheet_link_tag 'admin', media: 'all'
+
+    link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic"
+    /link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.css"
+    link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/milligram/1.3.0/milligram.css"
+    sass:
+      body
+        max-width: 640px
+        margin: auto
+
+      dt
+        text-decoration: underline
+        margin-bottom: 2px
+
+      dd
+        margin-bottom: 6px
+
+      .faded
+        opacity: 0.65
+
+  body
+    p: em This is an automated email. Please use the links in this email to respond, or email <a href="mailto:contact@sydevelopers.com">contact@sydevelopers.com</a> if you need help.
+
+    = yield
+
+    p: em If you don't know why you received this email, or no longer want to receive these emails please write to <a href="mailto:contact@sydevelopers.com">contact@sydevelopers.com</a>
