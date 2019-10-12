@@ -6,8 +6,8 @@ phoenix_center:
   longitude: -112.0307763
   contact_email: azsahajayoga@gmail.com
   street: 2434 E Osborn Rd
-  municipality: Phoenix
-  subnational: AZ
+  city: Phoenix
+  province: AZ
   country_code: US
   postcode: '85016'
 
@@ -17,8 +17,8 @@ chula_vista_eastlake:
   longitude: -116.9805553
   contact_email: test@test.com
   street: 2434 E Osborn Rd
-  municipality: Phoenix
-  subnational: AZ
+  city: Phoenix
+  province: AZ
   country_code: US
   postcode: '85016'
 
@@ -28,8 +28,8 @@ oak_park_community:
   longitude: -118.7743102
   contact_email: test@test.com
   street: 1000 Kanan Road
-  municipality: Oak Park
-  subnational: CA
+  city: Oak Park
+  province: CA
   country_code: US
   postcode: '91377'
 
@@ -39,8 +39,8 @@ burbank_rec_center:
   longitude: -118.3230303
   contact_email: test@test.com
   street: 1515 N Glenoaks Blvd
-  municipality: Burbank
-  subnational: CA
+  city: Burbank
+  province: CA
   country_code: US
   postcode: '91504'
 
@@ -50,8 +50,8 @@ folsom_dance_studio:
   longitude: -121.1358095
   contact_email: test@test.com
   street: 304 S Lexington Dr
-  municipality: Folsom
-  subnational: CA
+  city: Folsom
+  province: CA
   country_code: US
   postcode: '95630'
 
@@ -61,7 +61,7 @@ fremont_center:
   longitude: -121.9848458
   contact_email: test@test.com
   street: 37138 Niles Blvd
-  municipality: Fremont
-  subnational: CA
+  city: Fremont
+  province: CA
   country_code: US
   postcode: '94536'

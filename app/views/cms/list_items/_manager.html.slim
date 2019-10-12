@@ -1,0 +1,15 @@
+
+- allow = @context ? policy(@context) : policy(:worldwide)
+
+.item
+  - if allow.destroy_association?(:managers) && policy(manager).destroy?
+    .right.floated.content
+      a.ui.basic.circular.icon.label href=url_for([:cms, @context, manager]) data={ method: 'DELETE', confirm: translate('messages.confirm_delete') }
+        i.trash.icon
+  = model_icon Manager
+  .content
+    - if policy(manager).show?
+      a.header href=url_for([:cms, manager]) = manager.label
+    - else
+      .header = manager.label
+    .description = manager.email

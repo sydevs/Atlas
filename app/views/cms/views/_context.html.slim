@@ -1,0 +1,31 @@
+
+- allow = @context ? policy(@context) : policy(:worldwide)
+
+h2.ui.header
+  - unless %w[edit new].include?(action_name)
+    - if allow.destroy?
+      = floating_action 'Delete', 'trash', url_for([:cms, @context]), data: { method: 'DELETE', confirm: translate('messages.confirm_delete') }
+    - if allow.edit?
+      = floating_action 'Edit', 'edit', url_for([:edit, :cms, @context])
+  .content = @context&.label || 'Worldwide Data'
+  - if @context && @context.parent.present?
+    .sub.header #{@context.model_name.singular.titleize} in #{@context.parent.label}
+
+- if %w[edit new].include?(action_name)
+  .ui.divider
+- else
+  .ui.stackable.secondary.pointing.menu
+    = menu_item 'Info', @context, action: 'show'
+    = menu_item 'Images', @context, index: 'images' if @context&.respond_to?(:images)
+    = menu_item 'Regions', @context, index: 'regions' if allow.index_association?(:regions)
+    = menu_item 'Managers', @context, index: 'managers' if allow.index_association?(:managers)
+    = menu_item 'Venues', @context, index: 'venues' if allow.index_association?(:venues)
+    = menu_item 'Events', @context, index: 'events' if allow.index_association?(:events)
+    = menu_item 'Registrations', @context, index: 'registrations' if allow.index_association?(:registrations)
+
+.ui.basic.segment
+  - flash.each do |key, message|
+    .ui.message class=key
+      = message
+
+  = yield

@@ -1,11 +1,15 @@
 class Event < ApplicationRecord
 
+  include Manageable
+
   nilify_blanks
   belongs_to :venue
-  has_many :registrations
+  has_many :registrations, dependent: :delete_all
   mount_uploaders :images, ImageUploader
   enum category: { intro: 1, intermediate: 2, course: 3, public_event: 4, concert: 5 }
   enum recurrence: { day: 0, monday: 1, tuesday: 2, wednesday: 3, thursday: 4, friday: 5, saturday: 6, sunday: 7 }
+
+  acts_as_mappable through: :venue
 
   validates :name, length: { maximum: 255 }
   validates :category, presence: true
@@ -13,12 +17,20 @@ class Event < ApplicationRecord
   validates :start_time, presence: true
   validates :recurrence, presence: true
   validates :description, length: { minimum: 20, maximum: 255, allow_nil: true }
-  validates :contact_email, format: { with: URI::MailTo::EMAIL_REGEXP, allow_blank: true, message: 'must be a valid email' }
+  searchable_columns %w[name category description]
 
   delegate :full_address, to: :venue
+  alias_method :parent, :venue
+
+  default_scope { order(updated_at: :desc) }
 
   def label
     name || category_name
+  end
+
+  def managed_by? manager, super_manager: false
+    return true if self.manager == manager && !super_manager
+    return self.venue.managed_by?(manager)
   end
 
   def languages= value

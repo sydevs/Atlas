@@ -1,0 +1,8 @@
+
+.item
+  = model_icon LocalArea
+  .content
+    - if policy(local_area).show?
+      a.header href=url_for([:cms, local_area]) = local_area.label
+    - else
+      .header = local_area.label

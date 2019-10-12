@@ -1,0 +1,19 @@
+
+.field
+  = f.label :location, required: true
+  .two.fields
+    .field
+      = f.input_field :latitude, placeholder: 'Latitude'
+    .field
+      = f.input_field :longitude, placeholder: 'Longitude'
+
+= f.input :radius, label: 'Radius (km)'
+
+= f.input :name
+= f.input :identifier
+
+- if @record.latitude && @record.longitude && @record.radius
+  #local_area-map data-latitude=@record.latitude data-longitude=@record.longitude data-radius=@record.radius
+
+= f.hidden_field :province_code
+= f.hidden_field :country_code

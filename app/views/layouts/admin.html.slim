@@ -14,27 +14,52 @@ html
 
   body class="admin #{controller_name} #{controller.action_name}"
     header
-      a.ui.right.floated.basic.button href=map_path target='_blank'
-        i.globe.icon
-        | View Map
+      - if current_user
+        .ui.basic.top.right.floated.pointing.dropdown.icon.button
+          i.bars.icon
+          .menu
+            - if policy(:page).database?
+              a.item href=cms_root_path
+                i.archive.icon
+                | Program Database
+            a.item href=about_path
+              i.question.circle.icon
+              | About SYDB
+            - if policy(:page).statistics?
+              a.item href=statistics_path
+                i.chart.bar.icon
+                | Statistics
+            a.item href=map_path target='_blank'
+              i.globe.icon
+              | View Map
+
+        a.ui.right.floated.basic.button href=managers.sign_out_path
+          | Logout
+      - else
+        a.ui.right.floated.basic.button href=managers.sign_in_path
+          | Login
 
       h1 SY Database
+      .ui.divider
 
-    .ui.stackable.menu
-      a.item href=dashboard_path class="#{'active' if action_name == 'dashboard'}"
-        | Dashboard
-      a.item href=venues_path class="#{'active' if %w[venues events].include? controller_name}"
-        | Programs
-      a.disabled.item class="#{'active' if controller_name == 'admins'}"
-        | Admins
-
-      .right.menu
-        a.item href=statistics_path class="#{'active' if action_name == 'statistics'}"
-          | Statistics
-
-    - flash.each do |key, message|
-      .ui.message class=key
-        = message
+      - if @context && @context.respond_to?(:ancestors)
+        .ui.breadcrumbs
+          - if current_user.administrator?
+            a.section href=cms_root_url
+              i.globe.icon
+          - else
+            a.section href=url_for(current_user)
+              i.globe.icon
+          i.right.angle.icon.divider
+          - @context.ancestors.each do |ancestor|
+            - if policy(ancestor).show?
+              a.section href=url_for([:cms, ancestor]) = ancestor.label
+            - else
+              .section = ancestor.label
+            i.right.angle.icon.divider
+          span.active.section
+            = model_icon @context.class
+            = @context.label
 
     = yield
 

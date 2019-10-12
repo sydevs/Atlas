@@ -1,0 +1,9 @@
+
+.item
+  = model_icon Event
+  .content
+    - if policy(event).show?
+      a.header href=url_for([:cms, event]) = event.label
+    - else
+      .header = event.label
+    .description #{event.category.humanize.titleize} / #{"#{event.room}, " if event.room}#{event.timing}

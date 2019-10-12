@@ -1,0 +1,24 @@
+
+- categories = Event.categories.map { |k, v| [translate(k, scope: %i[category title]), k] }
+- languages = I18nData.languages(I18n.locale).map { |k,v| [v, k] }
+
+= f.input :venue do
+  .hint = @record.venue.name ? "#{@record.venue.name} - #{@record.venue.full_address}" : @record.venue.full_address
+
+= f.input :name, placeholder: @record.category_name
+= f.input :category, collection: categories
+= f.input :description, as: :text, placeholder: @record.category_description
+= f.input :room, hint: 'If the venue has more than one room, which room should seekers come to?'
+= f.input :languages, collection: languages, input_html: { multiple: true, class: 'search' }, hint: 'Which language(s) can a seeker expect to be used at this event.'
+
+.ui.divider
+
+= f.input :recurrence, collection: Event.recurrences.map {|k, v| ["Every #{k.humanize}", k]}
+
+.two.fields
+  = f.input :start_date, as: :string, wrapper: :semantic_date, wrapper_html: { class: 'start' }
+  = f.input :end_date, as: :string, wrapper: :semantic_date, wrapper_html: { class: 'end' }, input_html: { placeholder: 'Never' }
+
+.two.fields
+  = f.input :start_time, wrapper: :semantic_time, wrapper_html: { class: 'start' }, input_html: { autocomplete: 'off' }
+  = f.input :end_time, wrapper: :semantic_time, wrapper_html: { class: 'end' }, input_html: { autocomplete: 'off', placeholder: 'Unspecified' }
