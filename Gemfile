@@ -13,6 +13,7 @@ gem 'sassc-rails' # Use SASS for stylesheets
 gem 'slim-rails' # Use Slim for views
 gem 'uglifier', '>= 1.3.0' # Use Uglifier as compressor for JavaScript assets
 gem 'jbuilder', '~> 2.5' # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
+gem 'active_decorator' # Separate view code while keeping it attached to the model
 
 ### Javascript
 gem 'jquery-rails' # Add jQuery
@@ -28,6 +29,7 @@ gem 'recurrence' # For recurring events
 gem 'nilify_blanks' # Convert empty string to null in the database
 gem 'kaminari' # Pagination
 gem 'passwordless' # For email based user authentication
+gem 'premailer-rails' # Generate inline styles for emails
 gem 'pundit' # Permissions
 
 ### Geocoding
@@ -47,6 +49,7 @@ group :development, :test do
   gem 'capybara', '~> 2.13' # Adds support for Capybara system testing and selenium driver
   gem 'selenium-webdriver'
   gem 'faker' # To generate fake data
+  gem 'letter_opener' # Let's us capture test emails to verify that they were sent, and what markup was actually sent.
 end
 
 group :development do

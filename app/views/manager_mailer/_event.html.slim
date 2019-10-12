@@ -1,0 +1,21 @@
+
+p: strong Program Details
+dl
+  dt Name
+  dd = @event.label
+
+  dt Type
+  dd
+    = @event.category_name
+    .faded = @event.category_description
+
+  dt Location
+  dd
+    = @event.full_address
+    .faded Latitude and Longitude: #{@event.venue.coordinates.join(', ')}
+
+  dt Timing
+  dd = @event.timing
+
+  dt Languages Offered
+  dd = @event.language_names.join(', ')
