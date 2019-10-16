@@ -10,11 +10,10 @@ class ManagerMailer < ApplicationMailer
 
   def registrations
     setup
-    @since = params[:since]
-    @registrations = params[:registrations] || @event&.registrations
-    @registrations = @registrations.where('created_at > ?', @since) if @since
-    subject = I18n.translate('mail.registrations.subject', date: @since.to_s(:short))
+    @registrations = @event.registrations.since(@event.registrations_sent_at)
+    subject = I18n.translate('mail.registrations.subject', date: @event.registrations_sent_at)
     mail(to: @manager.email, subject: subject)
+    @event.touch(:registrations_sent_at) unless params[:test]
   end
 
   def verification

@@ -48,8 +48,10 @@ class CMS::ApplicationController < ActionController::Base
 
     if @record.save
       redirect_to [:cms, @record], flash: { success: "Created #{@model_name.human} successfully" }
+      true
     else
       render 'cms/views/new'
+      false
     end
   end
 
@@ -62,8 +64,10 @@ class CMS::ApplicationController < ActionController::Base
     authorize @record
     if @record.update(attributes)
       redirect_to [:cms, @record], flash: { success: "Saved #{@model_name.human} successfully" }
+      true
     else
       render 'cms/views/edit'
+      false
     end
   end
 

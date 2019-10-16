@@ -12,6 +12,7 @@ class CMS::ManagersController < CMS::ApplicationController
     if !new_record || @record.save
       if new_record || @context.present?
         flash[:success] = "Added #{@model_name.human} successfully"
+        ManagerMailer.with(manager: @record, event: @context).welcome.deliver_now
       else
         flash[:notice] = "#{@record.name} <#{@record.email}> already exists"
       end

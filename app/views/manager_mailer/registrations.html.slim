@@ -1,7 +1,7 @@
 
 / TODO: Check that this would actually be html safe
 p = translate('mail.registrations.intro', event: tag.b(@event.label)).html_safe
-p = translate('mail.registrations.purpose', date: @since.to_s(:short), count: @registrations.count)
+p = translate('mail.registrations.purpose', date: @event.registrations_sent_at.to_s(:short), count: @registrations.count)
 
 div: strong = translate('mail.registrations.listing.title')
 table

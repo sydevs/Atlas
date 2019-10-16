@@ -28,6 +28,7 @@ class Event < ApplicationRecord
 
   # Scopes
   default_scope { order(updated_at: :desc) }
+  scope :with_new_registrations, -> { where('latest_registration_at >= registrations_sent_at') }
 
   # Delegations
   delegate :full_address, to: :venue

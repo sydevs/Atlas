@@ -2,28 +2,30 @@
 namespace :mail do
   desc "Send list of recent registrations to every program manager"
   task :registrations => :environment do
-    Events.in_batches.each_record do |event|
+    Event.with_new_registrations.where('registrations_sent_at > ?', 3.days.ago).in_batches.each_record do |event|
       event.managers.in_batches.each_record do |manager|
-        ManagerMailer.with(manager: manager, event: event, since: 1.year.ago).registrations.deliver_now
+        ManagerMailer.with(manager: manager, event: event).registrations.deliver_now
       end
     end    
   end
 
   desc "Send a verification email to the managers of out-of-date events"
-  task :verification => :environment do
+  task :verifications => :environment do
     Event.needs_review.in_batches.each_record do |event|
-      managers = []
-
-      if event.needs_review?(:urgent)
-        managers = event.venue.parent.managers
-      else
-        managers = event.managers
-      end
-
+      managers = event.needs_review?(:urgent) ? event.venue.parent.managers : event.managers
       managers.in_batches.each_record do |manager|
         ManagerMailer.with(manager: manager, event: event).verification.deliver_now
       end
-    end    
+    end
+  end
+
+  desc "Send a verification email to the managers of out-of-date events"
+  task :expirations => :environment do
+    Event.recently_expired.in_batches.each_record do |event|
+      event.managers.in_batches.each_record do |manager|
+        ManagerMailer.with(manager: manager, event: event).expired.deliver_now
+      end
+    end
   end
 
   namespace :test do
@@ -47,7 +49,7 @@ namespace :mail do
       event = Event.first
       manager = event.managers.first
       puts "Sending mail to #{manager.name} for #{event.name || event.venue.street_address}"
-      ManagerMailer.with(manager: manager, event: event).welcome.deliver_now
+      ManagerMailer.with(manager: manager, event: event, test: true).welcome.deliver_now
     end
 
     desc "Sends list of recent registrations to one program manager"
@@ -56,7 +58,7 @@ namespace :mail do
       event = Event.first
       manager = event.managers.first
       puts "Sending mail to #{manager.name} for #{event.name || event.venue.street_address}"
-      ManagerMailer.with(manager: manager, event: event, since: 1.year.ago).registrations.deliver_now
+      ManagerMailer.with(manager: manager, event: event, test: true).registrations.deliver_now
     end
 
     desc "Sends a verification email to one of the managers of one out-of-date event"
@@ -65,7 +67,7 @@ namespace :mail do
       event = Event.first
       manager = event.managers.first
       puts "Sending mail to #{manager.name} for #{event.name || event.venue.street_address}"
-      ManagerMailer.with(manager: manager, event: event).verification.deliver_now
+      ManagerMailer.with(manager: manager, event: event, test: true).verification.deliver_now
     end
 
     desc "Sends a verification email to one of the super managers of one out-of-date event"
@@ -74,7 +76,7 @@ namespace :mail do
       event = Event.first
       manager = event.parent_managers.first
       puts "Sending mail to #{manager.name} for #{event.name || event.venue.street}"
-      ManagerMailer.with(manager: manager, event: event).escalation.deliver_now
+      ManagerMailer.with(manager: manager, event: event, test: true).escalation.deliver_now
     end
 
     desc "Sends a verification email to one of the managers of one expired event"
@@ -83,7 +85,7 @@ namespace :mail do
       event = Event.first
       manager = event.managers.first
       puts "Sending mail to #{manager.name} for #{event.name || event.venue.street}"
-      ManagerMailer.with(manager: manager, event: event).expired.deliver_now
+      ManagerMailer.with(manager: manager, event: event, test: true).expired.deliver_now
     end
 
     desc "Sends a verification email to one of the super managers of one expired event"
@@ -92,7 +94,7 @@ namespace :mail do
       event = Event.first
       manager = event.parent_managers.last
       puts "Sending mail to #{manager.name} for #{event.name || event.venue.street}"
-      ManagerMailer.with(manager: manager, event: event).expired.deliver_now
+      ManagerMailer.with(manager: manager, event: event, test: true).expired.deliver_now
     end
 
     desc "Sends a confirmation email to one registration"
@@ -100,7 +102,7 @@ namespace :mail do
       ActionMailer::Base.delivery_method = :letter_opener
       registration = Registration.joins(:event).where.not(events: { description: nil }).first
       puts "Sending mail to #{registration.name} for #{registration.event.name || registration.event.venue.street}"
-      RegistrationMailer.with(registration: registration).confirmation.deliver_now
+      RegistrationMailer.with(registration: registration, test: true).confirmation.deliver_now
     end
   end
 end
