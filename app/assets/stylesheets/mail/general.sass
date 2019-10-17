@@ -1,0 +1,166 @@
+
+$color-theme: #9b4dca
+$color-text: #606c76
+$color-divider: #f4f5f6
+$color-section-border: rgba(34, 36, 38, 0.22)
+$color-section-background: #f8f8f9
+$color-alert: #db2828
+$color-alert-background: #ffe8e6
+
+$spacing: 1.5rem
+$spacing-wide: 2.5rem
+
+html
+  box-sizing: border-box
+  font-size: 62.5%
+
+body
+  max-width: 640px
+  margin: auto
+  
+  color: $color-text
+  font-family: 'Roboto', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif
+  font-size: 1.6em
+  font-weight: 300
+  letter-spacing: 0.01em
+  line-height: 1.6
+
+p
+  margin-top: 0
+  margin-bottom: $spacing
+
+hr
+  border: none
+  border-top: 0.1rem solid $color-divider
+  margin: 3rem 0
+
+a
+  color: $color-theme
+  text-decoration: none
+  transition: all 0.5s
+
+a:hover
+  background: $color-section-background
+
+// TITLES
+h2, h3, h4, h5
+  font-size: inherit
+  margin: 0
+
+h2
+  border-bottom: 1px solid rgba(34, 36, 38, 0.15)
+  padding-bottom: 0.21428571rem
+  margin-top: $spacing-wide
+  margin-bottom: 0.5rem
+
+  + section
+    margin-top: -0.3em
+
+// LISTS
+dt
+  text-decoration: underline
+  margin-bottom: 2px
+
+dd
+  margin-bottom: 6px  
+
+ul
+  list-style: circle inside
+  padding-left: 0.5em
+  margin-top: 0
+  margin-bottom: $spacing
+
+li
+  margin-bottom: 0.25em
+
+table
+  margin-bottom: $spacing
+
+thead
+  font-size: 90%
+  font-weight: normal
+  text-align: left
+  text-transform: uppercase
+
+tbody
+  vertical-align: top
+
+td:not(:last-child)
+  padding-right: 10px
+
+// BUTTONS
+.button-group
+  margin-top: -$spacing + 0.75rem
+
+.button
+  display: inline-block
+  padding: 1rem 2rem
+  margin: 0.1rem
+  margin-bottom: 1rem
+
+  border: 0.1rem solid $color-theme
+  border-radius: 0.4rem
+
+  color: $color-theme
+  font-size: 1.1rem
+  font-weight: 700
+  letter-spacing: 0.1rem
+  text-align: center
+  text-decoration: none
+  text-transform: uppercase
+  white-space: nowrap
+
+// MESSAGES
+blockquote, .message
+  padding: 1rem 1.5rem
+  background: $color-section-background
+  border-left: 0.3rem solid $color-section-border
+  margin: 0
+  margin-top: $spacing-wide
+  margin-bottom: $spacing
+
+  > p
+    font-size: 90%
+
+  > *:last-child
+    margin-bottom: 0
+
+.message--alert
+  border-left-color: transparentize($color-alert, 0.5)
+  background: $color-alert-background
+
+  .title
+    color: $color-alert
+    font-weight: normal
+
+// SECTION
+section
+  background: $color-section-background
+  padding: 0.75em 1em
+  margin-top: $spacing / 2
+  margin-bottom: $spacing
+
+  > *:first-child
+    margin-top: 0
+
+  > *:last-child
+    margin-bottom: 0
+
+// HELPERS
+.title
+  font-weight: bold
+  display: block
+
+.faded
+  opacity: 0.65
+
+.alert
+  color: $color-alert
+
+.highlight
+  color: white
+  background: $color-theme
+
+.notice
+  opacity: 0.8
+  font-size: 90%

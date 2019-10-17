@@ -2,5 +2,5 @@
    <%= event.category_name %>
    <%= event.full_address %>
    <%= event.timing %>
-   *Expires: <%= event.expiration_date.to_s(:short) %>
+   *<%= translate('mail.common.expires') %>: <%= event.expiration_date.to_s(:short) %>
 

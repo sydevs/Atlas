@@ -75,34 +75,35 @@ namespace :mail do
     desc "Generates an email welcoming a manager who has been newly assigned to an event"
     task :welcome => :environment do
       ActionMailer::Base.delivery_method = :letter_opener
-      event = Event.first
+      event = Event.joins(:managers).reorder('RANDOM()').first
       manager = event.managers.first
-      puts "Sending mail to #{manager.name} for #{event.name || event.venue.street_address}"
+      puts "Sending mail to #{manager.name} for #{event.name || event.venue.street}"
       ManagerMailer.with(manager: manager, event: event, test: true).welcome.deliver_now
     end
 
     desc "Sends list of recent registrations to one program manager"
     task :registrations => :environment do
       ActionMailer::Base.delivery_method = :letter_opener
-      event = Event.first
+      event = Event.joins(:managers, :registrations).reorder('RANDOM()').first
+      event.registrations_sent_at = event.created_at
       manager = event.managers.first
-      puts "Sending mail to #{manager.name} for #{event.name || event.venue.street_address}"
+      puts "Sending mail to #{manager.name} for #{event.name || event.venue.street}"
       ManagerMailer.with(manager: manager, event: event, test: true).registrations.deliver_now
     end
 
     desc "Sends a verification email to one of the managers of one out-of-date event"
     task :verification => :environment do
       ActionMailer::Base.delivery_method = :letter_opener
-      event = Event.first
+      event = Event.joins(:managers).reorder('RANDOM()').first
       manager = event.managers.first
-      puts "Sending mail to #{manager.name} for #{event.name || event.venue.street_address}"
+      puts "Sending mail to #{manager.name} for #{event.name || event.venue.street}"
       ManagerMailer.with(manager: manager, event: event, test: true).verification.deliver_now
     end
 
     desc "Sends a verification email to one of the super managers of one out-of-date event"
     task :escalation => :environment do
       ActionMailer::Base.delivery_method = :letter_opener
-      event = Event.first
+      event = Event.joins(:managers).reorder('RANDOM()').first
       manager = event.parent_managers.first
       puts "Sending mail to #{manager.name} for #{event.name || event.venue.street}"
       ManagerMailer.with(manager: manager, event: event, test: true).escalation.deliver_now
@@ -111,7 +112,7 @@ namespace :mail do
     desc "Sends a verification email to one of the managers of one expired event"
     task :expired => :environment do
       ActionMailer::Base.delivery_method = :letter_opener
-      event = Event.first
+      event = Event.joins(:managers).reorder('RANDOM()').first
       manager = event.managers.first
       puts "Sending mail to #{manager.name} for #{event.name || event.venue.street}"
       ManagerMailer.with(manager: manager, event: event, test: true).expired.deliver_now
@@ -120,7 +121,7 @@ namespace :mail do
     desc "Sends a verification email to one of the super managers of one expired event"
     task :expired_escalation => :environment do
       ActionMailer::Base.delivery_method = :letter_opener
-      event = Event.first
+      event = Event.joins(:managers).reorder('RANDOM()').first
       manager = event.parent_managers.last
       puts "Sending mail to #{manager.name} for #{event.name || event.venue.street}"
       ManagerMailer.with(manager: manager, event: event, test: true).expired.deliver_now
@@ -129,7 +130,7 @@ namespace :mail do
     desc "Sends a summary email to one regional manager"
     task :regional_summary => :environment do
       ActionMailer::Base.delivery_method = :letter_opener
-      country = Country.first
+      country = Country.joins(:managers).reorder('RANDOM()').first
       manager = country.managers.first
       puts "Sending mail to #{manager.name} for #{CountryDecorator.get_label(country.country_code)}"
       SummaryMailer.with(manager: manager, region: country, test: true).regional.deliver_now
@@ -138,7 +139,7 @@ namespace :mail do
     desc "Sends a summary email to one global administrator"
     task :global_summary => :environment do
       ActionMailer::Base.delivery_method = :letter_opener
-      manager = Manager.administrators.first
+      manager = Manager.administrators.reorder('RANDOM()').first
       puts "Sending mail to #{manager.name}"
       SummaryMailer.with(manager: manager, test: true).global.deliver_now
     end

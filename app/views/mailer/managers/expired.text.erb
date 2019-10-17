@@ -22,4 +22,7 @@
 <%= translate('mail.escalation.call_to_action') %>
 <% end %>
 
-<%= render 'mailer/managers/about' %>
+
+<%= message translate('mail.common.about'), :text %>
+
+<%= message translate('mail.common.alert'), :text, :alert %>

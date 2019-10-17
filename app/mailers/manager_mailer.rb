@@ -11,7 +11,7 @@ class ManagerMailer < ApplicationMailer
 
   def registrations
     setup
-    @registrations = @event.registrations.since(@event.registrations_sent_at)
+    @registrations = @event.registrations.since(@event.registrations_sent_at || @event.created_at)
     subject = I18n.translate('mail.registrations.subject', date: @event.registrations_sent_at)
     mail(to: @manager.email, subject: subject)
     @event.touch(:registrations_sent_at) unless params[:test]

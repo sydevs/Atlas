@@ -1,7 +1,7 @@
 <%= translate('mail.common.event.title') %>
 <%= '=' * translate('mail.common.event.title').length %>
 <%= translate('mail.common.event.name') %>:
- | <%= @event.name %>
+ | <%= @event.label %>
  | <%= @event.description || translate('mail.common.event.no_description') %>
 
 <%= translate('mail.common.event.type') %>:

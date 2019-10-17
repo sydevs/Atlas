@@ -4,11 +4,12 @@ en:
     common:
       automated: "This is an automated email. Please use the links in this email to respond, or email %{email} if you need help."
       unsubscribe: "If you don't know why you received this email, or no longer want to receive these emails please write to %{email}."
+      expires: "Expires"
       actions: "Actions"
       or: "or"
       about:
         title: "About Sahaj Atlas"
-        description: "The Sahaj Atlas is a project to centralize the list of all public programs and ensure that this program list is always up to date so that seekers may always find active programs near them."
+        description: "The Sahaj Atlas is a project to centralize the list of all public events and ensure that this event list is always up to date so that seekers may always find active events near them."
       alert:
         title: "Alert!"
         description: "This email contains sensitive links that allow access and editing for the Sahaj Atlas Database. Please do not forward this email to anyone!"
@@ -23,33 +24,34 @@ en:
         no_description: "(No Description)"
 
     welcome:
-      subject: "Welcome to Sahaj Atlas - %{event} Program"
-      intro: "You have been listed as a manager for the %{event} sahaj public program."
+      subject: "Welcome to Sahaj Atlas - %{event} Event"
+      intro: "You have been listed as a manager for the %{event} sahaj public event."
       purpose: "From now on you will:"
       purposes:
-        - "Be able to modify the details of the %{event} program."
-        - "Will receive a digest email each week of any new registrations from seekers, for the program."
-        - "Every couple months you may receive an email asking you to confirm that the program details are still up to date."
+        - "Be able to modify the details of the %{event} event."
+        - "Will receive a digest email each week of any new registrations from seekers, for the event."
+        - "Every couple months you may receive an email asking you to confirm that the event details are still up to date."
       call_to_action: "Please click below if you wish to change these details."
-      update: "Update program"
+      update: "Update event"
 
     registrations:
-      subject: "Public Program Registrations since %{date}"
-      intro: "You are receiving this email because you are a manager for the %{event} sahaj public program."
-      purpose: "This email is to inform you about new registrations for the program since %{date}. There have been %{count} registrations since then."
+      subject: "Event Registrations since %{date}"
+      intro: "You are receiving this email because you are a manager for the %{event} sahaj public event."
+      purpose: "This email is to inform you about new registrations for the event since %{date}. There have been %{count} registrations since then."
       listing:
         title: "Registrations"
         person: "Person"
         comment: "Comment"
         registered_at: "Registered"
         no_comment: "(No Comment)"
-      view_all: "View all registrations on the Atlas"
+      call_to_action: "Please click below to take further action."
+      view_all: "View all registrations"
       unsubscribe: "Stop sending me registration lists"
 
     verification:
-      subject: "Public Program Verification - %{event}"
-      intro: "You are receiving this email because you are a manager for the %{event} sahaj public program, which has not been updated since %{date}"
-      purpose: "In order to ensure that the global sahaj program database is up to date, please check that the following details of the event are still up to date, and then choose an action below."
+      subject: "Public Event Verification - %{event}"
+      intro: "You are receiving this email because you are a manager for the %{event} sahaj public event, which has not been updated since %{date}"
+      purpose: "In order to ensure that the global sahaj event database is up to date, please check that the following details of the event are still up to date, and then choose an action below."
       escalate:
         title: "Alert!"
         description: "If you do not respond to this email within %{escalates_in_days}, we will attempt to contact a manager for the %{region} region. If this event is not verified after %{expires_in_days}, it will be hidden from the public."
@@ -58,16 +60,16 @@ en:
       update: "These details need to be updated"
 
     escalation:
-      subject: "Urgent Public Program Verification - %{event}"
-      intro: "You are receiving this email because you are a manager for the %{region} region. The %{event} sahaj public program in your region has has not been updated since %{date}"
-      purpose: "In order to ensure that the global sahaj program database is up to date, please get in touch with any of the managers of this program, and encourage them to check the data."
+      subject: "Urgent Public Event Verification - %{event}"
+      intro: "You are receiving this email because you are a manager for the %{region} region. The %{event} sahaj public event in your region has has not been updated since %{date}"
+      purpose: "In order to ensure that the global sahaj event database is up to date, please get in touch with any of the managers of this event, and encourage them to check the data."
       escalate:
         title: "Alert!"
         description: "If this event is not verified after %{expires_in_days}, it will be hidden from the public."
-      call_to_action: "Please get in touch with the managers of this program"
+      call_to_action: "Please get in touch with the managers of this event"
 
     expired:
-      subject: "Urgent! Public Program Expiration - %{event}"
+      subject: "Urgent! Public Event Expiration - %{event}"
       intro: "You are receiving this email because you are a manager for the %{event} sahaj event. This event has has not been updated since %{date}"
       purpose: "Because this event has not been updated for %{duration}, it has been removed from the public map of events! If you wish to have it republished, you must confirm that the event details are correct, or update them."
       call_to_action: "Please click below if you wish to respond to this email."
@@ -78,12 +80,18 @@ en:
       subject: "Registration Confirmation - %{event}"
       intro: "Your registration for the %{event} event is confirmed! Please write to us if you have any questions."
 
+    summary:
+      listing:
+        event: "Event"
+        details: "Details"
+        expires_at: "Expires"
+
     regional_summary:
       subject: "%{region} Summary - Sahaj Atlas"
       intro: "You are receiving this email because you are a manager for the %{region} region. This is a summary of recent changes in to the Sahaj Atlas in your region."
       expired:
         title: "Recently Expired Events"
-        description: "These events have been removed from the database because they have not been updated in %{expiration_weeks} weeks. This is done to maintain the accuracy of the database, please contact the yogis who run these programs and ask them to update the programs to keep them active."
+        description: "These events have been removed from the database because they have not been updated in %{expiration_weeks} weeks. This is done to maintain the accuracy of the database, please contact the yogis who run these events and ask them to update the events to keep them active."
       review:
         title: "Events Expiring Soon"
         description: "These events will soon expire and be removed from the database, unless they are updated by a manager. The yogis who run these events have been emailed, but have not yet responded."

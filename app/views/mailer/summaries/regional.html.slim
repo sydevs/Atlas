@@ -2,14 +2,27 @@
 p = translate('mail.regional_summary.intro', region: tag.b(@region.label)).html_safe
 
 - if @reviewable_events.present?
-  div: strong = translate('mail.regional_summary.review.title')
+  h2 = translate('mail.regional_summary.review.title')
   p = translate('mail.regional_summary.review.description')
-  = render partial: 'mailer/summaries/event', collection: @reviewable_events
+  table
+    thead
+      tr
+        th = translate('mail.summary.listing.event')
+        th = translate('mail.summary.listing.details')
+        th = translate('mail.summary.listing.expires_at')
+    tbody
+      = render partial: 'mailer/summaries/event', collection: @reviewable_events
 
 - if @expired_events.present?
-  div: strong = translate('mail.regional_summary.expired.title')
+  h2 = translate('mail.regional_summary.expired.title')
   p = translate('mail.regional_summary.expired.description', expiration_weeks: Expirable::EXPIRE_AFTER_WEEKS)
-  = render partial: 'mailer/summaries/event', collection: @expired_events
+  table
+    thead
+      tr
+        th = translate('mail.summary.listing.event')
+        th = translate('mail.summary.listing.details')
+        th = translate('mail.summary.listing.expires_at')
+    tbody
+      = render partial: 'mailer/summaries/event', collection: @expired_events
 
-hr
-= render 'mailer/managers/about'
+= message translate('mail.common.about'), :html

@@ -18,4 +18,4 @@
 
 <%= render partial: 'mailer/summaries/event', collection: @expired_events %>
 <% end %>
-<%= render 'mailer/managers/about' %>
+<%= message translate('mail.common.about'), :text %>

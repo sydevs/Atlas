@@ -5,11 +5,14 @@
 * <%= purpose.gsub('%{event}', @event.label) %>
 <% end %>
 
-<%= render 'mailer/managers/about' %>
+<%= message translate('mail.common.about'), :text %>
 
-<%= render 'mailer/managers/event' %>
+<%= render 'mailer/managers/event', event: @event %>
 
 <%= translate('mail.common.actions') %>
 <%= '=' * translate('mail.common.actions').length %>
 <%= translate('mail.welcome.call_to_action') %>
 <%= translate('mail.welcome.update') %> - <%= @magic_link %>
+
+
+<%= message translate('mail.common.alert'), :text, :alert %>

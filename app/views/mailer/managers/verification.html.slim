@@ -3,19 +3,20 @@
 p = translate('mail.verification.intro', event: tag.b(@event.label), date: @event.updated_at.to_s(:long)).html_safe
 p = translate('mail.verification.purpose')
 
-blockquote
-  div: strong = translate('mail.verification.escalate.title')
+blockquote.message--alert
+  strong.title = translate('mail.verification.escalate.title')
   p = translate('mail.verification.escalate.description', region: @event.venue.parent.label, escalates_in_days: @event.escalates_in_days_in_words, expires_in_days: @event.expires_in_days_in_words)
 
-= render 'mailer/managers/event'
+= render 'mailer/managers/event', event: @event
 
-div: strong = translate('mail.common.actions')
+h2 = translate('mail.common.actions')
 p = translate('mail.verification.call_to_action')
-p
+p.button-group
   a.button.button-outline href=@magic_link
     = translate('mail.verification.confirm')
   '  #{translate('mail.common.or').upcase} 
   a.button.button-outline href=@magic_link
     = translate('mail.verification.update')
 
-= render 'mailer/managers/about'
+= message translate('mail.common.about'), :html
+= message translate('mail.common.alert'), :html, :alert

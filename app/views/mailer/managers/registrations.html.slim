@@ -1,9 +1,9 @@
 
 / TODO: Check that this would actually be html safe
 p = translate('mail.registrations.intro', event: tag.b(@event.label)).html_safe
-p = translate('mail.registrations.purpose', date: @event.registrations_sent_at.to_s(:short), count: @registrations.count)
+p = translate('mail.registrations.purpose', date: (@event.registrations_sent_at || @event.created_at).to_s(:short), count: @registrations.count)
 
-div: strong = translate('mail.registrations.listing.title')
+h2 = translate('mail.registrations.listing.title')
 table
   thead
     tr
@@ -12,19 +12,20 @@ table
       th = translate('mail.registrations.listing.registered_at')
   tbody
     - @registrations.each do |registration|
-      tr.headline
+      tr
         td
           div = registration.name
-          div = registration.email
-        td = registration.comment
-        td = registration.created_at.to_s(:short)
+          .faded = registration.email
+        td.faded = registration.comment || '-'
+        td.faded = registration.created_at.to_s(:short)
 
-div: strong = translate('mail.common.actions')
-p
-  a.button.button-outline href=@magic_link
+h2 = translate('mail.common.actions')
+p = translate('mail.registrations.call_to_action')
+p.button-group
+  a.button href=@magic_link
     = translate('mail.registrations.view_all')
-  br
-  a.button.button-outline href=@magic_link
+  a.button href=@magic_link
     = translate('mail.registrations.unsubscribe')
 
-= render 'mailer/managers/about'
+= message translate('mail.common.about'), :html
+= message translate('mail.common.alert'), :html, :alert
