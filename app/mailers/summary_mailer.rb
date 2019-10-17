@@ -16,7 +16,7 @@ class SummaryMailer < ApplicationMailer
   def global
     setup
     @recent_registrations = Registration.since(1.week.ago)
-    @new_events = Event.reorder(:created_at).where('created_at > ?', 1.year.ago)
+    @new_events = Event.reorder(:created_at).where('created_at > ?', 1.week.ago)
     @reviewable_events = Event.needs_urgent_review
     @expired_events = Event.recently_expired
     subject = I18n.translate('mail.global_summary.subject')
