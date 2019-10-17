@@ -2,7 +2,10 @@
 - if @event.managers.include?(@manager)
   / TODO: Check that this would actually be html safe
   p = translate('mail.expired.intro', event: tag.b(@event.label), date: @event.updated_at.to_s(:long)).html_safe
-  p = translate('mail.expired.purpose', duration: distance_of_time_in_words(Time.now, Expirable::EXPIRE_AFTER_WEEKS.weeks.from_now))
+
+  blockquote.message--alert
+    strong.title = translate('mail.expired.purpose.title')
+    p = translate('mail.expired.purpose.description', duration: distance_of_time_in_words(Time.now, Expirable::EXPIRE_AFTER_WEEKS.weeks.from_now))
 
   = render 'mailer/managers/event', event: @event
 
@@ -17,12 +20,21 @@
 - else
   / TODO: Check that this would actually be html safe
   p = translate('mail.escalation.intro', region: tag.b(@event.venue.parent.label), event: tag.b(@event.label), date: @event.updated_at.to_s(:long)).html_safe
-  p = translate('mail.expired.purpose', duration: distance_of_time_in_words(Time.now, Expirable::EXPIRE_AFTER_WEEKS.weeks.from_now))
+
+  blockquote.message--alert
+    strong.title = translate('mail.expired.purpose.title')
+    p = translate('mail.expired.purpose.description', duration: distance_of_time_in_words(Time.now, Expirable::EXPIRE_AFTER_WEEKS.weeks.from_now))
 
   = render 'mailer/managers/event', event: @event
 
   h2 = translate('mail.common.actions')
   p = translate('mail.escalation.call_to_action')
+  ul
+    - @event.managers.each do |manager|
+      li
+        = manager.name
+        '  - 
+        = mail_to(manager.email)
 
 = message translate('mail.common.about'), :html
 = message translate('mail.common.alert'), :html, :alert

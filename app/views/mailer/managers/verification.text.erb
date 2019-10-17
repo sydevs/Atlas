@@ -1,4 +1,4 @@
-<%= translate('mail.verification.intro', event: @event.label, date: @event.updated_at.to_s(:long)) %>
+<%= translate('mail.verification.intro', event: (@event.name || @event.venue.street), date: @event.updated_at.to_s(:long)) %>
 
 <%= translate('mail.verification.purpose') %>
 

@@ -13,23 +13,27 @@ module Expirable
   RECENTLY_EXPIRED_DATE = (EXPIRE_AFTER_WEEKS + 1).weeks.ago.freeze
 
   included do
-    scope :published, -> { where('updated_at > ?', EXPIRE_DATE) }
-    scope :needs_review, -> { where('updated_at > ?', VERIFY_DATE) }
-    scope :needs_urgent_review, -> { where('updated_at > ? AND updated_at <= ?', ESCALATE_DATE, VERIFY_DATE) }
-    scope :expired, -> { where('updated_at <= ?', EXPIRE_DATE) }
-    scope :recently_expired, -> { where('updated_at <= ? AND updated_at > ?', EXPIRE_DATE, RECENTLY_EXPIRED_DATE) }
+    scope :published, -> { where("#{self.table_name}.updated_at > ?", EXPIRE_DATE) }
+    scope :needs_review, -> { where("#{self.table_name}.updated_at > ?", VERIFY_DATE) }
+    scope :needs_urgent_review, -> { where("#{self.table_name}.updated_at > ? AND #{self.table_name}.updated_at <= ?", ESCALATE_DATE, VERIFY_DATE) }
+    scope :expired, -> { where("#{self.table_name}.updated_at > ?", EXPIRE_DATE) }
+    scope :recently_expired, -> { where("#{self.table_name}.updated_at <= ? AND #{self.table_name}.updated_at > ?", EXPIRE_DATE, RECENTLY_EXPIRED_DATE) }
   end
 
-  def verification_date
+  def needs_verification_at
     updated_at + VERIFY_AFTER_WEEKS.weeks
   end
 
-  def escalation_date
+  def needs_escalation_at
     updated_at + ESCALATE_AFTER_WEEKS.weeks
   end
 
-  def expiration_date
+  def expires_at
     updated_at + EXPIRE_AFTER_WEEKS.weeks
+  end
+
+  def expired_at
+    expires_at
   end
 
   def active?

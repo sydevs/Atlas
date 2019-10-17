@@ -6,8 +6,9 @@ class SummaryMailer < ApplicationMailer
   def regional
     setup
     @region = params[:region]
-    @reviewable_events = @region.events.offset(5).first(5) # .needs_urgent_review
-    @expired_events = @region.events.first(5) # .recently_expired
+    @new_events = @region.events.reorder(:created_at).where('events.created_at > ?', 1.week.ago)
+    @reviewable_events = @region.events.needs_urgent_review
+    @expired_events = @region.events.recently_expired
     subject = I18n.translate('mail.regional_summary.subject', region: @region.label)
     mail(to: @manager.email, subject: subject)
   end
@@ -15,6 +16,7 @@ class SummaryMailer < ApplicationMailer
   def global
     setup
     @recent_registrations = Registration.since(1.week.ago)
+    @new_events = Event.reorder(:created_at).where('created_at > ?', 1.year.ago)
     @reviewable_events = Event.needs_urgent_review
     @expired_events = Event.recently_expired
     subject = I18n.translate('mail.global_summary.subject')

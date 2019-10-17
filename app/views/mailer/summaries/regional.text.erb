@@ -1,16 +1,24 @@
 <%= translate('mail.regional_summary.intro', region: @region.label) %>
+
+<% if @new_events.present? %>
+<%= translate('mail.regional_summary.new_events.title') %>
+<%= '=' * translate('mail.regional_summary.new_events.title').length %>
+<%= translate('mail.regional_summary.new_events.description', count: @expired_events.count) %>
+
+<%= render partial: 'mailer/summaries/event', collection: @new_events.limit(20), locals: { timestamp: :created_at } %>
+<% end %>
 <% if @reviewable_events.present? %>
 <%= translate('mail.regional_summary.review.title') %>
 <%= '=' * translate('mail.regional_summary.review.title').length %>
-<%= translate('mail.regional_summary.review.description') %>
+<%= translate('mail.regional_summary.review.description', count: @expired_events.count) %>
 
-<%= render partial: 'mailer/summaries/event', collection: @reviewable_events %>
+<%= render partial: 'mailer/summaries/event', collection: @reviewable_events.limit(20), locals: { timestamp: :expires_at } %>
 <% end %>
 <% if @expired_events.present? %>
 <%= translate('mail.regional_summary.expired.title') %>
 <%= '=' * translate('mail.regional_summary.expired.title').length %>
-<%= translate('mail.regional_summary.expired.description') %>
+<%= translate('mail.regional_summary.expired.description', count: @expired_events.count) %>
 
-<%= render partial: 'mailer/summaries/event', collection: @expired_events %>
+<%= render partial: 'mailer/summaries/event', collection: @expired_events.limit(20), locals: { timestamp: :expired_at } %>
 <% end %>
 <%= message translate('mail.common.about'), :text %>

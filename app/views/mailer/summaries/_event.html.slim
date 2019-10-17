@@ -5,5 +5,5 @@ tr
   td
     .faded = event.timing
     .faded = event.full_address
-  td.faded.alert
-    = event.expiration_date.to_s(:short)
+  td.faded class=('alert' if timestamp == :expires_at)
+    = event.send(timestamp).to_s(:short)

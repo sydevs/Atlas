@@ -52,11 +52,11 @@ module EventDecorator
   end
 
   def escalates_in_days_in_words
-    distance_of_time_in_words(Time.now, escalation_date)
+    distance_of_time_in_words(Time.now, needs_escalation_at)
   end
 
   def expires_in_days_in_words
-    distance_of_time_in_words(Time.now, expiration_date)
+    distance_of_time_in_words(Time.now, expires_at)
   end
 
   private

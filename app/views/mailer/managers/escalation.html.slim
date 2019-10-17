@@ -11,6 +11,12 @@ blockquote.message--alert
 
 h2 = translate('mail.common.actions')
 p = translate('mail.escalation.call_to_action')
+ul
+  - @event.managers.each do |manager|
+    li
+      = manager.name
+      '  - 
+      = mail_to(manager.email)
 
 = message translate('mail.common.about'), :html
 = message translate('mail.common.alert'), :html, :alert
