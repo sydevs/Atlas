@@ -12,7 +12,7 @@ namespace :mail do
   desc "Send a verification email to the managers of out-of-date events"
   task :verifications => :environment do
     Event.needs_review.in_batches.each_record do |event|
-      managers = event.needs_review?(:urgent) ? event.venue.parent.managers : event.managers
+      managers = event.needs_review?(:urgent) ? event.venue.parent_managers : event.managers
       managers.in_batches.each_record do |manager|
         ManagerMailer.with(manager: manager, event: event).verification.deliver_now
       end
@@ -25,6 +25,35 @@ namespace :mail do
       event.managers.in_batches.each_record do |manager|
         ManagerMailer.with(manager: manager, event: event).expired.deliver_now
       end
+
+      event.venue.parent_managers.in_batches.each_record do |manager|
+        ManagerMailer.with(manager: manager, event: event).expired.deliver_now
+      end
+    end
+  end
+
+  desc "Send a summary email to the managers of every region"
+  task :summaries => :environment do
+    Country.in_batches.each_record do |country|
+      country.managers.in_batches.each_record do |manager|
+        SummaryMailer.with(manager: manager, region: country).regional.deliver_now
+      end
+    end
+
+    Province.in_batches.each_record do |province|
+      province.managers.in_batches.each_record do |manager|
+        SummaryMailer.with(manager: manager, region: province).regional.deliver_now
+      end
+    end
+
+    LocalArea.in_batches.each_record do |local_area|
+      local_area.managers.in_batches.each_record do |manager|
+        SummaryMailer.with(manager: manager, region: local_area).regional.deliver_now
+      end
+    end
+
+    Manager.administrators.in_batches.each_record do |manager|
+      SummaryMailer.with(manager: manager).global.deliver_now
     end
   end
 
@@ -95,6 +124,23 @@ namespace :mail do
       manager = event.parent_managers.last
       puts "Sending mail to #{manager.name} for #{event.name || event.venue.street}"
       ManagerMailer.with(manager: manager, event: event, test: true).expired.deliver_now
+    end
+
+    desc "Sends a summary email to one regional manager"
+    task :regional_summary => :environment do
+      ActionMailer::Base.delivery_method = :letter_opener
+      country = Country.first
+      manager = country.managers.first
+      puts "Sending mail to #{manager.name} for #{CountryDecorator.get_label(country.country_code)}"
+      SummaryMailer.with(manager: manager, region: country, test: true).regional.deliver_now
+    end
+
+    desc "Sends a summary email to one global administrator"
+    task :global_summary => :environment do
+      ActionMailer::Base.delivery_method = :letter_opener
+      manager = Manager.administrators.first
+      puts "Sending mail to #{manager.name}"
+      SummaryMailer.with(manager: manager, test: true).global.deliver_now
     end
 
     desc "Sends a confirmation email to one registration"

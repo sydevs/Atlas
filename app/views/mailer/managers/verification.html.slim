@@ -7,7 +7,7 @@ blockquote
   div: strong = translate('mail.verification.escalate.title')
   p = translate('mail.verification.escalate.description', region: @event.venue.parent.label, escalates_in_days: @event.escalates_in_days_in_words, expires_in_days: @event.expires_in_days_in_words)
 
-= render 'event'
+= render 'mailer/managers/event'
 
 div: strong = translate('mail.common.actions')
 p = translate('mail.verification.call_to_action')
@@ -18,4 +18,4 @@ p
   a.button.button-outline href=@magic_link
     = translate('mail.verification.update')
 
-= render 'about'
+= render 'mailer/managers/about'

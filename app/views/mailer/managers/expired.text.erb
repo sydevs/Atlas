@@ -3,7 +3,7 @@
 
 <%= translate('mail.expired.purpose', duration: distance_of_time_in_words(Time.now, Expirable::EXPIRE_AFTER_WEEKS.weeks.from_now)) %>
 
-<%= render 'event' %>
+<%= render 'mailer/managers/event' %>
 
 <%= translate('mail.common.actions') %>
 <%= '=' * translate('mail.common.actions').length %>
@@ -15,11 +15,11 @@
 
 <%= translate('mail.expired.purpose', duration: distance_of_time_in_words(Time.now, Expirable::EXPIRE_AFTER_WEEKS.weeks.from_now)) %>
 
-<%= render 'event' %>
+<%= render 'mailer/managers/event' %>
 
 <%= translate('mail.common.actions') %>
 <%= '=' * translate('mail.common.actions').length %>
 <%= translate('mail.escalation.call_to_action') %>
 <% end %>
 
-<%= render 'about' %>
+<%= render 'mailer/managers/about' %>

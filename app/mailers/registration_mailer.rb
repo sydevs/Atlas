@@ -1,5 +1,6 @@
 
 class RegistrationMailer < ApplicationMailer
+  default template_path: 'mailer/registrations'
   layout 'mailer/public'
 
   def confirmation

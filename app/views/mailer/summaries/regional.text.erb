@@ -1,0 +1,16 @@
+<%= translate('mail.regional_summary.intro', region: @region.label) %>
+<% if @reviewable_events.present? %>
+<%= translate('mail.regional_summary.review.title') %>
+<%= '=' * translate('mail.regional_summary.review.title').length %>
+<%= translate('mail.regional_summary.review.description') %>
+
+<%= render partial: 'mailer/summaries/event', collection: @reviewable_events %>
+<% end %>
+<% if @expired_events.present? %>
+<%= translate('mail.regional_summary.expired.title') %>
+<%= '=' * translate('mail.regional_summary.expired.title').length %>
+<%= translate('mail.regional_summary.expired.description') %>
+
+<%= render partial: 'mailer/summaries/event', collection: @expired_events %>
+<% end %>
+<%= render 'mailer/managers/about' %>

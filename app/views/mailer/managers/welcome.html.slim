@@ -2,14 +2,14 @@
 / TODO: Check that this would actually be html safe
 p = translate('mail.welcome.intro', event: tag.b(@event.label)).html_safe
 
-= render 'about'
+= render 'mailer/managers/about'
 
 div: strong = translate('mail.welcome.purpose', event: tag.b(@event.label)).html_safe
 ul
   - translate('mail.welcome.purposes').each do |purpose|
     li = purpose.gsub('%{event}', @event.label)
 
-= render 'event'
+= render 'mailer/managers/event'
 
 div: strong = translate('mail.common.actions')
 p = translate('mail.welcome.call_to_action')

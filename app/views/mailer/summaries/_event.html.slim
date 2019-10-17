@@ -1,0 +1,7 @@
+
+blockquote
+  div: strong = event.name || event.venue.street
+  .faded = event.category_name
+  div = event.full_address
+  div = event.timing
+  .faded Expires: #{event.expiration_date.to_s(:short)}

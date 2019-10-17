@@ -77,3 +77,26 @@ en:
     confirmation:
       subject: "Registration Confirmation - %{event}"
       intro: "Your registration for the %{event} event is confirmed! Please write to us if you have any questions."
+
+    regional_summary:
+      subject: "%{region} Summary - Sahaj Atlas"
+      intro: "You are receiving this email because you are a manager for the %{region} region. This is a summary of recent changes in to the Sahaj Atlas in your region."
+      expired:
+        title: "Recently Expired Events"
+        description: "These events have been removed from the database because they have not been updated in %{expiration_weeks} weeks. This is done to maintain the accuracy of the database, please contact the yogis who run these programs and ask them to update the programs to keep them active."
+      review:
+        title: "Events Expiring Soon"
+        description: "These events will soon expire and be removed from the database, unless they are updated by a manager. The yogis who run these events have been emailed, but have not yet responded."
+
+    global_summary:
+      subject: "Global Summary - Sahaj Atlas"
+      intro: "You are receiving this email because you are an global administrator for the Sahaj Atlas. This is a summary of recent changes in the database."
+      registrations:
+        title: "Recent Registrations"
+        description: "There have been %{count} new registrations in the last week."
+      expired:
+        title: "Recently Expired Events"
+        description: "These events have been removed from the database because they have not been updated in %{expiration_weeks} weeks. This is done to maintain the accuracy of the database."
+      review:
+        title: "Events Expiring Soon"
+        description: "These events will soon expire and be removed from the database, unless they are updated by a manager. The yogis who run these events have been emailed, but have not yet responded."

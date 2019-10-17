@@ -4,7 +4,7 @@
   p = translate('mail.expired.intro', event: tag.b(@event.label), date: @event.updated_at.to_s(:long)).html_safe
   p = translate('mail.expired.purpose', duration: distance_of_time_in_words(Time.now, Expirable::EXPIRE_AFTER_WEEKS.weeks.from_now))
 
-  = render 'event'
+  = render 'mailer/managers/event'
 
   div: strong = translate('mail.common.actions')
   p = translate('mail.expired.call_to_action')
@@ -19,9 +19,9 @@
   p = translate('mail.escalation.intro', region: tag.b(@event.venue.parent.label), event: tag.b(@event.label), date: @event.updated_at.to_s(:long)).html_safe
   p = translate('mail.expired.purpose', duration: distance_of_time_in_words(Time.now, Expirable::EXPIRE_AFTER_WEEKS.weeks.from_now))
 
-  = render 'event'
+  = render 'mailer/managers/event'
 
   div: strong = translate('mail.common.actions')
   p = translate('mail.escalation.call_to_action')
 
-= render 'about'
+= render 'mailer/managers/about'

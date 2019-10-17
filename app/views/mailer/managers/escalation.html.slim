@@ -7,9 +7,9 @@ blockquote
   div: strong = translate('mail.escalation.escalate.title')
   p = translate('mail.escalation.escalate.description', region: @event.venue.parent.label, expires_in_days: @event.expires_in_days_in_words)
 
-= render 'event'
+= render 'mailer/managers/event'
 
 div: strong = translate('mail.common.actions')
 p = translate('mail.escalation.call_to_action')
 
-= render 'about'
+= render 'mailer/managers/about'

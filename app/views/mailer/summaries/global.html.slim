@@ -1,0 +1,18 @@
+
+p = translate('mail.global_summary.intro')
+
+div: strong = translate('mail.global_summary.registrations.title')
+p = translate('mail.global_summary.registrations.description', count: @recent_registrations.count)
+
+- if @reviewable_events.present?
+  div: strong = translate('mail.global_summary.review.title')
+  p = translate('mail.global_summary.review.description')
+  = render partial: 'mailer/summaries/event', collection: @reviewable_events
+
+- if @expired_events.present?
+  div: strong = translate('mail.global_summary.expired.title')
+  p = translate('mail.global_summary.expired.description', expiration_weeks: Expirable::EXPIRE_AFTER_WEEKS)
+  = render partial: 'mailer/summaries/event', collection: @expired_events
+
+hr
+= render 'mailer/managers/about'

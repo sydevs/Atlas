@@ -5,9 +5,9 @@
 * <%= purpose.gsub('%{event}', @event.label) %>
 <% end %>
 
-<%= render 'about' %>
+<%= render 'mailer/managers/about' %>
 
-<%= render 'event' %>
+<%= render 'mailer/managers/event' %>
 
 <%= translate('mail.common.actions') %>
 <%= '=' * translate('mail.common.actions').length %>
