@@ -1,20 +1,154 @@
 
 en:
-  category:
-    title:
-      intro: "Intro Meditation Class"
-      intermediate: "Intermediate Meditation Class"
-      course: "Meditation Course"
-      public_event: "Stall at Public Event"
-      concert: "Meditation & Music Concert"
-    description:
-      intro: "The first introductions to this kind of meditation."
-      intermediate: "A going deeper class for those who have already attended an introductory class."
-      course: "A several week course that takes you through various techniques of meditation."
-      public_event: "Offering free meditation instruction at a public event."
-      concert: "A performance combining meditation and music or dance."
-  restriction:
-    no: "No Restriction"
-    province: "Limit to State Boundaries"
-    country: "Limit to Country Borders"      
-    
+  activerecord:
+    models:
+      # Regions
+      country:
+        # Basic pluralization
+        single: "Country"
+        plural: "Countries"
+        # Countable
+        one: "country"
+        other: "countries"
+      province:
+        # Basic pluralization
+        single: "Subnation"
+        plural: "Subnations"
+        # Countable
+        one: "subnation"
+        other: "subnations"
+      local_area:
+        # Basic pluralization
+        single: "Area"
+        plural: "Areas"
+        # Countable
+        one: "area"
+        other: "areas"
+
+      # Events
+      venue:
+        # Basic pluralization
+        single: "Venue"
+        plural: "Venues"
+        # Countable
+        one: "venue"
+        other: "venues"
+      event:
+        # Basic pluralization
+        single: "Event"
+        plural: "Events"
+        # Countable
+        one: "event"
+        other: "events"
+      registration:
+        # Basic pluralization
+        single: "Attendee"
+        plural: "Attendees"
+        # Countable
+        one: "registration"
+        other: "registrations"
+
+      # Other
+      manager:
+        # Basic pluralization
+        single: "Manager"
+        plural: "Managers"
+        # Countable
+        one: "manager"
+        other: "managers"
+      audit:
+        # Basic pluralization
+        single: "History"
+        plural: "History"
+        # Countable
+        one: "log"
+        other: "logs"
+
+    attributes:
+      generic:
+        name: "Name"
+        published: "Published"
+        email: "Email Address"
+
+      # Regions
+      country:
+        country_code: :activerecord.models.country.single # Do not translate
+
+      province:
+        country_code: :activerecord.models.country.single # Do not translate
+        province_code: :activerecord.models.province.single # Do not translate
+
+      local_area:
+        name: :activerecord.attributes.generic.name # Do not translate
+        country_code: :activerecord.models.country.single # Do not translate
+        province_code: :activerecord.models.province.single # Do not translate
+        identifier: "Identifier"
+        location: "Location"
+        latitude: "Latitude"
+        longitude: "Longitude"
+        radius: "Radius (km)"
+
+      # Events
+      venue:
+        published: :activerecord.attributes.generic.published # Do not translate
+        name: :activerecord.attributes.generic.name # Do not translate
+        address: "Address"
+        street: "Street Address"
+        city: "City"
+        province_code: :activerecord.models.province.single # Do not translate
+        country_code: :activerecord.models.country.single # Do not translate
+        postcode: "Postal Code"
+
+      event:
+        published: :activerecord.attributes.generic.published # Do not translate
+        name: :activerecord.attributes.generic.name # Do not translate
+        category: "Category"
+        categories:
+          intro: "Intro Meditation Class"
+          intermediate: "Intermediate Meditation Class"
+          course: "Meditation Course"
+          public_event: "Stall at Public Event"
+          concert: "Meditation & Music Concert"
+        category_descriptions:
+          intro: "The first introductions to this kind of meditation."
+          intermediate: "A going deeper class for those who have already attended an introductory class."
+          course: "A several week course that takes you through various techniques of meditation."
+          public_event: "Offering free meditation instruction at a public event."
+          concert: "A performance combining meditation and music or dance."
+        description: "Description"
+        room: "Room"
+        languages: "Languages"
+        recurrence: "Recurrence"
+        recurrences:
+          day: "Every Day"
+          monday: "Every Monday"
+          tuesday: "Every Tuesday"
+          wednesday: "Every Wednesday"
+          thursday: "Every Thursday"
+          friday: "Every Friday"
+          saturday: "Every Saturday"
+          sunday: "Every Sunday"
+        start_date: "Start Date"
+        end_date: "End Date"
+        start_time: "Start Time"
+        end_time: "End Time"
+
+      registration:
+        name: :activerecord.attributes.generic.name # Do not translate
+        email: :activerecord.attributes.generic.email # Do not translate
+        comment: "Comment"
+        created_at: "Registered At"
+
+      # Other
+      manager:
+        name: :activerecord.attributes.generic.name # Do not translate
+        email: :activerecord.attributes.generic.email # Do not translate
+        administrator: Administrator
+
+      audit:
+        user: :activerecord.models.manager.single # Do not translate
+        action: "Action"
+        actions:
+          update: "Updated"
+          create: "Created"
+          destroy: "Deleted"

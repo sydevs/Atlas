@@ -1,17 +1,18 @@
 
 - allow = policy(@context)
-- content_for :title, "#{@model_name.plural.titleize} | #{@context.label}"
+- content_for :title, "#{translate('cms.activity.title')} | #{@context.label}"
 
 = render 'cms/views/context' do
   h3.ui.dividing.header
-    .content Activity
+    .content = translate('cms.activity.title')
 
-  p This is a log of all actions taken by this manager.
+  p = translate('cms.activity.description')
 
   - if @records.present? || params[:q]
     = simple_form_for url_for([:cms, @model]), html: { method: 'GET', data: { remote: 'true' }, autocomplete: 'off' }
       .search.ui.fluid.icon.small.input data-search=@model_name.route_key
-        input name='q' type='text' placeholder="Search #{@model_name.plural}..." value=(params[:q] || '')
+        - search_placeholder = translate('cms.actions.target.search', resources: translate_model(@model, :plural).downcase)
+        input name='q' type='text' placeholder=search_placeholder value=(params[:q] || '')
         i.search.icon
 
   .ui.fluid.styled.records.accordion data-search=@model_name.route_key

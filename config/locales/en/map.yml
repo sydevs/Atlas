@@ -1,2 +1,16 @@
 
 en:
+  map:
+    categories:
+      title:
+        intro: "Intro Meditation Class"
+        intermediate: "Intermediate Meditation Class"
+        course: "Meditation Course"
+        public_event: "Stall at Public Event"
+        concert: "Meditation & Music Concert"
+      description:
+        intro: "The first introductions to this kind of meditation."
+        intermediate: "A going deeper class for those who have already attended an introductory class."
+        course: "A several week course that takes you through various techniques of meditation."
+        public_event: "Offering free meditation instruction at a public event."
+        concert: "A performance combining meditation and music or dance."

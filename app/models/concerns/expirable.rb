@@ -37,7 +37,7 @@ module Expirable
   end
 
   def active?
-    updated_at > EXPIRATION_DATE
+    Time.now < expires_at
   end
 
   def expired?
