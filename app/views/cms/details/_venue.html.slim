@@ -1,12 +1,16 @@
 
-h3.ui.dividing.header Details for #{@record.label}
+h3.ui.dividing.header = translate('cms.details.details_for_record', resource: @record.label)
 .ui.list
+  - unless @record.published?
+    .item
+      i.warning.sign.icon
+      .content
+        .header = translate('cms.details.record_not_published.title', resource: translate_model(@model))
+        .description = translate('cms.details.record_not_published.description', resource: translate_model(@model).downcase)
   .item
     = model_icon Event
-    .content
-      = number_with_delimiter @record.events.count
-      = ' Event'.pluralize(@record.events.count)
+    .content = translate_model_count(@record.events)
 
-h3.ui.dividing.header Location of this venue
+h3.ui.dividing.header = translate('cms.details.location_of_record', resource: translate_model(@model).downcase)
 p = @record.full_address
 #venue-map data-latitude=@record.latitude data-longitude=@record.longitude

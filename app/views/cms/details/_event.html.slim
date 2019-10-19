@@ -1,6 +1,19 @@
 
-h3.ui.dividing.header Details
+- if @record.published? && @record.expired?
+  .ui.orange.icon.message
+    i.exclamation.icon
+    .content
+      .header = translate('cms.details.record_expired.title', resource: translate_model(@model))
+      .description = translate('cms.details.record_expired.description', resource: translate_model(@model).downcase, weeks: Expirable::EXPIRE_AFTER_WEEKS)
+
+h3.ui.dividing.header = translate('cms.details.details_for_record', resource: @record.label)
 .ui.list
+  - unless @record.published? && !@record.expired?
+    .item
+      i.warning.sign.icon
+      .content
+        .header = translate('cms.details.record_not_published.title', resource: translate_model(@model))
+        .description = translate('cms.details.record_not_published.description', resource: translate_model(@model).downcase)
   .item
     i.hashtag.icon
     .content
@@ -8,24 +21,19 @@ h3.ui.dividing.header Details
       .description = @record.category_description
   .item
     i.calendar.icon
-    .content = @record.timing
+    .content = @record.timing_in_words
   .item
     i.language.icon
     .content
-      ' Offered in 
-      = @record.languages.map { |lang| I18nData.languages(I18n.locale)[lang] }.join(', ')
+      - languages = @record.languages.map { |lang| I18nData.languages(I18n.locale)[lang] }.to_sentence
+      = translate('cms.details.record_has_languages', resource: translate_model(@model), languages: languages)
   .item
     i.clock.icon
-    .content
-      ' Last updated
-      = time_ago_in_words @record.updated_at
+    .content = translate('cms.details.updated_at', time_ago: (time_ago_in_words(@record.updated_at)))
   .item
     = model_icon Registration
-    .content
-      = number_with_delimiter @context.registrations.recent.count
-      = ' Registration'.pluralize(@context.registrations.recent.count)
-      |  in the last 30 days.
+    .content = translate('cms.details.records_in_recent_days', resources: translate_model_count(@record.registrations))
 
-h3.ui.dividing.header Location of this event
+h3.ui.dividing.header = translate('cms.details.location_of_record', resource: translate_model(@model).downcase)
 p = [@record.room, @record.full_address].compact.join(' - ')
 #venue-map data-latitude=@record.venue.latitude data-longitude=@record.venue.longitude

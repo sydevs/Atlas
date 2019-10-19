@@ -12,6 +12,7 @@ class CMS::ManagersController < CMS::ApplicationController
     if !new_record || @record.save
       if new_record || @context.present?
         flash[:success] = "Added #{@model_name.human} successfully"
+        ManagerMailer.with(manager: @record, event: @context).welcome.deliver_now
       else
         flash[:notice] = "#{@record.name} <#{@record.email}> already exists"
       end
@@ -30,8 +31,17 @@ class CMS::ManagersController < CMS::ApplicationController
     authorize @record
     raise StandardError, 'Cannot destroy a manager' unless @context
     @context.managers.delete(@record)
-    flash[:success] = translate('messages.successfully_removed', record: Manager, context: @context.class)
+    flash[:success] = translate('cms.messages.successfully_removed', resource: Manager, context: @context.class)
     redirect_to [:cms, @context, Manager]
+  end
+
+  def activity
+    set_context!
+    authorize @context, :view_activity?
+    @records = policy_scope(@context.actions).page(params[:page]).per(30).search(params[:q])
+    @model = Audit
+    set_model_name!
+    render 'cms/views/activity'
   end
 
   private

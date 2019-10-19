@@ -1,0 +1,23 @@
+<%= translate('mail.registrations.intro', event: "*#{@event.label}*") %>
+
+<%= translate('mail.registrations.purpose', date: (@event.registrations_sent_at || @event.created_at).to_s(:short), count: @registrations.count) %>
+
+<%= translate('mail.registrations.listing.title') %>
+<%= '=' * translate('mail.registrations.listing.title').length %>
+<% @registrations.each do |registration| %>
+ - <%= registration.name %> - <%= registration.email %>
+   <%= registration.created_at.to_s(:long) %>
+   <%= registration.comment || translate('mail.registrations.listing.no_comment') %>
+
+<% end %>
+
+<%= translate('mail.common.actions') %>
+<%= '=' * translate('mail.common.actions').length %>
+<%= translate('mail.registrations.call_to_action') %>
+<%= translate('mail.registrations.view_all') %> - <%= @magic_link %>
+<%= translate('mail.registrations.unsubscribe') %> - <%= @magic_link %>
+
+
+<%= message translate('mail.common.about'), :text %>
+
+<%= message translate('mail.common.alert'), :text, :alert %>

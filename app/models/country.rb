@@ -2,7 +2,9 @@ class Country < ApplicationRecord
 
   # Extensions
   include Manageable
+  
   searchable_columns %w[country_code]
+  audited
 
   # Associations
   has_many :provinces, inverse_of: :country, foreign_key: :country_code, primary_key: :country_code, dependent: :delete_all

@@ -3,11 +3,11 @@
   = f.label :location, required: true
   .two.fields
     .field
-      = f.input_field :latitude, placeholder: 'Latitude'
+      = f.input_field :latitude, placeholder: translate_attribute(LocalArea, :latitude)
     .field
-      = f.input_field :longitude, placeholder: 'Longitude'
+      = f.input_field :longitude, placeholder: translate_attribute(LocalArea, :longitude)
 
-= f.input :radius, label: 'Radius (km)'
+= f.input :radius
 
 = f.input :name
 = f.input :identifier

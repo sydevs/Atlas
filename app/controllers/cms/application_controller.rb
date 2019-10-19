@@ -22,6 +22,7 @@ class CMS::ApplicationController < ActionController::Base
   def index
     authorize_association! @model
     @records = policy_scope(@scope).page(params[:page]).per(10).search(params[:q])
+    @records = @records.with_associations if @records.respond_to?(:with_associations)
     render 'cms/views/index'
   end
 
@@ -47,9 +48,11 @@ class CMS::ApplicationController < ActionController::Base
     authorize @record
 
     if @record.save
-      redirect_to [:cms, @record], flash: { success: "Created #{@model_name.human} successfully" }
+      redirect_to [:cms, @record], flash: { success: translate('cms.messages.successfully_created', resource: @model) }
+      true
     else
       render 'cms/views/new'
+      false
     end
   end
 
@@ -61,9 +64,11 @@ class CMS::ApplicationController < ActionController::Base
   def update attributes
     authorize @record
     if @record.update(attributes)
-      redirect_to [:cms, @record], flash: { success: "Saved #{@model_name.human} successfully" }
+      redirect_to [:cms, @record], flash: { success: translate('cms.messages.successfully_updated', resource: @model) }
+      true
     else
       render 'cms/views/edit'
+      false
     end
   end
 
@@ -71,7 +76,7 @@ class CMS::ApplicationController < ActionController::Base
     authorize @record
     @record.destroy
 
-    flash[:success] = translate('messages.successfully_deleted')
+    flash[:success] = translate('cms.messages.successfully_deleted', resource: @model)
     redirect_to [:cms, @context, @model]
   end
 

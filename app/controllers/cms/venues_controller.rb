@@ -24,6 +24,7 @@ class CMS::VenuesController < CMS::ApplicationController
 
     def parameters
       params.fetch(:venue, {}).permit(
+        :published,
         :name, :category, :latitude, :longitude,
         :street, :city, :province_code, :country_code,
         manager: {}

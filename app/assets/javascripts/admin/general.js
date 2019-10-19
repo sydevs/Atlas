@@ -2,6 +2,7 @@
 const General = {
   load: function() {
     $('select, .ui.dropdown').dropdown()
+    $('.ui.accordion').accordion()
     $('.ui.checkbox').checkbox()
     $('.ui.menu .tab.item').tab()
 

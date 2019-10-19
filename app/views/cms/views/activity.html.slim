@@ -1,0 +1,22 @@
+
+- allow = policy(@context)
+- content_for :title, "#{translate('cms.activity.title')} | #{@context.label}"
+
+= render 'cms/views/context' do
+  h3.ui.dividing.header
+    .content = translate('cms.activity.title')
+
+  p = translate('cms.activity.description')
+
+  - if @records.present? || params[:q]
+    = simple_form_for url_for([:cms, @model]), html: { method: 'GET', data: { remote: 'true' }, autocomplete: 'off' }
+      .search.ui.fluid.icon.small.input data-search=@model_name.route_key
+        - search_placeholder = translate('cms.actions.target.search', resources: translate_model(@model, :plural).downcase)
+        input name='q' type='text' placeholder=search_placeholder value=(params[:q] || '')
+        i.search.icon
+
+  .ui.fluid.styled.records.accordion data-search=@model_name.route_key
+    = render partial: "cms/list_items/#{@model_name.singular_route_key}", collection: @records, cache: true
+
+  .pagination-info data-search=@model_name.route_key = page_entries_info @records
+  .pagination data-search=@model_name.route_key = paginate @records

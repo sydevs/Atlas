@@ -1,0 +1,29 @@
+
+.title
+  /= model_icon Audit
+  i.dropdown.icon
+  .floated
+    - if audit.user
+      = translate('cms.activity.changed_by', name: audit.user.label)
+      '  - 
+
+    = audit.created_at.to_s(:short)
+    
+  | #{translate_enum_value(audit, :action)} - #{audit.auditable.try(:name)} (#{audit.auditable_type})
+.content
+  table.ui.very.basic.table
+    tbody
+      - if audit.action == 'update'
+        - audit.audited_changes.each do |field, change|
+          tr
+            th = translate_attribute(audit.auditable.class, field)
+            td = translate('cms.activity.changed_to')
+          tr
+            td = change[0]
+            td = change[1]
+      - else
+        - audit.audited_changes.each do |field, change|
+          tr
+            th = translate_attribute(audit.auditable.class, field)
+          tr
+            td = change

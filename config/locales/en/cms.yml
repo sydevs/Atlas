@@ -1,0 +1,106 @@
+
+en:
+  cms:
+    actions:
+      simple:
+        new: "Add"
+        edit: "Edit"
+        update: "Save"
+        destroy: "Delete"
+        back: "Back"
+
+      target:
+        new: "Add %{resource}"
+        create: "Create %{resource}"
+        edit: "Edit %{resource}"
+        update: "Save %{resource}"
+        destroy: "Delete %{resource}"
+        back: "Back to %{resource}"
+        search: "Search %{resources}..."
+        choose: "Choose a %{resource}"
+
+    menu:
+      # Top level menu
+      database: "Sahaj Atlas Database"
+      about: "About Sahaj Atlas"
+      statistics: "Statistics"
+      map: "View Map"
+      sign_out: "Log Out"
+      sign_in: "Log In"
+      # Secondary menu
+      worldwide_data: "Worldwide Data"
+      context: "%{resource} in %{parent}"
+      # Tertiary menu
+      details: "Info"
+      images: "Images"
+      regions: "Regions"
+      activity: "Activity"
+
+    messages:
+      errors: "Errors"
+      no_records_found: "No %{resources} found."
+      confirm_destroy: "Are you sure you want to delete this? This cannot be undone."
+      successfully_created: "Created %{resource} successfully."
+      successfully_updated: "Saved %{resource} successfully."
+      successfully_deleted: "%{resource} successfully deleted. This cannot be undone."
+      successfully_removed: "%{resource} successfully removed from this %{context}."
+
+    hints:
+      unspecified: "Unspecified"
+      never: "Never"
+      country:
+        must_be_new: "Only countries which haven't already been added are listed below."
+      province:
+        must_be_new: "Only regions which haven't already been added are listed below."
+        prompt: "Province / State / County"
+      event:
+        room: "If the venue has more than one room, which room should seekers come to?"
+        language: "Which language(s) can a seeker expect to be used at this event."
+      venue:
+        find_marker: "Find Marker"
+        marker_not_set:
+          title: "Map marker has not been set"
+          description: "You must press 'Find Marker' above to automatically detect the coordinates of the venue's address."
+        cant_find_address:
+          title: "Couldn't find address"
+          description: "The address you entered could not be found, try adding more information."
+        marker_set:
+          title: "Map marker set!"
+          description: "Make sure that the location shown on the map looks correct."
+
+    details:
+      details_for_global: "Global Statistics"
+      details_for_record: "Details for %{resource}"
+      managers_for_record: "Managers for %{resource}"
+      records_managed: "%{resources} managed"
+      is_administrator: "%{name} is an administrator"
+      location_of_record: "Location of this %{resource}"
+      map_of_record: "Map of this %{resource}"
+      area_in_words: "%{radius} km around %{latitude}, %{longitude}"
+      records_in_recent_days: "%{resources} in the last 30 days"
+      record_expired:
+        title: "%{resource} Expired"
+        description: "This %{resource} has been hidden from the public, because it hasn't been updated in %{weeks} weeks."
+      record_not_published:
+        title: "Not Published"
+        description: "This %{resource} is current hidden from the public, because it is not published."
+      record_has_languages: "%{resource} offered in %{languages}"
+      updated_at: "Last updated %{time_ago} ago"
+
+    images:
+      title: "Images of this %{resource}"
+      upload: "Upload Images"
+
+    regions:
+      new_province: "Add Region"
+      provinces_header: "Provinces / States / Counties"
+      local_areas_header:
+        provincial: "Local Areas"
+        national: "Custom Areas"
+        global: "Custom International Areas"
+
+    activity:
+      title: :cms.menu.activity
+      description: "This is a log of all actions taken by this manager."
+      changed_by: "by %{name}"
+      changed_to: "changed to"

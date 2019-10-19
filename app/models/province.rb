@@ -2,7 +2,9 @@ class Province < ApplicationRecord
 
   # Extensios
   include Manageable
+  
   searchable_columns %w[province_code country_code]
+  audited
 
   # Associations
   belongs_to :country, foreign_key: :country_code, primary_key: :country_code

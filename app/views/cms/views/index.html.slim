@@ -1,27 +1,32 @@
 
 - allow = @context ? policy(@context) : policy(:worldwide)
-- content_for :title, "#{@model_name.plural.titleize} | #{@context}"
+- content_for :title, [translate_model(@model, :plural), @context&.label].compact.join(' | ')
 
 = render 'cms/views/context' do
   h3.ui.dividing.header
     - if allow.new_association?(@model.table_name.to_sym) && policy(@model).new?
-      = floating_action "Add #{@model}", 'plus', url_for([:new, :cms, @context, @model_name.singular_route_key])
-    .content = @model_name.plural.titleize
+      = floating_action translate('cms.actions.target.new', resource: translate_model(@model)), 'plus', url_for([:new, :cms, @context, @model_name.singular_route_key])
+    .content = translate_model(@model, :plural)
 
   - if @records.present? || params[:q]
     = simple_form_for url_for([:cms, @model]), html: { method: 'GET', data: { remote: 'true' }, autocomplete: 'off' }
       .search.ui.fluid.icon.small.input data-search=@model_name.route_key
-        input name='q' type='text' placeholder="Search #{@model_name.plural}..." value=(params[:q] || '')
+        - search_placeholder = translate('cms.actions.target.search', resources: translate_model(@model, :plural).downcase)
+        input name='q' type='text' placeholder=search_placeholder value=(params[:q] || '')
         i.search.icon
 
-  .ui.relaxed.list data-search=@model_name.route_key
-    = render partial: "cms/list_items/#{@model_name.singular_route_key}", collection: @records, cache: true
+  - if @model == Audit
+    .ui.fluid.styled.records.accordion data-search=@model_name.route_key
+      = render partial: "cms/list_items/#{@model_name.singular_route_key}", collection: @records, cache: true
+  - else
+    .ui.relaxed.records.list data-search=@model_name.route_key
+      = render partial: "cms/list_items/#{@model_name.singular_route_key}", collection: @records, cache: true
 
   .pagination-info data-search=@model_name.route_key = page_entries_info @records
   .pagination data-search=@model_name.route_key = paginate @records
 
   - if controller_name == 'managers' && @context&.parent_managers.present?
-    h3.ui.dividing.header Managers for #{@context.parent.label}
+    h3.ui.dividing.header = translate('cms.details.managers_for_record', resource: @context.parent.label)
 
     .ui.relaxed.list
       = render partial: 'cms/list_items/manager', collection: @context.parent_managers, cache: true

@@ -1,19 +1,13 @@
 
-h3.ui.dividing.header Details for #{@record.label}
+h3.ui.dividing.header = translate('cms.details.details_for_record', resource: @record.label)
 .ui.list
   - if @record.administrator?
     .item
       i.user.secret.icon
-      .content #{@record.name} is a database administrator
+      .content = translate('cms.details.is_administrator', name: @record.name)
   .item
     = model_icon Event
-    .content
-      = number_with_delimiter @record.events.count
-      = ' Event'.pluralize(@record.events.count)
-      |  managed
+    .content = translate('cms.details.records_managed', resources: translate_model_count(@record.events))
   .item
     = model_icon Venue
-    .content
-      = number_with_delimiter @record.venues.count
-      = ' Venue'.pluralize(@record.venues.count)
-      |  managed
+    .content = translate('cms.details.records_managed', resources: translate_model_count(@record.venues))

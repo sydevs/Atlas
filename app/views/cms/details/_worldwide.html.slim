@@ -1,19 +1,12 @@
 
-h3.ui.dividing.header Global Statistics
+h3.ui.dividing.header = translate('cms.details.details_for_global')
 .ui.list
   .item
     = model_icon Event
-    .content
-      = number_with_delimiter Event.count
-      = ' Event'.pluralize(Event.count)
+    .content = translate_model_count(Event.all)
   .item
     = model_icon Venue
-    .content
-      = number_with_delimiter Venue.count
-      = ' Venue'.pluralize(Venue.count)
-  .item
+    .content = translate_model_count(Venue.all)
+  /.item
     = model_icon Registration
-    .content
-      = number_with_delimiter Registration.recent.count
-      = ' Registration'.pluralize(Registration.recent.count)
-      |  in the last 30 days
+    .content = translate('cms.details.records_in_recent_days', resources: translate_model_count(Registrations.recent))

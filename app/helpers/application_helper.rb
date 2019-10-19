@@ -21,7 +21,7 @@ module ApplicationHelper
           category: event.category_name,
           raw_category: event.category,
           next_date: event.next_date,
-          timing: event.timing,
+          timing: event.timing_in_words,
         }
       },
     }
@@ -35,7 +35,7 @@ module ApplicationHelper
       category: event.category_name,
       raw_category: event.category,
       upcoming_dates: upcoming_dates(event),
-      timing: event.timing,
+      timing: event.timing_in_words,
       url: event_url(event),
       venue: {
         id: event.venue.id,

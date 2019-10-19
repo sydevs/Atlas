@@ -1,0 +1,18 @@
+<%= translate('mail.welcome.intro', event: @event.label) %>
+
+<%= translate('mail.welcome.purpose') %>
+<% translate('mail.welcome.purposes').each do |purpose| %>
+* <%= purpose.gsub('%{event}', @event.label) %>
+<% end %>
+
+<%= message translate('mail.common.about'), :text %>
+
+<%= render 'mailer/managers/event', event: @event %>
+
+<%= translate('mail.common.actions') %>
+<%= '=' * translate('mail.common.actions').length %>
+<%= translate('mail.welcome.call_to_action') %>
+<%= translate('mail.welcome.update') %> - <%= @magic_link %>
+
+
+<%= message translate('mail.common.alert'), :text, :alert %>
