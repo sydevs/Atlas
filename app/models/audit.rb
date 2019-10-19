@@ -6,6 +6,7 @@ class Audit < Audited::Audit
   searchable_columns %w[auditable_type action audited_changes]
 
   # Scopes
-  default_scope { includes(:user, :auditable).order(created_at: :desc) }
+  default_scope { order(created_at: :desc) }
+  scope :with_associations, -> { includes(:user, :auditable) }
 
 end

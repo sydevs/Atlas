@@ -2,7 +2,7 @@ doctype html
 
 html
   head
-    title SYA #{content_for :title}
+    title #{content_for :title} | #{translate 'sahaj_atlas'}
     /link rel="shortcut icon" href="/favicon/admin/favicon.ico" type="image/x-icon"
     /link rel="apple-touch-icon" href="/favicon/admin/apple-touch-icon.png"
     /link rel="apple-touch-icon" sizes="72x72" href="/favicon/admin/apple-touch-icon-72x72.png"
@@ -21,25 +21,25 @@ html
             - if policy(:page).database?
               a.item href=cms_root_path
                 i.archive.icon
-                | Atlas Database
+                = translate('cms.menu.database')
             a.item href=about_path
               i.question.circle.icon
-              | About Sahaj Atlas
+              = translate('cms.menu.about')
             - if policy(:page).statistics?
               a.item href=statistics_path
                 i.chart.bar.icon
-                | Statistics
+                = translate('cms.menu.statistics')
             a.item href=map_path target='_blank'
               i.globe.icon
-              | View Map
+              = translate('cms.menu.map')
 
         a.ui.right.floated.basic.button href=managers.sign_out_path
-          | Logout
+          = translate('cms.menu.sign_out')
       - else
         a.ui.right.floated.basic.button href=managers.sign_in_path
-          | Login
+          = translate('cms.menu.sign_inn')
 
-      h1 Sahaj Atlas
+      h1 = translate('sahaj_atlas')
       .ui.divider
 
       - if @context && @context.respond_to?(:ancestors)
@@ -57,9 +57,16 @@ html
             - else
               .section = ancestor.label
             i.right.angle.icon.divider
-          span.active.section
-            = model_icon @context.class
-            = @context.label
+          - if action_name == 'new'
+            a.section href=url_for([:cms, @context])
+              = model_icon @context.class
+              = @context.label
+            i.right.angle.icon.divider
+            span.active.section
+              = translate('cms.actions.target.new', resource: @model)
+          - else
+            span.section
+              = @context.label
 
     = yield
 

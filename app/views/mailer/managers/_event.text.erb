@@ -13,7 +13,7 @@
  | <%= translate('mail.common.event.latlng') %>: <%= @event.venue.coordinates.join(', ') %>
 
 <%= translate('mail.common.event.timing') %>:
- | <%= @event.timing %>
+ | <%= @event.timing_in_words %>
 
 <%= translate('mail.common.event.languages') %>:
  | <%= @event.language_names.join(', ') %>

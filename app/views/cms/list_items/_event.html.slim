@@ -6,4 +6,4 @@
       a.header href=url_for([:cms, event]) = event.label
     - else
       .header = event.label
-    .description #{event.category.humanize.titleize} / #{"#{event.room}, " if event.room}#{event.timing}
+    .description #{event.category.humanize.titleize} / #{"#{event.room}, " if event.room}#{event.timing_in_words}

@@ -14,14 +14,14 @@ module EventDecorator
   end
 
   def category_name
-    I18n.translate(category, scope: %i[category title])
+    I18n.translate(category, scope: %i[map categories title])
   end
 
   def category_description
-    I18n.translate(category, scope: %i[category description])
+    I18n.translate(category, scope: %i[map categories description])
   end
 
-  def timing
+  def timing_in_words
     result = ''
 
     if start_date == end_date || (end_date.nil? and recurrence == 'day')
@@ -29,7 +29,7 @@ module EventDecorator
     elsif recurrence == 'day'
       result += "#{start_date.to_s(:short)} - #{end_date.to_s(:short)}"
     else
-      result += "Every #{recurrence.humanize.titleize}"
+      result += translate_enum_value(self, :recurrence)
     end
 
     result += ", #{start_time}"

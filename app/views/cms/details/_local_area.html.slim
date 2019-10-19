@@ -1,17 +1,13 @@
 
-h3.ui.dividing.header Details for #{@record.label}
+h3.ui.dividing.header = translate('cms.details.details_for_record', resource: @record.label)
 .ui.list
   .item
     = model_icon Event
-    .content
-      = number_with_delimiter @record.events.count
-      = ' Event'.pluralize(@record.events.count)
+    .content = translate_model_count(@record.events)
   .item
     = model_icon Venue
-    .content
-      = number_with_delimiter @record.venues.count
-      = ' Venue'.pluralize(@record.venues.count)
+    .content = translate_model_count(@record.venues)
 
-h3.ui.dividing.header Map of this area
-p #{@record.radius} km around #{@record.latitude}, #{@record.longitude}
+h3.ui.dividing.header = translate('cms.details.location_of_record', resource: translate_model(LocalArea).downcase)
+p = translate('cms.details.area_in_words', radius: @record.radius, latitude: @record.latitude, longitude: @record.longitude)
 #region-map data-latitude=@record.latitude data-longitude=@record.longitude data-radius=@record.radius

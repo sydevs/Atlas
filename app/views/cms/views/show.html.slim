@@ -1,11 +1,11 @@
 
 - if @context
-  - content_for :title, "#{@record.label} | #{@context}"
+  - content_for :title, "#{@record.label}"
 
   = render 'cms/views/context' do
     = render "cms/details/#{@model_name.singular_route_key}"
 - else
-  - content_for :title, 'Worldwide Data'
+  - content_for :title, translate('cms.menu.worldwide_data')
 
   = render 'cms/views/context' do
     = render 'cms/details/worldwide'

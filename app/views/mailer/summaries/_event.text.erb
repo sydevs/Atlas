@@ -1,6 +1,6 @@
  - <%= event.name || event.venue.street %>
    <%= event.category_name %>
    <%= event.full_address %>
-   <%= event.timing %>
+   <%= event.timing_in_words %>
    *<%= translate(timestamp, scope: %i[mail summary listing]) %>: <%= event.send(timestamp).to_s(:short) %>
 

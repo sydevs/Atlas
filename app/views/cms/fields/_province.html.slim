@@ -2,5 +2,5 @@
 - existing_provinces = @record.country.provinces.pluck(:province_code)
 - provinces = ISO3166::Country[@record.country_code].subdivisions.map { |k,v| [v['name'], k] unless existing_provinces.include?(k) }.compact
 
-.hint Only regions which haven't already been added are listed below.
-= f.input :province_code, label: false, prompt: 'Choose Province / State / County', collection: provinces, input_html: { class: 'search' }
+.hint = translate('cms.hints.province.must_be_new')
+= f.input :province_code, label: false, prompt: translate('cms.actions.target.choose', resource: translate('cms.hints.province.prompt')), collection: provinces, input_html: { class: 'search' }
