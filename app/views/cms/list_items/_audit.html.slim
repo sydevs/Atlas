@@ -1,0 +1,28 @@
+
+.title
+  /= model_icon Audit
+  i.dropdown.icon
+  .floated
+    - if audit.user
+      ' by #{audit.user.label} - 
+
+    = audit.created_at.to_s(:short)
+    
+  | #{audit.action.titleize} - #{audit.auditable.try(:name)} (#{audit.auditable_type})
+.content
+  table.ui.very.basic.table
+    tbody
+      - if audit.action == 'update'
+        - audit.audited_changes.each do |field, change|
+          tr
+            th = field
+            td changed to
+          tr
+            td = change[0]
+            td = change[1]
+      - else
+        - audit.audited_changes.each do |field, change|
+          tr
+            th = field
+          tr
+            td = change

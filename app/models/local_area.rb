@@ -6,6 +6,7 @@ class LocalArea < ApplicationRecord
   nilify_blanks
   acts_as_mappable lat_column_name: :latitude, lng_column_name: :longitude
   searchable_columns %w[name identifier province_code country_code]
+  audited
 
   # Associations
   belongs_to :country, foreign_key: :country_code, primary_key: :country_code, optional: true

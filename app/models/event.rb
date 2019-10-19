@@ -7,6 +7,7 @@ class Event < ApplicationRecord
 
   nilify_blanks
   searchable_columns %w[name category description]
+  audited
 
   # Associations
   belongs_to :venue

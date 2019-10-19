@@ -14,7 +14,6 @@ body
   cursor: default
 
 .image
-  
   .labels
     position: absolute
     bottom: 0
@@ -22,7 +21,6 @@ body
 
   /*&:not(:hover) .labels
     display: none*/
-
 
 .leaflet-pane
   z-index: 0
@@ -34,3 +32,16 @@ body
     position: absolute
     right: 0
     bottom: 2px
+
+.ui.accordion
+  margin: 1em 0
+
+  &.styled
+    border: 1px solid rgba(34, 36, 38, 0.15)
+    box-shadow: none !important
+
+  &.styled.records > .title
+    padding: 0.5em 1em
+
+  > .title > .floated
+    float: right

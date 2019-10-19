@@ -35,6 +35,15 @@ class CMS::ManagersController < CMS::ApplicationController
     redirect_to [:cms, @context, Manager]
   end
 
+  def activity
+    set_context!
+    authorize @context, :view_activity?
+    @records = policy_scope(@context.actions).page(params[:page]).per(30).search(params[:q])
+    @model = Audit
+    set_model_name!
+    render 'cms/views/activity'
+  end
+
   private
 
     def parameters

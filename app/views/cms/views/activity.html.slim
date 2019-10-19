@@ -1,0 +1,21 @@
+
+- allow = policy(@context)
+- content_for :title, "#{@model_name.plural.titleize} | #{@context.label}"
+
+= render 'cms/views/context' do
+  h3.ui.dividing.header
+    .content Activity
+
+  p This is a log of all actions taken by this manager.
+
+  - if @records.present? || params[:q]
+    = simple_form_for url_for([:cms, @model]), html: { method: 'GET', data: { remote: 'true' }, autocomplete: 'off' }
+      .search.ui.fluid.icon.small.input data-search=@model_name.route_key
+        input name='q' type='text' placeholder="Search #{@model_name.plural}..." value=(params[:q] || '')
+        i.search.icon
+
+  .ui.fluid.styled.records.accordion data-search=@model_name.route_key
+    = render partial: "cms/list_items/#{@model_name.singular_route_key}", collection: @records, cache: true
+
+  .pagination-info data-search=@model_name.route_key = page_entries_info @records
+  .pagination data-search=@model_name.route_key = paginate @records

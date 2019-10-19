@@ -1,4 +1,4 @@
-$('.list[data-search="<%= @model_name.route_key %>"]').html(`<%= render partial: "cms/list_items/#{@model_name.singular_route_key}", collection: @records, cache: true %>`)
+$('.records[data-search="<%= @model_name.route_key %>"]').html(`<%= render partial: "cms/list_items/#{@model_name.singular_route_key}", collection: @records, cache: true %>`)
 $('.pagination[data-search="<%= @model_name.route_key %>"]').html(`<%= paginate @records %>`)
 $('.pagination-info[data-search="<%= @model_name.route_key %>"]').html(`<%= page_entries_info @records %>`)
 $('.search[data-search="<%= @model_name.route_key %>"]').removeClass('loading')

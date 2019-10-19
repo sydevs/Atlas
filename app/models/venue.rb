@@ -4,6 +4,7 @@ class Venue < ApplicationRecord
   include Manageable
   include Publishable
 
+  audited
   nilify_blanks
   acts_as_mappable lat_column_name: :latitude, lng_column_name: :longitude
   searchable_columns %w[name street city province_code country_code]

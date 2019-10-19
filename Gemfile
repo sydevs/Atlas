@@ -31,6 +31,7 @@ gem 'kaminari' # Pagination
 gem 'passwordless' # For email based user authentication
 gem 'premailer-rails' # Generate inline styles for emails
 gem 'pundit' # Permissions
+gem 'audited' # Logs changes to any record
 
 ### Geocoding
 gem 'geokit-rails'
@@ -57,7 +58,6 @@ group :development do
   gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'spring' # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring-watcher-listen', '~> 2.0.0'
-  gem 'switch_user'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
