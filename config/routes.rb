@@ -18,6 +18,7 @@ Rails.application.routes.draw do
       resources :events, only: %i[index]
       resources :provinces, only: %i[new create]
       resources :local_areas, only: %i[new create]
+      resources :audits, only: %i[index]
     end
 
     resources :provinces, except: %i[edit update index] do
@@ -26,17 +27,20 @@ Rails.application.routes.draw do
       resources :venues, only: %i[index new create]
       resources :events, only: %i[index]
       resources :local_areas, only: %i[new create]
+      resources :audits, only: %i[index]
     end
 
     resources :local_areas, except: %i[index] do
       resources :managers, only: %i[index new create destroy]
       resources :venues, only: %i[index new create]
       resources :events, only: %i[index]
+      resources :audits, only: %i[index]
     end
 
     resources :venues do
       resources :managers, only: %i[index new create destroy]
       resources :events, only: %i[index new create]
+      resources :audits, only: %i[index]
     end
 
     resources :events do
@@ -46,15 +50,18 @@ Rails.application.routes.draw do
       get :regions
       resources :managers, only: %i[index new create destroy]
       resources :registrations, only: %i[index]
+      resources :audits, only: %i[index]
     end
 
     resources :managers do
       get :regions
       resources :venues, only: %i[index]
       resources :events, only: %i[index]
+      resources :audits, only: %i[index]
     end
 
     resources :registrations, only: %i[index]
+    resources :audits, only: %i[index]
   end
 
 =begin

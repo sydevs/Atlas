@@ -9,6 +9,7 @@ module CMS::ApplicationHelper
     events: 'calendar',
     managers: 'user',
     registrations: 'user',
+    audits: 'clipboard list',
   }
 
   def floating_action text, icon, url = nil, **args

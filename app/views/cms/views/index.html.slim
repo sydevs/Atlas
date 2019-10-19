@@ -14,8 +14,12 @@
         input name='q' type='text' placeholder="Search #{@model_name.plural}..." value=(params[:q] || '')
         i.search.icon
 
-  .ui.relaxed.list data-search=@model_name.route_key
-    = render partial: "cms/list_items/#{@model_name.singular_route_key}", collection: @records, cache: true
+  - if @model == Audit
+    .ui.fluid.styled.records.accordion data-search=@model_name.route_key
+      = render partial: "cms/list_items/#{@model_name.singular_route_key}", collection: @records, cache: true
+  - else
+    .ui.relaxed.records.list data-search=@model_name.route_key
+      = render partial: "cms/list_items/#{@model_name.singular_route_key}", collection: @records, cache: true
 
   .pagination-info data-search=@model_name.route_key = page_entries_info @records
   .pagination data-search=@model_name.route_key = paginate @records

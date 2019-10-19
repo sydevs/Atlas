@@ -3,6 +3,7 @@ class Manager < ApplicationRecord
   # Extensions
   passwordless_with :email
   searchable_columns %w[name email]
+  audited
 
   # Associations
   has_many :managed_records
@@ -29,6 +30,10 @@ class Manager < ApplicationRecord
   def managed_by? manager, super_manager: false
     return true if self == manager && !super_manager
     return manager.administrator?
+  end
+
+  def username
+    name
   end
 
 end
