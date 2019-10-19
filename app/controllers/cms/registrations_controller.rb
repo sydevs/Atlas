@@ -3,7 +3,10 @@ class CMS::RegistrationsController < CMS::ApplicationController
   prepend_before_action { @model = Registration }
 
   def create
-    super parameters
+    if super(parameters)
+      @record.touch(:latest_registration_at)
+      RegistrationMailer.with(registration: @record).confirmation.deliver_now
+    end
   end
 
   def update

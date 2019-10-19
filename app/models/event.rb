@@ -2,6 +2,8 @@ class Event < ApplicationRecord
 
   # Extensions
   include Manageable
+  include Publishable
+  include Expirable
 
   nilify_blanks
   searchable_columns %w[name category description]
@@ -27,6 +29,7 @@ class Event < ApplicationRecord
 
   # Scopes
   default_scope { order(updated_at: :desc) }
+  scope :with_new_registrations, -> { where('latest_registration_at >= registrations_sent_at') }
 
   # Delegations
   delegate :full_address, to: :venue
@@ -43,5 +46,4 @@ class Event < ApplicationRecord
     # Only accept languages which are in the language list
     super value & I18nData.languages.keys
   end
-
 end

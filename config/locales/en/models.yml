@@ -1,9 +1,5 @@
 
 en:
-  messages:
-    confirm_delete: "Are you sure you want to delete this?  This cannot be undone."
-    successfully_deleted: "%{record} successfully deleted. This cannot be undone."
-    successfully_removed: "%{record} successfully removed from this %{context}."
   category:
     title:
       intro: "Intro Meditation Class"
@@ -21,3 +17,4 @@ en:
     no: "No Restriction"
     province: "Limit to State Boundaries"
     country: "Limit to Country Borders"      
+    

@@ -1,0 +1,28 @@
+<% if @event.managers.include?(@manager) %>
+<%= translate('mail.expired.intro', event: @event.label, date: @event.updated_at.to_s(:long)) %>
+
+<%= translate('mail.expired.purpose.description', duration: distance_of_time_in_words(Time.now, Expirable::EXPIRE_AFTER_WEEKS.weeks.from_now)) %>
+
+<%= render 'mailer/managers/event' %>
+
+<%= translate('mail.common.actions') %>
+<%= '=' * translate('mail.common.actions').length %>
+<%= translate('mail.expired.call_to_action') %>
+<%= translate('mail.expired.confirm') %> - <%= @magic_link %>
+<%= translate('mail.expired.update') %> - <%= @magic_link %>
+<% else %>
+<%= translate('mail.escalation.intro', region: @event.venue.parent.label, event: @event.label, date: @event.updated_at.to_s(:long)) %>
+
+<%= translate('mail.expired.purpose.description', duration: distance_of_time_in_words(Time.now, Expirable::EXPIRE_AFTER_WEEKS.weeks.from_now)) %>
+
+<%= render 'mailer/managers/event' %>
+
+<%= translate('mail.common.actions') %>
+<%= '=' * translate('mail.common.actions').length %>
+<%= translate('mail.escalation.call_to_action') %>
+<% end %>
+
+
+<%= message translate('mail.common.about'), :text %>
+
+<%= message translate('mail.common.alert'), :text, :alert %>

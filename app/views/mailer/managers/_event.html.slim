@@ -1,0 +1,27 @@
+
+h2 #{event.name || event.venue.street} - #{translate('mail.common.event.title')}
+section
+  dl
+    dt = translate('mail.common.event.name')
+    dd
+      div = event.label
+      .faded = event.description || translate('mail.common.event.no_description')
+
+    dt = translate('mail.common.event.type')
+    dd
+      div = event.category_name
+      .faded = event.category_description
+
+    dt = translate('mail.common.event.location')
+    dd
+      div = event.full_address
+      .faded 
+        = translate('mail.common.event.latlng')
+        ' : 
+        = event.venue.coordinates.join(', ')
+
+    dt = translate('mail.common.event.timing')
+    dd = event.timing
+
+    dt = translate('mail.common.event.languages')
+    dd = event.language_names.join(', ')

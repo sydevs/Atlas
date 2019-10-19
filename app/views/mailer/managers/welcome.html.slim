@@ -1,0 +1,20 @@
+
+/ TODO: Check that this would actually be html safe
+p = translate('mail.welcome.intro', event: tag.b(@event.label)).html_safe
+
+= message translate('mail.common.about'), :html
+
+h2 = translate('mail.welcome.purpose', event: tag.b(@event.label)).html_safe
+ul
+  - translate('mail.welcome.purposes').each do |purpose|
+    li = purpose.gsub('%{event}', @event.label)
+
+= render 'mailer/managers/event', event: @event
+
+h2 = translate('mail.common.actions')
+p = translate('mail.welcome.call_to_action')
+p.button-group
+  a.button href=@magic_link
+    = translate('mail.welcome.update')
+
+= message translate('mail.common.alert'), :html, :alert

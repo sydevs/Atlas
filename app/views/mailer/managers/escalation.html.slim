@@ -1,0 +1,22 @@
+
+/ TODO: Check that this would actually be html safe
+p = translate('mail.escalation.intro', region: tag.b(@event.venue.parent.label), event: tag.b(@event.label), date: @event.updated_at.to_s(:long)).html_safe
+p = translate('mail.escalation.purpose')
+
+blockquote.message--alert
+  strong.title = translate('mail.escalation.escalate.title')
+  p = translate('mail.escalation.escalate.description', region: @event.venue.parent.label, expires_in_days: @event.expires_in_days_in_words)
+
+= render 'mailer/managers/event', event: @event
+
+h2 = translate('mail.common.actions')
+p = translate('mail.escalation.call_to_action')
+ul
+  - @event.managers.each do |manager|
+    li
+      = manager.name
+      '  - 
+      = mail_to(manager.email)
+
+= message translate('mail.common.about'), :html
+= message translate('mail.common.alert'), :html, :alert
