@@ -5,7 +5,7 @@ module VenueDecorator
   end
 
   def full_address
-    [street, city, province_code, country_code].compact.join(', ')
+    [street, city, province_name, country_code].compact.join(', ')
   end
 
   def address

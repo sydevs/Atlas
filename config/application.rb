@@ -19,6 +19,8 @@ module Sydb
       'Access-Control-Allow-Origin' => '*',
       'Access-Control-Request-Method' => 'GET'
     }
+
+    config.i18n.load_path += Dir["#{Rails.root.to_s}/config/locales/**/*.{rb,yml}"]
   end
 end
 

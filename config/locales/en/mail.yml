@@ -1,0 +1,118 @@
+
+en:
+  mail:
+    common:
+      automated: "This is an automated email. Please use the links in this email to respond, or email %{email} if you need help."
+      unsubscribe: "If you don't know why you received this email, or no longer want to receive these emails please write to %{email}."
+      actions: "Actions"
+      or: "or"
+      about:
+        title: "About Sahaj Atlas"
+        description: "The Sahaj Atlas is a project to centralize the list of all public events and ensure that this event list is always up to date so that seekers may always find active events near them."
+      alert:
+        title: "Alert!"
+        description: "This email contains sensitive links that allow access and editing for the Sahaj Atlas Database. Please do not forward this email to anyone!"
+      event:
+        title: "Event Details"
+        name: "Event"
+        type: "Type"
+        location: "Location"
+        latlng: "Latitude & Longitude"
+        timing: "Timing"
+        languages: "Languages Offered"
+        no_description: "(No Description)"
+
+    welcome:
+      subject: "Welcome to Sahaj Atlas - %{event}"
+      intro: "You have been listed as a manager for an event on the Sahaj Atlas. You are now able to manage the %{event} sahaj public event."
+      purpose: "From now on you will:"
+      purposes:
+        - "Be able to modify the details of the \"%{event}\" event."
+        - "Receive a weekly email with a list of who has registered for the event."
+        - "Every couple months you may also receive an email asking you to confirm that the event details are still up to date."
+      call_to_action: "Please click below if you wish to change these details."
+      update: "Update event"
+
+    registrations:
+      subject: "Event Registrations since %{date}"
+      intro: "You are receiving this email because you are a manager for the %{event} sahaj public event."
+      purpose: "This email is to inform you about new registrations for the event since %{date}. There have been %{count} registrations since then."
+      listing:
+        title: "Registrations"
+        person: "Person"
+        comment: "Comment"
+        registered_at: "Registered"
+        no_comment: "(No Comment)"
+      call_to_action: "Please click below to take further action."
+      view_all: "View all registrations"
+      unsubscribe: "Stop sending me registration lists"
+
+    verification:
+      subject: "Public Event Verification - %{event}"
+      intro: "You are receiving this email because you are a manager for the %{event} sahaj public event, which has not been updated since %{date}"
+      purpose: "In order to ensure that the global sahaj event database is up to date, we remove events which are not confirmed every few months. Please check that the following details of the event are still up to date, and then choose an action below."
+      escalate:
+        title: :mail.common.alert.title # Do not translate
+        description: "If you do not respond to this email within %{escalates_in_days}, we will attempt to contact a manager for the %{region} region. If this event is not verified after %{expires_in_days}, it will be hidden from the public."
+      call_to_action: "Please click below to respond to this email."
+      confirm: "These details are correct"
+      update: "These details need to be updated"
+
+    escalation:
+      subject: "Urgent Public Event Verification - %{event}"
+      intro: "You are receiving this email because you are a manager for the %{region} region. The %{event} sahaj public event in your region has has not been updated since %{date}"
+      purpose: "In order to ensure that the global sahaj event database is up to date, we remove events which are not confirmed every few months. Please get in touch with any of the managers of this event, and encourage them to check the data."
+      escalate:
+        title: :mail.common.alert.title # Do not translate
+        description: "If this event is not verified after %{expires_in_days}, it will be hidden from the public."
+      call_to_action: "Please get in touch with any of the managers of this event, and ask them to update the event."
+
+    expired:
+      subject: "Urgent! Public Event Expiration - %{event}"
+      intro: "You are receiving this email because you are a manager for the %{event} sahaj event. This event has has not been updated since %{date}"
+      purpose:
+        title: :mail.common.alert.title # Do not translate
+        description: "Because this event has not been updated for %{duration}, it has been removed from the public map of events! If you wish to have it republished, you must confirm that the event details are correct, or update them."
+      call_to_action: "Please click below to respond to this email."
+      confirm: "These details are correct"
+      update: "Update program"
+
+    confirmation:
+      subject: "Registration Confirmation - %{event}"
+      intro: "Your registration for the %{event} event is confirmed! Please write to us if you have any questions."
+
+    summary:
+      listing:
+        event: "Event"
+        details: "Details"
+        expires_at: "Expires"
+        created_at: "Created"
+
+    global_summary:
+      subject: "Global Summary - Sahaj Atlas"
+      intro: "You are receiving this email because you are an global administrator for the Sahaj Atlas. This is a summary of recent changes in the database."
+      registrations:
+        title: "Recent Registrations"
+        description: "There have been %{count} new registrations in the last week."
+      new_events:
+        title: "Recently Created Events"
+        description: "%{count} events have been added to the database recently."
+      expired:
+        title: "Recently Expired Events"
+        description: "%{count} events have been removed from the database because they have not been updated in %{expiration_weeks} weeks. This is done to maintain the accuracy of the database."
+      review:
+        title: "Events Expiring Soon"
+        description: "%{count} events will soon expire and be removed from the database, unless they are updated by a manager. The yogis who run these events have been emailed, but have not yet responded."
+
+    regional_summary:
+      subject: "%{region} Summary - Sahaj Atlas"
+      intro: "You are receiving this email because you are a manager for the %{region} region for the Sahaj Atlas. This is a summary of recent changes in to the Sahaj Atlas in your region."
+      new_events:
+        title: :mail.global_summary.new_events.title # Do not translate
+        description: "%{count} events have been added to your region in the last week."
+      expired:
+        title: :mail.global_summary.expired.title # Do not translate
+        description: "%{count} events have been removed from the database because they have not been updated in %{expiration_weeks} weeks. This is done to maintain the accuracy of the database. Please contact the yogis who run these events and ask them to update their events to keep them active."
+      review:
+        title: :mail.global_summary.review.title # Do not translate
+        description: "%{count} events will soon expire and be removed from the database, unless they are updated by a manager. The yogis who run these events have been emailed, but have not yet responded."

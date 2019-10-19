@@ -13,7 +13,9 @@ module CMS::ApplicationHelper
   }
 
   def floating_action text, icon, url = nil, **args
-    content_tag :a, class: 'ui basic right floated compact tiny button', href: url, **args do
+    klass = %w[ui basic right floated compact tiny button]
+    klass << args[:class] if args[:class].present?
+    content_tag :a, class: klass, href: url, **args.except(:class) do
       concat tag.i class: "#{icon} icon"
       concat text
     end

@@ -2,6 +2,8 @@
 - categories = Event.categories.map { |k, v| [translate(k, scope: %i[category title]), k] }
 - languages = I18nData.languages(I18n.locale).map { |k,v| [v, k] }
 
+= f.input :published
+
 = f.input :venue do
   .hint = @record.venue.name ? "#{@record.venue.name} - #{@record.venue.full_address}" : @record.venue.full_address
 
