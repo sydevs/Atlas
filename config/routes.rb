@@ -55,6 +55,7 @@ Rails.application.routes.draw do
 
     resources :managers do
       get :regions
+      get :activity
       resources :venues, only: %i[index]
       resources :events, only: %i[index]
       resources :audits, only: %i[index]

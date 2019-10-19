@@ -2,6 +2,7 @@ class Audit < Audited::Audit
 
   # Extensions
   include Searchable
+  
   searchable_columns %w[auditable_type action audited_changes]
 
   # Scopes

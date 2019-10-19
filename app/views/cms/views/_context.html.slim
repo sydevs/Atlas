@@ -23,6 +23,7 @@ h2.ui.header
     = menu_item 'Events', @context, index: 'events' if allow.index_association?(:events)
     = menu_item 'Registrations', @context, index: 'registrations' if allow.index_association?(:registrations)
     = menu_item 'Audits', @context, index: 'audits' if allow.index_association?(:audits)
+    = menu_item 'Activity', @context, index: 'activity' if allow.try(:view_activity?)
 
 .ui.basic.segment
   - flash.each do |key, message|
