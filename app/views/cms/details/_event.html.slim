@@ -1,6 +1,18 @@
 
+- if @record.published? && @record.expired?
+  .ui.orange.icon.message
+    i.exclamation.icon
+    .content
+      .header Event Expired
+      .description This event has not been updated in 10 weeks, as such it has been removed from the public map.
+
 h3.ui.dividing.header Details
 .ui.list
+  .item
+    i.warning.sign.icon
+    .content
+      .header Not Published
+      .description This event is not currently published, so it will not appear on the public map.
   .item
     i.hashtag.icon
     .content

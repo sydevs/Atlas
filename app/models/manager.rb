@@ -18,6 +18,7 @@ class Manager < ApplicationRecord
 
   # Scopes
   default_scope { order(updated_at: :desc) }
+  scope :administrators, -> { where(administrator: true) }
 
   # Methods
 

@@ -7,6 +7,10 @@ h2.ui.header
       = floating_action 'Delete', 'trash', url_for([:cms, @context]), data: { method: 'DELETE', confirm: translate('messages.confirm_delete') }
     - if allow.edit?
       = floating_action 'Edit', 'edit', url_for([:edit, :cms, @context])
+    - if @context.respond_to?(:published) && !@context.published
+      = floating_action 'Not Published', 'exclamation', class: 'active yellow', data: { tooltip: 'This event is curernt hidden from the public.', position: 'bottom center' }
+    - elsif @context.try(:expired?)
+      = floating_action 'Out of Date', 'exclamation', class: 'active orange'
   .content = @context&.label || 'Worldwide Data'
   - if @context && @context.parent.present?
     .sub.header #{@context.model_name.singular.titleize} in #{@context.parent.label}

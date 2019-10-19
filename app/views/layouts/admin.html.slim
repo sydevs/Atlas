@@ -2,7 +2,7 @@ doctype html
 
 html
   head
-    title SYDB #{content_for :title}
+    title SYA #{content_for :title}
     /link rel="shortcut icon" href="/favicon/admin/favicon.ico" type="image/x-icon"
     /link rel="apple-touch-icon" href="/favicon/admin/apple-touch-icon.png"
     /link rel="apple-touch-icon" sizes="72x72" href="/favicon/admin/apple-touch-icon-72x72.png"
@@ -21,10 +21,10 @@ html
             - if policy(:page).database?
               a.item href=cms_root_path
                 i.archive.icon
-                | Program Database
+                | Atlas Database
             a.item href=about_path
               i.question.circle.icon
-              | About SYDB
+              | About Sahaj Atlas
             - if policy(:page).statistics?
               a.item href=statistics_path
                 i.chart.bar.icon
@@ -39,7 +39,7 @@ html
         a.ui.right.floated.basic.button href=managers.sign_in_path
           | Login
 
-      h1 SY Database
+      h1 Sahaj Atlas
       .ui.divider
 
       - if @context && @context.respond_to?(:ancestors)

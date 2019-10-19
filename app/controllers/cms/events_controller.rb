@@ -49,6 +49,7 @@ class CMS::EventsController < CMS::ApplicationController
 
     def parameters
       params.fetch(:event, {}).permit(
+        :published,
         :name, :description, :room, :category,
         :recurrence, :start_date, :end_date, :start_time, :end_time,
         manager: {},

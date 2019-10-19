@@ -1,0 +1,5 @@
+
+/ TODO: Check that this would actually be html safe
+p = translate('mail.confirmation.intro', event: tag.b(@event.name || @event.venue.street)).html_safe
+
+= render 'mailer/registrations/event'
