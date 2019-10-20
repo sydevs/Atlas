@@ -1,6 +1,7 @@
 @import 'mixins'
 
 $panel-overlap: 160px
+$panel-overlap-mobile: 200px
 
 body.about
   overflow: hidden
@@ -9,10 +10,13 @@ body.about
   &__image
     background: image-url('info/splash.jpg')
     background-repeat: norepeat
-    background-position: bottom
+    background-position: bottom left
     background-size: cover
     width: 100vw
     height: 100vh
+
+    @include mobile
+      background-position-x: -150px
 
   &__header
     animation: fadedown 1s
@@ -20,7 +24,14 @@ body.about
     position: absolute
     top: 8vh
     left: 5vh
+    padding-right: 20px
     color: $theme-color-transparent
+
+    @include mobile
+      left: 0
+      right: 0
+      width: 100vw
+      text-align: center
 
     svg
       height: 2em
@@ -29,16 +40,27 @@ body.about
       vertical-align: middle
       fill: $theme-color-transparent
 
+      @include mobile
+        display: block
+        margin: auto
+        margin-bottom: 0.25em
+
   &__content
     animation: slideup 1.5s ease
     margin-top: -$panel-overlap
-    width: 100vw
     min-height: $panel-overlap
+    width: 100vw
     padding: 1em
+    box-sizing: border-box
 
     background: $theme-color-transparent
     text-align: center
     color: white
+
+    @include mobile
+      animation: slideup-mobile 1.5s ease
+      margin-top: -$panel-overlap-mobile
+      min-height: $panel-overlap-mobile
 
   &__content__inner
     max-width: 600px
@@ -63,3 +85,14 @@ body.about
   to
     opacity: 1
     margin-top: -$panel-overlap
+
+@keyframes slideup-mobile
+  from
+    opacity: 0
+    margin-top: -$panel-overlap-mobile * 0.75
+  50%
+    opacity: 0
+    margin-top: -$panel-overlap-mobile * 0.75
+  to
+    opacity: 1
+    margin-top: -$panel-overlap-mobile

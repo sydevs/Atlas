@@ -2,3 +2,7 @@
 $theme-color: #0b212f
 $theme-color-transparent: transparentize($theme-color, 0.2)
 $font: 'Montserrat', sans-serif
+
+@mixin mobile
+  @media only screen and (max-width: 400px)
+    @content
