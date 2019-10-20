@@ -13,12 +13,10 @@
           span.event-address= event.venue&.address&.values.join(", ")
           span.time-details
             span.day
-              = event.recurrence.upcase
+              = event.recurrence_in_words
             | &nbsp
             span.time
-              = event.start_time
-              | - 
-              = event.end_time
+              = event.formatted_start_end_time
         .event-actions-container
           .button-container
             button.registerButton.register-button data-eventId=event.id
