@@ -57,6 +57,30 @@ module EventDecorator
     date.to_s
   end
 
+  def upcoming_dates limit = 10
+    dates = []
+    daily = (recurrence == 'day')
+    interval = (daily ? 1 : 7)
+
+    if start_date == end_date || (end_date.nil? && daily)
+      dates << start_date
+    elsif daily
+      dates << [start_date, Date.today].min
+    else
+      date = Date.parse(recurrence)
+      date += 7 if date > Date.today
+      dates << date
+    end
+
+    while dates.length < limit
+      next_date = dates[-1] + interval
+      break if end_date.present? && next_date > end_date
+      dates << next_date
+    end
+
+    dates
+  end
+
   def escalates_in_days_in_words
     distance_of_time_in_words(Time.now, needs_escalation_at)
   end

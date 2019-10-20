@@ -1,12 +1,14 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   passwordless_for :managers
-  
-  get :map, to: 'application#map'
 
   namespace :info, path: '' do
     root to: 'application#about'
     get :statistics, to: 'application#statistics'
+  end
+
+  namespace :map do
+    root to: 'application#show'
   end
 
   namespace :cms do
@@ -67,32 +69,10 @@ Rails.application.routes.draw do
     resources :audits, only: %i[index]
   end
 
-=begin
-  # ===== VENUES AND EVENTS ===== #
-  resources :venues do
-    resources :events, only: %i[new create]
-  end
-
-  resources :events, only: %i[show index edit update destroy] do
-    post :images, to: 'events#upload_image', as: :upload_image
-    delete 'images/:index', to: 'events#destroy_image', as: :destroy_image
-    resources :registrations, only: %i[index]
-  end
-
-  resource :registrations, only: %i[create update]
-
-  # ===== REGIONS ===== #
-  namespace :regions, path: '' do
-    resources :countries, only: %i[index show new create edit destroy] do
-      resources :provinces, only: %i[new create]
-      resources :local_areas, only: %i[new create]
+  namespace :api do
+    resources :events, only: %i[index show]
+    resources :venues, only: %i[index show] do
+      resources :events, only: %i[index]
     end
-
-    resources :provinces, only: %i[show edit destroy] do
-      resources :local_areas, only: %i[new create]
-    end
-
-    resources :local_areas
   end
-=end
 end

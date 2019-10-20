@@ -1,24 +1,11 @@
-# README
+# Sahaj Atlas
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## API
+There are currently two primary endpoints available. Accessing these endpoints will also provide endpoints to access individual records in the response.
+ - `/api/venues.json`
+ - `/api/events.json`
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Both these endpoints return respond to the following query parameters.
+ - `include=?` to include nested records (eg. `events`, `venues`). Comma-separated when you need to specify multiple types of nested records.
+ - `latitude=?&longitude=?&radius=?` to restrict the results to a geographical location. `radius` is optional, and will default to 500km.
+ 
