@@ -9,8 +9,8 @@ html
     /link rel="apple-touch-icon" sizes="114x114" href="/favicon/admin/apple-touch-icon-114x114.png"
 
     = csrf_meta_tags
-    = stylesheet_link_tag    'admin', media: 'all'
-    = javascript_include_tag 'admin'
+    = stylesheet_link_tag    'cms', media: 'all'
+    = javascript_include_tag 'cms'
 
   body class="admin #{controller_name} #{controller.action_name}"
     header
@@ -22,11 +22,11 @@ html
               a.item href=cms_root_path
                 i.archive.icon
                 = translate('cms.menu.database')
-            a.item href=about_path
+            a.item href=info_root_path
               i.question.circle.icon
               = translate('cms.menu.about')
             - if policy(:page).statistics?
-              a.item href=statistics_path
+              a.item href=info_statistics_path
                 i.chart.bar.icon
                 = translate('cms.menu.statistics')
             a.item href=map_path target='_blank'

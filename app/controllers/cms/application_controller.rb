@@ -1,6 +1,6 @@
 class CMS::ApplicationController < ActionController::Base
 
-  layout 'admin'
+  layout 'cms/application'
 
   include Passwordless::ControllerHelpers
   include Pundit

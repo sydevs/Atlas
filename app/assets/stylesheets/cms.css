@@ -12,7 +12,6 @@
  *
  *= require semantic-ui
  *= require leaflet
- *= require_tree ./admin
- *= require_self
+ *= require_tree ./cms
  */
 

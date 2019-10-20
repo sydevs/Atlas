@@ -2,10 +2,12 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   passwordless_for :managers
   
-  root to: 'application#about'
   get :map, to: 'application#map'
-  get :about, to: 'application#about'
-  get :statistics, to: 'application#statistics'
+
+  namespace :info, path: '' do
+    root to: 'application#about'
+    get :statistics, to: 'application#statistics'
+  end
 
   namespace :cms do
     root to: 'application#show'

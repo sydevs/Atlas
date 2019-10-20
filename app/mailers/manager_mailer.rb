@@ -1,7 +1,7 @@
 
 class ManagerMailer < ApplicationMailer
   default template_path: 'mailer/managers'
-  layout 'mailer/cms'
+  layout 'mailer/manager'
 
   def welcome
     setup
