@@ -1,0 +1,65 @@
+@import 'mixins'
+
+$panel-overlap: 160px
+
+body.about
+  overflow: hidden
+
+.splash
+  &__image
+    background: image-url('info/splash.jpg')
+    background-repeat: norepeat
+    background-position: bottom
+    background-size: cover
+    width: 100vw
+    height: 100vh
+
+  &__header
+    animation: fadedown 1s
+    margin-top: 0
+    position: absolute
+    top: 8vh
+    left: 5vh
+    color: $theme-color-transparent
+
+    svg
+      height: 2em
+      margin-right: 0.25em
+      margin-top: -0.75em
+      vertical-align: middle
+      fill: $theme-color-transparent
+
+  &__content
+    animation: slideup 1.5s ease
+    margin-top: -$panel-overlap
+    width: 100vw
+    min-height: $panel-overlap
+    padding: 1em
+
+    background: $theme-color-transparent
+    text-align: center
+    color: white
+
+  &__content__inner
+    max-width: 600px
+    margin: auto
+
+  
+@keyframes fadedown
+  from
+    opacity: 0
+    margin-top: -1em
+  to
+    opacity: 1
+    margin-top: 0
+
+@keyframes slideup
+  from
+    opacity: 0
+    margin-top: -$panel-overlap * 0.75
+  50%
+    opacity: 0
+    margin-top: -$panel-overlap * 0.75
+  to
+    opacity: 1
+    margin-top: -$panel-overlap

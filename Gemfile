@@ -45,6 +45,9 @@ gem 'mini_magick' # Image processing during upload
 gem 'i18n_data' # Adds localized lists of countries and languages
 gem 'countries' # Adds localized lists of countries and subdivisions
 
+### Utility
+gem 'inline_svg' # Allows SVGs to be rendered inline
+
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw] # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'capybara', '~> 2.13' # Adds support for Capybara system testing and selenium driver

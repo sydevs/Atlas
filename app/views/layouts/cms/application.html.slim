@@ -12,7 +12,7 @@ html
     = stylesheet_link_tag    'cms', media: 'all'
     = javascript_include_tag 'cms'
 
-  body class="admin #{controller_name} #{controller.action_name}"
+  body class="cms #{controller_name} #{controller.action_name}"
     header
       - if current_user
         .ui.basic.top.right.floated.pointing.dropdown.icon.button
@@ -37,7 +37,7 @@ html
           = translate('cms.menu.sign_out')
       - else
         a.ui.right.floated.basic.button href=managers.sign_in_path
-          = translate('cms.menu.sign_inn')
+          = translate('cms.menu.sign_in')
 
       h1 = translate('sahaj_atlas')
       .ui.divider
