@@ -1,7 +1,7 @@
 
 class SummaryMailer < ApplicationMailer
   default template_path: 'mailer/summaries'
-  layout 'mailer/cms'
+  layout 'mailer/manager'
 
   def regional
     setup

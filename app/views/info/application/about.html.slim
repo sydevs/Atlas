@@ -1,0 +1,14 @@
+
+.splash
+  .splash__image
+  h1.splash__header
+    = inline_svg 'logo.svg', title: 'global icon by KonKapp from the Noun Project'
+    = translate('sahaj_atlas').upcase
+  .splash__content
+    .splash__content__inner
+      p = translate('info.about.description')
+      p
+        a.button href=map_path
+          = translate('info.about.view_map')
+        a.button href=managers.sign_in_path
+          = translate('info.about.sign_in')
