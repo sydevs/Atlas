@@ -36,15 +36,11 @@ module EventDecorator
   end
 
   def formatted_start_end_time
-    result = ", #{start_time}"
-    result += " - #{end_time}" if end_time
-    result
+    [start_time, end_time].compact.join(' - ')
   end
 
   def timing_in_words
-    result = recurrence_in_words
-    result += formatted_start_end_time
-    result
+    "#{recurrence_in_words}, #{formatted_start_end_time}"
   end
 
   def next_date

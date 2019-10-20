@@ -17,6 +17,5 @@
 document.addEventListener('DOMContentLoaded', function() {
   Data.load()
   Map.load()
-  // DateInput.load()
   Search.load()
 })
