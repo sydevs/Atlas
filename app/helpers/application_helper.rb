@@ -36,7 +36,6 @@ module ApplicationHelper
       raw_category: event.category,
       upcoming_dates: upcoming_dates(event),
       timing: event.timing_in_words,
-      url: event_url(event),
       venue: {
         id: event.venue.id,
         name: event.venue.name,

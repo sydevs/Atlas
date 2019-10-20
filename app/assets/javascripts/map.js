@@ -17,9 +17,5 @@
 document.addEventListener('DOMContentLoaded', function() {
   Data.load()
   Map.load()
-  Sidebar.load()
-  Events.load()
-  Registration.load()
-  DateInput.load()
   Search.load()
 })

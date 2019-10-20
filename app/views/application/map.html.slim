@@ -1,77 +1,58 @@
+#data data-events=events_json.to_json data-current-location=@location.to_json
+#mapid
+#boxShadowDiv.box-shadow-div
+.search-container
+  .autocomplete.search-box
+    input#myInput.search-text name="myCountry" placeholder="Search" type="text" /
+    button#searchCloseButton.search-close X
+  .search-results
+    - @events.limit(5).each do |event|
+      .result-container
+        .event-info-container
+          span.event-name= event.name
+          span.event-address= event.venue&.address&.values.join(", ")
+          span.time-details
+            span.day
+              = event.recurrence_in_words
+            | &nbsp
+            span.time
+              = event.formatted_start_end_time
+        .event-actions-container
+          .button-container
+            button.registerButton.register-button data-eventId=event.id
+              | Register
+          .link-container
+            a.moreInfoLink.more-info-link href="/" data-eventId=event.id
+              | More Info
+      span.divider
 
-#data data-events=events_json.to_json
-#map
+#registrationPanel.search-container.first-side-panel
+  .less-info-container
+    a#cancelRegisterLink.less-info-text Cancel
+  .info-panel-text
+    .info-panel-header
+      | Register for
+    .info-panel-description
+      #registrationPanelDescription
+        = @events.first.name
+      form.event-registration
+        = csrf_meta_tags
+        p#registration-message
+        input#registration-event type='hidden' name='registration[event_id]'
 
-#sidebar
-  .panel-wrapper.visible data-panel='list'
-    #sidebar-list.panel
-      #sidebar-search
-        input type='text' placeholder='Search...'
-      .panel-close &times;
-      #empty-list
-        p There are no classes in your area, the closest free meditation class is in
-        a.search-link Name of the city
-      #suggestion-list
-        .suggestion
-      #venue-filter
-        p Classes at <span id="venue-filter-name">Sahaj Center</span>
-        p#venue-filter-reset Reset
-      ul#event-list.show
-        - @events.each do |event|
-          li.event id=dom_id(event) data-id=event.id
-            .event-info
-              h2.event-title = event.name || event.category_name
-              p.event-address = event.venue.full_address
-              p.event-timing = event.timing_in_words
-              .event-distance
-            .event-actions
-              .event-register Register now
-              .event-expand more info
-            .event-details
-              .event-description Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              .event-category Introductory Class
-              .event-venue Sahaja Yoga Meditation Center
+        .registration-fields
+          input.text-input type='text' name='registration[name]' placeholder='Name'
+          input.text-input type='text' name='registration[email]' placeholder='Email'
 
-  .panel-wrapper data-panel='details'
-    #sidebar-details.panel
-      .panel-close &times;
-      h2#details-title Event Title
-      h3#details-subtitle Introductory Class
-      #details-description Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sint minus tempore dolore facere blanditiis nemo quam rerum ratione quis quas, tenetur, consectetur fugiat exercitationem voluptates natus ex facilis ea rem?
-      #details-meta
-        #details-meta-address 44 Chelsham Road, London, UK
-        #details-meta-timing Every Friday, 7pm
-      button#details-register Register Now
-
-  .panel-wrapper data-panel='register'
-    #sidebar-register.panel
-      .panel-close &times;
-      h2 Register for event
-      form#register-form action=registrations_path method='PUT'
-        input#register-id type='hidden'
-        input type='email' placeholder='Email'
-        input type='text' placeholder='Name'
-        textarea placeholder='Comment'
-        input#register-date-input type='text' placeholder='Date (not implemented)'
-        #register-date
-          #register-month
-            #register-month-prev
-            #register-month-current January 2019
-            #register-month-next
-          #register-weekday Monday
-          #register-day-list
-            .register-day 01
-            .register-day 08
-            .register-day 15
-            .register-day 22
-            .register-day 28
-        button Confirm
-
-  .panel-wrapper data-panel='result'
-    #sidebar-result.panel
-      .panel-close &times;
-      h2#result-title Thank you for registering
-      p#result-description you will receive an email shortly
-      h3#result-subtitle Invite your friends
-      input#result-invite
-
+        button#confirmButton.register-button Confirm
+    
+#infoPanel.search-container.first-side-panel
+  .less-info-container
+    a#lessInfoLink.less-info-text Less info
+  .info-panel-text
+    .info-panel-header
+      #infoPanelEventName
+        placeholder name dynamically generated
+    .info-panel-description
+      #infoPanelEventDescription
+        placeholder description dynamically generated

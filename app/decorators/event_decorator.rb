@@ -21,7 +21,7 @@ module EventDecorator
     I18n.translate(category, scope: %i[map categories description])
   end
 
-  def timing_in_words
+  def recurrence_in_words
     result = ''
 
     if start_date == end_date || (end_date.nil? and recurrence == 'day')
@@ -32,9 +32,15 @@ module EventDecorator
       result += translate_enum_value(self, :recurrence)
     end
 
-    result += ", #{start_time}"
-    result += " - #{end_time}" if end_time
     result
+  end
+
+  def formatted_start_end_time
+    [start_time, end_time].compact.join(' - ')
+  end
+
+  def timing_in_words
+    "#{recurrence_in_words}, #{formatted_start_end_time}"
   end
 
   def next_date

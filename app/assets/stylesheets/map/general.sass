@@ -1,38 +1,18 @@
+@import "../mixins/*"
 
-body
-  padding: 0
-  width: 100%
-  margin: 0
++font-face("raleway", "RalewayExtraLight/RalewayExtraLight", 200)
++font-face("raleway", "RalewayLight/RalewayLight", 300)
++font-face("raleway", "RalewayRegular/RalewayRegular", 400)
++font-face("raleway", "RalewayMedium/RalewayMedium", 500)
++font-face("raleway", "RalewaySemiBold/RalewaySemiBold", 600)
++font-face("raleway", "RalewayBold/RalewayBold", 700)
++font-face("futura-book", "FuturaBook/FuturaBook")
 
-h1, h2, h3, h4, h5, h6
-  margin: 0
-
-p
-  margin: 0
-  margin-bottom: 0.4em
-
-input, textarea
-  width: 100%
-  border: 1px solid gray
-  font-size: 1.2em
-  padding: 0.4em 0.5em
-  margin-bottom: 0.5em
-  box-sizing: border-box
-
-textarea
-  resize: vertical
-
-button
-  width: 100%
-  border: 2px solid darkgray
-  padding: 4px
-  text-align: center
-  cursor: pointer
-
-  &:hover
-    border-color: black
-
-#map
-  width: 100%
+#mapid
   height: 100%
-  position: absolute !important
+  position: static !important
+
+.leaflet-control-container
+  @include mobile
+    display: none
+
