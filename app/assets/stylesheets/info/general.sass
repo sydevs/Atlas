@@ -1,0 +1,29 @@
+//@import url('https://fonts.googleapis.com/css?family=Merriweather&display=swap')
+@import 'mixins'
+
+body
+  margin: 0
+  font-family: $font
+
+p
+  margin-bottom: 1.5em
+
+.button
+  display: inline-block
+  min-width: 80px
+  padding: 12px 28px
+  margin: 2px
+
+  color: white
+  border: 2px solid white
+  border-radius: 4px
+  transition-duration: 0.4s
+  
+  text-transform: uppercase
+  text-decoration: none
+  font-weight: bold
+
+
+  &:hover
+    background-color: white
+    color: $theme-color

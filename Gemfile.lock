@@ -128,6 +128,9 @@ GEM
     i18n (1.7.0)
       concurrent-ruby (~> 1.0)
     i18n_data (0.8.0)
+    inline_svg (1.5.2)
+      activesupport (>= 3.0)
+      nokogiri (>= 1.6)
     jbuilder (2.9.1)
       activesupport (>= 4.2.0)
     jquery-rails (4.3.5)
@@ -318,6 +321,7 @@ DEPENDENCIES
   fomantic-ui-sass
   geokit-rails
   i18n_data
+  inline_svg
   jbuilder (~> 2.5)
   jquery-rails
   kaminari
