@@ -1,6 +1,5 @@
-
 const Search = {
-	infoPanelElement: null,
+  infoPanelElement: null,
   registrationPanelElement: null,
   boxShadowDivElement: null,
   currentEvent: null,
