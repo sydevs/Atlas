@@ -1,0 +1,32 @@
+@mixin font-face($font-family, $file-path, $weight: normal, $style: normal)
+  @font-face
+    font-family: $font-family
+    font-weight: $weight
+    font-style: $style
+
+    src: font-url('#{$file-path}.eot')
+    src: font-url('#{$file-path}.eot?#iefix') format('embedded-opentype'), font-url('#{$file-path}.woff') format('woff'), font-url('#{$file-path}.ttf') format('truetype')
+
+// ===== FONTS ===== //
++font-face("raleway", "RalewayExtraLight/RalewayExtraLight", 200)
++font-face("raleway", "RalewayLight/RalewayLight", 300)
++font-face("raleway", "RalewayRegular/RalewayRegular", 400)
++font-face("raleway", "RalewayMedium/RalewayMedium", 500)
++font-face("raleway", "RalewaySemiBold/RalewaySemiBold", 600)
++font-face("raleway", "RalewayBold/RalewayBold", 700)
++font-face("futura-book", "FuturaBook/FuturaBook")
+
+// ===== SIZES ===== //
+// These are the minimum widths for each device
+// Devices smaller than 320px width are not supported.
+$tablet-width: 768px
+$laptop-width: 1024px
+
+// ===== MEDIA QUERIES ===== //
+@mixin mobile
+  @media only screen and (max-width: #{$tablet-width - 1px})
+    @content
+
+@mixin laptop-or-larger
+  @media only screen and (min-width: #{$laptop-width})
+    @content
