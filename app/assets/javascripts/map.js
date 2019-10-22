@@ -10,7 +10,6 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require jquery
 //= require leaflet
 //= require_tree ./map
 
@@ -18,4 +17,5 @@ document.addEventListener('DOMContentLoaded', function() {
   Data.load()
   Map.load()
   Search.load()
+  AutoComplete.load()
 })

@@ -4,6 +4,7 @@ const Search = {
   boxShadowDivElement: null,
   currentEvent: null,
   load() {
+    Search.setCurrentEvents();
     Search.infoPanelElement = document.getElementById("infoPanel");
     Search.registrationPanelElement = document.getElementById("registrationPanel");
     Search.boxShadowDivElement = document.getElementById("boxShadowDiv");
@@ -11,6 +12,53 @@ const Search = {
     document.getElementById('lessInfoLink').addEventListener("click", Search._onLessInfoLinkClick);
     document.getElementById('cancelRegisterLink').addEventListener("click", Search._onCancelRegisterLinkClick);
 
+    Search._addRegisterMoreInfoListeners()
+  },
+  clearSearchDiv() {
+    searchResultsContainer.innerHTML = '';
+    Search._decreaseBoxShadowDiv();
+    Search.toggleDisplayClass(Search.boxShadowDivElement, "none");
+    Search.toggleDisplayClass(Search.infoPanelElement, "none");
+    Search.toggleDisplayClass(Search.registrationPanelElement, "none");
+  },
+  setCurrentEvents() {
+    var searchResultsContainer = document.getElementById("searchResultsContainer")
+    searchResultsContainer.innerHTML = '';
+    if (Data.events.length > 0) {
+      for(var i = 0; i < Data.events.length; i++) {
+        // TODO: Move into a different file
+        var resultContainerHtml = '<div class="result-container">'+
+        '  <div class="event-info-container">'+
+        '    <span id="eventName" class="event-name">'+(Data.events[i].name || Data.events[i].label)+'</span>'+
+        '    <span id="eventAddress" class="event-address">'+(Data.events[i].address_text || "")+'</span>'+
+        '    <span class="time-details">'+
+        '      <span id="timeDetailsDay" class="day">'+(Data.events[i].recurrence_in_words || "")+'</span>'+
+        '      |  '+
+        '      <span id="timeDetailsTime" class="time">'+(Data.events[i].formatted_start_end_time || "")+'</span>'+
+        '    </span>'+
+        '    </span>'+
+        '  </div>'+
+        '  <div class="event-actions-container">'+
+        '    <div class="button-container">'+
+        '      <button class="registerButton register-button" data-eventIndex="'+i+'">Register</button>'+
+        '    </div>'+
+        '    <div class="link-container">'+
+        '      <a class="moreInfoLink more-info-link" data-eventIndex="'+i+'">'+
+        '        More Info'+
+        '      </a>'+
+        '    </div>'+
+        '  </div>'+
+        '</div>'+
+        '<span class="divider"></span>';
+        searchResultsContainer.innerHTML += resultContainerHtml;
+        Search._addRegisterMoreInfoListeners()
+      }
+    } else {
+      searchResultsContainer.innerHTML = '<div class="result-container event-name">No Results Found</div>';
+      Search.toggleDisplayClass(Search.boxShadowDivElement, "none");
+    }
+  },
+  _addRegisterMoreInfoListeners() {
     var registerButtons = document.getElementsByClassName('registerButton');
     for (var i = 0; i < registerButtons.length; i++) {
       registerButtons[i].addEventListener('click', Search._onRegistrationButtonClick);
@@ -20,41 +68,41 @@ const Search = {
       moreInfoLinks[i].addEventListener("click", Search._onMoreInfoLinkClick);
     }
   },
-  _setCurrentEvent(eventId) {
-    Search.currentEvent = Data.events[eventId];
+  _setCurrentEvent(eventIndex) {
+    Search.currentEvent = Data.events[eventIndex];
   },
   _onMoreInfoLinkClick(clickEvent) {
     clickEvent.preventDefault();
     Search._increaseBoxShadowDiv();
-    Search._setCurrentEvent(parseInt(clickEvent.target.getAttribute("data-eventId")))
+    Search._setCurrentEvent(parseInt(clickEvent.target.getAttribute("data-eventIndex")))
     Search._setInfoPanelData();
-    Search._toggleDisplayClass(Search.registrationPanelElement, "none");
-    Search._toggleDisplayClass(Search.infoPanelElement, "block");
+    Search.toggleDisplayClass(Search.registrationPanelElement, "none");
+    Search.toggleDisplayClass(Search.infoPanelElement, "block");
   },
   _onLessInfoLinkClick(clickEvent) {
     clickEvent.preventDefault();
     Search._decreaseBoxShadowDiv();
-    Search._toggleDisplayClass(Search.infoPanelElement, "none");
+    Search.toggleDisplayClass(Search.infoPanelElement, "none");
   },
   _onCancelRegisterLinkClick(clickEvent) {
     clickEvent.preventDefault();
     Search._decreaseBoxShadowDiv();
-    Search._toggleDisplayClass(Search.registrationPanelElement, "none");
+    Search.toggleDisplayClass(Search.registrationPanelElement, "none");
   },
   _onRegistrationButtonClick(clickEvent) {
     clickEvent.preventDefault();
     Search._increaseBoxShadowDiv();
-    Search._setCurrentEvent(parseInt(clickEvent.target.getAttribute("data-eventId")))
+    Search._setCurrentEvent(parseInt(clickEvent.target.getAttribute("data-eventIndex")))
     Search._setRegistrationData();
-    Search._toggleDisplayClass(Search.infoPanelElement, "none");
-    Search._toggleDisplayClass(Search.registrationPanelElement, "block");
+    Search.toggleDisplayClass(Search.infoPanelElement, "none");
+    Search.toggleDisplayClass(Search.registrationPanelElement, "block");
   },
   _setInfoPanelData() {
-    document.getElementById("infoPanelEventName").innerText = Search.currentEvent.name;
+    document.getElementById("infoPanelEventName").innerText = Search.currentEvent.name || Search.currentEvent.label;
     document.getElementById("infoPanelEventDescription").innerText = Search.currentEvent.description;
   },
   _setRegistrationData() {
-    document.getElementById("registrationPanelDescription").innerText = Search.currentEvent.name;
+    document.getElementById("registrationPanelDescription").innerText = Search.currentEvent.name || Search.currentEvent.label;
   },
   _increaseBoxShadowDiv() {
     Search.boxShadowDivElement.classList.add("width-panel-double");
@@ -62,7 +110,7 @@ const Search = {
   _decreaseBoxShadowDiv() {
     Search.boxShadowDivElement.classList.remove("width-panel-double");
   },
-  _toggleDisplayClass(element, cssClass) {
+  toggleDisplayClass(element, cssClass) {
     element.style.display = cssClass;
   },
 }
