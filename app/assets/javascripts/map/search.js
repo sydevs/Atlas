@@ -26,31 +26,7 @@ const Search = {
     searchResultsContainer.innerHTML = '';
     if (Data.events.length > 0) {
       for(var i = 0; i < Data.events.length; i++) {
-        // TODO: Move into a different file
-        var resultContainerHtml = '<div class="result-container">'+
-        '  <div class="event-info-container">'+
-        '    <span id="eventName" class="event-name">'+(Data.events[i].name || Data.events[i].label)+'</span>'+
-        '    <span id="eventAddress" class="event-address">'+(Data.events[i].address_text || "")+'</span>'+
-        '    <span class="time-details">'+
-        '      <span id="timeDetailsDay" class="day">'+(Data.events[i].recurrence_in_words || "")+'</span>'+
-        '      |  '+
-        '      <span id="timeDetailsTime" class="time">'+(Data.events[i].formatted_start_end_time || "")+'</span>'+
-        '    </span>'+
-        '    </span>'+
-        '  </div>'+
-        '  <div class="event-actions-container">'+
-        '    <div class="button-container">'+
-        '      <button class="registerButton register-button" data-eventIndex="'+i+'">Register</button>'+
-        '    </div>'+
-        '    <div class="link-container">'+
-        '      <a class="moreInfoLink more-info-link" data-eventIndex="'+i+'">'+
-        '        More Info'+
-        '      </a>'+
-        '    </div>'+
-        '  </div>'+
-        '</div>'+
-        '<span class="divider"></span>';
-        searchResultsContainer.innerHTML += resultContainerHtml;
+        searchResultsContainer.innerHTML += Templates.resultContainerHtml(i, Data.events[i]);
         Search._addRegisterMoreInfoListeners()
       }
     } else {
