@@ -6,6 +6,7 @@ const AutoComplete = {
   load() {
     AutoComplete.geoSearchService = new GeoSearch.OpenStreetMapProvider();
     AutoComplete.currentMarkersGroup = L.featureGroup(AutoComplete.currentMarkers).addTo(Map.instance);
+    AutoComplete._createMarkers(Data.currentLocation.lat, Data.currentLocation.lng)
     AutoComplete._autocomplete(document.getElementById("myInput"), AutoComplete.searchResults);
   },
   _getUrl(url, callback) {
@@ -71,9 +72,7 @@ const AutoComplete = {
           autocompleteResultsContainerElement = document.createElement("DIV");
           autocompleteResultsContainerElement.setAttribute("id", this.id + "autocomplete-list");
           autocompleteResultsContainerElement.setAttribute("class", "autocomplete-items");
-          if(Data.events.length === 0) {
-            autocompleteResultsContainerElement.setAttribute("style", "position:initial!important");
-          }
+          autocompleteResultsContainerElement.setAttribute("style", "position:initial!important");
           /*append the DIV element as a child of the autocomplete container:*/
           this.parentNode.parentNode.appendChild(autocompleteResultsContainerElement);
           /*for each item in the array...*/

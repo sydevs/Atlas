@@ -1,12 +1,15 @@
-#data data-events=render(file: 'api/views/index.json.jbuilder') data-current-location=@location.to_json
+#data data-current-location=@location.to_json
 #mapid
 #boxShadowDiv.box-shadow-div
-.search-container
+.search-container id="searchContainer"
   .autocomplete.search-box
     input#myInput.search-text name="myCountry" placeholder="Search" type="text" /
     button#searchCloseButton.search-close X
   .search-results id="searchResultsContainer"
   / Search Results Dynamically Generated Here
+
+#bottomBar.bottom-bar
+  a#showListLink.show-list Show List
 
 #registrationPanel.search-container.first-side-panel
   .less-info-container

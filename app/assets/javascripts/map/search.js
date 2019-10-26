@@ -3,36 +3,45 @@ const Search = {
   registrationPanelElement: null,
   boxShadowDivElement: null,
   currentEvent: null,
+  searchResultsContainer: null,
+  searchContainer: null,
   load() {
-    Search.setCurrentEvents();
     Search.infoPanelElement = document.getElementById("infoPanel");
     Search.registrationPanelElement = document.getElementById("registrationPanel");
     Search.boxShadowDivElement = document.getElementById("boxShadowDiv");
+    Search.searchResultsContainer = document.getElementById("searchResultsContainer");
+    Search.searchContainer = document.getElementById("searchContainer");
+    Search.setCurrentEvents();
 
     document.getElementById('lessInfoLink').addEventListener("click", Search._onLessInfoLinkClick);
     document.getElementById('cancelRegisterLink').addEventListener("click", Search._onCancelRegisterLinkClick);
+    document.getElementById('showListLink').addEventListener("click", Search._onShowListMobileLink);
 
     Search._addRegisterMoreInfoListeners()
   },
   clearSearchDiv() {
     searchResultsContainer.innerHTML = '';
     Search._decreaseBoxShadowDiv();
+    Search.searchContainer.classList.remove("show-list-mobile-results")
     Search.toggleDisplayClass(Search.boxShadowDivElement, "none");
     Search.toggleDisplayClass(Search.infoPanelElement, "none");
     Search.toggleDisplayClass(Search.registrationPanelElement, "none");
   },
   setCurrentEvents() {
-    var searchResultsContainer = document.getElementById("searchResultsContainer")
-    searchResultsContainer.innerHTML = '';
+    Search.searchResultsContainer.innerHTML = '';
     if (Data.events.length > 0) {
       for(var i = 0; i < Data.events.length; i++) {
-        searchResultsContainer.innerHTML += Templates.resultContainerHtml(i, Data.events[i]);
+        Search.searchResultsContainer.innerHTML += Templates.resultContainerHtml(i, Data.events[i]);
         Search._addRegisterMoreInfoListeners()
       }
     } else {
-      searchResultsContainer.innerHTML = '<div class="result-container event-name">No Results Found</div>';
+      Search.searchResultsContainer.innerHTML = '<div class="result-container event-name">No Results Found</div>';
       Search.toggleDisplayClass(Search.boxShadowDivElement, "none");
     }
+  },
+  _onShowListMobileLink(clickEvent) {
+    clickEvent.preventDefault();
+    Search.searchContainer.classList.add("show-list-mobile-results")
   },
   _addRegisterMoreInfoListeners() {
     var registerButtons = document.getElementsByClassName('registerButton');
