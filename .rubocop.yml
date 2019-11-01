@@ -53,7 +53,7 @@ Layout/EmptyLinesAroundModuleBody:
 Layout/IndentationConsistency:
   EnforcedStyle: rails
 
-Layout/IndentHash:
+Layout/IndentFirstHashElement:
   EnforcedStyle: consistent # For some reason this breaks rubocop in VSCode
 
 Layout/SpaceInLambdaLiteral:
