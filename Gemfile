@@ -45,6 +45,10 @@ gem 'mini_magick' # Image processing during upload
 gem 'i18n_data' # Adds localized lists of countries and languages
 gem 'countries' # Adds localized lists of countries and subdivisions
 
+### API
+gem 'rack-cors'
+gem 'rack-attack'
+
 ### Utility
 gem 'inline_svg' # Allows SVGs to be rendered inline
 

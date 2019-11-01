@@ -67,9 +67,14 @@ Rails.application.routes.draw do
 
     resources :registrations, only: %i[index]
     resources :audits, only: %i[index]
+    resources :access_keys, only: %i[index new create edit update destroy]
   end
 
   namespace :api do
+    get '404', to: 'api/application#error' # Not found
+    get '429', to: 'api/application#error' # Too many requests
+    get '500', to: 'api/application#error' # Internal server error
+
     resources :events, only: %i[index show]
     resources :venues, only: %i[index show] do
       resources :events, only: %i[index]

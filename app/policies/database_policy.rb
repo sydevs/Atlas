@@ -1,4 +1,3 @@
-
 class DatabasePolicy < ApplicationPolicy
 
   def manage? super_manager: false
@@ -28,15 +27,18 @@ class DatabasePolicy < ApplicationPolicy
   def index_association? association = nil
     return record.has_region_association? if association == :regions
     return false unless manage?
-    return record.respond_to?(association)
+
+    record.respond_to?(association)
   end
 
   def new_association? association = nil
     return false if association == :audits
-    return record.respond_to?(association) && manage?
+
+    record.respond_to?(association) && manage?
   end
 
   def destroy_association? association = nil
     user.administrator? && association == :managers
   end
+
 end

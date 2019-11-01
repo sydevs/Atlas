@@ -54,7 +54,7 @@ Layout/IndentationConsistency:
   EnforcedStyle: rails
 
 Layout/IndentHash:
-  EnforcedStyle: consistent
+  EnforcedStyle: consistent # For some reason this breaks rubocop in VSCode
 
 Layout/SpaceInLambdaLiteral:
   EnforcedStyle: require_space

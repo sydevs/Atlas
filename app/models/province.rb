@@ -20,7 +20,7 @@ class Province < ApplicationRecord
   default_scope { order(province_code: :desc) }
 
   # Delegations
-  alias_method :parent, :country
+  alias parent country
 
   # Methods
 
@@ -30,7 +30,8 @@ class Province < ApplicationRecord
 
   def managed_by? manager, super_manager: false
     return true if managers.include?(manager) && !super_manager
-    return country.managed_by?(manager)
+
+    country.managed_by?(manager)
   end
 
 end

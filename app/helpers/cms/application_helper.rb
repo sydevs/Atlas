@@ -1,4 +1,3 @@
-
 module CMS::ApplicationHelper
 
   MODEL_ICONS = {
@@ -10,6 +9,7 @@ module CMS::ApplicationHelper
     managers: 'user',
     registrations: 'user',
     audits: 'clipboard list',
+    access_keys: 'key',
   }
 
   def floating_action text, icon, url = nil, **args
@@ -22,7 +22,7 @@ module CMS::ApplicationHelper
   end
 
   def menu_item label, record, index: nil, action: nil
-    active = controller_name == index || action_name == index if index
+    active = [controller_name, action_name].include?(index) if index
     active = action_name == action if action
 
     if active

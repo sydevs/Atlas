@@ -35,6 +35,7 @@ h2.ui.header
     = menu_item translate_model(Event, :plural), @context, index: 'events' if allow.index_association?(:events)
     = menu_item translate_model(Registration, :plural), @context, index: 'registrations' if allow.index_association?(:registrations)
     = menu_item translate_model(Audit, :plural), @context, index: 'audits' if allow.index_association?(:audits)
+    = menu_item translate_model(AccessKey, :plural), @context, index: 'access_keys' if allow.index_association?(:access_keys)
     = menu_item translate('cms.menu.activity'), @context, index: 'activity' if allow.try(:view_activity?)
 
 .ui.basic.segment

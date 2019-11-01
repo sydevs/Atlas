@@ -36,10 +36,11 @@ class Event < ApplicationRecord
   alias_method :parent, :venue
 
   # Methods
-  
+
   def managed_by? manager, super_manager: false
     return true if self.manager == manager && !super_manager
-    return self.venue.managed_by?(manager)
+
+    self.venue.managed_by?(manager)
   end
 
   def languages= value
