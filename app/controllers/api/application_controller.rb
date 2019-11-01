@@ -31,6 +31,7 @@ class API::ApplicationController < ActionController::Base
     end
 
     def authenticate_access_key!
+      return if %w[GET HEAD OPTIONS].include?(request.method)
       render('api/views/error', status: 400) && return unless params[:key].present?
 
       AccessKey.find(key: params[:key]).touch(:last_accessed_at)
