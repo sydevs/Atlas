@@ -1,6 +1,6 @@
 json.url api_event_url(event, format: :json)
 json.extract! event, :id, :label, :description, :category, :languages
-if (@include && (@include.include?(:venue) || @include.include?(:venues)))
+if @include&.include?(:venue) || @include&.include?(:venues)
   json.extract! event, :room
   json.address_text event.room ? "#{event.room}, #{event.venue.full_address}" : event.venue.full_address
 else

@@ -5,8 +5,10 @@ const AutoComplete = {
   currentMarkersGroup: null,
   load() {
     AutoComplete.geoSearchService = new GeoSearch.OpenStreetMapProvider();
+
     AutoComplete.currentMarkersGroup = L.featureGroup(AutoComplete.currentMarkers).addTo(Map.instance);
     AutoComplete._createMarkers(Data.currentLocation.lat, Data.currentLocation.lng)
+
     AutoComplete._autocomplete(document.getElementById("myInput"), AutoComplete.searchResults);
   },
   _getUrl(url, callback) {
@@ -26,6 +28,7 @@ const AutoComplete = {
   _placesApi(xhttp) {
     eventsData = JSON.parse(xhttp.response)
     AutoComplete._resetMarkers()
+
     var venuesAlreadyMarked = []
     for (var i = 0; i < eventsData.length; i++) {
       var venueId = eventsData[i].venue_id;
@@ -36,9 +39,11 @@ const AutoComplete = {
         venuesAlreadyMarked.push(venueId)
       }
     }
+
     Data.events = eventsData;
     Search.setCurrentEvents();
     Search.searchContainer.classList.remove("single-marker-mobile-result")
+
     AutoComplete.currentMarkersGroup = L.featureGroup(AutoComplete.currentMarkers).addTo(Map.instance)
     AutoComplete.currentMarkersGroup.on("click", function(event){
       var venueId = event.layer.options.venueId
@@ -49,6 +54,7 @@ const AutoComplete = {
         Map.instance.panTo([event.latlng.lat+mobilePanOffset, event.latlng.lng])
       }
     }.bind(this));
+
     if(AutoComplete.currentMarkers.length > 0) {
       Map.instance.fitBounds(AutoComplete.currentMarkersGroup.getBounds())
     }

@@ -22,8 +22,11 @@ const Search = {
   },
   clearSearchDiv() {
     searchResultsContainer.innerHTML = '';
+
     Search._decreaseBoxShadowDiv();
+
     Search.searchContainer.classList.remove("show-list-mobile-results")
+
     Search.toggleDisplayClass(Search.boxShadowDivElement, "none");
     Search.toggleDisplayClass(Search.infoPanelElement, "none");
     Search.toggleDisplayClass(Search.registrationPanelElement, "none");
@@ -48,9 +51,11 @@ const Search = {
   },
   _addRegisterMoreInfoListeners() {
     var registerButtons = document.getElementsByClassName('registerButton');
+
     for (var i = 0; i < registerButtons.length; i++) {
       registerButtons[i].addEventListener('click', Search._onRegistrationButtonClick);
     }
+
     var moreInfoLinks = document.getElementsByClassName('moreInfoLink');
     for (var i = 0; i < moreInfoLinks.length; i++) {
       moreInfoLinks[i].addEventListener("click", Search._onMoreInfoLinkClick);
