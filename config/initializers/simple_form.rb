@@ -50,11 +50,11 @@ SimpleForm.setup do |config|
 
   # Custom Semantic Wrapper
   # Values are similar to the default wrapper above, with different classes
-  config.wrappers :semantic, tag: 'div', class: "field", error_class: 'error', hint_class: 'with_hint' do |b|
+  config.wrappers :semantic, tag: 'div', class: 'field', error_class: 'error', hint_class: 'with_hint' do |b|
     b.use :html5
     b.use :placeholder
     b.use :label
-    b.use :hint,  wrap_with: { tag: 'div', class: 'hint' }
+    b.use :hint, wrap_with: { tag: 'div', class: 'hint' }
     b.use :input
     b.optional :maxlength
     b.optional :pattern
@@ -63,18 +63,18 @@ SimpleForm.setup do |config|
     b.use :error, wrap_with: { tag: 'div', class: 'ui red pointing above label error' }
   end
 
-  config.wrappers :semantic_checkbox, tag: 'div', class: "inline field", error_class: 'error', hint_class: 'with_hint' do |b|
+  config.wrappers :semantic_checkbox, tag: 'div', class: 'inline field', error_class: 'error', hint_class: 'with_hint' do |b|
     b.use :html5
     b.wrapper tag: 'div', class: 'ui checkbox' do |input|
-          input.use :input
+      input.use :input
       input.wrapper tag: 'label' do |box| end
-        end
+    end
     b.use :label
     b.use :hint, wrap_with: { tag: 'div', class: 'hint' }
     b.use :error, wrap_with: { tag: 'div', class: 'ui red pointing above label error' }
   end
 
-  config.wrappers :semantic_checkbox_slider, tag: 'div', class: "inline field", error_class: 'error', hint_class: 'with_hint' do |b|
+  config.wrappers :semantic_checkbox_slider, tag: 'div', class: 'inline field', error_class: 'error', hint_class: 'with_hint' do |b|
     b.use :html5
     b.wrapper tag: 'div', class: 'ui slider checkbox' do |input|
       input.use :input
@@ -85,7 +85,7 @@ SimpleForm.setup do |config|
     b.use :error, wrap_with: { tag: 'div', class: 'ui red pointing above label error' }
   end
 
-  config.wrappers :semantic_checkbox_toggle, tag: 'div', class: "inline field", error_class: 'error', hint_class: 'with_hint' do |b|
+  config.wrappers :semantic_checkbox_toggle, tag: 'div', class: 'inline field', error_class: 'error', hint_class: 'with_hint' do |b|
     b.use :html5
     b.wrapper tag: 'div', class: 'ui toggle checkbox' do |input|
       input.use :input
@@ -178,7 +178,7 @@ SimpleForm.setup do |config|
 
   # How the label text should be generated altogether with the required text.
   # config.label_text = lambda { |label, required, explicit_label| "#{required} #{label}" }
-  config.label_text = lambda { |label, required, explicit_label| "#{label}" }
+  config.label_text = -> (label, _required, _explicit_label) { label.to_s }
   # Semantic UI has its own astrisk
 
   # You can define the class to use on all labels. Default is nil.

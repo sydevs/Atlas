@@ -3,6 +3,7 @@
 require 'test_helper'
 
 class EventDecoratorTest < ActiveSupport::TestCase
+
   def setup
     @event = Event.new.extend EventDecorator
   end
@@ -10,4 +11,5 @@ class EventDecoratorTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end
+
 end

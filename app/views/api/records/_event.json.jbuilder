@@ -9,7 +9,7 @@ else
     json.extract! event, :room
     json.extract! event.venue, :street, :city, :province_code, :province_name, :country_code, :country_name, :postcode
   end
-end  
+end
 
 json.upcoming_dates event.upcoming_dates.map(&:to_s)
 

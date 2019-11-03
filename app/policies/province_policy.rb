@@ -1,4 +1,3 @@
-
 class ProvincePolicy < RegionPolicy
 
   def update?

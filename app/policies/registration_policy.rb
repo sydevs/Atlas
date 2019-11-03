@@ -1,6 +1,5 @@
-
 class RegistrationPolicy < DatabasePolicy
-  
+
   def new?
     false
   end

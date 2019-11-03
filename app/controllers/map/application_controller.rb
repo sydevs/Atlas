@@ -9,18 +9,18 @@ class Map::ApplicationController < ActionController::Base
     if location.success
       @location = {
         lat: location.lat,
-        lng: location.lng
+        lng: location.lng,
       }
     else
       # defaults to city of london for now
       @location = {
-        lat: 51.505, 
-        lng: -0.09
+        lat: 51.505,
+        lng: -0.09,
       }
     end
 
     @model = Event # This allows the jbuilder template to render
-    @events = Event.joins(:venue).within(500, :origin => [@location[:lat], @location[:lng]])
+    @events = Event.joins(:venue).within(500, origin: [@location[:lat], @location[:lng]])
     render 'map/show'
   end
 

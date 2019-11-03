@@ -1,3 +1,2 @@
-
 class VenuePolicy < DatabasePolicy
 end

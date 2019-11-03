@@ -1,4 +1,3 @@
-
 module CMS::ApplicationHelper
 
   MODEL_ICONS = {
@@ -10,7 +9,7 @@ module CMS::ApplicationHelper
     managers: 'user',
     registrations: 'user',
     audits: 'clipboard list',
-  }
+  }.freeze
 
   def floating_action text, icon, url = nil, **args
     klass = %w[ui basic right floated compact tiny button]

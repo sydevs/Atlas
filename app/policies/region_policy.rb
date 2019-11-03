@@ -1,4 +1,3 @@
-
 class RegionPolicy < DatabasePolicy
 
   def show?

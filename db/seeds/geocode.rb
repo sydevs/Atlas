@@ -9,8 +9,8 @@ include ERB::Util
 
 def valid_coordinate? string
   string.include?('.') && !!BigDecimal(string)
-rescue
-  return false
+rescue StandardError
+  false
 end
 
 def geocode address, country
@@ -28,7 +28,7 @@ def geocode address, country
   response = Net::HTTP.get(url)
   data = JSON.parse(response)
 
-  if data.length > 0
+  if !data.empty?
     return "#{data[0]['lat']}, #{data[0]['lon']}"
   else
     puts "[X] Couldn't find #{address}"

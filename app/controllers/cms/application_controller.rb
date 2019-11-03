@@ -4,7 +4,7 @@ class CMS::ApplicationController < ActionController::Base
 
   include Passwordless::ControllerHelpers
   include Pundit
-  
+
   helper_method :current_user
 
   before_action :require_login!
@@ -13,7 +13,7 @@ class CMS::ApplicationController < ActionController::Base
   before_action :set_scope!, except: %i[regions images]
   before_action :set_record!, only: %i[show edit update destroy]
   protect_from_forgery with: :exception
-  
+
   # TODO: Remove this development code
   after_action :verify_authorized
   after_action :verify_policy_scoped, only: :index
@@ -104,7 +104,7 @@ class CMS::ApplicationController < ActionController::Base
     def current_user
       @current_user ||= authenticate_by_session(Manager)
     end
-  
+
     def require_login!
       return if current_user
 
@@ -121,9 +121,11 @@ class CMS::ApplicationController < ActionController::Base
         keys = model.model_name
         param_key = "#{keys.param_key}_id"
         next unless params[param_key]
+
         context_record = model.find(params[param_key])
-        
+
         next if @context.present?
+
         @context_key = keys.route_key
         @context = context_record
       end
@@ -146,6 +148,7 @@ class CMS::ApplicationController < ActionController::Base
       allow = @context ? policy(@context) : policy(:worldwide)
       key = key.table_name.to_sym if key.is_a?(ActiveRecord.class)
       return if allow.index_association?(key)
+
       raise Pundit::NotAuthorizedError, "not allowed to index? #{@model} for #{@context || 'Worldwide'}"
     end
 
