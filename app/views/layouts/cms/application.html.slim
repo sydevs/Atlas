@@ -14,7 +14,7 @@ html
 
   body class="cms #{controller_name} #{controller.action_name}"
     header
-      - if current_user
+      - if defined?(current_user) && current_user
         .ui.basic.top.right.floated.pointing.dropdown.icon.button
           i.bars.icon
           .menu
@@ -29,17 +29,17 @@ html
               a.item href=info_statistics_path
                 i.chart.bar.icon
                 = translate('cms.menu.statistics')
-            a.item href=map_path target='_blank'
+            a.item href=map_root_path target='_blank'
               i.globe.icon
               = translate('cms.menu.map')
 
         a.ui.right.floated.basic.button href=managers.sign_out_path
           = translate('cms.menu.sign_out')
-      - else
-        a.ui.right.floated.basic.button href=managers.sign_in_path
-          = translate('cms.menu.sign_in')
 
-      h1 = translate('sahaj_atlas')
+      .ui.hidden.divider
+      h1.ui.header
+        = inline_svg 'logo.svg', title: 'global icon by KonKapp from the Noun Project'
+        = translate('sahaj_atlas')
       .ui.divider
 
       - if @context && @context.respond_to?(:ancestors)
