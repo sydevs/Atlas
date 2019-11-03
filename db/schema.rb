@@ -132,7 +132,7 @@ ActiveRecord::Schema.define(version: 20191103135357) do
   create_table "pictures", force: :cascade do |t|
     t.string "parent_type"
     t.bigint "parent_id"
-    t.text "file_data"
+    t.jsonb "file"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["parent_type", "parent_id"], name: "index_pictures_on_parent_type_and_parent_id"

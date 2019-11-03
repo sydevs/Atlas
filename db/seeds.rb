@@ -52,7 +52,7 @@ def load_venue address, country_code, index
 
   venue.events.destroy_all
 
-  puts "Created Venue #{index} - #{venue.name}"
+  puts "Created Venue #{index} - #{venue.name || venue.street}"
 
   [1, 1, 1, 2, 2, 3, 4, 5].sample.times do
     start_hour = rand(10..20)

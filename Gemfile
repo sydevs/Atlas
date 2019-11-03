@@ -36,10 +36,10 @@ gem 'audited' # Logs changes to any record
 ### Geocoding
 gem 'geokit-rails'
 
-### File uploads
-gem 'shrine' # Serverside image uploader
-gem 'shrine-google_cloud_storage' # Filestorage
-gem 'image_processing' # Image processing during upload
+# File uploads
+gem 'carrierwave' # Serverside image uploader
+gem 'carrierwave-google-storage' # Serverside image uploader
+gem 'mini_magick' # Image processing during upload
 
 ### Internationalization
 gem 'i18n_data' # Adds localized lists of countries and languages

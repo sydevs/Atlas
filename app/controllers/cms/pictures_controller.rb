@@ -14,12 +14,11 @@ class CMS::PicturesController < CMS::ApplicationController
     picture = @scope.new(file: file)
     authorize picture
 
-    picture.file_derivatives!
     picture.save!
 
     render json: {
       url: picture.file.url,
-      thumbnail_url: picture.file(:thumbnail)&.url,
+      thumbnail_url: picture.file.thumbnail.url,
       delete_url: url_for([:cms, @context, picture]),
     }.to_json
   end

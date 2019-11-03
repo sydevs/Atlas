@@ -8,6 +8,6 @@ CarrierWave.configure do |config|
   config.gcloud_attributes = { expires: 600 }
   config.gcloud_credentials = {
     gcloud_project: 'sydirectory',
-    gcloud_keyfile: JSON.parse(ENV['GOOGLE_CLOUD_KEYFILE'])
+    gcloud_keyfile: JSON.parse(ENV['GOOGLE_CLOUD_KEYFILE']),
   }
 end

@@ -1,7 +1,7 @@
 class Picture < ApplicationRecord
 
   # Extensions
-  include ImageUploader::Attachment(:file) # adds an `file` virtual attribute
+  mount_uploader :file, ImageUploader
 
   # Methods
 
