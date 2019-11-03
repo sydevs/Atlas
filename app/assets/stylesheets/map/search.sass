@@ -54,7 +54,21 @@ html
       width: 100%
       height: 100%
       max-height: 100%
-
+  &.single-marker-mobile-result
+    position: static
+    .autocomplete-items
+      z-index: 999
+    .autocomplete
+      position: absolute
+      top: 0
+      z-index: 999
+      width: 100%
+    .search-results
+      bottom: 0
+      position: absolute
+      z-index: 9999
+      background: white
+      display: block
 
 .bottom-bar
   @include laptop-or-larger
@@ -76,6 +90,8 @@ html
     font-size: 1.2em
     letter-spacing: 0.16px
     line-height: 15px
+    &.single-marker-hide-list
+      display: none
 
 #infoPanel
   display: none

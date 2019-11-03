@@ -26,12 +26,29 @@ const AutoComplete = {
   _placesApi(xhttp) {
     eventsData = JSON.parse(xhttp.response)
     AutoComplete._resetMarkers()
+    var venuesAlreadyMarked = []
     for (var i = 0; i < eventsData.length; i++) {
-      AutoComplete.currentMarkers.push(L.marker([eventsData[i].latitude, eventsData[i].longitude]))
+      var venueId = eventsData[i].venue_id;
+      if(!venuesAlreadyMarked.includes(venueId)) {
+        AutoComplete.currentMarkers.push(
+          L.marker([eventsData[i].latitude, eventsData[i].longitude], { venueId: venueId })
+        )
+        venuesAlreadyMarked.push(venueId)
+      }
     }
     Data.events = eventsData;
     Search.setCurrentEvents();
+    Search.searchContainer.classList.remove("single-marker-mobile-result")
     AutoComplete.currentMarkersGroup = L.featureGroup(AutoComplete.currentMarkers).addTo(Map.instance)
+    AutoComplete.currentMarkersGroup.on("click", function(event){
+      var venueId = event.layer.options.venueId
+      Search.setCurrentEvents(Data.events.filter(element => element.venue_id === venueId));
+      Search.searchContainer.classList.add("single-marker-mobile-result");
+      if(L.Browser.mobile) {
+        var mobilePanOffset = -0.2;
+        Map.instance.panTo([event.latlng.lat+mobilePanOffset, event.latlng.lng])
+      }
+    }.bind(this));
     if(AutoComplete.currentMarkers.length > 0) {
       Map.instance.fitBounds(AutoComplete.currentMarkersGroup.getBounds())
     }
@@ -63,6 +80,7 @@ const AutoComplete = {
               }
             )
           }
+
           closeAllLists();
           if (!currentSearchTextInputValue) {
             return false;
@@ -72,7 +90,9 @@ const AutoComplete = {
           autocompleteResultsContainerElement = document.createElement("DIV");
           autocompleteResultsContainerElement.setAttribute("id", this.id + "autocomplete-list");
           autocompleteResultsContainerElement.setAttribute("class", "autocomplete-items");
-          autocompleteResultsContainerElement.setAttribute("style", "position:initial!important");
+          if (Search.currentEvents.length === 0 || Data.events.length === Search.currentEvents.length) {
+            autocompleteResultsContainerElement.setAttribute("style", "position:initial!important");
+          }
           /*append the DIV element as a child of the autocomplete container:*/
           this.parentNode.parentNode.appendChild(autocompleteResultsContainerElement);
           /*for each item in the array...*/
@@ -110,7 +130,8 @@ const AutoComplete = {
 
     searchCloseButton.addEventListener('click', function (e) {
       document.getElementById("myInput").value = ""
-      Data.events = []
+      Search.searchContainer.classList.remove("single-marker-mobile-result")
+      Search.setCurrentEvents([]);
       Search.clearSearchDiv()
     })
 

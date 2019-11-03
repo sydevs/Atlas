@@ -3,6 +3,7 @@ const Search = {
   registrationPanelElement: null,
   boxShadowDivElement: null,
   currentEvent: null,
+  currentEvents: [],
   searchResultsContainer: null,
   searchContainer: null,
   load() {
@@ -27,17 +28,19 @@ const Search = {
     Search.toggleDisplayClass(Search.infoPanelElement, "none");
     Search.toggleDisplayClass(Search.registrationPanelElement, "none");
   },
-  setCurrentEvents() {
+  setCurrentEvents(filteredResults) {
+    var events = filteredResults ? filteredResults : Data.events;
     Search.searchResultsContainer.innerHTML = '';
     if (Data.events.length > 0) {
-      for(var i = 0; i < Data.events.length; i++) {
-        Search.searchResultsContainer.innerHTML += Templates.resultContainerHtml(i, Data.events[i]);
+      for(var i = 0; i < events.length; i++) {
+        Search.searchResultsContainer.innerHTML += Templates.resultContainerHtml(i, events[i]);
         Search._addRegisterMoreInfoListeners()
       }
     } else {
       Search.searchResultsContainer.innerHTML = '<div class="result-container event-name">No Results Found</div>';
       Search.toggleDisplayClass(Search.boxShadowDivElement, "none");
     }
+    Search.currentEvents = events;
   },
   _onShowListMobileLink(clickEvent) {
     clickEvent.preventDefault();
