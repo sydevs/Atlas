@@ -4,7 +4,7 @@ class CMS::ApplicationController < ActionController::Base
 
   include Passwordless::ControllerHelpers
   include Pundit
-  
+
   helper_method :current_user
 
   before_action :require_login!
@@ -13,7 +13,7 @@ class CMS::ApplicationController < ActionController::Base
   before_action :set_scope!, except: %i[regions images]
   before_action :set_record!, only: %i[show edit update destroy]
   protect_from_forgery with: :exception
-  
+
   # TODO: Remove this development code
   after_action :verify_authorized
   after_action :verify_policy_scoped, only: :index
@@ -94,17 +94,12 @@ class CMS::ApplicationController < ActionController::Base
     render 'cms/views/regions'
   end
 
-  def images
-    authorize @context, :show?
-    render 'cms/views/images'
-  end
-
   private
 
     def current_user
       @current_user ||= authenticate_by_session(Manager)
     end
-  
+
     def require_login!
       return if current_user
 

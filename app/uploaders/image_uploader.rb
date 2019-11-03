@@ -1,46 +1,20 @@
-class ImageUploader < CarrierWave::Uploader::Base
+require 'image_processing/mini_magick'
 
-  include CarrierWave::MiniMagick
-  process convert: :jpg
-  
-  version :thumbnail do
-    process resize_to_limit: [320, nil]
+class ImageUploader < Shrine
+
+  # plugins and uploading logic
+  plugin :validation_helpers
+  plugin :determine_mime_type
+  plugin :derivatives
+
+  Attacher.validate do
+    validate_max_size 5 * 1024 * 1024
+    validate_mime_type %w[image/jpeg image/png image/webp]
   end
 
-  # Add a white list of extensions which are allowed to be uploaded.
-  # For images you might use something like this:
-  def extension_whitelist
-    %w[png jpg jpeg]
+  Attacher.derivatives_storage do |original|
+    magick = ImageProcessing::MiniMagick.source(original)
+    { thumbnail: magick.resize_to_limit!(300, 300) }
   end
 
-  # Override the directory where uploaded files will be stored.
-  # This is a sensible default for uploaders that are meant to be mounted:
-  def store_dir
-    "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
-  end
-
-  def cache_dir
-    "#{Rails.root}/tmp/uploads"
-  end
-
-  def filename
-    "#{secure_token}.#{file.extension}" if original_filename.present?
-  end
-
-  protected
-
-    def secure_token
-      media_original_filenames_var = :"@#{mounted_as}_original_filenames"
-
-      unless model.instance_variable_get(media_original_filenames_var)
-        model.instance_variable_set(media_original_filenames_var, {})
-      end
-
-      unless model.instance_variable_get(media_original_filenames_var).map{|k,v| k }.include? original_filename.to_sym
-        new_value = model.instance_variable_get(media_original_filenames_var).merge({"#{original_filename}": SecureRandom.uuid})
-        model.instance_variable_set(media_original_filenames_var, new_value)
-      end
-
-      model.instance_variable_get(media_original_filenames_var)[original_filename.to_sym]
-    end
 end

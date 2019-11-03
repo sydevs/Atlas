@@ -1,0 +1,15 @@
+
+- content_for :title, "#{translate_model(Picture)} | #{@context.label}"
+
+= render 'cms/views/context' do
+  h3.ui.header
+    - if policy(@context).update?
+      = floating_action translate('cms.images.upload'), 'upload', id: 'upload-button', data: { endpoint: '/cms/images/upload' }
+    .content = translate('cms.images.title', resource: translate_model(@context.class).downcase)
+
+  .ui.small.images id='uploaded-images'
+    = render partial: 'cms/views/picture', collection: @context.pictures, cached: true
+
+  template id='upload-template'
+    = render 'cms/views/picture', template: true
+    

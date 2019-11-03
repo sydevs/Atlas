@@ -32,7 +32,6 @@ en:
       context: "%{resource} in %{parent}"
       # Tertiary menu
       details: "Info"
-      images: "Images"
       regions: "Regions"
       activity: "Activity"
 

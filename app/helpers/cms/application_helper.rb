@@ -1,4 +1,3 @@
-
 module CMS::ApplicationHelper
 
   MODEL_ICONS = {
@@ -10,6 +9,7 @@ module CMS::ApplicationHelper
     managers: 'user',
     registrations: 'user',
     audits: 'clipboard list',
+    pictures: 'image',
   }
 
   def floating_action text, icon, url = nil, **args

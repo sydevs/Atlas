@@ -1,4 +1,3 @@
-
 IMAGE_SETS = {
   concert: 2,
   public_event: 2,
@@ -6,14 +5,8 @@ IMAGE_SETS = {
 }.freeze
 
 if Rails.env.production?
-  puts "Seeding cannot be run in production!"
+  puts 'Seeding cannot be run in production!'
   return
-end
-
-def load_manager name
-  manager = Manager.find_or_initialize_by(email: params[:email])
-  manager.name = params[:name] if params[:name].present?
-  manager.save!
 end
 
 def load_country country_code
@@ -59,7 +52,7 @@ def load_venue address, country_code, index
 
   venue.events.destroy_all
 
-  puts "Created Venue #{index} - #{venue.label}"
+  puts "Created Venue #{index} - #{venue.name}"
 
   [1, 1, 1, 2, 2, 3, 4, 5].sample.times do
     start_hour = rand(10..20)
@@ -76,12 +69,12 @@ def load_venue address, country_code, index
       room: [true, false].sample ? "#{Faker::Address.city_prefix} Room" : nil,
       start_date: start_date,
       end_date: [true, false].sample ? Faker::Date.between(from: start_date, to: 6.months.since(start_date)) : nil,
-      start_time: "#{start_hour}:#{sprintf '%02d', start_minute}",
-      end_time: [true, true, false].sample ? "#{start_hour + [0, 1, 1, 2].sample}:#{sprintf '%02d', [start_minute, start_minute, 0, 15, 30, 45].sample}" : nil,
+      start_time: "#{start_hour}:#{format '%02d', start_minute}",
+      end_time: [true, true, false].sample ? "#{start_hour + [0, 1, 1, 2].sample}:#{format '%02d', [start_minute, start_minute, 0, 15, 30, 45].sample}" : nil,
       languages: [%w[EN], %w[EN], %w[EN IT], %w[IT], %w[ES]].sample,
       recurrence: Event.recurrences.keys.sample,
       category: category,
-      images: Dir.glob("#{images_folder}/*.jpg").map { |f| File.open(f, 'r') },
+      pictures_attributes: Dir.glob("#{images_folder}/*.jpg").map { |f| { file: File.open(f, 'r') } },
     })
 
     if [true, false].sample
@@ -89,7 +82,7 @@ def load_venue address, country_code, index
       event.save!
     end
 
-    puts " |-> Created Event - #{event.label}"
+    puts " |-> Created Event - #{event.name || event.venue.street}"
     next unless [true, true, false].sample
 
     rand(10..20).times do
@@ -108,7 +101,7 @@ end
 
 MANAGERS = Manager.limit(10).to_a
 
-MANAGERS.count.upto(10).each do |index|
+MANAGERS.count.upto(10).each do
   name = "#{Faker::Name.first_name} #{Faker::Name.last_name}"
   email = "#{name.parameterize(separator: '_')}@example.com"
   MANAGERS << Manager.create(name: name, email: email)

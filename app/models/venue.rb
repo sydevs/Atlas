@@ -23,13 +23,13 @@ class Venue < ApplicationRecord
   default_scope { order(updated_at: :desc) }
 
   # Delegations
-  alias_method :parent, :province
+  alias parent province
 
   # Methods
 
   def managed_by? manager, super_manager: false
     return true if !super_manager && managers.include?(manager)
-    
+
     manager.local_areas.each do |local_area|
       return true if local_area.contains?(venue)
     end

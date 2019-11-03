@@ -1,0 +1,19 @@
+
+- if local_assigns[:template]
+  .ui.rounded.image
+    .ui.circular.link.labels
+      a.ui.view.label href=nil target='_blank'
+        i.fitted.eye.icon
+      - if policy(@context).update?
+        a.ui.destroy.label href=nil data-method='DELETE' data-remote=true data-confirm=translate('cms.messages.confirm_destroy')
+          i.fitted.close.icon
+    img src=nil
+- else
+  .ui.rounded.image
+    .ui.circular.link.labels
+      a.ui.view.label href=picture.file.url target='_blank'
+        i.fitted.eye.icon
+      - if policy(@context).update?
+        a.ui.destroy.label href='#' data-method='DELETE' data-remote=true data-confirm=translate('cms.messages.confirm_destroy')
+          i.fitted.close.icon
+    img src=(picture.file(:thumbnail) || picture.file).url
