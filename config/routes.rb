@@ -13,7 +13,6 @@ Rails.application.routes.draw do
 
   namespace :cms do
     root to: 'application#show'
-    mount ImageUploader.upload_endpoint(:cache) => '/images/upload'
     get :regions, to: 'application#regions'
 
     resources :countries, except: %i[edit update] do
@@ -50,7 +49,7 @@ Rails.application.routes.draw do
 
     resources :events do
       get :regions
-      resources :pictures, only: %i[index]
+      resources :pictures, only: %i[index create destroy]
       resources :managers, only: %i[index new create destroy]
       resources :registrations, only: %i[index]
       resources :audits, only: %i[index]
@@ -66,7 +65,6 @@ Rails.application.routes.draw do
 
     resources :registrations, only: %i[index]
     resources :audits, only: %i[index]
-    resources :pictures, only: %i[destroy]
   end
 
   namespace :api do

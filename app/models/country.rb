@@ -2,7 +2,7 @@ class Country < ApplicationRecord
 
   # Extensions
   include Manageable
-  
+
   searchable_columns %w[country_code]
   audited
 

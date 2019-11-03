@@ -34,24 +34,31 @@ const Uploader = {
     })
 
     this.instance.on('upload-success', (file, response) => {
+      console.log(file, response)
       const $element = $(this.template.content).clone()
       $element.find('a.view.label').attr('href', response.url)
       $element.find('a.destroy.label').attr('href', response.delete_url)
-      $element.find('img').attr('src', response.thumbnail_url)
-      this.list.append($element[0])
+      $element.find('img').attr('src', response.thumbnail_url || response.url)
+      this.list.prepend($element[0])
     })
 
-    $('.destroy.label').on('click', event => {
-      let element = event.currentTarget.children[0]
-      if (element.classList.contains('loading')) {
-        event.stopPropagation()
-        event.preventDefault()
-      } else {
+    $('.destroy.label').on('confirm:complete', function(e, confirmed) {
+      if (confirmed) {
         element.classList.remove('close')
         element.classList.add('spinner')
         element.classList.add('loading')
         event.currentTarget.style.cursor = 'default'
       }
+    });
+
+    $('body').on('click', '.destroy.label', event => {
+      let element = event.currentTarget.children[0]
+      if (element.classList.contains('loading')) {
+        event.stopPropagation()
+        event.preventDefault()
+      } else if (!event.currentTarget.href) {
+        event.currentTarget.closest('.image').remove()
+      } 
     })
   },
 }

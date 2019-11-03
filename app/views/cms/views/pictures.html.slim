@@ -3,8 +3,8 @@
 
 = render 'cms/views/context' do
   h3.ui.header
-    - if policy(@context).update?
-      = floating_action translate('cms.images.upload'), 'upload', id: 'upload-button', data: { endpoint: '/cms/images/upload' }
+    - if policy(@context).new_association?(:pictures)
+      = floating_action translate('cms.images.upload'), 'upload', id: 'upload-button', data: { endpoint: url_for([:cms, @context, Picture]) }
     .content = translate('cms.images.title', resource: translate_model(@context.class).downcase)
 
   .ui.small.images id='uploaded-images'

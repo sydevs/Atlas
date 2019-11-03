@@ -19,12 +19,3 @@ Shrine.plugin :cached_attachment_data # enables retaining cached file across for
 Shrine.plugin :restore_cached_data # extracts metadata for assigned cached files
 Shrine.plugin :upload_endpoint, url: true, max_size: 5 * 1024 * 1024 # 5 MB  # Allow async uploads with Uppy
 Shrine.plugin :derivatives # For image processing / versions
-
-class Shrine::Attacher
-
-  def promote *
-    create_derivatives
-    super
-  end
-
-end
