@@ -104,3 +104,11 @@ en:
       description: "This is a log of all actions taken by this manager."
       changed_by: "by %{name}"
       changed_to: "changed to"
+
+  passwordless:
+    sessions:
+      create:
+        try_again: "Try a different email address"
+        back: "Back"
+      new:
+        back: "Back"

@@ -8,4 +8,7 @@
       - email_field_name = "passwordless[#{@email_field}]".to_sym
       = text_field_tag email_field_name, params.fetch(email_field_name, nil)
 
+  a.ui.basic.button href='/'
+    = translate('passwordless.sessions.create.back')
+
   = f.submit translate('passwordless.sessions.new.submit'), class: 'ui basic button'

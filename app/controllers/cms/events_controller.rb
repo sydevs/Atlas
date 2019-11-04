@@ -15,7 +15,7 @@ class CMS::EventsController < CMS::ApplicationController
   def upload_image
     set_context!
     authorize @context, :update?
-    images = @context.images 
+    images = @context.images
     images += params[:files]
     @context.images = images
     @success = @context.save!
@@ -36,7 +36,7 @@ class CMS::EventsController < CMS::ApplicationController
     if index == 0 && @context.images.size == 1
       @context.remove_images!
     else
-      deleted_image = kept_images.delete_at(index) 
+      deleted_image = kept_images.delete_at(index)
       deleted_image.try(:remove!)
       @context.images = kept_images
     end
@@ -53,7 +53,7 @@ class CMS::EventsController < CMS::ApplicationController
         :name, :description, :room, :category,
         :recurrence, :start_date, :end_date, :start_time, :end_time,
         manager: {},
-        languages: [],
+        languages: []
       )
     end
 

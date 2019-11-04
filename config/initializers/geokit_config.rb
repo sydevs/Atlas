@@ -1,17 +1,16 @@
-
 Rails.application.configure do
   config.geokit.default_units = :kms
   config.geokit.default_formula = :sphere
 end
 
 # These defaults are used in Geokit::Mappable.distance_to and acts_as_mappable
-Geokit::default_units = :kms # others :kms, :nms, :meters
-Geokit::default_formula = :sphere
+Geokit.default_units = :kms # others :kms, :nms, :meters
+Geokit.default_formula = :sphere
 
 # This is the timeout value in seconds to be used for calls to the geocoder web
 # services.  For no timeout at all, comment out the setting.  The timeout unit
 # is in seconds.
-Geokit::Geocoders::request_timeout = 3
+Geokit::Geocoders.request_timeout = 3
 
 # This setting can be used if web service calls must be routed through a proxy.
 # These setting can be nil if not needed, otherwise, a valid URI must be

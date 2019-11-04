@@ -1,4 +1,5 @@
 class CreateTables < ActiveRecord::Migration[5.1]
+
   def change
     create_table :venues do |t|
       t.string :name
@@ -49,4 +50,5 @@ class CreateTables < ActiveRecord::Migration[5.1]
       t.timestamps
     end
   end
+
 end

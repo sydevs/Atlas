@@ -1,3 +1,2 @@
-
 class EventPolicy < DatabasePolicy
 end

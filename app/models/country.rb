@@ -2,7 +2,7 @@ class Country < ApplicationRecord
 
   # Extensions
   include Manageable
-  
+
   searchable_columns %w[country_code]
   audited
 
@@ -20,14 +20,15 @@ class Country < ApplicationRecord
   default_scope { order(country_code: :desc) }
 
   # Methods
-  
+
   def contains? venue
     venue.country_code == country_code
   end
 
   def managed_by? manager, super_manager: false
     return managers.include?(manager) unless super_manager
-    return false
+
+    false
   end
 
 end

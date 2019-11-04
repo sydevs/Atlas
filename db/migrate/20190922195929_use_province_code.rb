@@ -1,4 +1,5 @@
-  class UseProvinceCode < ActiveRecord::Migration[5.1]
+class UseProvinceCode < ActiveRecord::Migration[5.1]
+
   def change
     remove_column :provinces, :province_name, :string
     add_column :provinces, :province_code, :string, limit: 3
@@ -7,4 +8,5 @@
     remove_column :venues, :province_name, :string
     add_column :venues, :province_code, :string, limit: 3
   end
+
 end

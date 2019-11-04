@@ -33,17 +33,19 @@ class Event < ApplicationRecord
 
   # Delegations
   delegate :full_address, to: :venue
-  alias_method :parent, :venue
+  alias parent venue
 
   # Methods
-  
+
   def managed_by? manager, super_manager: false
     return true if self.manager == manager && !super_manager
-    return self.venue.managed_by?(manager)
+
+    venue.managed_by?(manager)
   end
 
   def languages= value
     # Only accept languages which are in the language list
     super value & I18nData.languages.keys
   end
+
 end

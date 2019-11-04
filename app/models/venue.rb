@@ -23,18 +23,18 @@ class Venue < ApplicationRecord
   default_scope { order(updated_at: :desc) }
 
   # Delegations
-  alias_method :parent, :province
+  alias parent province
 
   # Methods
 
   def managed_by? manager, super_manager: false
     return true if !super_manager && managers.include?(manager)
-    
+
     manager.local_areas.each do |local_area|
       return true if local_area.contains?(venue)
     end
 
-    return parent.managed_by?(manager)
+    parent.managed_by?(manager)
   end
 
   # Check if coordinates have been defined
@@ -45,7 +45,7 @@ class Venue < ApplicationRecord
   def coordinates
     [latitude, longitude]
   end
-  
+
   def country_code= value
     value = value.to_s.upcase
     # Only accept country codes which are in the language list

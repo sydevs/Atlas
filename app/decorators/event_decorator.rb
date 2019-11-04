@@ -75,6 +75,7 @@ module EventDecorator
     while dates.length < limit
       next_date = dates[-1] + interval
       break if end_date.present? && next_date > end_date
+
       dates << next_date
     end
 

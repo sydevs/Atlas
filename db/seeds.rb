@@ -1,4 +1,3 @@
-
 IMAGE_SETS = {
   concert: 2,
   public_event: 2,
@@ -6,11 +5,11 @@ IMAGE_SETS = {
 }.freeze
 
 if Rails.env.production?
-  puts "Seeding cannot be run in production!"
+  puts 'Seeding cannot be run in production!'
   return
 end
 
-def load_manager name
+def load_manager _name
   manager = Manager.find_or_initialize_by(email: params[:email])
   manager.name = params[:name] if params[:name].present?
   manager.save!
@@ -28,7 +27,7 @@ def load_country country_code
 end
 
 def load_province province_code, country_code
-  province_code = ISO3166::Country[country_code].subdivisions.find { |k,s| s['name'] == province_code }[0] if province_code.length > 3
+  province_code = ISO3166::Country[country_code].subdivisions.find { |_k, s| s['name'] == province_code }[0] if province_code.length > 3
   province = Province.find_or_initialize_by(province_code: province_code, country_code: country_code)
   if province.new_record?
     province.save!
@@ -76,8 +75,8 @@ def load_venue address, country_code, index
       room: [true, false].sample ? "#{Faker::Address.city_prefix} Room" : nil,
       start_date: start_date,
       end_date: [true, false].sample ? Faker::Date.between(from: start_date, to: 6.months.since(start_date)) : nil,
-      start_time: "#{start_hour}:#{sprintf '%02d', start_minute}",
-      end_time: [true, true, false].sample ? "#{start_hour + [0, 1, 1, 2].sample}:#{sprintf '%02d', [start_minute, start_minute, 0, 15, 30, 45].sample}" : nil,
+      start_time: "#{start_hour}:#{format '%02d', start_minute}",
+      end_time: [true, true, false].sample ? "#{start_hour + [0, 1, 1, 2].sample}:#{format '%02d', [start_minute, start_minute, 0, 15, 30, 45].sample}" : nil,
       languages: [%w[EN], %w[EN], %w[EN IT], %w[IT], %w[ES]].sample,
       recurrence: Event.recurrences.keys.sample,
       category: category,
@@ -108,7 +107,7 @@ end
 
 MANAGERS = Manager.limit(10).to_a
 
-MANAGERS.count.upto(10).each do |index|
+MANAGERS.count.upto(10).each do |_index|
   name = "#{Faker::Name.first_name} #{Faker::Name.last_name}"
   email = "#{name.parameterize(separator: '_')}@example.com"
   MANAGERS << Manager.create(name: name, email: email)

@@ -1,5 +1,5 @@
-
 class SummaryMailer < ApplicationMailer
+
   default template_path: 'mailer/summaries'
   layout 'mailer/manager'
 
@@ -38,5 +38,5 @@ class SummaryMailer < ApplicationMailer
         @magic_link = send(Passwordless.mounted_as).token_sign_in_url(session.token)
       end
     end
-  
+
 end

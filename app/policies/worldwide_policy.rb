@@ -1,4 +1,3 @@
-
 class WorldwidePolicy < DatabasePolicy
 
   def show?
@@ -16,7 +15,8 @@ class WorldwidePolicy < DatabasePolicy
   def index_association? association
     return false if association == :registrations
     return user.present? if association == :regions
-    return user.administrator?
+
+    user.administrator?
   end
 
   def new_association? association
