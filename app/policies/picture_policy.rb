@@ -1,0 +1,2 @@
+class PicturePolicy < DatabasePolicy
+end

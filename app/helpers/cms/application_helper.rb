@@ -9,6 +9,7 @@ module CMS::ApplicationHelper
     managers: 'user',
     registrations: 'user',
     audits: 'clipboard list',
+    pictures: 'image',
   }.freeze
 
   def floating_action text, icon, url = nil, **args

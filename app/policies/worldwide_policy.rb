@@ -13,7 +13,7 @@ class WorldwidePolicy < DatabasePolicy
   end
 
   def index_association? association
-    return false if association == :registrations
+    return false if %i[registrations pictures].include?(association)
     return user.present? if association == :regions
 
     user.administrator?

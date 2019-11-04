@@ -94,11 +94,6 @@ class CMS::ApplicationController < ActionController::Base
     render 'cms/views/regions'
   end
 
-  def images
-    authorize @context, :show?
-    render 'cms/views/images'
-  end
-
   private
 
     def current_user

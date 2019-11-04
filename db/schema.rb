@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191019080912) do
+ActiveRecord::Schema.define(version: 20191103135357) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "access_keys", force: :cascade do |t|
+    t.string "label"
+    t.string "key"
+    t.boolean "suspended"
+    t.datetime "last_accessed_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "audits", force: :cascade do |t|
     t.integer "auditable_id"
@@ -118,6 +127,15 @@ ActiveRecord::Schema.define(version: 20191019080912) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["authenticatable_type", "authenticatable_id"], name: "authenticatable"
+  end
+
+  create_table "pictures", force: :cascade do |t|
+    t.string "parent_type"
+    t.bigint "parent_id"
+    t.jsonb "file"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["parent_type", "parent_id"], name: "index_pictures_on_parent_type_and_parent_id"
   end
 
   create_table "provinces", force: :cascade do |t|
