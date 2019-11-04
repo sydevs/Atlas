@@ -2,5 +2,8 @@
 .ui.positive.message
   = translate('passwordless.sessions.create.email_sent_if_record_found')
 
+a.ui.basic.button href='/'
+  = translate('passwordless.sessions.create.back')
+
 a.ui.basic.button href=managers.sign_in_path
-  | Try a different email address
+  = translate('passwordless.sessions.create.try_again')

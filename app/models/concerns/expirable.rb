@@ -1,4 +1,3 @@
-
 module Expirable
 
   extend ActiveSupport::Concern
@@ -13,11 +12,11 @@ module Expirable
   RECENTLY_EXPIRED_DATE = (EXPIRE_AFTER_WEEKS + 1).weeks.ago.freeze
 
   included do
-    scope :published, -> { where("#{self.table_name}.updated_at > ?", EXPIRE_DATE) }
-    scope :needs_review, -> { where("#{self.table_name}.updated_at > ?", VERIFY_DATE) }
-    scope :needs_urgent_review, -> { where("#{self.table_name}.updated_at > ? AND #{self.table_name}.updated_at <= ?", ESCALATE_DATE, VERIFY_DATE) }
-    scope :expired, -> { where("#{self.table_name}.updated_at > ?", EXPIRE_DATE) }
-    scope :recently_expired, -> { where("#{self.table_name}.updated_at <= ? AND #{self.table_name}.updated_at > ?", EXPIRE_DATE, RECENTLY_EXPIRED_DATE) }
+    scope :published, -> { where("#{table_name}.updated_at > ?", EXPIRE_DATE) }
+    scope :needs_review, -> { where("#{table_name}.updated_at > ?", VERIFY_DATE) }
+    scope :needs_urgent_review, -> { where("#{table_name}.updated_at > ? AND #{table_name}.updated_at <= ?", ESCALATE_DATE, VERIFY_DATE) }
+    scope :expired, -> { where("#{table_name}.updated_at > ?", EXPIRE_DATE) }
+    scope :recently_expired, -> { where("#{table_name}.updated_at <= ? AND #{table_name}.updated_at > ?", EXPIRE_DATE, RECENTLY_EXPIRED_DATE) }
   end
 
   def needs_verification_at
@@ -51,4 +50,5 @@ module Expirable
       updated_at > ESCALATE_DATE
     end
   end
+
 end

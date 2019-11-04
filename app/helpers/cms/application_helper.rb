@@ -10,7 +10,8 @@ module CMS::ApplicationHelper
     registrations: 'user',
     audits: 'clipboard list',
     access_keys: 'key',
-  }
+    pictures: 'image',
+  }.freeze
 
   def floating_action text, icon, url = nil, **args
     klass = %w[ui basic right floated compact tiny button]
@@ -38,6 +39,18 @@ module CMS::ApplicationHelper
 
   def model_icon model
     content_tag :i, nil, class: "#{MODEL_ICONS[model.table_name.to_sym]} icon"
+  end
+
+  def breadcrumb_url ancestor
+    if action_name == 'index' && policy(ancestor).index_association?(controller_name)
+      url_for([:cms, (ancestor == :worldwide ? nil : ancestor), controller_name])
+    elsif action_name == 'regions' && policy(ancestor).index_association?(:regions)
+      url_for([:cms, (ancestor == :worldwide ? nil : ancestor), :regions])
+    elsif ancestor == :worldwide
+      cms_root_url
+    else
+      url_for([:cms, ancestor])
+    end
   end
 
 end

@@ -24,7 +24,6 @@ module Sydb
     end
 
     config.i18n.load_path += Dir["#{Rails.root}/config/locales/**/*.{rb,yml}"]
-
   end
 end
 

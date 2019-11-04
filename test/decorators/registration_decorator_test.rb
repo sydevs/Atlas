@@ -3,6 +3,7 @@
 require 'test_helper'
 
 class RegistrationDecoratorTest < ActiveSupport::TestCase
+
   def setup
     @registration = Registration.new.extend RegistrationDecorator
   end
@@ -10,4 +11,5 @@ class RegistrationDecoratorTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end
+
 end

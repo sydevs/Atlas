@@ -14,7 +14,7 @@ html
 
   body class="cms #{controller_name} #{controller.action_name}"
     header
-      - if current_user
+      - if defined?(current_user) && current_user
         .ui.basic.top.right.floated.pointing.dropdown.icon.button
           i.bars.icon
           .menu
@@ -35,17 +35,17 @@ html
 
         a.ui.right.floated.basic.button href=managers.sign_out_path
           = translate('cms.menu.sign_out')
-      - else
-        a.ui.right.floated.basic.button href=managers.sign_in_path
-          = translate('cms.menu.sign_in')
 
-      h1 = translate('sahaj_atlas')
+      .ui.hidden.divider
+      h1.ui.header
+        = inline_svg 'logo.svg', title: 'global icon by KonKapp from the Noun Project'
+        = translate('sahaj_atlas')
       .ui.divider
 
       - if @context && @context.respond_to?(:ancestors)
         .ui.breadcrumbs
           - if current_user.administrator?
-            a.section href=cms_root_url
+            a.section href=breadcrumb_url(:worldwide)
               i.globe.icon
           - else
             a.section href=url_for(current_user)
@@ -53,7 +53,8 @@ html
           i.right.angle.icon.divider
           - @context.ancestors.each do |ancestor|
             - if policy(ancestor).show?
-              a.section href=url_for([:cms, ancestor]) = ancestor.label
+              a.section href=breadcrumb_url(ancestor)
+                = ancestor.label
             - else
               .section = ancestor.label
             i.right.angle.icon.divider

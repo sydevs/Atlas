@@ -70,6 +70,13 @@ en:
         # Countable
         one: "API key"
         other: "API keys"
+      picture:
+        # Basic pluralization
+        single: "Image"
+        plural: "Images"
+        # Countable
+        one: "image"
+        other: "images"
 
     attributes:
       generic:
@@ -165,3 +172,5 @@ en:
         key: "API Key"
         suspended: "Suspended"
         last_accessed_at: "Last Access"
+
+      pictures:

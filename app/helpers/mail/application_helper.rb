@@ -1,4 +1,3 @@
-
 module Mail::ApplicationHelper
 
   def message content, format = :html, type = :default

@@ -5,5 +5,5 @@ class Info::ApplicationController < ActionController::Base
 
   def statistics
   end
-  
+
 end

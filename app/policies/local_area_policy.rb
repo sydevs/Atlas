@@ -1,4 +1,3 @@
-
 class LocalAreaPolicy < RegionPolicy
 
   def new_association? association = nil

@@ -33,6 +33,9 @@ h3.ui.dividing.header = translate('cms.details.details_for_record', resource: @r
   .item
     = model_icon Registration
     .content = translate('cms.details.records_in_recent_days', resources: translate_model_count(@record.registrations))
+  .item
+    = model_icon Picture
+    .content = translate_model_count(@record.pictures)
 
 h3.ui.dividing.header = translate('cms.details.location_of_record', resource: translate_model(@model).downcase)
 p = [@record.room, @record.full_address].compact.join(' - ')

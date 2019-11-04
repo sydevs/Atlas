@@ -1,4 +1,3 @@
-
 class CountryPolicy < RegionPolicy
 
   def update?
