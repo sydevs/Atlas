@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   passwordless_for :managers
+  root to: 'info/application#about'
 
   namespace :info, path: '' do
     root to: 'application#about'

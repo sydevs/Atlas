@@ -1,3 +1,11 @@
+GIT
+  remote: https://github.com/Ardnived/passwordless.git
+  revision: 84e9162e5b301824b07e9275aa37a82ec3dad1e0
+  specs:
+    passwordless (0.8.2)
+      bcrypt (~> 3.1.11)
+      rails (>= 5.1.4)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -160,7 +168,7 @@ GEM
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
       ruby_dep (~> 1.2)
-    loofah (2.3.0)
+    loofah (2.3.1)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
     mail (2.7.1)
@@ -173,20 +181,17 @@ GEM
     mini_magick (4.9.5)
     mini_mime (1.0.2)
     mini_portile2 (2.4.0)
-    minitest (5.12.2)
+    minitest (5.13.0)
     multi_json (1.14.1)
     multipart-post (2.1.1)
     nilify_blanks (1.3.0)
       activerecord (>= 3.0.0)
       activesupport (>= 3.0.0)
     nio4r (2.5.2)
-    nokogiri (1.10.4)
+    nokogiri (1.10.5)
       mini_portile2 (~> 2.4.0)
     normalize-rails (4.1.1)
     os (1.0.1)
-    passwordless (0.8.2)
-      bcrypt (~> 3.1.11)
-      rails (>= 5.1.4)
     pg (0.21.0)
     premailer (1.11.1)
       addressable
@@ -331,7 +336,7 @@ DEPENDENCIES
   mini_magick
   nilify_blanks
   normalize-rails
-  passwordless
+  passwordless!
   pg (~> 0.18)
   premailer-rails
   puma (~> 3.7)
