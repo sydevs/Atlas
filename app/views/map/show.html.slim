@@ -1,30 +1,15 @@
-#data data-events=render(file: 'api/views/index.json.jbuilder') data-current-location=@location.to_json
+#data data-current-location=@location.to_json
 #mapid
 #boxShadowDiv.box-shadow-div
-.search-container
+.search-container id="searchContainer"
   .autocomplete.search-box
     input#myInput.search-text name="myCountry" placeholder="Search" type="text" /
     button#searchCloseButton.search-close X
-  .search-results
-    - @events.limit(5).each do |event|
-      .result-container
-        .event-info-container
-          span.event-name= event.name
-          span.event-address= event.venue&.address&.values.join(", ")
-          span.time-details
-            span.day
-              = event.recurrence_in_words
-            | &nbsp
-            span.time
-              = event.formatted_start_end_time
-        .event-actions-container
-          .button-container
-            button.registerButton.register-button data-eventId=event.id
-              | Register
-          .link-container
-            a.moreInfoLink.more-info-link href="/" data-eventId=event.id
-              | More Info
-      span.divider
+  .search-results id="searchResultsContainer"
+  / Search Results Dynamically Generated Here
+
+#bottomBar.bottom-bar
+  a#showListLink.show-list Show List
 
 #registrationPanel.search-container.first-side-panel
   .less-info-container
@@ -34,7 +19,6 @@
       | Register for
     .info-panel-description
       #registrationPanelDescription
-        = @events.first.name
       form.event-registration
         = csrf_meta_tags
         p#registration-message

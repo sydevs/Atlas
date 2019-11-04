@@ -19,8 +19,6 @@ class Map::ApplicationController < ActionController::Base
       }
     end
 
-    @model = Event # This allows the jbuilder template to render
-    @events = Event.joins(:venue).within(500, origin: [@location[:lat], @location[:lng]])
     render 'map/show'
   end
 

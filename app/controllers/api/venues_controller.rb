@@ -4,7 +4,7 @@ class API::VenuesController < API::ApplicationController
 
   def index
     if params[:latitude].present? && params[:longitude].present?
-      super scope.within(params[:radius] || 500, origin: [params[:latitude], params[:longitude]])
+      super scope.within(params[:radius] || 50, origin: [params[:latitude], params[:longitude]])
     else
       super
     end
