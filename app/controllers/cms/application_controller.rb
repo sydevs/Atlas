@@ -116,9 +116,11 @@ class CMS::ApplicationController < ActionController::Base
         keys = model.model_name
         param_key = "#{keys.param_key}_id"
         next unless params[param_key]
+
         context_record = model.find(params[param_key])
-        
+
         next if @context.present?
+
         @context_key = keys.route_key
         @context = context_record
       end
@@ -141,6 +143,7 @@ class CMS::ApplicationController < ActionController::Base
       allow = @context ? policy(@context) : policy(:worldwide)
       key = key.table_name.to_sym if key.is_a?(ActiveRecord.class)
       return if allow.index_association?(key)
+
       raise Pundit::NotAuthorizedError, "not allowed to index? #{@model} for #{@context || 'Worldwide'}"
     end
 

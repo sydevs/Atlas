@@ -1,4 +1,5 @@
 class AddManagerTable < ActiveRecord::Migration[5.1]
+
   def change
     create_table :managers do |t|
       t.string :name
@@ -14,4 +15,5 @@ class AddManagerTable < ActiveRecord::Migration[5.1]
     remove_column :venues, :contact_name, :string
     remove_column :venues, :contact_email, :string
   end
+
 end

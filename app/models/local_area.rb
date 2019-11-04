@@ -49,7 +49,8 @@ class LocalArea < ApplicationRecord
     return true if managers.include?(manager) && !super_manager
     return true if province.present? && province.managed_by?(manager)
     return true if country.present? && country.managed_by?(manager)
-    return false
+
+    false
   end
 
   private

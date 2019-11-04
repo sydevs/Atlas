@@ -31,7 +31,8 @@ class Manager < ApplicationRecord
 
   def managed_by? manager, super_manager: false
     return true if self == manager && !super_manager
-    return manager.administrator?
+
+    manager.administrator?
   end
 
   def username

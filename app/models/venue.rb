@@ -34,7 +34,7 @@ class Venue < ApplicationRecord
       return true if local_area.contains?(venue)
     end
 
-    return parent.managed_by?(manager)
+    parent.managed_by?(manager)
   end
 
   # Check if coordinates have been defined
@@ -45,7 +45,7 @@ class Venue < ApplicationRecord
   def coordinates
     [latitude, longitude]
   end
-  
+
   def country_code= value
     value = value.to_s.upcase
     # Only accept country codes which are in the language list

@@ -1,5 +1,5 @@
-
 class ManagerMailer < ApplicationMailer
+
   default template_path: 'mailer/managers'
   layout 'mailer/manager'
 
@@ -51,5 +51,5 @@ class ManagerMailer < ApplicationMailer
         @magic_link = send(Passwordless.mounted_as).token_sign_in_url(session.token)
       end
     end
-  
+
 end

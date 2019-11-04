@@ -1,4 +1,3 @@
-
 module LocalizationHelper
 
   def translate_model model, pluralization = :singular
@@ -11,7 +10,7 @@ module LocalizationHelper
       count = model.count
       model = model.klass
     end
-    
+
     "#{number_with_delimiter(count)} #{translate(model.model_name.i18n_key, scope: %i[activerecord models], count: count)}"
   end
 

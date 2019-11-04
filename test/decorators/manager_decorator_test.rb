@@ -3,6 +3,7 @@
 require 'test_helper'
 
 class ManagerDecoratorTest < ActiveSupport::TestCase
+
   def setup
     @manager = Manager.new.extend ManagerDecorator
   end
@@ -10,4 +11,5 @@ class ManagerDecoratorTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end
+
 end

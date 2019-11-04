@@ -18,7 +18,7 @@ class CMS::EventsController < CMS::ApplicationController
         :name, :description, :room, :category,
         :recurrence, :start_date, :end_date, :start_time, :end_time,
         manager: {},
-        languages: [],
+        languages: []
       )
     end
 

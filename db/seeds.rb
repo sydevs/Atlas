@@ -21,7 +21,7 @@ def load_country country_code
 end
 
 def load_province province_code, country_code
-  province_code = ISO3166::Country[country_code].subdivisions.find { |k,s| s['name'] == province_code }[0] if province_code.length > 3
+  province_code = ISO3166::Country[country_code].subdivisions.find { |_k, s| s['name'] == province_code }[0] if province_code.length > 3
   province = Province.find_or_initialize_by(province_code: province_code, country_code: country_code)
   if province.new_record?
     province.save!

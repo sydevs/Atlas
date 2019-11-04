@@ -11,6 +11,6 @@
 # end
 
 ActiveSupport::Inflector.inflections do |inflect|
-  inflect.acronym 'CMS' 
-  inflect.acronym 'API' 
+  inflect.acronym 'CMS'
+  inflect.acronym 'API'
 end

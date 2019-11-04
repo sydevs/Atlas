@@ -30,6 +30,7 @@ class CMS::ManagersController < CMS::ApplicationController
   def destroy
     authorize @record
     raise StandardError, 'Cannot destroy a manager' unless @context
+
     @context.managers.delete(@record)
     flash[:success] = translate('cms.messages.successfully_removed', resource: Manager, context: @context.class)
     redirect_to [:cms, @context, Manager]

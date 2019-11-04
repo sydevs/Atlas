@@ -1,6 +1,10 @@
 # Enable this when the VSC rubocop extension supports rails
 #inherit_from: ./config/rails.rubocop.yml
 
+AllCops:
+  Exclude:
+    - db/schema.rb
+
 Metrics:
   Enabled: False
 

@@ -3,6 +3,9 @@
 $single-panel-width: 35%
 $first-panel-left-offset: 10%
 
+html
+  overflow: hidden
+
 .box-shadow-div
   @include laptop-or-larger
     z-index: 999
@@ -38,8 +41,58 @@ $first-panel-left-offset: 10%
   overflow-y: scroll
   background-color: white
   @include mobile
+    .search-results
+      display: none
     left: 5%
     width: 90%
+  &.show-list-mobile-results
+    .search-results
+      display: block
+    @include mobile
+      top: 0
+      left: 0
+      width: 100%
+      height: 100%
+      max-height: 100%
+  &.single-marker-mobile-result
+    @include mobile
+      position: static
+      .autocomplete-items
+        z-index: 999
+      .autocomplete
+        position: absolute
+        top: 0
+        z-index: 999
+        width: 100%
+      .search-results
+        bottom: 0
+        position: absolute
+        z-index: 9999
+        background: white
+        display: block
+
+.bottom-bar
+  @include laptop-or-larger
+    display: none !important
+  width: 100%
+  display: flex
+  justify-content: center
+  align-items: center
+  z-index: 999
+  position: absolute
+  bottom: 0
+  height: 5%
+  max-height: 100%
+  background-color: #FFFFFF
+  box-shadow: 0 2px 50px 0 rgba(0,0,0,0.5)
+  .show-list
+    color: #7B7B7B
+    font-family: Raleway
+    font-size: 1.2em
+    letter-spacing: 0.16px
+    line-height: 15px
+    &.single-marker-hide-list
+      display: none
 
 #infoPanel
   display: none
@@ -76,7 +129,12 @@ $first-panel-left-offset: 10%
 
 .first-side-panel
   @include mobile
+    z-index: 9999
+    width: 100%
     height: 100%
+    max-height: 100%
+    left: 0
+    top: 0
   @include laptop-or-larger
     border-left: 0.5px solid #D8D8D8
     left: $first-panel-left-offset + $single-panel-width
@@ -92,7 +150,7 @@ $first-panel-left-offset: 10%
   border-bottom: none
   border-top: none
   z-index: 99
-  top: 100%
+  top: 51px
   left: 0
   right: 0
   div

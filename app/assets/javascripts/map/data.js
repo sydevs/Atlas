@@ -7,7 +7,7 @@ const Data = {
   load() {
     console.log('loading data.js')
     let data = L.DomUtil.get('data')
-    Data.events = JSON.parse(data.dataset.events)
+    Data.events = []
     Data.currentLocation = JSON.parse(data.dataset.currentLocation)
     Data.venues = {}
 

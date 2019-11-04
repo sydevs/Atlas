@@ -1,7 +1,7 @@
 require 'csv'
 
 class Registration < ApplicationRecord
-  
+
   # Extensions
   searchable_columns %w[name email]
 
@@ -14,10 +14,10 @@ class Registration < ApplicationRecord
 
   # Scopes
   default_scope { order(created_at: :desc) }
-  scope :since, ->(date) { where('created_at >= ?', date) }
+  scope :since, -> (date) { where('created_at >= ?', date) }
 
   # Delegations
-  alias_method :parent, :event
+  alias parent event
 
   # Methods
 
