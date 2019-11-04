@@ -64,8 +64,8 @@ namespace :mail do
         expired expired_escalation
         confirmation
       ].each_with_index do |test, index|
-        puts "Press enter to proceed to the next test (mail:#{test})" unless index == 0
-        STDIN.gets unless index == 0
+        puts "Press enter to proceed to the next test (mail:#{test})" unless index.zero?
+        STDIN.gets unless index.zero?
         puts "Testing: mail:#{test}"
         Rake::Task["mail:test:#{test}"].invoke
       end

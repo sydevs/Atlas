@@ -1,4 +1,4 @@
-class PagePolicy < Struct.new(:user, :page)
+class PagePolicy < Struct.new(:user, :page) # rubocop:disable Style/StructInheritance
 
   def database?
     user.present?

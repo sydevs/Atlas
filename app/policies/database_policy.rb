@@ -25,7 +25,7 @@ class DatabasePolicy < ApplicationPolicy
   end
 
   def index_association? association = nil
-    return record.has_region_association? if association == :regions
+    return record.region_association? if association == :regions
     return false unless manage?
 
     record.respond_to?(association)

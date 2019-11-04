@@ -16,9 +16,9 @@ module Searchable
 
   module ClassMethods
 
-    def search q
-      if q.present? && search_query.present?
-        where(search_query, *Array.new(search_columns_count, "%#{q}%"))
+    def search query
+      if query.present? && search_query.present?
+        where(search_query, *Array.new(search_columns_count, "%#{query}%"))
       else
         where(nil)
       end

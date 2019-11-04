@@ -5,7 +5,7 @@ class ApplicationRecord < ActiveRecord::Base
   include Searchable
   include Parentable
 
-  def has_region_association?
+  def region_association?
     respond_to?(:countries) || respond_to?(:provinces) || respond_to?(:local_areas)
   end
 

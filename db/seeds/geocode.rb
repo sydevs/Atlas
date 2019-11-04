@@ -2,13 +2,13 @@ require 'bigdecimal'
 require 'net/http'
 require 'json'
 require 'erb'
-include ERB::Util
+include ERB::Util # rubocop:disable Style/MixinUsage
 
 # This script is used to process a CSV of addresses and output the addresses with latlong values attached.
 # The script uses the Nominatim API, so be careful to not run the script too many times, as you will hit bandwidth limits.
 
 def valid_coordinate? string
-  string.include?('.') && !!BigDecimal(string)
+  string.include?('.') && !BigDecimal(string).nil?
 rescue StandardError
   false
 end
@@ -28,10 +28,10 @@ def geocode address, country
   response = Net::HTTP.get(url)
   data = JSON.parse(response)
 
-  if !data.empty?
-    return "#{data[0]['lat']}, #{data[0]['lon']}"
-  else
+  if data.empty?
     puts "[X] Couldn't find #{address}"
+  else
+    "#{data[0]['lat']}, #{data[0]['lon']}"
   end
 end
 

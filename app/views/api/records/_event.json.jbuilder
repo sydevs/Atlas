@@ -20,9 +20,7 @@ json.timing do
   json.extract! event, :recurrence, :start_date, :end_date, :start_time, :end_time
 end
 
-if event.venue_id
-  json.venue_id event.venue_id
-end
+json.venue_id event.venue_id if event.venue_id
 
 if event.venue.latitude? && event.venue.latitude?
   json.latitude event.venue.latitude
