@@ -12,17 +12,28 @@ const Search = {
     Search.boxShadowDivElement = document.getElementById("boxShadowDiv");
     Search.searchResultsContainer = document.getElementById("searchResultsContainer");
     Search.searchContainer = document.getElementById("searchContainer");
+    Search.registrationForm = document.getElementById("eventRegistration");
     Search.setCurrentEvents();
 
     document.getElementById('lessInfoLink').addEventListener("click", Search._onLessInfoLinkClick);
     document.getElementById('cancelRegisterLink').addEventListener("click", Search._onCancelRegisterLinkClick);
     document.getElementById('showListLink').addEventListener("click", Search._onShowListMobileLink);
 
+    Search._addRegistrationFormListeners()
     Search._addRegisterMoreInfoListeners()
   },
+  _addRegistrationFormListeners() {
+    Search.registrationForm.addEventListener("submit", function (event) {
+      event.preventDefault();
+      Utils.postForm("/map/registrations", Search.registrationForm, function(event) {
+        console.log(JSON.parse(event.target.response))
+      })
+    });
+  },
   clearSearchDiv() {
-    searchResultsContainer.innerHTML = '';
-
+    if(!L.Browser.mobile){
+      searchResultsContainer.innerHTML = '';
+    }
     Search._decreaseBoxShadowDiv();
 
     Search.searchContainer.classList.remove("show-list-mobile-results")
@@ -96,6 +107,7 @@ const Search = {
   },
   _setRegistrationData() {
     document.getElementById("registrationPanelDescription").innerText = Search.currentEvent.name || Search.currentEvent.label;
+    document.getElementById("registrationEventId").value = Search.currentEvent.id;
   },
   _increaseBoxShadowDiv() {
     Search.boxShadowDivElement.classList.add("width-panel-double");
