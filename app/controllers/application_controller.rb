@@ -5,7 +5,9 @@ class ApplicationController < ActionController::Base
   skip_before_action :redirect_login, except: %i[sign_out]
 
   def redirect_login
-    redirect_to '/cms' if current_user.present?
+    return unless current_user.present?
+
+    redirect_to params[:url] || '/cms'
   end
 
   def current_user

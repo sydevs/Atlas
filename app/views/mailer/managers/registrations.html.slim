@@ -22,9 +22,9 @@ table
 h2 = translate('mail.common.actions')
 p = translate('mail.registrations.call_to_action')
 p.button-group
-  a.button href=@magic_link
+  a.button href=@view_registrations_link
     = translate('mail.registrations.view_all')
-  a.button href=@magic_link
+  a.button href=@unsubscribe_registrations_link
     = translate('mail.registrations.unsubscribe')
 
 = message translate('mail.common.about'), :html
