@@ -9,13 +9,13 @@ class Map::ApplicationController < ActionController::Base
     if location.success
       @location = {
         lat: location.lat,
-        lng: location.lng
+        lng: location.lng,
       }
     else
       # defaults to city of london for now
       @location = {
-        lat: 51.505, 
-        lng: -0.09
+        lat: 51.505,
+        lng: -0.09,
       }
     end
 

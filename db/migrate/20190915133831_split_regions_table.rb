@@ -1,4 +1,5 @@
 class SplitRegionsTable < ActiveRecord::Migration[5.1]
+
   def change
     drop_table :regions do |t|
       t.string :name
@@ -49,4 +50,5 @@ class SplitRegionsTable < ActiveRecord::Migration[5.1]
 
     add_index :managed_regions, %i[region_id region_type]
   end
+
 end

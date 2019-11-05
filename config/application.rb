@@ -8,6 +8,7 @@ Bundler.require(*Rails.groups)
 
 module Sydb
   class Application < Rails::Application
+
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.1
 
@@ -17,10 +18,11 @@ module Sydb
 
     config.action_dispatch.default_headers = {
       'Access-Control-Allow-Origin' => '*',
-      'Access-Control-Request-Method' => 'GET'
+      'Access-Control-Request-Method' => 'GET',
     }
 
-    config.i18n.load_path += Dir["#{Rails.root.to_s}/config/locales/**/*.{rb,yml}"]
+    config.i18n.load_path += Dir["#{Rails.root}/config/locales/**/*.{rb,yml}"]
+
   end
 end
 

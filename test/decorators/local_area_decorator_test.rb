@@ -3,6 +3,7 @@
 require 'test_helper'
 
 class LocalAreaDecoratorTest < ActiveSupport::TestCase
+
   def setup
     @local_area = LocalArea.new.extend LocalAreaDecorator
   end
@@ -10,4 +11,5 @@ class LocalAreaDecoratorTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end
+
 end

@@ -1,4 +1,3 @@
-
 module Publishable
 
   extend ActiveSupport::Concern

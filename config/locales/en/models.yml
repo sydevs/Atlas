@@ -63,6 +63,13 @@ en:
         # Countable
         one: "log"
         other: "logs"
+      picture:
+        # Basic pluralization
+        single: "Image"
+        plural: "Images"
+        # Countable
+        one: "image"
+        other: "images"
 
     attributes:
       generic:
@@ -152,3 +159,5 @@ en:
           update: "Updated"
           create: "Created"
           destroy: "Deleted"
+
+      pictures:

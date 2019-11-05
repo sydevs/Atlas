@@ -1,4 +1,3 @@
-
 module Parentable
 
   extend ActiveSupport::Concern

@@ -1,4 +1,3 @@
-
 module Manageable
 
   extend ActiveSupport::Concern
@@ -11,7 +10,8 @@ module Manageable
   def managed_by? manager, super_manager: false
     return true if !super_manager && managers.include?(manager)
     return parent.managed_by?(manager) if respond_to?(:parent) && parent.respond_to?(:managed_by?)
-    return false
+
+    false
   end
 
   def parent_managers
@@ -25,7 +25,7 @@ module Manageable
       result
     end
   end
-  
+
   def add_manager params_or_manager
     if params_or_manager.is_a?(Hash)
       params = params_or_manager

@@ -9,7 +9,7 @@ else
     json.extract! event, :room
     json.extract! event.venue, :street, :city, :province_code, :province_name, :country_code, :country_name, :postcode
   end
-end  
+end
 
 json.upcoming_dates event.upcoming_dates.map(&:to_s)
 
@@ -20,9 +20,7 @@ json.timing do
   json.extract! event, :recurrence, :start_date, :end_date, :start_time, :end_time
 end
 
-if event.venue_id
-  json.venue_id event.venue_id
-end
+json.venue_id event.venue_id if event.venue_id
 
 if event.venue.latitude? && event.venue.latitude?
   json.latitude event.venue.latitude

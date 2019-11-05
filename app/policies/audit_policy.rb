@@ -1,4 +1,3 @@
-
 class AuditPolicy < DatabasePolicy
 
   def create?

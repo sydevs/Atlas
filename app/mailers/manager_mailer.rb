@@ -1,5 +1,5 @@
-
 class ManagerMailer < ApplicationMailer
+
   default template_path: 'mailer/managers'
   layout 'mailer/manager'
 
@@ -40,16 +40,15 @@ class ManagerMailer < ApplicationMailer
     def setup session: true
       @manager = params[:manager]
       @event = params[:event]
+      return unless session || (session == :auto && @event.managers.include?(@manager))
 
-      if session || (session == :auto && @event.managers.include?(@manager))
-        session = Passwordless::Session.new({
-          authenticatable: @manager,
-          user_agent: 'Command Line',
-          remote_addr: 'unknown',
-        })
-        session.save!
-        @magic_link = send(Passwordless.mounted_as).token_sign_in_url(session.token)
-      end
+      session = Passwordless::Session.new({
+        authenticatable: @manager,
+        user_agent: 'Command Line',
+        remote_addr: 'unknown',
+      })
+      session.save!
+      @magic_link = send(Passwordless.mounted_as).token_sign_in_url(session.token)
     end
-  
+
 end

@@ -1,4 +1,5 @@
 class CreateRegionsTable < ActiveRecord::Migration[5.1]
+
   def change
     create_table :regions do |t|
       t.string :name
@@ -14,4 +15,5 @@ class CreateRegionsTable < ActiveRecord::Migration[5.1]
 
     create_join_table :managers, :regions
   end
+
 end
