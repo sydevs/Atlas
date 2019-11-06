@@ -43,6 +43,8 @@ en:
       successfully_updated: "Saved %{resource} successfully."
       successfully_deleted: "%{resource} successfully deleted. This cannot be undone."
       successfully_removed: "%{resource} successfully removed from this %{context}."
+      successfully_confirmed: "Thank you for confirming that this %{resource} is up to date."
+      not_logged_in: "You are not logged in!"
 
     hints:
       unspecified: "Unspecified"
