@@ -5,7 +5,7 @@ class ManagerMailer < ApplicationMailer
 
   def welcome
     setup
-    @edit_event_link = "#{@magic_link}?destination_path=#{cms_edit_event_path(@event)}"
+    @edit_event_link = "#{@magic_link}?destination_path=#{url_for([:edit, :cms, @event])}"
     subject = I18n.translate('mail.welcome.subject', event: @event.label)
     mail(to: @manager.email, subject: subject)
   end
@@ -13,8 +13,8 @@ class ManagerMailer < ApplicationMailer
   def registrations
     setup
     @registrations = @event.registrations.since(@event.registrations_sent_at || @event.created_at)
-    @view_registrations_link = "#{@magic_link}?destination_path=#{cms_event_registrations_path(@event)}"
-    @unsubscribe_registrations_link = "#{@magic_link}?destination_path=#{cms_unsubscribe_event_path(@event)}"
+    @view_registrations_link = "#{@magic_link}?destination_path=#{url_for([:cms, @event, :registrations])}"
+    @unsubscribe_registrations_link = "#{@magic_link}?destination_path=#{url_for([:cms, @event, :unsubscribe])}"
     subject = I18n.translate('mail.registrations.subject', date: @event.registrations_sent_at)
     mail(to: @manager.email, subject: subject)
     @event.touch(:registrations_sent_at) unless params[:test]
@@ -22,8 +22,8 @@ class ManagerMailer < ApplicationMailer
 
   def verification
     setup
-    @confirm_event_link = "#{@magic_link}?destination_path=#{cms_confirm_event_path(@event)}"
-    @edit_event_link = "#{@magic_link}?destination_path=#{cms_edit_event_path(@event)}"
+    @confirm_event_link = "#{@magic_link}?destination_path=#{url_for([:cms, @event, :confirm])}"
+    @edit_event_link = "#{@magic_link}?destination_path=#{url_for([:edit, :cms, @event])}"
     subject = I18n.translate('mail.verification.subject', event: @event.label)
     mail(to: @manager.email, subject: subject)
   end
