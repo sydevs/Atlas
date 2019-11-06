@@ -135,6 +135,7 @@ class CMS::ApplicationController < ActionController::Base
 
     def set_record!
       @record = @scope&.find(params[:id])
+      @context ||= @record
       puts "SET RECORD #{@record.inspect}"
     end
 

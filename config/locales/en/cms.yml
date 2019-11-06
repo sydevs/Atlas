@@ -57,6 +57,7 @@ en:
       event:
         room: "If the venue has more than one room, which room should seekers come to?"
         language: "Which language(s) can a seeker expect to be used at this event."
+        disable_notifications: "If checked, managers for this event will never receive registration lists."
       venue:
         find_marker: "Find Marker"
         marker_not_set:

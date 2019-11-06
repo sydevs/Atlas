@@ -14,7 +14,7 @@ class ManagerMailer < ApplicationMailer
     setup
     @registrations = @event.registrations.since(@event.registrations_sent_at || @event.created_at)
     @view_registrations_link = "#{@magic_link}?destination_path=#{url_for([:cms, @event, :registrations])}"
-    @unsubscribe_registrations_link = "#{@magic_link}?destination_path=#{url_for([:cms, @event, :unsubscribe])}"
+    @unsubscribe_registrations_link = "#{@magic_link}?destination_path=#{url_for([:edit, :cms, @event, unsubscribe: true])}"
     subject = I18n.translate('mail.registrations.subject', date: @event.registrations_sent_at)
     mail(to: @manager.email, subject: subject)
     @event.touch(:registrations_sent_at) unless params[:test]

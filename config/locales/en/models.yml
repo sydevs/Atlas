@@ -125,6 +125,7 @@ en:
         description: "Description"
         room: "Room"
         languages: "Languages"
+        disable_notifications: "Disable Notifications"
         recurrence: "Recurrence"
         recurrences:
           day: "Every Day"
