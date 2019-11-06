@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/Ardnived/passwordless.git
-  revision: 5b971d24e141aa6699eb510b051fb00ca4d463e2
+  revision: d490ec2829ebab25b65e44d0c74859c08ee1fe56
   specs:
     passwordless (0.8.2)
       bcrypt (~> 3.1.11)
