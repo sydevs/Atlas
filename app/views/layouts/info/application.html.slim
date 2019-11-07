@@ -3,14 +3,11 @@ doctype html
 html
   head
     title #{content_for(:title)} #{translate('sahaj_atlas')}
-    /link rel="shortcut icon" href="/favicon/admin/favicon.ico" type="image/x-icon"
-    /link rel="apple-touch-icon" href="/favicon/admin/apple-touch-icon.png"
-    /link rel="apple-touch-icon" sizes="72x72" href="/favicon/admin/apple-touch-icon-72x72.png"
-    /link rel="apple-touch-icon" sizes="114x114" href="/favicon/admin/apple-touch-icon-114x114.png"
 
+    link href='https://fonts.googleapis.com/css?family=Montserrat:400,600&display=swap' rel='stylesheet'
+    link href='https://fonts.googleapis.com/css?family=Merriweather:400,600&display=swap' rel='stylesheet'
+    = render 'layouts/favicons'
     = csrf_meta_tags
-    link href="https://fonts.googleapis.com/css?family=Montserrat:400,600&display=swap" rel="stylesheet"
-    link href="https://fonts.googleapis.com/css?family=Merriweather:400,600&display=swap" rel="stylesheet"
     = stylesheet_link_tag 'info', media: 'all'
     = javascript_include_tag 'info'
 
