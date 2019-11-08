@@ -1,8 +1,10 @@
 html
   head
-    meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" /
-    = stylesheet_link_tag    "map", media: "all"
-    = javascript_include_tag "map"
+    title = translate('meditation_atlas')
+    meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no' name='viewport'
+    = render 'layouts/favicons'
     = csrf_meta_tags
+    = stylesheet_link_tag 'map', media: 'all'
+    = javascript_include_tag 'map'
   body
     = yield

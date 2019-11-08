@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+ruby "2.6.5"
 
 git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?('/')
@@ -51,6 +52,7 @@ gem 'rack-attack'
 
 ### Utility
 gem 'inline_svg' # Allows SVGs to be rendered inline
+gem 'rails_12factor', group: :production # For heroku support
 
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw] # Call 'byebug' anywhere in the code to stop execution and get a debugger console
