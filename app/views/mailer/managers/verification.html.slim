@@ -12,10 +12,10 @@ blockquote.message--alert
 h2 = translate('mail.common.actions')
 p = translate('mail.verification.call_to_action')
 p.button-group
-  a.button.button-outline href=@magic_link
+  a.button.button-outline href=@confirm_event_link
     = translate('mail.verification.confirm')
   '  #{translate('mail.common.or').upcase} 
-  a.button.button-outline href=@magic_link
+  a.button.button-outline href=@edit_event_link
     = translate('mail.verification.update')
 
 = message translate('mail.common.about'), :html

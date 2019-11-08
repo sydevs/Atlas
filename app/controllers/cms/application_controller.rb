@@ -48,7 +48,7 @@ class CMS::ApplicationController < ActionController::Base
     authorize @record
 
     if @record.save
-      redirect_to [:cms, @record], flash: { success: translate('cms.messages.successfully_created', resource: @model) }
+      redirect_to [:cms, @record], flash: { success: translate('cms.messages.successfully_created', resource: @model.model_name.human.downcase) }
       true
     else
       render 'cms/views/new'
@@ -64,7 +64,7 @@ class CMS::ApplicationController < ActionController::Base
   def update attributes
     authorize @record
     if @record.update(attributes)
-      redirect_to [:cms, @record], flash: { success: translate('cms.messages.successfully_updated', resource: @model) }
+      redirect_to [:cms, @record], flash: { success: translate('cms.messages.successfully_updated', resource: @model.model_name.human.downcase) }
       true
     else
       render 'cms/views/edit'
@@ -76,7 +76,7 @@ class CMS::ApplicationController < ActionController::Base
     authorize @record
     @record.destroy
 
-    flash[:success] = translate('cms.messages.successfully_deleted', resource: @model)
+    flash[:success] = translate('cms.messages.successfully_deleted', resource: @model.model_name.human.downcase)
     redirect_to [:cms, @context, @model]
   end
 
@@ -104,7 +104,7 @@ class CMS::ApplicationController < ActionController::Base
       return if current_user
 
       save_passwordless_redirect_location! Manager
-      redirect_to managers.sign_in_path, flash: { error: 'You are not logged in!' }
+      redirect_to managers.sign_in_path, flash: { error: translate('cms.messages.not_logged_in') }
     end
 
     def set_model_name!
@@ -135,6 +135,7 @@ class CMS::ApplicationController < ActionController::Base
 
     def set_record!
       @record = @scope&.find(params[:id])
+      @context ||= @record
       puts "SET RECORD #{@record.inspect}"
     end
 

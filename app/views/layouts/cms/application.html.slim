@@ -45,8 +45,8 @@ html
             a.section href=breadcrumb_url(:worldwide)
               i.globe.icon
           - else
-            a.section href=url_for(current_user)
-              i.globe.icon
+            a.section href=url_for([:cms, current_user])
+              i.home.icon
           i.right.angle.icon.divider
           - @context.ancestors.each do |ancestor|
             - if policy(ancestor).show?

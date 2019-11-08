@@ -10,12 +10,19 @@ class CMS::EventsController < CMS::ApplicationController
     super parameters
   end
 
+  def confirm
+    @record = Event.find(params[:event_id])
+    authorize @record, :update?
+    @record.touch
+    redirect_to [:cms, @record], flash: { success: translate('cms.messages.successfully_confirmed', resource: @model.model_name.human.downcase) }
+  end
+
   private
 
     def parameters
       params.fetch(:event, {}).permit(
         :published,
-        :name, :description, :room, :category,
+        :name, :description, :room, :category, :disable_notifications,
         :recurrence, :start_date, :end_date, :start_time, :end_time,
         manager: {},
         languages: []

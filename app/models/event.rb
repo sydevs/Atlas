@@ -33,6 +33,7 @@ class Event < ApplicationRecord
   # Scopes
   default_scope { order(updated_at: :desc) }
   scope :with_new_registrations, -> { where('latest_registration_at >= registrations_sent_at') }
+  scope :notifications_enabled, -> { where.not(disable_notifications: true) }
 
   # Delegations
   delegate :full_address, to: :venue
@@ -41,7 +42,7 @@ class Event < ApplicationRecord
   # Methods
 
   def managed_by? manager, super_manager: false
-    return true if self.manager == manager && !super_manager
+    return true if !super_manager && managers.include?(manager)
 
     venue.managed_by?(manager)
   end

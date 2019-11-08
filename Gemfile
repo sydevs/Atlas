@@ -30,7 +30,7 @@ gem 'simple_form' # To simplify admin forms
 gem 'audited' # Logs changes to any record
 gem 'kaminari' # Pagination
 gem 'nilify_blanks' # Convert empty string to null in the database
-gem 'passwordless' # For email based user authentication
+gem 'passwordless', git: 'https://github.com/Ardnived/passwordless.git' # For email based user authentication
 gem 'premailer-rails' # Generate inline styles for emails
 gem 'pundit' # Permissions
 

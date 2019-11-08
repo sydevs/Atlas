@@ -1,6 +1,10 @@
 
 - content_for :title, "Login"
 
+- flash.each do |key, message|
+  .ui.message class=key
+    = message
+
 = simple_form_for @session, url: send(Passwordless.mounted_as).sign_in_path do |f|
   .ui.segment
     h2.ui.header Request login

@@ -12,10 +12,13 @@
           - @record.errors.full_messages.each do |message|
             li = message
 
-    = render "cms/fields/#{@model_name.singular_route_key}", f: f
+    - if params.key?(:unsubscribe) && @record.respond_to?(:disable_notifications)
+      = f.input :disable_notifications, hint: translate("cms.hints.#{@model.model_name.i18n_key}.disable_notifications"), input_html: { checked: true }
+    - else
+      = render "cms/fields/#{@model_name.singular_route_key}", f: f
 
     p
-      a.ui.basic.button href=url_for([:cms, @context, @model])
+      a.ui.basic.button href=url_for([:cms, @record])
         i.left.arrow.icon
         = translate('cms.actions.simple.back')
 
