@@ -24,5 +24,4 @@
 # RubyMine JetBrains
 .idea
 
-.env
 .env.local
