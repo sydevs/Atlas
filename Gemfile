@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+ruby "2.6.5"
 
 git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?('/')
@@ -29,7 +30,7 @@ gem 'simple_form' # To simplify admin forms
 gem 'audited' # Logs changes to any record
 gem 'kaminari' # Pagination
 gem 'nilify_blanks' # Convert empty string to null in the database
-gem 'passwordless' # For email based user authentication
+gem 'passwordless', git: 'https://github.com/Ardnived/passwordless.git' # For email based user authentication
 gem 'premailer-rails' # Generate inline styles for emails
 gem 'pundit' # Permissions
 
@@ -45,8 +46,13 @@ gem 'mini_magick' # Image processing during upload
 gem 'countries' # Adds localized lists of countries and subdivisions
 gem 'i18n_data' # Adds localized lists of countries and languages
 
+### API
+gem 'rack-cors'
+gem 'rack-attack'
+
 ### Utility
 gem 'inline_svg' # Allows SVGs to be rendered inline
+gem 'rails_12factor', group: :production # For heroku support
 
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw] # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -61,6 +67,7 @@ group :development do
   gem 'spring' # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'web-console', '>= 3.3.0' # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
+  gem 'dotenv-rails' # Automatically load environmental variables
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

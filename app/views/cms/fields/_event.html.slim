@@ -13,6 +13,8 @@
 = f.input :room, hint: translate('cms.hints.event.room')
 = f.input :languages, collection: languages, input_html: { multiple: true, class: 'search' }, hint: translate('cms.hints.event.language')
 
+= f.input :disable_notifications, hint: translate('cms.hints.event.disable_notifications')
+
 .ui.divider
 
 = f.input :recurrence, collection: Event.recurrences.map {|k, v| ["Every #{k.humanize}", k]}

@@ -20,11 +20,11 @@ class WorldwidePolicy < DatabasePolicy
   end
 
   def new_association? association
-    user.administrator? && %i[countries local_areas managers].include?(association)
+    user.administrator? && %i[countries local_areas managers access_keys].include?(association)
   end
 
   def destroy_association? association = nil
-    user.administrator? && %i[countries local_areas].include?(association)
+    user.administrator? && %i[countries local_areas access_keys].include?(association)
   end
 
 end

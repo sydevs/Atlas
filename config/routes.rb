@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   passwordless_for :managers
+  root to: 'info/application#about'
 
   namespace :info, path: '' do
     root to: 'application#about'
@@ -50,6 +51,7 @@ Rails.application.routes.draw do
 
     resources :events do
       get :regions
+      get :confirm
       resources :pictures, only: %i[index create destroy]
       resources :managers, only: %i[index new create destroy]
       resources :registrations, only: %i[index]
@@ -66,9 +68,14 @@ Rails.application.routes.draw do
 
     resources :registrations, only: %i[index]
     resources :audits, only: %i[index]
+    resources :access_keys, only: %i[index new create edit update destroy]
   end
 
   namespace :api do
+    get '404', to: 'api/application#error' # Not found
+    get '429', to: 'api/application#error' # Too many requests
+    get '500', to: 'api/application#error' # Internal server error
+
     resources :events, only: %i[index show]
     resources :venues, only: %i[index show] do
       resources :events, only: %i[index]
