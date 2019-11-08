@@ -1,5 +1,6 @@
 class API::ApplicationController < ActionController::Base
 
+  before_action :authenticate_access_key!
   before_action :parse_params!
 
   def index records = nil
@@ -10,6 +11,10 @@ class API::ApplicationController < ActionController::Base
   def show
     @record = scope.find(params[:id])
     render 'api/views/show'
+  end
+
+  def error
+    render 'api/views/error', status: request.env['PATH_INFO'][1, 3].to_i
   end
 
   private
@@ -23,6 +28,15 @@ class API::ApplicationController < ActionController::Base
         end
         scope
       end
+    end
+
+    def authenticate_access_key!
+      return if %w[GET HEAD OPTIONS].include?(request.method)
+      render('api/views/error', status: 400) && return unless params[:key].present?
+
+      AccessKey.find(key: params[:key]).touch(:last_accessed_at)
+    rescue ActiveRecord::RecordNotFound => _e
+      render 'api/views/error', status: 401
     end
 
     def parse_params!

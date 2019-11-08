@@ -63,6 +63,13 @@ en:
         # Countable
         one: "log"
         other: "logs"
+      access_key:
+        # Basic pluralization
+        single: "API Key"
+        plural: "API Keys"
+        # Countable
+        one: "API key"
+        other: "API keys"
       picture:
         # Basic pluralization
         single: "Image"
@@ -159,5 +166,11 @@ en:
           update: "Updated"
           create: "Created"
           destroy: "Deleted"
+
+      access_key:
+        label: "Label"
+        key: "API Key"
+        suspended: "Suspended"
+        last_accessed_at: "Last Access"
 
       pictures:

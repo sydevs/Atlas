@@ -9,6 +9,7 @@ module CMS::ApplicationHelper
     managers: 'user',
     registrations: 'user',
     audits: 'clipboard list',
+    access_keys: 'key',
     pictures: 'image',
   }.freeze
 

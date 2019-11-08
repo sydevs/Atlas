@@ -1,0 +1,25 @@
+
+- allow = @context ? policy(@context) : policy(:worldwide)
+
+.item
+  - if allow.destroy_association?(:access_keys) && policy(access_key).destroy?
+    .right.floated.content
+      a.ui.basic.circular.icon.label href=url_for([:cms, @context, access_key]) data={ method: 'DELETE', confirm: translate('cms.messages.confirm_destroy') }
+        i.trash.icon
+  = model_icon AccessKey
+  .content
+    - if policy(access_key).edit?
+      a.header href=url_for([:edit, :cms, access_key]) = access_key.label
+    - else
+      .header = access_key.label
+    .description
+      - if access_key.suspended?
+        = translate_attribute(access_key, :suspended)
+      - elsif access_key.last_accessed_at.present?
+        = translate_attribute(access_key, :last_accessed_at)
+        ' : 
+        = access_key.last_accessed_at.to_s(:long)
+      - else
+        = translate_attribute(access_key, :last_accessed_at)
+        ' : 
+        = translate('cms.hints.never')
