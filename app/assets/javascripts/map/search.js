@@ -31,13 +31,16 @@ const Search = {
       Utils.postForm("/map/registrations", Search.registrationForm, function(event) {
         var response = JSON.parse(event.target.response)
         if (response.success) {
-          document.getElementById("registrationPanelDescription").innerText = "";
-          document.getElementById("infoPanelHeader").innerText = "";
-          Search.toggleDisplayClass(Search.registrationForm, "none");
-          Search.toggleDisplayClass(Search.registrationConfirmation, "block");
+          Search._showConfirmRegistrationElements()
         }
       })
     });
+  },
+  _showConfirmRegistrationElements() {
+    document.getElementById("registrationPanelDescription").innerText = "";
+    document.getElementById("infoPanelHeader").innerText = "";
+    Search.toggleDisplayClass(Search.registrationForm, "none");
+    Search.toggleDisplayClass(Search.registrationConfirmation, "block");
   },
   clearSearchDiv() {
     if(!L.Browser.mobile){
@@ -81,13 +84,13 @@ const Search = {
       moreInfoLinks[i].addEventListener("click", Search._onMoreInfoLinkClick);
     }
   },
-  _setCurrentEvent(eventIndex) {
-    Search.currentEvent = Data.events[eventIndex];
+  _setCurrentEvent(eventId) {
+    Search.currentEvent = Data.events.find(element => element.id === eventId);
   },
   _onMoreInfoLinkClick(clickEvent) {
     clickEvent.preventDefault();
     Search._increaseBoxShadowDiv();
-    Search._setCurrentEvent(parseInt(clickEvent.target.getAttribute("data-eventIndex")))
+    Search._setCurrentEvent(parseInt(clickEvent.target.getAttribute("data-eventId")))
     Search._setInfoPanelData();
     Search.toggleDisplayClass(Search.registrationPanelElement, "none");
     Search.toggleDisplayClass(Search.infoPanelElement, "block");
@@ -100,12 +103,13 @@ const Search = {
   _onCancelRegisterLinkClick(clickEvent) {
     clickEvent.preventDefault();
     Search._decreaseBoxShadowDiv();
+    Search._setRegistrationData();
     Search.toggleDisplayClass(Search.registrationPanelElement, "none");
   },
   _onRegistrationButtonClick(clickEvent) {
     clickEvent.preventDefault();
     Search._increaseBoxShadowDiv();
-    Search._setCurrentEvent(parseInt(clickEvent.target.getAttribute("data-eventIndex")))
+    Search._setCurrentEvent(parseInt(clickEvent.target.getAttribute("data-eventId")))
     Search._setRegistrationData();
     Search.toggleDisplayClass(Search.infoPanelElement, "none");
     Search.toggleDisplayClass(Search.registrationPanelElement, "block");
@@ -116,7 +120,10 @@ const Search = {
   },
   _setRegistrationData() {
     document.getElementById("registrationPanelDescription").innerText = Search.currentEvent.name || Search.currentEvent.label;
+    document.getElementById("infoPanelHeader").innerText = "Register for";
     document.getElementById("registrationEventId").value = Search.currentEvent.id;
+    Search.toggleDisplayClass(Search.registrationForm, "block");
+    Search.toggleDisplayClass(Search.registrationConfirmation, "none");
   },
   _increaseBoxShadowDiv() {
     Search.boxShadowDivElement.classList.add("width-panel-double");
