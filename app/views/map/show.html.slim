@@ -13,12 +13,16 @@
 
 #registrationPanel.search-container.first-side-panel
   .less-info-container
-    a#cancelRegisterLink.less-info-text Cancel
+    a#cancelRegisterLink.less-info-text Close
   .info-panel-text
-    .info-panel-header
+    #infoPanelHeader.info-panel-header
       | Register for
     .info-panel-description
       #registrationPanelDescription
+      #registrationConfrimation.registration-confirmation
+       span.thank-you-title Thank You for Registering!
+       p you will receive an email shortly!
+
       form#eventRegistration.event-registration
         = csrf_meta_tags
         p#registration-message

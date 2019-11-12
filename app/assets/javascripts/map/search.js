@@ -5,6 +5,7 @@ const Search = {
   currentEvent: null,
   currentEvents: [],
   searchResultsContainer: null,
+  registrationConfirmation: null,
   searchContainer: null,
   load() {
     Search.infoPanelElement = document.getElementById("infoPanel");
@@ -13,6 +14,8 @@ const Search = {
     Search.searchResultsContainer = document.getElementById("searchResultsContainer");
     Search.searchContainer = document.getElementById("searchContainer");
     Search.registrationForm = document.getElementById("eventRegistration");
+    Search.registrationConfirmation = document.getElementById("registrationConfrimation");
+
     Search.setCurrentEvents();
 
     document.getElementById('lessInfoLink').addEventListener("click", Search._onLessInfoLinkClick);
@@ -26,7 +29,13 @@ const Search = {
     Search.registrationForm.addEventListener("submit", function (event) {
       event.preventDefault();
       Utils.postForm("/map/registrations", Search.registrationForm, function(event) {
-        console.log(JSON.parse(event.target.response))
+        var response = JSON.parse(event.target.response)
+        if (response.success) {
+          document.getElementById("registrationPanelDescription").innerText = "";
+          document.getElementById("infoPanelHeader").innerText = "";
+          Search.toggleDisplayClass(Search.registrationForm, "none");
+          Search.toggleDisplayClass(Search.registrationConfirmation, "block");
+        }
       })
     });
   },
