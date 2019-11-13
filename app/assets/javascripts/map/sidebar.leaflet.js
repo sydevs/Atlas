@@ -66,6 +66,7 @@ L.Control.Sidebar = L.Control.extend({
   toggle(show = null) {
     let offset = this._container.offsetWidth / 2
     if (show == null) show = !this.isVisible()
+    
     if (show) {
       L.DomUtil.addClass(this._container, 'visible')
       this._map.panBy([-offset, 0], { duration: 0.5 })

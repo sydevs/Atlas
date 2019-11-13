@@ -3,6 +3,7 @@ const AutoComplete = {
   searchResults: [],
   currentMarkers: [],
   currentMarkersGroup: null,
+
   load() {
     AutoComplete.geoSearchService = new GeoSearch.OpenStreetMapProvider();
 
@@ -11,9 +12,11 @@ const AutoComplete = {
 
     AutoComplete._autocomplete(document.getElementById("myInput"), AutoComplete.searchResults);
   },
+  
   _createMarkers(lat, lng) {
     Utils.getUrl("/api/events.json?latitude=" + lat + "&longitude=" + lng + "&radius=50", AutoComplete._placesApi)
   },
+
   _placesApi(xhttp) {
     eventsData = JSON.parse(xhttp.response)
     AutoComplete._resetMarkers()
@@ -48,10 +51,12 @@ const AutoComplete = {
       Map.instance.fitBounds(AutoComplete.currentMarkersGroup.getBounds())
     }
   },
+  
   _resetMarkers() {
     AutoComplete.currentMarkers = []
     Map.instance.removeLayer(AutoComplete.currentMarkersGroup);
-  },  
+  },
+
   _autocomplete(searchTextInput) {
     var currentFocus;
     // Bulk of Autocomplete code from: https://www.w3schools.com/howto/howto_js_autocomplete.asp
@@ -77,28 +82,37 @@ const AutoComplete = {
           }
 
           closeAllLists();
+
           if (!currentSearchTextInputValue) {
             return false;
           }
+
           currentFocus = -1;
+
           /*create a DIV element that will contain the items (values):*/
           autocompleteResultsContainerElement = document.createElement("DIV");
           autocompleteResultsContainerElement.setAttribute("id", this.id + "autocomplete-list");
           autocompleteResultsContainerElement.setAttribute("class", "autocomplete-items");
+
           if (Search.currentEvents.length === 0 || (Data.events.length === Search.currentEvents.length && L.Browser.mobile)) {
             autocompleteResultsContainerElement.setAttribute("style", "position:initial!important");
           }
+
           /*append the DIV element as a child of the autocomplete container:*/
           this.parentNode.parentNode.appendChild(autocompleteResultsContainerElement);
+
           /*for each item in the array...*/
           for (i = 0; i < AutoComplete.searchResults.length; i++) {
             /*create a DIV element for each matching element:*/
             eachAutoCompleteResultElement = document.createElement("DIV");
+
             /*make the matching letters bold:*/
             eachAutoCompleteResultElement.innerHTML = "<strong>" + AutoComplete.searchResults[i].label.substr(0, currentSearchTextInputValue.length) + "</strong>";
             eachAutoCompleteResultElement.innerHTML += AutoComplete.searchResults[i].label.substr(currentSearchTextInputValue.length);
+
             /*insert a input field that will hold the current searchResultsay item's value:*/
             eachAutoCompleteResultElement.innerHTML += "<input type='hidden' value='" + JSON.stringify(AutoComplete.searchResults[i]) + "'>";
+
             /*execute a function when someone clicks on the item value (DIV element):*/
             eachAutoCompleteResultElement.addEventListener("click", function (e) {
               /*insert the value for the autocomplete text field:*/
@@ -107,17 +121,20 @@ const AutoComplete = {
               Map.instance.panTo([currentResultData.lat, currentResultData.lng])
               AutoComplete._createMarkers(currentResultData.lat, currentResultData.lng)
               Search.toggleDisplayClass(Search.boxShadowDivElement, "block");
+
               /*close the list of autocompleted values,
               (or any other open lists of autocompleted values:*/
               closeAllLists();
             });
+
             autocompleteResultsContainerElement.appendChild(eachAutoCompleteResultElement);
           }
         }.bind(this));
       } else {
         closeAllLists();
         AutoComplete.searchResults = []
-        if(Data.events.length === 0){
+
+        if (Data.events.length === 0) {
           Search.clearSearchDiv()      
         }
       }
@@ -137,7 +154,9 @@ const AutoComplete = {
     /*execute a function presses a key on the keyboard:*/
     searchTextInput.addEventListener("keydown", function (e) {
       var x = document.getElementById(this.id + "autocomplete-list");
+
       if (x) x = x.getElementsByTagName("div");
+      
       if (e.keyCode == 40) {
         /*If the arrow DOWN key is pressed,
         increase the currentFocus variable:*/
@@ -153,6 +172,7 @@ const AutoComplete = {
       } else if (e.keyCode == 13) {
         /*If the ENTER key is pressed, prevent the form from being submitted,*/
         e.preventDefault();
+
         if (currentFocus > -1) {
           /*and simulate a click on the "active" item:*/
           if (x) x[currentFocus].click();
@@ -163,10 +183,12 @@ const AutoComplete = {
     function addActive(x) {
       /*a function to classify an item as "active":*/
       if (!x) return false;
+
       /*start by removing the "active" class on all items:*/
       removeActive(x);
       if (currentFocus >= x.length) currentFocus = 0;
       if (currentFocus < 0) currentFocus = (x.length - 1);
+
       /*add class "autocomplete-active":*/
       x[currentFocus].classList.add("autocomplete-active");
     }
@@ -182,6 +204,7 @@ const AutoComplete = {
       /*close all autocomplete lists in the document,
       except the one passed as an argument:*/
       var x = document.getElementsByClassName("autocomplete-items");
+
       for (var i = 0; i < x.length; i++) {
         if (elmnt != x[i] && elmnt != searchTextInput) {
           x[i].parentNode.removeChild(x[i]);
