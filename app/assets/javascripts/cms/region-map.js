@@ -1,3 +1,5 @@
+/* global $, L */
+/* exported RegionMap */
 
 const RegionMap = {
   provinceDataUrl: 'assets/map-data/ne_10m_admin_1_states_provinces.zip',
@@ -5,7 +7,7 @@ const RegionMap = {
   instance: null,
 
   load() {
-    console.log("Loading RegionMap")
+    console.log('Loading RegionMap') // eslint-disable-line no-console
 
     const $map = $('#region-map')
     RegionMap.data = $map.data()
@@ -16,7 +18,7 @@ const RegionMap = {
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(RegionMap.instance)
 
-    if (RegionMap.data['editable'] == 'true') {
+    if (RegionMap.data.editable == 'true') {
       RegionMap.initEditableMap()
     } else {
       RegionMap.initPreviewMap()
@@ -24,11 +26,10 @@ const RegionMap = {
 
     $map.css('min-height', '360px').css('opacity', '1')
     RegionMap.instance.invalidateSize()
-    console.log('Region map data', RegionMap.data)
   },
 
   initEditableMap() {
-    console.error("Editable region map is not implemented as of yet")
+    console.error('Editable region map is not implemented as of yet') // eslint-disable-line no-console
   },
 
   initPreviewMap() {
@@ -67,27 +68,27 @@ const RegionMap = {
   loadCountryVectors() {
     console.log('loading country features', RegionMap.countriesDataUrl)
     RegionMap.countries = new L.Shapefile(RegionMap.countriesDataUrl, {
-			onEachFeature: function(feature, layer) {
-				console.log('loaded feature', feature, layer)
-			}
+      onEachFeature: function(feature, layer) {
+        console.log('loaded feature', feature, layer)
+      }
     })
     RegionMap.countries.addTo(RegionMap.instance)
-    RegionMap.countries.once("data:loaded", function() {
-			console.log("finished loaded shapefile");
-		})
+    RegionMap.countries.once('data:loaded', function() {
+      console.log('finished loaded shapefile')
+    })
   },
 
   loadSubnationalVectors() {
     console.log('loading province features', RegionMap.provinceDataUrl)
     RegionMap.provinces = new L.Shapefile(RegionMap.provinceDataUrl, {
-			onEachFeature: function(feature, layer) {
-				console.log('loaded feature', feature, layer)
-			}
+      onEachFeature: function(feature, layer) {
+        console.log('loaded feature', feature, layer)
+      }
     })
     RegionMap.provinces.addTo(RegionMap.instance)
-    RegionMap.provinces.once("data:loaded", function() {
-			console.log("finished loaded shapefile");
-		})
+    RegionMap.provinces.once('data:loaded', function() {
+      console.log('finished loaded shapefile')
+    })
   },
 
   disableInteractions() {
