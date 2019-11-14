@@ -1,6 +1,19 @@
 
 en:
   map:
+    general:
+      close: "Close"
+      less_info: "Less info"
+      more_info: "More info"
+    list:
+      show: "Show List"
+      register: "Register"
+    register:
+      header: "Register for"
+      confirm: "Confirm"
+      confirmation:
+        title: "Thank You for Registering!"
+        description: "you will receive an email shortly!"
     categories:
       title:
         intro: "Intro Meditation Class"
