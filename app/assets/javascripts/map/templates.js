@@ -25,5 +25,5 @@ const Templates = {
     '  </div>' +
     '</div>' +
     '<span class="divider"></span>' 
-  }   
+  }
 }

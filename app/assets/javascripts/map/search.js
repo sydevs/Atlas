@@ -19,7 +19,6 @@ const Search = {
     Search.searchContainer = document.getElementById('searchContainer')
     Search.registrationForm = document.getElementById('eventRegistration')
     Search.registrationConfirmation = document.getElementById('registrationConfrimation')
-
     Search.setCurrentEvents()
 
     document.getElementById('lessInfoLink').addEventListener('click', Search._onLessInfoLinkClick)

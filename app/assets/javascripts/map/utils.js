@@ -36,5 +36,4 @@ const Utils = {
     // The data sent is what the user provided in the form
     XHR.send(formData)
   }
-
 }

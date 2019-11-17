@@ -12,7 +12,6 @@ const AutoComplete = {
 
     AutoComplete.currentMarkersGroup = L.featureGroup(AutoComplete.currentMarkers).addTo(Map.instance)
     AutoComplete._createMarkers(Data.currentLocation.lat, Data.currentLocation.lng)
-
     AutoComplete._autocomplete(document.getElementById('myInput'), AutoComplete.searchResults)
   },
   
@@ -98,7 +97,7 @@ const AutoComplete = {
           autocompleteResultsContainerElement.setAttribute('class', 'autocomplete-items')
 
           if (Search.currentEvents.length === 0 || (Data.events.length === Search.currentEvents.length && L.Browser.mobile)) {
-            autocompleteResultsContainerElement.setAttribute('style', 'position:initial!important')
+            autocompleteResultsContainerElement.setAttribute('style', 'position:initial !important')
           }
 
           /*append the DIV element as a child of the autocomplete container:*/
@@ -146,18 +145,19 @@ const AutoComplete = {
     searchCloseButton.addEventListener('click', function(_event) {
       document.getElementById('myInput').value = ''
       Search.searchContainer.classList.remove('single-marker-mobile-result')
+      
       if (L.Browser.mobile){
         Search.searchContainer.classList.remove('show-list-mobile-results')
       } else {
         Search.setCurrentEvents([])
       }
+      
       Search.clearSearchDiv()
     })
 
     /*execute a function presses a key on the keyboard:*/
     searchTextInput.addEventListener('keydown', function (e) {
       var x = document.getElementById(this.id + 'autocomplete-list')
-
       if (x) x = x.getElementsByTagName('div')
       
       if (e.keyCode == 40) {
