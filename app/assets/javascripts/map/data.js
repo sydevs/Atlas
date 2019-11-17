@@ -1,5 +1,3 @@
-/* global L */
-/* exported Data */
 
 const Data = {
   events: null,
@@ -7,8 +5,7 @@ const Data = {
   currentLocation: null,
 
   load() {
-    console.log('loading data.js') // eslint-disable-line no-console
-
+    console.log('loading data.js')
     let data = L.DomUtil.get('data')
     Data.events = []
     Data.currentLocation = JSON.parse(data.dataset.currentLocation)
@@ -22,8 +19,8 @@ const Data = {
   },
 
   processUpcomingDates(dates) {
-    const result = []
-    let current_month = null
+    result = []
+    current_month = null
 
     for (let i = 0; i < dates.length; i++) {
       const date = new Date(dates[i])

@@ -1,5 +1,3 @@
-/* global $, L, GeoSearch */
-/* exported VenueMap */
 
 const VenueMap = {
   data: {},
@@ -9,7 +7,7 @@ const VenueMap = {
   initialZoom: 13,
 
   load() {
-    console.log('Loading VenueMap') // eslint-disable-line no-console
+    console.log("Loading VenueMap")
 
     VenueMap.data = $('#venue-map').data()
     VenueMap.instance = L.map('venue-map', {
@@ -19,7 +17,7 @@ const VenueMap = {
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(VenueMap.instance)
 
-    if (VenueMap.data.editable == true) {
+    if (VenueMap.data['editable'] == true) {
       VenueMap.initEditableMap()
     } else {
       VenueMap.initPreviewMap()
@@ -41,7 +39,7 @@ const VenueMap = {
   },
 
   initPreviewMap() {
-    VenueMap.setMarker(VenueMap.data.latitude, VenueMap.data.longitude)
+    VenueMap.setMarker(VenueMap.data['latitude'], VenueMap.data['longitude'])
     VenueMap.instance.dragging.disable()
     VenueMap.instance.touchZoom.disable()
     VenueMap.instance.doubleClickZoom.disable()
@@ -56,6 +54,7 @@ const VenueMap = {
   },
 
   onLookup(event) {
+    console.log('lookup marker')
     let $button = $(event.target)
     $button.addClass('loading')
 
@@ -67,6 +66,8 @@ const VenueMap = {
       document.getElementById('venue_postcode').value,
     ].filter(Boolean).join(', ')
 
+    console.log('Geocoding', value)
+
     VenueMap.geocoder.search({
       query: value,
     }).then(function(results) {
@@ -74,6 +75,7 @@ const VenueMap = {
 
       if (results.length > 0) {
         var result = results[0]
+        console.log(result)
         $('#venue_latitude').val(result.y)
         $('#venue_longitude').val(result.x)
         VenueMap.setMarker(result.y, result.x)

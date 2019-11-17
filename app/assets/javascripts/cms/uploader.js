@@ -1,12 +1,9 @@
-/* global $, Uppy */
-/* exported Uploader */
+
 
 const Uploader = {
   instance: null,
 
   load() {
-    console.log('Loading Uploader') // eslint-disable-line no-console
-    
     this.list = document.getElementById('uploaded-images')
     this.template = document.getElementById('upload-template')
 
@@ -37,6 +34,7 @@ const Uploader = {
     })
 
     this.instance.on('upload-success', (file, response) => {
+      console.log(file, response)
       const $element = $(this.template.content).clone()
       $element.find('a.view.label').attr('href', response.url)
       $element.find('a.destroy.label').attr('href', response.delete_url)
@@ -44,14 +42,14 @@ const Uploader = {
       this.list.prepend($element[0])
     })
 
-    $('.destroy.label').on('confirm:complete', function(element, confirmed) {
+    $('.destroy.label').on('confirm:complete', function(e, confirmed) {
       if (confirmed) {
         element.classList.remove('close')
         element.classList.add('spinner')
         element.classList.add('loading')
         event.currentTarget.style.cursor = 'default'
       }
-    })
+    });
 
     $('body').on('click', '.destroy.label', event => {
       let element = event.currentTarget.children[0]

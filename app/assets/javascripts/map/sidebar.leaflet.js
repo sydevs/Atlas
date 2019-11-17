@@ -1,4 +1,3 @@
-/* global L */
 
 L.Control.Sidebar = L.Control.extend({
   includes: (L.Evented.prototype || L.Mixin.Events),
@@ -9,7 +8,7 @@ L.Control.Sidebar = L.Control.extend({
 
     let ids = ['search', 'list', 'details', 'register', 'result']
     ids.forEach(id => {
-      const panel = L.DomUtil.get(`sidebar-${id}`)
+      panel = L.DomUtil.get('sidebar-'+id)
       L.DomUtil.addClass(panel, 'leaflet-control')
     })
 
@@ -37,7 +36,7 @@ L.Control.Sidebar = L.Control.extend({
     }, this)
 
     // Attach sidebar container to controls container
-    map._controlContainer.insertBefore(container, map._controlContainer.firstChild)
+    map._controlContainer.insertBefore(container, map._controlContainer.firstChild);
 
     // Make sure we don't drag the map when we interact with the content
     let stop = L.DomEvent.stopPropagation
@@ -54,20 +53,19 @@ L.Control.Sidebar = L.Control.extend({
     return this
   },
 
-  removeFrom: function(_map) {
+  removeFrom: function(map) {
     // We never need to do this.
     console.error('There is no support for removing the sidebar control')
     return this
   },
 
   isVisible() {
-    return L.DomUtil.hasClass(this._container, 'visible')
+    return L.DomUtil.hasClass(this._container, 'visible');
   },
 
   toggle(show = null) {
     let offset = this._container.offsetWidth / 2
     if (show == null) show = !this.isVisible()
-    
     if (show) {
       L.DomUtil.addClass(this._container, 'visible')
       this._map.panBy([-offset, 0], { duration: 0.5 })

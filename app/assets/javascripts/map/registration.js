@@ -1,10 +1,7 @@
-/* global */
-/* exported Registration */
 
 const Registration = {
   load() {
-    console.log('loading registration.js') // eslint-disable-line no-console
-
+    console.log('loading registration.js')
     $('.event-registration').submit(Registration._on_submit)
   },
 
@@ -15,7 +12,7 @@ const Registration = {
     console.log(this, data)
 
     for (var [key, value] of data.entries()) {
-      console.log(key, value)
+      console.log(key, value);
     }
 
     xhttp.onreadystatechange = function() {
@@ -23,13 +20,13 @@ const Registration = {
       if (this.readyState == 4 && this.status == 200) {
         let response = JSON.parse(this.response)
         console.log(response)
-        $('#registration-message').toggleClass('negative', response.status == 'error')
-        $('#registration-message').toggleClass('positive', response.status == 'success')
-        document.getElementById('registration-message').innerText = response.message
+        $('#registration-message').toggleClass('negative', response['status'] == 'error')
+        $('#registration-message').toggleClass('positive', response['status'] == 'success')
+        document.getElementById('registration-message').innerText = response['message']
       }
     }
 
-    xhttp.open('POST', `/events/${id}/registrations`, true)
+    xhttp.open('POST', '/events/'+id+'/registrations', true)
     //xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded')
     xhttp.setRequestHeader('X-CSRF-Token', document.querySelector('meta[name=csrf-token]').getAttribute('content'))
     xhttp.send(data)
@@ -56,8 +53,8 @@ const Registration = {
       }
     }
 
-    xhttp.open('POST', `/events/${id}/registrations`, true)
-    xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded')
+    xhttp.open('POST', '/events/'+id+'/registrations', true)
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
     xhttp.send([
       'registration[name]=', name,
       '&registration[email]=', email,

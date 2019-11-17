@@ -1,5 +1,3 @@
-/* global L, Data, Sidebar */
-/* exported Events */
 
 const Events = {
   list: {
@@ -16,8 +14,7 @@ const Events = {
   active: null,
 
   load() {
-    console.log('loading events.js') // eslint-disable-line no-console
-
+    console.log('loading events.js')
     Events.list.empty = document.getElementById('empty-list')
     Events.list.suggestions = document.getElementById('suggestion-list')
     Events.list.events = document.getElementById('event-list')

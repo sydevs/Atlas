@@ -1,4 +1,3 @@
-/* global L */
 
 L.Control.Searchbox = L.Control.extend({
   includes: (L.Evented.prototype || L.Mixin.Events),
@@ -14,7 +13,7 @@ L.Control.Searchbox = L.Control.extend({
 
   removeFrom: function(map) {
     // We never need to do this.
-    console.error('There is no support for removing the searchbox control') // eslint-disable-line no-console
+    console.error('There is no support for removing the searchbox control')
   },
 })
 
