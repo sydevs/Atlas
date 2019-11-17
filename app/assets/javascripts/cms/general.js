@@ -1,3 +1,5 @@
+/* global $ */
+/* exported General */
 
 const General = {
   load: function() {
@@ -16,7 +18,7 @@ const General = {
   },
 
   onSearchSubmit: function() {
-    $input = $(this).children('input')
+    const $input = $(this).children('input')
     $input.siblings('.input').addClass('loading')
     $input.blur()
 
@@ -25,7 +27,7 @@ const General = {
   },
 
   onRadioMenuSelect: function() {
-    $item = $(this)
+    const $item = $(this)
     $item.siblings('input').val($item.data('value'))
     $item.siblings('.active').removeClass('active')
     $item.addClass('active')

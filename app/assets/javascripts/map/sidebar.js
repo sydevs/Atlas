@@ -1,3 +1,5 @@
+/* global L, Data, Events, DateInput */
+/* exported Sidebar */
 
 const Sidebar = {
   container: null,
@@ -63,24 +65,24 @@ const Sidebar = {
     let event = Data.events[event_id]
 
     switch (panel_id) {
-      case 'details':
-        Sidebar.details.title.innerText = event.name
-        Sidebar.details.subtitle.innerText = event.category
-        Sidebar.details.description.innerText = event.description
-        Sidebar.details.address.innerText = event.venue.address.street
-        Sidebar.details.timing.innerText = event.timing
+    case 'details':
+      Sidebar.details.title.innerText = event.name
+      Sidebar.details.subtitle.innerText = event.category
+      Sidebar.details.description.innerText = event.description
+      Sidebar.details.address.innerText = event.venue.address.street
+      Sidebar.details.timing.innerText = event.timing
 
-        Sidebar.panels.details.dataset.id = event_id
-        Events.setActive(event_id)
-        break;
-      case 'register':
-        Sidebar.registration.id.value = event_id
-        DateInput.setDates(event.upcoming_dates)
-        Events.setActive(event_id)
-        break;
-      case 'result':
-        Sidebar.result.invite.value = event.url + '?invite'
-        break;
+      Sidebar.panels.details.dataset.id = event_id
+      Events.setActive(event_id)
+      break
+    case 'register':
+      Sidebar.registration.id.value = event_id
+      DateInput.setDates(event.upcoming_dates)
+      Events.setActive(event_id)
+      break
+    case 'result':
+      Sidebar.result.invite.value = event.url + '?invite'
+      break
     }
 
     Sidebar.setActive(panel_id)
@@ -122,8 +124,8 @@ const Sidebar = {
       }
     }
 
-    L.DomUtil.addClass(Sidebar.container, 'width-'+visible_panel_count)
-    L.DomUtil.removeClass(Sidebar.container, 'width-'+Sidebar.visible_panel_count)
+    L.DomUtil.addClass(Sidebar.container, `width-${visible_panel_count}`)
+    L.DomUtil.removeClass(Sidebar.container, `width-${Sidebar.visible_panel_count}`)
     Sidebar.visible_panel_count = visible_panel_count
   },
 
@@ -140,7 +142,7 @@ const Sidebar = {
     } else if (event.target.className == 'panel-close') {
       Sidebar.closePanel(this.parentNode.dataset.panel)
     } else if (event.target.className == 'event-register') {
-      event_id = event.target.parentNode.parentNode.dataset.id
+      const event_id = event.target.parentNode.parentNode.dataset.id
       Sidebar.openPanel('register', event_id)
     } else if (event.target.className == 'event-expand') {
       let event_element = event.target.parentNode.parentNode
@@ -150,7 +152,7 @@ const Sidebar = {
     //  event_id = event.target.parentNode.parentNode.dataset.id
     //  Sidebar.openPanel('details', event_id)
     } else if (event.target.id == 'details-register') {
-      event_id = event.target.parentNode.dataset.id
+      const event_id = event.target.parentNode.dataset.id
       Sidebar.openPanel('register', event_id)
     }
   },
