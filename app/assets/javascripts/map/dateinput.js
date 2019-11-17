@@ -1,3 +1,5 @@
+/* global L */
+/* exported DateInput */
 
 const DateInput = {
   input: null,
@@ -15,7 +17,8 @@ const DateInput = {
   month_index: null,
 
   load() {
-    console.log('loading date.js')
+    console.log('loading date.js') // eslint-disable-line no-console
+
     DateInput.input = L.DomUtil.get('register-date-input')
     DateInput.month.current = L.DomUtil.get('register-month-current')
     DateInput.month.prev = L.DomUtil.get('register-month-prev')
@@ -49,7 +52,7 @@ const DateInput = {
     DateInput.input.value = ''
     DateInput.setActiveDayElement(null)
 
-    html = ''
+    let html = ''
     let month_data = DateInput.dates[DateInput.month_index]
     for (let i = 1; i < month_data.length; i++) {
       html += '<div class="register-day">' + month_data[i] + '</div>'
@@ -85,6 +88,7 @@ const DateInput = {
   _onClickDay(event) {
     DateInput.input.value = event.target.innerText + ' ' + DateInput.month.current.innerText
     if (DateInput.days.active != null) L.DomUtil.removeClass(DateInput.days.active, 'active')
+
     L.DomUtil.addClass(event.target, 'active')
     DateInput.setActiveDayElement(event.target)
   },

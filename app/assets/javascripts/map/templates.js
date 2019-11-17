@@ -1,3 +1,5 @@
+/* exported Templates */
+
 const Templates = {
 
   load() {
@@ -15,5 +17,5 @@ const Templates = {
     element.querySelector('.more-info-link').dataset.eventId = event.id
     return element
   }
-  
+
 }
