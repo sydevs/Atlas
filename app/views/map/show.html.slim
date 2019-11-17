@@ -13,20 +13,24 @@
 
 #registrationPanel.search-container.first-side-panel
   .less-info-container
-    a#cancelRegisterLink.less-info-text Cancel
+    a#cancelRegisterLink.less-info-text Close
   .info-panel-text
-    .info-panel-header
+    #infoPanelHeader.info-panel-header
       | Register for
     .info-panel-description
       #registrationPanelDescription
-      form.event-registration
+      #registrationConfrimation.registration-confirmation
+       span.thank-you-title Thank You for Registering!
+       p you will receive an email shortly!
+
+      form#eventRegistration.event-registration
         = csrf_meta_tags
         p#registration-message
-        input#registration-event type='hidden' name='registration[event_id]'
+        input#registrationEventId type='hidden' name='event_id'
 
         .registration-fields
-          input.text-input type='text' name='registration[name]' placeholder='Name'
-          input.text-input type='text' name='registration[email]' placeholder='Email'
+          input.text-input type='text' name='name' placeholder='Name'
+          input.text-input type='text' name='email' placeholder='Email'
 
         button#confirmButton.register-button Confirm
     

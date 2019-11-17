@@ -11,19 +11,8 @@ const AutoComplete = {
 
     AutoComplete._autocomplete(document.getElementById("myInput"), AutoComplete.searchResults);
   },
-  _getUrl(url, callback) {
-    var xhttp;
-    xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function () {
-      if (this.readyState == 4 && this.status == 200) {
-        callback(this);
-      }
-    };
-    xhttp.open("GET", url, true);
-    xhttp.send();
-  },
   _createMarkers(lat, lng) {
-    AutoComplete._getUrl("/api/events.json?latitude=" + lat + "&longitude=" + lng + "&radius=50", AutoComplete._placesApi)
+    Utils.getUrl("/api/events.json?latitude=" + lat + "&longitude=" + lng + "&radius=50", AutoComplete._placesApi)
   },
   _placesApi(xhttp) {
     eventsData = JSON.parse(xhttp.response)
@@ -96,7 +85,7 @@ const AutoComplete = {
           autocompleteResultsContainerElement = document.createElement("DIV");
           autocompleteResultsContainerElement.setAttribute("id", this.id + "autocomplete-list");
           autocompleteResultsContainerElement.setAttribute("class", "autocomplete-items");
-          if (Search.currentEvents.length === 0 || Data.events.length === Search.currentEvents.length) {
+          if (Search.currentEvents.length === 0 || (Data.events.length === Search.currentEvents.length && L.Browser.mobile)) {
             autocompleteResultsContainerElement.setAttribute("style", "position:initial!important");
           }
           /*append the DIV element as a child of the autocomplete container:*/
@@ -137,7 +126,11 @@ const AutoComplete = {
     searchCloseButton.addEventListener('click', function (e) {
       document.getElementById("myInput").value = ""
       Search.searchContainer.classList.remove("single-marker-mobile-result")
-      Search.setCurrentEvents([]);
+      if(L.Browser.mobile){
+        Search.searchContainer.classList.remove("show-list-mobile-results")
+      } else {
+        Search.setCurrentEvents([]);
+      }
       Search.clearSearchDiv()
     })
 

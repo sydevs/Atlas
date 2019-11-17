@@ -13,10 +13,10 @@ const Templates = {
     '  </div>'+
     '  <div class="event-actions-container">'+
     '    <div class="button-container">'+
-    '      <button class="registerButton register-button" data-eventIndex="'+eventIndex+'">Register</button>'+
+    '      <button class="registerButton register-button" data-eventId="'+event.id+'">Register</button>'+
     '    </div>'+
     '    <div class="link-container">'+
-    '      <a class="moreInfoLink more-info-link" data-eventIndex="'+eventIndex+'">'+
+    '      <a class="moreInfoLink more-info-link" data-eventId="'+event.id+'">'+
     '        More Info'+
     '      </a>'+
     '    </div>'+

@@ -10,6 +10,7 @@ Rails.application.routes.draw do
 
   namespace :map do
     root to: 'application#show'
+    post :registrations, to: 'registrations#create'
   end
 
   namespace :cms do

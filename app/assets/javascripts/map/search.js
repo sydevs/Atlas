@@ -5,6 +5,7 @@ const Search = {
   currentEvent: null,
   currentEvents: [],
   searchResultsContainer: null,
+  registrationConfirmation: null,
   searchContainer: null,
   load() {
     Search.infoPanelElement = document.getElementById("infoPanel");
@@ -12,17 +13,39 @@ const Search = {
     Search.boxShadowDivElement = document.getElementById("boxShadowDiv");
     Search.searchResultsContainer = document.getElementById("searchResultsContainer");
     Search.searchContainer = document.getElementById("searchContainer");
+    Search.registrationForm = document.getElementById("eventRegistration");
+    Search.registrationConfirmation = document.getElementById("registrationConfrimation");
+
     Search.setCurrentEvents();
 
     document.getElementById('lessInfoLink').addEventListener("click", Search._onLessInfoLinkClick);
     document.getElementById('cancelRegisterLink').addEventListener("click", Search._onCancelRegisterLinkClick);
     document.getElementById('showListLink').addEventListener("click", Search._onShowListMobileLink);
 
+    Search._addRegistrationFormListeners()
     Search._addRegisterMoreInfoListeners()
   },
+  _addRegistrationFormListeners() {
+    Search.registrationForm.addEventListener("submit", function (event) {
+      event.preventDefault();
+      Utils.postForm("/map/registrations", Search.registrationForm, function(event) {
+        var response = JSON.parse(event.target.response)
+        if (response.success) {
+          Search._showConfirmRegistrationElements()
+        }
+      })
+    });
+  },
+  _showConfirmRegistrationElements() {
+    document.getElementById("registrationPanelDescription").innerText = "";
+    document.getElementById("infoPanelHeader").innerText = "";
+    Search.toggleDisplayClass(Search.registrationForm, "none");
+    Search.toggleDisplayClass(Search.registrationConfirmation, "block");
+  },
   clearSearchDiv() {
-    searchResultsContainer.innerHTML = '';
-
+    if(!L.Browser.mobile){
+      searchResultsContainer.innerHTML = '';
+    }
     Search._decreaseBoxShadowDiv();
 
     Search.searchContainer.classList.remove("show-list-mobile-results")
@@ -61,13 +84,13 @@ const Search = {
       moreInfoLinks[i].addEventListener("click", Search._onMoreInfoLinkClick);
     }
   },
-  _setCurrentEvent(eventIndex) {
-    Search.currentEvent = Data.events[eventIndex];
+  _setCurrentEvent(eventId) {
+    Search.currentEvent = Data.events.find(element => element.id === eventId);
   },
   _onMoreInfoLinkClick(clickEvent) {
     clickEvent.preventDefault();
     Search._increaseBoxShadowDiv();
-    Search._setCurrentEvent(parseInt(clickEvent.target.getAttribute("data-eventIndex")))
+    Search._setCurrentEvent(parseInt(clickEvent.target.getAttribute("data-eventId")))
     Search._setInfoPanelData();
     Search.toggleDisplayClass(Search.registrationPanelElement, "none");
     Search.toggleDisplayClass(Search.infoPanelElement, "block");
@@ -80,12 +103,13 @@ const Search = {
   _onCancelRegisterLinkClick(clickEvent) {
     clickEvent.preventDefault();
     Search._decreaseBoxShadowDiv();
+    Search._setRegistrationData();
     Search.toggleDisplayClass(Search.registrationPanelElement, "none");
   },
   _onRegistrationButtonClick(clickEvent) {
     clickEvent.preventDefault();
     Search._increaseBoxShadowDiv();
-    Search._setCurrentEvent(parseInt(clickEvent.target.getAttribute("data-eventIndex")))
+    Search._setCurrentEvent(parseInt(clickEvent.target.getAttribute("data-eventId")))
     Search._setRegistrationData();
     Search.toggleDisplayClass(Search.infoPanelElement, "none");
     Search.toggleDisplayClass(Search.registrationPanelElement, "block");
@@ -96,6 +120,10 @@ const Search = {
   },
   _setRegistrationData() {
     document.getElementById("registrationPanelDescription").innerText = Search.currentEvent.name || Search.currentEvent.label;
+    document.getElementById("infoPanelHeader").innerText = "Register for";
+    document.getElementById("registrationEventId").value = Search.currentEvent.id;
+    Search.toggleDisplayClass(Search.registrationForm, "block");
+    Search.toggleDisplayClass(Search.registrationConfirmation, "none");
   },
   _increaseBoxShadowDiv() {
     Search.boxShadowDivElement.classList.add("width-panel-double");
