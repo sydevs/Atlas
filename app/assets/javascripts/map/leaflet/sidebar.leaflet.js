@@ -56,7 +56,7 @@ L.Control.Sidebar = L.Control.extend({
 
   removeFrom: function(_map) {
     // We never need to do this.
-    console.error('There is no support for removing the sidebar control')
+    console.error('There is no support for removing the sidebar control') // eslint-disable-line no-console
     return this
   },
 

@@ -6,13 +6,13 @@ L.Control.Searchbox = L.Control.extend({
     position: 'left',
   },
 
-  onAdd: function(map) {
+  onAdd: function(_map) {
     let searchbox = L.DomUtil.create('div', 'leaflet-searchbox')
     searchbox.innerHTML = '<span id="sidebar-button">LIST</span><input id="search" type="search" placeholder="Search...">'
     return searchbox
   },
 
-  removeFrom: function(map) {
+  removeFrom: function(_map) {
     // We never need to do this.
     console.error('There is no support for removing the searchbox control') // eslint-disable-line no-console
   },
