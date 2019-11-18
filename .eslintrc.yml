@@ -1,0 +1,50 @@
+env:
+  browser: true
+  es6: true
+extends: 'eslint:recommended'
+parserOptions:
+  ecmaVersion: 2016
+rules:
+  indent:
+    - error
+    - 2
+  linebreak-style:
+    - error
+    - unix
+  quotes:
+    - error
+    - single
+  semi:
+    - error
+    - never
+  no-unused-vars:
+    - error
+    - argsIgnorePattern: '^_'
+  curly:
+    - error
+    - multi-line
+  no-extra-parens:
+    - error
+    - functions
+  keyword-spacing: error
+  no-spaced-func: error
+  no-console: warn
+  comma-spacing: error
+  key-spacing: error
+  space-infix-ops: error
+  no-template-curly-in-string: error
+  array-callback-return: error
+  consistent-return: warn
+  dot-notation: warn
+  max-classes-per-file: error
+  no-alert: error
+  no-caller: error
+  no-empty-function: error
+  no-labels: error
+  no-floating-decimal: error
+  no-implicit-coercion: error
+  no-multi-spaces: error
+  no-new: error
+  no-self-compare: error
+  no-unmodified-loop-condition: error
+  no-unused-expressions: error
