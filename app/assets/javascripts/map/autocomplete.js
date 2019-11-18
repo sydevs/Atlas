@@ -3,16 +3,49 @@ const AutoComplete = {
   searchResults: [],
   currentMarkers: [],
   currentMarkersGroup: null,
+  currentBounds: null,
+  markersGroup: null,
+  searchAreaButton: null,
+  searchAreaContainer: null,
   load() {
     AutoComplete.geoSearchService = new GeoSearch.OpenStreetMapProvider();
 
+    AutoComplete.searchAreaButton = document.getElementById('searchAreaButton');
+    AutoComplete.searchAreaContainer = document.getElementById('searchArea');
     AutoComplete.currentMarkersGroup = L.featureGroup(AutoComplete.currentMarkers).addTo(Map.instance);
     AutoComplete._createMarkers(Data.currentLocation.lat, Data.currentLocation.lng)
 
     AutoComplete._autocomplete(document.getElementById("myInput"), AutoComplete.searchResults);
+    AutoComplete.currentBounds = Map.instance.getBounds();
+    AutoComplete.searchAreaButton.addEventListener("click", AutoComplete._onSearchAreaClick)
   },
   _createMarkers(lat, lng) {
     Utils.getUrl("/api/events.json?latitude=" + lat + "&longitude=" + lng + "&radius=50", AutoComplete._placesApi)
+  },
+  _createMarkersFromBounds(mapBounds) {
+    if (!AutoComplete._currentBoundsCheck(mapBounds)){
+      AutoComplete._setCurrentBounds(mapBounds)
+      const southWestBound = mapBounds.getSouthWest()
+      const northEastBound = mapBounds.getNorthEast()
+      Utils.getUrl(
+        "/api/events.json?from_bounds=true" +
+        "&south_west_point_lat=" + southWestBound.lat +
+        "&south_west_point_lng=" + southWestBound.lng +
+        "&north_east_point_lat=" + northEastBound.lat +
+        "&north_east_point_lng=" + northEastBound.lng
+        , AutoComplete._placesApi)
+    }
+  },
+  _setCurrentBounds(mapBounds) {
+    AutoComplete.currentBounds = mapBounds
+  },
+  _currentBoundsCheck(mapBounds){
+    return AutoComplete.currentBounds.equals(mapBounds)
+  },
+  _onSearchAreaClick(event){
+    event.preventDefault()
+    const mapBounds = Map.instance.getBounds();
+    AutoComplete._createMarkersFromBounds(mapBounds)
   },
   _placesApi(xhttp) {
     eventsData = JSON.parse(xhttp.response)
@@ -33,23 +66,36 @@ const AutoComplete = {
     Search.setCurrentEvents();
     Search.searchContainer.classList.remove("single-marker-mobile-result")
 
-    AutoComplete.currentMarkersGroup = L.featureGroup(AutoComplete.currentMarkers).addTo(Map.instance)
+    AutoComplete.currentMarkersGroup = L.featureGroup(AutoComplete.currentMarkers)
+
+    AutoComplete.markersGroup = L.markerClusterGroup({"spiderfyOnMaxZoom": false});
+    AutoComplete.markersGroup.addLayers(AutoComplete.currentMarkers);
+    Map.instance.addLayer(AutoComplete.markersGroup);
+
     AutoComplete.currentMarkersGroup.on("click", function(event){
       var venueId = event.layer.options.venueId
       Search.setCurrentEvents(Data.events.filter(element => element.venue_id === venueId));
       Search.searchContainer.classList.add("single-marker-mobile-result");
-      if(L.Browser.mobile) {
-        var mobilePanOffset = -0.2;
-        Map.instance.panTo([event.latlng.lat+mobilePanOffset, event.latlng.lng])
-      }
     }.bind(this));
 
     if(AutoComplete.currentMarkers.length > 0) {
       Map.instance.fitBounds(AutoComplete.currentMarkersGroup.getBounds())
+      AutoComplete.currentBounds = Map.instance.getBounds()
     }
+  },
+  _hideSearchArea() {
+    Search.toggleDisplayClass(AutoComplete.searchAreaButton, "none")
+    Utils.toggleZindex(AutoComplete.searchAreaContainer, 0)
+  },
+  _showSearchArea() {
+    Search.toggleDisplayClass(AutoComplete.searchAreaButton, "block")
+    Utils.toggleZindex(AutoComplete.searchAreaContainer, 999)
   },
   _resetMarkers() {
     AutoComplete.currentMarkers = []
+    if(AutoComplete.markersGroup){
+      AutoComplete.markersGroup.clearLayers()
+    }
     Map.instance.removeLayer(AutoComplete.currentMarkersGroup);
   },  
   _autocomplete(searchTextInput) {
@@ -57,6 +103,7 @@ const AutoComplete = {
     // Bulk of Autocomplete code from: https://www.w3schools.com/howto/howto_js_autocomplete.asp
     searchTextInput.addEventListener("input", function (e) {
       if (this.value.length > 1) {
+        AutoComplete._hideSearchArea()
         var autocompleteResultsContainerElement;
         var eachAutoCompleteResultElement;
         var currentSearchTextInputValue = this.value;
@@ -125,12 +172,9 @@ const AutoComplete = {
 
     searchCloseButton.addEventListener('click', function (e) {
       document.getElementById("myInput").value = ""
+      AutoComplete._showSearchArea()
       Search.searchContainer.classList.remove("single-marker-mobile-result")
-      if(L.Browser.mobile){
-        Search.searchContainer.classList.remove("show-list-mobile-results")
-      } else {
-        Search.setCurrentEvents([]);
-      }
+      Search.searchContainer.classList.remove("show-list-mobile-results")
       Search.clearSearchDiv()
     })
 

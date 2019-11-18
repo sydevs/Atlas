@@ -31,6 +31,33 @@ html
   font-size: 14px
   font-weight: 600
 
+.search-area
+  height: 25px
+  position: absolute
+  top: 8%
+  left: 45%
+  z-index: 999
+  display: flex
+  width: 100%
+  @include mobile
+    top: 16%
+    left: 0
+    justify-content: center
+
+  .search-area-button-container
+    text-align: center
+    display: flex
+  .search-area-button
+    color: #7B7B7B
+    width: 150px
+    height: 50px
+    background-color: white
+    border: 1px solid #979797
+    font-size: 14px
+    font-weight: 600
+    @include mobile
+      height: 40px
+
 .search-container
   z-index: 999
   top: 8%

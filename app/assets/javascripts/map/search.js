@@ -70,6 +70,7 @@ const Search = {
   },
   _onShowListMobileLink(clickEvent) {
     clickEvent.preventDefault();
+    AutoComplete._hideSearchArea()
     Search.searchContainer.classList.add("show-list-mobile-results")
   },
   _addRegisterMoreInfoListeners() {
