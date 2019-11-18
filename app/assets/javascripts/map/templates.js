@@ -1,27 +1,22 @@
+/* globals */
+/* exported Templates */
+
 const Templates = {
+
+  load() {
+    console.log('loading templates.js') // eslint-disable-line no-console
+    Templates.event = document.getElementById('eventTemplate')
+  },
+
   resultContainerHtml(eventIndex, event) {
-    return '<div class="result-container">' +
-  '  <div class="event-info-container">' +
-  '    <span id="eventName" class="event-name">' + (event.name || event.label) + '</span>' +
-  '    <span id="eventAddress" class="event-address">' + (event.address_text || '') + '</span>' +
-  '    <span class="time-details">' +
-  '      <span id="timeDetailsDay" class="day">' + (event.recurrence_in_words || '') + '</span>' +
-  '      |  ' +
-  '      <span id="timeDetailsTime" class="time">' + (event.formatted_start_end_time || '') + '</span>' +
-  '    </span>' +
-  '    </span>' +
-  '  </div>' +
-  '  <div class="event-actions-container">' +
-  '    <div class="button-container">' +
-  '      <button class="registerButton register-button" data-eventId="' + event.id + '">Register</button>' +
-  '    </div>' +
-  '    <div class="link-container">' +
-  '      <a class="moreInfoLink more-info-link" data-eventId="' + event.id + '">' +
-  '        More Info' +
-  '      </a>' +
-  '    </div>' +
-  '  </div>' +
-  '</div>' +
-  '<span class="divider"></span>'
+    const element = document.importNode(Templates.event.content, true)
+    element.querySelector('.event-name').textContent = event.name || event.label
+    element.querySelector('.event-address').textContent = event.address_text || ''
+    element.querySelector('.time-details > .day').textContent = event.recurrence_in_words || ''
+    element.querySelector('.time-details > .time').textContent = event.formatted_start_end_time || ''
+    element.querySelector('.register-button').dataset.eventId = event.id
+    element.querySelector('.more-info-link').dataset.eventId = event.id
+    return element
   }
+
 }

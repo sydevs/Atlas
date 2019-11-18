@@ -18,7 +18,7 @@ rules:
     - error
     - never
   no-unused-vars:
-    - error
+    - warn
     - argsIgnorePattern: '^_'
   curly:
     - error

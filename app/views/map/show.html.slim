@@ -68,3 +68,6 @@ template id='eventTemplate'
         a.moreInfoLink.more-info-link data-event-id=nil
           = translate('map.general.more_info')
   span.divider
+
+javascript:
+  window.mbid = '#{ENV['MAPBOX_ACCESSTOKEN']}'
