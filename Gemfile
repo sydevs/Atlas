@@ -16,6 +16,9 @@ gem 'sassc-rails' # Use SASS for stylesheets
 gem 'slim-rails' # Use Slim for views
 gem 'uglifier', '>= 1.3.0' # Use Uglifier as compressor for JavaScript assets
 
+### Security Fix
+gem "loofah", ">= 2.3.1"
+
 ### Javascript
 gem 'autoprefixer-rails' # For automatic cross browser CSS compatibility
 gem 'fomantic-ui-sass' # Integrate Semantic UI for general styling

@@ -1,7 +1,4 @@
-/* exported Utils */
-
 const Utils = {
-
   getUrl(url, callback) {
     var xhttp
     xhttp = new XMLHttpRequest()
@@ -10,11 +7,9 @@ const Utils = {
         callback(this)
       }
     }
-    
     xhttp.open('GET', url, true)
     xhttp.send()
   },
-
   postForm(url, formElement, callback) {
     var XHR = new XMLHttpRequest()
     // Bind the FormData object and the form element
@@ -35,5 +30,8 @@ const Utils = {
 
     // The data sent is what the user provided in the form
     XHR.send(formData)
+  },
+  toggleZindex(element, zIndex) {
+    element.style.zIndex = zIndex
   }
 }

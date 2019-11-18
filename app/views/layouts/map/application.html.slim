@@ -6,5 +6,8 @@ html
     = csrf_meta_tags
     = stylesheet_link_tag 'map', media: 'all'
     = javascript_include_tag 'map'
+    script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js" type="text/javascript"
+    link rel="stylesheet" src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css"
+    link rel="stylesheet" src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css"
   body
     = yield
