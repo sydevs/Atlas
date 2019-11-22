@@ -1,3 +1,4 @@
+@import '../_mixins'
 
 .item
   position: relative
@@ -11,7 +12,7 @@
 .item:not(:last-child)::after
   content: ''
   position: absolute
-  border-bottom: 1px solid #D8D8D8
+  border-bottom: 1px solid $color-grey-light
   bottom: 0
   left: 24px
   right: 35px
@@ -20,7 +21,7 @@
   display: none
 
 .item--active
-  background: rgba(230, 230, 230, 0.6)
+  background: $color-grey-background
 
   .item__actions
     display: none
@@ -33,12 +34,12 @@
   margin-left: 1em
 
 .item__register
-  font-weight: normal
+  font-weight: $font-normal
   width: 100%
   line-height: 50px
   font-size: 14px
   letter-spacing: 0.17px
-  border: 1px solid #979797
+  border: 1px solid $color-grey-border
   cursor: pointer
 
 .item__more
@@ -50,7 +51,7 @@
   cursor: pointer
 
   > span
-    border-bottom: 1px solid #7B7B7B
+    border-bottom: 1px solid $color-grey-normal
 
 // ===== ITEM INFO ===== //
 .item__name,
@@ -58,10 +59,10 @@
   max-width: 200px
 
 .item__name
-  font-weight: 600
+  font-weight: $font-semibold
   font-size: 17px
   line-height: 20px
-  color: #555555
+  color: $color-grey-dark
   margin-bottom: 3px
   min-height: 40px
 
@@ -85,12 +86,12 @@
   content: ''
   display: inline-block
   height: 14px
-  border-left: 1px solid #D8D8D8
+  border-left: 1px solid $color-grey-light
   margin: 0 9px
   vertical-align: text-bottom
 
 .item__time
   display: inline-block
-  font-weight: 500
+  font-weight: $font-medium
   font-size: 15px
   letter-spacing: 0.49px

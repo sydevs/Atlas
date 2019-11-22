@@ -1,11 +1,12 @@
+@import '../_mixins'
 
 .listing
   z-index: -1
   height: auto !important
-  padding-top: 70px
+  padding-top: $header-height
 
 .listing__results
-  height: calc(100% - 70px)
+  height: calc(100% - $header-height)
   overflow-y: scroll
 
 // ===== FILTER MESSAGE ===== //
@@ -14,7 +15,7 @@
     display: none
 
 .listing__filter
-  background: rgba(230, 230, 230, 0.6)
+  background: $color-grey-background
   padding: 4px 20px
 
   font-size: 14px
@@ -30,7 +31,7 @@
   float: right
   text-transform: uppercase
   font-size: 12px
-  font-weight: 600
+  font-weight: $font-semibold
   cursor: pointer
 
 // ===== NO RESULT MESSAGE ===== //
@@ -53,5 +54,5 @@
   display: inline-block
   font-size: 18px
   line-height: 1.4444
-  border-bottom: 1px solid #7B7B7B
+  border-bottom: 1px solid $color-grey-normal
   cursor: pointer

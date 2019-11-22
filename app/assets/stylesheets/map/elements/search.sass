@@ -1,24 +1,25 @@
+@import '../_mixins'
 
 .search
   position: absolute
-  top: 70px
-  left: 64px
+  top: $control-offset-y
+  left: $control-offset-x
 
   width: 520px
   z-index: 1000
   background: white
-  box-shadow: 0 2px 25px 0 rgba(0, 0, 0, 0.2)
+  box-shadow: $shadow-light
 
 .search__input
   width: 100%
   height: 100%
   padding: 24px 20px
-  padding-right: 70px
+  padding-right: $header-height
   border: 0
 
   font-size: 17px
   letter-spacing: 0.2px
-  color: #7B7B7B
+  color: $color-grey-normal
   font-family: raleway, sans-serif
 
   &:focus
@@ -29,8 +30,8 @@
   position: absolute
   top: 2px
   right: 2px
-  height: 66px
-  width: 66px
+  height: $header-height - 4px
+  width: $header-height - 4px
   padding: 0
   cursor: pointer
   appearance: none
@@ -53,7 +54,7 @@
     height: 8px
     
     transition: transform 0.2s
-    border: solid #979797
+    border: solid $color-grey-border
     border-width: 0 2px 2px 0
     display: inline-block
     padding: 3px
@@ -75,10 +76,10 @@
   font-size: 14px
   line-height: 1.15
   background: white
-  border-top: 1px solid #7B7B7B
+  border-top: 1px solid $color-grey-normal
   cursor: pointer
   transition: background-color 0.25s ease
 
   &:hover
-    background: rgba(230, 230, 230, 0.6)
+    background: $color-grey-background
     color: red
