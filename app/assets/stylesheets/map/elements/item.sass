@@ -1,0 +1,96 @@
+
+.item
+  position: relative
+  padding: 20px
+  padding-left: 24px
+  padding-right: 35px
+  background: white
+  transition: background-color 0.25s ease
+  min-height: 140px
+
+.item:not(:last-child)::after
+  content: ''
+  position: absolute
+  border-bottom: 1px solid #D8D8D8
+  bottom: 0
+  left: 24px
+  right: 35px
+
+.item--hidden
+  display: none
+
+.item--active
+  background: rgba(230, 230, 230, 0.6)
+
+  .item__actions
+    display: none
+
+// ===== ITEM ACTIONS ===== //
+.item__actions
+  float: right
+  width: 100px
+  text-align: center
+  margin-left: 1em
+
+.item__register
+  font-weight: normal
+  width: 100%
+  line-height: 50px
+  font-size: 14px
+  letter-spacing: 0.17px
+  border: 1px solid #979797
+  cursor: pointer
+
+.item__more
+  display: block
+  font-size: 13px
+  letter-spacing: 0.16px
+  line-height: 19px
+  padding: 15px 0
+  cursor: pointer
+
+  > span
+    border-bottom: 1px solid #7B7B7B
+
+// ===== ITEM INFO ===== //
+.item__name,
+.item__address
+  max-width: 200px
+
+.item__name
+  font-weight: 600
+  font-size: 17px
+  line-height: 20px
+  color: #555555
+  margin-bottom: 3px
+  min-height: 40px
+
+.item__address
+  font-size: 13px
+  line-height: 14px
+  letter-spacing: 0.36px
+  margin-bottom: 7px
+  min-height: 28px
+
+.item__datetime
+  line-height: 14px
+
+.item__day
+  display: inline-block
+  text-transform: uppercase
+  font-size: 11px
+  letter-spacing: 0.36px
+
+.item__day::after
+  content: ''
+  display: inline-block
+  height: 14px
+  border-left: 1px solid #D8D8D8
+  margin: 0 9px
+  vertical-align: text-bottom
+
+.item__time
+  display: inline-block
+  font-weight: 500
+  font-size: 15px
+  letter-spacing: 0.49px

@@ -1,0 +1,73 @@
+#data data-current-location=@location.to_json
+#mapid
+
+#boxShadowDiv.box-shadow-div
+.search-container id="searchContainer"
+  .autocomplete.search-box
+    input#myInput.search-text name="myCountry" placeholder="Search" type="text"
+    button#searchCloseButton.search-close X
+  .search-results id="searchResultsContainer"
+    / Search Results Dynamically Generated Here
+
+.search-area id="searchArea"
+  div.search-area-button-container
+    button#searchAreaButton.search-area-button Search This Area
+
+#bottomBar.bottom-bar
+  a#showListLink.show-list = translate('map.list.show')
+
+#registrationPanel.search-container.first-side-panel
+  .less-info-container
+    a#cancelRegisterLink.less-info-text
+      = translate('map.general.close')
+  .info-panel-text
+    #infoPanelHeader.info-panel-header
+      = translate('map.register.header')
+    .info-panel-description
+      #registrationPanelDescription
+      #registrationConfrimation.registration-confirmation
+       span.thank-you-title = translate('map.register.confirmation.header')
+       p = translate('map.register.confirmation.description')
+
+      form#eventRegistration.event-registration
+        = csrf_meta_tags
+        p#registration-message
+        input#registrationEventId type='hidden' name='event_id'
+
+        .registration-fields
+          input.text-input type='text' name='name' placeholder='Name'
+          input.text-input type='text' name='email' placeholder='Email'
+
+        button#confirmButton.register-button = translate('map.register.confirm')
+    
+#infoPanel.search-container.first-side-panel
+  .less-info-container
+    a#lessInfoLink.less-info-text = translate('map.general.less_info')
+  .info-panel-text
+    .info-panel-header
+      #infoPanelEventName
+        placeholder name dynamically generated
+    .info-panel-description
+      #infoPanelEventDescription
+        placeholder description dynamically generated
+
+template id='eventTemplate'
+  .result-container
+    .event-info-container
+      span.event-name
+      span.event-address
+      span.time-details
+        span.day
+        | |  
+        span.time
+    .event-actions-container
+      .button-container
+        button.registerButton.register-button data-event-id=nil
+          = translate('map.list.register')
+      .link-container
+        a.moreInfoLink.more-info-link data-event-id=nil
+          = translate('map.general.more_info')
+  span.divider
+
+javascript:
+  window.mbid = '#{ENV['MAPBOX_ACCESSTOKEN']}'

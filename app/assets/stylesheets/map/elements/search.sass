@@ -1,0 +1,84 @@
+
+.search
+  position: absolute
+  top: 70px
+  left: 64px
+
+  width: 520px
+  z-index: 1000
+  background: white
+  box-shadow: 0 2px 25px 0 rgba(0, 0, 0, 0.2)
+
+.search__input
+  width: 100%
+  height: 100%
+  padding: 24px 20px
+  padding-right: 70px
+  border: 0
+
+  font-size: 17px
+  letter-spacing: 0.2px
+  color: #7B7B7B
+  font-family: raleway, sans-serif
+
+  &:focus
+    outline: 1px solid red
+
+// COLLAPSE BUTTON
+.search__collapse
+  position: absolute
+  top: 2px
+  right: 2px
+  height: 66px
+  width: 66px
+  padding: 0
+  cursor: pointer
+  appearance: none
+  border: none
+  transition: opacity 0.2s
+
+  &:focus
+    outline: none
+    border-color: red
+
+  &:hover
+    opacity: 0.8
+
+  &::after
+    content: ''
+    position: absolute
+    top: 24px
+    right: 31px
+    width: 8px
+    height: 8px
+    
+    transition: transform 0.2s
+    border: solid #979797
+    border-width: 0 2px 2px 0
+    display: inline-block
+    padding: 3px
+    transform: rotate(45deg)
+    transform-origin: 50% 50%
+
+    body.collapsed &
+      transform: rotate(-135deg)
+
+// GEOSEARCH AUTOCOMPLETE RESULTS
+.search__results
+  background: white
+  list-style: none
+  margin: 0
+  padding: 0
+
+.search__results > *
+  padding: 12px 20px
+  font-size: 14px
+  line-height: 1.15
+  background: white
+  border-top: 1px solid #7B7B7B
+  cursor: pointer
+  transition: background-color 0.25s ease
+
+  &:hover
+    background: rgba(230, 230, 230, 0.6)
+    color: red

@@ -1,0 +1,99 @@
+@import '../_mixins'
+
+.panels
+  position: absolute
+  top: 70px
+  left: 64px
+  max-height: calc(100vh - 140px)
+  z-index: 1000
+  background: white
+  box-shadow: 0 2px 50px 0 rgba(0, 0, 0, 0.5)
+  font-family: raleway, sans-serif
+  color: #7B7B7B
+  overflow: hidden
+
+.panel
+  position: relative
+  float: left
+  width: 520px
+  z-index: 1
+  height: calc(100vh - 140px)
+
+  display: flex
+  flex-direction: column
+
+  &:not(.panel--active)
+    display: none
+
+.panel--thin
+  width: 467px
+
+.panel--wide
+  width: 884px
+
+// ===== HEADER ===== //
+.panel__header
+  height: 70px
+  flex-grow: 0
+
+.panel__close
+  position: absolute
+  top: 26px
+  right: 32px
+  width: 15px
+  height: 15px
+  transition: opacity 0.2s
+  cursor: pointer
+  appearance: none
+  border: none
+
+  &:focus
+    outline: none
+    border-color: red
+
+  &:hover
+    opacity: 0.8
+
+// CLOSE ICON
+.panel__close
+  &::before,
+  &::after
+    content: ' '
+    position: absolute
+    top: 0
+    left: calc(50% - 2px)
+    height: 100%
+    width: 2px
+    background-color: #979797
+
+  &::before
+    transform: rotate(45deg)
+
+  &::after
+    transform: rotate(-45deg)
+
+// ===== CONTENT ===== //
+.panel__content
+  flex-grow: 1
+
+// ===== FOOTER ===== //
+.panel__footer
+  text-align: center
+  flex-grow: 0
+
+.panel__action
+  appearance: none
+  font-weight: 600
+  line-height: 50px
+  font-size: 17px
+  letter-spacing: 0.2px
+  color: #555555
+  width: 325px
+  margin: auto
+  padding: 0
+  cursor: pointer
+  border: 1px solid #979797
+
+// ===== COLLAPSE ===== //
+body.collapsed .panels
+  display: none
