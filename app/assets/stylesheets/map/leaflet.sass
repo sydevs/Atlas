@@ -1,5 +1,6 @@
 // Adjustments to the Leaflet styling
 @import '_mixins'
+@import 'icons'
 
 .leaflet-control-zoom
   border: 0 !important
@@ -8,3 +9,11 @@
 .leaflet-control-zoom-in,
 .leaflet-control-zoom-out
   border-radius: 0 !important
+  font-size: 14px !important
+  color: $color-grey-dark !important
+
+.leaflet-control-zoom-in
+  @extend .icon, .icon--plus
+
+.leaflet-control-zoom-out
+  @extend .icon, .icon--minus

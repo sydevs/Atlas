@@ -1,3 +1,5 @@
+@import '_data'
+
 @mixin font-face($font-family, $file-path, $weight: normal, $style: normal)
   @font-face
     font-family: $font-family
@@ -15,10 +17,12 @@
 +font-face("raleway", "RalewaySemiBold/RalewaySemiBold", 600)
 +font-face("raleway", "RalewayBold/RalewayBold", 700)
 +font-face("futura-book", "FuturaBook/FuturaBook")
++font-face("icomoon", "Icons/icomoon")
 
 // ===== FONT WEIGHTS ===== //
-$font-text: "raleway", sans-serif
-$font-number: "futura-book", sans-serif
+$font-text: 'raleway', sans-serif
+$font-number: 'futura-book', sans-serif
+$font-icon: 'icomoon'
 
 $font-lighter: 200
 $font-light: 300
@@ -60,6 +64,10 @@ $z-control: 1000
 $panel-mobile-collapsed-height: 210px
 $panel-mobile-height: 80vh
 $panel-padding: 45px
+
+// ===== ICONS ===== //
+@function icon($key)
+  @return map-get($icons, $key)
 
 // ===== MEDIA QUERIES ===== //
 @mixin collapsed

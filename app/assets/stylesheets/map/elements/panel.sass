@@ -81,25 +81,36 @@
   flex-grow: 0
 
 .panel__handle
-  height: 20px
+  font-size: 20px
   background: $color-background
   border-bottom: 1px solid $color-border
   cursor: pointer
+  text-align: center
   flex-grow: 0
+
+  opacity: 0.7
+  transition: opacity 0.5s ease
 
   @include tablet-or-larger
     display: none
+
+  @include collapsed
+    > .icon::before
+      content: icon(narrow-up)
+
+  &:hover
+    opacity: 1
 
 .panel__close
   position: absolute
   top: 26px
   right: 32px
-  width: 15px
-  height: 15px
+  font-size: 16px
   transition: opacity 0.2s
   cursor: pointer
-  appearance: none
-  border: none
+
+  @include mobile
+    display: none
 
   &:focus
     outline: none
@@ -109,7 +120,7 @@
     opacity: 0.8
 
 // CLOSE ICON
-.panel__close
+/*.panel__close
   &::before,
   &::after
     content: ' '
@@ -124,7 +135,7 @@
     transform: rotate(45deg)
 
   &::after
-    transform: rotate(-45deg)
+    transform: rotate(-45deg)*/
 
 // ===== CONTENT ===== //
 .panel__content
@@ -138,6 +149,9 @@
   flex-grow: 0
   padding-left: $panel-padding
   padding-right: $panel-padding
+
+  @include mobile
+    margin-top: 40px
 
 .panel__action
   appearance: none

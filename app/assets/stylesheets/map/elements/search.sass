@@ -39,30 +39,54 @@
   &:focus
     outline: 1px solid red
 
-// COLLAPSE BUTTON
+// ICONS
+.search__icon,
 .search__collapse
+  $margin: 8px
+  $size: $header-height - ($margin * 2)
+
   position: absolute
-  top: 2px
-  right: 2px
-  height: $header-height - 4px
-  width: $header-height - 4px
+  top: $margin
+  right: $margin
+  height: $size
+  width: $size
   padding: 0
   cursor: pointer
-  appearance: none
-  border: none
+  text-align: center
+
+  > .icon
+    line-height: $size
+
+.search__icon
+  font-size: 24px
+
+  @include tablet-or-larger
+    display: none
+
+.search__collapse
+  //background-color: transparent
+  //transition: background-color 0.2s
+  opacity: 1
   transition: opacity 0.2s
+  border-radius: 100%
+  font-size: 50px
 
   @include mobile
     display: none
-
+  
   &:focus
     outline: none
-    border-color: red
+    border-color: $color-blue
 
   &:hover
     opacity: 0.8
+    //background-color: $color-background-hover
 
-  &::after
+  @include collapsed
+    > .icon::before
+      content: icon('chevron-up')
+
+  /*&::after
     content: ''
     position: absolute
     top: 24px
@@ -79,7 +103,7 @@
     transform-origin: 50% 50%
 
     @include collapsed
-      transform: rotate(-135deg)
+      transform: rotate(-135deg)*/
 
 // GEOSEARCH AUTOCOMPLETE RESULTS
 .search__results

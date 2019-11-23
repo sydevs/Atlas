@@ -7,7 +7,8 @@
 .panels id='js-panels'
   // LISTING PANEL
   .listing.panel.panel--active id='js-listing-panel'
-    .panel__handle class='js-collapse'
+    a.panel__handle class='js-collapse'
+      i.icon.icon--narrow-down
 
     .panel__content
       .listing__filter
@@ -24,8 +25,10 @@
 
   // INFORMATION PANEL
   .information.panel.panel--thin id='js-information-panel'
-    .panel__handle class='js-collapse'
-    button.panel__close class='js-panel-close'
+    a.panel__handle class='js-collapse'
+      i.icon.icon--narrow-down
+    a.panel__close class='js-panel-close'
+      i.icon.icon--close
     
     .panel__content
       .information__title data-attribute='name'
@@ -37,8 +40,10 @@
 
   // REGISTRATION PANEL
   .registration.panel.panel--thin id='js-registration-panel'
-    .panel__handle class='js-collapse'
-    button.panel__close class='js-panel-close'
+    a.panel__handle class='js-collapse'
+      i.icon.icon--narrow-down
+    a.panel__close class='js-panel-close'
+      i.icon.icon--close
 
     .panel__content
       .registration__header = translate('map.registration.header')
@@ -59,13 +64,18 @@
       
   // SHARING PANEL
   .sharing.panel.panel--wide id='js-sharing-panel'
-    .panel__handle class='js-collapse'
-    button.panel__close class='js-panel-close'
+    a.panel__handle class='js-collapse'
+      i.icon.icon--narrow-down
+    a.panel__close class='js-panel-close'
+      i.icon.icon--close
 
 // ===== SEARCH BOX ===== //
 .search id='js-search'
   input.search__input class='js-search-input' type='text' placeholder=translate('map.listing.search')
-  button.search__collapse class='js-collapse'
+  .search__icon
+    i.icon.icon--search
+  a.search__collapse class='js-collapse'
+    i.icon.icon--chevron-down
   ul.search__results class='js-search-results'
 
 // ===== REFRESH BUTTON ===== //

@@ -24,7 +24,11 @@ class WorldMap {
     }).addTo(this.leaflet)
 
     L.control.zoom({
-      position: 'topright'
+      position: 'topright',
+      zoomInText: '',
+      zoomOutText: '',
+      zoomInTitle: 'Zoom in',
+      zoomOutTitle: 'Zoom out',
     }).addTo(this.leaflet)
 
     this.markersGroup.on('click', event => this.selectMarker(event.layer))
