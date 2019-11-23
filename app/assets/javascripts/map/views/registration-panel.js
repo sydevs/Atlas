@@ -9,7 +9,7 @@ class RegistrationPanel {
     this.formFeedback = element.querySelector('.js-form-feedback')
     this.submitButton = element.querySelector('.js-submit')
     this.submitButton.addEventListener('click', () => this.submit())
-    element.querySelector('.panel__close').addEventListener('click', () => this.hide())
+    element.querySelector('.js-panel-close').addEventListener('click', () => Application.showPanel('listing'))
   }
 
   show(event) {

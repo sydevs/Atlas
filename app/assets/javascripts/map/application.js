@@ -8,7 +8,6 @@ class ApplicationInstance {
     const initialLocation = JSON.parse(map.dataset.location)
 
     this.map = new WorldMap(map)
-    this.activePanel = null
     this.panels = {}
     this.panels.listing = new ListingPanel(document.getElementById('js-listing-panel'))
     this.panels.information = new InformationPanel(document.getElementById('js-information-panel'))
@@ -16,11 +15,18 @@ class ApplicationInstance {
     this.panels.sharing = new SharingPanel(document.getElementById('js-sharing-panel'))
     this.search = new SearchBox(document.getElementById('js-search'))
     this.atlas = new AtlasAPI()
+    this.activePanel = this.panels.listing
     this.loadEvents(initialLocation)
+    
+    const collapseButtons = document.querySelectorAll('.js-collapse')
+    for (let i = 0; i < collapseButtons.length; i++) {
+      collapseButtons[i].addEventListener('click', () => this.toggleCollapsed())
+    }
   }
 
   toggleCollapsed() {
     document.body.classList.toggle('collapsed')
+    this.map.leaflet.invalidateSize()
   }
 
   showPanel(panelKey, event = null) {
@@ -28,18 +34,22 @@ class ApplicationInstance {
       this.activePanel.hide()
     }
 
-    if (panelKey && event) {
+    if (panelKey) {
       this.activePanel = this.panels[panelKey]
       this.activePanel.show(event)
-      this.panels.listing.setActiveItem(event.id)
-      this.map.zoomToVenue(event)
+
+      if (event) {
+        this.activePanel.show(event)
+        this.panels.listing.setActiveItem(event.id)
+        this.map.zoomToVenue(event)
+      }
     } else {
       this.activePanel = null
     }
   }
 
   loadEvents(query) {
-    this.showPanel(null)
+    this.showPanel('listing')
     this.atlas.query(query, events => {
       this.map.addEventMarkers(events)
       this.map.zoomToEvents(events)

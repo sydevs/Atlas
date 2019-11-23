@@ -1,40 +1,94 @@
 @import '../_mixins'
 
 .panels
-  position: absolute
-  top: $control-offset-y
-  left: $control-offset-x
-  max-height: calc(100vh - 140px)
-  z-index: 1000
+  position: relative
+  z-index: $z-control
   background: white
   box-shadow: $shadow-heavy
-  font-family: raleway, sans-serif
+  font-family: $font-text
   color: $color-grey-normal
   overflow: hidden
+
+  @include mobile
+    height: $panel-mobile-height
+    overflow: scroll
+
+    /*&::before
+      content: ''
+      position: absolute
+      top: 0
+      bottom: 0
+      left: 0
+      right: 0
+      pointer-events: all*/
+
+    @include collapsed
+      height: $panel-mobile-collapsed-height
+      overflow: hidden
+
+  @include tablet
+    width: 520px
+
+  @include tablet-or-larger
+    position: absolute
+    top: 0
+    left: 0
+    max-height: 100vh
+
+    @include collapsed
+      display: none
+
+  @include desktop-or-larger
+    top: $control-offset-y
+    left: $control-offset-x
+    max-height: calc(100vh - #{$control-offset-y * 2})
 
 .panel
   position: relative
   float: left
-  width: 520px
   z-index: 1
-  height: calc(100vh - 140px)
+  width: 100%
 
   display: flex
   flex-direction: column
+
+  @include tablet-or-larger
+    padding-bottom: $panel-padding
+
+  @include tablet
+    margin-top: $header-height
+    height: calc(100vh - #{$header-height})
+
+  @include desktop-or-larger
+    padding-top: $panel-padding
+    width: 520px
+    height: calc(100vh - #{$control-offset-y * 2})
 
   &:not(.panel--active)
     display: none
 
 .panel--thin
-  width: 467px
+  @include desktop-or-larger
+    width: 467px
 
 .panel--wide
-  width: 884px
+  @include desktop-or-larger
+    width: 884px
 
 // ===== HEADER ===== //
 .panel__header
   height: $header-height
   flex-grow: 0
+
+.panel__handle
+  height: 20px
+  background: $color-background
+  border-bottom: 1px solid $color-border
+  cursor: pointer
+  flex-grow: 0
+
+  @include tablet-or-larger
+    display: none
 
 .panel__close
   position: absolute
@@ -64,7 +118,7 @@
     left: calc(50% - 2px)
     height: 100%
     width: 2px
-    background-color: $color-grey-border
+    background-color: $color-border
 
   &::before
     transform: rotate(45deg)
@@ -75,11 +129,15 @@
 // ===== CONTENT ===== //
 .panel__content
   flex-grow: 1
+  padding-left: $panel-padding
+  padding-right: $panel-padding
 
 // ===== FOOTER ===== //
 .panel__footer
   text-align: center
   flex-grow: 0
+  padding-left: $panel-padding
+  padding-right: $panel-padding
 
 .panel__action
   appearance: none
@@ -92,8 +150,4 @@
   margin: auto
   padding: 0
   cursor: pointer
-  border: 1px solid $color-grey-border
-
-// ===== COLLAPSE ===== //
-body.collapsed .panels
-  display: none
+  border: 1px solid $color-border

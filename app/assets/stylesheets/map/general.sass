@@ -3,14 +3,21 @@
 body
   margin: 0
   color: $color-grey-normal
-  font-style: $font-text
+  font-family: $font-text
+  overflow: hidden
 
 *
   box-sizing: border-box
 
 #map
-  height: 100%
+  height: calc(100vh - #{$panel-mobile-height})
   position: static !important
+
+  @include collapsed
+    height: calc(100vh - #{$panel-mobile-collapsed-height})
+
+  @include tablet-or-larger
+    height: 100vh
 
 .leaflet-control-container
   @include mobile

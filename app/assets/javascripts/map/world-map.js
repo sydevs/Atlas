@@ -10,6 +10,7 @@ class WorldMap {
     this.clusterLayer = L.markerClusterGroup({ spiderfyOnMaxZoom: false })
 
     this.panels = document.getElementById('js-panels')
+    this.searchBox = document.getElementById('js-search')
     this.refreshButton = document.getElementById('js-refresh')
     this.refreshButton.addEventListener('click', () => this.refresh())
 
@@ -105,10 +106,16 @@ class WorldMap {
 
   computeViewportPadding(mode = null) {
     let result = {
-      top: this.refreshButton.offsetHeight + this.zoomPadding,
+      top: this.refreshButton.getBoundingClientRect().right + this.zoomPadding,
       bottom: this.zoomPadding,
-      left: this.panels.offsetWidth + this.zoomPadding,
+      left: this.panels.getBoundingClientRect().bottom + this.zoomPadding,
       right: this.zoomPadding,
+    }
+
+    if (window.innerWidth < 768) {
+      result.left = this.zoomPadding
+      result.top = this.searchBox.getBoundingClientRect().bottom + this.zoomPadding
+      //result.bottom = this.panels.getBoundingClientRect().top + this.zoomPadding
     }
 
     if (mode == 'percent') {

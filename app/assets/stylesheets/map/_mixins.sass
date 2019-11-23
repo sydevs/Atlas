@@ -32,9 +32,11 @@ $color-grey-dark: #555555
 $color-grey-normal: #7b7b7b
 $color-grey-light: #d8d8d8
 
-$color-grey-border: #979797
-$color-grey-background: rgba(230, 230, 230, 0.6)
-$color-grey-hover: #f4f4f4
+$color-border: #979797
+$color-border-light: #d8d8d8
+
+$color-background: rgba(230, 230, 230, 0.6)
+$color-background-hover: #f4f4f4
 
 $color-orange: #e08e79
 $color-blue: #c5e0dc
@@ -47,27 +49,39 @@ $shadow-heavy: 0 2px 50px 0 rgba(0, 0, 0, 0.5)
 // These are the minimum widths for each device
 // Devices smaller than 320px width are not supported.
 $tablet-width: 768px
-$laptop-width: 1024px
+$desktop-width: 1280px
 
-// ===== MISC ===== //
+// ===== PANELS ===== //
 $header-height: 70px
 $control-offset-x: 64px
-$control-offset-y: 70px
+$control-offset-y: 58px
 $z-control: 1000
 
+$panel-mobile-collapsed-height: 210px
+$panel-mobile-height: 80vh
+$panel-padding: 45px
+
 // ===== MEDIA QUERIES ===== //
+@mixin collapsed
+  body.collapsed &
+    @content
+
 @mixin mobile
   @media only screen and (max-width: #{$tablet-width - 1px})
     @content
 
+@mixin tablet-or-smaller
+  @media only screen and (max-width: #{$desktop-width - 1px})
+    @content
+
 @mixin tablet
-  @media only screen and (min-width: #{$tablet-width}) and (max-width: #{$laptop-width - 1px})
+  @media only screen and (min-width: #{$tablet-width}) and (max-width: #{$desktop-width - 1px})
     @content
 
 @mixin tablet-or-larger
   @media only screen and (min-width: #{$tablet-width})
     @content
 
-@mixin laptop-or-larger
-  @media only screen and (min-width: #{$laptop-width})
+@mixin desktop-or-larger
+  @media only screen and (min-width: #{$desktop-width})
     @content

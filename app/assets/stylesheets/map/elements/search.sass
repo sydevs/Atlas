@@ -2,13 +2,27 @@
 
 .search
   position: absolute
-  top: $control-offset-y
-  left: $control-offset-x
-
-  width: 520px
-  z-index: 1000
   background: white
+  z-index: $z-control
   box-shadow: $shadow-light
+
+  @include mobile
+    display: none
+    top: 20
+    left: $control-offset-x * 0.375
+    right: $control-offset-x * 0.375
+
+    @include collapsed
+      display: block
+
+  @include tablet-or-larger
+    width: 520px
+    top: 0
+    left: 0
+
+  @include desktop-or-larger
+    top: $control-offset-y
+    left: $control-offset-x
 
 .search__input
   width: 100%
@@ -38,6 +52,9 @@
   border: none
   transition: opacity 0.2s
 
+  @include mobile
+    display: none
+
   &:focus
     outline: none
     border-color: red
@@ -54,14 +71,14 @@
     height: 8px
     
     transition: transform 0.2s
-    border: solid $color-grey-border
+    border: solid $color-border
     border-width: 0 2px 2px 0
     display: inline-block
     padding: 3px
     transform: rotate(45deg)
     transform-origin: 50% 50%
 
-    body.collapsed &
+    @include collapsed
       transform: rotate(-135deg)
 
 // GEOSEARCH AUTOCOMPLETE RESULTS
@@ -81,5 +98,5 @@
   transition: background-color 0.25s ease
 
   &:hover
-    background: $color-grey-background
+    background: $color-background
     color: red

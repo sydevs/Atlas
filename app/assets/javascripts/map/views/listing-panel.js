@@ -13,6 +13,14 @@ class ListingPanel {
     element.querySelector('.js-reset').addEventListener('click', () => this.resetFilter())
   }
 
+  show() {
+    this.container.classList.add('panel--active')
+  }
+
+  hide() {
+    this.container.classList.remove('panel--active')
+  }
+
   filterByVenue(venue) {
     this.items.forEach(item => item.setHidden(item.event.venue_id != venue.id))
     this.container.classList.add('listing--filtered')

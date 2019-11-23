@@ -15,7 +15,6 @@ class SearchBox {
       }
     })
 
-    element.querySelector('.js-collapse').addEventListener('click', () => Application.toggleCollapsed())
     this.enableGeoSearch = true
   }
 

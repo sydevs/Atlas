@@ -7,6 +7,8 @@
 .panels id='js-panels'
   // LISTING PANEL
   .listing.panel.panel--active id='js-listing-panel'
+    .panel__handle class='js-collapse'
+
     .panel__content
       .listing__filter
         a.listing__filter__close class='js-reset' Clear
@@ -22,6 +24,7 @@
 
   // INFORMATION PANEL
   .information.panel.panel--thin id='js-information-panel'
+    .panel__handle class='js-collapse'
     button.panel__close class='js-panel-close'
     
     .panel__content
@@ -34,6 +37,7 @@
 
   // REGISTRATION PANEL
   .registration.panel.panel--thin id='js-registration-panel'
+    .panel__handle class='js-collapse'
     button.panel__close class='js-panel-close'
 
     .panel__content
@@ -55,6 +59,7 @@
       
   // SHARING PANEL
   .sharing.panel.panel--wide id='js-sharing-panel'
+    .panel__handle class='js-collapse'
     button.panel__close class='js-panel-close'
 
 // ===== SEARCH BOX ===== //
@@ -65,8 +70,9 @@
 
 // ===== REFRESH BUTTON ===== //
 // Button to search the current area
-button.refresh id='js-refresh'
-  = translate('map.search_area')
+.refresh
+  button.refresh__buton id='js-refresh'
+    = translate('map.search_area')
 
 / ===== TEMPLATES ===== /
 template id='js-item-template'

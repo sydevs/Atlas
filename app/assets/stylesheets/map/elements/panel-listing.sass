@@ -3,10 +3,16 @@
 .listing
   z-index: -1
   height: auto !important
-  padding-top: $header-height
+  padding-bottom: 0 !important
+
+  @include desktop-or-larger
+    display: block !important
+
+  > .panel__content
+    padding: 0
 
 .listing__results
-  height: calc(100% - $header-height)
+  height: calc(100% - #{$header-height})
   overflow-y: scroll
 
 // ===== FILTER MESSAGE ===== //
@@ -15,7 +21,7 @@
     display: none
 
 .listing__filter
-  background: $color-grey-background
+  background: $color-background
   padding: 4px 20px
 
   font-size: 14px
