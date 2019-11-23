@@ -5,6 +5,7 @@ class SharingPanel {
 
   constructor(element) {
     this.container = element
+    element.querySelector('.js-panel-info').addEventListener('click', () => Application.showPanel('information', this.event))
     element.querySelector('.js-panel-close').addEventListener('click', () => Application.showPanel('listing'))
   }
 

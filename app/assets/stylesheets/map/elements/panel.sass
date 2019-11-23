@@ -80,6 +80,7 @@
   height: $header-height
   flex-grow: 0
 
+// ===== HANDLE ===== //
 .panel__handle
   font-size: 20px
   background: $color-background
@@ -101,16 +102,17 @@
   &:hover
     opacity: 1
 
-.panel__close
+// ===== CONTROLS ===== //
+.panel__controls
   position: absolute
   top: 26px
   right: 32px
+
+.panel__controls > a
+  margin-left: 8px
   font-size: 16px
   transition: opacity 0.2s
   cursor: pointer
-
-  @include mobile
-    display: none
 
   &:focus
     outline: none
@@ -119,23 +121,9 @@
   &:hover
     opacity: 0.8
 
-// CLOSE ICON
-/*.panel__close
-  &::before,
-  &::after
-    content: ' '
-    position: absolute
-    top: 0
-    left: calc(50% - 2px)
-    height: 100%
-    width: 2px
-    background-color: $color-border
-
-  &::before
-    transform: rotate(45deg)
-
-  &::after
-    transform: rotate(-45deg)*/
+.panel__close
+  @include mobile
+    display: none
 
 // ===== CONTENT ===== //
 .panel__content

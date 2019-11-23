@@ -27,8 +27,11 @@
   .information.panel.panel--thin id='js-information-panel'
     a.panel__handle class='js-collapse'
       i.icon.icon--narrow-down
-    a.panel__close class='js-panel-close'
-      i.icon.icon--close
+    .panel__controls
+      a.panel__share class='js-panel-share'
+        i.icon.icon--share
+      a.panel__close class='js-panel-close'
+        i.icon.icon--close
     
     .panel__content
       .information__title data-attribute='name'
@@ -42,8 +45,11 @@
   .registration.panel.panel--thin id='js-registration-panel'
     a.panel__handle class='js-collapse'
       i.icon.icon--narrow-down
-    a.panel__close class='js-panel-close'
-      i.icon.icon--close
+    .panel__controls
+      a.panel__info class='js-panel-info'
+        i.icon.icon--info
+      a.panel__close class='js-panel-close'
+        i.icon.icon--close
 
     .panel__content
       .registration__header = translate('map.registration.header')
@@ -66,8 +72,11 @@
   .sharing.panel.panel--wide id='js-sharing-panel'
     a.panel__handle class='js-collapse'
       i.icon.icon--narrow-down
-    a.panel__close class='js-panel-close'
-      i.icon.icon--close
+    .panel__controls
+      a.panel__info class='js-panel-info'
+        i.icon.icon--info
+      a.panel__close class='js-panel-close'
+        i.icon.icon--close
 
 // ===== SEARCH BOX ===== //
 .search id='js-search'
