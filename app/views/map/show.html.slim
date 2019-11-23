@@ -69,7 +69,7 @@
       button.panel__action class='js-submit' = translate('map.registration.form.submit')
       
   // SHARING PANEL
-  .sharing.panel.panel--wide id='js-sharing-panel'
+  .sharing.panel.panel--thin id='js-sharing-panel'
     a.panel__handle class='js-collapse'
       i.icon.icon--narrow-down
     .panel__controls
@@ -77,6 +77,25 @@
         i.icon.icon--info
       a.panel__close class='js-panel-close'
         i.icon.icon--close
+
+    .panel__content
+      .sharing__confirmation
+        .sharing__circle
+          .sharing__confirmation__title = translate('map.sharing.confirmation.title')
+          .sharing__confirmation__subtitle = translate('map.sharing.confirmation.subtitle')
+
+      .sharing__invite
+        .sharing__invite__header = translate('map.sharing.invite')
+        .sharing__actions
+          .sharing__link
+            i.icon.icon--link
+            input type='text' value=map_root_url
+          .sharing__social-icons
+            a.sharing__mail href='mailto:'
+              i.icon.icon--mail
+            - %w[whatsapp messenger telegram].each do |app|
+              a class="sharing__#{app}" href='#'
+                i.icon class="icon--#{app}"
 
 // ===== SEARCH BOX ===== //
 .search id='js-search'

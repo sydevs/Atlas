@@ -19,9 +19,11 @@ en:
         duplicate: "You have already registered on %{date}. See you soon."
         success: "Success! You will receive a confirmation email shortly."
         error: "Error! Please try again later."
+    sharing:
+      invite: "Invite your friends"
       confirmation:
-        title: "Thank You for Registering!"
-        description: "you will receive an email shortly!"
+        title: "Thank You for Registering"
+        subtitle: "you will receive an email shortly"
     categories:
       title:
         intro: "Intro Meditation Class"
