@@ -1,4 +1,4 @@
-/* globals ListingItem */
+/* globals Application, ListingItem */
 /* exported ListingPanel */
 
 class ListingPanel {
@@ -10,7 +10,7 @@ class ListingPanel {
     this.itemTemplate = document.getElementById('js-item-template')
     this.itemsContainer = document.getElementById('js-list-results')
     this.filterText = element.querySelector('.js-filter-text')
-    element.querySelector('.js-reset').addEventListener('click', () => this.resetFilter())
+    element.querySelector('.js-reset').addEventListener('click', () => this.resetFilter(true))
   }
 
   show() {
@@ -27,9 +27,10 @@ class ListingPanel {
     this.filterText.textContent = venue.address.street || ''
   }
 
-  resetFilter() {
+  resetFilter(zoom = false) {
     this.items.forEach(item => item.setHidden(false))
     this.container.classList.remove('listing--filtered')
+    if (zoom) Application.map.fitToMarkers()
   }
 
   clearEvents() {

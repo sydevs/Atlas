@@ -28,6 +28,7 @@
 
   @include tablet
     width: 520px
+    max-width: 45vw
 
   @include tablet-or-larger
     position: absolute
@@ -62,6 +63,7 @@
   @include desktop-or-larger
     padding-top: $panel-padding
     width: 520px
+    max-width: 45vw
     height: calc(100vh - #{$control-offset-y * 2})
 
   &:not(.panel--active)

@@ -52,8 +52,7 @@ class ApplicationInstance {
   loadEvents(query) {
     this.showPanel('listing')
     this.atlas.query(query, events => {
-      this.map.addEventMarkers(events)
-      this.map.zoomToEvents(events)
+      this.map.setEventMarkers(events)
       this.panels.listing.setEvents(events)
       this.toggleCollapsed(false)
     })

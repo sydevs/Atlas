@@ -41,7 +41,9 @@ class WorldMap {
 
   // ===== MARKER MANIUPLATION ===== //
 
-  addEventMarkers(events) {
+  setEventMarkers(events) {
+    this.markersGroup.clearLayers()
+
     for (let i = 0; i < events.length; i++) {
       const event = events[i]
       if (event.venue_id in this.markers) continue
@@ -53,6 +55,8 @@ class WorldMap {
         address: event.address,
       })
     }
+
+    this.fitToMarkers()
   }
 
   addVenueMarker(venue) {
@@ -66,6 +70,16 @@ class WorldMap {
   }
 
   // ===== ZOOM MANIPULATION ===== //
+
+  fitToMarkers() {
+    const bounds = this.markersGroup.getBounds()
+    const padding = this.computeViewportPadding()
+    this.leaflet.fitBounds(bounds, {
+      paddingTopLeft: [padding.left, padding.top],
+      paddingBottomRight: [padding.right, padding.bottom],
+      maxZoom: 14,
+    })
+  }
 
   zoomToEvents(events) {
     if (events.length == 0) return
