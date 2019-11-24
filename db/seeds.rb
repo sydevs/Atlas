@@ -4,7 +4,7 @@ IMAGE_SETS = {
   other: 6,
 }.freeze
 
-if Rails.env.production?
+if Rails.env.production? && !ENV['force']
   puts 'Seeding cannot be run in production!'
   return
 end
