@@ -110,9 +110,9 @@ class WorldMap {
 
   computeViewportPadding(mode = null) {
     let result = {
-      top: this.refreshButton.getBoundingClientRect().right + this.zoomPadding,
+      top: this.refreshButton.getBoundingClientRect().bottom + this.zoomPadding,
       bottom: this.zoomPadding,
-      left: this.panels.getBoundingClientRect().bottom + this.zoomPadding,
+      left: this.panels.getBoundingClientRect().right + this.zoomPadding,
       right: this.zoomPadding,
     }
 

@@ -24,8 +24,8 @@ class ApplicationInstance {
     }
   }
 
-  toggleCollapsed() {
-    document.body.classList.toggle('collapsed')
+  toggleCollapsed(collapsed) {
+    document.body.classList.toggle('collapsed', collapsed)
     this.map.leaflet.invalidateSize()
   }
 
@@ -54,6 +54,7 @@ class ApplicationInstance {
       this.map.addEventMarkers(events)
       this.map.zoomToEvents(events)
       this.panels.listing.setEvents(events)
+      this.toggleCollapsed(false)
     })
   }
 
