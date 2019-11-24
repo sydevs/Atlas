@@ -1,15 +1,20 @@
-const Utils = {
-  getUrl(url, callback) {
+/* exported Util */
+
+const Util = {
+
+  getURL(url, callback) {
     var xhttp
     xhttp = new XMLHttpRequest()
-    xhttp.onreadystatechange = function () {
+    xhttp.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200) {
         callback(this)
       }
     }
+
     xhttp.open('GET', url, true)
     xhttp.send()
   },
+
   postForm(url, formElement, callback) {
     var XHR = new XMLHttpRequest()
     // Bind the FormData object and the form element
@@ -31,7 +36,21 @@ const Utils = {
     // The data sent is what the user provided in the form
     XHR.send(formData)
   },
+
   toggleZindex(element, zIndex) {
     element.style.zIndex = zIndex
+  },
+
+  simpleFormat(str) {
+    str = str.replace(/\r\n?/, '\n')
+    str = str.trim(str)
+
+    if (str.length > 0) {
+      str = str.replace(/\n\n+/g, '</p><p>')
+      str = str.replace(/\n/g, '<br />')
+      str = '<p>' + str + '</p>'
+    }
+
+    return str
   }
 }
