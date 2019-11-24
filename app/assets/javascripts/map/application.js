@@ -36,12 +36,13 @@ class ApplicationInstance {
 
     if (panelKey) {
       this.activePanel = this.panels[panelKey]
-      this.activePanel.show(event)
 
       if (event) {
         this.activePanel.show(event)
         this.panels.listing.setActiveItem(event.id)
         this.map.zoomToVenue(event)
+      } else {
+        this.activePanel.show(event)
       }
     } else {
       this.activePanel = null

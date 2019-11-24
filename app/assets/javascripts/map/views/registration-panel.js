@@ -34,14 +34,17 @@ class RegistrationPanel {
     Util.postForm('/map/registrations', this.form, event => {
       const response = JSON.parse(event.target.response)
       this.submitButton.removeAttribute('disabled')
+      this.formFeedback.innerText = response.message
 
       if (response.status == 'success') {
+        this.formFeedback.classList.add('success')
+        this.event.registered = true
+        Application.showPanel('sharing', this.event)
+      } else if (response.status == 'info') {
         this.formFeedback.classList.add('success')
       } else {
         this.formFeedback.classList.add('error')
       }
-
-      this.formFeedback.innerText = response.message
     })
   }
 

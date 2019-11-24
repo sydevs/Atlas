@@ -8,6 +8,14 @@
   > .panel__content
     padding: 0
 
+.sharing:not(.sharing--confirmation)
+  .sharing__confirmation
+    display: none
+
+  .sharing__invite
+    @include desktop-or-larger
+      margin-top: 25px
+
 .sharing__confirmation
   flex-grow: 0
   flex-shrink: 1
