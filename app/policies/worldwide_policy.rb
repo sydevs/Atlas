@@ -13,6 +13,7 @@ class WorldwidePolicy < DatabasePolicy
   end
 
   def index_association? association
+    association = association.to_sym
     return false if %i[registrations pictures].include?(association)
     return user.present? if association == :regions
 

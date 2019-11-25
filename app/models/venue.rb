@@ -25,7 +25,7 @@ class Venue < ApplicationRecord
   # Methods
 
   def parent
-    province || country || nil
+    province || country
   end
 
   def managed_by? manager, super_manager: false
