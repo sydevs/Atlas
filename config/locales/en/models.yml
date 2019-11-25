@@ -97,7 +97,7 @@ en:
         country_code: :activerecord.models.country.single # Do not translate
         province_code: :activerecord.models.province.single # Do not translate
         identifier: "Identifier"
-        location: "Location"
+        coordinates: "Location"
         latitude: "Latitude"
         longitude: "Longitude"
         radius: "Radius (km)"
@@ -112,6 +112,9 @@ en:
         province_code: :activerecord.models.province.single # Do not translate
         country_code: :activerecord.models.country.single # Do not translate
         postcode: "Postal Code"
+        coordinates: "Location"
+        latitude: "Latitude"
+        longitude: "Longitude"
 
       event:
         published: :activerecord.attributes.generic.published # Do not translate

@@ -37,6 +37,15 @@ const VenueMap = {
     }
 
     $('.lookup.button').click(VenueMap.onLookup)
+    $('[name="venue[latitude]"], [name="venue[longitude]"]').change(() => {
+      const latitude = $('[name="venue[latitude]"]').val()
+      const longitude = $('[name="venue[longitude]"]').val()
+
+      if (latitude && longitude) {
+        VenueMap.setMarker(latitude, longitude)
+      }
+    })
+    $('.lookup.button').click(VenueMap.onLookup)
     VenueMap.instance.dragging.disable()
   },
 

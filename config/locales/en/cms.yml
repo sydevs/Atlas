@@ -59,13 +59,13 @@ en:
         language: "Which language(s) can a seeker expect to be used at this event."
         disable_notifications: "If checked, managers for this event will never receive registration lists."
       venue:
-        find_marker: "Find Marker"
+        find_marker: "Find Location"
         marker_not_set:
           title: "Map marker has not been set"
-          description: "You must press 'Find Marker' above to automatically detect the coordinates of the venue's address."
+          description: "You must press 'Find Location' above to automatically detect the coordinates of the venue's address."
         cant_find_address:
           title: "Couldn't find address"
-          description: "The address you entered could not be found, try adding more information."
+          description: "The address you entered could not be found. Try adding more information, or enter the latitude and longitude manually."
         marker_set:
           title: "Map marker set!"
           description: "Make sure that the location shown on the map looks correct."

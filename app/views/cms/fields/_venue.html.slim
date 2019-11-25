@@ -12,9 +12,9 @@
       = f.input_field :city, placeholder: translate_attribute(Venue, :city)
   .fields
     .six.wide.field
-      - if f.object.province_code.present?
+      - if f.object.province.present?
         = f.hidden_field :province_code
-        = f.input_field :province, value: f.object.province.name, disabled: true
+        = f.input_field :province, value: f.object.province_name, disabled: true
       - elsif f.object.country_code.present?
         = f.input_field :province_code, collection: ISO3166::Country[f.object.country_code].subdivisions.map { |k,v| [v['name'], k] }, prompt: translate('cms.hints.province.prompt'), class: 'search'
     .seven.wide.field
@@ -26,8 +26,11 @@
     .three.wide.field
       = f.input_field :postcode, placeholder: translate_attribute(Venue, :postcode)
 
-  = f.hidden_field :latitude
-  = f.hidden_field :longitude
+.required.field
+  = f.label :coordinates, required: true
+  .two.fields
+    .field = f.input_field :latitude, placeholder: translate_attribute(Venue, :latitude)
+    .field = f.input_field :longitude, placeholder: translate_attribute(Venue, :longitude)
 
 button.lookup.ui.fluid.button type='button'
   i.search.icon
