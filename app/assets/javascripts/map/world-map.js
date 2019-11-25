@@ -13,6 +13,7 @@ class WorldMap {
     this.searchBox = document.getElementById('js-search')
     this.refreshButton = document.getElementById('js-refresh')
     this.refreshButton.addEventListener('click', () => this.refresh())
+    this.refreshInProgress = false
 
     this.zoomPadding = 40
 
@@ -37,6 +38,10 @@ class WorldMap {
     this.leaflet.setView([initialLocation.latitude, initialLocation.longitude], 11)
     this.clusterLayer.addLayers(this.markersGroup)
     this.clusterLayer.addTo(this.leaflet)
+
+    this.leaflet.on('resize', () => this.setRefreshHidden(false))
+    this.leaflet.on('zoomstart', () => this.setRefreshHidden(false))
+    this.leaflet.on('movestart', () => this.setRefreshHidden(false))
   }
 
   // ===== MARKER MANIUPLATION ===== //
@@ -120,6 +125,12 @@ class WorldMap {
   refresh() {
     const bounds = this.computeUseableLatLngViewport()
     Application.loadEvents(bounds)
+    this.setRefreshHidden(true)
+  }
+
+  setRefreshHidden(hidden) {
+    if (this.refreshInProgress) return
+    this.refreshButton.classList.toggle('refresh__button--hidden', hidden)
   }
 
   // ===== UTILITY ===== //
