@@ -18,12 +18,20 @@ class GeoSearchAPI {
     const results = []
     
     // Showing only 8 results for now, potentially increase/descrease the number
-    for (let i = 0; i < Math.min(data.length, 8); i++) {
-      results.push({
-        label: data[i].label,
-        latitude: data[i].y,
-        longitude: data[i].x,
-      })
+    for (let i = 0; i < data.length; i++) {
+      const dat = data[i]
+
+      if (dat.raw.class == 'place') {
+        results.push({
+          label: dat.label,
+          latitude: dat.y,
+          longitude: dat.x,
+        })
+      }
+      
+      if (results.length >= 8) {
+        break
+      }
     }
 
     return results

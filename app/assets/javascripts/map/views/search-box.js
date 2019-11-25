@@ -20,7 +20,8 @@ class SearchBox {
 
   select(location) {
     this.enableGeoSearch = false
-    this.searchInput.value = location.label
+    this.searchInput.value = null
+    this.searchInput.placeholder = location.label
     this.searchResults.innerHTML = null
     this.enableGeoSearch = true
 
