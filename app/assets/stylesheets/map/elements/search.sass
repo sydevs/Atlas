@@ -7,13 +7,13 @@
   box-shadow: $shadow-light
 
   @include mobile
-    display: none
-    top: 20
+    top: -100vh
     left: $control-offset-x * 0.375
     right: $control-offset-x * 0.375
+    transition: top $control-transition ease
 
     @include collapsed
-      display: block
+      top: 20
 
   @include tablet-or-larger
     width: 520px
