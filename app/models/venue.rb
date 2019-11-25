@@ -22,10 +22,11 @@ class Venue < ApplicationRecord
   # Scopes
   default_scope { order(updated_at: :desc) }
 
-  # Delegations
-  alias parent province
-
   # Methods
+
+  def parent
+    province || country || nil
+  end
 
   def managed_by? manager, super_manager: false
     return true if !super_manager && managers.include?(manager)

@@ -86,13 +86,16 @@ en:
 
       # Regions
       country:
+        manager_id: :activerecord.models.manager.single # Do not translate
         country_code: :activerecord.models.country.single # Do not translate
 
       province:
+        manager_id: :activerecord.models.manager.single # Do not translate
         country_code: :activerecord.models.country.single # Do not translate
         province_code: :activerecord.models.province.single # Do not translate
 
       local_area:
+        manager_id: :activerecord.models.manager.single # Do not translate
         name: :activerecord.attributes.generic.name # Do not translate
         country_code: :activerecord.models.country.single # Do not translate
         province_code: :activerecord.models.province.single # Do not translate
@@ -106,6 +109,7 @@ en:
       venue:
         published: :activerecord.attributes.generic.published # Do not translate
         name: :activerecord.attributes.generic.name # Do not translate
+        manager_id: :activerecord.models.manager.single # Do not translate
         address: "Address"
         street: "Street Address"
         city: "City"
@@ -119,6 +123,7 @@ en:
       event:
         published: :activerecord.attributes.generic.published # Do not translate
         name: :activerecord.attributes.generic.name # Do not translate
+        manager_id: :activerecord.models.manager.single # Do not translate
         category: "Category"
         categories:
           intro: "Intro Meditation Class"
@@ -152,6 +157,7 @@ en:
         end_time: "End Time"
 
       registration:
+        manager_id: :activerecord.models.manager.single # Do not translate
         name: :activerecord.attributes.generic.name # Do not translate
         email: :activerecord.attributes.generic.email # Do not translate
         comment: "Comment"
@@ -159,6 +165,7 @@ en:
 
       # Other
       manager:
+        manager_id: :activerecord.models.manager.single # Do not translate
         name: :activerecord.attributes.generic.name # Do not translate
         email: :activerecord.attributes.generic.email # Do not translate
         administrator: Administrator
