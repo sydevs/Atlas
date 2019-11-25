@@ -44,19 +44,20 @@ class WorldMap {
   setEventMarkers(events) {
     this.markersGroup.clearLayers()
 
-    for (let i = 0; i < events.length; i++) {
-      const event = events[i]
-      if (event.venue_id in this.markers) continue
+    if (events.length > 0) {
+      for (let i = 0; i < events.length; i++) {
+        const event = events[i]
 
-      this.addVenueMarker({
-        id: event.venue_id,
-        latitude: event.latitude,
-        longitude: event.longitude,
-        address: event.address,
-      })
+        this.addVenueMarker({
+          id: event.venue_id,
+          latitude: event.latitude,
+          longitude: event.longitude,
+          address: event.address,
+        })
+      }
+
+      this.fitToMarkers()
     }
-
-    this.fitToMarkers()
   }
 
   addVenueMarker(venue) {
@@ -67,6 +68,7 @@ class WorldMap {
 
   clearMarkers() {
     this.markersGroup.clearLayers()
+    this.markers = []
   }
 
   // ===== ZOOM MANIPULATION ===== //

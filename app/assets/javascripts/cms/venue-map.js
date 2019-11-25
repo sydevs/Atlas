@@ -62,6 +62,7 @@ const VenueMap = {
     $('#venue-map').css('min-height', '180px').css('opacity', '1')
     VenueMap.instance.invalidateSize()
     VenueMap.instance.setView([latitude, longitude], VenueMap.initialZoom)
+    VenueMap.messages.filter('.for-success').removeClass('hidden')
   },
 
   onLookup(event) {
@@ -86,7 +87,6 @@ const VenueMap = {
         $('#venue_latitude').val(result.y)
         $('#venue_longitude').val(result.x)
         VenueMap.setMarker(result.y, result.x)
-        VenueMap.messages.filter('.for-success').removeClass('hidden')
       } else {
         VenueMap.messages.filter('.for-failure').removeClass('hidden')
       }
