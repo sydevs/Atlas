@@ -10,7 +10,7 @@ Rails.application.config.content_security_policy do |policy|
   policy.img_src     :self, 'https://storage.googleapis.com/', :https, :data
   policy.object_src  :none
   policy.script_src  :self, :unsafe_eval, :https
-  policy.style_src   :self, :https
+  policy.style_src   :self, :unsafe_inline, :https
   policy.frame_ancestors nil
 
   # Specify URI for violation reports
