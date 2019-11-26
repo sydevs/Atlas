@@ -120,7 +120,11 @@
     opacity: 0.8
 
 .panel__close
-  @include mobile
+  @include tablet-or-smaller
+    display: none
+
+.panel__back
+  @include desktop-or-larger
     display: none
 
 // ===== CONTENT ===== //

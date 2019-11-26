@@ -15,12 +15,18 @@ class ApplicationInstance {
     this.panels.sharing = new SharingPanel(document.getElementById('js-sharing-panel'))
     this.search = new SearchBox(document.getElementById('js-search'))
     this.atlas = new AtlasAPI()
-    this.activePanel = this.panels.listing
+    this.activePanel = { key: 'listing', event: null, panel: this.panels.listing }
+    this.panelHistory = new Map()
     this.loadEvents(initialLocation)
     
     const collapseButtons = document.querySelectorAll('.js-collapse')
     for (let i = 0; i < collapseButtons.length; i++) {
       collapseButtons[i].addEventListener('click', () => this.toggleCollapsed())
+    }
+    
+    const backButtons = document.querySelectorAll('.js-back')
+    for (let i = 0; i < backButtons.length; i++) {
+      backButtons[i].addEventListener('click', () => this.showPreviousPanel())
     }
   }
 
@@ -31,21 +37,67 @@ class ApplicationInstance {
 
   showPanel(panelKey, event = null) {
     if (this.activePanel) {
-      this.activePanel.hide()
+      this.pushPanelHistory(this.activePanel)
+      this.activePanel.panel.hide()
     }
 
     if (panelKey) {
-      this.activePanel = this.panels[panelKey]
+      this.activePanel = {
+        key: panelKey,
+        event: event,
+        panel: this.panels[panelKey],
+      }
+
+      if (panelKey == 'listing') {
+        this.panelHistory.clear()
+      } else {
+        this.panelHistory.delete(panelKey)
+      }
 
       if (event) {
-        this.activePanel.show(event)
-        this.panels.listing.setActiveItem(event.id)
+        this.activePanel.panel.show(event)
+        this.panels.listing.setActiveItem(event ? event.id : null)
         this.map.zoomToVenue(event)
       } else {
-        this.activePanel.show(event)
+        this.activePanel.panel.show(event)
       }
     } else {
       this.activePanel = null
+    }
+  }
+
+  showPreviousPanel() {
+    if (this.activePanel) {
+      this.activePanel.panel.hide()
+      this.activePanel = this.popPanelHistory()
+    }
+
+    if (this.activePanel) {
+      const event = this.activePanel.event
+      if (event) {
+        this.activePanel.panel.show(event)
+        this.panels.listing.setActiveItem(event.id)
+        this.map.zoomToVenue(event)
+      } else {
+        this.activePanel.panel.show()
+        this.map.fitToMarkers()
+      }
+    }
+  }
+
+  pushPanelHistory(panelData) {
+    this.panelHistory.delete(panelData.key)
+    this.panelHistory.set(panelData.key, panelData)
+  }
+
+  popPanelHistory() {
+    if (this.panelHistory.size > 0) {
+      let entry = null
+      for (entry of this.panelHistory);
+      this.panelHistory.delete(entry[0])
+      return entry[1]
+    } else {
+      return null
     }
   }
 
