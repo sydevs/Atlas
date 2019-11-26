@@ -9,12 +9,19 @@ ul
   - translate('mail.welcome.purposes').each do |purpose|
     li = purpose.gsub('%{event}', @event.label)
 
-= render 'mailer/managers/event', event: @event
+- if @event
+  = render 'mailer/managers/event', event: @event
 
-h2 = translate('mail.common.actions')
-p = translate('mail.welcome.call_to_action')
-p.button-group
-  a.button href=@edit_event_link
-    = translate('mail.welcome.update')
+  h2 = translate('mail.common.actions')
+  p = translate('mail.welcome.call_to_action')
+  p.button-group
+    a.button href=@edit_event_link
+      = translate('mail.welcome.update')
+- else
+  h2 = translate('mail.common.actions')
+  p.button-group
+    a.button href=@magic_link
+      = translate('mail.welcome.login')
+
 
 = message translate('mail.common.alert'), :html, :alert

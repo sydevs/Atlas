@@ -32,6 +32,7 @@ en:
         - "Every couple months you may also receive an email asking you to confirm that the event details are still up to date."
       call_to_action: "Please click below if you wish to change these details."
       update: "Update event"
+      login: "Login"
 
     registrations:
       subject: "Event Registrations since %{date}"

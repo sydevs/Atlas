@@ -6,13 +6,17 @@
 <% end %>
 
 <%= message translate('mail.common.about'), :text %>
-
+<% if @event%>
 <%= render 'mailer/managers/event', event: @event %>
 
 <%= translate('mail.common.actions') %>
 <%= '=' * translate('mail.common.actions').length %>
 <%= translate('mail.welcome.call_to_action') %>
 <%= translate('mail.welcome.update') %> - <%= @edit_event_link %>
-
+<% else %>
+<%= translate('mail.common.actions') %>
+<%= '=' * translate('mail.common.actions').length %>
+<%= translate('mail.welcome.login') %> - <%= @login_link %>
+<% end %>
 
 <%= message translate('mail.common.alert'), :text, :alert %>

@@ -5,7 +5,7 @@ class ManagerMailer < ApplicationMailer
 
   def welcome
     setup
-    @edit_event_link = "#{@magic_link}?destination_path=#{url_for([:edit, :cms, @event])}"
+    @edit_event_link = "#{@magic_link}?destination_path=#{url_for([:edit, :cms, @event])}" if @event
     subject = I18n.translate('mail.welcome.subject', event: @event.label)
     mail(to: @manager.email, subject: subject)
   end
