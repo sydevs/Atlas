@@ -112,6 +112,11 @@ class WorldMap {
     })
   }
 
+  lockBounds() {
+    this.leaflet.setMaxBounds(this.leaflet.getBounds())
+    this.leaflet.setMinZoom(this.leaflet.getZoom())
+  }
+
   // ===== INTERACTION ===== //
 
   selectMarker(marker) {

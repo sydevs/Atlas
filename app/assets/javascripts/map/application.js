@@ -25,6 +25,10 @@ class ApplicationInstance {
         this.showPanel('information', initialEvents[0])
       }
     }
+
+    if (map.dataset.restricted == 'true') {
+      this.map.lockBounds()
+    }
     
     const collapseButtons = document.querySelectorAll('.js-collapse')
     for (let i = 0; i < collapseButtons.length; i++) {

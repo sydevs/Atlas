@@ -20,6 +20,7 @@ class Map::ApplicationController < ActionController::Base
       language: params[:language],
       token: ENV['MAPBOX_ACCESSTOKEN'],
       featured: params[:event].present?.to_s,
+      restricted: [LocalArea, Province, Country].include?(scope.class).to_s,
     }
 
     set_jbuilder_params!
