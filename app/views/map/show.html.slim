@@ -69,9 +69,11 @@
         .registration__feedback class='js-form-feedback'
 
     .panel__footer
-      .registration__legal-notice Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum eum ab unde sunt assumenda.
+      .registration__notice
+        = translate('map.registration.notice.description')
+        .registration__notice-link class='js-privacy' = translate('map.registration.notice.link')
       button.panel__action class='js-submit' = translate('map.registration.form.submit')
-      
+
   // SHARING PANEL
   .sharing.panel.panel--thin id='js-sharing-panel'
     a.panel__handle class='js-collapse'
@@ -100,6 +102,19 @@
             - %w[whatsapp messenger telegram].each do |app|
               a class="sharing__#{app}" href='#'
                 i.icon class="icon--#{app}"
+
+  // PRIVACY PANEL
+  .privacy.panel.panel--thin id='js-privacy-panel'
+    a.panel__handle class='js-collapse'
+      i.icon.icon--narrow-down
+    .panel__controls
+      a.panel__back class='js-back'
+        i.icon.icon--back
+      a.panel__close class='js-panel-close'
+        i.icon.icon--close
+
+    .panel__content
+      | Privacy notice panel still needs to be filled in.
 
 // ===== SEARCH BOX ===== //
 .search id='js-search'

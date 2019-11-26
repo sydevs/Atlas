@@ -15,6 +15,9 @@ en:
         name: "Name"
         notice: "Privacy notice"
         submit: "Confirm"
+      notice:
+        description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum eum ab unde sunt assumenda."
+        link: "View privacy notice"
       feedback:
         duplicate: "You have already registered on %{date}. See you soon."
         success: "Success! You will receive a confirmation email shortly."

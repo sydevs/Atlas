@@ -1,4 +1,4 @@
-/* global AtlasAPI, WorldMap, SearchBox, ListingPanel, InformationPanel, RegistrationPanel, SharingPanel */
+/* global AtlasAPI, WorldMap, SearchBox, ListingPanel, InformationPanel, RegistrationPanel, SharingPanel, PrivacyPanel */
 /* exported Applicatio */
 
 class ApplicationInstance {
@@ -12,6 +12,7 @@ class ApplicationInstance {
     this.panels.information = new InformationPanel(document.getElementById('js-information-panel'))
     this.panels.registration = new RegistrationPanel(document.getElementById('js-registration-panel'))
     this.panels.sharing = new SharingPanel(document.getElementById('js-sharing-panel'))
+    this.panels.privacy = new PrivacyPanel(document.getElementById('js-privacy-panel'))
     this.search = new SearchBox(document.getElementById('js-search'))
     this.atlas = new AtlasAPI(map.dataset.api)
     this.activePanel = { key: 'listing', event: null, panel: this.panels.listing }
