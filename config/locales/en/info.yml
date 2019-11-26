@@ -6,4 +6,5 @@ en:
     about:
       description: "Sahaj Atlas is a project"
       view_map: "View Map"
+      view_cms: "Manage Map"
       sign_in: "Log In"

@@ -10,5 +10,9 @@
       p
         a.button href=map_root_path
           = translate('info.about.view_map')
-        a.button href=managers.sign_in_path
-          = translate('info.about.sign_in')
+        - if current_user.present?
+          a.button href=cms_root_path
+            = translate('info.about.view_cms')
+        - else
+          a.button href=managers.sign_in_path
+            = translate('info.about.sign_in')
