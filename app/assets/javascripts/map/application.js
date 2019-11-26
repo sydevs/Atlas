@@ -5,7 +5,6 @@ class ApplicationInstance {
 
   constructor() {
     const map = document.getElementById('map')
-    const initialLocation = JSON.parse(map.dataset.location)
 
     this.map = new WorldMap(map)
     this.panels = {}
@@ -14,10 +13,14 @@ class ApplicationInstance {
     this.panels.registration = new RegistrationPanel(document.getElementById('js-registration-panel'))
     this.panels.sharing = new SharingPanel(document.getElementById('js-sharing-panel'))
     this.search = new SearchBox(document.getElementById('js-search'))
-    this.atlas = new AtlasAPI()
+    this.atlas = new AtlasAPI(map.dataset.api)
     this.activePanel = { key: 'listing', event: null, panel: this.panels.listing }
     this.panelHistory = new Map()
-    this.loadEvents(initialLocation)
+
+    const initialLocation = JSON.parse(map.dataset.location)
+    if (initialLocation) {
+      this.loadEvents(initialLocation)
+    }
     
     const collapseButtons = document.querySelectorAll('.js-collapse')
     for (let i = 0; i < collapseButtons.length; i++) {

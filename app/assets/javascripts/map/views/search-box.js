@@ -16,6 +16,10 @@ class SearchBox {
     })
 
     this.enableGeoSearch = true
+
+    if (this.searchInput.value) {
+      this.refreshGeoSearch()
+    }
   }
 
   select(location) {

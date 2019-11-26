@@ -3,7 +3,8 @@
 
 class AtlasAPI {
 
-  constructor() {
+  constructor(api_endpoint) {
+    this.api_endpoint = api_endpoint
     console.log('loading AtlasAPI.js') // eslint-disable-line no-console
   }
 
@@ -12,7 +13,7 @@ class AtlasAPI {
       return encodeURIComponent(key) + '=' + encodeURIComponent(parameters[key])
     }).join('&')
 
-    Util.getURL(`/api/events.json?${parameters}`, xhttp => {
+    Util.getURL(`${this.api_endpoint}?${parameters}`, xhttp => {
       AtlasAPI.events = JSON.parse(xhttp.response)
       callback(AtlasAPI.events)
     })

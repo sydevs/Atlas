@@ -21,7 +21,21 @@ class API::ApplicationController < ActionController::Base
 
     def scope
       @scope ||= begin
-        scope = @model.respond_to?(:published) ? @model.published : @model
+        model_key = @model.model_name.route_key
+
+        if params[:country_id]
+          scope = Country.find(params[:country_id]).send(model_key)
+        elsif params[:province_id]
+          scope = Province.find(params[:province_id]).send(model_key)
+        elsif params[:local_area_id]
+          scope = LocalArea.find(params[:local_area_id]).send(model_key)
+        elsif params[:venue_id]
+          scope = Venue.find(params[:venue_id]).send(model_key)
+        else
+          scope = @model
+        end
+
+        scope = scope.respond_to?(:published) ? scope.published : scope
         associations = @model.reflect_on_all_associations
         @include.each do |association|
           scope = scope.includes(association) if associations.include?(association)

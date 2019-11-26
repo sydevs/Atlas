@@ -80,5 +80,9 @@ Rails.application.routes.draw do
     resources :venues, only: %i[index show] do
       resources :events, only: %i[index]
     end
+
+    resources :local_areas, :provinces, :countries, only: %i[] do
+      resources :events, only: %i[index]
+    end
   end
 end

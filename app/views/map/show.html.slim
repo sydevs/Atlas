@@ -1,6 +1,6 @@
 
 // The main map element
-#map data-token=ENV['MAPBOX_ACCESSTOKEN'] data-location=@location.to_json
+#map data-token=ENV['MAPBOX_ACCESSTOKEN'] data-api=@api_endpoint data-location=@location.to_json
 
 // ===== MAP PANELS ===== //
 // All the panels which overlaid onto the map
@@ -103,7 +103,7 @@
 
 // ===== SEARCH BOX ===== //
 .search id='js-search'
-  input.search__input class='js-search-input' type='text' placeholder=translate('map.listing.search')
+  input.search__input class='js-search-input' type='text' placeholder=translate('map.listing.search') value=@query
   .search__icon
     i.icon.icon--search
   a.search__collapse class='js-collapse'
