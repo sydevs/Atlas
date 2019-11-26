@@ -1,4 +1,5 @@
 json.url api_venue_url(venue, format: :json)
+json.map_url map_root_url(venue: venue.id)
 json.extract! venue, :id, :label, :latitude, :longitude
 json.address_text venue.full_address
 json.address do

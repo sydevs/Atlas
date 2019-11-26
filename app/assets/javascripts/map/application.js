@@ -20,6 +20,10 @@ class ApplicationInstance {
     const initialEvents = JSON.parse(map.dataset.events)
     if (initialEvents) {
       this.setEvents(initialEvents)
+
+      if (map.dataset.featured == 'true') {
+        this.showPanel('information', initialEvents[0])
+      }
     }
     
     const collapseButtons = document.querySelectorAll('.js-collapse')

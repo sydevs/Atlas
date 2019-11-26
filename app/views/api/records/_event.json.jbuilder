@@ -1,4 +1,5 @@
 json.url api_event_url(event, format: :json)
+json.map_url map_root_url(event: event.id)
 json.extract! event, :id, :label, :description, :languages
 if @include&.include?(:venue) || @include&.include?(:venues)
   json.extract! event, :room

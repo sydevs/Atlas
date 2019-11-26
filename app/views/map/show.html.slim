@@ -103,7 +103,7 @@
 
 // ===== SEARCH BOX ===== //
 .search id='js-search'
-  input.search__input class='js-search-input' type='text' placeholder=translate('map.listing.search') value=@query
+  input.search__input class='js-search-input' type='text' placeholder=(@venue&.full_address || @query || translate('map.listing.search'))
   .search__icon
     i.icon.icon--search
   a.search__collapse class='js-collapse'

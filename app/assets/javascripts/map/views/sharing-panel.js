@@ -12,6 +12,7 @@ class SharingPanel {
 
   show(event) {
     this.event = event
+    this.linkInput.value = event.map_url
     this.container.classList.add('panel--active')
     this.container.classList.toggle('sharing--confirmation', event.registered || false)
   }

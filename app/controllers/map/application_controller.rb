@@ -7,11 +7,19 @@ class Map::ApplicationController < ActionController::Base
   def show
     I18n.locale = params[:locale]
 
-    @query = params[:q]
+    if params[:venue]
+      @venue = Venue.joins(:events).find(params[:venue])
+    elsif params[:event]
+      @venue = Event.joins(:venue).find(params[:event]).venue
+    else
+      @query = params[:q]
+    end
+
     @map_config = {
       api: api_endpoint,
       language: params[:language],
-      token: ENV['MAPBOX_ACCESSTOKEN']
+      token: ENV['MAPBOX_ACCESSTOKEN'],
+      featured: params[:event].present?.to_s,
     }
 
     set_jbuilder_params!
@@ -21,9 +29,7 @@ class Map::ApplicationController < ActionController::Base
   private
 
     def set_jbuilder_params!
-      if params[:event]
-        @records = [Event.find(params[:event])]
-      elsif scope
+      if scope
         @records = scope.events.published
       else
         @records = Event.joins(:venue).within(50, origin: geocoded_coordinates)
@@ -36,7 +42,9 @@ class Map::ApplicationController < ActionController::Base
       @scope ||= begin
         scope = nil
 
-        if params[:area]
+        if params[:venue] || params[:event]
+          scope = @venue
+        elsif params[:area]
           scope = LocalArea.find_by_identifier(params[:area])
         elsif params[:province]
           scope = Province.find_by_province_code(params[:province])
