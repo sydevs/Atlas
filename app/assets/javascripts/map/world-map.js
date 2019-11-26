@@ -6,8 +6,6 @@ class WorldMap {
   constructor(element) {
     this.leaflet = L.map(element, { zoomControl: false })
     this.markers = {}
-    this.markersGroup = L.featureGroup().addTo(this.leaflet)
-    this.clusterLayer = L.markerClusterGroup({ spiderfyOnMaxZoom: false })
 
     this.panels = document.getElementById('js-panels')
     this.searchBox = document.getElementById('js-search')
@@ -32,10 +30,13 @@ class WorldMap {
       zoomOutTitle: 'Zoom out',
     }).addTo(this.leaflet)
 
+    this.markersGroup = L.featureGroup().addTo(this.leaflet)
+    /*this.markersGroup = L.markerClusterGroup({
+      spiderfyOnMaxZoom: false,
+      showCoverageOnHover: false,
+      singleMarkerMode: true,
+    }).addTo(this.leaflet)*/
     this.markersGroup.on('click', event => this.selectMarker(event.layer))
-
-    this.clusterLayer.addLayers(this.markersGroup)
-    this.clusterLayer.addTo(this.leaflet)
 
     this.leaflet.on('resize', () => this.setRefreshHidden(false))
     this.leaflet.on('zoomstart', () => this.setRefreshHidden(false))
