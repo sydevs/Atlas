@@ -17,9 +17,9 @@ class ApplicationInstance {
     this.activePanel = { key: 'listing', event: null, panel: this.panels.listing }
     this.panelHistory = new Map()
 
-    const initialLocation = JSON.parse(map.dataset.location)
-    if (initialLocation) {
-      this.loadEvents(initialLocation)
+    const initialEvents = JSON.parse(map.dataset.events)
+    if (initialEvents) {
+      this.setEvents(initialEvents)
     }
     
     const collapseButtons = document.querySelectorAll('.js-collapse')
@@ -106,11 +106,13 @@ class ApplicationInstance {
 
   loadEvents(query) {
     this.showPanel('listing')
-    this.atlas.query(query, events => {
-      this.map.setEventMarkers(events)
-      this.panels.listing.setEvents(events)
-      this.toggleCollapsed(false)
-    })
+    this.atlas.query(query, events => this.setEvents(events))
+  }
+  
+  setEvents(events) {
+    this.map.setEventMarkers(events)
+    this.panels.listing.setEvents(events)
+    this.toggleCollapsed(false)
   }
 
 }

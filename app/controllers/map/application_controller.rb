@@ -5,35 +5,48 @@ class Map::ApplicationController < ActionController::Base
   before_action :set_cors!
 
   def show
-    @api_endpoint = api_endpoint
-    @preferred_language = params[:language]
     I18n.locale = params[:locale]
 
-    if params[:event]
-      event = Event.find(params[:event])
-      @location = { latitude: event.latitude, longitude: event.longitude }
-    elsif params[:q]
-      @query = params[:q]
-    else
-      @location = geocoded_location
-    end
+    @query = params[:q]
+    @map_config = {
+      api: api_endpoint,
+      language: params[:language],
+      token: ENV['MAPBOX_ACCESSTOKEN']
+    }
 
+    set_jbuilder_params!
     render 'map/show'
   end
 
   private
 
-    def api_endpoint
-      scope = nil
-
-      if params[:area]
-        scope = LocalArea.find_by_identifier(params[:area])
-      elsif params[:province]
-        scope = Province.find_by_province_code(params[:province])
-      elsif params[:country]
-        scope = Country.find_by_country_code(params[:country])
+    def set_jbuilder_params!
+      if params[:event]
+        @records = [Event.find(params[:event])]
+      elsif scope
+        @records = scope.events.published
+      else
+        @records = Event.joins(:venue).within(50, origin: geocoded_coordinates)
       end
 
+      @model = Event
+    end
+
+    def scope
+      @scope ||= begin
+        scope = nil
+
+        if params[:area]
+          scope = LocalArea.find_by_identifier(params[:area])
+        elsif params[:province]
+          scope = Province.find_by_province_code(params[:province])
+        elsif params[:country]
+          scope = Country.find_by_country_code(params[:country])
+        end
+      end
+    end
+
+    def api_endpoint
       if scope
         url_for([:api, scope, :events, format: :json])
       else
@@ -41,11 +54,11 @@ class Map::ApplicationController < ActionController::Base
       end
     end
 
-    def geocoded_location
+    def geocoded_coordinates
       location = IpGeocoder.geocode(request.remote_ip)
-      return { latitude: location.lat, longitude: location.lng } if location.success
+      return [ location.lat, location.lng ] if location.success
 
-      { latitude: 51.505, longitude: -0.09 } # Default to london for now
+      [ 51.505, -0.09 ] # Default to london for now
     end
 
     def set_cors!

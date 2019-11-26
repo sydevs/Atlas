@@ -34,11 +34,6 @@ class WorldMap {
 
     this.markersGroup.on('click', event => this.selectMarker(event.layer))
 
-    const initialLocation = JSON.parse(element.dataset.location)
-    if (initialLocation) {
-      this.leaflet.setView([initialLocation.latitude, initialLocation.longitude], 11)
-    }
-    
     this.clusterLayer.addLayers(this.markersGroup)
     this.clusterLayer.addTo(this.leaflet)
 

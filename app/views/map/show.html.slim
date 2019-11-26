@@ -1,6 +1,6 @@
 
 // The main map element
-#map data-token=ENV['MAPBOX_ACCESSTOKEN'] data-api=@api_endpoint data-location=@location.to_json
+#map data=@map_config data-events=render(template: 'api/views/index.json')
 
 // ===== MAP PANELS ===== //
 // All the panels which overlaid onto the map
