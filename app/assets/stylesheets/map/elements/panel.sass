@@ -117,8 +117,11 @@
 // ===== CONTROLS ===== //
 .panel__controls
   position: absolute
-  top: 26px
+  top: 42px
   right: 32px
+
+  @include tablet-or-larger
+    top: 26px
 
 .panel__controls > a
   margin-left: 8px

@@ -98,12 +98,12 @@
           .sharing__link
             i.icon.icon--link class='js-copy-link'
             input class='js-link' type='text' value=map_root_url
-          .sharing__social-icons
-            a.sharing__mail href='mailto:'
-              i.icon.icon--mail
-            - %w[whatsapp messenger telegram].each do |app|
-              a class="sharing__#{app}" href='#'
-                i.icon class="icon--#{app}"
+          .sharing__social-icons class='js-desktop-share'
+            - Map::ApplicationHelper::SHARING_URLS.each do |key, url|
+              a class="sharing__#{key} js-sharing-button" data-template=url
+                i.icon class="icon--#{key}"
+          a.sharing__mobile-button class='js-mobile-share'
+            i.icon.icon--mobile-share
 
   // PRIVACY PANEL
   .privacy.panel.panel--thin id='js-privacy-panel'
