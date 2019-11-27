@@ -40,6 +40,20 @@
     left: $control-offset-x
     max-height: calc(100vh - #{$control-offset-y * 2})
 
+.panels__overlay
+  position: absolute
+  top: 0
+  left: 0
+  right: 0
+  bottom: 0
+  cursor: pointer
+  display: none
+  z-index: 2
+
+  @include mobile
+    @include collapsed
+      display: block
+
 .panel
   position: relative
   float: left

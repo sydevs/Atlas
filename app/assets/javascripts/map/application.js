@@ -1,4 +1,4 @@
-/* global AtlasAPI, WorldMap, SearchBox, ListingPanel, InformationPanel, RegistrationPanel, SharingPanel, PrivacyPanel */
+/* global AtlasAPI, WorldMap, SearchBox, ListingPanel, InformationPanel, RegistrationPanel, SharingPanel, PrivacyPanel, Hammer */
 /* exported Applicatio */
 
 class ApplicationInstance {
@@ -40,6 +40,20 @@ class ApplicationInstance {
     for (let i = 0; i < backButtons.length; i++) {
       backButtons[i].addEventListener('click', () => this.showPreviousPanel())
     }
+
+    this.hammertime = new Hammer(document.getElementById('js-panels'))
+    this.hammertime.get('tap').set({ enable: false })
+    this.hammertime.get('doubletap').set({ enable: false })
+    this.hammertime.get('press').set({ enable: false })
+    this.hammertime.get('pan').set({ enable: false })
+    this.hammertime.get('swipe').set({ direction: Hammer.DIRECTION_VERTICAL })
+
+    this.hammertime.on('swipedown', _event => { if (this.isMobile()) this.toggleCollapsed(true) })
+    this.hammertime.on('swipeup', _event => { if (this.isMobile()) this.toggleCollapsed(false) })
+  }
+
+  isMobile() {
+    return window.innerWidth < 768
   }
 
   toggleCollapsed(collapsed) {
