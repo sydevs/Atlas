@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191107093624) do
+ActiveRecord::Schema.define(version: 2019_11_28_134924) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -91,7 +91,7 @@ ActiveRecord::Schema.define(version: 20191107093624) do
     t.string "province_code", limit: 3
   end
 
-  create_table "managed_records", id: false, force: :cascade do |t|
+  create_table "managed_records", force: :cascade do |t|
     t.integer "manager_id"
     t.integer "record_id"
     t.string "record_type"

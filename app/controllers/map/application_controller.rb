@@ -31,9 +31,9 @@ class Map::ApplicationController < ActionController::Base
 
     def set_jbuilder_params!
       if scope
-        @records = scope.events.published
+        @records = scope.events.includes(:pictures).published
       else
-        @records = Event.joins(:venue).within(50, origin: geocoded_coordinates)
+        @records = Event.joins(:venue).includes(:venue, :pictures).within(50, origin: geocoded_coordinates)
       end
 
       @model = Event
@@ -57,9 +57,9 @@ class Map::ApplicationController < ActionController::Base
 
     def api_endpoint
       if scope
-        url_for([:api, scope, :events, format: :json])
+        url_for([:api, scope, :events, format: :json, include: 'pictures'])
       else
-        api_events_url(format: :json)
+        api_events_url(format: :json, include: %i[pictures venues].join(','))
       end
     end
 

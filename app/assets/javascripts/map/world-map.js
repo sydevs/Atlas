@@ -207,11 +207,18 @@ class WorldMap {
       east: bounds.getEast() - (boundsDimensions.longitudes * percentPadding.right),
     }
 
+    const center = L.latLngBounds([
+      [result.north, result.west],
+      [result.south, result.east]
+    ]).getCenter()
+
     return {
       north: result.north.toFixed(6),
       south: result.south.toFixed(6),
       west: result.west.toFixed(6),
       east: result.east.toFixed(6),
+      latitude: center.lat,
+      longitude: center.lng,
     }
   }
 

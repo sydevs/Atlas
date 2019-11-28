@@ -36,10 +36,9 @@ class API::ApplicationController < ActionController::Base
         end
 
         scope = scope.respond_to?(:published) ? scope.published : scope
-        associations = @model.reflect_on_all_associations
-        @include.each do |association|
-          scope = scope.includes(association) if associations.include?(association)
-        end
+        associations = @model.reflect_on_all_associations.map(&:name).map(&:to_sym)
+        scope.includes(*(associations & @include))
+
         scope
       end
     end
