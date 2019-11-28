@@ -9,6 +9,7 @@ class SharingPanel {
     this.sharingButtons = element.querySelectorAll('.js-sharing-button')
     element.querySelector('.js-panel-close').addEventListener('click', () => Application.showPanel('listing'))
     element.querySelector('.js-copy-link').addEventListener('click', () => this.copyLink())
+    element.querySelector('.js-link').addEventListener('focus', () => this.copyLink())
 
     if (navigator.share) {
       element.querySelector('.js-desktop-share').remove()

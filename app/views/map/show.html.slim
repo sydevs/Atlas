@@ -101,9 +101,10 @@
           .sharing__link
             i.icon.icon--link class='js-copy-link'
             input class='js-link' type='text' value=map_root_url
+            .sharing__link__confirmation = translate('map.sharing.copied')
           .sharing__social-icons class='js-desktop-share'
             - Map::ApplicationHelper::SHARING_URLS.each do |key, url|
-              a class="sharing__#{key} js-sharing-button" data-template=url
+              a class="sharing__#{key} js-sharing-button" target='_blank' data-template=url
                 i.icon class="icon--#{key}"
           a.sharing__mobile-button class='js-mobile-share'
             i.icon.icon--mobile-share

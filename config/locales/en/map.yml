@@ -28,6 +28,7 @@ en:
         error: "Error! Please try again later."
     sharing:
       invite: "Invite your friends"
+      copied: "Copied!"
       confirmation:
         title: "Thank You for Registering"
         subtitle: "you will receive an email shortly"
