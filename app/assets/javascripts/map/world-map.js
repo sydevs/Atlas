@@ -1,4 +1,4 @@
-/* global L, Application */
+/* global L, Application, Util */
 /* exported WorldMap */
 
 class WorldMap {
@@ -15,6 +15,7 @@ class WorldMap {
 
     this.zoomPadding = 40
 
+    //L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/streets-v11/tiles/{z}/{x}/{y}?access_token={accessToken}', {
     L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
       attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
       maxZoom: 18,
@@ -38,9 +39,18 @@ class WorldMap {
     }).addTo(this.leaflet)*/
     this.markersGroup.on('click', event => this.selectMarker(event.layer))
 
-    this.leaflet.on('resize', () => this.setRefreshHidden(false))
     this.leaflet.on('zoomstart', () => this.setRefreshHidden(false))
     this.leaflet.on('movestart', () => this.setRefreshHidden(false))
+    this.leaflet.on('resize', () => {
+      this.setRefreshHidden(false)
+      this.invalidateViewportDimensions()
+      this.fitToMarkers()
+    })
+
+    this.invalidateViewportDimensions()
+
+    // Debugging
+    this.updateViewportBox()
   }
 
   // ===== MARKER MANIUPLATION ===== //
@@ -79,10 +89,9 @@ class WorldMap {
 
   fitToMarkers() {
     const bounds = this.markersGroup.getBounds()
-    const padding = this.computeViewportPadding()
     this.leaflet.fitBounds(bounds, {
-      paddingTopLeft: [padding.left, padding.top],
-      paddingBottomRight: [padding.right, padding.bottom],
+      paddingTopLeft: [this.viewport.left, this.viewport.top],
+      paddingBottomRight: [this.viewport.right, this.viewport.bottom],
       maxZoom: 14,
     })
   }
@@ -91,24 +100,22 @@ class WorldMap {
     if (events.length == 0) return
 
     const bounds = L.latLngBounds()
-    const padding = this.computeViewportPadding()
 
     events.forEach(event => {
       bounds.extend(L.latLng(event.latitude, event.longitude))
     })
 
     this.leaflet.fitBounds(bounds, {
-      paddingTopLeft: [padding.left, padding.top],
-      paddingBottomRight: [padding.right, padding.bottom],
+      paddingTopLeft: [this.viewport.left, this.viewport.top],
+      paddingBottomRight: [this.viewport.right, this.viewport.bottom],
       maxZoom: 14,
     })
   }
 
   zoomToVenue(venue) {
-    const padding = this.computeViewportPadding()
     this.leaflet.fitBounds(L.latLngBounds([[venue.latitude, venue.longitude], [venue.latitude, venue.longitude]]), {
-      paddingTopLeft: [padding.left, padding.top],
-      paddingBottomRight: [padding.right, padding.bottom],
+      paddingTopLeft: [this.viewport.left, this.viewport.top],
+      paddingBottomRight: [this.viewport.right, this.viewport.bottom],
       maxZoom: 15,
     })
   }
@@ -123,11 +130,12 @@ class WorldMap {
   selectMarker(marker) {
     const venue = marker.options.venue
     this.zoomToVenue(venue)
+    Application.toggleCollapsed(false)
     Application.panels.listing.filterByVenue(venue)
   }
 
   refresh() {
-    const bounds = this.computeUseableLatLngViewport()
+    const bounds = this.getViewportBounds()
     Application.loadEvents(bounds)
     this.setRefreshHidden(true)
   }
@@ -139,38 +147,45 @@ class WorldMap {
 
   // ===== UTILITY ===== //
 
-  computeViewportPadding(mode = null) {
-    let result = {
-      top: this.refreshButton.getBoundingClientRect().bottom + this.zoomPadding,
-      bottom: this.zoomPadding,
-      left: this.panels.getBoundingClientRect().right + this.zoomPadding,
-      right: this.zoomPadding,
-    }
+  invalidateViewportDimensions() {
+    let result
 
-    if (window.innerWidth < 768) {
-      result.left = this.zoomPadding
-      result.top = this.searchBox.getBoundingClientRect().bottom + this.zoomPadding
-      //result.bottom = this.panels.getBoundingClientRect().top + this.zoomPadding
-    }
-
-    if (mode == 'percent') {
-      // As a percentage of the map's viewport size
-      const size = this.leaflet.getSize()
+    if (Util.isMobile()) {
       result = {
-        top: result.top / size.y,
-        bottom: result.bottom / size.y,
-        left: result.left / size.x,
-        right: result.right / size.x,
+        top: (Util.isCollapsed() ? 100 : 0) + this.zoomPadding,
+        bottom: this.zoomPadding / 2,
+        left: this.zoomPadding / 2,
+        right: this.zoomPadding / 2,
+      }
+    } else {
+      result = {
+        top: this.refreshButton.getBoundingClientRect().bottom,
+        bottom: this.zoomPadding,
+        left: this.panels.getBoundingClientRect().right + this.zoomPadding,
+        right: this.zoomPadding,
       }
     }
 
+    result.width = Math.abs(result.left - result.right)
+    result.height = Math.abs(result.top - result.bottom)
+    result.x = result.left + result.width / 2
+    result.y = result.right + result.height / 2
+    this.viewport = result
+
+    this.updateViewportBox()
     return result
   }
 
-  computeUseableLatLngViewport() {
+  getViewportBounds() {
     // We need to compute the latlng bounds of the map, but only the parts which are not covered by controls.
-    // This needs to roughly mirror the zoomToEvents method, to avoid unnecessary zooming.
-    const percentPadding = this.computeViewportPadding('percent')
+    const size = this.leaflet.getSize()
+    const percentPadding = {
+      top: this.viewport.top / size.y,
+      bottom: this.viewport.bottom / size.y,
+      left: this.viewport.left / size.x,
+      right: this.viewport.right / size.x,
+    }
+
     const bounds = this.leaflet.getBounds()
     const boundsDimensions = {
       latitudes: Math.abs(bounds.getNorth() - bounds.getSouth()),
@@ -180,8 +195,8 @@ class WorldMap {
     const result = {
       north: bounds.getNorth() - (boundsDimensions.latitudes * percentPadding.top),
       south: bounds.getSouth() + (boundsDimensions.latitudes * percentPadding.bottom),
-      west: bounds.getWest() - (boundsDimensions.longitudes * percentPadding.left),
-      east: bounds.getEast() + (boundsDimensions.longitudes * percentPadding.right),
+      west: bounds.getWest() + (boundsDimensions.longitudes * percentPadding.left),
+      east: bounds.getEast() - (boundsDimensions.longitudes * percentPadding.right),
     }
 
     return {
@@ -190,6 +205,13 @@ class WorldMap {
       west: result.west.toFixed(6),
       east: result.east.toFixed(6),
     }
+  }
+
+  // ===== DEBUGGING ===== //
+
+  updateViewportBox() {
+    console.log('update', this.viewportBox)
+    document.getElementById('js-debug-viewport').style = `top: ${this.viewport.top}; bottom: ${this.viewport.bottom}; left: ${this.viewport.left}; right: ${this.viewport.right}`
   }
 
 }

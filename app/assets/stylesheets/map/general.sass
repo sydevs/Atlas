@@ -11,18 +11,22 @@ body
 
 *:focus
   outline: 1px dashed $color-blue
-  //outline: none
-  //background: beige
 
 #map
   height: calc(100vh - #{$panel-mobile-height})
-  position: static !important
+  position: relative !important
 
-  @include collapsed
-    height: calc(100vh - #{$panel-mobile-collapsed-height})
+  @include mobile
+    @include collapsed
+      height: calc(100vh - #{$panel-mobile-collapsed-height})
 
   @include tablet-or-larger
     height: 100vh
+
+#js-debug-viewport
+  border: 2px dashed $color-orange
+  position: absolute
+  z-index: $z-control
 
 .leaflet-control-container
   @include mobile

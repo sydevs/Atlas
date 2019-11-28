@@ -2,6 +2,14 @@
 
 const Util = {
 
+  isMobile() {
+    return window.innerWidth < 768
+  },
+
+  isCollapsed() {
+    return document.body.classList.contains('collapsed')
+  },
+
   getURL(url, callback) {
     var xhttp
     xhttp = new XMLHttpRequest()

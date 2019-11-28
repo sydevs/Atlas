@@ -1,4 +1,5 @@
-/* global AtlasAPI, WorldMap, SearchBox, ListingPanel, InformationPanel, RegistrationPanel, SharingPanel, PrivacyPanel, Hammer */
+/* global AtlasAPI, WorldMap, Hammer, Util,
+          SearchBox, ListingPanel, InformationPanel, RegistrationPanel, SharingPanel, PrivacyPanel */
 /* exported Applicatio */
 
 class ApplicationInstance {
@@ -48,17 +49,14 @@ class ApplicationInstance {
     this.hammertime.get('pan').set({ enable: false })
     this.hammertime.get('swipe').set({ direction: Hammer.DIRECTION_VERTICAL })
 
-    this.hammertime.on('swipedown', _event => { if (this.isMobile()) this.toggleCollapsed(true) })
-    this.hammertime.on('swipeup', _event => { if (this.isMobile()) this.toggleCollapsed(false) })
-  }
-
-  isMobile() {
-    return window.innerWidth < 768
+    this.hammertime.on('swipedown', _event => { if (Util.isMobile()) this.toggleCollapsed(true) })
+    this.hammertime.on('swipeup', _event => { if (Util.isMobile()) this.toggleCollapsed(false) })
   }
 
   toggleCollapsed(collapsed) {
     document.body.classList.toggle('collapsed', collapsed)
     this.map.leaflet.invalidateSize()
+    this.map.invalidateViewportDimensions()
   }
 
   showPanel(panelKey, event = null) {
@@ -133,17 +131,21 @@ class ApplicationInstance {
       if (response.status == 'success') {
         this.setEvents(response.results)
       } else {
-        this.map.setEventMarkers([])
         this.panels.listing.showEmptyResults(response.alternative)
         this.toggleCollapsed(false)
+        this.map.setEventMarkers([])
       }
     })
   }
   
   setEvents(events) {
-    this.map.setEventMarkers(events)
     this.panels.listing.setEvents(events)
-    this.toggleCollapsed(false)
+
+    if (!Util.isMobile()) {
+      this.toggleCollapsed(false)
+    }
+
+    this.map.setEventMarkers(events)
   }
 
 }
