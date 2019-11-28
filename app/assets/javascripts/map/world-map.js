@@ -23,14 +23,6 @@ class WorldMap {
       accessToken: element.dataset.token,
     }).addTo(this.leaflet)
 
-    L.control.zoom({
-      position: 'topright',
-      zoomInText: '',
-      zoomOutText: '',
-      zoomInTitle: 'Zoom in',
-      zoomOutTitle: 'Zoom out',
-    }).addTo(this.leaflet)
-
     this.markersGroup = L.featureGroup().addTo(this.leaflet)
     /*this.markersGroup = L.markerClusterGroup({
       spiderfyOnMaxZoom: false,
@@ -38,6 +30,9 @@ class WorldMap {
       singleMarkerMode: true,
     }).addTo(this.leaflet)*/
     this.markersGroup.on('click', event => this.selectMarker(event.layer))
+
+    document.getElementById('js-zoom-in').addEventListener('click', _event => this.zoom(+1))
+    document.getElementById('js-zoom-out').addEventListener('click', _event => this.zoom(-1))
 
     this.leaflet.on('zoomstart', () => this.setRefreshHidden(false))
     this.leaflet.on('movestart', () => this.setRefreshHidden(false))
@@ -86,6 +81,18 @@ class WorldMap {
   }
 
   // ===== ZOOM MANIPULATION ===== //
+
+  zoom(adjustment) {
+    const minZoom = this.leaflet.getMinZoom()
+    const maxZoom = this.leaflet.getMaxZoom()
+    const currentZoom = this.leaflet.getZoom()
+    const newZoom = Math.max(minZoom, Math.min(currentZoom + adjustment, maxZoom))
+
+    if (newZoom != currentZoom) {
+      const center = L.point(this.viewport.x, this.viewport.y)
+      this.leaflet.setZoomAround(center, newZoom)
+    }
+  }
 
   fitToMarkers() {
     const bounds = this.markersGroup.getBounds()
@@ -167,10 +174,10 @@ class WorldMap {
       }
     }
 
-    result.width = Math.abs(result.left - result.right)
-    result.height = Math.abs(result.top - result.bottom)
+    result.width = this.leaflet._container.clientWidth - result.left - result.right
+    result.height = this.leaflet._container.clientHeight - result.top - result.bottom
     result.x = result.left + result.width / 2
-    result.y = result.right + result.height / 2
+    result.y = result.top + result.height / 2
     this.viewport = result
 
     this.updateViewportBox()
@@ -212,6 +219,7 @@ class WorldMap {
 
   updateViewportBox() {
     document.getElementById('js-debug-viewport').style = `top: ${this.viewport.top}; bottom: ${this.viewport.bottom}; left: ${this.viewport.left}; right: ${this.viewport.right}`
+    document.getElementById('js-debug-viewport-center').style = `top: ${this.viewport.y}; left: ${this.viewport.x}`
   }
 
 }

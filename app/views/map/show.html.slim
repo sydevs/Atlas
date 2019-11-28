@@ -2,6 +2,7 @@
 // The main map element
 #map data=@map_config data-events=render(template: 'api/views/index.json')
   #js-debug-viewport
+  #js-debug-viewport-center
 
 // ===== MAP PANELS ===== //
 // All the panels which overlaid onto the map
@@ -138,6 +139,13 @@
 .refresh
   button.refresh__button id='js-refresh' tabindex='1'
     = translate('map.search_area')
+
+// ===== ZOOM BUTTONS ===== //
+.zoom
+  .zoom__in id='js-zoom-in' tabindex='1'
+    .icon.icon--plus
+  .zoom__out id='js-zoom-out' tabindex='1'
+    .icon.icon--minus
 
 / ===== TEMPLATES ===== /
 template id='js-item-template'
