@@ -56,10 +56,14 @@ class Map::ApplicationController < ActionController::Base
     end
 
     def api_endpoint
+      includes = %i[pictures venues].join(',')
+
       if scope
-        url_for([:api, scope, :events, format: :json, include: 'pictures'])
+        # url_for([:api, scope, :events, format: :json, include: includes])
+        url_for([:api, scope, :events, format: :json])
       else
-        api_events_url(format: :json, include: %i[pictures venues].join(','))
+        # api_events_url(format: :json, include: includes)
+        api_events_url(format: :json)
       end
     end
 
