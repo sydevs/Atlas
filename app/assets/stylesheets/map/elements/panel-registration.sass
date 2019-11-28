@@ -45,13 +45,17 @@
   letter-spacing: 0.36px
 
 .registration__notice-link
-  margin-top: 4px
+  display: inline-block
+  margin-top: 8px
+  margin-bottom: 8px
   opacity: 1
-  transition: opacity 0.2s ease
+  transition: all 0.2s ease
   cursor: pointer
+  border-bottom: 1px dashed $color-grey-normal
 
   &:hover
-    opacity: 0.8
+    color: $color-grey-dark
+    border-bottom: 1px solid $color-grey-dark
 
 .registration__feedback
   font-size: 14px
