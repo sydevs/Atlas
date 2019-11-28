@@ -18,7 +18,7 @@ class ApplicationInstance {
     this.activePanel = { key: 'listing', event: null, panel: this.panels.listing }
     this.panelHistory = new Map()
 
-    const initialEvents = JSON.parse(map.dataset.events)
+    const initialEvents = JSON.parse(map.dataset.events).results
     if (initialEvents) {
       this.setEvents(initialEvents)
 
@@ -129,7 +129,15 @@ class ApplicationInstance {
 
   loadEvents(query) {
     this.showPanel('listing')
-    this.atlas.query(query, events => this.setEvents(events))
+    this.atlas.query(query, response => {
+      if (response.status == 'success') {
+        this.setEvents(response.results)
+      } else {
+        this.map.setEventMarkers([])
+        this.panels.listing.showEmptyResults(response.alternative)
+        this.toggleCollapsed(false)
+      }
+    })
   }
   
   setEvents(events) {

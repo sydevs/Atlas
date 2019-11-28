@@ -9,32 +9,34 @@
 
   // LISTING PANEL
   .listing.panel.panel--active id='js-listing-panel'
-    a.panel__handle class='js-collapse'
+    a.panel__handle class='js-collapse' tabindex='0'
       i.icon.icon--narrow-down
 
     .panel__content
       .listing__filter
-        a.listing__filter__close class='js-reset' Clear
-        .listing__filter__prefix Showing events at
+        a.listing__filter__close class='js-reset' tabindex='0'
+          = translate('map.listing.filter.clear')
+        .listing__filter__prefix
+          = translate('map.listing.filter.prefix')
         .listing__filter__title class='js-filter-text'
 
       .listing__no-result
-        .listing__no-result__message There are no classes in your area, the closest free meditation class is in 
+        .listing__no-result__message = translate('map.listing.no_results')
         .listing__no-result__link
-          a City name
+          a class='js-no-result-title' tabindex='0'
 
       .listing__results id='js-list-results'
 
   // INFORMATION PANEL
   .information.panel.panel--thin id='js-information-panel'
-    a.panel__handle class='js-collapse'
+    a.panel__handle class='js-collapse' tabindex='0'
       i.icon.icon--narrow-down
     .panel__controls
-      a.panel__share class='js-panel-share'
+      a.panel__share class='js-panel-share' tabindex='0'
         i.icon.icon--share
-      a.panel__back class='js-back'
+      a.panel__back class='js-back' tabindex='0'
         i.icon.icon--back
-      a.panel__close class='js-panel-close'
+      a.panel__close class='js-panel-close' tabindex='0'
         i.icon.icon--close
     
     .panel__content
@@ -47,14 +49,14 @@
 
   // REGISTRATION PANEL
   .registration.panel.panel--thin id='js-registration-panel'
-    a.panel__handle class='js-collapse'
+    a.panel__handle class='js-collapse' tabindex='0'
       i.icon.icon--narrow-down
     .panel__controls
-      a.panel__info class='js-panel-info'
+      a.panel__info class='js-panel-info' tabindex='0'
         i.icon.icon--info
-      a.panel__back class='js-back'
+      a.panel__back class='js-back' tabindex='0'
         i.icon.icon--back
-      a.panel__close class='js-panel-close'
+      a.panel__close class='js-panel-close' tabindex='0'
         i.icon.icon--close
 
     .panel__content
@@ -78,12 +80,12 @@
 
   // SHARING PANEL
   .sharing.panel.panel--thin id='js-sharing-panel'
-    a.panel__handle class='js-collapse'
+    a.panel__handle class='js-collapse' tabindex='0'
       i.icon.icon--narrow-down
     .panel__controls
-      a.panel__back class='js-back'
+      a.panel__back class='js-back' tabindex='0'
         i.icon.icon--back
-      a.panel__close class='js-panel-close'
+      a.panel__close class='js-panel-close' tabindex='0'
         i.icon.icon--close
 
     .panel__content
@@ -107,12 +109,12 @@
 
   // PRIVACY PANEL
   .privacy.panel.panel--thin id='js-privacy-panel'
-    a.panel__handle class='js-collapse'
+    a.panel__handle class='js-collapse' tabindex='0'
       i.icon.icon--narrow-down
     .panel__controls
-      a.panel__back class='js-back'
+      a.panel__back class='js-back' tabindex='0'
         i.icon.icon--back
-      a.panel__close class='js-panel-close'
+      a.panel__close class='js-panel-close' tabindex='0'
         i.icon.icon--close
 
     .panel__content
@@ -123,7 +125,7 @@
   input.search__input class='js-search-input' type='text' placeholder=(@venue&.full_address || @query || translate('map.listing.search'))
   .search__icon
     i.icon.icon--search
-  a.search__collapse class='js-collapse'
+  a.search__collapse class='js-collapse' tabindex='0'
     i.icon.icon--chevron-down
   ul.search__results class='js-search-results'
 
@@ -139,7 +141,7 @@ template id='js-item-template'
     .item__actions
       button.item__register class='js-register'
         = translate('map.listing.register')
-      a.item__more class='js-more'
+      a.item__more class='js-more' tabindex='0'
         span = translate('map.listing.more_info')
     .item__info
       .item__name data-attribute='name'

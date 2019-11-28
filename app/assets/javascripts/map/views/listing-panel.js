@@ -10,6 +10,8 @@ class ListingPanel {
     this.itemTemplate = document.getElementById('js-item-template')
     this.itemsContainer = document.getElementById('js-list-results')
     this.filterText = element.querySelector('.js-filter-text')
+    this.noResultsAlternativeTitle = element.querySelector('.js-no-result-title')
+    this.noResultsAlternativeTitle.addEventListener('click', () => this.triggerAlternativeQuery())
     element.querySelector('.js-reset').addEventListener('click', () => this.resetFilter(true))
   }
 
@@ -64,6 +66,21 @@ class ListingPanel {
     if (this.activeItem) {
       this.activeItem.setActive(true)
     }
+  }
+
+  showEmptyResults(alternative) {
+    this.clearEvents()
+    this.resetFilter()
+
+    this.alternative = alternative
+    this.container.classList.add('listing--no-result')
+    this.noResultsAlternativeTitle.innerText = alternative.label
+  }
+
+  triggerAlternativeQuery() {
+    const query = this.alternative.query
+    query.label = this.alternative.label
+    Application.search.select(query)
   }
 
 }

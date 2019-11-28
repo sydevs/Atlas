@@ -14,8 +14,8 @@ class AtlasAPI {
     }).join('&')
 
     Util.getURL(`${this.api_endpoint}?${parameters}`, xhttp => {
-      AtlasAPI.events = JSON.parse(xhttp.response)
-      callback(AtlasAPI.events)
+      console.log('[AtlasAPI]', xhttp.response) // eslint-disable-line no-console
+      callback(JSON.parse(xhttp.response))
     })
   }
 
