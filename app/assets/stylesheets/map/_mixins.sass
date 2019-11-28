@@ -9,6 +9,16 @@
     src: font-url('#{$file-path}.eot')
     src: font-url('#{$file-path}.eot?#iefix') format('embedded-opentype'), font-url('#{$file-path}.woff') format('woff'), font-url('#{$file-path}.ttf') format('truetype')
 
+@mixin keyframes($name)
+  @-webkit-keyframes #{$name}
+    @content
+  @-moz-keyframes #{$name}
+    @content
+  @-ms-keyframes #{$name}
+    @content
+  @keyframes #{$name}
+    @content
+
 // ===== FONTS ===== //
 +font-face("raleway", "RalewayExtraLight/RalewayExtraLight", 200)
 +font-face("raleway", "RalewayLight/RalewayLight", 300)

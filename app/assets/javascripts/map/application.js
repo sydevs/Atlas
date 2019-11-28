@@ -54,12 +54,19 @@ class ApplicationInstance {
   }
 
   toggleCollapsed(collapsed) {
-    document.body.classList.toggle('collapsed', collapsed)
+    const isCollapsed = document.body.classList.toggle('collapsed', collapsed)
+
+    if (!isCollapsed) {
+      this.search.setActive(false)
+    }
+
     this.map.leaflet.invalidateSize()
     this.map.invalidateViewportDimensions()
   }
 
   showPanel(panelKey, event = null) {
+    this.search.setActive(false)
+
     if (this.activePanel) {
       this.pushPanelHistory(this.activePanel)
       this.activePanel.panel.hide()
@@ -139,6 +146,7 @@ class ApplicationInstance {
   }
   
   setEvents(events) {
+    this.search.setActive(false)
     this.panels.listing.setEvents(events)
 
     if (!Util.isMobile()) {

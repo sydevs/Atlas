@@ -1,4 +1,5 @@
 @import '../_mixins'
+@import '../icons'
 
 .search
   position: absolute
@@ -39,6 +40,7 @@
 
 // ICONS
 .search__icon,
+.search__spinner,
 .search__collapse
   $margin: 8px
   $size: $header-height - ($margin * 2)
@@ -61,52 +63,56 @@
   @include tablet-or-larger
     display: none
 
+.search__spinner
+  display: none
+  font-size: 24px
+
 .search__collapse
-  //background-color: transparent
-  //transition: background-color 0.2s
+  display: none
   opacity: 1
   transition: opacity 0.2s
   border-radius: 100%
   font-size: 50px
 
-  @include mobile
-    display: none
+  @include tablet-or-larger
+    display: block
 
   &:hover
     opacity: 0.8
-    //background-color: $color-background-hover
 
   @include collapsed
     > .icon::before
       content: icon('chevron-up')
 
-  /*&::after
-    content: ''
-    position: absolute
-    top: 24px
-    right: 31px
-    width: 8px
-    height: 8px
-    
-    transition: transform 0.2s
-    border: solid $color-border
-    border-width: 0 2px 2px 0
-    display: inline-block
-    padding: 3px
-    transform: rotate(45deg)
-    transform-origin: 50% 50%
+// ACTIVE
+.search--active
+  .search__icon
+    display: block !important
 
-    @include collapsed
-      transform: rotate(-135deg)*/
+  .search__collapse
+    display: none !important
+
+// LOADING
+.search--loading
+  .search__icon,
+  .search__collapse
+    display: none !important
+
+  .search__spinner
+    display: block !important
 
 // GEOSEARCH AUTOCOMPLETE RESULTS
 .search__results
+  display: none
   background: white
   list-style: none
   margin: 0
   padding: 0
 
-.search__results > *
+  .search--active &
+    display: block
+
+.search__results > li
   padding: 12px 20px
   font-size: 14px
   line-height: 1.15
@@ -115,6 +121,8 @@
   cursor: pointer
   transition: background-color 0.25s ease
 
-  &:hover
+  &:hover,
+  &.focus
+    outline: none
     background: $color-background
-    color: red
+    color: $color-orange

@@ -8,9 +8,17 @@ class GeoSearchAPI {
   }
 
   query(text, callback) {
-    this.service.search({ query: text }).then((response, status) => {
-      const results = this.parseServiceResponse(response)
-      callback(results)
+    this.latestQuery = text
+    this.waiting = true
+
+    this.service.search({ query: text }).then(response => {
+      if (text == this.latestQuery) {
+        console.log('[GeoSearchAPI]', text, response) // eslint-disable-line no-console
+        this.waiting = false
+        callback(this.parseServiceResponse(response))
+      } else {
+        console.log('[GeoSearchAPI]', 'Ignored expired request:', text) // eslint-disable-line no-console
+      }
     })
   }
 

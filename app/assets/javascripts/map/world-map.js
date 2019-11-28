@@ -129,9 +129,10 @@ class WorldMap {
 
   selectMarker(marker) {
     const venue = marker.options.venue
-    this.zoomToVenue(venue)
+    Application.search.setActive(false)
     Application.toggleCollapsed(false)
     Application.panels.listing.filterByVenue(venue)
+    this.zoomToVenue(venue)
   }
 
   refresh() {
@@ -159,7 +160,7 @@ class WorldMap {
       }
     } else {
       result = {
-        top: this.refreshButton.getBoundingClientRect().bottom,
+        top: this.refreshButton.getBoundingClientRect().bottom + this.zoomPadding,
         bottom: this.zoomPadding,
         left: this.panels.getBoundingClientRect().right + this.zoomPadding,
         right: this.zoomPadding,
@@ -210,7 +211,6 @@ class WorldMap {
   // ===== DEBUGGING ===== //
 
   updateViewportBox() {
-    console.log('update', this.viewportBox)
     document.getElementById('js-debug-viewport').style = `top: ${this.viewport.top}; bottom: ${this.viewport.bottom}; left: ${this.viewport.left}; right: ${this.viewport.right}`
   }
 
