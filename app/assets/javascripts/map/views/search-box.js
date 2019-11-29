@@ -83,7 +83,6 @@ class SearchBox {
   }
 
   handleSearchResultClick(target) {
-    console.log('click', target, target.tagName)
     if (target.tagName == 'LI') {
       this.select(JSON.parse(target.dataset.parameters))
     }
@@ -104,6 +103,8 @@ class SearchBox {
   selectFocusedElement() {
     if (this.focusedItem) {
       this.focusedItem.click()
+    } else {
+      this.searchResults.firstElementChild.click()
     }
   }
 
