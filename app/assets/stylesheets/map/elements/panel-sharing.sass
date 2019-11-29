@@ -19,33 +19,37 @@
 .sharing__confirmation
   flex-grow: 0
   flex-shrink: 1
+  font-size: 16px
 
 .sharing__circle
+  background: image-url('map/circle.svg')
   display: inline-flex
   flex-direction: column
   justify-content: center
-  width: 300px
-  height: 300px
-  padding: 30px
+  width: 360px
+  height: 360px
+  padding: 16%
   margin-top: 5vh
   margin-bottom: 5vh
 
 .sharing__confirmation__title
-  font-size: 30px
-  line-height: 1.6667
+  font-size: 1.875em
+  line-height: 1.16667
   letter-spacing: 0.8px
   color: $color-grey-dark
   margin-bottom: 25px
+  margin-top: 40px
 
 .sharing__confirmation__subtitle
-  font-size: 16px
+  font-size: 1em
   line-height: 1.5625
   letter-spacing: 0.44px
+  padding: 0 8%
 
 .sharing__invite
   padding-top: 50px
   min-height: 272px
-  background: linear-gradient(to top, #FFFFFF 0%, #F0F7F6 36.88%, #C5E0DC 100%)
+  background: linear-gradient(to top, #FFFFFF 0%, #F0F7F6 36.88%, #F0F7F6 100%)
   flex-grow: 1
   flex-shrink: 0
   display: flex
@@ -116,24 +120,27 @@
 .sharing__social-icons > a
   display: inline-block
   margin: 12px
-  color: inherit
   text-decoration: none
-  transition: color 0.2s ease
+  transition: all 0.2s ease
+  opacity: 1
 
-.sharing__mail:hover
-  color: $color-orange
+  &:hover
+    opacity: 0.7
 
-.sharing__facebook:hover
+.sharing__mail
+  color: #2c9f45 // #f47721
+
+.sharing__facebook
   color: #3b5998
 
-.sharing__twitter:hover
+.sharing__twitter
   color: #1da1f2
 
-.sharing__linkedin:hover
+.sharing__linkedin
   color: #0077b5
 
-.sharing__flipboard:hover
+.sharing__flipboard
   color: #e12828
 
-.sharing__vk:hover
+.sharing__vk
   color: #45668e
