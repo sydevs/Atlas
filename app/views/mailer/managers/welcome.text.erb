@@ -1,22 +1,16 @@
-<%= translate('mail.welcome.intro', event: @event.label) %>
+<%= translate("mail.welcome.#{@type}.intro", context: @context&.label) %>
 
-<%= translate('mail.welcome.purpose') %>
-<% translate('mail.welcome.purposes').each do |purpose| %>
-* <%= purpose.gsub('%{event}', @event.label) %>
+<%= translate("mail.welcome.#{@type}.purpose") %>
+<% translate("mail.welcome.#{@type}.purposes").each do |purpose| %>
+* <%= @context ? purpose.gsub('%{context}', @context.label) : purpose %>
 <% end %>
 
 <%= message translate('mail.common.about'), :text %>
-<% if @event%>
-<%= render 'mailer/managers/event', event: @event %>
+<%= render 'mailer/managers/event', event: @context if @context.is_a?(Event) %>
 
 <%= translate('mail.common.actions') %>
 <%= '=' * translate('mail.common.actions').length %>
-<%= translate('mail.welcome.call_to_action') %>
-<%= translate('mail.welcome.update') %> - <%= @edit_event_link %>
-<% else %>
-<%= translate('mail.common.actions') %>
-<%= '=' * translate('mail.common.actions').length %>
-<%= translate('mail.welcome.login') %> - <%= @login_link %>
-<% end %>
+<%= translate("mail.welcome.#{@type}.call_to_action") %>
+<%= translate("mail.welcome.#{@type}.action") %> - <%= @action_link %>
 
 <%= message translate('mail.common.alert'), :text, :alert %>

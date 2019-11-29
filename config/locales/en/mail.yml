@@ -2,6 +2,7 @@
 en:
   mail:
     common:
+      worldwide: "Worldwide"
       automated: "This is an automated email. Please use the links in this email to respond, or email %{email} if you need help."
       unsubscribe: "If you don't know why you received this email, or no longer want to receive these emails please write to %{email}."
       actions: "Actions"
@@ -23,16 +24,42 @@ en:
         no_description: "(No Description)"
 
     welcome:
-      subject: "Welcome to Sahaj Atlas - %{event}"
-      intro: "You have been listed as a manager for an event on the Sahaj Atlas. You are now able to manage the %{event} sahaj public event."
-      purpose: "From now on you will:"
-      purposes:
-        - "Be able to modify the details of the \"%{event}\" event."
-        - "Receive a weekly email with a list of who has registered for the event."
-        - "Every couple months you may also receive an email asking you to confirm that the event details are still up to date."
-      call_to_action: "Please click below if you wish to change these details."
-      update: "Update event"
-      login: "Login"
+      subject: "Welcome to Sahaj Atlas - %{context}"
+      event:
+        intro: "You have been listed as a manager for an event on the Sahaj Atlas. You are now able to manage the %{context} sahaj public event."
+        purpose: "From now on you will:"
+        purposes:
+          - "Be able to modify the details of the \"%{context}\" event."
+          - "Receive a weekly email with a list of who has registered for the event."
+          - "Every couple months you may also receive an email asking you to confirm that the event details are still up to date."
+        call_to_action: "Please click below if you wish to change these details."
+        action: "Update event"
+      venue:
+        intro: "You have been added as a manager for a venue on the Sahaj Atlas. You are now able to manage sahaj public events at the %{context} venue."
+        purpose: "From now on you will:"
+        purposes:
+          - "Be able to create and modify the events at the \"%{context}\" venue."
+          - "Every few months you may also receive an email asking you to confirm that the event details for this venue are still up to date."
+        call_to_action: "Please click below to log in and get started."
+        action: "Login"
+      region:
+        intro: "You have been added as a manager for a region on the Sahaj Atlas. You are now able to manage sahaj public events in %{context}."
+        purpose: "From now on you will:"
+        purposes:
+          - "Be able to create and modify the venues and events in \"%{context}.\""
+          - "Every few months you may also receive an email asking you to confirm that events in your region are up to date."
+        call_to_action: "Please click below to log in and get started."
+        action: "Login"
+      local_area: :mail.welcome.region
+      province: :mail.welcome.region
+      country: :mail.welcome.region
+      worldwide:
+        intro: "You have been added as an administrator for the Sahaj Atlas. You are now able to manage all sahaj public events worldwide."
+        purpose: "From now on you will:"
+        purposes:
+          - "Be able to create and modify regions, managers, venues, and events in the database."
+        call_to_action: "Please click below to log in and get started."
+        action: "Login"
 
     registrations:
       subject: "Event Registrations since %{date}"

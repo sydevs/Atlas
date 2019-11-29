@@ -85,6 +85,7 @@ class CMS::ApplicationController < ActionController::Base
     authorize_association! :regions
 
     if @context
+      @countries = @context.countries if @context.respond_to?(:countries)
       @provinces = @context.provinces if @context.respond_to?(:provinces)
       @local_areas = @context.local_areas if @context.respond_to?(:local_areas)
     else

@@ -60,7 +60,8 @@ namespace :mail do
     desc 'Generates one of each email type for testing purposes'
     task all: :environment do
       %w[
-        welcome registrations verification escalation
+        welcome:event welcome:worldwide
+        registrations verification escalation
         expired expired_escalation
         confirmation
       ].each_with_index do |test, index|
@@ -69,15 +70,6 @@ namespace :mail do
         puts "Testing: mail:#{test}"
         Rake::Task["mail:test:#{test}"].invoke
       end
-    end
-
-    desc 'Generates an email welcoming a manager who has been newly assigned to an event'
-    task welcome: :environment do
-      ActionMailer::Base.delivery_method = :letter_opener
-      event = Event.joins(:managers).reorder('RANDOM()').first
-      manager = event.managers.first
-      puts "Sending mail to #{manager.name} for #{event.name || event.venue.street}"
-      ManagerMailer.with(manager: manager, event: event, test: true).welcome.deliver_now
     end
 
     desc 'Sends list of recent registrations to one program manager'
@@ -149,6 +141,74 @@ namespace :mail do
       registration = Registration.joins(:event).where.not(events: { description: nil }).first
       puts "Sending mail to #{registration.name} for #{registration.event.name || registration.event.venue.street}"
       RegistrationMailer.with(registration: registration, test: true).confirmation.deliver_now
+    end
+
+    namespace :welcome do
+      desc 'Generates one of each welcome email type for testing purposes'
+      task all: :environment do
+        %w[
+          event venue local_area province country worldwide
+        ].each_with_index do |test, index|
+          puts "Press enter to proceed to the next test (mail:#{test})" unless index.zero?
+          STDIN.gets unless index.zero?
+          puts "Testing: mail:welcome:#{test}"
+          Rake::Task["mail:test:welcome:#{test}"].invoke
+        end
+      end
+
+      desc 'Generates an email welcoming a manager who has been newly assigned to an event'
+      task event: :environment do
+        ActionMailer::Base.delivery_method = :letter_opener
+        event = Event.joins(:venue, :managers).reorder('RANDOM()').first
+        manager = event.managers.first
+        puts "Sending mail to #{manager.name} for #{event.name || event.venue.street}"
+        ManagerMailer.with(manager: manager, context: event, test: true).welcome.deliver_now
+      end
+
+      desc 'Generates an email welcoming a manager who has been newly assigned to a venue'
+      task venue: :environment do
+        ActionMailer::Base.delivery_method = :letter_opener
+        venue = Venue.joins(:managers).reorder('RANDOM()').first
+        manager = venue.managers.first
+        puts "Sending mail to #{manager.name} for #{venue.name || venue.street}"
+        ManagerMailer.with(manager: manager, context: venue, test: true).welcome.deliver_now
+      end
+
+      desc 'Generates an email welcoming a manager who has been newly assigned to a local area'
+      task local_area: :environment do
+        ActionMailer::Base.delivery_method = :letter_opener
+        local_area = LocalArea.joins(:managers).reorder('RANDOM()').first
+        manager = local_area.managers.first
+        puts "Sending mail to #{manager.name} for #{local_area.name}"
+        ManagerMailer.with(manager: manager, context: local_area, test: true).welcome.deliver_now
+      end
+
+      desc 'Generates an email welcoming a manager who has been newly assigned to a province'
+      task province: :environment do
+        ActionMailer::Base.delivery_method = :letter_opener
+        province = Province.joins(:managers).reorder('RANDOM()').first
+        manager = province.managers.first
+        puts "Sending mail to #{manager.name} for #{ProvinceDecorator.get_name(province.province_code, province.country_code)}"
+        ManagerMailer.with(manager: manager, context: province, test: true).welcome.deliver_now
+      end
+
+      desc 'Generates an email welcoming a manager who has been newly assigned to a country'
+      task country: :environment do
+        ActionMailer::Base.delivery_method = :letter_opener
+        country = Country.joins(:managers).reorder('RANDOM()').first
+        manager = country.managers.first
+        puts "Sending mail to #{manager.name} for #{CountryDecorator.get_label(country.country_code)}"
+        ManagerMailer.with(manager: manager, context: country, test: true).welcome.deliver_now
+      end
+
+      desc 'Generates an email welcoming an administrator'
+      task worldwide: :environment do
+        ActionMailer::Base.delivery_method = :letter_opener
+        country = Country.joins(:managers).reorder('RANDOM()').first
+        manager = Manager.administrators.first
+        puts "Sending mail to #{manager.name} as an administrator"
+        ManagerMailer.with(manager: manager, test: true).welcome.deliver_now
+      end
     end
   end
 end

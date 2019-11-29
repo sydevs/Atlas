@@ -5,8 +5,17 @@ class ManagerMailer < ApplicationMailer
 
   def welcome
     setup
-    @edit_event_link = "#{@magic_link}?destination_path=#{url_for([:edit, :cms, @event])}" if @event
-    subject = I18n.translate('mail.welcome.subject', event: @event.label)
+    @type = @context&.model_name&.i18n_key&.to_sym || :worldwide
+
+    if @type == :event
+      @action_link = "#{@magic_link}?destination_path=#{url_for([:edit, :cms, @context])}"
+    elsif @type == :worldwide
+      @action_link = "#{@magic_link}?destination_path=#{cms_root_url}"
+    else
+      @action_link = "#{@magic_link}?destination_path=#{url_for([:cms, @context])}"
+    end
+    
+    subject = I18n.translate('mail.welcome.subject', context: @context&.label || I18n.translate('mail.common.worldwide'))
     mail(to: @manager.email, subject: subject)
   end
 
@@ -45,7 +54,8 @@ class ManagerMailer < ApplicationMailer
     def setup session: true
       @manager = params[:manager]
       @event = params[:event]
-      return unless session || (session == :auto && @event.managers.include?(@manager))
+      @context = params[:context] || @event
+      return unless session || (session == :auto && @context.managers.include?(@manager))
 
       session = Passwordless::Session.new({
         authenticatable: @manager,

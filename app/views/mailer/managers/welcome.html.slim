@@ -1,27 +1,20 @@
 
 / TODO: Check that this would actually be html safe
-p = translate('mail.welcome.intro', event: tag.b(@event.label)).html_safe
+p = translate("mail.welcome.#{@type}.intro", context: tag.b(@context&.label)).html_safe
 
 = message translate('mail.common.about'), :html
 
-h2 = translate('mail.welcome.purpose', event: tag.b(@event.label)).html_safe
+h2 = translate("mail.welcome.#{@type}.purpose", context: tag.b(@context&.label)).html_safe
 ul
-  - translate('mail.welcome.purposes').each do |purpose|
-    li = purpose.gsub('%{event}', @event.label)
+  - translate("mail.welcome.#{@type}.purposes").each do |purpose|
+    li = @context ? purpose.gsub('%{context}', @context.label) : purpose
 
-- if @event
-  = render 'mailer/managers/event', event: @event
+= render 'mailer/managers/event', event: @context if @context.is_a?(Event)
 
-  h2 = translate('mail.common.actions')
-  p = translate('mail.welcome.call_to_action')
-  p.button-group
-    a.button href=@edit_event_link
-      = translate('mail.welcome.update')
-- else
-  h2 = translate('mail.common.actions')
-  p.button-group
-    a.button href=@magic_link
-      = translate('mail.welcome.login')
-
+h2 = translate('mail.common.actions')
+p = translate("mail.welcome.#{@type}.call_to_action")
+p.button-group
+  a.button href=@action_link
+    = translate("mail.welcome.#{@type}.action")
 
 = message translate('mail.common.alert'), :html, :alert

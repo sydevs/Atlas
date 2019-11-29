@@ -37,6 +37,7 @@ en:
         worldwide: "Countries"
         country: "Regions"
         province: "Local Areas"
+        manager: "Regions"
 
     messages:
       errors: "Errors"
