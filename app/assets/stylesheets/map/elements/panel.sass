@@ -23,7 +23,7 @@
       overflow: hidden
 
   @include tablet
-    width: 520px
+    width: $panel-width
     max-width: 45vw
 
   @include tablet-or-larger
@@ -72,7 +72,7 @@
 
   @include desktop-or-larger
     padding-top: $panel-padding
-    width: 520px
+    width: $panel-width
     max-width: 45vw
     height: calc(100vh - #{$control-offset-y * 2})
 
@@ -81,11 +81,11 @@
 
 .panel--thin
   @include desktop-or-larger
-    width: 467px
+    width: $panel-width-thin
 
 .panel--wide
   @include desktop-or-larger
-    width: 884px
+    width: $panel-width-wide
 
 // ===== HEADER ===== //
 .panel__header
