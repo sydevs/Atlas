@@ -15,10 +15,6 @@ html
         .ui.basic.top.right.floated.pointing.dropdown.icon.button
           i.bars.icon
           .menu
-            - if policy(:page).database?
-              a.item href=cms_root_path
-                i.archive.icon
-                = translate('cms.menu.database')
             a.item href=info_root_path
               i.question.circle.icon
               = translate('cms.menu.about')
@@ -39,14 +35,22 @@ html
         = translate('sahaj_atlas')
       .ui.divider
 
+      - if defined?(current_user) && !current_user.administrator?
+        .ui.right.floated.breadcrumbs
+          - if @context == current_user
+            span.section
+              i.home.icon
+              = translate('cms.menu.home')
+          - else
+            a href=current_user.home_url
+              i.home.icon
+              = translate('cms.menu.home')
+
       - if @context && @context.respond_to?(:ancestors)
         .ui.breadcrumbs
-          - if current_user.administrator?
-            a.section href=breadcrumb_url(:worldwide)
-              i.globe.icon
-          - else
-            a.section href=url_for([:cms, current_user])
-              i.home.icon
+          a.section href=breadcrumb_url(:worldwide)
+            i.globe.icon
+          
           i.right.angle.icon.divider
           - @context.ancestors.each do |ancestor|
             - if policy(ancestor).show?

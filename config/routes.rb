@@ -15,6 +15,7 @@ Rails.application.routes.draw do
 
   namespace :cms do
     root to: 'application#show'
+    get :home, to: 'application#home'
     get :regions, to: 'application#regions'
 
     resources :countries, except: %i[edit update] do

@@ -15,9 +15,13 @@ class CMS::ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   # TODO: Remove this development code
-  after_action :verify_authorized
+  after_action :verify_authorized, except: :home
   after_action :verify_policy_scoped, only: :index
   # END TODO
+
+  def home
+    redirect_to current_user.administrator? ? cms_root_url : cms_manager_url(current_user), status: :moved_permanently
+  end
 
   def index
     authorize_association! @model

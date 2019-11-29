@@ -20,8 +20,8 @@ en:
         choose: "Choose a %{resource}"
 
     menu:
+      home: "Home"
       # Top level menu
-      database: "Sahaj Atlas Database"
       about: "About Sahaj Atlas"
       statistics: "Statistics"
       map: "View Map"
