@@ -52,6 +52,8 @@ class Map::ApplicationController < ActionController::Base
         elsif params[:country]
           scope = Country.find_by_country_code(params[:country])
         end
+
+        scope = scope.published if scope.respond_to?(:published)
       end
     end
 

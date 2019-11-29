@@ -120,10 +120,14 @@ class WorldMap {
   }
 
   zoomToVenue(venue) {
-    this.leaflet.fitBounds(L.latLngBounds([[venue.latitude, venue.longitude], [venue.latitude, venue.longitude]]), {
+    this.zoomTo(venue.latitude, venue.longitude, 15)
+  }
+
+  zoomTo(latitude, longitude, maxZoom = 10) {
+    this.leaflet.fitBounds(L.latLngBounds([[latitude, longitude], [latitude, longitude]]), {
       paddingTopLeft: [this.viewport.left, this.viewport.top],
       paddingBottomRight: [this.viewport.right, this.viewport.bottom],
-      maxZoom: 15,
+      maxZoom: maxZoom,
     })
   }
 

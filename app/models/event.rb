@@ -31,7 +31,6 @@ class Event < ApplicationRecord
   validates_associated :pictures
 
   # Scopes
-  default_scope { order(updated_at: :desc) }
   scope :with_new_registrations, -> { where('latest_registration_at >= registrations_sent_at') }
   scope :notifications_enabled, -> { where.not(disable_notifications: true) }
 

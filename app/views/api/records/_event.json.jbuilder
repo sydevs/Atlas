@@ -1,6 +1,6 @@
 json.url api_event_url(event, format: :json)
 json.map_url map_root_url(event: event.id)
-json.extract! event, :id, :label, :languages
+json.extract! event, :id, :label
 json.description event.description || ''
 
 if @include&.include?(:venue) || @include&.include?(:venues)
@@ -12,6 +12,10 @@ else
     json.extract! event, :room
     json.extract! event.venue, :street, :city, :province_code, :province_name, :country_code, :country_name, :postcode
   end
+end
+
+json.languages do
+  json.merge! event.languages.map { |l| [l, I18nData.languages(I18n.locale)[l]] }.to_h
 end
 
 json.category do

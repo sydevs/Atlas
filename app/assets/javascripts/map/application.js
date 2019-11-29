@@ -134,11 +134,13 @@ class ApplicationInstance {
 
   loadEvents(query) {
     this.showPanel('listing')
+
     this.atlas.query(query, response => {
       if (response.status == 'success') {
         this.setEvents(response.results)
       } else {
-        this.panels.listing.showEmptyResults(response.alternative)
+        this.panels.listing.showEmptyResults(response.alternatives[0])
+        this.map.zoomTo(query.latitude, query.longitude)
         this.toggleCollapsed(false)
         this.map.setEventMarkers([])
       }

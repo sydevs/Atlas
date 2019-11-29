@@ -18,9 +18,10 @@ class AtlasAPI {
       return encodeURIComponent(key) + '=' + encodeURIComponent(parameters[key])
     }).join('&')
 
-    Util.getURL(`${this.api_endpoint}${parameters}`, xhttp => {
+    const query = `${this.api_endpoint}${parameters}`
+    Util.getURL(query, xhttp => {
       const response = JSON.parse(xhttp.response)
-      console.log('[AtlasAPI]', response) // eslint-disable-line no-console
+      console.log('[AtlasAPI]', response, query) // eslint-disable-line no-console
       callback(response)
     })
   }

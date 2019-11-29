@@ -19,9 +19,6 @@ class Venue < ApplicationRecord
   validates :country_code, presence: true
   validates :latitude, :longitude, presence: true
 
-  # Scopes
-  default_scope { order(updated_at: :desc) }
-
   # Methods
 
   def parent
