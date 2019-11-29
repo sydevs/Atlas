@@ -9,7 +9,7 @@ class DatabasePolicy < ApplicationPolicy
   end
 
   def new?
-    user.present? && create?
+    user.present?
   end
 
   def create?
