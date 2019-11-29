@@ -1,7 +1,7 @@
 class ManagerPolicy < DatabasePolicy
 
   def destroy?
-    user.administrator? && @context.present?
+    user.administrator?
   end
 
   def new_association? _association = nil

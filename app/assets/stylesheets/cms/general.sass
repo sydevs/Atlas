@@ -51,3 +51,9 @@ body
 
   > .title > .floated
     float: right
+
+.ui.button:not(.disabled)[disabled="disabled"]
+  cursor: not-allowed
+  background: transparentize(#E0E1E2, 0.4)
+  box-shadow: none !important
+  color: rgba(0, 0, 0, 0.6)

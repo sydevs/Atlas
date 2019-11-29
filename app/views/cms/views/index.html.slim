@@ -3,9 +3,17 @@
 - content_for :title, [translate_model(@model, :plural), @context&.label].compact.join(' | ')
 
 = render 'cms/views/context' do
+
   h3.ui.dividing.header
-    - if allow.new_association?(@model.table_name.to_sym) && policy(@model).new?
-      = floating_action translate('cms.actions.target.new', resource: translate_model(@model)), 'plus', url_for([:new, :cms, @context, @model_name.singular_route_key])
+    - if policy(@model).new?
+      - create_action_text = translate('cms.actions.target.new', resource: translate_model(@model))
+
+      - if allow.new_association?(@model.table_name.to_sym)
+        = floating_action create_action_text, 'plus', url_for([:new, :cms, @context, @model_name.singular_route_key])
+      - else
+        - tooltip = { tooltip: translate(@model.model_name.i18n_key, scope: 'cms.messages.cannot_create'), position: 'bottom right', variation: 'small basic' }
+        = floating_action create_action_text, 'plus', nil, disabled: true, data: tooltip
+
     .content = translate_model(@model, :plural)
 
   - if @records.present? || params[:q]
@@ -20,7 +28,7 @@
       = render partial: "cms/list_items/#{@model_name.singular_route_key}", collection: @records, cache: true
   - else
     .ui.relaxed.records.list data-search=@model_name.route_key
-      = render partial: "cms/list_items/#{@model_name.singular_route_key}", collection: @records, cache: true
+      = render partial: "cms/list_items/#{@model_name.singular_route_key}", collection: @records, cache: true, locals: { removable: true }
 
   .pagination-info data-search=@model_name.route_key = page_entries_info @records
   .pagination data-search=@model_name.route_key = paginate @records

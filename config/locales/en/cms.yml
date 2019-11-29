@@ -32,8 +32,11 @@ en:
       context: "%{resource} in %{parent}"
       # Tertiary menu
       details: "Info"
-      regions: "Regions"
       activity: "Activity"
+      regions:
+        worldwide: "Countries"
+        country: "Regions"
+        province: "Local Areas"
 
     messages:
       errors: "Errors"
@@ -45,6 +48,9 @@ en:
       successfully_removed: "%{resource} successfully removed from this %{context}."
       successfully_confirmed: "Thank you for confirming that this %{resource} is up to date."
       not_logged_in: "You are not logged in!"
+      cannot_create:
+        event: "New events cannot be created here, they must be added directly to a venue."
+        venue: "New venues cannot be created here, they must be added directly to a region within a country."
 
     hints:
       unspecified: "Unspecified"
@@ -98,7 +104,7 @@ en:
       provinces_header: "Provinces / States / Counties"
       local_areas_header:
         provincial: "Local Areas"
-        national: "Custom Areas"
+        national: "Custom Regions"
         global: "Custom International Areas"
 
     activity:

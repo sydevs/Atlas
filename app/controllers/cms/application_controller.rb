@@ -21,7 +21,8 @@ class CMS::ApplicationController < ActionController::Base
 
   def index
     authorize_association! @model
-    @records = policy_scope(@scope).page(params[:page]).per(10).search(params[:q]).order(updated_at: :desc)
+    @records = policy_scope(@scope).page(params[:page]).per(10).search(params[:q])
+    @records = @records.order(updated_at: :desc) if @records.respond_to?(:updated_at)
     @records = @records.with_associations if @records.respond_to?(:with_associations)
     render 'cms/views/index'
   end

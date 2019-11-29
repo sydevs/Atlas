@@ -12,11 +12,11 @@ en:
         other: "countries"
       province:
         # Basic pluralization
-        single: "Subnation"
-        plural: "Subnations"
+        single: "Region"
+        plural: "Regions"
         # Countable
-        one: "subnation"
-        other: "subnations"
+        one: "region"
+        other: "regions"
       local_area:
         # Basic pluralization
         single: "Area"

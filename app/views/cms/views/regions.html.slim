@@ -1,6 +1,7 @@
-
-- allow = @context ? policy(@context) : policy(:worldwide)
-- content_for :title, [translate('cms.menu.regions'), @context&.label].compact.join(' | ')
+ruby:
+  allow = @context ? policy(@context) : policy(:worldwide)
+  title = translate(@context&.model_name&.i18n_key || :worldwide, scope: %i[cms menu regions])
+  content_for :title, [title, @context&.label].compact.join(' | ')
 
 = render 'cms/views/context' do
   - if @countries

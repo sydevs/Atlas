@@ -2,7 +2,7 @@
 - allow = @context ? policy(@context) : policy(:worldwide)
 
 .item
-  - if allow.destroy_association?(:managers) && policy(manager).destroy?
+  - if local_assigns[:removable] == true && allow.destroy_association?(:managers)
     .right.floated.content
       a.ui.basic.circular.icon.label href=url_for([:cms, @context, manager]) data={ method: 'DELETE', confirm: translate('cms.messages.confirm_destroy') }
         i.trash.icon

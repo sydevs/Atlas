@@ -9,7 +9,7 @@ class DatabasePolicy < ApplicationPolicy
   end
 
   def new?
-    user.present?
+    user.present? && create?
   end
 
   def create?
@@ -38,7 +38,7 @@ class DatabasePolicy < ApplicationPolicy
   end
 
   def destroy_association? association = nil
-    return true if user.administrator? && association == :managers
+    return true if manage?(super_manager: true) && association == :managers
     return true if update? && association == :pictures
 
     false
