@@ -9,7 +9,7 @@ module Searchable
       class << self; attr_reader :search_query; end
 
       @search_columns_count = columns.length
-      @search_query = columns.map { |c| "(#{c} LIKE ?)" }.join(' OR ')
+      @search_query = columns.map { |c| "(#{c} ILIKE ?)" }.join(' OR ')
     end
 
   end
