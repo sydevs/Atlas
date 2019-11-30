@@ -92,6 +92,7 @@ class WorldMap {
   }
 
   fitToMarkers() {
+    if (this.markersGroup.getLayers().length == 0) return
     const bounds = this.markersGroup.getBounds()
     this.leaflet.fitBounds(bounds, {
       paddingTopLeft: [this.viewport.left, this.viewport.top],
