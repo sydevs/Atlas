@@ -24,6 +24,10 @@ class DatabasePolicy < ApplicationPolicy
     manage? super_manager: true
   end
 
+  def create_manager?
+    new_association?(:managers)
+  end
+
   def index_association? association = nil
     return record.region_association? if association == :regions
     return false unless manage?

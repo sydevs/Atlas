@@ -4,7 +4,13 @@ class CMS::ManagersController < CMS::ApplicationController
 
   def create
     @record = Manager.find_or_initialize_by(email: parameters[:email])
-    authorize @record
+
+    if @context
+      authorize @context, :create_manager?
+    else
+      authorize @record
+    end
+
     new_record = @record.new_record?
     @record.name = parameters[:name] if new_record
     @context.managers << @record if @context
