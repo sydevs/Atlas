@@ -11,12 +11,14 @@
 
   @include mobile
     width: 100vw
-    height: $panel-mobile-height
+    height: calc(100% - #{$map-mobile-height})
     overflow: scroll
     transition: height $panel-transition ease
+    position: absolute
+    bottom: 0
 
     @include collapsed
-      height: $panel-mobile-collapsed-height
+      height: calc(100% - #{$map-mobile-collapsed-height})
       overflow: hidden
 
   @include tablet

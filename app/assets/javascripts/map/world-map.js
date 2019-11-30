@@ -31,8 +31,8 @@ class WorldMap {
     }).addTo(this.leaflet)*/
     this.markersGroup.on('click', event => this.selectMarker(event.layer))
 
-    document.getElementById('js-zoom-in').addEventListener('click', _event => this.zoom(+1))
-    document.getElementById('js-zoom-out').addEventListener('click', _event => this.zoom(-1))
+    document.getElementById('js-zoom-in').addEventListener('click', () => this.zoom(+1))
+    document.getElementById('js-zoom-out').addEventListener('click', () => this.zoom(-1))
 
     this.leaflet.on('zoomstart', () => this.setRefreshHidden(false))
     this.leaflet.on('movestart', () => this.setRefreshHidden(false))
@@ -43,9 +43,6 @@ class WorldMap {
     })
 
     this.invalidateViewportDimensions()
-
-    // Debugging
-    this.updateViewportBox()
   }
 
   // ===== MARKER MANIUPLATION ===== //
@@ -159,15 +156,26 @@ class WorldMap {
 
   // ===== UTILITY ===== //
 
+  invalidatePanels() {
+    this.invalidateViewportDimensions()
+    this.fitToMarkers()
+  }
+
   invalidateViewportDimensions() {
     let result
 
     if (Util.isMobile()) {
+      console.log('collapsed', Util.isCollapsed())
       result = {
-        top: (Util.isCollapsed() ? 100 : 0) + this.zoomPadding,
-        bottom: this.zoomPadding / 2,
+        top: this.zoomPadding,
+        bottom: (window.innerHeight - 210) + this.zoomPadding / 2,
         left: this.zoomPadding / 2,
         right: this.zoomPadding / 2,
+      }
+
+      if (Util.isCollapsed()) {
+        result.top = 130 + this.zoomPadding
+        result.bottom = (window.innerHeight * 0.2) + this.zoomPadding / 2
       }
     } else {
       result = {
@@ -184,6 +192,7 @@ class WorldMap {
     result.y = result.top + result.height / 2
     this.viewport = result
 
+    console.log('invalidate', result)
     this.updateViewportBox()
     return result
   }

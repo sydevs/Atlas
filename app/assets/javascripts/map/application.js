@@ -60,8 +60,7 @@ class ApplicationInstance {
       this.search.setActive(false)
     }
 
-    this.map.leaflet.invalidateSize()
-    this.map.invalidateViewportDimensions()
+    this.map.invalidatePanels()
   }
 
   showPanel(panelKey, event = null) {

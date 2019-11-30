@@ -71,8 +71,9 @@ $control-offset-x: 64px
 $control-offset-y: 58px
 $z-control: 1000
 
-$panel-mobile-collapsed-height: 210px
-$panel-mobile-height: 80%
+$map-mobile-height: 210px
+$map-mobile-collapsed-height: 80%
+
 $panel-padding: 45px
 $panel-width: 520px
 $panel-width-thin: 467px
@@ -88,6 +89,10 @@ $panel-transition: 0.5s
 // ===== MEDIA QUERIES ===== //
 @mixin collapsed
   body.collapsed &
+    @content
+
+@mixin not-collapsed
+  body:not(.collapsed) &
     @content
 
 @mixin mobile

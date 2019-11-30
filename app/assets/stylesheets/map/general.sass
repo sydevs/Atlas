@@ -18,17 +18,8 @@ body
   outline: 1px dashed $color-blue
 
 #map
-  min-height: 180px
-  height: calc(100% - #{$panel-mobile-height})
   position: relative !important
-  transition: height $panel-transition ease
-
-  @include mobile
-    @include collapsed
-      height: calc(100% - #{$panel-mobile-collapsed-height})
-
-  @include tablet-or-larger
-    height: 100%
+  height: 100%
 
 .leaflet-control-container
   @include mobile
