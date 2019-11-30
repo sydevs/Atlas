@@ -11,6 +11,7 @@
 
   @include mobile
     width: 100vw
+    padding-top: 20px
     height: calc(100% - #{$map-mobile-height})
     overflow: scroll
     transition: height $panel-transition ease
@@ -92,13 +93,18 @@
   flex-grow: 0
 
 // ===== HANDLE ===== //
-.panel__handle
+.panels__handle
+  display: block
+  position: absolute
+  top: 0
+  left: 0
+  right: 0
+  z-index: 2
   font-size: 20px
   background: $color-background
   border-bottom: 1px solid $color-border
   cursor: pointer
   text-align: center
-  flex-grow: 0
 
   opacity: 0.7
   transition: opacity 0.5s ease

@@ -8,12 +8,11 @@
 // All the panels which overlaid onto the map
 .panels id='js-panels'
   a.panels__overlay class='js-collapse'
+  a.panels__handle class='js-collapse' tabindex='0'
+    i.icon.icon--narrow-down
 
   // LISTING PANEL
   .listing.panel.panel--active id='js-listing-panel'
-    a.panel__handle class='js-collapse' tabindex='0'
-      i.icon.icon--narrow-down
-
     .panel__content
       .listing__filter
         a.listing__filter__close class='js-reset' tabindex='0'
@@ -31,8 +30,6 @@
 
   // INFORMATION PANEL
   .information.panel.panel--thin id='js-information-panel'
-    a.panel__handle class='js-collapse' tabindex='0'
-      i.icon.icon--narrow-down
     .panel__controls
       a.panel__share class='js-panel-share' tabindex='0'
         i.icon.icon--share
@@ -51,8 +48,6 @@
 
   // REGISTRATION PANEL
   .registration.panel.panel--thin id='js-registration-panel'
-    a.panel__handle class='js-collapse' tabindex='0'
-      i.icon.icon--narrow-down
     .panel__controls
       a.panel__info class='js-panel-info' tabindex='0'
         i.icon.icon--info
@@ -82,8 +77,6 @@
 
   // SHARING PANEL
   .sharing.panel.panel--thin id='js-sharing-panel'
-    a.panel__handle class='js-collapse' tabindex='0'
-      i.icon.icon--narrow-down
     .panel__controls
       a.panel__back class='js-back' tabindex='0'
         i.icon.icon--back
@@ -112,8 +105,6 @@
 
   // PRIVACY PANEL
   .privacy.panel.panel--thin id='js-privacy-panel'
-    a.panel__handle class='js-collapse' tabindex='0'
-      i.icon.icon--narrow-down
     .panel__controls
       a.panel__back class='js-back' tabindex='0'
         i.icon.icon--back
