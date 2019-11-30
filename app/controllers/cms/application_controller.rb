@@ -20,7 +20,15 @@ class CMS::ApplicationController < ActionController::Base
   # END TODO
 
   def home
-    redirect_to current_user.administrator? ? cms_root_url : cms_manager_url(current_user), status: :moved_permanently
+    if current_user.administrator?
+      route = cms_root_url
+    elsif current_user.parent.present?
+      route = url_for([:cms, current_user.parent])
+    else
+      route = cms_manager_url(current_user)
+    end
+
+    redirect_to route, status: :moved_permanently
   end
 
   def index

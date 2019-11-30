@@ -165,7 +165,6 @@ class WorldMap {
     let result
 
     if (Util.isMobile()) {
-      console.log('collapsed', Util.isCollapsed())
       result = {
         top: this.zoomPadding,
         bottom: (window.innerHeight - 210) + this.zoomPadding / 2,
@@ -192,7 +191,6 @@ class WorldMap {
     result.y = result.top + result.height / 2
     this.viewport = result
 
-    console.log('invalidate', result)
     this.updateViewportBox()
     return result
   }

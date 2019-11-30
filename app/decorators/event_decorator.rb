@@ -14,11 +14,11 @@ module EventDecorator
   end
 
   def category_name
-    I18n.translate(category, scope: %i[map categories title])
+    category ? I18n.translate(category, scope: %i[map categories title]) : ''
   end
 
   def category_description
-    I18n.translate(category, scope: %i[map categories description])
+    category ? I18n.translate(category, scope: %i[map categories description]) : ''
   end
 
   def recurrence_in_words
