@@ -13,10 +13,7 @@
     width: 100vw
     height: $panel-mobile-height
     overflow: scroll
-
     transition: height $panel-transition ease
-    position: absolute
-    bottom: 0
 
     @include collapsed
       height: $panel-mobile-collapsed-height
@@ -30,7 +27,7 @@
     position: absolute
     top: 0
     left: 0
-    max-height: 100vh
+    max-height: 100%
 
     @include collapsed
       display: none
@@ -38,7 +35,7 @@
   @include desktop-or-larger
     top: $control-offset-y
     left: $control-offset-x
-    max-height: calc(100vh - #{$control-offset-y * 2})
+    max-height: calc(100% - #{$control-offset-y * 2})
 
 .panels__overlay
   position: absolute
@@ -68,13 +65,13 @@
 
   @include tablet
     margin-top: $header-height
-    height: calc(100vh - #{$header-height})
+    height: calc(100% - #{$header-height})
 
   @include desktop-or-larger
     padding-top: $panel-padding
     width: $panel-width
     max-width: 45vw
-    height: calc(100vh - #{$control-offset-y * 2})
+    height: calc(100% - #{$control-offset-y * 2})
 
   &:not(.panel--active)
     display: none
@@ -163,8 +160,10 @@
   font-size: 17px
   letter-spacing: 0.2px
   color: $color-grey-dark
-  width: 325px
+  width: 100%
+  max-width: 325px
   margin: auto
   padding: 0
   cursor: pointer
   border: 1px solid $color-border
+  background: transparent

@@ -1,6 +1,11 @@
 @import '_mixins'
 
+html, body
+  overflow: hidden
+  height: -webkit-fill-available
+
 body
+  position: relative
   margin: 0
   color: $color-grey-normal
   font-family: $font-text
@@ -13,15 +18,17 @@ body
   outline: 1px dashed $color-blue
 
 #map
-  height: calc(100vh - #{$panel-mobile-height})
+  min-height: 180px
+  height: calc(100% - #{$panel-mobile-height})
   position: relative !important
+  transition: height $panel-transition ease
 
   @include mobile
     @include collapsed
-      height: calc(100vh - #{$panel-mobile-collapsed-height})
+      height: calc(100% - #{$panel-mobile-collapsed-height})
 
   @include tablet-or-larger
-    height: 100vh
+    height: 100%
 
 .leaflet-control-container
   @include mobile
