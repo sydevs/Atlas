@@ -42,7 +42,8 @@ const RegionMap = {
       RegionMap.instance.setView([40, 0], 1.25)
     } else {
       RegionMap.setCircle(data.latitude, data.longitude, data.radius)
-      RegionMap.instance.setView([data.latitude, data.longitude], 9)
+      const bounds = L.latLng(data.latitude, data.longitude).toBounds(data.radius)
+      RegionMap.instance.fitBounds(bounds)
     }
 
     RegionMap.instance.invalidateSize()
@@ -53,7 +54,7 @@ const RegionMap = {
     RegionMap.circle = L.circle([latitude, longitude], radius * 1000, {
       color: 'red',
       fillColor: '#f03',
-      fillOpacity: 0.3
+      fillOpacity: 0.3,
     }).addTo(RegionMap.instance)
   },
 
