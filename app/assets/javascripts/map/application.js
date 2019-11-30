@@ -47,7 +47,11 @@ class ApplicationInstance {
     this.hammertime.get('doubletap').set({ enable: false })
     this.hammertime.get('press').set({ enable: false })
     this.hammertime.get('pan').set({ enable: false })
-    this.hammertime.get('swipe').set({ direction: Hammer.DIRECTION_VERTICAL })
+    this.hammertime.get('swipe').set({
+      direction: Hammer.DIRECTION_VERTICAL,
+      threshold: 5,
+      velocity: 0.15,
+    })
 
     this.hammertime.on('swipedown', _event => { if (Util.isMobile()) this.toggleCollapsed(true) })
     this.hammertime.on('swipeup', _event => { if (Util.isMobile()) this.toggleCollapsed(false) })
