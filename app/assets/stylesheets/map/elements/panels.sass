@@ -24,6 +24,7 @@
 
   @include tablet
     width: $panel-width
+    height: 100%
     max-width: 45vw
 
   @include tablet-or-larger
@@ -74,7 +75,7 @@
     padding-top: $panel-padding
     width: $panel-width
     max-width: 45vw
-    height: calc(100% - #{$control-offset-y * 2})
+    height: calc(100vh - #{$control-offset-y * 2})
 
   &:not(.panel--active)
     display: none
