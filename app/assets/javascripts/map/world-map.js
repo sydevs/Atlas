@@ -23,12 +23,12 @@ class WorldMap {
       accessToken: element.dataset.token,
     }).addTo(this.leaflet)
 
-    this.markersGroup = L.featureGroup().addTo(this.leaflet)
-    /*this.markersGroup = L.markerClusterGroup({
+    //this.markersGroup = L.featureGroup().addTo(this.leaflet)
+    this.markersGroup = L.markerClusterGroup({
       spiderfyOnMaxZoom: false,
       showCoverageOnHover: false,
       singleMarkerMode: true,
-    }).addTo(this.leaflet)*/
+    }).addTo(this.leaflet)
     this.markersGroup.on('click', event => this.selectMarker(event.layer))
 
     document.getElementById('js-zoom-in').addEventListener('click', () => this.zoom(+1))
