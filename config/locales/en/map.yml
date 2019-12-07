@@ -7,6 +7,7 @@ en:
       more_info: "More info"
       register: "Register"
       no_results: "There are no classes in your area, the closest free meditation class is in"
+      show: "Show list"
       filter:
         prefix: "Showing results at"
         clear: "Clear"

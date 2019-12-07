@@ -20,8 +20,20 @@
 .information__description > p
   margin-bottom: 16px
 
+.information__images
+  overflow-x: scroll
+  white-space: nowrap
+  margin: -35px (-$panel-padding-mobile)
+  padding: 50px $panel-padding-mobile
+
+  @include tablet-or-larger
+    margin: -35px (-$panel-padding)
+    padding: 50px $panel-padding
+
 .information__images > img
   max-width: 180px
-  margin-right: 8px
-  margin-bottom: 16px
-  float: left
+  margin-right: 15px
+  box-shadow: $shadow-heavy
+
+  &:last-child
+    margin-right: 0

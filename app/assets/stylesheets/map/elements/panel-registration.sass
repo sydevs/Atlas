@@ -25,9 +25,43 @@
 .registration__description > p
   margin-bottom: 16px
 
+.registration__timing
+  padding: 10px 0
+  text-align: center
+  border: 1px solid $color-border-light
+  vertical-align: middle
+  margin-bottom: 11px
+
+  > *
+    vertical-align: middle
+    padding: 3px 0
+
+  &__date
+    display: inline-block
+    width: calc(50% - 1px)
+    border-right: 1px solid $color-border-light
+    font-size: 16px
+    line-height: 16px
+
+  &__day
+    font-weight: $font-medium
+    text-transform: uppercase
+
+  &__month
+    font-size: 11px
+    letter-spacing: 0.36px
+
+  &__time
+    display: inline-block
+    width: 50%
+    font-weight: $font-medium
+    font-size: 15px
+    line-height: 32px
+    letter-spacing: 0.49px
+
 .registration__input
   padding: 17px 20px
-  border: 1px solid $color-border
+  border: 1px solid $color-border-light
   width: 100%
   margin-bottom: 18px
 

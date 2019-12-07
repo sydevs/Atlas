@@ -3,14 +3,23 @@ json.map_url map_root_url(event: event.id)
 json.extract! event, :id, :label
 json.description event.description || ''
 
-if @include&.include?(:venue) || @include&.include?(:venues)
-  json.extract! event, :room
-  json.address_text event.room ? "#{event.room}, #{event.venue.full_address}" : event.venue.full_address
-else
-  json.address_text event.room ? "#{event.room}, #{event.venue.full_address}" : event.venue.full_address
-  json.address do
+if event.venue.present?
+  if @include&.include?(:venue) || @include&.include?(:venues)
     json.extract! event, :room
-    json.extract! event.venue, :street, :city, :province_code, :province_name, :country_code, :country_name, :postcode
+    json.address_text event.room ? "#{event.room}, #{event.venue.full_address}" : event.venue.full_address
+  else
+    json.address_text event.room ? "#{event.room}, #{event.venue.full_address}" : event.venue.full_address
+    json.address do
+      json.extract! event, :room
+      json.extract! event.venue, :street, :city, :province_code, :province_name, :country_code, :country_name, :postcode
+    end
+  end
+
+  json.venue_id event.venue_id if event.venue_id
+  
+  if event.venue.latitude? && event.venue.latitude?
+    json.latitude event.venue.latitude
+    json.longitude event.venue.longitude
   end
 end
 
@@ -31,13 +40,6 @@ json.formatted_start_end_time event.formatted_start_end_time
 json.timing_text event.timing_in_words
 json.timing do
   json.extract! event, :recurrence, :start_date, :end_date, :start_time, :end_time
-end
-
-json.venue_id event.venue_id if event.venue_id
-
-if event.venue.latitude? && event.venue.latitude?
-  json.latitude event.venue.latitude
-  json.longitude event.venue.longitude
 end
 
 json.images do

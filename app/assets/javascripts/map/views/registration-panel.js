@@ -16,9 +16,18 @@ class RegistrationPanel {
 
   show(event) {
     this.event = event
+    const upcoming_date = new Date(event.upcoming_dates[0])
+    let weekday = upcoming_date.toLocaleDateString(undefined, { weekday: 'long' })
+    weekday = weekday.charAt(0).toUpperCase() + weekday.slice(1)
+    let month = upcoming_date.toLocaleDateString(undefined, { month: 'short' })
+    month = month.charAt(0).toUpperCase() + month.slice(1)
+
     this.container.classList.add('panel--active')
     this.container.querySelector('[data-attribute="name"]').textContent = event.label
     this.container.querySelector('[data-attribute="description"]').innerHTML = Util.simpleFormat(event.description || event.category.description || '')
+    this.container.querySelector('[data-attribute="day"]').innerHTML = weekday
+    this.container.querySelector('[data-attribute="month"]').innerHTML = `${month} ${upcoming_date.getDate()}, ${upcoming_date.getFullYear()}`
+    this.container.querySelector('[data-attribute="time"]').innerHTML = event.formatted_start_end_time
     this.container.querySelector('input[name="event_id"]').value = event.id
   }
 

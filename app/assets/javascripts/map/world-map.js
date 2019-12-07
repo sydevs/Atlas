@@ -27,7 +27,7 @@ class WorldMap {
     this.markersGroup = L.markerClusterGroup({
       spiderfyOnMaxZoom: false,
       showCoverageOnHover: false,
-      singleMarkerMode: true,
+      //singleMarkerMode: true,
     }).addTo(this.leaflet)
     this.markersGroup.on('click', event => this.selectMarker(event.layer))
 
@@ -167,15 +167,15 @@ class WorldMap {
 
     if (Util.isMobile()) {
       result = {
-        top: this.zoomPadding,
+        top: this.zoomPadding / 2,
         bottom: (window.innerHeight - 210) + this.zoomPadding / 2,
         left: this.zoomPadding / 2,
         right: this.zoomPadding / 2,
       }
 
       if (Util.isCollapsed()) {
-        result.top = 130 + this.zoomPadding
-        result.bottom = (window.innerHeight * 0.2) + this.zoomPadding / 2
+        result.top = 124 + this.zoomPadding / 2
+        result.bottom = 221 + this.zoomPadding / 2
       }
     } else {
       result = {

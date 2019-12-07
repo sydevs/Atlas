@@ -19,7 +19,7 @@
     bottom: 0
 
     @include collapsed
-      height: calc(100% - #{$map-mobile-collapsed-height})
+      height: $panel-mobile-collapsed-height
       overflow: hidden
 
   @include tablet
@@ -123,11 +123,8 @@
 // ===== CONTROLS ===== //
 .panel__controls
   position: absolute
-  top: 42px
+  top: 24px
   right: 32px
-
-  @include tablet-or-larger
-    top: 26px
 
 .panel__controls > a
   margin-left: 8px
@@ -149,18 +146,27 @@
 // ===== CONTENT ===== //
 .panel__content
   flex-grow: 1
-  padding-left: $panel-padding
-  padding-right: $panel-padding
+  padding-left: $panel-padding-mobile
+  padding-right: $panel-padding-mobile
+
+  @include tablet-or-larger
+    padding-left: $panel-padding
+    padding-right: $panel-padding
 
 // ===== FOOTER ===== //
 .panel__footer
   text-align: center
   flex-grow: 0
-  padding-left: $panel-padding
-  padding-right: $panel-padding
+  margin-top: 40px
+  padding-left: $panel-padding-mobile
+  padding-right: $panel-padding-mobile
+  padding-bottom: $panel-padding-mobile
 
-  @include mobile
-    margin-top: 40px
+  @include tablet-or-larger
+    margin-top: 0
+    padding-left: $panel-padding
+    padding-right: $panel-padding
+    padding-bottom: $panel-padding
 
 .panel__action
   appearance: none

@@ -16,6 +16,22 @@
   height: calc(100% - #{$header-height})
   overflow-y: scroll
 
+  @include collapsed
+    > .item:not(:first-child)
+      display: none
+
+.listing__show
+  display: block
+  height: 60px
+  font-size: 13px
+  line-height: 23px
+  letter-spacing: 0.16px
+  text-align: center
+  padding-top: 16px
+
+  > span
+    border-bottom: 1px solid $color-grey-normal
+
 // ===== FILTER MESSAGE ===== //
 .listing:not(.listing--filtered)
   .listing__filter
