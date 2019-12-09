@@ -91,11 +91,16 @@ class ApplicationInstance {
       if (event) {
         this.activePanel.panel.show(event)
         this.panels.listing.setActiveItem(event ? event.id : null)
+        this.map.invalidateViewportDimensions()
         this.map.zoomToVenue(event)
       } else {
+        this.map.invalidateViewportDimensions()
+        this.map.fitToMarkers()
         this.activePanel.panel.show(event)
       }
     } else {
+      this.map.invalidateViewportDimensions()
+      this.map.fitToMarkers()
       this.activePanel = null
     }
   }

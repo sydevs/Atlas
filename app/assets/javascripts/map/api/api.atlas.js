@@ -26,4 +26,8 @@ class AtlasAPI {
     })
   }
 
+  register(form, callback) {
+    Util.postForm('/map/registrations', form, callback)
+  }
+
 }

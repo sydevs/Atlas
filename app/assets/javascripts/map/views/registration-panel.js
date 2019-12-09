@@ -1,4 +1,4 @@
-/* global Application, Util */
+/* global Application, Util, AtlasAPI */
 /* exported RegistrationPanel */
 
 class RegistrationPanel {
@@ -41,7 +41,7 @@ class RegistrationPanel {
     this.formFeedback.classList.remove('error')
     this.submitButton.setAttribute('disabled', 'disabled')
 
-    Util.postForm('/map/registrations', this.form, event => {
+    AtlasAPI.register(this.form, event => {
       const response = JSON.parse(event.target.response)
       this.submitButton.removeAttribute('disabled')
       this.formFeedback.innerText = response.message
