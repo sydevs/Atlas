@@ -8,13 +8,15 @@
   box-shadow: $shadow-light
 
   @include mobile
-    top: -100vh
-    left: $control-offset-x * 0.375
-    right: $control-offset-x * 0.375
-    transition: top $control-transition ease
+    top: 0
+    left: 0
+    right: 0
+    transition: all $control-transition-fast ease
 
     @include collapsed
       top: 20
+      left: $control-offset-x * 0.375
+      right: $control-offset-x * 0.375
 
   @include tablet-or-larger
     width: 520px
@@ -32,11 +34,16 @@
   padding: 22px 20px
   padding-right: $header-height
   border: 0
+  transition: all $control-transition-fast ease
 
   font-size: 17px
   letter-spacing: 0.2px
   color: $color-grey-normal
   font-family: raleway, sans-serif
+
+  @include mobile
+    @include not-collapsed
+      padding: 15px 20px
 
 // ICONS
 .search__icon,
@@ -53,9 +60,23 @@
   padding: 0
   cursor: pointer
   text-align: center
+  transition: all $control-transition-fast ease
 
   > .icon
     line-height: $size
+    transition: all $control-transition-fast ease
+
+  @include mobile
+    @include not-collapsed
+      $size: 50px - ($margin * 2)
+      
+      top: $margin
+      right: $margin
+      height: $size
+      width: $size
+
+      > .icon
+        line-height: $size
 
 .search__icon
   font-size: 24px

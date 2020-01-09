@@ -10,9 +10,10 @@
   overflow: hidden
 
   @include mobile
+    background: none
     width: 100vw
-    padding-top: 20px
-    height: calc(100% - #{$map-mobile-height})
+    //padding-top: 20px
+    height: calc(100% - 50px)
     overflow: scroll
     transition: height $panel-transition ease
     position: absolute
@@ -41,7 +42,7 @@
     left: $control-offset-x
     max-height: calc(100% - #{$control-offset-y * 2})
 
-.panels__overlay
+/*.panels__overlay
   position: absolute
   top: 0
   left: 0
@@ -53,7 +54,7 @@
 
   @include mobile
     @include collapsed
-      display: block
+      display: block*/
 
 .panel
   position: relative
@@ -63,6 +64,13 @@
 
   display: flex
   flex-direction: column
+
+  @include mobile
+    background: white
+    min-height: 100%
+
+    @include collapsed
+      min-height: 100%
 
   @include tablet-or-larger
     padding-bottom: $panel-padding
@@ -94,7 +102,7 @@
   flex-grow: 0
 
 // ===== HANDLE ===== //
-.panels__handle
+/*.panels__handle
   display: block
   position: absolute
   top: 0
@@ -118,7 +126,7 @@
       content: icon(narrow-up)
 
   &:hover
-    opacity: 1
+    opacity: 1*/
 
 // ===== CONTROLS ===== //
 .panel__controls
