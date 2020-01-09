@@ -10,10 +10,10 @@ class CMS::PicturesController < CMS::ApplicationController
   end
 
   def create
-    file = params[:files].first
-    picture = @scope.new(file: file)
+    picture = @scope.new
     authorize picture
 
+    picture.file = params[:files].first
     picture.save!
 
     render json: {
