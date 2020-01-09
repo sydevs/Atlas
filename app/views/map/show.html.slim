@@ -82,6 +82,37 @@
     .panel__footer
       .registration__notice
         = translate('map.registration.notice.description')
+        ' 
+        .registration__notice-link class='js-privacy' = translate('map.registration.notice.link')
+      button.panel__action class='js-submit' = translate('map.registration.form.submit')
+
+  // INVITATION PANEL
+  .invitation.panel.panel--thin id='js-information-panel'
+    .panel__content
+      .invitation__title data-attribute='name'
+      .invitation__subtitle data-attribute='address'
+      .invitation__timing
+        .invitation__timing__date
+          .invitation__timing__day data-attribute='day' Monday 28
+          .invitation__timing__month data-attribute='month' Jan 2019
+        .invitation__timing__time data-attribute='time' = "11:00 - 13:00"
+
+      .invitation__description data-attribute='description'
+      .invitation__images data-attribute='images'
+
+    .panel__content
+      .registration__banner Register now
+
+      form.registration__form class='js-form'
+        = csrf_meta_tags
+        input type='hidden' name='event_id'
+        input.registration__input type='text' name='name' placeholder=translate('map.registration.form.name')
+        input.registration__input type='text' name='email' placeholder=translate('map.registration.form.email')
+        .registration__feedback class='js-form-feedback'
+
+    .panel__footer
+      .registration__notice
+        = translate('map.registration.notice.description')
         .registration__notice-link class='js-privacy' = translate('map.registration.notice.link')
       button.panel__action class='js-submit' = translate('map.registration.form.submit')
 
