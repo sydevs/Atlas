@@ -1,7 +1,8 @@
 <% if @event.managers.include?(@manager) %>
 <%= translate('mail.expired.intro', event: @event.label, date: @event.updated_at.to_s(:long)) %>
 
-<%= translate('mail.expired.purpose.description', duration: distance_of_time_in_words(Time.now, Expirable::EXPIRE_AFTER_WEEKS.weeks.from_now)) %>
+<%#= translate('mail.expired.purpose.description', duration: distance_of_time_in_words(Time.now, Expirable::EXPIRE_AFTER_WEEKS.weeks.from_now)) %>
+<%= translate('mail.expired.purpose.description', duration: distance_of_time_in_words(Time.now, Expirable::EXPIRE_AFTER_WEEKS.minutes.from_now)) %>
 
 <%= render 'mailer/managers/event' %>
 
@@ -13,7 +14,8 @@
 <% else %>
 <%= translate('mail.escalation.intro', region: @event.venue.parent.label, event: @event.label, date: @event.updated_at.to_s(:long)) %>
 
-<%= translate('mail.expired.purpose.description', duration: distance_of_time_in_words(Time.now, Expirable::EXPIRE_AFTER_WEEKS.weeks.from_now)) %>
+<%#= translate('mail.expired.purpose.description', duration: distance_of_time_in_words(Time.now, Expirable::EXPIRE_AFTER_WEEKS.weeks.from_now)) %>
+<%= translate('mail.expired.purpose.description', duration: distance_of_time_in_words(Time.now, Expirable::EXPIRE_AFTER_WEEKS.minutes.from_now)) %>
 
 <%= render 'mailer/managers/event' %>
 

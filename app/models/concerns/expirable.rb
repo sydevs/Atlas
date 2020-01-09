@@ -2,14 +2,23 @@ module Expirable
 
   extend ActiveSupport::Concern
 
-  VERIFY_AFTER_WEEKS = 8
-  ESCALATE_AFTER_WEEKS = 9
+  # VERIFY_AFTER_WEEKS = 8
+  # ESCALATE_AFTER_WEEKS = 9
+  # EXPIRE_AFTER_WEEKS = 10
+
+  # VERIFY_DATE = VERIFY_AFTER_WEEKS.weeks.ago.freeze
+  # ESCALATE_DATE = ESCALATE_AFTER_WEEKS.weeks.ago.freeze
+  # EXPIRE_DATE = EXPIRE_AFTER_WEEKS.weeks.ago.freeze
+  # RECENTLY_EXPIRED_DATE = (EXPIRE_AFTER_WEEKS + 1).weeks.ago.freeze
+
+  VERIFY_AFTER_WEEKS = 1
+  ESCALATE_AFTER_WEEKS = 5
   EXPIRE_AFTER_WEEKS = 10
 
-  VERIFY_DATE = VERIFY_AFTER_WEEKS.weeks.ago.freeze
-  ESCALATE_DATE = ESCALATE_AFTER_WEEKS.weeks.ago.freeze
-  EXPIRE_DATE = EXPIRE_AFTER_WEEKS.weeks.ago.freeze
-  RECENTLY_EXPIRED_DATE = (EXPIRE_AFTER_WEEKS + 1).weeks.ago.freeze
+  VERIFY_DATE = VERIFY_AFTER_WEEKS.minutes.ago.freeze
+  ESCALATE_DATE = ESCALATE_AFTER_WEEKS.minutes.ago.freeze
+  EXPIRE_DATE = EXPIRE_AFTER_WEEKS.minutes.ago.freeze
+  RECENTLY_EXPIRED_DATE = (EXPIRE_AFTER_WEEKS + 5).minutes.ago.freeze
 
   included do
     scope :published, -> { where("#{table_name}.updated_at > ?", EXPIRE_DATE) }
@@ -20,15 +29,18 @@ module Expirable
   end
 
   def needs_verification_at
-    updated_at + VERIFY_AFTER_WEEKS.weeks
+    # updated_at + VERIFY_AFTER_WEEKS.weeks
+    updated_at + VERIFY_AFTER_WEEKS.minutes
   end
 
   def needs_escalation_at
-    updated_at + ESCALATE_AFTER_WEEKS.weeks
+    # updated_at + ESCALATE_AFTER_WEEKS.weeks
+    updated_at + ESCALATE_AFTER_WEEKS.minutes
   end
 
   def expires_at
-    updated_at + EXPIRE_AFTER_WEEKS.weeks
+    # updated_at + EXPIRE_AFTER_WEEKS.weeks
+    updated_at + EXPIRE_AFTER_WEEKS.minutes
   end
 
   def expired_at
