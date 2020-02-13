@@ -1,20 +1,20 @@
 
 $icons: (
-  'external': '\e900',
-  'share': '\e901',
+  'marker': '\e913',
+  'marker-selected': '\e912',
+  'location': '\e910',
+  'share': '\e900',
 
-  'info': '\ef4e',
-  'search': '\e902',
-  'close': '\e903',
-  'back': '\ed4d',
+  'up': '\e904',
+  'down': '\e905',
+  'left': '\e90f',
+  'right': '\e901',
 
-  'chevron-up': '\e904',
-  'chevron-down': '\e905',
-  'narrow-up': '\ea76',
-  'narrow-down': '\ea73',
   'plus': '\e906',
   'minus': '\e907',
   'spinner': '\e90e',
+  'search': '\e902',
+  'close': '\e903',
 
   'mail': '\e90d',
   'flipboard': '\e908',
@@ -22,6 +22,5 @@ $icons: (
   'twitter': '\e90c',
   'vk': '\e909',
   'facebook': '\e90b',
-  'mobile-share': '\efe4',
-  'link': '\ef71',
+  'link': '\e911',
 );

@@ -1,73 +1,195 @@
-#data data-current-location=@location.to_json
-#mapid
 
-#boxShadowDiv.box-shadow-div
-.search-container id="searchContainer"
-  .autocomplete.search-box
-    input#myInput.search-text name="myCountry" placeholder="Search" type="text"
-    button#searchCloseButton.search-close X
-  .search-results id="searchResultsContainer"
-    / Search Results Dynamically Generated Here
+// The main map element
+#map data=@map_config data-events=render(template: 'api/views/index.json')
+  #js-debug-viewport
+  #js-debug-viewport-center
 
-.search-area id="searchArea"
-  div.search-area-button-container
-    button#searchAreaButton.search-area-button Search This Area
+// ===== MAP PANELS ===== //
+// All the panels which overlaid onto the map
+.panels id='js-panels'
+  /a.panels__overlay class='js-collapse'
+  /a.panels__handle class='js-collapse' tabindex='0'
+    i.icon.icon--narrow-down
 
-#bottomBar.bottom-bar
-  a#showListLink.show-list = translate('map.list.show')
+  // LISTING PANEL
+  .listing.panel.panel--active id='js-listing-panel'
+    .panel__content
+      .listing__filter
+        a.listing__filter__close class='js-reset' tabindex='0'
+          = translate('map.listing.filter.clear')
+        .listing__filter__prefix
+          = translate('map.listing.filter.prefix')
+        .listing__filter__title class='js-filter-text'
 
-#registrationPanel.search-container.first-side-panel
-  .less-info-container
-    a#cancelRegisterLink.less-info-text
-      = translate('map.general.close')
-  .info-panel-text
-    #infoPanelHeader.info-panel-header
-      = translate('map.register.header')
-    .info-panel-description
-      #registrationPanelDescription
-      #registrationConfrimation.registration-confirmation
-       span.thank-you-title = translate('map.register.confirmation.header')
-       p = translate('map.register.confirmation.description')
+      .listing__no-result
+        .listing__no-result__message = translate('map.listing.no_results')
+        .listing__no-result__link
+          a class='js-no-result-title' tabindex='0'
 
-      form#eventRegistration.event-registration
-        = csrf_meta_tags
-        p#registration-message
-        input#registrationEventId type='hidden' name='event_id'
+      .listing__results id='js-list-results'
 
-        .registration-fields
-          input.text-input type='text' name='name' placeholder='Name'
-          input.text-input type='text' name='email' placeholder='Email'
+      a.listing__show class='js-collapse' tabindex='0'
+        span = translate('map.listing.show')
+      
 
-        button#confirmButton.register-button = translate('map.register.confirm')
+  // INFORMATION PANEL
+  .information.panel.panel--thin id='js-information-panel'
+    .panel__controls
+      a.panel__share class='js-panel-share' tabindex='0'
+        i.icon.icon--share
+      a.panel__back class='js-back' tabindex='0'
+        i.icon.icon--back
+      a.panel__close class='js-panel-close' tabindex='0'
+        i.icon.icon--close
     
-#infoPanel.search-container.first-side-panel
-  .less-info-container
-    a#lessInfoLink.less-info-text = translate('map.general.less_info')
-  .info-panel-text
-    .info-panel-header
-      #infoPanelEventName
-        placeholder name dynamically generated
-    .info-panel-description
-      #infoPanelEventDescription
-        placeholder description dynamically generated
+    .panel__content
+      .information__title data-attribute='name'
+      .information__description data-attribute='description'
+      .information__images data-attribute='images'
 
-template id='eventTemplate'
-  .result-container
-    .event-info-container
-      span.event-name
-      span.event-address
-      span.time-details
-        span.day
-        | |  
-        span.time
-    .event-actions-container
-      .button-container
-        button.registerButton.register-button data-event-id=nil
-          = translate('map.list.register')
-      .link-container
-        a.moreInfoLink.more-info-link data-event-id=nil
-          = translate('map.general.more_info')
-  span.divider
+    .panel__footer
+      button.panel__action class='js-register' = translate('map.information.register')
 
-javascript:
-  window.mbid = '#{ENV['MAPBOX_ACCESSTOKEN']}'
+  // REGISTRATION PANEL
+  .registration.panel.panel--thin id='js-registration-panel'
+    .panel__controls
+      a.panel__info class='js-panel-info' tabindex='0'
+        i.icon.icon--info
+      a.panel__back class='js-back' tabindex='0'
+        i.icon.icon--back
+      a.panel__close class='js-panel-close' tabindex='0'
+        i.icon.icon--close
+
+    .panel__content
+      .registration__header = translate('map.registration.header')
+      .registration__title data-attribute='name'
+      .registration__description data-attribute='description'
+
+    .panel__content
+      form.registration__form class='js-form'
+        = csrf_meta_tags
+        input type='hidden' name='event_id'
+        .registration__timing
+          .registration__timing__date
+            .registration__timing__day data-attribute='day' Monday 28
+            .registration__timing__month data-attribute='month' Jan 2019
+          .registration__timing__time data-attribute='time' = "11:00 - 13:00"
+
+        input.registration__input type='text' name='name' placeholder=translate('map.registration.form.name')
+        input.registration__input type='text' name='email' placeholder=translate('map.registration.form.email')
+        .registration__feedback class='js-form-feedback'
+
+    .panel__footer
+      .registration__notice
+        = translate('map.registration.notice.description')
+        ' 
+        .registration__notice-link class='js-privacy' = translate('map.registration.notice.link')
+      button.panel__action class='js-submit' = translate('map.registration.form.submit')
+
+  // INVITATION PANEL
+  .invitation.panel.panel--thin id='js-information-panel'
+    .panel__content
+      .invitation__title data-attribute='name'
+      .invitation__subtitle data-attribute='address'
+      .invitation__timing
+        .invitation__timing__date
+          .invitation__timing__day data-attribute='day' Monday 28
+          .invitation__timing__month data-attribute='month' Jan 2019
+        .invitation__timing__time data-attribute='time' = "11:00 - 13:00"
+
+      .invitation__description data-attribute='description'
+      .invitation__images data-attribute='images'
+
+    .panel__content
+      .registration__banner Register now
+
+      form.registration__form class='js-form'
+        = csrf_meta_tags
+        input type='hidden' name='event_id'
+        input.registration__input type='text' name='name' placeholder=translate('map.registration.form.name')
+        input.registration__input type='text' name='email' placeholder=translate('map.registration.form.email')
+        .registration__feedback class='js-form-feedback'
+
+    .panel__footer
+      .registration__notice
+        = translate('map.registration.notice.description')
+        .registration__notice-link class='js-privacy' = translate('map.registration.notice.link')
+      button.panel__action class='js-submit' = translate('map.registration.form.submit')
+
+  // SHARING PANEL
+  .sharing.panel.panel--thin id='js-sharing-panel'
+    .panel__controls
+      a.panel__back class='js-back' tabindex='0'
+        i.icon.icon--back
+      a.panel__close class='js-panel-close' tabindex='0'
+        i.icon.icon--close
+
+    .panel__content
+      .sharing__confirmation
+        .sharing__circle
+          .sharing__confirmation__title = translate('map.sharing.confirmation.title')
+          .sharing__confirmation__subtitle = translate('map.sharing.confirmation.subtitle')
+
+      .sharing__invite
+        .sharing__invite__header = translate('map.sharing.invite')
+        .sharing__actions
+          .sharing__link
+            i.icon.icon--link class='js-copy-link'
+            input class='js-link' type='text' value=map_root_url
+            .sharing__link__confirmation = translate('map.sharing.copied')
+          .sharing__social-icons class='js-desktop-share'
+            - Map::ApplicationHelper::SHARING_URLS.each do |key, url|
+              a class="sharing__#{key} js-sharing-button" target='_blank' data-template=url
+                i.icon class="icon--#{key}"
+          a.sharing__mobile-button class='js-mobile-share'
+            i.icon.icon--mobile-share
+
+  // PRIVACY PANEL
+  .privacy.panel.panel--thin id='js-privacy-panel'
+    .panel__controls
+      a.panel__back class='js-back' tabindex='0'
+        i.icon.icon--back
+      a.panel__close class='js-panel-close' tabindex='0'
+        i.icon.icon--close
+
+    .panel__content
+      | Privacy notice panel still needs to be filled in.
+
+// ===== SEARCH BOX ===== //
+.search id='js-search'
+  input.search__input class='js-search-input' type='text' tabindex='1' placeholder=(@venue&.full_address || @query || translate('map.listing.search'))
+  .search__icon
+    i.icon.icon--search
+  .search__spinner
+    i.icon.icon--spinner
+  a.search__collapse class='js-collapse' tabindex='1'
+    i.icon.icon--chevron-down
+  ul.search__results class='js-search-results'
+
+// ===== REFRESH BUTTON ===== //
+// Button to search the current area
+.refresh
+  button.refresh__button id='js-refresh' tabindex='1'
+    = translate('map.search_area')
+
+// ===== ZOOM BUTTONS ===== //
+.zoom
+  .zoom__in id='js-zoom-in' tabindex='1'
+    .icon.icon--plus
+  .zoom__out id='js-zoom-out' tabindex='1'
+    .icon.icon--minus
+
+/ ===== TEMPLATES ===== /
+template id='js-item-template'
+  .item.list__item class='js-item' data-id=nil
+    .item__actions
+      button.item__register class='js-register'
+        = translate('map.listing.register')
+      a.item__more class='js-more' tabindex='0'
+        span = translate('map.listing.more_info')
+    .item__info
+      .item__name data-attribute='name'
+      .item__address data-attribute='address'
+      .item__datetime
+        .item__day data-attribute='day'
+        .item__time data-attribute='time'

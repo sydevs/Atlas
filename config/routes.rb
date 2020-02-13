@@ -10,6 +10,7 @@ Rails.application.routes.draw do
 
   namespace :map do
     root to: 'application#show'
+    get :privacy, to: 'application#privacy'
     post :registrations, to: 'registrations#create'
   end
 

@@ -27,16 +27,21 @@ class Map::ApplicationController < ActionController::Base
     render 'map/show'
   end
 
+  def privacy
+    render 'map/privacy'
+  end
+
   private
 
     def set_jbuilder_params!
       if scope
-        @records = scope.events.includes(:pictures).published
+        @records = scope.includes(:events, events: :pictures).published
       else
-        @records = Event.joins(:venue).includes(:venue, :pictures).within(50, origin: geocoded_coordinates)
+        @records = Venue.includes(:events, events: :pictures).within(50, origin: geocoded_coordinates)
       end
 
-      @model = Event
+      @verbose = true
+      @model = Venue
     end
 
     def scope
@@ -58,14 +63,10 @@ class Map::ApplicationController < ActionController::Base
     end
 
     def api_endpoint
-      includes = %i[pictures venues].join(',')
-
       if scope
-        # url_for([:api, scope, :events, format: :json, include: includes])
         url_for([:api, scope, :events, format: :json])
       else
-        # api_events_url(format: :json, include: includes)
-        api_events_url(format: :json)
+        api_venues_url(format: :json)
       end
     end
 

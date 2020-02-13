@@ -26,4 +26,12 @@ module VenueDecorator
     CountryDecorator.get_label(country_code)
   end
 
+  def distance(coordinates)
+    @distance ||= distance_from(coordinates)
+  end
+
+  def distance_in_words(coordinates)
+    I18n.translate('api.distance', distance: distance(coordinates).to_i)
+  end
+
 end

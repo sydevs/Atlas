@@ -4,7 +4,7 @@ json.extract! event, :id, :label
 json.description event.description || ''
 
 if event.venue.present?
-  if @include&.include?(:venue) || @include&.include?(:venues)
+  if verbose
     json.extract! event, :room
     json.address_text event.room ? "#{event.room}, #{event.venue.full_address}" : event.venue.full_address
   else
@@ -20,6 +20,11 @@ if event.venue.present?
   if event.venue.latitude? && event.venue.latitude?
     json.latitude event.venue.latitude
     json.longitude event.venue.longitude
+
+    if @coordinates.present?
+      json.distance event.venue.distance(@coordinates)
+      json.distance_text event.venue.distance_in_words(@coordinates)
+    end
   end
 end
 
@@ -49,9 +54,9 @@ json.images do
   end
 end
 
-if !local_assigns[:nested] && (@include && (@include.include?(:venue) || @include.include?(:venues)))
+if verbose
   json.venue do
-    json.partial! 'api/records/venue', venue: event.venue, nested: true
+    json.partial! 'api/records/venue', venue: event.venue, verbose: false
   end
 else
   json.venue api_venue_url(event.venue_id, format: :json)

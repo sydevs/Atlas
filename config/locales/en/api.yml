@@ -1,2 +1,4 @@
 
 en:
+  api:
+    distance: "%{distance} km away"

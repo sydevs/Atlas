@@ -13,6 +13,7 @@
   // Better Font Rendering
   -webkit-font-smoothing: antialiased
   -moz-osx-font-smoothing: grayscale
+  vertical-align: middle
 
 +keyframes(spin)
   0%
@@ -23,6 +24,10 @@
 @each $name, $code in $icons
   .icon--#{$name}::before
       content: $code
+
+@each $direction in up down left right
+  .icon--#{$direction}
+    font-size: 2em
 
 .icon--spinner::before
   display: block

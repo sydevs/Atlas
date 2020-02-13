@@ -1,0 +1,125 @@
+@import '../_mixins'
+
+.share-wrapper
+  position: fixed
+  left: 0
+  top: 0
+  width: 100%
+  height: 100%
+  z-index: $z-hidden
+  background-color: transparentize(black, 0.6)
+  overflow: auto
+
+.share-wrapper--active
+  z-index: $z-modal
+  
+  .share-modal
+    transform: translate(-50%, -50%) scale(1)
+
+.share-modal
+  box-shadow: $shadow-heavy
+  background-color: #fefefe
+
+  position: absolute
+  top: 50%
+  left: 50%
+
+  width: auto
+  transform: translate(-50%, -50%) scale(0)
+  transition: transform 0.2s ease
+  padding: 20px
+
+.share__close
+  position: absolute
+  top: 10px
+  right: 10px
+  //color: white
+  cursor: pointer
+  
+  &:hover
+    opacity: 0.8
+
+.share__header
+  text-align: center
+  font-weight: $font-bold
+  line-height: 1.3
+  letter-spacing: 0.25px
+  margin-bottom: 18px
+
+.share__actions
+  @include desktop-or-larger
+    flex-direction: row
+
+.share__link
+  position: relative
+  display: inline-block
+  width: 330px
+  margin-left: auto
+  margin-right: auto
+  margin-bottom: 12px
+
+  > input
+    border: 1px solid $color-border-light
+    padding: 15px 20px
+    padding-right: 50px
+    font-family: $font-text
+    font-weight: $font-semibold
+    font-size: 14px
+    line-height: 1.15
+    letter-spacing: 0.17px
+    width: 100%
+
+  > .icon
+    font-size: 24px
+    position: absolute
+    top: 13px
+    right: 13px
+    cursor: pointer
+    transform: color 0.2s ease
+
+  > .icon:hover
+    color: $color-grey-dark
+
+  > .share__link__confirmation
+    display: none
+
+  > input:focus + .share__link__confirmation
+    display: block
+
+.share__link__confirmation
+  margin-top: 8px
+  font-size: 16px
+  color: $color-blue
+  text-align: center
+
+.share__social-icons
+  font-size: 36px
+  text-align: center
+
+.share__social-icons > a
+  display: inline-block
+  margin: 12px
+  text-decoration: none
+  transition: all 0.2s ease
+  opacity: 1
+
+  &:hover
+    opacity: 0.7
+
+.share__mail
+  color: $color-grey-normal
+
+.share__facebook
+  color: #3b5998
+
+.share__twitter
+  color: #1da1f2
+
+.share__linkedin
+  color: #0077b5
+
+.share__flipboard
+  color: #e12828
+
+.share__vk
+  color: #45668e

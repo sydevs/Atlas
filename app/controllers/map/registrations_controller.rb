@@ -18,7 +18,7 @@ class Map::RegistrationsController < ActionController::Base
   private
 
   def registration_params
-    params.permit(:event_id, :name, :email)
+    params.permit(:event_id, :name, :email, :starting_at)
   end
 
 end

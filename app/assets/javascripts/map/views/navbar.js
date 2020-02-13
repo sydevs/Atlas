@@ -1,15 +1,20 @@
 /* globals Application, Util, GeoSearchAPI */
-/* exported SearchBox */
+/* exported Navbar */
 
-class SearchBox {
+class Navbar {
 
   constructor(element) {
     this.container = element
+
+    this.venueBack = document.getElementById('js-venue-back')
+    this.venueText = document.getElementById('js-venue-title')
+
     this.geoSearch = new GeoSearchAPI()
-    this.searchResults = element.querySelector('.js-search-results')
-    this.searchInput = element.querySelector('.js-search-input')
+    this.searchResults = document.getElementById('js-search-results')
+    this.searchInput = document.getElementById('js-search-input')
     this.enableGeoSearch = true
 
+    this.venueBack.addEventListener('click', _event => this.clearVenue())
     this.searchResults.addEventListener('click', event => this.handleSearchResultClick(event.target))
     this.searchInput.addEventListener('input', _event => this.refreshGeoSearch())
     this.searchInput.addEventListener('keydown', event => this.handleKeyPress(event.code, event.keyCode))
@@ -39,10 +44,10 @@ class SearchBox {
   }
 
   setActive(active) {
-    const isActive = this.container.classList.contains('search--active')
+    const isActive = this.container.classList.contains('navbar--active')
     if (isActive == active) return
 
-    this.container.classList.toggle('search--active', active)
+    this.container.classList.toggle('navbar--active', active)
 
     if (active) {
       this.storedCollapseState = Util.isCollapsed()
@@ -64,7 +69,7 @@ class SearchBox {
       return
     }
 
-    this.container.classList.add('search--loading')
+    this.container.classList.add('navbar--loading')
 
     this.geoSearch.query(searchText, results => {
       results.forEach(result => {
@@ -77,7 +82,7 @@ class SearchBox {
       })
       
       setTimeout(() => {
-        this.container.classList.remove('search--loading')
+        this.container.classList.remove('navbar--loading')
       }, 1000)
     })
   }
@@ -96,6 +101,17 @@ class SearchBox {
     } else if (event.code == 'ArrowUp' || event.keyCode === 38) {
       this.moveFocusUp()
     }
+  }
+
+  /* ===== VENUE BANNER ===== */
+
+  setVenue(venue) {
+    console.log(venue)
+    this.venueText.textContent = venue ? venue.label : ''
+  }
+
+  clearVenue() {
+    Application.showList()
   }
 
   /* ===== SEARCH RESULT FOCUS ===== */

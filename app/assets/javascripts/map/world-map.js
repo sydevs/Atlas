@@ -4,17 +4,21 @@
 class WorldMap {
 
   constructor(element) {
+    this.container = element
+    
     this.leaflet = L.map(element, { zoomControl: false })
     this.markers = {}
 
-    this.panels = document.getElementById('js-panels')
-    this.searchBox = document.getElementById('js-search')
     this.refreshButton = document.getElementById('js-refresh')
     this.refreshButton.addEventListener('click', () => this.refresh())
     this.refreshInProgress = false
 
     this.zoomPadding = 40
-
+    this.minHeight = 174
+    this.maxHeight = window.innerHeight - 200
+    this.currentHeight = this.maxHeight
+    this.container.style = `max-height: ${this.currentHeight}`
+    
     //L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/streets-v11/tiles/{z}/{x}/{y}?access_token={accessToken}', {
     L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
       attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
@@ -29,8 +33,13 @@ class WorldMap {
       showCoverageOnHover: false,
       //singleMarkerMode: true,
     }).addTo(this.leaflet)
-    this.markersGroup.on('click', event => this.selectMarker(event.layer))
 
+    this.markersGroup.on('click', event => Application.showVenue(event.layer.options.venue))
+
+    this.normalIcon = L.divIcon({ className: 'marker icon icon--marker' })
+    this.selectedIcon = L.divIcon({ className: 'marker marker--selected icon icon--marker-selected' })
+
+    window.addEventListener('wheel', event => this.scaleByScroll(event), { passive: false })
     document.getElementById('js-zoom-in').addEventListener('click', () => this.zoom(+1))
     document.getElementById('js-zoom-out').addEventListener('click', () => this.zoom(-1))
 
@@ -45,8 +54,19 @@ class WorldMap {
     this.invalidateViewportDimensions()
   }
 
+  setInteractive(interactive) {
+    this.leaflet._handlers.forEach(function(handler) {
+      if (interactive) {
+        handler.enable()
+      } else {
+        handler.disable()
+      }
+    })
+  }
+
   // ===== MARKER MANIUPLATION ===== //
 
+  /*
   setEventMarkers(events) {
     this.markersGroup.clearLayers()
 
@@ -65,9 +85,25 @@ class WorldMap {
       this.fitToMarkers()
     }
   }
+  */
+
+  setVenueMarkers(venues) {
+    this.markersGroup.clearLayers()
+
+    if (venues.length > 0) {
+      for (let i = 0; i < venues.length; i++) {
+        if (venues[i].events.length > 0) {
+          this.addVenueMarker(venues[i])
+        }
+      }
+
+      this.fitToMarkers()
+    }
+  }
 
   addVenueMarker(venue) {
-    const marker = L.marker([venue.latitude, venue.longitude], { venue: venue })
+    const marker = L.marker([venue.latitude, venue.longitude], { venue: venue, icon: this.normalIcon })
+    //const marker = L.marker([venue.latitude, venue.longitude], { venue: venue })
     this.markers[venue.id] = marker
     marker.addTo(this.markersGroup)
   }
@@ -75,6 +111,29 @@ class WorldMap {
   clearMarkers() {
     this.markersGroup.clearLayers()
     this.markers = []
+  }
+
+  // ===== SCROLL RESIZING ===== //
+
+  scaleByScroll(event) {
+    if (!Util.isDevice('mobile')) return
+
+    this.currentHeight = this.container.offsetHeight
+    if (event.deltaY < 0 && window.scrollY <= 0) event.preventDefault()
+    if (event.deltaY == 0 || window.scrollY > 0) return
+    if (event.deltaY < 0 && this.currentHeight >= this.maxHeight) return
+    if (event.deltaY > 0 && this.currentHeight <= this.minHeight) return
+    
+    this.currentHeight = this.currentHeight - event.deltaY
+    this.currentHeight = Math.min(Math.max(this.currentHeight, this.minHeight), this.maxHeight)
+    this.container.style = `max-height: ${this.currentHeight}`
+    this.setRefreshHidden(this.currentHeight < this.maxHeight)
+    Application.setInteractive(this.currentHeight >= this.maxHeight)
+    event.preventDefault()
+  }
+
+  scaleToMax() {
+    this.container.style = `max-height: ${this.maxHeight}`
   }
 
   // ===== ZOOM MANIPULATION ===== //
@@ -101,6 +160,7 @@ class WorldMap {
     })
   }
 
+  /*
   zoomToEvents(events) {
     if (events.length == 0) return
 
@@ -116,6 +176,7 @@ class WorldMap {
       maxZoom: 14,
     })
   }
+  */
 
   zoomToVenue(venue) {
     this.zoomTo(venue.latitude, venue.longitude, 15)
@@ -136,12 +197,18 @@ class WorldMap {
 
   // ===== INTERACTION ===== //
 
-  selectMarker(marker) {
-    const venue = marker.options.venue
-    Application.search.setActive(false)
-    Application.toggleCollapsed(false)
-    Application.panels.listing.filterByVenue(venue)
-    this.zoomToVenue(venue)
+  selectMarker(marker_or_id) {
+    const marker = (typeof(marker_or_id) === 'number' ? this.markers[marker_or_id] : marker_or_id)
+      
+    if (this.selectedMarker) {
+      this.selectedMarker.setIcon(this.normalIcon)
+    }
+
+    this.selectedMarker = marker
+
+    if (this.selectedMarker) {
+      this.selectedMarker.setIcon(this.selectedIcon)
+    }
   }
 
   refresh() {
@@ -152,37 +219,35 @@ class WorldMap {
 
   setRefreshHidden(hidden) {
     if (this.refreshInProgress) return
-    this.refreshButton.classList.toggle('refresh__button--hidden', hidden)
+    this.refreshButton.classList.toggle('refresh-control__button--hidden', hidden)
   }
 
   // ===== UTILITY ===== //
 
-  invalidatePanels() {
-    this.invalidateViewportDimensions()
-    this.fitToMarkers()
-  }
-
   invalidateViewportDimensions() {
     let result
 
-    if (Util.isMobile()) {
+    if (Util.isDevice('mobile')) {
       result = {
         top: this.zoomPadding / 2,
-        bottom: (window.innerHeight - 210) + this.zoomPadding / 2,
+        bottom: this.zoomPadding / 2,
         left: this.zoomPadding / 2,
         right: this.zoomPadding / 2,
       }
 
-      if (Util.isCollapsed()) {
+      if (Util.isMode('list')) {
         result.top = 124 + this.zoomPadding / 2
-        result.bottom = 221 + this.zoomPadding / 2
       }
     } else {
       result = {
         top: this.refreshButton.getBoundingClientRect().bottom + this.zoomPadding,
         bottom: this.zoomPadding,
-        left: this.panels.getBoundingClientRect().right + this.zoomPadding,
+        left: this.zoomPadding,
         right: this.zoomPadding,
+      }
+
+      if (Util.isDevice('desktop')) {
+        result.left = 531 + this.zoomPadding
       }
     }
 
@@ -191,6 +256,7 @@ class WorldMap {
     result.x = result.left + result.width / 2
     result.y = result.top + result.height / 2
     this.viewport = result
+    this.maxHeight = window.innerHeight - 200
 
     this.updateViewportBox()
     return result

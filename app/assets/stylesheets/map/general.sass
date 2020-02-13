@@ -1,28 +1,45 @@
 @import '_mixins'
 
 html, body
-  overflow: hidden
   height: 100%
   height: fill-available
+  background: white
 
 body
   position: relative
   margin: 0
   color: $color-grey-normal
   font-family: $font-text
+
+body.noscroll
   overflow: hidden
 
 *
   box-sizing: border-box
 
-input:focus
-  outline: 1px solid $color-blue
+input, textarea
+  &:focus
+    outline: 1px solid $color-blue
 
-#map
-  position: relative !important
-  height: 100%
+button
+  color: $color-grey-normal
+  font-weight: $font-semibold
 
-.leaflet-control-container
-  @include mobile
-    display: none
+.button
+  transition: all 0.2s
+  cursor: pointer
+  background: transparent
+  text-align: center
 
+  padding: 0
+  color: inherit
+  text-align: center
+  font-weight: $font-normal
+  line-height: 50px
+  font-size: 14px
+  letter-spacing: 0.17px
+  border: 1px solid $color-border
+  text-decoration: none
+
+  &:hover
+    background: $color-background-hover

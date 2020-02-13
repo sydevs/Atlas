@@ -1,7 +1,7 @@
-/* globals Application, ListingItem */
-/* exported ListingPanel */
+/* globals Application, ListItem */
+/* exported ListPanel */
 
-class ListingPanel {
+class ListPanel {
 
   constructor(element) {
     this.container = element
@@ -9,24 +9,13 @@ class ListingPanel {
     this.items = []
     this.itemTemplate = document.getElementById('js-item-template')
     this.itemsContainer = document.getElementById('js-list-results')
-    this.filterText = element.querySelector('.js-filter-text')
-    this.noResultsAlternativeTitle = element.querySelector('.js-no-result-title')
+    this.noResultsAlternativeTitle = document.getElementById('js-list-alternative')
     this.noResultsAlternativeTitle.addEventListener('click', () => this.triggerAlternativeQuery())
-    element.querySelector('.js-reset').addEventListener('click', () => this.resetFilter(true))
-  }
-
-  show() {
-    this.container.classList.add('panel--active')
-  }
-
-  hide() {
-    this.container.classList.remove('panel--active')
   }
 
   filterByVenue(venue) {
     this.items.forEach(item => item.setHidden(item.event.venue_id != venue.id))
     this.container.classList.add('listing--filtered')
-    this.filterText.textContent = venue.address.street || ''
   }
 
   resetFilter(zoom = false) {
@@ -40,19 +29,39 @@ class ListingPanel {
     this.items = []
   }
 
+  setVenues(venues) {
+    console.log('venues', venues)
+    this.clearEvents()
+    this.resetFilter()
+
+    this.container.classList.toggle('list--no-results', venues.length == 0)
+    for (let i = 0; i < venues.length; i++) {
+      const venue = venues[i]
+      let events = venue.events
+
+      for (let n = 0; n < events.length; n++) {
+        const event = events[n]
+        event.venue_id = venue.id
+        this.appendEvent(event)
+      }
+    }
+  }
+
+  /*
   setEvents(events) {
     this.clearEvents()
     this.resetFilter()
 
-    this.container.classList.toggle('listing--no-result', events.length == 0)
+    this.container.classList.toggle('list--no-results', events.length == 0)
     for (let i = 0; i < events.length; i++) {
       this.appendEvent(events[i])
     }
   }
+  */
 
   appendEvent(event) {
     const element = document.importNode(this.itemTemplate.content, true).querySelector('.js-item')
-    this.items[event.id] = new ListingItem(element, event)
+    this.items[event.id] = new ListItem(element, event)
     this.itemsContainer.appendChild(element)
   }
 
@@ -73,14 +82,17 @@ class ListingPanel {
     this.resetFilter()
 
     this.alternative = alternative
-    this.container.classList.add('listing--no-result')
-    this.noResultsAlternativeTitle.innerText = alternative.label
+    this.container.classList.add('list--no-results')
+
+    if (alternative) {
+      this.noResultsAlternativeTitle.innerText = alternative.label
+    }
   }
 
   triggerAlternativeQuery() {
     const query = this.alternative.query
     query.label = this.alternative.label
-    Application.search.select(query)
+    Application.navbar.select(query)
   }
 
 }

@@ -6,10 +6,15 @@ json.address do
   json.extract! venue, :street, :city, :province_code, :province_name, :country_code, :country_name, :postcode
 end
 
-if !local_assigns[:nested] && @include.include?(:events)
+if verbose
   json.events do
-    json.partial! 'api/records/event', collection: venue.events, as: :event, nested: true
+    json.partial! 'api/records/event', collection: venue.events, as: :event, verbose: false
   end
 else
   json.events api_venue_events_url(venue.id, format: :json)
+end
+
+if venue.latitude? && venue.latitude? && @coordinates.present?
+  json.distance venue.distance(@coordinates)
+  json.distance_text venue.distance_in_words(@coordinates)
 end

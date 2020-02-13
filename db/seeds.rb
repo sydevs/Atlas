@@ -38,6 +38,7 @@ def load_venue address, country_code, index
 
   venue = Venue.find_or_initialize_by(street: address[0])
   venue.update!({
+    published: true,
     name: [true, false].sample ? Faker::Address.community : nil,
     street: address[0],
     city: address[1],
@@ -64,6 +65,7 @@ def load_venue address, country_code, index
     images_folder = "db/seeds/files/#{images_folder}/#{rand(1..IMAGE_SETS[images_folder])}"
 
     event = venue.events.create!({
+      published: true,
       name: [true, false].sample ? Faker::Address.community : nil,
       description: [true, false].sample ? Faker::Lorem.paragraph : nil,
       room: [true, false].sample ? "#{Faker::Address.city_prefix} Room" : nil,
@@ -92,6 +94,7 @@ def load_venue address, country_code, index
         email: "#{name.parameterize(separator: '_')}@example.com",
         comment: [true, false].sample ? Faker::Lorem.paragraph : nil,
         created_at: Faker::Time.backward(days: 14),
+        starting_at: event.upcoming_dates(3).sample,
       })
 
       puts "    |-> Created Registration - #{registration.name} <#{registration.email}>"

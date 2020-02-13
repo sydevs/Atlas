@@ -1,9 +1,10 @@
 class API::ApplicationController < ActionController::Base
 
   before_action :authenticate_access_key!
-  before_action :parse_params!
 
   def index records = nil
+    @verbose = params[:verbose] == 'true' || !params.key?(:verbose)
+    puts "Verbose: #{@verbose.inspect}"
     @records = records || scope
     render 'api/views/index'
   end
@@ -35,12 +36,12 @@ class API::ApplicationController < ActionController::Base
           scope = @model
         end
 
-        scope = scope.respond_to?(:published) ? scope.published : scope
-        associations = @model.reflect_on_all_associations.map(&:name).map(&:to_sym)
-        includes = associations & @include
-        scope.includes(*includes) if includes.present?
+        if @verbose
+          associations = @model.reflect_on_all_associations.map(&:name).map(&:to_sym)
+          scope.includes(*associations) if associations.present?
+        end
 
-        scope
+        scope.respond_to?(:published) ? scope.published : scope
       end
     end
 
@@ -51,10 +52,6 @@ class API::ApplicationController < ActionController::Base
       AccessKey.find(key: params[:key]).touch(:last_accessed_at)
     rescue ActiveRecord::RecordNotFound => _e
       render 'api/views/error', status: 401
-    end
-
-    def parse_params!
-      @include = params[:include]&.split(',')&.map(&:to_sym) || []
     end
 
 end

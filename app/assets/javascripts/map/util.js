@@ -2,12 +2,22 @@
 
 const Util = {
 
-  isMobile() {
-    return window.innerWidth < 768
+  isDevice(device) {
+    if (window.innerWidth < 768) {
+      return device == 'mobile'
+    } else if (window.innerWidth > 1280) {
+      return device == 'desktop'
+    } else {
+      return device == 'tablet'
+    }
   },
 
   isCollapsed() {
     return document.body.classList.contains('collapsed')
+  },
+
+  isMode(mode) {
+    return document.body.classList.contains(`mode--${mode}`)
   },
 
   getURL(url, callback) {

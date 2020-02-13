@@ -1,195 +1,151 @@
 
-// The main map element
+// ===== SEARCH BOX ===== //
+.navbar id='js-navbar'
+  .navbar__box
+    .navbar__venue
+      .navbar__venue__back id='js-venue-back'
+        i.icon.icon--left
+      .navbar__venue__title
+        strong Events at
+        span id='js-venue-title'
+
+    .navbar__search
+      input.navbar__search__input id='js-search-input' type='text' tabindex='1' placeholder=(@venue&.full_address || @query || translate('map.listing.search'))
+      .navbar__search__icon
+        i.icon.icon--search
+        i.icon.icon--spinner
+    
+    ul.navbar__results id='js-search-results'
+
+// ===== MAP ===== //
 #map data=@map_config data-events=render(template: 'api/views/index.json')
   #js-debug-viewport
   #js-debug-viewport-center
 
-// ===== MAP PANELS ===== //
-// All the panels which overlaid onto the map
-.panels id='js-panels'
-  /a.panels__overlay class='js-collapse'
-  /a.panels__handle class='js-collapse' tabindex='0'
-    i.icon.icon--narrow-down
+// ===== LIST PANEL ===== //
+.list id='js-list-panel'
+  .list__no-results
+    .list__no-results__message = translate('map.listing.no_results')
+    .list__no-results__link
+      a id='js-list-alternative' tabindex='0'
+  .list__results id='js-list-results'
 
-  // LISTING PANEL
-  .listing.panel.panel--active id='js-listing-panel'
-    .panel__content
-      .listing__filter
-        a.listing__filter__close class='js-reset' tabindex='0'
-          = translate('map.listing.filter.clear')
-        .listing__filter__prefix
-          = translate('map.listing.filter.prefix')
-        .listing__filter__title class='js-filter-text'
+// ===== INFO PANEL ===== //
+.info id='js-info-panel'
+  .info__action.info__action--left id='js-info-close'
+    .icon.icon--left
+  .info__action.info__action--right id='js-info-share'
+    .icon.icon--share
 
-      .listing__no-result
-        .listing__no-result__message = translate('map.listing.no_results')
-        .listing__no-result__link
-          a class='js-no-result-title' tabindex='0'
+  a.event__button id='js-info-action' href='#register'
+    = translate('map.information.register')
+  .event
+    .event__name data-attribute='name'
+    .event__description
+      span.event__address data-attribute='address'
+    .event__meta
+      span.event__day data-attribute='day'
+      span.event__time data-attribute='time'
+      .event__languages data-attribute='languages'
 
-      .listing__results id='js-list-results'
+  a.info__directions data-attribute='directions' target='_blank'
+    span.icon.icon--location
+    = translate('map.information.directions')
 
-      a.listing__show class='js-collapse' tabindex='0'
-        span = translate('map.listing.show')
-      
+  .info__description data-attribute='description'
+  .info__images.main-carousel id='js-image-gallery' data-attribute='images'
 
-  // INFORMATION PANEL
-  .information.panel.panel--thin id='js-information-panel'
-    .panel__controls
-      a.panel__share class='js-panel-share' tabindex='0'
-        i.icon.icon--share
-      a.panel__back class='js-back' tabindex='0'
-        i.icon.icon--back
-      a.panel__close class='js-panel-close' tabindex='0'
-        i.icon.icon--close
-    
-    .panel__content
-      .information__title data-attribute='name'
-      .information__description data-attribute='description'
-      .information__images data-attribute='images'
+  div id='register'
+  form.registration id='js-registration'
+    .registration__header
+      .registration__header__text
+        .registration__header__title = translate('map.registration.header')
+        .registration__header__subtitle This class is on-going
 
-    .panel__footer
-      button.panel__action class='js-register' = translate('map.information.register')
+    .registration__fields
+      = csrf_meta_tags
+      input type='hidden' name='event_id'
 
-  // REGISTRATION PANEL
-  .registration.panel.panel--thin id='js-registration-panel'
-    .panel__controls
-      a.panel__info class='js-panel-info' tabindex='0'
-        i.icon.icon--info
-      a.panel__back class='js-back' tabindex='0'
-        i.icon.icon--back
-      a.panel__close class='js-panel-close' tabindex='0'
-        i.icon.icon--close
+      .registration__timing__label
+        .registration__timing__text I’D LIKE TO START ON:
+      .registration__timing id='js-timing-carousel'
 
-    .panel__content
-      .registration__header = translate('map.registration.header')
-      .registration__title data-attribute='name'
-      .registration__description data-attribute='description'
+      input.registration__input type='text' name='name' placeholder=translate('map.registration.form.name')
+      input.registration__input type='text' name='email' placeholder=translate('map.registration.form.email')
+      textarea.registration__textarea rows=3 placeholder=translate('map.registration.form.message')
 
-    .panel__content
-      form.registration__form class='js-form'
-        = csrf_meta_tags
-        input type='hidden' name='event_id'
-        .registration__timing
-          .registration__timing__date
-            .registration__timing__day data-attribute='day' Monday 28
-            .registration__timing__month data-attribute='month' Jan 2019
-          .registration__timing__time data-attribute='time' = "11:00 - 13:00"
+      .registration__message id='js-registration-feedback'
 
-        input.registration__input type='text' name='name' placeholder=translate('map.registration.form.name')
-        input.registration__input type='text' name='email' placeholder=translate('map.registration.form.email')
-        .registration__feedback class='js-form-feedback'
-
-    .panel__footer
       .registration__notice
         = translate('map.registration.notice.description')
-        ' 
-        .registration__notice-link class='js-privacy' = translate('map.registration.notice.link')
-      button.panel__action class='js-submit' = translate('map.registration.form.submit')
+        br
+        a.registration__notice-link href=map_privacy_path target='_blank'
+          = translate('map.registration.notice.link')
+          
+      button.registration__submit id='js-registration-submit'
+        = translate('map.registration.form.submit')
 
-  // INVITATION PANEL
-  .invitation.panel.panel--thin id='js-information-panel'
-    .panel__content
-      .invitation__title data-attribute='name'
-      .invitation__subtitle data-attribute='address'
-      .invitation__timing
-        .invitation__timing__date
-          .invitation__timing__day data-attribute='day' Monday 28
-          .invitation__timing__month data-attribute='month' Jan 2019
-        .invitation__timing__time data-attribute='time' = "11:00 - 13:00"
+    .registration__confirmation
+      .registration__confirmation__circle
+        .registration__confirmation__title = translate('map.registration.confirmation.title')
+        .registration__confirmation__subtitle = translate('map.registration.confirmation.subtitle')
+      a.registration__confirmation__share id='js-registration-share'
+        span.icon.icon--share
+        = translate('map.sharing.invite')
+      a.registration__confirmation__back id='js-registration-close'
+        span.icon.icon--left
+        = translate('map.registration.confirmation.back')  
 
-      .invitation__description data-attribute='description'
-      .invitation__images data-attribute='images'
+.share-wrapper id='js-share'
+  .share-modal
+    .share__header = translate('map.sharing.invite')
+    a.share__close id='js-share-close'
+      i.icon.icon--close
+    .share__actions
+      .share__link
+        i.icon.icon--link id='js-share-copy'
+        input id='js-share-link' type='text' value=map_root_url
+        .share__link__confirmation = translate('map.sharing.copied')
+      .share__social-icons
+        - Map::ApplicationHelper::SHARING_URLS.each do |key, url|
+          a class="share__#{key} js-share-button" target='_blank' data-template=url
+            i.icon class="icon--#{key}"
 
-    .panel__content
-      .registration__banner Register now
-
-      form.registration__form class='js-form'
-        = csrf_meta_tags
-        input type='hidden' name='event_id'
-        input.registration__input type='text' name='name' placeholder=translate('map.registration.form.name')
-        input.registration__input type='text' name='email' placeholder=translate('map.registration.form.email')
-        .registration__feedback class='js-form-feedback'
-
-    .panel__footer
-      .registration__notice
-        = translate('map.registration.notice.description')
-        .registration__notice-link class='js-privacy' = translate('map.registration.notice.link')
-      button.panel__action class='js-submit' = translate('map.registration.form.submit')
-
-  // SHARING PANEL
-  .sharing.panel.panel--thin id='js-sharing-panel'
-    .panel__controls
-      a.panel__back class='js-back' tabindex='0'
-        i.icon.icon--back
-      a.panel__close class='js-panel-close' tabindex='0'
-        i.icon.icon--close
-
-    .panel__content
-      .sharing__confirmation
-        .sharing__circle
-          .sharing__confirmation__title = translate('map.sharing.confirmation.title')
-          .sharing__confirmation__subtitle = translate('map.sharing.confirmation.subtitle')
-
-      .sharing__invite
-        .sharing__invite__header = translate('map.sharing.invite')
-        .sharing__actions
-          .sharing__link
-            i.icon.icon--link class='js-copy-link'
-            input class='js-link' type='text' value=map_root_url
-            .sharing__link__confirmation = translate('map.sharing.copied')
-          .sharing__social-icons class='js-desktop-share'
-            - Map::ApplicationHelper::SHARING_URLS.each do |key, url|
-              a class="sharing__#{key} js-sharing-button" target='_blank' data-template=url
-                i.icon class="icon--#{key}"
-          a.sharing__mobile-button class='js-mobile-share'
-            i.icon.icon--mobile-share
-
-  // PRIVACY PANEL
-  .privacy.panel.panel--thin id='js-privacy-panel'
-    .panel__controls
-      a.panel__back class='js-back' tabindex='0'
-        i.icon.icon--back
-      a.panel__close class='js-panel-close' tabindex='0'
-        i.icon.icon--close
-
-    .panel__content
-      | Privacy notice panel still needs to be filled in.
-
-// ===== SEARCH BOX ===== //
-.search id='js-search'
-  input.search__input class='js-search-input' type='text' tabindex='1' placeholder=(@venue&.full_address || @query || translate('map.listing.search'))
-  .search__icon
-    i.icon.icon--search
-  .search__spinner
-    i.icon.icon--spinner
-  a.search__collapse class='js-collapse' tabindex='1'
-    i.icon.icon--chevron-down
-  ul.search__results class='js-search-results'
-
-// ===== REFRESH BUTTON ===== //
+// ===== CONTROLS ===== //
 // Button to search the current area
-.refresh
-  button.refresh__button id='js-refresh' tabindex='1'
+.refresh-control
+  button.refresh-control__button id='js-refresh' tabindex='1'
     = translate('map.search_area')
 
 // ===== ZOOM BUTTONS ===== //
-.zoom
-  .zoom__in id='js-zoom-in' tabindex='1'
+.zoom-control
+  .zoom-control__in id='js-zoom-in' tabindex='1'
     .icon.icon--plus
-  .zoom__out id='js-zoom-out' tabindex='1'
+  .zoom-control__out id='js-zoom-out' tabindex='1'
     .icon.icon--minus
 
 / ===== TEMPLATES ===== /
 template id='js-item-template'
   .item.list__item class='js-item' data-id=nil
-    .item__actions
-      button.item__register class='js-register'
-        = translate('map.listing.register')
-      a.item__more class='js-more' tabindex='0'
-        span = translate('map.listing.more_info')
-    .item__info
-      .item__name data-attribute='name'
-      .item__address data-attribute='address'
-      .item__datetime
-        .item__day data-attribute='day'
-        .item__time data-attribute='time'
+    a.event__action
+      span = translate('map.listing.more_info')
+      span.icon.icon--right
+    /a.event__button class='js-event'
+      = translate('map.listing.more_info')
+    .event
+      .event__name data-attribute='name'
+      .event__description
+        span.event__address data-attribute='address'
+        span.event__distance data-attribute='distance'
+      .event__meta
+        span.event__language data-attribute='language'
+        span.event__day data-attribute='day'
+        span.event__time data-attribute='time'
+
+template id='js-timing-template'
+  .registration__timing__cell class='js-timing'
+    input type='hidden' name='starting_at' data-attribute='datetime' class='js-timing-value' disabled=true
+    .registration__timing__date
+      .registration__timing__day data-attribute='day'
+      .registration__timing__month data-attribute='date'
+    .registration__timing__time data-attribute='time'

@@ -26,12 +26,12 @@
 +font-face("raleway", "RalewayMedium/RalewayMedium", 500)
 +font-face("raleway", "RalewaySemiBold/RalewaySemiBold", 600)
 +font-face("raleway", "RalewayBold/RalewayBold", 700)
-+font-face("futura-book", "FuturaBook/FuturaBook")
+//+font-face("futura-book", "FuturaBook/FuturaBook")
 +font-face("icomoon", "Icons/icomoon")
 
 // ===== FONT WEIGHTS ===== //
 $font-text: 'raleway', sans-serif
-$font-number: 'futura-book', sans-serif
+//$font-number: 'futura-book', sans-serif
 $font-icon: 'icomoon'
 
 $font-lighter: 200
@@ -53,7 +53,7 @@ $color-background: rgba(230, 230, 230, 0.6)
 $color-background-hover: #f4f4f4
 
 $color-orange: #e08e79
-$color-blue: #7590ac // wemeditate: #c5e0dc
+$color-blue: #92BBB8 // #7590ac // wemeditate: #c5e0dc
 
 // ===== SHADOWS ===== //
 $shadow-light: 0 2px 25px 0 rgba(0, 0, 0, 0.2)
@@ -69,34 +69,25 @@ $desktop-width: 1280px
 $header-height: 64px
 $control-offset-x: 64px
 $control-offset-y: 58px
-$z-control: 1000
-
-$map-mobile-collapsed-height: 80%
-$panel-mobile-collapsed-height: 221px
 
 $panel-padding: 45px
+$panel-padding-thin: 30px
 $panel-padding-mobile: 24px
-$panel-width: 520px
-$panel-width-thin: 467px
-$panel-width-wide: 884px
+$panel-width: 467px
 
-$control-transition-fast: 0.25s
-$control-transition: 0.75s
-$panel-transition: 0.5s
+$control-transition: 0.25s
+
+$z-modal: 10000
+$z-control: 1200
+$z-panel: 800
+$z-map: 400
+$z-hidden: -100
 
 // ===== ICONS ===== //
 @function icon($key)
   @return map-get($icons, $key)
 
 // ===== MEDIA QUERIES ===== //
-@mixin collapsed
-  body.collapsed &
-    @content
-
-@mixin not-collapsed
-  body:not(.collapsed) &
-    @content
-
 @mixin mobile
   @media only screen and (max-width: #{$tablet-width - 1px})
     @content
@@ -116,3 +107,45 @@ $panel-transition: 0.5s
 @mixin desktop-or-larger
   @media only screen and (min-width: #{$desktop-width})
     @content
+
+// ===== MODES ===== //
+@mixin collapsed
+  body.collapsed &
+    @content
+
+@mixin not-collapsed
+  body:not(.collapsed) &
+    @content
+
+@mixin map-interactive
+  body.map-interactive &
+    @content
+
+@mixin map-not-interactive
+  body:not(.map-interactive) &
+    @content
+
+@mixin mode($mode)
+  body.mode--#{$mode} &
+    @content
+
+@mixin not-mode($mode)
+  body:not(.mode--#{$mode}) &
+    @content
+
+// ===== OTHER ====== //
+@mixin panel
+  @include tablet-or-larger
+    position: absolute
+    top: 0
+    left: 0
+    bottom: 0
+    width: $panel-width
+    z-index: $z-panel
+    box-shadow: $shadow-light
+    overflow: scroll
+
+  @include desktop-or-larger
+    top: $control-offset-y
+    left: $control-offset-x
+    bottom: $control-offset-y

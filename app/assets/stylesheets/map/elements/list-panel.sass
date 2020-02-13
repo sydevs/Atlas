@@ -1,0 +1,39 @@
+@import '../_mixins'
+
+.list
+  @include panel
+  background: white
+
+  @include mode(event)
+    display: none
+
+  @include tablet-or-larger
+    top: $header-height
+
+  @include desktop-or-larger
+    top: $control-offset-y + $header-height
+    bottom: auto
+    height: auto
+    max-height: calc(100vh - #{($control-offset-y * 2) + $header-height})
+
+// ===== NO RESULT MESSAGE ===== //
+.list__no-results
+  display: none
+  padding: 40px 80px
+  text-align: center
+
+  .list--no-results &
+    display: block
+
+  &__message
+    margin-bottom: 20px
+    font-size: 16px
+    line-height: 1.5625
+    letter-spacing: 0.44px
+
+  &__link > a
+    display: inline-block
+    font-size: 18px
+    line-height: 1.4444
+    border-bottom: 1px solid $color-grey-normal
+    cursor: pointer

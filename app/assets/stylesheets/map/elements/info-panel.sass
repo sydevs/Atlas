@@ -1,0 +1,140 @@
+@import '../_mixins'
+
+.info
+  @include panel
+  padding: $panel-padding-mobile
+  padding-bottom: $panel-padding-mobile * 2
+  background: white
+
+  @include not-mode(event)
+    display: none
+
+  @include tablet-or-larger
+    padding: $panel-padding-thin $panel-padding
+
+  .event
+    margin-bottom: 15px
+
+.info__directions
+  display: inline-block
+  color: $color-blue
+  transition: opacity 0.2s ease
+  margin: 0
+  font-weight: $font-medium
+  font-style: italic
+  font-size: 13px
+  letter-spacing: 0.36px
+  line-height: 22px
+  text-decoration: none
+
+  .icon
+    font-size: 22px
+    vertical-align: middle
+    margin-right: 7px
+
+  &:hover
+    opacity: 0.8
+
+.info__description
+  margin-bottom: 12px
+
+  font-size: 14px
+  line-height: 1.785
+  letter-spacing: 0.39px
+
+.info__description > p
+  margin-bottom: 16px
+
+// ===== IMAGES ===== //
+.info__images
+  margin: 35px 0
+  height: 180px
+  
+  .carousel-image
+    margin-right: 10px
+    border-radius: 0
+    height: 180px
+    box-shadow: $shadow-light
+
+// FLICKITY ADJUSTMENTS
+.info__images .flickity
+  &-viewport
+    overflow: visible
+
+  &-button:disabled
+    display: none
+
+  &-page-dots
+    bottom: -20px
+
+  &-page-dots > .dot
+    width: 7px
+    height: 7px
+    margin: 0 7px
+
+  &-prev-next-button
+    @include tablet-or-larger
+      &.next
+        right: -20px
+
+      &.previous
+        left: -20px
+
+// ===== BUTTONS ===== //
+.info__action
+  $size: 33px
+
+  z-index: $z-control
+  position: absolute
+
+  width: $size
+  height: $size
+  border: 1px solid white
+  border-radius: 100%
+  color: $color-border
+  background: white
+  transition: all 0.2s ease
+  cursor: pointer
+
+  @include mobile
+    top: 20px
+
+    &--left
+      left: 22px
+
+    &--right
+      right: 22px
+
+  @include tablet-or-larger
+    position: absolute
+    left: 5px
+
+    &--left
+      top: $panel-padding-thin - 5px
+
+    &--right
+      top: $panel-padding-thin + 30px
+
+  /*@include tablet-or-larger
+    position: fixed
+    left: $control-offset-x + 5px
+
+    &--left
+      top: $control-offset-y + $panel-padding-thin - 5px
+
+    &--right
+      top: $control-offset-y + $panel-padding-thin + 30px
+      */
+
+  .icon
+    height: 100%
+    text-align: center
+    line-height: $size
+
+  &:hover
+    opacity: 0.7
+    color: black
+
+    /*@include tablet-or-larger
+      background: $color-background-hover
+      */
