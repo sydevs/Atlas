@@ -39,6 +39,22 @@ module EventDecorator
     [start_time, end_time].compact.join(' - ')
   end
 
+  def timing_description
+    if category == 'course'
+      if start_date && end_date
+        weeks = start_date.step(end_date, 7).count
+        duration = I18n.translate('map.categories.timing.weeks', count: weeks)
+        I18n.translate('map.categories.timing.course', duration: duration)
+      else
+        I18n.translate('map.categories.timing.course_fallback')
+      end
+    elsif recurrence == 'day'
+      ''
+    else
+      I18n.translate('map.categories.timing.ongoing')
+    end
+  end
+
   def timing_in_words
     "#{recurrence_in_words}, #{formatted_start_end_time}"
   end

@@ -36,17 +36,20 @@
     .icon.icon--left
   .info__action.info__action--right id='js-info-share'
     .icon.icon--share
-
-  a.event__button id='js-info-action' href='#register'
-    = translate('map.information.register')
+  
+  .event__sidebar
+    a.event__sidebar__button id='js-info-action' href='#register'
+      = translate('map.information.register')
+    .event__sidebar__languages id='js-info-languages'
+      = translate('map.information.language')
+      .event__sidebar__languages-text data-attribute='languages'
   .event
     .event__name data-attribute='name'
     .event__description
-      span.event__address data-attribute='address'
+      span.event__description__address data-attribute='address'
     .event__meta
-      span.event__day data-attribute='day'
-      span.event__time data-attribute='time'
-      .event__languages data-attribute='languages'
+      span.event__meta__day data-attribute='day'
+      span.event__meta__time data-attribute='time'
 
   a.info__directions data-attribute='directions' target='_blank'
     span.icon.icon--location
@@ -60,7 +63,7 @@
     .registration__header
       .registration__header__text
         .registration__header__title = translate('map.registration.header')
-        .registration__header__subtitle This class is on-going
+        .registration__header__subtitle id='js-timing-description'
 
     .registration__fields
       = csrf_meta_tags
@@ -77,7 +80,7 @@
       .registration__message id='js-registration-feedback'
 
       .registration__notice
-        = translate('map.registration.notice.description')
+        = translate('map.registration.notice.text')
         br
         a.registration__notice-link href=map_privacy_path target='_blank'
           = translate('map.registration.notice.link')
@@ -89,12 +92,13 @@
       .registration__confirmation__circle
         .registration__confirmation__title = translate('map.registration.confirmation.title')
         .registration__confirmation__subtitle = translate('map.registration.confirmation.subtitle')
-      a.registration__confirmation__share id='js-registration-share'
-        span.icon.icon--share
-        = translate('map.sharing.invite')
-      a.registration__confirmation__back id='js-registration-close'
-        span.icon.icon--left
-        = translate('map.registration.confirmation.back')  
+      .registration__confirmation__actions
+        a.registration__confirmation__back id='js-registration-close'
+          span.icon.icon--addon
+          = translate('map.registration.confirmation.back')  
+        a.registration__confirmation__share id='js-registration-share'
+          span.icon.icon--share
+          = translate('map.sharing.invite')
 
 .share-wrapper id='js-share'
   .share-modal
@@ -130,17 +134,15 @@ template id='js-item-template'
     a.event__action
       span = translate('map.listing.more_info')
       span.icon.icon--right
-    /a.event__button class='js-event'
-      = translate('map.listing.more_info')
     .event
       .event__name data-attribute='name'
       .event__description
-        span.event__address data-attribute='address'
-        span.event__distance data-attribute='distance'
+        span.event__description__address data-attribute='address'
+        span.event__description__distance data-attribute='distance'
       .event__meta
-        span.event__language data-attribute='language'
-        span.event__day data-attribute='day'
-        span.event__time data-attribute='time'
+        span.event__meta__language data-attribute='language'
+        span.event__meta__day data-attribute='day'
+        span.event__meta__time data-attribute='time'
 
 template id='js-timing-template'
   .registration__timing__cell class='js-timing'

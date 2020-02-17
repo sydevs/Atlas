@@ -4,7 +4,7 @@ en:
     search_area: "Search This Area"
     listing:
       search: "Search for location"
-      more_info: "More info"
+      more_info: "More Info"
       register: "Register"
       no_results: "There are no classes in your area, the closest free meditation class is in"
       show: "Show list"
@@ -13,6 +13,7 @@ en:
         clear: "Clear"
     information:
       register: "Register"
+      language: "This class is in"
       directions: "Get directions"
     registration:
       header: "Register now"
@@ -20,11 +21,10 @@ en:
         email: "Email"
         name: "Name"
         message: "Questions / Comments"
-        notice: "Privacy notice"
         submit: "Confirm"
       notice:
-        description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum eum ab unde sunt assumenda."
-        link: "View privacy notice"
+        text: "By submitting you confirm your agreement with our privacy policy."
+        link: "View privacy policy"
       feedback:
         duplicate: "You have already registered on %{date}. See you soon."
         success: "Success! You will receive a confirmation email shortly."
@@ -50,3 +50,10 @@ en:
         course: "A several week course that takes you through various techniques of meditation."
         public_event: "Offering free meditation instruction at a public event."
         concert: "A performance combining meditation and music or dance."
+      timing:
+        course_fallback: "This is a weekly course"
+        course: "%{duration} course"
+        ongoing: "This class is on-going"
+        weeks:
+          one: "1-week"
+          other: "%{count}-week"

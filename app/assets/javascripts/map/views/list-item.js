@@ -12,8 +12,14 @@ class ListItem {
     element.querySelector('[data-attribute="distance"]').style = (event.distance_text ? '' : 'display: none')
     element.querySelector('[data-attribute="day"]').textContent = event.recurrence_in_words || ''
     element.querySelector('[data-attribute="time"]').textContent = event.formatted_start_end_time || ''
-    element.querySelector('[data-attribute="language"]').textContent = Object.keys(event.languages)[0] || ''
     element.addEventListener('click', () => this.open())
+
+    const language = Object.keys(event.languages)[0] || ''
+    if (document.documentElement.lang.toUpperCase() != language) {
+      element.querySelector('[data-attribute="language"]').textContent = language
+    } else {
+      element.querySelector('[data-attribute="language"]').remove()
+    }
   }
 
   open() {

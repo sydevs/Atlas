@@ -44,6 +44,7 @@ json.recurrence_in_words event.recurrence_in_words
 json.formatted_start_end_time event.formatted_start_end_time
 json.timing_text event.timing_in_words
 json.timing do
+  json.description event.timing_description
   json.extract! event, :recurrence, :start_date, :end_date, :start_time, :end_time
 end
 

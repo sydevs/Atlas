@@ -54,7 +54,6 @@
     margin-right: 10px
     border-radius: 0
     height: 180px
-    box-shadow: $shadow-light
 
 // FLICKITY ADJUSTMENTS
 .info__images .flickity
@@ -65,14 +64,26 @@
     display: none
 
   &-page-dots
-    bottom: -20px
+    bottom: -24px
 
   &-page-dots > .dot
-    width: 7px
-    height: 7px
-    margin: 0 7px
+    width: 6px
+    height: 6px
+    margin: 0 7.5px
 
   &-prev-next-button
+    width: 40px
+    height: 40px
+
+    .flickity-button-icon
+      width: 16px
+      height: 16px
+      left: 12px
+      top: 12px
+
+    &:focus
+      box-shadow: 0 0 0 3px $color-orange
+
     @include tablet-or-larger
       &.next
         right: -20px
@@ -107,13 +118,13 @@
 
   @include tablet-or-larger
     position: absolute
-    left: 5px
+    top: $panel-padding-thin - 5px
 
     &--left
-      top: $panel-padding-thin - 5px
+      left: 5px
 
     &--right
-      top: $panel-padding-thin + 30px
+      right: 5px
 
   /*@include tablet-or-larger
     position: fixed

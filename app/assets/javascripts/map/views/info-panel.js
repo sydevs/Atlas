@@ -5,6 +5,8 @@ class InfoPanel {
 
   constructor(element) {
     this.container = element
+    this.timingDescription = document.getElementById('js-timing-description')
+    this.languagesBlock = document.getElementById('js-info-languages')
     this.form = document.getElementById('js-registration')
     this.formFeedback = document.getElementById('js-registration-feedback')
     this.submitButton = document.getElementById('js-registration-submit')
@@ -17,19 +19,21 @@ class InfoPanel {
 
   show(event) {
     this.event = event
-    const upcoming_date = new Date(event.upcoming_dates[0])
-    let weekday = upcoming_date.toLocaleDateString(undefined, { weekday: 'long' })
-    weekday = weekday.charAt(0).toUpperCase() + weekday.slice(1)
-
     this.container.querySelector('[data-attribute="name"]').textContent = event.label
     this.container.querySelector('[data-attribute="address"]').textContent = event.address_text || ''
     this.container.querySelector('[data-attribute="directions"]').href = `http://www.google.com/maps/place/${event.latitude},${event.longitude}`
-    this.container.querySelector('[data-attribute="languages"]').textContent = Object.values(event.languages).join(', ')
-    this.container.querySelector('[data-attribute="day"]').textContent = weekday
+    this.container.querySelector('[data-attribute="day"]').textContent = event.recurrence_in_words
     this.container.querySelector('[data-attribute="time"]').textContent = event.formatted_start_end_time
     this.container.querySelector('[data-attribute="description"]').innerHTML = Util.simpleFormat(event.description || event.category.description || '')
     this.container.querySelector('input[name="event_id"]').value = event.id
     
+    const languageKey = Object.keys(event.languages)[0] || ''
+    const language = Object.values(event.languages)[0]
+    this.languagesBlock.style = (document.documentElement.lang.toUpperCase() == languageKey ? 'display: none' : '')
+    this.container.querySelector('[data-attribute="languages"]').textContent = language
+
+    this.timingDescription.textContent = event.timing.description
+
     Application.imageGallery.setImages(event.images)
     Application.timingCarousel.setTimings(event, event.upcoming_dates)
   }

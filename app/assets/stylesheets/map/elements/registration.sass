@@ -2,7 +2,7 @@
 @import '../_mixins'
 
 .registration
-  margin-top: 60px
+  margin-top: 65px
   margin-bottom: 0
   position: relative
 
@@ -78,12 +78,19 @@
   letter-spacing: 0.17px
   color: $color-grey-normal
 
+  &::placeholder,
+  &::-webkit-input-placeholder,
+  &:-ms-input-placeholder
+    color: $color-grey-normal
+    opacity: 0.6
+
 .registration__notice
   text-align: center
   margin-bottom: 10px
+  padding: 0 30px
 
   font-size: 12px
-  line-height: 1.1666
+  line-height: 1.25
   letter-spacing: 0.36px
 
 .registration__notice-link
@@ -192,6 +199,9 @@
     &.next
       right: -10px
 
+    &:focus
+      box-shadow: 0 0 0 3px $color-orange
+
   .flickity-button-icon
     fill: $color-border
     opacity: 1
@@ -238,8 +248,7 @@
     width: 360px
     height: 360px
     padding: 16%
-    margin-top: 5%
-    margin-bottom: 5%
+    margin-bottom: 10%
 
     opacity: 0
     transform: scale(0)
@@ -260,14 +269,38 @@
     max-width: 180px
     margin: 0 auto
 
+  &__actions
+    color: $color-grey-dark
+    font-weight: $font-semibold
+    font-size: 13px
+    line-height: 15px
+    text-align: left
+    
+    display: flex
+    flex-direction: row
+    justify-content: space-evenly
+
+  &__share
+    width: #{80 + 34}px
+
+  &__back
+    width: #{90 + 34}px
+
   &__share,
   &__back
-    display: block
+    display: inline-block
     cursor: pointer
-    line-height: 40px
+    opacity: 0.8
+    transition: ease 0.2s
 
-  &__share > .icon
-    margin-right: 10px
+    &:hover
+      opacity: 1
+
+    > .icon
+      float: left
+      margin-right: 10px
+      font-size: 24px
+      line-height: 30px
 
 .registration--confirmed
   .registration__confirmation

@@ -1,25 +1,6 @@
 @import '../_mixins'
 @import '../general'
 
-.event__button
-  @extend .button
-  float: right
-  width: 100px
-
-.event__action
-  position: absolute
-  right: $panel-padding-mobile
-  top: 50%
-  transform: translateY(-50%)
-  white-space: nowrap
-  //font-size: 0.9em
-
-  > *
-    vertical-align: middle
-
-  .icon
-    margin-left: -5px
-
 .event__name,
 .event__description
   padding-right: 120px
@@ -39,47 +20,90 @@
   margin-bottom: 4px
   min-height: 28px
 
-.event__distance::before
-  content: ' • '
+  &__distance::before
+    content: ' • '
 
-.event__distance
-  color: $color-blue
-  white-space: nowrap
+  &__distance
+    color: $color-blue
+    white-space: nowrap
 
 .event__meta
   line-height: 17px
 
-.event__language
-  display: inline-block
-  color: $color-blue
-  border: 1px solid $color-blue
-  border-radius: 5px
-  padding: 0 5px
+  &__language
+    display: inline-block
+    color: $color-blue
+    border: 1px solid $color-blue
+    border-radius: 5px
+    padding: 0 5px
 
-  font-size: 11px
+    font-size: 11px
+    font-weight: $font-semibold
+    letter-spacing: 0.36px
+    margin-right: 8px
+
+  &__day
+    text-transform: uppercase
+    font-size: 11px
+    letter-spacing: 0.36px
+
+  &__day::after
+    content: ''
+    height: 14px
+    border-left: 1px solid $color-border-light
+    margin: 0 9px
+    vertical-align: text-bottom
+
+  &__time
+    font-weight: $font-medium
+    font-size: 15px
+    letter-spacing: 0.49px
+
+// ===== ACTIONS ===== //
+.event__action
+  position: absolute
+  right: $panel-padding-mobile
+  top: 50%
+  transform: translateY(-50%)
+  white-space: nowrap
   font-weight: $font-semibold
-  letter-spacing: 0.36px
-  margin-right: 8px
+  font-size: 14px
 
-.event__languages
+  > *
+    vertical-align: middle
+
+  .icon
+    display: inline-block
+    margin-left: -2px
+    margin-bottom: -2px
+    font-size: 24px
+
+// ===== SIDEBAR ===== //
+.event__sidebar
   float: right
-  font-size: 13px
-  line-height: 1.8
-  letter-spacing: 0.39px
+  width: 100px
+  
+  &__button
+    @extend .button
+    display: block
 
-.event__day
-  text-transform: uppercase
-  font-size: 11px
-  letter-spacing: 0.36px
+  &__languages
+    font-size: 10px
+    line-height: 14px
+    letter-spacing: 0.17px
+    text-align: center
+    padding: 9px
+    padding-top: 6px
+    font-style: italic
 
-.event__day::after
-  content: ''
-  height: 14px
-  border-left: 1px solid $color-border-light
-  margin: 0 9px
-  vertical-align: text-bottom
+    border: 1px solid $color-blue
+    border-bottom-left-radius: 5px
+    border-bottom-right-radius: 5px
+    border-top: none
 
-.event__time
-  font-weight: $font-medium
-  font-size: 15px
-  letter-spacing: 0.49px
+  &__languages-text
+    color: $color-blue
+    font-size: 11px
+    font-weight: $font-bold
+    font-style: normal
+    letter-spacing: 0.36px
