@@ -19,7 +19,6 @@ class WorldMap {
     this.currentHeight = this.maxHeight
     this.container.style = `max-height: ${this.currentHeight}`
     
-    //L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/streets-v11/tiles/{z}/{x}/{y}?access_token={accessToken}', {
     L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
       attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
       maxZoom: 18,
@@ -27,17 +26,22 @@ class WorldMap {
       accessToken: element.dataset.token,
     }).addTo(this.leaflet)
 
-    //this.markersGroup = L.featureGroup().addTo(this.leaflet)
     this.markersGroup = L.markerClusterGroup({
       spiderfyOnMaxZoom: false,
       showCoverageOnHover: false,
-      //singleMarkerMode: true,
     }).addTo(this.leaflet)
 
     this.markersGroup.on('click', event => Application.showVenue(event.layer.options.venue))
 
-    this.normalIcon = L.divIcon({ className: 'marker icon icon--marker' })
-    this.selectedIcon = L.divIcon({ className: 'marker marker--selected icon icon--marker-selected' })
+    this.normalIcon = L.icon({
+      iconUrl: 'markers/default.png',
+      iconSize: [31, 30.6],
+    })
+
+    this.selectedIcon = L.icon({
+      iconUrl: 'markers/selected.png',
+      iconSize: [31, 30.6],
+    })
 
     window.addEventListener('wheel', event => this.scaleByScroll(event), { passive: false })
     document.getElementById('js-zoom-in').addEventListener('click', () => this.zoom(+1))
@@ -103,7 +107,6 @@ class WorldMap {
 
   addVenueMarker(venue) {
     const marker = L.marker([venue.latitude, venue.longitude], { venue: venue, icon: this.normalIcon })
-    //const marker = L.marker([venue.latitude, venue.longitude], { venue: venue })
     this.markers[venue.id] = marker
     marker.addTo(this.markersGroup)
   }

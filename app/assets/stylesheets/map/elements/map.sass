@@ -19,7 +19,7 @@
     margin-left: 0
 
 // ===== MARKERS ===== //
-@mixin marker-colour($outer, $inner)
+@mixin marker-colour($inner, $outer)
   background-color: transparentize($outer, 0.3)
 
   > div
@@ -41,17 +41,15 @@
 
 .marker-cluster
   color: white
+  width: 38px
+  height: 38px
   
   &.marker-cluster
     &-small
-      @include marker-colour(#8DCEC6, #20B785)
+      @include marker-colour(#20B684, #8CCDC5)
 
     &-medium
-      @include marker-colour(#F4A37A, #20B785)
+      @include marker-colour(#2BA343, #86C497)
 
     &-large
-      @include marker-colour(#F47A7A, #20B785)
-
-    /*&-selected
-      @include marker-colour(#E27352, #F4A37A)
-      */
+      @include marker-colour(#359000, #80BB69)
