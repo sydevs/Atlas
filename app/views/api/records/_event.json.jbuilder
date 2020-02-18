@@ -48,6 +48,12 @@ json.timing do
   json.extract! event, :recurrence, :start_date, :end_date, :start_time, :end_time
 end
 
+json.registration do
+  json.mode event.registration_mode
+  json.label translate('map.registration.action', service: translate_enum_value(event, :registration_mode))
+  json.url event.registration_url
+end
+
 json.images do
   json.array! event.pictures do |picture|
     json.url picture.file.url

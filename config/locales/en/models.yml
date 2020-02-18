@@ -141,6 +141,12 @@ en:
         room: "Room"
         languages: "Languages"
         disable_notifications: "Disable Notifications"
+        registration_mode: "Registration Mode"
+        registration_modes:
+          native: "Sahaj Atlas"
+          meetup: "Meetup"
+          eventbrite: "Eventbrite"
+        registration_url: "Registration Link (URL)"
         recurrence: "Recurrence"
         recurrences:
           day: "Daily"

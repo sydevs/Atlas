@@ -17,7 +17,9 @@ en:
       directions: "Get directions"
     registration:
       header: "Register now"
+      action: "Register on %{service}"
       form:
+        timing: "I’d like to start on:"
         email: "Email"
         name: "Name"
         message: "Questions / Comments"

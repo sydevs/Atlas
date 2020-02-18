@@ -65,12 +65,16 @@
         .registration__header__title = translate('map.registration.header')
         .registration__header__subtitle id='js-timing-description'
 
+    .registration__external
+      a.registration__external__action target='_blank' data-attribute='registration'
+        | Register on Site
+
     .registration__fields
       = csrf_meta_tags
       input type='hidden' name='event_id'
 
       .registration__timing__label
-        .registration__timing__text I’D LIKE TO START ON:
+        .registration__timing__text = translate('map.registration.form.timing').upcase
       .registration__timing id='js-timing-carousel'
 
       input.registration__input type='text' name='name' placeholder=translate('map.registration.form.name')

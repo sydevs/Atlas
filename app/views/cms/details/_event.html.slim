@@ -1,10 +1,17 @@
 
 - if @record.published? && @record.expired?
-  .ui.orange.icon.message
+  .ui.small.orange.icon.message
     i.exclamation.icon
     .content
       .header = translate('cms.details.record_expired.title', resource: translate_model(@model))
       .description = translate('cms.details.record_expired.description', resource: translate_model(@model).downcase, weeks: Expirable::EXPIRE_AFTER_WEEKS)
+
+- unless @record.native_registration_mode?
+  .ui.small.yellow.icon.message
+    i.exclamation.icon
+    .content
+      .header = translate('cms.details.external_registration.title')
+      .description = translate('cms.details.external_registration.description', mode: translate_enum_value(@record, :registration_mode))
 
 h3.ui.dividing.header = translate('cms.details.details_for_record', resource: @record.label)
 .ui.list
@@ -19,6 +26,13 @@ h3.ui.dividing.header = translate('cms.details.details_for_record', resource: @r
     .content
       .header = @record.category_name
       .description = @record.category_description
+  .item
+    i.phone.icon class=('slash' unless @record.native_registration_mode?)
+    .content
+      .header
+        = translate_attribute(@record, :registration_mode)
+        ' : 
+        = translate_enum_value(@record, :registration_mode)
   .item
     i.calendar.icon
     .content = @record.timing_in_words

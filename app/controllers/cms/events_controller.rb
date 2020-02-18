@@ -23,6 +23,7 @@ class CMS::EventsController < CMS::ApplicationController
       params.fetch(:event, {}).permit(
         :published,
         :name, :description, :room, :category, :disable_notifications,
+        :registration_mode, :registration_url,
         :recurrence, :start_date, :end_date, :start_time, :end_time,
         manager: {},
         languages: []

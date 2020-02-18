@@ -25,7 +25,6 @@ class InfoPanel {
     this.container.querySelector('[data-attribute="day"]').textContent = event.recurrence_in_words
     this.container.querySelector('[data-attribute="time"]').textContent = event.formatted_start_end_time
     this.container.querySelector('[data-attribute="description"]').innerHTML = Util.simpleFormat(event.description || event.category.description || '')
-    this.container.querySelector('input[name="event_id"]').value = event.id
     
     const languageKey = Object.keys(event.languages)[0] || ''
     const language = Object.values(event.languages)[0]
@@ -35,7 +34,17 @@ class InfoPanel {
     this.timingDescription.textContent = event.timing.description
 
     Application.imageGallery.setImages(event.images)
-    Application.timingCarousel.setTimings(event, event.upcoming_dates)
+
+    if (event.registration.mode != 'native' && event.registration.url) {
+      this.form.classList.add('registration--external')
+      const linkElement = this.container.querySelector('[data-attribute="registration"]')
+      linkElement.textContent = event.registration.label
+      linkElement.href = event.registration.url
+    } else {
+      this.form.classList.remove('registration--external')
+      Application.timingCarousel.setTimings(event, event.upcoming_dates)
+      this.container.querySelector('input[name="event_id"]').value = event.id
+    }
   }
 
   submit() {

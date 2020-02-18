@@ -49,6 +49,28 @@
     line-height: 1.1667
     letter-spacing: 0.36px
 
+// ===== EXTERNAL REGISTRATION ===== //
+.registration__external
+  display: none
+
+  &__action
+    @extend .button
+
+    display: block
+    font-size: 17px
+    letter-spacing: 0.2px
+    color: $color-grey-dark
+    width: 100%
+    max-width: 325px
+    margin: auto
+
+.registration--external
+  .registration__external
+    display: block
+
+  .registration__fields
+    display: none
+
 // ===== FIELDS ===== //
 .registration__fields
   opacity: 1
@@ -307,7 +329,7 @@
     z-index: 1
     opacity: 1
 
-  .registration__fields
+  .registration__fields,
     opacity: 0
 
   .registration__confirmation__circle

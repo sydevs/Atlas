@@ -9,7 +9,7 @@
 
 = f.input :name, placeholder: @record.category_name
 = f.input :category, collection: categories
-= f.input :description, as: :text, placeholder: @record.category_description
+= f.input :description, as: :text, placeholder: @record.category_description, input_html: { rows: 3 }
 = f.input :room, hint: translate('cms.hints.event.room')
 = f.input :languages, collection: languages, input_html: { multiple: true, class: 'search' }, hint: translate('cms.hints.event.language')
 
@@ -17,7 +17,12 @@
 
 .ui.divider
 
-= f.input :recurrence, collection: Event.recurrences.map {|k, v| ["Every #{k.humanize}", k]}
+= f.input :registration_mode, collection: Event.registration_modes.map { |k, v| [translate_enum_value(Event, :registration_mode, k), k] }, hint: translate('cms.hints.event.registration_mode', native: translate_enum_value(@record, :registration_mode, :native))
+= f.input :registration_url, as: :url, hint: translate('cms.hints.event.registration_url', native: translate_enum_value(@record, :registration_mode, :native))
+
+.ui.divider
+
+= f.input :recurrence, collection: Event.recurrences.map { |k, v| [translate_enum_value(Event, :recurrence, k), k] }
 
 .two.fields
   = f.input :start_date, as: :string, wrapper: :semantic_date, wrapper_html: { class: 'start' }
