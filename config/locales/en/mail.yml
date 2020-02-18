@@ -105,10 +105,6 @@ en:
       confirm: "These details are correct"
       update: "Update program"
 
-    confirmation:
-      subject: "Registration Confirmation - %{event}"
-      intro: "Your registration for the %{event} event is confirmed! Please write to us if you have any questions."
-
     summary:
       listing:
         event: "Event"

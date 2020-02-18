@@ -63,7 +63,6 @@ namespace :mail do
         welcome:event welcome:worldwide
         registrations verification escalation
         expired expired_escalation
-        confirmation
       ].each_with_index do |test, index|
         puts "Press enter to proceed to the next test (mail:#{test})" unless index.zero?
         STDIN.gets unless index.zero?
@@ -133,14 +132,6 @@ namespace :mail do
       manager = Manager.administrators.reorder('RANDOM()').first
       puts "Sending mail to #{manager.name}"
       SummaryMailer.with(manager: manager, test: true).global.deliver_now
-    end
-
-    desc 'Sends a confirmation email to one registration'
-    task confirmation: :environment do
-      ActionMailer::Base.delivery_method = :letter_opener
-      registration = Registration.joins(:event).where.not(events: { description: nil }).first
-      puts "Sending mail to #{registration.name} for #{registration.event.name || registration.event.venue.street}"
-      RegistrationMailer.with(registration: registration, test: true).confirmation.deliver_now
     end
 
     namespace :welcome do

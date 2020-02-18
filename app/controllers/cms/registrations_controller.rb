@@ -6,7 +6,6 @@ class CMS::RegistrationsController < CMS::ApplicationController
     return unless super(parameters)
 
     @record.touch(:latest_registration_at)
-    RegistrationMailer.with(registration: @record).confirmation.deliver_now
   end
 
   def update
