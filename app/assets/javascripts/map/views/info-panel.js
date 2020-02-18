@@ -25,7 +25,8 @@ class InfoPanel {
     this.container.querySelector('[data-attribute="day"]').textContent = event.recurrence_in_words
     this.container.querySelector('[data-attribute="time"]').textContent = event.formatted_start_end_time
     this.container.querySelector('[data-attribute="description"]').innerHTML = Util.simpleFormat(event.description || event.category.description || '')
-    
+    this.form.classList.toggle('registration--confirmed', Boolean(event.registered))
+
     const languageKey = Object.keys(event.languages)[0] || ''
     const language = Object.values(event.languages)[0]
     this.languagesBlock.style = (document.documentElement.lang.toUpperCase() == languageKey ? 'display: none' : '')
@@ -55,10 +56,9 @@ class InfoPanel {
     Application.atlas.register(this.form, event => {
       const response = JSON.parse(event.target.response)
       this.submitButton.removeAttribute('disabled')
-      //this.formFeedback.innerText = response.message
-
+ 
       if (response.status == 'success') {
-        //this.formFeedback.classList.add('success')
+        this.formFeedback.innerText = null
         this.event.registered = true
         this.form.classList.add('registration--confirmed')
       } else if (response.status == 'info') {
@@ -73,6 +73,7 @@ class InfoPanel {
 
   hideConfirmation() {
     this.form.classList.remove('registration--confirmed')
+    this.form.reset()
   }
 
 }
