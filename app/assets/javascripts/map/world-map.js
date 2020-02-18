@@ -35,12 +35,20 @@ class WorldMap {
 
     this.normalIcon = L.icon({
       iconUrl: 'markers/default.png',
-      iconSize: [31, 30.6],
+      shadowUrl: 'markers/shadow.png',
+      iconSize: [24, 30.4],
+      shadowSize: [20.6, 11.8],
+      iconAnchor: [12, 30.4],
+      shadowAnchor: [1.3, 11.8],
     })
 
     this.selectedIcon = L.icon({
       iconUrl: 'markers/selected.png',
-      iconSize: [31, 30.6],
+      shadowUrl: 'markers/shadow.png',
+      iconSize: [24, 30.4],
+      shadowSize: [20.6, 11.8],
+      iconAnchor: [12, 30.4],
+      shadowAnchor: [1.3, 11.8],
     })
 
     window.addEventListener('wheel', event => this.scaleByScroll(event), { passive: false })
