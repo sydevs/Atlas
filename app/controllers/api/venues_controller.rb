@@ -12,7 +12,7 @@ class API::VenuesController < API::ApplicationController
       query = scope.by_distance(origin: @coordinates) if %i[latitude longitude].all? { |key| params.include?(key) }
       records = query.in_bounds([southwest, northeast])
     elsif %i[latitude longitude].all? { |key| params.include?(key) }
-      records = scope.within(100, origin: @coordinates).by_distance(origin: @coordinates)
+      records = scope.within(params[:radius], origin: @coordinates).by_distance(origin: @coordinates)
     else
       super && return
     end

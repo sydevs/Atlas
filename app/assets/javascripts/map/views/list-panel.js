@@ -30,7 +30,6 @@ class ListPanel {
   }
 
   setVenues(venues) {
-    console.log('venues', venues)
     this.clearEvents()
     this.resetFilter()
 

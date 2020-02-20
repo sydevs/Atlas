@@ -12,10 +12,6 @@ const Util = {
     }
   },
 
-  isCollapsed() {
-    return document.body.classList.contains('collapsed')
-  },
-
   isMode(mode) {
     return document.body.classList.contains(`mode--${mode}`)
   },

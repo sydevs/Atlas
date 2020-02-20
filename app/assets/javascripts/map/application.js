@@ -34,24 +34,17 @@ class ApplicationInstance {
 
     if (venues) {
       this.navbar.setActive(false)
-      //this.listPanel.setEvents(events)
       this.listPanel.setVenues(venues)
-
-      if (!Util.isDevice('mobile')) {
-        this.toggleCollapsed(false)
-      }
-
-      //this.map.setEventMarkers(venues)
       this.map.setVenueMarkers(venues)
     }
 
     this.map.scaleToMax()
-    this.setInteractive(true)
     this.listPanel.resetFilter()
     this.listPanel.setActiveItem(null)
     this.map.selectMarker(null)
     this.map.invalidateViewportDimensions()
     this.map.fitToMarkers()
+    this.setInteractive(true)
   }
 
   showVenue(venue) {
@@ -59,10 +52,10 @@ class ApplicationInstance {
     this.navbar.setVenue(venue)
     this.listPanel.filterByVenue(venue)
     this.listPanel.setActiveItem(null)
-    this.setInteractive(false)
     this.map.selectMarker(venue.id)
     this.map.invalidateViewportDimensions()
     this.map.zoomToVenue(venue)
+    this.setInteractive(false)
   }
 
   showEvent(event) {
@@ -70,10 +63,9 @@ class ApplicationInstance {
     this.setMode('event')
     this.listPanel.setActiveItem(event.id)
     this.infoPanel.show(event)
-    this.setInteractive(false)
     this.map.selectMarker(event.venue_id)
-    //this.map.invalidateViewportDimensions()
     this.map.zoomToVenue(event)
+    this.setInteractive(false)
   }
 
   closeEvent() {
@@ -104,17 +96,6 @@ class ApplicationInstance {
     this.map.setInteractive(interactive)
   }
 
-  toggleCollapsed(collapsed) {
-    const isCollapsed = document.body.classList.toggle('collapsed', collapsed)
-
-    if (!isCollapsed) {
-      this.navbar.setActive(false)
-    }
-
-    this.map.invalidateViewportDimensions()
-    this.map.fitToMarkers()
-  }
-
   loadEvents(query) {
     this.setMode('list')
 
@@ -124,10 +105,11 @@ class ApplicationInstance {
       } else {
         this.listPanel.showEmptyResults(response.alternatives[0])
         this.map.zoomTo(query.latitude, query.longitude)
-        this.toggleCollapsed(false)
-        //this.map.setEventMarkers([])
         this.map.setVenueMarkers([])
       }
+
+      this.map.setRefreshDisabled(false)
+      this.map.setRefreshHidden(true)
     })
   }
 

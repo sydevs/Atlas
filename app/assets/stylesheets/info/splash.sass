@@ -4,7 +4,7 @@ $panel-overlap: 160px
 $panel-overlap-mobile: 200px
 
 body.about,
-body.login,
+body.login
   overflow: hidden
 
 .splash
@@ -48,11 +48,14 @@ body.login,
 
   &__content
     animation: slideup 1.5s ease
-    margin-top: -$panel-overlap
     min-height: $panel-overlap
-    width: 100vw
     padding: 1em
     box-sizing: border-box
+
+    position: absolute
+    bottom: 0
+    left: 0
+    right: 0
 
     background: $theme-color-transparent
     text-align: center

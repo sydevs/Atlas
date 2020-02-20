@@ -48,16 +48,6 @@ class Navbar {
     if (isActive == active) return
 
     this.container.classList.toggle('navbar--active', active)
-
-    if (active) {
-      this.storedCollapseState = Util.isCollapsed()
-      Application.toggleCollapsed(true)
-    } else {
-      if (this.storedCollapseState == false) {
-        Application.toggleCollapsed(this.storedCollapseState)
-      }
-      this.storedCollapseState = null
-    }
   }
 
   refreshGeoSearch() {
@@ -106,7 +96,6 @@ class Navbar {
   /* ===== VENUE BANNER ===== */
 
   setVenue(venue) {
-    console.log(venue)
     this.venueText.textContent = venue ? venue.label : ''
   }
 

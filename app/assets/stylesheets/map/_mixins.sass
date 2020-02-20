@@ -109,14 +109,6 @@ $z-hidden: -100
     @content
 
 // ===== MODES ===== //
-@mixin collapsed
-  body.collapsed &
-    @content
-
-@mixin not-collapsed
-  body:not(.collapsed) &
-    @content
-
 @mixin map-interactive
   body.map-interactive &
     @content

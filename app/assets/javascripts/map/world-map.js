@@ -11,7 +11,7 @@ class WorldMap {
 
     this.refreshButton = document.getElementById('js-refresh')
     this.refreshButton.addEventListener('click', () => this.refresh())
-    this.refreshInProgress = false
+    this.refreshDisabled = true
 
     this.zoomPadding = 40
     this.minHeight = 174
@@ -67,6 +67,8 @@ class WorldMap {
   }
 
   setInteractive(interactive) {
+    this.setRefreshDisabled(!interactive)
+
     this.leaflet._handlers.forEach(function(handler) {
       if (interactive) {
         handler.enable()
@@ -77,27 +79,6 @@ class WorldMap {
   }
 
   // ===== MARKER MANIUPLATION ===== //
-
-  /*
-  setEventMarkers(events) {
-    this.markersGroup.clearLayers()
-
-    if (events.length > 0) {
-      for (let i = 0; i < events.length; i++) {
-        const event = events[i]
-
-        this.addVenueMarker({
-          id: event.venue_id,
-          latitude: event.latitude,
-          longitude: event.longitude,
-          address: event.address,
-        })
-      }
-
-      this.fitToMarkers()
-    }
-  }
-  */
 
   setVenueMarkers(venues) {
     this.markersGroup.clearLayers()
@@ -171,24 +152,6 @@ class WorldMap {
     })
   }
 
-  /*
-  zoomToEvents(events) {
-    if (events.length == 0) return
-
-    const bounds = L.latLngBounds()
-
-    events.forEach(event => {
-      bounds.extend(L.latLng(event.latitude, event.longitude))
-    })
-
-    this.leaflet.fitBounds(bounds, {
-      paddingTopLeft: [this.viewport.left, this.viewport.top],
-      paddingBottomRight: [this.viewport.right, this.viewport.bottom],
-      maxZoom: 14,
-    })
-  }
-  */
-
   zoomToVenue(venue) {
     this.zoomTo(venue.latitude, venue.longitude, 15)
   }
@@ -225,11 +188,19 @@ class WorldMap {
   refresh() {
     const bounds = this.getViewportBounds()
     Application.loadEvents(bounds)
-    this.setRefreshHidden(true)
+    this.setRefreshDisabled(true)
+  }
+
+  setRefreshDisabled(disabled) {
+    this.refreshDisabled = disabled
+
+    if (disabled) {
+      this.refreshButton.classList.add('refresh-control__button--hidden')
+    }
   }
 
   setRefreshHidden(hidden) {
-    if (this.refreshInProgress) return
+    if (this.refreshDisabled) return
     this.refreshButton.classList.toggle('refresh-control__button--hidden', hidden)
   }
 
