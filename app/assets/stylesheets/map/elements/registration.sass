@@ -244,6 +244,9 @@
   left: 0
   right: 0
 
+  display: flex
+  flex-direction: column
+
   opacity: 0
   transition: opacity 0.5s ease
   z-index: -1
@@ -261,6 +264,7 @@
     bottom: 0
     transition: all 0.5s ease-out
     transform: rotate(-45deg)
+    align-self: center
 
   &__circle
     position: relative
@@ -329,7 +333,7 @@
     z-index: 1
     opacity: 1
 
-  .registration__fields,
+  .registration__fields
     opacity: 0
 
   .registration__confirmation__circle
