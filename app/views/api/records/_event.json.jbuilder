@@ -1,5 +1,5 @@
 json.url api_event_url(event, format: :json)
-json.map_url map_root_url(event: event.id)
+json.map_url map_event_url(event)
 json.extract! event, :id, :label
 json.description event.description || ''
 

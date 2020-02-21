@@ -12,24 +12,11 @@ class SharingModal {
     document.getElementById('js-share-link').addEventListener('focus', () => this.copyLink())
   }
 
-  show(event) {
-    if (navigator.share) {
-      this.triggerMobileShare(event)
+  async show(event) {
+    if (navigator && navigator.share) {
+      await this._shareNative(event)
     } else {
-      this.event = event
-      this.linkInput.value = event.map_url
-      this.container.classList.add('noscroll')
-      this.container.classList.add('share-wrapper--active')
-
-      for (let i = 0; i < this.sharingButtons.length; i++) {
-        const button = this.sharingButtons[i]
-        let href = button.dataset.template
-        href = href.replace('{url}', encodeURIComponent(event.map_url))
-        href = href.replace('{title}', encodeURIComponent(event.label))
-        href = href.replace('{text}', encodeURIComponent(event.description))
-        href = href.replace('{provider}', encodeURIComponent(window.location.hostname))
-        button.href = href
-      }
+      this._shareFallback(event)
     }
   }
 
@@ -49,6 +36,35 @@ class SharingModal {
       text: event.description,
       url: event.map_url,
     })
+  }
+
+  _shareNative(event) {
+    return new Promise(async (resolve) => {
+      await navigator.share({
+        title: event.label,
+        text: event.description,
+        url: event.map_url,
+      })
+  
+      resolve()
+    })
+  }
+
+  _shareFallback(event) {
+    this.event = event
+    this.linkInput.value = event.map_url
+    this.container.classList.add('noscroll')
+    this.container.classList.add('share-wrapper--active')
+
+    for (let i = 0; i < this.sharingButtons.length; i++) {
+      const button = this.sharingButtons[i]
+      let href = button.dataset.template
+      href = href.replace('{url}', encodeURIComponent(event.map_url))
+      href = href.replace('{title}', encodeURIComponent(event.label))
+      href = href.replace('{text}', encodeURIComponent(event.description))
+      href = href.replace('{provider}', encodeURIComponent(window.location.hostname))
+      button.href = href
+    }
   }
 
 }
