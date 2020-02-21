@@ -30,6 +30,7 @@ class ListPanel {
   }
 
   setVenues(venues) {
+    this.venues = venues
     this.clearEvents()
     this.resetFilter()
 
@@ -46,34 +47,10 @@ class ListPanel {
     }
   }
 
-  /*
-  setEvents(events) {
-    this.clearEvents()
-    this.resetFilter()
-
-    this.container.classList.toggle('list--no-results', events.length == 0)
-    for (let i = 0; i < events.length; i++) {
-      this.appendEvent(events[i])
-    }
-  }
-  */
-
   appendEvent(event) {
     const element = document.importNode(this.itemTemplate.content, true).querySelector('.js-item')
     this.items[event.id] = new ListItem(element, event)
     this.itemsContainer.appendChild(element)
-  }
-
-  setActiveItem(id) {
-    if (this.activeItem) {
-      this.activeItem.setActive(false)
-    }
-
-    this.activeItem = id ? this.items[id] : null
-
-    if (this.activeItem) {
-      this.activeItem.setActive(true)
-    }
   }
 
   showEmptyResults(alternative) {

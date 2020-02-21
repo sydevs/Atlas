@@ -12,7 +12,7 @@ class InfoPanel {
     this.submitButton = document.getElementById('js-registration-submit')
     this.submitButton.addEventListener('click', event => { this.submit(); event.preventDefault() })
     document.getElementById('js-info-share').addEventListener('click', () => Application.share.show(this.event))
-    document.getElementById('js-info-close').addEventListener('click', () => Application.closeEvent())
+    document.getElementById('js-info-close').addEventListener('click', () => history.back())
     document.getElementById('js-registration-share').addEventListener('click', () => Application.share.show(this.event))
     document.getElementById('js-registration-close').addEventListener('click', () => this.hideConfirmation())
   }

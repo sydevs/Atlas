@@ -1,83 +1,103 @@
-/* global AtlasAPI, WorldMap, Util, Navbar, ListPanel, InfoPanel, ImageGallery, TimingCarousel, SharingModal */
+/* global AtlasAPI, WorldMap, Navbar, ListPanel, InfoPanel, ImageGallery, TimingCarousel, SharingModal */
 
 class ApplicationInstance {
 
   constructor() {
-    const map = document.getElementById('map')
+    this.container = document.getElementById('map')
 
     this.mode = null
-    this.map = new WorldMap(map)
+    this.map = new WorldMap(this.container)
     this.listPanel = new ListPanel(document.getElementById('js-list-panel'))
     this.infoPanel = new InfoPanel(document.getElementById('js-info-panel'))
     this.navbar = new Navbar(document.getElementById('js-navbar'))
     this.imageGallery = new ImageGallery(document.getElementById('js-image-gallery'))
     this.timingCarousel = new TimingCarousel(document.getElementById('js-timing-carousel'))
     this.share = new SharingModal(document.getElementById('js-share'))
-    this.atlas = new AtlasAPI(map.dataset.api)
+    this.atlas = new AtlasAPI(this.container.dataset.api)
+    this.history = new History()
 
-    const initialEvents = JSON.parse(map.dataset.events).results
-    if (initialEvents) {
-      this.showList(initialEvents)
-
-      if (map.dataset.featured == 'true') {
-        this.showEvent(initialEvents[0])
-      }
-    }
-
-    if (map.dataset.restricted == 'true') {
+    if (this.container.dataset.restricted == 'true') {
       this.map.lockBounds()
     }
   }
 
-  showList(venues) {
-    this.setMode('list')
+  loadState() {
+    const state = JSON.parse(this.container.dataset.state)
 
-    if (venues) {
+    if (state.event || state.venue) {
+      this.history.push({ venues: state.venues })
+    }
+
+    this.setState(state)
+  }
+
+  setState(state, recordHistory = true) {
+    this.state = state
+
+    if (state.venues) {
+      // Load venues
+      this.listPanel.setVenues(state.venues)
+      this.map.setVenueMarkers(state.venues)
+    }
+
+    if (state.event) {
+      // Show event
+      this._setMode('event')
+      this.infoPanel.show(state.event)
+      this.map.selectMarker(state.event.venue_id)
+      this.map.zoomToVenue(state.event)
+      this.setInteractive(false)
+    } else if (state.venue) {
+      // Show venue
+      this._setMode('venue')
+      this.navbar.setVenue(state.venue)
+      this.listPanel.filterByVenue(state.venue)
+      this.map.selectMarker(state.venue.id)
+      this.map.invalidateViewportDimensions()
+      this.map.zoomToVenue(state.venue)
+      this.setInteractive(false)
+    } else if (state.venues) {
+      // Show list of venues
+      this._setMode('list')
       this.navbar.setActive(false)
-      this.listPanel.setVenues(venues)
-      this.map.setVenueMarkers(venues)
-    }
-
-    this.map.scaleToMax()
-    this.listPanel.resetFilter()
-    this.listPanel.setActiveItem(null)
-    this.map.selectMarker(null)
-    this.map.invalidateViewportDimensions()
-    this.map.fitToMarkers()
-    this.setInteractive(true)
-  }
-
-  showVenue(venue) {
-    this.setMode('venue')
-    this.navbar.setVenue(venue)
-    this.listPanel.filterByVenue(venue)
-    this.listPanel.setActiveItem(null)
-    this.map.selectMarker(venue.id)
-    this.map.invalidateViewportDimensions()
-    this.map.zoomToVenue(venue)
-    this.setInteractive(false)
-  }
-
-  showEvent(event) {
-    this.wasVenueMode = Util.isMode('venue')
-    this.setMode('event')
-    this.listPanel.setActiveItem(event.id)
-    this.infoPanel.show(event)
-    this.map.selectMarker(event.venue_id)
-    this.map.zoomToVenue(event)
-    this.setInteractive(false)
-  }
-
-  closeEvent() {
-    if (this.wasVenueMode) {
-      this.setMode('venue')
-      this.listPanel.setActiveItem(null)
+      this.map.scaleToMax()
+      this.listPanel.resetFilter()
+      this.map.selectMarker(null)
+      this.map.invalidateViewportDimensions()
+      this.map.fitToMarkers()
+      this.setInteractive(true)
+    } else if (state.alternatives) {
+      // Show empty results with alternatives
+      this._setMode('list')
+      this.listPanel.showEmptyResults(state.alternatives[0])
+      this.map.zoomTo(state.latitude, state.longitude)
+      this.map.setVenueMarkers([])
     } else {
-      this.showList()
+      console.error('Tried to set invalid state', state) // eslint-disable-line no-console
+      return false
     }
+
+    if (recordHistory) {
+      this.history.push(state)
+    }
+
+    return true
   }
 
-  setMode(mode) {
+  setInteractive(interactive) {
+    document.body.classList.toggle('map-interactive', interactive)
+    this.map.setInteractive(interactive)
+  }
+
+  loadEvents(query) {
+    this.atlas.query(query, response => {
+      this.setState({ venues: response.results })
+      this.map.setRefreshDisabled(false)
+      this.map.setRefreshHidden(true)
+    })
+  }
+
+  _setMode(mode) {
     if (this.mode) {
       document.body.classList.remove(`mode--${this.mode}`)
     }
@@ -90,31 +110,9 @@ class ApplicationInstance {
       this.map.leaflet.invalidateSize()
     }
   }
-
-  setInteractive(interactive) {
-    document.body.classList.toggle('map-interactive', interactive)
-    this.map.setInteractive(interactive)
-  }
-
-  loadEvents(query) {
-    this.setMode('list')
-
-    this.atlas.query(query, response => {
-      if (response.status == 'success') {
-        this.showList(response.results)
-      } else {
-        this.listPanel.showEmptyResults(response.alternatives[0])
-        this.map.zoomTo(query.latitude, query.longitude)
-        this.map.setVenueMarkers([])
-      }
-
-      this.map.setRefreshDisabled(false)
-      this.map.setRefreshHidden(true)
-    })
-  }
-
 }
 
 document.addEventListener('DOMContentLoaded', () => {
   window.Application = new ApplicationInstance()
+  window.Application.loadState()
 })

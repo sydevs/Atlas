@@ -10,6 +10,8 @@ Rails.application.routes.draw do
 
   namespace :map do
     root to: 'application#show'
+    get '/event/:event_id', to: 'application#show'
+    get '/venue/:venue_id', to: 'application#show'
     get :privacy, to: 'application#privacy'
     post :registrations, to: 'registrations#create'
   end

@@ -100,7 +100,7 @@ class Navbar {
   }
 
   clearVenue() {
-    Application.showList()
+    history.back()
   }
 
   /* ===== SEARCH RESULT FOCUS ===== */

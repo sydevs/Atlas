@@ -7,19 +7,19 @@ class Map::ApplicationController < ActionController::Base
   def show
     I18n.locale = params[:locale] || :en
 
-    if params[:venue]
-      @venue = Venue.joins(:events).find(params[:venue])
-    elsif params[:event]
-      @venue = Event.joins(:venue).find(params[:event]).venue
+    if params[:venue_id]
+      @venue = Venue.joins(:events).find(params[:venue_id])
+    elsif params[:event_id]
+      @event = Event.joins(:venue).find(params[:event_id])
+      @venue = @event.venue
     else
       @query = params[:q]
     end
 
-    @map_config = {
+    @config = {
       api: api_endpoint,
       language: params[:language],
       token: ENV['MAPBOX_ACCESSTOKEN'],
-      featured: params[:event].present?.to_s,
       restricted: [LocalArea, Province, Country].include?(scope.class).to_s,
     }
 

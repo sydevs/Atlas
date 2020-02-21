@@ -31,11 +31,11 @@ class WorldMap {
       showCoverageOnHover: false,
     }).addTo(this.leaflet)
 
-    this.markersGroup.on('click', event => Application.showVenue(event.layer.options.venue))
+    this.markersGroup.on('click', event => Application.setState({ venue: event.layer.options.venue }))
 
     this.normalIcon = L.icon({
-      iconUrl: 'markers/default.png',
-      shadowUrl: 'markers/shadow.png',
+      iconUrl: '/markers/default.png',
+      shadowUrl: '/markers/shadow.png',
       iconSize: [24, 30.4],
       shadowSize: [20.6, 11.8],
       iconAnchor: [12, 30.4],
@@ -43,8 +43,8 @@ class WorldMap {
     })
 
     this.selectedIcon = L.icon({
-      iconUrl: 'markers/selected.png',
-      shadowUrl: 'markers/shadow.png',
+      iconUrl: '/markers/selected.png',
+      shadowUrl: '/markers/shadow.png',
       iconSize: [24, 30.4],
       shadowSize: [20.6, 11.8],
       iconAnchor: [12, 30.4],
@@ -57,12 +57,7 @@ class WorldMap {
 
     this.leaflet.on('zoomstart', () => this.setRefreshHidden(false))
     this.leaflet.on('movestart', () => this.setRefreshHidden(false))
-    this.leaflet.on('resize', () => {
-      this.setRefreshHidden(false)
-      this.invalidateViewportDimensions()
-      this.fitToMarkers()
-    })
-
+    this.leaflet.on('resize', () => this.invalidateViewportDimensions())
     this.invalidateViewportDimensions()
   }
 
@@ -89,8 +84,6 @@ class WorldMap {
           this.addVenueMarker(venues[i])
         }
       }
-
-      this.fitToMarkers()
     }
   }
 

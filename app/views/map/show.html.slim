@@ -1,4 +1,11 @@
 
+ruby:
+  venues = render(template: 'api/views/index.json')
+  @state = { venues: JSON.parse(venues)['results'] }
+  @state[:query] = @query if @query
+  @state[:venue] = JSON.parse(render('api/records/venue.json', venue: @venue, verbose: true)) if @venue
+  @state[:event] = JSON.parse(render('api/records/event.json', event: @event, verbose: true)) if @event
+
 // ===== SEARCH BOX ===== //
 .navbar id='js-navbar'
   .navbar__box
@@ -10,7 +17,7 @@
         span id='js-venue-title'
 
     .navbar__search
-      input.navbar__search__input id='js-search-input' type='text' tabindex='1' placeholder=(@venue&.full_address || @query || translate('map.listing.search'))
+      input.navbar__search__input id='js-search-input' type='text' tabindex='1' placeholder=(@query || translate('map.listing.search'))
       .navbar__search__icon
         i.icon.icon--search
         i.icon.icon--spinner
@@ -18,7 +25,7 @@
     ul.navbar__results id='js-search-results'
 
 // ===== MAP ===== //
-#map data=@map_config data-events=render(template: 'api/views/index.json')
+#map data=@config data-state=@state.to_json
   #js-debug-viewport
   #js-debug-viewport-center
 

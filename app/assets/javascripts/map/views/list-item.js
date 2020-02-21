@@ -23,11 +23,7 @@ class ListItem {
   }
 
   open() {
-    Application.showEvent(this.event)
-  }
-
-  setActive(active) {
-    this.container.classList.toggle('item--active', active)
+    Application.setState({ event: this.event })
   }
 
   setHidden(hidden) {

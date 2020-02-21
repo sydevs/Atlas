@@ -66,5 +66,5 @@ const Util = {
     }
 
     return str
-  }
+  },
 }
