@@ -25,8 +25,8 @@ en:
         message: "Questions / Comments"
         submit: "Confirm"
       notice:
-        text: "By submitting you confirm your agreement with our privacy policy."
-        link: "View privacy policy"
+        text: "By submitting you confirm your agreement with our %{link}."
+        link: "privacy policy"
       feedback:
         duplicate: "You have already registered on %{date}. See you soon."
         success: "Success! You will receive a confirmation email shortly."

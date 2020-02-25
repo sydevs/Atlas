@@ -1,4 +1,4 @@
-/* globals Application, Util, GeoSearchAPI */
+/* globals Application, GeoSearchAPI */
 /* exported Navbar */
 
 class Navbar {
@@ -9,9 +9,10 @@ class Navbar {
     this.venueBack = document.getElementById('js-venue-back')
     this.venueText = document.getElementById('js-venue-title')
 
-    this.geoSearch = new GeoSearchAPI()
+    this.geoSearch = new GeoSearchAPI(this.container.dataset.key)
     this.searchResults = document.getElementById('js-search-results')
     this.searchInput = document.getElementById('js-search-input')
+    this.searchPlaceholder = this.searchInput.placeholder
     this.enableGeoSearch = true
 
     this.venueBack.addEventListener('click', _event => this.clearVenue())
@@ -33,14 +34,19 @@ class Navbar {
     this.focusedItem = null
     this.enableGeoSearch = false
     this.searchInput.value = null
-    this.searchInput.placeholder = location.label
     this.searchResults.innerHTML = null
     this.enableGeoSearch = true
 
-    Application.loadEvents({
-      latitude: location.latitude,
-      longitude: location.longitude
-    })
+    if (location) {
+      this.searchInput.placeholder = location.label
+
+      Application.loadEvents({
+        latitude: location.latitude,
+        longitude: location.longitude
+      })
+    } else {
+      this.searchInput.placeholder = this.searchPlaceholder
+    }
   }
 
   setActive(active) {

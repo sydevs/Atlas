@@ -1,8 +1,7 @@
-json.label params[:label] # TODO: Remove test code
 json.status 'empty'
 json.code response.status
 json.results do
-  json.message = "#{translate('map.listing.no_results')} #{}"
+  json.message "#{translate('map.listing.no_results')} #{}"
   json.latitude @coordinates[0]
   json.longitude @coordinates[1]
 

@@ -141,7 +141,7 @@ class WorldMap {
     this.leaflet.fitBounds(bounds, {
       paddingTopLeft: [this.viewport.left, this.viewport.top],
       paddingBottomRight: [this.viewport.right, this.viewport.bottom],
-      maxZoom: 14,
+      maxZoom: 8,
     })
   }
 
@@ -180,7 +180,14 @@ class WorldMap {
 
   refresh() {
     const bounds = this.getViewportBounds()
+    const buffer = 1.1
+    bounds.north *= buffer
+    bounds.south *= buffer
+    bounds.east *= buffer
+    bounds.west *= buffer
+
     Application.loadEvents(bounds)
+    Application.navbar.select(null)
     this.setRefreshDisabled(true)
   }
 

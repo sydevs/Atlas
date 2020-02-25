@@ -135,7 +135,9 @@ $z-hidden: -100
     width: $panel-width
     z-index: $z-panel
     box-shadow: $shadow-light
-    overflow: scroll
+    scroll-behavior: smooth
+    overflow-x: hidden
+    overflow-y: scroll
 
   @include desktop-or-larger
     top: $control-offset-y
