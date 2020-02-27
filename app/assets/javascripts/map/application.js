@@ -124,6 +124,11 @@ class ApplicationInstance {
           venues: response.results
         }, true)
       }
+
+      if (['postcode', 'address'].includes(query.type)) {
+        this.map.setTargetMarker(query)
+      }
+
       this.map.setRefreshDisabled(false)
       this.map.setRefreshHidden(true)
     })

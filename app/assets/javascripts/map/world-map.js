@@ -51,6 +51,15 @@ class WorldMap {
       shadowAnchor: [1.3, 11.8],
     })
 
+    this.targetIcon = L.icon({
+      iconUrl: '/markers/target.png',
+      shadowUrl: '/markers/shadow.png',
+      iconSize: [24, 30.4],
+      shadowSize: [20.6, 11.8],
+      iconAnchor: [12, 30.4],
+      shadowAnchor: [1.3, 11.8],
+    })
+
     window.addEventListener('wheel', event => this.scaleByScroll(event), { passive: false })
     document.getElementById('js-zoom-in').addEventListener('click', () => this.zoom(+1))
     document.getElementById('js-zoom-out').addEventListener('click', () => this.zoom(-1))
@@ -93,6 +102,20 @@ class WorldMap {
     const marker = L.marker([venue.latitude, venue.longitude], { venue: venue, icon: this.normalIcon })
     this.markers[venue.id] = marker
     marker.addTo(this.markersGroup)
+  }
+
+  setTargetMarker(location) {
+    if (location) {
+      if (!this.targetMarker) {
+        this.targetMarker = L.marker([location.latitude, location.longitude], { icon: this.targetIcon })
+      } else {
+        this.targetMarker.setLatLng([location.latitude, location.longitude])
+      }
+
+      this.targetMarker.addTo(this.leaflet)
+    } else if (this.targetMarker) {
+      this.leaflet.removeLayer(this.targetMarker)
+    }
   }
 
   clearMarkers() {

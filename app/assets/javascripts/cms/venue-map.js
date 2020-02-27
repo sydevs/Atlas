@@ -1,4 +1,4 @@
-/* global $, L, GeoSearch */
+/* global $, L */
 /* exported VenueMap */
 
 const VenueMap = {
