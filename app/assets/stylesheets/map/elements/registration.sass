@@ -232,6 +232,8 @@
 
 // ===== CONFIRMATION ===== //
 .registration__confirmation
+  $circle-size: 360px
+
   position: absolute
   top: 0
   bottom: 0
@@ -246,19 +248,19 @@
   transition: opacity 0.5s ease
   z-index: -1
 
-  padding-top: 75px
+  padding-top: 90px
   font-size: 16px
   text-align: center
 
   &__circle::before
     content: image-url('map/circle.svg')
     position: absolute
-    top: 0
-    right: 0
-    left: 0
-    bottom: 0
+    top: 50%
+    left: 50%
+    width: $circle-size
+    height: $circle-size
     transition: all 0.5s ease-out
-    transform: rotate(-45deg)
+    transform: translate(-50%, -50%) rotate(-45deg)
     align-self: center
 
   &__circle
@@ -266,10 +268,11 @@
     display: inline-flex
     flex-direction: column
     justify-content: center
-    width: 360px
-    height: 360px
+    width: $circle-size
+    height: $circle-size
     padding: 16%
-    margin-bottom: 10%
+    margin-top: 3vh
+    margin-bottom: 8vh
 
     opacity: 0
     transform: scale(0)
@@ -303,6 +306,7 @@
 
     width: 400px
     max-width: 100%
+    margin-top: 32px
 
   &__share
     width: #{80 + 34}px
@@ -339,4 +343,4 @@
     transform: scale(0.9)
 
   .registration__confirmation__circle::before
-    transform: rotate(0)
+    transform: translate(-50%, -50%) rotate(0)
