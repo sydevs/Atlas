@@ -67,8 +67,6 @@ class WorldMap {
     this.leaflet.on('zoomstart', () => this.setRefreshHidden(false))
     this.leaflet.on('movestart', () => this.setRefreshHidden(false))
     this.leaflet.on('resize', () => this.invalidateViewportDimensions())
-    this.leaflet.on('zoomend', () => this.invalidateViewportDimensions())
-    this.leaflet.on('moveend', () => this.invalidateViewportDimensions())
     this.invalidateViewportDimensions()
   }
 
@@ -206,11 +204,11 @@ class WorldMap {
   refresh() {
     const bounds = this.getViewportBounds()
     const buffer = 1.1
-    bounds.north *= buffer
-    bounds.south *= buffer
-    bounds.east *= buffer
-    bounds.west *= buffer
-
+    bounds.north = ((bounds.north - bounds.latitude) * buffer) + bounds.latitude
+    bounds.south = ((bounds.south - bounds.latitude) * buffer) + bounds.latitude
+    bounds.east = ((bounds.east - bounds.longitude) * buffer) + bounds.longitude
+    bounds.west = ((bounds.west - bounds.longitude) * buffer) + bounds.longitude
+    
     Application.loadEvents(bounds)
     Application.navbar.select(null)
     this.setRefreshDisabled(true)
@@ -284,26 +282,26 @@ class WorldMap {
       latitudes: Math.abs(bounds.getNorth() - bounds.getSouth()),
       longitudes: Math.abs(bounds.getWest() - bounds.getEast()),
     }
-    
+
     const result = {
       north: bounds.getNorth() - (boundsDimensions.latitudes * percentPadding.top),
       south: bounds.getSouth() + (boundsDimensions.latitudes * percentPadding.bottom),
       west: bounds.getWest() + (boundsDimensions.longitudes * percentPadding.left),
       east: bounds.getEast() - (boundsDimensions.longitudes * percentPadding.right),
     }
-
+    
     const center = L.latLngBounds([
       [result.north, result.west],
       [result.south, result.east]
     ]).getCenter()
 
     return {
-      north: result.north.toFixed(6),
-      south: result.south.toFixed(6),
-      west: result.west.toFixed(6),
-      east: result.east.toFixed(6),
-      latitude: center.lat.toFixed(6),
-      longitude: center.lng.toFixed(6),
+      north: result.north,
+      south: result.south,
+      west: result.west,
+      east: result.east,
+      latitude: center.lat,
+      longitude: center.lng,
     }
   }
 
