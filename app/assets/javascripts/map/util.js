@@ -5,7 +5,7 @@ const Util = {
   isDevice(device) {
     if (window.innerWidth < 768) {
       return device == 'mobile'
-    } else if (window.innerWidth > 1280) {
+    } else if (window.innerWidth > 1100) {
       return device == 'desktop'
     } else {
       return device == 'tablet'

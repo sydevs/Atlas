@@ -63,7 +63,7 @@ $shadow-heavy: 0 2px 50px 0 rgba(0, 0, 0, 0.5)
 // These are the minimum widths for each device
 // Devices smaller than 320px width are not supported.
 $tablet-width: 768px
-$desktop-width: 1280px
+$desktop-width: 1100px
 
 // ===== PANELS ===== //
 $header-height: 64px
@@ -74,6 +74,7 @@ $panel-padding: 45px
 $panel-padding-thin: 30px
 $panel-padding-mobile: 24px
 $panel-width: 467px
+$panel-width-thin: 360px
 
 $control-transition: 0.25s
 
@@ -132,7 +133,7 @@ $z-hidden: -100
     top: 0
     left: 0
     bottom: 0
-    width: $panel-width
+    width: $panel-width-thin
     z-index: $z-panel
     box-shadow: $shadow-light
     scroll-behavior: smooth
@@ -143,3 +144,4 @@ $z-hidden: -100
     top: $control-offset-y
     left: $control-offset-x
     bottom: $control-offset-y
+    width: $panel-width
