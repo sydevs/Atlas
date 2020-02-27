@@ -9,11 +9,12 @@ class GeoSearchAPI {
       format: 'json',
       autocomplete: true,
       language: document.documentElement.lang,
-      types: 'region,postcode,district,place,locality,neighborhood,address'
+      types: 'country,region,postcode,district,place,locality,neighborhood,address',
     }
 
     if (country) {
       this.config.country = country
+      this.config.typs = 'region,postcode,district,place,locality,neighborhood,address'
     }
 
     this.config = Object.keys(this.config).map((key) => {
@@ -44,13 +45,23 @@ class GeoSearchAPI {
     // Showing only 8 results for now, potentially increase/descrease the number
     for (let i = 0; i < data.length; i++) {
       const dat = data[i]
-
-      results.push({
-        label: dat.place_name,
+      let result = {
+        text: dat.place_name,
         latitude: dat.center[1],
         longitude: dat.center[0],
         type: dat.place_type[0],
-      })
+      }
+
+      if (['country', 'region', 'district'].includes(result.type)) {
+        console.log(dat)
+        result.west = dat.bbox[0]
+        result.south = dat.bbox[1]
+        result.east = dat.bbox[2]
+        result.north = dat.bbox[3]
+      }
+
+      results.push(result)
+
     }
 
     return results

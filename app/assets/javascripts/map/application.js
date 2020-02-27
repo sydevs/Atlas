@@ -16,6 +16,13 @@ class ApplicationInstance {
     this.atlas = new AtlasAPI(this.container.dataset.api)
     this.history = new History()
 
+    this.defaultZoom = {
+      region: 6,
+      district: 7,
+      place: 8,
+      default: 10,
+    }
+
     if (this.container.dataset.restricted == 'true') {
       this.map.lockBounds()
     }
@@ -77,7 +84,9 @@ class ApplicationInstance {
       // Show empty results with alternatives
       this._setMode('list')
       this.listPanel.showEmptyResults(state.alternatives[0])
-      this.map.zoomTo(state.latitude, state.longitude)
+      if (state.type) {
+        this.map.zoomTo(state.latitude, state.longitude, this.defaultZoom[state.type] || this.defaultZoom.default)
+      }
       this.map.setVenueMarkers([])
     } else {
       console.error('Tried to set invalid state', state) // eslint-disable-line no-console
@@ -98,13 +107,23 @@ class ApplicationInstance {
 
   loadEvents(query) {
     this.atlas.query(query, response => {
-      this.setState({
-        query: query.text,
-        latitude: query.latitude,
-        longitude: query.longitude,
-        type: query.type,
-        venues: response.results
-      }, true)
+      if (response.status == 'empty') {
+        this.setState({
+          message: response.results.message,
+          latitude: query.latitude,
+          longitude: query.longitude,
+          type: query.type,
+          alternatives: response.results.alternatives
+        }, true)
+      } else {
+        this.setState({
+          query: query.text,
+          latitude: query.latitude,
+          longitude: query.longitude,
+          type: query.type,
+          venues: response.results
+        }, true)
+      }
       this.map.setRefreshDisabled(false)
       this.map.setRefreshHidden(true)
     })

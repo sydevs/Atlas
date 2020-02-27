@@ -42,14 +42,8 @@ class Navbar {
     this.enableGeoSearch = true
 
     if (location) {
-      this.searchInput.placeholder = location.label
-
-      Application.loadEvents({
-        text: location.label,
-        latitude: location.latitude,
-        longitude: location.longitude,
-        type: location.type,
-      })
+      this.searchInput.placeholder = location.text
+      Application.loadEvents(location)
     } else {
       this.searchInput.placeholder = this.searchPlaceholder
     }
@@ -81,7 +75,7 @@ class Navbar {
         const element = document.createElement('LI')
         element.tabIndex = '0'
         element.dataset.parameters = JSON.stringify(result)
-        element.innerText = result.label
+        element.innerText = result.text
         this.searchResults.appendChild(element)
         this.setActive(true)
       })
