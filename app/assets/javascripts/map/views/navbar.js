@@ -9,7 +9,7 @@ class Navbar {
     this.venueBack = document.getElementById('js-venue-back')
     this.venueText = document.getElementById('js-venue-title')
 
-    this.geoSearch = new GeoSearchAPI(this.container.dataset.key)
+    this.geoSearch = new GeoSearchAPI(this.container.dataset.key, this.container.dataset.country || null)
     this.searchResults = document.getElementById('js-search-results')
     this.searchInput = document.getElementById('js-search-input')
     this.searchPlaceholder = this.searchInput.placeholder
@@ -58,7 +58,6 @@ class Navbar {
 
   refreshGeoSearch() {
     const searchText = this.searchInput.value
-    this.searchResults.innerHTML = null
 
     if (searchText.length < 3 || !this.enableGeoSearch) {
       this.setActive(false)
@@ -68,6 +67,8 @@ class Navbar {
     this.container.classList.add('navbar--loading')
 
     this.geoSearch.query(searchText, results => {
+      this.searchResults.innerHTML = null
+
       results.forEach(result => {
         const element = document.createElement('LI')
         element.tabIndex = '0'

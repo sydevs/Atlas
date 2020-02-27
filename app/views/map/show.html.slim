@@ -7,7 +7,7 @@ ruby:
   @state[:event] = JSON.parse(render('api/records/event.json', event: @event, verbose: true)) if @event
 
 // ===== SEARCH BOX ===== //
-.navbar id='js-navbar'
+.navbar id='js-navbar' data-key=ENV['MAPBOX_ACCESSTOKEN'] data-country=params[:country]
   .navbar__box
     .navbar__venue
       .navbar__venue__back id='js-venue-back'

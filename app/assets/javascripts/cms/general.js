@@ -22,8 +22,8 @@ const General = {
     $input.siblings('.input').addClass('loading')
     $input.blur()
 
-    var url = window.location.protocol + "//" + window.location.host + window.location.pathname + '?q=' + $input.val()
-    window.history.pushState({ path: url }, '', url);
+    var url = window.location.protocol + '//' + window.location.host + window.location.pathname + '?q=' + $input.val()
+    window.history.pushState({ path: url }, '', url)
   },
 
   onRadioMenuSelect: function() {
