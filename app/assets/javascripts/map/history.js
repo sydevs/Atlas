@@ -25,7 +25,7 @@ class History {
   }
 
   pop(event) {
-    if (Application.setState(event.state, false)) {
+    if (event.state && Application.setState(event.state, false)) {
       event.preventDefault()
     }
   }

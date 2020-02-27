@@ -5,6 +5,10 @@
   margin-top: 65px
   margin-bottom: 0
   position: relative
+  min-height: 101vh
+
+  @include desktop-or-larger
+    min-height: auto
 
 // ===== HEADER ===== //
 .registration__header
@@ -243,6 +247,7 @@
   display: flex
   flex-direction: column
   align-items: center
+  justify-content: center
 
   opacity: 0
   transition: opacity 0.5s ease
@@ -271,7 +276,6 @@
     width: $circle-size
     height: $circle-size
     padding: 16%
-    margin-top: 3vh
     margin-bottom: 8vh
 
     opacity: 0
@@ -306,7 +310,7 @@
 
     width: 400px
     max-width: 100%
-    margin-top: 32px
+    margin-bottom: 5vh
 
   &__share
     width: #{80 + 34}px

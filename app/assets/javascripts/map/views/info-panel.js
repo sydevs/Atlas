@@ -61,6 +61,7 @@ class InfoPanel {
         this.formFeedback.innerText = null
         this.event.registered = true
         this.form.classList.add('registration--confirmed')
+        window.hash = '#confirmation'
       } else if (response.status == 'info') {
         this.formFeedback.innerText = response.message
         this.formFeedback.classList.add('success')

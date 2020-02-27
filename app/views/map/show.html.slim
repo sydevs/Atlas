@@ -64,7 +64,7 @@ ruby:
   .info__description data-attribute='description'
   .info__images.main-carousel id='js-image-gallery' data-attribute='images'
 
-  div id='register'
+  #register
   form.registration id='js-registration'
     .registration__header
       .registration__header__text
@@ -96,6 +96,7 @@ ruby:
       button.registration__submit id='js-registration-submit'
         = translate('map.registration.form.submit')
 
+    #confirmation
     .registration__confirmation
       .registration__confirmation__circle
         .registration__confirmation__title = translate('map.registration.confirmation.title')
