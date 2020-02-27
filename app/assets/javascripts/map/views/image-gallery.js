@@ -16,6 +16,7 @@ class ImageGallery {
 
   setImages(images) {
     this.container.style = images.length > 0 ? '' : 'display: none'
+    this.container.classList.toggle('flickity-single', images.length == 1)
 
     const cells = images.map(image => {
       const img = document.createElement('IMG')
