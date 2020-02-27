@@ -30,6 +30,10 @@ class Navbar {
     }
   }
 
+  setText(text) {
+    this.searchInput.placeholder = text
+  }
+
   select(location) {
     this.focusedItem = null
     this.enableGeoSearch = false
@@ -41,8 +45,10 @@ class Navbar {
       this.searchInput.placeholder = location.label
 
       Application.loadEvents({
+        text: location.label,
         latitude: location.latitude,
-        longitude: location.longitude
+        longitude: location.longitude,
+        type: location.type,
       })
     } else {
       this.searchInput.placeholder = this.searchPlaceholder
@@ -66,7 +72,9 @@ class Navbar {
 
     this.container.classList.add('navbar--loading')
 
-    this.geoSearch.query(searchText, results => {
+    const viewportBounds = Application.map.getViewportBounds()
+    const center = [viewportBounds.latitude, viewportBounds.longitude]
+    this.geoSearch.query(searchText, center, results => {
       this.searchResults.innerHTML = null
 
       results.forEach(result => {

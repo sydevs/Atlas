@@ -16,6 +16,9 @@ class History {
       path += `/venue/${state.venue.id}`
     } else if (state.query) {
       path += `?q=${state.query}`
+      if (state.latitude) path += `&latitude=${state.latitude}`
+      if (state.longitude) path += `&longitude=${state.longitude}`
+      if (state.type) path += `&type=${state.type}`
     }
 
     history.pushState(state, undefined, path)

@@ -8,7 +8,7 @@ json.results do
   json.alternatives do
     json.array! @alternatives do |alternative|
       json.label alternative[:label]
-      json.url api_events_url(latitude: alternative[:latitude], longitude: alternative[:longitude])
+      json.url api_venues_url(latitude: alternative[:latitude], longitude: alternative[:longitude])
       json.distance alternative[:distance]
       
       json.query do

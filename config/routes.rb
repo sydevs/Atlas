@@ -80,7 +80,7 @@ Rails.application.routes.draw do
     get '429', to: 'api/application#error' # Too many requests
     get '500', to: 'api/application#error' # Internal server error
 
-    resources :events, only: %i[index show]
+    resources :events, only: %i[show]
     resources :venues, only: %i[index show] do
       resources :events, only: %i[index]
     end

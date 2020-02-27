@@ -21,11 +21,11 @@ class GeoSearchAPI {
     }).join('&')
   }
 
-  query(text, callback) {
+  query(text, center, callback) {
     this.latestQuery = text
     this.waiting = true
 
-    this.fetch(text).then(data => {
+    this.fetch(text, center).then(data => {
       if (text == this.latestQuery) {
         console.log('[GeoSearchAPI]', text, data) // eslint-disable-line no-console
         this.waiting = false
@@ -47,16 +47,17 @@ class GeoSearchAPI {
 
       results.push({
         label: dat.place_name,
-        latitude: dat.center[0],
-        longitude: dat.center[1],
+        latitude: dat.center[1],
+        longitude: dat.center[0],
+        type: dat.place_type[0],
       })
     }
 
     return results
   }
 
-  async fetch(text) {
-    const url = `https://api.mapbox.com/geocoding/v5/mapbox.places/${text}.json?${this.config}`
+  async fetch(text, center) {
+    const url = `https://api.mapbox.com/geocoding/v5/mapbox.places/${text}.json?${this.config}&proximity=${center[1]},${center[0]}`
 
     // Default options are marked with *
     const response = await fetch(url, {

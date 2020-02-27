@@ -12,8 +12,6 @@ class Map::ApplicationController < ActionController::Base
     elsif params[:event_id]
       @event = Event.joins(:venue).find(params[:event_id])
       @venue = @event.venue
-    else
-      @query = params[:q]
     end
 
     @config = {
@@ -21,6 +19,13 @@ class Map::ApplicationController < ActionController::Base
       language: params[:language],
       token: ENV['MAPBOX_ACCESSTOKEN'],
       restricted: [LocalArea, Province, Country].include?(scope.class).to_s,
+    }
+
+    @state = {
+      query: params[:q],
+      type: params[:type],
+      latitude: params[:latitude],
+      longitude: params[:longitude],
     }
 
     set_jbuilder_params!

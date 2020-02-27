@@ -2,9 +2,14 @@ class API::VenuesController < API::ApplicationController
 
   prepend_before_action { @model = Venue }
 
+  def show
+    super
+  end
+
   def index
     params.reverse_merge!({ radius: 50 })
     @coordinates = [params[:latitude], params[:longitude]]
+    @type = params[:type] || 'area'
 
     if %i[north south east west].all? { |key| params.include?(key) }
       southwest = [params[:south], params[:west]]

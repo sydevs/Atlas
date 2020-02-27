@@ -58,6 +58,8 @@ class WorldMap {
     this.leaflet.on('zoomstart', () => this.setRefreshHidden(false))
     this.leaflet.on('movestart', () => this.setRefreshHidden(false))
     this.leaflet.on('resize', () => this.invalidateViewportDimensions())
+    this.leaflet.on('zoomend', () => this.invalidateViewportDimensions())
+    this.leaflet.on('moveend', () => this.invalidateViewportDimensions())
     this.invalidateViewportDimensions()
   }
 
@@ -277,8 +279,8 @@ class WorldMap {
       south: result.south.toFixed(6),
       west: result.west.toFixed(6),
       east: result.east.toFixed(6),
-      latitude: center.lat,
-      longitude: center.lng,
+      latitude: center.lat.toFixed(6),
+      longitude: center.lng.toFixed(6),
     }
   }
 

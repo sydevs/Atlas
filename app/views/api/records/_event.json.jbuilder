@@ -21,7 +21,7 @@ if event.venue.present?
     json.latitude event.venue.latitude
     json.longitude event.venue.longitude
 
-    if @coordinates.present?
+    if @coordinates.present? && %w[address postcode].include?(@type)
       json.distance event.venue.distance(@coordinates)
       json.distance_text event.venue.distance_in_words(@coordinates)
     end

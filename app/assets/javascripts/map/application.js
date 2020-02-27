@@ -25,7 +25,10 @@ class ApplicationInstance {
     const state = JSON.parse(this.container.dataset.state)
 
     if (state.event || state.venue) {
-      this.history.push({ venues: state.venues })
+      let old_state = Object.assign({}, state)
+      delete old_state.event
+      delete old_state.venue
+      this.history.push(old_state)
     }
 
     this.setState(state)
@@ -38,6 +41,10 @@ class ApplicationInstance {
       // Load venues
       this.listPanel.setVenues(state.venues)
       this.map.setVenueMarkers(state.venues)
+    }
+    
+    if (state.text) {
+      this.navbar.setText(state.text)
     }
 
     if (state.event) {
@@ -91,7 +98,13 @@ class ApplicationInstance {
 
   loadEvents(query) {
     this.atlas.query(query, response => {
-      this.setState({ venues: response.results })
+      this.setState({
+        query: query.text,
+        latitude: query.latitude,
+        longitude: query.longitude,
+        type: query.type,
+        venues: response.results
+      }, true)
       this.map.setRefreshDisabled(false)
       this.map.setRefreshHidden(true)
     })

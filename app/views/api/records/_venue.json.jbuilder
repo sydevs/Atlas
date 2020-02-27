@@ -14,7 +14,7 @@ else
   json.events api_venue_events_url(venue.id, format: :json)
 end
 
-if venue.latitude? && venue.latitude? && @coordinates.present?
+if venue.latitude? && venue.latitude? && @coordinates.present? && %w[address postcode].include?(@type)
   json.distance venue.distance(@coordinates)
   json.distance_text venue.distance_in_words(@coordinates)
 end
