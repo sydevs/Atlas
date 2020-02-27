@@ -66,9 +66,7 @@ class ListPanel {
   }
 
   triggerAlternativeQuery() {
-    const query = this.alternative.query
-    query.label = this.alternative.label
-    Application.navbar.select(query)
+    Application.navbar.select(this.alternative.query)
   }
 
 }

@@ -12,6 +12,7 @@ json.results do
       json.distance alternative[:distance]
       
       json.query do
+        json.text alternative[:label]
         json.latitude alternative[:latitude]
         json.longitude alternative[:longitude]
       end
