@@ -4,7 +4,7 @@ CarrierWave.configure do |config|
   if ENV['GCLOUD_BUCKET'].present?
     config.storage = :gcloud
     config.asset_host = "https://#{ENV.fetch('GCLOUD_BUCKET')}" if ENV.fetch('GCLOUD_BUCKET').include?('.')
-    config.gcloud_bucket = ENV['GCLOUD_BUCKET']
+    config.gcloud_bucket = ENV.fetch('GCLOUD_BUCKET')
     config.gcloud_bucket_is_public = true
     config.gcloud_authenticated_url_expiration = 600
 
