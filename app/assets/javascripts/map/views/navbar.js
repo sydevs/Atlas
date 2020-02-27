@@ -138,9 +138,11 @@ class Navbar {
   moveFocusUp() {
     if (this.focusedItem) {
       this.focusedItem.classList.remove('focus')
-      this.focusedItem = this.focusedItem.nextElementSibling
-    } else {
-      this.focusedItem = this.searchResults.firstElementChild
+      this.focusedItem = this.focusedItem.previousElementSibling
+    }
+
+    if (!this.focusedItem) {
+      this.focusedItem = this.searchResults.lastElementChild
     }
 
     this.focusedItem.classList.add('focus')
@@ -149,9 +151,11 @@ class Navbar {
   moveFocusDown() {
     if (this.focusedItem) {
       this.focusedItem.classList.remove('focus')
-      this.focusedItem = this.focusedItem.previousElementSibling
-    } else {
-      this.focusedItem = this.searchResults.lastElementChild
+      this.focusedItem = this.focusedItem.nextElementSibling
+    } 
+    
+    if (!this.focusedItem) {
+      this.focusedItem = this.searchResults.firstElementChild
     }
 
     this.focusedItem.classList.add('focus')
