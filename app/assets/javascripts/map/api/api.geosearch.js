@@ -53,7 +53,6 @@ class GeoSearchAPI {
       }
 
       if (['country', 'region', 'district'].includes(result.type)) {
-        console.log(dat)
         result.west = dat.bbox[0]
         result.south = dat.bbox[1]
         result.east = dat.bbox[2]
@@ -61,7 +60,6 @@ class GeoSearchAPI {
       }
 
       results.push(result)
-
     }
 
     return results

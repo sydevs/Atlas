@@ -14,7 +14,15 @@ else
   json.events api_venue_events_url(venue.id, format: :json)
 end
 
-if venue.latitude? && venue.latitude? && @coordinates.present? && %w[address postcode].include?(@type)
-  json.distance venue.distance(@coordinates)
-  json.distance_text venue.distance_in_words(@coordinates)
+if venue.latitude? && venue.latitude?
+  if @coordinates.present? && %w[address postcode].include?(@type)
+    json.distance venue.distance(@coordinates)
+    json.distance_text venue.distance_in_words(@coordinates)
+  end
+
+  if venue.place_id?
+    json.directions_url "https://www.google.com/maps/search/?api=1&query=#{venue.full_address}>&query_place_id=#{venue.place_id}"
+  else
+    json.directions_url "http://www.google.com/maps/place/#{venue.latitude},#{venue.longitude}"
+  end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_18_145343) do
+ActiveRecord::Schema.define(version: 2020_02_27_123845) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -164,6 +164,7 @@ ActiveRecord::Schema.define(version: 2020_02_18_145343) do
     t.bigint "manager_id"
     t.string "province_code", limit: 3
     t.boolean "published", default: true
+    t.string "place_id"
     t.index ["manager_id"], name: "index_venues_on_manager_id"
   end
 

@@ -25,6 +25,12 @@ if event.venue.present?
       json.distance event.venue.distance(@coordinates)
       json.distance_text event.venue.distance_in_words(@coordinates)
     end
+
+    if event.venue.place_id?
+      json.directions_url "https://www.google.com/maps/search/?api=1&query=#{event.venue.full_address}>&query_place_id=#{event.venue.place_id}"
+    else
+      json.directions_url "http://www.google.com/maps/place/#{event.venue.latitude},#{event.venue.longitude}"
+    end
   end
 end
 

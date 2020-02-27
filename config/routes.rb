@@ -48,6 +48,7 @@ Rails.application.routes.draw do
     end
 
     resources :venues do
+      get :geocode, on: :collection
       resources :managers, only: %i[index new create destroy]
       resources :events, only: %i[index new create]
       resources :audits, only: %i[index]

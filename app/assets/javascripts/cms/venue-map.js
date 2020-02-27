@@ -28,7 +28,6 @@ const VenueMap = {
 
   initEditableMap() {
     VenueMap.messages = $('.map.message')
-    VenueMap.geocoder = new GeoSearch.OpenStreetMapProvider()
 
     var latitude = $('#venue_latitude').val()
     var longitude = $('#venue_longitude').val()
@@ -45,7 +44,7 @@ const VenueMap = {
         VenueMap.setMarker(latitude, longitude)
       }
     })
-    $('.lookup.button').click(VenueMap.onLookup)
+
     VenueMap.instance.dragging.disable()
   },
 
@@ -58,8 +57,13 @@ const VenueMap = {
   },
 
   setMarker(latitude, longitude) {
-    VenueMap.venueMarker = L.marker([latitude, longitude]).addTo(VenueMap.instance)
+    if (!VenueMap.venueMarker) {
+      VenueMap.venueMarker = L.marker().addTo(VenueMap.instance)
+      VenueMap.venueMarker.on('click', VenueMap.onMarkerClick)
+    }
+
     $('#venue-map').css('min-height', '180px').css('opacity', '1')
+    VenueMap.venueMarker.setLatLng([latitude, longitude])
     VenueMap.instance.invalidateSize()
     VenueMap.instance.setView([latitude, longitude], VenueMap.initialZoom)
 
@@ -72,30 +76,55 @@ const VenueMap = {
     let $button = $(event.target)
     $button.addClass('loading')
 
-    let value = [
+    $.ajax({
+      url: '/cms/venues/geocode',
+      type: 'GET',
+      dataType: 'json',
+      data: {
+        query: VenueMap.parseAddress(),
+        country_code: document.getElementById('venue_country_code').value,
+      },
+      success: function(data) {
+        VenueMap.messages.addClass('hidden')
+        $('#venue_latitude').val(data.latitude)
+        $('#venue_longitude').val(data.longitude)
+        $('#venue_place_id').val(data.place_id)
+        VenueMap.setMarker(data.latitude, data.longitude)
+        $button.removeClass('loading')
+      },
+      error: function(_data) {
+        VenueMap.messages.addClass('hidden')
+        VenueMap.messages.filter('.for-failure').removeClass('hidden')
+        $button.removeClass('loading')
+      },
+    })
+  },
+
+  onMarkerClick() {
+    const place_id = $('#venue_place_id').val()
+    const latitude = $('#venue_latitude').val()
+    const longitude = $('#venue_longitude').val()
+    let url
+
+    if (place_id) {
+      url = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(VenueMap.parseAddress())}>&query_place_id=${place_id}`
+    } else if (latitude && longitude) {
+      url = `http://www.google.com/maps/place/${latitude},${longitude}`
+    }
+
+    if (url) {
+      window.open(url, '_blank')
+    }
+  },
+
+  parseAddress() {
+    return [
       document.getElementById('venue_street').value,
       document.getElementById('venue_city').value,
       document.getElementById('venue_province_code').value,
       document.getElementById('venue_country_code').value,
       document.getElementById('venue_postcode').value,
     ].filter(Boolean).join(', ')
-
-    VenueMap.geocoder.search({
-      query: value,
-    }).then(function(results) {
-      VenueMap.messages.addClass('hidden')
-
-      if (results.length > 0) {
-        var result = results[0]
-        $('#venue_latitude').val(result.y)
-        $('#venue_longitude').val(result.x)
-        VenueMap.setMarker(result.y, result.x)
-      } else {
-        VenueMap.messages.filter('.for-failure').removeClass('hidden')
-      }
-
-      $button.removeClass('loading')
-    })
   },
 }
 

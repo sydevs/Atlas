@@ -17,7 +17,7 @@ class Venue < ApplicationRecord
   # Validations
   validates :street, presence: true
   validates :country_code, presence: true
-  validates :latitude, :longitude, presence: true
+  validates :latitude, :longitude, :place_id, presence: true
 
   # Methods
 

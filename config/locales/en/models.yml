@@ -119,6 +119,7 @@ en:
         coordinates: "Location"
         latitude: "Latitude"
         longitude: "Longitude"
+        place_id: "Google Place ID"
 
       event:
         published: :activerecord.attributes.generic.published # Do not translate

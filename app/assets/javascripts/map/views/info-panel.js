@@ -21,9 +21,7 @@ class InfoPanel {
     this.event = event
     this.container.querySelector('[data-attribute="name"]').textContent = event.label
     this.container.querySelector('[data-attribute="address"]').textContent = event.address_text || ''
-    this.container.querySelector('[data-attribute="directions"]').href = `http://www.google.com/maps/place/${event.latitude},${event.longitude}`
-    //this.container.querySelector('[data-attribute="directions"]').href = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(event.address_text)}`
-    //this.container.querySelector('[data-attribute="directions"]').href = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${event.latitude}, ${event.longitude}`)}`
+    this.container.querySelector('[data-attribute="directions"]').href = event.directions_url
     this.container.querySelector('[data-attribute="day"]').textContent = event.recurrence_in_words
     this.container.querySelector('[data-attribute="time"]').textContent = event.formatted_start_end_time
     this.container.querySelector('[data-attribute="description"]').innerHTML = Util.simpleFormat(event.description || event.category.description || '')

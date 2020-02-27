@@ -1,4 +1,5 @@
 class CMS::VenuesController < CMS::ApplicationController
+  include GeocodeAPI
 
   prepend_before_action { @model = Venue }
 
@@ -20,12 +21,27 @@ class CMS::VenuesController < CMS::ApplicationController
     super parameters
   end
 
+  def geocode
+    authorize Venue
+
+    result = GeocodeAPI.googlemaps({
+      input: params[:query],
+      language: I18n.locale,
+    })
+
+    if result
+      render json: result
+    else
+      render json: {}, status: 404
+    end
+  end
+
   private
 
     def parameters
       params.fetch(:venue, {}).permit(
         :published,
-        :name, :category, :latitude, :longitude,
+        :name, :category, :latitude, :longitude, :place_id,
         :street, :city, :province_code, :country_code,
         manager: {}
       )
