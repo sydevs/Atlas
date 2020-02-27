@@ -126,18 +126,47 @@ class WorldMap {
   scaleByScroll(event) {
     if (!Util.isDevice('mobile')) return
 
-    this.currentHeight = this.container.offsetHeight
-    if (event.deltaY < 0 && window.scrollY <= 0) event.preventDefault()
-    if (event.deltaY == 0 || window.scrollY > 0) return
+    if (event.deltaY < 0 && document.body.scrollTop <= 0) event.preventDefault()
+    if (event.deltaY == 0 || document.body.scrollTop > 0) return
     if (event.deltaY < 0 && this.currentHeight >= this.maxHeight) return
     if (event.deltaY > 0 && this.currentHeight <= this.minHeight) return
     
+    clearTimeout(this.scrollTimeout)
+    clearInterval(this.scrollInterval)
+
+    this.currentHeight = this.container.offsetHeight
     this.currentHeight = this.currentHeight - event.deltaY
     this.currentHeight = Math.min(Math.max(this.currentHeight, this.minHeight), this.maxHeight)
     this.container.style = `max-height: ${this.currentHeight}`
     this.setRefreshHidden(this.currentHeight < this.maxHeight)
     Application.setInteractive(this.currentHeight >= this.maxHeight)
     event.preventDefault()
+
+    const turningPoint = (this.maxHeight - this.minHeight) * (event.deltaY > 0 ? 3 : 1) / 4
+    if (this.currentHeight < this.minHeight + turningPoint) {
+      this.targetHeight = this.minHeight
+    } else if (this.currentHeight >= this.minHeight + turningPoint) {
+      this.targetHeight = this.maxHeight
+    } else {
+      this.targetHeight = null
+    }
+
+    if (this.targetHeight) {
+      this.scrollTimeout = setTimeout(() => {
+        this.scrollInterval = setInterval(() => {
+          this.currentHeight = this.container.offsetHeight
+          let heightDelta = (this.targetHeight - this.currentHeight) * 0.15
+
+          if (heightDelta == 0) {
+            clearInterval(this.scrollInterval)
+            return
+          }
+
+          if (Math.abs(heightDelta) < 1) heightDelta = Math.sign(heightDelta)
+          this.container.style = `max-height: ${this.currentHeight + heightDelta}`
+        }, 10)
+      }, 300)
+    }
   }
 
   scaleToMax() {
