@@ -118,13 +118,19 @@ const VenueMap = {
   },
 
   parseAddress() {
-    return [
-      document.getElementById('venue_street').value,
-      document.getElementById('venue_city').value,
-      document.getElementById('venue_province_code').value,
-      document.getElementById('venue_country_code').value,
-      document.getElementById('venue_postcode').value,
-    ].filter(Boolean).join(', ')
+    const addressField = document.getElementById('venue_address')
+
+    if (addressField) {
+      return addressField.value
+    } else {
+      return [
+        document.getElementById('venue_street').value,
+        document.getElementById('venue_city').value,
+        document.getElementById('venue_province_code').value,
+        document.getElementById('venue_country_code').value,
+        document.getElementById('venue_postcode').value,
+      ].filter(Boolean).join(', ')
+    }
   },
 }
 

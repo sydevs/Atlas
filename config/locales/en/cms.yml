@@ -70,6 +70,7 @@ en:
         registration_url: "This is the URL that seekers will be sent to, to register, if your registration mode is set to something other than '%{native}.'"
 
       venue:
+        location: "Press \"Find Location\" to automatically fill in these fields, using the address that you have filled in above."
         find_marker: "Find Location"
         marker_not_set:
           title: "Map marker has not been set"

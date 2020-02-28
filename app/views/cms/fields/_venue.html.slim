@@ -26,17 +26,6 @@
     .three.wide.field
       = f.input_field :postcode, placeholder: translate_attribute(Venue, :postcode)
 
-.required.field
-  = f.label :coordinates, required: true
-  .three.fields
-    .field = f.input_field :latitude, placeholder: translate_attribute(Venue, :latitude)
-    .field = f.input_field :longitude, placeholder: translate_attribute(Venue, :longitude)
-    .field = f.input_field :place_id, placeholder: translate_attribute(Venue, :place_id)
-
-button.lookup.ui.fluid.button type='button'
-  i.search.icon
-  = translate('cms.hints.venue.find_marker')
-
 #venue-map data-editable='true'
 .ui.map.message class="#{'hidden' if f.object.coordinates?}"
   .header = translate('cms.hints.venue.marker_not_set.title')
@@ -47,3 +36,15 @@ button.lookup.ui.fluid.button type='button'
 .ui.info.map.message.for-success class="#{'hidden' unless f.object.coordinates?}"
   .header = translate('cms.hints.venue.marker_set.title')
   p = translate('cms.hints.venue.marker_set.description')
+
+button.lookup.ui.fluid.button type='button'
+  i.search.icon
+  = translate('cms.hints.venue.find_marker')
+
+.required.field
+  = f.label :coordinates, required: true
+  = f.hint translate('cms.hints.venue.location')
+  .three.fields
+    .field = f.input_field :latitude, placeholder: translate_attribute(Venue, :latitude)
+    .field = f.input_field :longitude, placeholder: translate_attribute(Venue, :longitude)
+    .field = f.input_field :place_id, placeholder: translate_attribute(Venue, :place_id)

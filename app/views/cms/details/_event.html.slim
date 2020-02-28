@@ -53,4 +53,4 @@ h3.ui.dividing.header = translate('cms.details.details_for_record', resource: @r
 
 h3.ui.dividing.header = translate('cms.details.location_of_record', resource: translate_model(@model).downcase)
 p = [@record.room, @record.full_address].compact.join(' - ')
-#venue-map data-latitude=@record.venue.latitude data-longitude=@record.venue.longitude
+#venue-map data-latitude=@record.venue.latitude data-longitude=@record.venue.longitude data-place-id=@record.venue.place_id

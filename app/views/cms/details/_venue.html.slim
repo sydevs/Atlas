@@ -13,4 +13,9 @@ h3.ui.dividing.header = translate('cms.details.details_for_record', resource: @r
 
 h3.ui.dividing.header = translate('cms.details.location_of_record', resource: translate_model(@model).downcase)
 p = @record.full_address
+
+= hidden_field_tag :venue_address, @record.full_address
+= hidden_field_tag :venue_latitude, @record.latitude
+= hidden_field_tag :venue_longitude, @record.longitude
+= hidden_field_tag :venue_place_id, @record.place_id
 #venue-map data-latitude=@record.latitude data-longitude=@record.longitude
