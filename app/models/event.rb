@@ -29,7 +29,7 @@ class Event < ApplicationRecord
   validates :start_date, presence: true
   validates :start_time, presence: true
   validates :recurrence, presence: true
-  validates :description, length: { minimum: 20, maximum: 255, allow_nil: true }
+  validates :description, length: { minimum: 20, maximum: 600, allow_nil: true }
   validates_associated :pictures
 
   # Scopes

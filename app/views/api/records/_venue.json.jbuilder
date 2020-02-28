@@ -3,6 +3,7 @@ json.map_url map_venue_url(venue)
 json.extract! venue, :id, :label, :latitude, :longitude
 json.address_text venue.full_address
 json.address do
+  json.building venue.name
   json.extract! venue, :street, :city, :province_code, :province_name, :country_code, :country_name, :postcode
 end
 

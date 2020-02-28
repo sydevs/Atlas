@@ -124,6 +124,7 @@ const VenueMap = {
       return addressField.value
     } else {
       return [
+        document.getElementById('venue_name').value,
         document.getElementById('venue_street').value,
         document.getElementById('venue_city').value,
         document.getElementById('venue_province_code').value,

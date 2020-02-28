@@ -1,10 +1,11 @@
 
 = f.input :published
 
-= f.input :name, placeholder: f.object.street
-
 .required.field
   = f.label :address
+  .fields
+    .sixteen.wide.field
+      = f.input_field :name, placeholder: translate_attribute(Venue, :name)
   .fields
     .eleven.wide.field
       = f.input_field :street, placeholder: translate_attribute(Venue, :street)
