@@ -46,7 +46,7 @@ class GeoSearchAPI {
     for (let i = 0; i < data.length; i++) {
       const dat = data[i]
       let result = {
-        text: dat.place_name,
+        query: dat.place_name,
         latitude: dat.center[1],
         longitude: dat.center[0],
         type: dat.place_type[0],

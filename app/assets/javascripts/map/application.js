@@ -50,8 +50,8 @@ class ApplicationInstance {
       this.map.setVenueMarkers(state.venues)
     }
     
-    if (state.text) {
-      this.navbar.setText(state.text)
+    if (state.query) {
+      this.navbar.setText(state.query)
     }
 
     if (state.event) {
@@ -117,7 +117,7 @@ class ApplicationInstance {
         }, true)
       } else {
         this.setState({
-          query: query.text,
+          query: query.query,
           latitude: query.latitude,
           longitude: query.longitude,
           type: query.type,
