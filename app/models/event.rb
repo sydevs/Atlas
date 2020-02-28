@@ -6,7 +6,7 @@ class Event < ApplicationRecord
   include Expirable
 
   nilify_blanks
-  searchable_columns %w[name category description]
+  searchable_columns %w[name description]
   audited
 
   # Associations
