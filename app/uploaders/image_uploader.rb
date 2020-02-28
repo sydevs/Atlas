@@ -23,23 +23,17 @@ class ImageUploader < CarrierWave::Uploader::Base
     "#{Rails.root}/tmp/uploads"
   end
 
+  # Replace all file names with a unique random string
   def filename
-    "#{secure_token}.#{file.extension}" if original_filename.present?
+    "#{secure_token(10)}.#{file.extension}" if original_filename.present?
   end
 
   protected
 
-    def secure_token
-      media_original_filenames_var = :"@#{mounted_as}_original_filenames"
-
-      model.instance_variable_set(media_original_filenames_var, {}) unless model.instance_variable_get(media_original_filenames_var)
-
-      unless model.instance_variable_get(media_original_filenames_var).map { |k, _v| k }.include? original_filename.to_sym
-        new_value = model.instance_variable_get(media_original_filenames_var).merge({ "#{original_filename}": SecureRandom.uuid })
-        model.instance_variable_set(media_original_filenames_var, new_value)
-      end
-
-      model.instance_variable_get(media_original_filenames_var)[original_filename.to_sym]
+    # This checks if a secure token already exists for this file, and otherwise generates a new one.
+    def secure_token(length = 16)
+      var = :"@#{mounted_as}_secure_token"
+      model.instance_variable_get(var) || model.instance_variable_set(var, SecureRandom.hex(length / 2))
     end
 
 end
