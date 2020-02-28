@@ -100,7 +100,7 @@ en:
       record_not_published:
         title: "Not Published"
         description: "This %{resource} is current hidden from the public, because it is not published."
-      record_has_languages: "%{resource} offered in %{languages}"
+      record_has_language: "%{resource} offered in %{language}"
       updated_at: "Last updated %{time_ago} ago"
 
     images:
