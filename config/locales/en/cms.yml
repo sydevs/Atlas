@@ -64,7 +64,7 @@ en:
         prompt: "Province / State / County"
       event:
         room: "If the venue has more than one room, which room should seekers come to?"
-        language: "Which language(s) can a seeker expect to be used at this event."
+        language: "What is the primary language that this event if given in."
         disable_notifications: "If checked, managers for this event will never receive registration lists."
         registration_mode: "Where should seekers go to register for the event? We strongly recommend that you leave this as '%{native},' because having seekers register on this website, will let us send them reminder and follow-up emails."
         registration_url: "This is the URL that seekers will be sent to, to register, if your registration mode is set to something other than '%{native}.'"

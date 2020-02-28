@@ -14,9 +14,8 @@ class ListItem {
     element.querySelector('[data-attribute="time"]').textContent = event.formatted_start_end_time || ''
     element.addEventListener('click', () => this.open())
 
-    const language = Object.keys(event.languages)[0] || ''
-    if (document.documentElement.lang.toUpperCase() != language) {
-      element.querySelector('[data-attribute="language"]').textContent = language
+    if (event.language_code && document.documentElement.lang.toUpperCase() != event.language_code) {
+      element.querySelector('[data-attribute="language"]').textContent = event.language_code
     } else {
       element.querySelector('[data-attribute="language"]').remove()
     }

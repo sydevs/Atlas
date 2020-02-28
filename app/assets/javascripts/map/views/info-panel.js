@@ -6,7 +6,7 @@ class InfoPanel {
   constructor(element) {
     this.container = element
     this.timingDescription = document.getElementById('js-timing-description')
-    this.languagesBlock = document.getElementById('js-info-languages')
+    this.languageBlock = document.getElementById('js-info-language')
     this.form = document.getElementById('js-registration')
     this.formFeedback = document.getElementById('js-registration-feedback')
     this.submitButton = document.getElementById('js-registration-submit')
@@ -27,10 +27,8 @@ class InfoPanel {
     this.container.querySelector('[data-attribute="description"]').innerHTML = Util.simpleFormat(event.description || event.category.description || '')
     this.form.classList.toggle('registration--confirmed', Boolean(event.registered))
 
-    const languageKey = Object.keys(event.languages)[0] || ''
-    const language = Object.values(event.languages)[0]
-    this.languagesBlock.style = (document.documentElement.lang.toUpperCase() == languageKey ? 'display: none' : '')
-    this.container.querySelector('[data-attribute="languages"]').textContent = language
+    this.languageBlock.style = (Boolean(event.language) && document.documentElement.lang.toUpperCase() != event.language_code ? '' : 'display: none')
+    this.container.querySelector('[data-attribute="languages"]').textContent = event.language
 
     this.timingDescription.textContent = event.timing.description
 

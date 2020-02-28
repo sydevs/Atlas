@@ -34,8 +34,9 @@ if event.venue.present?
   end
 end
 
-json.languages do
-  json.merge! event.languages.map { |l| [l, I18nData.languages(I18n.locale)[l]] }.to_h
+if event.language
+  json.language_code event.language
+  json.language I18nData.languages(I18n.locale)[event.language].split(/[,;]/)[0]
 end
 
 json.category do

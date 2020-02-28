@@ -1,6 +1,6 @@
 
 - categories = Event.categories.map { |k, v| [translate_enum_value(Event, :category, k), k] }
-- languages = I18nData.languages(I18n.locale).map { |k,v| [v, k] }
+- languages = I18nData.languages(I18n.locale).map { |k,v| [v.split(/[,;]/)[0], k] }
 
 = f.input :published
 
@@ -9,9 +9,9 @@
 
 = f.input :name, placeholder: @record.category_name
 = f.input :category, collection: categories
-= f.input :description, as: :text, placeholder: @record.category_description, input_html: { rows: 3 }
+= f.input :description, as: :text, placeholder: @record.category_description
 = f.input :room, hint: translate('cms.hints.event.room')
-= f.input :languages, collection: languages, input_html: { multiple: true, class: 'search' }, hint: translate('cms.hints.event.language')
+= f.input :language, collection: languages, selected: @record.language || I18n.locale.upcase, input_html: { class: 'search' }, hint: translate('cms.hints.event.language')
 
 = f.input :disable_notifications, hint: translate('cms.hints.event.disable_notifications')
 
