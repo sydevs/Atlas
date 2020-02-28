@@ -25,6 +25,7 @@ class Event < ApplicationRecord
   # Validations
   validates :name, length: { maximum: 255 }
   validates :category, presence: true
+  validates :language, presence: true
   validates :start_date, presence: true
   validates :start_time, presence: true
   validates :recurrence, presence: true
