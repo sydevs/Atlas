@@ -20,7 +20,7 @@ en:
         location: "Location"
         latlng: "Latitude & Longitude"
         timing: "Timing"
-        languages: "Language"
+        language: "Language"
         no_description: "(No Description)"
 
     welcome:

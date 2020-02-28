@@ -48,9 +48,9 @@ class Event < ApplicationRecord
     venue.managed_by?(manager)
   end
 
-  def languages= value
+  def language= value
     # Only accept languages which are in the language list
-    super value & I18nData.languages.keys
+    super value if I18nData.languages.key?(value)
   end
 
 end

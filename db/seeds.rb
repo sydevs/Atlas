@@ -73,7 +73,7 @@ def load_venue address, country_code, index
       end_date: [true, false].sample ? Faker::Date.between(from: start_date, to: 6.months.since(start_date)) : nil,
       start_time: "#{start_hour}:#{format '%02d', start_minute}",
       end_time: [true, true, false].sample ? "#{start_hour + [0, 1, 1, 2].sample}:#{format '%02d', [start_minute, start_minute, 0, 15, 30, 45].sample}" : nil,
-      languages: [%w[EN], %w[EN], %w[EN IT], %w[IT], %w[ES]].sample,
+      language: %w[EN EN EN IT IT ES]].sample,
       recurrence: Event.recurrences.keys.sample,
       category: category,
       pictures_attributes: Dir.glob("#{images_folder}/*.jpg").map { |f| { file: File.open(f, 'r') } },

@@ -28,7 +28,7 @@ class InfoPanel {
     this.form.classList.toggle('registration--confirmed', Boolean(event.registered))
 
     this.languageBlock.style = (Boolean(event.language) && document.documentElement.lang.toUpperCase() != event.language_code ? '' : 'display: none')
-    this.container.querySelector('[data-attribute="languages"]').textContent = event.language
+    this.container.querySelector('[data-attribute="language"]').textContent = event.language
 
     this.timingDescription.textContent = event.timing.description
 

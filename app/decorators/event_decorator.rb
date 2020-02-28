@@ -4,9 +4,8 @@ module EventDecorator
     name || category_name
   end
 
-  def language_names
-    data = I18nData.languages(I18n.locale)
-    languages.map { |l| data[l] }
+  def language_name
+    I18nData.languages(I18n.locale)[language]
   end
 
   def address
