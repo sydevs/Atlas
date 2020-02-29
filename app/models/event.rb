@@ -1,7 +1,6 @@
 class Event < ApplicationRecord
 
   # Extensions
-  include Manageable
   include Publishable
   include Expirable
 
@@ -17,6 +16,10 @@ class Event < ApplicationRecord
   accepts_nested_attributes_for :pictures
 
   has_many :registrations, dependent: :delete_all
+
+  has_one :managed_record, foreign_key: :record
+  has_one :manager, through: :managed_record, dependent: :destroy
+  accepts_nested_attributes_for :manager
 
   enum category: { intro: 1, intermediate: 2, course: 3, public_event: 4, concert: 5 }
   enum recurrence: { day: 0, monday: 1, tuesday: 2, wednesday: 3, thursday: 4, friday: 5, saturday: 6, sunday: 7 }
@@ -52,6 +55,11 @@ class Event < ApplicationRecord
   def language= value
     # Only accept languages which are in the language list
     super value if I18nData.languages.key?(value)
+  end
+
+  # This method is called by the Rails code to build new managers in conjuction with `accepts_nested_attributes_for`
+  def build_manager params
+    self.manager = Manager.new(params)
   end
 
 end

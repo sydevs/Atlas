@@ -13,7 +13,26 @@
       .header = translate('cms.details.external_registration.title')
       .description = translate('cms.details.external_registration.description', mode: translate_enum_value(@record, :registration_mode))
 
-h3.ui.dividing.header = translate('cms.details.details_for_record', resource: @record.label)
+h3.ui.small.dividing.grey.header = translate('cms.details.details_for_record', resource: @record.label)
+p = @record.description
+.ui.list
+  .item
+    i.hashtag.icon
+    .content
+      .header = @record.category_name
+      .description = @record.category_description
+  .item
+    i.calendar.icon
+    .content
+      .header = translate('cms.details.dates_and_timing')
+      .description #{@record.formatted_start_end_date}, #{@record.timing_in_words}
+  .item
+    i.language.icon
+    .content
+      .header = translate_attribute(Event, :language)
+      .description = @record.language_name
+
+h3.ui.small.dividing.grey.header = translate('cms.details.management_for_record', resource: translate_model(@model).downcase)
 .ui.list
   - unless @record.published? && !@record.expired?
     .item
@@ -21,36 +40,35 @@ h3.ui.dividing.header = translate('cms.details.details_for_record', resource: @r
       .content
         .header = translate('cms.details.record_not_published.title', resource: translate_model(@model))
         .description = translate('cms.details.record_not_published.description', resource: translate_model(@model).downcase)
-  .item
-    i.hashtag.icon
-    .content
-      .header = @record.category_name
-      .description = @record.category_description
-  .item
-    i.phone.icon class=('slash' unless @record.native_registration_mode?)
-    .content
-      .header
-        = translate_attribute(@record, :registration_mode)
-        ' : 
-        = translate_enum_value(@record, :registration_mode)
-  .item
-    i.calendar.icon
-    .content = @record.timing_in_words
-  .item
-    i.language.icon
-    .content
-      - language = I18nData.languages(I18n.locale)[@record.language].split(/[,;]/)[0]
-      = translate('cms.details.record_has_language', resource: translate_model(@model), language: language)
+  - if @record.manager.present?
+    .item
+      = model_icon Manager
+      .content
+        .header = translate_model(Manager)
+        a.description href=url_for([:cms, @record.manager])
+          | #{@record.manager.label} (#{@record.manager.email})
+  - else
+    .item
+      i.warning.sign.icon
+      .content
+        .header = translate('cms.details.record_not_published.title', resource: translate_model(@model))
+        .description = translate('cms.details.record_not_published.description', resource: translate_model(@model).downcase)
   .item
     i.clock.icon
-    .content = translate('cms.details.updated_at', time_ago: (time_ago_in_words(@record.updated_at)))
+    .content
+      .header = translate('cms.details.updated_at', time_ago: '')
+      .description = time_ago_in_words(@record.updated_at)
   .item
     = model_icon Registration
-    .content = translate('cms.details.records_in_recent_days', resources: translate_model_count(@record.registrations))
-  .item
-    = model_icon Picture
-    .content = translate_model_count(@record.pictures)
+    .content
+      .header Recent Registrations
+      .description = translate('cms.details.records_in_recent_days', resources: translate_model_count(@record.registrations))
 
-h3.ui.dividing.header = translate('cms.details.location_of_record', resource: translate_model(@model).downcase)
+h3.ui.small.dividing.grey.header = translate('cms.details.location_of_record', resource: translate_model(@model).downcase)
 p = [@record.room, @record.full_address].compact.join(' - ')
-#venue-map data-latitude=@record.venue.latitude data-longitude=@record.venue.longitude data-place-id=@record.venue.place_id
+
+= hidden_field_tag :venue_address, @record.venue.full_address
+= hidden_field_tag :venue_latitude, @record.venue.latitude
+= hidden_field_tag :venue_longitude, @record.venue.longitude
+= hidden_field_tag :venue_place_id, @record.venue.place_id
+#venue-map data-latitude=@record.venue.latitude data-longitude=@record.venue.longitude

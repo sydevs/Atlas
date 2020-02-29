@@ -33,7 +33,7 @@
   .pagination-info data-search=@model_name.route_key = page_entries_info @records
   .pagination data-search=@model_name.route_key = paginate @records
 
-  - if controller_name == 'managers' && @context&.parent_managers.present?
+  - if controller_name == 'managers' && @context.try(:parent_managers)&.present?
     h3.ui.dividing.header = translate('cms.details.managers_for_record', resource: @context.parent.label)
 
     .ui.relaxed.list

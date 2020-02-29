@@ -34,6 +34,10 @@ module EventDecorator
     result
   end
 
+  def formatted_start_end_date
+    [start_date, end_date].compact.join(' - ')
+  end
+
   def formatted_start_end_time
     [start_time, end_time].compact.join(' - ')
   end

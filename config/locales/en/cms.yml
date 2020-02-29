@@ -32,6 +32,7 @@ en:
       worldwide_data: "Worldwide Data"
       context: "%{resource} in %{parent}"
       # Tertiary menu
+      dashboard: "Dashboard"
       details: "Info"
       activity: "Activity"
       regions:
@@ -63,11 +64,12 @@ en:
         must_be_new: "Only regions which haven't already been added are listed below."
         prompt: "Province / State / County"
       event:
-        room: "If the venue has more than one room, which room should seekers come to?"
-        language: "What is the primary language that this event if given in."
-        disable_notifications: "If checked, managers for this event will never receive registration lists."
+        name: "This name will appear in the publis listing for this event. Try to choose a unique name which also describes the category of event this is. If you do not supply a name, one will automatically be chosen."
+        room: "Which room in the building is the event in?"
+        language: "What is the primary language that this event if given in?"
+        disable_notifications: "If selected, managers for this event will not receive emails about who has registered for the event."
         registration_mode: "Where should seekers go to register for the event? We strongly recommend that you leave this as '%{native},' because having seekers register on this website, will let us send them reminder and follow-up emails."
-        registration_url: "This is the URL that seekers will be sent to, to register, if your registration mode is set to something other than '%{native}.'"
+        registration_url: "The registration URL will be set automatically if the mode is set \"%{native}.\""
 
       venue:
         location: "Press \"Find Location\" to automatically fill in these fields, using the address that you have filled in above."
@@ -85,10 +87,11 @@ en:
     details:
       details_for_global: "Global Statistics"
       details_for_record: "Details for %{resource}"
+      management_for_record: "Management for this %{resource}"
       managers_for_record: "Managers for %{resource}"
       records_managed: "%{resources} managed"
-      is_administrator: "%{name} is an administrator"
       location_of_record: "Location of this %{resource}"
+      dates_and_timing: "Dates & Timing"
       map_of_record: "Map of this %{resource}"
       area_in_words: "%{radius} km around %{latitude}, %{longitude}"
       records_in_recent_days: "%{resources} in the last 30 days"
@@ -100,7 +103,7 @@ en:
         description: "This event is set to have seekers register on %{mode}. It's better if you have seekers register on the Sahaj Atlas, because then we will be able to send them reminders and confirmation emails."
       record_not_published:
         title: "Not Published"
-        description: "This %{resource} is current hidden from the public, because it is not published."
+        description: "This %{resource} is currently hidden from the public, because it is not published."
       record_has_language: "%{resource} offered in %{language}"
       updated_at: "Last updated %{time_ago} ago"
 
@@ -121,6 +124,33 @@ en:
       description: "This is a log of all actions taken by this manager."
       changed_by: "by %{name}"
       changed_to: "changed to"
+
+    dashboard:
+      alerts: "Alerts"
+      no_alerts: "No alerts right now, keep up the good work!"
+      statistics: "Statistics"
+      role:
+        intro: "You are a %{role}"
+        worldwide:
+          title: "Global Administrator"
+          description: "Can manage all atlas content and managers."
+          instruction: "You have access to all aspects of the atlas CMS (Content Management System). It is your responsibility to create new country-level managers and help them learn to use the system."
+        country:
+          title: "Country Manager"
+          description: "Can create regions, venues, events and assign managers within %{region}"
+          instruction: "It's your responsibility to create regions within your country and assign managers to those regions to set up events. You may also create venues and events directly yourself."
+        local:
+          title: "Local Manager"
+          description: "Can create venues and events within %{region}"
+          instruction: "It's your responsibility to create events within your local area. You will first need to create a venue, before you can create an event at that venue."
+        event:
+          title: "Event Manager"
+          description: "Can update the details of the events assigned to them."
+          instruction: "It's your responsibility to keep your classes up to date. You will be sent emails every few months asking you confirm that your events are up to date. If the location of your class changes, you will need to ask the managr for you local area to update it."
+        none:
+          title: "No-Access Manager"
+          description: "This user no events or regions assigned to them. They have no access to manage the atlas."
+          instruction: "You don't have access to any part of the website. If you believe this is a mistake, please contact the manager for your local area."
 
   passwordless:
     sessions:

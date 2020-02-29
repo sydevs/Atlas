@@ -1,13 +1,46 @@
 
-h3.ui.dividing.header = translate('cms.details.details_for_record', resource: @record.label)
-.ui.list
-  - if @record.administrator?
+- if policy(@record).dashboard?
+  .ui.icon.message
+    = manager_icon @record
+    .content
+      .header = translate('cms.dashboard.role.intro', role: translate("cms.dashboard.role.#{@record.type}.title").downcase)
+      .description = translate("cms.dashboard.role.#{@record.type}.instruction")
+
+  h3.ui.small.dividing.grey.header = translate('cms.dashboard.alerts')
+  p = translate('cms.dashboard.no_alerts')
+
+  h3.ui.small.dividing.grey.header = translate('cms.dashboard.statistics')
+  .ui.list
+    - if @record.administrator?
+      .item
+        = manager_icon @record
+        .content = translate('cms.dashboard.role.intro', role: translate("cms.dashboard.role.#{@record.type}.title").downcase)
+    - else
+      .item
+        = model_icon Country
+        .content = translate('cms.details.records_managed', resources: translate_model_count(Country, @record.managed_countries_counter))
+      .item
+        = model_icon Province
+        .content = translate('cms.details.records_managed', resources: translate_model_count(Province, @record.managed_localities_counter))
+      .item
+        = model_icon Event
+        .content = translate('cms.details.records_managed', resources: translate_model_count(Event, @record.managed_events_counter))
+
+- else
+  h3.ui.small.dividing.grey.header = translate('cms.details.details_for_record', resource: @record.label)
+  .ui.list
     .item
-      i.user.secret.icon
-      .content = translate('cms.details.is_administrator', name: @record.name)
-  .item
-    = model_icon Event
-    .content = translate('cms.details.records_managed', resources: translate_model_count(@record.events))
-  .item
-    = model_icon Venue
-    .content = translate('cms.details.records_managed', resources: translate_model_count(@record.venues))
+      = manager_icon @record
+      .content
+        .header = translate("cms.dashboard.role.#{@record.type}.title")
+        .description = translate("cms.dashboard.role.#{@record.type}.description", region: @record.parent&.label)
+    - unless false && @record.type == :none
+      .item
+        = model_icon Country
+        .content = translate('cms.details.records_managed', resources: translate_model_count(Country, @record.managed_countries_counter))
+      .item
+        = model_icon Province
+        .content = translate('cms.details.records_managed', resources: translate_model_count(Province, @record.managed_localities_counter))
+      .item
+        = model_icon Event
+        .content = translate('cms.details.records_managed', resources: translate_model_count(Event, @record.managed_events_counter))

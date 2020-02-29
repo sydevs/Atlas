@@ -5,22 +5,19 @@
 = f.input :published
 
 = f.input :venue do
-  .hint = @record.venue.name ? "#{@record.venue.name} - #{@record.venue.full_address}" : @record.venue.full_address
+  .hint = @record.venue.full_address
 
-= f.input :name, placeholder: @record.category_name
+.ui.small.dividing.violet.header Event Details
+
+= f.input :name, placeholder: @record.category_name, hint: translate('cms.hints.event.name')
 = f.input :category, collection: categories
 = f.input :description, as: :text, placeholder: @record.category_description
-= f.input :room, hint: translate('cms.hints.event.room')
-= f.input :language, collection: languages, selected: @record.language || I18n.locale.upcase, input_html: { class: 'search' }, hint: translate('cms.hints.event.language')
 
-= f.input :disable_notifications, hint: translate('cms.hints.event.disable_notifications')
+.two.fields
+  = f.input :room, hint: translate('cms.hints.event.room')
+  = f.input :language, collection: languages, selected: @record.language || I18n.locale.upcase, input_html: { class: 'search' }, hint: translate('cms.hints.event.language')
 
-.ui.divider
-
-= f.input :registration_mode, collection: Event.registration_modes.map { |k, v| [translate_enum_value(Event, :registration_mode, k), k] }, hint: translate('cms.hints.event.registration_mode', native: translate_enum_value(@record, :registration_mode, :native))
-= f.input :registration_url, as: :url, hint: translate('cms.hints.event.registration_url', native: translate_enum_value(@record, :registration_mode, :native))
-
-.ui.divider
+.ui.small.dividing.violet.header Timing
 
 = f.input :recurrence, collection: Event.recurrences.map { |k, v| [translate_enum_value(Event, :recurrence, k), k] }
 
@@ -31,3 +28,23 @@
 .two.fields
   = f.input :start_time, wrapper_html: { class: 'start' }, input_html: { type: 'time', autocomplete: 'off' }
   = f.input :end_time, wrapper_html: { class: 'end' }, input_html: { type: 'time', autocomplete: 'off', placeholder: translate('cms.hints.unspecified') }
+
+.ui.small.dividing.violet.header Registration
+
+.hint = translate('cms.hints.event.registration_mode', native: translate_enum_value(@record, :registration_mode, :native))
+.hint = translate('cms.hints.event.registration_url', native: translate_enum_value(@record, :registration_mode, :native))
+.fields
+  = f.input :registration_mode, collection: Event.registration_modes.map { |k, v| [translate_enum_value(Event, :registration_mode, k), k] }, wrapper_html: { class: 'four wide' }
+  = f.input :registration_url, as: :url, placeholder: map_event_url(@record, anchor: 'register'), wrapper_html: { class: 'twelve wide' }
+
+= f.input :disable_notifications, hint: translate('cms.hints.event.disable_notifications')
+
+- if policy(@record).set_manager?
+  .ui.small.dividing.violet.header Manager
+
+  = f.fields_for :manager do |ff|
+    .two.fields
+      = ff.input :name, input_html: { value: @record.manager&.name }
+      = ff.input :email, input_html: { value: @record.manager&.email }
+
+.ui.hidden.section.divider

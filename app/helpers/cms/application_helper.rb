@@ -6,11 +6,19 @@ module CMS::ApplicationHelper
     local_areas: 'dot circle',
     venues: 'map marker',
     events: 'calendar',
-    managers: 'user',
+    managers: 'user secret',
     registrations: 'user',
     audits: 'clipboard list',
     access_keys: 'key',
     pictures: 'image',
+  }.freeze
+
+  MANAGER_ICONS = {
+    worldwide: 'chess queen',
+    country: 'chess bishop',
+    local: 'chess knight',
+    event: 'chess pawn',
+    none: 'minus',
   }.freeze
 
   def floating_action text, icon, url = nil, **args
@@ -41,7 +49,13 @@ module CMS::ApplicationHelper
     content_tag :i, nil, class: "#{MODEL_ICONS[model.table_name.to_sym]} icon"
   end
 
+  def manager_icon manager
+    content_tag :i, nil, class: "#{MANAGER_ICONS[manager.type]} icon"
+  end
+
   def breadcrumb_url ancestor
+    ancestor = current_user if ancestor == :home
+
     if action_name == 'index' && policy(ancestor).index_association?(controller_name)
       url_for([:cms, (ancestor == :worldwide ? nil : ancestor), controller_name])
     elsif action_name == 'regions' && policy(ancestor).index_association?(:regions)

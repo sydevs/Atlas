@@ -51,29 +51,34 @@ html
               i.home.icon
               = translate('cms.menu.home')
 
-      - if @context && @context.respond_to?(:ancestors)
+      - unless @context == current_user
         .ui.breadcrumbs
-          a.section href=breadcrumb_url(:worldwide)
-            i.globe.icon
+          a.section href=breadcrumb_url(:home)
+            i.home.icon
           
           i.right.angle.icon.divider
-          - @context.ancestors.each do |ancestor|
-            - if policy(ancestor).show?
-              a.section href=breadcrumb_url(ancestor)
-                = ancestor.label
+
+          - if @context && @context.respond_to?(:ancestors)
+            - @context.ancestors.each do |ancestor|
+              - if policy(ancestor).show?
+                a.section href=breadcrumb_url(ancestor)
+                  = ancestor.label
+              - else
+                .section = ancestor.label
+              i.right.angle.icon.divider
+            - if action_name == 'new'
+              a.section href=url_for([:cms, @context])
+                = model_icon @context.class
+                = @context.label
+              i.right.angle.icon.divider
+              span.active.section
+                = translate('cms.actions.target.new', resource: @model)
             - else
-              .section = ancestor.label
-            i.right.angle.icon.divider
-          - if action_name == 'new'
-            a.section href=url_for([:cms, @context])
-              = model_icon @context.class
-              = @context.label
-            i.right.angle.icon.divider
-            span.active.section
-              = translate('cms.actions.target.new', resource: @model)
+              span.section
+                = @context.label
           - else
             span.section
-              = @context.label
+              = translate('cms.menu.worldwide_data')
 
     = yield
 

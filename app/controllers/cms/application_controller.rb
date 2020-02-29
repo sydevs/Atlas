@@ -19,18 +19,6 @@ class CMS::ApplicationController < ActionController::Base
   after_action :verify_policy_scoped, only: :index
   # END TODO
 
-  def home
-    if current_user.administrator?
-      route = cms_root_url
-    elsif current_user.parent.present?
-      route = url_for([:cms, current_user.parent])
-    else
-      route = cms_manager_url(current_user)
-    end
-
-    redirect_to route, status: :moved_permanently
-  end
-
   def index
     authorize_association! @model
     @records = policy_scope(@scope).page(params[:page]).per(10).search(params[:q])
@@ -87,7 +75,7 @@ class CMS::ApplicationController < ActionController::Base
 
   def destroy
     authorize @record
-    # @record.destroy
+    @record.destroy
 
     flash[:success] = translate('cms.messages.successfully_deleted', resource: @model.model_name.human.titleize)
     redirect_to [:cms, @record.parent, @model]

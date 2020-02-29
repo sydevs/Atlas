@@ -18,7 +18,9 @@ h2.ui.header
   .content = @context&.label || translate('cms.menu.worldwide_data')
   - if @context
     .sub.header
-      - if @context.parent.present?
+      - if @context.is_a?(Manager) && @context.administrator?
+        = translate_attribute(Manager, :administrator)
+      - elsif @context.parent.present?
         = translate('cms.menu.context', resource: translate_model(@context.class), parent: @context.parent.label)
       - else
         = translate_model(@context.class)
@@ -27,7 +29,7 @@ h2.ui.header
   .ui.divider
 - else
   .ui.stackable.secondary.pointing.menu
-    = menu_item translate('cms.menu.details'), @context, action: 'show'
+    = menu_item translate(allow.dashboard? ? 'cms.menu.dashboard' : 'cms.menu.details'), @context, action: 'show'
     = menu_item translate_model(Picture, :plural), @context, index: 'pictures' if allow.index_association?(:pictures)
     = menu_item translate(@context&.model_name&.i18n_key || :worldwide, scope: %i[cms menu regions]), @context, index: 'regions' if allow.index_association?(:regions)
     = menu_item translate_model(Manager, :plural), @context, index: 'managers' if allow.index_association?(:managers)

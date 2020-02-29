@@ -4,6 +4,15 @@ ruby:
   content_for :title, [title, @context&.label].compact.join(' | ')
 
 = render 'cms/views/context' do
+  - if @context == current_user && @context.administrator?
+    h3.ui.dividing.header = translate('cms.menu.worldwide_data')
+
+    .ui.list
+      .item
+        i.globe.icon
+        .content
+          a.header href=cms_root_url = translate('cms.menu.worldwide_data')
+
   - if @countries
     h3.ui.dividing.header
       - if allow.new_association?(:countries) && policy(Country).new?

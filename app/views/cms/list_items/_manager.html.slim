@@ -6,7 +6,7 @@
     .right.floated.content
       a.ui.basic.circular.icon.label href=url_for([:cms, @context, manager]) data={ method: 'DELETE', confirm: translate('cms.messages.confirm_destroy') }
         i.trash.icon
-  = model_icon Manager
+  = manager_icon manager
   .content
     - if policy(manager).show?
       a.header href=url_for([:cms, manager]) = manager.label

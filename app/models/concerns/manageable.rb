@@ -4,7 +4,7 @@ module Manageable
 
   included do
     has_many :managed_records, as: :record
-    has_many :managers, through: :managed_records
+    has_many :managers, through: :managed_records, dependent: :destroy
   end
 
   def managed_by? manager, super_manager: false
@@ -24,19 +24,6 @@ module Manageable
       result += parent.all_managers if respond_to?(:parent) && parent.present?
       result
     end
-  end
-
-  def add_manager params_or_manager
-    if params_or_manager.is_a?(Hash)
-      params = params_or_manager
-      manager = Manager.find_or_initialize_by(email: params[:email])
-      manager.name = params[:name] if params[:name].present?
-      manager.save!
-    else
-      manager = params_or_manager
-    end
-
-    managers << manager
   end
 
 end

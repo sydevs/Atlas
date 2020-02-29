@@ -1,7 +1,6 @@
 class Venue < ApplicationRecord
 
   # Extensions
-  include Manageable
   include Publishable
 
   audited
@@ -20,6 +19,7 @@ class Venue < ApplicationRecord
   validates :latitude, :longitude, :place_id, presence: true
 
   # Methods
+  delegate :all_managers, :managed_by?, to: :parent
 
   def parent
     province || country

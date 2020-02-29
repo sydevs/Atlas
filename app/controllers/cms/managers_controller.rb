@@ -13,16 +13,28 @@ class CMS::ManagersController < CMS::ApplicationController
 
     new_record = @record.new_record?
     @record.name = parameters[:name] if new_record
-    @context.managers << @record if @context
+    success = false
 
-    if !new_record || @record.save
-      if new_record || @context.present?
+    if @context.present?
+      if @context.managers.where(id: @record.id).exists?
+        flash[:error] = "#{@record.name} already manages this #{helpers.translate_model(@context).downcase}"
+      elsif !new_record || @record.save
         flash[:success] = "Added #{@model_name.human} successfully"
-        ManagerMailer.with(manager: @record, context: @context).welcome.deliver_now if @context.present? || @record.administrator?
-      else
-        flash[:notice] = "#{@record.name} <#{@record.email}> already exists"
+        @context.managers << @record
+        @context.save! validate: false
+        ManagerMailer.with(manager: @record, context: @context).welcome.deliver_now if new_record
+        success = true
       end
+    elsif !new_record
+      flash[:notice] = "#{@record.name} <#{@record.email}> already exists"
+      success = true
+    elsif @record.save
+      flash[:success] = "Added #{@model_name.human} successfully"
+      ManagerMailer.with(manager: @record, context: @context).welcome.deliver_now if @record.administrator?
+      success = true
+    end
 
+    if success
       redirect_to [:cms, @context, Manager]
     else
       render 'cms/views/new'
