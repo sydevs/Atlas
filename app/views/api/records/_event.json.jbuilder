@@ -4,11 +4,9 @@ json.extract! event, :id, :label
 json.description event.description || ''
 
 if event.venue.present?
+  json.address_text [event.room, event.venue.name, event.venue.full_address].compact.join(', ')
+
   if verbose
-    json.extract! event, :room
-    json.address_text event.room ? "#{event.room}, #{event.venue.full_address}" : event.venue.full_address
-  else
-    json.address_text event.room ? "#{event.room}, #{event.venue.full_address}" : event.venue.full_address
     json.address do
       json.extract! event, :room
       json.extract! event.venue, :street, :city, :province_code, :province_name, :country_code, :country_name, :postcode

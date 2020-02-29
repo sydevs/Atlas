@@ -65,7 +65,8 @@ h3.ui.small.dividing.grey.header = translate('cms.details.management_for_record'
       .description = translate('cms.details.records_in_recent_days', resources: translate_model_count(@record.registrations))
 
 h3.ui.small.dividing.grey.header = translate('cms.details.location_of_record', resource: translate_model(@model).downcase)
-p = [@record.room, @record.full_address].compact.join(' - ')
+p = [@record.room, @record.venue.name].compact.join(', ')
+p = @record.full_address
 
 = hidden_field_tag :venue_address, @record.venue.full_address
 = hidden_field_tag :venue_latitude, @record.venue.latitude

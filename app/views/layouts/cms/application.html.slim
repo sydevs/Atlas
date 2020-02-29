@@ -59,17 +59,23 @@ html
           i.right.angle.icon.divider
 
           - if @context && @context.respond_to?(:ancestors)
+            - if current_user.administrator?
+              a.section href=breadcrumb_url(:worldwide)
+                = translate('cms.menu.worldwide')
+              i.right.angle.icon.divider
+
             - @context.ancestors.each do |ancestor|
               - if policy(ancestor).show?
                 a.section href=breadcrumb_url(ancestor)
-                  = ancestor.label
+                  = ancestor.try(:breadcrumb_label) || ancestor.label
               - else
                 .section = ancestor.label
               i.right.angle.icon.divider
+              
             - if action_name == 'new'
               a.section href=url_for([:cms, @context])
                 = model_icon @context.class
-                = @context.label
+                = @context.try(:breadcrumb_label) || ancestor.label
               i.right.angle.icon.divider
               span.active.section
                 = translate('cms.actions.target.new', resource: @model)
@@ -78,7 +84,7 @@ html
                 = @context.label
           - else
             span.section
-              = translate('cms.menu.worldwide_data')
+              = translate('cms.menu.worldwide')
 
     = yield
 

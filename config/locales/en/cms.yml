@@ -30,6 +30,7 @@ en:
       sign_in: "Log In"
       # Secondary menu
       worldwide_data: "Worldwide Data"
+      worldwide: "World"
       context: "%{resource} in %{parent}"
       # Tertiary menu
       dashboard: "Dashboard"

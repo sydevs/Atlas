@@ -8,6 +8,10 @@ module ProvinceDecorator
     "#{name}, #{country_code}"
   end
 
+  def breadcrumb_label
+    name
+  end
+
   def self.get_name province_code, country_code
     ISO3166::Country[country_code].subdivisions[province_code]['name']
   end

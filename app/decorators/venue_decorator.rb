@@ -5,10 +5,7 @@ module VenueDecorator
   end
 
   def full_address
-    @full_address ||= begin
-      address = [street, city, province_name, country_code].compact.join(', ')
-      name ? "#{name} - #{address}" : address
-    end
+    @full_address ||= [street, city, province_name, country_code].compact.join(', ')
   end
 
   def address
