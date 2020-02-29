@@ -92,6 +92,10 @@
 
 .registration__input,
 .registration__textarea
+  appearance: none
+  border-radius: 0
+  background: white
+
   padding: 17px 20px
   border: 1px solid $color-border-light
   width: 100%
@@ -265,7 +269,7 @@
     width: $circle-size
     height: $circle-size
     transition: all 0.5s ease-out
-    transform: translate(-50%, -50%) rotate(-45deg)
+    transform: translate(-#{$circle-size / 2}, -#{$circle-size / 2}) rotate(-45deg)
     align-self: center
 
   &__circle
@@ -347,4 +351,4 @@
     transform: scale(0.9)
 
   .registration__confirmation__circle::before
-    transform: translate(-50%, -50%) rotate(0)
+    transform: translate(-#{$circle-size / 2}, -#{$circle-size / 2}) rotate(0)

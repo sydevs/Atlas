@@ -87,10 +87,10 @@ class CMS::ApplicationController < ActionController::Base
 
   def destroy
     authorize @record
-    @record.destroy
+    # @record.destroy
 
-    flash[:success] = translate('cms.messages.successfully_deleted', resource: @model.model_name.human.downcase)
-    redirect_to [:cms, @context, @model]
+    flash[:success] = translate('cms.messages.successfully_deleted', resource: @model.model_name.human.titleize)
+    redirect_to [:cms, @record.parent, @model]
   end
 
   def regions
@@ -132,11 +132,9 @@ class CMS::ApplicationController < ActionController::Base
         next unless params[param_key]
 
         context_record = model.find(params[param_key])
-
-        next if @context.present?
-
         @context_key = keys.route_key
         @context = context_record
+        break
       end
 
       puts "SET CONTEXT #{@context.inspect}"

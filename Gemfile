@@ -58,6 +58,7 @@ gem 'inline_svg' # Allows SVGs to be rendered inline
 gem 'rails_12factor', group: :production # For heroku support
 gem 'klaviyo' # For integration with Klaviyo
 gem 'httparty' # For http requests (specifically for Klaviyo)
+gem 'validate_url' # Validate url fields
 
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw] # Call 'byebug' anywhere in the code to stop execution and get a debugger console

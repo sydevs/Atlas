@@ -26,6 +26,12 @@ class ApplicationInstance {
     if (this.container.dataset.restricted == 'true') {
       this.map.lockBounds()
     }
+
+    // Workaround for an iOS bug that causes grey blocks when you focus an input
+    const inputs = document.querySelectorAll('input, textarea')
+    inputs.forEach(input => {
+      input.addEventListener('focus', () => window.scrollBy(0, 0))
+    })
   }
 
   loadState() {

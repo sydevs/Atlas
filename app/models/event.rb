@@ -30,6 +30,7 @@ class Event < ApplicationRecord
   validates :start_time, presence: true
   validates :recurrence, presence: true
   validates :description, length: { minimum: 20, maximum: 600, allow_nil: true }
+  validates :registration_url, url: true, unless: :native_registration_mode?
   validates_associated :pictures
 
   # Scopes

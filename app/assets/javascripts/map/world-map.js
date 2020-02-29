@@ -290,7 +290,7 @@ class WorldMap {
     result.x = result.left + result.width / 2
     result.y = result.top + result.height / 2
     this.viewport = result
-    this.maxHeight = window.innerHeight - 200
+    this.maxHeight = window.innerHeight - 150
 
     this.updateViewportBox()
     return result
