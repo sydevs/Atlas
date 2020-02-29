@@ -27,4 +27,12 @@ class ManagerPolicy < DatabasePolicy
     manage?(super_manager: true)
   end
 
+  def countries?
+    user == record
+  end
+
+  def provinces?
+    user == record
+  end
+
 end

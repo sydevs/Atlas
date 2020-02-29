@@ -77,7 +77,7 @@ en:
         find_marker: "Find Location"
         marker_not_set:
           title: "Map marker has not been set"
-          description: "You must press 'Find Location' above to automatically detect the coordinates of the venue's address."
+          description: "Press 'Find Location' to automatically detect the coordinates of the venue's address."
         cant_find_address:
           title: "Couldn't find address"
           description: "The address you entered could not be found. Try adding more information, or enter the latitude and longitude manually."

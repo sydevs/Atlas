@@ -63,6 +63,22 @@ class CMS::ManagersController < CMS::ApplicationController
     render 'cms/views/activity'
   end
 
+  def countries
+    manager = @scope&.find(params[:manager_id])
+    authorize manager
+
+    @countries = manager.accessible_countries(area: params[:area])
+    render format: :json
+  end
+
+  def provinces
+    manager = @scope&.find(params[:manager_id])
+    authorize manager
+
+    @provinces = manager.accessible_provinces(params[:country_code], area: params[:area])
+    render format: :json
+  end
+
   private
 
     def parameters

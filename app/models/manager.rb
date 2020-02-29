@@ -79,5 +79,25 @@ class Manager < ApplicationRecord
 
     Manager.send("#{direction}_counter", column, id) if column
   end
+  
+  def accessible_countries area: false
+    if administrator? || area
+      Country.all
+    else
+      countries_via_province = Country.where(country_code: provinces.select(:country_code))
+      countries_via_local_area = Country.where(country_code: local_areas.select(:country_code))
+      Country.where(id: countries).or(countries_via_province).or(countries_via_local_area)
+    end
+  end
+  
+  def accessible_provinces country_code, area: false
+    if administrator? || area
+      Province.where(country_code: country_code)
+    else
+      provinces_via_local_area = Province.where(province_code: local_areas.select(:country_code))
+      provinces = Province.where(id: provinces).or(provinces_via_local_area)
+      Province.where(id: provinces, country_code: country_code)
+    end
+  end
 
 end

@@ -5,9 +5,9 @@ class CountryPolicy < RegionPolicy
   end
 
   def new_association? association = nil
-    return nil if %i[venues events].include?(association)
+    return nil if association == :events
     
-    %i[provinces local_areas managers].include?(association) && super
+    %i[provinces local_areas venues managers].include?(association) && super
   end
 
 end

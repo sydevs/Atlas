@@ -4,7 +4,7 @@ module CountryDecorator
     CountryDecorator.get_label(country_code)
   end
 
-  def breadcrumb_label
+  def short_label
     country_code
   end
 

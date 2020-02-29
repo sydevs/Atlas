@@ -67,7 +67,7 @@ html
             - @context.ancestors.each do |ancestor|
               - if policy(ancestor).show?
                 a.section href=breadcrumb_url(ancestor)
-                  = ancestor.try(:breadcrumb_label) || ancestor.label
+                  = ancestor.try(:short_label) || ancestor.label
               - else
                 .section = ancestor.label
               i.right.angle.icon.divider
@@ -75,7 +75,7 @@ html
             - if action_name == 'new'
               a.section href=url_for([:cms, @context])
                 = model_icon @context.class
-                = @context.try(:breadcrumb_label) || ancestor.label
+                = @context.try(:short_label) || @context.label
               i.right.angle.icon.divider
               span.active.section
                 = translate('cms.actions.target.new', resource: @model)

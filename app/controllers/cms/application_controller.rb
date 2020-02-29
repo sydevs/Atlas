@@ -96,7 +96,7 @@ class CMS::ApplicationController < ActionController::Base
     render 'cms/views/regions'
   end
 
-  private
+  protected
 
     def current_user
       @current_user ||= authenticate_by_session(Manager)

@@ -3,7 +3,7 @@
 
 const General = {
   load: function() {
-    $('select, .ui.dropdown').dropdown()
+    $('select, .ui.dropdown:not(.ajax)').dropdown()
     $('.ui.accordion').accordion()
     $('.ui.checkbox').checkbox()
     $('.ui.menu .tab.item').tab()

@@ -21,9 +21,9 @@ class WorldwidePolicy < DatabasePolicy
   end
 
   def new_association? association
-    return nil if %i[venues events].include?(association)
+    return nil if association == :events
     
-    user.administrator? && %i[countries local_areas managers access_keys].include?(association)
+    user.administrator? && %i[countries local_areas venues managers access_keys].include?(association)
   end
 
   def destroy_association? association = nil

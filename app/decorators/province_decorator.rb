@@ -8,7 +8,7 @@ module ProvinceDecorator
     "#{name}, #{country_code}"
   end
 
-  def breadcrumb_label
+  def short_label
     name
   end
 
