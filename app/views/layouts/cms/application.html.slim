@@ -51,7 +51,7 @@ html
               i.home.icon
               = translate('cms.menu.home')
 
-      - unless @context == current_user
+      - if defined?(current_user) && @context != current_user
         .ui.breadcrumbs
           a.section href=breadcrumb_url(:home)
             i.home.icon
