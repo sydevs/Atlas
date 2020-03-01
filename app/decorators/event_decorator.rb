@@ -1,11 +1,12 @@
 module EventDecorator
 
   def label fallback_only: false
-    if name && !fallback_only
+    puts "#{id}, #{name.inspect} -> #{name.present?} && #{!fallback_only} = #{name.present? && !fallback_only}"
+    if name.present? && !fallback_only
       name
     elsif category && venue.name
-      category_name = I18n.translate(category, scope: %i[map categories label])
-      I18n.translate('map.listing.event_name', category: category_name, venue: venue.label)
+      category_label = I18n.translate(category, scope: %i[map categories label])
+      I18n.translate('map.listing.event_name', category: category_label, venue: venue.label)
     else
       category_name
     end
