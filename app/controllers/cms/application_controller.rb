@@ -19,6 +19,12 @@ class CMS::ApplicationController < ActionController::Base
   after_action :verify_policy_scoped, only: :index
   # END TODO
 
+  def home
+    raise ActionController::RoutingError.new('Not Found') unless defined?(current_user) && current_user.present?
+
+    redirect_to cms_manager_url(current_user), status: :moved_permanently
+  end
+
   def index
     authorize_association! @model
     @records = policy_scope(@scope).page(params[:page]).per(10).search(params[:q])
