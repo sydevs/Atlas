@@ -43,6 +43,7 @@
 - if policy(@record).set_manager?
   .ui.small.dividing.violet.header Manager
 
+  - @record.manager = Manager.new unless @record.manager.present?
   = f.simple_fields_for :manager, include_id: false do |ff|
     .two.fields
       = ff.input :name, input_html: { value: @record.manager&.name }
