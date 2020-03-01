@@ -10,7 +10,7 @@ class Manager < ApplicationRecord
   has_many :countries, through: :managed_records, source: :record, source_type: 'Country', dependent: :destroy
   has_many :provinces, through: :managed_records, source: :record, source_type: 'Province', dependent: :destroy
   has_many :local_areas, through: :managed_records, source: :record, source_type: 'LocalArea', dependent: :destroy
-  has_many :events, through: :managed_records, source: :record, source_type: 'Event', dependent: :destroy
+  has_many :events
   has_many :actions, class_name: 'Audit', foreign_type: :user_type, foreign_key: :user_id
 
   # Validations

@@ -17,9 +17,9 @@ class Event < ApplicationRecord
 
   has_many :registrations, dependent: :delete_all
 
-  has_one :managed_record, foreign_key: :record
-  has_one :manager, through: :managed_record, dependent: :destroy
+  belongs_to :manager
   accepts_nested_attributes_for :manager
+  before_validation :find_or_create_manager
 
   enum category: { intro: 1, intermediate: 2, course: 3, public_event: 4, concert: 5 }
   enum recurrence: { day: 0, monday: 1, tuesday: 2, wednesday: 3, thursday: 4, friday: 5, saturday: 6, sunday: 7 }
@@ -34,6 +34,7 @@ class Event < ApplicationRecord
   validates :recurrence, presence: true
   validates :description, length: { minimum: 20, maximum: 600, allow_nil: true }
   validates :registration_url, url: true, unless: :native_registration_mode?
+  validates :manager, presence: true
   validates_associated :pictures
 
   # Scopes
@@ -57,9 +58,10 @@ class Event < ApplicationRecord
     super value if I18nData.languages.key?(value)
   end
 
-  # This method is called by the Rails code to build new managers in conjuction with `accepts_nested_attributes_for`
-  def build_manager params
-    self.manager = Manager.new(params)
+  def find_or_create_manager
+    self.manager = Manager.find_or_create_by(email: manager.email) do |new_manager|
+      new_manager.name = manager.name
+    end
   end
 
 end

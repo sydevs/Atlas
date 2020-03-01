@@ -64,6 +64,7 @@ class CMS::ApplicationController < ActionController::Base
 
   def update attributes
     authorize @record
+
     if @record.update(attributes)
       redirect_to [:cms, @record], flash: { success: translate('cms.messages.successfully_updated', resource: @model.model_name.human.downcase) }
       true
