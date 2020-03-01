@@ -5,17 +5,18 @@
 = f.input :published
 
 = f.input :venue do
-  .hint = [@record.venue.name, @record.venue.full_address].compact.join(',')
+  .hint = [@record.venue.name, @record.venue.full_address].compact.join(', ')
 
 .ui.small.dividing.violet.header Event Details
 
-= f.input :name, placeholder: @record.category_name, hint: translate('cms.hints.event.name')
 = f.input :category, collection: categories
 = f.input :description, as: :text, placeholder: @record.category_description
 
 .two.fields
   = f.input :room, hint: translate('cms.hints.event.room')
   = f.input :language, collection: languages, selected: @record.language || I18n.locale.upcase, input_html: { class: 'search' }, hint: translate('cms.hints.event.language')
+
+= f.input :name, placeholder: @record.category_name, hint: translate('cms.hints.event.name')
 
 .ui.small.dividing.violet.header Timing
 
@@ -35,7 +36,7 @@
 .hint = translate('cms.hints.event.registration_url', native: translate_enum_value(@record, :registration_mode, :native))
 .fields
   = f.input :registration_mode, collection: Event.registration_modes.map { |k, v| [translate_enum_value(Event, :registration_mode, k), k] }, wrapper_html: { class: 'four wide' }
-  = f.input :registration_url, as: :url, placeholder: map_event_url(@record, anchor: 'register'), wrapper_html: { class: 'twelve wide' }
+  = f.input :registration_url, as: :url, placeholder: map_event_url(@record&.id || 0, anchor: 'register'), wrapper_html: { class: 'twelve wide' }
 
 = f.input :disable_notifications, hint: translate('cms.hints.event.disable_notifications')
 

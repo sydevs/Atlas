@@ -8,6 +8,7 @@ en:
       register: "Register"
       no_results: "There are no classes in your area, the closest free meditation class is in"
       show: "Show list"
+      event_name: "%{category} at %{venue}"
       filter:
         prefix: "Showing results at"
         clear: "Clear"
@@ -54,6 +55,12 @@ en:
         course: "Meditation Course"
         public_event: "Stall at Public Event"
         concert: "Meditation & Music Concert"
+      label:
+        intro: "Intro"
+        intermediate: "Going Deeper"
+        course: "Meditation Course"
+        public_event: "Stall"
+        concert: "Concert"
       description:
         intro: "The first introductions to this kind of meditation."
         intermediate: "A going deeper class for those who have already attended an introductory class."

@@ -1,7 +1,14 @@
 module EventDecorator
 
-  def label
-    name || category_name
+  def label fallback_only: false
+    if name && !fallback_only
+      name
+    elsif category && venue.name
+      category_name = I18n.translate(category, scope: %i[map categories label])
+      I18n.translate('map.listing.event_name', category: category_name, venue: venue.label)
+    else
+      category_name
+    end
   end
 
   def language_name

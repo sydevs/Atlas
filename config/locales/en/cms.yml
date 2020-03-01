@@ -65,7 +65,7 @@ en:
         must_be_new: "Only regions which haven't already been added are listed below."
         prompt: "Province / State / County"
       event:
-        name: "This name will appear in the publis listing for this event. Try to choose a unique name which also describes the category of event this is. If you do not supply a name, one will automatically be chosen."
+        name: "If you want to override the name of the event, you can do so here."
         room: "Which room in the building is the event in?"
         language: "What is the primary language that this event if given in?"
         disable_notifications: "If selected, managers for this event will not receive emails about who has registered for the event."

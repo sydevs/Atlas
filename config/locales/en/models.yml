@@ -123,7 +123,7 @@ en:
 
       event:
         published: :activerecord.attributes.generic.published # Do not translate
-        name: :activerecord.attributes.generic.name # Do not translate
+        name: "Custom Event Name (Optional)"
         manager_id: :activerecord.models.manager.single # Do not translate
         category: "Category"
         categories:
