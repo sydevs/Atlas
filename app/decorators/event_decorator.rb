@@ -4,7 +4,7 @@ module EventDecorator
     puts "#{id}, #{name.inspect} -> #{name.present?} && #{!fallback_only} = #{name.present? && !fallback_only}"
     if name.present? && !fallback_only
       name
-    elsif category && venue.name
+    elsif category && venue&.name
       category_label = I18n.translate(category, scope: %i[map categories label])
       I18n.translate('map.listing.event_name', category: category_label, venue: venue.label)
     else

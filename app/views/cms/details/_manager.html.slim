@@ -6,8 +6,36 @@
       .header = translate('cms.dashboard.role.intro', role: translate("cms.dashboard.role.#{@record.type}.title").downcase)
       .description = translate("cms.dashboard.role.#{@record.type}.instruction")
 
-  h3.ui.small.dividing.grey.header = translate('cms.dashboard.alerts')
-  p = translate('cms.dashboard.no_alerts')
+  h3.ui.small.dividing.grey.header = translate('cms.dashboard.alerts.title')
+
+  - if @events_for_review.present?
+    h4.ui.sub.header = translate('cms.dashboard.alerts.review.title')
+    p = translate('cms.dashboard.alerts.review.description')
+    .ui.divided.list
+      - @events_for_review.each do |event|
+        .item
+          i.orange.warning.sign.icon
+          .content
+            a href=edit_cms_event_url(event)
+              = event.label
+            '  - 
+            = time_ago_in_words(@record.updated_at)
+
+  - if @events_recently_expired.present?
+    h4.ui.sub.header = translate('cms.dashboard.alerts.expired.title')
+    p = translate('cms.dashboard.alerts.expired.description')
+    .ui.divided.list
+      - @events_recently_expired.each do |event|
+        .item
+          i.orange.warning.sign.icon
+          .content
+            a href=edit_cms_event_url(event)
+              = event.label
+            '  - 
+            = time_ago_in_words(@record.updated_at)
+
+  - unless @events_for_review.present? || @events_recently_expired.present?
+    p = translate('cms.dashboard.alerts.empty')
 
   h3.ui.small.dividing.grey.header = translate('cms.dashboard.statistics')
   .ui.list

@@ -127,8 +127,6 @@ en:
       changed_to: "changed to"
 
     dashboard:
-      alerts: "Alerts"
-      no_alerts: "No alerts right now, keep up the good work!"
       statistics: "Statistics"
       role:
         intro: "You are a %{role}"
@@ -152,6 +150,15 @@ en:
           title: "No-Access Manager"
           description: "This user no events or regions assigned to them. They have no access to manage the atlas."
           instruction: "You don't have access to any part of the website. If you believe this is a mistake, please contact the manager for your local area."
+      alerts:
+        title: "Alerts"
+        empty: "No alerts right now, keep up the good work!"
+        review:
+          title: "Events need review"
+          description: "Several published events have not been updated in a few months. Please check that the event details are still correct, and save the event so that we know that it is still accurate. Otherwise it will be removed from the map."
+        expired:
+          title: "Some events have expired"
+          description: "Several published events are hidden from the map because they have not been verified recently. Please check and resave these events to re-enable them."
 
   passwordless:
     sessions:

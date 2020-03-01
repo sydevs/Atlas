@@ -2,6 +2,16 @@ class CMS::ManagersController < CMS::ApplicationController
 
   prepend_before_action { @model = Manager }
 
+  def show
+    if policy(@record).dashboard?
+      @events_for_review = Event.needs_review
+      @events_recently_expired = Event.recently_expired
+      @events_expired_count = Event.expired.count
+    end
+
+    super
+  end
+
   def create
     @record = Manager.find_or_initialize_by(email: parameters[:email])
 

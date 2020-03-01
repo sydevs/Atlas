@@ -21,6 +21,13 @@ module CMS::ApplicationHelper
     none: 'minus',
   }.freeze
 
+  ALERT_ICONS = {
+    urgent_review: 'red warning sign',
+    review: 'orange warning sign',
+    recently_expired: 'warning sign',
+    expired: 'info circle',
+  }.freeze
+
   def floating_action text, icon, url = nil, **args
     klass = %w[ui basic right floated compact tiny button]
     klass << args[:class] if args[:class].present?
@@ -51,6 +58,10 @@ module CMS::ApplicationHelper
 
   def manager_icon manager
     content_tag :i, nil, class: "#{MANAGER_ICONS[manager.type]} icon"
+  end
+
+  def alert_icon type
+    content_tag :i, nil, class: "#{ALERT_ICONS[type]} icon"
   end
 
   def breadcrumb_url ancestor
