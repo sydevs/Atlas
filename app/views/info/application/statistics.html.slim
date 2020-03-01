@@ -1,6 +1,14 @@
 
 - content_for :title, "Statistics"
 
-.ui.segment
-  h2 Statistics
-  | TODO: Add a map here showing the program coverage, and registration trends.
+.statistics
+  h2.statistics__header Statistics
+
+  .statistics__content
+    h3 Worldwide Event Coverage
+  .statistics__map id='map-world-events' data-events=@events_data.to_json
+
+  .statistics__content
+    h3 Worldwide Registration Trends
+  .statistics__chart
+    .ct-chart.ct-minor-seventh id='chart-world-registrations' data-registrations=@registrations_data.to_json

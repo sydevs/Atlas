@@ -15,6 +15,8 @@ class Registration < ApplicationRecord
   # Scopes
   default_scope { order(created_at: :desc) }
   scope :since, -> (date) { where('created_at >= ?', date) }
+  scope :group_by_month, -> { unscoped.group("DATE_TRUNC('month', created_at)") }
+  scope :group_by_week, -> { unscoped.group("DATE_TRUNC('week', created_at)") }
 
   # Delegations
   alias parent event
