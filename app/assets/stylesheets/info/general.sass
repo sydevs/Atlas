@@ -26,3 +26,42 @@ p
   &:hover
     background-color: white
     color: $theme-color
+
+.info
+  &__header
+    background: $theme-color
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)
+
+    margin-top: 0
+    color: white
+    opacity: 0.9
+    text-align: center
+    font-size: 24px
+    line-height: 45px
+    position: relative
+    margin-bottom: 60px
+
+  &__header__logo
+    display: inline-block
+    float: left
+    color: white
+    text-decoration: none
+    padding: 5px
+
+    font-size: 80%
+    line-height: 35px
+    box-sizing: border-box
+
+    position: absolute
+    left: 0
+
+    svg
+      height: 32px
+      margin-top: -4px
+      display: inline-block
+      fill: white
+      vertical-align: text-top
+
+  &__content
+    max-width: 600px
+    margin: auto

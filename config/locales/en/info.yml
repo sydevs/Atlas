@@ -3,9 +3,16 @@ en:
   meditation_atlas: "Meditation Atlas"
 
   info:
-    about:
+    index:
       description: "Sahaj Atlas is a project to map free meditation classes offered by Sahaja Yoga around the world."
       view_map: "View Map"
       view_statistics: "Stats"
       view_cms: "Manage"
       sign_in: "Log In"
+    
+    about:
+      title: "About"
+    
+    statistics:
+      title: "Statistics"
+    

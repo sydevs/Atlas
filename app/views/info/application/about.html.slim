@@ -1,20 +1,12 @@
 
-.splash
-  .splash__image
-  h1.splash__header
-    = inline_svg_tag 'logo.svg', title: 'global icon by KonKapp from the Noun Project'
-    = translate('sahaj_atlas').upcase
-  .splash__content
-    .splash__content__inner
-      p.splash__content__description = translate('info.about.description')
-      p
-        a.button href=map_root_path
-          = translate('info.about.view_map')
-        a.button href=info_statistics_path
-          = translate('info.about.view_statistics')
-        - if current_user.present?
-          a.button href=cms_root_path
-            = translate('info.about.view_cms')
-        - else
-          a.button href=managers.sign_in_path
-            = translate('info.about.sign_in')
+- content_for :title, translate('info.about.title')
+
+.about
+  h1.info__header
+    a.info__header__logo href=info_root_url
+      = inline_svg_tag 'logo.svg', title: 'global icon by KonKapp from the Noun Project'
+      = translate('sahaj_atlas')
+    span = translate('info.about.title')
+
+  .info__content
+    p Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus quae velit dolorum nesciunt sequi, laborum ea ut eveniet, vel voluptatibus magni? Totam maiores perferendis id. Animi doloremque totam aperiam similique!

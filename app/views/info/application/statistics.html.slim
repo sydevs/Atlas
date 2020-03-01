@@ -1,14 +1,18 @@
 
-- content_for :title, "Statistics"
+- content_for :title, translate('info.statistics.title')
 
 .statistics
-  h2.statistics__header Statistics
+  h1.info__header
+    a.info__header__logo href=info_root_url
+      = inline_svg_tag 'logo.svg', title: 'global icon by KonKapp from the Noun Project'
+      = translate('sahaj_atlas')
+    span = translate('info.statistics.title')
 
-  .statistics__content
+  .info__content
     h3 Worldwide Event Coverage
   .statistics__map id='map-world-events' data-events=@events_data.to_json
 
-  .statistics__content
+  .info__content
     h3 Worldwide Registration Trends
   .statistics__chart
     .ct-chart.ct-minor-seventh id='chart-world-registrations' data-registrations=@registrations_data.to_json

@@ -3,6 +3,9 @@ class Info::ApplicationController < ActionController::Base
   include Passwordless::ControllerHelpers
   helper_method :current_user
 
+  def index
+  end
+
   def about
   end
 
