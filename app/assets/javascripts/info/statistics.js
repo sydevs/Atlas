@@ -6,6 +6,9 @@ const Statistics = {
     this.$chart = $('#chart-world-registrations')
     this.chart = new Chartist.Line('#chart-world-registrations', this.$chart.data('registrations'), {
       fullWidth: true,
+      axisY: {
+        onlyInteger: true,
+      },
     })
 
     this.$map = $('#map-world-events')
