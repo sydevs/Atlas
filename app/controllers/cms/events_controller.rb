@@ -7,7 +7,7 @@ class CMS::EventsController < CMS::ApplicationController
   end
 
   def update
-    super parameters
+    @record.touch if super parameters
   end
 
   def confirm

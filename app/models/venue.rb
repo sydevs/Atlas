@@ -11,7 +11,7 @@ class Venue < ApplicationRecord
   # Associations
   belongs_to :country, foreign_key: :country_code, primary_key: :country_code, optional: true
   belongs_to :province, foreign_key: :province_code, primary_key: :province_code, optional: true
-  has_many :events
+  has_many :events, dependent: :delete_all
 
   # Validations
   validates :street, presence: true

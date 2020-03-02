@@ -19,7 +19,7 @@
             a href=edit_cms_event_url(event)
               = event.label
             '  - 
-            = time_ago_in_words(@record.updated_at)
+            = time_ago_in_words(event.updated_at)
 
   - if @events_recently_expired.present?
     h4.ui.sub.header = translate('cms.dashboard.alerts.expired.title')
@@ -32,7 +32,11 @@
             a href=edit_cms_event_url(event)
               = event.label
             '  - 
-            = time_ago_in_words(@record.updated_at)
+            = time_ago_in_words(event.updated_at)
+      .item
+        i.warning.sign.icon
+        .content
+          = translate('cms.dashboard.alerts.expired.other', count: @events_expired_count)
 
   - unless @events_for_review.present? || @events_recently_expired.present?
     p = translate('cms.dashboard.alerts.empty')

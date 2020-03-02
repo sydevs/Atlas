@@ -4,9 +4,9 @@ class CMS::ManagersController < CMS::ApplicationController
 
   def show
     if policy(@record).dashboard?
-      @events_for_review = Event.needs_review
-      @events_recently_expired = Event.recently_expired
-      @events_expired_count = Event.expired.count
+      @events_for_review = @record.accessible_events.needs_review
+      @events_recently_expired = @record.accessible_events.recently_expired
+      @events_expired_count = @record.accessible_events.expired.count
     end
 
     super

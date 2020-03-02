@@ -1,6 +1,6 @@
 
 - categories = Event.categories.map { |k, v| [translate_enum_value(Event, :category, k), k] }
-- languages = I18nData.languages(I18n.locale).map { |k,v| [v.split(/[,;]/)[0], k] }
+- languages = I18nData.languages(I18n.locale).map { |k, v| [v.split(/[,;]/)[0], k] }
 
 = f.input :published
 

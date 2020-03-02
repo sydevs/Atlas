@@ -37,7 +37,7 @@ def load_venue address, country_code, index
   contact = "#{Faker::Name.first_name} #{Faker::Name.last_name}"
 
   venue = Venue.find_or_initialize_by(street: address[0])
-  venue.update!({
+  venue.assign_attributes({
     published: true,
     name: [true, false].sample ? Faker::Address.community : nil,
     street: address[0],
@@ -48,8 +48,7 @@ def load_venue address, country_code, index
     latitude: address[4],
     longitude: address[5],
   })
-  venue.managers = [MANAGERS.sample]
-  venue.save!
+  venue.save! validate: false
 
   venue.events.destroy_all
 
@@ -64,7 +63,7 @@ def load_venue address, country_code, index
     images_folder = %i[concert public_event].include?(category) ? category : :other
     images_folder = "db/seeds/files/#{images_folder}/#{rand(1..IMAGE_SETS[images_folder])}"
 
-    event = venue.events.create!({
+    event = venue.events.new({
       published: true,
       name: [true, false].sample ? Faker::Address.community : nil,
       description: [true, false].sample ? Faker::Lorem.paragraph : nil,
@@ -73,19 +72,19 @@ def load_venue address, country_code, index
       end_date: [true, false].sample ? Faker::Date.between(from: start_date, to: 6.months.since(start_date)) : nil,
       start_time: "#{start_hour}:#{format '%02d', start_minute}",
       end_time: [true, true, false].sample ? "#{start_hour + [0, 1, 1, 2].sample}:#{format '%02d', [start_minute, start_minute, 0, 15, 30, 45].sample}" : nil,
-      language: %w[EN EN EN IT IT ES]].sample,
+      language: %w[EN EN EN IT IT ES].sample,
       recurrence: Event.recurrences.keys.sample,
       category: category,
       pictures_attributes: Dir.glob("#{images_folder}/*.jpg").map { |f| { file: File.open(f, 'r') } },
     })
 
-    if [true, false].sample
-      event.managers << MANAGERS.sample
-      event.save!
-    end
+    event.manager = MANAGERS.sample
+    event.save!
 
     puts " |-> Created Event - #{event.name || event.venue.street}"
     next unless [true, true, false].sample
+
+    @event = event
 
     rand(10..20).times do
       name = "#{Faker::Name.first_name} #{Faker::Name.last_name}"
@@ -94,7 +93,7 @@ def load_venue address, country_code, index
         email: "#{name.parameterize(separator: '_')}@example.com",
         comment: [true, false].sample ? Faker::Lorem.paragraph : nil,
         created_at: Faker::Time.backward(days: 14),
-        starting_at: event.upcoming_dates(3).sample,
+        starting_at: event.start_date,
       })
 
       puts "    |-> Created Registration - #{registration.name} <#{registration.email}>"

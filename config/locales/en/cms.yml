@@ -159,6 +159,9 @@ en:
         expired:
           title: "Some events have expired"
           description: "Several published events are hidden from the map because they have not been verified recently. Please check and resave these events to re-enable them."
+          other:
+            one: "There is %{count} other older expired event in the system."
+            other: "There are %{count} other older expired events in the system."
 
   passwordless:
     sessions:

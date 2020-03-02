@@ -10,6 +10,7 @@ class Manager < ApplicationRecord
   has_many :countries, through: :managed_records, source: :record, source_type: 'Country', dependent: :destroy
   has_many :provinces, through: :managed_records, source: :record, source_type: 'Province', dependent: :destroy
   has_many :local_areas, through: :managed_records, source: :record, source_type: 'LocalArea', dependent: :destroy
+  #has_many :local_area_venues, through: :local_areas, source: :venues
   has_many :events
   has_many :actions, class_name: 'Audit', foreign_type: :user_type, foreign_key: :user_id
 
@@ -82,7 +83,7 @@ class Manager < ApplicationRecord
   
   def accessible_countries area: false
     if administrator? || area
-      Country.all
+      Country.default_scoped
     else
       countries_via_province = Country.where(country_code: provinces.select(:country_code))
       countries_via_local_area = Country.where(country_code: local_areas.select(:country_code))
@@ -97,6 +98,43 @@ class Manager < ApplicationRecord
       provinces_via_local_area = Province.where(province_code: local_areas.select(:country_code))
       provinces = Province.where(id: provinces).or(provinces_via_local_area)
       Province.where(id: provinces, country_code: country_code)
+    end
+  end
+  
+  def accessible_local_areas
+    if administrator?
+      LocalArea.default_scoped
+    else
+      provinces_via_local_area = Province.where(province_code: local_areas.select(:country_code))
+      provinces = Province.where(id: provinces).or(provinces_via_local_area)
+      Province.where(id: provinces, country_code: country_code)
+    end
+  end
+  
+  def accessible_venues
+    if administrator?
+      Venue.default_scoped
+    else
+      venues_via_countries = Venue.where(country_code: countries.select(:country_code))
+      venues_via_provinces = Venue.where(province_code: provinces.select(:province_code))
+      #venues_via_local_areas = Venue.where(province_code: local_area_venues.select(:province_code))
+      Venue.where(venues_via_countries).or(venues_via_provinces)#.or(local_area_venues)
+    end
+  end
+
+  def accessible_events
+    if administrator?
+      Event.default_scoped
+    else
+      Event.where(venue_id: accessible_venues).or(events)
+    end
+  end
+
+  def accessible_registrations
+    if administrator?
+      Registration.default_scoped
+    else
+      Registration.where(event_id: accessible_events)
     end
   end
 

@@ -91,7 +91,11 @@ class CMS::ApplicationController < ActionController::Base
   def regions
     authorize_association! :regions
 
-    if @context
+    if @context&.is_a?(Manager) && policy(@context).dashboard?
+      @countries = @context.accessible_countries
+      @provinces = @context.accessible_provinces unless @countries.exists?
+      @local_areas = @context.accessible_local_areas.international
+    elsif @context
       @countries = @context.countries if @context.respond_to?(:countries)
       @provinces = @context.provinces if @context.respond_to?(:provinces)
       @local_areas = @context.local_areas if @context.respond_to?(:local_areas)
@@ -136,7 +140,12 @@ class CMS::ApplicationController < ActionController::Base
     end
 
     def set_scope!
-      @scope = @context ? @context.send(@model.table_name) : @model
+      if @context&.is_a?(Manager) && policy(@context).dashboard? && @context.respond_to?("accessible_#{@model.table_name}")
+        @scope = @context.send("accessible_#{@model.table_name}")
+      else
+        @scope = @context ? @context.send(@model.table_name) : @model
+      end
+
       puts "SET SCOPE #{@scope.inspect}"
     end
 

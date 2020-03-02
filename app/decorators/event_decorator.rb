@@ -1,7 +1,6 @@
 module EventDecorator
 
   def label fallback_only: false
-    puts "#{id}, #{name.inspect} -> #{name.present?} && #{!fallback_only} = #{name.present? && !fallback_only}"
     if name.present? && !fallback_only
       name
     elsif category && venue&.name
