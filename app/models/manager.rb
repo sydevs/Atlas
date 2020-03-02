@@ -138,4 +138,12 @@ class Manager < ApplicationRecord
     end
   end
 
+  def accessible_managers
+    if administrator?
+      Manager.all
+    else
+      Manager.none
+    end
+  end
+
 end

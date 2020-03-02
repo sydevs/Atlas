@@ -5,8 +5,8 @@
   = render 'cms/views/context' do
     = render "cms/details/#{@model_name.singular_route_key}"
 - else
-  - content_for :title, translate('cms.menu.worldwide_data')
+  - content_for :title, translate('cms.menu.dashboard')
 
   = render 'cms/views/context' do
-    = render 'cms/details/worldwide'
+    = render 'cms/details/dashboard'
 

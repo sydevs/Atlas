@@ -4,7 +4,6 @@ class API::ApplicationController < ActionController::Base
 
   def index records = nil
     @verbose = params[:verbose] == 'true' || !params.key?(:verbose)
-    puts "Verbose: #{@verbose.inspect}"
     @records = records || scope
     render 'api/views/index'
   end

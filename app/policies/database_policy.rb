@@ -4,10 +4,6 @@ class DatabasePolicy < ApplicationPolicy
     user.administrator? || record.managed_by?(user, super_manager: super_manager)
   end
 
-  def dashboard?
-    false
-  end
-
   def show?
     manage?
   end

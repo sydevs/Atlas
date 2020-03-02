@@ -37,8 +37,11 @@ class CMS::ApplicationController < ActionController::Base
     if @model
       authorize @record
       @context = @record
-    else
-      authorize nil, policy_class: WorldwidePolicy
+    else # Dashboard
+      authorize nil, policy_class: DashboardPolicy
+      @events_for_review = current_user.accessible_events.needs_review
+      @events_recently_expired = current_user.accessible_events.recently_expired
+      @events_expired_count = current_user.accessible_events.expired.count
     end
 
     render 'cms/views/show'
@@ -91,17 +94,14 @@ class CMS::ApplicationController < ActionController::Base
   def regions
     authorize_association! :regions
 
-    if @context&.is_a?(Manager) && policy(@context).dashboard?
-      @countries = @context.accessible_countries
-      @provinces = @context.accessible_provinces unless @countries.exists?
-      @local_areas = @context.accessible_local_areas.international
-    elsif @context
+    if @context
       @countries = @context.countries if @context.respond_to?(:countries)
       @provinces = @context.provinces if @context.respond_to?(:provinces)
       @local_areas = @context.local_areas if @context.respond_to?(:local_areas)
     else
-      @countries = Country.all
-      @local_areas = LocalArea.international.all
+      @countries = current_user.accessible_countries
+      @provinces = current_user.accessible_provinces unless @countries.exists?
+      @local_areas = current_user.accessible_local_areas.international
     end
 
     render 'cms/views/regions'
@@ -140,12 +140,12 @@ class CMS::ApplicationController < ActionController::Base
     end
 
     def set_scope!
-      if @context&.is_a?(Manager) && policy(@context).dashboard? && @context.respond_to?("accessible_#{@model.table_name}")
-        @scope = @context.send("accessible_#{@model.table_name}")
-      else
-        @scope = @context ? @context.send(@model.table_name) : @model
+      if @context
+        @scope = @context.send(@model.table_name)
+      elsif @model
+        @scope = current_user.try("accessible_#{@model.table_name}") || @model
       end
-
+      
       puts "SET SCOPE #{@scope.inspect}"
     end
 
@@ -157,7 +157,7 @@ class CMS::ApplicationController < ActionController::Base
 
     def authorize_association! key
       skip_authorization
-      allow = @context ? policy(@context) : policy(:worldwide)
+      allow = @context ? policy(@context) : policy(:dashboard)
       key = key.table_name.to_sym if key.is_a?(ActiveRecord.class)
       return if allow.index_association?(key)
 

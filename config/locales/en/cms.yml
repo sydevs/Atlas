@@ -29,7 +29,7 @@ en:
       sign_out: "Log Out"
       sign_in: "Log In"
       # Secondary menu
-      worldwide_data: "Worldwide Data"
+      dashboard: "Dashboard"
       worldwide: "World"
       context: "%{resource} for %{parent}"
       # Tertiary menu

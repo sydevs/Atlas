@@ -1,9 +1,5 @@
 class ManagerPolicy < DatabasePolicy
 
-  def dashboard?
-    user == record
-  end
-
   def destroy?
     user.administrator? && user != record
   end

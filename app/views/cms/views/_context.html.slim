@@ -1,5 +1,5 @@
 
-- allow = @context ? policy(@context) : policy(:worldwide)
+- allow = @context ? policy(@context) : policy(:dashboard)
 
 h2.ui.header
   - unless %w[edit new].include?(action_name)
@@ -15,7 +15,7 @@ h2.ui.header
       - text = translate('cms.details.record_expired.title', resource: translate_model(@context.class))
       - tooltip = translate('cms.details.record_expired.description', resource: translate_model(@context.class).downcase, weeks: Expirable::EXPIRE_AFTER_WEEKS)
       = floating_action text, 'exclamation', class: 'active orange', data: { tooltip: tooltip, position: 'bottom center' }
-  .content = @context&.label || translate('cms.menu.worldwide_data')
+  .content = @context&.label || translate('cms.menu.dashboard')
   - if @context
     .sub.header
       - if @context.is_a?(Manager) && @context.administrator?
@@ -29,7 +29,7 @@ h2.ui.header
   .ui.divider
 - else
   .ui.stackable.secondary.pointing.menu
-    = menu_item translate(allow.dashboard? ? 'cms.menu.dashboard' : 'cms.menu.details'), @context, action: 'show'
+    = menu_item translate('cms.menu.details'), @context, action: 'show'
     = menu_item translate_model(Picture, :plural), @context, index: 'pictures' if allow.index_association?(:pictures)
     = menu_item translate(@context&.model_name&.i18n_key || :worldwide, scope: %i[cms menu regions]), @context, index: 'regions' if allow.index_association?(:regions)
     = menu_item translate_model(Manager, :plural), @context, index: 'managers' if allow.index_association?(:managers)

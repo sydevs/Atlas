@@ -1,0 +1,58 @@
+
+.ui.icon.message
+  = manager_icon current_user
+  .content
+    .header = translate('cms.dashboard.role.intro', role: translate("cms.dashboard.role.#{current_user.type}.title").downcase)
+    .description = translate("cms.dashboard.role.#{current_user.type}.instruction")
+
+h3.ui.small.dividing.grey.header = translate('cms.dashboard.alerts.title')
+
+- if @events_for_review.present?
+  h4.ui.sub.header = translate('cms.dashboard.alerts.review.title')
+  p = translate('cms.dashboard.alerts.review.description')
+  .ui.divided.list
+    - @events_for_review.each do |event|
+      .item
+        i.orange.warning.sign.icon
+        .content
+          a href=edit_cms_event_url(event)
+            = event.label
+          '  - 
+          = time_ago_in_words(event.updated_at)
+
+- if @events_recently_expired.present?
+  h4.ui.sub.header = translate('cms.dashboard.alerts.expired.title')
+  p = translate('cms.dashboard.alerts.expired.description')
+  .ui.divided.list
+    - @events_recently_expired.each do |event|
+      .item
+        i.orange.warning.sign.icon
+        .content
+          a href=edit_cms_event_url(event)
+            = event.label
+          '  - 
+          = time_ago_in_words(event.updated_at)
+    .item
+      i.warning.sign.icon
+      .content
+        = translate('cms.dashboard.alerts.expired.other', count: @events_expired_count)
+
+- unless @events_for_review.present? || @events_recently_expired.present?
+  p = translate('cms.dashboard.alerts.empty')
+
+h3.ui.small.dividing.grey.header = translate('cms.dashboard.statistics')
+.ui.list
+  - if current_user.administrator?
+    .item
+      = manager_icon current_user
+      .content = translate('cms.dashboard.role.intro', role: translate("cms.dashboard.role.#{current_user.type}.title").downcase)
+  - else
+    .item
+      = model_icon Country
+      .content = translate('cms.details.records_managed', resources: translate_model_count(Country, current_user.managed_countries_counter))
+    .item
+      = model_icon Province
+      .content = translate('cms.details.records_managed', resources: translate_model_count(Province, current_user.managed_localities_counter))
+    .item
+      = model_icon Event
+      .content = translate('cms.details.records_managed', resources: translate_model_count(Event, current_user.events.count))

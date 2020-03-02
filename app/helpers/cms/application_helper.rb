@@ -65,13 +65,13 @@ module CMS::ApplicationHelper
   end
 
   def breadcrumb_url ancestor
-    ancestor = current_user if ancestor == :home
+    # ancestor = current_user if ancestor == :home
 
     if action_name == 'index' && policy(ancestor).index_association?(controller_name)
-      url_for([:cms, (ancestor == :worldwide ? nil : ancestor), controller_name])
+      url_for([:cms, (ancestor == :dashboard ? nil : ancestor), controller_name])
     elsif action_name == 'regions' && policy(ancestor).index_association?(:regions)
-      url_for([:cms, (ancestor == :worldwide ? nil : ancestor), :regions])
-    elsif ancestor == :worldwide
+      url_for([:cms, (ancestor == :dashboard ? nil : ancestor), :regions])
+    elsif ancestor == :dashboard
       cms_root_url
     else
       url_for([:cms, ancestor])

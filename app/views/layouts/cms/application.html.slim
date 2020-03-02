@@ -51,19 +51,14 @@ html
               i.home.icon
               = translate('cms.menu.home')
 
-      - if defined?(current_user) && @context != current_user
+      - if defined?(current_user) && @context
         .ui.breadcrumbs
-          a.section href=breadcrumb_url(:home)
+          a.section href=breadcrumb_url(:dashboard)
             i.home.icon
           
           i.right.angle.icon.divider
 
-          - if @context && @context.respond_to?(:ancestors)
-            - if current_user.administrator?
-              a.section href=breadcrumb_url(:worldwide)
-                = translate('cms.menu.worldwide')
-              i.right.angle.icon.divider
-
+          - if @context.respond_to?(:ancestors)
             - @context.ancestors.each do |ancestor|
               - if policy(ancestor).show?
                 a.section href=breadcrumb_url(ancestor)
@@ -79,12 +74,15 @@ html
               i.right.angle.icon.divider
               span.active.section
                 = translate('cms.actions.target.new', resource: @model)
+            - elsif action_name == 'edit'
+              a.section href=url_for([:cms, @context])
+                = @context.label
             - else
               span.section
                 = @context.label
           - else
             span.section
-              = translate('cms.menu.worldwide')
+              = @context.label
 
     = yield
 

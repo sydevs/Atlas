@@ -1,5 +1,5 @@
 
-- allow = @context ? policy(@context) : policy(:worldwide)
+- allow = @context ? policy(@context) : policy(:dashboard)
 
 .item
   - if local_assigns[:removable] == true && allow.destroy_association?(:managers)

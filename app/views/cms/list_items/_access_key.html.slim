@@ -1,5 +1,5 @@
 
-- allow = @context ? policy(@context) : policy(:worldwide)
+- allow = @context ? policy(@context) : policy(:dashboard)
 
 .item
   - if allow.destroy_association?(:access_keys) && policy(access_key).destroy?
