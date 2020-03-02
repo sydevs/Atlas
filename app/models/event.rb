@@ -48,7 +48,7 @@ class Event < ApplicationRecord
   # Methods
 
   def managed_by? manager, super_manager: false
-    return true if !super_manager && managers.include?(manager)
+    return true if !super_manager && self.manager == manager
 
     venue.managed_by?(manager)
   end

@@ -31,7 +31,7 @@ en:
       # Secondary menu
       worldwide_data: "Worldwide Data"
       worldwide: "World"
-      context: "%{resource} in %{parent}"
+      context: "%{resource} for %{parent}"
       # Tertiary menu
       dashboard: "Dashboard"
       details: "Info"
