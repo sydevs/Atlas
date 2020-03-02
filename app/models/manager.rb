@@ -23,7 +23,7 @@ class Manager < ApplicationRecord
   scope :administrators, -> { where(administrator: true) }
   scope :country_managers, -> { where('managed_countries_counter > 0') }
   scope :local_managers, -> { where('managed_localities_counter > 0') }
-  scope :event_managers, -> { where('managed_events_counter > 0') }
+  scope :event_managers, -> { joins(:events) }
 
   # Methods
 
@@ -53,7 +53,7 @@ class Manager < ApplicationRecord
       :country
     elsif managed_localities_counter.positive?
       :local
-    elsif managed_events_counter.positive?
+    elsif events.exists?
       :event
     else
       :none

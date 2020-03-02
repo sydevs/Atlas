@@ -56,7 +56,7 @@
         .content = translate('cms.details.records_managed', resources: translate_model_count(Province, @record.managed_localities_counter))
       .item
         = model_icon Event
-        .content = translate('cms.details.records_managed', resources: translate_model_count(Event, @record.managed_events_counter))
+        .content = translate('cms.details.records_managed', resources: translate_model_count(Event, @record.events.count))
 
 - else
   h3.ui.small.dividing.grey.header = translate('cms.details.details_for_record', resource: @record.label)
@@ -75,4 +75,4 @@
         .content = translate('cms.details.records_managed', resources: translate_model_count(Province, @record.managed_localities_counter))
       .item
         = model_icon Event
-        .content = translate('cms.details.records_managed', resources: translate_model_count(Event, @record.managed_events_counter))
+        .content = translate('cms.details.records_managed', resources: translate_model_count(Event, @record.events.count))
