@@ -14,7 +14,7 @@
       .header = access_key.label
     .description
       - if access_key.suspended?
-        = translate_attribute(access_key, :suspended)
+        em = translate_attribute(access_key, :suspended)
       - elsif access_key.last_accessed_at.present?
         = translate_attribute(access_key, :last_accessed_at)
         ' : 

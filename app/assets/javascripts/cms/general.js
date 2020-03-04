@@ -7,6 +7,7 @@ const General = {
     $('.ui.accordion').accordion()
     $('.ui.checkbox').checkbox()
     $('.ui.menu .tab.item').tab()
+    $('.ui.embed').embed()
 
     $('.start.field .ui.date.calendar').calendar({ type: 'date', minDate: new Date(), endCalendar: $('.end.field .ui.date.calendar') })
     $('.end.field .ui.date.calendar').calendar({ type: 'date', minDate: new Date(), startCalendar: $('.start.field .ui.date.calendar') })
@@ -18,11 +19,12 @@ const General = {
   },
 
   onSearchSubmit: function() {
-    const $input = $(this).children('input')
+    const $input = $('.search > input')
     $input.siblings('.input').addClass('loading')
     $input.blur()
 
     var url = window.location.protocol + '//' + window.location.host + window.location.pathname + '?q=' + $input.val()
+    console.log($input[0], url)
     window.history.pushState({ path: url }, '', url)
   },
 

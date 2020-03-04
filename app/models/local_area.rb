@@ -14,7 +14,8 @@ class LocalArea < ApplicationRecord
 
   # Validations
   before_validation :ensure_country_consistency
-  validates_presence_of :latitude, :longitude, :radius, :name, :identifier
+  before_validation :format_identifier
+  validates_presence_of :latitude, :longitude, :radius, :name
 
   # Scopes
   default_scope { order(name: :desc) }
@@ -56,7 +57,12 @@ class LocalArea < ApplicationRecord
   private
 
     def ensure_country_consistency
-      self[:country_code] = province.country_code if province.present?
+      self.country_code = province.country_code if province.present?
+    end
+
+    def format_identifier
+      puts 'TESDFASDSADS'
+      self.identifier = (identifier || name)&.parameterize&.dasherize
     end
 
 end

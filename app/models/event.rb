@@ -44,6 +44,7 @@ class Event < ApplicationRecord
   # Delegations
   delegate :full_address, to: :venue
   alias parent venue
+  alias associated_registrations registrations
 
   # Methods
 

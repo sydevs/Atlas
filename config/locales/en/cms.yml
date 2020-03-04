@@ -40,6 +40,7 @@ en:
         worldwide: "Countries"
         country: "Regions"
         province: "Local Areas"
+        local: "Areas"
         manager: "Regions"
 
     messages:
@@ -52,6 +53,7 @@ en:
       successfully_removed: "%{resource} successfully removed from this %{context}."
       successfully_confirmed: "Thank you for confirming that this %{resource} is up to date."
       not_logged_in: "You are not logged in!"
+      no_comment: "(No comment)"
       cannot_create:
         event: "New events cannot be created here, they must be added directly to a venue."
         venue: "New venues cannot be created here, they must be added directly to a region within a country."
@@ -64,6 +66,9 @@ en:
       province:
         must_be_new: "Only regions which haven't already been added are listed below."
         prompt: "Province / State / County"
+      local_area:
+        location: "A custom area is defined using coordinates on the map (latitude and longitude) and a radius, to make a circular region."
+        identifier: "This identifier is used to filter the map to only show events in this area. Keep it short, lowercase, and with no spaces."
       event:
         name: "If you want to override the name of the event, you can do so here."
         room: "Which room in the building is the event in?"
@@ -86,16 +91,20 @@ en:
           description: "Make sure that the location shown on the map looks correct."
 
     details:
-      details_for_global: "Global Statistics"
       details_for_record: "Details for %{resource}"
+      registration_for_record: "Registration trend"
       management_for_record: "Management for this %{resource}"
       managers_for_record: "Managers for %{resource}"
-      records_managed: "%{resources} managed"
       location_of_record: "Location of this %{resource}"
       dates_and_timing: "Dates & Timing"
       map_of_record: "Map of this %{resource}"
       area_in_words: "%{radius} km around %{latitude}, %{longitude}"
       records_in_recent_days: "%{resources} in the last 30 days"
+      resources_managed:
+        title: "Resources Managed"
+      event_coverage:
+        title: "Event Coverage"
+        description: "%{events} (%{venues})"
       record_expired:
         title: "%{resource} Expired"
         description: "This %{resource} has been hidden from the public, because it hasn't been updated in %{weeks} weeks."
@@ -127,7 +136,7 @@ en:
       changed_to: "changed to"
 
     dashboard:
-      statistics: "Statistics"
+      guide: "How To Use Sahaj Atlas"
       role:
         intro: "You are a %{role}"
         worldwide:

@@ -12,6 +12,7 @@ class Province < ApplicationRecord
 
   has_many :venues, foreign_key: :province, primary_key: :province_code
   has_many :events, through: :venues
+  # has_many :associated_registrations, through: :events, source: :registrations
 
   # Validations
   validates_presence_of :province_code, :country_code

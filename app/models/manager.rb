@@ -87,17 +87,21 @@ class Manager < ApplicationRecord
     else
       countries_via_province = Country.where(country_code: provinces.select(:country_code))
       countries_via_local_area = Country.where(country_code: local_areas.select(:country_code))
-      Country.where(id: countries).or(countries_via_province).or(countries_via_local_area)
+      countries_via_event = Country.where(country_code: events.select(:country_code))
+      Country.where(id: countries).or(countries_via_province).or(countries_via_local_area).or(countries_via_event)
     end
   end
   
-  def accessible_provinces country_code, area: false
+  def accessible_provinces country_code = nil, area: false
     if administrator? || area
-      Province.where(country_code: country_code)
+      country_code ? Province.where(country_code: country_code) : Province.default_scoped
     else
-      provinces_via_local_area = Province.where(province_code: local_areas.select(:country_code))
-      provinces = Province.where(id: provinces).or(provinces_via_local_area)
-      Province.where(id: provinces, country_code: country_code)
+      provinces_via_country = Province.where(country_code: countries.select(:country_code))
+      provinces_via_local_area = Province.where(province_code: local_areas.select(:province_code)) # TODO: Provinces are probably not unique internationally
+      provinces_via_event = Province.where(province_code: events.select(:province_code))
+      provinces = Province.where(id: provinces).or(provinces_via_country).or(provinces_via_local_area).or(provinces_via_event)
+      provinces = Province.where(id: provinces, country_code: country_code) if country_code
+      provinces
     end
   end
   
@@ -105,9 +109,9 @@ class Manager < ApplicationRecord
     if administrator?
       LocalArea.default_scoped
     else
-      provinces_via_local_area = Province.where(province_code: local_areas.select(:country_code))
-      provinces = Province.where(id: provinces).or(provinces_via_local_area)
-      Province.where(id: provinces, country_code: country_code)
+      local_areas_via_country = LocalArea.where(country_code: countries.select(:country_code))
+      local_areas_via_province = LocalArea.where(province_code: provinces.select(:province_code))
+      LocalArea.where(id: local_areas).or(local_areas_via_country).or(local_areas_via_province)
     end
   end
   

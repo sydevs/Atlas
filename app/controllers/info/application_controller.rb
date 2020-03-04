@@ -16,7 +16,7 @@ class Info::ApplicationController < ActionController::Base
       Date.parse(Date::MONTHNAMES[n.months.ago.month]).strftime('%b')
     end
     
-    monthly_registrations = Registration.group_by_month.count.map { |k, v| [k.strftime("%b"), v] }.to_h
+    monthly_registrations = Registration.since(6.months.ago).group_by_month.count.map { |k, v| [k.strftime("%b"), v] }.to_h
     @registrations_data = {
       labels: recent_month_names,
       series: [

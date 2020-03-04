@@ -12,6 +12,7 @@ class Country < ApplicationRecord
 
   has_many :venues, foreign_key: :country_code, primary_key: :country_code
   has_many :events, through: :venues
+  has_many :associated_registrations, through: :events, source: :registrations
 
   # Validations
   validates_presence_of :country_code

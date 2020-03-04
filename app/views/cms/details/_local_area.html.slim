@@ -1,13 +1,12 @@
 
-h3.ui.dividing.header = translate('cms.details.details_for_record', resource: @record.label)
+h3.ui.small.dividing.grey.header = translate('cms.details.details_for_record', resource: @record.label)
 .ui.list
   .item
-    = model_icon Event
-    .content = translate_model_count(@record.events)
-  .item
-    = model_icon Venue
-    .content = translate_model_count(@record.venues)
+    i.sitemap.icon
+    .content
+      .header = translate('cms.details.event_coverage.title')
+      .description = translate('cms.details.event_coverage.description', events: translate_model_count(@record.events), venues: translate_model_count(@record.venues))
 
-h3.ui.dividing.header = translate('cms.details.location_of_record', resource: translate_model(LocalArea).downcase)
+h3.ui.small.dividing.grey.header = translate('cms.details.location_of_record', resource: translate_model(LocalArea).downcase)
 p = translate('cms.details.area_in_words', radius: @record.radius, latitude: @record.latitude, longitude: @record.longitude)
 #region-map data-latitude=@record.latitude data-longitude=@record.longitude data-radius=@record.radius

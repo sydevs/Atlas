@@ -2,7 +2,10 @@
 .item
   .right.floated.content = registration.created_at.to_s(:short)
   = model_icon Registration
-  - if policy(registration.event).manage?
-    .content #{registration.label} - <em>#{registration.email}</em>
-  - else
-    .content = registration.label
+  .content
+    - if policy(registration.event).manage?
+      div <strong>#{registration.label}</strong> - <em>#{registration.email}</em>
+      small class=('faded' unless registration.comment.present?)
+        = registration.comment || translate('cms.messages.no_comment')
+    - else
+      div = registration.label

@@ -1,5 +1,5 @@
 
-h3.ui.dividing.header = translate('cms.details.details_for_record', resource: @record.label)
+h3.ui.small.dividing.grey.header = translate('cms.details.details_for_record', resource: @record.label)
 .ui.list
   - unless @record.published?
     .item
@@ -9,9 +9,11 @@ h3.ui.dividing.header = translate('cms.details.details_for_record', resource: @r
         .description = translate('cms.details.record_not_published.description', resource: translate_model(@model).downcase)
   .item
     = model_icon Event
-    .content = translate_model_count(@record.events)
+    .content
+      .header = translate('cms.details.event_coverage.title')
+      .description = translate_model_count(@record.events)
 
-h3.ui.dividing.header = translate('cms.details.location_of_record', resource: translate_model(@model).downcase)
+h3.ui.small.dividing.grey.header = translate('cms.details.location_of_record', resource: translate_model(@model).downcase)
 p = @record.full_address
 
 = hidden_field_tag :venue_address, @record.full_address

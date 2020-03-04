@@ -37,6 +37,24 @@ class CMS::ApplicationController < ActionController::Base
     if @model
       authorize @record
       @context = @record
+
+      registrations = @record.try(:associated_registrations)
+      if registrations
+        registrations = registrations.since(6.months.ago).group_by_month.count.map { |k, v| [k.strftime("%b"), v] }.to_h
+        recent_month_names = 5.downto(1).collect do |n| 
+          Date.parse(Date::MONTHNAMES[n.months.ago.month]).strftime('%b')
+        end
+        
+        @registrations_data = {
+          labels: recent_month_names,
+          series: [
+            {
+              name: 'monthly',
+              data: recent_month_names.map { |m| registrations[m] || 0 },
+            }
+          ],
+        }
+      end
     else # Dashboard
       authorize nil, policy_class: DashboardPolicy
       @events_for_review = current_user.accessible_events.needs_review

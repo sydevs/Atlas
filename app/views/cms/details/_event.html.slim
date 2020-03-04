@@ -67,3 +67,6 @@ p = @record.full_address
 = hidden_field_tag :venue_longitude, @record.venue.longitude
 = hidden_field_tag :venue_place_id, @record.venue.place_id
 #venue-map data-latitude=@record.venue.latitude data-longitude=@record.venue.longitude
+
+h3.ui.small.dividing.grey.header = translate('cms.details.registration_for_record', resource: @record.label)
+.ct-chart.ct-minor-seventh id='chart' data-plot=@registrations_data.to_json

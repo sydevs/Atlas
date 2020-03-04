@@ -1,9 +1,8 @@
 
-h3.ui.dividing.header = translate('cms.details.details_for_record', resource: @record.label)
+h3.ui.small.dividing.grey.header = translate('cms.details.details_for_record', resource: @record.label)
 .ui.list
   .item
-    = model_icon Event
-    .content = translate_model_count(@record.events)
-  .item
-    = model_icon Venue
-    .content = translate_model_count(@record.venues)
+    i.sitemap.icon
+    .content
+      .header = translate('cms.details.event_coverage.title')
+      .description = translate('cms.details.event_coverage.description', events: translate_model_count(@record.events), venues: translate_model_count(@record.venues))

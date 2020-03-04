@@ -40,19 +40,5 @@ h3.ui.small.dividing.grey.header = translate('cms.dashboard.alerts.title')
 - unless @events_for_review.present? || @events_recently_expired.present?
   p = translate('cms.dashboard.alerts.empty')
 
-h3.ui.small.dividing.grey.header = translate('cms.dashboard.statistics')
-.ui.list
-  - if current_user.administrator?
-    .item
-      = manager_icon current_user
-      .content = translate('cms.dashboard.role.intro', role: translate("cms.dashboard.role.#{current_user.type}.title").downcase)
-  - else
-    .item
-      = model_icon Country
-      .content = translate('cms.details.records_managed', resources: translate_model_count(Country, current_user.managed_countries_counter))
-    .item
-      = model_icon Province
-      .content = translate('cms.details.records_managed', resources: translate_model_count(Province, current_user.managed_localities_counter))
-    .item
-      = model_icon Event
-      .content = translate('cms.details.records_managed', resources: translate_model_count(Event, current_user.events.count))
+h3.ui.small.dividing.grey.header = translate('cms.dashboard.guide')
+.ui.embed data-source='youtube' data-id='ScMzIvxBSi4' data-placeholder='http://i3.ytimg.com/vi/ScMzIvxBSi4/maxresdefault.jpg'
