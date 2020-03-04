@@ -24,7 +24,6 @@ const General = {
     $input.blur()
 
     var url = window.location.protocol + '//' + window.location.host + window.location.pathname + '?q=' + $input.val()
-    console.log($input[0], url)
     window.history.pushState({ path: url }, '', url)
   },
 
