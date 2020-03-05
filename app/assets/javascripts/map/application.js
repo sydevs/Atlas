@@ -71,8 +71,7 @@ class ApplicationInstance {
       const venue_events = this.listPanel.getEventsForVenue(state.venue)
       if (venue_events.length == 1) {
         // Show even if there is only one event for this venue
-        this.setState({ event: venue_events[0] })
-        return
+        return this.setState({ event: venue_events[0] })
       }
 
       // Show venue
