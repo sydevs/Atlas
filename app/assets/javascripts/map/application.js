@@ -68,6 +68,13 @@ class ApplicationInstance {
       if (!disableZoom) this.map.zoomToVenue(state.event)
       this.setInteractive(false)
     } else if (state.venue) {
+      const venue_events = this.listPanel.getEventsForVenue(state.venue)
+      if (venue_events.length == 1) {
+        // Show even if there is only one event for this venue
+        this.setState({ event: venue_events[0] })
+        return
+      }
+
       // Show venue
       this._setMode('venue')
       this.navbar.setVenue(state.venue)

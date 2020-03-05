@@ -26,6 +26,7 @@ class WorldMap {
       accessToken: element.dataset.token,
     }).addTo(this.leaflet)
 
+    this.targetMarkerLayer = L.layerGroup().addTo(this.leaflet)
     this.markersGroup = L.markerClusterGroup({
       spiderfyOnMaxZoom: false,
       showCoverageOnHover: false,
@@ -110,9 +111,9 @@ class WorldMap {
         this.targetMarker.setLatLng([location.latitude, location.longitude])
       }
 
-      this.targetMarker.addTo(this.leaflet)
+      this.targetMarker.addTo(this.targetMarkerLayer)
     } else if (this.targetMarker) {
-      this.leaflet.removeLayer(this.targetMarker)
+      this.targetMarkerLayer.removeLayer(this.targetMarker)
     }
   }
 

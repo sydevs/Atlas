@@ -13,6 +13,10 @@ class ListPanel {
     this.noResultsAlternativeTitle.addEventListener('click', () => this.triggerAlternativeQuery())
   }
 
+  getEventsForVenue(venue) {
+    return this.items.map(item => { return item.event.venue_id == venue.id ? item.event : null }).filter(Boolean)
+  }
+
   filterByVenue(venue) {
     this.items.forEach(item => item.setHidden(item.event.venue_id != venue.id))
     this.container.classList.add('listing--filtered')
