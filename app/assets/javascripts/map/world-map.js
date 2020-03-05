@@ -238,7 +238,7 @@ class WorldMap {
     bounds.east = ((bounds.east - bounds.longitude) * buffer) + bounds.longitude
     bounds.west = ((bounds.west - bounds.longitude) * buffer) + bounds.longitude
     
-    Application.loadEvents(bounds)
+    Application.loadEvents(bounds, true)
     Application.navbar.select(null)
     this.setRefreshDisabled(true)
   }

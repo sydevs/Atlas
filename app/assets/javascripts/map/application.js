@@ -47,7 +47,7 @@ class ApplicationInstance {
     this.setState(state)
   }
 
-  setState(state, recordHistory = true) {
+  setState(state, recordHistory = true, disableZoom = false) {
     this.state = state
 
     if (state.venues) {
@@ -65,7 +65,7 @@ class ApplicationInstance {
       this._setMode('event')
       this.infoPanel.show(state.event)
       this.map.selectMarker(state.event.venue_id)
-      this.map.zoomToVenue(state.event)
+      if (!disableZoom) this.map.zoomToVenue(state.event)
       this.setInteractive(false)
     } else if (state.venue) {
       // Show venue
@@ -74,7 +74,7 @@ class ApplicationInstance {
       this.listPanel.filterByVenue(state.venue)
       this.map.selectMarker(state.venue.id)
       this.map.invalidateViewportDimensions()
-      this.map.zoomToVenue(state.venue)
+      if (!disableZoom) this.map.zoomToVenue(state.venue)
       this.setInteractive(false)
     } else if (state.venues) {
       // Show list of venues
@@ -84,7 +84,7 @@ class ApplicationInstance {
       this.listPanel.resetFilter()
       this.map.selectMarker(null)
       this.map.invalidateViewportDimensions()
-      this.map.fitToMarkers()
+      if (!disableZoom) this.map.fitToMarkers()
       this.setInteractive(true)
     } else if (state.alternatives) {
       // Show empty results with alternatives
@@ -93,6 +93,7 @@ class ApplicationInstance {
       if (state.type) {
         this.map.zoomTo(state.latitude, state.longitude, this.defaultZoom[state.type] || this.defaultZoom.default)
       }
+
       this.map.setVenueMarkers([])
     } else {
       console.error('Tried to set invalid state', state) // eslint-disable-line no-console
@@ -111,7 +112,7 @@ class ApplicationInstance {
     this.map.setInteractive(interactive)
   }
 
-  loadEvents(query) {
+  loadEvents(query, disableZoom = false) {
     this.atlas.query(query, response => {
       if (response.status == 'empty') {
         this.setState({
@@ -119,7 +120,7 @@ class ApplicationInstance {
           latitude: query.latitude,
           longitude: query.longitude,
           type: query.type,
-          alternatives: response.results.alternatives
+          alternatives: response.results.alternatives,
         }, true)
       } else {
         this.setState({
@@ -127,8 +128,8 @@ class ApplicationInstance {
           latitude: query.latitude,
           longitude: query.longitude,
           type: query.type,
-          venues: response.results
-        }, true)
+          venues: response.results,
+        }, true, disableZoom)
       }
 
       if (['postcode', 'address'].includes(query.type)) {
