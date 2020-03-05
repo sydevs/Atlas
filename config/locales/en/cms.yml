@@ -42,6 +42,7 @@ en:
         province: "Local Areas"
         local: "Areas"
         manager: "Regions"
+        event: "Regions"
 
     messages:
       errors: "Errors"
