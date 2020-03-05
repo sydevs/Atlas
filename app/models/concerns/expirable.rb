@@ -28,7 +28,7 @@ module Expirable
     scope :recently_expired, -> { where("#{table_name}.updated_at <= ? AND #{table_name}.updated_at > ?", EXPIRE_DATE, RECENTLY_EXPIRED_DATE) }
   end
 
-  def needs_verification_at
+  def needs_review_at
     updated_at + VERIFY_AFTER_WEEKS.weeks
     # updated_at + VERIFY_AFTER_MINUTES.minutes
   end
@@ -51,15 +51,19 @@ module Expirable
     Time.now < expires_at
   end
 
+  def updated?
+    !expired? && !needs_review?
+  end
+
   def expired?
     !active?
   end
 
   def needs_review? urgency = :any
     if urgency == :urgent
-      updated_at > VERIFY_DATE
+      updated_at < VERIFY_DATE
     else
-      updated_at > ESCALATE_DATE
+      updated_at < ESCALATE_DATE
     end
   end
 

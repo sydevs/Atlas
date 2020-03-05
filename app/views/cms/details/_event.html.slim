@@ -33,6 +33,14 @@ p = @record.description
       .description = @record.language_name
 
 h3.ui.small.dividing.grey.header = translate('cms.details.management_for_record', resource: translate_model(@model).downcase)
+.ui.three.event.steps
+  - %w[updated needs_review expired].each do |step|
+    .step class=('disabled' unless @record.send("#{step}?"))
+      i.icon class=translate("cms.dashboard.expiration.steps.#{step}.icon") class=('grey disabled' unless @record.send("#{step}?"))
+      .content
+        .title = translate("cms.dashboard.expiration.steps.#{step}.label")
+        .description = @record.send("#{step}_at").strftime('%-d %b %Y')
+
 .ui.list
   - unless @record.published? && !@record.expired?
     .item
@@ -52,21 +60,25 @@ h3.ui.small.dividing.grey.header = translate('cms.details.management_for_record'
     .content
       .header = translate('cms.details.updated_at', time_ago: '')
       .description = time_ago_in_words(@record.updated_at)
-  .item
-    = model_icon Registration
-    .content
-      .header Recent Registrations
-      .description = translate('cms.details.records_in_recent_days', resources: translate_model_count(@record.registrations))
 
 h3.ui.small.dividing.grey.header = translate('cms.details.location_of_record', resource: translate_model(@model).downcase)
-p = [@record.room, @record.venue.name].compact.join(', ')
-p = @record.full_address
-
 = hidden_field_tag :venue_address, @record.venue.full_address
 = hidden_field_tag :venue_latitude, @record.venue.latitude
 = hidden_field_tag :venue_longitude, @record.venue.longitude
 = hidden_field_tag :venue_place_id, @record.venue.place_id
 #venue-map data-latitude=@record.venue.latitude data-longitude=@record.venue.longitude
+
+.ui.list
+  .item
+    i.building.icon
+    .content
+      .header = translate_attribute(Event, :building)
+      .description = [@record.venue.name, @record.room].compact.join(', ')
+  .item
+    i.map.marked.alternate.icon
+    .content
+      .header = translate_attribute(Venue, :address)
+      .description = @record.full_address
 
 h3.ui.small.dividing.grey.header = translate('cms.details.registration_for_record', resource: @record.label)
 .ct-chart.ct-minor-seventh id='chart' data-plot=@registrations_data.to_json

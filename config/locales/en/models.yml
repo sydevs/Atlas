@@ -140,6 +140,7 @@ en:
           concert: "A performance combining meditation and music or dance."
         description: "Description"
         room: "Room"
+        building: "Building"
         language: "Language"
         disable_notifications: "Disable Notifications"
         registration_mode: "Registration Mode"
