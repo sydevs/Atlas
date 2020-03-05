@@ -26,8 +26,6 @@ class Venue < ApplicationRecord
   end
 
   def managed_by? manager, super_manager: false
-    return true if !super_manager && managers.include?(manager)
-
     manager.local_areas.each do |local_area|
       return true if local_area.contains?(venue)
     end
