@@ -125,6 +125,12 @@ class CMS::ApplicationController < ActionController::Base
     render 'cms/views/regions'
   end
 
+  def help
+    set_context!
+    authorize :dashboard, :view_help?
+    render 'cms/views/help'
+  end
+
   protected
 
     def current_user

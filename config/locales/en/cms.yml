@@ -36,6 +36,7 @@ en:
       dashboard: "Dashboard"
       details: "Info"
       activity: "Activity"
+      help: "Help"
       regions:
         worldwide: "Countries"
         country: "Regions"
@@ -137,7 +138,6 @@ en:
       changed_to: "changed to"
 
     dashboard:
-      guide: "How To Use Sahaj Atlas"
       role:
         intro: "You are a %{role}"
         worldwide:
@@ -172,6 +172,13 @@ en:
           other:
             one: "There is %{count} other older expired event in the system."
             other: "There are %{count} other older expired events in the system."
+      help:
+        title: "How do I use this site?"
+        description: "You are currently viewing the Content Management System (CMS) for the Sahaj Atlas. We have created a video and some explanations to help you understand how to use this CMS."
+        action: "Learn how to use"
+      
+    help:
+      guide: "How To Use Sahaj Atlas"
       expiration:
         title: "How does event expiration work?"
         description:
@@ -195,6 +202,9 @@ en:
             label: "Expires" # This should be present tense as in the phrase "The event expires on March 3"
             title: "Expired"
             description: "If an event has not been updated in %{weeks} weeks"
+      contact:
+        title: "Need more help?"
+        description: "If you need further help, or if you want to help with the development of the Sahaj Atlas, please write to the email below. Please write your message in english."
 
   passwordless:
     sessions:
