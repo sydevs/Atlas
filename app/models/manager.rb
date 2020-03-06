@@ -122,7 +122,8 @@ class Manager < ApplicationRecord
       venues_via_countries = Venue.where(country_code: countries.select(:country_code))
       venues_via_provinces = Venue.where(province_code: provinces.select(:province_code))
       #venues_via_local_areas = Venue.where(province_code: local_area_venues.select(:province_code))
-      Venue.where(venues_via_countries).or(venues_via_provinces)#.or(local_area_venues)
+      venues_via_events = Venue.where(id: events.select(:venue_id))
+      Venue.where(venues_via_countries).or(venues_via_provinces).or(venues_via_events)#.or(local_area_venues)
     end
   end
 
@@ -130,7 +131,10 @@ class Manager < ApplicationRecord
     if administrator?
       Event.default_scoped
     else
-      Event.where(venue_id: accessible_venues).or(events)
+      events_via_countries = Event.joins(:venue).where(venues: { country_code: countries.select(:country_code) })
+      events_via_provinces = Event.joins(:venue).where(venues: { province_code: provinces.select(:province_code) })
+      #events_via_local_areas = Venue.where(province_code: local_area_venues.select(:province_code))
+      Event.where(id: events).or(events_via_countries).or(events_via_provinces)#.or(events_via_local_areas)
     end
   end
 

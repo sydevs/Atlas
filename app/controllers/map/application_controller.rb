@@ -42,7 +42,7 @@ class Map::ApplicationController < ActionController::Base
       if scope
         @records = scope.includes(:events, events: :pictures).published
       else
-        @records = Venue.includes(:events, events: :pictures).within(50, origin: geocoded_coordinates)
+        @records = Venue.includes(:events, events: :pictures).within(50, origin: coordinates)
       end
 
       @verbose = true
@@ -75,7 +75,9 @@ class Map::ApplicationController < ActionController::Base
       end
     end
 
-    def geocoded_coordinates
+    def coordinates
+      return [ params[:latitude], params[:longitude] ] if params[:latitude].present? && params[:longitude].present?
+
       location = IpGeocoder.geocode(request.remote_ip)
       return [ location.lat, location.lng ] if location.success
 
