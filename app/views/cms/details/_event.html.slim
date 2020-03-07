@@ -36,9 +36,9 @@ h3.ui.small.dividing.grey.header = translate('cms.details.management_for_record'
 .ui.three.event.steps
   - %w[updated needs_review expired].each do |step|
     .step class=('disabled' unless @record.send("#{step}?"))
-      i.icon class=translate("cms.dashboard.expiration.steps.#{step}.icon") class=('grey disabled' unless @record.send("#{step}?"))
+      i.icon class=translate("cms.help.expiration.steps.#{step}.icon") class=('grey disabled' unless @record.send("#{step}?"))
       .content
-        .title = translate("cms.dashboard.expiration.steps.#{step}.label")
+        .title = translate("cms.help.expiration.steps.#{step}.label")
         .description = @record.send("#{step}_at").strftime('%-d %b %Y')
 
 .ui.list
