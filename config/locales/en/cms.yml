@@ -65,6 +65,7 @@ en:
       never: "Never"
       country:
         must_be_new: "Only countries which haven't already been added are listed below."
+        province_management: "If enabled, you will be able to view and assign managers to regions (provinces, states, etc) within this country. This is useful for larger countries (China, USA, Australia, etc), and unnessecary for small countries (Belgium, Lithuania, Singapore, etc)."
       province:
         must_be_new: "Only regions which haven't already been added are listed below."
         prompt: "Province / State / County"

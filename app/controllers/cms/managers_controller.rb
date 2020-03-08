@@ -74,9 +74,23 @@ class CMS::ManagersController < CMS::ApplicationController
   def provinces
     manager = @scope&.find(params[:manager_id])
     authorize manager
+    country_code = params[:country_code]
 
-    @provinces = manager.accessible_provinces(params[:country_code], area: params[:area])
-    render format: :json
+    if Country.where(country_code: country_code, enable_province_management: false).exists?
+      render json: {
+        success: true,
+        results: ISO3166::Country[country_code].subdivisions.map { |k, v|
+          name = v['name'] || v['translations'][I18n.locale.to_s]
+          return unless name.present?
+
+          name = name.split(' [')[0]
+          { name: name, value: k }
+        }.compact
+      }
+    else
+      @provinces = manager.accessible_provinces(country_code, area: params[:area])
+      render format: :json
+    end
   end
 
   private

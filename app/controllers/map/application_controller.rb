@@ -5,7 +5,7 @@ class Map::ApplicationController < ActionController::Base
   before_action :set_cors!
 
   def show
-    I18n.locale = params[:locale] || :en
+    I18n.locale = params[:locale].to_sym || :en
 
     if params[:venue_id]
       @venue = Venue.joins(:events).find(params[:venue_id])

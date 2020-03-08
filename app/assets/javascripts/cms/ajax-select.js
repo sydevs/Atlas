@@ -9,6 +9,7 @@ const AjaxSelect = {
     $country.dropdown({
       apiSettings: { url: $country.data('url') },
       filterRemoteData: true,
+      ignoreDiacritics: true,
       onChange: (value, _text, _$selectedItem) => {
         const $dropdown = $province.parent()
         
@@ -16,6 +17,8 @@ const AjaxSelect = {
         $dropdown.dropdown({
           apiSettings: { url: `${$province.data('url')}&country_code=${value}` },
           filterRemoteData: true,
+          ignoreDiacritics: true,
+          saveRemoteData: false,
         })
       }
     })
@@ -23,6 +26,8 @@ const AjaxSelect = {
     $province.dropdown({
       apiSettings: { url: $province.data('url') },
       filterRemoteData: true,
+      ignoreDiacritics: true,
+      saveRemoteData: false,
     })
   },
 }

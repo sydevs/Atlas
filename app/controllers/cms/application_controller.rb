@@ -8,6 +8,7 @@ class CMS::ApplicationController < ActionController::Base
   helper_method :current_user
 
   before_action :require_login!
+  before_action :set_locale!
   before_action :set_model_name!
   before_action :set_context!, only: %i[index new create regions destroy images]
   before_action :set_scope!, except: %i[regions images]
@@ -142,6 +143,10 @@ class CMS::ApplicationController < ActionController::Base
 
       save_passwordless_redirect_location! Manager
       redirect_to managers.sign_in_path, flash: { error: translate('cms.messages.not_logged_in') }
+    end
+
+    def set_locale!
+      I18n.locale = params[:locale]&.to_sym || :en
     end
 
     def set_model_name!

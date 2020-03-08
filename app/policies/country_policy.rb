@@ -1,9 +1,5 @@
 class CountryPolicy < RegionPolicy
 
-  def update?
-    false
-  end
-
   def new_association? association = nil
     return nil if association == :events
     

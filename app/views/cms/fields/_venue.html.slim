@@ -17,14 +17,14 @@
         = f.hidden_field :province_code
         = f.input_field :province, value: f.object.province_name, disabled: true
       - else
-        - api_url = cms_manager_provinces_url(current_user, country_code: f.object.country_code, area: @context.is_a?(LocalArea))
+        - api_url = cms_manager_provinces_url(current_user, country_code: f.object.country_code, area: @context.is_a?(LocalArea), format: :json)
         = f.input_field :province_code, as: :select, data: { url: api_url }, prompt: translate('cms.hints.province.prompt'), class: 'ajax search'
     .seven.wide.field
       - if f.object.country_code.present?
         = f.hidden_field :country_code
         = f.input_field :country, as: :string, value: f.object.country.label, disabled: true
       - else
-        - api_url = cms_manager_countries_url(current_user, area: @context.is_a?(LocalArea))
+        - api_url = cms_manager_countries_url(current_user, area: @context.is_a?(LocalArea), format: :json)
         = f.input_field :country_code, as: :select, data: { url: api_url }, prompt: translate_attribute(Venue, :country_code), class: 'ajax search'
     .three.wide.field
       = f.input_field :postcode, placeholder: translate_attribute(Venue, :postcode)

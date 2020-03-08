@@ -88,6 +88,7 @@ en:
       country:
         manager_id: :activerecord.models.manager.single # Do not translate
         country_code: :activerecord.models.country.single # Do not translate
+        enable_province_management: "Enable Regional Management"
 
       province:
         manager_id: :activerecord.models.manager.single # Do not translate

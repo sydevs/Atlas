@@ -22,7 +22,7 @@ Rails.application.routes.draw do
     get :regions, to: 'application#regions'
     get :help, to: 'application#help'
 
-    resources :countries, except: %i[edit update] do
+    resources :countries do
       get :regions
       resources :managers, only: %i[index new create destroy]
       resources :venues, only: %i[index new create]

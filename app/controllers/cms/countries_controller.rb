@@ -13,7 +13,7 @@ class CMS::CountriesController < CMS::ApplicationController
   def regions
     authorize_association! :regions
 
-    @provinces = @context.provinces
+    @provinces = @context.provinces if @context.enable_province_management?
     @local_areas = @context.local_areas.cross_province
     render 'cms/views/regions'
   end
@@ -21,7 +21,7 @@ class CMS::CountriesController < CMS::ApplicationController
   private
 
     def parameters
-      params.fetch(:country, {}).permit(:country_code)
+      params.fetch(:country, {}).permit(:country_code, :enable_province_management)
     end
 
 end
