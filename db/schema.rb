@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_08_091141) do
+ActiveRecord::Schema.define(version: 2020_03_10_142038) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,7 +48,6 @@ ActiveRecord::Schema.define(version: 2020_03_08_091141) do
 
   create_table "countries", force: :cascade do |t|
     t.string "country_code", null: false
-    t.string "identifier"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "enable_province_management"
@@ -136,7 +135,6 @@ ActiveRecord::Schema.define(version: 2020_03_08_091141) do
 
   create_table "provinces", force: :cascade do |t|
     t.string "country_code", null: false
-    t.string "identifier"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "province_code", limit: 3

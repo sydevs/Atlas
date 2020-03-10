@@ -40,17 +40,6 @@ html
         = translate('sahaj_atlas')
       .ui.divider
 
-      - if defined?(current_user) && !current_user.administrator?
-        .ui.right.floated.breadcrumbs
-          - if @context == current_user
-            span.section
-              i.home.icon
-              = translate('cms.menu.home')
-          - else
-            a href=cms_manager_url(current_user)
-              i.home.icon
-              = translate('cms.menu.home')
-
       - if defined?(current_user) && @context
         .ui.breadcrumbs
           a.section href=breadcrumb_url(:dashboard)
