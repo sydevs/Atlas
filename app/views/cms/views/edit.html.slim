@@ -18,7 +18,7 @@
       = render "cms/fields/#{@model_name.singular_route_key}", f: f
 
     p
-      a.ui.basic.button href=url_for([:cms, @record])
+      a.ui.basic.button href=(@record == current_user ? cms_root_url : url_for([:cms, @record]))
         i.left.arrow.icon
         = translate('cms.actions.simple.back')
 

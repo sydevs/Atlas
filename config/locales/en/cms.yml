@@ -19,6 +19,9 @@ en:
         search: "Search %{resources}..."
         choose: "Choose a %{resource}"
 
+      special:
+        edit_profile: "Edit My Profile"
+
     menu:
       home: "Home"
       # Top level menu
