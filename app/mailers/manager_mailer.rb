@@ -7,6 +7,7 @@ class ManagerMailer < ApplicationMailer
     setup
     
     @action_link = "#{@magic_link}?destination_path=#{cms_manager_url(@manager)}"
+    @type = @context&.model_name&.i18n_key || 'worldwide'
     subject = I18n.translate('mail.welcome.subject', context: @context&.label || I18n.translate('mail.common.worldwide'))
     mail(to: @manager.email, subject: subject)
   end
