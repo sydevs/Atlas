@@ -38,12 +38,9 @@ en:
       details: "Info"
       activity: "Activity"
       regions:
-        worldwide: "Countries"
-        country: "Regions"
-        province: "Local Areas"
-        local: "Areas"
-        manager: "Regions"
-        event: "Regions"
+        countries: "Countries"
+        regions: "Regions"
+        cities: "Cities"
       breadcrumbs:
         show: "World"
         help: "Help"
@@ -132,7 +129,7 @@ en:
       new_province: "Add Region"
       provinces_header: "Provinces / States / Counties"
       local_areas_header:
-        provincial: "Local Areas"
+        provincial: "Metropolitan Areas"
         national: "Custom Regions"
         global: "Custom International Areas"
 

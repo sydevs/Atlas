@@ -1,6 +1,12 @@
 ruby:
+  if @context.is_a?(Country)
+    regions_type = @context.enable_province_management? ? :regions : :cities
+  else
+    regions_type = @context.present? ? :cities : :countries
+  end
+  
   allow = @context ? policy(@context) : policy(:dashboard)
-  title = translate(@context&.model_name&.i18n_key || :worldwide, scope: %i[cms menu regions])
+  title = translate(regions_type, scope: %i[cms menu regions])
   content_for :title, [title, @context&.label].compact.join(' | ')
 
 = render 'cms/views/context' do
@@ -33,7 +39,11 @@ ruby:
       - if @context
         - if allow.new_association?(:local_areas) && policy(LocalArea).new?
           = floating_action translate('cms.actions.target.new', resource: translate_model(LocalArea)), 'plus', url_for([:new, :cms, @context, :local_area])
-        .content = @context.is_a?(Province) ? translate('cms.regions.local_areas_header.provincial') : translate('cms.regions.local_areas_header.national')
+        .content
+          - if @context.is_a?(Province) || @context.is_a?(Country) && !@context.enable_province_management?
+            = translate('cms.regions.local_areas_header.provincial')
+          - else
+            = translate('cms.regions.local_areas_header.national')
       - else
         - if allow.new_association?(:local_areas) && policy(LocalArea).new?
           = floating_action translate('cms.actions.target.new', resource: translate_model(LocalArea)), 'plus', url_for([:new, :cms, :local_area])
