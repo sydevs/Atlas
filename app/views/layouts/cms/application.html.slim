@@ -19,6 +19,9 @@ html
             a.item href=info_about_path
               i.question.circle.icon
               = translate('cms.menu.about')
+            a.item href=cms_help_path
+              i.hands.helping.icon
+              = translate('cms.menu.help')
             - if policy(:page).statistics?
               a.item href=info_statistics_path
                 i.chart.bar.icon
@@ -40,9 +43,9 @@ html
         = translate('sahaj_atlas')
       .ui.divider
 
-      - if defined?(current_user) && @context
+      - if defined?(current_user) && action_name != 'dashboard'
         .ui.breadcrumbs
-          a.section href=breadcrumb_url(:dashboard)
+          a.section href=cms_root_url
             i.home.icon
           
           i.right.angle.icon.divider
@@ -71,7 +74,12 @@ html
                 = @context.label
           - else
             span.section
-              = @context.label
+              - if @context
+                = @context.label
+              - elsif @model
+                = translate_model(@model, :plural)
+              - else
+                = translate("cms.menu.breadcrumbs.#{action_name}")
 
     = yield
 

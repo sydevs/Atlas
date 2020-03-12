@@ -18,8 +18,9 @@ Rails.application.routes.draw do
   end
 
   namespace :cms do
-    root to: 'application#show'
+    root to: 'application#dashboard'
     get :regions, to: 'application#regions'
+    get :worldwide, to: 'application#show'
     get :help, to: 'application#help'
 
     resources :countries do

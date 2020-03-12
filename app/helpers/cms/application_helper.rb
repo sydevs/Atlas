@@ -44,7 +44,7 @@ module CMS::ApplicationHelper
     if active
       content_tag :div, label, class: 'active item'
     elsif action.present?
-      content_tag :a, label, class: 'item', href: action == 'show' ? url_for([:cms, record || :root]) : url_for([action, :cms, record])
+      content_tag :a, label, class: 'item', href: action == 'show' ? url_for([:cms, record || :worldwide]) : url_for([action, :cms, record])
     elsif controller.present?
       content_tag :a, label, class: 'item', href: url_for([:cms, record, index])
     else
@@ -65,14 +65,10 @@ module CMS::ApplicationHelper
   end
 
   def breadcrumb_url ancestor
-    # ancestor = current_user if ancestor == :home
-
     if action_name == 'index' && policy(ancestor).index_association?(controller_name)
-      url_for([:cms, (ancestor == :dashboard ? nil : ancestor), controller_name])
+      url_for([:cms, ancestor, controller_name])
     elsif action_name == 'regions' && policy(ancestor).index_association?(:regions)
-      url_for([:cms, (ancestor == :dashboard ? nil : ancestor), :regions])
-    elsif ancestor == :dashboard
-      cms_root_url
+      url_for([:cms, ancestor, :regions])
     else
       url_for([:cms, ancestor])
     end

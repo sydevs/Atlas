@@ -1,5 +1,5 @@
 
-- allow = @context ? policy(@context) : policy(:dashboard)
+- allow = @context ? policy(@context) : policy(:worldwide)
 
 h2.ui.header
   - unless %w[edit new].include?(action_name)
@@ -15,7 +15,7 @@ h2.ui.header
       - text = translate('cms.details.record_expired.title', resource: translate_model(@context.class))
       - tooltip = translate('cms.details.record_expired.description', resource: translate_model(@context.class).downcase, weeks: Expirable::EXPIRE_AFTER_WEEKS)
       = floating_action text, 'exclamation', class: 'active orange', data: { tooltip: tooltip, position: 'bottom center' }
-  .content = @context&.label || translate('cms.menu.dashboard')
+  .content = @context&.label || translate('cms.menu.worldwide')
   - if @context
     .sub.header
       - if @context.is_a?(Manager) && @context.administrator?

@@ -26,6 +26,14 @@ class CMS::ApplicationController < ActionController::Base
     redirect_to cms_manager_url(current_user), status: :moved_permanently
   end
 
+  def dashboard
+    authorize current_user, :dashboard?
+    @resources = current_user.countries + current_user.provinces + current_user.local_areas + current_user.events
+    @events_for_review = current_user.accessible_events.needs_review
+    @events_recently_expired = current_user.accessible_events.recently_expired
+    @events_expired_count = current_user.accessible_events.expired.count
+  end
+
   def index
     authorize_association! @model
     @records = policy_scope(@scope).page(params[:page]).per(10).search(params[:q])
@@ -38,29 +46,27 @@ class CMS::ApplicationController < ActionController::Base
     if @model
       authorize @record
       @context = @record
-
       registrations = @record.try(:associated_registrations)
-      if registrations
-        registrations = registrations.since(6.months.ago).group_by_month.count.map { |k, v| [k.strftime("%b"), v] }.to_h
-        recent_month_names = 5.downto(1).collect do |n| 
-          Date.parse(Date::MONTHNAMES[n.months.ago.month]).strftime('%b')
-        end
-        
-        @registrations_data = {
-          labels: recent_month_names,
-          series: [
-            {
-              name: 'monthly',
-              data: recent_month_names.map { |m| registrations[m] || 0 },
-            }
-          ],
-        }
+    else
+      authorize nil, policy_class: WorldwidePolicy
+      registrations = Registration
+    end
+
+    if registrations
+      registrations = registrations.since(6.months.ago).group_by_month.count.map { |k, v| [k.strftime("%b"), v] }.to_h
+      recent_month_names = 5.downto(1).collect do |n| 
+        Date.parse(Date::MONTHNAMES[n.months.ago.month]).strftime('%b')
       end
-    else # Dashboard
-      authorize nil, policy_class: DashboardPolicy
-      @events_for_review = current_user.accessible_events.needs_review
-      @events_recently_expired = current_user.accessible_events.recently_expired
-      @events_expired_count = current_user.accessible_events.expired.count
+      
+      @registrations_data = {
+        labels: recent_month_names,
+        series: [
+          {
+            name: 'monthly',
+            data: recent_month_names.map { |m| registrations[m] || 0 },
+          }
+        ],
+      }
     end
 
     render 'cms/views/show'
@@ -129,7 +135,6 @@ class CMS::ApplicationController < ActionController::Base
   def help
     set_context!
     authorize :dashboard, :view_help?
-    render 'cms/views/help'
   end
 
   protected
@@ -186,7 +191,7 @@ class CMS::ApplicationController < ActionController::Base
 
     def authorize_association! key
       skip_authorization
-      allow = @context ? policy(@context) : policy(:dashboard)
+      allow = @context ? policy(@context) : policy(:worldwide)
       key = key.table_name.to_sym if key.is_a?(ActiveRecord.class)
       return if allow.index_association?(key)
 
