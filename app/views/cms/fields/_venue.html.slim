@@ -5,12 +5,12 @@
   = f.label :address
   .fields
     .sixteen.wide.field
-      = f.input :name, label: false, placeholder: translate_attribute(Venue, :name)
+      = f.input_field :name, placeholder: translate_attribute(Venue, :name)
   .fields
     .eleven.wide.field
-      = f.input :street, label: false, placeholder: translate_attribute(Venue, :street)
+      = f.input_field :street, placeholder: translate_attribute(Venue, :street)
     .five.wide.field
-      = f.input :city, label: false, placeholder: translate_attribute(Venue, :city)
+      = f.input_field :city, placeholder: translate_attribute(Venue, :city)
   .fields
     .six.wide.field
       - if f.object.province.present?
@@ -27,7 +27,7 @@
         - api_url = cms_manager_countries_url(current_user, area: @context.is_a?(LocalArea), format: :json)
         = f.input_field :country_code, collection: [f.object.country_name], data: { url: api_url, prompt: translate_attribute(Venue, :country_code) }, class: 'ajax search'
     .three.wide.field
-      = f.input :postcode, label: false, placeholder: translate_attribute(Venue, :postcode)
+      = f.input_field :postcode, placeholder: translate_attribute(Venue, :postcode)
 
 #venue-map data-editable='true'
 .ui.map.message class="#{'hidden' if f.object.coordinates?}"
@@ -44,22 +44,21 @@ button.lookup.ui.fluid.button type='button'
   i.search.icon
   = translate('cms.hints.venue.find_marker')
 
-- has_location_error = f.object.errors.include?(:latitude) || f.object.errors.include?(:longitude)
-.ui.accordion
-  .title class=('active' if has_location_error)
-    i.dropdown.icon
-    = translate('cms.hints.venue.manual_location')
-  .content class=('active' if has_location_error)
-    .required.field
-      = f.hint translate('cms.hints.venue.location')
-      = f.label :coordinates, required: true
-      - if current_user.administrator?
-        .three.fields
-          .field = f.input :latitude, label: false, placeholder: translate_attribute(Venue, :latitude)
-          .field = f.input :longitude, label: false, placeholder: translate_attribute(Venue, :longitude)
-          .field = f.input :place_id, label: false, placeholder: translate_attribute(Venue, :place_id)
-      - else
-        .two.fields
-          .field = f.input :latitude, label: false, placeholder: translate_attribute(Venue, :latitude)
-          .field = f.input :longitude, label: false, placeholder: translate_attribute(Venue, :longitude)
-          = f.hidden_field :place_id, placeholder: translate_attribute(Venue, :place_id)
+.required.field id='venue_location' style='display: none'
+  = f.label translate('cms.hints.venue.manual_location'), required: true
+  = f.hint translate('cms.hints.venue.location')
+  - if current_user.administrator?
+    .three.fields
+      .field = f.input_field :latitude, placeholder: translate_attribute(Venue, :latitude)
+      .field = f.input_field :longitude, placeholder: translate_attribute(Venue, :longitude)
+      .field = f.input_field :place_id, placeholder: translate_attribute(Venue, :place_id)
+  - else
+    .two.fields
+      .field = f.input_field :latitude, placeholder: translate_attribute(Venue, :latitude)
+      .field = f.input_field :longitude, placeholder: translate_attribute(Venue, :longitude)
+      = f.hidden_field :place_id, placeholder: translate_attribute(Venue, :place_id)
+
+- if f.object.errors.include?(:latitude)
+  = f.error :latitude
+- elsif f.object.errors.include?(:longitude)
+  = f.error :longitude

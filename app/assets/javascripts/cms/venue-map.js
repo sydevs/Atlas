@@ -96,6 +96,7 @@ const VenueMap = {
         VenueMap.messages.addClass('hidden')
         VenueMap.messages.filter('.for-failure').removeClass('hidden')
         $button.removeClass('loading')
+        $('#venue_location').show()
       },
     })
   },

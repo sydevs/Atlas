@@ -82,7 +82,7 @@ en:
         registration_url: "The registration URL will be set automatically if the mode is set \"%{native}.\""
       venue:
         manual_location: "Set location manually"
-        location: "Press \"Find Location\" to automatically detect the location (the uses the address that you have given above). If that button fails, you can enter the location manually here."
+        location: "If the location cannot be set automatically by pressing \"Find Location\", you can enter the details manually below."
         find_marker: "Find Location"
         marker_not_set:
           title: "Map marker has not been set"
