@@ -17,6 +17,7 @@ const RegionMap = {
     })
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(RegionMap.instance)
+    $map.css('min-height', '360px').css('opacity', '1')
 
     if (RegionMap.data.editable == 'true') {
       RegionMap.initEditableMap()
@@ -24,7 +25,6 @@ const RegionMap = {
       RegionMap.initPreviewMap()
     }
 
-    $map.css('min-height', '360px').css('opacity', '1')
     RegionMap.instance.invalidateSize()
   },
 
@@ -34,6 +34,9 @@ const RegionMap = {
 
   initPreviewMap() {
     const data = RegionMap.data
+    RegionMap.instance.invalidateSize()
+    RegionMap.disableInteractions()
+
     if (data.country) {
       RegionMap.loadCountryVectors()
       RegionMap.instance.setView([40, 0], 1.25)
@@ -42,12 +45,9 @@ const RegionMap = {
       RegionMap.instance.setView([40, 0], 1.25)
     } else {
       RegionMap.setCircle(data.latitude, data.longitude, data.radius)
-      const bounds = L.latLng(data.latitude, data.longitude).toBounds(data.radius)
+      const bounds = L.latLng(data.latitude, data.longitude).toBounds(parseInt(data.radius) * 2000)
       RegionMap.instance.fitBounds(bounds)
     }
-
-    RegionMap.instance.invalidateSize()
-    RegionMap.disableInteractions()
   },
 
   setCircle(latitude, longitude, radius) {
