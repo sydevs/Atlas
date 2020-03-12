@@ -104,28 +104,6 @@ class Manager < ApplicationRecord
       provinces
     end
   end
-  
-  def accessible_local_areas
-    if administrator?
-      LocalArea.default_scoped
-    else
-      local_areas_via_country = LocalArea.where(country_code: countries.select(:country_code))
-      local_areas_via_province = LocalArea.where(province_code: provinces.select(:province_code))
-      LocalArea.where(id: local_areas).or(local_areas_via_country).or(local_areas_via_province)
-    end
-  end
-  
-  def accessible_venues
-    if administrator?
-      Venue.default_scoped
-    else
-      venues_via_countries = Venue.where(country_code: countries.select(:country_code))
-      venues_via_provinces = Venue.where(province_code: provinces.select(:province_code))
-      #venues_via_local_areas = Venue.where(province_code: local_area_venues.select(:province_code))
-      venues_via_events = Venue.where(id: events.select(:venue_id))
-      Venue.where(venues_via_countries).or(venues_via_provinces).or(venues_via_events)#.or(local_area_venues)
-    end
-  end
 
   def accessible_events
     if administrator?
@@ -135,22 +113,6 @@ class Manager < ApplicationRecord
       events_via_provinces = Event.joins(:venue).where(venues: { province_code: provinces.select(:province_code) })
       #events_via_local_areas = Venue.where(province_code: local_area_venues.select(:province_code))
       Event.joins(:venue).where(id: events).or(events_via_countries).or(events_via_provinces)#.or(events_via_local_areas)
-    end
-  end
-
-  def accessible_registrations
-    if administrator?
-      Registration.default_scoped
-    else
-      Registration.where(event_id: accessible_events)
-    end
-  end
-
-  def accessible_managers
-    if administrator?
-      Manager.all
-    else
-      Manager.none
     end
   end
 

@@ -124,9 +124,8 @@ class CMS::ApplicationController < ActionController::Base
       @provinces = @context.provinces if @context.respond_to?(:provinces)
       @local_areas = @context.local_areas if @context.respond_to?(:local_areas)
     else
-      @countries = current_user.accessible_countries
-      @provinces = current_user.accessible_provinces unless @countries.exists?
-      @local_areas = current_user.accessible_local_areas.international
+      @countries = Country.default_scoped
+      @local_areas = LocalArea.international
     end
 
     render 'cms/views/regions'
