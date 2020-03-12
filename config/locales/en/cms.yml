@@ -80,9 +80,9 @@ en:
         disable_notifications: "If selected, managers for this event will not receive emails about who has registered for the event."
         registration_mode: "Where should seekers go to register for the event? We strongly recommend that you leave this as '%{native},' because having seekers register on this website, will let us send them reminder and follow-up emails."
         registration_url: "The registration URL will be set automatically if the mode is set \"%{native}.\""
-
       venue:
-        location: "Press \"Find Location\" to automatically fill in these fields, using the address that you have filled in above."
+        manual_location: "Set location manually"
+        location: "Press \"Find Location\" to automatically detect the location (the uses the address that you have given above). If that button fails, you can enter the location manually here."
         find_marker: "Find Location"
         marker_not_set:
           title: "Map marker has not been set"

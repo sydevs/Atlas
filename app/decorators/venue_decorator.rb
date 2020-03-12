@@ -20,11 +20,11 @@ module VenueDecorator
   end
 
   def province_name
-    ProvinceDecorator.get_name(province_code, country_code)
+    ProvinceDecorator.get_name(province_code, country_code) if province_code && country_code
   end
 
   def country_name
-    CountryDecorator.get_label(country_code)
+    CountryDecorator.get_label(country_code) if country_code
   end
 
   def distance(coordinates)
