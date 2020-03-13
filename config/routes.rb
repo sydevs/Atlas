@@ -43,6 +43,7 @@ Rails.application.routes.draw do
     end
 
     resources :local_areas, except: %i[index] do
+      get :autocomplete, on: :collection
       resources :managers, only: %i[index new create destroy]
       resources :venues, only: %i[index new create]
       resources :events, only: %i[index]
@@ -51,6 +52,7 @@ Rails.application.routes.draw do
 
     resources :venues do
       get :geocode, on: :collection
+      get :autocomplete, on: :collection
       resources :managers, only: %i[index new create destroy]
       resources :events, only: %i[index new create]
       resources :audits, only: %i[index]

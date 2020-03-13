@@ -6,4 +6,8 @@ class LocalAreaPolicy < RegionPolicy
     %i[managers venues].include?(association) && super
   end
 
+  def autocomplete?
+    manage?
+  end
+
 end

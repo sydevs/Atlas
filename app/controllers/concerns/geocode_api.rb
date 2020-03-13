@@ -13,11 +13,7 @@ module GeocodeAPI
     })
 
     url = "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?#{parameters.to_query}"
-    response = HTTParty.get(url, {
-      headers: { 'Content-Type': 'application/json' },
-      log_level: :debug,
-    })
-    puts response.pretty_inspect
+    response = HTTParty.get(url, { headers: { 'Content-Type': 'application/json' }, log_level: :debug })
 
     if response['candidates'].length > 0
       candidate = response['candidates'][0]

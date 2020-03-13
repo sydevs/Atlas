@@ -36,6 +36,30 @@ class CMS::VenuesController < CMS::ApplicationController
     end
   end
 
+  # Unfortunately this doesn't return consistent address results, so this method is not currently used.
+  def autocomplete
+    authorize LocalArea
+    data = {
+      language: I18n.locale,
+      sessiontoken: session.id,
+    }
+
+    if params[:place_id].present?
+      data[:placeid] = params[:place_id]
+      result = AutocompleteAPI.fetch_address(data)
+    else
+      data[:components] = "country:#{params[:country]}" if params[:country].present?
+      data[:input] = params[:query]
+      result = AutocompleteAPI.predict(data)
+    end
+
+    if result
+      render json: result
+    else
+      render json: {}, status: 404
+    end
+  end
+
   private
 
     def parameters

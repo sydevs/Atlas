@@ -1,5 +1,12 @@
 
 .field
+  .ui.area.search data-key=ENV.fetch('GOOGLE_PLACES_API_KEY') data-locale=I18n.locale data-country=f.object.country_code
+    .ui.left.icon.input
+      input.prompt type='text' placeholder=translate('cms.hints.geosearch.prompt')
+      i.search.icon
+  .hint = translate('cms.hints.geosearch.description')
+
+.field
   = f.label :coordinates, required: true
   .hint = translate('cms.hints.local_area.location')
   .two.fields

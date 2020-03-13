@@ -67,6 +67,9 @@ en:
     hints:
       unspecified: "Unspecified"
       never: "Never"
+      geosearch:
+        prompt: "Search for location"
+        description: "You can use this search to automatically fill the fields below. It uses the Google API. If Google is blocked in your country, or if the search fails, you will need to enter the data manually."
       country:
         must_be_new: "Only countries which haven't already been added are listed below."
         province_management: "If enabled, you will be able to view and assign managers to regions (provinces, states, etc) within this country. This is useful for larger countries (China, USA, Australia, etc), and unnessecary for small countries (Belgium, Lithuania, Singapore, etc)."

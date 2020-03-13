@@ -1,4 +1,5 @@
 class CMS::LocalAreasController < CMS::ApplicationController
+  include AutocompleteAPI
 
   prepend_before_action { @model = LocalArea }
 
@@ -8,6 +9,29 @@ class CMS::LocalAreasController < CMS::ApplicationController
 
   def update
     super parameters
+  end
+
+  def autocomplete
+    authorize LocalArea
+    data = {
+      language: I18n.locale,
+      sessiontoken: session.id,
+    }
+
+    if params[:place_id].present?
+      data[:placeid] = params[:place_id]
+      result = AutocompleteAPI.fetch_area(data)
+    else
+      data[:components] = "country:#{params[:country]}" if params[:country].present?
+      data[:input] = params[:query]
+      result = AutocompleteAPI.predict(data)
+    end
+
+    if result
+      render json: result
+    else
+      render json: {}, status: 404
+    end
   end
 
   private
