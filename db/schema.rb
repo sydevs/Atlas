@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_10_142038) do
+ActiveRecord::Schema.define(version: 2020_03_13_163044) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -83,7 +83,6 @@ ActiveRecord::Schema.define(version: 2020_03_10_142038) do
   create_table "local_areas", force: :cascade do |t|
     t.string "country_code"
     t.string "name"
-    t.string "identifier"
     t.float "latitude"
     t.float "longitude"
     t.float "radius"

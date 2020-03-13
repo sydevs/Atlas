@@ -75,7 +75,6 @@ en:
         prompt: "Province / State / County"
       local_area:
         location: "A custom area is defined using coordinates on the map (latitude and longitude) and a radius, to make a circular region."
-        identifier: "This identifier is used to filter the map to only show events in this area. Keep it short, lowercase, and with no spaces."
       event:
         name: "If you want to override the name of the event, you can do so here."
         room: "Which room in the building is the event in?"

@@ -83,6 +83,7 @@ en:
         name: "Name"
         published: "Published"
         email: "Email Address"
+        identifier: "Filter Identifier"
 
       # Regions
       country:
@@ -100,7 +101,6 @@ en:
         name: :activerecord.attributes.generic.name # Do not translate
         country_code: :activerecord.models.country.single # Do not translate
         province_code: :activerecord.models.province.single # Do not translate
-        identifier: "Identifier"
         coordinates: "Location"
         latitude: "Latitude"
         longitude: "Longitude"

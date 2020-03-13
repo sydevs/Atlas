@@ -8,7 +8,6 @@
   = f.input :radius, label: false, placeholder: translate_attribute(LocalArea, :radius)
 
 = f.input :name
-= f.input :identifier, hint: translate('cms.hints.local_area.identifier')
 
 - if @record.latitude && @record.longitude && @record.radius
   #local_area-map data-latitude=@record.latitude data-longitude=@record.longitude data-radius=@record.radius
