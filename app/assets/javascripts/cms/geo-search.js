@@ -4,7 +4,7 @@
 const GeoSearch = {
   load: function() {
     this.$search = $('.ui.area.search')
-    if (this.$search.length > 1) {
+    if (this.$search.length > 0) {
       this.mode = 'area'
       this.loadAreaSearch()
       return
@@ -13,7 +13,7 @@ const GeoSearch = {
     // Unfortunately this doesn't return consistent results, and so is currently disabled
     /*
     this.$search = $('.ui.venue.search')
-    if (this.$search.length > 1) {
+    if (this.$search.length > 0) {
       this.mode = 'venue'
       this.loadVenueSearch()
       return

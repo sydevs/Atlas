@@ -43,7 +43,7 @@ en:
       regions:
         countries: "Countries"
         regions: "Regions"
-        cities: "Cities"
+        cities: "Cities / Regions"
       breadcrumbs:
         show: "World"
         help: "Help"
