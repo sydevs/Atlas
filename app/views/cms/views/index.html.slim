@@ -14,7 +14,11 @@
       - elsif allow_new
         = floating_action create_action_text, 'plus', url_for([:new, :cms, @context, @model_name.singular_route_key])
 
-    .content = translate_model(@model, :plural)
+    .content
+      - if controller_name == 'managers' && @context.try(:parent_managers)&.present?
+        = translate('cms.details.managers_for_record', resource: @context.label)
+      - else
+        = translate_model(@model, :plural)
 
   - if @records.present? || params[:q]
     = simple_form_for url_for([:cms, @model]), html: { method: 'GET', data: { remote: 'true' }, autocomplete: 'off' }
