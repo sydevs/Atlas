@@ -18,6 +18,7 @@ class History {
       path += `?q=${state.query}`
       if (state.latitude) path += `&latitude=${state.latitude}`
       if (state.longitude) path += `&longitude=${state.longitude}`
+      if (state.zoom) path += `&zoom=${state.zoom}`
       if (state.type) path += `&type=${state.type}`
     }
 

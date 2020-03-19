@@ -5,7 +5,7 @@
 = f.input :published
 
 = f.input :venue do
-  .hint = [@record.venue.name, @record.venue.full_address].compact.join(', ')
+  .hint = [@record.venue.name, @record.venue.address_text].compact.join(', ')
 
 .ui.small.dividing.violet.header Event Details
 

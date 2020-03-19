@@ -20,6 +20,17 @@
     margin-left: 0
 
 // ===== MARKERS ===== //
+.mapboxgl-marker
+  $zoom: 0.91
+  width: 34.5px * $zoom
+  height: 38px * $zoom
+  margin-top: 4px
+  background: image-url('map/selected-marker.svg')
+  background-repeat: no-repeat
+  background-position: bottom center
+
+  
+// ===== OLD MARKERS ===== //
 @mixin marker-colour($inner, $outer)
   background-color: transparentize($outer, 0.3)
 

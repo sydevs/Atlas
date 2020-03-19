@@ -5,7 +5,8 @@ module EventDecorator
       name
     elsif category && venue&.name
       category_label = I18n.translate(category, scope: %i[map categories label])
-      I18n.translate('map.listing.event_name', category: category_label, venue: venue.label)
+      venue_label = venue.extend(VenueDecorator).label
+      I18n.translate('map.listing.event_name', category: category_label, venue: venue_label)
     else
       category_name
     end
@@ -17,6 +18,10 @@ module EventDecorator
 
   def address
     { room: room }.merge(venue.address)
+  end
+
+  def address_text
+    @address_text ||= [room, venue.street, venue.city, venue.province_name, venue.country_code].compact.join(', ')
   end
 
   def category_name
@@ -114,6 +119,44 @@ module EventDecorator
 
   def expires_in_days_in_words
     distance_of_time_in_words(Time.now, expires_at)
+  end
+
+  def registration_label
+    I18n.translate('map.registration.action', service: translate_enum_value(self, :registration_mode))
+  end
+  
+  def language_name
+    I18nData.languages(I18n.locale)[language].split(/[,;]/)[0]
+  end
+
+  def to_h
+    {
+      id: id,
+      label: label,
+      path: Rails.application.routes.url_helpers.map_event_path(self),
+      description: description,
+      address: address_text,
+      timing: {
+        dates: recurrence_in_words,
+        times: formatted_start_end_time,
+        upcoming: upcoming_dates.map(&:to_s)
+      },
+      language: {
+        code: language,
+        name: language_name,
+      },
+      images: pictures.map { |picture|
+        {
+          url: picture.file.url,
+          thumbnail_url: picture.file.url(:thumbnail),
+        }
+      },
+      registration: {
+        mode: registration_mode,
+        label: registration_label,
+        url: registration_url,
+      },
+    }
   end
 
   private

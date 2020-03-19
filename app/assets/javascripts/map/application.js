@@ -1,4 +1,4 @@
-/* global AtlasAPI, WorldMap, Navbar, ListPanel, InfoPanel, ImageGallery, TimingCarousel, SharingModal */
+/* global AtlasAPI, MapView, Navbar, ListPanel, InfoPanel, ImageGallery, TimingCarousel, SharingModal */
 
 class ApplicationInstance {
 
@@ -6,7 +6,6 @@ class ApplicationInstance {
     this.container = document.getElementById('map')
 
     this.mode = null
-    this.map = new WorldMap(this.container)
     this.listPanel = new ListPanel(document.getElementById('js-list-panel'))
     this.infoPanel = new InfoPanel(document.getElementById('js-info-panel'))
     this.navbar = new Navbar(document.getElementById('js-navbar'))
@@ -15,17 +14,7 @@ class ApplicationInstance {
     this.share = new SharingModal(document.getElementById('js-share'))
     this.atlas = new AtlasAPI(this.container.dataset.api)
     this.history = new History()
-
-    this.defaultZoom = {
-      region: 6,
-      district: 7,
-      place: 8,
-      default: 10,
-    }
-
-    if (this.container.dataset.restricted == 'true') {
-      this.map.lockBounds()
-    }
+    this.map = new MapView(this.container, () => this.loadState())
 
     // Workaround for an iOS bug that causes grey blocks when you focus an input
     const inputs = document.querySelectorAll('input, textarea')
@@ -47,63 +36,56 @@ class ApplicationInstance {
     this.setState(state)
   }
 
-  setState(state, recordHistory = true, disableZoom = false) {
-    this.state = state
-
-    if (state.venues) {
-      // Load venues
-      this.listPanel.setVenues(state.venues)
-      this.map.setVenueMarkers(state.venues)
+  showVenues(venues) {
+    if (venues.length) {
+      this.listPanel.showVenues(venues)
+    } else {
+      this.listPanel.showLoading()
+      this.atlas.getClosest(this.map.getCenter(), response => this.listPanel.showNoResults(response))
     }
+  }
+
+  setState(state, recordHistory = true) {
+    this.state = state
     
-    if (state.query) {
-      this.navbar.setText(state.query)
+    if (state.query || state.label) {
+      this.navbar.setText(state.query || state.label)
     }
 
     if (state.event) {
       // Show event
       this._setMode('event')
       this.infoPanel.show(state.event)
-      this.map.selectMarker(state.event.venue_id)
-      if (!disableZoom) this.map.zoomToVenue(state.event)
+      this.map.setHighlightedVenue(state.venue)
       this.setInteractive(false)
     } else if (state.venue) {
-      const venue_events = this.listPanel.getEventsForVenue(state.venue)
-      if (venue_events.length == 1) {
+      if (state.venue.events.length == 1) {
         // Show even if there is only one event for this venue
-        return this.setState({ event: venue_events[0] })
+        return this.setState({ event: state.venue.events[0], venue: state.venue })
       }
 
       // Show venue
       this._setMode('venue')
       this.navbar.setVenue(state.venue)
-      this.listPanel.filterByVenue(state.venue)
-      this.map.selectMarker(state.venue.id)
-      this.map.invalidateViewportDimensions()
-      if (!disableZoom) this.map.zoomToVenue(state.venue)
+      this.showVenues([state.venue])
+      this.map.setHighlightedVenue(state.venue)
       this.setInteractive(false)
-    } else if (state.venues) {
-      // Show list of venues
+    } else {
       this._setMode('list')
-      this.navbar.setActive(false)
-      this.map.scaleToMax()
-      this.listPanel.resetFilter()
-      this.map.selectMarker(null)
-      this.map.invalidateViewportDimensions()
-      if (!disableZoom) this.map.fitToMarkers()
-      this.setInteractive(true)
-    } else if (state.alternatives) {
-      // Show empty results with alternatives
-      this._setMode('list')
-      this.listPanel.showEmptyResults(state.alternatives[0])
-      if (state.type) {
-        this.map.zoomTo(state.latitude, state.longitude, this.defaultZoom[state.type] || this.defaultZoom.default)
+      this.map.setHighlightedVenue(null)
+
+      if (state.west && state.east && state.north && state.south) {
+        this.listPanel.clearEmptyResults()
+        this.map.fitTo(state)
+        this.state.zoom = this.map.mapbox.getZoom()
+      } else if (state.latitude && state.longitude) {
+        this.listPanel.clearEmptyResults()
+        this.map.flyTo(state, 10)
+      } else {
+        this.map.zoomOut()
       }
 
-      this.map.setVenueMarkers([])
-    } else {
-      console.error('Tried to set invalid state', state) // eslint-disable-line no-console
-      return false
+      this.setInteractive(true)
     }
 
     if (recordHistory) {
@@ -118,35 +100,6 @@ class ApplicationInstance {
     this.map.setInteractive(interactive)
   }
 
-  loadEvents(query, disableZoom = false) {
-    this.atlas.query(query, response => {
-      if (response.status == 'empty') {
-        this.setState({
-          message: response.results.message,
-          latitude: query.latitude,
-          longitude: query.longitude,
-          type: query.type,
-          alternatives: response.results.alternatives,
-        }, true)
-      } else {
-        this.setState({
-          query: query.query,
-          latitude: query.latitude,
-          longitude: query.longitude,
-          type: query.type,
-          venues: response.results,
-        }, true, disableZoom)
-      }
-
-      if (['postcode', 'address'].includes(query.type)) {
-        this.map.setTargetMarker(query)
-      }
-
-      this.map.setRefreshDisabled(false)
-      this.map.setRefreshHidden(true)
-    })
-  }
-
   _setMode(mode) {
     if (this.mode) {
       document.body.classList.remove(`mode--${this.mode}`)
@@ -157,12 +110,10 @@ class ApplicationInstance {
     if (this.mode) {
       document.body.classList.add(`mode--${this.mode}`)
       document.body.scrollTop = 0
-      this.map.leaflet.invalidateSize()
     }
   }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
   window.Application = new ApplicationInstance()
-  window.Application.loadState()
 })

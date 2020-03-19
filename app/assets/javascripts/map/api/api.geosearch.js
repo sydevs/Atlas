@@ -46,13 +46,13 @@ class GeoSearchAPI {
     for (let i = 0; i < data.length; i++) {
       const dat = data[i]
       let result = {
-        query: dat.place_name,
+        label: dat.place_name,
         latitude: dat.center[1],
         longitude: dat.center[0],
         type: dat.place_type[0],
       }
 
-      if (['country', 'region', 'district'].includes(result.type)) {
+      if (['country', 'region', 'district', 'place'].includes(result.type)) {
         result.west = dat.bbox[0]
         result.south = dat.bbox[1]
         result.east = dat.bbox[2]

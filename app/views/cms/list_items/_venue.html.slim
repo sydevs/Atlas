@@ -6,4 +6,4 @@
       a.header href=url_for([:cms, venue]) = venue.label
     - else
       .header = venue.label
-    .description #{venue.full_address} - #{translate_model_count(venue.events)}
+    .description #{venue.address_text} - #{translate_model_count(venue.events)}

@@ -3,26 +3,27 @@
 
 class ListItem {
 
-  constructor(element, event) {
+  constructor(element, event, venue) {
     this.container = element
     this.event = event
-    element.querySelector('[data-attribute="name"]').textContent = event.name || event.label
-    element.querySelector('[data-attribute="address"]').textContent = event.address_text || ''
-    element.querySelector('[data-attribute="distance"]').textContent = event.distance_text || ''
-    element.querySelector('[data-attribute="distance"]').style = (event.distance_text ? '' : 'display: none')
-    element.querySelector('[data-attribute="day"]').textContent = event.recurrence_in_words || ''
-    element.querySelector('[data-attribute="time"]').textContent = event.formatted_start_end_time || ''
+    this.venue = venue
+    element.querySelector('[data-attribute="name"]').textContent = event.label
+    element.querySelector('[data-attribute="address"]').textContent = event.address
+    element.querySelector('[data-attribute="distance"]').textContent = event.distance
+    element.querySelector('[data-attribute="distance"]').style = (event.distance ? '' : 'display: none')
+    element.querySelector('[data-attribute="day"]').textContent = event.timing.dates
+    element.querySelector('[data-attribute="time"]').textContent = event.timing.times
     element.addEventListener('click', () => this.open())
 
-    if (event.language_code && document.documentElement.lang.toUpperCase() != event.language_code) {
-      element.querySelector('[data-attribute="language"]').textContent = event.language_code
+    if (event.language.code && document.documentElement.lang.toUpperCase() != event.language.code) {
+      element.querySelector('[data-attribute="language"]').textContent = event.language.code
     } else {
       element.querySelector('[data-attribute="language"]').remove()
     }
   }
 
   open() {
-    Application.setState({ event: this.event })
+    Application.setState({ event: this.event, venue: this.venue })
   }
 
   setHidden(hidden) {

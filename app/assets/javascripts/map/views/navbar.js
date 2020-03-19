@@ -42,8 +42,8 @@ class Navbar {
     this.enableGeoSearch = true
 
     if (location) {
-      this.searchInput.placeholder = location.query
-      Application.loadEvents(location)
+      this.searchInput.placeholder = location.label
+      Application.setState(location)
     } else {
       this.searchInput.placeholder = this.searchPlaceholder
     }
@@ -66,16 +66,15 @@ class Navbar {
 
     this.container.classList.add('navbar--loading')
 
-    const viewportBounds = Application.map.getViewportBounds()
-    const center = [viewportBounds.latitude, viewportBounds.longitude]
-    this.geoSearch.query(searchText, center, results => {
+    const center = Application.map.getCenter()
+    this.geoSearch.query(searchText, [center.longitude, center.latitude], results => {
       this.searchResults.innerHTML = null
 
       results.forEach(result => {
         const element = document.createElement('LI')
         element.tabIndex = '0'
         element.dataset.parameters = JSON.stringify(result)
-        element.innerText = result.query
+        element.innerText = result.label
         this.searchResults.appendChild(element)
         this.setActive(true)
       })
@@ -139,7 +138,9 @@ class Navbar {
       this.focusedItem = this.searchResults.lastElementChild
     }
 
-    this.focusedItem.classList.add('focus')
+    if (this.searchResults.childElementCount > 0) {
+      this.focusedItem.classList.add('focus')
+    }
   }
 
   moveFocusDown() {
@@ -152,7 +153,9 @@ class Navbar {
       this.focusedItem = this.searchResults.firstElementChild
     }
 
-    this.focusedItem.classList.add('focus')
+    if (this.searchResults.childElementCount > 0) {
+      this.focusedItem.classList.add('focus')
+    }
   }
 
 }

@@ -4,7 +4,7 @@ json.extract! event, :id, :label
 json.description event.description || ''
 
 if event.venue.present?
-  json.address_text [event.room, event.venue.name, event.venue.full_address].compact.join(', ')
+  json.address_text [event.room, event.venue.name, event.venue.address_text].compact.join(', ')
 
   if verbose
     json.address do
@@ -25,7 +25,7 @@ if event.venue.present?
     end
 
     if event.venue.place_id?
-      json.directions_url "https://www.google.com/maps/search/?api=1&query=#{event.venue.full_address}>&query_place_id=#{event.venue.place_id}"
+      json.directions_url "https://www.google.com/maps/search/?api=1&query=#{event.venue.address_text}>&query_place_id=#{event.venue.place_id}"
     else
       json.directions_url "http://www.google.com/maps/place/#{event.venue.latitude},#{event.venue.longitude}"
     end

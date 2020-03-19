@@ -1,7 +1,7 @@
 json.url api_venue_url(venue, format: :json)
 json.map_url map_venue_url(venue)
 json.extract! venue, :id, :label, :latitude, :longitude
-json.address_text venue.full_address
+json.address_text venue.address_text
 json.address do
   json.building venue.name
   json.extract! venue, :street, :city, :province_code, :province_name, :country_code, :country_name, :postcode
@@ -22,7 +22,7 @@ if venue.latitude? && venue.latitude?
   end
 
   if venue.place_id?
-    json.directions_url "https://www.google.com/maps/search/?api=1&query=#{venue.full_address}>&query_place_id=#{venue.place_id}"
+    json.directions_url "https://www.google.com/maps/search/?api=1&query=#{venue.address_text}>&query_place_id=#{venue.place_id}"
   else
     json.directions_url "http://www.google.com/maps/place/#{venue.latitude},#{venue.longitude}"
   end

@@ -27,6 +27,19 @@ class AtlasAPI {
     })
   }
 
+  getClosest(parameters, callback) {
+    console.log('[AtlasAPI]', 'getting closest', parameters) // eslint-disable-line no-console
+    parameters = Object.keys(parameters).map(key => {
+      return encodeURIComponent(key) + '=' + encodeURIComponent(parameters[key])
+    }).join('&')
+
+    Util.getURL(`/map/closest?${parameters}`, xhttp => {
+      const response = JSON.parse(xhttp.response)
+      console.log('[AtlasAPI]', 'received', response) // eslint-disable-line no-console
+      callback(response)
+    })
+  }
+
   register(form, callback) {
     Util.postForm('/map/registrations', form, callback)
   }

@@ -1,9 +1,13 @@
 
-ruby:
+/ruby:
   venues = render(template: 'api/views/index.json')
   @state[:venues] = JSON.parse(venues)['results']
   @state[:venue] = JSON.parse(render('api/records/venue.json', venue: @venue, verbose: true)) if @venue
   @state[:event] = JSON.parse(render('api/records/event.json', event: @event, verbose: true)) if @event
+
+ruby:
+  @state[:venue] = @venue&.to_h
+  @state[:event] = @event&.to_h
 
 // ===== SEARCH BOX ===== //
 .navbar id='js-navbar' data-key=ENV['MAPBOX_ACCESSTOKEN'] data-country=params[:country]

@@ -29,21 +29,15 @@ class SharingModal {
     this.linkInput.select()
     document.execCommand('copy')
   }
-  
-  triggerMobileShare(event) {
-    navigator.share({
-      title: event.label,
-      text: event.description,
-      url: event.map_url,
-    })
-  }
 
   _shareNative(event) {
+    const url = `${window.origin}${event.path}`
+
     return new Promise(async (resolve) => {
       await navigator.share({
         title: event.label,
         text: event.description,
-        url: event.map_url,
+        url: url,
       })
   
       resolve()
@@ -51,15 +45,16 @@ class SharingModal {
   }
 
   _shareFallback(event) {
+    const url = `${window.origin}${event.path}`
     this.event = event
-    this.linkInput.value = event.map_url
+    this.linkInput.value = url
     this.container.classList.add('noscroll')
     this.container.classList.add('share-wrapper--active')
 
     for (let i = 0; i < this.sharingButtons.length; i++) {
       const button = this.sharingButtons[i]
       let href = button.dataset.template
-      href = href.replace('{url}', encodeURIComponent(event.map_url))
+      href = href.replace('{url}', encodeURIComponent(url))
       href = href.replace('{title}', encodeURIComponent(event.label))
       href = href.replace('{text}', encodeURIComponent(event.description))
       href = href.replace('{provider}', encodeURIComponent(window.location.hostname))

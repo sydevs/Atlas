@@ -24,12 +24,29 @@ class Map::ApplicationController < ActionController::Base
     @state = {
       query: params[:q],
       type: params[:type],
-      latitude: params[:latitude],
-      longitude: params[:longitude],
+      latitude: params[:latitude] || @venue&.latitude,
+      longitude: params[:longitude] || @venue&.longitude,
     }
+
+    @state[:zoom] = 16 if @state[:latitude] && @state[:longitude]
 
     set_jbuilder_params!
     render 'map/show'
+  end
+
+  def closest
+    params.require(%i[latitude longitude])
+    coordinates = [params[:latitude], params[:longitude]]
+    query = Venue.published.by_distance(origin: coordinates)
+    venue = query.select('id, city, country_code, latitude, longitude').limit(1).first
+
+    render json: {
+      id: venue.id,
+      label: "#{venue.city}, #{venue.country_code}",
+      latitude: venue.latitude,
+      longitude: venue.longitude,
+      distance: venue.distance_from(coordinates),
+    }
   end
 
   def privacy

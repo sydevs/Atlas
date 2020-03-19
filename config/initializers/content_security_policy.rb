@@ -7,12 +7,15 @@
 Rails.application.config.content_security_policy do |policy|
   policy.default_src :self, :https
   policy.font_src    :self, :https, :data
-  policy.img_src     :self, 'storage.googleapis.com', 'i3.ytimg.com', :https, :data
+  policy.img_src     :self, 'storage.googleapis.com', 'i3.ytimg.com', :https, :data, :blob
   policy.object_src  :none
   policy.script_src  :self, :unsafe_eval, :unsafe_inline, :https
   policy.style_src   :self, :unsafe_inline, :https
   policy.frame_src   'www.youtube.com'
   policy.frame_ancestors nil
+  policy.worker_src  :blob
+  policy.child_src   :blob
+  policy.connect_src :self, '*.tiles.mapbox.com', 'api.mapbox.com', 'events.mapbox.com', 'upload.wikimedia.org'
 
   # Specify URI for violation reports
   # policy.report_uri "/csp-violation-report-endpoint"

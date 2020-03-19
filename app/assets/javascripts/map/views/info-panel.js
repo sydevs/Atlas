@@ -20,17 +20,17 @@ class InfoPanel {
   show(event) {
     this.event = event
     this.container.querySelector('[data-attribute="name"]').textContent = event.label
-    this.container.querySelector('[data-attribute="address"]').textContent = event.address_text || ''
+    this.container.querySelector('[data-attribute="address"]').textContent = event.address
     this.container.querySelector('[data-attribute="directions"]').href = event.directions_url
-    this.container.querySelector('[data-attribute="day"]').textContent = event.recurrence_in_words
-    this.container.querySelector('[data-attribute="time"]').textContent = event.formatted_start_end_time
-    this.container.querySelector('[data-attribute="description"]').innerHTML = Util.simpleFormat(event.description || event.category.description || '')
-    this.form.classList.toggle('registration--confirmed', Boolean(event.registered))
+    this.container.querySelector('[data-attribute="day"]').textContent = event.timing.dates
+    this.container.querySelector('[data-attribute="time"]').textContent = event.timing.times
+    this.container.querySelector('[data-attribute="description"]').innerHTML = Util.simpleFormat(event.description || '')
+    //this.form.classList.toggle('registration--confirmed', Boolean(event.registered))
 
-    this.languageBlock.style = (Boolean(event.language) && document.documentElement.lang.toUpperCase() != event.language_code ? '' : 'display: none')
-    this.container.querySelector('[data-attribute="language"]').textContent = event.language
+    this.languageBlock.style = (Boolean(event.language.name) && document.documentElement.lang.toUpperCase() != event.language.code ? '' : 'display: none')
+    this.container.querySelector('[data-attribute="language"]').textContent = event.language.name
 
-    this.timingDescription.textContent = event.timing.description
+    this.timingDescription.textContent = event.timing.label
 
     Application.imageGallery.setImages(event.images)
 
@@ -41,7 +41,7 @@ class InfoPanel {
       linkElement.href = event.registration.url
     } else {
       this.form.classList.remove('registration--external')
-      Application.timingCarousel.setTimings(event, event.upcoming_dates)
+      Application.timingCarousel.setTimings(event, event.timing.upcoming)
       this.container.querySelector('input[name="event_id"]').value = event.id
     }
   }

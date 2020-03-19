@@ -14,6 +14,7 @@ Rails.application.routes.draw do
     get '/event/:event_id', to: 'application#show', as: :event
     get '/venue/:venue_id', to: 'application#show', as: :venue
     get :privacy, to: 'application#privacy'
+    get :closest, to: 'application#closest'
     post :registrations, to: 'registrations#create'
   end
 

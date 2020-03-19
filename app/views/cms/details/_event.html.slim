@@ -62,7 +62,7 @@ h3.ui.small.dividing.grey.header = translate('cms.details.management_for_record'
       .description = time_ago_in_words(@record.updated_at)
 
 h3.ui.small.dividing.grey.header = translate('cms.details.location_of_record', resource: translate_model(@model).downcase)
-= hidden_field_tag :venue_address, @record.venue.full_address
+= hidden_field_tag :venue_address, @record.venue.address_text
 = hidden_field_tag :venue_latitude, @record.venue.latitude
 = hidden_field_tag :venue_longitude, @record.venue.longitude
 = hidden_field_tag :venue_place_id, @record.venue.place_id
@@ -78,7 +78,7 @@ h3.ui.small.dividing.grey.header = translate('cms.details.location_of_record', r
     i.map.marked.alternate.icon
     .content
       .header = translate_attribute(Venue, :address)
-      .description = @record.full_address
+      .description = @record.address_text
 
 h3.ui.small.dividing.grey.header = translate('cms.details.registration_for_record', resource: @record.label)
 .ct-chart.ct-minor-seventh id='chart' data-plot=@registrations_data.to_json
