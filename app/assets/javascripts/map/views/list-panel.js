@@ -31,18 +31,23 @@ class ListPanel {
     this.venues = venues
     this.clearEvents()
 
-    if (venues.length) {
-      this.container.classList.remove('list--no-results')
+    if (venues.length < 1) return
 
-      for (let i = 0; i < venues.length; i++) {
-        const venue = venues[i]
-        let events = venue.events
-  
-        for (let n = 0; n < events.length; n++) {
-          const event = events[n]
-          event.venue_id = venue.id
-          this.appendEvent(event, venue)
-        }
+    this.container.classList.remove('list--no-results')
+
+    if (Application.map.location) {
+      venues.map(venue => venue.distance = Application.map.distance(venue))
+      venues.sort((a, b) => a.distance - b.distance)
+    }
+
+    for (let i = 0; i < venues.length; i++) {
+      const venue = venues[i]
+      let events = venue.events
+
+      for (let n = 0; n < events.length; n++) {
+        const event = events[n]
+        event.venue_id = venue.id
+        this.appendEvent(event, venue)
       }
     }
   }

@@ -26,6 +26,12 @@ class MapView {
     this.mapbox = new mapboxgl.Map(config)
     this.mapbox.addControl(new mapboxgl.NavigationControl({ showCompass: false }))
 
+    const geolocater = new mapboxgl.GeolocateControl()
+    this.mapbox.addControl(geolocater)
+    geolocater.on('geolocate', event => {
+      this.setLocation(event.coords, true)
+    })
+
     this.mapbox.on('load', _event => {
       onLoadCallback()
     })
@@ -66,17 +72,17 @@ class MapView {
   }
 
   setHighlightedVenue(venue) {
-    if (!this.targetMarker) {
+    if (!this.selectedMarker) {
       const icon = document.createElement('DIV')
       icon.className = 'mapboxgl-marker--selected'
-      this.targetMarker = new mapboxgl.Marker({ element: icon, offset: [0, -16] })
+      this.selectedMarker = new mapboxgl.Marker({ element: icon, offset: [0, -16] })
     }
 
     if (venue) {
-      this.targetMarker.setLngLat([venue.longitude, venue.latitude]).addTo(this.mapbox)
+      this.selectedMarker.setLngLat([venue.longitude, venue.latitude]).addTo(this.mapbox)
       this.flyTo(venue, 16)
     } else {
-      this.targetMarker.remove()
+      this.selectedMarker.remove()
     }
   }
 
@@ -91,6 +97,20 @@ class MapView {
   getCenter() {
     const center = this.mapbox.getCenter()
     return { latitude: center.lat, longitude: center.lng }
+  }
+
+  setLocation(location, disableMarker = false) {
+    this.location = location
+
+    if (!this.locationMarker) {
+      this.locationMarker = new mapboxgl.Marker()
+    }
+
+    if (disableMarker || location == null) {
+      this.locationMarker.remove()
+    } else {
+      this.locationMarker.setLngLat([location.longitude, location.latitude]).addTo(this.mapbox)
+    }
   }
 
   setInteractive(interactive) {
@@ -114,6 +134,14 @@ class MapView {
 
   _easing(t) {
     return t < 0.5 ? (8 * t * t * t * t) : (1 - 8 * (--t) * t * t * t)
+  }
+
+  distance(point) {
+    if (this.location && point) {
+      return Util.distance(this.location.latitude, this.location.longitude, point.latitude, point.longitude, 'K')
+    } else {
+      return null
+    }
   }
 
 }

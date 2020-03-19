@@ -85,6 +85,13 @@ class ApplicationInstance {
         this.map.zoomOut()
       }
 
+      if (['postcode', 'address'].includes(state.type)) {
+        this.map.setLocation({
+          latitude: state.latitude,
+          longitude: state.longitude,
+        })
+      }
+
       this.setInteractive(true)
     }
 
