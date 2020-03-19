@@ -133,6 +133,12 @@ en:
           course: "Meditation Course"
           public_event: "Stall at Public Event"
           concert: "Meditation & Music Concert"
+        category_labels:
+          intro: "Intro"
+          intermediate: "Going Deeper"
+          course: "Meditation Course"
+          public_event: "Stall"
+          concert: "Concert"
         category_descriptions:
           intro: "The first introductions to this kind of meditation."
           intermediate: "A going deeper class for those who have already attended an introductory class."

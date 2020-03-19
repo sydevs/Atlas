@@ -45,7 +45,7 @@ class TimingCarousel {
     element.querySelector('[data-attribute="datetime"]').value = datetime
     element.querySelector('[data-attribute="day"]').innerText = weekday
     element.querySelector('[data-attribute="date"]').innerText = dateString
-    element.querySelector('[data-attribute="time"]').textContent = event.timing.times
+    element.querySelector('[data-attribute="time"]').textContent = event.timing.time
     return element
   }
 

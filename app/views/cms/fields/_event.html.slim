@@ -14,7 +14,7 @@
 
 .two.fields
   = f.input :room, hint: translate('cms.hints.event.room')
-  = f.input :language, collection: languages, selected: @record.language || I18n.locale.upcase, input_html: { class: 'search' }, hint: translate('cms.hints.event.language')
+  = f.input :language, collection: languages, selected: @record.language_code || I18n.locale.upcase, input_html: { class: 'search' }, hint: translate('cms.hints.event.language')
 
 = f.input :name, placeholder: @record.category_name, hint: translate('cms.hints.event.name')
 

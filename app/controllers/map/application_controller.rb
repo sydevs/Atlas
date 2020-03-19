@@ -22,7 +22,7 @@ class Map::ApplicationController < ActionController::Base
     }
 
     @state = {
-      query: params[:q],
+      label: params[:q],
       type: params[:type],
       latitude: params[:latitude] || @venue&.latitude,
       longitude: params[:longitude] || @venue&.longitude,

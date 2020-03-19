@@ -67,4 +67,47 @@ const Util = {
 
     return str
   },
+
+  translate(key) {
+    // Copied from: https://twitter.com/sharifsbeat/status/843187365367767046
+    const dig = (p, o) => p.reduce((xs, x) => (xs && xs[x]) ? xs[x] : null, o)
+    return dig(key.split('.'), window.translations)
+  },
+
+  parseTiming(timing) {
+    if (timing.start_date == timing.end_date || (!timing.end_date && timing.recurrence == 'day')) {
+      return Util.formatDate(timing.start_date)
+    } else if (timing.recurrence == 'day') {
+      return `${Util.formatDate(timing.start_date)} - ${Util.formatDate(timing.end_date)}`
+    } else {
+      return Util.translate(`recurrence.${timing.recurrence}`)
+    }
+  },
+
+  parseEventCategoryDescription(event) {
+    if (event.category == 'course') {
+      const start_date = Date.parse(event.timing.start_date)
+      const end_date = Date.parse(event.timing.end_date)
+
+      if (start_date && end_date) {
+        const weeksBetween = Math.round((start_date - end_date) / (7 * 24 * 60 * 60 * 1000))
+        return Util.translate('timing_labels.course').replace('%{weeks}', weeksBetween)
+      } else {
+        return Util.translate('timing_labels.course_fallback')
+      }
+    } else if (event.recurrence == 'day') {
+      return ''
+    } else {
+      return Util.translate('timing_labels.ongoing')
+    }
+  },
+
+  formatDate(date) {
+    if (!Util.formatter) {
+      Util.formatter = new Intl.DateTimeFormat(undefined, { month: 'short', day: 'numeric' })
+    }
+
+    date = Date.parse(date)
+    return Util.formatter.format(date)
+  },
 }

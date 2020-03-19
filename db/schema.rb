@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_13_163044) do
+ActiveRecord::Schema.define(version: 2020_03_19_114559) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -75,7 +75,7 @@ ActiveRecord::Schema.define(version: 2020_03_13_163044) do
     t.boolean "disable_notifications", default: false, null: false
     t.integer "registration_mode", default: 0
     t.string "registration_url"
-    t.string "language", limit: 2
+    t.string "language_code", limit: 2
     t.index ["manager_id"], name: "index_events_on_manager_id"
     t.index ["venue_id"], name: "index_events_on_venue_id"
   end

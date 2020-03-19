@@ -32,9 +32,9 @@ if event.venue.present?
   end
 end
 
-if event.language
-  json.language_code event.language
-  json.language I18nData.languages(I18n.locale)[event.language].split(/[,;]/)[0]
+if event.language_code
+  json.language_code event.language_code
+  json.language event.language_name
 end
 
 json.category do

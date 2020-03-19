@@ -17,27 +17,27 @@ class InfoPanel {
     document.getElementById('js-registration-close').addEventListener('click', () => this.hideConfirmation())
   }
 
-  show(event) {
+  show(event, venue) {
     this.event = event
     this.container.querySelector('[data-attribute="name"]').textContent = event.label
     this.container.querySelector('[data-attribute="address"]').textContent = event.address
-    this.container.querySelector('[data-attribute="directions"]').href = event.directions_url
-    this.container.querySelector('[data-attribute="day"]').textContent = event.timing.dates
-    this.container.querySelector('[data-attribute="time"]').textContent = event.timing.times
+    this.container.querySelector('[data-attribute="directions"]').href = venue.directions_url
+    this.container.querySelector('[data-attribute="day"]').textContent = Util.parseTiming(event.timing)
+    this.container.querySelector('[data-attribute="time"]').textContent = event.timing.time
     this.container.querySelector('[data-attribute="description"]').innerHTML = Util.simpleFormat(event.description || '')
     //this.form.classList.toggle('registration--confirmed', Boolean(event.registered))
 
-    this.languageBlock.style = (Boolean(event.language.name) && document.documentElement.lang.toUpperCase() != event.language.code ? '' : 'display: none')
-    this.container.querySelector('[data-attribute="language"]').textContent = event.language.name
+    this.languageBlock.style = (Boolean(event.language_code) && document.documentElement.lang.toUpperCase() != event.language_code ? '' : 'display: none')
+    this.container.querySelector('[data-attribute="language"]').textContent = Util.translate(`languages.${event.language_code}`).split(/[,;]/)[0]
 
-    this.timingDescription.textContent = event.timing.label
+    this.timingDescription.textContent = Util.parseEventCategoryDescription(event)
 
     Application.imageGallery.setImages(event.images)
 
-    if (event.registration.mode != 'native' && event.registration.url) {
+    if (event.registration.mode in Util.translate('registration') && event.registration.url) {
       this.form.classList.add('registration--external')
       const linkElement = this.container.querySelector('[data-attribute="registration"]')
-      linkElement.textContent = event.registration.label
+      linkElement.textContent = Util.translate(`registration.${event.registration.mode}`)
       linkElement.href = event.registration.url
     } else {
       this.form.classList.remove('registration--external')

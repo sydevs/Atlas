@@ -48,14 +48,14 @@ class ApplicationInstance {
   setState(state, recordHistory = true) {
     this.state = state
     
-    if (state.query || state.label) {
-      this.navbar.setText(state.query || state.label)
+    if (state.label) {
+      this.navbar.setText(state.label)
     }
 
     if (state.event) {
       // Show event
       this._setMode('event')
-      this.infoPanel.show(state.event)
+      this.infoPanel.show(state.event, state.venue)
       this.map.setHighlightedVenue(state.venue)
       this.setInteractive(false)
     } else if (state.venue) {

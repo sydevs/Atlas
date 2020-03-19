@@ -1,4 +1,4 @@
-/* globals Application */
+/* globals Application, Util */
 /* exported ListItem */
 
 class ListItem {
@@ -11,12 +11,12 @@ class ListItem {
     element.querySelector('[data-attribute="address"]').textContent = event.address
     element.querySelector('[data-attribute="distance"]').textContent = event.distance
     element.querySelector('[data-attribute="distance"]').style = (event.distance ? '' : 'display: none')
-    element.querySelector('[data-attribute="day"]').textContent = event.timing.dates
-    element.querySelector('[data-attribute="time"]').textContent = event.timing.times
+    element.querySelector('[data-attribute="day"]').textContent = Util.parseTiming(event.timing)
+    element.querySelector('[data-attribute="time"]').textContent = event.timing.time
     element.addEventListener('click', () => this.open())
 
-    if (event.language.code && document.documentElement.lang.toUpperCase() != event.language.code) {
-      element.querySelector('[data-attribute="language"]').textContent = event.language.code
+    if (event.language_code && document.documentElement.lang.toUpperCase() != event.language_code) {
+      element.querySelector('[data-attribute="language"]').textContent = event.language_code
     } else {
       element.querySelector('[data-attribute="language"]').remove()
     }

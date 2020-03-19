@@ -7,5 +7,10 @@ html lang=I18n.locale
     = csrf_meta_tags
     = stylesheet_link_tag 'map', media: 'all'
     = javascript_include_tag 'map'
+
   body class=action_name
     = yield
+
+  javascript:
+    window.translations = #{translate('javascript').to_json.html_safe}
+    window.translations.languages = #{I18nData.languages(I18n.locale).to_json.html_safe}

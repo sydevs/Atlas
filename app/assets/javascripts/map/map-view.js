@@ -7,21 +7,24 @@ class MapView {
     this.container = element
     this.venuesLayer = 'original'
     const state = JSON.parse(this.container.dataset.state)
+    const config = {
+      container: 'map',
+      style: 'mapbox://styles/sydevadmin/ck7g6nag70rn11io09f45odkq',
+      minZoom: 1,
+      dragRotate: false
+    }
 
     mapboxgl.accessToken = element.dataset.token
     if (state.longitude && state.latitude) {
-      this.mapbox = new mapboxgl.Map({
-        container: 'map',
-        style: 'mapbox://styles/sydevadmin/ck7g6nag70rn11io09f45odkq',
-        center: [state.longitude, state.latitude],
-        zoom: state.zoom || null,
-      })
-    } else {
-      this.mapbox = new mapboxgl.Map({
-        container: 'map',
-        style: 'mapbox://styles/sydevadmin/ck7g6nag70rn11io09f45odkq',
-      })
+      config.center = [state.longitude, state.latitude]
     }
+
+    if (state.zoom) {
+      config.zoom = state.zoom
+    }
+
+    this.mapbox = new mapboxgl.Map(config)
+    this.mapbox.addControl(new mapboxgl.NavigationControl({ showCompass: false }))
 
     this.mapbox.on('load', _event => {
       onLoadCallback()
@@ -45,9 +48,6 @@ class MapView {
         Application.showVenues(this.getRenderedVenues())
       }
     })
-
-    document.getElementById('js-zoom-in').addEventListener('click', () => this.mapbox.zoomIn())
-    document.getElementById('js-zoom-out').addEventListener('click', () => this.mapbox.zoomOut())
   }
 
   getRenderedVenues() {
@@ -68,7 +68,8 @@ class MapView {
   setHighlightedVenue(venue) {
     if (!this.targetMarker) {
       const icon = document.createElement('DIV')
-      this.targetMarker = new mapboxgl.Marker({ element: icon, anchor: 'bottom' })
+      icon.className = 'mapboxgl-marker--selected'
+      this.targetMarker = new mapboxgl.Marker({ element: icon, offset: [0, -16] })
     }
 
     if (venue) {

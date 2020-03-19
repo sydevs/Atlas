@@ -1,12 +1,11 @@
 
 en:
   map:
-    search_area: "Search This Area"
     listing:
       search: "Search for location"
       more_info: "More Info"
       register: "Register"
-      no_results: "There are no classes in your area, the closest free meditation class is in"
+      no_results: "There are no classes in this area, the closest free meditation class is in"
       show: "Show list"
       event_name: "%{category} at %{venue}"
       filter:
@@ -18,7 +17,6 @@ en:
       directions: "Get directions"
     registration:
       header: "Register now"
-      action: "Register on %{service}"
       form:
         timing: "I’d like to start on:"
         email: "Email"
@@ -40,37 +38,22 @@ en:
       invite: "Invite a friend along"
       share: "Share"
       copied: "Copied!"
-    weekdays:
-      0: Sunday
-      1: Monday
-      2: Tuesday
-      3: Wednesday
-      4: Thursday
-      5: Friday
-      6: Saturday
-    categories:
-      title:
-        intro: "Intro Meditation Class"
-        intermediate: "Intermediate Meditation Class"
-        course: "Meditation Course"
-        public_event: "Stall at Public Event"
-        concert: "Meditation & Music Concert"
-      label:
-        intro: "Intro"
-        intermediate: "Going Deeper"
-        course: "Meditation Course"
-        public_event: "Stall"
-        concert: "Concert"
-      description:
-        intro: "The first introductions to this kind of meditation."
-        intermediate: "A going deeper class for those who have already attended an introductory class."
-        course: "A several week course that takes you through various techniques of meditation."
-        public_event: "Offering free meditation instruction at a public event."
-        concert: "A performance combining meditation and music or dance."
-      timing:
-        course_fallback: "This is a weekly course"
-        course: "%{duration} course"
-        ongoing: "This class is on-going"
-        weeks:
-          one: "1-week"
-          other: "%{count}-week"
+
+  javascript:
+    recurrence:
+      day: "Daily"
+      monday: "Mondays"
+      tuesday: "Tuesdays"
+      wednesday: "Wednesdays"
+      thursday: "Thursdays"
+      friday: "Fridays"
+      saturday: "Saturdays"
+      sunday: "Sundays"
+    timing_labels:
+      course_fallback: "This is a weekly course"
+      course: "%{weeks}-week course"
+      ongoing: "This class is on-going"
+    registration:
+      facebook: "Register on Facebook"
+      eventbrite: "Register on Eventbrite"
+      meetup: "Register on Meetup"

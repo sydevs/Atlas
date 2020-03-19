@@ -4,7 +4,7 @@ module EventDecorator
     if name.present? && !fallback_only
       name
     elsif category && venue&.name
-      category_label = I18n.translate(category, scope: %i[map categories label])
+      category_label = translate_enum_value(self, :category_label, category)
       venue_label = venue.extend(VenueDecorator).label
       I18n.translate('map.listing.event_name', category: category_label, venue: venue_label)
     else
@@ -25,11 +25,11 @@ module EventDecorator
   end
 
   def category_name
-    category ? I18n.translate(category, scope: %i[map categories title]) : ''
+    translate_enum_value(self, :category)
   end
 
   def category_description
-    category ? I18n.translate(category, scope: %i[map categories description]) : ''
+    translate_enum_value(self, :category_description, category)
   end
 
   def recurrence_in_words
@@ -54,38 +54,8 @@ module EventDecorator
     [start_time, end_time].compact.join(' - ')
   end
 
-  def timing_description
-    if category == 'course'
-      if start_date && end_date
-        weeks = start_date.step(end_date, 7).count
-        duration = I18n.translate('map.categories.timing.weeks', count: weeks)
-        I18n.translate('map.categories.timing.course', duration: duration)
-      else
-        I18n.translate('map.categories.timing.course_fallback')
-      end
-    elsif recurrence == 'day'
-      ''
-    else
-      I18n.translate('map.categories.timing.ongoing')
-    end
-  end
-
   def timing_in_words
     "#{recurrence_in_words}, #{formatted_start_end_time}"
-  end
-
-  def next_date
-    date = nil
-
-    if start_date == end_date || (end_date.nil? and recurrence == 'day')
-      date = start_date
-    elsif recurrence == 'day'
-      date = [start_date, Date.today].min
-    else
-      date = date_of_next(recurrence)
-    end
-
-    date.to_s
   end
 
   def upcoming_dates limit = 10
@@ -120,10 +90,6 @@ module EventDecorator
   def expires_in_days_in_words
     distance_of_time_in_words(Time.now, expires_at)
   end
-
-  def registration_label
-    I18n.translate('map.registration.action', service: translate_enum_value(self, :registration_mode))
-  end
   
   def language_name
     I18nData.languages(I18n.locale)[language].split(/[,;]/)[0]
@@ -136,15 +102,15 @@ module EventDecorator
       path: Rails.application.routes.url_helpers.map_event_path(self),
       description: description,
       address: address_text,
+      category: category,
       timing: {
-        dates: recurrence_in_words,
-        times: formatted_start_end_time,
+        recurrence: recurrence,
+        start_date: start_date.to_s,
+        end_date: end_date&.to_s,
+        time: formatted_start_end_time,
         upcoming: upcoming_dates.map(&:to_s)
       },
-      language: {
-        code: language,
-        name: language_name,
-      },
+      language_code: language_code,
       images: pictures.map { |picture|
         {
           url: picture.file.url,
@@ -153,7 +119,6 @@ module EventDecorator
       },
       registration: {
         mode: registration_mode,
-        label: registration_label,
         url: registration_url,
       },
     }
