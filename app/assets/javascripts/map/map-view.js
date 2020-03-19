@@ -6,12 +6,15 @@ class MapView {
   constructor(element, onLoadCallback) {
     this.container = element
     this.venuesLayer = 'original'
+    this.desktopBreakpoint = 1100
+    this.viewportPadding = 0
+
     const state = JSON.parse(this.container.dataset.state)
     const config = {
       container: 'map',
       style: 'mapbox://styles/sydevadmin/ck7g6nag70rn11io09f45odkq',
       minZoom: 1,
-      dragRotate: false
+      dragRotate: false,
     }
 
     mapboxgl.accessToken = element.dataset.token
@@ -87,11 +90,20 @@ class MapView {
   }
 
   flyTo(location, zoom) {
-    this.mapbox.flyTo({ center: [location.longitude, location.latitude], zoom: zoom, easing: this._easing })
+    console.log('fly to', this.getViewportCenterOffset())
+    this.mapbox.flyTo({
+      center: [location.longitude, location.latitude],
+      offset: this.getViewportCenterOffset(),
+      zoom: zoom,
+      //easing: this._easing.
+    })
   }
 
   fitTo(bounds) {
-    this.mapbox.fitBounds([[bounds.west, bounds.south], [bounds.east, bounds.north]], { easing: this._easing })
+    this.mapbox.fitBounds([[bounds.west, bounds.south], [bounds.east, bounds.north]], {
+      padding: this.getViewportPadding(),
+      easing: this._easing,
+    })
   }
 
   getCenter() {
@@ -123,8 +135,6 @@ class MapView {
   parseVenue(feature) {
     const venue = feature.properties
     venue.events = JSON.parse(venue.events)
-    venue.latitude = feature.geometry.coordinates[1]
-    venue.longitude = feature.geometry.coordinates[0]
     return venue
   }
 
@@ -141,6 +151,30 @@ class MapView {
       return Util.distance(this.location.latitude, this.location.longitude, point.latitude, point.longitude, 'K')
     } else {
       return null
+    }
+  }
+
+  getViewportPadding() {
+    if (window.innerWidth < this.desktopBreakpoint) {
+      return this.viewportPadding
+    } else {
+      const leftPadding = Application.listPanel.container.offsetLeft + Application.listPanel.container.offsetWidth
+      return {
+        top: this.viewportPadding,
+        bottom: this.viewportPadding,
+        right: this.viewportPadding,
+        left: leftPadding + this.viewportPadding,
+      }
+    }
+  }
+
+  getViewportCenterOffset() {
+    if (window.innerWidth < this.desktopBreakpoint) {
+      return [0, 0]
+    } else {
+      const listPanelPadding = Application.listPanel.container.offsetLeft + Application.listPanel.container.offsetWidth
+      const infoPanelPadding = Application.infoPanel.container.offsetLeft + Application.infoPanel.container.offsetWidth
+      return [(listPanelPadding || infoPanelPadding) / 2, 0]
     }
   }
 
