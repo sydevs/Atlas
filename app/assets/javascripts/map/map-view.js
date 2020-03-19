@@ -156,15 +156,19 @@ class MapView {
   }
 
   getViewportPadding() {
-    if (window.innerWidth < this.tabletBreakpoint) {
-      const topPadding = Application.navbar.container.offsetTop + Application.listPanel.container.offsetHeight
-      return {
-        top: topPadding + this.viewportPadding * 2,
-        bottom: this.viewportPadding,
-        right: this.viewportPadding,
-        left: this.viewportPadding,
+    if (Util.isDevice('mobile')) {
+      if (Util.isMode('list')) {
+        const topPadding = Application.navbar.container.offsetTop + Application.listPanel.container.offsetHeight
+        return {
+          top: topPadding + this.viewportPadding * 2,
+          bottom: this.viewportPadding,
+          right: this.viewportPadding,
+          left: this.viewportPadding,
+        }
+      } else {
+        return 0
       }
-    } else if (window.innerWidth < this.desktopBreakpoint) {
+    } else if (Util.isDevice('tablet')) {
       return this.viewportPadding
     } else {
       const leftPadding = Application.listPanel.container.offsetLeft + Application.listPanel.container.offsetWidth
@@ -178,16 +182,18 @@ class MapView {
   }
 
   getViewportCenterOffset() {
-    if (window.innerWidth < this.tabletBreakpoint) {
-      const navbarPadding = Application.listPanel.container.offsetLeft + Application.listPanel.container.offsetWidth
-      return [0, navbarPadding / 2 + this.viewportPadding]
-    } else if (window.innerWidth < this.desktopBreakpoint) {
-      return [0, 0]
-    } else {
-      const listPanelPadding = Application.listPanel.container.offsetLeft + Application.listPanel.container.offsetWidth
-      const infoPanelPadding = Application.infoPanel.container.offsetLeft + Application.infoPanel.container.offsetWidth
-      return [(listPanelPadding || infoPanelPadding) / 2, 0]
+    let viewportPadding = this.getViewportPadding()
+    if (typeof viewportPadding === 'number') {
+      viewportPadding = { top: viewportPadding, left: viewportPadding }
     }
+
+    const left = Math.min(0, viewportPadding.left - this.viewportPadding)
+    const top = Math.min(0, viewportPadding.top - this.viewportPadding)
+    return [left, top]
+  }
+
+  invalidateSize() {
+    this.mapbox.resize()
   }
 
 }

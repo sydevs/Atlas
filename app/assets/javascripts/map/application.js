@@ -56,6 +56,7 @@ class ApplicationInstance {
       // Show event
       this._setMode('event')
       this.infoPanel.show(state.event, state.venue)
+      this.map.invalidateSize()
       this.map.setHighlightedVenue(state.venue)
       this.setInteractive(false)
     } else if (state.venue) {
@@ -68,10 +69,12 @@ class ApplicationInstance {
       this._setMode('venue')
       this.navbar.setVenue(state.venue)
       this.showVenues([state.venue])
+      this.map.invalidateSize()
       this.map.setHighlightedVenue(state.venue)
       this.setInteractive(false)
     } else {
       this._setMode('list')
+      this.map.invalidateSize()
       this.map.setHighlightedVenue(null)
 
       if (state.west && state.east && state.north && state.south) {

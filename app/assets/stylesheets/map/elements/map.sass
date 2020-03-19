@@ -23,20 +23,24 @@
 .mapboxgl-control-container
   @include mobile
     .mapboxgl-ctrl
-      &-top-left,
-      &-top-right
-        top: 70px
-
-      &-top-right,
-      &-bottom-right
-        right: ($control-offset-x * 0.375) - 10
-
-      &-top-left,
-      &-bottom-left
-        left: ($control-offset-x * 0.375) - 10
-
-      &-group:first-child
+      @include not-mode(list)
         display: none
+
+      @include mode(list)
+        &-top-left,
+        &-top-right
+          top: 70px
+
+        &-top-right,
+        &-bottom-right
+          right: ($control-offset-x * 0.375) - 10
+
+        &-top-left,
+        &-bottom-left
+          left: ($control-offset-x * 0.375) - 10
+          
+        &-group:first-child
+          display: none
 
 /*
   // ===== MARKERS ===== //
