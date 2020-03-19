@@ -6,6 +6,7 @@ class MapView {
   constructor(element, onLoadCallback) {
     this.container = element
     this.venuesLayer = 'original'
+    this.mobileBreakpoint = 768
     this.desktopBreakpoint = 1100
     this.viewportPadding = 0
 
@@ -155,7 +156,15 @@ class MapView {
   }
 
   getViewportPadding() {
-    if (window.innerWidth < this.desktopBreakpoint) {
+    if (window.innerWidth < this.tabletBreakpoint) {
+      const topPadding = Application.navbar.container.offsetTop + Application.listPanel.container.offsetHeight
+      return {
+        top: topPadding + this.viewportPadding * 2,
+        bottom: this.viewportPadding,
+        right: this.viewportPadding,
+        left: this.viewportPadding,
+      }
+    } else if (window.innerWidth < this.desktopBreakpoint) {
       return this.viewportPadding
     } else {
       const leftPadding = Application.listPanel.container.offsetLeft + Application.listPanel.container.offsetWidth
@@ -169,7 +178,10 @@ class MapView {
   }
 
   getViewportCenterOffset() {
-    if (window.innerWidth < this.desktopBreakpoint) {
+    if (window.innerWidth < this.tabletBreakpoint) {
+      const navbarPadding = Application.listPanel.container.offsetLeft + Application.listPanel.container.offsetWidth
+      return [0, navbarPadding / 2 + this.viewportPadding]
+    } else if (window.innerWidth < this.desktopBreakpoint) {
       return [0, 0]
     } else {
       const listPanelPadding = Application.listPanel.container.offsetLeft + Application.listPanel.container.offsetWidth
