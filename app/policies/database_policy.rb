@@ -1,6 +1,6 @@
 class DatabasePolicy < ApplicationPolicy
 
-  def manage? super_manager: false
+  def manage? super_manager: nil
     user.administrator? || record.managed_by?(user, super_manager: super_manager)
   end
 
