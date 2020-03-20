@@ -1,7 +1,7 @@
 module ProvinceDecorator
 
   def name
-    ISO3166::Country[country_code].subdivisions[province_code]['name']
+    ProvinceDecorator.get_name(province_code, country_code)
   end
 
   def label

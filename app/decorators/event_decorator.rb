@@ -28,10 +28,14 @@ module EventDecorator
   end
 
   def category_label
+    return nil unless category.present?
+
     translate(category, scope: 'activerecord.attributes.event.category_labels')
   end
 
   def category_description
+    return nil unless category.present?
+    
     translate(category, scope: 'activerecord.attributes.event.category_descriptions')
   end
 
