@@ -24,11 +24,11 @@ module EventDecorator
   end
 
   def category_label
-    category ? translate(category, scope: 'activerecord.attributes.event.category_labels') : nil
+    category ? I18n.translate(category, scope: 'activerecord.attributes.event.category_labels') : nil
   end
 
   def category_description
-    category ? translate(category, scope: 'activerecord.attributes.event.category_descriptions') : nil
+    category ? I18n.translate(category, scope: 'activerecord.attributes.event.category_descriptions') : nil
   end
 
   def recurrence_in_words

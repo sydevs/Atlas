@@ -37,7 +37,7 @@ class Map::ApplicationController < ActionController::Base
   def closest
     params.require(%i[latitude longitude])
     coordinates = [params[:latitude], params[:longitude]]
-    query = Venue.published.by_distance(origin: coordinates)
+    query = Venue.published.by_distance(origin: coordinates).where('updated_at < ?', 1.hour.ago.beginning_of_hour)
     venue = query.select('id, city, country_code, latitude, longitude').limit(1).first
 
     render json: {
