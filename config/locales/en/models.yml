@@ -148,7 +148,7 @@ en:
         description: "Description"
         room: "Room"
         building: "Building"
-        language: "Language"
+        language_code: "Language"
         disable_notifications: "Disable Notifications"
         registration_mode: "Registration Mode"
         registration_modes:

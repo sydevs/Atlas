@@ -11,10 +11,6 @@ module EventDecorator
     end
   end
 
-  def language_name
-    I18nData.languages(I18n.locale)[language]
-  end
-
   def address
     { room: room }.merge(venue.address)
   end
@@ -95,7 +91,7 @@ module EventDecorator
   end
   
   def language_name
-    I18nData.languages(I18n.locale)[language].split(/[,;]/)[0]
+    I18nData.languages(I18n.locale)[language_code].split(/[,;]/)[0]
   end
 
   def to_h

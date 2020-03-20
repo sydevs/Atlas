@@ -29,7 +29,7 @@ p = @record.description
   .item
     i.language.icon
     .content
-      .header = translate_attribute(Event, :language)
+      .header = translate_attribute(Event, :language_code)
       .description = @record.language_name
 
 h3.ui.small.dividing.grey.header = translate('cms.details.management_for_record', resource: translate_model(@model).downcase)
