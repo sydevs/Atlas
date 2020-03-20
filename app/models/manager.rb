@@ -111,7 +111,7 @@ class Manager < ApplicationRecord
     else
       events_via_countries = Event.joins(:venue).where(venues: { country_code: countries.select(:country_code) })
       events_via_provinces = Event.joins(:venue).where(venues: { province_code: provinces.select(:province_code) })
-      events_via_local_areas = Venue.where(province_code: local_area_venues.select(:province_code))
+      events_via_local_areas = Eventjoins(:venue).where(venues: { province_code: local_area_venues.select(:province_code) })
       Event.joins(:venue).where(id: events).or(events_via_countries).or(events_via_provinces).or(events_via_local_areas)
     end
   end
