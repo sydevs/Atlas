@@ -94,12 +94,12 @@ module EventDecorator
     I18nData.languages(I18n.locale)[language_code].split(/[,;]/)[0]
   end
 
-  def to_h
+  def as_json
     {
       id: id,
       label: label,
       path: Rails.application.routes.url_helpers.map_event_path(self),
-      description: description,
+      description: description.gsub(/\u2028/, '\u2028').gsub(/\u2029/, '\u2029'),
       address: address_text,
       category: category,
       timing: {

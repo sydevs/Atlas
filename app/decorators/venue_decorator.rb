@@ -43,7 +43,7 @@ module VenueDecorator
     I18n.translate('api.distance', distance: distance(coordinates).to_i)
   end
 
-  def to_h
+  def as_json
     {
       id: id,
       label: label,

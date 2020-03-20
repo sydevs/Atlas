@@ -12,6 +12,39 @@ namespace :mapbox do
   end
 
   namespace :update do
+    task test: :environment do
+      include LocalizationHelper
+      features = []
+  
+      puts "===== GENERATE NEW DATASET ====="
+      Venue.includes(:events).published.find_each do |venue|
+        next unless venue.events.present?
+        venue.extend VenueDecorator
+  
+        features << {
+          type: 'Feature',
+          id: venue.id,
+          geometry: {
+            type: 'Point',
+            coordinates: [venue.longitude, venue.latitude]
+          },
+          properties: venue.as_json,
+        }
+      end
+  
+      data = {
+        type: 'FeatureCollection',
+        features: features,
+      }
+
+      puts "---- RAW DATA ----"
+      puts data.pretty_inspect
+      puts "---- JSON DATA ----"
+      puts data.to_json
+      puts "---- REPARSED DATA ----"
+      puts JSON.parse(data.to_json)
+    end
+
     task force: :environment do
       include LocalizationHelper
       file = Tempfile.new('meditation-venues.geojson')
@@ -32,7 +65,7 @@ namespace :mapbox do
             type: 'Point',
             coordinates: [venue.longitude, venue.latitude]
           },
-          properties: venue.to_h,
+          properties: venue.as_json,
         }
       end
   
