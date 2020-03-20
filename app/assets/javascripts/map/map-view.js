@@ -130,8 +130,8 @@ class MapView {
       // Never disable interaction on tablet and desktop
       interactive = true
     }
-    
-    const handlers = ['scrollZoom', 'boxZoom', 'dragRotate', 'dragPan', 'keyboard', 'doubleClickZoom', 'doubleClickZoom']
+
+    const handlers = ['scrollZoom', 'boxZoom', 'dragPan', 'keyboard', 'doubleClickZoom', 'doubleClickZoom']
     handlers.forEach(handler => {
       this.mapbox[handler][interactive ? 'enable' : 'disable']()
     })
