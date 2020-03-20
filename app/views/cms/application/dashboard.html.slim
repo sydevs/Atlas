@@ -17,7 +17,7 @@ p = translate('cms.dashboard.resources.description')
     .item
       i.globe.icon
       .content
-        a.header href=url_for([:cms, :worldwide]) = translate('cms.menu.worldwide')
+        a.header href=url_for([:cms, :regions]) = translate('cms.menu.worldwide')
   - @resources.each do |resource|
     .item
       = model_icon resource.class

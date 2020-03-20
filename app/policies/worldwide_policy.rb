@@ -1,7 +1,11 @@
 class WorldwidePolicy < DatabasePolicy
 
-  def show?
+  def manage?
     user.present? && user.administrator?
+  end
+
+  def show?
+    false
   end
 
   def update?
@@ -16,17 +20,17 @@ class WorldwidePolicy < DatabasePolicy
     association = association.to_sym
     return false if %i[registrations pictures].include?(association)
 
-    show?
+    manage?
   end
 
   def new_association? association
     return nil if association == :events
     
-    show? && %i[countries local_areas venues managers access_keys].include?(association)
+    manage? && %i[countries local_areas venues managers access_keys].include?(association)
   end
 
   def destroy_association? association = nil
-    show? && %i[countries local_areas access_keys].include?(association)
+    manage? && %i[countries local_areas access_keys].include?(association)
   end
 
 end
