@@ -1,7 +1,7 @@
 class VenuePolicy < DatabasePolicy
 
   def geocode?
-    manage?
+    user.present?
   end
 
   def index_association? association = nil

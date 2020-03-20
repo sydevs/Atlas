@@ -7,7 +7,7 @@ class LocalAreaPolicy < RegionPolicy
   end
 
   def autocomplete?
-    manage?
+    user.present?
   end
 
 end
