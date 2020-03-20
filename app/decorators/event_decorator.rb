@@ -24,19 +24,15 @@ module EventDecorator
   end
 
   def category_name
-    translate_enum_value(self, :category)
+    category ? translate_enum_value(self, :category) : nil
   end
 
   def category_label
-    return nil unless category.present?
-
-    translate(category, scope: 'activerecord.attributes.event.category_labels')
+    category ? translate(category, scope: 'activerecord.attributes.event.category_labels') : nil
   end
 
   def category_description
-    return nil unless category.present?
-    
-    translate(category, scope: 'activerecord.attributes.event.category_descriptions')
+    category ? translate(category, scope: 'activerecord.attributes.event.category_descriptions') : nil
   end
 
   def recurrence_in_words

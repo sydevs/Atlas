@@ -27,12 +27,9 @@ class Event < ApplicationRecord
 
   # Validations
   validates :name, length: { maximum: 255 }
-  validates :category, presence: true
-  validates :language, presence: true
-  validates :start_date, presence: true
-  validates :start_time, presence: true
-  validates :recurrence, presence: true
-  validates :description, length: { minimum: 20, maximum: 600, allow_nil: true }
+  validates :category, :language, presence: true
+  validates :recurrence, :start_date, :start_time, presence: true
+  validates :description, length: { minimum: 20, maximum: 600, allow_empty: true }
   validates :registration_url, url: true, unless: :native_registration_mode?
   validates :manager, presence: true
   validates_associated :pictures
@@ -54,7 +51,7 @@ class Event < ApplicationRecord
     venue.managed_by?(manager)
   end
 
-  def language= value
+  def language_code= value
     # Only accept languages which are in the language list
     super value if I18nData.languages.key?(value)
   end
