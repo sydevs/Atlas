@@ -91,7 +91,6 @@ class MapView {
   }
 
   flyTo(location, zoom) {
-    console.log('fly to', this.getViewportCenterOffset())
     this.mapbox.flyTo({
       center: [location.longitude, location.latitude],
       offset: this.getViewportCenterOffset(),
@@ -127,6 +126,11 @@ class MapView {
   }
 
   setInteractive(interactive) {
+    if (!Util.isDevice('mobile')) {
+      // Never disable interaction on tablet and desktop
+      interactive = true
+    }
+    
     const handlers = ['scrollZoom', 'boxZoom', 'dragRotate', 'dragPan', 'keyboard', 'doubleClickZoom', 'doubleClickZoom']
     handlers.forEach(handler => {
       this.mapbox[handler][interactive ? 'enable' : 'disable']()
