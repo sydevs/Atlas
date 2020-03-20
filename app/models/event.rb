@@ -45,10 +45,11 @@ class Event < ApplicationRecord
 
   # Methods
 
-  def managed_by? manager, super_manager: false
-    return true if !super_manager && self.manager == manager
+  def managed_by? manager, super_manager: nil
+    return true if super_manager != true && self.manager == manager
+    return true if venue.managed_by?(manager) && super_manager != false
 
-    venue.managed_by?(manager)
+    false
   end
 
   def language_code= value

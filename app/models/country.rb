@@ -26,8 +26,8 @@ class Country < ApplicationRecord
     venue.country_code == country_code
   end
 
-  def managed_by? manager, super_manager: false
-    return managers.include?(manager) unless super_manager
+  def managed_by? manager, super_manager: nil
+    return managers.include?(manager) unless super_manager == true
 
     false
   end

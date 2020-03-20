@@ -1,4 +1,13 @@
 
+.ui.small.icon.message
+  i.question.icon
+  .content
+    a.ui.right.floated.button href=url_for([:cms, @record, :regions])
+      = translate('cms.details.create_city_manager.action')
+      i.right.arrow.icon
+    .header = translate('cms.details.create_city_manager.title')
+    .description = translate('cms.details.create_city_manager.description', action: translate('cms.menu.regions.cities'))
+
 h3.ui.small.dividing.grey.header = translate('cms.details.details_for_record', resource: @record.label)
 .ui.list
   .item

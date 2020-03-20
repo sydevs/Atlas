@@ -5,7 +5,7 @@ class Picture < ApplicationRecord
 
   # Methods
 
-  def managed_by? manager, super_manager: false # rubocop:disable Link/UnusedMethodArgument
+  def managed_by? manager, super_manager: nil # rubocop:disable Link/UnusedMethodArgument
     parent.managed_by?(manager)
   end
 

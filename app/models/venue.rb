@@ -32,7 +32,7 @@ class Venue < ApplicationRecord
     province || country
   end
 
-  def managed_by? manager, super_manager: false
+  def managed_by? manager, super_manager: nil
     manager.local_areas.each do |local_area|
       return true if local_area.contains?(self)
     end

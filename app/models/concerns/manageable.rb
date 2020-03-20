@@ -7,9 +7,9 @@ module Manageable
     has_many :managers, through: :managed_records, dependent: :destroy
   end
 
-  def managed_by? manager, super_manager: false
-    return true if !super_manager && managers.include?(manager)
-    return parent.managed_by?(manager) if respond_to?(:parent) && parent.respond_to?(:managed_by?)
+  def managed_by? manager, super_manager: nil
+    return true if managers.include?(manager) && super_manager != true
+    return true if respond_to?(:parent) && parent.respond_to?(:managed_by?) && parent.managed_by?(manager) && super_manager != false
 
     false
   end

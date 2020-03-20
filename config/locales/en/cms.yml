@@ -123,6 +123,18 @@ en:
       record_not_published:
         title: "Not Published"
         description: "This %{resource} is currently hidden from the public, because it is not published."
+      create_event:
+        title: "Wondering how to create a public program?"
+        description: "Navigate to a venue page first, in the \"%{action}\" tab."
+        action: "Go now"
+      create_province_manager:
+        title: "Wondering how to create a regional manager?"
+        description: "Navigate to a region page first, in the \"%{action}\" tab."
+        action: "Go now"
+      create_city_manager:
+        title: "Wondering how to create a city manager?"
+        description: "Navigate to a city page first, in the \"%{action}\" tab."
+        action: "Go now"
       record_has_language: "%{resource} offered in %{language}"
       updated_at: "Last updated %{time_ago} ago"
 

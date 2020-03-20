@@ -29,10 +29,9 @@ class Province < ApplicationRecord
     venue.province == province_code
   end
 
-  def managed_by? manager, super_manager: false
-    return true if managers.include?(manager) && !super_manager
-
-    country.managed_by?(manager)
+  def managed_by? manager, super_manager: nil
+    return true if managers.include?(manager) && super_manager != true
+    return true if country.managed_by?(manager) && super_manager != false
   end
 
 end

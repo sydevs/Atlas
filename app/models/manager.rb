@@ -40,10 +40,11 @@ class Manager < ApplicationRecord
     parent unless parent&.new_record?
   end
 
-  def managed_by? manager, super_manager: false
-    return true if self == manager && !super_manager
+  def managed_by? manager, super_manager: nil
+    return true if self == manager && super_manager != true
+    return true if manager.administrator? && super_manager != false
 
-    manager.administrator?
+    false
   end
 
   def type
