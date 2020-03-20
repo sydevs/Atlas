@@ -50,7 +50,7 @@ module VenueDecorator
       latitude: latitude,
       longitude: longitude,
       directions_url: directions_url,
-      events: events.map { |event| event.extend(EventDecorator).to_h },
+      events: events.map { |event| event.extend(EventDecorator).as_json },
     }
   end
 
