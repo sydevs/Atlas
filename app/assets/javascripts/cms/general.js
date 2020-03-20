@@ -16,6 +16,14 @@ const General = {
 
     $('.search').parent().submit(General.onSearchSubmit)
     $('.ui.radio.menu .item').click(General.onRadioMenuSelect)
+
+    $('.js-character-count').each((_index, counter) => {
+      $(`#${counter.dataset.for}`).on('input', event => {
+        const length = event.currentTarget.value.length
+        counter.parentElement.style = (length != 0 && (length < counter.dataset.min || length > counter.dataset.max) ? 'color: darkred' : '')
+        counter.innerText = length
+      })
+    })
   },
 
   onSearchSubmit: function() {

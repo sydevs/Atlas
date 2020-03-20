@@ -10,7 +10,12 @@
 .ui.small.dividing.violet.header Event Details
 
 = f.input :category, collection: categories
-= f.input :description, as: :text, placeholder: @record.category_description
+= f.input :description do 
+  .hint = translate('cms.hints.event.description', min: 40, max: 600)
+  = f.input_field :description, as: :text, placeholder: @record.category_description do 
+  .hint
+    span.js-character-count data={ for: 'event_description', min: 40, max: 600 } = @record.description&.length || 0
+    = translate('cms.hints.event.description_count', min: 40, max: 600)
 
 .two.fields
   = f.input :room, hint: translate('cms.hints.event.room')

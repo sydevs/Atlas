@@ -29,7 +29,7 @@ class Event < ApplicationRecord
   validates :name, length: { maximum: 255 }
   validates :category, :language_code, presence: true
   validates :recurrence, :start_date, :start_time, presence: true
-  validates :description, length: { minimum: 20, maximum: 600, allow_empty: true }
+  validates :description, length: { minimum: 40, maximum: 600, allow_blank: true }
   validates :registration_url, url: true, unless: :native_registration_mode?
   validates :manager, presence: true
   validates_associated :pictures
