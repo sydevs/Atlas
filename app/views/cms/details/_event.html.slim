@@ -3,6 +3,9 @@
   .ui.small.orange.icon.message
     i.exclamation.icon
     .content
+      a.ui.right.floated.orange.button href=url_for([:edit, :cms, @record])
+        = translate('cms.details.record_expired.action')
+        i.right.arrow.icon
       .header = translate('cms.details.record_expired.title', resource: translate_model(@model))
       .description = translate('cms.details.record_expired.description', resource: translate_model(@model).downcase, weeks: Expirable::EXPIRE_AFTER_WEEKS)
 

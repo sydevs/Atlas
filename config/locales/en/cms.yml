@@ -116,7 +116,8 @@ en:
         description: "%{events} (%{venues})"
       record_expired:
         title: "%{resource} Expired"
-        description: "This %{resource} has been hidden from the public, because it hasn't been updated in %{weeks} weeks."
+        description: "This %{resource} has been hidden from the public, because it hasn't been updated in %{weeks} weeks. Go to the edit page and press save to confirm the event details are still correct."
+        action: "Review"
       external_registration:
         title: "Event is Using External Registration"
         description: "This event is set to have seekers register on %{mode}. It's better if you have seekers register on the Sahaj Atlas, because then we will be able to send them reminders and confirmation emails."
