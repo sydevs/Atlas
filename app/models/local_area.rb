@@ -11,6 +11,9 @@ class LocalArea < ApplicationRecord
   # Associations
   belongs_to :country, foreign_key: :country_code, primary_key: :country_code, optional: true
   belongs_to :province, foreign_key: :province_code, primary_key: :province_code, optional: true
+  has_many :local_area_venues
+  has_many :venues, through: :local_area_venues
+  has_many :events, through: :venues
 
   # Validations
   before_validation :ensure_country_consistency
@@ -21,24 +24,13 @@ class LocalArea < ApplicationRecord
   scope :cross_province, -> { where(province_code: nil) }
   scope :international, -> { cross_province.where(country_code: nil) }
 
+  # Callbacks
+  after_save :ensure_venue_consistency
+
   # Methods
 
   def parent
     province || country || nil
-  end
-
-  def venues
-    scope = Venue.within(radius, origin: self)
-    scope = scope.where(country_code: country_code) if country_code?
-    scope = scope.where(province: province_code) if province_code?
-    scope
-  end
-
-  def events
-    scope = Event.joins(:venue).within(radius, origin: self)
-    scope = scope.where(venues: { country_code: country_code }) if country_code?
-    scope = scope.where(venues: { province: province_code }) if province_code?
-    scope
   end
 
   def contains? venue
@@ -57,6 +49,15 @@ class LocalArea < ApplicationRecord
 
     def ensure_country_consistency
       self.country_code = province.country_code if province.present?
+    end
+
+    def ensure_venue_consistency
+      return unless (previous_changes.keys & %w[radius latitude longitude province_code country_code]).present?
+
+      venues = Venue.select('id, latitude, longitude').within(radius, origin: self)
+      venues = venues.where(country_code: country_code) if country_code?
+      venues = venues.where(province: province_code) if province_code?
+      self.venues = venues
     end
 
 end

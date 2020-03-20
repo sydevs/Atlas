@@ -4,4 +4,10 @@ class VenuePolicy < DatabasePolicy
     manage?
   end
 
+  def index_association? association = nil
+    return false if association == :regions
+
+    super association
+  end
+
 end

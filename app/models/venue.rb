@@ -11,6 +11,8 @@ class Venue < ApplicationRecord
   # Associations
   belongs_to :country, foreign_key: :country_code, primary_key: :country_code, optional: true
   belongs_to :province, foreign_key: :province_code, primary_key: :province_code, optional: true
+  has_many :local_area_venues
+  has_many :local_areas, through: :local_area_venues
   has_many :events, dependent: :delete_all
 
   # Validations
@@ -18,8 +20,13 @@ class Venue < ApplicationRecord
   validates :country_code, presence: true
   validates :latitude, :longitude, presence: true
 
-  # Methods
+  # Delegations
   delegate :all_managers, :managed_by?, to: :parent
+
+  # Callbacks
+  after_save :ensure_local_area_consistency
+
+  # Methods
 
   def parent
     province || country
@@ -46,6 +53,17 @@ class Venue < ApplicationRecord
     value = value.to_s.upcase
     # Only accept country codes which are in the language list
     super value if I18nData.countries.keys.include?(value)
+  end
+
+  def ensure_local_area_consistency
+    return unless (previous_changes.keys & %w[latitude longitude province_code country_code]).present?
+
+    radius = LocalArea.maximum(:radius)
+    local_areas = LocalArea.select('id, name, radius, latitude, longitude').within(radius, origin: self)
+    local_areas = local_areas.where(country_code: country_code) if country_code?
+    local_areas = local_areas.where(province: province_code) if province_code?
+    local_areas.to_a.filter! { |area| area.radius >= area.distance_to(self) }
+    self.local_areas = local_areas
   end
 
 end

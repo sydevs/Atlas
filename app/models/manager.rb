@@ -10,7 +10,7 @@ class Manager < ApplicationRecord
   has_many :countries, through: :managed_records, source: :record, source_type: 'Country', dependent: :destroy
   has_many :provinces, through: :managed_records, source: :record, source_type: 'Province', dependent: :destroy
   has_many :local_areas, through: :managed_records, source: :record, source_type: 'LocalArea', dependent: :destroy
-  #has_many :local_area_venues, through: :local_areas, source: :venues
+  has_many :local_area_venues, through: :local_areas, source: :venues
   has_many :events
   has_many :actions, class_name: 'Audit', foreign_type: :user_type, foreign_key: :user_id
 
@@ -111,8 +111,8 @@ class Manager < ApplicationRecord
     else
       events_via_countries = Event.joins(:venue).where(venues: { country_code: countries.select(:country_code) })
       events_via_provinces = Event.joins(:venue).where(venues: { province_code: provinces.select(:province_code) })
-      #events_via_local_areas = Venue.where(province_code: local_area_venues.select(:province_code))
-      Event.joins(:venue).where(id: events).or(events_via_countries).or(events_via_provinces)#.or(events_via_local_areas)
+      events_via_local_areas = Venue.where(province_code: local_area_venues.select(:province_code))
+      Event.joins(:venue).where(id: events).or(events_via_countries).or(events_via_provinces).or(events_via_local_areas)
     end
   end
 

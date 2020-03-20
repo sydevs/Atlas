@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_19_114559) do
+ActiveRecord::Schema.define(version: 2020_03_20_102848) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -78,6 +78,15 @@ ActiveRecord::Schema.define(version: 2020_03_19_114559) do
     t.string "language_code", limit: 2
     t.index ["manager_id"], name: "index_events_on_manager_id"
     t.index ["venue_id"], name: "index_events_on_venue_id"
+  end
+
+  create_table "local_area_venues", force: :cascade do |t|
+    t.bigint "local_area_id"
+    t.bigint "venue_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["local_area_id"], name: "index_local_area_venues_on_local_area_id"
+    t.index ["venue_id"], name: "index_local_area_venues_on_venue_id"
   end
 
   create_table "local_areas", force: :cascade do |t|
