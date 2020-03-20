@@ -27,9 +27,7 @@ gem 'leaflet-rails' # Integrate Leaflet for maps
 gem 'normalize-rails' # To normalize CSS
 
 ### Administration
-gem 'recurrence' # For recurring events
 gem 'simple_form' # To simplify admin forms
-# gem 'autosize' # To automatically grow text areas
 gem 'audited' # Logs changes to any record
 gem 'kaminari' # Pagination
 gem 'nilify_blanks' # Convert empty string to null in the database
@@ -40,7 +38,7 @@ gem 'pundit' # Permissions
 ### Geocoding
 gem 'geokit-rails'
 
-# File uploads
+### File uploads
 gem 'carrierwave' # Serverside image uploader
 gem 'carrierwave-google-storage' # Serverside image uploader
 gem 'mini_magick' # Image processing during upload
@@ -75,6 +73,7 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'web-console', '>= 3.3.0' # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
   gem 'dotenv-rails' # Automatically load environmental variables
+  gem 'derailed' # To test memory usage for all the gems
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

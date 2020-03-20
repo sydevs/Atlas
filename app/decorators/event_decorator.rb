@@ -4,7 +4,6 @@ module EventDecorator
     if name.present? && !fallback_only
       name
     elsif category && venue&.name
-      category_label = translate_enum_value(self, :category_label, category)
       venue_label = venue.extend(VenueDecorator).label
       I18n.translate('map.listing.event_name', category: category_label, venue: venue_label)
     else
@@ -28,8 +27,12 @@ module EventDecorator
     translate_enum_value(self, :category)
   end
 
+  def category_label
+    translate(category, scope: 'activerecord.attributes.event.category_labels')
+  end
+
   def category_description
-    translate_enum_value(self, :category_description, category)
+    translate(category, scope: 'activerecord.attributes.event.category_descriptions')
   end
 
   def recurrence_in_words

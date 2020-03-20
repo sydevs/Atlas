@@ -13,7 +13,7 @@ module ProvinceDecorator
   end
 
   def self.get_name province_code, country_code
-    ISO3166::Country[country_code].subdivisions[province_code]['name']
+    ISO3166::Country[country_code].subdivisions[province_code]['name'].split(',')[0]
   end
 
   def self.get_label province_code, country_code
