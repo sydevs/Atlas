@@ -2,7 +2,7 @@
 - content_for :title, translate('cms.actions.target.edit', resource: translate_model(@model))
 
 = render 'cms/views/context' do
-  - if @record&.expired?
+  - if @record.try(:expired?)
     .ui.small.orange.icon.message
       i.exclamation.icon
       .content
