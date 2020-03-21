@@ -136,6 +136,30 @@ class CMS::ApplicationController < ActionController::Base
     authorize :dashboard, :view_help?
   end
 
+  def sync
+    authorize :dashboard, :sync?
+
+    if request.post?
+      if MapboxSync.sync!
+        flash[:success] = "The latest atlas data has been sent to Mapbox to be processed. It should appear on the map within 5 minutes."
+      else
+        flash[:error] = "There was a problem with the map synchronisation: \"#{MapboxSync.last_sync_error}\""
+      end
+  
+      redirect_to cms_root_url
+    else
+      if params[:force] == 'true'
+        render 'cms/application/sync'
+      elsif !MapboxSync.needs_sync?
+        redirect_to cms_root_url, flash: { notice: "No venues or events have changes since the last map synchronisation. So the sync has been skipped." }
+      elsif !MapboxSync.can_sync?
+        redirect_to cms_root_url, flash: { error: "The map cannot be synced now because it was already synced recently. Please wait for #{helpers.time_ago_in_words(MapboxSync.can_sync_at)}, and try again." }
+      else
+        render 'cms/application/sync'
+      end
+    end
+  end
+
   protected
 
     def current_user

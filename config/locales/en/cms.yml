@@ -48,6 +48,7 @@ en:
         show: "World"
         help: "Help"
         regions: "Regions"
+        sync: "Mapbox Sync"
 
     messages:
       errors: "Errors"
@@ -85,7 +86,7 @@ en:
         room: "Which room in the building is the event in?"
         language: "What is the primary language that this event if given in?"
         disable_notifications: "If selected, managers for this event will not receive emails about who has registered for the event."
-        registration_mode: "Where should seekers go to register for the event? We strongly recommend that you leave this as '%{native},' because having seekers register on this website, will let us send them reminder and follow-up emails."
+        registration_mode: "Where should seekers go to register for the event? We strongly recommend that you leave this as '%{native}.' Having seekers register on this website will allow us send them reminder and follow-up emails."
         registration_url: "The registration URL will be set automatically if the mode is set \"%{native}.\""
       venue:
         manual_location: "Set location manually"
@@ -121,6 +122,7 @@ en:
       record_expired:
         title: "%{resource} Expired"
         description: "This %{resource} has been hidden from the public, because it hasn't been updated in %{weeks} weeks. Go to the edit page and press save to confirm the event details are still correct."
+        alt_description: "This %{resource} has been hidden from the public, because it hasn't been updated in %{weeks} weeks. Please review the details below and press save to confirm the event details are still correct."
         action: "Review"
       external_registration:
         title: "Event is Using External Registration"
@@ -209,15 +211,31 @@ en:
         action: "Learn how to use"
       sync:
         title: "Mapbox Synchronisation"
-        description: "The Atlas database is published to the map once per hour. Synchronisations are scheduled at the beginning of every hour, but can also occur immediately if a synchronisation hasn't occured recently."
-        previous: "Last sync at"
-        next: "Next scheduled sync at"
+        description: "The Atlas map is processed by a third-party service called Mapbox. Every hour a synchronisation is scheduled, to send the latest atlas data to Mapbox for processing. The synchronisation will be skipped if there are no new changes."
+        previous:
+          title: "Last successful sync"
+          description: "%{date} (%{time} ago)"
+        current:
+          title: "Sync currently in progress..."
+          description: "Started %{time} ago"
+        next:
+          title: "Next scheduled sync"
+          description: "%{date} (%{time} from now)"
+        error:
+          title: "The previous attempted sync failed (%{date})"
+          description: "Error Message: %{message}"
         never: "Never"
+        learn_more: "Learn more"
+        action: "Manually sync now"
+        action_confirmation: "Are you sure you want to manually sync the map now? This may take a few minutes."
+        action_disabled: "The map cannot be synced now because it was already synced %{time_ago} ago. Please wait for %{time_from_now}, before syncing again."
       
     help:
       guide: "How do I use Sahaj Atlas?"
+      learn_more: "Learn more"
       expiration:
         title: "Why isn't my event appearing on the map?"
+        alt_title: "How does event expiration work?"
         description:
           problem: "We don't want seekers to see classes which are no longer running. Many Sahaj website have out of date program information, but even when the details are updated they quickly become outdated again."
           solution: "To solve this, we've created an autmatic system that will email the yogis who run each program every few months to ask if the information is still correct. If they do not respond, the program will be hidden from the public until it is checked."
@@ -244,10 +262,33 @@ en:
         description:
           problem: "The map is processed and created by an external service called Mapbox. Whenever a change is made to the Sahaj Atlas database, it must be sent to Mapbox to update the map. However, this updating can take a few minutes, and Mapbox is processing many other maps at the same time. For this reason, we need to limit the number of updates that are sent."
           solution: "Every hour our system checks to see if there are new updates to the Sahaj Atlas database, and if there is they will get sent to Mapbox."
-          details: "Here are the most recent Mapbox synchronisation times:"
+          status: "Here are the most recent Mapbox synchronisation times:"
+      registration:
+        title: "Why should seekers register on Sahaj Atlas?"
+        description:
+          introduction: "The Sahaj Atlas supports having seekers register on Meetup, Eventbrite, Facebook or other services in order to make it easier for local yogis to make the atlas work with their current methods."
+          benefit: "However, there are several benefits to having seekers register directly on the Sahaj Atlas instead of other services."
+        benefits:
+          accessibility:
+            icon: universal access # Do not translate
+            title: "Accessibility"
+            description: "While many people have Facebook and Meetup accounts, many do not. Increasingly younger people reject facebook, and Meetup is less popular amongst older people. Registering on Sahaj Atlas doesn't require any account and the seeker doesn't have to navigate to another website. This makes is easier and more likely for them to register."
+          reminders:
+            icon: bell # Do not translate
+            title: "Automatic Reminders"
+            description: "Seekers who register on Sahaj Atlas will receive a confirmation email and an automatic reminder email 1 day before their first class. The yogi(ni) who runs the public program will also receive a list of new registrations every week by email."
+          marketing:
+            icon: envelope # Do not translate
+            title: "Future Marketing"
+            description: "When seekers register on Sahaj Atlas we can store their email address (and we are not subject to the rules of Meetup, Eventbrite, or Facebook). This means we can use these email addresses to send follow-up materials, or recommend special Sahaj events in their area (eg. concerts or intermediate programs)."
       contact:
         title: "I need more help"
         description: "If you need further help, or if you want to help with the development of the Sahaj Atlas, please write to the email below. Please write your message in english."
+
+    sync:
+      title: "Map synchronisation in progress..."
+      description: "The latest atlas data is being compiled and uploaded to the Mapbox servers."
+      please_wait: "This can take up to five minutes, please wait and do not close this page."
 
   passwordless:
     sessions:

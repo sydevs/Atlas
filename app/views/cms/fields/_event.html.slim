@@ -42,6 +42,7 @@
 .fields
   = f.input :registration_mode, collection: Event.registration_modes.map { |k, v| [translate_enum_value(Event, :registration_mode, k), k] }, wrapper_html: { class: 'four wide' }
   = f.input :registration_url, as: :url, placeholder: map_event_url(@record&.id || 0, anchor: 'register'), wrapper_html: { class: 'twelve wide' }
+= help_link :registration
 
 = f.input :disable_notifications, hint: translate('cms.hints.event.disable_notifications')
 

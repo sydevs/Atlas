@@ -2,6 +2,13 @@
 - content_for :title, translate('cms.actions.target.edit', resource: translate_model(@model))
 
 = render 'cms/views/context' do
+  - if @record.expired?
+    .ui.small.orange.icon.message
+      i.exclamation.icon
+      .content
+        .header = translate('cms.details.record_expired.title', resource: translate_model(@model))
+        .description = translate('cms.details.record_expired.alt_description', resource: translate_model(@model).downcase, weeks: Expirable::EXPIRE_AFTER_WEEKS)
+
   = simple_form_for [:cms, @record], html: { id: 'page-form', class: "#{'error' if @record.errors.present?}", novalidate: true, autocomplete: 'off' } do |f|
     h3.ui.header = translate('cms.actions.target.edit', resource: translate_model(@model))
 

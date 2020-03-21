@@ -40,14 +40,22 @@ h1.ui.header = translate('cms.menu.faq')
   .content class=active_accordion?(:sync)
     p = translate('cms.help.sync.description.problem')
     p = translate('cms.help.sync.description.solution')
-    p = translate('cms.help.sync.description.details')
-    ul.ui.list
-      li.item
-        .header = translate('cms.dashboard.sync.previous')
-        .content = MapboxSync.last_synced_at&.to_s(:long) || translate('cms.dashboard.sync.never')
-      li.item
-        .header = translate('cms.dashboard.sync.next')
-        .content = MapboxSync.next_sync_at.to_s(:long)
+    p = translate('cms.help.sync.description.status')
+    = render 'sync_status'
+
+  .title class=active_accordion?(:registration)
+    i.dropdown.icon
+    = translate('cms.help.registration.title')
+  .content class=active_accordion?(:registration)
+    p = translate('cms.help.registration.description.introduction')
+    p = translate('cms.help.registration.description.benefit')
+    .ui.list
+      - %w[accessibility reminders marketing].each do |benefit|
+        .item
+          i.icon class=translate("cms.help.registration.benefits.#{benefit}.icon")
+          .content
+            .header = translate("cms.help.registration.benefits.#{benefit}.title")
+            .description = translate("cms.help.registration.benefits.#{benefit}.description")
 
   .title class=active_accordion?(:contact)
     i.dropdown.icon

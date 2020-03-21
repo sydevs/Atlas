@@ -10,6 +10,10 @@ h2.ui.header
     .header = translate('cms.dashboard.role.intro', role: translate("cms.dashboard.role.#{current_user.type}.title").downcase)
     .description = translate("cms.dashboard.role.#{current_user.type}.instruction")
 
+- flash.each do |key, message|
+  .ui.message class=key
+    = message
+
 h3.ui.small.dividing.grey.header = translate('cms.dashboard.resources.title')
 p = translate('cms.dashboard.resources.description')
 .ui.relaxed.divided.list
@@ -66,16 +70,23 @@ h3.ui.small.dividing.grey.header = translate('cms.dashboard.alerts.title')
 - if current_user.administrator?
   h3.ui.small.dividing.grey.header = translate('cms.dashboard.sync.title')
   p = translate('cms.dashboard.sync.description')
-  .ui.list
-    .item
-      .header = translate('cms.dashboard.sync.previous')
-      .content = MapboxSync.last_synced_at&.to_s(:long) || translate('cms.dashboard.sync.never')
-    .item
-      .header = translate('cms.dashboard.sync.next')
-      .content = MapboxSync.next_sync_at.to_s(:long)
+  = render 'sync_status'
+  - if MapboxSync.can_sync?
+    a.ui.small.button href=cms_sync_url data-confirm=translate('cms.dashboard.sync.action_confirmation')
+      i.sync.alternate.icon
+      = translate('cms.dashboard.sync.action')
+  - else
+    a.ui.small.disabled.button disabled='disabled'
+      i.ban.icon
+      = translate('cms.dashboard.sync.action')
+  a.ui.basic.small.button href=cms_help_url(q: :sync, anchor: :sync)
+    = translate('cms.dashboard.sync.learn_more')
+    i.right.arrow.icon
+  - unless MapboxSync.can_sync?
+    p: small: em = translate('cms.dashboard.sync.action_disabled', time_ago: time_ago_in_words(MapboxSync.active_sync_at), time_from_now: time_ago_in_words(MapboxSync.can_sync_at))
 
 h3.ui.small.dividing.grey.header = translate('cms.dashboard.help.title')
 p = translate('cms.dashboard.help.description')
-a.ui.basic.small.button href=cms_help_url
+a.ui.basic.small.button href=cms_help_url(q: :guide, anchor: :guide)
   = translate('cms.dashboard.help.action')
   i.right.arrow.icon

@@ -2,7 +2,7 @@ class Stash < ApplicationRecord
 
   def self.get key
     value = Stash.where(key: key).limit(1).pluck(:value).first
-    value = DateTime.parse(value) if key.ends_with?('_at') && !value.nil?
+    value = DateTime.parse(value) if key.to_s.ends_with?('_at') && !value.nil?
     value
   end
 

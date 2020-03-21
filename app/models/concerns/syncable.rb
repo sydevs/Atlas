@@ -14,9 +14,9 @@ module Syncable
   end
 
   def synced?
-    return false if MapboxSync.last_synced_at.nil?
+    return false if MapboxSync.active_sync_at.nil?
 
-    updated_at < MapboxSync.last_synced_at
+    updated_at < MapboxSync.active_sync_at
   end
 
 end

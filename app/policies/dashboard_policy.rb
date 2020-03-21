@@ -34,7 +34,11 @@ class DashboardPolicy < DatabasePolicy
   end
 
   def view_help?
-    true
+    user.present?
+  end
+
+  def sync?
+    user.administrator?
   end
 
 end

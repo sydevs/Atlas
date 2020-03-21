@@ -1,0 +1,19 @@
+
+- content_for :title, translate('cms.menu.breadcrumbs.help')
+
+.ui.hidden.divider
+
+.ui.center.aligned.text.container
+  p: i.huge.green.loading.sync.alternate.icon
+  h1.ui.icon.header = translate('cms.sync.title')
+  p
+    = translate('cms.sync.description')
+    br
+    = translate('cms.sync.please_wait')
+
+= form_tag(nil, method: :post, id: :sync, style: 'display: hidden')
+
+.ui.hidden.section.divider
+
+javascript:
+  $(document).ready(() => $('#sync').submit())
