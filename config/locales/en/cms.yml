@@ -238,7 +238,7 @@ en:
         alt_title: "How does event expiration work?"
         description:
           problem: "We don't want seekers to see classes which are no longer running. Many Sahaj website have out of date program information, but even when the details are updated they quickly become outdated again."
-          solution: "To solve this, we've created an autmatic system that will email the yogis who run each program every few months to ask if the information is still correct. If they do not respond, the program will be hidden from the public until it is checked."
+          solution: "To solve this, we've created an automatic system that will email the yogis who run each program every few months to ask if the information is still correct. If they do not respond, the program will be hidden from the public until it is checked."
           review: "As soon as an event becomes classified as \"Needs Review\" the program manager will be sent an email asking them to confirm that the event details are still correct. If they do not respond within 1 week, the city manager will be sent an email asking them to check the details instead."
           expiration: "If %{weeks} weeks have passed without the event being verified, then it will be hidden from the map until someone checks and updates it."
         steps:
@@ -260,7 +260,7 @@ en:
       sync:
         title: "Why isn't my event appearing on the map?"
         description:
-          problem: "The map is processed and created by an external service called Mapbox. Whenever a change is made to the Sahaj Atlas database, it must be sent to Mapbox to update the map. However, this updating can take a few minutes, and Mapbox is processing many other maps at the same time. For this reason, we need to limit the number of updates that are sent."
+          problem: "The map is processed and created by an external service called Mapbox. Whenever a change is made to the Sahaj Atlas database, it must be sent to Mapbox before it can appear on the map. However, this updating can take a few minutes, and Mapbox is processing many other maps at the same time. For this reason, we need to limit the number of updates that are sent."
           solution: "Every hour our system checks to see if there are new updates to the Sahaj Atlas database, and if there is they will get sent to Mapbox."
           status: "Here are the most recent Mapbox synchronisation times:"
       registration:
@@ -282,7 +282,7 @@ en:
             title: "Future Marketing"
             description: "When seekers register on Sahaj Atlas we can store their email address (and we are not subject to the rules of Meetup, Eventbrite, or Facebook). This means we can use these email addresses to send follow-up materials, or recommend special Sahaj events in their area (eg. concerts or intermediate programs)."
       contact:
-        title: "I need more help"
+        title: "I have other questions or suggestions"
         description: "If you need further help, or if you want to help with the development of the Sahaj Atlas, please write to the email below. Please write your message in english."
 
     sync:
