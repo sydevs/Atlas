@@ -3,15 +3,15 @@ include LocalizationHelper
 module MapboxSync
 
   def self.last_synced_at
-    @@last_synced_at ||= Stash.get(:last_synced_at)
+    Stash.get(:last_synced_at)
   end
 
   def self.last_sync_errored_at
-    @@last_sync_errored_at ||= Stash.get(:last_sync_errored_at)
+    Stash.get(:last_sync_errored_at)
   end
 
   def self.last_sync_error
-    @@last_sync_error ||= Stash.get(:last_sync_error)
+    Stash.get(:last_sync_error)
   end
 
   def self.last_sync_errored?
@@ -28,12 +28,10 @@ module MapboxSync
   end
 
   def self.next_sync_at
-    @@next_sync_at ||= begin
-      if MapboxSync.can_sync?
-        59.minutes.from_now.beginning_of_hour + 1.minute
-      else
-        (MapboxSync.can_sync_at + 59.minutes).beginning_of_hour + 1.minute
-      end
+    if MapboxSync.can_sync?
+      59.minutes.from_now.beginning_of_hour + 1.minute
+    else
+      (MapboxSync.can_sync_at + 59.minutes).beginning_of_hour + 1.minute
     end
   end
 
@@ -42,7 +40,7 @@ module MapboxSync
   end
 
   def self.can_sync_at
-    @can_sync_at ||= MapboxSync.active_sync_at.nil? ? DateTime.now : MapboxSync.active_sync_at + 1.hour
+    MapboxSync.active_sync_at.nil? ? DateTime.now : MapboxSync.active_sync_at + 1.hour
   end
 
   def self.can_sync?
