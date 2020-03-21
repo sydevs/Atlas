@@ -78,7 +78,7 @@ h3.ui.small.dividing.grey.header = translate('cms.details.management_for_record'
   .item
     i.clock.icon
     .content
-      .header = translate('cms.details.updated_at', time_ago: '')
+      .header = translate('cms.details.updated_at')
       .description = time_ago_in_words(@record.updated_at)
 
 h3.ui.small.dividing.grey.header = translate('cms.details.location_of_record', resource: translate_model(@model).downcase)

@@ -113,7 +113,7 @@ en:
       area_in_words: "%{radius} km around %{latitude}, %{longitude}"
       records_in_recent_days: "%{resources} in the last 30 days"
       record_has_language: "%{resource} offered in %{language}"
-      updated_at: "Last updated %{time_ago} ago"
+      updated_at: "Last updated"
       resources_managed:
         title: "Resources Managed"
       event_coverage:
