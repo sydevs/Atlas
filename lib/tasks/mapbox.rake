@@ -113,6 +113,8 @@ namespace :mapbox do
       puts options.inspect
       response = HTTParty.post(url, options)
       puts "--> #{response.parsed_response.inspect}"
+
+      Stash.set('last_sync_at', DateTime.now)
   
       file.unlink
     end

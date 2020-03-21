@@ -1,4 +1,20 @@
 
+- if @record.published?
+  - if @record.syncing?
+    .ui.small.green.icon.message
+      i.compact.disc.loading.icon
+      .content
+        .header = translate('cms.details.syncing.title')
+        .description = translate('cms.details.syncing.description', resource: translate_model(@model).downcase)
+    = help_link :sync
+  - elsif !@record.synced?
+    .ui.small.olive.icon.message
+      i.sync.alternate.icon
+      .content
+        .header = translate('cms.details.desynced.title')
+        .description = translate('cms.details.desynced.description', resource: translate_model(@model).downcase, time: MapboxSync.next_sync_at.to_s(:short))
+    = help_link :sync
+
 h3.ui.small.dividing.grey.header = translate('cms.details.details_for_record', resource: @record.label)
 .ui.list
   - unless @record.published?

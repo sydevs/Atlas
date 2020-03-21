@@ -63,6 +63,17 @@ h3.ui.small.dividing.grey.header = translate('cms.dashboard.alerts.title')
 - unless @events_for_review.present? || @events_recently_expired.present?
   p = translate('cms.dashboard.alerts.empty')
 
+- if current_user.administrator?
+  h3.ui.small.dividing.grey.header = translate('cms.dashboard.sync.title')
+  p = translate('cms.dashboard.sync.description')
+  .ui.list
+    .item
+      .header = translate('cms.dashboard.sync.previous')
+      .content = MapboxSync.last_synced_at&.to_s(:long) || translate('cms.dashboard.sync.never')
+    .item
+      .header = translate('cms.dashboard.sync.next')
+      .content = MapboxSync.next_sync_at.to_s(:long)
+
 h3.ui.small.dividing.grey.header = translate('cms.dashboard.help.title')
 p = translate('cms.dashboard.help.description')
 a.ui.basic.small.button href=cms_help_url

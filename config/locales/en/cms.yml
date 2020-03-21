@@ -29,13 +29,13 @@ en:
       statistics: "Statistics"
       map: "View Map"
       report_issue: "Report Issue"
-      help: "Help (How to use)"
+      help: "Help (FAQ)"
       sign_out: "Log Out"
       sign_in: "Log In"
       # Secondary menu
       dashboard: "Dashboard for %{user}"
       worldwide: "Worldwide Data"
-      how_to: "How to use Sahaj Atlas"
+      faq: "Frequently Asked Questions"
       context: "%{resource} for %{parent}"
       # Tertiary menu
       details: "Info"
@@ -111,6 +111,8 @@ en:
       map_of_record: "Map of this %{resource}"
       area_in_words: "%{radius} km around %{latitude}, %{longitude}"
       records_in_recent_days: "%{resources} in the last 30 days"
+      record_has_language: "%{resource} offered in %{language}"
+      updated_at: "Last updated %{time_ago} ago"
       resources_managed:
         title: "Resources Managed"
       event_coverage:
@@ -138,8 +140,12 @@ en:
         title: "Wondering how to create a city manager?"
         description: "Navigate to a city page first, in the \"%{action}\" tab."
         action: "Go now"
-      record_has_language: "%{resource} offered in %{language}"
-      updated_at: "Last updated %{time_ago} ago"
+      syncing:
+        title: "Publishing to map..."
+        description: "Recent changes to this %{resource} are currently being published to the map, they should be available within 5 minutes."
+      desynced:
+        title: "Waiting for sync"
+        description: "Recent changes to this %{resource} have not been published to the map yet. The next map synchronisation is scheduled for %{time}."
 
     images:
       title: "Images of this %{resource}"
@@ -201,11 +207,17 @@ en:
         title: "How do I use this site?"
         description: "You are currently viewing the Content Management System (CMS) for the Sahaj Atlas. We have created a video and some explanations to help you understand how to use this CMS."
         action: "Learn how to use"
+      sync:
+        title: "Mapbox Synchronisation"
+        description: "The Atlas database is published to the map once per hour. Synchronisations are scheduled at the beginning of every hour, but can also occur immediately if a synchronisation hasn't occured recently."
+        previous: "Last sync at"
+        next: "Next scheduled sync at"
+        never: "Never"
       
     help:
-      guide: "How To Use Sahaj Atlas"
+      guide: "How do I use Sahaj Atlas?"
       expiration:
-        title: "How does event expiration work?"
+        title: "Why isn't my event appearing on the map?"
         description:
           problem: "We don't want seekers to see classes which are no longer running. Many Sahaj website have out of date program information, but even when the details are updated they quickly become outdated again."
           solution: "To solve this, we've created an autmatic system that will email the yogis who run each program every few months to ask if the information is still correct. If they do not respond, the program will be hidden from the public until it is checked."
@@ -227,8 +239,14 @@ en:
             label: "Expires" # This should be present tense as in the phrase "The event expires on March 3"
             title: "Expired"
             description: "If an event has not been updated in %{weeks} weeks"
+      sync:
+        title: "Why isn't my event appearing on the map?"
+        description:
+          problem: "The map is processed and created by an external service called Mapbox. Whenever a change is made to the Sahaj Atlas database, it must be sent to Mapbox to update the map. However, this updating can take a few minutes, and Mapbox is processing many other maps at the same time. For this reason, we need to limit the number of updates that are sent."
+          solution: "Every hour our system checks to see if there are new updates to the Sahaj Atlas database, and if there is they will get sent to Mapbox."
+          details: "Here are the most recent Mapbox synchronisation times:"
       contact:
-        title: "Need more help?"
+        title: "I need more help"
         description: "If you need further help, or if you want to help with the development of the Sahaj Atlas, please write to the email below. Please write your message in english."
 
   passwordless:

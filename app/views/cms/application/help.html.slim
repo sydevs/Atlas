@@ -1,28 +1,59 @@
 
 - content_for :title, translate('cms.menu.breadcrumbs.help')
 
-h1.ui.header = translate('cms.menu.how_to')
+h1.ui.header = translate('cms.menu.faq')
 
-h3.ui.small.dividing.grey.header = translate('cms.help.guide')
-.ui.embed data-source='youtube' data-id='ScMzIvxBSi4' data-placeholder='http://i3.ytimg.com/vi/ScMzIvxBSi4/maxresdefault.jpg'
+.ui.fluid.accordion
+  .title class=active_accordion?(:guide)
+    i.dropdown.icon
+    = translate('cms.help.guide')
+    |  (
+    = manager_icon current_user
+    = translate("cms.dashboard.role.#{current_user.type}.title")
+    | )
+  .content class=active_accordion?(:guide)
+    .ui.embed data-source='youtube' data-id='ScMzIvxBSi4' data-placeholder='http://i3.ytimg.com/vi/ScMzIvxBSi4/maxresdefault.jpg'
 
-h3.ui.small.dividing.grey.header = translate('cms.help.expiration.title')
-p = translate('cms.help.expiration.description.problem')
-p = translate('cms.help.expiration.description.solution')
-.ui.three.steps
-  - %w[updated needs_review expired].each do |step|
-    - weeks = (step == 'expired' ? Expirable::EXPIRE_AFTER_WEEKS : Expirable::VERIFY_AFTER_WEEKS)
-    .step
-      i.icon class=translate("cms.help.expiration.steps.#{step}.icon")
-      .content
-        .title = translate("cms.help.expiration.steps.#{step}.title")
-        .description = translate("cms.help.expiration.steps.#{step}.description", weeks: weeks)
+  .title class=active_accordion?(:expiration)
+    i.dropdown.icon
+    = translate('cms.help.expiration.title')
+    |  (#{translate('cms.details.record_expired.title', resource: translate_model(Event))})
+  .content class=active_accordion?(:expiration)
+    p = translate('cms.help.expiration.description.problem')
+    p = translate('cms.help.expiration.description.solution')
+    .ui.three.steps
+      - %w[updated needs_review expired].each do |step|
+        - weeks = (step == 'expired' ? Expirable::EXPIRE_AFTER_WEEKS : Expirable::VERIFY_AFTER_WEEKS)
+        .step
+          i.icon class=translate("cms.help.expiration.steps.#{step}.icon")
+          .content
+            .title = translate("cms.help.expiration.steps.#{step}.title")
+            .description = translate("cms.help.expiration.steps.#{step}.description", weeks: weeks)
 
-p = translate('cms.help.expiration.description.review')
-p = translate('cms.help.expiration.description.expiration', weeks: Expirable::EXPIRE_AFTER_WEEKS)
+    p = translate('cms.help.expiration.description.review')
+    p = translate('cms.help.expiration.description.expiration', weeks: Expirable::EXPIRE_AFTER_WEEKS)
 
-h3.ui.small.dividing.grey.header = translate('cms.help.contact.title')
-p = translate('cms.help.contact.description')
-p = mail_to 'contact@sydevelopers.com'
+  .title class=active_accordion?(:sync)
+    i.dropdown.icon
+    = translate('cms.help.sync.title')
+    |  (#{translate('cms.details.desynced.title', resource: translate_model(Event))})
+  .content class=active_accordion?(:sync)
+    p = translate('cms.help.sync.description.problem')
+    p = translate('cms.help.sync.description.solution')
+    p = translate('cms.help.sync.description.details')
+    ul.ui.list
+      li.item
+        .header = translate('cms.dashboard.sync.previous')
+        .content = MapboxSync.last_synced_at&.to_s(:long) || translate('cms.dashboard.sync.never')
+      li.item
+        .header = translate('cms.dashboard.sync.next')
+        .content = MapboxSync.next_sync_at.to_s(:long)
+
+  .title class=active_accordion?(:contact)
+    i.dropdown.icon
+    = translate('cms.help.contact.title')
+  .content class=active_accordion?(:contact)
+    p = translate('cms.help.contact.description')
+    p = mail_to 'contact@sydevelopers.com'
 
 .ui.hidden.section.divider

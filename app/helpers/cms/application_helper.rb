@@ -74,4 +74,17 @@ module CMS::ApplicationHelper
     end
   end
 
+  def help_link type
+    content_tag :div, class: 'ui help' do
+      tag.a href: cms_help_url(q: type, anchor: type), target: '_blank' do
+        concat tag.i class: 'info circle icon'
+        concat translate("cms.help.#{type}.title")
+      end
+    end
+  end
+
+  def active_accordion? type
+    'active' if params[:q]&.to_sym == type # || (params[:q].nil? && type == :guide)
+  end
+
 end
