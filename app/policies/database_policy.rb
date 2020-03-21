@@ -42,7 +42,7 @@ class DatabasePolicy < ApplicationPolicy
   end
 
   def destroy_association? association = nil
-    return true if manage?(super_manager: true) && association == :managers
+    return true if manage? && association == :managers
     return true if update? && association == :pictures
 
     false

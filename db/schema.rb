@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_20_193808) do
+ActiveRecord::Schema.define(version: 2020_03_21_112354) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -104,6 +104,7 @@ ActiveRecord::Schema.define(version: 2020_03_20_193808) do
     t.integer "manager_id"
     t.integer "record_id"
     t.string "record_type"
+    t.integer "assigned_by_id"
     t.index ["record_id", "record_type"], name: "index_managed_records_on_record_id_and_record_type"
   end
 

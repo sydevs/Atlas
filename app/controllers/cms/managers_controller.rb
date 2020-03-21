@@ -2,6 +2,18 @@ class CMS::ManagersController < CMS::ApplicationController
 
   prepend_before_action { @model = Manager }
 
+  def index
+    if @context
+      authorize_association! Manager
+      @scope = @context.managed_records || Manager
+      @records = policy_scope(@scope).page(params[:page]).per(10).search(params[:q])
+      @records = @records.joins(:manager).order('managers.updated_at': :desc)
+      render 'cms/views/index'
+    else
+      super
+    end
+  end
+
   def create
     @record = Manager.find_or_initialize_by(email: parameters[:email])
 
@@ -20,7 +32,7 @@ class CMS::ManagersController < CMS::ApplicationController
         flash[:error] = "#{@record.name} already manages this #{helpers.translate_model(@context).downcase}"
       elsif !new_record || @record.save
         flash[:success] = "Added #{@model_name.human} successfully"
-        @context.managers << @record
+        @context.managed_records << ManagedRecord.new(manager: @record, record: @context, assigned_by_id: current_user.id)
         @context.save! validate: false
         ManagerMailer.with(manager: @record, context: @context).welcome.deliver_now if new_record
         success = true
@@ -46,12 +58,16 @@ class CMS::ManagersController < CMS::ApplicationController
   end
 
   def destroy
-    authorize @record
-    raise StandardError, 'Cannot destroy a manager' unless @context
+    if @context && !@context.is_a?(Manager)
+      @managed_record = @context.managed_records.find_by(manager_id: @record.id) if @context
+      authorize @managed_record
 
-    @context.managers.delete(@record)
-    flash[:success] = translate('cms.messages.successfully_removed', resource: Manager, context: @context.class)
-    redirect_to [:cms, @context, Manager]
+      @context.managers.delete(@record)
+      flash[:success] = translate('cms.messages.successfully_removed', resource: Manager, context: @context.class)
+      redirect_to [:cms, @context, Manager]
+    else
+      super
+    end
   end
 
   def activity
