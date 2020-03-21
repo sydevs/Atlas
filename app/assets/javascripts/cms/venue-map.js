@@ -14,7 +14,7 @@ const VenueMap = {
     VenueMap.data = $('#venue-map').data()
     VenueMap.instance = L.map('venue-map', {
       attributionControl: false,
-      zoomControl: false,
+      //zoomControl: false,
     })
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(VenueMap.instance)
@@ -50,10 +50,10 @@ const VenueMap = {
 
   initPreviewMap() {
     VenueMap.setMarker(VenueMap.data.latitude, VenueMap.data.longitude)
-    VenueMap.instance.dragging.disable()
-    VenueMap.instance.touchZoom.disable()
-    VenueMap.instance.doubleClickZoom.disable()
-    VenueMap.instance.scrollWheelZoom.disable()
+    //VenueMap.instance.dragging.disable()
+    //VenueMap.instance.touchZoom.disable()
+    //VenueMap.instance.doubleClickZoom.disable()
+    //VenueMap.instance.scrollWheelZoom.disable()
   },
 
   setMarker(latitude, longitude) {
@@ -62,7 +62,7 @@ const VenueMap = {
       VenueMap.venueMarker.on('click', VenueMap.onMarkerClick)
     }
 
-    $('#venue-map').css('min-height', '180px').css('opacity', '1')
+    $('#venue-map').css('min-height', '240px').css('opacity', '1')
     VenueMap.venueMarker.setLatLng([latitude, longitude])
     VenueMap.instance.invalidateSize()
     VenueMap.instance.setView([latitude, longitude], VenueMap.initialZoom)

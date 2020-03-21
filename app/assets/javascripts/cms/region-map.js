@@ -13,7 +13,7 @@ const RegionMap = {
     RegionMap.data = $map.data()
     RegionMap.instance = L.map('region-map', {
       attributionControl: false,
-      zoomControl: false,
+      //zoomControl: false,
     })
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(RegionMap.instance)
@@ -35,7 +35,7 @@ const RegionMap = {
   initPreviewMap() {
     const data = RegionMap.data
     RegionMap.instance.invalidateSize()
-    RegionMap.disableInteractions()
+    //RegionMap.disableInteractions()
 
     if (data.country) {
       RegionMap.loadCountryVectors()
