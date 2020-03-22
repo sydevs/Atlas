@@ -6,4 +6,15 @@
       a.header href=url_for([:cms, event]) = event.label
     - else
       .header = event.label
-    .description #{event.category.humanize.titleize} / #{"#{event.room}, " if event.room}#{event.timing_in_words}
+    .description
+      - if event.expired?
+        span.orange.alert = translate('cms.details.record_expired.title', resource: translate_model(Event))
+        '  - 
+      - elsif !event.published?
+        em.alert = translate('cms.details.record_not_published.title')
+        '  - 
+      
+      - if event.room
+        | #{event.category.humanize.titleize} / #{event.room}, #{event.timing_in_words}
+      - else
+        | #{event.category.humanize.titleize} / #{event.timing_in_words}

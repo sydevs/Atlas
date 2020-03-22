@@ -6,4 +6,9 @@
       a.header href=url_for([:cms, venue]) = venue.label
     - else
       .header = venue.label
-    .description #{venue.address_text} - #{translate_model_count(venue.events)}
+    .description
+      - if !venue.published?
+        em.alert = translate('cms.details.record_not_published.title')
+        '  - 
+      
+      | #{venue.address_text} - #{translate_model_count(venue.events)}
