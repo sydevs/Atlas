@@ -97,7 +97,7 @@ class Manager < ApplicationRecord
     if administrator? || area
       country_code ? Province.where(country_code: country_code) : Province.default_scoped
     else
-      provinces_via_country = Province.where(country_code: countries.select(:country_code))
+      provinces_via_country = Province.where(country_code: countries.select(:country_code).where(enable_province_management: true))
       provinces_via_local_area = Province.where(province_code: local_areas.select(:province_code)) # TODO: Provinces are probably not unique internationally
       provinces_via_event = Province.where(province_code: events.select(:province_code))
       provinces = Province.where(id: provinces).or(provinces_via_country).or(provinces_via_local_area).or(provinces_via_event)
