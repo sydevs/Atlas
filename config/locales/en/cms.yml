@@ -34,6 +34,7 @@ en:
       sign_in: "Log In"
       # Secondary menu
       dashboard: "Dashboard for %{user}"
+      review: "All Alerts for %{user}"
       worldwide: "Worldwide Data"
       faq: "Frequently Asked Questions"
       context: "%{resource} for %{parent}"
@@ -48,6 +49,7 @@ en:
         show: "World"
         help: "Help"
         regions: "Regions"
+        review: "Review Alerts"
         sync: "Mapbox Sync"
 
     messages:
@@ -198,13 +200,15 @@ en:
         empty: "No alerts right now, keep up the good work!"
         review:
           title: "Events need review"
+          alt_title: "Soon to Expire Events"
           description: "Several published events have not been updated in a few months. Please check that the event details are still correct, and save the event so that we know that it is still accurate. Otherwise it will be removed from the map."
         expired:
           title: "Some events have expired"
+          alt_title: "Expired Events"
           description: "Several published events are hidden from the map because they have not been verified recently. Please check and resave these events to re-enable them."
           other:
-            one: "There is %{count} other older expired event in the system."
-            other: "There are %{count} other older expired events in the system."
+            one: "There is %{count} older expired event in the system."
+            other: "There are %{count} older expired events in the system."
       help:
         title: "How do I use this site?"
         description: "You are currently viewing the Content Management System (CMS) for the Sahaj Atlas. We have created a video and some explanations to help you understand how to use this CMS."

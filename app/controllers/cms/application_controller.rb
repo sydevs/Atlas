@@ -30,8 +30,14 @@ class CMS::ApplicationController < ActionController::Base
     authorize current_user, :dashboard?
     @resources = current_user.countries + current_user.provinces + current_user.local_areas + current_user.events
     @events_for_review = current_user.accessible_events.needs_review
-    @events_recently_expired = current_user.accessible_events.recently_expired
+    @events_recently_expired = current_user.accessible_events.limit(10)
     @events_expired_count = current_user.accessible_events.expired.count
+  end
+
+  def review
+    authorize current_user, :dashboard?
+    @events_for_review = current_user.accessible_events.needs_review
+    @events_expired = current_user.accessible_events.expired
   end
 
   def index

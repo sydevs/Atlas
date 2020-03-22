@@ -20,6 +20,7 @@ Rails.application.routes.draw do
 
   namespace :cms do
     root to: 'application#dashboard'
+    get :review, to: 'application#review'
     get :regions, to: 'application#regions'
     get :worldwide, to: 'application#show'
     get :help, to: 'application#help'
