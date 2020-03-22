@@ -63,6 +63,15 @@ en:
       successfully_confirmed: "Thank you for confirming that this %{resource} is up to date."
       not_logged_in: "You are not logged in!"
       no_comment: "(No comment)"
+      sync:
+        success: "The latest atlas data has been sent to Mapbox to be processed. It should appear on the map within 5 minutes."
+        error: "There was a problem with the map synchronisation: \"%{error}\""
+        not_needed: "No venues or events have changes since the last map synchronisation. So the sync has been skipped."
+        now_allowed: "The map cannot be synced now because it was already synced %{time_ago}. Please wait for %{time_from_now}, and try again."
+      manager:
+        success: "Added manager successfully"
+        already_added: "%{manager} already manages this #{resource}"
+        already_exists: "%{name} <%{email}> already exists"
       cannot_create:
         event: "New events cannot be created here, they must be added directly to a venue."
         venue: "New venues cannot be created here, they must be added directly to a region within a country."

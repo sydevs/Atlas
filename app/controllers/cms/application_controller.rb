@@ -147,9 +147,9 @@ class CMS::ApplicationController < ActionController::Base
 
     if request.post?
       if MapboxSync.sync!
-        flash[:success] = "The latest atlas data has been sent to Mapbox to be processed. It should appear on the map within 5 minutes."
+        flash[:success] = translate('cms.messages.sync.success')
       else
-        flash[:error] = "There was a problem with the map synchronisation: \"#{MapboxSync.last_sync_error}\""
+        flash[:error] = translate('cms.messages.sync.error', error: MapboxSync.last_sync_error)
       end
   
       redirect_to cms_root_url
@@ -157,9 +157,9 @@ class CMS::ApplicationController < ActionController::Base
       if params[:force] == 'true'
         render 'cms/application/sync'
       elsif !MapboxSync.needs_sync?
-        redirect_to cms_root_url, flash: { notice: "No venues or events have changes since the last map synchronisation. So the sync has been skipped." }
+        redirect_to cms_root_url, flash: { notice: translate('cms.messages.not_needed') }
       elsif !MapboxSync.can_sync?
-        redirect_to cms_root_url, flash: { error: "The map cannot be synced now because it was already synced recently. Please wait for #{helpers.time_ago_in_words(MapboxSync.can_sync_at)}, and try again." }
+        redirect_to cms_root_url, flash: { error: success: translate('cms.messages.not_allowed', time_ago: helpers.time_ago_in_words(MapboxSync.active_sync_at), time_from_now: helpers.time_ago_in_words(MapboxSync.can_sync_at)) }
       else
         render 'cms/application/sync'
       end

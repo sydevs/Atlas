@@ -29,19 +29,19 @@ class CMS::ManagersController < CMS::ApplicationController
 
     if @context.present?
       if @context.managers.where(id: @record.id).exists?
-        flash[:error] = "#{@record.name} already manages this #{helpers.translate_model(@context).downcase}"
+        flash[:error] = translate('cms.messages.manager.already_added', manager: @record.name, resource: @context.model_name.downcase)
       elsif !new_record || @record.save
-        flash[:success] = "Added #{@model_name.human} successfully"
+        flash[:success] = translate('cms.messages.manager.success')
         @context.managed_records << ManagedRecord.new(manager: @record, record: @context, assigned_by_id: current_user.id)
         @context.save! validate: false
         ManagerMailer.with(manager: @record, context: @context).welcome.deliver_now if new_record
         success = true
       end
     elsif !new_record
-      flash[:notice] = "#{@record.name} <#{@record.email}> already exists"
+      flash[:notice] = translate('cms.messages.manager.already_exists', name: @record.name, email: @record.email)
       success = true
     elsif @record.save
-      flash[:success] = "Added #{@model_name.human} successfully"
+      flash[:success] = translate('cms.messages.manager.success')
       ManagerMailer.with(manager: @record, context: @context).welcome.deliver_now if @record.administrator?
       success = true
     end
