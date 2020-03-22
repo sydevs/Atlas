@@ -30,7 +30,7 @@ class Venue < ApplicationRecord
   # Methods
 
   def parent
-    country.enable_province_management? ? province || country : country
+    local_areas.first || (country.enable_province_management? ? province || country : country)
   end
 
   def managed_by? manager, super_manager: nil

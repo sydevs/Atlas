@@ -4,7 +4,9 @@ class CMS::VenuesController < CMS::ApplicationController
   prepend_before_action { @model = Venue }
 
   def new
-    if @context.is_a?(Province)
+    if @context.is_a?(LocalArea)
+      super country_code: @context.country_code, province_code: @context.province_code
+    elsif @context.is_a?(Province)
       super country_code: @context.country_code, province_code: @context.province_code
     elsif @context.is_a?(Country)
       super country_code: @context.country_code
