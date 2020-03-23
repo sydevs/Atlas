@@ -58,7 +58,6 @@ class ApplicationInstance {
       this.infoPanel.show(state.event, state.venue)
       this.map.invalidateSize()
       this.map.setHighlightedVenue(state.venue)
-      this.setInteractive(false)
     } else if (state.venue) {
       if (state.venue.events.length == 1) {
         // Show even if there is only one event for this venue
@@ -71,7 +70,6 @@ class ApplicationInstance {
       this.showVenues([state.venue])
       this.map.invalidateSize()
       this.map.setHighlightedVenue(state.venue)
-      this.setInteractive(false)
     } else {
       this._setMode('list')
       this.map.invalidateSize()
@@ -94,8 +92,6 @@ class ApplicationInstance {
           longitude: state.longitude,
         })
       }
-
-      this.setInteractive(true)
     }
 
     if (recordHistory) {
@@ -103,11 +99,6 @@ class ApplicationInstance {
     }
 
     return true
-  }
-
-  setInteractive(interactive) {
-    document.body.classList.toggle('map-interactive', interactive)
-    this.map.setInteractive(interactive)
   }
 
   _setMode(mode) {

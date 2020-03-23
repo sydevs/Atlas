@@ -110,14 +110,6 @@ $z-hidden: -100
     @content
 
 // ===== MODES ===== //
-@mixin map-interactive
-  body.map-interactive &
-    @content
-
-@mixin map-not-interactive
-  body:not(.map-interactive) &
-    @content
-
 @mixin mode($mode)
   body.mode--#{$mode} &
     @content

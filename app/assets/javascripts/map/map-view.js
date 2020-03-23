@@ -86,9 +86,28 @@ class MapView {
 
     if (venue) {
       this.selectedMarker.setLngLat([venue.longitude, venue.latitude]).addTo(this.mapbox)
+
+      if (Util.isDevice('mobile')) {
+        const width = 0.01
+        const height = width * (this.container.offsetHeight / window.innerWidth)
+        console.log(width, height, '-', this.container.offsetHeight, '/', window.innerWidth)
+        const bounds = new mapboxgl.LngLatBounds([
+          [
+            venue.longitude - width / 2.0,
+            venue.latitude - height / 2.0,
+          ], [
+            venue.longitude + width / 2.0,
+            venue.latitude + height / 2.0,
+          ]
+        ])
+        console.log(bounds, bounds.getCenter())
+        this.mapbox.setMaxBounds(bounds)
+      }
+
       this.flyTo(venue, 16)
     } else {
       this.selectedMarker.remove()
+      this.mapbox.setMaxBounds(null)
     }
   }
 
@@ -125,18 +144,6 @@ class MapView {
     } else {
       this.locationMarker.setLngLat([location.longitude, location.latitude]).addTo(this.mapbox)
     }
-  }
-
-  setInteractive(interactive) {
-    if (!Util.isDevice('mobile')) {
-      // Never disable interaction on tablet and desktop
-      interactive = true
-    }
-
-    const handlers = ['scrollZoom', 'boxZoom', 'dragPan', 'keyboard', 'doubleClickZoom', 'doubleClickZoom']
-    handlers.forEach(handler => {
-      this.mapbox[handler][interactive ? 'enable' : 'disable']()
-    })
   }
 
   parseVenue(feature) {
