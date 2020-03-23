@@ -37,16 +37,14 @@ class Map::ApplicationController < ActionController::Base
   def closest
     params.require(%i[latitude longitude])
     coordinates = [params[:latitude], params[:longitude]]
-    query = Venue.published.by_distance(origin: coordinates).where('updated_at < ?', 1.hour.ago.beginning_of_hour)
-    venue = query.select('id, city, country_code, latitude, longitude').limit(1).first
 
-    render json: {
-      id: venue.id,
-      label: "#{venue.city}, #{venue.country_code}",
-      latitude: venue.latitude,
-      longitude: venue.longitude,
-      distance: venue.distance_from(coordinates),
-    }
+    query = Venue.published.by_distance(origin: coordinates).where('venues.updated_at < ?', 1.hour.ago.beginning_of_hour)
+    @venue = query.joins(:events).limit(1).first
+
+    distance = @venue.distance_from(coordinates)
+    @event = @venue.events.unscoped.first if distance < 8
+
+    render 'cms/application/closest', format: :json
   end
 
   def privacy

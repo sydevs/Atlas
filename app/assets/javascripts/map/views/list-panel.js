@@ -29,9 +29,12 @@ class ListPanel {
   showNoResults(alternative) {
     this.alternative = alternative
     this.setEmptyResults(true)
+    this.clearEvents()
 
     if (alternative) {
-      this.noResultsAlternativeTitle.innerText = alternative.label
+      this.noResultsAlternativeTitle.innerText = alternative.event.label || alternative.label
+      this.container.classList.toggle('list__no-results--far', !alternative.close)
+      this.container.classList.toggle('list__no-results--close', alternative.close)
     }
   }
 

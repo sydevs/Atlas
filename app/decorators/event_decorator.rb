@@ -1,22 +1,25 @@
 module EventDecorator
 
+  def decorated_venue
+    @venue ||= venue&.extend(VenueDecorator)
+  end
+
   def label fallback_only: false
     if name.present? && !fallback_only
       name
     elsif category && venue&.name
-      venue_label = venue.extend(VenueDecorator).label
-      I18n.translate('map.listing.event_name', category: category_label, venue: venue_label)
+      I18n.translate('map.listing.event_name', category: category_label, venue: decorated_venue.label)
     else
       category_name
     end
   end
 
   def address
-    { room: room }.merge(venue.address)
+    { room: room }.merge(decorated_venue.address)
   end
 
   def address_text
-    @address_text ||= [room, venue.street, venue.city, venue.province_name, venue.country_code].compact.join(', ')
+    @address_text ||= [room, venue.street, venue.city, decorated_venue.province_name, venue.country_code].compact.join(', ')
   end
 
   def category_name

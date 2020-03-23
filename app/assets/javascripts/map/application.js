@@ -76,11 +76,11 @@ class ApplicationInstance {
       this.map.setHighlightedVenue(null)
 
       if (state.west && state.east && state.north && state.south) {
-        this.listPanel.clearEmptyResults()
+        this.listPanel.setEmptyResults(false)
         this.map.fitTo(state)
         this.state.zoom = this.map.mapbox.getZoom()
       } else if (state.latitude && state.longitude) {
-        this.listPanel.clearEmptyResults()
+        this.listPanel.setEmptyResults(false)
         this.map.flyTo(state, 10)
       } else {
         this.map.zoomOut()

@@ -90,7 +90,6 @@ class MapView {
       if (Util.isDevice('mobile')) {
         const width = 0.01
         const height = width * (this.container.offsetHeight / window.innerWidth)
-        console.log(width, height, '-', this.container.offsetHeight, '/', window.innerWidth)
         const bounds = new mapboxgl.LngLatBounds([
           [
             venue.longitude - width / 2.0,
@@ -100,7 +99,6 @@ class MapView {
             venue.latitude + height / 2.0,
           ]
         ])
-        console.log(bounds, bounds.getCenter())
         this.mapbox.setMaxBounds(bounds)
       }
 
