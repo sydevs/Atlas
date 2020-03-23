@@ -13,14 +13,22 @@ class ListPanel {
     this.noResultsAlternativeTitle.addEventListener('click', () => this.triggerAlternativeQuery())
   }
 
+  setEmptyResults(shown) {
+    const was_shown = document.body.classList.contains('state--no-results')
+    if (was_shown != shown) {
+      document.body.classList.toggle('state--no-results', shown)
+      Application.map.invalidateSize()
+    }
+  }
+
   showLoading() {
-    this.container.classList.remove('list--no-results')
+    this.setEmptyResults(false)
     this.clearEvents()
   }
 
   showNoResults(alternative) {
     this.alternative = alternative
-    this.container.classList.add('list--no-results')
+    this.setEmptyResults(true)
 
     if (alternative) {
       this.noResultsAlternativeTitle.innerText = alternative.label
@@ -33,7 +41,7 @@ class ListPanel {
 
     if (venues.length < 1) return
 
-    this.container.classList.remove('list--no-results')
+    this.setEmptyResults(false)
 
     if (Application.map.location) {
       venues.map(venue => venue.distance = Application.map.distance(venue))
@@ -61,21 +69,6 @@ class ListPanel {
     const element = document.importNode(this.itemTemplate.content, true).querySelector('.js-item')
     this.items[event.id] = new ListItem(element, event, venue)
     this.itemsContainer.appendChild(element)
-  }
-
-  clearEmptyResults() {
-    this.container.classList.remove('list--no-results')
-  }
-
-  showEmptyResults(alternative) {
-    this.clearEvents()
-
-    this.alternative = alternative
-    this.container.classList.add('list--no-results')
-
-    if (alternative) {
-      this.noResultsAlternativeTitle.innerText = alternative.label
-    }
   }
 
   triggerAlternativeQuery() {

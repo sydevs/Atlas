@@ -9,6 +9,7 @@ class MapView {
     this.mobileBreakpoint = 768
     this.desktopBreakpoint = 1100
     this.viewportPadding = 0
+    this.invalidating = true
 
     const state = JSON.parse(this.container.dataset.state)
     const config = {
@@ -38,6 +39,7 @@ class MapView {
 
     this.mapbox.on('load', _event => {
       onLoadCallback()
+      this.invalidating = false
     })
 
     this.mapbox.on('click', event => {
@@ -54,7 +56,7 @@ class MapView {
     })
 
     this.mapbox.on('moveend', _event => {
-      if (Util.isMode('list')) {
+      if (Util.isMode('list') && !this.invalidating) {
         Application.showVenues(this.getRenderedVenues())
       }
     })
@@ -197,7 +199,9 @@ class MapView {
   }
 
   invalidateSize() {
+    this.invalidating = true
     this.mapbox.resize()
+    this.invalidating = false
   }
 
 }

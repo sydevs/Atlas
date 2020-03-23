@@ -40,7 +40,7 @@ class ApplicationInstance {
     if (venues.length) {
       this.listPanel.showVenues(venues)
     } else {
-      this.listPanel.showLoading()
+      //this.listPanel.showLoading()
       this.atlas.getClosest(this.map.getCenter(), response => this.listPanel.showNoResults(response))
     }
   }
