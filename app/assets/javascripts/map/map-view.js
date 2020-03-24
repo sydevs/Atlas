@@ -88,7 +88,7 @@ class MapView {
       this.selectedMarker.setLngLat([venue.longitude, venue.latitude]).addTo(this.mapbox)
 
       if (Util.isDevice('mobile')) {
-        const width = 0.01
+        const width = 0.25
         const height = width * (this.container.offsetHeight / window.innerWidth)
         const bounds = new mapboxgl.LngLatBounds([
           [

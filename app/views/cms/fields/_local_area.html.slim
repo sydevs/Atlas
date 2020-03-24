@@ -6,15 +6,15 @@
       i.search.icon
   .hint = translate('cms.hints.geosearch.description')
 
-.field
-  = f.label :coordinates, required: true
-  .hint = translate('cms.hints.local_area.location')
-  .two.fields
-    = f.input :latitude, label: false, placeholder: translate_attribute(LocalArea, :latitude)
-    = f.input :longitude, label: false, placeholder: translate_attribute(LocalArea, :longitude)
-  = f.input :radius, label: false, placeholder: translate_attribute(LocalArea, :radius)
-
 = f.input :name
+
+.hint = translate('cms.hints.local_area.location')
+
+.two.fields
+  = f.input :latitude, placeholder: translate_attribute(LocalArea, :latitude)
+  = f.input :longitude, placeholder: translate_attribute(LocalArea, :longitude)
+  
+= f.input :radius, placeholder: translate_attribute(LocalArea, :radius)
 
 - if @record.latitude && @record.longitude && @record.radius
   #local_area-map data-latitude=@record.latitude data-longitude=@record.longitude data-radius=@record.radius
