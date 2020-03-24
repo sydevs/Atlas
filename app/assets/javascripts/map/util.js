@@ -91,7 +91,7 @@ const Util = {
 
       if (start_date && end_date) {
         const weeksBetween = Math.round((start_date - end_date) / (7 * 24 * 60 * 60 * 1000))
-        return Util.translate('timing_labels.course').replace('%{weeks}', weeksBetween)
+        return Util.translate('timing_labels.course').replace('%{weeks}', Math.abs(weeksBetween))
       } else {
         return Util.translate('timing_labels.course_fallback')
       }

@@ -24,7 +24,7 @@ module Expirable
     scope :published, -> { where("#{table_name}.updated_at < ?", EXPIRE_DATE) }
     scope :needs_review, -> { where("#{table_name}.updated_at <= ? AND #{table_name}.updated_at > ?", VERIFY_DATE, RECENTLY_EXPIRED_DATE) }
     scope :needs_urgent_review, -> { where("#{table_name}.updated_at < ? AND #{table_name}.updated_at > ?", ESCALATE_DATE, VERIFY_DATE) }
-    scope :expired, -> { where("#{table_name}.updated_at < ?", EXPIRE_DATE) }
+    scope :expired, -> { where("#{table_name}.updated_at <= ?", EXPIRE_DATE) }
     scope :recently_expired, -> { where("#{table_name}.updated_at <= ? AND #{table_name}.updated_at > ?", EXPIRE_DATE, RECENTLY_EXPIRED_DATE) }
   end
 
