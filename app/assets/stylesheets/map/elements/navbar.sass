@@ -46,12 +46,20 @@
       left: 0
       right: 0
 
+  @include tablet
+    @include not-mode(map)
+      top: 0
+      left: 0
+      right: 0
+
   @include tablet-or-larger
+    height: $header-height
+    z-index: $z-control + 1
+
+  @include desktop-or-larger
     top: 0
     left: 0
     right: 0
-    height: $header-height
-    z-index: $z-control + 1
 
 // ===== VENUE ===== //
 .navbar__venue
@@ -92,7 +100,7 @@
 
 // ===== SEARCH ===== //
 .navbar__search
-  @include not-mode(list)
+  @include mode([venue, event])
     display: none
 
 .navbar__search__input

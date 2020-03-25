@@ -110,9 +110,10 @@ $z-hidden: -100
     @content
 
 // ===== MODES ===== //
-@mixin mode($mode)
-  body.mode--#{$mode} &
-    @content
+@mixin mode($modes)
+  @each $mode in $modes
+    body.mode--#{$mode} &
+      @content
 
 @mixin not-mode($mode)
   body:not(.mode--#{$mode}) &

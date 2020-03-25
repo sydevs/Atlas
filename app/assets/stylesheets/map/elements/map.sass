@@ -5,11 +5,13 @@
   height: calc(100vh - 150px)
   user-select: none
 
-  @include mode(event)
+  @include mode([event, venue])
     height: 174px
 
-  @include mode(venue)
-    height: 174px
+  @include mode(map)
+    width: 100vw !important
+    height: 100vh !important
+    margin-left: 0 !important
 
   @include tablet-or-larger
     height: 100vh !important
@@ -26,10 +28,10 @@ body.state--no-results.mode--list #map
 .mapboxgl-control-container
   @include mobile
     .mapboxgl-ctrl
-      @include not-mode(list)
+      @include mode([venue, event])
         display: none
 
-      @include mode(list)
+      @include mode([list, map])
         &-top-left,
         &-top-right
           top: 70px

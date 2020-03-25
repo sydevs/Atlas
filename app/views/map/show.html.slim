@@ -1,7 +1,7 @@
 
 ruby:
-  @state[:venue] = @venue&.to_h
-  @state[:event] = @event&.to_h
+  @state[:venue] = @venue&.as_json
+  @state[:event] = @event&.as_json
 
 // ===== SEARCH BOX ===== //
 .navbar id='js-navbar' data-key=ENV['MAPBOX_ACCESSTOKEN'] data-country=params[:country]
@@ -11,7 +11,7 @@ ruby:
         i.icon.icon--left
       .navbar__venue__title
         strong Events at
-        span id='js-venue-title'
+        span id='js-venue-title' = @venue&.label
 
     .navbar__search
       input.navbar__search__input id='js-search-input' type='text' tabindex='1' placeholder=translate('map.listing.search')
@@ -22,7 +22,7 @@ ruby:
     ul.navbar__results id='js-search-results'
 
 // ===== MAP ===== //
-#map data=@config data-state=@state.to_json
+#map data=@config data-state=@state.to_json data-geojson=MapboxSync.get_remote_geojson_url
   #js-debug-viewport
   #js-debug-viewport-center
 

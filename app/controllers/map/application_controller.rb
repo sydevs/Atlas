@@ -6,12 +6,15 @@ class Map::ApplicationController < ActionController::Base
 
   def show
     I18n.locale = params[:locale]&.to_sym || :en
+    @mode = 'map'
 
     if params[:venue_id]
       @venue = Venue.joins(:events).find(params[:venue_id])
+      @mode = 'venue'
     elsif params[:event_id]
       @event = Event.joins(:venue).find(params[:event_id])
       @venue = @event.venue
+      @mode = 'event'
     end
 
     @config = {
@@ -28,7 +31,7 @@ class Map::ApplicationController < ActionController::Base
       longitude: params[:longitude] || @venue&.longitude,
     }
 
-    @state[:zoom] = 16 if @state[:latitude] && @state[:longitude]
+    @state[:zoom] ||= 16 if @state[:latitude] && @state[:longitude]
 
     set_jbuilder_params!
     render 'map/show'

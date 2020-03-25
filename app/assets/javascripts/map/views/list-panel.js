@@ -32,7 +32,8 @@ class ListPanel {
     this.clearEvents()
 
     if (alternative) {
-      this.noResultsAlternativeTitle.innerText = alternative.event.label || alternative.label
+      const event_label = alternative.event ? alternative.event.label : null
+      this.noResultsAlternativeTitle.innerText = event_label || alternative.label
       this.container.classList.toggle('list__no-results--far', !alternative.close)
       this.container.classList.toggle('list__no-results--close', alternative.close)
     }

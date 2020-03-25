@@ -5,7 +5,6 @@ class MapView {
 
   constructor(element, onLoadCallback) {
     this.container = element
-    this.venuesLayer = 'original'
     this.mobileBreakpoint = 768
     this.desktopBreakpoint = 1100
     this.viewportPadding = 0
@@ -38,32 +37,111 @@ class MapView {
     })
 
     this.mapbox.on('load', _event => {
+      this.loadFeatureLayers()
+      this.createEventHooks()
       onLoadCallback()
       this.invalidating = false
     })
+  }
 
+  loadFeatureLayers() {
+    this.venuesLayer = 'original'
+    this.clusterSource = 'meditation-cluster-source'
+    this.clusteredCirclesLayer = 'meditation-clusters'
+    this.clusteredPointsLayer = 'meditation-points'
+
+    this.mapbox.addSource(this.clusterSource, {
+      type: 'geojson',
+      data: this.container.dataset.geojson,
+      cluster: true,
+      clusterMaxZoom: 7, // Max zoom to cluster points on
+      clusterRadius: 50, // Radius of each cluster when clustering points
+    })
+
+    this.mapbox.addLayer({
+      id: this.clusteredCirclesLayer,
+      type: 'symbol',
+      source: this.clusterSource,
+      filter: ['has', 'point_count'],
+      layout: {
+        'icon-image': 'circle-white-2',
+        'text-field': '{point_count_abbreviated}',
+        'text-font': ['DIN Offc Pro Medium', 'Arial Unicode MS Bold'],
+        'text-size': 12
+      },
+    })
+
+    this.mapbox.addLayer({
+      id: this.clusteredPointsLayer,
+      type: 'symbol',
+      source: this.clusterSource,
+      filter: ['!', ['has', 'point_count']],
+      layout: {
+        'icon-image': 'marker_default',
+        'icon-anchor': 'bottom',
+        'icon-size': 0.85,
+      },
+    })
+  }
+
+  createEventHooks() {
     this.mapbox.on('click', event => {
-      var features = this.mapbox.queryRenderedFeatures(event.point, { layers: [this.venuesLayer] })
+      var features = this.mapbox.queryRenderedFeatures(event.point, { layers: [this.venuesLayer, this.clusteredPointsLayer] })
       if (features.length > 0) {
         Application.setState({ venue: this.parseVenue(features[0]) })
       }
     })
+
+    this.mapbox.on('click', this.clusteredCirclesLayer, event => {
+      var features = this.mapbox.queryRenderedFeatures(event.point, { layers: [this.clusteredCirclesLayer] })
+      var clusterId = features[0].properties.cluster_id
+      this.mapbox.getSource(this.clusterSource).getClusterExpansionZoom(clusterId, (error, zoom) => {
+        if (error) {
+          console.error(error) // eslint-disable-line no-console
+        } else {
+          this.mapbox.easeTo({
+            center: features[0].geometry.coordinates,
+            zoom: zoom + 1,
+            duration: 500,
+          })
+        }
+      })
+    })
   
     // Indicate that the symbols are clickable by changing the cursor style to 'pointer'.
     this.mapbox.on('mousemove', event => {
-      var features = this.mapbox.queryRenderedFeatures(event.point, { layers: [this.venuesLayer] })
+      var features = this.mapbox.queryRenderedFeatures(event.point, { layers: [this.venuesLayer, this.clusteredPointsLayer, this.clusteredCirclesLayer] })
       this.mapbox.getCanvas().style.cursor = features.length ? 'pointer' : ''
     })
 
+    this.mapbox.on('move', _event => {
+      if (!this.invalidating && (Util.isMode('list') || Util.isMode('map'))) {
+        const center = this.getCenter()
+
+        Application.replaceListState({
+          latitude: center.latitude.toFixed(6),
+          longitude: center.longitude.toFixed(6),
+          zoom: this.mapbox.getZoom().toFixed(2)
+        }, this.isZoomWide(), false)
+      }
+    })
+
     this.mapbox.on('moveend', _event => {
-      if (Util.isMode('list') && !this.invalidating) {
+      if (!this.invalidating && (Util.isMode('list') || Util.isMode('map'))) {
+        const center = this.getCenter()
         Application.showVenues(this.getRenderedVenues())
+
+        Application.replaceListState({
+          latitude: center.latitude.toFixed(6),
+          longitude: center.longitude.toFixed(6),
+          zoom: this.mapbox.getZoom().toFixed(2)
+        }, this.isZoomWide())
       }
     })
   }
 
   getRenderedVenues() {
-    const features = this.mapbox.queryRenderedFeatures({ layers: [this.venuesLayer] })
+    const features = this.mapbox.queryRenderedFeatures({ layers: [this.clusteredPointsLayer] })
     const featureKeys = {}
     const uniqueFeatures = features.filter(feature => {
       if (featureKeys[feature.properties.id]) {
@@ -152,6 +230,10 @@ class MapView {
 
   zoomOut() {
     this.mapbox.zoomTo(10)
+  }
+
+  isZoomWide() {
+    return this.mapbox.getZoom() < 8
   }
 
   _easing(t) {

@@ -1,11 +1,11 @@
-/* global AtlasAPI, MapView, Navbar, ListPanel, InfoPanel, ImageGallery, TimingCarousel, SharingModal */
+/* global AtlasAPI, MapView, Navbar, ListPanel, InfoPanel, ImageGallery, TimingCarousel, SharingModal, Util */
 
 class ApplicationInstance {
 
   constructor() {
     this.container = document.getElementById('map')
 
-    this.mode = null
+    this.mode = 'map'
     this.listPanel = new ListPanel(document.getElementById('js-list-panel'))
     this.infoPanel = new InfoPanel(document.getElementById('js-info-panel'))
     this.navbar = new Navbar(document.getElementById('js-navbar'))
@@ -71,7 +71,7 @@ class ApplicationInstance {
       this.map.invalidateSize()
       this.map.setHighlightedVenue(state.venue)
     } else {
-      this._setMode('list')
+      this._setMode((this.state.zoom && this.state.zoom > 10) ? 'list' : 'map')
       this.map.invalidateSize()
       this.map.setHighlightedVenue(null)
 
@@ -99,6 +99,21 @@ class ApplicationInstance {
     }
 
     return true
+  }
+
+  replaceListState(state, wideZoom, recordHistory = true) {
+    if (['list', 'map'].includes(this.mode)) {
+      const targetState = wideZoom ? 'map' : 'list'
+      
+      if (recordHistory) {
+        this.history.replace(state)
+      }
+
+      if (this.mode != targetState) {
+        this._setMode(targetState)
+        this.map.invalidateSize()
+      }
+    }
   }
 
   _setMode(mode) {

@@ -53,7 +53,7 @@ module MapboxSync
 
   def self.sync!
     Stash.set(:current_sync_started_at, DateTime.now)
-    file = Tempfile.new('meditation-venues.geojson')
+    file = Tempfile.new(GeojsonUploader::FILENAME)
 
     file.write(MapboxSync.generate_geojson.to_json)
     puts "Created geojson file: #{file.path}"
@@ -106,6 +106,12 @@ module MapboxSync
     }
   end
 
+  def self.get_remote_geojson_url
+    uploader = GeojsonUploader.new
+    uploader.retrieve_from_store!(GeojsonUploader::FILENAME)
+    uploader.url
+  end
+
   private
 
     def self.upload_mapbox_s3! file
@@ -136,7 +142,10 @@ module MapboxSync
     end
 
     def self.upload_google_storage! file
-
+      puts 'Storing dataset to Google Cloud Storage...'
+      uploader = GeojsonUploader.new
+      uploader.store!(file)
+      puts "--> #{MapboxSync.get_remote_geojson_url}"
     end
 
     def self.publish_to_mapbox! remote_file_url
@@ -160,10 +169,6 @@ module MapboxSync
       puts "--> #{url.inspect}"
       response = HTTParty.post(url, options)
       puts "<-- #{response.parsed_response.inspect}"
-    end
-
-    def self.is_publish_complete?
-
     end
 
 end
