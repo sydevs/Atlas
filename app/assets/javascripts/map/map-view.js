@@ -28,13 +28,7 @@ class MapView {
     }
 
     this.mapbox = new mapboxgl.Map(config)
-    this.mapbox.addControl(new mapboxgl.NavigationControl({ showCompass: false }))
-
-    const geolocater = new mapboxgl.GeolocateControl()
-    this.mapbox.addControl(geolocater)
-    geolocater.on('geolocate', event => {
-      this.setLocation(event.coords, true)
-    })
+    this.loadControlLayers()
 
     this.mapbox.on('load', _event => {
       this.loadFeatureLayers()
@@ -44,11 +38,25 @@ class MapView {
     })
   }
 
+  loadControlLayers() {
+    this.mapbox.addControl(new mapboxgl.NavigationControl({ showCompass: false }))
+
+    const geolocater = new mapboxgl.GeolocateControl()
+    this.mapbox.addControl(geolocater)
+
+    geolocater.on('geolocate', event => {
+      this.setLocation(event.coords, true)
+    })
+  }
+
   loadFeatureLayers() {
     this.venuesLayer = 'original'
     this.clusterSource = 'meditation-cluster-source'
     this.clusteredCirclesLayer = 'meditation-clusters'
     this.clusteredPointsLayer = 'meditation-points'
+
+    this.selectedVenueSource = 'selected-venue-source'
+    this.selectedVenueLayer = 'selected-venue'
 
     this.mapbox.addSource(this.clusterSource, {
       type: 'geojson',
@@ -78,6 +86,19 @@ class MapView {
       filter: ['!', ['has', 'point_count']],
       layout: {
         'icon-image': 'marker_default',
+        'icon-anchor': 'bottom',
+        'icon-size': 0.85,
+      },
+    })
+
+    this.mapbox.addSource(this.selectedVenueSource, { type: 'geojson', data: null })
+    this.mapbox.addLayer({
+      id: this.selectedVenueLayer,
+      type: 'symbol',
+      source: this.selectedVenueSource,
+      filter: ['!', ['has', 'point_count']],
+      layout: {
+        'icon-image': 'marker_selected',
         'icon-anchor': 'bottom',
         'icon-size': 0.85,
       },
@@ -156,14 +177,17 @@ class MapView {
   }
 
   setHighlightedVenue(venue) {
-    if (!this.selectedMarker) {
-      const icon = document.createElement('DIV')
-      icon.className = 'mapboxgl-marker--selected'
-      this.selectedMarker = new mapboxgl.Marker({ element: icon, offset: [0, -16] })
-    }
-
     if (venue) {
-      this.selectedMarker.setLngLat([venue.longitude, venue.latitude]).addTo(this.mapbox)
+      this.mapbox.getSource(this.selectedVenueSource).setData({
+        type: 'FeatureCollection',
+        features: [{
+          type: 'Feature',
+          geometry: {
+            type: 'Point',
+            coordinates: [venue.longitude, venue.latitude]
+          },
+        }]
+      })
 
       if (Util.isDevice('mobile')) {
         const width = 0.25
@@ -182,7 +206,7 @@ class MapView {
 
       this.flyTo(venue, 16)
     } else {
-      this.selectedMarker.remove()
+      this.mapbox.getSource(this.selectedVenueSource).setData({ type: 'FeatureCollection', features: [] })
       this.mapbox.setMaxBounds(null)
     }
   }

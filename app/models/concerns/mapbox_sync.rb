@@ -58,8 +58,8 @@ module MapboxSync
     file.write(MapboxSync.generate_geojson.to_json)
     puts "Created geojson file: #{file.path}"
 
-    remote_file_path = MapboxSync.upload_mapbox_s3! file
-    MapboxSync.publish_to_mapbox! remote_file_path
+    # remote_file_path = MapboxSync.upload_mapbox_s3! file
+    # MapboxSync.publish_to_mapbox! remote_file_path
     MapboxSync.upload_google_storage! file
 
     Stash.set(:last_synced_at, MapboxSync.current_sync_started_at)
