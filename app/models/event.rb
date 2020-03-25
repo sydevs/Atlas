@@ -59,11 +59,14 @@ class Event < ApplicationRecord
   end
 
   def find_or_create_manager
+    new_record = false
+
     self.manager = Manager.find_or_create_by(email: manager.email) do |new_manager|
       new_manager.name = manager.name
+      new_record = true
     end
 
-    ManagerMailer.with(manager: self.manager, context: self).welcome.deliver_now if self.manager.new_record?
+    ManagerMailer.with(manager: self.manager, context: self).welcome.deliver_now if new_record
   end
 
 end
