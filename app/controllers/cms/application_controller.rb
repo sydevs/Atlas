@@ -28,7 +28,10 @@ class CMS::ApplicationController < ActionController::Base
 
   def dashboard
     authorize current_user, :dashboard?
-    @resources = current_user.countries + current_user.provinces + current_user.local_areas + current_user.events
+    @resources = current_user.countries
+    @resources += current_user.joins(:country).provinces.where(countries: { enable_province_management: true })
+    @resources += current_user.local_areas
+    @resources += current_user.events
     @events_for_review = current_user.accessible_events.needs_review
     @events_recently_expired = current_user.accessible_events.recently_expired
     @events_expired_count = current_user.accessible_events.expired.count - @events_recently_expired.count

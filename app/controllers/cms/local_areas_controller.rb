@@ -11,6 +11,14 @@ class CMS::LocalAreasController < CMS::ApplicationController
     super parameters
   end
 
+  def destroy
+    authorize @record
+    @record.destroy
+
+    flash[:success] = translate('cms.messages.successfully_deleted', resource: @model.model_name.human.titleize)
+    redirect_to [:cms, @record.parent, :regions]
+  end
+
   def autocomplete
     authorize LocalArea
     data = {

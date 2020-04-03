@@ -59,6 +59,8 @@ class Event < ApplicationRecord
   end
 
   def find_or_create_manager
+    return unless manager.email.present?
+
     new_record = false
 
     self.manager = Manager.find_or_create_by(email: manager.email) do |new_manager|
