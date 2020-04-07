@@ -61,12 +61,12 @@ h3.ui.small.dividing.grey.header = translate('cms.dashboard.alerts.title')
           = time_ago_in_words(event.updated_at)
     .item
       i.warning.sign.icon
-      .content
-        - if @events_expired_count.positive?
-          a href=cms_review_path
-            = translate('cms.dashboard.alerts.expired.other', count: @events_expired_count)
-        - else
-          = translate('cms.dashboard.alerts.expired.other', count: @events_expired_count)
+      .content = translate('cms.dashboard.alerts.expired.other', count: @events_expired_count)
+
+  - if @events_expired_count.positive?
+    a.ui.small.basic.button href=cms_review_path
+      = translate('cms.dashboard.alerts.expired.view_all')
+      i.right.arrow.icon
 
 - unless @events_for_review.present? || @events_recently_expired.present?
   p = translate('cms.dashboard.alerts.empty')

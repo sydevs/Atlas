@@ -218,6 +218,7 @@ en:
           other:
             one: "There is %{count} older expired event in the system."
             other: "There are %{count} older expired events in the system."
+          view_all: "View All Expired Events"
       help:
         title: "How do I use this site?"
         description: "You are currently viewing the Content Management System (CMS) for the Sahaj Atlas. We have created a video and some explanations to help you understand how to use this CMS."
