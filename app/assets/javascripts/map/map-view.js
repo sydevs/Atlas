@@ -72,10 +72,13 @@ class MapView {
       source: this.clusterSource,
       filter: ['has', 'point_count'],
       layout: {
-        'icon-image': 'circle-white-2',
+        'icon-image': 'cluster-1',
         'text-field': '{point_count_abbreviated}',
-        'text-font': ['DIN Offc Pro Medium', 'Arial Unicode MS Bold'],
-        'text-size': 12
+        'text-font': ['DIN Offc Pro Bold', 'Arial Unicode MS Bold'],
+        'text-size': 12,
+      },
+      paint: {
+        'text-color': '#FFFFFF',
       },
     })
 
