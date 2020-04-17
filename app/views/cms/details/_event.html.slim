@@ -18,6 +18,15 @@
           i.right.arrow.icon
         .header = translate('cms.details.record_expired.title', resource: translate_model(@model))
         .description = translate('cms.details.record_expired.description', resource: translate_model(@model).downcase, weeks: Expirable::EXPIRE_AFTER_WEEKS)
+  - elsif @record.needs_review?
+    .ui.small.yellow.icon.message
+      i.exclamation.icon
+      .content
+        a.ui.right.floated.orange.button href=url_for([:edit, :cms, @record])
+          = translate('cms.details.needs_review.action')
+          i.right.arrow.icon
+        .header = translate('cms.details.needs_review.title', resource: translate_model(@model))
+        .description = translate('cms.details.needs_review.description', resource: translate_model(@model).downcase, weeks: Expirable::VERIFY_AFTER_WEEKS)
   - elsif @record.syncing?
     .ui.small.green.icon.message
       i.compact.disc.loading.icon

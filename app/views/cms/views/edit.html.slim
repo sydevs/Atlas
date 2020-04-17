@@ -14,6 +14,12 @@
       .content
         .header = translate('cms.details.record_expired.title', resource: translate_model(@model))
         .description = translate('cms.details.record_expired.alt_description', resource: translate_model(@model).downcase, weeks: Expirable::EXPIRE_AFTER_WEEKS)
+  - elsif @record.try(:needs_review?)
+    .ui.small.yellow.icon.message
+      i.exclamation.icon
+      .content
+        .header = translate('cms.details.needs_review.title', resource: translate_model(@model))
+        .description = translate('cms.details.needs_review.alt_description', resource: translate_model(@model).downcase, weeks: Expirable::VERIFY_AFTER_WEEKS)
 
   = simple_form_for [:cms, @record], html: { id: 'page-form', class: "#{'error' if @record.errors.present?}", novalidate: true, autocomplete: 'off' } do |f|
     h3.ui.header = translate('cms.actions.target.edit', resource: translate_model(@model))
