@@ -72,6 +72,7 @@ module MapboxSync
   rescue StandardError => error
     Stash.set(:last_sync_errored_at, DateTime.now)
     Stash.set(:last_sync_error, "#{error.message} (#{error.class})")
+    Stash.set(:current_sync_started_at, nil)
     raise error if Rails.env.development?
     return false
   end

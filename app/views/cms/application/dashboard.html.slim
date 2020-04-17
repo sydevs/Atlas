@@ -59,16 +59,16 @@ h3.ui.small.dividing.grey.header = translate('cms.dashboard.alerts.title')
             = event.label
           '  - 
           = time_ago_in_words(event.updated_at)
-    .item
-      i.warning.sign.icon
-      .content = translate('cms.dashboard.alerts.expired.other', count: @events_expired_count)
 
-  - if @events_expired_count.positive?
-    a.ui.small.basic.button href=cms_review_path
-      = translate('cms.dashboard.alerts.expired.view_all')
-      i.right.arrow.icon
+- if @events_archived_count.positive?
+  h4.ui.sub.header = translate('cms.dashboard.alerts.archived.title')
+  p = translate('cms.dashboard.alerts.archived.description', count: @events_archived_count)
 
-- unless @events_for_review.present? || @events_recently_expired.present?
+  a.ui.small.basic.button href=cms_review_path
+    = translate('cms.dashboard.alerts.archived.view_all')
+    i.right.arrow.icon
+
+- unless @events_for_review.present? || @events_recently_expired.present? || @events_archived_count.positive?
   p = translate('cms.dashboard.alerts.empty')
 
 - if current_user.administrator?

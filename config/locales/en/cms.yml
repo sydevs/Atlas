@@ -67,7 +67,7 @@ en:
         success: "The latest atlas data has been sent to Mapbox to be processed. It should appear on the map within 5 minutes."
         error: "There was a problem with the map synchronisation: \"%{error}\""
         not_needed: "No venues or events have changes since the last map synchronisation. So the sync has been skipped."
-        now_allowed: "The map cannot be synced now because it was already synced %{time_ago}. Please wait for %{time_from_now}, and try again."
+        not_allowed: "The map cannot be synced now because it was already synced %{time_ago}. Please wait for %{time_from_now}, and try again."
       manager:
         success: "Added manager successfully"
         already_added: "%{manager} already manages this #{resource}"
@@ -133,7 +133,12 @@ en:
       record_expired:
         title: "%{resource} Expired"
         description: "This %{resource} has been hidden from the public, because it hasn't been updated in %{weeks} weeks. Go to the edit page and press save to confirm the event details are still correct."
-        alt_description: "This %{resource} has been hidden from the public, because it hasn't been updated in %{weeks} weeks. Please review the details below and press save to confirm the event details are still correct."
+        alt_description: "This %{resource} has been hidden from the public, because it hasn't been updated in %{weeks} weeks. Please review the details below and press save to confirm that the event details are correct."
+        action: "Review"
+      record_archived:
+        title: "%{resource} Archived"
+        description: "This %{resource} has not been updated in a long time (%{time}). It will not be shown on the map unless it is review and saved."
+        alt_description: "This %{resource} has been hidden from the public, because it hasn't been updated in a long time (%{time}). Please review the details below and press save to confirm that the event details are correct."
         action: "Review"
       external_registration:
         title: "Event is Using External Registration"
@@ -218,7 +223,14 @@ en:
           other:
             one: "There is %{count} older expired event in the system."
             other: "There are %{count} older expired events in the system."
+        archived:
+          title: "Archived Events"
+          alt_title: :cms.dashboard.alerts.archived.title # Do not translate
+          description:
+            one: "%{count} event has been expired for a long time and has been archived. It will not show on the map until it is reviewed and updated."
+            other: "%{count} events have been expired for a long time and have been archived. They will not show on the map until they are reviewed and updated."
           view_all: "View All Expired Events"
+
       help:
         title: "How do I use this site?"
         description: "You are currently viewing the Content Management System (CMS) for the Sahaj Atlas. We have created a video and some explanations to help you understand how to use this CMS."
@@ -228,13 +240,13 @@ en:
         description: "The Atlas map is processed by a third-party service called Mapbox. Every hour a synchronisation is scheduled, to send the latest atlas data to Mapbox for processing. The synchronisation will be skipped if there are no new changes."
         previous:
           title: "Last successful sync"
-          description: "%{date} (%{time} ago)"
+          description: "%{date} UTC (%{time} ago)"
         current:
           title: "Sync currently in progress..."
           description: "Started %{time} ago"
         next:
           title: "Next scheduled sync"
-          description: "%{date} (%{time} from now)"
+          description: "%{date} UTC (%{time} from now)"
         error:
           title: "The previous attempted sync failed (%{date})"
           description: "Error Message: %{message}"

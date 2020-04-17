@@ -11,6 +11,10 @@ h2.ui.header
       - text = translate('cms.details.record_not_published.title', resource: translate_model(@context.class))
       - tooltip = translate('cms.details.record_not_published.description', resource: translate_model(@context.class).downcase)
       = floating_action text, 'exclamation', class: 'active yellow', data: { tooltip: tooltip, position: 'bottom center' }
+    - elsif @context.try(:archived?)
+      - text = translate('cms.details.record_archived.title', resource: translate_model(@context.class))
+      - tooltip = translate('cms.details.record_archived.description', resource: translate_model(@context.class).downcase, time: time_ago_in_words(@context.updated_at))
+      = floating_action text, 'exclamation', class: 'active orange', data: { tooltip: tooltip, position: 'bottom center' }
     - elsif @context.try(:expired?)
       - text = translate('cms.details.record_expired.title', resource: translate_model(@context.class))
       - tooltip = translate('cms.details.record_expired.description', resource: translate_model(@context.class).downcase, weeks: Expirable::EXPIRE_AFTER_WEEKS)

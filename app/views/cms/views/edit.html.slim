@@ -2,7 +2,13 @@
 - content_for :title, translate('cms.actions.target.edit', resource: translate_model(@model))
 
 = render 'cms/views/context' do
-  - if @record.try(:expired?)
+  - if @record.try(:archived?)
+    .ui.small.orange.icon.message
+      i.exclamation.icon
+      .content
+        .header = translate('cms.details.record_archived.title', resource: translate_model(@model))
+        .description = translate('cms.details.record_archived.alt_description', resource: translate_model(@model).downcase, time: time_ago_in_words(@record.updated_at))
+  - elsif @record.try(:expired?)
     .ui.small.orange.icon.message
       i.exclamation.icon
       .content

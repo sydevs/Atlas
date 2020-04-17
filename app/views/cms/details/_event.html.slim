@@ -1,6 +1,15 @@
 
 - if @record.published?
-  - if @record.expired?
+  - if @record.archived?
+    .ui.small.orange.icon.message
+      i.exclamation.icon
+      .content
+        a.ui.right.floated.orange.button href=url_for([:edit, :cms, @record])
+          = translate('cms.details.record_archived.action')
+          i.right.arrow.icon
+        .header = translate('cms.details.record_archived.title', resource: translate_model(@model))
+        .description = translate('cms.details.record_archived.description', resource: translate_model(@model).downcase, time: time_ago_in_words(@record.updated_at))
+  - elsif @record.expired?
     .ui.small.orange.icon.message
       i.exclamation.icon
       .content

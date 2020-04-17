@@ -28,11 +28,11 @@ module CMS::ApplicationHelper
     expired: 'info circle',
   }.freeze
 
-  def floating_action text, icon, url = nil, **args
+  def floating_action text, icon = nil, url = nil, **args
     klass = %w[ui basic right floated compact tiny button]
     klass << args[:class] if args[:class].present?
     content_tag :a, class: klass, href: url, **args.except(:class) do
-      concat tag.i class: "#{icon} icon"
+      concat tag.i class: "#{icon} icon" if icon
       concat text
     end
   end

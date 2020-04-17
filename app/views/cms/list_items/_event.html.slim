@@ -7,7 +7,10 @@
     - else
       .header = event.label
     .description
-      - if event.expired?
+      - if event.archived?
+        span.orange.alert = translate('cms.details.record_archived.title', resource: translate_model(Event))
+        '  - 
+      - elsif event.expired?
         span.orange.alert = translate('cms.details.record_expired.title', resource: translate_model(Event))
         '  - 
       - elsif !event.published?
