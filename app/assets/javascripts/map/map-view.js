@@ -62,7 +62,7 @@ class MapView {
       type: 'geojson',
       data: this.container.dataset.geojson,
       cluster: true,
-      clusterMaxZoom: 7, // Max zoom to cluster points on
+      clusterMaxZoom: 12, // Max zoom to cluster points on
       clusterRadius: 50, // Radius of each cluster when clustering points
     })
 
