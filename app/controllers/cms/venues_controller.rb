@@ -68,7 +68,7 @@ class CMS::VenuesController < CMS::ApplicationController
       params.fetch(:venue, {}).permit(
         :published,
         :name, :category, :latitude, :longitude, :place_id,
-        :street, :city, :province_code, :country_code,
+        :street, :city, :province_code, :country_code, :postcode,
         manager: {}
       )
     end
