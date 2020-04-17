@@ -44,7 +44,7 @@ button.lookup.ui.fluid.button type='button'
   i.search.icon
   = translate('cms.hints.venue.find_marker')
 
-.required.field id='venue_location' style=('display: none' if f.object.new_record?)
+.required.field id='venue_location' style=('display: none' unless current_user.administrator?)
   = f.label translate('cms.hints.venue.manual_location'), required: true
   = f.hint translate('cms.hints.venue.location')
   - if current_user.administrator?
