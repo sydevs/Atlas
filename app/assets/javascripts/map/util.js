@@ -75,9 +75,9 @@ const Util = {
   },
 
   parseTiming(timing) {
-    if (timing.start_date == timing.end_date || (!timing.end_date && timing.recurrence == 'day')) {
+    if (timing.start_date == timing.end_date) {
       return Util.formatDate(timing.start_date)
-    } else if (timing.recurrence == 'day') {
+    } else if (timing.recurrence == 'day' && timing.end_date) {
       return `${Util.formatDate(timing.start_date)} - ${Util.formatDate(timing.end_date)}`
     } else {
       return Util.translate(`recurrence.${timing.recurrence}`)
