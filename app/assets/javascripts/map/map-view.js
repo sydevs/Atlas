@@ -153,7 +153,7 @@ class MapView {
     this.mapbox.on('moveend', _event => {
       if (!this.invalidating && (Util.isMode('list') || Util.isMode('map'))) {
         const center = this.getCenter()
-        Application.showVenues(this.getRenderedVenues())
+        this.getRenderedVenues(venues => Application.showVenues(venues))
 
         Application.replaceListState({
           latitude: center.latitude.toFixed(6),
@@ -164,19 +164,44 @@ class MapView {
     })
   }
 
-  getRenderedVenues() {
+  getRenderedVenues(callback) {
     const features = this.mapbox.queryRenderedFeatures({ layers: [this.clusteredPointsLayer] })
-    const featureKeys = {}
-    const uniqueFeatures = features.filter(feature => {
-      if (featureKeys[feature.properties.id]) {
-        return false
-      } else {
-        featureKeys[feature.properties.id] = true
-        return true
-      }
+    const clusters = this.mapbox.queryRenderedFeatures({ layers: [this.clusteredCirclesLayer] })
+
+    if (clusters.length > 0) {
+      this.collectClusterFeatures(clusters, clusterFeatures => {
+        const uniqueFeatures = this.getUniqueFeatures(features.concat(clusterFeatures))
+        const result = uniqueFeatures.map(feature => this.parseVenue(feature))
+        callback(result)
+      })
+    } else {
+      const uniqueFeatures = this.getUniqueFeatures(features)
+      const result = uniqueFeatures.map(feature => this.parseVenue(feature))
+      callback(result)
+    }
+  }
+
+  collectClusterFeatures(clusters, callback) {
+    const clusterData = this.mapbox.getSource(this.clusterSource)
+    let results = []
+    let waitingForSources = clusters.length
+    this.tempClusterFeatures = []
+
+    clusters.forEach(cluster => {
+      clusterData.getClusterLeaves(cluster.properties.cluster_id, 100, 0, (error, features) => {
+        if (error) {
+          console.error(error) // eslint-disable-line no-console
+        } else {
+          results = results.concat(features)
+        }
+
+        waitingForSources--
+
+        if (waitingForSources <= 0) {
+          callback(results)
+        }
+      })
     })
-    
-    return uniqueFeatures.map(feature => this.parseVenue(feature))
   }
 
   setHighlightedVenue(venue) {
@@ -251,7 +276,9 @@ class MapView {
 
   parseVenue(feature) {
     const venue = feature.properties
-    venue.events = JSON.parse(venue.events)
+    if (typeof venue.events === 'string') {
+      venue.events = JSON.parse(venue.events)
+    }
     return venue
   }
 
