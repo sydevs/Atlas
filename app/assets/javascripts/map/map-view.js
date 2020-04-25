@@ -181,6 +181,18 @@ class MapView {
     }
   }
 
+  getUniqueFeatures(features) {
+    const featureKeys = {}
+    return features.filter(feature => {
+      if (featureKeys[feature.properties.id]) {
+        return false
+      } else {
+        featureKeys[feature.properties.id] = true
+        return true
+      }
+    })
+  }
+
   collectClusterFeatures(clusters, callback) {
     const clusterData = this.mapbox.getSource(this.clusterSource)
     let results = []
