@@ -151,6 +151,7 @@ en:
       record_not_published:
         title: "Not Published"
         description: "This %{resource} is currently hidden from the public, because it is not published."
+        parent: "This %{resource} is currently hidden from the public, because its %{parent} is not published."
       create_event:
         title: "Wondering how to create a public program?"
         description: "Navigate to a venue page first, in the \"%{action}\" tab."
@@ -275,16 +276,20 @@ en:
         steps:
           updated:
             icon: green check circle
-            label: "Updated" # This should be past tense as in the phrase "The event was updated on March 3"
+            active_label: "Up To Date"
+            inactive_label: "Last Updated"
             title: "Up To Date"
             description: "When an event is created or updated"
           needs_review:
             icon: orange question circle
-            label: "Needs Review" # This should be present tense as in the phrase "The event needs review on March 3"
+            active_label: "Needs Review"
+            inactive_label: "Will Need Review"
             title: "Needs Review"
             description: "If %{weeks} weeks pass without the event being updated"
           expired:
             icon: red times circle
+            active_label: "Expired"
+            inactive_label: "Expires"
             label: "Expires" # This should be present tense as in the phrase "The event expires on March 3"
             title: "Expired"
             description: "If an event has not been updated in %{weeks} weeks"
