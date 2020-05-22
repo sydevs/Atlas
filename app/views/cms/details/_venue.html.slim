@@ -12,7 +12,9 @@
       i.sync.alternate.icon
       .content
         .header = translate('cms.details.desynced.title')
-        .description = translate('cms.details.desynced.description', resource: translate_model(@model).downcase, time: MapboxSync.next_sync_at.to_s(:short))
+        .description
+          - time = "#{time_ago_in_words MapboxSync.next_sync_at} (#{MapboxSync.next_sync_at.to_s(:short)} UTC)"
+          = translate('cms.details.desynced.description', resource: translate_model(@model).downcase, time: time)
     = help_link :sync
 
 h3.ui.small.dividing.grey.header = translate('cms.details.details_for_record', resource: @record.label)
