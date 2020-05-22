@@ -71,7 +71,7 @@ module EventDecorator
       dates << [start_date, Date.today].min
     else
       date = Date.parse(recurrence)
-      date += 7 if date > Date.today
+      date += 7 if date < Date.today
       dates << date
     end
 

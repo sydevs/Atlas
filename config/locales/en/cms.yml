@@ -169,7 +169,7 @@ en:
         description: "Recent changes to this %{resource} are currently being published to the map, they should be available within 5 minutes."
       desynced:
         title: "Waiting for sync"
-        description: "Recent changes to this %{resource} have not been published to the map yet. The next map synchronisation is scheduled for %{time}."
+        description: "Recent changes to this %{resource} have not been published to the map yet. The next map synchronisation is scheduled in %{time}."
 
     images:
       title: "Images of this %{resource}"
