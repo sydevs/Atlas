@@ -36,7 +36,11 @@ module MapboxSync
   end
 
   def self.needs_sync?
-    Venue.where('updated_at >= ?', MapboxSync.last_synced_at).exists? || Event.where('updated_at >= ?', MapboxSync.last_synced_at).exists?
+    Venue.where('updated_at >= ?', MapboxSync.last_synced_at).exists? ||
+      Event.where('updated_at >= ?', MapboxSync.last_synced_at).exists? ||
+      Event.where('updated_at >= ? AND updated_at < ?', 
+                  MapboxSync.last_synced_at - Expirable::EXPIRE_AFTER_WEEKS.weeks,
+                  DateTime.now - Expirable::EXPIRE_AFTER_WEEKS.weeks).exists?
   end
 
   def self.can_sync_at

@@ -160,9 +160,9 @@ class CMS::ApplicationController < ActionController::Base
       if params[:force] == 'true'
         render 'cms/application/sync'
       elsif !MapboxSync.needs_sync?
-        redirect_to cms_root_url, flash: { notice: translate('cms.messages.not_needed') }
+        redirect_to cms_root_url, flash: { notice: translate('cms.messages.sync.not_needed') }
       elsif !MapboxSync.can_sync?
-        redirect_to cms_root_url, flash: { error: translate('cms.messages.not_allowed', time_ago: helpers.time_ago_in_words(MapboxSync.active_sync_at), time_from_now: helpers.time_ago_in_words(MapboxSync.can_sync_at)) }
+        redirect_to cms_root_url, flash: { error: translate('cms.messages.sync.not_allowed', time_ago: helpers.time_ago_in_words(MapboxSync.active_sync_at), time_from_now: helpers.time_ago_in_words(MapboxSync.can_sync_at)) }
       else
         render 'cms/application/sync'
       end
