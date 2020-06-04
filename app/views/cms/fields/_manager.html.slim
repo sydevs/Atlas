@@ -2,5 +2,5 @@
 = f.input :name
 = f.input :email
 
-- if current_user.administrator? && @context.nil?
+- if current_user.administrator?
   = f.input :administrator, as: :boolean, wrapper: :semantic_checkbox

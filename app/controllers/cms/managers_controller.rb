@@ -15,7 +15,8 @@ class CMS::ManagersController < CMS::ApplicationController
   end
 
   def create
-    @record = Manager.find_or_initialize_by(email: parameters[:email])
+    manager_params = parameters
+    @record = Manager.find_or_initialize_by(email: manager_params[:email])
 
     if @context
       authorize @context, :create_manager?
@@ -24,7 +25,8 @@ class CMS::ManagersController < CMS::ApplicationController
     end
 
     new_record = @record.new_record?
-    @record.name = parameters[:name] if new_record
+    @record.name = manager_params[:name] if new_record
+    @record.administrator = manager_params[:administrator] if manager_params.key?(:administrator)
     success = false
 
     if @context.present?
@@ -112,10 +114,17 @@ class CMS::ManagersController < CMS::ApplicationController
   private
 
     def parameters
-      @parameters ||= params.fetch(:manager, {}).permit(
-        :name, :email, :administrator,
-        country_ids: [], province_ids: [], local_area_ids: []
-      )
+      if current_user.administrator?
+        params.fetch(:manager, {}).permit(
+          :name, :email, :administrator,
+          country_ids: [], province_ids: [], local_area_ids: []
+        )
+      else
+        params.fetch(:manager, {}).permit(
+          :name, :email,
+          country_ids: [], province_ids: [], local_area_ids: []
+        )
+      end
     end
 
 end
