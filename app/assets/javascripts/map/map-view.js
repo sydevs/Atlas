@@ -88,6 +88,7 @@ class MapView {
       source: this.clusterSource,
       filter: ['!', ['has', 'point_count']],
       layout: {
+        'icon-allow-overlap': true,
         'icon-image': 'marker_default',
         'icon-anchor': 'bottom',
         'icon-size': 0.85,
