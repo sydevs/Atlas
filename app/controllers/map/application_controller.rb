@@ -41,7 +41,7 @@ class Map::ApplicationController < ActionController::Base
     params.require(%i[latitude longitude])
     coordinates = [params[:latitude], params[:longitude]]
 
-    query = Venue.published.by_distance(origin: coordinates).where('venues.updated_at < ?', 1.hour.ago.beginning_of_hour)
+    query = Venue.publicly_visible.by_distance(origin: coordinates).where('venues.updated_at < ?', 1.hour.ago.beginning_of_hour)
     @venue = query.joins(:events).limit(1).first
 
     distance = @venue.distance_from(coordinates)
@@ -58,9 +58,9 @@ class Map::ApplicationController < ActionController::Base
 
     def set_jbuilder_params!
       if scope
-        @records = scope.includes(:events, events: :pictures).published
+        @records = scope.includes(:events, events: :pictures)
       else
-        @records = Venue.includes(:events, events: :pictures).within(50, origin: coordinates)
+        @records = Venue.publicly_visible.includes(:events, events: :pictures).within(50, origin: coordinates)
       end
 
       @verbose = true
@@ -81,7 +81,13 @@ class Map::ApplicationController < ActionController::Base
           scope = Country.find_by_country_code(params[:country])
         end
 
-        scope = scope.published if scope.respond_to?(:published)
+        if scope.respond_to?(:publicly_visible)
+          scope = scope.publicly_visible
+        elsif scope.respond_to?(:published)
+          scope = scope.published
+        end
+
+        scope
       end
     end
 

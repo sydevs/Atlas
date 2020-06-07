@@ -40,7 +40,13 @@ class API::ApplicationController < ActionController::Base
           scope.includes(*associations) if associations.present?
         end
 
-        scope.respond_to?(:published) ? scope.published : scope
+        if scope.respond_to?(:publicly_visible)
+          scope = scope.publicly_visible
+        elsif scope.respond_to?(:published)
+          scope = scope.published
+        end
+
+        scope
       end
     end
 

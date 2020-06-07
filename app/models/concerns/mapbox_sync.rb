@@ -81,17 +81,17 @@ module MapboxSync
     return false
   end
 
-  def self.generate_geojson
+  def self.generate_geojson scope = Venue
     features = []
     venue_count = 0
     event_count = 0
 
     puts 'Generating geojson dataset...' 
-    Venue.includes(:events).published.find_each do |venue|
+    scope.publicly_visible.find_each do |venue|
       next unless venue.events.present?
       venue.extend VenueDecorator
       venue_count += 1
-      event_count += venue.events.count
+      event_count += venue.events.publicly_visible.count
 
       features << {
         type: 'Feature',

@@ -7,27 +7,29 @@ module Expirable
   EXPIRE_AFTER_WEEKS = 10
   ARCHIVE_AFTER_WEEKS = EXPIRE_AFTER_WEEKS + 1
 
-  VERIFY_DATE = VERIFY_AFTER_WEEKS.weeks.ago.freeze
-  ESCALATE_DATE = ESCALATE_AFTER_WEEKS.weeks.ago.freeze
-  EXPIRE_DATE = EXPIRE_AFTER_WEEKS.weeks.ago.freeze
-  ARCHIVE_DATE = ARCHIVE_AFTER_WEEKS.weeks.ago.freeze
-=begin
-  VERIFY_AFTER_MINUTES = 5
-  ESCALATE_AFTER_MINUTES = 10
-  EXPIRE_AFTER_MINUTES = 15
-
-  VERIFY_DATE = VERIFY_AFTER_MINUTES.minutes.ago.freeze
-  ESCALATE_DATE = ESCALATE_AFTER_MINUTES.minutes.ago.freeze
-  EXPIRE_DATE = EXPIRE_AFTER_MINUTES.minutes.ago.freeze
-  ARCHIVE_DATE = (EXPIRE_AFTER_MINUTES + 5).minutes.ago.freeze
-=end
   included do
-    scope :published, -> { where("#{table_name}.updated_at < ?", EXPIRE_DATE) }
-    scope :needs_review, -> { where("#{table_name}.updated_at <= ? AND #{table_name}.updated_at > ?", VERIFY_DATE, ARCHIVE_DATE) }
-    scope :needs_urgent_review, -> { where("#{table_name}.updated_at < ? AND #{table_name}.updated_at > ?", ESCALATE_DATE, VERIFY_DATE) }
-    scope :expired, -> { where("#{table_name}.updated_at <= ?", EXPIRE_DATE) }
-    scope :recently_expired, -> { where("#{table_name}.updated_at <= ? AND #{table_name}.updated_at > ?", EXPIRE_DATE, ARCHIVE_DATE) }
-    scope :archived, -> { where("#{table_name}.updated_at <= ?", ARCHIVE_DATE) }
+    scope :not_expired, -> { where("#{table_name}.updated_at > ?", Expirable.expire_date) }
+    scope :needs_review, -> { where("#{table_name}.updated_at <= ? AND #{table_name}.updated_at > ?", Expirable.verify_date, Expirable.archive_date) }
+    scope :needs_urgent_review, -> { where("#{table_name}.updated_at < ? AND #{table_name}.updated_at > ?", Expirable.escalate_date, Expirable.verify_date) }
+    scope :expired, -> { where("#{table_name}.updated_at <= ?", Expirable.expire_date) }
+    scope :recently_expired, -> { where("#{table_name}.updated_at <= ? AND #{table_name}.updated_at > ?", Expirable.expire_date, Expirable.archive_date) }
+    scope :archived, -> { where("#{table_name}.updated_at <= ?", Expirable.archive_date) }
+  end
+
+  def self.verify_date
+    VERIFY_AFTER_WEEKS.weeks.ago
+  end
+
+  def self.escalate_date
+    ESCALATE_AFTER_WEEKS.weeks.ago
+  end
+
+  def self.expire_date
+    EXPIRE_AFTER_WEEKS.weeks.ago
+  end
+
+  def self.archive_date
+    ARCHIVE_AFTER_WEEKS.weeks.ago
   end
 
   def needs_review_at
@@ -72,9 +74,9 @@ module Expirable
 
   def needs_review? urgency = :any
     if urgency == :urgent
-      updated_at < VERIFY_DATE
+      updated_at < Expirable.verify_date
     else
-      updated_at < ESCALATE_DATE
+      updated_at < Expirable.escalate_date
     end
   end
 
