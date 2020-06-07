@@ -72,6 +72,7 @@ class MapView {
       source: this.clusterSource,
       filter: ['has', 'point_count'],
       layout: {
+        'icon-allow-overlap': true,
         'icon-image': 'cluster-1',
         'text-field': '{point_count_abbreviated}',
         'text-font': ['DIN Offc Pro Bold', 'Arial Unicode MS Bold'],
@@ -102,6 +103,7 @@ class MapView {
       source: this.selectedVenueSource,
       filter: ['!', ['has', 'point_count']],
       layout: {
+        'icon-allow-overlap': true,
         'icon-image': 'marker_selected',
         'icon-anchor': 'bottom',
         'icon-size': 0.85,
