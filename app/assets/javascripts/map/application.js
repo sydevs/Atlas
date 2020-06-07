@@ -36,12 +36,13 @@ class ApplicationInstance {
     this.setState(state)
   }
 
-  showVenues(venues) {
+  showVenues(venues, allowFallback = false) {
     if (venues.length) {
       this.listPanel.showVenues(venues)
-    } else {
-      //this.listPanel.showLoading()
-      this.atlas.getClosest(this.map.getCenter(), response => this.listPanel.showNoResults(response))
+    } else if (allowFallback) {
+      this.atlas.getClosest(this.map.getCenter(), response => {
+        this.listPanel.showNoResults(response)
+      })
     }
   }
 
@@ -78,10 +79,12 @@ class ApplicationInstance {
 
       if (state.west && state.east && state.north && state.south) {
         this.listPanel.setEmptyResults(false)
+        this.listPanel.clearEvents()
         this.map.fitTo(state)
         this.state.zoom = this.map.mapbox.getZoom()
       } else if (state.latitude && state.longitude) {
         this.listPanel.setEmptyResults(false)
+        this.listPanel.clearEvents()
         this.map.flyTo(state, 10)
       } else {
         this.map.zoomOut()
@@ -108,6 +111,10 @@ class ApplicationInstance {
       
       if (recordHistory) {
         this.history.replace(state)
+      }
+
+      if (wideZoom) {
+        this.listPanel.clearEvents()
       }
 
       if (this.mode != targetState) {

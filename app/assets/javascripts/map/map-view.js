@@ -138,30 +138,27 @@ class MapView {
       this.mapbox.getCanvas().style.cursor = features.length ? 'pointer' : ''
     })
 
-    this.mapbox.on('move', _event => {
-      if (!this.invalidating && (Util.isMode('list') || Util.isMode('map'))) {
-        const center = this.getCenter()
+    this.mapbox.on('move', _event => this.updateRenderedVenues())
+    this.mapbox.on('moveend', _event => this.updateRenderedVenues(true))
+  }
 
-        Application.replaceListState({
-          latitude: center.latitude.toFixed(6),
-          longitude: center.longitude.toFixed(6),
-          zoom: this.mapbox.getZoom().toFixed(2)
-        }, this.isZoomWide(), false)
-      }
-    })
+  async updateRenderedVenues(allowFallback = false) {
+    if (this.invalidating) return
 
-    this.mapbox.on('moveend', _event => {
-      if (!this.invalidating && (Util.isMode('list') || Util.isMode('map'))) {
-        const center = this.getCenter()
-        this.getRenderedVenues(venues => Application.showVenues(venues))
+    let isListMode = Util.isMode('list')
+    let isMapMode = Util.isMode('map')
+    if (!(isListMode || isMapMode)) return
 
-        Application.replaceListState({
-          latitude: center.latitude.toFixed(6),
-          longitude: center.longitude.toFixed(6),
-          zoom: this.mapbox.getZoom().toFixed(2)
-        }, this.isZoomWide())
-      }
-    })
+    if (!this.isZoomWide()) {
+      this.getRenderedVenues(venues => Application.showVenues(venues, allowFallback))
+    }
+
+    let center = this.getCenter()
+    Application.replaceListState({
+      latitude: center.latitude.toFixed(6),
+      longitude: center.longitude.toFixed(6),
+      zoom: this.mapbox.getZoom().toFixed(2)
+    }, this.isZoomWide())
   }
 
   getRenderedVenues(callback) {
@@ -299,7 +296,7 @@ class MapView {
   }
 
   isZoomWide() {
-    return this.mapbox.getZoom() < 8
+    return this.mapbox.getZoom() < 10
   }
 
   _easing(t) {
