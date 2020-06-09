@@ -14,7 +14,7 @@ class InfoPanel {
     document.getElementById('js-info-share').addEventListener('click', () => Application.share.show(this.event))
     document.getElementById('js-info-close').addEventListener('click', () => history.back())
     document.getElementById('js-registration-share').addEventListener('click', () => Application.share.show(this.event))
-    document.getElementById('js-registration-close').addEventListener('click', () => this.hideConfirmation())
+    document.getElementById('js-registration-close').addEventListener('click', () => this.hideMessages())
   }
 
   show(event, venue) {
@@ -70,8 +70,9 @@ class InfoPanel {
     })
   }
 
-  hideConfirmation() {
+  hideMessages() {
     this.form.classList.remove('registration--confirmed')
+    this.formFeedback.innerText = ''
     this.form.reset()
   }
 

@@ -48,7 +48,7 @@ class ApplicationInstance {
 
   setState(state, recordHistory = true) {
     this.state = state
-    this.infoPanel.hideConfirmation()
+    this.infoPanel.hideMessages()
     
     if (state.label) {
       this.navbar.setText(state.label)
