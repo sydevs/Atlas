@@ -24,12 +24,10 @@ class GeoSearchAPI {
 
   query(text, center, callback) {
     this.latestQuery = text
-    this.waiting = true
 
     this.fetch(text, center).then(data => {
       if (text == this.latestQuery) {
         console.log('[GeoSearchAPI]', text, data) // eslint-disable-line no-console
-        this.waiting = false
         callback(this.parseServiceResponse(data.features))
       } else {
         console.log('[GeoSearchAPI]', 'Ignored expired request:', text) // eslint-disable-line no-console
