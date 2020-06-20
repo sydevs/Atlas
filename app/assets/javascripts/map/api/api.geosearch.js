@@ -66,7 +66,7 @@ class GeoSearchAPI {
   }
 
   async fetch(text, center) {
-    const url = `https://api.mapbox.com/geocoding/v5/mapbox.places/${text}.json?${this.config}&proximity=${center[1]},${center[0]}`
+    const url = `https://api.mapbox.com/geocoding/v5/mapbox.places/${text}.json?${this.config}&proximity=${center[0]},${center[1]}`
 
     // Default options are marked with *
     const response = await fetch(url, {
