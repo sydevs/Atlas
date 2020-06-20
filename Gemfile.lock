@@ -1,3 +1,12 @@
+GIT
+  remote: https://github.com/mikker/passwordless.git
+  revision: eac65445a824579715d45cde974f50b254af8ab1
+  ref: eac6544
+  specs:
+    passwordless (0.9.0)
+      bcrypt (~> 3.1.11)
+      rails (>= 5.1.4)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -244,9 +253,6 @@ GEM
       mini_portile2 (~> 2.4.0)
     normalize-rails (4.1.1)
     os (1.1.0)
-    passwordless (0.9.0)
-      bcrypt (~> 3.1.11)
-      rails (>= 5.1.4)
     pg (0.21.0)
     premailer (1.11.1)
       addressable
@@ -403,7 +409,7 @@ DEPENDENCIES
   mini_magick
   nilify_blanks
   normalize-rails
-  passwordless
+  passwordless!
   pg (~> 0.18)
   premailer-rails
   puma (~> 3.12)
