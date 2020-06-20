@@ -1,2 +1,10 @@
 
-= translate('passwordless.mailer.magic_link', link: @magic_link)
+p.notice = translate('mail.common.automated', email: mail_to('contact@sydevelopers.com')).html_safe
+
+p = translate('mail.magic_link.intro')
+
+p.button-group
+  a.button href=@magic_link
+    = translate("mail.magic_link.action")
+
+= message translate('mail.common.alert'), :html, :alert
