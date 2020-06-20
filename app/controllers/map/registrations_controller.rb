@@ -6,7 +6,7 @@ class Map::RegistrationsController < ActionController::Base
     registration = Registration.joins(:event, event: :venue).find_or_initialize_by(registration_params)
 
     if !registration.new_record?
-      render json: { status: 'info', message: I18n.translate('map.registration.feedback.duplicate', date: registration.created_at.to_s(:short)) }
+      render json: { status: 'info', message: I18n.translate('map.registration.feedback.duplicate'), date: registration.created_at.utc }
     elsif registration.save
       # KlaviyoAPI.subscribe(registration)
       KlaviyoAPI.send_registration_event(registration)

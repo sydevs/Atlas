@@ -41,7 +41,16 @@ class AtlasAPI {
   }
 
   register(form, callback) {
-    Util.postForm('/map/registrations', form, callback)
+    Util.postForm('/map/registrations', form, event => {
+      const response = JSON.parse(event.target.response)
+      console.log('[AtlasAPI]', 'received', response) // eslint-disable-line no-console
+      response.message = response.message.replace('%{date}', new Date(response.date).toLocaleString(undefined, {
+        year: 'numeric', month: 'short', day: 'numeric',
+        hour: 'numeric', minute: 'numeric'
+      }))
+
+      callback(response)
+    })
   }
 
 }

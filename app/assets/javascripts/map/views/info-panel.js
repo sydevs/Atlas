@@ -51,8 +51,7 @@ class InfoPanel {
     this.formFeedback.classList.remove('error')
     this.submitButton.setAttribute('disabled', 'disabled')
 
-    Application.atlas.register(this.form, event => {
-      const response = JSON.parse(event.target.response)
+    Application.atlas.register(this.form, response => {
       this.submitButton.removeAttribute('disabled')
  
       if (response.status == 'success') {
