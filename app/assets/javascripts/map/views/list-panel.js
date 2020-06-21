@@ -22,11 +22,13 @@ class ListPanel {
   }
 
   showLoading() {
+    this.container.scrollTop = 0
     this.setEmptyResults(false)
     this.clearEvents()
   }
 
   showNoResults(alternative) {
+    this.container.scrollTop = 0
     this.alternative = alternative
     this.setEmptyResults(true)
     this.clearEvents()
@@ -40,6 +42,7 @@ class ListPanel {
   }
 
   showVenues(venues) {
+    this.container.scrollTop = 0
     this.venues = venues
     this.clearEvents()
 

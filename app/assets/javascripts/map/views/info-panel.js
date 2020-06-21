@@ -19,6 +19,8 @@ class InfoPanel {
 
   show(event, venue) {
     this.event = event
+    this.container.scrollTop = 0
+
     this.container.querySelector('[data-attribute="name"]').textContent = event.label
     this.container.querySelector('[data-attribute="address"]').textContent = event.address
     this.container.querySelector('[data-attribute="directions"]').href = venue.directions_url

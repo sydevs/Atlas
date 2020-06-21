@@ -1,4 +1,4 @@
-/* global AtlasAPI, MapView, Navbar, ListPanel, InfoPanel, ImageGallery, TimingCarousel, SharingModal, Util */
+/* global AtlasAPI, MapView, Navbar, ListPanel, InfoPanel, ImageGallery, TimingCarousel, SharingModal */
 
 class ApplicationInstance {
 
