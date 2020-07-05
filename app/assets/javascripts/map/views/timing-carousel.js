@@ -26,9 +26,10 @@ class TimingCarousel {
   }
 
   setTimings(event, timings) {
-    const cells = timings.map(timing => this.createTimingItem(event, timing))
-    this.flickity.remove(this.flickity.cell)
-    this.flickity.append(cells)
+    const oldCells = this.flickity.cells.map(cell => cell.element)
+    const newCells = timings.map(timing => this.createTimingItem(event, timing))
+    this.flickity.remove(oldCells)
+    this.flickity.append(newCells)
     this.flickity.select(0, false, true)
     this.flickity.resize()
   }
