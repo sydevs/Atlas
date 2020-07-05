@@ -33,6 +33,15 @@ class Map::ApplicationController < ActionController::Base
 
     @state[:zoom] ||= 16 if @state[:latitude] && @state[:longitude]
 
+    if params[:north] && params[:south] && params[:east] && params[:west]
+      @state.merge!({
+        north: params[:north],
+        south: params[:south],
+        east: params[:east],
+        west: params[:west]
+      })
+    end
+
     set_jbuilder_params!
     render 'map/show'
   end

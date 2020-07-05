@@ -34,6 +34,8 @@ class History {
       if (state.longitude) path += `&longitude=${state.longitude}`
       if (state.zoom) path += `&zoom=${state.zoom}`
       if (state.type) path += `&type=${state.type}`
+    } else if (state.north && state.south && state.east && state.west) {
+      path += `?latitude=${state.latitude}&longitude=${state.longitude}&north=${state.north}&south=${state.south}&east=${state.east}&west=${state.west}`
     } else if (state.latitude && state.longitude) {
       path += `?latitude=${state.latitude}&longitude=${state.longitude}`
       if (state.zoom) path += `&zoom=${state.zoom}`

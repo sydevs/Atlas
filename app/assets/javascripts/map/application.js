@@ -110,7 +110,7 @@ class ApplicationInstance {
       const targetState = wideZoom ? 'map' : 'list'
       
       if (recordHistory) {
-        this.history.replace(state)
+        //this.history.replace(state)
       }
 
       if (wideZoom) {
