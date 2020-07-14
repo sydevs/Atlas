@@ -110,7 +110,6 @@ module EventDecorator
         start_date: start_date.to_s,
         end_date: end_date&.to_s,
         time: formatted_start_end_time,
-        upcoming: upcoming_dates.map(&:to_s)
       },
       language_code: language_code,
       images: pictures.map { |picture|

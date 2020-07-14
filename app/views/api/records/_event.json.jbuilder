@@ -43,8 +43,6 @@ json.category do
   json.description event.category_description
 end
 
-json.upcoming_dates event.upcoming_dates.map(&:to_s)
-
 json.recurrence_in_words event.recurrence_in_words
 json.formatted_start_end_time event.formatted_start_end_time
 json.timing_text event.timing_in_words
