@@ -7,7 +7,7 @@
   position: relative
   min-height: 101vh
 
-  @include desktop-or-larger
+  @include tablet-or-larger
     min-height: auto
 
 // ===== HEADER ===== //
@@ -268,6 +268,7 @@ $circle-size: 360px
     left: 50%
     width: $circle-size
     height: $circle-size
+    min-height: $circle-size
     transition: all 0.5s ease-out
     transform: translate(-#{$circle-size / 2}, -#{$circle-size / 2}) rotate(-45deg)
     align-self: center
@@ -285,6 +286,10 @@ $circle-size: 360px
     opacity: 0
     transform: scale(0)
     transition: all 0.5s ease
+
+    @mixin tablet-or-larger
+      margin-top: 30px
+      margin-bottom: 30px
 
   &__title
     font-size: 1.875em
