@@ -44,8 +44,6 @@ const VenueMap = {
         VenueMap.setMarker(latitude, longitude)
       }
     })
-
-    VenueMap.instance.dragging.disable()
   },
 
   initPreviewMap() {

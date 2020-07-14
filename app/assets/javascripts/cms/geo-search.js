@@ -78,7 +78,6 @@ const GeoSearch = {
           this.$latitude.val(data.latitude)
           this.$longitude.val(data.longitude)
           this.$radius.val(data.radius)
-
         }
       },
       error: (data) => {
