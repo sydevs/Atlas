@@ -55,7 +55,8 @@ module KlaviyoAPI
         'weekday': registration.starting_at_weekday,
         'date': registration.starting_at.strftime("%-d %b %Y"),
         'language': event.language_name,
-        'url': Rails.application.routes.url_helpers.map_root_url(event: event.id, host: 'https://atlas.sydevelopers.com'),
+        'directions_url': venue.directions_url,
+        'url': Rails.application.routes.url_helpers.map_event_url(event, host: 'https://atlas.sydevelopers.com'),
       },
     })
   end
