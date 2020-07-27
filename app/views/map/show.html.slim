@@ -1,7 +1,8 @@
 
 ruby:
+  @event_data = @event&.as_json
   @state[:venue] = @venue&.as_json
-  @state[:event] = @event&.as_json
+  @state[:event] = @event_data
 
 // ===== SEARCH BOX ===== //
 .navbar id='js-navbar' data-key=ENV['MAPBOX_ACCESSTOKEN'] data-country=params[:country]
@@ -45,23 +46,30 @@ ruby:
   .event__sidebar
     a.event__sidebar__button id='js-info-action' href='#register'
       = translate('map.information.register')
-    .event__sidebar__language id='js-info-language'
+    .event__sidebar__language id='js-info-language' style='display: none'
       = translate('map.information.language')
       .event__sidebar__language-text data-attribute='language'
   .event
     .event__name data-attribute='name'
+      = @event_data&.dig(:label)
     .event__description
       span.event__description__address data-attribute='address'
+        = @event_data&.dig(:address)
     .event__meta
       span.event__meta__day data-attribute='day'
+        - if @event_data&.dig(:timing, :recurrence)
+          = translate @event_data[:timing][:recurrence], scope: 'javascript.recurrence'
       span.event__meta__time data-attribute='time'
+        = @event_data&.dig(:timing, :time)
 
   a.info__directions data-attribute='directions' target='_blank'
     span.icon.icon--location
     = translate('map.information.directions')
 
   .info__description data-attribute='description'
-  .info__images.main-carousel id='js-image-gallery' data-attribute='images'
+    = simple_format @event_data&.dig(:description)
+
+  .info__images.main-carousel id='js-image-gallery' data-attribute='images' style='display: none'
 
   #register
   form.registration id='js-registration'

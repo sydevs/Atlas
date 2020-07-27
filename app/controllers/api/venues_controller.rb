@@ -31,7 +31,7 @@ class API::VenuesController < API::ApplicationController
 
       @alternatives = venues.map do |venue|
         {
-          label: "#{venue.city}, #{venue.country_code}",
+          label: venue.location_label,
           latitude: venue.latitude,
           longitude: venue.longitude,
           distance: venue.distance_from(@coordinates),

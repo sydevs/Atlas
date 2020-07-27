@@ -7,5 +7,5 @@ if @event
   json.event @event.as_json
 else
   json.close false
-  json.label "#{@venue.city || @venue.province_name}, #{@venue.country_code}"
+  json.label @venue.location_label
 end

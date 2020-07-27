@@ -4,6 +4,10 @@ module VenueDecorator
     name || street
   end
 
+  def location_label
+    "#{city || province_name || street || name}, #{translate country_code.downcase, scope: 'map.short_country_names', default: country_code}"
+  end
+
   def address_text
     @address_text ||= [street, city, province_name, country_code].compact.join(', ')
   end
