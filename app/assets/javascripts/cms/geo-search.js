@@ -49,10 +49,12 @@ const GeoSearch = {
     this.$country = $('#venue_country_code')
     this.$postcode = $('#venue_postcode')
 
+    const country = this.$search.data('country')
+
     this.$search.search({
       minCharacters: 3,
       apiSettings: {
-        url: `/cms/venues/autocomplete?country=${this.$search.data('country')}&query={query}`,
+        url: country ? `/cms/venues/autocomplete?country=${country}&query={query}` : '/cms/venues/autocomplete?query={query}',
       },
       onSelect: (result, _response) => {
         this.$name.val(result.structured_formatting.main_text)

@@ -18,6 +18,7 @@ class Venue < ApplicationRecord
 
   # Validations
   validates :street, presence: true
+  validates :province_code, presence: true, if: :country_has_provinces?
   validates :country_code, presence: true
   validates :latitude, :longitude, presence: true
 
@@ -59,15 +60,21 @@ class Venue < ApplicationRecord
     super value if I18nData.countries.keys.include?(value)
   end
 
-  def ensure_local_area_consistency
-    return unless (previous_changes.keys & %w[latitude longitude province_code country_code]).present?
+  private
 
-    radius = LocalArea.maximum(:radius)
-    local_areas = LocalArea.select('id, name, radius, latitude, longitude').within(radius, origin: self)
-    local_areas = local_areas.where(country_code: country_code) if country_code?
-    local_areas = local_areas.where(province: province_code) if province_code?
-    local_areas.to_a.filter! { |area| area.radius >= area.distance_to(self) }
-    self.local_areas = local_areas
-  end
+    def ensure_local_area_consistency
+      return unless (previous_changes.keys & %w[latitude longitude province_code country_code]).present?
+
+      radius = LocalArea.maximum(:radius)
+      local_areas = LocalArea.select('id, name, radius, latitude, longitude').within(radius, origin: self)
+      local_areas = local_areas.where(country_code: country_code) if country_code?
+      local_areas = local_areas.where(province: province_code) if province_code?
+      local_areas.to_a.filter! { |area| area.radius >= area.distance_to(self) }
+      self.local_areas = local_areas
+    end
+
+    def country_has_provinces?
+      return country.nil? || country.enable_province_management
+    end
 
 end
