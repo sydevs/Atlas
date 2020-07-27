@@ -102,7 +102,7 @@ module EventDecorator
       id: id,
       label: label,
       path: Rails.application.routes.url_helpers.map_event_path(self),
-      description: description&.gsub("\r", "\\r")&.gsub("\n", "\\n"),
+      description: description,
       address: address_text,
       category: category,
       timing: {

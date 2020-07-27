@@ -56,7 +56,7 @@ const Util = {
   },
 
   simpleFormat(str) {
-    str = str.replace(/\r\n?/, '\n')
+    str = str.replace(/\r\n?/g, '\n')
     str = str.trim(str)
 
     if (str.length > 0) {
