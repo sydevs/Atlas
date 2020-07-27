@@ -53,7 +53,7 @@
   = help_link :registration
 
 h3.ui.small.dividing.grey.header = translate('cms.details.details_for_record', resource: @record.label)
-p = @record.description
+p = simple_format @record.description
 .ui.list
   .item
     i.hashtag.icon
