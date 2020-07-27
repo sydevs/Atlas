@@ -29,9 +29,9 @@ module MapboxSync
 
   def self.next_sync_at
     if MapboxSync.can_sync?
-      59.minutes.from_now.beginning_of_hour + 1.minute
+      Time.now.floor(10.minutes)
     else
-      (MapboxSync.can_sync_at + 59.minutes).beginning_of_hour + 1.minute
+      MapboxSync.can_sync_at.floor(10.minutes)
     end
   end
 
@@ -44,11 +44,11 @@ module MapboxSync
   end
 
   def self.can_sync_at
-    MapboxSync.active_sync_at.nil? ? DateTime.now : MapboxSync.active_sync_at + 1.hour
+    MapboxSync.active_sync_at.nil? ? DateTime.now : MapboxSync.active_sync_at + 10.minutes
   end
 
   def self.can_sync?
-    !MapboxSync.syncing? && MapboxSync.can_sync_at <= DateTime.now
+    !MapboxSync.syncing? # && MapboxSync.can_sync_at <= DateTime.now
   end
 
   def self.syncing?
