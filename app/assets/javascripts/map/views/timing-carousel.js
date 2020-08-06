@@ -36,17 +36,18 @@ class TimingCarousel {
   }
 
   setTimings(event) {
-    const timings = this.parseTiming(event.timing)
     const oldCells = this.flickity.cells.map(cell => cell.element)
-    const newCells = timings.map(timing => this.createTimingItem(event, timing))
     this.flickity.remove(oldCells)
+
+    const timings = this.parseTiming(event.timing)
+    const newCells = timings.map(timing => this.createTimingItem(event, timing))
     this.flickity.append(newCells)
     this.flickity.select(0, false, true)
     this.flickity.resize()
   }
 
   parseTiming(timing) {
-    const daily = (timing.recurrence == 'daily')
+    const daily = (timing.recurrence == 'day')
     const interval = (daily ? 1 : 7)
     const start_date = new Date(timing.start_date)
     const end_date = timing.end_date == null ? null : new Date(timing.end_date)
