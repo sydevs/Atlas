@@ -28,6 +28,7 @@ class InfoPanel {
     this.container.querySelector('[data-attribute="time"]').textContent = event.timing.time
     this.container.querySelector('[data-attribute="description"]').innerHTML = Util.simpleFormat(event.description || '')
     this.form.classList.toggle('registration--confirmed', Boolean(event.registered))
+    this.form.style = Date.parse(event.timing.registration_end_time) < Date.now() ? 'display: none' : ''
 
     this.languageBlock.style = (Boolean(event.language_code) && document.documentElement.lang.toUpperCase() != event.language_code ? '' : 'display: none')
     this.container.querySelector('[data-attribute="language"]').textContent = Util.translate(`languages.${event.language_code}`).split(/[,;]/)[0]
