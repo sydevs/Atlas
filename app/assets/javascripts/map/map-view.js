@@ -139,7 +139,8 @@ class MapView {
       this.mapbox.getCanvas().style.cursor = features.length ? 'pointer' : ''
     })
 
-    this.mapbox.on('move', _event => this.updateRenderedVenues())
+    //this.mapbox.on('move', _event => this.updateRenderedVenues())
+    this.mapbox.on('render', _event => this.updateRenderedVenues())
     this.mapbox.on('moveend', _event => this.updateRenderedVenues(true))
   }
 
