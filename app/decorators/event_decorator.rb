@@ -110,7 +110,7 @@ module EventDecorator
         start_date: start_date.to_s,
         end_date: end_date&.to_s,
         time: formatted_start_end_time,
-        registration_end_time: Time.parse("#{end_date} #{end_time || start_time}"),
+        registration_end_time: end_date ? Time.parse("#{end_date} #{end_time || start_time}") : nil,
       },
       language_code: language_code,
       images: pictures.map { |picture|

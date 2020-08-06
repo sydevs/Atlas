@@ -72,7 +72,7 @@ ruby:
   .info__images.main-carousel id='js-image-gallery' data-attribute='images' style='display: none'
 
   #register
-  form.registration id='js-registration' style=(@event_data&.dig(:timing, :registration_end_time).past? ? 'display: none' : '')
+  form.registration id='js-registration' style=(@event_data&.dig(:timing, :registration_end_time)&.past? ? 'display: none' : '')
     .registration__header
       .registration__header__text
         .registration__header__title = translate('map.registration.header')
