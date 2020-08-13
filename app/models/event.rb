@@ -59,6 +59,10 @@ class Event < ApplicationRecord
     super value if I18nData.languages.key?(value)
   end
 
+  def finished?
+    end_date && end_date < DateTime.now - 1.day
+  end
+
   def find_or_create_manager
     return unless manager.email.present?
 

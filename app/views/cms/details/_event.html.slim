@@ -1,48 +1,49 @@
 
 - if @record.published? && @record.venue.published?
-  - if @record.archived?
-    .ui.small.orange.icon.message
-      i.exclamation.icon
-      .content
-        a.ui.right.floated.orange.button href=url_for([:edit, :cms, @record])
-          = translate('cms.details.record_archived.action')
-          i.right.arrow.icon
-        .header = translate('cms.details.record_archived.title', resource: translate_model(@model))
-        .description = translate('cms.details.record_archived.description', resource: translate_model(@model).downcase, time: time_ago_in_words(@record.updated_at))
-  - elsif @record.expired?
-    .ui.small.orange.icon.message
-      i.exclamation.icon
-      .content
-        a.ui.right.floated.orange.button href=url_for([:edit, :cms, @record])
-          = translate('cms.details.record_expired.action')
-          i.right.arrow.icon
-        .header = translate('cms.details.record_expired.title', resource: translate_model(@model))
-        .description = translate('cms.details.record_expired.description', resource: translate_model(@model).downcase, weeks: Expirable::EXPIRE_AFTER_WEEKS)
-  - elsif @record.needs_review?
-    .ui.small.yellow.icon.message
-      i.exclamation.icon
-      .content
-        a.ui.right.floated.yellow.button href=url_for([:edit, :cms, @record])
-          = translate('cms.details.record_needs_review.action')
-          i.right.arrow.icon
-        .header = translate('cms.details.record_needs_review.title', resource: translate_model(@model))
-        .description = translate('cms.details.record_needs_review.description', resource: translate_model(@model).downcase, weeks: Expirable::VERIFY_AFTER_WEEKS, date: @record.expires_at.to_s(:short))
-  - elsif @record.syncing?
-    .ui.small.green.icon.message
-      i.compact.disc.loading.icon
-      .content
-        .header = translate('cms.details.syncing.title')
-        .description = translate('cms.details.syncing.description', resource: translate_model(@model).downcase)
-    = help_link :sync
-  - elsif !@record.synced?
-    .ui.small.olive.icon.message
-      i.sync.alternate.icon
-      .content
-        .header = translate('cms.details.desynced.title')
-        .description
-          - time = "#{time_ago_in_words MapboxSync.next_sync_at} (#{MapboxSync.next_sync_at.to_s(:short)} UTC)"
-          = translate('cms.details.desynced.description', resource: translate_model(@model).downcase, time: time)
-    = help_link :sync
+  - unless @record.finished?
+    - if @record.archived?
+      .ui.small.orange.icon.message
+        i.exclamation.icon
+        .content
+          a.ui.right.floated.orange.button href=url_for([:edit, :cms, @record])
+            = translate('cms.details.record_archived.action')
+            i.right.arrow.icon
+          .header = translate('cms.details.record_archived.title', resource: translate_model(@model))
+          .description = translate('cms.details.record_archived.description', resource: translate_model(@model).downcase, time: time_ago_in_words(@record.updated_at))
+    - elsif @record.expired?
+      .ui.small.orange.icon.message
+        i.exclamation.icon
+        .content
+          a.ui.right.floated.orange.button href=url_for([:edit, :cms, @record])
+            = translate('cms.details.record_expired.action')
+            i.right.arrow.icon
+          .header = translate('cms.details.record_expired.title', resource: translate_model(@model))
+          .description = translate('cms.details.record_expired.description', resource: translate_model(@model).downcase, weeks: Expirable::EXPIRE_AFTER_WEEKS)
+    - elsif @record.needs_review?
+      .ui.small.yellow.icon.message
+        i.exclamation.icon
+        .content
+          a.ui.right.floated.yellow.button href=url_for([:edit, :cms, @record])
+            = translate('cms.details.record_needs_review.action')
+            i.right.arrow.icon
+          .header = translate('cms.details.record_needs_review.title', resource: translate_model(@model))
+          .description = translate('cms.details.record_needs_review.description', resource: translate_model(@model).downcase, weeks: Expirable::VERIFY_AFTER_WEEKS, date: @record.expires_at.to_s(:short))
+    - elsif @record.syncing?
+      .ui.small.green.icon.message
+        i.compact.disc.loading.icon
+        .content
+          .header = translate('cms.details.syncing.title')
+          .description = translate('cms.details.syncing.description', resource: translate_model(@model).downcase)
+      = help_link :sync
+    - elsif !@record.synced?
+      .ui.small.olive.icon.message
+        i.sync.alternate.icon
+        .content
+          .header = translate('cms.details.desynced.title')
+          .description
+            - time = "#{time_ago_in_words MapboxSync.next_sync_at} (#{MapboxSync.next_sync_at.to_s(:short)} UTC)"
+            = translate('cms.details.desynced.description', resource: translate_model(@model).downcase, time: time)
+      = help_link :sync
 
 - unless @record.native_registration_mode?
   .ui.small.yellow.icon.message
@@ -72,7 +73,14 @@ p = simple_format @record.description
       .description = @record.language_name
 
 h3.ui.small.dividing.grey.header = translate('cms.details.management_for_record', resource: translate_model(@model).downcase)
-- if @record.published? && @record.venue.published?
+- if @record.finished?
+  .ui.one.steps
+    .step
+      i.blue.check.circle.icon
+      .content
+        .title = translate('cms.details.record_finished.title', resource: translate_model(Event))
+        .description = translate('cms.details.record_finished.description', resource: translate_model(Event).downcase, date: @record.end_date.to_s(:long))
+- elsif @record.published? && @record.venue.published?
   .ui.three.event.steps
     - %w[updated needs_review expired].each do |step|
       - active = @record.send("#{step}?")
