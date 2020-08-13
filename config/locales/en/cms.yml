@@ -227,7 +227,7 @@ en:
           description: "Several published events have not been updated in a few months. Please check that the event details are still correct, and save the event so that we know that it is still accurate. Otherwise it will be removed from the map."
         expired:
           title: "Some events have expired"
-          alt_title: "Expired Events"
+          alt_title: "Recently Expired Events"
           description: "Several published events are hidden from the map because they have not been verified recently. Please check and resave these events to re-enable them."
           other:
             one: "There is %{count} older expired event in the system."
@@ -236,7 +236,7 @@ en:
           title: "Archived Events"
           alt_title: :cms.dashboard.alerts.archived.title # Do not translate
           description:
-            one: "%{count} event has been expired for a long time and has been archived. It will not show on the map until it is reviewed and updated."
+            one: "%{count} event has been expired for a long time and has been archived. It will not show on the map unless it is reviewed and updated."
             other: "%{count} events have been expired for a long time and have been archived. They will not show on the map unless they are reviewed and updated."
           view_all: "View All Expired Events"
 

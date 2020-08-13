@@ -38,7 +38,9 @@ class Event < ApplicationRecord
   # Scopes
   scope :with_new_registrations, -> { where('latest_registration_at >= registrations_sent_at') }
   scope :notifications_enabled, -> { where.not(disable_notifications: true) }
-  scope :publicly_visible, -> { published.not_expired.where('end_date < ?', DateTime.now - 1.day) }
+  scope :publicly_visible, -> { published.not_expired.not_finished }
+  scope :finished, -> { where('end_date < ?', DateTime.now - 1.day) }
+  scope :not_finished, -> { where.not('end_date < ?', DateTime.now - 1.day) }
 
   # Delegations
   delegate :full_address, to: :venue

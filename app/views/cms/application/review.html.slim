@@ -37,3 +37,19 @@ h3.ui.small.dividing.grey.header = translate('cms.dashboard.alerts.expired.alt_t
           = time_ago_in_words(event.updated_at)
 - else
   p = translate('cms.dashboard.alerts.empty')
+
+h3.ui.small.dividing.grey.header = translate('cms.dashboard.alerts.archived.alt_title')
+
+- if @events_archived.present?
+  p = translate('cms.dashboard.alerts.archived.description', count: @events_archived.count)
+  .ui.divided.list
+    - @events_archived.each do |event|
+      .item
+        i.orange.warning.sign.icon
+        .content
+          a href=edit_cms_event_url(event)
+            = event.label
+          '  - 
+          = time_ago_in_words(event.updated_at)
+- else
+  p = translate('cms.dashboard.alerts.empty')
