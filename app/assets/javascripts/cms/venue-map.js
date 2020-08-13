@@ -126,7 +126,7 @@ const VenueMap = {
         document.getElementById('venue_name').value,
         document.getElementById('venue_street').value,
         document.getElementById('venue_city').value,
-        document.getElementById('venue_province_code').value,
+        document.getElementById('venue_province_code') ? document.getElementById('venue_province_code').value : null,
         document.getElementById('venue_country_code').value,
         document.getElementById('venue_postcode').value,
       ].filter(Boolean).join(', ')
