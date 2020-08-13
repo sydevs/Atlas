@@ -107,6 +107,7 @@ module MapboxSync
 
     puts "Generated geojson dataset with #{venue_count} venue(s) and #{event_count} event(s)"
     {
+      created_at: DateTime.now.to_s,
       type: 'FeatureCollection',
       features: features,
     }
