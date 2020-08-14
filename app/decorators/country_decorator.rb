@@ -5,7 +5,7 @@ module CountryDecorator
   end
 
   def short_label
-    country_code
+    I18n.translate(country_code.downcase, scope: 'cms.country_codes', default: country_code)
   end
 
   def self.get_label country_code

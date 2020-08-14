@@ -332,6 +332,10 @@ en:
       description: "The latest atlas data is being compiled and uploaded to the Mapbox servers."
       please_wait: "This can take up to five minutes, please wait and do not close this page."
 
+    country_codes:
+      gb: UK
+      us: USA
+    
   passwordless:
     sessions:
       create:
