@@ -9,7 +9,7 @@ module CountryDecorator
   end
 
   def self.get_label country_code
-    ISO3166::Country[country_code].name
+    ISO3166::Country.translations[country_code]
   end
 
 end
