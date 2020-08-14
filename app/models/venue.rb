@@ -23,7 +23,8 @@ class Venue < ApplicationRecord
   validates :latitude, :longitude, presence: true
 
   # Scopes
-  scope :publicly_visible, -> { published.joins(:events).where('events.published = true AND events.updated_at > ? AND events.end_date < ?', Expirable.expire_date, DateTime.now - 1.day).distinct }
+  scope :publicly_visible, -> { published.has_events }
+  scope :has_events, -> { joins(:events).where('events.published = true AND events.updated_at > ?', Expirable.expire_date).distinct }
 
   # Delegations
   delegate :all_managers, :managed_by?, to: :parent
