@@ -3,7 +3,7 @@ include LocalizationHelper
 module MapboxSync
 
   def self.last_synced_at
-    Stash.get(:last_synced_at)
+    Stash.get(:last_synced_at) || Time.at(0)
   end
 
   def self.last_sync_errored_at
