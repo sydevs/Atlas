@@ -1,14 +1,23 @@
 
 .item
-  = model_icon Venue
+  - if !venue.events.present?
+    i.black.minus.circle.icon
+  - elsif venue.published?
+    i.blue.check.circle.icon
+  - else
+    i.grey.dot.circle.icon
   .content
     - if policy(venue).show?
-      a.header href=url_for([:cms, venue]) = venue.label
+      .header 
+        a href=url_for([:cms, venue]) = venue.label
     - else
       .header = venue.label
     .description
       - if !venue.published?
         em.alert = translate('cms.details.record_not_published.title')
-        '  - 
+      - elsif !venue.events.present?
+        em.alert = translate('cms.details.record_has_no_events.title')
+      - else
+        em.alert = translate_model_count(venue.events)
       
-      | #{venue.address_text} - #{translate_model_count(venue.events)}
+      |  - #{venue.address_text}

@@ -138,6 +138,9 @@ en:
       record_finished:
         title: "%{resource} Completed"
         description: "This %{resource} is over. It's last occurence was %{date}."
+      record_has_no_events:
+        title: "No Events"
+        description: "This %{resource} has no events, and so it will not appear on the map."
       record_expired:
         title: "%{resource} Expired"
         description: "This %{resource} has been hidden from the public, because it hasn't been updated in %{weeks} weeks. Go to the edit page and press save to confirm the event details are still correct."

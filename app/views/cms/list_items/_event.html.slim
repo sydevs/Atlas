@@ -1,6 +1,15 @@
 
 .item
-  = model_icon Event
+  - if event.finished?
+    i.blue.check.circle.icon
+  - elsif event.archived?
+    i.black.times.circle.icon
+  - elsif event.expired?
+    i.orange.exclamation.circle.icon
+  - elsif event.published?
+    i.green.check.circle.icon
+  - else
+    i.grey.dot.circle.icon
   .content
     - if policy(event).show?
       a.header href=url_for([:cms, event]) = event.label
@@ -11,7 +20,7 @@
         em.alert = translate('cms.details.record_finished.title', resource: translate_model(Event))
         '  - 
       - elsif event.archived?
-        span.orange.alert = translate('cms.details.record_archived.title', resource: translate_model(Event))
+        em.alert = translate('cms.details.record_archived.title', resource: translate_model(Event))
         '  - 
       - elsif event.expired?
         span.orange.alert = translate('cms.details.record_expired.title', resource: translate_model(Event))
@@ -20,7 +29,4 @@
         em.alert = translate('cms.details.record_not_published.title')
         '  - 
       
-      - if event.room
-        | #{event.category.humanize.titleize} / #{event.room}, #{event.timing_in_words}
-      - else
-        | #{event.category.humanize.titleize} / #{event.timing_in_words}
+      | #{event.category.humanize.titleize}, #{event.timing_in_words}
