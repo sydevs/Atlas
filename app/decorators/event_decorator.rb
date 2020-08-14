@@ -49,11 +49,11 @@ module EventDecorator
   end
 
   def formatted_start_end_date
-    [start_date, end_date].compact.join(' - ')
+    end_date ? "#{start_date} - #{end_date}" : start_date
   end
 
   def formatted_start_end_time
-    [start_time, end_time].compact.join(' - ')
+    end_time ? "#{start_time} - #{end_time}" : start_time
   end
 
   def timing_in_words
