@@ -41,12 +41,10 @@ module CMS::ApplicationHelper
     active = [controller_name, action_name].include?(index) if index
     active = action_name == action if action
 
-    if active
-      content_tag :div, label, class: 'active item'
-    elsif action.present?
-      content_tag :a, label, class: 'item', href: action == 'show' ? url_for([:cms, record || :worldwide]) : url_for([action, :cms, record])
+    if action.present?
+      content_tag :a, label, class: "#{'active' if active} item", href: action == 'show' ? url_for([:cms, record || :worldwide]) : url_for([action, :cms, record])
     elsif controller.present?
-      content_tag :a, label, class: 'item', href: url_for([:cms, record, index])
+      content_tag :a, label, class: "#{'active' if active} item", href: url_for([:cms, record, index])
     else
       content_tag :div, label, class: 'item'
     end
