@@ -13,6 +13,7 @@ class Navbar {
     this.searchResults = document.getElementById('js-search-results')
     this.searchInput = document.getElementById('js-search-input')
     this.searchPlaceholder = this.searchInput.placeholder
+    console.log('search placeholder is', this.searchPlaceholder)
     this.enableGeoSearch = true
 
     this.venueBack.addEventListener('click', _event => this.clearVenue())
@@ -31,7 +32,7 @@ class Navbar {
   }
 
   setText(text) {
-    this.searchInput.placeholder = text
+    this.searchInput.placeholder = text || this.searchPlaceholder
   }
 
   select(location) {
@@ -42,7 +43,7 @@ class Navbar {
     this.enableGeoSearch = true
 
     if (location) {
-      this.searchInput.placeholder = location.label
+      this.searchInput.placeholder = location.label || this.searchPlaceholder
       Application.setState(location)
     } else {
       this.searchInput.placeholder = this.searchPlaceholder
