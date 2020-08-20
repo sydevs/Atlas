@@ -50,7 +50,7 @@ class Map::ApplicationController < ActionController::Base
     params.require(%i[latitude longitude])
     coordinates = [params[:latitude], params[:longitude]]
 
-    query = Venue.publicly_visible.by_distance(origin: coordinates).where('venues.updated_at < ?', 1.hour.ago.beginning_of_hour)
+    query = Venue.publicly_visible.by_distance(origin: coordinates).where('venues.updated_at < ?', MapboxSync.last_synced_at)
     @venue = query.joins(:events).limit(1).first
 
     distance = @venue.distance_from(coordinates)

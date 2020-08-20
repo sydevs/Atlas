@@ -88,7 +88,7 @@ module MapboxSync
     event_count = 0
 
     puts 'Generating geojson dataset...' 
-    scope.publicly_visible.find_each do |venue|
+    scope.publicly_visible.distinct.find_each do |venue|
       next unless venue.events.publicly_visible.present?
 
       venue.extend VenueDecorator

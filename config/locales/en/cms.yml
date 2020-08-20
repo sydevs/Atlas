@@ -64,7 +64,7 @@ en:
       not_logged_in: "You are not logged in!"
       no_comment: "(No comment)"
       sync:
-        success: "The latest atlas data has been sent to Mapbox to be processed. It should appear on the map within 5 minutes."
+        success: "The latest atlas data has been uploaded. It should appear on the map within 10 minutes."
         error: "There was a problem with the map synchronisation: \"%{error}\""
         not_needed: "No venues or events have changes since the last map synchronisation. So the sync has been skipped."
         not_allowed: "The map cannot be synced now because it was already synced %{time_ago}. Please wait for %{time_from_now}, and try again."
@@ -302,9 +302,9 @@ en:
       sync:
         title: "Why isn't my event appearing on the map?"
         description:
-          problem: "The map is processed and created by an external service called Mapbox. Whenever a change is made to the Sahaj Atlas database, it must be sent to Mapbox before it can appear on the map. However, this updating can take a few minutes, and Mapbox is processing many other maps at the same time. For this reason, we need to limit the number of updates that are sent."
-          solution: "Every hour our system checks to see if there are new updates to the Sahaj Atlas database, and if there is they will get sent to Mapbox."
-          status: "Here are the most recent Mapbox synchronisation times:"
+          problem: "To make the map load fast and support many simultaneous users we need to store a simplified version of the map data which is quick for their computer to download. Updating this simplified version of the map can take a few minutes, so we can't do it as immediately whenever a program changes."
+          solution: "Every 10 minutes our system checks to see if there are new updates to the Sahaj Atlas database, and if there is the next data is synchronised."
+          status: "Here are the most recent synchronisation times:"
       registration:
         title: "Why should seekers register on Sahaj Atlas?"
         description:
