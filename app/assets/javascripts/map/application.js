@@ -13,7 +13,6 @@ class ApplicationInstance {
     this.timingCarousel = new TimingCarousel(document.getElementById('js-timing-carousel'))
     this.share = new SharingModal(document.getElementById('js-share'))
     this.atlas = new AtlasAPI(this.container.dataset.api)
-    this.history = new History()
     this.map = new MapView(this.container, () => this.loadState())
 
     // Workaround for an iOS bug that causes grey blocks when you focus an input
@@ -26,14 +25,16 @@ class ApplicationInstance {
   loadState() {
     const state = JSON.parse(this.container.dataset.state)
 
-    if (state.event || state.venue) {
-      let old_state = Object.assign({}, state)
-      delete old_state.event
-      delete old_state.venue
-      this.history.push(old_state)
+    if (state.event) {
+      this.showEvent(state.event, state.venue)
+    } else if (state.venue) {
+      this.showVenue(state.venue)
+    } else {
+      const wideZoom = this.map.isZoomWide()
+      this._setMode(wideZoom ? 'map' : 'list')
     }
 
-    this.setState(state)
+    this.currentMapOverview = null // There is no previous map overview
   }
 
   showVenues(venues, allowFallback = false) {
@@ -46,82 +47,106 @@ class ApplicationInstance {
     }
   }
 
-  setState(state, recordHistory = true) {
-    this.state = state
+  showEvent(event, venue) {
+    if (this.currentVenue && this.currentVenue.id != event.venue_id) {
+      this.currentVenue = null
+    }
+
+    this.saveMapState()
+    this._setMode('event')
+    this.infoPanel.show(event, venue)
+    this.showVenues([venue])
+    this.map.invalidateSize()
+    this.map.setHighlightedVenue(venue)
+
     this.infoPanel.hideMessages()
-    
-    if (state.label) {
-      this.navbar.setText(state.label)
-    }
-
-    if (state.event) {
-      // Show event
-      this._setMode('event')
-      this.infoPanel.show(state.event, state.venue)
-      this.map.invalidateSize()
-      this.map.setHighlightedVenue(state.venue)
-    } else if (state.venue) {
-      if (state.venue.events.length == 1) {
-        // Show even if there is only one event for this venue
-        return this.setState({ event: state.venue.events[0], venue: state.venue })
-      }
-
-      // Show venue
-      this._setMode('venue')
-      this.navbar.setVenue(state.venue)
-      this.showVenues([state.venue])
-      this.map.invalidateSize()
-      this.map.setHighlightedVenue(state.venue)
-    } else {
-      this._setMode((this.state.zoom && this.state.zoom > 10) ? 'list' : 'map')
-      this.map.invalidateSize()
-      this.map.setHighlightedVenue(null)
-
-      if (state.west && state.east && state.north && state.south) {
-        this.listPanel.setEmptyResults(false)
-        this.listPanel.clearEvents()
-        this.map.fitTo(state)
-        this.state.zoom = this.map.mapbox.getZoom()
-      } else if (state.latitude && state.longitude) {
-        this.listPanel.setEmptyResults(false)
-        this.listPanel.clearEvents()
-        this.map.flyTo(state, 10)
-      } else {
-        this.map.zoomOut()
-      }
-
-      if (['postcode', 'address'].includes(state.type)) {
-        this.map.setLocation({
-          latitude: state.latitude,
-          longitude: state.longitude,
-        })
-      }
-    }
-
-    if (recordHistory) {
-      this.history.push(state)
-    }
-
-    return true
+    console.log(venue)
+    this.saveHistoryState(`/map/event/${event.id}`, venue)
   }
 
-  replaceListState(state, wideZoom, recordHistory = true) {
-    if (['list', 'map'].includes(this.mode)) {
-      const targetState = wideZoom ? 'map' : 'list'
-      
-      if (recordHistory) {
-        //this.history.replace(state)
-      }
+  showVenue(venue) {
+    if (venue.events.length > 1) {
+      this.saveMapState()
+      this._setMode('venue')
+      this.navbar.setVenue(venue)
+      this.showVenues([venue])
+      this.map.invalidateSize()
+      this.map.setHighlightedVenue(venue)
 
-      if (wideZoom) {
-        this.listPanel.clearEvents()
-      }
+      this.infoPanel.hideMessages()
 
-      if (this.mode != targetState) {
-        this._setMode(targetState)
-        this.map.invalidateSize()
+      this.saveHistoryState(`/map/venue/${venue.id}`, venue)
+      this.currentVenue = venue
+    } else {
+      this.showEvent(venue.events[0], venue)
+    }
+  }
+
+  showMap() {
+    console.log('return to', this.currentMapOverview)
+    this._setMode('list')
+    this.map.invalidateSize()
+    this.map.setHighlightedVenue(null)
+
+    if (this.currentMapOverview) {
+      this.map.fitTo(this.currentMapOverview, false)
+    } else {
+      this.map.zoomOut()
+    }
+
+    this.updateMode()
+    this.saveHistoryState('/map')
+    this.currentVenue = null
+    this.currentMapOverview = null
+  }
+
+  updateMode() {
+    if (this.mode == 'list' || this.mode == 'map') {
+      this._setMode(this.map.isZoomWide() ? 'map' : 'list')
+    }
+  }
+
+  saveMapState() {
+    if (this.mode == 'map' || this.mode == 'list') {
+      const bounds = this.map.mapbox.getBounds()
+      this.currentMapOverview = {
+        north: bounds._ne.lat,
+        east: bounds._ne.lng,
+        west: bounds._sw.lng,
+        south: bounds._sw.lat,
       }
     }
+  }
+
+  back() {
+    if (this.mode == 'event' && this.currentVenue) {
+      this.showVenue(this.currentVenue)
+    } else {
+      this.showMap()
+    }
+  }
+
+  saveHistoryState(path, highlightLocation = null) {
+    let state = {}
+    
+    if (path.indexOf('#') == -1) {
+      if (highlightLocation) {
+        path += `#${this.map.highlightZoom}/${highlightLocation.latitude}/${highlightLocation.longitude}`
+      } else if (window.location.hash) {
+        path += '#' + window.location.hash
+      }
+    }
+
+    if (this.currentVenue) {
+      state.venue = this.currentVenue
+    }
+
+    if (this.currentMapOverview) {
+      state.overview = this.currentMapOverview
+    }
+
+    console.log('set history', path, state)
+    history.replaceState(state, undefined, path)
   }
 
   _setMode(mode) {

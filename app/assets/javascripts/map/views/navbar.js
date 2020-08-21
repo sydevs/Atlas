@@ -13,7 +13,6 @@ class Navbar {
     this.searchResults = document.getElementById('js-search-results')
     this.searchInput = document.getElementById('js-search-input')
     this.searchPlaceholder = this.searchInput.placeholder
-    console.log('search placeholder is', this.searchPlaceholder)
     this.enableGeoSearch = true
 
     this.venueBack.addEventListener('click', _event => this.clearVenue())
@@ -44,7 +43,7 @@ class Navbar {
 
     if (location) {
       this.searchInput.placeholder = location.label || this.searchPlaceholder
-      Application.setState(location)
+      Application.map.fitTo(location)
     } else {
       this.searchInput.placeholder = this.searchPlaceholder
     }
@@ -109,7 +108,7 @@ class Navbar {
   }
 
   clearVenue() {
-    history.back()
+    Application.back()
   }
 
   /* ===== SEARCH RESULT FOCUS ===== */

@@ -9,6 +9,8 @@ class MapView {
     this.desktopBreakpoint = 1100
     this.viewportPadding = 0
     this.invalidating = true
+    this.loading = true
+    this.highlightZoom = 16
 
     const state = JSON.parse(this.container.dataset.state)
     const config = {
@@ -16,15 +18,14 @@ class MapView {
       style: 'mapbox://styles/sydevadmin/ck7g6nag70rn11io09f45odkq',
       minZoom: 1,
       dragRotate: false,
+      hash: true,
     }
 
     mapboxgl.accessToken = element.dataset.token
-    if (state.longitude && state.latitude) {
-      config.center = [state.longitude, state.latitude]
-    }
 
-    if (state.zoom) {
-      config.zoom = state.zoom
+    if (state.venue) {
+      config.center = [state.venue.longitude, state.venue.latitude]
+      config.zoom = this.highlightZoom
     }
 
     this.mapbox = new mapboxgl.Map(config)
@@ -35,6 +36,7 @@ class MapView {
       this.createEventHooks()
       onLoadCallback()
       this.invalidating = false
+      this.loading = false
     })
   }
 
@@ -113,7 +115,7 @@ class MapView {
     this.mapbox.on('click', event => {
       var features = this.mapbox.queryRenderedFeatures(event.point, { layers: [this.venuesLayer, this.clusteredPointsLayer] })
       if (features.length > 0) {
-        Application.setState({ venue: this.parseVenue(features[0]) })
+        Application.showVenue(this.parseVenue(features[0]))
       }
     })
 
@@ -139,9 +141,11 @@ class MapView {
       this.mapbox.getCanvas().style.cursor = features.length ? 'pointer' : ''
     })
 
+    this.mapbox.on('dragstart', _event => Application.navbar.setText(null))
     //this.mapbox.on('move', _event => this.updateRenderedVenues())
     this.mapbox.on('render', _event => this.updateRenderedVenues())
     this.mapbox.on('moveend', _event => this.updateRenderedVenues(true))
+    this.mapbox.on('zoom', _event => Application.updateMode())
   }
 
   async updateRenderedVenues(allowFallback = false) {
@@ -154,13 +158,6 @@ class MapView {
     if (!this.isZoomWide()) {
       this.getRenderedVenues(venues => Application.showVenues(venues, allowFallback))
     }
-
-    let center = this.getCenter()
-    Application.replaceListState({
-      latitude: center.latitude.toFixed(6),
-      longitude: center.longitude.toFixed(6),
-      zoom: this.mapbox.getZoom().toFixed(2)
-    }, this.isZoomWide())
   }
 
   getRenderedVenues(callback) {
@@ -243,11 +240,22 @@ class MapView {
         this.mapbox.setMaxBounds(bounds)
       }
 
-      this.flyTo(venue, 16)
+      if (!this.loading) {
+        this.flyTo(venue, this.highlightZoom)
+      }
     } else {
       this.mapbox.getSource(this.selectedVenueSource).setData({ type: 'FeatureCollection', features: [] })
       this.mapbox.setMaxBounds(null)
     }
+  }
+
+  jumpTo(location, zoom) {
+    this.mapbox.jumpTo({
+      center: [location.longitude, location.latitude],
+      offset: this.getViewportCenterOffset(),
+      zoom: zoom,
+      //easing: this._easing.
+    })
   }
 
   flyTo(location, zoom) {
@@ -259,11 +267,19 @@ class MapView {
     })
   }
 
-  fitTo(bounds) {
-    this.mapbox.fitBounds([[bounds.west, bounds.south], [bounds.east, bounds.north]], {
-      padding: this.getViewportPadding(),
-      easing: this._easing,
-    })
+  fitTo(bounds, padding = true) {
+    bounds = [[bounds.west, bounds.south], [bounds.east, bounds.north]]
+
+    if (padding) {
+      this.mapbox.fitBounds(bounds, {
+        padding: this.getViewportPadding(),
+        //easing: this._easing,
+      })
+    } else {
+      this.mapbox.fitBounds(bounds, {
+        //easing: this._easing,
+      })
+    }
   }
 
   getCenter() {

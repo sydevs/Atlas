@@ -1,8 +1,10 @@
 
 ruby:
   @event_data = @event&.as_json
-  @state[:venue] = @venue&.as_json
-  @state[:event] = @event_data
+  state = {
+    venue: @venue&.as_json,
+    event: @event_data,
+  }
 
 // ===== SEARCH BOX ===== //
 .navbar id='js-navbar' data-key=ENV['MAPBOX_ACCESSTOKEN'] data-country=params[:country]
@@ -23,7 +25,7 @@ ruby:
     ul.navbar__results id='js-search-results'
 
 // ===== MAP ===== //
-#map data=@config data-state=@state.to_json data-geojson=MapboxSync.get_remote_geojson_url
+#map data=@config data-state=state.to_json data-geojson=MapboxSync.get_remote_geojson_url
   #js-debug-viewport
   #js-debug-viewport-center
 

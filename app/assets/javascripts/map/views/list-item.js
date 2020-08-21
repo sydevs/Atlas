@@ -26,7 +26,7 @@ class ListItem {
   }
 
   open() {
-    Application.setState({ event: this.event, venue: this.venue })
+    Application.showEvent(this.event, this.venue)
   }
 
   setHidden(hidden) {

@@ -24,24 +24,6 @@ class Map::ApplicationController < ActionController::Base
       restricted: [LocalArea, Province, Country].include?(scope.class).to_s,
     }
 
-    @state = {
-      label: params[:q],
-      type: params[:type],
-      latitude: params[:latitude] || @venue&.latitude,
-      longitude: params[:longitude] || @venue&.longitude,
-    }
-
-    @state[:zoom] ||= 16 if @state[:latitude] && @state[:longitude]
-
-    if params[:north] && params[:south] && params[:east] && params[:west]
-      @state.merge!({
-        north: params[:north],
-        south: params[:south],
-        east: params[:east],
-        west: params[:west]
-      })
-    end
-
     set_jbuilder_params!
     render 'map/show'
   end
