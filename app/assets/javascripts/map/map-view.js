@@ -3,16 +3,15 @@
 
 class MapView {
 
-  constructor(element, onLoadCallback) {
+  constructor(element, venue = null) {
     this.container = element
     this.mobileBreakpoint = 768
     this.desktopBreakpoint = 1100
-    this.viewportPadding = 0
+    this.viewportPadding = 5
     this.invalidating = true
     this.loading = true
     this.highlightZoom = 16
 
-    const state = JSON.parse(this.container.dataset.state)
     const config = {
       container: 'map',
       style: 'mapbox://styles/sydevadmin/ck7g6nag70rn11io09f45odkq',
@@ -23,8 +22,8 @@ class MapView {
 
     mapboxgl.accessToken = element.dataset.token
 
-    if (state.venue) {
-      config.center = [state.venue.longitude, state.venue.latitude]
+    if (venue) {
+      config.center = [venue.longitude, venue.latitude]
       config.zoom = this.highlightZoom
     }
 
@@ -34,9 +33,15 @@ class MapView {
     this.mapbox.on('load', _event => {
       this.loadFeatureLayers()
       this.createEventHooks()
-      onLoadCallback()
       this.invalidating = false
       this.loading = false
+
+      if (venue) {
+        this.setHighlightedVenue(venue, false)
+      }
+
+      //this.mapbox.showPadding = true
+      this.updatePadding()
     })
   }
 
@@ -146,6 +151,7 @@ class MapView {
     this.mapbox.on('render', _event => this.updateRenderedVenues())
     this.mapbox.on('moveend', _event => this.updateRenderedVenues(true))
     this.mapbox.on('zoom', _event => Application.updateMode())
+    window.addEventListener('resize', _event => this.updatePadding())
   }
 
   async updateRenderedVenues(allowFallback = false) {
@@ -212,7 +218,9 @@ class MapView {
     })
   }
 
-  setHighlightedVenue(venue) {
+  setHighlightedVenue(venue, zoomToVenue = true) {
+    if (this.loading) return
+
     if (venue) {
       this.mapbox.getSource(this.selectedVenueSource).setData({
         type: 'FeatureCollection',
@@ -240,7 +248,7 @@ class MapView {
         this.mapbox.setMaxBounds(bounds)
       }
 
-      if (!this.loading) {
+      if (zoomToVenue) {
         this.flyTo(venue, this.highlightZoom)
       }
     } else {
@@ -249,37 +257,32 @@ class MapView {
     }
   }
 
-  jumpTo(location, zoom) {
-    this.mapbox.jumpTo({
-      center: [location.longitude, location.latitude],
-      offset: this.getViewportCenterOffset(),
-      zoom: zoom,
-      //easing: this._easing.
-    })
-  }
-
   flyTo(location, zoom) {
-    this.mapbox.flyTo({
-      center: [location.longitude, location.latitude],
-      offset: this.getViewportCenterOffset(),
-      zoom: zoom,
-      //easing: this._easing.
-    })
-  }
-
-  fitTo(bounds, padding = true) {
-    bounds = [[bounds.west, bounds.south], [bounds.east, bounds.north]]
-
-    if (padding) {
-      this.mapbox.fitBounds(bounds, {
+    if (Util.isDevice('mobile')) {
+      this.mapbox.jumpTo({
+        center: [location.longitude, location.latitude],
+        zoom: zoom,
         padding: this.getViewportPadding(),
-        //easing: this._easing,
       })
     } else {
-      this.mapbox.fitBounds(bounds, {
-        //easing: this._easing,
+      this.mapbox.flyTo({
+        center: [location.longitude, location.latitude],
+        zoom: zoom,
+        padding: this.getViewportPadding(),
+        //easing: this._easing.
       })
     }
+  }
+
+  fitTo(bounds) {
+    bounds = [[bounds.west, bounds.south], [bounds.east, bounds.north]]
+    this.mapbox.fitBounds(bounds, {
+      padding: this.getViewportPadding(),
+    })
+  }
+
+  updatePadding() {
+    this.mapbox.setPadding(this.getViewportPadding())
   }
 
   getCenter() {
@@ -330,43 +333,42 @@ class MapView {
   }
 
   getViewportPadding() {
+    let padding
+
     if (Util.isDevice('mobile')) {
       if (Util.isMode('list')) {
-        const topPadding = Application.navbar.container.offsetTop + Application.listPanel.container.offsetHeight
-        return {
-          top: topPadding + this.viewportPadding * 2,
-          bottom: this.viewportPadding,
-          right: this.viewportPadding,
-          left: this.viewportPadding,
-        }
+        padding = { top: 80 }
       } else {
-        return 0
+        padding = { top: 0, left: 0, right: 0, bottom: 0 }
       }
     } else if (Util.isDevice('tablet')) {
-      return this.viewportPadding
+      padding = {}
     } else {
-      const leftPadding = Application.listPanel.container.offsetLeft + Application.listPanel.container.offsetWidth
-      return {
-        top: this.viewportPadding,
-        bottom: this.viewportPadding,
-        right: this.viewportPadding,
+      let leftPadding
+
+      if (Util.isMode('event')) {
+        leftPadding = Application.infoPanel.container.offsetLeft + Application.infoPanel.container.offsetWidth
+      } else {
+        leftPadding = Application.listPanel.container.offsetLeft + Application.listPanel.container.offsetWidth
+      }
+
+      padding = {
         left: leftPadding + this.viewportPadding,
       }
     }
-  }
 
-  getViewportCenterOffset() {
-    let viewportPadding = this.getViewportPadding()
-    if (typeof viewportPadding === 'number') {
-      viewportPadding = { top: viewportPadding, left: viewportPadding }
-    }
+    ['top', 'left', 'bottom', 'right'].forEach(side => {
+      if (typeof padding[side] === 'undefined') {
+        padding[side] = this.viewportPadding
+      }
+    })
 
-    const left = Math.min(0, viewportPadding.left - this.viewportPadding)
-    const top = Math.min(0, viewportPadding.top - this.viewportPadding)
-    return [left, top]
+    return padding
   }
 
   invalidateSize() {
+    if (this.loading) return
+
     this.invalidating = true
     this.mapbox.resize()
     this.invalidating = false

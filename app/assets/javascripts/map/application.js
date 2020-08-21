@@ -13,7 +13,6 @@ class ApplicationInstance {
     this.timingCarousel = new TimingCarousel(document.getElementById('js-timing-carousel'))
     this.share = new SharingModal(document.getElementById('js-share'))
     this.atlas = new AtlasAPI(this.container.dataset.api)
-    this.map = new MapView(this.container, () => this.loadState())
 
     // Workaround for an iOS bug that causes grey blocks when you focus an input
     const inputs = document.querySelectorAll('input, textarea')
@@ -22,8 +21,9 @@ class ApplicationInstance {
     })
   }
 
-  loadState() {
+  loadMap() {
     const state = JSON.parse(this.container.dataset.state)
+    this.map = new MapView(this.container, state.venue)
 
     if (state.event) {
       this.showEvent(state.event, state.venue)
@@ -56,11 +56,9 @@ class ApplicationInstance {
     this._setMode('event')
     this.infoPanel.show(event, venue)
     this.showVenues([venue])
-    this.map.invalidateSize()
     this.map.setHighlightedVenue(venue)
 
     this.infoPanel.hideMessages()
-    console.log(venue)
     this.saveHistoryState(`/map/event/${event.id}`, venue)
   }
 
@@ -83,13 +81,11 @@ class ApplicationInstance {
   }
 
   showMap() {
-    console.log('return to', this.currentMapOverview)
     this._setMode('list')
-    this.map.invalidateSize()
     this.map.setHighlightedVenue(null)
 
     if (this.currentMapOverview) {
-      this.map.fitTo(this.currentMapOverview, false)
+      this.map.flyTo(this.currentMapOverview.center, this.currentMapOverview.zoom)
     } else {
       this.map.zoomOut()
     }
@@ -108,12 +104,13 @@ class ApplicationInstance {
 
   saveMapState() {
     if (this.mode == 'map' || this.mode == 'list') {
-      const bounds = this.map.mapbox.getBounds()
+      const center = this.map.mapbox.getCenter()
       this.currentMapOverview = {
-        north: bounds._ne.lat,
-        east: bounds._ne.lng,
-        west: bounds._sw.lng,
-        south: bounds._sw.lat,
+        center: {
+          latitude: center.lat,
+          longitude: center.lng,
+        },
+        zoom: this.map.mapbox.getZoom(),
       }
     }
   }
@@ -133,7 +130,7 @@ class ApplicationInstance {
       if (highlightLocation) {
         path += `#${this.map.highlightZoom}/${highlightLocation.latitude}/${highlightLocation.longitude}`
       } else if (window.location.hash) {
-        path += '#' + window.location.hash
+        path += window.location.hash
       }
     }
 
@@ -145,11 +142,12 @@ class ApplicationInstance {
       state.overview = this.currentMapOverview
     }
 
-    console.log('set history', path, state)
     history.replaceState(state, undefined, path)
   }
 
   _setMode(mode) {
+    if (this.mode == mode) return
+
     if (this.mode) {
       document.body.classList.remove(`mode--${this.mode}`)
     }
@@ -160,9 +158,12 @@ class ApplicationInstance {
       document.body.classList.add(`mode--${this.mode}`)
       document.body.scrollTop = 0
     }
+
+    this.map.invalidateSize()
   }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
   window.Application = new ApplicationInstance()
+  window.Application.loadMap()
 })
