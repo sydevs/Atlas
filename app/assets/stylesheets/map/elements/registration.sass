@@ -261,6 +261,9 @@ $circle-size: 360px
   font-size: 16px
   text-align: center
 
+  @include desktop-or-larger
+    padding-top: 140px
+
   &__circle::before
     content: image-url('map/circle.svg')
     position: absolute
