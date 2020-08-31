@@ -2,6 +2,11 @@ module Expirable
 
   extend ActiveSupport::Concern
 
+  VERIFY_AFTER_MINUTES = 1
+  ESCALATE_AFTER_MINUTES = 2
+  EXPIRE_AFTER_MINUTES = 3
+  ARCHIVE_AFTER_MINUTES = 4
+
   VERIFY_AFTER_WEEKS = 8
   ESCALATE_AFTER_WEEKS = 9
   EXPIRE_AFTER_WEEKS = 10
@@ -17,39 +22,43 @@ module Expirable
   end
 
   def self.verify_date
-    VERIFY_AFTER_WEEKS.weeks.ago
+    # VERIFY_AFTER_WEEKS.weeks.ago
+    VERIFY_AFTER_MINUTES.minutes.ago
   end
 
   def self.escalate_date
-    ESCALATE_AFTER_WEEKS.weeks.ago
+    # ESCALATE_AFTER_WEEKS.weeks.ago
+    ESCALATE_AFTER_MINUTES.minutes.ago
   end
 
   def self.expire_date
-    EXPIRE_AFTER_WEEKS.weeks.ago
+    # EXPIRE_AFTER_WEEKS.weeks.ago
+    EXPIRE_AFTER_MINUTES.minutes.ago
   end
 
   def self.archive_date
-    ARCHIVE_AFTER_WEEKS.weeks.ago
+    # ARCHIVE_AFTER_WEEKS.weeks.ago
+    ARCHIVE_AFTER_MINUTES.minutes.ago
   end
 
   def needs_review_at
-    updated_at + VERIFY_AFTER_WEEKS.weeks
-    # updated_at + VERIFY_AFTER_MINUTES.minutes
+    # updated_at + VERIFY_AFTER_WEEKS.weeks
+    updated_at + VERIFY_AFTER_MINUTES.minutes
   end
 
   def needs_escalation_at
-    updated_at + ESCALATE_AFTER_WEEKS.weeks
-    # updated_at + ESCALATE_AFTER_MINUTES.minutes
+    # updated_at + ESCALATE_AFTER_WEEKS.weeks
+    updated_at + ESCALATE_AFTER_MINUTES.minutes
   end
 
   def expires_at
-    updated_at + EXPIRE_AFTER_WEEKS.weeks
-    # updated_at + EXPIRE_AFTER_MINUTES.minutes
+    # updated_at + EXPIRE_AFTER_WEEKS.weeks
+    updated_at + EXPIRE_AFTER_MINUTES.minutes
   end
 
   def archives_at
-    updated_at + ARCHIVE_AFTER_WEEKS.weeks
-    # updated_at + ARCHIVE_AFTER_MINUTES.minutes
+    # updated_at + ARCHIVE_AFTER_WEEKS.weeks
+    updated_at + ARCHIVE_AFTER_MINUTES.minutes
   end
 
   def expired_at
