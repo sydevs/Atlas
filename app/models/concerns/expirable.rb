@@ -4,10 +4,10 @@ module Expirable
 
   TEST_MODE = false
 
-  VERIFY_AFTER_MINUTES = 1
-  ESCALATE_AFTER_MINUTES = 2
-  EXPIRE_AFTER_MINUTES = 3
-  ARCHIVE_AFTER_MINUTES = EXPIRE_AFTER_MINUTES + 1
+  VERIFY_TEST_MINUTES = 1
+  ESCALATE_TEST_MINUTES = 2
+  EXPIRE_TEST_MINUTES = 3
+  ARCHIVE_TEST_MINUTES = EXPIRE_TEST_MINUTES + 1
 
   VERIFY_AFTER_WEEKS = 8
   ESCALATE_AFTER_WEEKS = 9
@@ -24,35 +24,35 @@ module Expirable
   end
 
   def self.verify_date
-    TEST_MODE ? VERIFY_AFTER_MINUTES.minutes.ago : VERIFY_AFTER_WEEKS.weeks.ago
+    TEST_MODE ? VERIFY_TEST_MINUTES.minutes.ago : VERIFY_AFTER_WEEKS.weeks.ago
   end
 
   def self.escalate_date
-    TEST_MODE ? ESCALATE_AFTER_MINUTES.minutes.ago : ESCALATE_AFTER_WEEKS.weeks.ago
+    TEST_MODE ? ESCALATE_TEST_MINUTES.minutes.ago : ESCALATE_AFTER_WEEKS.weeks.ago
   end
 
   def self.expire_date
-    TEST_MODE ? EXPIRE_AFTER_MINUTES.minutes.ago : EXPIRE_AFTER_WEEKS.weeks.ago
+    TEST_MODE ? EXPIRE_TEST_MINUTES.minutes.ago : EXPIRE_AFTER_WEEKS.weeks.ago
   end
 
   def self.archive_date
-    TEST_MODE ? ARCHIVE_AFTER_MINUTES.minutes.ago : ARCHIVE_AFTER_WEEKS.weeks.ago
+    TEST_MODE ? ARCHIVE_TEST_MINUTES.minutes.ago : ARCHIVE_AFTER_WEEKS.weeks.ago
   end
 
   def needs_review_at
-    updated_at + (TEST_MODE ? VERIFY_AFTER_MINUTES.minutes : VERIFY_AFTER_WEEKS.weeks)
+    updated_at + (TEST_MODE ? VERIFY_TEST_MINUTES.minutes : VERIFY_AFTER_WEEKS.weeks)
   end
 
   def needs_escalation_at
-    updated_at + (TEST_MODE ? ESCALATE_AFTER_MINUTES.minutes : ESCALATE_AFTER_WEEKS.weeks)
+    updated_at + (TEST_MODE ? ESCALATE_TEST_MINUTES.minutes : ESCALATE_AFTER_WEEKS.weeks)
   end
 
   def expires_at
-    updated_at + (TEST_MODE ? EXPIRE_AFTER_MINUTES.minutes : EXPIRE_AFTER_WEEKS.weeks)
+    updated_at + (TEST_MODE ? EXPIRE_TEST_MINUTES.minutes : EXPIRE_AFTER_WEEKS.weeks)
   end
 
   def archives_at
-    updated_at + (TEST_MODE ? ARCHIVE_AFTER_MINUTES.minutes : ARCHIVE_AFTER_WEEKS.weeks)
+    updated_at + (TEST_MODE ? ARCHIVE_TEST_MINUTES.minutes : ARCHIVE_AFTER_WEEKS.weeks)
   end
 
   def expired_at
