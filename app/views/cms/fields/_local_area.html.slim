@@ -13,7 +13,7 @@
 .two.fields
   = f.input :latitude, placeholder: translate_attribute(LocalArea, :latitude)
   = f.input :longitude, placeholder: translate_attribute(LocalArea, :longitude)
-  
+
 = f.input :radius, placeholder: translate_attribute(LocalArea, :radius)
 
 - if @record.latitude && @record.longitude && @record.radius

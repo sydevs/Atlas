@@ -3,6 +3,14 @@ class CMS::LocalAreasController < CMS::ApplicationController
 
   prepend_before_action { @model = LocalArea }
 
+  def new
+    if @context.is_a?(Province)
+      super country_code: @context.country_code
+    else
+      super
+    end
+  end
+
   def create
     super parameters
   end
