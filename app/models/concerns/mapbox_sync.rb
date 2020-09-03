@@ -31,7 +31,7 @@ module MapboxSync
     if MapboxSync.can_sync?
       (Time.now + 10.minutes).floor(10.minutes)
     else
-      (MapboxSync.can_sync_at + 10.minutes).floor(10.minutes)
+      (MapboxSync.can_sync_at + 10.minutes).to_time.floor(10.minutes)
     end
   end
 
