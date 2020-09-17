@@ -11,6 +11,7 @@ class Manager < ApplicationRecord
   has_many :provinces, through: :managed_records, source: :record, source_type: 'Province', dependent: :destroy
   has_many :local_areas, through: :managed_records, source: :record, source_type: 'LocalArea', dependent: :destroy
   has_many :local_area_venues, through: :local_areas, source: :venues
+  has_many :local_area_provinces, through: :local_areas, source: :province
   has_many :events
   has_many :actions, class_name: 'Audit', foreign_type: :user_type, foreign_key: :user_id
 
@@ -96,13 +97,13 @@ class Manager < ApplicationRecord
   def accessible_provinces country_code = nil, area: false
     if administrator? || area
       country_code ? Province.where(country_code: country_code) : Province.default_scoped
+    elsif country_code
+      Province.where(id: provinces, country_code: country_code)
     else
       provinces_via_country = Province.where(country_code: countries.select(:country_code).where(enable_province_management: true))
-      provinces_via_local_area = Province.where(province_code: local_areas.select(:province_code)) # TODO: Provinces are probably not unique internationally
+      provinces_via_local_area = Province.where(id: local_area_provinces)
       provinces_via_event = Province.where(province_code: events.select(:province_code))
-      provinces = Province.where(id: provinces).or(provinces_via_country).or(provinces_via_local_area).or(provinces_via_event)
-      provinces = Province.where(id: provinces, country_code: country_code) if country_code
-      provinces
+      Province.where(id: provinces).or(provinces_via_country).or(provinces_via_local_area).or(provinces_via_event)
     end
   end
 
