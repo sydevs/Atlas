@@ -8,7 +8,11 @@ module EventDecorator
     if name.present? && !fallback_only
       name
     elsif category && venue&.name
-      I18n.translate('map.listing.event_name', category: category_label, venue: decorated_venue.label)
+      if online?
+        I18n.translate('map.listing.online_event_name', category: category_label, venue: venue.city)
+      else
+        I18n.translate('map.listing.event_name', category: category_label, venue: decorated_venue.label)
+      end
     else
       category_name
     end

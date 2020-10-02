@@ -9,6 +9,7 @@ en:
       no_place_results: "The closest free meditation class is"
       show: "Show list"
       event_name: "%{category} at %{venue}"
+      online_event_name: "%{category} from %{city}"
       filter:
         prefix: "Showing results at"
         clear: "Clear"
