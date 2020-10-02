@@ -47,7 +47,7 @@ class Map::ApplicationController < ActionController::Base
     params.require(%i[latitude longitude])
     coordinates = [params[:latitude], params[:longitude]]
 
-    @events = Event.publicly_visible.online.by_distance(origin: coordinates).joins(:venue)
+    @events = Event.publicly_visible.where(online: true).by_distance(origin: coordinates).joins(:venue)
     render json: ActiveDecorator::Decorator.instance.decorate(@events)
   end
 
