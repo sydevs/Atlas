@@ -9,7 +9,7 @@ module EventDecorator
       name
     elsif category && venue&.name
       if online?
-        I18n.translate('map.listing.online_event_name', category: category_label, venue: venue.city)
+        I18n.translate('map.listing.online_event_name', category: category_label, city: venue.city)
       else
         I18n.translate('map.listing.event_name', category: category_label, venue: decorated_venue.label)
       end
