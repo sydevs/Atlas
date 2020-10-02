@@ -33,14 +33,18 @@ class Event < ApplicationRecord
   validates :description, length: { minimum: 40, maximum: 600, allow_blank: true }
   validates :registration_url, url: true, unless: :native_registration_mode?
   validates :manager, presence: true
+  validates :online_url, presence: true, if: :online?
   validates_associated :pictures
 
   # Scopes
   scope :with_new_registrations, -> { where('latest_registration_at >= registrations_sent_at') }
   scope :notifications_enabled, -> { where.not(disable_notifications: true) }
   scope :publicly_visible, -> { published.not_expired.not_finished }
+  scope :mappable, -> { publicly_visible.not_online }
   scope :finished, -> { where('end_date IS NOT NULL AND end_date < ?', DateTime.now - 1.day) }
   scope :not_finished, -> { where('end_date IS NULL OR end_date >= ?', DateTime.now - 1.day) }
+  scope :online, -> { where(online: true) }
+  scope :not_online, -> { where.not(online: true) }
 
   # Delegations
   delegate :full_address, to: :venue

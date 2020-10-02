@@ -2,6 +2,7 @@
 
 .list
   @include panel
+  transition: box-shadow 0.5s
   background: white
 
   @include mode([event, map])
@@ -15,6 +16,44 @@
     bottom: auto
     height: auto
     max-height: calc(100vh - #{($control-offset-y * 2) + $header-height})
+
+  body:not(.mode--map)[data-list="online"] &
+    box-shadow: $shadow-heavy
+
+
+// ===== MODE TOGGLE ===== //
+.list__mode
+  padding: 1.5rem
+  padding-bottom: 0.5rem
+
+  &-toggle
+    display: flex
+
+    font-size: 14px
+    letter-spacing: 0.17px
+    text-align: center
+    font-weight: bold
+    color: $color-blue
+
+    border: 1px solid $color-blue
+    border-radius: 5px
+
+  &-toggle__item
+    display: none
+
+    &:checked + label
+      background: $color-blue
+      color: white
+
+  label
+    display: inline-block
+    flex-grow: 1
+    padding: 6px
+    cursor: pointer
+
+    &:not(:last-child)
+      border-right: 1px solid $color-blue
+
 
 // ===== NO RESULT MESSAGE ===== //
 .list__no-results

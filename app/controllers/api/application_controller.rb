@@ -40,7 +40,9 @@ class API::ApplicationController < ActionController::Base
           scope.includes(*associations) if associations.present?
         end
 
-        if scope.respond_to?(:publicly_visible)
+        if params[:mappable] == 'true' && scope.respond_to?(:mappable)
+          scope = scope.mappable
+        elsif scope.respond_to?(:publicly_visible)
           scope = scope.publicly_visible
         elsif scope.respond_to?(:published)
           scope = scope.published

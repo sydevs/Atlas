@@ -17,18 +17,21 @@ class InfoPanel {
     document.getElementById('js-registration-close').addEventListener('click', () => this.hideMessages())
   }
 
-  show(event, venue) {
+  show(event, venue = null) {
     this.event = event
     this.container.scrollTop = 0
 
     this.container.querySelector('[data-attribute="name"]').textContent = event.label
     this.container.querySelector('[data-attribute="address"]').textContent = event.address
-    this.container.querySelector('[data-attribute="directions"]').href = venue.directions_url
     this.container.querySelector('[data-attribute="day"]').textContent = Util.parseTiming(event.timing)
     this.container.querySelector('[data-attribute="time"]').textContent = event.timing.time
     this.container.querySelector('[data-attribute="description"]').innerHTML = Util.simpleFormat(event.description || '')
     this.form.classList.toggle('registration--confirmed', Boolean(event.registered))
     this.form.style = Date.parse(event.timing.registration_end_time) < Date.now() ? 'display: none' : ''
+
+    const directions = this.container.querySelector('[data-attribute="directions"]')
+    directions.style = venue ? '' : 'display: none'
+    directions.href = venue ? venue.directions_url : null
 
     this.languageBlock.style = (Boolean(event.language_code) && document.documentElement.lang.toUpperCase() != event.language_code ? '' : 'display: none')
     this.container.querySelector('[data-attribute="language"]').textContent = Util.translate(`languages.${event.language_code}`).split(/[,;]/)[0]

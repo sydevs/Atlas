@@ -162,7 +162,11 @@ class MapView {
     if (!(isListMode || isMapMode)) return
 
     if (!this.isZoomWide()) {
-      this.getRenderedVenues(venues => Application.showVenues(venues, allowFallback))
+      if (Application.listingType == 'online') {
+        Application.atlas.getOnlineEvents(this.getCenter(), events => Application.showOnlineEvents(events, allowFallback))
+      } else {
+        this.getRenderedVenues(venues => Application.showVenues(venues, allowFallback))
+      }
     }
   }
 

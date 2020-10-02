@@ -25,6 +25,7 @@ class CMS::EventsController < CMS::ApplicationController
         :name, :description, :room, :category, :language_code, :disable_notifications,
         :registration_mode, :registration_url,
         :recurrence, :start_date, :end_date, :start_time, :end_time,
+        :online, :online_url,
         manager_attributes: %i[email name]
       )
     end

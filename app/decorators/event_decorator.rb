@@ -19,7 +19,11 @@ module EventDecorator
   end
 
   def address_text
-    @address_text ||= [room, venue.street, venue.city, decorated_venue.province_name, venue.country_code].compact.join(', ')
+    @address_text ||= begin
+      fields = online ? [venue.city, decorated_venue.province_name] : [room, venue.street, venue.city, decorated_venue.province_name]
+      fields << CountryDecorator.get_short_label(venue.country_code)
+      fields.compact.join(', ')
+    end
   end
 
   def category_name
@@ -97,7 +101,7 @@ module EventDecorator
     I18nData.languages(I18n.locale)[language_code].split(/[,;]/)[0]
   end
 
-  def as_json
+  def as_json(_context = nil)
     {
       id: id,
       label: label,
@@ -123,6 +127,8 @@ module EventDecorator
         mode: registration_mode,
         url: registration_url,
       },
+      online: online,
+      online_url: online_url,
     }
   end
 

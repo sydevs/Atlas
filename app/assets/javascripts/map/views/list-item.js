@@ -3,17 +3,23 @@
 
 class ListItem {
 
-  constructor(element, event, venue) {
+  constructor(element, event, venue = null) {
     this.container = element
     this.event = event
     this.venue = venue
 
-    const distance = Application.map.distance(venue)
+    let distance = null
+    const distanceElement = element.querySelector('[data-attribute="distance"]')
+
+    if (venue) {
+      distance = Application.map.distance(venue)
+      distanceElement.textContent = `${Math.round(distance * 10) / 10} km`
+    }
+
+    distanceElement.style = (distance == null ? 'display: none' : '')
 
     element.querySelector('[data-attribute="name"]').textContent = event.label
     element.querySelector('[data-attribute="address"]').textContent = event.address
-    element.querySelector('[data-attribute="distance"]').textContent = `${Math.round(distance * 10) / 10} km`
-    element.querySelector('[data-attribute="distance"]').style = (distance == null ? 'display: none' : '')
     element.querySelector('[data-attribute="day"]').textContent = Util.parseTiming(event.timing)
     element.querySelector('[data-attribute="time"]').textContent = event.timing.time
     element.addEventListener('click', () => this.open())

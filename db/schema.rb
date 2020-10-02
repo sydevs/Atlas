@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_21_112354) do
+ActiveRecord::Schema.define(version: 2020_10_02_084337) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -76,6 +76,8 @@ ActiveRecord::Schema.define(version: 2020_03_21_112354) do
     t.integer "registration_mode", default: 0
     t.string "registration_url"
     t.string "language_code", limit: 2
+    t.boolean "online"
+    t.string "online_url"
     t.index ["manager_id"], name: "index_events_on_manager_id"
     t.index ["venue_id"], name: "index_events_on_venue_id"
   end

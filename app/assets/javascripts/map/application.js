@@ -5,6 +5,7 @@ class ApplicationInstance {
   constructor() {
     this.container = document.getElementById('map')
 
+    this.listingType = document.body.dataset.list
     this.mode = 'map'
     this.listPanel = new ListPanel(document.getElementById('js-list-panel'))
     this.infoPanel = new InfoPanel(document.getElementById('js-info-panel'))
@@ -41,10 +42,14 @@ class ApplicationInstance {
     if (venues.length) {
       this.listPanel.showVenues(venues)
     } else if (allowFallback) {
-      this.atlas.getClosest(this.map.getCenter(), response => {
+      this.atlas.getClosestVenue(this.map.getCenter(), response => {
         this.listPanel.showNoResults(response)
       })
     }
+  }
+
+  showOnlineEvents(events) {
+    this.listPanel.showOnlineEvents(events)
   }
 
   showEvent(event, venue) {
@@ -55,14 +60,22 @@ class ApplicationInstance {
     this.saveMapState()
     this._setMode('event')
     this.infoPanel.show(event, venue)
-    this.showVenues([venue])
-    this.map.setHighlightedVenue(venue)
+    if (venue) {
+      this.showVenues([venue])
+      this.map.setHighlightedVenue(venue)
+    }
 
     this.infoPanel.hideMessages()
     this.saveHistoryState(`/map/event/${event.id}`, venue)
   }
 
   showVenue(venue) {
+    if (this.listingType == 'online') {
+      this.map.updateRenderedVenues()
+      this._setListingType('offline')
+      this.listPanel.selectType('offline')
+    }
+
     if (venue.events.length > 1) {
       this.saveMapState()
       this._setMode('venue')
@@ -143,6 +156,14 @@ class ApplicationInstance {
     }
 
     history.replaceState(state, undefined, path)
+  }
+
+  _setListingType(type) {
+    if (this.listingType == type) return
+
+    this.listingType = type
+    document.body.dataset.list = type
+    this.map.updateRenderedVenues()
   }
 
   _setMode(mode) {

@@ -1,15 +1,24 @@
 module CountryDecorator
 
+  COUNTRY_CODE_OVERRIDES = {
+    gb: "UK",
+    us: "USA"
+  }.freeze
+
   def label
     CountryDecorator.get_label(country_code)
   end
 
   def short_label
-    I18n.translate(country_code.downcase, scope: 'cms.country_codes', default: country_code)
+    CountryDecorator.get_short_label(country_code)
   end
 
   def self.get_label country_code
     ISO3166::Country.translations[country_code]
+  end
+
+  def self.get_short_label country_code
+    I18n.translate(country_code.downcase, scope: 'cms.country_codes', default: country_code)
   end
 
 end

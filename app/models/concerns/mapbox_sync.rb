@@ -88,12 +88,12 @@ module MapboxSync
     event_count = 0
 
     puts 'Generating geojson dataset...' 
-    scope.publicly_visible.distinct.find_each do |venue|
-      next unless venue.events.publicly_visible.present?
+    scope.mappable.distinct.find_each do |venue|
+      next unless venue.events.mappable.present?
 
       venue.extend VenueDecorator
       venue_count += 1
-      event_count += venue.events.publicly_visible.count
+      event_count += venue.events.mappable.count
 
       features << {
         type: 'Feature',

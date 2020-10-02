@@ -9,8 +9,13 @@ class ListPanel {
     this.items = []
     this.itemTemplate = document.getElementById('js-item-template')
     this.itemsContainer = document.getElementById('js-list-results')
+    this.modeInputs = document.getElementById('js-list-mode').querySelectorAll('input')
     this.noResultsAlternativeTitle = document.getElementById('js-list-alternative')
     this.noResultsAlternativeTitle.addEventListener('click', () => this.triggerAlternativeQuery())
+
+    for (let i = 0; i < this.modeInputs.length; i++) {
+      this.modeInputs[i].addEventListener('change', event => Application._setListingType(event.target.value))
+    }
   }
 
   setEmptyResults(shown) {
@@ -22,16 +27,14 @@ class ListPanel {
   }
 
   showLoading() {
-    this.container.scrollTop = 0
     this.setEmptyResults(false)
-    this.clearEvents()
+    this.reset()
   }
 
   showNoResults(alternative) {
-    this.container.scrollTop = 0
     this.alternative = alternative
     this.setEmptyResults(true)
-    this.clearEvents()
+    this.reset()
 
     if (alternative) {
       const event_label = alternative.event ? alternative.event.label : null
@@ -42,9 +45,7 @@ class ListPanel {
   }
 
   showVenues(venues) {
-    this.container.scrollTop = 0
-    this.venues = venues
-    this.clearEvents()
+    this.reset()
 
     if (venues.length < 1) return
 
@@ -67,12 +68,24 @@ class ListPanel {
     }
   }
 
-  clearEvents() {
-    this.itemsContainer.innerHTML = null
-    this.items = []
+  showOnlineEvents(events) {
+    this.reset()
+
+    if (events.length < 1) return
+
+    this.setEmptyResults(false)
+    this.appendEvents(events)
   }
 
-  appendEvent(event, venue) {
+  appendEvents(events, venue = null) {
+    for (let n = 0; n < events.length; n++) {
+      const event = events[n]
+      event.venue_id = venue ? venue.id : null
+      this.appendEvent(event, venue)
+    }
+  }
+
+  appendEvent(event, venue = null) {
     const element = document.importNode(this.itemTemplate.content, true).querySelector('.js-item')
     this.items[event.id] = new ListItem(element, event, venue)
     this.itemsContainer.appendChild(element)
@@ -80,6 +93,23 @@ class ListPanel {
 
   triggerAlternativeQuery() {
     Application.navbar.select(this.alternative)
+  }
+
+  selectType(mode) {
+    for (let i = 0; i < this.modeInputs.length; i++) {
+      const element = this.modeInputs[i]
+
+      if (element.value == mode) {
+        element.checked = true
+        return
+      }
+    }
+  }
+
+  reset() {
+    this.container.scrollTop = 0
+    this.itemsContainer.innerHTML = null
+    this.items = []
   }
 
 }

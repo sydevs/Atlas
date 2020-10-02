@@ -170,6 +170,8 @@ en:
         end_date: "End Date"
         start_time: "Start Time"
         end_time: "End Time"
+        online: "Online Class"
+        online_url: "Online Meeting Link"
 
       registration:
         manager_id: :activerecord.models.manager.single # Do not translate

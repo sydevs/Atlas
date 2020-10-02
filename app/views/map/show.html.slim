@@ -31,6 +31,11 @@ ruby:
 
 // ===== LIST PANEL ===== //
 .list id='js-list-panel'
+  .list__mode
+    .list__mode-toggle id='js-list-mode'
+      - %w[offline online].each do |mode|
+        input.list__mode-toggle__item id="list-mode-#{mode}" type='radio' name='list-mode' value=mode checked=(mode == @list_type)
+        label for="list-mode-#{mode}" = translate("map.listing.mode.#{mode}")
   .list__no-results
     .list__no-results__message.list__no-results__message--far = translate('map.listing.no_area_results')
     .list__no-results__message.list__no-results__message--close = translate('map.listing.no_place_results')
@@ -57,6 +62,8 @@ ruby:
     .event__description
       span.event__description__address data-attribute='address'
         = @event_data&.dig(:address)
+      span.event__meta__pill data-attribute='online'
+        = translate('map.information.online')
     .event__meta
       span.event__meta__day data-attribute='day'
         - if @event_data&.dig(:timing, :recurrence)
@@ -145,7 +152,7 @@ template id='js-item-template'
         span.event__description__address data-attribute='address'
         span.event__description__distance data-attribute='distance'
       .event__meta
-        span.event__meta__language data-attribute='language'
+        span.event__meta__pill data-attribute='language'
         span.event__meta__day data-attribute='day'
         span.event__meta__time data-attribute='time'
 

@@ -10,6 +10,8 @@
 .ui.small.dividing.violet.header Event Details
 
 = f.input :category, collection: categories
+= f.input :online, hint: translate('cms.hints.event.online')
+
 = f.input :description do 
   .hint = translate('cms.hints.event.description', min: 40, max: 600)
   = f.input_field :description, as: :text, placeholder: @record.category_description do 
@@ -44,6 +46,7 @@
   = f.input :registration_url, as: :url, placeholder: map_event_url(@record&.id || 0, anchor: 'register'), wrapper_html: { class: 'twelve wide' }
 = help_link :registration
 
+= f.input :online_url, hint: translate('cms.hints.event.online_url')
 = f.input :disable_notifications, hint: translate('cms.hints.event.disable_notifications')
 
 - if policy(@record).set_manager?

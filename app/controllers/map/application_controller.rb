@@ -6,6 +6,7 @@ class Map::ApplicationController < ActionController::Base
 
   def show
     I18n.locale = params[:locale]&.to_sym || :en
+    @list_type = params[:type] || 'offline'
     @mode = 'map'
 
     if params[:venue_id]
@@ -13,7 +14,8 @@ class Map::ApplicationController < ActionController::Base
       @mode = 'venue'
     elsif params[:event_id]
       @event = Event.joins(:venue).find(params[:event_id])
-      @venue = @event.venue
+      @venue = @event.venue unless @event.online?
+      @list_type = 'online' if @event.online?
       @mode = 'event'
     end
 
@@ -39,6 +41,14 @@ class Map::ApplicationController < ActionController::Base
     @event = @venue.events.unscoped.first if distance < 8
 
     render 'cms/application/closest', format: :json
+  end
+
+  def online
+    params.require(%i[latitude longitude])
+    coordinates = [params[:latitude], params[:longitude]]
+
+    @events = Event.publicly_visible.online.by_distance(origin: coordinates).joins(:venue)
+    render json: ActiveDecorator::Decorator.instance.decorate(@events)
   end
 
   def privacy

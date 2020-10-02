@@ -12,10 +12,14 @@ en:
       filter:
         prefix: "Showing results at"
         clear: "Clear"
+      mode:
+        offline: "In Person"
+        online: "Online"
     information:
       register: "Register"
       language: "This class is in"
       directions: "Get directions"
+      online: "Online Class"
     registration:
       header: "Register now"
       form:
