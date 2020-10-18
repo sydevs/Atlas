@@ -8,14 +8,14 @@ end
 
 ### Core gems
 gem 'active_decorator' # Separate view code while keeping it attached to the model
-gem 'jbuilder', '~> 2.5' # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'pg', '~> 0.18' # Use sqlite3 as the database for Active Record
-gem 'puma', '~> 3.12' # Use Puma as the app server
-gem 'rails', '~> 5.2' # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'sassc', '~> 2.3.0' # Use SASS for stylesheets
+gem 'jbuilder' # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
+gem 'pg' # Use postgres as the database for Active Record
+gem 'puma' # Use Puma as the app server
+gem 'rails' # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
+gem 'sassc' # Use SASS for stylesheets
 gem 'sassc-rails' # Use SASS for stylesheets
 gem 'slim-rails' # Use Slim for views
-gem 'uglifier', '>= 1.3.0' # Use Uglifier as compressor for JavaScript assets
+gem 'uglifier' # Use Uglifier as compressor for JavaScript assets
 
 ### Security Fix
 gem 'loofah', '>= 2.3.1'
