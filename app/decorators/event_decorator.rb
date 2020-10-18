@@ -45,7 +45,7 @@ module EventDecorator
   def recurrence_in_words
     result = ''
 
-    if start_date == end_date || (end_date.nil? and recurrence == 'day')
+    if start_date == end_date || (end_date.nil? && recurrence == 'day')
       result += start_date.to_s(:short)
     elsif recurrence == 'day'
       result += "#{start_date.to_s(:short)} - #{end_date.to_s(:short)}"
