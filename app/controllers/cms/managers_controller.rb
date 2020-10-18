@@ -31,7 +31,7 @@ class CMS::ManagersController < CMS::ApplicationController
 
     if @context.present?
       if @context.managers.where(id: @record.id).exists?
-        flash[:error] = translate('cms.messages.manager.already_added', manager: @record.name, resource: @context.model_name.downcase)
+        flash[:error] = translate('cms.messages.manager.already_added', manager: @record.name, resource: @context.model_name.singular)
       elsif !new_record || @record.save
         flash[:success] = translate('cms.messages.manager.success')
         @context.managed_records << ManagedRecord.new(manager: @record, record: @context, assigned_by_id: current_user.id)
