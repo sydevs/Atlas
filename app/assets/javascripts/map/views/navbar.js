@@ -43,7 +43,12 @@ class Navbar {
 
     if (location) {
       this.searchInput.placeholder = location.label || this.searchPlaceholder
-      Application.map.fitTo(location)
+
+      if (location.west && location.east && location.north && location.south) {
+        Application.map.fitTo(location)
+      } else {
+        Application.map.flyTo(location)
+      }
     } else {
       this.searchInput.placeholder = this.searchPlaceholder
     }
