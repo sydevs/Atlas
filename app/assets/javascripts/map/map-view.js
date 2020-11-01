@@ -25,6 +25,9 @@ class MapView {
     if (venue) {
       config.center = [venue.longitude, venue.latitude]
       config.zoom = this.highlightZoom
+    } else if (element.dataset.latitude && element.dataset.longitude) {
+      config.center = [element.dataset.longitude, element.dataset.latitude]
+      config.zoom = 10
     }
 
     this.mapbox = new mapboxgl.Map(config)

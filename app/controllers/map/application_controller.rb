@@ -24,6 +24,8 @@ class Map::ApplicationController < ActionController::Base
       language: params[:language],
       token: ENV['MAPBOX_ACCESSTOKEN'],
       restricted: [LocalArea, Province, Country].include?(scope.class).to_s,
+      latitude: coordinates[0],
+      longitude: coordinates[1],
     }
 
     set_jbuilder_params!
@@ -101,12 +103,14 @@ class Map::ApplicationController < ActionController::Base
     end
 
     def coordinates
-      return [ params[:latitude], params[:longitude] ] if params[:latitude].present? && params[:longitude].present?
-
-      location = IpGeocoder.geocode(request.remote_ip)
-      return [ location.lat, location.lng ] if location.success
-
-      [ 51.505, -0.09 ] # Default to london for now
+      @coordinates ||= begin
+        if params[:latitude].present? && params[:longitude].present?
+          [ params[:latitude], params[:longitude] ]
+        else
+          location = IpGeocoder.geocode(remote_ip)
+          location.success ? [ location.lat, location.lng ] : [ 51.505, -0.09 ] # Default to london for now
+        end
+      end
     end
 
     def set_cors!
