@@ -107,7 +107,7 @@ class Map::ApplicationController < ActionController::Base
         if params[:latitude].present? && params[:longitude].present?
           [ params[:latitude], params[:longitude] ]
         else
-          location = IpGeocoder.geocode(remote_ip)
+          location = IpGeocoder.geocode(request.remote_ip)
           location.success ? [ location.lat, location.lng ] : [ 51.505, -0.09 ] # Default to london for now
         end
       end
