@@ -20,6 +20,7 @@ class Event < ApplicationRecord
 
   belongs_to :manager
   accepts_nested_attributes_for :manager
+  before_validation :find_manager
   after_save :find_or_create_manager
 
   enum category: { intro: 1, intermediate: 2, course: 3, public_event: 4, concert: 5 }
@@ -65,6 +66,18 @@ class Event < ApplicationRecord
 
   def finished?
     end_date && end_date < DateTime.now - 1.day
+  end
+
+  def find_manager
+    return unless manager.email.present?
+
+    existing_manager = Manager.where(email: manager.email).first
+
+    if existing_manager
+      self.manager = existing_manager
+    else
+      self.manager_id = nil
+    end
   end
 
   def find_or_create_manager

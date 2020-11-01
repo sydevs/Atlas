@@ -265,7 +265,6 @@ class MapView {
   }
 
   flyTo(location, zoom) {
-    console.log('fly to', location, zoom)
     zoom = zoom || this.highlightZoom
 
     if (Util.isDevice('mobile')) {
@@ -285,7 +284,6 @@ class MapView {
   }
 
   fitTo(bounds) {
-    console.log('fit to', bounds)
     bounds = [[bounds.west, bounds.south], [bounds.east, bounds.north]]
     this.mapbox.fitBounds(bounds, {
       padding: this.getViewportPadding(),
