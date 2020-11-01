@@ -5,3 +5,5 @@ class Time
     Time.at((self.to_f / seconds).floor * seconds).utc
   end
 end
+
+Time::DATE_FORMATS[:month_and_day] = '%b %e'

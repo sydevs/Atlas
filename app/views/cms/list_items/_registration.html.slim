@@ -1,5 +1,7 @@
 
 .item
+  .right.floated.content data-tooltip=Registration.human_attribute_name(:starting_at)
+    .ui.horizontal.label = registration.starting_at.to_s(:month_and_day)
   .right.floated.content = registration.created_at.to_s(:short)
   = model_icon Registration
   .content
