@@ -7,10 +7,9 @@
 = f.input :venue do
   .hint = [@record.venue.name, @record.venue.address_text].compact.join(', ')
 
-.ui.small.dividing.violet.header Event Details
+.ui.small.dividing.violet.header = translate('cms.forms.event.details')
 
 = f.input :category, collection: categories
-= f.input :online, hint: translate('cms.hints.event.online')
 
 = f.input :description do 
   .hint = translate('cms.hints.event.description', min: 40, max: 600)
@@ -25,7 +24,12 @@
 
 = f.input :name, placeholder: @record.category_name, hint: translate('cms.hints.event.name')
 
-.ui.small.dividing.violet.header Timing
+.ui.small.dividing.violet.header = translate('cms.forms.event.online')
+
+= f.input :online, hint: translate('cms.hints.event.online')
+= f.input :online_url, hint: translate('cms.hints.event.online_url')
+
+.ui.small.dividing.violet.header = translate('cms.forms.event.timing')
 
 = f.input :recurrence, collection: Event.recurrences.map { |k, v| [translate_enum_value(Event, :recurrence, k), k] }
 
@@ -37,7 +41,7 @@
   = f.input :start_time, wrapper_html: { class: 'start' }, input_html: { type: 'time', autocomplete: 'off' }
   = f.input :end_time, wrapper_html: { class: 'end' }, input_html: { type: 'time', autocomplete: 'off', placeholder: translate('cms.hints.unspecified') }
 
-.ui.small.dividing.violet.header Registration
+.ui.small.dividing.violet.header = translate('cms.forms.event.registration')
 
 .hint = translate('cms.hints.event.registration_mode', native: translate_enum_value(@record, :registration_mode, :native))
 .hint = translate('cms.hints.event.registration_url', native: translate_enum_value(@record, :registration_mode, :native))
@@ -46,14 +50,15 @@
   = f.input :registration_url, as: :url, placeholder: map_event_url(@record&.id || 0, anchor: 'register'), wrapper_html: { class: 'twelve wide' }
 = help_link :registration
 
-= f.input :online_url, hint: translate('cms.hints.event.online_url')
 = f.input :disable_notifications, hint: translate('cms.hints.event.disable_notifications')
 
 - if policy(@record).set_manager?
-  .ui.small.dividing.violet.header Manager
+  .ui.small.dividing.violet.header = translate('cms.forms.event.manager')
 
   - @record.manager = Manager.new unless @record.manager.present?
   = f.simple_fields_for :manager, include_id: false do |ff|
+    .ui.hint = translate('cms.hints.event.manager')
+
     .two.fields
       = ff.input :name, input_html: { value: @record.manager&.name }
       = ff.input :email, input_html: { value: @record.manager&.email }

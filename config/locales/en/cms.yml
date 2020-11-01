@@ -76,6 +76,14 @@ en:
         event: "New events cannot be created here, they must be added directly to a venue."
         venue: "New venues cannot be created here, they must be added directly to a region within a country."
 
+    forms:
+      event:
+        details: "Event Details"
+        online: "Online Classes"
+        timing: "Timing"
+        registration: "Registration"
+        manager: "Manager"
+
     hints:
       unspecified: "Unspecified"
       never: "Never"
@@ -100,7 +108,8 @@ en:
         registration_mode: "Where should seekers go to register for the event? We strongly recommend that you leave this as '%{native}.' Having seekers register on this website will allow us send them reminder and follow-up emails."
         registration_url: "The registration URL will be set automatically if the mode is set \"%{native}.\""
         online: "Check this box if the program will take place online."
-        online_url: "A link to Zoom, YouTube, Google Meet, etc where seekers should join the class. This will only be used if you also selected the \"Online Class\" option."
+        online_url: "If the class is online, this link is where seekers should join the class (eg. a link to Zoom, YouTube, Google Meet, etc)."
+        manager: "The manager should be set to a yogi(ni) who will take responsibility for this event. Every week a list of new registrations will be sent to the manager and every few months they will be asked to confirm that the program information is still correct."
       venue:
         manual_location: "Set location manually"
         location: "If the location cannot be set automatically by pressing \"Find Location\", you can enter the details manually below."
