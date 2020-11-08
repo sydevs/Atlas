@@ -25,7 +25,7 @@ class InfoPanel {
     this.container.querySelector('[data-attribute="name"]').textContent = event.label
     this.container.querySelector('[data-attribute="address"]').textContent = event.address
     this.container.querySelector('[data-attribute="day"]').textContent = Util.parseTiming(event.timing)
-    this.container.querySelector('[data-attribute="time"]').textContent = event.timing.endTime ? `${event.timing.startTime} - ${event.timing.endTime}` : event.timing.startTime
+    this.container.querySelector('[data-attribute="time"]').textContent = Util.parseTime(event.timing)
     this.container.querySelector('[data-attribute="description"]').innerHTML = Util.simpleFormat(event.description || '')
     this.container.querySelector('[data-attribute="online"]').style = event.online ? '' : 'display: none'
 

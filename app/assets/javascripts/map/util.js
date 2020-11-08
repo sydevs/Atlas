@@ -84,6 +84,10 @@ const Util = {
     }
   },
 
+  parseTime(timing) {
+    return timing.endTime ? `${timing.startTime} - ${timing.endTime}` : timing.startTime
+  },
+
   parseEventCategoryDescription(event) {
     if (event.category == 'course') {
       const startDate = Date.parse(event.timing.startDate)

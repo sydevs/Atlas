@@ -21,7 +21,7 @@ class ListItem {
     element.querySelector('[data-attribute="name"]').textContent = event.label
     element.querySelector('[data-attribute="address"]').textContent = event.address
     element.querySelector('[data-attribute="day"]').textContent = Util.parseTiming(event.timing)
-    element.querySelector('[data-attribute="time"]').textContent = event.timing.endTime ? `${event.timing.startTime} - ${event.timing.endTime}` : event.timing.startTime
+    element.querySelector('[data-attribute="time"]').textContent = Util.parseTime(event.timing)
     element.addEventListener('click', () => this.open())
 
     if (event.languageCode && document.documentElement.lang.toUpperCase() != event.languageCode) {

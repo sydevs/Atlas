@@ -1,4 +1,4 @@
-/* globals Flickity */
+/* globals Flickity, Util */
 /* exported TimingCarousel */
 
 const DAY_INDICES = {
@@ -46,14 +46,14 @@ class TimingCarousel {
     this.flickity.resize()
   }
 
-  parseTiming(timing) {
+  parseTiming(timing, limit = 7) {
     const daily = (timing.recurrence == 'day')
     const interval = (daily ? 1 : 7)
     const startDate = new Date(timing.startDate)
     const endDate = timing.endDate == null ? null : new Date(timing.endDate)
     let dates = []
 
-    if (timing.startDate == timing.endDate || (timing.endDate == null && daily)) {
+    if (timing.startDate == timing.endDate) {
       return [startDate]
     } else if (daily) {
       dates.push(new Date(Math.min(startDate, new Date())))
@@ -64,12 +64,12 @@ class TimingCarousel {
       dates.push(date)
     }
 
-    while (dates.length < 10) {
-      let next_date = new Date(dates[dates.length - 1])
-      next_date.setDate(next_date.getDate() + interval)
-      if (endDate != null && next_date > endDate) break
+    while (dates.length < limit) {
+      let nextDate = new Date(dates[dates.length - 1])
+      nextDate.setDate(nextDate.getDate() + interval)
+      if (endDate != null && nextDate > endDate) break
 
-      dates.push(next_date)
+      dates.push(nextDate)
     }
 
     return dates
@@ -86,7 +86,8 @@ class TimingCarousel {
     element.querySelector('[data-attribute="datetime"]').value = date.toISOString().substring(0, 10)
     element.querySelector('[data-attribute="day"]').innerText = weekday
     element.querySelector('[data-attribute="date"]').innerText = dateString
-    element.querySelector('[data-attribute="time"]').textContent = event.timing.time
+    element.querySelector('[data-attribute="time"]').textContent = Util.parseTime(event.timing)
+
     return element
   }
 
