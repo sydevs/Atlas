@@ -13,6 +13,9 @@ module Types
     field :country, String, null: true
     field :postcode, String, null: true
 
+    field :province_code, String, null: true
+    field :country_code, String, null: true
+
     field :place_id, String, null: true
     field :directions_url, String, null: false
 

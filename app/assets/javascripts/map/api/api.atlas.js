@@ -66,12 +66,39 @@ class AtlasAPI {
       }`
     })
 
-    this.geojsonQuery = this.graph('query { geojson { ...geojson } }')
+    this.geojsonQuery = this.graph(`query {
+      geojson { ...geojson }
+    }`)
+
+    this.closestVenueQuery = this.graph(`query (@autodeclare) {
+      closestVenue(latitude: $latitude, longitude: $longitude) {
+        id
+        label
+        city
+        countryCode
+      } }
+    `)
   }
 
   async getGeojson(callback) {
     const data = await this.geojsonQuery()
     callback(data.geojson)
+  }
+
+  async getClosestVenueNew(coordinates, callback) {
+    console.log('[AtlasAPI]', 'getting closest venue', coordinates) // eslint-disable-line no-console
+
+    const cacheResponse = this.checkCache('closestVenue', coordinates, 0.2)
+    if (cacheResponse) {
+      console.log('[AtlasAPI]', 'cache hit', cacheResponse) // eslint-disable-line no-console
+      callback(cacheResponse)
+      return
+    }
+
+    const data = await this.closestVenueQuery(coordinates)
+    this.setCache('closestVenue', coordinates, data)
+    console.log('[AtlasAPI]', 'received', data) // eslint-disable-line no-console
+    callback(data.closestVenue)
   }
 
   query(parameters, callback) {
