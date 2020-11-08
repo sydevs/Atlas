@@ -99,7 +99,7 @@ en:
       local_area:
         location: "A custom area is defined using coordinates on the map (latitude and longitude) and a radius, to make a circular region."
       event:
-        name: "If you want to override the name of the event, you can do so here."
+        custom_name: "If you want to override the name of the event, you can do so here."
         description: "Provice a description of the program for seekers. Give them an idea of what to expect, and any special instructions to find the location, or what to bring. This description should be between %{min} to %{max} characters."
         description_count: " characters"
         room: "Which room in the building is the event in?"

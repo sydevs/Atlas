@@ -1,4 +1,4 @@
-/* global Util */
+/* global Util, graphql */
 /* exported AtlasAPI */
 
 class AtlasAPI {
@@ -9,9 +9,69 @@ class AtlasAPI {
     } else {
       this.api_endpoint = `${api_endpoint}&`
     }
-    
+
+    this.prepareGraphQL()
     this.cache = {}
     console.log('loading AtlasAPI.js') // eslint-disable-line no-console
+  }
+
+  prepareGraphQL() {
+    this.graph = graphql('/api/graphql')
+    this.graph.fragment({
+      event: `on Event {
+        id
+        label
+        description
+        category
+        address
+        languageCode
+        online
+        onlineUrl
+        registrationMode
+        registrationUrl
+        timing {
+          recurrence
+          startDate
+          endDate
+          startTime
+          endTime
+        }
+        images {
+          url
+        }
+      }`,
+      venue: `on Venue {
+        id
+        label
+        latitude
+        longitude
+        directionsUrl
+        events {
+          ...event
+        }
+      }`,
+      geojson: `on Geojson {
+        type
+        features {
+          type
+          id
+          geometry {
+            type
+            coordinates
+          }
+          properties {
+            ...venue
+          }
+        }
+      }`
+    })
+
+    this.geojsonQuery = this.graph('query { geojson { ...geojson } }')
+  }
+
+  async getGeojson(callback) {
+    const data = await this.geojsonQuery()
+    callback(data.geojson)
   }
 
   query(parameters, callback) {

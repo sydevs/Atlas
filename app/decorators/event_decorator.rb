@@ -4,9 +4,9 @@ module EventDecorator
     @venue ||= venue&.extend(VenueDecorator)
   end
 
-  def label fallback_only: false
-    if name.present? && !fallback_only
-      name
+  def label
+    if custom_name.present?
+      custom_name
     elsif category && venue&.name
       if online?
         I18n.translate('map.listing.online_event_name', category: category_label, city: venue.city)
@@ -19,19 +19,19 @@ module EventDecorator
   end
 
   def address
-    { room: room }.merge(decorated_venue.address)
-  end
-
-  def address_text
-    @address_text ||= begin
-      fields = online ? [venue.city, decorated_venue.province_name] : [room, venue.street, venue.city, decorated_venue.province_name]
+    @address ||= begin
+      fields = online ? [venue.city, decorated_venue.province] : [room, venue.street, venue.city, decorated_venue.country]
       fields << CountryDecorator.get_short_label(venue.country_code)
       fields.compact.join(', ')
     end
   end
 
+  def registration_mode
+    Event.registration_modes[self[:registration_mode]]
+  end
+
   def category_name
-    category ? translate_enum_value(self, :category) : nil
+    category ? I18n.translate(category, scope: 'activerecord.attributes.event.categories') : nil
   end
 
   def category_label
@@ -43,17 +43,13 @@ module EventDecorator
   end
 
   def recurrence_in_words
-    result = ''
-
     if start_date == end_date || (end_date.nil? && recurrence == 'day')
-      result += start_date.to_s(:short)
+      start_date.to_s(:short)
     elsif recurrence == 'day'
-      result += "#{start_date.to_s(:short)} - #{end_date.to_s(:short)}"
+      "#{start_date.to_s(:short)} - #{end_date.to_s(:short)}"
     else
-      result += translate_enum_value(self, :recurrence)
+      I18n.translate(recurrence, scope: 'activerecord.attributes.event.recurrences')
     end
-
-    result
   end
 
   def formatted_start_end_date
@@ -68,31 +64,6 @@ module EventDecorator
     "#{recurrence_in_words}, #{formatted_start_end_time}"
   end
 
-  def upcoming_dates limit = 10
-    dates = []
-    daily = (recurrence == 'day')
-    interval = (daily ? 1 : 7)
-
-    if start_date == end_date || (end_date.nil? && daily)
-      dates << start_date
-    elsif daily
-      dates << [start_date, Date.today].min
-    else
-      date = Date.parse(recurrence)
-      date += 7 if date < Date.today
-      dates << date
-    end
-
-    while dates.length < limit
-      next_date = dates[-1] + interval
-      break if end_date.present? && next_date > end_date
-
-      dates << next_date
-    end
-
-    dates
-  end
-
   def escalates_in_days_in_words
     distance_of_time_in_words(Time.now, needs_escalation_at)
   end
@@ -105,13 +76,17 @@ module EventDecorator
     I18nData.languages(I18n.locale)[language_code].split(/[,;]/)[0]
   end
 
+  def registration_end_time
+    end_date ? Time.parse("#{end_date} #{end_time || start_time}") : nil
+  end
+
   def as_json(_context = nil)
     {
       id: id,
       label: label,
       path: Rails.application.routes.url_helpers.map_event_path(self),
       description: description,
-      address: address_text,
+      address: address,
       category: category,
       timing: {
         recurrence: recurrence,
@@ -135,13 +110,5 @@ module EventDecorator
       online_url: online_url,
     }
   end
-
-  private
-
-    def date_of_next day
-      date = Date.parse(day)
-      delta = date > Date.today ? 0 : 7
-      date + delta
-    end
 
 end

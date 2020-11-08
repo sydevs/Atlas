@@ -10,7 +10,7 @@
 
 <%= translate('mail.common.event.location') %>:
  | <%= [event.room, event.venue.name].compact.join(', ') %>
- | <%= event.venue.address_text %>
+ | <%= event.venue.address %>
  | <%= translate('mail.common.event.latlng') %>: <%= event.venue.coordinates.join(', ') %>
 
 <%= translate('mail.common.event.timing') %>:

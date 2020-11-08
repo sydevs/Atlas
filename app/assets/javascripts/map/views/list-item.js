@@ -21,11 +21,11 @@ class ListItem {
     element.querySelector('[data-attribute="name"]').textContent = event.label
     element.querySelector('[data-attribute="address"]').textContent = event.address
     element.querySelector('[data-attribute="day"]').textContent = Util.parseTiming(event.timing)
-    element.querySelector('[data-attribute="time"]').textContent = event.timing.time
+    element.querySelector('[data-attribute="time"]').textContent = event.timing.endTime ? `${event.timing.startTime} - ${event.timing.endTime}` : event.timing.startTime
     element.addEventListener('click', () => this.open())
 
-    if (event.language_code && document.documentElement.lang.toUpperCase() != event.language_code) {
-      element.querySelector('[data-attribute="language"]').textContent = event.language_code
+    if (event.languageCode && document.documentElement.lang.toUpperCase() != event.languageCode) {
+      element.querySelector('[data-attribute="language"]').textContent = event.languageCode
     } else {
       element.querySelector('[data-attribute="language"]').remove()
     }

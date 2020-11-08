@@ -49,14 +49,14 @@ class TimingCarousel {
   parseTiming(timing) {
     const daily = (timing.recurrence == 'day')
     const interval = (daily ? 1 : 7)
-    const start_date = new Date(timing.start_date)
-    const end_date = timing.end_date == null ? null : new Date(timing.end_date)
+    const startDate = new Date(timing.startDate)
+    const endDate = timing.endDate == null ? null : new Date(timing.endDate)
     let dates = []
 
-    if (timing.start_date == timing.end_date || (timing.end_date == null && daily)) {
-      return [start_date]
+    if (timing.startDate == timing.endDate || (timing.endDate == null && daily)) {
+      return [startDate]
     } else if (daily) {
-      dates.push(new Date(Math.min(start_date, new Date())))
+      dates.push(new Date(Math.min(startDate, new Date())))
     } else {
       let date = new Date()
       let targetDay = DAY_INDICES[timing.recurrence]
@@ -67,7 +67,7 @@ class TimingCarousel {
     while (dates.length < 10) {
       let next_date = new Date(dates[dates.length - 1])
       next_date.setDate(next_date.getDate() + interval)
-      if (end_date != null && next_date > end_date) break
+      if (endDate != null && next_date > endDate) break
 
       dates.push(next_date)
     }

@@ -5,7 +5,7 @@
 = f.input :published
 
 = f.input :venue do
-  .hint = [@record.venue.name, @record.venue.address_text].compact.join(', ')
+  .hint = [@record.venue.name, @record.venue.address].compact.join(', ')
 
 .ui.small.dividing.violet.header = translate('cms.forms.event.details')
 
@@ -22,7 +22,7 @@
   = f.input :room, hint: translate('cms.hints.event.room')
   = f.input :language_code, collection: languages, selected: @record.language_code || I18n.locale.upcase, input_html: { class: 'search' }, hint: translate('cms.hints.event.language')
 
-= f.input :name, placeholder: @record.category_name, hint: translate('cms.hints.event.name')
+= f.input :custom_name, placeholder: @record.category_name, hint: translate('cms.hints.event.custom_name')
 
 .ui.small.dividing.violet.header = translate('cms.forms.event.online')
 
