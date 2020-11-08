@@ -53,7 +53,7 @@ class ApplicationInstance {
   }
 
   showEvent(event, venue) {
-    if (this.currentVenue && this.currentVenue.id != event.venue_id) {
+    if (this.currentVenue && this.currentVenue.id != event.venueId) {
       this.currentVenue = null
     }
 

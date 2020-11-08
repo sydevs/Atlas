@@ -62,7 +62,7 @@ class ListPanel {
 
       for (let n = 0; n < events.length; n++) {
         const event = events[n]
-        event.venue_id = venue.id
+        event.venueId = venue.id
         this.appendEvent(event, venue)
       }
     }
@@ -80,7 +80,7 @@ class ListPanel {
   appendEvents(events, venue = null) {
     for (let n = 0; n < events.length; n++) {
       const event = events[n]
-      event.venue_id = venue ? venue.id : null
+      event.venueId = venue ? venue.id : null
       this.appendEvent(event, venue)
     }
   }

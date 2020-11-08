@@ -26,10 +26,6 @@ module EventDecorator
     end
   end
 
-  def registration_mode
-    Event.registration_modes[self[:registration_mode]]
-  end
-
   def category_name
     category ? I18n.translate(category, scope: 'activerecord.attributes.event.categories') : nil
   end

@@ -70,6 +70,10 @@ class AtlasAPI {
       geojson { ...geojson }
     }`)
 
+    this.onlineEventsQuery = this.graph(`query {
+      events(online: true) { ...event } }
+    `)
+
     this.closestVenueQuery = this.graph(`query (@autodeclare) {
       closestVenue(latitude: $latitude, longitude: $longitude) {
         id
@@ -96,9 +100,25 @@ class AtlasAPI {
     }
 
     const data = await this.closestVenueQuery(coordinates)
-    this.setCache('closestVenue', coordinates, data)
+    this.setCache('closestVenue', coordinates, data.closestVenue)
     console.log('[AtlasAPI]', 'received', data) // eslint-disable-line no-console
     callback(data.closestVenue)
+  }
+
+  async getOnlineEvents(coordinates, callback) {
+    console.log('[AtlasAPI]', 'getting online events', coordinates) // eslint-disable-line no-console
+
+    const cacheResponse = this.checkCache('onlineEvents', coordinates, 100)
+    if (cacheResponse) {
+      console.log('[AtlasAPI]', 'cache hit', cacheResponse) // eslint-disable-line no-console
+      callback(cacheResponse)
+      return
+    }
+
+    const data = await this.onlineEventsQuery(coordinates)
+    this.setCache('onlineEvents', coordinates, data.events)
+    console.log('[AtlasAPI]', 'received', data) // eslint-disable-line no-console
+    callback(data.events)
   }
 
   query(parameters, callback) {
@@ -142,25 +162,6 @@ class AtlasAPI {
     Util.getURL(`/map/closest?${parameters}`, xhttp => {
       const response = JSON.parse(xhttp.response)
       this.setCache('closestVenue', options, response)
-      console.log('[AtlasAPI]', 'received', response) // eslint-disable-line no-console
-      callback(response)
-    })
-  }
-
-  getOnlineEvents(options, callback) {
-    console.log('[AtlasAPI]', 'getting online events', options) // eslint-disable-line no-console
-
-    const cacheResponse = this.checkCache('onlineEvents', options, 100)
-    if (cacheResponse) {
-      console.log('[AtlasAPI]', 'cache hit', cacheResponse) // eslint-disable-line no-console
-      callback(cacheResponse)
-      return
-    }
-
-    const parameters = this.encodeParameters(options)
-    Util.getURL(`/map/online?${parameters}`, xhttp => {
-      const response = JSON.parse(xhttp.response)
-      this.setCache('onlineEvents', options, response)
       console.log('[AtlasAPI]', 'received', response) // eslint-disable-line no-console
       callback(response)
     })

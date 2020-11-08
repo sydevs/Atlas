@@ -168,7 +168,7 @@ class MapView {
 
     if (!this.isZoomWide()) {
       if (Application.listingType == 'online') {
-        Application.atlas.getOnlineEvents(this.getCenter(), events => Application.showOnlineEvents(events, allowFallback))
+        Application.atlas.getOnlineEvents(this.getCenter(), events => Application.showOnlineEvents(events))
       } else {
         this.getRenderedVenues(venues => Application.showVenues(venues, allowFallback))
       }
