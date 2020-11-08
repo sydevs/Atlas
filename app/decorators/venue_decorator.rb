@@ -36,6 +36,14 @@ module VenueDecorator
     I18n.translate('api.distance', distance: distance(coordinates).to_i)
   end
 
+  def map_path
+    Rails.application.routes.url_helpers.map_venue_path(self)
+  end
+
+  def map_url
+    Rails.application.routes.url_helpers.map_venue_url(self)
+  end
+
   def as_json(_context = nil)
     {
       id: id,

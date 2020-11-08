@@ -1,6 +1,8 @@
 module Types
   class EventType < Types::BaseObject
     field :id, ID, null: false
+    field :path, String, null: false, method: :map_path
+    field :url, String, null: false, method: :map_url
 
     field :label, String, null: false
     field :description, String, null: true

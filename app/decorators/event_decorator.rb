@@ -76,6 +76,14 @@ module EventDecorator
     end_date ? Time.parse("#{end_date} #{end_time || start_time}") : nil
   end
 
+  def map_path
+    Rails.application.routes.url_helpers.map_event_path(self)
+  end
+
+  def map_url
+    Rails.application.routes.url_helpers.map_event_url(self)
+  end
+
   def as_json(_context = nil)
     {
       id: id,

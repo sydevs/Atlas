@@ -1,6 +1,8 @@
 module Types
   class VenueType < Types::BaseObject
     field :id, ID, null: false
+    field :path, String, null: false, method: :map_path
+    field :url, String, null: false, method: :map_url
     
     field :label, String, null: true
     field :latitude, Float, null: true
