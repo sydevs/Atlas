@@ -1,4 +1,4 @@
-/* globals Application, ListItem */
+/* globals Application, ListItem, Util */
 /* exported ListPanel */
 
 class ListPanel {
@@ -10,8 +10,8 @@ class ListPanel {
     this.itemTemplate = document.getElementById('js-item-template')
     this.itemsContainer = document.getElementById('js-list-results')
     this.modeInputs = document.getElementById('js-list-mode').querySelectorAll('input')
-    this.noResultsAlternativeTitle = document.getElementById('js-list-alternative')
-    this.noResultsAlternativeTitle.addEventListener('click', () => this.triggerAlternativeQuery())
+    this.closestVenueTitle = document.getElementById('js-list-closest-venue')
+    this.closestVenueTitle.addEventListener('click', () => this.triggerAlternativeQuery())
 
     for (let i = 0; i < this.modeInputs.length; i++) {
       this.modeInputs[i].addEventListener('change', event => Application._setListingType(event.target.value))
@@ -29,19 +29,6 @@ class ListPanel {
   showLoading() {
     this.setEmptyResults(false)
     this.reset()
-  }
-
-  showNoResults(alternative) {
-    this.alternative = alternative
-    this.setEmptyResults(true)
-    this.reset()
-
-    if (alternative) {
-      const event_label = alternative.event ? alternative.event.label : null
-      this.noResultsAlternativeTitle.innerText = event_label || alternative.label
-      this.container.classList.toggle('list__no-results--far', !alternative.close)
-      this.container.classList.toggle('list__no-results--close', alternative.close)
-    }
   }
 
   showVenues(venues) {
@@ -77,6 +64,28 @@ class ListPanel {
     this.appendEvents(events)
   }
 
+  showClosestVenue(venue, currentCenter) {
+    this.setEmptyResults(true)
+    this.reset()
+
+    if (venue) {
+      const distance = Util.distance(venue.latitude, venue.longitude, currentCenter.latitude, currentCenter.longitude)
+      const venueIsClose = distance < 8
+      this.closestVenueData = {
+        label: venueIsClose ? venue.label : `${venue.city}, ${venue.countryCode}`,
+        latitude: venue.latitude,
+        longitude: venue.longitude,
+        zoom: venueIsClose ? 14 : 11,
+      }
+      
+      this.closestVenueTitle.innerText = this.closestVenueData.label
+      this.container.classList.toggle('list__no-results--far', !venueIsClose)
+      this.container.classList.toggle('list__no-results--close', venueIsClose)
+    } else {
+      this.closestVenueData = null
+    }
+  }
+
   appendEvents(events, venue = null) {
     for (let n = 0; n < events.length; n++) {
       const event = events[n]
@@ -92,7 +101,7 @@ class ListPanel {
   }
 
   triggerAlternativeQuery() {
-    Application.navbar.select(this.alternative)
+    Application.navbar.select(this.closestVenueData)
   }
 
   selectType(mode) {

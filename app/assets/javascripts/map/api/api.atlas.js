@@ -81,6 +81,8 @@ class AtlasAPI {
         label
         city
         countryCode
+        latitude
+        longitude
       }
     }`)
 
@@ -95,22 +97,6 @@ class AtlasAPI {
   async getGeojson(callback) {
     const data = await this.geojsonQuery()
     callback(data.geojson)
-  }
-
-  async getClosestVenueNew(coordinates, callback) {
-    console.log('[AtlasAPI]', 'getting closest venue', coordinates) // eslint-disable-line no-console
-
-    const cacheResponse = this.checkCache('closestVenue', coordinates, 0.2)
-    if (cacheResponse) {
-      console.log('[AtlasAPI]', 'cache hit', cacheResponse) // eslint-disable-line no-console
-      callback(cacheResponse)
-      return
-    }
-
-    const data = await this.closestVenueQuery(coordinates)
-    this.setCache('closestVenue', coordinates, data.closestVenue)
-    console.log('[AtlasAPI]', 'received', data) // eslint-disable-line no-console
-    callback(data.closestVenue)
   }
 
   async getOnlineEvents(coordinates, callback) {
@@ -129,6 +115,22 @@ class AtlasAPI {
     callback(data.events)
   }
 
+  async getClosestVenue(coordinates, callback) {
+    console.log('[AtlasAPI]', 'getting closest venue', coordinates) // eslint-disable-line no-console
+
+    const cacheResponse = this.checkCache('closestVenue', coordinates, 0.2)
+    if (cacheResponse) {
+      console.log('[AtlasAPI]', 'cache hit', cacheResponse) // eslint-disable-line no-console
+      callback(cacheResponse)
+      return
+    }
+
+    const data = await this.closestVenueQuery(coordinates)
+    this.setCache('closestVenue', coordinates, data.closestVenue)
+    console.log('[AtlasAPI]', 'received', data) // eslint-disable-line no-console
+    callback(data.closestVenue)
+  }
+
   async createRegistration(parameters, callback) {
     console.log('[AtlasAPI]', 'creating registration', parameters) // eslint-disable-line no-console
     const data = await this.registrationQuery({
@@ -137,58 +139,6 @@ class AtlasAPI {
 
     console.log('[AtlasAPI]', 'received', data) // eslint-disable-line no-console
     callback(data.createRegistration)
-  }
-
-  query(parameters, callback) {
-    console.log('[AtlasAPI]', 'sending', parameters) // eslint-disable-line no-console
-    parameters = Object.keys(parameters).map(key => {
-      return encodeURIComponent(key) + '=' + encodeURIComponent(parameters[key])
-    }).join('&')
-
-    const query = `${this.api_endpoint}${parameters}`
-    Util.getURL(query, xhttp => {
-      const response = JSON.parse(xhttp.response)
-      console.log('[AtlasAPI]', 'received', response, query) // eslint-disable-line no-console
-      callback(response)
-    })
-  }
-
-  register(form, callback) {
-    Util.postForm('/map/registrations', form, event => {
-      const response = JSON.parse(event.target.response)
-      console.log('[AtlasAPI]', 'received', response) // eslint-disable-line no-console
-      response.message = response.message.replace('%{date}', new Date(response.date).toLocaleString(undefined, {
-        year: 'numeric', month: 'short', day: 'numeric',
-        hour: 'numeric', minute: 'numeric'
-      }))
-
-      callback(response)
-    })
-  }
-
-  getClosestVenue(options, callback) {
-    console.log('[AtlasAPI]', 'getting closest venue', options) // eslint-disable-line no-console
-
-    const cacheResponse = this.checkCache('closestVenue', options, 0.2)
-    if (cacheResponse) {
-      console.log('[AtlasAPI]', 'cache hit', cacheResponse) // eslint-disable-line no-console
-      callback(cacheResponse)
-      return
-    }
-
-    const parameters = this.encodeParameters(options)
-    Util.getURL(`/map/closest?${parameters}`, xhttp => {
-      const response = JSON.parse(xhttp.response)
-      this.setCache('closestVenue', options, response)
-      console.log('[AtlasAPI]', 'received', response) // eslint-disable-line no-console
-      callback(response)
-    })
-  }
-
-  encodeParameters(parameters) {
-    return Object.keys(parameters).map(key => {
-      return encodeURIComponent(key) + '=' + encodeURIComponent(parameters[key])
-    }).join('&')
   }
 
   setCache(key, parameters, response) {
@@ -203,7 +153,7 @@ class AtlasAPI {
     if (!this.cache[key]) return null
     
     const cache = this.cache[key]
-    const distance = Util.distance(params.latitude, params.longitude, cache.latitude, cache.longitude, 'K')
+    const distance = Util.distance(params.latitude, params.longitude, cache.latitude, cache.longitude)
     return distance <= allowedDistance ? cache.response : null
   }
 

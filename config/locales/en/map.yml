@@ -6,7 +6,7 @@ en:
       more_info: "More Info"
       register: "Register"
       no_area_results: "There are no classes in this area, the closest free meditation class is in"
-      no_place_results: "The closest free meditation class is"
+      no_place_results: "The closest free meditation class at"
       show: "Show list"
       event_name: "%{category} at %{venue}"
       online_event_name: "%{category} from %{city}"

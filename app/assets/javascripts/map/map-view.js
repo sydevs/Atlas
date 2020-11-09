@@ -337,7 +337,7 @@ class MapView {
 
   distance(point) {
     if (this.location && point) {
-      return Util.distance(this.location.latitude, this.location.longitude, point.latitude, point.longitude, 'K')
+      return Util.distance(this.location.latitude, this.location.longitude, point.latitude, point.longitude)
     } else {
       return null
     }
