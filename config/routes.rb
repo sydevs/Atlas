@@ -98,14 +98,5 @@ Rails.application.routes.draw do
 
     post :graphql, to: "graphql#execute"
     get :graphql, to: "graphql#execute" if Rails.env.development?
-
-    resources :events, only: %i[show]
-    resources :venues, only: %i[index show] do
-      resources :events, only: %i[index]
-    end
-
-    resources :local_areas, :provinces, :countries, only: %i[] do
-      resources :events, only: %i[index]
-    end
   end
 end

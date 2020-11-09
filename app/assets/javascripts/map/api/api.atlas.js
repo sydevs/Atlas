@@ -3,13 +3,7 @@
 
 class AtlasAPI {
 
-  constructor(api_endpoint) {
-    if (api_endpoint.indexOf('?') == -1) {
-      this.api_endpoint = `${api_endpoint}?`
-    } else {
-      this.api_endpoint = `${api_endpoint}&`
-    }
-
+  constructor() {
     this.prepareGraphQL()
     this.cache = {}
     console.log('loading AtlasAPI.js') // eslint-disable-line no-console
