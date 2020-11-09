@@ -93,7 +93,6 @@ ruby:
 
     .registration__fields
       = csrf_meta_tags
-      input type='hidden' name='event_id'
 
       .registration__timing__label
         .registration__timing__text = translate('map.registration.form.timing').upcase
@@ -101,7 +100,7 @@ ruby:
 
       input.registration__input type='text' name='name' placeholder=translate('map.registration.form.name')
       input.registration__input type='text' name='email' placeholder=translate('map.registration.form.email')
-      textarea.registration__textarea rows=3 placeholder=translate('map.registration.form.message')
+      textarea.registration__textarea name='message' rows=3 placeholder=translate('map.registration.form.message')
 
       .registration__message id='js-registration-feedback'
 
@@ -158,7 +157,7 @@ template id='js-item-template'
 
 template id='js-timing-template'
   .registration__timing__cell class='js-timing'
-    input type='hidden' name='starting_at' data-attribute='datetime' class='js-timing-value' disabled=true
+    input type='hidden' name='startingAt' data-attribute='datetime' class='js-timing-value' disabled=true
     .registration__timing__date
       .registration__timing__day data-attribute='day'
       .registration__timing__month data-attribute='date'

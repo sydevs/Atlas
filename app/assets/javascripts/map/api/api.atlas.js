@@ -16,72 +16,80 @@ class AtlasAPI {
   }
 
   prepareGraphQL() {
-    this.graph = graphql('/api/graphql')
-    this.graph.fragment({
-      event: `on Event {
-        id
-        label
-        description
-        category
-        address
-        languageCode
-        online
-        onlineUrl
-        registrationMode
-        registrationUrl
-        timing {
-          recurrence
-          startDate
-          endDate
-          startTime
-          endTime
-        }
-        images {
-          url
-        }
-      }`,
-      venue: `on Venue {
-        id
-        label
-        latitude
-        longitude
-        directionsUrl
-        events {
-          ...event
-        }
-      }`,
-      geojson: `on Geojson {
-        type
-        features {
-          type
+    this.graph = graphql('/api/graphql', {
+      fragments: {
+        event: `on Event {
           id
-          geometry {
+          label
+          description
+          category
+          address
+          languageCode
+          online
+          onlineUrl
+          registrationMode
+          registrationUrl
+          timing {
+            recurrence
+            startDate
+            endDate
+            startTime
+            endTime
+          }
+          images {
+            url
+          }
+        }`,
+        venue: `on Venue {
+          id
+          label
+          latitude
+          longitude
+          directionsUrl
+          events {
+            ...event
+          }
+        }`,
+        geojson: `on Geojson {
+          type
+          features {
             type
-            coordinates
+            id
+            geometry {
+              type
+              coordinates
+            }
+            properties {
+              ...venue
+            }
           }
-          properties {
-            ...venue
-          }
-        }
-      }`
+        }`
+      }
     })
 
-    this.geojsonQuery = this.graph(`query {
+    this.geojsonQuery = this.graph.query(`{
       geojson { ...geojson }
     }`)
 
-    this.onlineEventsQuery = this.graph(`query {
-      events(online: true) { ...event } }
-    `)
+    this.onlineEventsQuery = this.graph.query(`{
+      events(online: true) { ...event }
+    }`)
 
-    this.closestVenueQuery = this.graph(`query (@autodeclare) {
+    this.closestVenueQuery = this.graph.query(`(@autodeclare) {
       closestVenue(latitude: $latitude, longitude: $longitude) {
         id
         label
         city
         countryCode
-      } }
-    `)
+      }
+    }`)
+
+    this.registrationQuery = this.graph.mutate(`(@autodeclare) {
+      createRegistration(input: $input) {
+        status
+        message
+      }
+    }`)
   }
 
   async getGeojson(callback) {
@@ -119,6 +127,16 @@ class AtlasAPI {
     this.setCache('onlineEvents', coordinates, data.events)
     console.log('[AtlasAPI]', 'received', data) // eslint-disable-line no-console
     callback(data.events)
+  }
+
+  async createRegistration(parameters, callback) {
+    console.log('[AtlasAPI]', 'creating registration', parameters) // eslint-disable-line no-console
+    const data = await this.registrationQuery({
+      'input!CreateRegistrationInput': parameters
+    })
+
+    console.log('[AtlasAPI]', 'received', data) // eslint-disable-line no-console
+    callback(data.createRegistration)
   }
 
   query(parameters, callback) {

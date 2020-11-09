@@ -12,6 +12,15 @@ class InfoPanel {
     this.submitButton = document.getElementById('js-registration-submit')
     this.submitButton.addEventListener('click', event => { this.submit(); event.preventDefault() })
 
+    this.formInputs = []
+    const formInputNames = ['name', 'email', 'message']
+    formInputNames.forEach(name => {
+      const formInput = this.form.querySelector(`[name=${name}]`)
+      if (formInput) {
+        this.formInputs.push(formInput)
+      }
+    })
+
     document.getElementById('js-info-share').addEventListener('click', () => Application.share.show(this.event))
     document.getElementById('js-info-close').addEventListener('click', () => Application.back())
     document.getElementById('js-registration-share').addEventListener('click', () => Application.share.show(this.event))
@@ -51,7 +60,6 @@ class InfoPanel {
     } else {
       this.form.classList.remove('registration--external')
       Application.timingCarousel.setTimings(event, event.timing.upcoming)
-      this.container.querySelector('input[name="event_id"]').value = event.id
     }
   }
 
@@ -60,7 +68,15 @@ class InfoPanel {
     this.formFeedback.classList.remove('error')
     this.submitButton.setAttribute('disabled', 'disabled')
 
-    Application.atlas.register(this.form, response => {
+    let parameters = {}
+    this.formInputs.forEach(input => {
+      parameters[input.name] = input.value
+    })
+
+    parameters.eventId = this.event.id
+    parameters.startingAt = new Date(this.form.querySelector('.js-timing.is-selected input[name=startingAt]').value)
+
+    Application.atlas.createRegistration(parameters, response => {
       this.submitButton.removeAttribute('disabled')
  
       if (response.status == 'success') {

@@ -33,7 +33,7 @@ en:
         text: "By submitting you confirm your agreement with our %{link}."
         link: "privacy policy"
       feedback:
-        duplicate: "You have already registered on %{date}. See you soon."
+        duplicate: "You are already registered. See you soon."
         success: "Success! You will receive a confirmation email shortly."
         error: "Error! Please try again later."
       confirmation:

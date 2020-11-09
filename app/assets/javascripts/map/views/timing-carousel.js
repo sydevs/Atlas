@@ -49,9 +49,14 @@ class TimingCarousel {
   parseTiming(timing, limit = 7) {
     const daily = (timing.recurrence == 'day')
     const interval = (daily ? 1 : 7)
-    const startDate = new Date(timing.startDate)
     const endDate = timing.endDate == null ? null : new Date(timing.endDate)
+    const today = new Date()
+    let startDate = new Date(`${timing.startDate} ${timing.startTime}`)
     let dates = []
+
+    if (startDate < today) {
+      startDate = today
+    }
 
     if (timing.startDate == timing.endDate) {
       return [startDate]
