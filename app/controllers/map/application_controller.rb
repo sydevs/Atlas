@@ -10,47 +10,27 @@ class Map::ApplicationController < ActionController::Base
     @mode = 'map'
 
     if params[:venue_id]
-      @venue = Venue.joins(:events).find(params[:venue_id])
+      @venue = GraphqlAPI.venue(params[:venue_id])
       @mode = 'venue'
     elsif params[:event_id]
-      @event = Event.joins(:venue).find(params[:event_id])
-      @venue = @event.venue unless @event.online?
-      @list_type = 'online' if @event.online?
+      @event = GraphqlAPI.event(params[:event_id])
       @mode = 'event'
+      
+      if @event['online']
+        @list_type = 'online'
+      else 
+        @venue = @event['venue']
+      end
     end
 
     @config = {
-      api: api_endpoint,
       language: params[:language],
       token: ENV['MAPBOX_ACCESSTOKEN'],
-      restricted: [LocalArea, Province, Country].include?(scope.class).to_s,
       latitude: coordinates[0],
       longitude: coordinates[1],
     }
 
-    set_jbuilder_params!
     render 'map/show'
-  end
-
-  def closest
-    params.require(%i[latitude longitude])
-    coordinates = [params[:latitude], params[:longitude]]
-
-    query = Venue.publicly_visible.by_distance(origin: coordinates).where('venues.updated_at < ?', MapboxSync.last_synced_at)
-    @venue = query.joins(:events).limit(1).first
-
-    distance = @venue.distance_from(coordinates)
-    @event = @venue.events.unscoped.first if distance < 8
-
-    render 'cms/application/closest', format: :json
-  end
-
-  def online
-    params.require(%i[latitude longitude])
-    coordinates = [params[:latitude], params[:longitude]]
-
-    @events = Event.publicly_visible.where(online: true).by_distance(origin: coordinates).joins(:venue)
-    render json: ActiveDecorator::Decorator.instance.decorate(@events)
   end
 
   def privacy
@@ -58,17 +38,6 @@ class Map::ApplicationController < ActionController::Base
   end
 
   private
-
-    def set_jbuilder_params!
-      if scope
-        @records = scope.includes(:events, events: :pictures)
-      else
-        @records = Venue.publicly_visible.includes(:events, events: :pictures).within(50, origin: coordinates)
-      end
-
-      @verbose = true
-      @model = Venue
-    end
 
     def scope
       @scope ||= begin
@@ -91,14 +60,6 @@ class Map::ApplicationController < ActionController::Base
         end
 
         scope
-      end
-    end
-
-    def api_endpoint
-      if scope
-        url_for([:api, scope, :events, format: :json])
-      else
-        api_venues_url(format: :json)
       end
     end
 

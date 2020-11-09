@@ -1,9 +1,8 @@
 
 ruby:
-  @event_data = @event&.as_json
   state = {
     venue: @venue&.as_json,
-    event: @event_data,
+    event: @event&.as_json,
   }
 
 // ===== SEARCH BOX ===== //
@@ -14,7 +13,7 @@ ruby:
         i.icon.icon--left
       .navbar__venue__title
         strong Events at
-        span id='js-venue-title' = @venue&.label
+        span id='js-venue-title' = @venue&.dig('label')
 
     .navbar__search
       input.navbar__search__input id='js-search-input' type='text' tabindex='1' placeholder=translate('map.listing.search')
@@ -58,30 +57,34 @@ ruby:
       .event__sidebar__language-text data-attribute='language'
   .event
     .event__name data-attribute='name'
-      = @event_data&.dig(:label)
+      = @event&.dig(:label)
     .event__description
       span.event__description__address data-attribute='address'
-        = @event_data&.dig(:address)
+        = @event&.dig(:address)
       span.event__meta__pill data-attribute='online'
         = translate('map.information.online')
     .event__meta
       span.event__meta__day data-attribute='day'
-        - if @event_data&.dig(:timing, :recurrence)
-          = translate @event_data[:timing][:recurrence], scope: 'javascript.recurrence'
+        - if @event&.dig(:timing, :recurrence)
+          = translate @event[:timing][:recurrence], scope: 'javascript.recurrence'
       span.event__meta__time data-attribute='time'
-        = @event_data&.dig(:timing, :time)
+        ruby:
+          startTime = @event&.dig(:timing, :endTime)
+          endTime = @event&.dig(:timing, :endTime)
+
+        = endTime ? "#{startTime} - #{endTime}" : startTime
 
   a.info__directions data-attribute='directions' target='_blank'
     span.icon.icon--location
     = translate('map.information.directions')
 
   .info__description data-attribute='description'
-    = simple_format @event_data&.dig(:description)
+    = simple_format @event&.dig(:description)
 
   .info__images.main-carousel id='js-image-gallery' data-attribute='images' style='display: none'
 
   #register
-  form.registration id='js-registration' style=(@event_data&.dig(:timing, :registration_end_time)&.past? ? 'display: none' : '')
+  form.registration id='js-registration' style=(@event&.dig(:timing, :registration_end_time)&.past? ? 'display: none' : '')
     .registration__header
       .registration__header__text
         .registration__header__title = translate('map.registration.header')
