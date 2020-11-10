@@ -5,37 +5,26 @@ module VenueDecorator
   end
 
   def location_label
-    "#{city || province_name || street || name}, #{translate country_code.downcase, scope: 'map.short_country_names', default: country_code}"
-  end
-
-  def address_text
-    @address_text ||= [street, city, province_name, country_code].compact.join(', ')
+    "#{city || province || street || name}, #{translate country.downcase, scope: 'map.short_country_names', default: country_code}"
   end
 
   def address
-    {
-      building: name,
-      street: street,
-      city: city,
-      province: province_code,
-      country: country_code,
-      postcode: postcode,
-    }
+    @address ||= [street, city, province, country].compact.join(', ')
   end
 
   def directions_url
     if place_id?
-      "https://www.google.com/maps/search/?api=1&query=#{address_text}>&query_place_id=#{place_id}"
+      "https://www.google.com/maps/search/?api=1&query=#{address}>&query_place_id=#{place_id}"
     else
       "http://www.google.com/maps/place/#{latitude},#{longitude}"
     end
   end
 
-  def province_name
+  def province
     ProvinceDecorator.get_name(province_code, country_code) if province_code && country_code
   end
 
-  def country_name
+  def country
     CountryDecorator.get_label(country_code) if country_code
   end
 
@@ -45,6 +34,14 @@ module VenueDecorator
 
   def distance_in_words(coordinates)
     I18n.translate('api.distance', distance: distance(coordinates).to_i)
+  end
+
+  def map_path
+    Rails.application.routes.url_helpers.map_venue_path(self)
+  end
+
+  def map_url
+    Rails.application.routes.url_helpers.map_venue_url(self)
   end
 
   def as_json(_context = nil)

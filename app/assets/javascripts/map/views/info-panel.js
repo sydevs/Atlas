@@ -11,6 +11,16 @@ class InfoPanel {
     this.formFeedback = document.getElementById('js-registration-feedback')
     this.submitButton = document.getElementById('js-registration-submit')
     this.submitButton.addEventListener('click', event => { this.submit(); event.preventDefault() })
+
+    this.formInputs = []
+    const formInputNames = ['name', 'email', 'message']
+    formInputNames.forEach(name => {
+      const formInput = this.form.querySelector(`[name=${name}]`)
+      if (formInput) {
+        this.formInputs.push(formInput)
+      }
+    })
+
     document.getElementById('js-info-share').addEventListener('click', () => Application.share.show(this.event))
     document.getElementById('js-info-close').addEventListener('click', () => Application.back())
     document.getElementById('js-registration-share').addEventListener('click', () => Application.share.show(this.event))
@@ -24,7 +34,7 @@ class InfoPanel {
     this.container.querySelector('[data-attribute="name"]').textContent = event.label
     this.container.querySelector('[data-attribute="address"]').textContent = event.address
     this.container.querySelector('[data-attribute="day"]').textContent = Util.parseTiming(event.timing)
-    this.container.querySelector('[data-attribute="time"]').textContent = event.timing.time
+    this.container.querySelector('[data-attribute="time"]').textContent = Util.parseTime(event.timing)
     this.container.querySelector('[data-attribute="description"]').innerHTML = Util.simpleFormat(event.description || '')
     this.container.querySelector('[data-attribute="online"]').style = event.online ? '' : 'display: none'
 
@@ -35,22 +45,21 @@ class InfoPanel {
     directions.style = venue ? '' : 'display: none'
     directions.href = venue ? venue.directions_url : null
 
-    this.languageBlock.style = (Boolean(event.language_code) && document.documentElement.lang.toUpperCase() != event.language_code ? '' : 'display: none')
-    this.container.querySelector('[data-attribute="language"]').textContent = Util.translate(`languages.${event.language_code}`).split(/[,;]/)[0]
+    this.languageBlock.style = (Boolean(event.languageCode) && document.documentElement.lang.toUpperCase() != event.languageCode ? '' : 'display: none')
+    this.container.querySelector('[data-attribute="language"]').textContent = Util.translate(`languages.${event.languageCode}`).split(/[,;]/)[0]
 
     this.timingDescription.textContent = Util.parseEventCategoryDescription(event)
 
     Application.imageGallery.setImages(event.images)
 
-    if (event.registration.mode in Util.translate('registration') && event.registration.url) {
+    if (event.registrationMode in Util.translate('registration') && event.registrationUrl) {
       this.form.classList.add('registration--external')
       const linkElement = this.container.querySelector('[data-attribute="registration"]')
-      linkElement.textContent = Util.translate(`registration.${event.registration.mode}`)
-      linkElement.href = event.registration.url
+      linkElement.textContent = Util.translate(`registration.${event.registrationMode}`)
+      linkElement.href = event.registrationUrl
     } else {
       this.form.classList.remove('registration--external')
       Application.timingCarousel.setTimings(event, event.timing.upcoming)
-      this.container.querySelector('input[name="event_id"]').value = event.id
     }
   }
 
@@ -59,7 +68,15 @@ class InfoPanel {
     this.formFeedback.classList.remove('error')
     this.submitButton.setAttribute('disabled', 'disabled')
 
-    Application.atlas.register(this.form, response => {
+    let parameters = {}
+    this.formInputs.forEach(input => {
+      parameters[input.name] = input.value
+    })
+
+    parameters.eventId = this.event.id
+    parameters.startingAt = new Date(this.form.querySelector('.js-timing.is-selected input[name=startingAt]').value)
+
+    Application.atlas.createRegistration(parameters, response => {
       this.submitButton.removeAttribute('disabled')
  
       if (response.status == 'success') {

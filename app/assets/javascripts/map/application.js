@@ -42,8 +42,9 @@ class ApplicationInstance {
     if (venues.length) {
       this.listPanel.showVenues(venues)
     } else if (allowFallback) {
-      this.atlas.getClosestVenue(this.map.getCenter(), response => {
-        this.listPanel.showNoResults(response)
+      const center = this.map.getCenter()
+      this.atlas.getClosestVenue(center, venue => {
+        this.listPanel.showClosestVenue(venue, center)
       })
     }
   }
@@ -53,7 +54,7 @@ class ApplicationInstance {
   }
 
   showEvent(event, venue) {
-    if (this.currentVenue && this.currentVenue.id != event.venue_id) {
+    if (this.currentVenue && this.currentVenue.id != event.venueId) {
       this.currentVenue = null
     }
 

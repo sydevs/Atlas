@@ -32,9 +32,9 @@ h3.ui.small.dividing.grey.header = translate('cms.details.details_for_record', r
       .description = translate_model_count(@record.events)
 
 h3.ui.small.dividing.grey.header = translate('cms.details.location_of_record', resource: translate_model(@model).downcase)
-p = @record.address_text
+p = @record.address
 
-= hidden_field_tag :venue_address, @record.address_text
+= hidden_field_tag :venue_address, @record.address
 = hidden_field_tag :venue_latitude, @record.latitude
 = hidden_field_tag :venue_longitude, @record.longitude
 = hidden_field_tag :venue_place_id, @record.place_id

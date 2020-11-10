@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  if Rails.env.development?
+    mount GraphiQL::Rails::Engine, at: "/graphiql", graphql_path: "/api/graphql"
+  end
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   passwordless_for :managers
   root to: 'info/application#index'
@@ -92,13 +96,7 @@ Rails.application.routes.draw do
     get '429', to: 'api/application#error' # Too many requests
     get '500', to: 'api/application#error' # Internal server error
 
-    resources :events, only: %i[show]
-    resources :venues, only: %i[index show] do
-      resources :events, only: %i[index]
-    end
-
-    resources :local_areas, :provinces, :countries, only: %i[] do
-      resources :events, only: %i[index]
-    end
+    post :graphql, to: "graphql#execute"
+    get :graphql, to: "graphql#execute" if Rails.env.development?
   end
 end

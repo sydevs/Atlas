@@ -34,17 +34,19 @@ class MapView {
     this.loadControlLayers()
 
     this.mapbox.on('load', _event => {
-      this.loadFeatureLayers()
-      this.createEventHooks()
-      this.invalidating = false
-      this.loading = false
+      Application.atlas.getGeojson(geojson => {
+        this.loadFeatureLayers(geojson)
+        this.createEventHooks()
+        this.invalidating = false
+        this.loading = false
 
-      if (venue) {
-        this.setHighlightedVenue(venue, false)
-      }
-
-      //this.mapbox.showPadding = true
-      this.updatePadding()
+        if (venue) {
+          this.setHighlightedVenue(venue, false)
+        }
+  
+        //this.mapbox.showPadding = true
+        this.updatePadding()
+      })
     })
   }
 
@@ -59,7 +61,7 @@ class MapView {
     })
   }
 
-  loadFeatureLayers() {
+  loadFeatureLayers(geojsonData) {
     this.venuesLayer = 'original'
     this.clusterSource = 'meditation-cluster-source'
     this.clusteredCirclesLayer = 'meditation-clusters'
@@ -70,7 +72,7 @@ class MapView {
 
     this.mapbox.addSource(this.clusterSource, {
       type: 'geojson',
-      data: this.container.dataset.geojson,
+      data: geojsonData,
       cluster: true,
       clusterMaxZoom: 12, // Max zoom to cluster points on
       clusterRadius: 50, // Radius of each cluster when clustering points
@@ -166,7 +168,7 @@ class MapView {
 
     if (!this.isZoomWide()) {
       if (Application.listingType == 'online') {
-        Application.atlas.getOnlineEvents(this.getCenter(), events => Application.showOnlineEvents(events, allowFallback))
+        Application.atlas.getOnlineEvents(this.getCenter(), events => Application.showOnlineEvents(events))
       } else {
         this.getRenderedVenues(venues => Application.showVenues(venues, allowFallback))
       }
@@ -335,7 +337,7 @@ class MapView {
 
   distance(point) {
     if (this.location && point) {
-      return Util.distance(this.location.latitude, this.location.longitude, point.latitude, point.longitude, 'K')
+      return Util.distance(this.location.latitude, this.location.longitude, point.latitude, point.longitude)
     } else {
       return null
     }

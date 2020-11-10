@@ -15,7 +15,7 @@ section
     dt = translate('mail.common.event.location')
     dd
       div = [event.room, event.venue.name].compact.join(', ')
-      div = event.venue.address_text
+      div = event.venue.address
       .faded 
         = translate('mail.common.event.latlng')
         ' : 

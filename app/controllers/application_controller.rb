@@ -14,4 +14,8 @@ class ApplicationController < ActionController::Base
     @current_user ||= authenticate_by_session(Manager)
   end
 
+  def passwordless_controller?
+    false
+  end
+
 end

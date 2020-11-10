@@ -51,6 +51,9 @@ gem 'i18n_data' # Adds localized lists of countries and languages
 ### API
 gem 'rack-cors'
 gem 'rack-attack'
+gem 'graphql'
+gem 'graphql-cache'
+gem 'graphiql-rails', group: :development
 
 ### Utility
 gem 'inline_svg' # Allows SVGs to be rendered inline

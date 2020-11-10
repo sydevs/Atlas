@@ -1,88 +1,138 @@
-/* global Util */
+/* global Util, graphql */
 /* exported AtlasAPI */
 
 class AtlasAPI {
 
-  constructor(api_endpoint) {
-    if (api_endpoint.indexOf('?') == -1) {
-      this.api_endpoint = `${api_endpoint}?`
-    } else {
-      this.api_endpoint = `${api_endpoint}&`
-    }
-    
+  constructor() {
+    this.prepareGraphQL()
     this.cache = {}
     console.log('loading AtlasAPI.js') // eslint-disable-line no-console
   }
 
-  query(parameters, callback) {
-    console.log('[AtlasAPI]', 'sending', parameters) // eslint-disable-line no-console
-    parameters = Object.keys(parameters).map(key => {
-      return encodeURIComponent(key) + '=' + encodeURIComponent(parameters[key])
-    }).join('&')
-
-    const query = `${this.api_endpoint}${parameters}`
-    Util.getURL(query, xhttp => {
-      const response = JSON.parse(xhttp.response)
-      console.log('[AtlasAPI]', 'received', response, query) // eslint-disable-line no-console
-      callback(response)
+  prepareGraphQL() {
+    this.graph = graphql('/api/graphql', {
+      fragments: {
+        event: `on Event {
+          id
+          label
+          description
+          category
+          address
+          languageCode
+          online
+          onlineUrl
+          registrationMode
+          registrationUrl
+          timing {
+            recurrence
+            startDate
+            endDate
+            startTime
+            endTime
+          }
+          images {
+            url
+          }
+        }`,
+        venue: `on Venue {
+          id
+          label
+          latitude
+          longitude
+          directionsUrl
+          events {
+            ...event
+          }
+        }`,
+        geojson: `on Geojson {
+          type
+          features {
+            type
+            id
+            geometry {
+              type
+              coordinates
+            }
+            properties {
+              ...venue
+            }
+          }
+        }`
+      }
     })
+
+    this.geojsonQuery = this.graph.query(`{
+      geojson { ...geojson }
+    }`)
+
+    this.onlineEventsQuery = this.graph.query(`{
+      events(online: true) { ...event }
+    }`)
+
+    this.closestVenueQuery = this.graph.query(`(@autodeclare) {
+      closestVenue(latitude: $latitude, longitude: $longitude) {
+        id
+        label
+        city
+        countryCode
+        latitude
+        longitude
+      }
+    }`)
+
+    this.registrationQuery = this.graph.mutate(`(@autodeclare) {
+      createRegistration(input: $input) {
+        status
+        message
+      }
+    }`)
   }
 
-  register(form, callback) {
-    Util.postForm('/map/registrations', form, event => {
-      const response = JSON.parse(event.target.response)
-      console.log('[AtlasAPI]', 'received', response) // eslint-disable-line no-console
-      response.message = response.message.replace('%{date}', new Date(response.date).toLocaleString(undefined, {
-        year: 'numeric', month: 'short', day: 'numeric',
-        hour: 'numeric', minute: 'numeric'
-      }))
-
-      callback(response)
-    })
+  async getGeojson(callback) {
+    const data = await this.geojsonQuery()
+    callback(data.geojson)
   }
 
-  getClosestVenue(options, callback) {
-    console.log('[AtlasAPI]', 'getting closest venue', options) // eslint-disable-line no-console
+  async getOnlineEvents(coordinates, callback) {
+    console.log('[AtlasAPI]', 'getting online events', coordinates) // eslint-disable-line no-console
 
-    const cacheResponse = this.checkCache('closestVenue', options, 0.2)
+    const cacheResponse = this.checkCache('onlineEvents', coordinates, 100)
     if (cacheResponse) {
       console.log('[AtlasAPI]', 'cache hit', cacheResponse) // eslint-disable-line no-console
       callback(cacheResponse)
       return
     }
 
-    const parameters = this.encodeParameters(options)
-    Util.getURL(`/map/closest?${parameters}`, xhttp => {
-      const response = JSON.parse(xhttp.response)
-      this.setCache('closestVenue', options, response)
-      console.log('[AtlasAPI]', 'received', response) // eslint-disable-line no-console
-      callback(response)
-    })
+    const data = await this.onlineEventsQuery(coordinates)
+    this.setCache('onlineEvents', coordinates, data.events)
+    console.log('[AtlasAPI]', 'received', data) // eslint-disable-line no-console
+    callback(data.events)
   }
 
-  getOnlineEvents(options, callback) {
-    console.log('[AtlasAPI]', 'getting online events', options) // eslint-disable-line no-console
+  async getClosestVenue(coordinates, callback) {
+    console.log('[AtlasAPI]', 'getting closest venue', coordinates) // eslint-disable-line no-console
 
-    const cacheResponse = this.checkCache('onlineEvents', options, 100)
+    const cacheResponse = this.checkCache('closestVenue', coordinates, 0.2)
     if (cacheResponse) {
       console.log('[AtlasAPI]', 'cache hit', cacheResponse) // eslint-disable-line no-console
       callback(cacheResponse)
       return
     }
 
-    const parameters = this.encodeParameters(options)
-    Util.getURL(`/map/online?${parameters}`, xhttp => {
-      const response = JSON.parse(xhttp.response)
-      this.setCache('onlineEvents', options, response)
-      console.log('[AtlasAPI]', 'received', response) // eslint-disable-line no-console
-      callback(response)
-    })
+    const data = await this.closestVenueQuery(coordinates)
+    this.setCache('closestVenue', coordinates, data.closestVenue)
+    console.log('[AtlasAPI]', 'received', data) // eslint-disable-line no-console
+    callback(data.closestVenue)
   }
 
-  encodeParameters(parameters) {
-    return Object.keys(parameters).map(key => {
-      return encodeURIComponent(key) + '=' + encodeURIComponent(parameters[key])
-    }).join('&')
+  async createRegistration(parameters, callback) {
+    console.log('[AtlasAPI]', 'creating registration', parameters) // eslint-disable-line no-console
+    const data = await this.registrationQuery({
+      'input!CreateRegistrationInput': parameters
+    })
+
+    console.log('[AtlasAPI]', 'received', data) // eslint-disable-line no-console
+    callback(data.createRegistration)
   }
 
   setCache(key, parameters, response) {
@@ -97,7 +147,7 @@ class AtlasAPI {
     if (!this.cache[key]) return null
     
     const cache = this.cache[key]
-    const distance = Util.distance(params.latitude, params.longitude, cache.latitude, cache.longitude, 'K')
+    const distance = Util.distance(params.latitude, params.longitude, cache.latitude, cache.longitude)
     return distance <= allowedDistance ? cache.response : null
   }
 

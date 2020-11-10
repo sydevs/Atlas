@@ -190,6 +190,12 @@ GEM
       multi_json (~> 1.11)
       os (>= 0.9, < 2.0)
       signet (~> 0.14)
+    graphiql-rails (1.7.0)
+      railties
+      sprockets-rails
+    graphql (1.11.6)
+    graphql-cache (0.6.0)
+      graphql (~> 1, > 1.8)
     heapy (0.2.0)
       thor
     htmlentities (4.3.4)
@@ -414,6 +420,9 @@ DEPENDENCIES
   faker
   fomantic-ui-sass
   geokit-rails
+  graphiql-rails
+  graphql
+  graphql-cache
   httparty
   i18n_data
   inline_svg

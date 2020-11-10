@@ -75,22 +75,26 @@ const Util = {
   },
 
   parseTiming(timing) {
-    if (timing.start_date == timing.end_date) {
-      return Util.formatDate(timing.start_date)
-    } else if (timing.recurrence == 'day' && timing.end_date) {
-      return `${Util.formatDate(timing.start_date)} - ${Util.formatDate(timing.end_date)}`
+    if (timing.startDate == timing.endDate) {
+      return Util.formatDate(timing.startDate)
+    } else if (timing.recurrence == 'day' && timing.endDate) {
+      return `${Util.formatDate(timing.startDate)} - ${Util.formatDate(timing.endDate)}`
     } else {
       return Util.translate(`recurrence.${timing.recurrence}`)
     }
   },
 
+  parseTime(timing) {
+    return timing.endTime ? `${timing.startTime} - ${timing.endTime}` : timing.startTime
+  },
+
   parseEventCategoryDescription(event) {
     if (event.category == 'course') {
-      const start_date = Date.parse(event.timing.start_date)
-      const end_date = Date.parse(event.timing.end_date)
+      const startDate = Date.parse(event.timing.startDate)
+      const endDate = Date.parse(event.timing.endDate)
 
-      if (start_date && end_date) {
-        const weeksBetween = Math.round((start_date - end_date) / (7 * 24 * 60 * 60 * 1000))
+      if (startDate && endDate) {
+        const weeksBetween = Math.round((startDate - endDate) / (7 * 24 * 60 * 60 * 1000))
         return Util.translate('timing_labels.course').replace('%{weeks}', Math.abs(weeksBetween))
       } else {
         return Util.translate('timing_labels.course_fallback')
@@ -111,7 +115,7 @@ const Util = {
     return Util.formatter.format(date)
   },
 
-  distance(lat1, lon1, lat2, lon2, unit) {
+  distance(lat1, lon1, lat2, lon2, unit = 'K') {
     if ((lat1 == lat2) && (lon1 == lon2)) {
       return 0
     } else {
