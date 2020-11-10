@@ -15,3 +15,6 @@ Rails.application.config.assets.precompile += %w[map.js map.css]
 Rails.application.config.assets.precompile += %w[cms.js cms.css]
 Rails.application.config.assets.precompile += %w[info.js info.css]
 Rails.application.config.assets.precompile += %w[mail.css]
+Rails.application.config.assets.precompile += %w[mail.css]
+
+Rails.application.config.assets.precompile += %w[graphiql/rails/application.css graphiql/rails/application.js] if Rails.env.development?
