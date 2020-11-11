@@ -23,6 +23,10 @@ ruby:
     
     ul.navbar__results id='js-search-results'
 
+.list-toggle.list-toggle--closed id='js-list-toggle'
+  .list-toggle__closed Show list
+  .list-toggle__open Back to map
+
 // ===== MAP ===== //
 #map data=@config data-state=state.to_json data-geojson=MapboxSync.get_remote_geojson_url
   #js-debug-viewport

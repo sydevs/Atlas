@@ -18,7 +18,8 @@
     max-height: calc(100vh - #{($control-offset-y * 2) + $header-height})
 
   body:not(.mode--map)[data-list="online"] &
-    box-shadow: $shadow-heavy
+    @include tablet-or-larger
+      box-shadow: $shadow-heavy
 
 
 // ===== MODE TOGGLE ===== //

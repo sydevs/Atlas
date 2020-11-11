@@ -2,7 +2,7 @@
 
 #map
   position: relative !important
-  height: calc(100vh - 150px)
+  height: 100vh
   user-select: none
 
   @include mode([event, venue])
@@ -10,19 +10,14 @@
 
   @include mode(map)
     width: 100vw !important
-    height: 100vh !important
     margin-left: 0 !important
 
   @include tablet-or-larger
-    height: 100vh !important
     max-height: none !important
     margin-left: $panel-width-thin
 
   @include desktop-or-larger
     margin-left: 0
-
-body.state--no-results.mode--list #map
-  height: calc(100vh - 180px)
 
 
 // ===== MAPBOX ===== //

@@ -1,4 +1,4 @@
-/* global AtlasAPI, MapView, Navbar, ListPanel, InfoPanel, ImageGallery, TimingCarousel, SharingModal */
+/* global AtlasAPI, MapView, Navbar, ListPanel, ListToggle, InfoPanel, ImageGallery, TimingCarousel, SharingModal */
 
 class ApplicationInstance {
 
@@ -12,6 +12,7 @@ class ApplicationInstance {
     this.navbar = new Navbar(document.getElementById('js-navbar'))
     this.imageGallery = new ImageGallery(document.getElementById('js-image-gallery'))
     this.timingCarousel = new TimingCarousel(document.getElementById('js-timing-carousel'))
+    this.listToggle = new ListToggle(document.getElementById('js-list-toggle'))
     this.share = new SharingModal(document.getElementById('js-share'))
     this.atlas = new AtlasAPI(this.container.dataset.api)
 

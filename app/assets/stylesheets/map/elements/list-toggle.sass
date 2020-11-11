@@ -1,0 +1,37 @@
+@import '../_mixins'
+
+.list-toggle
+  background: white
+  text-align: center
+  font-weight: $font-medium
+  z-index: 10
+  transition: all $control-transition
+  
+  @include tablet-or-larger
+    display: none
+
+  @include not-mode(list)
+    bottom: -80px
+
+  &.list-toggle--open
+    margin-top: 80px
+    margin-bottom: -1.5rem
+    line-height: 40px
+
+  &.list-toggle--closed
+    position: absolute
+    bottom: 0
+    left: 0
+    right: 0
+    height: 70px
+    line-height: 70px
+    box-shadow: $shadow-light
+
+  &.list-toggle--closed .list-toggle__open,
+  &.list-toggle--open .list-toggle__closed
+    display: none
+
+  &.list-toggle--open ~ #map,
+  &.list-toggle--closed ~ .list
+    @include mobile
+      display: none
