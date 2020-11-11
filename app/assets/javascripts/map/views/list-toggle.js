@@ -1,4 +1,4 @@
-/* globals */
+/* globals Application */
 /* exported ListToggle */
 
 class ListToggle {
@@ -11,6 +11,7 @@ class ListToggle {
   toggle() {
     this.container.classList.toggle('list-toggle--closed')
     this.container.classList.toggle('list-toggle--open')
+    Application.map.invalidateSize()
   }
 
 }

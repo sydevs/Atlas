@@ -6,9 +6,11 @@
   font-weight: $font-medium
   z-index: 10
   transition: all $control-transition
-  
-  @include tablet-or-larger
-    display: none
+  display: none
+
+  @include mode([list, map])
+    @include mobile
+      display: block
 
   @include not-mode(list)
     bottom: -80px
@@ -33,5 +35,6 @@
 
   &.list-toggle--open ~ #map,
   &.list-toggle--closed ~ .list
-    @include mobile
-      display: none
+    @include mode(list)
+      @include mobile
+        display: none
