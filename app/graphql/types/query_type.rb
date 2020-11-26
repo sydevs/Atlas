@@ -1,6 +1,6 @@
 module Types
   class QueryType < Types::BaseObject
-    description "The query root of this schema"
+    description 'The query root of this schema'
 
     field :geojson, GeojsonType, 'Returns all events in the geojson format', null: false
 
@@ -11,30 +11,30 @@ module Types
     end
 
     field :event, EventType, null: true do
-      description "Find an event by ID"
+      description 'Find an event by ID'
       argument :id, ID, required: true
     end
 
     field :venue, VenueType, null: true do
-      description "Find a venue by ID"
+      description 'Find a venue by ID'
       argument :id, ID, required: true
     end
 
     field :closest_venue, VenueType, null: true do
-      description "Find the closest event to some coordinates"
+      description 'Find the closest event to some coordinates'
       argument :latitude, Float, required: true
       argument :longitude, Float, required: true
     end
 
 
     def geojson
-      venues = decorate Venue.publicly_visible
+      venues = decorate Venue.publicly_visible.has_offline_events
 
       {
         type: 'FeatureCollection',
         features: venues.map do |venue|
           {
-            type: 'Feature',
+            type: "Feature #{venue.events.length}",
             id: venue.id,
             geometry: {
               type: 'Point',
