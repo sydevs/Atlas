@@ -28,7 +28,7 @@ class Event < ApplicationRecord
   enum registration_mode: { native: 0, meetup: 1, eventbrite: 2 }, _suffix: true
 
   # Validations
-  validates :name, length: { maximum: 255 }
+  validates :custom_name, length: { maximum: 255 }
   validates :category, :language_code, presence: true
   validates :recurrence, :start_date, :start_time, presence: true
   validates :description, length: { minimum: 40, maximum: 600, allow_blank: true }
