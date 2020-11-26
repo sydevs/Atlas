@@ -52,9 +52,6 @@ en:
       4: Thursday
       5: Friday
       6: Saturday
-    short_country_names:
-      gb: UK
-      us: USA
 
   javascript:
     recurrence:

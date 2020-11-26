@@ -20,7 +20,7 @@ module EventDecorator
 
   def address
     @address ||= begin
-      fields = online ? [venue.city, decorated_venue.province] : [room, venue.street, venue.city, decorated_venue.country]
+      fields = online ? [venue.city, decorated_venue.province_name] : [room, venue.street, venue.city, decorated_venue.province_name]
       fields << CountryDecorator.get_short_label(venue.country_code)
       fields.compact.join(', ')
     end

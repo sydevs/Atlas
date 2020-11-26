@@ -5,11 +5,11 @@ module VenueDecorator
   end
 
   def location_label
-    "#{city || province || street || name}, #{translate country.downcase, scope: 'map.short_country_names', default: country_code}"
+    "#{city || province || street || name}, #{country_name(:short)}"
   end
 
   def address
-    @address ||= [street, city, province, country].compact.join(', ')
+    @address ||= [street, city, province_name, country_name(:short)].compact.join(', ')
   end
 
   def directions_url
@@ -20,12 +20,14 @@ module VenueDecorator
     end
   end
 
-  def province
+  def province_name
     ProvinceDecorator.get_name(province_code, country_code) if province_code && country_code
   end
 
-  def country
-    CountryDecorator.get_label(country_code) if country_code
+  def country_name format = :full
+    return nil unless country_code
+
+    format == :short ? CountryDecorator.get_short_label(country_code) : CountryDecorator.get_label(country_code)
   end
 
   def distance(coordinates)
