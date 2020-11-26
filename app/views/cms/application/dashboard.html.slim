@@ -71,24 +71,6 @@ h3.ui.small.dividing.grey.header = translate('cms.dashboard.alerts.title')
 - unless @events_for_review.present? || @events_recently_expired.present? || @events_archived_count.positive?
   p = translate('cms.dashboard.alerts.empty')
 
-- if current_user.administrator?
-  h3.ui.small.dividing.grey.header = translate('cms.dashboard.sync.title')
-  p = translate('cms.dashboard.sync.description')
-  = render 'sync_status'
-  - if MapboxSync.can_sync?
-    a.ui.small.button href=cms_sync_url data-confirm=translate('cms.dashboard.sync.action_confirmation')
-      i.sync.alternate.icon
-      = translate('cms.dashboard.sync.action')
-  - else
-    a.ui.small.disabled.button disabled='disabled'
-      i.ban.icon
-      = translate('cms.dashboard.sync.action')
-  a.ui.basic.small.button href=cms_help_url(q: :sync, anchor: :sync)
-    = translate('cms.dashboard.sync.learn_more')
-    i.right.arrow.icon
-  - unless MapboxSync.can_sync?
-    p: small: em = translate('cms.dashboard.sync.action_disabled', time_ago: time_ago_in_words(MapboxSync.active_sync_at), time_from_now: time_ago_in_words(MapboxSync.can_sync_at))
-
 h3.ui.small.dividing.grey.header = translate('cms.dashboard.help.title')
 p = translate('cms.dashboard.help.description')
 a.ui.basic.small.button href=cms_help_url(q: :guide, anchor: :guide)

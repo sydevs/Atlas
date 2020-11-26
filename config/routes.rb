@@ -29,8 +29,6 @@ Rails.application.routes.draw do
     get :regions, to: 'application#regions'
     get :worldwide, to: 'application#show'
     get :help, to: 'application#help'
-    get :sync, to: 'application#sync'
-    post :sync, to: 'application#sync'
 
     resources :countries do
       get :regions
