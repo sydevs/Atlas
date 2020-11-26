@@ -2,7 +2,6 @@ class Venue < ApplicationRecord
 
   # Extensions
   include Publishable
-  include Syncable
 
   audited
   nilify_blanks

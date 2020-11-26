@@ -50,7 +50,6 @@ en:
         help: "Help"
         regions: "Regions"
         review: "Review Alerts"
-        sync: "Mapbox Sync"
 
     messages:
       errors: "Errors"
@@ -63,11 +62,6 @@ en:
       successfully_confirmed: "Thank you for confirming that this %{resource} is up to date."
       not_logged_in: "You are not logged in!"
       no_comment: "(No comment)"
-      sync:
-        success: "The latest atlas data has been uploaded. It should appear on the map within 10 minutes."
-        error: "There was a problem with the map synchronisation: \"%{error}\""
-        not_needed: "No venues or events have changes since the last map synchronisation. So the sync has been skipped."
-        not_allowed: "The map cannot be synced now because it was already synced %{time_ago}. Please wait for %{time_from_now}, and try again."
       manager:
         success: "Added manager successfully"
         already_added: "%{manager} already manages this #{resource}"
@@ -181,12 +175,6 @@ en:
         title: "Wondering how to create a city manager?"
         description: "Navigate to a city page first, in the \"%{action}\" tab."
         action: "Go now"
-      syncing:
-        title: "Publishing to map..."
-        description: "Recent changes to this %{resource} are currently being published to the map, they should be available within 5 minutes."
-      desynced:
-        title: "Waiting for sync"
-        description: "Recent changes to this %{resource} have not been published to the map yet. The next map synchronisation is scheduled in %{time}."
 
     images:
       title: "Images of this %{resource}"
@@ -258,27 +246,7 @@ en:
         title: "How do I use this site?"
         description: "You are currently viewing the Content Management System (CMS) for the Sahaj Atlas. We have created a video and some explanations to help you understand how to use this CMS."
         action: "Learn how to use"
-      sync:
-        title: "Mapbox Synchronisation"
-        description: "The Atlas map is processed by a third-party service called Mapbox. Every hour a synchronisation is scheduled, to send the latest atlas data to Mapbox for processing. The synchronisation will be skipped if there are no new changes."
-        previous:
-          title: "Last successful sync"
-          description: "%{date} UTC (%{time} ago)"
-        current:
-          title: "Sync currently in progress..."
-          description: "Started %{time} ago"
-        next:
-          title: "Next scheduled sync"
-          description: "%{date} UTC (%{time} from now)"
-        error:
-          title: "The previous attempted sync failed (%{date})"
-          description: "Error Message: %{message}"
-        never: "Never"
-        learn_more: "Learn more"
-        action: "Manually sync now"
-        action_confirmation: "Are you sure you want to manually sync the map now? This may take a few minutes."
-        action_disabled: "The map cannot be synced now because it was already synced %{time_ago} ago. Please wait for %{time_from_now}, before syncing again."
-      
+
     help:
       guide: "How do I use Sahaj Atlas?"
       learn_more: "Learn more"
@@ -310,12 +278,6 @@ en:
             label: "Expires" # This should be present tense as in the phrase "The event expires on March 3"
             title: "Expired"
             description: "If an event has not been updated in %{weeks} weeks"
-      sync:
-        title: "Why isn't my event appearing on the map?"
-        description:
-          problem: "To make the map load fast and support many simultaneous users we need to store a simplified version of the map data which is quick for their computer to download. Updating this simplified version of the map can take a few minutes, so we can't do it as immediately whenever a program changes."
-          solution: "Every 10 minutes our system checks to see if there are new updates to the Sahaj Atlas database, and if there is the next data is synchronised."
-          status: "Here are the most recent synchronisation times:"
       registration:
         title: "Why should seekers register on Sahaj Atlas?"
         description:
@@ -337,11 +299,6 @@ en:
       contact:
         title: "I have other questions or suggestions"
         description: "If you need further help, or if you want to help with the development of the Sahaj Atlas, please write to the email below. Please write your message in english."
-
-    sync:
-      title: "Map synchronisation in progress..."
-      description: "The latest atlas data is being compiled and uploaded to the Mapbox servers."
-      please_wait: "This can take up to five minutes, please wait and do not close this page."
 
     country_codes:
       gb: UK

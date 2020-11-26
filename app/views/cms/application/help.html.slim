@@ -33,16 +33,6 @@ h1.ui.header = translate('cms.menu.faq')
     p = translate('cms.help.expiration.description.review')
     p = translate('cms.help.expiration.description.expiration', weeks: Expirable::EXPIRE_AFTER_WEEKS)
 
-  .title class=active_accordion?(:sync)
-    i.dropdown.icon
-    = translate('cms.help.sync.title')
-    |  (#{translate('cms.details.desynced.title', resource: translate_model(Event))})
-  .content class=active_accordion?(:sync)
-    p = translate('cms.help.sync.description.problem')
-    p = translate('cms.help.sync.description.solution')
-    p = translate('cms.help.sync.description.status')
-    = render 'sync_status'
-
   .title class=active_accordion?(:registration)
     i.dropdown.icon
     = translate('cms.help.registration.title')

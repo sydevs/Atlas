@@ -146,30 +146,6 @@ class CMS::ApplicationController < ActionController::Base
     authorize :dashboard, :view_help?
   end
 
-  def sync
-    authorize :dashboard, :sync?
-
-    if request.post?
-      if MapboxSync.sync!
-        flash[:success] = translate('cms.messages.sync.success')
-      else
-        flash[:error] = translate('cms.messages.sync.error', error: MapboxSync.last_sync_error)
-      end
-  
-      redirect_to cms_root_url
-    else
-      if params[:force] == 'true'
-        render 'cms/application/sync'
-      elsif false && !MapboxSync.needs_sync? # TODO: Remove this "false" after finished testing
-        redirect_to cms_root_url, flash: { notice: translate('cms.messages.sync.not_needed') }
-      elsif !MapboxSync.can_sync?
-        redirect_to cms_root_url, flash: { error: translate('cms.messages.sync.not_allowed', time_ago: helpers.time_ago_in_words(MapboxSync.active_sync_at), time_from_now: helpers.time_ago_in_words(MapboxSync.can_sync_at)) }
-      else
-        render 'cms/application/sync'
-      end
-    end
-  end
-
   protected
 
     def current_user

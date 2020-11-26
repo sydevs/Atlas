@@ -37,8 +37,4 @@ class DashboardPolicy < DatabasePolicy
     user.present?
   end
 
-  def sync?
-    user.administrator?
-  end
-
 end
