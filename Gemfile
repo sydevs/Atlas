@@ -38,6 +38,7 @@ gem 'pundit' # Permissions
 
 ### Geocoding
 gem 'geokit-rails'
+gem 'timezone'
 
 ### File uploads
 gem 'carrierwave' # Serverside image uploader

@@ -178,7 +178,7 @@ en:
         name: :activerecord.attributes.generic.name # Do not translate
         email: :activerecord.attributes.generic.email # Do not translate
         comment: "Comment"
-        created_at: "Registered At"
+        created_at: "Registered At - Local Time"
         starting_at: "First Class On"
 
       # Other

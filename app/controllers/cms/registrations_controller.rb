@@ -1,6 +1,7 @@
 class CMS::RegistrationsController < CMS::ApplicationController
 
   prepend_before_action { @model = Registration }
+  before_action :set_time_zone, only: :index
 
   def create
     return unless super(parameters)
@@ -13,6 +14,13 @@ class CMS::RegistrationsController < CMS::ApplicationController
   end
 
   private
+
+    def set_time_zone
+      return unless @context.is_a?(Event)
+
+      venue = @context.venue
+      @time_zone = Timezone.lookup(venue.latitude, venue.longitude)
+    end
 
     def parameters
       params.fetch(:registration, {}).permit(:name, :email, :comment)
