@@ -29,13 +29,13 @@
 
   - if @model == Audit
     .ui.fluid.styled.records.accordion data-search=@model_name.route_key
-      = render partial: "cms/list_items/#{@model_name.singular_route_key}", collection: @records, cache: true
-  - if @model == Registration
+      = render partial: "cms/list_items/#{@model_name.singular_route_key}", collection: @records, cached: true
+  - elsif @model == Registration
     .ui.fluid.records.accordion data-search=@model_name.route_key
-      = render partial: "cms/list_items/#{@model_name.singular_route_key}", collection: @records, cache: true
+      = render partial: "cms/list_items/#{@model_name.singular_route_key}", collection: @records, cached: true
   - else
     .ui.relaxed.records.list data-search=@model_name.route_key
-      = render partial: "cms/list_items/#{@records.model_name.singular_route_key}", collection: @records, cache: true, locals: { removable: true }
+      = render partial: "cms/list_items/#{@records.model_name.singular_route_key}", collection: @records, cached: true, locals: { removable: true }
 
   .pagination-info data-search=@model_name.route_key = page_entries_info @records
   .pagination data-search=@model_name.route_key = paginate @records
@@ -44,4 +44,4 @@
     h3.ui.dividing.header = translate('cms.details.managers_for_record', resource: @context.parent.label)
 
     .ui.relaxed.list
-      = render partial: 'cms/list_items/manager', collection: @context.parent_managers, cache: true
+      = render partial: 'cms/list_items/manager', collection: @context.parent_managers, cached: true

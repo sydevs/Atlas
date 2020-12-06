@@ -124,7 +124,7 @@ en:
 
       event:
         published: :activerecord.attributes.generic.published # Do not translate
-        name: "Custom Event Name (Optional)"
+        custom_name: "Custom Event Name (Optional)"
         manager_id: :activerecord.models.manager.single # Do not translate
         category: "Category"
         categories:
@@ -172,6 +172,9 @@ en:
         end_time: "End Time"
         online: "Online Class"
         online_url: "Online Meeting Link"
+        language: "Language"
+        images: :activerecord.models.picture.plural # Do not translate
+        venue_id: :activerecord.models.manager.single # Do not translate
 
       registration:
         manager_id: :activerecord.models.manager.single # Do not translate

@@ -6,7 +6,7 @@ class Event < ApplicationRecord
 
   nilify_blanks
   searchable_columns %w[name description]
-  audited
+  audited except: %i[registrations_sent_at latest_registration_at]
 
   # Associations
   belongs_to :venue

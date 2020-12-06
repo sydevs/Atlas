@@ -18,7 +18,7 @@ ruby:
 
     - if @countries.present?
       .ui.list
-        = render partial: 'cms/list_items/country', collection: @countries, cache: true
+        = render partial: 'cms/list_items/country', collection: @countries, cached: true
     - else
       p = translate('cms.messages.no_records_found', resources: translate_model(Country, :plural).downcase)
 
@@ -30,7 +30,7 @@ ruby:
 
     - if @provinces.present?
       .ui.list
-        = render partial: 'cms/list_items/province', collection: @provinces, cache: true
+        = render partial: 'cms/list_items/province', collection: @provinces, cached: true
     - else
       p = translate('cms.messages.no_records_found', resources: translate_model(Province, :plural).downcase)
 
@@ -51,6 +51,6 @@ ruby:
 
     - if @local_areas.present?
       .ui.list
-        = render partial: 'cms/list_items/local_area', collection: @local_areas, cache: true
+        = render partial: 'cms/list_items/local_area', collection: @local_areas, cached: true
     - else
       p = translate('cms.messages.no_records_found', resources: translate_model(LocalArea, :plural).downcase)
