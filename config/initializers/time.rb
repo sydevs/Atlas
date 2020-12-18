@@ -7,3 +7,4 @@ class Time
 end
 
 Time::DATE_FORMATS[:month_and_day] = '%b %e'
+Time::DATE_FORMATS[:short_date] = '%e %b %Y'

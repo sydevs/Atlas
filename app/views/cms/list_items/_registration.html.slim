@@ -21,10 +21,11 @@
         .header
           = Registration.human_attribute_name(:created_at)
           = " (#{@time_zone.name.gsub('_', ' ')})" if @time_zone
-        .description
+        time.description datetime=registration.created_at
           = @time_zone.utc_to_local(registration.created_at).to_s(:short)
     .item
       i.calendar.alternate.icon
       .content
         .header = Registration.human_attribute_name(:starting_at)
-        .description = registration.starting_at.to_s(:month_and_day)
+        time.description datetime=registration.starting_at
+          = registration.starting_at.to_s(:short_date)
