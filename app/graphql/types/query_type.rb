@@ -76,9 +76,12 @@ module Types
     end
 
     def decorate object
+      return nil if object.nil?
+
       if object.is_a? ActiveRecord::Relation
         object.map { |r| r.extend("#{object.model}Decorator".constantize) }
       else
+        puts "DECORATE #{object.class}"
         object.extend("#{object.class}Decorator".constantize)
       end
     end

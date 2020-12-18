@@ -268,18 +268,17 @@ class MapView {
 
   flyTo(location, zoom) {
     zoom = zoom || this.highlightZoom
+    this.updatePadding()
 
     if (Util.isDevice('mobile')) {
       this.mapbox.jumpTo({
         center: [location.longitude, location.latitude],
         zoom: zoom,
-        padding: this.getViewportPadding(),
       })
     } else {
       this.mapbox.flyTo({
         center: [location.longitude, location.latitude],
         zoom: zoom,
-        padding: this.getViewportPadding(),
         //easing: this._easing.
       })
     }
@@ -287,9 +286,8 @@ class MapView {
 
   fitTo(bounds) {
     bounds = [[bounds.west, bounds.south], [bounds.east, bounds.north]]
-    this.mapbox.fitBounds(bounds, {
-      padding: this.getViewportPadding(),
-    })
+    this.updatePadding()
+    this.mapbox.fitBounds(bounds)
   }
 
   updatePadding() {
@@ -355,6 +353,7 @@ class MapView {
     } else if (Util.isDevice('tablet')) {
       padding = {}
     } else {
+      /*
       let leftPadding
 
       if (Util.isMode('event')) {
@@ -362,9 +361,10 @@ class MapView {
       } else {
         leftPadding = Application.listPanel.container.offsetLeft + Application.listPanel.container.offsetWidth
       }
+      */
 
       padding = {
-        left: leftPadding + this.viewportPadding,
+        left: 532 + this.viewportPadding,
       }
     }
 
@@ -373,6 +373,9 @@ class MapView {
         padding[side] = this.viewportPadding
       }
     })
+
+    const debug = document.getElementById('js-debug-viewport')
+    if (debug) Object.assign(debug.style, padding)
 
     return padding
   }
