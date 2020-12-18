@@ -1,5 +1,5 @@
 
-Passwordless.expires_at = lambda { 1.year.from_now } # How long until a passwordless session expires.
+Passwordless.expires_at = lambda { 2.weeks.from_now } # How long until a passwordless session expires.
 Passwordless.timeout_at = lambda { 1.hour.from_now } # How long until a magic link expires.
 
 # Passwordless.restrict_token_reuse = true # TODO: Reenable?
