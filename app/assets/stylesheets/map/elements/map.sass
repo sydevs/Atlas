@@ -6,7 +6,8 @@
   user-select: none
 
   @include mode([event, venue])
-    height: 174px
+    @include mobile
+      height: 174px
 
   @include mode(map)
     width: 100vw !important
