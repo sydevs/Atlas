@@ -4,55 +4,49 @@ module Expirable
 
   TEST_MODE = true
 
-  VERIFY_TEST_MINUTES = 10
-  ESCALATE_TEST_MINUTES = 20
-  EXPIRE_TEST_MINUTES = 30
-  ARCHIVE_TEST_MINUTES = EXPIRE_TEST_MINUTES + 15
+  BASE_DURATION = TEST_MODE ? 10 : 8
+  DURATION_INCREMENT = TEST_MODE ? 10 : 1
 
-  VERIFY_AFTER_WEEKS = 8
-  ESCALATE_AFTER_WEEKS = 9
-  EXPIRE_AFTER_WEEKS = 10
-  ARCHIVE_AFTER_WEEKS = EXPIRE_AFTER_WEEKS + 1
+  LEVELS = {
+    verify: 0,
+    escalate: 1,
+    expire: 2,
+    archive: 3
+  }.freeze
 
   included do
-    scope :not_expired, -> { where("#{table_name}.updated_at > ?", Expirable.expire_date) }
-    scope :needs_review, -> { where("#{table_name}.updated_at <= ? AND #{table_name}.updated_at > ?", Expirable.verify_date, Expirable.archive_date) }
-    scope :needs_urgent_review, -> { where("#{table_name}.updated_at < ? AND #{table_name}.updated_at > ?", Expirable.escalate_date, Expirable.verify_date) }
-    scope :expired, -> { where("#{table_name}.updated_at <= ?", Expirable.expire_date) }
-    scope :recently_expired, -> { where("#{table_name}.updated_at <= ? AND #{table_name}.updated_at > ?", Expirable.expire_date, Expirable.archive_date) }
-    scope :archived, -> { where("#{table_name}.updated_at <= ?", Expirable.archive_date) }
+    scope :not_expired, -> { where("#{table_name}.updated_at > ?", Expirable.date_for(:expire)) }
+    scope :needs_review, -> { where("#{table_name}.updated_at <= ? AND #{table_name}.updated_at > ?", Expirable.date_for(:verify), Expirable.date_for(:archive)) }
+    scope :needs_urgent_review, -> { where("#{table_name}.updated_at < ? AND #{table_name}.updated_at > ?", Expirable.date_for(:escalate), Expirable.date_for(:verify)) }
+    scope :expired, -> { where("#{table_name}.updated_at <= ?", Expirable.date_for(:expire)) }
+    scope :recently_expired, -> { where("#{table_name}.updated_at <= ? AND #{table_name}.updated_at > ?", Expirable.date_for(:expire), Expirable.date_for(:archive)) }
+    scope :archived, -> { where("#{table_name}.updated_at <= ?", Expirable.date_for(:archive)) }
   end
 
-  def self.verify_date
-    TEST_MODE ? VERIFY_TEST_MINUTES.minutes.ago : VERIFY_AFTER_WEEKS.weeks.ago
+  def self.duration_for(level)
+    base = BASE_DURATION + (LEVEL[level] * DURATION_INCREMENT)
+    base -= BASE_DURATION if level == :interval
+    TEST_MODE ? base.minutes : base.weeks
   end
 
-  def self.escalate_date
-    TEST_MODE ? ESCALATE_TEST_MINUTES.minutes.ago : ESCALATE_AFTER_WEEKS.weeks.ago
-  end
-
-  def self.expire_date
-    TEST_MODE ? EXPIRE_TEST_MINUTES.minutes.ago : EXPIRE_AFTER_WEEKS.weeks.ago
-  end
-
-  def self.archive_date
-    TEST_MODE ? ARCHIVE_TEST_MINUTES.minutes.ago : ARCHIVE_AFTER_WEEKS.weeks.ago
+  def self.date_for(level)
+    Expirable.duration_for(level).ago
   end
 
   def needs_review_at
-    updated_at + (TEST_MODE ? VERIFY_TEST_MINUTES.minutes : VERIFY_AFTER_WEEKS.weeks)
+    updated_at + self.duration_for(:verify)
   end
 
   def needs_escalation_at
-    updated_at + (TEST_MODE ? ESCALATE_TEST_MINUTES.minutes : ESCALATE_AFTER_WEEKS.weeks)
+    updated_at + self.duration_for(:escalate)
   end
 
   def expires_at
-    updated_at + (TEST_MODE ? EXPIRE_TEST_MINUTES.minutes : EXPIRE_AFTER_WEEKS.weeks)
+    updated_at + self.duration_for(:expire)
   end
 
   def archives_at
-    updated_at + (TEST_MODE ? ARCHIVE_TEST_MINUTES.minutes : ARCHIVE_AFTER_WEEKS.weeks)
+    updated_at + self.duration_for(:archive)
   end
 
   def expired_at
@@ -77,9 +71,9 @@ module Expirable
 
   def needs_review? urgency = :any
     if urgency == :urgent
-      updated_at < Expirable.verify_date
+      updated_at < Expirable.date_for(:verify)
     else
-      updated_at < Expirable.escalate_date
+      updated_at < Expirable.date_for(:escalate)
     end
   end
 

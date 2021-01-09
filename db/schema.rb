@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_06_234637) do
+ActiveRecord::Schema.define(version: 2021_01_09_004906) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -70,7 +70,6 @@ ActiveRecord::Schema.define(version: 2020_11_06_234637) do
     t.jsonb "images"
     t.bigint "manager_id"
     t.boolean "published", default: true
-    t.datetime "registrations_sent_at"
     t.datetime "latest_registration_at"
     t.boolean "disable_notifications", default: false, null: false
     t.integer "registration_mode", default: 0
@@ -78,6 +77,8 @@ ActiveRecord::Schema.define(version: 2020_11_06_234637) do
     t.string "language_code", limit: 2
     t.boolean "online", default: false, null: false
     t.string "online_url"
+    t.datetime "last_expiration_email_sent_at"
+    t.datetime "last_registration_email_sent_at"
     t.index ["manager_id"], name: "index_events_on_manager_id"
     t.index ["venue_id"], name: "index_events_on_venue_id"
   end

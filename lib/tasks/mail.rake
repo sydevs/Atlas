@@ -1,33 +1,50 @@
 namespace :mail do
   desc 'Send list of recent registrations to every program manager'
+  task all: :environment do
+    %w[registrations verifications expirations].each_with_index do |test, index|
+      Rake::Task["mail:#{test}"].invoke
+    end
+  end
+
+  desc 'Send list of recent registrations to every program manager'
   task registrations: :environment do
-    Event.notifications_enabled.with_new_registrations.where('registrations_sent_at > ?', 3.days.ago).in_batches.each_record do |event|
-      event.managers.in_batches.each_record do |manager|
-        ManagerMailer.with(manager: manager, event: event).registrations.deliver_now
-      end
+    since = Expirable.duration_for(:interval)
+
+    Event.notifications_enabled.with_new_registrations.where('last_registration_email_sent_at > ?', since).in_batches.each_record do |event|
+      ManagerMailer.with(manager: event.manager, event: event).registrations.deliver_now
+      event.update_column last_registration_email_sent_at: Time.now
     end
   end
 
   desc 'Send a verification email to the managers of out-of-date events'
   task verifications: :environment do
-    Event.needs_review.in_batches.each_record do |event|
-      managers = event.needs_review?(:urgent) ? event.venue.parent_managers : event.managers
-      managers.in_batches.each_record do |manager|
-        ManagerMailer.with(manager: manager, event: event).verification.deliver_now
+    since = Expirable.duration_for(:interval)
+
+    Event.needs_review.where('last_expiration_email_sent_at > ?', since).in_batches.each_record do |event|
+      if event.needs_review?(:urgent)
+        event.venue.parent_managers.each do |manager|
+          ManagerMailer.with(manager: manager, event: event).verification.deliver_now
+        end
+      else
+        ManagerMailer.with(manager: event.manager, event: event).verification.deliver_now
       end
+
+      event.update_column last_expiration_email_sent_at: Time.now
     end
   end
 
   desc 'Send a verification email to the managers of out-of-date events'
   task expirations: :environment do
-    Event.recently_expired.in_batches.each_record do |event|
-      event.managers.in_batches.each_record do |manager|
+    since = Expirable.duration_for(:interval)
+
+    Event.recently_expired.where('last_expiration_email_sent_at > ?', since).in_batches.each_record do |event|
+      ManagerMailer.with(manager: event.manager, event: event).expired.deliver_now
+
+      event.venue.parent_managers.each do |manager|
         ManagerMailer.with(manager: manager, event: event).expired.deliver_now
       end
 
-      event.venue.parent_managers.in_batches.each_record do |manager|
-        ManagerMailer.with(manager: manager, event: event).expired.deliver_now
-      end
+      event.update_column last_expiration_email_sent_at: Time.now
     end
   end
 
