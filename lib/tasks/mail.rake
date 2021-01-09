@@ -8,7 +8,7 @@ namespace :mail do
 
   desc 'Send list of recent registrations to every program manager'
   task registrations: :environment do
-    since = Expirable.duration_for(:interval)
+    since = 1.day.ago
 
     Event.notifications_enabled.with_new_registrations.where('last_registration_email_sent_at > ?', since).in_batches.each_record do |event|
       ManagerMailer.with(manager: event.manager, event: event).registrations.deliver_now
@@ -92,7 +92,7 @@ namespace :mail do
     task registrations: :environment do
       ActionMailer::Base.delivery_method = :letter_opener
       event = Event.notifications_enabled.joins(:managers, :registrations).reorder('RANDOM()').first
-      event.registrations_sent_at = event.created_at
+      event.last_registration_email_sent_at = event.created_at
       manager = event.managers.first
       puts "Sending mail to #{manager.name} for #{event.name || event.venue.street}"
       ManagerMailer.with(manager: manager, event: event, test: true).registrations.deliver_now

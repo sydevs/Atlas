@@ -6,7 +6,7 @@ class Event < ApplicationRecord
 
   nilify_blanks
   searchable_columns %w[name description]
-  audited except: %i[registrations_sent_at latest_registration_at]
+  audited except: %i[last_expiration_email_sent_at last_registration_email_sent_at latest_registration_at]
 
   # Associations
   belongs_to :venue
@@ -37,7 +37,7 @@ class Event < ApplicationRecord
   validates_associated :pictures
 
   # Scopes
-  scope :with_new_registrations, -> { where('latest_registration_at >= registrations_sent_at') }
+  scope :with_new_registrations, -> { where('latest_registration_at >= last_registration_email_sent_at') }
   scope :notifications_enabled, -> { where.not(disable_notifications: true) }
   scope :publicly_visible, -> { published.not_expired.not_finished }
   scope :finished, -> { where('end_date IS NOT NULL AND end_date < ?', DateTime.now - 1.day) }

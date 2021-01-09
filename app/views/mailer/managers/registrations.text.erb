@@ -1,6 +1,6 @@
 <%= translate('mail.registrations.intro', event: "*#{@event.label}*") %>
 
-<%= translate('mail.registrations.purpose', date: (@event.registrations_sent_at || @event.created_at).to_s(:short), count: @registrations.count) %>
+<%= translate('mail.registrations.purpose', date: (@event.last_registration_email_sent_at || @event.created_at).to_s(:short), count: @registrations.count) %>
 
 <%= translate('mail.registrations.listing.title') %>
 <%= '=' * translate('mail.registrations.listing.title').length %>
