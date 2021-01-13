@@ -1,5 +1,9 @@
 {
   "name": "atlas",
   "private": true,
-  "dependencies": {}
+  "dependencies": {},
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:sydevs/sydirectory.git",
+  "author": "Devindra"
 }
