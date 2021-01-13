@@ -24,7 +24,7 @@ module Expirable
   end
 
   def self.duration_for(level)
-    base = BASE_DURATION + (LEVEL[level] * DURATION_INCREMENT)
+    base = BASE_DURATION + (LEVELS[level] * DURATION_INCREMENT)
     base -= BASE_DURATION if level == :interval
     TEST_MODE ? base.minutes : base.weeks
   end
