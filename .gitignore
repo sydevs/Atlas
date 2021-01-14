@@ -26,3 +26,5 @@
 
 .env.local
 meditation-venues.geojson
+
+/config/master.key

@@ -15,7 +15,8 @@ gem 'rails' # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'sassc' # Use SASS for stylesheets
 gem 'sassc-rails' # Use SASS for stylesheets
 gem 'slim-rails' # Use Slim for views
-gem 'uglifier' # Use Uglifier as compressor for JavaScript assets
+gem 'terser' # Use Uglifier as compressor for JavaScript assets
+gem 'sprockets', '3.7.2'
 
 ### Security Fix
 gem 'loofah', '>= 2.3.1'
