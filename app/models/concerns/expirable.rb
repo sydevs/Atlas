@@ -35,19 +35,19 @@ module Expirable
   end
 
   def needs_review_at
-    updated_at + self.duration_for(:verify)
+    updated_at + Expirable.duration_for(:verify)
   end
 
   def needs_escalation_at
-    updated_at + self.duration_for(:escalate)
+    updated_at + Expirable.duration_for(:escalate)
   end
 
   def expires_at
-    updated_at + self.duration_for(:expire)
+    updated_at + Expirable.duration_for(:expire)
   end
 
   def archives_at
-    updated_at + self.duration_for(:archive)
+    updated_at + Expirable.duration_for(:archive)
   end
 
   def expired_at

@@ -40,7 +40,7 @@ namespace :mail do
     Event.recently_expired.where('last_expiration_email_sent_at > ?', since).in_batches.each_record do |event|
       ManagerMailer.with(manager: event.manager, event: event).expired.deliver_now
 
-      event.venue.parent_managers.each do |manager|
+      event.venue.all_managers.each do |manager|
         ManagerMailer.with(manager: manager, event: event).expired.deliver_now
       end
 
@@ -91,46 +91,46 @@ namespace :mail do
     desc 'Sends list of recent registrations to one program manager'
     task registrations: :environment do
       ActionMailer::Base.delivery_method = :letter_opener
-      event = Event.notifications_enabled.joins(:managers, :registrations).reorder('RANDOM()').first
+      event = Event.notifications_enabled.joins(:manager, :registrations).reorder('RANDOM()').first
       event.last_registration_email_sent_at = event.created_at
-      manager = event.managers.first
-      puts "Sending mail to #{manager.name} for #{event.name || event.venue.street}"
+      manager = event.manager
+      puts "Sending mail to #{manager.name} for #{event.custom_name || event.venue.street}"
       ManagerMailer.with(manager: manager, event: event, test: true).registrations.deliver_now
     end
 
     desc 'Sends a verification email to one of the managers of one out-of-date event'
     task verification: :environment do
       ActionMailer::Base.delivery_method = :letter_opener
-      event = Event.joins(:managers).reorder('RANDOM()').first
-      manager = event.managers.first
-      puts "Sending mail to #{manager.name} for #{event.name || event.venue.street}"
+      event = Event.joins(:manager).reorder('RANDOM()').first
+      manager = event.manager
+      puts "Sending mail to #{manager.name} for #{event.custom_name || event.venue.street}"
       ManagerMailer.with(manager: manager, event: event, test: true).verification.deliver_now
     end
 
     desc 'Sends a verification email to one of the super managers of one out-of-date event'
     task escalation: :environment do
       ActionMailer::Base.delivery_method = :letter_opener
-      event = Event.joins(:managers).reorder('RANDOM()').first
-      manager = event.parent_managers.first
-      puts "Sending mail to #{manager.name} for #{event.name || event.venue.street}"
+      event = Event.reorder('RANDOM()').first
+      manager = event.venue.all_managers.first
+      puts "Sending mail to #{manager.name} for #{event.custom_name || event.venue.street}"
       ManagerMailer.with(manager: manager, event: event, test: true).escalation.deliver_now
     end
 
     desc 'Sends a verification email to one of the managers of one expired event'
     task expired: :environment do
       ActionMailer::Base.delivery_method = :letter_opener
-      event = Event.joins(:managers).reorder('RANDOM()').first
-      manager = event.managers.first
-      puts "Sending mail to #{manager.name} for #{event.name || event.venue.street}"
+      event = Event.joins(:manager).reorder('RANDOM()').first
+      manager = event.manager
+      puts "Sending mail to #{manager.name} for #{event.custom_name || event.venue.street}"
       ManagerMailer.with(manager: manager, event: event, test: true).expired.deliver_now
     end
 
     desc 'Sends a verification email to one of the super managers of one expired event'
     task expired_escalation: :environment do
       ActionMailer::Base.delivery_method = :letter_opener
-      event = Event.joins(:managers).reorder('RANDOM()').first
-      manager = event.parent_managers.last
-      puts "Sending mail to #{manager.name} for #{event.name || event.venue.street}"
+      event = Event.joins(:manager).reorder('RANDOM()').first
+      manager = event.venue.all_managers.last
+      puts "Sending mail to #{manager.name} for #{event.custom_name || event.venue.street}"
       ManagerMailer.with(manager: manager, event: event, test: true).expired.deliver_now
     end
 
@@ -167,9 +167,9 @@ namespace :mail do
       desc 'Generates an email welcoming a manager who has been newly assigned to an event'
       task event: :environment do
         ActionMailer::Base.delivery_method = :letter_opener
-        event = Event.joins(:venue, :managers).reorder('RANDOM()').first
-        manager = event.managers.first
-        puts "Sending mail to #{manager.name} for #{event.name || event.venue.street}"
+        event = Event.joins(:venue, :manager).reorder('RANDOM()').first
+        manager = event.manager
+        puts "Sending mail to #{manager.name} for #{event.custom_name || event.venue.street}"
         ManagerMailer.with(manager: manager, context: event, test: true).welcome.deliver_now
       end
 

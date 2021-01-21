@@ -1,6 +1,6 @@
 
 / TODO: Check that this would actually be html safe
-p = translate('mail.verification.intro', event: tag.b(@event.name || @event.venue.street), date: @event.updated_at.to_s(:long)).html_safe
+p = translate('mail.verification.intro', event: tag.b(@event.custom_name || @event.venue.street), date: @event.updated_at.to_s(:long)).html_safe
 p = translate('mail.verification.purpose')
 
 blockquote.message--alert

@@ -81,7 +81,7 @@ def load_venue address, country_code, index
     event.manager = MANAGERS.sample
     event.save!
 
-    puts " |-> Created Event - #{event.name || event.venue.street}"
+    puts " |-> Created Event - #{event.custom_name || event.venue.street}"
     next unless [true, true, false].sample
 
     @event = event

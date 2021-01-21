@@ -13,7 +13,7 @@ class Manager < ApplicationRecord
   has_many :local_area_venues, through: :local_areas, source: :venues
   has_many :local_area_provinces, through: :local_areas, source: :province
   has_many :events
-  has_many :actions, class_name: 'Audit', foreign_type: :user_type, foreign_key: :user_id
+  has_many :actions, class_name: 'Audit', as: :user
 
   # Validations
   validates :name, presence: true
