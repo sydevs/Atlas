@@ -64,7 +64,7 @@ gem 'klaviyo' # For integration with Klaviyo
 gem 'httparty' # For http requests (specifically for Klaviyo)
 gem 'validate_url' # Validate url fields
 gem 'aws-sdk-s3' # For uploading to Mapbox
-gem 'webpacker' # Needed to build properly
+# gem 'webpacker' # Needed to build properly
 
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw] # Call 'byebug' anywhere in the code to stop execution and get a debugger console
