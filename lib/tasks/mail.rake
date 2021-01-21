@@ -18,7 +18,7 @@ namespace :mail do
 
   desc 'Send a verification email to the managers of out-of-date events'
   task verifications: :environment do
-    since = Expirable.duration_for(:interval)
+    since = Expirable.date_for(:interval)
 
     Event.needs_review.where('last_expiration_email_sent_at > ?', since).in_batches.each_record do |event|
       if event.needs_review?(:urgent)
@@ -35,7 +35,7 @@ namespace :mail do
 
   desc 'Send a verification email to the managers of out-of-date events'
   task expirations: :environment do
-    since = Expirable.duration_for(:interval)
+    since = Expirable.date_for(:interval)
 
     Event.recently_expired.where('last_expiration_email_sent_at > ?', since).in_batches.each_record do |event|
       ManagerMailer.with(manager: event.manager, event: event).expired.deliver_now
