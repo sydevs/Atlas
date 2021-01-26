@@ -13,7 +13,7 @@ namespace :mail do
 
     Event.notifications_enabled.with_new_registrations.no_recent_email_sent(:last_registration_email_sent_at).in_batches.each_record do |event|
       ManagerMailer.with(manager: event.manager, event: event).registrations.deliver_now
-      event.update_column last_registration_email_sent_at: Time.now
+      event.update_column :last_registration_email_sent_at, Time.now
     end
   end
 
@@ -31,7 +31,7 @@ namespace :mail do
         ManagerMailer.with(manager: event.manager, event: event).verification.deliver_now
       end
 
-      event.update_column last_expiration_email_sent_at: Time.now
+      event.update_column :last_expiration_email_sent_at, Time.now
     end
   end
 
@@ -46,7 +46,7 @@ namespace :mail do
         ManagerMailer.with(manager: manager, event: event).expired.deliver_now
       end
 
-      event.update_column last_expiration_email_sent_at: Time.now
+      event.update_column :last_expiration_email_sent_at, Time.now
     end
   end
 
