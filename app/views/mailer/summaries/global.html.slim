@@ -30,7 +30,7 @@ p = translate('mail.global_summary.registrations.description', count: @recent_re
 
 - if @expired_events.present?
   h2 = translate('mail.global_summary.expired.title')
-  p = translate('mail.global_summary.expired.description', count: @expired_events.count, expiration_weeks: Expirable::EXPIRE_AFTER_WEEKS)
+  p = translate('mail.global_summary.expired.description', count: @expired_events.count, expiration_weeks: Expirable.count_for(:expire))
   table
     thead
       tr

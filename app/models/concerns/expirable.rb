@@ -24,13 +24,14 @@ module Expirable
     scope :no_recent_email_sent, -> (field) { where("#{field} IS NULL OR #{field} > ?", Expirable.date_for(:interval)) }
   end
 
-  def self.duration_for(level)
-    if level == :interval
-      base = DURATION_INCREMENT
-    else
-      base = BASE_DURATION + (LEVELS[level] * DURATION_INCREMENT)
-    end
+  def self.count_for(level)
+    return DURATION_INCREMENT if level == :interval
     
+    BASE_DURATION + (LEVELS[level] * DURATION_INCREMENT)
+  end
+
+  def self.duration_for(level)
+    base = Expirable.count_for(level)
     TEST_MODE ? base.minutes : base.weeks
   end
 

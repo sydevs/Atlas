@@ -27,7 +27,7 @@ p = translate('mail.regional_summary.intro', region: tag.b(@region.label)).html_
 
 - if @expired_events.present?
   h2 = translate('mail.regional_summary.expired.title')
-  p = translate('mail.regional_summary.expired.description', count: @expired_events.count, expiration_weeks: Expirable::EXPIRE_AFTER_WEEKS)
+  p = translate('mail.regional_summary.expired.description', count: @expired_events.count, expiration_weeks: Expirable.count_for(:expire))
   table
     thead
       tr
