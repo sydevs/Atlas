@@ -24,7 +24,7 @@ namespace :mail do
     Event.needs_review.no_recent_email_sent(:last_expiration_email_sent_at).in_batches.each_record do |event|
       puts "Event needs review: #{event}"
       if event.needs_review?(:urgent)
-        event.venue.parent_managers.each do |manager|
+        event.venue.all_managers.each do |manager|
           ManagerMailer.with(manager: manager, event: event).verification.deliver_now
         end
       else
