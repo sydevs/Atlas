@@ -21,6 +21,7 @@ module Expirable
     scope :expired, -> { where("#{table_name}.updated_at <= ?", Expirable.date_for(:expire)) }
     scope :recently_expired, -> { where("#{table_name}.updated_at <= ? AND #{table_name}.updated_at > ?", Expirable.date_for(:expire), Expirable.date_for(:archive)) }
     scope :archived, -> { where("#{table_name}.updated_at <= ?", Expirable.date_for(:archive)) }
+    scope :no_recent_email_sent, -> (field) { where("#{field} IS NULL OR #{field} > ?", Expirable.date_for(:interval)) }
   end
 
   def self.duration_for(level)
