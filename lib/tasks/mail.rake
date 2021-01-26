@@ -1,8 +1,9 @@
 namespace :mail do
   desc 'Send list of recent registrations to every program manager'
   task all: :environment do
-    %w[registrations verifications expirations].each_with_index do |test, index|
-      Rake::Task["mail:#{test}"].invoke
+    %w[registrations verifications expirations].each do |key|
+      puts "[MAIL] Run task mail:#{key}"
+      Rake::Task["mail:#{key}"].invoke
     end
   end
 
@@ -21,6 +22,7 @@ namespace :mail do
     since = Expirable.date_for(:interval)
 
     Event.needs_review.where('last_expiration_email_sent_at > ?', since).in_batches.each_record do |event|
+      puts "Event needs review: #{event}"
       if event.needs_review?(:urgent)
         event.venue.parent_managers.each do |manager|
           ManagerMailer.with(manager: manager, event: event).verification.deliver_now
