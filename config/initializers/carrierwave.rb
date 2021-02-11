@@ -5,7 +5,7 @@ CarrierWave.configure do |config|
     config.storage = :fog
 
     config.fog_provider = 'fog/google'
-    config.gcloud_bucket = ENV.fetch('GCLOUD_BUCKET')
+    config.fog_directory = ENV.fetch('GCLOUD_BUCKET')
     config.fog_attributes = { expires: 600 }
     config.fog_credentials = {
       provider:               'Google',
