@@ -24,7 +24,7 @@ namespace :mail do
     Event.needs_review.no_recent_email_sent(:last_expiration_email_sent_at).in_batches.each_record do |event|
       puts "Event needs review: #{event}"
       if event.needs_review?(:urgent)
-        event.venue.all_managers.each do |manager|
+        event.venue.parent.managers.each do |manager|
           ManagerMailer.with(manager: manager, event: event).verification.deliver_now
         end
       else
@@ -35,14 +35,14 @@ namespace :mail do
     end
   end
 
-  desc 'Send a verification email to the managers of out-of-date events'
+  desc 'Send an expiration notification email to the managers of out-of-date events'
   task expirations: :environment do
     since = Expirable.date_for(:interval)
 
     Event.recently_expired.no_recent_email_sent(:last_expiration_email_sent_at).in_batches.each_record do |event|
       ManagerMailer.with(manager: event.manager, event: event).expired.deliver_now
 
-      event.venue.all_managers.each do |manager|
+      event.venue.parent.managers.each do |manager|
         ManagerMailer.with(manager: manager, event: event).expired.deliver_now
       end
 
