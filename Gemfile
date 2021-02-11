@@ -43,7 +43,7 @@ gem 'timezone'
 
 ### File uploads
 gem 'carrierwave' # Serverside image uploader
-gem 'carrierwave-google-storage' # Serverside image uploader
+gem 'fog-google' # Serverside image uploader
 gem 'mini_magick' # Image processing during upload
 
 ### Internationalization
