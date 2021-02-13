@@ -2,15 +2,15 @@
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
 #
-# This file is the source Rails uses to define your schema when running `rails
-# db:schema:load`. When creating a new database, `rails db:schema:load` tends to
+# This file is the source Rails uses to define your schema when running `bin/rails
+# db:schema:load`. When creating a new database, `bin/rails db:schema:load` tends to
 # be faster and is potentially less error prone than running all of your
 # migrations from scratch. Old migrations may fail to apply correctly if those
 # migrations use external dependencies or application code.
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_09_004906) do
+ActiveRecord::Schema.define(version: 2021_02_13_180215) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -77,8 +77,7 @@ ActiveRecord::Schema.define(version: 2021_01_09_004906) do
     t.string "language_code", limit: 2
     t.boolean "online", default: false, null: false
     t.string "online_url"
-    t.datetime "last_expiration_email_sent_at"
-    t.datetime "last_registration_email_sent_at"
+    t.datetime "summary_email_sent_at"
     t.index ["manager_id"], name: "index_events_on_manager_id"
     t.index ["venue_id"], name: "index_events_on_venue_id"
   end
@@ -119,6 +118,7 @@ ActiveRecord::Schema.define(version: 2021_01_09_004906) do
     t.boolean "administrator"
     t.integer "managed_countries_counter", default: 0, null: false
     t.integer "managed_localities_counter", default: 0, null: false
+    t.datetime "summary_email_sent_at"
     t.index ["email"], name: "index_managers_on_email", unique: true
   end
 

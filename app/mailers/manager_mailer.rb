@@ -1,54 +1,39 @@
 class ManagerMailer < ApplicationMailer
 
   default template_path: 'mailer/managers'
-  layout 'mailer/manager'
+  layout 'mailer/admin'
 
   def welcome
     setup
     
+    @context = params[:context]
     @action_link = "#{@magic_link}?destination_path=#{@context.is_a?(Event) ? url_for([:edit, :cms, @context]) : cms_root_url}"
     @type = @context&.model_name&.i18n_key || 'worldwide'
     subject = I18n.translate('mail.welcome.subject', context: @context&.label || I18n.translate('mail.common.worldwide'))
     mail(to: @manager.email, subject: subject)
   end
 
-  def registrations
+  def summary
     setup
-    @registrations = @event.registrations.since(@event.last_registration_email_sent_at || @event.created_at)
-    @view_registrations_link = "#{@magic_link}?destination_path=#{url_for([:cms, @event, :registrations])}"
-    @unsubscribe_registrations_link = "#{@magic_link}?destination_path=#{url_for([:edit, :cms, @event, unsubscribe: true])}"
-    subject = I18n.translate('mail.registrations.subject', date: @event.last_registration_email_sent_at)
-    mail(to: @manager.email, subject: subject)
-    @event.touch(:last_registration_email_sent_at) unless params[:test]
-  end
 
-  def verification
-    setup
-    @confirm_event_link = "#{@magic_link}?destination_path=#{url_for([:cms, @event, :confirm])}"
-    @edit_event_link = "#{@magic_link}?destination_path=#{url_for([:edit, :cms, @event])}"
-    subject = I18n.translate('mail.verification.subject', event: @event.label)
-    mail(to: @manager.email, subject: subject)
-  end
+    @context = @manager.parent
+    @new_events = @manager.accessible_events.reorder(:created_at).where('events.created_at > ?', Expirable.date_for(:interval))
+    @reviewable_events = @manager.accessible_events.needs_urgent_review
+    @expired_events = @manager.accessible_events.recently_expired
+    @limit = 5
 
-  def escalation
-    setup session: false
-    subject = I18n.translate('mail.escalation.subject', event: @event.label)
-    mail(to: @manager.email, subject: subject)
-  end
+    @dashboard_link = "#{@magic_link}?destination_path=#{cms_review_url}"
+    @template_link = "#{@magic_link}?destination_path="
 
-  def expired
-    setup session: :auto
-    subject = I18n.translate('mail.expired.subject', event: @event.label)
+    subject = I18n.translate('mail.manager_summary.subject', context: @context&.label || I18n.translate('mail.common.worldwide'), date: Date.today.to_s(:short))
     mail(to: @manager.email, subject: subject)
+    @manager.touch(:summary_email_sent_at) unless params[:test]
   end
 
   private
 
-    def setup session: true
+    def setup
       @manager = params[:manager]
-      @event = params[:event]
-      @context = params[:context] || @event
-      return unless session || (session == :auto && @context.managers.include?(@manager))
 
       session = Passwordless::Session.new({
         authenticatable: @manager,

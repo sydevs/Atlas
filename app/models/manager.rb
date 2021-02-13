@@ -3,7 +3,7 @@ class Manager < ApplicationRecord
   # Extensions
   passwordless_with :email
   searchable_columns %w[name email]
-  audited
+  audited except: %i[summary_email_sent_at]
 
   # Associations
   has_many :managed_records
@@ -25,6 +25,7 @@ class Manager < ApplicationRecord
   scope :country_managers, -> { where('managed_countries_counter > 0') }
   scope :local_managers, -> { where('managed_localities_counter > 0') }
   scope :event_managers, -> { joins(:events) }
+  scope :no_recent_email_sent, -> { where("summary_email_sent_at IS NULL OR summary_email_sent_at > ?", Expirable.date_for(:interval)) }
 
   # Methods
 

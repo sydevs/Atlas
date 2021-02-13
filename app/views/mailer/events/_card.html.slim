@@ -1,0 +1,19 @@
+.card
+  .card__meta
+    div: strong = event.recurrence_in_words
+    div: small = event.formatted_start_end_time
+  div
+    strong = event.custom_name || event.venue.street
+    '  - 
+    span.faded = event.category_name
+  div = event.address
+  div
+    span class=('alert' if timestamp == :expires_at)
+      = translate("mail.common.event.#{timestamp}", date: event.send(timestamp).to_date.to_s(:short))
+
+    '  • 
+    = link_to "View", @template_link + map_event_url(event)
+    '  • 
+    = link_to "Edit", @template_link + cms_event_url(event)
+    '  • 
+    span Managed by #{mail_to event.manager.email, event.manager.name}

@@ -1,87 +1,32 @@
 namespace :mail do
   desc 'Send list of recent registrations to every program manager'
   task all: :environment do
-    %w[registrations expirations verifications].each do |key|
+    %w[events managers].each do |key|
       puts "[MAIL] Run task mail:#{key}"
       Rake::Task["mail:#{key}"].invoke
     end
   end
 
-  desc 'Send list of recent registrations to every program manager'
-  task registrations: :environment do
-    since = 1.day.ago
-
-    Event.notifications_enabled.with_new_registrations.no_recent_email_sent(:last_registration_email_sent_at).in_batches.each_record do |event|
-      ManagerMailer.with(manager: event.manager, event: event).registrations.deliver_now
-      event.update_column :last_registration_email_sent_at, Time.now
+  desc 'Send event summaries to each event manager.'
+  task events: :environment do
+    Event.publicly_visible.no_recent_email_sent.in_batches.each_record do |event|
+      EventMailer.with(event: event).summary.deliver_now
     end
   end
 
-  desc 'Send a verification email to the managers of out-of-date events'
-  task verifications: :environment do
-    since = Expirable.date_for(:interval)
-
-    Event.needs_review.no_recent_email_sent(:last_expiration_email_sent_at).in_batches.each_record do |event|
-      puts "Event needs review: #{event}"
-      if event.needs_review?(:urgent)
-        event.venue.parent.managers.each do |manager|
-          ManagerMailer.with(manager: manager, event: event).verification.deliver_now
-        end
-      else
-        ManagerMailer.with(manager: event.manager, event: event).verification.deliver_now
-      end
-
-      event.update_column :last_expiration_email_sent_at, Time.now
-    end
-  end
-
-  desc 'Send an expiration notification email to the managers of out-of-date events'
-  task expirations: :environment do
-    since = Expirable.date_for(:interval)
-
-    Event.recently_expired.no_recent_email_sent(:last_expiration_email_sent_at).in_batches.each_record do |event|
-      ManagerMailer.with(manager: event.manager, event: event).expired.deliver_now
-
-      event.venue.parent.managers.each do |manager|
-        ManagerMailer.with(manager: manager, event: event).expired.deliver_now
-      end
-
-      event.update_column :last_expiration_email_sent_at, Time.now
-    end
-  end
-
-  desc 'Send a summary email to the managers of every region'
-  task summaries: :environment do
-    Country.in_batches.each_record do |country|
-      country.managers.in_batches.each_record do |manager|
-        SummaryMailer.with(manager: manager, region: country).regional.deliver_now
-      end
-    end
-
-    Province.in_batches.each_record do |province|
-      province.managers.in_batches.each_record do |manager|
-        SummaryMailer.with(manager: manager, region: province).regional.deliver_now
-      end
-    end
-
-    LocalArea.in_batches.each_record do |local_area|
-      local_area.managers.in_batches.each_record do |manager|
-        SummaryMailer.with(manager: manager, region: local_area).regional.deliver_now
-      end
-    end
-
-    Manager.administrators.in_batches.each_record do |manager|
-      SummaryMailer.with(manager: manager).global.deliver_now
+  desc 'Send a summary email to each manager'
+  task managers: :environment do
+    Manager.no_recent_email_sent.in_batches.each_record do |event|
+      ManagerMailer.with(manager: manager).summary.deliver_now
     end
   end
 
   namespace :test do
     desc 'Generates one of each email type for testing purposes'
     task all: :environment do
+      # welcome:event welcome:worldwide
       %w[
-        welcome:event welcome:worldwide
-        registrations verification escalation
-        expired expired_escalation
+        summary:event summary:manager
       ].each_with_index do |test, index|
         puts "Press enter to proceed to the next test (mail:#{test})" unless index.zero?
         STDIN.gets unless index.zero?
@@ -90,16 +35,33 @@ namespace :mail do
       end
     end
 
-    desc 'Sends list of recent registrations to one program manager'
-    task registrations: :environment do
-      ActionMailer::Base.delivery_method = :letter_opener
-      event = Event.notifications_enabled.joins(:manager, :registrations).reorder('RANDOM()').first
-      event.last_registration_email_sent_at = event.created_at
-      manager = event.manager
-      puts "Sending mail to #{manager.name} for #{event.custom_name || event.venue.street}"
-      ManagerMailer.with(manager: manager, event: event, test: true).registrations.deliver_now
+    namespace :summary do
+      desc 'Sends event summary to one program manager'
+      task event: :environment do
+        ActionMailer::Base.delivery_method = :letter_opener
+        event = Event.joins(:manager, :registrations).reorder('RANDOM()').first
+        puts "Sending mail to #{event.manager.name} for #{event.custom_name || event.venue.street}"
+        EventMailer.with(event: event, test: true).summary.deliver_now
+      end
+
+      desc 'Sends summary to one regional manager'
+      task manager: :environment do
+        ActionMailer::Base.delivery_method = :letter_opener
+        manager = Manager.where(administrator: false).reorder('RANDOM()').first
+        puts "Sending mail to #{manager.name}"
+        ManagerMailer.with(manager: manager, test: true).summary.deliver_now
+      end
+
+      desc 'Sends summary to one administrator'
+      task admin: :environment do
+        ActionMailer::Base.delivery_method = :letter_opener
+        manager = Manager.where(administrator: true).reorder('RANDOM()').first
+        puts "Sending mail to #{manager.name}"
+        ManagerMailer.with(manager: manager, test: true).summary.deliver_now
+      end
     end
 
+=begin
     desc 'Sends a verification email to one of the managers of one out-of-date event'
     task verification: :environment do
       ActionMailer::Base.delivery_method = :letter_opener
@@ -220,5 +182,6 @@ namespace :mail do
         ManagerMailer.with(manager: manager, test: true).welcome.deliver_now
       end
     end
+=end
   end
 end

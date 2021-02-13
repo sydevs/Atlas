@@ -6,7 +6,7 @@ class Event < ApplicationRecord
 
   nilify_blanks
   searchable_columns %w[name description]
-  audited except: %i[last_expiration_email_sent_at last_registration_email_sent_at latest_registration_at]
+  audited except: %i[summary_email_sent_at latest_registration_at]
 
   # Associations
   belongs_to :venue
@@ -37,11 +37,12 @@ class Event < ApplicationRecord
   validates_associated :pictures
 
   # Scopes
-  scope :with_new_registrations, -> { where('latest_registration_at >= last_registration_email_sent_at') }
+  scope :with_new_registrations, -> { where('latest_registration_at >= summary_email_sent_at') }
   scope :notifications_enabled, -> { where.not(disable_notifications: true) }
   scope :publicly_visible, -> { published.not_expired.not_finished }
   scope :finished, -> { where('end_date IS NOT NULL AND end_date < ?', DateTime.now - 1.day) }
   scope :not_finished, -> { where('end_date IS NULL OR end_date >= ?', DateTime.now - 1.day) }
+  scope :no_recent_email_sent, -> { where("summary_email_sent_at IS NULL OR summary_email_sent_at > ?", Expirable.date_for(:interval)) }
 
   # Delegations
   delegate :full_address, to: :venue
@@ -88,7 +89,7 @@ class Event < ApplicationRecord
       new_record = true
     end
 
-    ManagerMailer.with(manager: self.manager, context: self).welcome.deliver_now if new_record
+    ManagerMailer.with(manager: self.manager, context: self).welcome.deliver_now if manager_id_changed?
   end
 
 end

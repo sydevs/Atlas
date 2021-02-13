@@ -36,7 +36,7 @@ class CMS::ManagersController < CMS::ApplicationController
         flash[:success] = translate('cms.messages.manager.success')
         @context.managed_records << ManagedRecord.new(manager: @record, record: @context, assigned_by_id: current_user.id)
         @context.save! validate: false
-        ManagerMailer.with(manager: @record, context: @context).welcome.deliver_now if new_record
+        ManagerMailer.with(manager: @record, context: @context).welcome.deliver_now
         success = true
       end
     elsif !new_record

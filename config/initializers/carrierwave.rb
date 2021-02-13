@@ -1,8 +1,7 @@
 CarrierWave.configure do |config|
-  config.asset_host = "https://#{ENV.fetch('GCLOUD_BUCKET')}" if ENV.fetch('GCLOUD_BUCKET').include?('.')
-
   if ENV['GCLOUD_BUCKET'].present?
     config.storage = :fog
+    config.asset_host = "https://#{ENV.fetch('GCLOUD_BUCKET')}" if ENV['GCLOUD_BUCKET'].include?('.')
 
     config.fog_provider = 'fog/google'
     config.fog_directory = ENV.fetch('GCLOUD_BUCKET')
