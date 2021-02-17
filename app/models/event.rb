@@ -21,6 +21,7 @@ class Event < ApplicationRecord
   accepts_nested_attributes_for :manager
   before_validation :find_manager
   after_save :find_or_create_manager
+  after_save :notify_new_manager
 
   enum category: { intro: 1, intermediate: 2, course: 3, public_event: 4, concert: 5 }
   enum recurrence: { day: 0, monday: 1, tuesday: 2, wednesday: 3, thursday: 4, friday: 5, saturday: 6, sunday: 7 }
@@ -88,8 +89,10 @@ class Event < ApplicationRecord
       new_manager.name = manager.name
       new_manager_record = true
     end
+  end
 
-    ManagerMailer.with(manager: self.manager, context: self).welcome.deliver_now if new_record? || new_manager_record || manager_id_changed?
+  def notify_new_manager
+    ManagerMailer.with(manager: self.manager, context: self).welcome.deliver_now if manager_id_changed?
   end
 
 end
