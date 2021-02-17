@@ -16,7 +16,7 @@ class EventMailer < ApplicationMailer
     end
 
     @registrations = @event.registrations.since(@event.summary_email_sent_at || @event.created_at)
-    @registrations = @event.registrations.limit(10) if params[:test]
+    @registrations = @event.registrations.limit(10) if params[:test] && !@registrations.present?
 
     return if status.nil? || !@registrations.present?
 
