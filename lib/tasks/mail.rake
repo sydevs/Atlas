@@ -10,6 +10,7 @@ namespace :mail do
   desc 'Send event summaries to each event manager.'
   task events: :environment do
     Event.publicly_visible.no_recent_email_sent.in_batches.each_record do |event|
+      puts "[MAIL] Sending summary email to #{event.custom_name || event.venue.street}"
       EventMailer.with(event: event).summary.deliver_now
     end
   end
@@ -17,6 +18,7 @@ namespace :mail do
   desc 'Send a summary email to each manager'
   task managers: :environment do
     Manager.no_recent_email_sent.in_batches.each_record do |manager|
+      puts "[MAIL] Sending summary email to #{manager.name}"
       ManagerMailer.with(manager: manager).summary.deliver_now
     end
   end
