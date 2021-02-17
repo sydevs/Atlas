@@ -70,6 +70,10 @@ module Expirable
     !active?
   end
 
+  def recently_expired?
+    expired? && !archived?
+  end
+
   def archived?
     Time.now >= archives_at
   end
