@@ -34,6 +34,15 @@ namespace :mail do
         Rake::Task["mail:test:#{test}"].invoke
       end
     end
+    
+    desc 'Sends summary to one administrator'
+    task welcome: :environment do
+      ActionMailer::Base.delivery_method = :letter_opener
+      manager = Manager.where(administrator: false).reorder('RANDOM()').first
+      event = Event.reorder('RANDOM()').first
+      puts "Sending mail to #{manager.name}"
+      ManagerMailer.with(manager: manager, context: event, test: true).welcome.deliver_now
+    end
 
     namespace :summary do
       desc 'Sends event summary to one program manager'

@@ -5,8 +5,9 @@
 * <%= @context ? purpose.gsub('%{context}', @context.label) : purpose %>
 <% end %>
 
+<%= render 'mailer/events/card', event: @context, timestamp: :created_at, actions: false if @context.is_a?(Event) %>
+
 <%= message translate('mail.common.about'), :text %>
-<%= render 'mailer/managers/event', event: @context if @context.is_a?(Event) %>
 
 <%= translate('mail.common.actions') %>
 <%= '=' * translate('mail.common.actions').length %>

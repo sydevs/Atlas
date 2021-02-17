@@ -11,12 +11,15 @@ class EventMailer < ApplicationMailer
       @status = 'expired'
     elsif @event.needs_review?(:urgent)
       @status = 'needs_urgent_review'
-    else
+    elsif @event.needs_review?
       @status = 'needs_review'
     end
 
     @registrations = @event.registrations.since(@event.summary_email_sent_at || @event.created_at)
     @registrations = @event.registrations.limit(10) if params[:test]
+
+    return if status.nil? || !@registrations.present?
+
     @edit_event_link = "#{@magic_link}?destination_path=#{url_for([:edit, :cms, @event])}"
     @view_registrations_link = "#{@magic_link}?destination_path=#{url_for([:cms, @event, :registrations])}"
 

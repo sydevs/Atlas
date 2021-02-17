@@ -9,7 +9,7 @@ ul
   - translate("mail.welcome.#{@type}.purposes").each do |purpose|
     li = @context ? purpose.gsub('%{context}', @context.label) : purpose
 
-= render 'mailer/managers/event', event: @context if @context.is_a?(Event)
+= render 'mailer/events/card', event: @context, timestamp: :created_at, actions: false if @context.is_a?(Event)
 
 h2 = translate('mail.common.actions')
 p = translate("mail.welcome.#{@type}.call_to_action")

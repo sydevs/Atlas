@@ -2,7 +2,7 @@
 en:
   mail:
     common:
-      worldwide: "Worldwide"
+      sahaj_atlas: "Sahaj Atlas"
       automated: "This is an automated email. Please use the links in this email to respond, or email %{email} if you need help."
       unsubscribe: "If you don't know why you received this email, or no longer want to receive these emails please write to %{email}."
       actions: "Actions"
@@ -26,11 +26,9 @@ en:
         expires_at: "Will Expire %{date}"
         expired_at: "Expired %{date}"
         view_all: "View all %{count} events"
-      listing:
-        event: "Event"
-        details: "Details"
-        expires_at: "Expires"
-        created_at: "Created"
+        view: "View"
+        edit: "Edit"
+        managed_by: "Managed by %{manager}"
 
     magic_link:
       intro: "You have just requested a login link to manage the Sahaj Atlas. If you did not request this link, you may safely ignore. Otherwise, please use the link below to login."

@@ -1,1 +1,46 @@
-// TODO: Implement text version of this email
+<%= translate('mail.manager_summary.intro', context: "*#{@context.label}*") %>
+
+
+<% if @new_events.present? %>
+<%= translate('mail.manager_summary.new_events.title') %>
+<%= '=' * translate('mail.manager_summary.new_events.title').length %>
+<%= translate('mail.manager_summary.new_events.description', count: @new_events.count) %>
+
+<%= render partial: 'mailer/events/card', collection: @new_events.limit(@limit), as: :event, locals: { timestamp: :created_at } %>
+
+
+<% if @new_events.count > @limit %>
+<%= translate('mail.common.event.view_all', count: @new_events.count) %> - <%= @dashboard_link %>
+<% end %>
+
+<% end %>
+<% if @reviewable_events.present? %>
+<%= translate('mail.manager_summary.review.title') %>
+<%= '=' * translate('mail.manager_summary.review.title').length %>
+<%= translate('mail.manager_summary.review.description', count: @reviewable_events.count) %>
+
+<%= render partial: 'mailer/events/card', collection: @reviewable_events.limit(@limit), as: :event, locals: { timestamp: :created_at } %>
+
+
+<% if @reviewable_events.count > @limit %>
+<%= translate('mail.common.event.view_all', count: @reviewable_events.count) %> - <%= @dashboard_link %>
+<% end %>
+
+<% end %>
+<% if @expired_events.present? %>
+<%= translate('mail.manager_summary.expired.title') %>
+<%= '=' * translate('mail.manager_summary.expired.title').length %>
+<%= translate('mail.manager_summary.expired.description', count: @expired_events.count, expiration_duration: distance_of_time_in_words(Time.now, Expirable::date_for(:expire))) %>
+
+<%= render partial: 'mailer/events/card', collection: @expired_events.limit(@limit), as: :event, locals: { timestamp: :created_at } %>
+
+
+<% if @expired_events.count > @limit %>
+<%= translate('mail.common.event.view_all', count: @expired_events.count) %> - <%= @dashboard_link %>
+<% end %>
+
+<% end %>
+
+<%= message translate('mail.common.about'), :text %>
+
+<%= message translate('mail.common.alert'), :text, :alert %>
