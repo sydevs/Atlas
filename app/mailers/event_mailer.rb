@@ -18,12 +18,13 @@ class EventMailer < ApplicationMailer
     @registrations = @event.registrations.since(@event.summary_email_sent_at || @event.created_at)
     @registrations = @event.registrations.limit(10) if params[:test] && !@registrations.present?
 
-    return if status.nil? || !@registrations.present?
+    return if @status.nil? || !@registrations.present?
 
     @edit_event_link = "#{@magic_link}?destination_path=#{url_for([:edit, :cms, @event])}"
     @view_registrations_link = "#{@magic_link}?destination_path=#{url_for([:cms, @event, :registrations])}"
 
     subject = I18n.translate('mail.event_summary.subject', event: @event.label, date: Date.today.to_s(:short))
+    puts "[MAIL] Sending summary email for #{event.custom_name || event.venue.street} to #{@manager.name}"
     mail(to: @manager.email, subject: subject)
     @event.touch(:summary_email_sent_at) unless params[:test]
   end

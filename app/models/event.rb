@@ -92,7 +92,7 @@ class Event < ApplicationRecord
   end
 
   def notify_new_manager
-    ManagerMailer.with(manager: self.manager, context: self).welcome.deliver_now if manager_id_changed?
+    ManagerMailer.with(manager: self.manager, context: self).welcome.deliver_now if saved_change_to_attribute?(:manager_id)
   end
 
 end

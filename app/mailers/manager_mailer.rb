@@ -10,6 +10,7 @@ class ManagerMailer < ApplicationMailer
     @action_link = "#{@magic_link}?destination_path=#{@context.is_a?(Event) ? url_for([:edit, :cms, @context]) : cms_root_url}"
     @type = @context&.model_name&.i18n_key || 'worldwide'
     subject = I18n.translate('mail.welcome.subject', context: @context&.label)
+    puts "[MAIL] Sending welcome email to #{@manager.name} for #{@context}"
     mail(to: @manager.email, subject: subject)
   end
 
@@ -35,6 +36,7 @@ class ManagerMailer < ApplicationMailer
     @template_link = "#{@magic_link}?destination_path="
 
     subject = I18n.translate('mail.manager_summary.subject', context: @context&.label || I18n.translate('mail.common.sahaj_atlas'), date: Date.today.to_s(:short))
+    puts "[MAIL] Sending summary email to #{@manager.name}"
     mail(to: @manager.email, subject: subject)
     @manager.touch(:summary_email_sent_at) unless params[:test]
   end
