@@ -1,4 +1,4 @@
-<%= translate('mail.manager_summary.intro', context: "*#{@context.label}*") %>
+<%= translate('mail.manager_summary.intro', context: "*#{@context&.label || translate('mail.common.sahaj_atlas')}*") %>
 
 
 <% if @new_events.present? %>

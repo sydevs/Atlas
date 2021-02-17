@@ -1,5 +1,5 @@
 
-p = translate('mail.manager_summary.intro', context: tag.b(@context.label)).html_safe
+p = translate('mail.manager_summary.intro', context: tag.b(@context&.label || translate('mail.common.sahaj_atlas'))).html_safe
 
 - if @new_events.present?
   h2 = translate('mail.manager_summary.new_events.title')
