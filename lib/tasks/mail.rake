@@ -16,7 +16,7 @@ namespace :mail do
 
   desc 'Send a summary email to each manager'
   task managers: :environment do
-    Manager.no_recent_email_sent.in_batches.each_record do |event|
+    Manager.no_recent_email_sent.in_batches.each_record do |manager|
       ManagerMailer.with(manager: manager).summary.deliver_now
     end
   end
