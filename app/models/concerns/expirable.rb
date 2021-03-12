@@ -58,10 +58,6 @@ module Expirable
     expires_at
   end
 
-  def active?
-    Time.now < expires_at
-  end
-
   def updated?
     !expired? && !needs_review?
   end
@@ -74,16 +70,20 @@ module Expirable
     expired? && !archived?
   end
 
+  def active?
+    Time.now < expires_at
+  end
+
   def archived?
     Time.now >= archives_at
   end
 
-  def needs_review? urgency = :any
-    if urgency == :urgent
-      updated_at < Expirable.date_for(:verify)
-    else
-      updated_at < Expirable.date_for(:escalate)
-    end
+  def needs_review?
+    Time.now >= needs_review_at
+  end
+
+  def needs_urgent_review?
+    Time.now >= needs_escalation_at
   end
 
 end

@@ -8,7 +8,7 @@ class EventMailer < ApplicationMailer
 
     if @event.recently_expired?
       @status = 'expired'
-    elsif @event.needs_review?(:urgent)
+    elsif @event.needs_urgent_review?
       @status = 'needs_urgent_review'
     elsif @event.needs_review?
       @status = 'needs_review'
