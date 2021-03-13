@@ -19,7 +19,7 @@ class EventMailer < ApplicationMailer
     @registrations = @event.registrations.since(@event.summary_email_sent_at || @event.created_at)
     @registrations = @event.registrations.limit(10) if params[:test] && !@registrations.present?
 
-    return unless @registrations.present?
+    return unless @registrations.present? || @status.present?
 
     @edit_event_link = "#{@magic_link}?destination_path=#{url_for([:edit, :cms, @event])}"
     @view_registrations_link = "#{@magic_link}?destination_path=#{url_for([:cms, @event, :registrations])}"
