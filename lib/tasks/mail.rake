@@ -11,6 +11,7 @@ namespace :mail do
   task events: :environment do
     events = Event.publicly_visible.no_recent_email_sent
     puts "[MAIL] Attempting to send emails for #{events.count} events"
+    puts "Event status: #{Event.first.pretty_inspect}"
 
     events.in_batches.each_record do |event|
       EventMailer.with(event: event).summary.deliver_now
@@ -21,6 +22,7 @@ namespace :mail do
   task managers: :environment do
     managers = Manager.no_recent_email_sent
     puts "[MAIL] Attempting to send emails to #{managers.count} managers"
+    puts "Manager status: #{Event.first.pretty_inspect}"
 
     managers.in_batches.each_record do |manager|
       ManagerMailer.with(manager: manager).summary.deliver_now
