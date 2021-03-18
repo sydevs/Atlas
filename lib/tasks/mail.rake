@@ -9,14 +9,20 @@ namespace :mail do
 
   desc 'Send event summaries to each event manager.'
   task events: :environment do
-    Event.publicly_visible.no_recent_email_sent.in_batches.each_record do |event|
+    events = Event.publicly_visible.no_recent_email_sent
+    puts "[MAIL] Attempting to send emails for #{events.count} events"
+
+    events.in_batches.each_record do |event|
       EventMailer.with(event: event).summary.deliver_now
     end
   end
 
   desc 'Send a summary email to each manager'
   task managers: :environment do
-    Manager.no_recent_email_sent.in_batches.each_record do |manager|
+    managers = Manager.no_recent_email_sent
+    puts "[MAIL] Attempting to send emails to #{managers.count} managers"
+
+    managers.in_batches.each_record do |manager|
       ManagerMailer.with(manager: manager).summary.deliver_now
     end
   end
