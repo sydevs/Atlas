@@ -29,7 +29,7 @@ class EventMailer < ApplicationMailer
     subject = I18n.translate('mail.event_summary.subject', event: @event.label, date: Date.today.to_s(:short))
     puts "[MAIL] Sending summary email for #{@event.custom_name || @event.venue.street} to #{@manager.name}"
     mail(to: @manager.email, subject: subject)
-    @event.touch(:summary_email_sent_at) unless params[:test]
+    @event.update_column(summary_email_sent_at: Time.now) unless params[:test]
   end
 
   private
