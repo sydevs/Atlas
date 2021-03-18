@@ -2,12 +2,14 @@
 / TODO: Check that this would actually be html safe
 p = translate('mail.event_summary.intro', event: tag.b(@event.label)).html_safe
 
-= render 'mailer/events/card', event: @event, timestamp: :start_date
+= render 'mailer/events/card', event: @event, timestamp: :start_date, actions: false
 
 - if @status.present?
-  h2 = translate("mail.event_summary.status.title.#{@status}")
-  p = translate('mail.event_summary.status.reason', frequency: distance_of_time_in_words(Time.now, Expirable::date_for(:expire)))
+  h2
+    span.alert ⚠ 
+    = translate("mail.event_summary.status.title.#{@status}")
   p = translate("mail.event_summary.status.call_to_action.#{@status}", duration: distance_of_time_in_words(Time.now, @event.expires_at))
+  p = translate('mail.event_summary.status.reason', frequency: distance_of_time_in_words(Time.now, Expirable::date_for(:expire)))
   a.button href=@edit_event_link
     = translate('mail.event_summary.status.action')
 
