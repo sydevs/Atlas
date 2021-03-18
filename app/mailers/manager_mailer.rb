@@ -17,7 +17,6 @@ class ManagerMailer < ApplicationMailer
   def summary
     setup
 
-    @context = @manager.parent
     @new_events = @manager.accessible_events.reorder(:created_at).where('events.created_at > ?', Expirable.date_for(:interval))
     @reviewable_events = @manager.accessible_events.needs_urgent_review
     @expired_events = @manager.accessible_events.recently_expired
@@ -28,8 +27,11 @@ class ManagerMailer < ApplicationMailer
       @expired_events = Event.reorder('RANDOM()').limit(11)
     end
 
+    puts "[MAIL] Check email for #{@manager}: new events? #{@new_events.present?}, review? #{@reviewable_events.present?}, expiration? #{@expired_events.present?}"
     return unless @new_events.present? || @reviewable_events.present? || @expired_events.present?
+    puts "[MAIL] Sending email"
 
+    @context = @manager.parent
     @limit = 5
 
     @dashboard_link = "#{@magic_link}?destination_path=#{cms_review_url}"
