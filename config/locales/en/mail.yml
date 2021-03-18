@@ -82,7 +82,7 @@ en:
           expired: "Status: Expired!"
         reason: "We don't want visitors to see classes which are no longer active. In order to ensure that the map stays up to date, we automatically remove events which are not updated every %{frequency}."
         call_to_action:
-          needs_review: "This event has has not been updated since %{date}. Please click on the button below to review the details "
+          needs_review: "This event has has not been updated for %{duration}. Please click on the button below to review the details "
           expired: "This event has been removed from the map because it has not been updated for %{duration}. If you wish to have it republished, you must review and update the event."
         action: "Review Event"
       registrations:
