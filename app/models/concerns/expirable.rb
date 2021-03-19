@@ -5,7 +5,7 @@ module Expirable
   TEST_MODE = true
 
   BASE_DURATION = TEST_MODE ? 10 : 8
-  DURATION_INCREMENT = TEST_MODE ? 10 : 1
+  DURATION_INCREMENT = TEST_MODE ? 15 : 1
 
   LEVELS = {
     verify: 0,
