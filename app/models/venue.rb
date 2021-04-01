@@ -23,7 +23,7 @@ class Venue < ApplicationRecord
 
   # Scopes
   scope :publicly_visible, -> { published.has_events }
-  scope :has_events, -> { joins(:events).where('events.published IS true AND events.updated_at > ? AND (end_date IS NULL OR end_date >= ?)', Expirable.expire_date, DateTime.now - 1.day) }
+  scope :has_events, -> { joins(:events).where('events.published IS true AND events.updated_at > ? AND (end_date IS NULL OR end_date >= ?)', Expirable.date_for(:expire), DateTime.now - 1.day) }
   scope :has_offline_events, -> { has_events.where(events: { online: false }) }
   scope :has_online_events, -> { has_events.where(events: { online: true }) }
 
