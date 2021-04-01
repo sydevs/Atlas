@@ -8,8 +8,8 @@ p = translate('mail.event_summary.intro', event: tag.b(@event.label)).html_safe
   h2
     span.alert ⚠ 
     = translate("mail.event_summary.status.title.#{@status}")
-  p = translate("mail.event_summary.status.call_to_action.#{@status}", duration: distance_of_time_in_words(Time.now, @event.expires_at))
-  p = translate('mail.event_summary.status.reason', frequency: distance_of_time_in_words(Time.now, Expirable::date_for(:expire)))
+  p = translate("mail.event_summary.status.call_to_action.#{@status}", duration: distance_of_time_in_words(Time.now, @event.updated_at))
+  p = translate('mail.event_summary.status.reason', frequency: distance_of_time_in_words(Time.now, Expirable::date_for(:expire)), duration: distance_of_time_in_words(Time.now, @event.expires_at))
   a.button href=@edit_event_link
     = translate('mail.event_summary.status.action')
 

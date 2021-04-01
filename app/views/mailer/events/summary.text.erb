@@ -7,8 +7,8 @@
 <% if @status.present? %>
 <%= translate("mail.event_summary.status.title.#{@status}") %>
 <%= '=' * translate("mail.event_summary.status.title.#{@status}").length %>
-<%= translate("mail.event_summary.status.call_to_action.#{@status}", duration: distance_of_time_in_words(Time.now, @event.expires_at)) %>
-<%= translate('mail.event_summary.status.reason') %>
+<%= translate("mail.event_summary.status.call_to_action.#{@status}", duration: distance_of_time_in_words(Time.now, @event.updated_at)) %>
+<%= translate('mail.event_summary.status.reason', frequency: distance_of_time_in_words(Time.now, Expirable::date_for(:expire)), duration: distance_of_time_in_words(Time.now, @event.expires_at)) %>
 
 <%= translate('mail.event_summary.status.action') %> - <%= @edit_event_link %>
 

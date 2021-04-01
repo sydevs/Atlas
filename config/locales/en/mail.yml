@@ -81,7 +81,7 @@ en:
           needs_review: "Needs Review"
           needs_urgent_review: "Needs Urgent Review!"
           expired: "Expired!"
-        reason: "We don't want visitors to see classes which are no longer active. In order to ensure that the map stays up to date, we automatically remove events which are not updated every %{frequency}."
+        reason: "We don't want visitors to see classes which are no longer active. In order to ensure that the map stays up to date, we automatically remove events which are not updated every %{frequency}. This event will be removed if it is not updated within %{duration}."
         call_to_action:
           needs_urgent_review: "This event has has not been updated for %{duration}. It will be removed from the map if it is not updated soon. Please click on the button below to review the details."
           needs_review: "This event has has not been updated for %{duration}. Please click on the button below to review the details."
