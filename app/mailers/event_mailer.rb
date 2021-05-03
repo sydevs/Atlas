@@ -23,6 +23,7 @@ class EventMailer < ApplicationMailer
     return unless @registrations.present? || @status.present?
     puts "[MAIL] Sending email"
 
+    @magic_link = send(Passwordless.mounted_as).token_sign_in_url(session.token)
     @edit_event_link = "#{@magic_link}?destination_path=#{url_for([:edit, :cms, @event])}"
     @view_registrations_link = "#{@magic_link}?destination_path=#{url_for([:cms, @event, :registrations])}"
 
@@ -44,8 +45,6 @@ class EventMailer < ApplicationMailer
         remote_addr: 'unknown',
       })
       session.save!
-
-      @magic_link = send(Passwordless.mounted_as).token_sign_in_url(session.token)
     end
 
 end

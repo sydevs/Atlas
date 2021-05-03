@@ -7,6 +7,7 @@ class ManagerMailer < ApplicationMailer
     setup
     
     @context = params[:context]
+    @magic_link = send(Passwordless.mounted_as).token_sign_in_url(session.token)
     @action_link = "#{@magic_link}?destination_path=#{@context.is_a?(Event) ? url_for([:edit, :cms, @context]) : cms_root_url}"
     @type = @context&.model_name&.i18n_key || 'worldwide'
     subject = I18n.translate('mail.welcome.subject', context: @context&.label)
@@ -34,6 +35,7 @@ class ManagerMailer < ApplicationMailer
     @context = @manager.parent
     @limit = 5
 
+    @magic_link = send(Passwordless.mounted_as).token_sign_in_url(session.token)
     @dashboard_link = "#{@magic_link}?destination_path=#{cms_review_url}"
     @template_link = "#{@magic_link}?destination_path="
 
@@ -54,7 +56,6 @@ class ManagerMailer < ApplicationMailer
         remote_addr: 'unknown',
       })
       session.save!
-      @magic_link = send(Passwordless.mounted_as).token_sign_in_url(session.token)
     end
 
 end

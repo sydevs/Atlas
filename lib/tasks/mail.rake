@@ -5,6 +5,12 @@ namespace :mail do
       puts "[MAIL] Run task mail:#{key}"
       Rake::Task["mail:#{key}"].invoke
     end
+
+    Rake::Task['mail:cleanup'].invoke
+  end
+
+  task cleanup: :environment do
+    Passwordless::Session.where("expires_at < ?", 1.day.ago).delete_all
   end
 
   desc 'Send event summaries to each event manager.'
