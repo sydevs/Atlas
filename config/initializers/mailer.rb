@@ -7,7 +7,8 @@ Rails.application.configure do
     password: ENV['SMTP_PASSWORD'],
     domain: 'sydevelopers.com',
     authentication: :plain,
-    enable_starttls_auto: true,
+    # enable_starttls_auto: true,
+    ssl: true,
   }
 
   config.action_mailer.perform_deliveries = true
