@@ -2,13 +2,12 @@ Rails.application.configure do
   ActionMailer::Base.delivery_method = :smtp
   ActionMailer::Base.smtp_settings = {
     address: 'smtp.gmail.com',
-    port: 465,
+    port: 587,
     user_name: ENV['SMTP_EMAIL'],
     password: ENV['SMTP_PASSWORD'],
     domain: 'sydevelopers.com',
     authentication: :plain,
-    # enable_starttls_auto: true,
-    ssl: true,
+    enable_starttls_auto: true,
   }
 
   config.action_mailer.perform_deliveries = true
