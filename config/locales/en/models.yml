@@ -124,8 +124,9 @@ en:
 
       event:
         published: :activerecord.attributes.generic.published # Do not translate
-        custom_name: "Custom Event Name (Optional)"
         manager_id: :activerecord.models.manager.single # Do not translate
+        name: :activerecord.attributes.generic.name # Do not translate
+        custom_name: "Custom Event Name (Optional)"
         category: "Category"
         categories:
           intro: "Intro Meditation Class"
@@ -173,6 +174,8 @@ en:
         online: "Online Class"
         online_url: "Online Meeting Link"
         language: "Language"
+        expires_at: "Expires In"
+        expired_at: "Expired At"
         images: :activerecord.models.picture.plural # Do not translate
         venue_id: :activerecord.models.manager.single # Do not translate
 

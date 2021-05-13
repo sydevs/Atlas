@@ -50,6 +50,7 @@ en:
         help: "Help"
         regions: "Regions"
         review: "Review Alerts"
+        dashboard: "Dashboard"
 
     messages:
       errors: "Errors"
@@ -165,15 +166,15 @@ en:
         parent: "This %{resource} is currently hidden from the public, because its %{parent} is not published."
       create_event:
         title: "Wondering how to create a public program?"
-        description: "Navigate to a venue page first, in the \"%{action}\" tab."
+        description: "Choose a venue on the \"%{action}\" tab."
         action: "Go now"
       create_province_manager:
         title: "Wondering how to create a regional manager?"
-        description: "Navigate to a region page first, in the \"%{action}\" tab."
+        description: "Choose a province, state or county on the \"%{action}\" tab."
         action: "Go now"
       create_city_manager:
         title: "Wondering how to create a city manager?"
-        description: "Navigate to a city page first, in the \"%{action}\" tab."
+        description: "Choose a city page on the \"%{action}\" tab."
         action: "Go now"
 
     images:
@@ -197,6 +198,7 @@ en:
     dashboard:
       role:
         intro: "You are a %{role}"
+        learn_more: "Learn more."
         worldwide:
           title: "Global Administrator"
           description: "Can manage all atlas content and managers."
@@ -204,7 +206,7 @@ en:
         country:
           title: "Country Manager"
           description: "Can create regions, venues, events and assign managers within %{region}"
-          instruction: "It's your responsibility to create regions within your country and assign managers to those regions to set up events. You may also create venues and events directly yourself."
+          instruction: "It's your responsibility to create regions within your country and assign managers to those regions to set up events. You may also create venues and events within your country."
         local:
           title: "Local Manager"
           description: "Can create venues and events within %{region}"
@@ -219,28 +221,32 @@ en:
           instruction: "You don't have access to any part of the website. If you believe this is a mistake, please contact the manager for your local area."
       resources:
         title: "My Responsibilities"
+        subtitle: "Regions or events where you are a direct manager."
         description: "These are the events or regions that you are directly responsible for."
       alerts:
-        title: "Alerts"
+        title: "Expiring Events"
+        subtitle: "These events need to be checked to ensure they are still accurate."
+        all_good: "All events are up to date."
         empty: "No alerts right now, keep up the good work!"
+        expires_at: "Expires in %{time}"
+        expired_at: "Expired %{time} ago"
         review:
-          title: "Events need review"
-          alt_title: "Soon to Expire Events"
+          title: "Soon to expire events"
           description: "Several published events have not been updated in a few months. Please check that the event details are still correct, and save the event so that we know that it is still accurate. Otherwise it will be removed from the map."
         expired:
-          title: "Some events have expired"
-          alt_title: "Recently Expired Events"
+          title: "Expired events"
           description: "Several published events are hidden from the map because they have not been verified recently. Please check and resave these events to re-enable them."
           other:
             one: "There is %{count} older expired event in the system."
             other: "There are %{count} older expired events in the system."
         archived:
-          title: "Archived Events"
-          alt_title: :cms.dashboard.alerts.archived.title # Do not translate
+          title: "Archived events"
           description:
             one: "%{count} event has been expired for a long time and has been archived. It will not show on the map unless it is reviewed and updated."
             other: "%{count} events have been expired for a long time and have been archived. They will not show on the map unless they are reviewed and updated."
-          view_all: "View All Expired Events"
+          view_all:
+            one: "View %{count} archived event"
+            other: "View %{count} archived events"
 
       help:
         title: "How do I use this site?"

@@ -14,4 +14,4 @@ h3.ui.small.dividing.grey.header = translate('cms.details.details_for_record', r
     i.sitemap.icon
     .content
       .header = translate('cms.details.event_coverage.title')
-      .description = translate('cms.details.event_coverage.description', events: translate_model_count(@record.events), venues: translate_model_count(@record.venues))
+      .description = translate('cms.details.event_coverage.description', events: translate_model_count(@record.events.publicly_visible), venues: translate_model_count(@record.venues.publicly_visible))

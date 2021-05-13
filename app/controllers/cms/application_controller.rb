@@ -39,9 +39,9 @@ class CMS::ApplicationController < ActionController::Base
 
   def review
     authorize current_user, :dashboard?
-    @events_for_review = current_user.accessible_events.not_finished.needs_review
-    @events_expired = current_user.accessible_events.not_finished.recently_expired
-    @events_archived = current_user.accessible_events.not_finished.archived
+    @events_for_review = current_user.accessible_events.not_finished.needs_review.order(updated_at: :desc)
+    @events_expired = current_user.accessible_events.not_finished.recently_expired.order(updated_at: :desc)
+    @events_archived = current_user.accessible_events.not_finished.archived.order(updated_at: :desc)
   end
 
   def index
