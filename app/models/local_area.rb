@@ -33,8 +33,12 @@ class LocalArea < ApplicationRecord
     province || country || nil
   end
 
+  def flexible_radius
+    radius * 1.2
+  end
+
   def contains? venue
-    distance_to(venue) <= radius
+    distance_to(venue) <= flexible_radius
   end
 
   def managed_by? manager, super_manager: nil
@@ -54,7 +58,7 @@ class LocalArea < ApplicationRecord
     def ensure_venue_consistency
       return unless (previous_changes.keys & %w[radius latitude longitude province_code country_code]).present?
 
-      venues = Venue.select('id, latitude, longitude').within(radius, origin: self)
+      venues = Venue.select('id, latitude, longitude').within(flexible_radius, origin: self)
       venues = venues.where(country_code: country_code) if country_code?
       venues = venues.where(province: province_code) if province_code?
       self.venues = venues

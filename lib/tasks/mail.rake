@@ -40,7 +40,7 @@ namespace :mail do
     task all: :environment do
       # welcome:event welcome:worldwide
       %w[
-        summary:event summary:manager
+        welcome summary:event summary:manager
       ].each_with_index do |test, index|
         puts "Press enter to proceed to the next test (mail:#{test})" unless index.zero?
         STDIN.gets unless index.zero?

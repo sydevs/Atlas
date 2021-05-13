@@ -38,7 +38,6 @@ h1.ui.header = translate('cms.menu.faq')
     = translate('cms.help.registration.title')
   .content class=active_accordion?(:registration)
     p = translate('cms.help.registration.description.introduction')
-    p = translate('cms.help.registration.description.benefit')
     .ui.list
       - %w[accessibility reminders marketing].each do |benefit|
         .item

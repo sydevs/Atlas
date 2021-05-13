@@ -202,7 +202,7 @@ en:
         worldwide:
           title: "Global Administrator"
           description: "Can manage all atlas content and managers."
-          instruction: "You have access to all aspects of the atlas CMS (Content Management System). It is your responsibility to create new country-level managers and help them learn to use the system."
+          instruction: "You have access to all aspects of the atlas CMS (Content Management System). It is your job to create new country managers and help them learn to use the system."
         country:
           title: "Country Manager"
           description: "Can create regions, venues, events and assign managers within %{region}"
@@ -250,8 +250,8 @@ en:
 
       help:
         title: "How do I use this site?"
-        description: "You are currently viewing the Content Management System (CMS) for the Sahaj Atlas. We have created a video and some explanations to help you understand how to use this CMS."
-        action: "Learn how to use"
+        description: "You are currently viewing the Content Management System (CMS) for the Sahaj Atlas. We have recorded a video tutorial to help you get started. Email us if you need help (contact@sydevelopers.com)."
+        action: "Watch tutorial video"
 
     help:
       guide: "How do I use Sahaj Atlas?"
@@ -287,13 +287,12 @@ en:
       registration:
         title: "Why should seekers register on Sahaj Atlas?"
         description:
-          introduction: "The Sahaj Atlas supports having seekers register on Meetup, Eventbrite, Facebook or other services in order to make it easier for local yogis to make the atlas work with their current methods."
-          benefit: "However, there are several benefits to having seekers register directly on the Sahaj Atlas instead of other services."
+          introduction: "Even though we support having seeker register on external websites (Meetup, Eventbrite, Facebook, etc), there are everal benefitss to having seekers register directy on the Sahaj Atlas."
         benefits:
           accessibility:
             icon: universal access # Do not translate
             title: "Accessibility"
-            description: "While many people have Facebook and Meetup accounts, many do not. Increasingly younger people reject facebook, and Meetup is less popular amongst older people. Registering on Sahaj Atlas doesn't require any account and the seeker doesn't have to navigate to another website. This makes is easier and more likely for them to register."
+            description: "Many people do not have Facebook or Meetup accounts. Facebook's popularity has sharply declined with younger generations and Meetup is less popular with elders. Registering directly on Sahaj Atlas is easier and doesn't require an account - making it more likely for seekers to register."
           reminders:
             icon: bell # Do not translate
             title: "Automatic Reminders"
@@ -301,7 +300,7 @@ en:
           marketing:
             icon: envelope # Do not translate
             title: "Future Marketing"
-            description: "When seekers register on Sahaj Atlas we can store their email address (and we are not subject to the rules of Meetup, Eventbrite, or Facebook). This means we can use these email addresses to send follow-up materials, or recommend special Sahaj events in their area (eg. concerts or intermediate programs)."
+            description: "When seekers register on Sahaj Atlas we can store their email address (without the restrictions of Meetup, Eventbrite, or Facebook). This means we can use these email addresses to send follow-up materials, or recommend special Sahaj events in their area (eg. concerts or intermediate programs)."
       contact:
         title: "I have other questions or suggestions"
         description: "If you need further help, or if you want to help with the development of the Sahaj Atlas, please write to the email below. Please write your message in english."

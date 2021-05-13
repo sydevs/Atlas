@@ -38,13 +38,6 @@ class EventMailer < ApplicationMailer
     def setup
       @event = params[:event]
       @manager = @event.manager
-
-      session = Passwordless::Session.new({
-        authenticatable: @manager,
-        user_agent: 'Command Line',
-        remote_addr: 'unknown',
-      })
-      session.save!
     end
 
 end
