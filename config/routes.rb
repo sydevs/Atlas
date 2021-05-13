@@ -13,6 +13,18 @@ Rails.application.routes.draw do
     get :statistics, to: 'application#statistics'
   end
 
+  namespace :mail do
+    resources :managers, only: %i[] do
+      get :welcome
+      get :summary
+    end
+
+    resources :events, only: %i[] do
+      get :status
+      get :reminder
+    end
+  end
+
   namespace :map do
     root to: 'application#show'
     get '/event/:event_id', to: 'application#show', as: :event

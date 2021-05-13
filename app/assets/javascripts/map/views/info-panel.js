@@ -59,7 +59,7 @@ class InfoPanel {
       linkElement.href = event.registrationUrl
     } else {
       this.form.classList.remove('registration--external')
-      Application.timingCarousel.setTimings(event, event.timing.upcoming)
+      Application.timingCarousel.setTimings(event, event.timing.upcoming) // TODO: Is this correct? No other references to `upcoming` in codebase
     }
   }
 

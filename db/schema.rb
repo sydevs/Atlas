@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_13_180215) do
+ActiveRecord::Schema.define(version: 2021_05_13_225803) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -78,6 +78,7 @@ ActiveRecord::Schema.define(version: 2021_02_13_180215) do
     t.boolean "online", default: false, null: false
     t.string "online_url"
     t.datetime "summary_email_sent_at"
+    t.datetime "reminder_emails_sent_at"
     t.index ["manager_id"], name: "index_events_on_manager_id"
     t.index ["venue_id"], name: "index_events_on_venue_id"
   end

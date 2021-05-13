@@ -6,7 +6,7 @@ class Event < ApplicationRecord
 
   nilify_blanks
   searchable_columns %w[name description]
-  audited except: %i[summary_email_sent_at latest_registration_at]
+  audited except: %i[summary_email_sent_at upcoming_email_sent_at latest_registration_at]
 
   # Associations
   belongs_to :venue
@@ -93,6 +93,14 @@ class Event < ApplicationRecord
 
   def notify_new_manager
     ManagerMailer.with(manager: self.manager, context: self).welcome.deliver_now if saved_change_to_attribute?(:manager_id)
+  end
+
+  def next_recurrence_at
+    start_date
+  end
+
+  def label
+    custom_name || venue.street
   end
 
 end

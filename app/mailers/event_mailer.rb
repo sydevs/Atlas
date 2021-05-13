@@ -1,36 +1,33 @@
 class EventMailer < ApplicationMailer
 
-  default template_path: 'mailer/events'
-  layout 'mailer/admin'
+  default template_path: 'mail/events'
+  layout 'mail/admin'
 
-  def summary
+  def status
     setup
+    return if status.nil?
 
-    if @event.recently_expired?
-      @status = 'expired'
-    elsif @event.needs_urgent_review?
-      @status = 'needs_urgent_review'
-    elsif @event.needs_review?
-      @status = 'needs_review'
-    else
-      return
+    puts "[MAIL] Sending status email for #{@event.label} to #{@manager.name}"
+    subject = I18n.translate(@status, scope: 'mail.event.status.title')
+    parameters = { to: @manager.email, subject: subject }
+    if status == :needs_urgent_review
+      parameters['Importance'] = 'high'
+      parameters['X-Priority'] = '1'
     end
 
-    @registrations = @event.registrations.since(@event.summary_email_sent_at || @event.created_at)
-    @registrations = @event.registrations.limit(10) if params[:test] && !@registrations.present?
-
-    puts "[MAIL] Check email for #{@event}: registrations? #{@registrations.present?}, status? #{@status.present?}"
-    return unless @registrations.present? || @status.present?
-    puts "[MAIL] Sending email"
-
-    @magic_link = send(Passwordless.mounted_as).token_sign_in_url(session.token)
-    @edit_event_link = "#{@magic_link}?destination_path=#{url_for([:edit, :cms, @event])}"
-    @view_registrations_link = "#{@magic_link}?destination_path=#{url_for([:cms, @event, :registrations])}"
-
-    subject = I18n.translate('mail.event_summary.subject', event: @event.label, date: Date.today.to_s(:short))
-    puts "[MAIL] Sending summary email for #{@event.custom_name || @event.venue.street} to #{@manager.name}"
-    mail(to: @manager.email, subject: subject)
+    mail(parameters)
     @event.update_column(:summary_email_sent_at, Time.now) unless params[:test]
+  end
+
+  def reminder
+    setup
+
+    puts "[MAIL] Sending reminder email for #{@event.label} to #{@manager.name}"
+    @registrations = @event.registrations.since(@event.reminder_emails_sent_at || @event.created_at)
+    @registrations = @event.registrations.limit(10) if params[:test] && @registrations.empty?
+    subject = I18n.translate('mail.event.reminder.subject')
+    mail(to: @manager.email, subject: subject)
+    @event.update_column(:reminder_emails_sent_at, Time.now) unless params[:test]
   end
 
   private
@@ -38,6 +35,18 @@ class EventMailer < ApplicationMailer
     def setup
       @event = params[:event]
       @manager = @event.manager
+
+      if @event.expired?
+        @status = :expired
+      elsif @event.needs_urgent_review?
+        @status = :needs_urgent_review
+      elsif @event.needs_review?
+        @status = :needs_review
+      elsif @event.created_at > 1.week.ago
+        @status = :created
+      else
+        @status = nil
+      end
     end
 
 end

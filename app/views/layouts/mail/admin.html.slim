@@ -1,0 +1,24 @@
+doctype html
+
+html
+  head
+    title = @subject || message&.subject
+    meta http-equiv='Content-Type' content='text/html; charset=utf-8'
+    link rel='stylesheet' href='//fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic'
+    = stylesheet_link_tag 'mail', media: 'all'
+  body
+    h1
+      = inline_svg('logo.svg', class: 'logo')
+      = translate('mail.layout.sahaj_atlas').upcase
+    = yield
+    ul.information
+      - translate('mail.layout.information').each do |key, text|
+        li
+          strong = text[:title]
+          = text[:description]
+          '  
+          - if key == :atlas
+            = link_to translate('mail.layout.learn_more'), info_about_url
+          - elsif key == :automated
+            = mail_to 'contact@sydevelopers.com'
+

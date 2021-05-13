@@ -2,9 +2,9 @@ class ApplicationMailer < ActionMailer::Base
 
   helper Mail::ApplicationHelper
   helper LocalizationHelper
-  layout 'mailer/public'
-  default template_path: 'mailer'
-  default from: 'contact@sydevelopers.com'
+  layout 'mail/public'
+  default template_path: 'mail'
+  default from: 'Sahaj Atlas <contact@sydevelopers.com>'
 
   def session
     @session ||= begin

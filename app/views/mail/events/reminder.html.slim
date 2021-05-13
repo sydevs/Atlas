@@ -1,0 +1,46 @@
+
+h2
+  = @event.label
+  small Upcoming Event
+
+p.explanation
+  = translate('mail.event.reminder.explanation', time: @event.start_time)
+
+table.event
+  tr
+    th = translate('mail.event.next_date')
+    td = @event.next_recurrence_at.to_s(:long)
+  tr
+    th = translate('mail.event.location')
+    td = @event.address
+  tr
+    th = translate('mail.event.timing')
+    td
+      = @event.recurrence_in_words
+      ' , 
+      = @event.formatted_start_end_time
+  tr
+    th = translate('mail.event.manager')
+    td
+      - manager = @event.manager
+      = mail_to manager.email, manager.name
+
+.byline = translate('mail.event.reminder.title', count: @registrations.count, date: @event.next_recurrence_at.to_date.to_s(:short))
+
+table.registrations
+  - @registrations.limit(10).each do |registration|
+    tr
+      th = mail_to registration.email, registration.name
+      td
+        = registration.created_at.to_s(:short)
+        - if registration.comment.present?
+          a href=email_login(cms_event_registrations_url(@event, anchor: registration.id, show: registration.id))
+            = inline_svg 'mail/comment.svg'
+  - if @registrations.count > 10
+    tr.footer
+      td colspan=2
+        = translate('mail.event.reminder.not_shown', count: @registrations.count - 10)
+        '  
+        = link_to translate('mail.event.reminder.view_all'), email_login(cms_event_registrations_url(@event))
+
+hr

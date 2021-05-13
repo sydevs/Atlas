@@ -2,7 +2,7 @@ module Expirable
 
   extend ActiveSupport::Concern
 
-  TEST_MODE = true
+  TEST_MODE = false
 
   BASE_DURATION = TEST_MODE ? 5 : 8
   DURATION_INCREMENT = TEST_MODE ? 7 : 1
@@ -79,11 +79,11 @@ module Expirable
   end
 
   def needs_review?
-    Time.now >= needs_review_at
+    !expired? && Time.now >= needs_review_at
   end
 
   def needs_urgent_review?
-    Time.now >= needs_escalation_at
+    !expired? && Time.now >= needs_escalation_at
   end
 
 end

@@ -1,11 +1,11 @@
 
-.title
+.title id=registration.id class=("active" if params[:show].to_i == registration.id)
   - if registration.comment
     .right.floated.content
       i.comment.icon
   i.dropdown.icon
   = registration.label
-.content
+.content class=("active" if params[:show].to_i == registration.id)
   .ui.list
     .item
       i.comment.icon

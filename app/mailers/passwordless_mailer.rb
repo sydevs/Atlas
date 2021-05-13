@@ -1,5 +1,5 @@
 class PasswordlessMailer < ApplicationMailer
 
-  layout 'mailer/public'
+  layout 'mail/public'
 
 end
