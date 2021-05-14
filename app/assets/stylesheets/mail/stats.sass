@@ -1,0 +1,23 @@
+@import '_mixins'
+
+table.stats
+  margin: 40px auto
+  text-align: center
+
+  td
+    width: 120px
+
+  svg
+    width: 30px
+    height: 30px
+
+  .stat
+    font-size: 24px
+
+  .change
+    font-size: 16px
+    line-height: 1
+    color: $positive-color
+
+    &.negative
+      color: $negative-color

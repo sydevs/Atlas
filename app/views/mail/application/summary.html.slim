@@ -1,0 +1,44 @@
+
+h2
+  = translate('mail.summary.title')
+  small = @start_of_month.to_s(:month_and_year)
+
+table.stats
+  tr
+    - @stats.each do |key, value|
+      - diff = percent_difference(value, @old_stats[key])
+      td
+        = inline_svg "mail/#{Mail::ApplicationHelper::STAT_ICONS[key]}.svg"
+        .label = translate(key, scope: 'mail.summary.stats')
+        .stat = value
+        - unless diff.zero?
+          .change class=("negative" if diff.negative?)
+            | (#{'+' if diff.positive?}#{diff}%)
+
+table.data
+  - if @new_countries.present?
+    tr
+      th = translate('mail.summary.data.new_countries')
+      td
+        - @new_countries.each do |country|
+          div
+            = link_to CountryDecorator.get_label(country.country_code), email_login(cms_country_url(country))
+  - if @new_country_managers.present?
+    tr
+      th = translate('mail.summary.data.new_managers')
+      td
+        - @new_country_managers.each do |managed_record|
+          - manager = managed_record.manager
+          div
+            = link_to manager.name, email_login(cms_manager_url(manager))
+            |  (#{CountryDecorator.get_short_label(managed_record.record.country_code)})
+  - if @new_access_keys.present?
+    tr
+      th = translate('mail.summary.data.new_access_keys')
+      td
+        - @new_access_keys.each do |access_key|
+          div = link_to access_key.label, email_login(cms_access_key_url(access_key))
+
+.actions
+  a.button href=info_statistics_url
+    span = translate('mail.summary.view_statistics')

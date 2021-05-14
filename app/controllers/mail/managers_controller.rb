@@ -1,13 +1,9 @@
 class Mail::ManagersController < Mail::ApplicationController
 
-  before_action :fetch_manager
+  before_action :fetch_manager, only: %i[welcome]
 
   def welcome
     @subject = I18n.translate('mail.manager.welcome.title')
-  end
-
-  def summary
-    @registrations = @event.registrations.first(10)
   end
 
   private

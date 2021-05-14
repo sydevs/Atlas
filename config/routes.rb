@@ -14,11 +14,11 @@ Rails.application.routes.draw do
   end
 
   namespace :mail do
+    get :summary, to: 'application#summary'
+
     resources :managers, only: %i[] do
       get :welcome
-      get :summary
       get :welcome, on: :collection
-      get :summary, on: :collection
     end
 
     resources :events, only: %i[] do

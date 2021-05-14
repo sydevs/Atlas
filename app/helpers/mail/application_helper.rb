@@ -16,6 +16,16 @@ module Mail::ApplicationHelper
     finished: '#1e5b82',
   }.freeze
 
+  STAT_ICONS = {
+    new_registrations: 'registration',
+    active_events: 'verified',
+    active_countries: 'country',
+    expired_events: 'expired',
+    events: 'event',
+    managers: 'manager',
+    locations: 'location',
+  }
+
   def email_image_tag(image, **options)
     if defined?(attachments)
       attachments[image] = File.read(Rails.root.join("app/assets/images/#{image}"))
@@ -36,6 +46,18 @@ module Mail::ApplicationHelper
           inline_svg "mail/#{STATUS_ICONS[status]}.svg"
         end
       end
+    end
+  end
+
+  def percent_difference(val, old_val)
+    if val == old_val
+      diff = 0
+    elsif val.zero?
+      diff = -100
+    elsif old_val.zero?
+      diff = +100
+    else
+      diff = (val.to_f / old_val.to_f * 100).to_i - 100
     end
   end
 

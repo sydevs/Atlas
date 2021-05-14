@@ -49,3 +49,4 @@ module Atlas
 end
 
 Date::DATE_FORMATS[:short] = '%b %e'
+Date::DATE_FORMATS[:month_and_year] = '%B %Y'
