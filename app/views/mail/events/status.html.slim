@@ -7,10 +7,12 @@ ruby:
     finished: :end_date
   }[@status])
 
+- content_for :preview, translate(@status, scope: 'mail.event.status.preview', event: @event.label, duration: time_ago_in_words(@event.updated_at), region: @event.venue.parent.label)
+
 .box
   h2
     = translate(@status, scope: 'mail.event.status.title')
-    small = @event.custom_name || @event.venue.street
+    small = @event.label
 
 = email_status_icon(@status)
 

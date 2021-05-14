@@ -1,4 +1,6 @@
 
+- content_for :preview, translate(@status, scope: 'mail.event.status.preview', event: @event.label, count: @registrations.count)
+
 h2
   = @event.label
   small = translate('mail.event.reminder.title')

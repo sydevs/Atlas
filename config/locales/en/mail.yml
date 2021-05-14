@@ -61,6 +61,12 @@ en:
           needs_urgent_review: "[Warning] Event Will Expire Soon"
           expired: "Event Expired"
           finished: "Event Finished"
+        preview:
+          created: "You are the manager of a new event. \"%{event}\" has been created in %{region}."
+          needs_review: "Please check that your event is still up to date. \"%{event}\" needs to be reviewed or else it will be removed from the map."
+          needs_urgent_review: "You must urgently verify that your event is up to date. \"%{event}\" will be removed from the map unless it is updated soon."
+          expired: "Your event has not been updated in %{duration}, and has been removed from the map. Update \"%{event}\" to make it public again."
+          finished: "Your event has concluded as scheduled. The final class for \"%{event}\" is over. The event is now hidden."
         title:
           created: "New Event Created"
           needs_review: "Event Needs Review"
@@ -83,6 +89,9 @@ en:
       reminder:
         subject: "[Reminder] Upcoming Event"
         title: "Upcoming Event"
+        preview:
+          one: "Your event, \"%{event}\", is %{days} from now at %{time}. %{count} new registration."
+          other: "Your event, \"%{event}\", is %{days} from now at %{time}. %{count} new registrations."
         explanation: "Your event is happening %{days} from now at %{time}."
         byline:
           zero: "No New Registrations"
