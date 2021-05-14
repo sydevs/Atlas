@@ -14,10 +14,10 @@ html
     ul.information
       - translate('mail.layout.information').each do |key, text|
         li
-          strong = text[:title]
+          .title = text[:title]
           = text[:description]
           '  
-          - if key == :atlas
+          - if key == :atlas && defined?(info_about_url)
             = link_to translate('mail.layout.learn_more'), info_about_url
           - elsif key == :automated
             = mail_to 'contact@sydevelopers.com'

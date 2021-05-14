@@ -14,6 +14,11 @@ en:
           title: "Automated email / Unsubscribe"
           description: "If you don't know why you receive this email, no longer want to receive these emails, or have any questions: please write to"
 
+    login:
+      title: "Login to Sahaj Atlas"
+      action: "Login"
+      explanation: "or copy this url to your browser"
+
     summary:
       subject: "Monthly Summary of Sahaj Atlas"
       title: "Monthly Update"

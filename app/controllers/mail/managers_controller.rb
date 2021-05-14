@@ -1,16 +1,17 @@
 class Mail::ManagersController < Mail::ApplicationController
 
-  before_action :fetch_manager, only: %i[welcome]
+  before_action :fetch_manager
+
+  def login
+    @magic_link = cms_root_url
+    render 'mail/magic_link'
+  end
 
   def welcome
     @subject = I18n.translate('mail.manager.welcome.title')
   end
 
   private
-
-    def current_user
-      @current_user ||= authenticate_by_session(Manager)
-    end
 
     def fetch_manager
       if params[:manager_id]

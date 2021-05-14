@@ -2,7 +2,7 @@ class ApplicationMailer < ActionMailer::Base
 
   helper Mail::ApplicationHelper
   helper LocalizationHelper
-  layout 'mail/public'
+  layout 'mail/admin'
   default template_path: 'mail'
   default from: 'Sahaj Atlas <contact@sydevelopers.com>'
 

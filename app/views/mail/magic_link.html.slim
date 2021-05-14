@@ -1,0 +1,13 @@
+
+h2
+  = translate('mail.login.title')
+  small = defined?(@manager) ? @manager.name : @session.authenticatable.name
+
+.actions
+  a.button href=@magic_link
+    span = translate('mail.login.action')
+
+p.explanation
+  = translate('mail.login.explanation')
+  br
+  = @magic_link

@@ -19,6 +19,8 @@ Rails.application.routes.draw do
     resources :managers, only: %i[] do
       get :welcome
       get :welcome, on: :collection
+      get :login
+      get :login, on: :collection
     end
 
     resources :events, only: %i[] do
