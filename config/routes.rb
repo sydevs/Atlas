@@ -28,7 +28,7 @@ Rails.application.routes.draw do
       get :reminder, on: :collection
     end
 
-    resources :countries, only: %i[] do
+    resources :countries, :provinces, :local_areas, only: %i[] do
       get :summary
       get :summary, on: :collection
     end

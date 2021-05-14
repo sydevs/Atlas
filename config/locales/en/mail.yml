@@ -18,6 +18,8 @@ en:
       subject: "Monthly Summary of Sahaj Atlas"
       title: "Monthly Update"
       view_statistics: "Full Statistics"
+      next_week: "Next week"
+      last_week: "Last week"
       stats:
         new_registrations: "New Registrations"
         active_events: "Active Events"
@@ -26,6 +28,9 @@ en:
         new_countries: "New Countries"
         new_managers: "New Managers"
         new_access_keys: "New Access Keys"
+        new_events: "New Events"
+        expiring_events: "Expiring Events"
+        recently_expired_events: "Recently Expired"
         inactive_regions: "Inactive Regions"
 
     event:
@@ -109,3 +114,9 @@ en:
         subject: "Bi-Weekly Update %{country}"
         title: "Bi-Weekly Update"
         view: "View Country"
+
+    region:
+      summary:
+        subject: "Weekly Update for %{region}"
+        title: "Weekly Update"
+        view: "View Region"

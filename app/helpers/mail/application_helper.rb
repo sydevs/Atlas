@@ -21,7 +21,6 @@ module Mail::ApplicationHelper
     active_events: 'verified',
     active_countries: 'country',
     active_regions: 'location',
-    expired_events: 'expired',
   }
 
   def email_image_tag(image, **options)
