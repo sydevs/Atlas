@@ -1,4 +1,10 @@
 
+- content_for :preview do
+  = translate('mail.summary.preview')
+  '  
+  - stats.each do |key, value|
+    ' #{translate(key, scope: 'mail.summary.stats')}: #{value}. 
+
 h2
   = translate('mail.summary.title')
   small = @start_of_month.to_s(:month_and_year)

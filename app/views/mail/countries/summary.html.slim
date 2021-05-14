@@ -1,4 +1,10 @@
 
+- content_for :preview do
+  = translate('mail.country.summary.preview', country: @country.label)
+  '  
+  - stats.each do |key, value|
+    ' #{translate(key, scope: 'mail.summary.stats')}: #{value}. 
+
 h2
   = translate('mail.country.summary.title')
   small = @country.label

@@ -16,12 +16,14 @@ en:
 
     login:
       title: "Login to Sahaj Atlas"
+      preview: "Here is a link to automatically log you into the Sahaj Atlas CMS. Do not share this email with anyone else, or they will gain access to your account."
       action: "Login"
       explanation: "or copy this url to your browser"
 
     summary:
       subject: "Monthly Summary of Sahaj Atlas"
       title: "Monthly Update"
+      preview: "Summary of changes on the Sahaj Atlas in the last month."
       view_statistics: "Full Statistics"
       next_week: "Next week"
       last_week: "Last week"
@@ -29,6 +31,7 @@ en:
         new_registrations: "New Registrations"
         active_events: "Active Events"
         active_countries: "Active Countries"
+        active_regions: "Active Regions"
       data:
         new_countries: "New Countries"
         new_managers: "New Managers"
@@ -93,6 +96,12 @@ en:
     manager:
       welcome:
         title: "Welcome to Sahaj Atlas"
+        preview:
+          worldwide: "You have been invited to become an administrator of the Sahaj Atlas."
+          country: "You have been invited to become a country manager for %{context}."
+          local: "You have been invited to become a local manager for %{context}."
+          event: "You have been invited to become the event manager for \"%{context}\"."
+          none: "You have been invited to become a manager of the Sahaj Atlas."
         login: "Login"
         view: "View %{context}"
         byline:
@@ -118,10 +127,12 @@ en:
       summary:
         subject: "Bi-Weekly Update %{country}"
         title: "Bi-Weekly Update"
+        preview: "Summary of changes in %{country} in the last 2 weeks."
         view: "View Country"
 
     region:
       summary:
         subject: "Weekly Update for %{region}"
         title: "Weekly Update"
+        preview: "Summary of changes in %{region} in the last week."
         view: "View Region"

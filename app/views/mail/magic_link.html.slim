@@ -1,4 +1,6 @@
 
+- content_for :preview, translate('mail.login.preview')
+
 h2
   = translate('mail.login.title')
   small = defined?(@manager) ? @manager.name : @session.authenticatable.name

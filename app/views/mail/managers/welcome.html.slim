@@ -1,4 +1,6 @@
 
+- content_for :preview, translate(@manager.type, scope: 'mail.manager.welcome.preview', context: @context&.label)
+
 h2
   = translate('mail.manager.welcome.title')
   small = @manager.name
