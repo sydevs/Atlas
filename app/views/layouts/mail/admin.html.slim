@@ -7,7 +7,7 @@ html
     link rel='stylesheet' href='//fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic'
     = stylesheet_link_tag 'mail', media: 'all'
   body
-    .preview-text = content_for(:preview).ljust(150)
+    .preview-text = content_for(:preview)&.ljust(150)
     h1
       = inline_svg('logo.svg', class: 'logo')
       = translate('mail.layout.sahaj_atlas').upcase

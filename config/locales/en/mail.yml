@@ -90,9 +90,10 @@ en:
         subject: "[Reminder] Upcoming Event"
         title: "Upcoming Event"
         preview:
-          one: "Your event, \"%{event}\", is %{days} from now at %{time}. %{count} new registration."
-          other: "Your event, \"%{event}\", is %{days} from now at %{time}. %{count} new registrations."
-        explanation: "Your event is happening %{days} from now at %{time}."
+          zero: "Your event, \"%{event},\" is %{duration} from now at %{time}. No new registrations."
+          one: "Your event, \"%{event},\" is %{duration} from now at %{time}. %{count} new registration."
+          other: "Your event, \"%{event},\" is %{duration} from now at %{time}. %{count} new registrations."
+        explanation: "Your event is happening %{duration} from now at %{time}."
         byline:
           zero: "No New Registrations"
           one: "%{count} New Registration for %{date}"
