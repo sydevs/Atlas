@@ -51,5 +51,14 @@ namespace :mail do
         EventMailer.with(event: event, test: true).reminder.deliver_now
       end
     end
+
+    namespace :managers do
+      desc 'Sends welcome to one manager'
+      task welcome: :environment do
+        ActionMailer::Base.delivery_method = :letter_opener
+        manager = Manager.reorder('RANDOM()').first
+        ManagerMailer.with(manager: manager, test: true).welcome.deliver_now
+      end
+    end
   end
 end

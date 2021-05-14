@@ -93,6 +93,7 @@ class Event < ApplicationRecord
   end
 
   def notify_new_manager
+    # TODO: Send a welcome or created email depending on context
     ManagerMailer.with(manager: self.manager, context: self).welcome.deliver_now if saved_change_to_attribute?(:manager_id)
   end
 

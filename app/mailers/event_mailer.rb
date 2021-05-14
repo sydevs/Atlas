@@ -8,6 +8,7 @@ class EventMailer < ApplicationMailer
     return if status.nil?
 
     puts "[MAIL] Sending status email for #{@event.label} to #{@manager.name}"
+    create_session!
     subject = I18n.translate(@status, scope: 'mail.event.status.title')
     parameters = { to: @manager.email, subject: subject }
     if status == :needs_urgent_review
@@ -23,6 +24,7 @@ class EventMailer < ApplicationMailer
     setup
 
     puts "[MAIL] Sending reminder email for #{@event.label} to #{@manager.name}"
+    create_session!
     @registrations = @event.registrations.since(@event.reminder_emails_sent_at || @event.created_at)
     @registrations = @event.registrations.limit(10) if params[:test] && @registrations.empty?
     subject = I18n.translate('mail.event.reminder.subject')

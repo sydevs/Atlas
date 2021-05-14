@@ -1,8 +1,9 @@
-class Mail::EventsController < Mail::ApplicationController
+class Mail::ManagersController < Mail::ApplicationController
 
   before_action :fetch_manager
 
   def welcome
+    @subject = I18n.translate('mail.manager.welcome.title')
   end
 
   def summary
@@ -16,7 +17,13 @@ class Mail::EventsController < Mail::ApplicationController
     end
 
     def fetch_manager
-      @manager = Event.find(params[:manager_id])
+      if params[:manager_id]
+        @manager = Manager.find(params[:manager_id])
+      else
+        @manager = Manager.reorder('RANDOM()').first
+      end
+
+      @context = @manager.parent
     end
 
 end

@@ -6,11 +6,7 @@ class ManagerMailer < ApplicationMailer
   def welcome
     setup
     
-    @context = params[:context]
-    @magic_link = send(Passwordless.mounted_as).token_sign_in_url(session.token)
-    @action_link = "#{@magic_link}?destination_path=#{@context.is_a?(Event) ? url_for([:edit, :cms, @context]) : cms_root_url}"
-    @type = @context&.model_name&.i18n_key || 'worldwide'
-    subject = I18n.translate('mail.welcome.subject', context: @context&.label)
+    subject = I18n.translate('mail.manager.welcome.title', context: @context&.label)
     puts "[MAIL] Sending welcome email to #{@manager.name} for #{@context}"
     mail(to: @manager.email, subject: subject)
   end
@@ -49,6 +45,8 @@ class ManagerMailer < ApplicationMailer
 
     def setup
       @manager = params[:manager]
+      @context = params[:context] || @manager.parent
+      create_session!
     end
 
 end

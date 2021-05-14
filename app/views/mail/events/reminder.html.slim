@@ -1,12 +1,12 @@
 
 h2
   = @event.label
-  small Upcoming Event
+  small = translate('mail.event.reminder.title')
 
 p.narrow.explanation
   = translate('mail.event.reminder.explanation', days: time_ago_in_words(@event.next_recurrence_at), time: @event.start_time)
 
-table.event
+table.data
   tr
     th = translate('mail.event.next_date')
     td
@@ -26,7 +26,7 @@ table.event
       - manager = @event.manager
       = mail_to manager.email, manager.name
 
-.byline = translate('mail.event.reminder.title', count: @registrations.count, date: @event.next_recurrence_at.to_date.to_s(:short))
+.byline = translate('mail.event.reminder.byline', count: @registrations.count, date: @event.next_recurrence_at.to_date.to_s(:short))
 
 table.registrations
   - @registrations.limit(10).each do |registration|

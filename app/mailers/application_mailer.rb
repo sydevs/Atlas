@@ -6,17 +6,16 @@ class ApplicationMailer < ActionMailer::Base
   default template_path: 'mail'
   default from: 'Sahaj Atlas <contact@sydevelopers.com>'
 
-  def session
-    @session ||= begin
-      session = Passwordless::Session.new({
-        authenticatable: @manager,
-        user_agent: 'Command Line',
-        remote_addr: 'unknown',
-      })
+  def create_session!
+    session = Passwordless::Session.new({
+      authenticatable: @manager,
+      user_agent: 'Command Line',
+      remote_addr: 'unknown',
+    })
 
-      session.save!
-      session
-    end
+    session.save!
+    @magic_link ||= send(Passwordless.mounted_as).token_sign_in_url(session.token)
+    @template_link ||= "#{@magic_link}?destination_path="
   end
 
 end

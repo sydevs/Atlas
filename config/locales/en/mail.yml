@@ -55,8 +55,9 @@ en:
 
       reminder:
         subject: "[Reminder] Upcoming Event"
+        title: "Upcoming Event"
         explanation: "Your event is happening %{days} from now at %{time}."
-        title:
+        byline:
           zero: "No New Registrations"
           one: "%{count} New Registration for %{date}"
           other: "%{count} New Registrations for %{date}"
@@ -64,3 +65,27 @@ en:
           one: "%{count} new registration not shown."
           other: "%{count} new registrations not shown."
         view_all: "View all"
+
+    manager:
+      welcome:
+        title: "Welcome to Sahaj Atlas"
+        login: "Login"
+        view: "View %{context}"
+        byline:
+          worldwide: "Global Administrator"
+          country: "Country Manager for %{context}"
+          local: "Local Manager for %{context}"
+          event: "Event Manager for \"%{context}\""
+        explanation:
+          worldwide: "You have been invited to become an administrator of the Sahaj Atlas. It will be your job to onboard new country managers and keep an eye on the maintainance of the atlas."
+          country: "You have been invited to become a country manager on Sahaj Atlas. It will be your responsibility to create cities and regions within your country and assign managers to manage events in those regions."
+          local: "You have been invited to become a local manager on Sahaj Atlas. It will be your responsibility to create venues and list public Sahaj events within your region."
+          event: "You have been invited to become an event manager on Sahaj Atlas. It will be your responsibility to keep your event up to date."
+          none: "You have been invited to become a manager on Sahaj Atlas. You have not yet been assigned any responsibilities. Please contact us if you need help."
+        type:
+          country: "Country"
+          local: "Region"
+          event: "Event"
+        data:
+          events: "Events"
+          venues: "Venues"

@@ -17,7 +17,7 @@ ruby:
 p.byline
   = translate(@status, scope: 'mail.event.status.byline', date: timestamp.to_date.to_s(:long))
 
-table.event
+table.data
   tr
     th = translate('mail.event.location')
     td = @event.address
