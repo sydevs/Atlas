@@ -5,13 +5,13 @@ class EventMailer < ApplicationMailer
 
   def status
     setup
-    return if status.nil?
+    return if @status.nil?
 
     puts "[MAIL] Sending status email for #{@event.label} to #{@manager.name}"
     create_session!
     subject = I18n.translate(@status, scope: 'mail.event.status.title')
     parameters = { to: @manager.email, subject: subject }
-    if status == :needs_urgent_review
+    if @status == :needs_urgent_review
       parameters['Importance'] = 'high'
       parameters['X-Priority'] = '1'
     end
