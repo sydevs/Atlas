@@ -1,10 +1,5 @@
 module CountryDecorator
 
-  COUNTRY_CODE_OVERRIDES = {
-    gb: "UK",
-    us: "USA"
-  }.freeze
-
   def label
     CountryDecorator.get_label(country_code)
   end

@@ -26,6 +26,7 @@ en:
         new_countries: "New Countries"
         new_managers: "New Managers"
         new_access_keys: "New Access Keys"
+        inactive_regions: "Inactive Regions"
 
     event:
       location: "Location"
@@ -102,3 +103,9 @@ en:
         data:
           events: "Events"
           venues: "Venues"
+
+    country:
+      summary:
+        subject: "Bi-Weekly Update %{country}"
+        title: "Bi-Weekly Update"
+        view: "View Country"

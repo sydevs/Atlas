@@ -27,6 +27,11 @@ Rails.application.routes.draw do
       get :status, on: :collection
       get :reminder, on: :collection
     end
+
+    resources :countries, only: %i[] do
+      get :summary
+      get :summary, on: :collection
+    end
   end
 
   namespace :map do

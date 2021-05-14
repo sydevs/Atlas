@@ -9,10 +9,11 @@ class Mail::ApplicationController < ActionController::Base
 
   def summary
     @subject = I18n.translate('mail.summary.title')
-    @start_of_month = (Date.today - 1.month).beginning_of_month
-    @end_of_month = (Date.today - 1.month).end_of_month
 
+    @start_of_month = 1.month.ago.beginning_of_month
+    @end_of_month = 1.month.ago.end_of_month
     query = ['created_at >= ? AND created_at <= ?', @start_of_month, @end_of_month]
+
     @new_countries = Country.limit(5) #.where(*query)
     @new_country_managers = ManagedRecord.where(record_type: 'Country').joins(:manager).limit(5) #.where(*query)
     @new_access_keys = AccessKey.limit(5) #.where(*query)

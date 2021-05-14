@@ -1,0 +1,20 @@
+
+table.stats
+  tr
+    - stats.each do |key, value|
+      ruby:
+        value = value.to_i
+        old_value = old_stats[key].to_i
+
+      td
+        = inline_svg "mail/#{Mail::ApplicationHelper::STAT_ICONS[key]}.svg"
+        .label = translate(key, scope: 'mail.summary.stats')
+        .stat = value
+        - unless value == old_value
+          .change class=("negative" if value < old_value)
+            - if value > 50 || old_value > 50
+              - diff = percent_difference(value, old_value)
+              | (#{'+' if diff.positive?}#{diff}%)
+            - else
+              - diff = value - old_value
+              | (#{'+' if diff.positive?}#{diff})
