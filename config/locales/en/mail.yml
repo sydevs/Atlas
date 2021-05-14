@@ -33,25 +33,29 @@ en:
           needs_review: "[Warning] Event Needs Review"
           needs_urgent_review: "[Warning] Event Will Expire Soon"
           expired: "Event Expired"
+          finished: "Event Finished"
         title:
           created: "New Event Created"
           needs_review: "Event Needs Review"
           needs_urgent_review: "Event Will Expire Soon"
           expired: "Event Expired"
+          finished: "Event Finished"
         byline:
           created: "Created on %{date}"
           needs_review: "Last updated on %{date}"
           needs_urgent_review: "Will expire on %{date}"
           expired: "Expired on %{date}"
+          finished: "Finished on %{date}"
         explanation:
           created: "You are the manager of a new event which has been created on the Sahaj Atlas."
           needs_review: "This event, which you manage, needs to be checked for accuracy or else it will be removed from the map."
           needs_urgent_review: "Please check and update this event immediately to make sure it is accurate or else it will be removed from the map."
           expired: "This event has been removed from the map because it has not been updated recently. To add it back to the map, update the event."
+          finished: "This event has concluded."
 
       reminder:
         subject: "[Reminder] Upcoming Event"
-        explanation: "Your event is happening tomorrow at %{time}."
+        explanation: "Your event is happening %{days} from now at %{time}."
         title:
           zero: "No New Registrations"
           one: "%{count} New Registration for %{date}"

@@ -5,6 +5,7 @@ module Mail::ApplicationHelper
     needs_review: 'alert',
     needs_urgent_review: 'alert',
     expired: 'expired',
+    finished: 'verified',
   }.freeze
 
   STATUS_COLORS = {
@@ -12,6 +13,7 @@ module Mail::ApplicationHelper
     needs_review: '#f2711c',
     needs_urgent_review: '#db2828',
     expired: '#008080',
+    finished: '#1e5b82',
   }.freeze
 
   def email_image_tag(image, **options)

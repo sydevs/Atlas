@@ -3,13 +3,14 @@ h2
   = @event.label
   small Upcoming Event
 
-p.explanation
-  = translate('mail.event.reminder.explanation', time: @event.start_time)
+p.narrow.explanation
+  = translate('mail.event.reminder.explanation', days: time_ago_in_words(@event.next_recurrence_at), time: @event.start_time)
 
 table.event
   tr
     th = translate('mail.event.next_date')
-    td = @event.next_recurrence_at.to_s(:long)
+    td
+      = @event.next_recurrence_at.to_s(:day)
   tr
     th = translate('mail.event.location')
     td = @event.address

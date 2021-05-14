@@ -3,12 +3,12 @@ class Mail::EventsController < Mail::ApplicationController
   before_action :fetch_event
 
   def status
+    @status = params[:status]&.to_sym || :created
     @subject = I18n.translate(@status, scope: 'mail.event.status.subject')
-    @status = params[:status].to_sym || :created
   end
 
   def reminder
-    @registrations = @event.registrations.order('RANDOM()').limit(params[:count].to_i || 10)
+    @registrations = @event.registrations.order('RANDOM()')
     @subject = I18n.translate('mail.event.reminder.subject')
   end
 
@@ -19,7 +19,11 @@ class Mail::EventsController < Mail::ApplicationController
     end
 
     def fetch_event
-      @event = Event.find(params[:event_id])
+      if params[:event_id]
+        @event = Event.find(params[:event_id])
+      else
+        @event = Event.not_finished.order('RANDOM()').first
+      end
     end
 
 end

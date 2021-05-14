@@ -3,7 +3,8 @@ ruby:
     created: :created_at,
     needs_review: :updated_at,
     needs_urgent_review: :expires_at,
-    expired: :expired_at
+    expired: :expired_at,
+    finished: :end_date
   }[@status])
 
 .box
@@ -53,7 +54,7 @@ p.explanation
   = translate(@status, scope: 'mail.event.status.explanation')
 
 .actions
-  - unless @status == :expired
+  - unless %i[expired finished].include?(@status)
     a.button href=map_event_url(@event)
       span = translate('mail.event.view')
   a.button href=email_login(map_event_url(@event))

@@ -17,11 +17,15 @@ Rails.application.routes.draw do
     resources :managers, only: %i[] do
       get :welcome
       get :summary
+      get :welcome, on: :collection
+      get :summary, on: :collection
     end
 
     resources :events, only: %i[] do
       get :status
       get :reminder
+      get :status, on: :collection
+      get :reminder, on: :collection
     end
   end
 

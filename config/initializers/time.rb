@@ -6,5 +6,6 @@ class Time
   end
 end
 
-Time::DATE_FORMATS[:month_and_day] = '%b %e'
+Time::DATE_FORMATS[:month_and_date] = '%b %e'
 Time::DATE_FORMATS[:short_date] = '%e %b %Y'
+Time::DATE_FORMATS[:day] = '%a, %b %e'

@@ -20,6 +20,7 @@ class Event < ApplicationRecord
   belongs_to :manager
   accepts_nested_attributes_for :manager
   before_validation :find_manager
+  before_validation :set_end_date
   after_save :find_or_create_manager
   after_save :notify_new_manager
 
@@ -96,11 +97,31 @@ class Event < ApplicationRecord
   end
 
   def next_recurrence_at
-    start_date
+    @next_recurrence_at ||= begin
+      return nil if end_date && end_date < Date.today
+      date = start_date > Date.today ? start_date : Date.today
+      time = start_time.split(':').map(&:to_i)
+      datetime = date.to_time.change(hour: time[0], min: time[1])
+
+      if datetime > Time.now
+        datetime
+      elsif recurrence == 'day'
+        datetime + 1.day
+      else
+        (datetime + 1.week).beginning_of_week(recurrence.to_sym).change(hour: time[0], min: time[1])
+      end
+    end
   end
 
   def label
     custom_name || venue.street
   end
+
+  private
+
+    def set_end_date
+      puts "SAVING #{recurrence.inspect} #{recurrence == 'day'} && #{end_date.inspect} #{!end_date.present?}"
+      self.end_date = start_date if recurrence == 'day' && !end_date.present?
+    end
 
 end
