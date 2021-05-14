@@ -53,38 +53,40 @@ en:
       view: "View on Map"
       edit: "Edit Event"
       update: "Update Event"
+      contact: "Send Email"
 
       status:
         subject:
           created: "New Event Created"
           needs_review: "[Warning] Event Needs Review"
-          needs_urgent_review: "[Warning] Event Will Expire Soon"
+          needs_urgent_review: "[Alert] Event Will Expire Soon"
           expired: "Event Expired"
           finished: "Event Finished"
         preview:
           created: "You are the manager of a new event. \"%{event}\" has been created in %{region}."
           needs_review: "Please check that your event is still up to date. \"%{event}\" needs to be reviewed or else it will be removed from the map."
-          needs_urgent_review: "You must urgently verify that your event is up to date. \"%{event}\" will be removed from the map unless it is updated soon."
+          needs_urgent_review: "The manager of an event has not responded to our email. \"%{event}\" must be updated soon or it will be removed from the map."
           expired: "Your event has not been updated in %{duration}, and has been removed from the map. Update \"%{event}\" to make it public again."
           finished: "Your event has concluded as scheduled. The final class for \"%{event}\" is over. The event is now hidden."
         title:
           created: "New Event Created"
           needs_review: "Event Needs Review"
-          needs_urgent_review: "Event Will Expire Soon"
+          needs_urgent_review: "Manager Not Responding"
           expired: "Event Expired"
           finished: "Event Finished"
         byline:
           created: "Created on %{date}"
           needs_review: "Last updated on %{date}"
-          needs_urgent_review: "Will expire on %{date}"
+          needs_urgent_review: "Will be removed on %{date}"
           expired: "Expired on %{date}"
           finished: "Finished on %{date}"
         explanation:
           created: "You are the manager of a new event which has been created on the Sahaj Atlas."
           needs_review: "This event, which you manage, needs to be checked for accuracy or else it will be removed from the map."
-          needs_urgent_review: "Please check and update this event immediately to make sure it is accurate or else it will be removed from the map."
+          needs_urgent_review: "Please urgently contact the event manager or update this event yourself, or else it will be hidden from the map."
           expired: "This event has been removed from the map because it has not been updated recently. To add it back to the map, update the event."
           finished: "This event has concluded."
+        escalation: "You are a manager for %{region}. This warning is being sent to you because this event's manager has not responded to our email."
 
       reminder:
         subject: "[Reminder] Upcoming Event"
