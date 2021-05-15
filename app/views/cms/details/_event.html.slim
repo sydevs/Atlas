@@ -1,16 +1,7 @@
 
 - if @record.published? && @record.venue.published?
   - unless @record.finished?
-    - if @record.archived?
-      .ui.small.orange.icon.message
-        i.exclamation.icon
-        .content
-          a.ui.right.floated.orange.button href=url_for([:edit, :cms, @record])
-            = translate('cms.details.record_archived.action')
-            i.right.arrow.icon
-          .header = translate('cms.details.record_archived.title', resource: translate_model(@model))
-          .description = translate('cms.details.record_archived.description', resource: translate_model(@model).downcase, time: time_ago_in_words(@record.updated_at))
-    - elsif @record.expired?
+    - if @record.recently_expired?
       .ui.small.orange.icon.message
         i.exclamation.icon
         .content
@@ -64,6 +55,14 @@ h3.ui.small.dividing.grey.header = translate('cms.details.management_for_record'
       .content
         .title = translate('cms.details.record_finished.title', resource: translate_model(Event))
         .description = translate('cms.details.record_finished.description', resource: translate_model(Event).downcase, date: @record.end_date.to_s(:long))
+- elsif @record.archived?
+  .ui.one.steps
+    .step
+      i.orange.eye.slash.icon
+      .content
+        .title = translate('cms.details.record_archived.title', resource: translate_model(Event))
+        .description = translate('cms.details.record_archived.description', resource: translate_model(Event).downcase, time: time_ago_in_words(@record.updated_at))
+  = help_link :expiration, (translate("cms.help.expiration.alt_title") unless @record.expired?)
 - elsif @record.published? && @record.venue.published?
   .ui.three.event.steps
     - %w[updated needs_review expired].each do |step|
