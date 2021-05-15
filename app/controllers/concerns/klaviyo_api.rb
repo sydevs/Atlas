@@ -28,9 +28,8 @@ module KlaviyoAPI
   end
 
   def self.send_registration_event registration
-    return unless ENV['KLAVIYO_API_KEY'].present?
+    return unless ENV['KLAVIYO_PUBLIC_API_KEY'].present? && ENV['KLAVIYO_PRIVATE_API_KEY'].present?
 
-    @klaviyo ||= Klaviyo::Client.new(ENV.fetch('KLAVIYO_API_KEY'))
     registration = ActiveDecorator::Decorator.instance.decorate(registration)
     event = ActiveDecorator::Decorator.instance.decorate(registration.event)
     venue = ActiveDecorator::Decorator.instance.decorate(event.venue)
