@@ -6,7 +6,7 @@ en:
       information:
         atlas:
           title: "What is Sahaj Atlas?"
-          description: "A project to create a central list of all public Sahaja Yoga events. To ensure that this event list is always up to date, so that seekers may always find active events near them."
+          description: "Sahaj Atlas is a project to create a central list of all public Sahaja Yoga events. To ensure that this event list is always up to date, so that seekers may always find active events near them."
         security:
           title: "Do not forward this email"
           description: "The links in this email allow access to edit the Sahaj Atlas. Forwarding this email will compromise the security of the website."
@@ -16,7 +16,7 @@ en:
 
     login:
       title: "Login to Sahaj Atlas"
-      preview: "Here is a link to automatically log you into the Sahaj Atlas CMS. Do not share this email with anyone else, or they will gain access to your account."
+      preview: "This link will automatically log you into the Sahaj Atlas CMS. Do not share this email with anyone else, or they will gain access to your account."
       action: "Login"
       explanation: "or copy this url to your browser"
 
@@ -63,11 +63,11 @@ en:
           expired: "Event Expired"
           finished: "Event Finished"
         preview:
-          created: "You are the manager of a new event. \"%{event}\" has been created in %{region}."
-          needs_review: "Please check that your event is still up to date. \"%{event}\" needs to be reviewed or else it will be removed from the map."
-          needs_urgent_review: "The manager of an event has not responded to our email. \"%{event}\" must be updated soon or it will be removed from the map."
-          expired: "Your event has not been updated in %{duration}, and has been removed from the map. Update \"%{event}\" to make it public again."
-          finished: "Your event has concluded as scheduled. The final class for \"%{event}\" is over. The event is now hidden."
+          created: "You are the manager of a new event. '%{event}'' has been created in %{region}."
+          needs_review: "'%{event}' needs to be reviewed or else it will be removed from the map. Please check that the event information is still correct."
+          needs_urgent_review: "The manager of '%{event}' has not responded to our email. This event must be updated soon or it will be removed from the map."
+          expired: "'%{event}'' has not been updated in %{duration}, and has been removed from the map. Update this event to make it public again."
+          finished: "'%{event}' has concluded as scheduled. The final class for this event is over, so the event will be hidden from the map."
         title:
           created: "New Event Created"
           needs_review: "Event Needs Review"
