@@ -18,7 +18,7 @@
             = translate('cms.details.record_expired.action')
             i.right.arrow.icon
           .header = translate('cms.details.record_expired.title', resource: translate_model(@model))
-          .description = translate('cms.details.record_expired.description', resource: translate_model(@model).downcase, weeks: Expirable.count_for(:expire))
+          .description = translate('cms.details.record_expired.description', resource: translate_model(@model).downcase, updated_ago: time_ago_in_words(@record.updated_at))
     - elsif @record.needs_review?
       .ui.small.yellow.icon.message
         i.exclamation.icon
@@ -27,7 +27,7 @@
             = translate('cms.details.record_needs_review.action')
             i.right.arrow.icon
           .header = translate('cms.details.record_needs_review.title', resource: translate_model(@model))
-          .description = translate('cms.details.record_needs_review.description', resource: translate_model(@model).downcase, weeks: Expirable.count_for(:verify), duration: distance_of_time_in_words(Time.now, @record.expires_at))
+          .description = translate('cms.details.record_needs_review.description', resource: translate_model(@model).downcase, updated_ago: time_ago_in_words(@record.updated_at), expires_in: distance_of_time_in_words(Time.now, @record.expires_at))
 
 - unless @record.native_registration_mode?
   .ui.small.yellow.icon.message

@@ -85,4 +85,9 @@ module CMS::ApplicationHelper
     'active' if params[:q]&.to_sym == type # || (params[:q].nil? && type == :guide)
   end
 
+  def expiry_duration_in_words(level)
+    now = Time.now
+    distance_of_time_in_words now, now + Expirable.duration_for(level)
+  end
+
 end

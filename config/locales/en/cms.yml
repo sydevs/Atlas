@@ -138,8 +138,8 @@ en:
         description: "%{events} (%{venues})"
       record_needs_review:
         title: "%{resource} Needs Review"
-        description: "This %{resource} hasn't been updated in %{weeks} weeks. This event will be removed from the map unless it is reviewed within %{duration}. Go to the edit page and press save to confirm the event details are still correct."
-        alt_description: "This %{resource} hasn't been updated in %{weeks} weeks. Please review the details below and press save to confirm that the event details are correct."
+        description: "This %{resource} hasn't been updated in %{updated_ago}. This event will be removed from the map unless it is reviewed within %{expires_in}. Go to the edit page and press save to confirm the event details are still correct."
+        alt_description: "This %{resource} hasn't been updated in %{updated_ago}. Please review the details below and press save to confirm that the event details are correct."
         action: "Review"
       record_finished:
         title: "%{resource} Completed"
@@ -149,8 +149,8 @@ en:
         description: "This %{resource} has no events, and so it will not appear on the map."
       record_expired:
         title: "%{resource} Expired"
-        description: "This %{resource} has been hidden from the public, because it hasn't been updated in %{weeks} weeks. Go to the edit page and press save to confirm the event details are still correct."
-        alt_description: "This %{resource} has been hidden from the public, because it hasn't been updated in %{weeks} weeks. Please review the details below and press save to confirm that the event details are correct."
+        description: "This %{resource} has been hidden from the public, because it hasn't been updated in %{updated_ago}. Go to the edit page and press save to confirm the event details are still correct."
+        alt_description: "This %{resource} has been hidden from the public, because it hasn't been updated in %{updated_ago}. Please review the details below and press save to confirm that the event details are correct."
         action: "Review"
       record_archived:
         title: "%{resource} Archived"
@@ -263,7 +263,7 @@ en:
           problem: "We don't want seekers to see classes which are no longer running. Many Sahaj website have out of date program information, but even when the details are updated they quickly become outdated again."
           solution: "To solve this, we've created an automatic system that will email the yogis who run each program every few months to ask if the information is still correct. If they do not respond, the program will be hidden from the public until it is checked."
           review: "As soon as an event becomes classified as \"Needs Review\" the program manager will be sent an email asking them to confirm that the event details are still correct. If they do not respond within 1 week, the city manager will be sent an email asking them to check the details instead."
-          expiration: "If %{weeks} weeks have passed without the event being verified, then it will be hidden from the map until someone checks and updates it."
+          expiration: "If %{duration} pass without the event being verified, then it's hidden from the map until someone checks and updates it."
         steps:
           updated:
             icon: green check circle
@@ -276,14 +276,14 @@ en:
             active_label: "Needs Review"
             inactive_label: "Will Need Review"
             title: "Needs Review"
-            description: "If %{weeks} weeks pass without the event being updated"
+            description: "If %{duration} pass without the event being updated"
           expired:
             icon: red times circle
             active_label: "Expired"
             inactive_label: "Expires"
             label: "Expires" # This should be present tense as in the phrase "The event expires on March 3"
             title: "Expired"
-            description: "If an event has not been updated in %{weeks} weeks"
+            description: "If an event has not been updated in %{duration}"
       registration:
         title: "Why should seekers register on Sahaj Atlas?"
         description:

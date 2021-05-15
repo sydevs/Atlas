@@ -23,15 +23,14 @@ h1.ui.header = translate('cms.menu.faq')
     p = translate('cms.help.expiration.description.solution')
     .ui.three.steps
       - %w[updated needs_review expired].each do |step|
-        - weeks = (step == 'expired' ? Expirable.count_for(:expire) : Expirable.count_for(:verify))
         .step
           i.icon class=translate("cms.help.expiration.steps.#{step}.icon")
           .content
             .title = translate("cms.help.expiration.steps.#{step}.title")
-            .description = translate("cms.help.expiration.steps.#{step}.description", weeks: weeks)
+            .description = translate("cms.help.expiration.steps.#{step}.description", duration: expiry_duration_in_words(step == 'expired' ? :expire : :verify))
 
     p = translate('cms.help.expiration.description.review')
-    p = translate('cms.help.expiration.description.expiration', weeks: Expirable.count_for(:expire))
+    p = translate('cms.help.expiration.description.expiration', duration: expiry_duration_in_words(:expire))
 
   .title class=active_accordion?(:registration)
     i.dropdown.icon
