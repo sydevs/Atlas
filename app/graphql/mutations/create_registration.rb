@@ -55,6 +55,7 @@ class Mutations::CreateRegistration < Mutations::BaseMutation
     {
       status: 'error',
       message: I18n.translate('map.registration.feedback.error'),
+      error: error.message,
     }
   end
 end
