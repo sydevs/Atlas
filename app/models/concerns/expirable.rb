@@ -2,7 +2,7 @@ module Expirable
 
   extend ActiveSupport::Concern
 
-  TEST_MODE = true
+  TEST_MODE = false
 
   BASE_DURATION = TEST_MODE ? 5 : 8
   DURATION_INCREMENT = TEST_MODE ? 7 : 1
