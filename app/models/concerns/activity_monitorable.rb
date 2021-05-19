@@ -8,11 +8,15 @@ module ActivityMonitorable
     scope :inactive_since, ->(since) { where("#{table_name}.last_activity_on IS null OR #{table_name}.last_activity_on < ?", since) }
   end
 
+  def last_activity_on
+    self[:last_activity_on] || updated_at.to_date
+  end
+
   def update_activity_timestamps(force = false)
     return unless force || changed? || respond_to?(:expired?)
-    return if self.try(:last_activity_on).present? && self.last_activity_on >= Date.today
+    return if self[:last_activity_on].present? && self[:last_activity_on] >= Date.today
 
-    if respond_to?(:last_activity_on)
+    if has_attribute?(:last_activity_on)
       if new_record?
         self.last_activity_on = Date.today
       else

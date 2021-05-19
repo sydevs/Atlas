@@ -12,9 +12,11 @@ class LocalArea < ApplicationRecord
   # Associations
   belongs_to :country, foreign_key: :country_code, primary_key: :country_code, optional: true
   belongs_to :province, foreign_key: :province_code, primary_key: :province_code, optional: true
+
   has_many :local_area_venues
   has_many :venues, through: :local_area_venues
   has_many :events, through: :venues
+  has_many :associated_registrations, through: :events, source: :registrations
 
   # Validations
   before_validation :ensure_country_consistency

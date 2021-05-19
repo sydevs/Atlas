@@ -2,7 +2,7 @@
 - content_for :preview do
   = translate('mail.summary.preview')
   '  
-  - stats.each do |key, value|
+  - @stats.each do |key, value|
     ' #{translate(key, scope: 'mail.summary.stats')}: #{value}. 
 
 h2

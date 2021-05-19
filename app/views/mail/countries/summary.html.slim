@@ -2,7 +2,7 @@
 - content_for :preview do
   = translate('mail.country.summary.preview', country: @country.label)
   '  
-  - stats.each do |key, value|
+  - @stats.each do |key, value|
     ' #{translate(key, scope: 'mail.summary.stats')}: #{value}. 
 
 h2
@@ -22,11 +22,11 @@ table.data
         - @new_local_areas.each do |local_area|
           div
             = link_to local_area.name, email_login(cms_local_area_url(local_area))
-  - if @new_region_managers.present?
+  - if @new_province_managers.present? || @new_local_area_managers.present?
     tr
       th = translate('mail.summary.data.new_managers')
       td
-        - @new_region_managers.each do |managed_record|
+        - @new_province_managers.each do |managed_record|
           - manager = managed_record.manager
           - record = managed_record.record
           div
@@ -35,6 +35,17 @@ table.data
               |  (#{ProvinceDecorator.get_name(record.province_code, record.country.country_code)})
             - else
               |  (#{record.name})
+              
+        - @new_local_area_managers.each do |managed_record|
+          - manager = managed_record.manager
+          - record = managed_record.record
+          div
+            = link_to manager.name, email_login(cms_manager_url(manager))
+            - if record.is_a?(Province)
+              |  (#{ProvinceDecorator.get_name(record.province_code, record.country.country_code)})
+            - else
+              |  (#{record.name})
+  
   - if @inactive_provinces.present? || @inactive_local_areas.present?
     tr
       th = translate('mail.summary.data.inactive_regions')
@@ -42,9 +53,11 @@ table.data
         - @inactive_provinces.each do |province|
           div
             = link_to ProvinceDecorator.get_name(province.province_code, province.country.country_code), email_login(cms_province_url(province))
+            |  (#{time_ago_in_words province.last_activity_on})
         - @inactive_local_areas.each do |local_area|
           div
             = link_to local_area.name, email_login(cms_local_area_url(local_area))
+            |  (#{time_ago_in_words local_area.last_activity_on})
 
 .actions
   a.button href=email_login(cms_country_url(@country))
