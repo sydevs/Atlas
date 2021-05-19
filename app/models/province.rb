@@ -2,6 +2,7 @@ class Province < ApplicationRecord
 
   # Extensios
   include Manageable
+  include ActivityMonitorable
 
   searchable_columns %w[province_code country_code]
   audited

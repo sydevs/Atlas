@@ -2,6 +2,7 @@ class Country < ApplicationRecord
 
   # Extensions
   include Manageable
+  include ActivityMonitorable
 
   searchable_columns %w[country_code]
   audited
@@ -13,6 +14,8 @@ class Country < ApplicationRecord
   has_many :venues, foreign_key: :country_code, primary_key: :country_code
   has_many :events, through: :venues
   has_many :associated_registrations, through: :events, source: :registrations
+  has_many :province_manager_records, through: :provinces, source: :managed_records
+  has_many :local_area_manager_records, through: :local_areas, source: :managed_records
 
   # Validations
   validates_presence_of :country_code

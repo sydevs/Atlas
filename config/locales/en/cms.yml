@@ -194,6 +194,7 @@ en:
       description: "This is a log of all actions taken by this manager."
       changed_by: "by %{name}"
       changed_to: "changed to"
+      last_activity: "Last Activity"
 
     dashboard:
       role:

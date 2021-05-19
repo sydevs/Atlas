@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_13_225803) do
+ActiveRecord::Schema.define(version: 2021_05_19_225523) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,6 +51,7 @@ ActiveRecord::Schema.define(version: 2021_05_13_225803) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "enable_province_management"
+    t.date "last_activity_on"
     t.index ["country_code"], name: "index_countries_on_country_code", unique: true
   end
 
@@ -78,7 +79,7 @@ ActiveRecord::Schema.define(version: 2021_05_13_225803) do
     t.boolean "online", default: false, null: false
     t.string "online_url"
     t.datetime "summary_email_sent_at"
-    t.datetime "reminder_emails_sent_at"
+    t.datetime "reminder_email_sent_at"
     t.index ["manager_id"], name: "index_events_on_manager_id"
     t.index ["venue_id"], name: "index_events_on_venue_id"
   end
@@ -101,6 +102,7 @@ ActiveRecord::Schema.define(version: 2021_05_13_225803) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "province_code", limit: 3
+    t.date "last_activity_on"
   end
 
   create_table "managed_records", force: :cascade do |t|
@@ -108,6 +110,8 @@ ActiveRecord::Schema.define(version: 2021_05_13_225803) do
     t.integer "record_id"
     t.string "record_type"
     t.integer "assigned_by_id"
+    t.datetime "created_at", precision: 6, default: -> { "now()" }, null: false
+    t.datetime "updated_at", precision: 6, default: -> { "now()" }, null: false
     t.index ["record_id", "record_type"], name: "index_managed_records_on_record_id_and_record_type"
   end
 
@@ -151,6 +155,7 @@ ActiveRecord::Schema.define(version: 2021_05_13_225803) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "province_code", limit: 3
+    t.date "last_activity_on"
   end
 
   create_table "registrations", force: :cascade do |t|
@@ -183,6 +188,7 @@ ActiveRecord::Schema.define(version: 2021_05_13_225803) do
     t.string "province_code", limit: 3
     t.boolean "published", default: true
     t.string "place_id"
+    t.date "last_activity_on"
   end
 
 end

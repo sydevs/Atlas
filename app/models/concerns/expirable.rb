@@ -2,10 +2,8 @@ module Expirable
 
   extend ActiveSupport::Concern
 
-  TEST_MODE = false
-
-  BASE_DURATION = TEST_MODE ? 5 : 8
-  DURATION_INCREMENT = TEST_MODE ? 7 : 1
+  BASE_DURATION = ENV['TEST_EXPIRY'] ? 5 : 8
+  DURATION_INCREMENT = ENV['TEST_EXPIRY'] ? 7 : 1
 
   LEVELS = {
     verify: 0,
@@ -31,7 +29,7 @@ module Expirable
 
   def self.duration_for(level)
     base = Expirable.count_for(level)
-    TEST_MODE ? base.minutes : base.weeks
+    ENV['TEST_MODE'] ? base.minutes : base.weeks
   end
 
   def self.date_for(level)

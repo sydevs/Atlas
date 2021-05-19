@@ -2,6 +2,7 @@ class LocalArea < ApplicationRecord
 
   # Extensions
   include Manageable
+  include ActivityMonitorable
 
   nilify_blanks
   acts_as_mappable lat_column_name: :latitude, lng_column_name: :longitude

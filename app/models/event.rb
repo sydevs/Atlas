@@ -3,6 +3,7 @@ class Event < ApplicationRecord
   # Extensions
   include Publishable
   include Expirable
+  include ActivityMonitorable
 
   nilify_blanks
   searchable_columns %w[name description]

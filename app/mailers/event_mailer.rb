@@ -32,11 +32,11 @@ class EventMailer < ApplicationMailer
 
     puts "[MAIL] Sending reminder email for #{@event.label} to #{@manager.name}"
     create_session!
-    @registrations = @event.registrations.since(@event.reminder_emails_sent_at || @event.created_at)
+    @registrations = @event.registrations.since(@event.reminder_email_sent_at || @event.created_at)
     @registrations = @event.registrations.limit(10) if params[:test] && @registrations.empty?
     subject = I18n.translate('mail.event.reminder.subject')
     mail(to: @manager.email, subject: subject)
-    @event.update_column(:reminder_emails_sent_at, Time.now) unless params[:test]
+    @event.update_column(:reminder_email_sent_at, Time.now) unless params[:test]
   end
 
   private

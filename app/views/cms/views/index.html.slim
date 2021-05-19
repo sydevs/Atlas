@@ -14,6 +14,10 @@
       - elsif allow_new
         = floating_action create_action_text, 'plus', url_for([:new, :cms, @context, @model_name.singular_route_key])
 
+    - if @model == Audit
+      - last_activity_on = @context.try(:last_activity_on) || @context.updated_at.to_date
+      = floating_action last_activity_on.to_s(:long), class: 'active teal', data: { tooltip: translate('cms.activity.last_activity') }
+
     .content
       - if controller_name == 'managers' && @context.try(:parent_managers)&.present?
         = translate('cms.details.managers_for_record', resource: @context.label)

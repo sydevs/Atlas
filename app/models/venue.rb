@@ -2,6 +2,7 @@ class Venue < ApplicationRecord
 
   # Extensions
   include Publishable
+  include ActivityMonitorable
 
   audited
   nilify_blanks
@@ -32,6 +33,7 @@ class Venue < ApplicationRecord
 
   # Callbacks
   after_save :ensure_local_area_consistency
+  after_save :update_activity_timestamps
 
   # Methods
 
