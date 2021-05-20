@@ -124,7 +124,6 @@ class Event < ApplicationRecord
   private
 
     def set_end_date
-      puts "SAVING #{recurrence.inspect} #{recurrence == 'day'} && #{end_date.inspect} #{!end_date.present?}"
       self.end_date = start_date if recurrence == 'day' && !end_date.present?
     end
 

@@ -7,7 +7,7 @@ table.stats
         old_value = old_stats[key].to_i
 
       td
-        = inline_svg_tag "mail/#{Mail::ApplicationHelper::STAT_ICONS[key]}.svg"
+        = image_tag "mail/#{Mail::ApplicationHelper::STAT_ICONS[key]}.svg"
         .label = translate(key, scope: 'mail.summary.stats')
         .stat = value
         - unless value == old_value
