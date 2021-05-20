@@ -21,7 +21,7 @@ html
       <td style="padding:0px;margin:0px;" width="560">
       [endif]
     h1
-      = image_tag('mail/logo.png', class: 'logo')
+      = image_tag image_url('mail/logo.png'), class: 'logo'
       = translate('mail.layout.sahaj_atlas').upcase
     = yield
     ul.information
