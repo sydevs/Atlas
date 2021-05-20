@@ -83,6 +83,8 @@ class ListPanel {
       this.container.classList.toggle('list__no-results--close', venueIsClose)
     } else {
       this.closestVenueData = null
+      this.container.classList.remove('list__no-results--far')
+      this.container.classList.remove('list__no-results--close')
     }
   }
 

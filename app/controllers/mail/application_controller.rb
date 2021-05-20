@@ -10,7 +10,7 @@ class Mail::ApplicationController < ActionController::Base
   SUMMARY_PERIOD = 1.month
 
   def summary
-    summary_period = ApplicationController::SUMMARY_PERIOD
+    summary_period = ApplicationMailer::SUMMARY_PERIOD
     @subject = I18n.translate('mail.summary.title')
 
     @start_of_month = summary_period.ago.beginning_of_month
