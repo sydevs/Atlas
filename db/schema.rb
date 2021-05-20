@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_19_225523) do
+ActiveRecord::Schema.define(version: 2021_05_19_232203) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -52,6 +52,8 @@ ActiveRecord::Schema.define(version: 2021_05_19_225523) do
     t.datetime "updated_at", null: false
     t.boolean "enable_province_management"
     t.date "last_activity_on"
+    t.datetime "summary_email_sent_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.jsonb "summary_metadata", default: "{}"
     t.index ["country_code"], name: "index_countries_on_country_code", unique: true
   end
 
@@ -78,8 +80,8 @@ ActiveRecord::Schema.define(version: 2021_05_19_225523) do
     t.string "language_code", limit: 2
     t.boolean "online", default: false, null: false
     t.string "online_url"
-    t.datetime "summary_email_sent_at"
-    t.datetime "reminder_email_sent_at"
+    t.datetime "status_email_sent_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.datetime "reminder_email_sent_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
     t.index ["manager_id"], name: "index_events_on_manager_id"
     t.index ["venue_id"], name: "index_events_on_venue_id"
   end
@@ -103,6 +105,8 @@ ActiveRecord::Schema.define(version: 2021_05_19_225523) do
     t.datetime "updated_at", null: false
     t.string "province_code", limit: 3
     t.date "last_activity_on"
+    t.datetime "summary_email_sent_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.jsonb "summary_metadata", default: "{}"
   end
 
   create_table "managed_records", force: :cascade do |t|
@@ -123,7 +127,6 @@ ActiveRecord::Schema.define(version: 2021_05_19_225523) do
     t.boolean "administrator"
     t.integer "managed_countries_counter", default: 0, null: false
     t.integer "managed_localities_counter", default: 0, null: false
-    t.datetime "summary_email_sent_at"
     t.index ["email"], name: "index_managers_on_email", unique: true
   end
 
@@ -156,6 +159,8 @@ ActiveRecord::Schema.define(version: 2021_05_19_225523) do
     t.datetime "updated_at", null: false
     t.string "province_code", limit: 3
     t.date "last_activity_on"
+    t.datetime "summary_email_sent_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.jsonb "summary_metadata", default: "{}"
   end
 
   create_table "registrations", force: :cascade do |t|

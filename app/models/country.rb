@@ -23,6 +23,8 @@ class Country < ApplicationRecord
   # Scopes
   default_scope { order(country_code: :desc) }
 
+  scope :ready_for_summary_email, -> { where("summary_email_sent_at IS NULL OR summary_email_sent_at <= ?", CountryMailer::SUMMARY_PERIOD.ago) }
+
   # Methods
 
   def contains? venue

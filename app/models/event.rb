@@ -45,7 +45,9 @@ class Event < ApplicationRecord
   scope :publicly_visible, -> { published.not_expired.not_finished }
   scope :finished, -> { where('end_date IS NOT NULL AND end_date < ?', DateTime.now - 1.day) }
   scope :not_finished, -> { where('end_date IS NULL OR end_date >= ?', DateTime.now - 1.day) }
-  scope :no_recent_email_sent, -> { where("summary_email_sent_at IS NULL OR summary_email_sent_at <= ?", Expirable.date_for(:interval)) }
+
+  scope :ready_for_status_email, -> { where("status_email_sent_at IS NULL OR status_email_sent_at <= ?", Expirable.date_for(:interval)) }
+  scope :ready_for_reminder_email, -> { where("reminder_email_sent_at IS NULL OR reminder_email_sent_at <= ?", 12.hours.ago) }
 
   # Delegations
   delegate :full_address, to: :venue

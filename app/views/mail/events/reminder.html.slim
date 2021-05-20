@@ -42,7 +42,7 @@ table.registrations
         = registration.created_at.to_s(:short)
         - if registration.comment.present?
           a href=email_login(cms_event_registrations_url(@event, anchor: registration.id, show: registration.id))
-            = inline_svg 'mail/comment.svg'
+            = inline_svg_tag 'mail/comment.svg'
   - if @registrations.count > 10
     tr.footer
       td colspan=2

@@ -27,6 +27,8 @@ class LocalArea < ApplicationRecord
   scope :cross_province, -> { where(province_code: nil) }
   scope :international, -> { cross_province.where(country_code: nil) }
 
+  scope :ready_for_summary_email, -> { where("summary_email_sent_at IS NULL OR summary_email_sent_at <= ?", RegionMailer::SUMMARY_PERIOD.ago) }
+
   # Callbacks
   after_save :ensure_venue_consistency
 

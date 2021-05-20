@@ -2,8 +2,8 @@ module Expirable
 
   extend ActiveSupport::Concern
 
-  BASE_DURATION = ENV['TEST_EXPIRY'] ? 5 : 8
-  DURATION_INCREMENT = ENV['TEST_EXPIRY'] ? 7 : 1
+  BASE_DURATION = ENV['TEST_EMAILS'] ? 5 : 8
+  DURATION_INCREMENT = ENV['TEST_EMAILS'] ? 7 : 1
 
   LEVELS = {
     verify: 0,
@@ -13,12 +13,13 @@ module Expirable
   }.freeze
 
   included do
-    scope :not_expired, -> { where("#{table_name}.updated_at > ?", Expirable.date_for(:expire)) }
     scope :needs_review, -> { where("#{table_name}.updated_at <= ? AND #{table_name}.updated_at > ?", Expirable.date_for(:verify), Expirable.date_for(:archive)) }
     scope :needs_urgent_review, -> { where("#{table_name}.updated_at < ? AND #{table_name}.updated_at > ?", Expirable.date_for(:escalate), Expirable.date_for(:verify)) }
     scope :expired, -> { where("#{table_name}.updated_at <= ?", Expirable.date_for(:expire)) }
     scope :recently_expired, -> { where("#{table_name}.updated_at <= ? AND #{table_name}.updated_at > ?", Expirable.date_for(:expire), Expirable.date_for(:archive)) }
     scope :archived, -> { where("#{table_name}.updated_at <= ?", Expirable.date_for(:archive)) }
+    scope :not_expired, -> { where("#{table_name}.updated_at > ?", Expirable.date_for(:expire)) }
+    scope :not_archived, -> { where("#{table_name}.updated_at > ?", Expirable.date_for(:archive)) }
   end
 
   def self.count_for(level)

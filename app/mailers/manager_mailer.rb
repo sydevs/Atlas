@@ -14,7 +14,7 @@ class ManagerMailer < ApplicationMailer
   private
 
     def setup
-      @manager = params[:manager]
+      @manager = params[:manager] || params[:record]
       @context = params[:context] || @manager.parent
       create_session!
     end

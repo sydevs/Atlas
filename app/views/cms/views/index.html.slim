@@ -16,7 +16,7 @@
 
     - if @model == Audit
       - last_activity_on = @context.try(:last_activity_on) || @context.updated_at.to_date
-      = floating_action last_activity_on.to_s(:long), class: 'active teal', data: { tooltip: translate('cms.activity.last_activity') }
+      = floating_action last_activity_on.to_s(:long), class: 'active teal', data: { tooltip: translate('cms.activity.last_activity_on') }
 
     .content
       - if controller_name == 'managers' && @context.try(:parent_managers)&.present?
@@ -49,3 +49,15 @@
 
     .ui.relaxed.list
       = render partial: 'cms/list_items/manager', collection: @context.parent_managers, cached: true
+
+- if @model == Audit
+  .ui.basic.segment
+    dl
+      - %i[last_activity_on status_email_sent_at reminder_email_sent_at summary_email_sent_at].each do |timestamp|
+        - if @context.respond_to?(timestamp)
+          dt
+            strong = translate(timestamp, scope: 'cms.activity')
+          dd
+            = time_ago_in_words @context.send(timestamp)
+            '  - 
+            = @context.send(timestamp).to_s(:long)

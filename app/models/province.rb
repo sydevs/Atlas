@@ -20,6 +20,8 @@ class Province < ApplicationRecord
 
   # Scopes
   default_scope { order(province_code: :desc) }
+  
+  scope :ready_for_summary_email, -> { where("summary_email_sent_at IS NULL OR summary_email_sent_at <= ?", RegionMailer::SUMMARY_PERIOD.ago) }
 
   # Delegations
   alias parent country

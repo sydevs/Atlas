@@ -194,7 +194,10 @@ en:
       description: "This is a log of all actions taken by this manager."
       changed_by: "by %{name}"
       changed_to: "changed to"
-      last_activity: "Last Activity"
+      last_activity_on: "Last activity"
+      summary_email_sent_at: "Summary email sent"
+      status_email_sent_at: "Status email sent"
+      reminder_email_sent_at: "Reminder email sent"
 
     dashboard:
       role:

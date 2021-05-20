@@ -40,7 +40,7 @@ module Mail::ApplicationHelper
     content_tag :div, class: 'alert' do
       content_tag :div, class: 'alert__box', style: "background: #{STATUS_COLORS[status]}" do
         content_tag :div, class: 'alert__icon' do
-          inline_svg "mail/#{STATUS_ICONS[status]}.svg"
+          inline_svg_tag "mail/#{STATUS_ICONS[status]}.svg"
         end
       end
     end

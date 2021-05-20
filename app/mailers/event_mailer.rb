@@ -5,9 +5,13 @@ class EventMailer < ApplicationMailer
 
   def status
     setup
-    return if @status.nil?
+    if @status.present?
+      puts "[MAIL] Sending status email for #{@event.label} to #{@manager.name}"
+    else
+      puts "[MAIL] Skip sending status for #{@event.label}"
+      return
+    end
 
-    puts "[MAIL] Sending status email for #{@event.label} to #{@manager.name}"
     create_session!
     subject = I18n.translate(@status, scope: 'mail.event.status.title')
     parameters = { to: @manager.email, subject: subject }
@@ -24,13 +28,18 @@ class EventMailer < ApplicationMailer
       mail(parameters)
     end
 
-    @event.update_column(:summary_email_sent_at, Time.now) unless params[:test]
+    @event.update_column(:status_email_sent_at, Time.now) unless params[:test]
   end
 
   def reminder
     setup
+    if (params && params[:test]) || (@event.next_recurrence_at && @event.next_recurrence_at <= 1.day.from_now)
+      puts "[MAIL] Sending reminder email for #{@event.label} to #{@manager.name}"
+    else
+      puts "[MAIL] Skip sending status for #{@event.label}"
+      return
+    end
 
-    puts "[MAIL] Sending reminder email for #{@event.label} to #{@manager.name}"
     create_session!
     @registrations = @event.registrations.since(@event.reminder_email_sent_at || @event.created_at)
     @registrations = @event.registrations.limit(10) if params[:test] && @registrations.empty?
@@ -42,7 +51,7 @@ class EventMailer < ApplicationMailer
   private
 
     def setup
-      @event = params[:event]
+      @event = params[:event] || params[:record]
       @manager = @event.manager
 
       if @event.expired?
