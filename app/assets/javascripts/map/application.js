@@ -65,8 +65,10 @@ class ApplicationInstance {
     if (venue) {
       this.showVenues([venue])
       this.map.setHighlightedVenue(venue)
+      this.listPanel.toggleTypeInput(false)
     }
 
+    this.listPanel.toggleTypeInput(Boolean(venue))
     this.infoPanel.hideMessages()
     this.saveHistoryState(`/map/event/${event.id}`, venue)
   }
@@ -85,6 +87,7 @@ class ApplicationInstance {
       this.showVenues([venue])
       this.map.invalidateSize()
       this.map.setHighlightedVenue(venue)
+      this.listPanel.toggleTypeInput(false)
 
       this.infoPanel.hideMessages()
 
@@ -98,6 +101,7 @@ class ApplicationInstance {
   showMap() {
     this._setMode('list')
     this.map.setHighlightedVenue(null)
+    this.listPanel.toggleTypeInput(true)
 
     if (this.currentMapOverview) {
       this.map.flyTo(this.currentMapOverview.center, this.currentMapOverview.zoom)

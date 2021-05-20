@@ -117,6 +117,13 @@ class ListPanel {
     }
   }
 
+  toggleTypeInput(shown = null) {
+    const parent = this.modeInputs[0].parentElement.parentElement
+    if (shown == null) shown = parent.style == 'display: none'
+    console.log('toggle type input', shown)
+    parent.style = shown ? '' : 'display: none'
+  }
+
   reset() {
     this.container.scrollTop = 0
     this.itemsContainer.innerHTML = null
