@@ -3,7 +3,7 @@ module Manageable
   extend ActiveSupport::Concern
 
   included do
-    has_many :managed_records, as: :record
+    has_many :managed_records, as: :record, dependent: :delete_all
     has_many :managers, through: :managed_records, dependent: :destroy
   end
 

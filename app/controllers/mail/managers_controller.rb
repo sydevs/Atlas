@@ -4,7 +4,7 @@ class Mail::ManagersController < Mail::ApplicationController
 
   def login
     @magic_link = cms_root_url
-    render 'mail/magic_link'
+    render 'mail/application/magic_link'
   end
 
   def welcome

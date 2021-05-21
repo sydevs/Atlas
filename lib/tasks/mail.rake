@@ -50,6 +50,7 @@ namespace :mail do
         application:summary
         countries:summary provinces:summary local_areas:summary
         events:status events:reminder
+        managed_records:created managed_records:event_manager_changed
       ].each_with_index do |test, index|
         # puts "Press enter to proceed to the next test (mail:#{test})" unless index.zero?
         # STDIN.gets unless index.zero?
@@ -115,6 +116,22 @@ namespace :mail do
         ActionMailer::Base.delivery_method = :letter_opener
         event = Event.not_finished.joins(:manager, :registrations).reorder('RANDOM()').first
         EventMailer.with(event: event, test: true).reminder.deliver_now
+      end
+    end
+
+    namespace :managed_records do
+      desc 'Sends status for one event'
+      task created: :environment do
+        ActionMailer::Base.delivery_method = :letter_opener
+        record = ManagedRecord.joins(:manager).reorder('RANDOM()').first
+        ManagedRecordMailer.with(managed_record: record, test: true).created.deliver_now
+      end
+  
+      desc 'Sends reminder for one event'
+      task event_manager_changed: :environment do
+        ActionMailer::Base.delivery_method = :letter_opener
+        event = Event.not_finished.joins(:manager).reorder('RANDOM()').first
+        ManagedRecordMailer.with(event: event, test: true).created.deliver_now
       end
     end
   end

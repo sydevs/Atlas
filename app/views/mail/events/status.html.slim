@@ -19,38 +19,7 @@ ruby:
 p.byline
   = translate(@status, scope: 'mail.event.status.byline', date: timestamp.to_date.to_s(:long))
 
-table.data
-  tr
-    th = translate('mail.event.location')
-    td = @event.address
-  tr
-    th = translate('mail.event.timing')
-    td
-      = @event.recurrence_in_words
-      ' , 
-      = @event.formatted_start_end_time
-  - if @status == :created
-    tr
-      th = translate('mail.event.start_date')
-      td = @event.start_date.to_date.to_s(:long)
-  tr
-    th = translate('mail.event.category')
-    td = @event.category_name
-  tr
-    th = translate('mail.event.manager')
-    td
-      - manager = @event.manager
-      = mail_to manager.email, manager.name
-  - if @status == :created
-    tr
-      th = translate('mail.event.created_by')
-      td
-        - creator = @event.audits.last.user
-        = creator ? mail_to(creator.email, creator.name) : "System"
-  - elsif %i[needs_urgent_review expired].include?(@status)
-    tr
-      th = translate('mail.event.updated_at')
-      td = @event.updated_at.to_date.to_s(:long)
+= render 'mail/events/data', event: @event, status: @status
 
 - if @status == :needs_urgent_review
   p.explanation

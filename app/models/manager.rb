@@ -6,7 +6,7 @@ class Manager < ApplicationRecord
   audited except: %i[summary_email_sent_at]
 
   # Associations
-  has_many :managed_records
+  has_many :managed_records, dependent: :delete_all
   has_many :countries, through: :managed_records, source: :record, source_type: 'Country', dependent: :destroy
   has_many :provinces, through: :managed_records, source: :record, source_type: 'Province', dependent: :destroy
   has_many :local_areas, through: :managed_records, source: :record, source_type: 'LocalArea', dependent: :destroy

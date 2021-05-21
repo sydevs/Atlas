@@ -37,7 +37,6 @@ Rails.application.configure do
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
   # config.action_controller.asset_host = 'http://assets.example.com'
-  config.action_mailer.asset_host = "https://atlas.sydevelopers.com"
 
   # Specifies the header that your server uses for sending files.
   # config.action_dispatch.x_sendfile_header = 'X-Sendfile' # for Apache
@@ -66,6 +65,7 @@ Rails.application.configure do
   # config.active_job.queue_name_prefix = "atlas_#{Rails.env}"
   config.action_mailer.perform_caching = false
   config.action_mailer.default_url_options = { host: 'atlas.sydevelopers.com' }
+  config.action_mailer.asset_host = "https://atlas.sydevelopers.com"
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.

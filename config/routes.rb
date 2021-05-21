@@ -34,6 +34,12 @@ Rails.application.routes.draw do
       get :summary
       get :summary, on: :collection
     end
+
+    resources :managed_records, only: %i[] do
+      get :created
+      get :created, on: :collection
+      get 'created/:type', on: :collection, action: :created
+    end
   end
 
   namespace :map do

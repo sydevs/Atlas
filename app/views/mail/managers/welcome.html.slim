@@ -11,30 +11,11 @@ h2
 p.explanation = translate(@manager.type, scope: 'mail.manager.welcome.explanation')
 
 - if @context.is_a?(Event)
-  table.data
-    tr
-      th = translate(@manager.type, scope: 'mail.manager.welcome.type')
-      td = @context.label
-    - unless @context.finished?
-      tr
-        th = translate('mail.event.next_date')
-        td = @context.next_recurrence_at.to_s(:day)
-    tr
-      th = translate('mail.event.location')
-      td = @context.address
-    tr
-      th = translate('mail.event.timing')
-      td
-        = @context.recurrence_in_words
-        ' , 
-        = @context.formatted_start_end_time
-    tr
-      th = translate('mail.event.category')
-      td = @context.category_name
+  = render 'mail/events/data', event: @context, status: :reminder
 
 .actions
   a.button href=@magic_link
     span = translate('mail.manager.welcome.login')
   - if @context.present?
     a.button href=email_login(url_for([:cms, @context]))
-      span = translate('mail.manager.welcome.view', context: translate(@manager.type, scope: 'mail.manager.welcome.type'))
+      span = translate(@context.model_name.i18n_key, scope: 'mail.manager.welcome.view')

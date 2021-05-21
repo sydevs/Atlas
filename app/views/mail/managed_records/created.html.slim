@@ -1,0 +1,24 @@
+ruby:
+  type = @record.model_name.i18n_key
+
+- content_for :preview do
+  = translate('mail.managed_record.created.preview', record: @record.label)
+  = translate(type, scope: 'mail.managed_record.created.explanation')
+
+h2
+  = translate(type, scope: 'mail.managed_record.created.title', record: @record.label)
+  small = @manager.name
+
+p.narrow.byline
+  - record_link = link_to(@record.label, email_login(url_for([:cms, @record])))
+  = translate("#{@record.class.model_name.i18n_key}_html", scope: 'mail.managed_record.created.byline', model: translate_model(@record.class).downcase, record: record_link)
+
+p.explanation
+  = translate(@record.model_name.i18n_key, scope: 'mail.managed_record.created.explanation')
+
+- if @record.is_a?(Event)
+  = render 'mail/events/data', event: @record, status: :reminder
+
+.actions
+  a.button href=email_login(url_for([:cms, @record]))
+    span = translate('mail.managed_record.created.view', model: translate_model(@record.class))
