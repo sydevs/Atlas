@@ -43,7 +43,7 @@ class InfoPanel {
 
     const directions = this.container.querySelector('[data-attribute="directions"]')
     directions.style = venue ? '' : 'display: none'
-    directions.href = venue ? venue.directions_url : null
+    directions.href = venue ? venue.directionsUrl : null
 
     this.languageBlock.style = (Boolean(event.languageCode) && document.documentElement.lang.toUpperCase() != event.languageCode ? '' : 'display: none')
     this.container.querySelector('[data-attribute="language"]').textContent = Util.translate(`languages.${event.languageCode}`).split(/[,;]/)[0]
