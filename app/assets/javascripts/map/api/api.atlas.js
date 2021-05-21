@@ -23,6 +23,7 @@ class AtlasAPI {
           onlineUrl
           registrationMode
           registrationUrl
+          path
           timing {
             recurrence
             startDate

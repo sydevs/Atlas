@@ -16,6 +16,7 @@ module GraphqlAPI
     registrationMode
     registrationUrl
     venueId
+    path
     timing {
       recurrence
       startDate
