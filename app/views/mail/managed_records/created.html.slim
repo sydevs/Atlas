@@ -21,4 +21,4 @@ p.explanation
 
 .actions
   a.button href=email_login(url_for([:cms, @record]))
-    span = translate('mail.managed_record.created.view', model: translate_model(@record.class))
+    = translate('mail.managed_record.created.view', model: translate_model(@record.class))

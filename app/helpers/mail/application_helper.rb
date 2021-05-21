@@ -40,7 +40,7 @@ module Mail::ApplicationHelper
     content_tag :div, class: 'alert' do
       content_tag :div, class: 'alert__box', style: "background: #{STATUS_COLORS[status]}" do
         content_tag :div, class: 'alert__icon' do
-          image_tag "mail/#{STATUS_ICONS[status]}-white.png"
+          image_tag "mail/#{STATUS_ICONS[status]}-white.png", width: 28, height: 28
         end
       end
     end

@@ -13,9 +13,12 @@ p.explanation = translate(@manager.type, scope: 'mail.manager.welcome.explanatio
 - if @context.is_a?(Event)
   = render 'mail/events/data', event: @context, status: :reminder
 
-.actions
-  a.button href=@magic_link
-    span = translate('mail.manager.welcome.login')
-  - if @context.present?
-    a.button href=email_login(url_for([:cms, @context]))
-      span = translate(@context.model_name.i18n_key, scope: 'mail.manager.welcome.view')
+table.actions
+  tr
+    td
+      a.button href=@magic_link
+        = translate('mail.manager.welcome.login')
+    - if @context.present?
+      td
+        a.button href=email_login(url_for([:cms, @context]))
+          = translate(@context.model_name.i18n_key, scope: 'mail.manager.welcome.view')

@@ -9,6 +9,11 @@ html
     css:
       a { transition: opacity 0.2s ease }
       a:hover { opacity: 0.8; }
+      button { transition: all 0.5s }
+      button:hover {
+        background: #0b212f;
+        border-color: #0b212f;
+      }
   body
     .preview-text
       = content_for(:preview)
@@ -16,15 +21,17 @@ html
       = translate('mail.layout.information.atlas.description')
 
     / START LIQUID WRAPPER
-    /![if mso]
+    <!--[if mso]>
       <table cellpadding="0" cellspacing="0" border="0" style="padding:0px;margin:0px;width:100%;">
       <tr><td colspan="3" style="padding:0px;margin:0px;font-size:20px;height:20px;" height="20">&nbsp;</td></tr>
       <tr>
       <td style="padding:0px;margin:0px;">&nbsp;</td>
       <td style="padding:0px;margin:0px;" width="560">
-      [endif]
+    <![endif]-->
+
     h1
-      = image_tag image_url('mail/logo.png'), class: 'logo'
+      = image_tag image_url('mail/logo.png'), class: 'logo', width: 32, height: 32
+      br
       = translate('mail.layout.sahaj_atlas').upcase
     = yield
     ul.information
@@ -37,11 +44,12 @@ html
             = link_to translate('mail.layout.learn_more'), info_about_url
           - elsif key == :automated
             = mail_to 'contact@sydevelopers.com'
-    /![if mso]
+
+    <!--[if mso]>
       </td>
       <td style="padding:0px;margin:0px;">&nbsp;</td>
       </tr>
       <tr><td colspan="3" style="padding:0px;margin:0px;font-size:20px;height:20px;" height="20">&nbsp;</td></tr>
       </table>
-      [endif]
+    <![endif]-->
     / END LIQUID WRAPPER
