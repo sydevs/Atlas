@@ -27,7 +27,7 @@ module Types
     field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
 
     def get_events
-      object.events.publicly_visible.map { |event| event.extend(EventDecorator) }
+      object.events.publicly_visible.offline.map { |event| event.extend(EventDecorator) }
     end
   end
 end

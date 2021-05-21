@@ -63,19 +63,21 @@ ruby:
     .event__name data-attribute='name'
       = @event&.dig(:label)
     .event__description
+      span.event__description__online data-attribute='online'
+        strong = translate('map.information.online')
+        br
+        = translate('map.information.online_from')
+        '  
       span.event__description__address data-attribute='address'
         = @event&.dig(:address)
-      span.event__meta__pill data-attribute='online'
-        = translate('map.information.online')
     .event__meta
       span.event__meta__day data-attribute='day'
         - if @event&.dig(:timing, :recurrence)
           = translate @event[:timing][:recurrence], scope: 'javascript.recurrence'
-      span.event__meta__time data-attribute='time'
-        ruby:
-          startTime = @event&.dig(:timing, :endTime)
-          endTime = @event&.dig(:timing, :endTime)
-
+      | &#8203;
+      - startTime = @event&.dig(:timing, :endTime)
+      - endTime = @event&.dig(:timing, :endTime)
+      time.event__meta__time data-attribute='time' datetime=startTime
         = endTime ? "#{startTime} - #{endTime}" : startTime
 
   a.info__directions data-attribute='directions' target='_blank'

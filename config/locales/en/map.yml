@@ -21,6 +21,7 @@ en:
       language: "This class is in"
       directions: "Get directions"
       online: "Online Class"
+      online_from: "From"
     registration:
       header: "Register now"
       form:

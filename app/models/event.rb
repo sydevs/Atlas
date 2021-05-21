@@ -45,6 +45,9 @@ class Event < ApplicationRecord
   scope :ready_for_status_email, -> { where("status_email_sent_at IS NULL OR status_email_sent_at <= ?", Expirable.date_for(:interval)) }
   scope :ready_for_reminder_email, -> { where("reminder_email_sent_at IS NULL OR reminder_email_sent_at <= ?", 12.hours.ago) }
 
+  scope :online, -> { where(online: true) }
+  scope :offline, -> { where.not(online: true) }
+
   # Callbacks
   before_validation :find_manager
   before_validation :set_end_date
