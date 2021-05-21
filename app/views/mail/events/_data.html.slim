@@ -1,6 +1,6 @@
 - status ||= nil
 
-table.data
+table.data cellpadding=0
   - if status == :reminder && !event.finished?
     tr
       th = translate('mail.event.next_date')
