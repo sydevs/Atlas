@@ -12,7 +12,7 @@ ruby:
 .box
   h2
     = translate(@status, scope: 'mail.event.status.title')
-    small = @event.label
+    .subtitle = @event.label
 
 = email_status_icon(@status)
 

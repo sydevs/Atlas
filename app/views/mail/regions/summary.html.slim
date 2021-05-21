@@ -7,7 +7,7 @@
 
 h2
   = translate('mail.region.summary.title')
-  small = @region.label
+  .subtitle = @region.label
 
 = render 'mail/application/stats', stats: @stats, old_stats: @old_stats
 

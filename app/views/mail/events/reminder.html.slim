@@ -7,7 +7,7 @@
 
 h2
   = @event.label
-  small = translate('mail.event.reminder.title')
+  .subtitle = translate('mail.event.reminder.title')
 
 p.narrow.explanation
   = translate('mail.event.reminder.explanation', duration: time_ago_in_words(@event.next_recurrence_at), time: @event.start_time)

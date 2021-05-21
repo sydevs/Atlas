@@ -3,7 +3,7 @@
 
 h2
   = translate('mail.manager.welcome.title')
-  small = @manager.name
+  .subtitle = @manager.name
 
 - unless @manager.type == :none
   p.byline = translate(@manager.type, scope: 'mail.manager.welcome.byline', context: @context&.label)

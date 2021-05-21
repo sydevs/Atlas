@@ -7,7 +7,7 @@ ruby:
 
 h2
   = translate(type, scope: 'mail.managed_record.created.title', record: @record.label)
-  small = @manager.name
+  .subtitle = @manager.name
 
 p.narrow.byline
   - record_link = link_to(@record.label, email_login(url_for([:cms, @record])))
