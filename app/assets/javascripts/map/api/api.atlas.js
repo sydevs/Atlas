@@ -32,6 +32,7 @@ class AtlasAPI {
           }
           images {
             url
+            thumbnailUrl
           }
         }`,
         venue: `on Venue {

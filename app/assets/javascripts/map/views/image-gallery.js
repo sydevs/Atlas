@@ -21,7 +21,7 @@ class ImageGallery {
     const cells = images.map(image => {
       const img = document.createElement('IMG')
       img.className = 'carousel-image'
-      img.dataset.flickityLazyloadSrc = image.thumbnail_url
+      img.dataset.flickityLazyloadSrc = image.url
 
       img.addEventListener('load', () => {
         this.flickity.resize()

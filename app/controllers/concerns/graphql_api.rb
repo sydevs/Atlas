@@ -25,6 +25,7 @@ module GraphqlAPI
     }
     images {
       url
+      thumbnailUrl
     }
   }
 

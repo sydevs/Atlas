@@ -99,7 +99,7 @@ class Event < ApplicationRecord
   end
 
   def notify_new_manager
-    return if self.new_manager_record?
+    return if self.new_manager_record
     return unless saved_change_to_attribute?(:manager_id)
 
     if created_at_changed?
