@@ -43,7 +43,8 @@ gem 'timezone'
 
 ### File uploads
 gem 'carrierwave' # Serverside image uploader
-gem 'fog-google' # Serverside image uploader
+gem 'carrierwave-google-storage' # Let's us store the files in Google Storage
+gem 'google-api-client' # An unspecified dependency for carrierwave-google-storage
 gem 'mini_magick' # Image processing during upload
 
 ### Internationalization
