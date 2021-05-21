@@ -30,7 +30,7 @@ module Expirable
 
   def self.duration_for(level)
     base = Expirable.count_for(level)
-    ENV['TEST_MODE'] ? base.minutes : base.weeks
+    ENV['TEST_EMAILS'] ? base.minutes : base.weeks
   end
 
   def self.date_for(level)
