@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_19_232203) do
+ActiveRecord::Schema.define(version: 2021_05_23_215257) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,6 +54,7 @@ ActiveRecord::Schema.define(version: 2021_05_19_232203) do
     t.date "last_activity_on"
     t.datetime "summary_email_sent_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
     t.jsonb "summary_metadata", default: "{}"
+    t.string "default_language_code", limit: 2
     t.index ["country_code"], name: "index_countries_on_country_code", unique: true
   end
 

@@ -58,19 +58,22 @@ button.lookup.ui.fluid.button type='button'
   i.search.icon
   = translate('cms.hints.venue.find_marker')
 
-.required.field id='venue_location' style=('display: none' unless current_user.administrator?)
-  = f.label translate('cms.hints.venue.manual_location'), required: true
-  = f.hint translate('cms.hints.venue.location')
-  - if current_user.administrator?
-    .three.fields
-      .field = f.input_field :latitude, placeholder: translate_attribute(Venue, :latitude)
-      .field = f.input_field :longitude, placeholder: translate_attribute(Venue, :longitude)
-      .field = f.input_field :place_id, placeholder: translate_attribute(Venue, :place_id)
-  - else
-    .two.fields
-      .field = f.input_field :latitude, placeholder: translate_attribute(Venue, :latitude)
-      .field = f.input_field :longitude, placeholder: translate_attribute(Venue, :longitude)
-      = f.hidden_field :place_id, placeholder: translate_attribute(Venue, :place_id)
+= f.hint translate('cms.hints.venue.location')
+.ui.accordion.required.field id='venue_location' style=('display: none' unless current_user.administrator?)
+  .title
+    i.dropdown.icon
+    = f.label translate('cms.hints.venue.manual_location'), required: true
+  .content
+    - if current_user.administrator?
+      .three.fields
+        .field = f.input_field :latitude, placeholder: translate_attribute(Venue, :latitude)
+        .field = f.input_field :longitude, placeholder: translate_attribute(Venue, :longitude)
+        .field = f.input_field :place_id, placeholder: translate_attribute(Venue, :place_id)
+    - else
+      .two.fields
+        .field = f.input_field :latitude, placeholder: translate_attribute(Venue, :latitude)
+        .field = f.input_field :longitude, placeholder: translate_attribute(Venue, :longitude)
+        = f.hidden_field :place_id, placeholder: translate_attribute(Venue, :place_id)
 
 - if f.object.errors.include?(:latitude)
   = f.error :latitude

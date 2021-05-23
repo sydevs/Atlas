@@ -61,6 +61,7 @@ h3.ui.small.dividing.grey.header = translate('cms.details.management_for_record'
       i.orange.eye.slash.icon
       .content
         .title = translate('cms.details.record_archived.title', resource: translate_model(Event))
+        a.ui.right.floated.basic.button href=edit_cms_event_url(@record) = translate('cms.details.record_archived.action')
         .description = translate('cms.details.record_archived.description', resource: translate_model(Event).downcase, time: time_ago_in_words(@record.updated_at))
   = help_link :expiration, (translate("cms.help.expiration.alt_title") unless @record.expired?)
 - elsif @record.published? && @record.venue.published?

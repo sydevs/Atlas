@@ -37,4 +37,9 @@ class Country < ApplicationRecord
     false
   end
 
+  def default_language_code= value
+    # Only accept languages which are in the language list
+    super value if I18nData.languages.key?(value)
+  end
+
 end

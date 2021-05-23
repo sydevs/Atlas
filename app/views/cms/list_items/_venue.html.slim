@@ -7,11 +7,11 @@
   - else
     i.grey.dot.circle.icon
   .content
-    - if policy(venue).show?
-      .header 
+    .header
+      - if policy(venue).show?
         a href=url_for([:cms, venue]) = venue.label
-    - else
-      .header = venue.label
+      - else
+        = venue.label
     .description
       - if !venue.published?
         em.alert = translate('cms.details.record_not_published.title')

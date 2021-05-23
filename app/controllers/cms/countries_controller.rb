@@ -21,7 +21,7 @@ class CMS::CountriesController < CMS::ApplicationController
   private
 
     def parameters
-      params.fetch(:country, {}).permit(:country_code, :enable_province_management)
+      params.fetch(:country, {}).permit(:country_code, :default_language_code, :enable_province_management)
     end
 
 end

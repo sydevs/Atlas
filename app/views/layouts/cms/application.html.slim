@@ -50,6 +50,12 @@ html
           i.right.angle.icon.divider
 
           - if @context.respond_to?(:ancestors)
+            - if current_user.administrator?
+              a.section href=url_for([:cms, :regions])
+                = translate('cms.menu.breadcrumbs.world')
+              
+              i.right.angle.icon.divider
+              
             - @context.ancestors.each do |ancestor|
               - if policy(ancestor).show?
                 a.section href=breadcrumb_url(ancestor)

@@ -46,7 +46,7 @@ en:
         regions: "Regions"
         cities: "Cities / Regions"
       breadcrumbs:
-        show: "World"
+        world: "World"
         help: "Help"
         regions: "Regions"
         review: "Review Alerts"
@@ -87,6 +87,8 @@ en:
         description: "You can use this search to automatically fill the fields below. It uses the Google API. If Google is blocked in your country, or if the search fails, you will need to enter the data manually."
       country:
         must_be_new: "Only countries which haven't already been added are listed below."
+        language: "The default language that events in this country are usually in."
+        no_default_language: "No default"
         province_management: "If enabled, you will be able to view and assign managers to regions (provinces, states, etc) within this country. This is useful for larger countries (China, USA, Australia, etc), and unnessecary for small countries (Belgium, Lithuania, Singapore, etc)."
       province:
         must_be_new: "Only regions which haven't already been added are listed below."
@@ -154,9 +156,9 @@ en:
         action: "Review"
       record_archived:
         title: "%{resource} Archived"
-        description: "This %{resource} has not been updated in a long time (%{time}). It will not be shown on the map unless it is review and saved."
+        description: "This %{resource} has not been updated in a long time (%{time}). It will not be shown on the map unless it is reviewed and saved."
         alt_description: "This %{resource} has been hidden from the public, because it hasn't been updated in a long time (%{time}). Please review the details below and press save to confirm that the event details are correct."
-        action: "Review"
+        action: "Unarchive"
       external_registration:
         title: "Event is Using External Registration"
         description: "This event is set to have seekers register on %{mode}. It's better if you have seekers register on the Sahaj Atlas, because then we will be able to send them reminders and confirmation emails."

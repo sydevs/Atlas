@@ -1,3 +1,4 @@
+- languages = I18nData.languages(I18n.locale).map { |k, v| [v.split(/[,;]/)[0], k] }
 
 - if @record.new_record?
   - existing_countries = Country.pluck(:country_code)
@@ -6,4 +7,5 @@
   .hint = translate('cms.hints.country.must_be_new')
   = f.input :country_code, label: false, prompt: translate('cms.actions.target.choose', resource: translate_model(Country).downcase), collection: countries, input_html: { class: 'search' }
 
+= f.input :default_language_code, collection: languages, selected: @record.default_language_code, input_html: { class: 'search' }, include_blank: translate('cms.hints.country.no_default_language'), hint: translate('cms.hints.country.language')
 = f.input :enable_province_management, as: :boolean, wrapper: :semantic_checkbox, hint: translate('cms.hints.country.province_management')

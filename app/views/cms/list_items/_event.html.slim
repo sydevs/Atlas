@@ -11,10 +11,14 @@
   - else
     i.grey.dot.circle.icon
   .content
-    - if policy(event).show?
-      a.header href=url_for([:cms, event]) = event.label
-    - else
-      .header = event.label
+    .header
+      - if policy(event).show?
+        a href=url_for([:cms, event]) = event.label
+      - else
+        = event.label
+
+      - if !@context&.is_a?(Venue)
+        |  - #{event.venue.city}
     .description
       - if event.finished?
         em.alert = translate('cms.details.record_finished.title', resource: translate_model(Event))
