@@ -111,7 +111,8 @@ en:
         preview:
           worldwide: "You have been invited to become an administrator of the Sahaj Atlas."
           country: "You have been invited to become a country manager for %{context}."
-          local: "You have been invited to become a local manager for %{context}."
+          province: "You have been invited to become a local manager for %{context}."
+          local_area: "You have been invited to become a local manager the %{context} area."
           event: "You have been invited to become the event manager for \"%{context}\"."
           none: "You have been invited to become a manager of the Sahaj Atlas."
         login: "Login"
@@ -123,12 +124,14 @@ en:
         byline:
           worldwide: "Global Administrator"
           country: "Country Manager for %{context}"
-          local: "Local Manager for %{context}"
+          province: "Local Manager for %{context}"
+          local_area: "Local Manager for %{context}"
           event: "Event Manager for \"%{context}\""
         explanation:
           worldwide: "You have been invited to become an administrator of the Sahaj Atlas. It will be your job to onboard new country managers and keep an eye on the maintainance of the atlas."
           country: "You have been invited to become a country manager on Sahaj Atlas. It will be your responsibility to create cities and regions within your country and assign managers to manage events in those regions."
-          local: "You have been invited to become a local manager on Sahaj Atlas. It will be your responsibility to create venues and list public Sahaj events within your region."
+          province: "You have been invited to become a local manager on Sahaj Atlas. It will be your responsibility to create venues and list public Sahaj events within your region."
+          local_area: "You have been invited to become a local manager on Sahaj Atlas. It will be your responsibility to create venues and list public Sahaj events within your region."
           event: "You have been invited to become an event manager on Sahaj Atlas. It will be your responsibility to keep your event up to date."
           none: "You have been invited to become a manager on Sahaj Atlas. You have not yet been assigned any responsibilities. Please contact us if you need help."
         data:

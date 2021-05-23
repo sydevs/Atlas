@@ -5,10 +5,14 @@ h2
   = translate('mail.manager.welcome.title')
   .subtitle = @manager.name
 
-- unless @manager.type == :none
-  p.byline = translate(@manager.type, scope: 'mail.manager.welcome.byline', context: @context&.label)
-
-p.explanation = translate(@manager.type, scope: 'mail.manager.welcome.explanation')
+- if @context
+  p.byline = translate(@context.model_name.i18n_key, scope: 'mail.manager.welcome.byline', context: @context&.label)
+  p.explanation = translate(@context.model_name.i18n_key, scope: 'mail.manager.welcome.explanation')
+- elsif @manager.administrator?
+  p.byline = translate('mail.manager.welcome.byline.worldwide')
+  p.explanation = translate('mail.manager.welcome.explanation.worldwide')
+- else
+  p.explanation = translate('mail.manager.welcome.explanation.none')
 
 - if @context.is_a?(Event)
   = render 'mail/events/data', event: @context, status: :reminder
