@@ -8,7 +8,7 @@ class Mail::LocalAreasController < Mail::ApplicationController
 
     @start_of_period = summary_period.ago.beginning_of_week
     @end_of_period = @start_of_period + summary_period
-    @end_of_month = Time.now # For testing
+    @end_of_period = Time.now # For testing
     query = ['events.created_at >= ? AND events.created_at <= ?', @start_of_period, @end_of_period]
 
     @new_events = @region.events.publicly_visible.where(*query)

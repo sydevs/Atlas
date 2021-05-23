@@ -7,7 +7,7 @@
 
 h2
   = translate('mail.summary.title')
-  .subtitle = @start_of_month.to_date.to_s(:month_and_year)
+  .subtitle = @start_of_period.to_date.to_s(:month_and_year)
 
 = render 'mail/application/stats', stats: @stats, old_stats: @old_stats
 

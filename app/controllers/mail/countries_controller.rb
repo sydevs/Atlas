@@ -9,7 +9,7 @@ class Mail::CountriesController < Mail::ApplicationController
 
     @start_of_period = summary_period.ago.beginning_of_week
     @end_of_period = @start_of_period + summary_period
-    @end_of_month = Time.now # For testing
+    @end_of_period = Time.now # For testing
     query = ['created_at >= ? AND created_at <= ?', @start_of_period, @end_of_period]
     managed_records_query = ['managed_records.created_at >= ? AND managed_records.created_at <= ?', @start_of_period, @end_of_period]
 

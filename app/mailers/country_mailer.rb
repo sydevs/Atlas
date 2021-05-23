@@ -8,17 +8,11 @@ class CountryMailer < ApplicationMailer
   def summary
     setup
     last_summary_email_sent_at = @country.summary_email_sent_at || 1.year.ago
-    cooldown_interval = ENV['TEST_EMAILS'] ? 2.days : SUMMARY_PERIOD - 1.day
-    if params[:test] || last_summary_email_sent_at < cooldown_interval.ago
-      puts "[MAIL] Sending summary email for #{@country.label}"
-    else
-      puts "[MAIL] Skip sending summary for #{@country.label}"
-      return
-    end
+    return if params.dig(:test) || last_summary_too_soon?(last_summary_email_sent_at)
 
-    @start_of_period = SUMMARY_PERIOD.ago.beginning_of_week
-    @end_of_period = @start_of_period + SUMMARY_PERIOD
-    @end_of_period = Time.now
+    puts "[MAIL] Sending summary email for #{@country.label}"
+
+    set_summary_period!
     query = ['created_at >= ? AND created_at <= ?', @start_of_period, @end_of_period]
     managed_records_query = ['managed_records.created_at >= ? AND managed_records.created_at <= ?', @start_of_period, @end_of_period]
 

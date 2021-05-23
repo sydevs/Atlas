@@ -5,7 +5,7 @@ class Province < ApplicationRecord
   include ActivityMonitorable
 
   searchable_columns %w[province_code country_code]
-  audited
+  audited except: %i[summary_email_sent_at summary_metadata]
 
   # Associations
   belongs_to :country, foreign_key: :country_code, primary_key: :country_code

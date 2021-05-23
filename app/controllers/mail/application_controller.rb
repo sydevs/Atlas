@@ -13,11 +13,11 @@ class Mail::ApplicationController < ActionController::Base
     summary_period = ApplicationMailer::SUMMARY_PERIOD
     @subject = I18n.translate('mail.summary.title')
 
-    @start_of_month = summary_period.ago.beginning_of_month
-    @end_of_month = summary_period.ago.end_of_month
-    @end_of_month = Time.now # For testing
-    query = ['created_at >= ? AND created_at <= ?', @start_of_month, @end_of_month]
-    managed_records_query = ['managed_records.created_at >= ? AND managed_records.created_at <= ?', @start_of_month, @end_of_month]
+    @start_of_period = summary_period.ago.beginning_of_month
+    @end_of_period = summary_period.ago.end_of_period
+    @end_of_period = Time.now # For testing
+    query = ['created_at >= ? AND created_at <= ?', @start_of_period, @end_of_period]
+    managed_records_query = ['managed_records.created_at >= ? AND managed_records.created_at <= ?', @start_of_period, @end_of_period]
 
     @new_countries = Country.where(*query)
     @new_country_managers = ManagedRecord.where(record_type: 'Country').joins(:manager).where(*managed_records_query)

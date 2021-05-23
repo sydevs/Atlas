@@ -3,7 +3,7 @@ class Manager < ApplicationRecord
   # Extensions
   passwordless_with :email
   searchable_columns %w[name email]
-  audited except: %i[summary_email_sent_at]
+  audited
 
   # Associations
   has_many :managed_records, dependent: :delete_all

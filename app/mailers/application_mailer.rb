@@ -1,27 +1,22 @@
 class ApplicationMailer < ActionMailer::Base
 
+  SUMMARY_PERIOD = 1.month
+  include Summary
+
   helper Mail::ApplicationHelper
   helper LocalizationHelper
   layout 'mail/admin'
   default template_path: 'mail/application'
   default from: 'Sahaj Atlas <contact@sydevelopers.com>'
 
-  SUMMARY_PERIOD = 1.month
-
   def summary
     last_summary_email_sent_at = Stash.get(:summary_email_sent_at) || 1.year.ago
-    cooldown_interval = ENV['TEST_EMAILS'] ? 3.days : SUMMARY_PERIOD - 1.day
-    if (params && params[:test]) || last_summary_email_sent_at < cooldown_interval.ago
-      puts "[MAIL] Sending summary for Sahaj Atlas"
-    else
-      puts "[MAIL] Skip sending summary for Sahaj Atlas"
-      return
-    end
+    return if params.dig(:test) || last_summary_too_soon?(last_summary_email_sent_at)
 
-    @start_of_month = SUMMARY_PERIOD.ago.beginning_of_month
-    @end_of_month = SUMMARY_PERIOD.ago.end_of_month
-    query = ['created_at >= ? AND created_at <= ?', @start_of_month, @end_of_month]
-    managed_records_query = ['managed_records.created_at >= ? AND managed_records.created_at <= ?', @start_of_month, @end_of_month]
+    puts "[MAIL] Sending summary for Sahaj Atlas"
+    set_summary_period!
+    query = ['created_at >= ? AND created_at <= ?', @start_of_period, @end_of_period]
+    managed_records_query = ['managed_records.created_at >= ? AND managed_records.created_at <= ?', @start_of_period, @end_of_period]
 
     @new_countries = Country.where(*query)
     @new_country_managers = ManagedRecord.where(record_type: 'Country').joins(:manager).where(*managed_records_query)

@@ -7,7 +7,7 @@ class Event < ApplicationRecord
 
   nilify_blanks
   searchable_columns %w[name description]
-  audited except: %i[summary_email_sent_at upcoming_email_sent_at latest_registration_at]
+  audited except: %i[summary_email_sent_at status_email_sent_at latest_registration_at]
 
   enum category: { intro: 1, intermediate: 2, course: 3, public_event: 4, concert: 5 }
   enum recurrence: { day: 0, monday: 1, tuesday: 2, wednesday: 3, thursday: 4, friday: 5, saturday: 6, sunday: 7 }
