@@ -84,23 +84,27 @@ en:
         published: "Published"
         email: "Email Address"
         identifier: "Filter Identifier"
+        last_activity_on: "Last Activity On"
 
       # Regions
       country:
         manager_id: :activerecord.models.manager.single # Do not translate
         country_code: :activerecord.models.country.single # Do not translate
+        last_activity_on: :activerecord.attributes.generic.last_activity_on # Do not translate
         enable_province_management: "Enable Regional Management"
 
       province:
         manager_id: :activerecord.models.manager.single # Do not translate
         country_code: :activerecord.models.country.single # Do not translate
         province_code: :activerecord.models.province.single # Do not translate
+        last_activity_on: :activerecord.attributes.generic.last_activity_on # Do not translate
 
       local_area:
         manager_id: :activerecord.models.manager.single # Do not translate
         name: :activerecord.attributes.generic.name # Do not translate
         country_code: :activerecord.models.country.single # Do not translate
         province_code: :activerecord.models.province.single # Do not translate
+        last_activity_on: :activerecord.attributes.generic.last_activity_on # Do not translate
         coordinates: "Location"
         latitude: "Latitude"
         longitude: "Longitude"
