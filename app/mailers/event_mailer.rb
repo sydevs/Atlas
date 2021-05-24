@@ -13,7 +13,7 @@ class EventMailer < ApplicationMailer
     end
 
     create_session!
-    subject = I18n.translate(@status, scope: 'mail.event.status.title')
+    subject = I18n.translate(@status, scope: 'mail.event.status.title', event: @event.label)
     parameters = { to: @manager.email, subject: subject }
     if @status == :needs_urgent_review
       parameters['Importance'] = 'high'
@@ -43,7 +43,7 @@ class EventMailer < ApplicationMailer
     create_session!
     @registrations = @event.registrations.since(@event.reminder_email_sent_at || @event.created_at)
     @registrations = @event.registrations.limit(10) if params[:test] && @registrations.empty?
-    subject = I18n.translate('mail.event.reminder.subject')
+    subject = I18n.translate('mail.event.reminder.subject', event: @event.label)
     mail(to: @manager.email, subject: subject)
     @event.update_column(:reminder_email_sent_at, Time.now) unless params[:test]
   end

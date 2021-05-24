@@ -57,11 +57,11 @@ en:
 
       status:
         subject:
-          created: "New Event Created"
-          needs_review: "[Warning] Event Needs Review"
-          needs_urgent_review: "[Alert] Event Will Expire Soon"
-          expired: "Event Expired"
-          finished: "Event Finished"
+          created: "New Event Created - %{event}"
+          needs_review: "[Warning] Event Needs Review - %{event}"
+          needs_urgent_review: "[Alert] Event Will Expire Soon - %{event}"
+          expired: "Event Expired - %{event}"
+          finished: "Event Finished - %{event}"
         preview:
           created: "You are the manager of a new event. '%{event}'' has been created in %{region}."
           needs_review: "'%{event}' needs to be reviewed or else it will be removed from the map. Please check that the event information is still correct."
