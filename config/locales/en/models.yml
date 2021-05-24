@@ -2,6 +2,7 @@
 en:
   datetime:
     distance_in_words:
+      soon: "soon"
       x_weeks:
         one: "%{count} week"
         other: "%{count} weeks"

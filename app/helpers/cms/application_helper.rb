@@ -86,7 +86,7 @@ module CMS::ApplicationHelper
   end
 
   def time_from_now_in_words time
-    time_ago_in_words(time)
+    time > Time.now ? time_ago_in_words(time) : translate('datetime.distance_in_words.soon')
   end
 
   def expiry_time_in_words status
