@@ -60,14 +60,6 @@ module EventDecorator
     "#{recurrence_in_words}, #{formatted_start_end_time}"
   end
 
-  def escalates_in_days_in_words
-    distance_of_time_in_words(Time.now, needs_escalation_at)
-  end
-
-  def expires_in_days_in_words
-    distance_of_time_in_words(Time.now, expires_at)
-  end
-  
   def language_name
     I18nData.languages(I18n.locale)[language_code].split(/[,;]/)[0]
   end

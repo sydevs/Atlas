@@ -53,11 +53,20 @@
 - if @model == Audit
   .ui.basic.segment
     dl
-      - %i[last_activity_on status_email_sent_at reminder_email_sent_at summary_email_sent_at].each do |timestamp|
+      - %i[last_activity_on status_email_sent_at reminder_email_sent_at summary_email_sent_at should_update_status_at verified_at expired_at archived_at finished_at].each do |timestamp|
         - if @context.respond_to?(timestamp)
+          - time = @context.send(timestamp)
           dt
-            strong = translate(timestamp, scope: 'cms.activity')
+            strong = translate_attribute(@context, timestamp)
           dd
-            = time_ago_in_words @context.send(timestamp)
-            '  - 
-            = @context.send(timestamp).to_s(:long)
+            - if time
+              = time_ago_in_words(time)
+              '  - 
+              = time.to_s(:long)
+            - else
+              | -
+      - if @context.respond_to?(:status)
+        dt
+          strong = translate_attribute(@context.class, :status)
+        dd
+          = translate_enum_value(@context, :status)

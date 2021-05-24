@@ -3,7 +3,8 @@ class Mail::EventsController < Mail::ApplicationController
   before_action :fetch_event
 
   def status
-    @status = params[:status]&.to_sym || :created
+    @status = params[:status]&.to_sym || @event.status.to_sym || :created
+    @status = :created if @status == :verified
     @subject = I18n.translate(@status, scope: 'mail.event.status.subject')
   end
 
@@ -22,7 +23,7 @@ class Mail::EventsController < Mail::ApplicationController
       if params[:event_id]
         @event = Event.find(params[:event_id])
       else
-        @event = Event.not_finished.order('RANDOM()').first
+        @event = Event.where.not(status: Event.statuses.values_at(*%w[archived finished])).order('RANDOM()').first
       end
     end
 

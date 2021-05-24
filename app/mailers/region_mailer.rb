@@ -23,7 +23,7 @@ class RegionMailer < ApplicationMailer
 
     @new_events = @region.events.publicly_visible.where(*query)
     @expiring_events = @region.events.needs_urgent_review
-    @recently_expired_events = @region.events.recently_expired
+    @expired_events = @region.events.expired
     @inactive_local_areas = @region.local_areas.inactive_since(SUMMARY_PERIOD.ago) if @region.is_a?(Province)
 
     @stats = {

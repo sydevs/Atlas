@@ -5,8 +5,8 @@ class EventMailer < ApplicationMailer
 
   def status
     setup
-    if @status.present?
-      puts "[MAIL] Sending status email for #{@event.label} to #{@manager.name}"
+    if @status.present? && @status != :verified
+      puts "[MAIL] Sending status email (#{@event.status}) for #{@event.label} to #{@manager.name}"
     else
       puts "[MAIL] Skip sending status for #{@event.label}"
       return
@@ -53,18 +53,8 @@ class EventMailer < ApplicationMailer
     def setup
       @event = params[:event] || params[:record]
       @manager = @event.manager
-
-      if @event.expired?
-        @status = :expired
-      elsif @event.needs_urgent_review?
-        @status = :needs_urgent_review
-      elsif @event.needs_review?
-        @status = :needs_review
-      elsif @event.created_at > 1.week.ago
-        @status = :created
-      else
-        @status = nil
-      end
+      @status = @event.status.to_sym
+      @status = :created if @status == :verified && @event.created_at > 1.week.ago
     end
 
 end

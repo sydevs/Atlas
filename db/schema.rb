@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_23_215257) do
+ActiveRecord::Schema.define(version: 2021_05_23_233629) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -83,7 +83,14 @@ ActiveRecord::Schema.define(version: 2021_05_23_215257) do
     t.string "online_url"
     t.datetime "status_email_sent_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
     t.datetime "reminder_email_sent_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.datetime "should_update_status_at", default: -> { "CURRENT_TIMESTAMP" }
+    t.datetime "verified_at", default: -> { "CURRENT_TIMESTAMP" }
+    t.datetime "expired_at"
+    t.datetime "archived_at"
+    t.datetime "finished_at"
+    t.integer "status", default: 0, null: false
     t.index ["manager_id"], name: "index_events_on_manager_id"
+    t.index ["status"], name: "index_events_on_status"
     t.index ["venue_id"], name: "index_events_on_venue_id"
   end
 

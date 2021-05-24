@@ -1,24 +1,23 @@
 
 - if @record.published? && @record.venue.published?
-  - unless @record.finished?
-    - if @record.recently_expired?
-      .ui.small.orange.icon.message
-        i.exclamation.icon
-        .content
-          a.ui.right.floated.orange.button href=url_for([:edit, :cms, @record])
-            = translate('cms.details.record_expired.action')
-            i.right.arrow.icon
-          .header = translate('cms.details.record_expired.title', resource: translate_model(@model))
-          .description = translate('cms.details.record_expired.description', resource: translate_model(@model).downcase, updated_ago: time_ago_in_words(@record.updated_at))
-    - elsif @record.needs_review?
-      .ui.small.yellow.icon.message
-        i.exclamation.icon
-        .content
-          a.ui.right.floated.yellow.button href=url_for([:edit, :cms, @record])
-            = translate('cms.details.record_needs_review.action')
-            i.right.arrow.icon
-          .header = translate('cms.details.record_needs_review.title', resource: translate_model(@model))
-          .description = translate('cms.details.record_needs_review.description', resource: translate_model(@model).downcase, updated_ago: time_ago_in_words(@record.updated_at), expires_in: distance_of_time_in_words(Time.now, @record.expires_at))
+  - if @record.expired?
+    .ui.small.orange.icon.message
+      i.exclamation.icon
+      .content
+        a.ui.right.floated.orange.button href=url_for([:edit, :cms, @record])
+          = translate('cms.details.record_expired.action')
+          i.right.arrow.icon
+        .header = translate('cms.details.record_expired.title', resource: translate_model(@model))
+        .description = translate('cms.details.record_expired.description', resource: translate_model(@model).downcase, updated_ago: time_ago_in_words(@record.updated_at))
+  - elsif @record.needs_review?
+    .ui.small.yellow.icon.message
+      i.exclamation.icon
+      .content
+        a.ui.right.floated.yellow.button href=url_for([:edit, :cms, @record])
+          = translate('cms.details.record_needs_review.action')
+          i.right.arrow.icon
+        .header = translate('cms.details.record_needs_review.title', resource: translate_model(@model))
+        .description = translate('cms.details.record_needs_review.description', resource: translate_model(@model).downcase, updated_ago: time_ago_in_words(@record.updated_at), expires_in: time_from_now_in_words(@record.should_expire_at))
 
 - unless @record.native_registration_mode?
   .ui.small.yellow.icon.message
@@ -63,16 +62,17 @@ h3.ui.small.dividing.grey.header = translate('cms.details.management_for_record'
         .title = translate('cms.details.record_archived.title', resource: translate_model(Event))
         a.ui.right.floated.basic.button href=edit_cms_event_url(@record) = translate('cms.details.record_archived.action')
         .description = translate('cms.details.record_archived.description', resource: translate_model(Event).downcase, time: time_ago_in_words(@record.updated_at))
-  = help_link :expiration, (translate("cms.help.expiration.alt_title") unless @record.expired?)
+  = help_link :expiration, translate("cms.help.expiration.title")
 - elsif @record.published? && @record.venue.published?
   .ui.three.event.steps
-    - %w[updated needs_review expired].each do |step|
-      - active = @record.send("#{step}?")
+    - { verified: :verified, should_need_review: :needs_review, should_expire: :expired }.each do |step, status|
+      - active = @record.send(:"#{status}?")
+      - active ||= @record.needs_urgent_review? if status == :needs_review
       .step class=('disabled' unless active)
         i.icon class=translate("cms.help.expiration.steps.#{step}.icon") class=('grey disabled' unless active)
         .content
           .title = translate(active ? :active_label : :inactive_label, scope: "cms.help.expiration.steps.#{step}")
-          .description = @record.send("#{step}_at").strftime('%-d %b %Y')
+          .description = (@record.try("#{status}_at") || @record.try("#{step}_at")).strftime('%-d %b %Y')
   = help_link :expiration, (translate("cms.help.expiration.alt_title") unless @record.expired?)
 
 .ui.list

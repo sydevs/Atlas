@@ -32,16 +32,16 @@ class CMS::ApplicationController < ActionController::Base
     @resources += current_user.provinces.joins(:country).where(countries: { enable_province_management: true })
     @resources += current_user.local_areas
     @resources += current_user.events
-    @events_for_review = current_user.accessible_events.not_finished.needs_review
-    @events_recently_expired = current_user.accessible_events.not_finished.recently_expired
-    @events_archived_count = current_user.accessible_events.not_finished.expired.count - @events_recently_expired.count
+    @events_for_review = current_user.accessible_events.needs_review
+    @events_recently_expired = current_user.accessible_events.expired
+    @events_archived_count = current_user.accessible_events.archived.count
   end
 
   def review
     authorize current_user, :dashboard?
-    @events_for_review = current_user.accessible_events.not_finished.needs_review.order(updated_at: :desc)
-    @events_expired = current_user.accessible_events.not_finished.recently_expired.order(updated_at: :desc)
-    @events_archived = current_user.accessible_events.not_finished.archived.order(updated_at: :desc)
+    @events_for_review = current_user.accessible_events.needs_review.order(updated_at: :desc)
+    @events_expired = current_user.accessible_events.expired.order(updated_at: :desc)
+    @events_archived = current_user.accessible_events.archived.order(updated_at: :desc)
   end
 
   def index

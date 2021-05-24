@@ -2,12 +2,17 @@ class Event < ApplicationRecord
 
   # Extensions
   include Publishable
+  include AASM # State machine - required for Expirable
   include Expirable
   include ActivityMonitorable
 
   nilify_blanks
   searchable_columns %w[name description]
-  audited except: %i[summary_email_sent_at status_email_sent_at latest_registration_at]
+  audited except: %i[
+    summary_email_sent_at status_email_sent_at latest_registration_at
+    should_update_status_at verified_at expired_at archived_at finished_at
+    status
+  ]
 
   enum category: { intro: 1, intermediate: 2, course: 3, public_event: 4, concert: 5 }
   enum recurrence: { day: 0, monday: 1, tuesday: 2, wednesday: 3, thursday: 4, friday: 5, saturday: 6, sunday: 7 }
@@ -38,11 +43,8 @@ class Event < ApplicationRecord
   # Scopes
   scope :with_new_registrations, -> { where('latest_registration_at >= summary_email_sent_at') }
   scope :notifications_enabled, -> { where.not(disable_notifications: true) }
-  scope :publicly_visible, -> { published.not_expired.not_finished }
-  scope :finished, -> { where('end_date IS NOT NULL AND end_date < ?', DateTime.now - 1.day) }
-  scope :not_finished, -> { where('end_date IS NULL OR end_date >= ?', DateTime.now - 1.day) }
+  scope :publicly_visible, -> { publishable.published }
 
-  scope :ready_for_status_email, -> { where("status_email_sent_at IS NULL OR status_email_sent_at <= ?", Expirable.date_for(:interval)) }
   scope :ready_for_reminder_email, -> { where("reminder_email_sent_at IS NULL OR reminder_email_sent_at <= ?", 12.hours.ago) }
 
   scope :online, -> { where(online: true) }
@@ -74,8 +76,8 @@ class Event < ApplicationRecord
     super value if I18nData.languages.key?(value)
   end
 
-  def finished?
-    end_date && end_date < DateTime.now - 1.day
+  def should_finish?
+    next_recurrence_at.nil?
   end
 
   def find_manager
@@ -132,6 +134,12 @@ class Event < ApplicationRecord
 
   def label
     custom_name || venue.street
+  end
+
+  def log_status_change
+    return if archived?
+    
+    EventMailer.with(event: self).status.deliver_now
   end
 
   private

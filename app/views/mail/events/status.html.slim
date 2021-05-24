@@ -2,8 +2,8 @@ ruby:
   timestamp = @event.send({
     created: :created_at,
     needs_review: :updated_at,
-    needs_urgent_review: :expires_at,
-    expired: :expired_at,
+    needs_urgent_review: :should_expire_at,
+    expired: :should_expire_at,
     finished: :end_date
   }[@status])
 

@@ -38,7 +38,7 @@ en:
         new_access_keys: "New Access Keys"
         new_events: "New Events"
         expiring_events: "Expiring Events"
-        recently_expired_events: "Recently Expired"
+        expired_events: "Recently Expired"
         inactive_regions: "Inactive Regions"
 
     event:

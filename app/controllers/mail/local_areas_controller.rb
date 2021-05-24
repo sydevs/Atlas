@@ -13,7 +13,7 @@ class Mail::LocalAreasController < Mail::ApplicationController
 
     @new_events = @region.events.publicly_visible.where(*query)
     @expiring_events = @region.events.needs_urgent_review
-    @recently_expired_events = @region.events.recently_expired
+    @expired_events = @region.events.expired
 
     @stats = {
       active_events: @region.events.publicly_visible.count,

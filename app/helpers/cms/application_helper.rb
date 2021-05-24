@@ -85,9 +85,20 @@ module CMS::ApplicationHelper
     'active' if params[:q]&.to_sym == type # || (params[:q].nil? && type == :guide)
   end
 
-  def expiry_duration_in_words(level)
-    now = Time.now
-    distance_of_time_in_words now, now + Expirable.duration_for(level)
+  def time_from_now_in_words time
+    time_ago_in_words(time)
+  end
+
+  def expiry_time_in_words status
+    return nil unless Expirable::TRANSITION_STATE_AFTER.key?(status)
+
+    duration = Expirable::TRANSITION_STATE_AFTER[status]
+
+    if ENV['TEST_EMAILS']
+      translate('datetime.distance_in_words.x_minutes', count: duration.in_minutes.to_i)
+    else
+      translate('datetime.distance_in_words.x_weeks', count: duration.in_weeks.to_i)
+    end
   end
 
 end

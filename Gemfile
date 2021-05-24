@@ -36,6 +36,8 @@ gem 'nilify_blanks' # Convert empty string to null in the database
 gem 'passwordless' # For email based user authentication
 gem 'premailer-rails' # Generate inline styles for emails
 gem 'pundit' # Permissions
+gem 'aasm' # State machine for managing expiration status
+gem 'after_commit_everywhere', '~> 1.0' # Dependency for aasm
 
 ### Geocoding
 gem 'geokit-rails'

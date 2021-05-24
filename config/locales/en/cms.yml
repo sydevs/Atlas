@@ -196,10 +196,6 @@ en:
       description: "This is a log of all actions taken by this manager."
       changed_by: "by %{name}"
       changed_to: "changed to"
-      last_activity_on: "Last activity"
-      summary_email_sent_at: "Summary email sent"
-      status_email_sent_at: "Status email sent"
-      reminder_email_sent_at: "Reminder email sent"
 
     dashboard:
       role:
@@ -234,7 +230,7 @@ en:
         subtitle: "These events need to be checked to ensure they are still accurate."
         all_good: "All events are up to date."
         empty: "No alerts right now, keep up the good work!"
-        expires_at: "Expires in %{time}"
+        should_expire_at: "Expires in %{time}"
         expired_at: "Expired %{time} ago"
         review:
           title: "Soon to expire events"
@@ -271,19 +267,19 @@ en:
           review: "As soon as an event becomes classified as \"Needs Review\" the program manager will be sent an email asking them to confirm that the event details are still correct. If they do not respond within 1 week, the city manager will be sent an email asking them to check the details instead."
           expiration: "If %{duration} pass without the event being verified, then it's hidden from the map until someone checks and updates it."
         steps:
-          updated:
+          verified:
             icon: green check circle
             active_label: "Up To Date"
             inactive_label: "Last Updated"
             title: "Up To Date"
             description: "When an event is created or updated"
-          needs_review:
+          should_need_review:
             icon: orange question circle
             active_label: "Needs Review"
             inactive_label: "Will Need Review"
             title: "Needs Review"
             description: "If %{duration} pass without the event being updated"
-          expired:
+          should_expire:
             icon: red times circle
             active_label: "Expired"
             inactive_label: "Expires"

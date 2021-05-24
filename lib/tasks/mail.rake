@@ -13,17 +13,11 @@ namespace :mail do
     Passwordless::Session.where("expires_at < ?", 1.day.ago).delete_all
   end
 
-  desc 'Send event emails.'
+  desc 'Send event reminder emails.'
   task events: :environment do
-    status_events = Event.not_archived.ready_for_status_email.joins(:manager)
-    puts "[MAIL] Attempting to send status emails for #{status_events.count} events"
-    status_events.in_batches.each_record do |event|
-      EventMailer.with(event: event).status.deliver_now
-    end
-    
-    reminder_events = Event.publicly_visible.ready_for_reminder_email.joins(:manager, :registrations)
+    events = Event.publicly_visible.ready_for_reminder_email.joins(:manager, :registrations)
     puts "[MAIL] Attempting to send reminder emails for #{reminder_events.count} events"
-    reminder_events.in_batches.each_record do |event|
+    events.in_batches.each_record do |event|
       EventMailer.with(event: event).reminder.deliver_now
     end
   end
@@ -114,7 +108,7 @@ namespace :mail do
       desc 'Sends reminder for one event'
       task reminder: :environment do
         ActionMailer::Base.delivery_method = :letter_opener
-        event = Event.not_finished.joins(:manager, :registrations).reorder('RANDOM()').first
+        event = Event.where.not(status: :finished).joins(:manager, :registrations).reorder('RANDOM()').first
         EventMailer.with(event: event, test: true).reminder.deliver_now
       end
     end
@@ -130,7 +124,7 @@ namespace :mail do
       desc 'Sends reminder for one event'
       task event_manager_changed: :environment do
         ActionMailer::Base.delivery_method = :letter_opener
-        event = Event.not_finished.joins(:manager).reorder('RANDOM()').first
+        event = Event.where.not(status: :finished).joins(:manager).reorder('RANDOM()').first
         ManagedRecordMailer.with(event: event, test: true).created.deliver_now
       end
     end

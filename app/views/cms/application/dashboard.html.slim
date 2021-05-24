@@ -61,7 +61,7 @@ h2.ui.header
                   a.header href=edit_cms_event_url(event)
                     = event.label
                   .description
-                    = translate('cms.dashboard.alerts.expires_at', time: time_ago_in_words(event.expires_at))
+                    = translate('cms.dashboard.alerts.should_expire_at', time: time_from_now_in_words(event.should_expire_at))
 
             - @events_recently_expired.each do |event|
               .item
@@ -70,7 +70,7 @@ h2.ui.header
                   a.header href=edit_cms_event_url(event)
                     = event.label
                   .description
-                    = translate('cms.dashboard.alerts.expired_at', time: time_ago_in_words(event.expires_at))
+                    = translate('cms.dashboard.alerts.expired_at', time: time_ago_in_words(event.expired_at))
 
         - if @events_archived_count.positive?
           a.ui.basic.bottom.attached.button href=cms_review_path

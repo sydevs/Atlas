@@ -32,13 +32,13 @@ table.wide.data
             = link_to event.label, email_login(cms_event_url(event))
             |  (#{event.venue.city})
 
-  - if @recently_expired_events.present?
+  - if @expired_events.present?
     tr
       th
-        = translate('mail.summary.data.recently_expired_events')
+        = translate('mail.summary.data.expired_events')
         .detail = translate('mail.summary.last_week').downcase
       td
-        - @recently_expired_events.each do |event|
+        - @expired_events.each do |event|
           .entry
             = link_to event.label, email_login(cms_event_url(event))
             |  (#{event.venue.city})

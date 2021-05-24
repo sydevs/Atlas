@@ -2,87 +2,94 @@ module Expirable
 
   extend ActiveSupport::Concern
 
-  BASE_DURATION = ENV['TEST_EMAILS'] ? 5 : 8
-  DURATION_INCREMENT = ENV['TEST_EMAILS'] ? 7 : 1
-
-  LEVELS = {
-    verify: 0,
-    escalate: 1,
-    expire: 2,
-    archive: 3
-  }.freeze
+  if ENV['TEST_EMAILS']
+    TRANSITION_STATE_AFTER = {
+      should_verify: 0.minutes,
+      should_need_review: 5.minutes,
+      should_need_urgent_review: 17.minutes,
+      should_expire: 30.minutes,
+      should_archive: 42.minutes,
+    }.freeze
+  else
+    TRANSITION_STATE_AFTER = {
+      should_verify: 0.weeks,
+      should_need_review: 8.weeks,
+      should_need_urgent_review: 9.weeks,
+      should_expire: 10.weeks,
+      should_archive: 12.weeks,
+    }.freeze
+  end
 
   included do
-    scope :needs_review, -> { where("#{table_name}.updated_at <= ? AND #{table_name}.updated_at > ?", Expirable.date_for(:verify), Expirable.date_for(:archive)) }
-    scope :needs_urgent_review, -> { where("#{table_name}.updated_at < ? AND #{table_name}.updated_at > ?", Expirable.date_for(:escalate), Expirable.date_for(:verify)) }
-    scope :expired, -> { where("#{table_name}.updated_at <= ?", Expirable.date_for(:expire)) }
-    scope :recently_expired, -> { where("#{table_name}.updated_at <= ? AND #{table_name}.updated_at > ?", Expirable.date_for(:expire), Expirable.date_for(:archive)) }
-    scope :archived, -> { where("#{table_name}.updated_at <= ?", Expirable.date_for(:archive)) }
-    scope :not_expired, -> { where("#{table_name}.updated_at > ?", Expirable.date_for(:expire)) }
-    scope :not_archived, -> { where("#{table_name}.updated_at > ?", Expirable.date_for(:archive)) }
+    enum status: {
+      verified: 0,
+      needs_review: 1,
+      needs_urgent_review: 2,
+      expired: 3,
+      archived: 4,
+      finished: 5,
+    }, _scopes: false
+
+    aasm column: :status, enum: true, skip_validation_on_save: true do
+      state :verified, initial: true
+      state :needs_review
+      state :needs_urgent_review
+      state :expired
+      state :archived
+      state :finished
+
+      after_all_events :update_timestamps
+      after_all_events :log_event
+
+      event :update_status do
+        transitions to: :finished, if: :should_finish?
+        transitions from: :verified, to: :needs_review, if: :should_need_review?
+        transitions from: :needs_review, to: :needs_urgent_review, if: :should_need_urgent_review?
+        transitions from: :needs_urgent_review, to: :expired, if: :should_expire?
+        transitions from: :expired, to: :archived, if: :should_archive?
+      end
+
+      event :verify do
+        transitions to: :verified
+      end
+    end
+
+    TRANSITION_STATE_AFTER.keys.each do |key|
+      define_method :"#{key}_at" do
+        updated_at + TRANSITION_STATE_AFTER[key]
+      end
+
+      define_method :"#{key}?" do
+        send(:"#{key}_at") <= Time.now
+      end
+    end
+
+    before_save :verify
+
+    scope :publishable, -> { where(status: %i[verified needs_review needs_urgent_review]) }
+    scope :unpublishable, -> { where(status: %i[expired archived finished]) }
   end
 
-  def self.count_for(level)
-    return DURATION_INCREMENT if level == :interval
-    
-    BASE_DURATION + (LEVELS[level] * DURATION_INCREMENT)
+  def update_timestamps
+    if archived? || finished?
+      update_column :should_update_status_at, nil
+    else
+      next_state_index = self.class.statuses[status] + 1
+      next_state = TRANSITION_STATE_AFTER.keys[next_state_index]
+      update_column :should_update_status_at, send(:"#{next_state}_at")
+    end
+
+    if respond_to?("#{status}_at")
+      update_column "#{status}_at", Time.now
+    end
   end
 
-  def self.duration_for(level)
-    base = Expirable.count_for(level)
-    ENV['TEST_EMAILS'] ? base.minutes : base.weeks
+  def log_event
+    try(:log_status_change)
   end
 
-  def self.date_for(level)
-    Expirable.duration_for(level).ago
-  end
-
-  def needs_review_at
-    updated_at + Expirable.duration_for(:verify)
-  end
-
-  def needs_escalation_at
-    updated_at + Expirable.duration_for(:escalate)
-  end
-
-  def expires_at
-    updated_at + Expirable.duration_for(:expire)
-  end
-
-  def archives_at
-    updated_at + Expirable.duration_for(:archive)
-  end
-
-  def expired_at
-    expires_at
-  end
-
-  def updated?
-    !expired? && !needs_review?
-  end
-
-  def expired?
-    !active?
-  end
-
-  def recently_expired?
-    expired? && !archived?
-  end
-
-  def active?
-    Time.now < expires_at
-  end
-
-  def archived?
-    Time.now >= archives_at
-  end
-
-  def needs_review?
-    !expired? && Time.now >= needs_review_at
-  end
-
-  def needs_urgent_review?
-    !expired? && Time.now >= needs_escalation_at
+  def should_finish?
+    false
   end
 
 end
