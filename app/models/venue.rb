@@ -73,7 +73,7 @@ class Venue < ApplicationRecord
       local_areas = LocalArea.select('id, name, radius, latitude, longitude').within(radius, origin: self)
       local_areas = local_areas.where(country_code: country_code) if country_code?
       local_areas = local_areas.where(province: province_code) if province_code?
-      local_areas.to_a.filter! { |area| area.radius >= area.distance_to(self) }
+      local_areas = local_areas.to_a.filter { |area| area.contains?(self) }
       self.local_areas = local_areas
     end
 
