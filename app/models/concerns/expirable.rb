@@ -5,10 +5,10 @@ module Expirable
   if ENV['TEST_EMAILS']
     TRANSITION_STATE_AFTER = {
       should_verify: 0.minutes,
-      should_need_review: 5.minutes,
-      should_need_urgent_review: 17.minutes,
-      should_expire: 30.minutes,
-      should_archive: 42.minutes,
+      should_need_review: 10.minutes,
+      should_need_urgent_review: 19.minutes,
+      should_expire: 28.minutes,
+      should_archive: 37.minutes,
     }.freeze
   else
     TRANSITION_STATE_AFTER = {
