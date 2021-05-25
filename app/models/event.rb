@@ -39,6 +39,7 @@ class Event < ApplicationRecord
   validates :manager, presence: true
   validates :online_url, presence: true, if: :online?
   validates_associated :pictures
+  validate :validate_end_date
 
   # Scopes
   scope :with_new_registrations, -> { where('latest_registration_at >= summary_email_sent_at') }
@@ -52,7 +53,6 @@ class Event < ApplicationRecord
 
   # Callbacks
   before_validation :find_manager
-  before_validation :set_end_date
   after_save :find_or_create_manager
   after_save :notify_new_manager
 
@@ -137,15 +137,19 @@ class Event < ApplicationRecord
   end
 
   def log_status_change
-    return if archived?
+    return if archived? || new_record?
     
     EventMailer.with(event: self).status.deliver_now
   end
 
   private
 
-    def set_end_date
+    def validate_end_date
       self.end_date = start_date if recurrence == 'day' && !end_date.present?
+      return if end_date.nil?
+      
+      self.errors.add(:end_date, I18n.translate('cms.messages.event.invalid_end_date')) if end_date < start_date
+      self.errors.add(:end_date, I18n.translate('cms.messages.event.passed_end_date')) if end_date < Date.today
     end
 
 end

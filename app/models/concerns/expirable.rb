@@ -56,7 +56,7 @@ module Expirable
 
     TRANSITION_STATE_AFTER.keys.each do |key|
       define_method :"#{key}_at" do
-        result = (updated_at || created_at) + TRANSITION_STATE_AFTER[key]
+        result = (updated_at || 1.minute.ago) + TRANSITION_STATE_AFTER[key]
         ENV['TEST_EMAILS'] ? result : result.beginning_of_hour
       end
 
@@ -72,7 +72,9 @@ module Expirable
   end
 
   def update_timestamps
-    if archived? || finished?
+    if new_record?
+      self.should_update_status_at = should_need_review_at
+    elsif archived? || finished?
       update_column :should_update_status_at, nil
     else
       next_state_index = self.class.statuses[status] + 1
@@ -80,7 +82,9 @@ module Expirable
       update_column :should_update_status_at, send(:"#{next_state}_at")
     end
 
-    if respond_to?("#{status}_at")
+    if new_record?
+      self.verified_at = Time.now
+    elsif respond_to?("#{status}_at")
       update_column "#{status}_at", Time.now
     end
   end
