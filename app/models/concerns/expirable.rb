@@ -56,7 +56,7 @@ module Expirable
 
     TRANSITION_STATE_AFTER.keys.each do |key|
       define_method :"#{key}_at" do
-        result = updated_at + TRANSITION_STATE_AFTER[key]
+        result = (updated_at || created_at) + TRANSITION_STATE_AFTER[key]
         ENV['TEST_EMAILS'] ? result : result.beginning_of_hour
       end
 

@@ -54,8 +54,9 @@ module CMS::ApplicationHelper
     content_tag :i, nil, class: "#{MODEL_ICONS[model.table_name.to_sym]} icon"
   end
 
-  def manager_icon manager
-    content_tag :i, nil, class: "#{MANAGER_ICONS[manager.type]} icon"
+  def manager_icon manager_or_type
+    type = manager_or_type.is_a?(Manager) ? manager_or_type.type : manager_or_type
+    content_tag :i, nil, class: "#{MANAGER_ICONS[type]} icon"
   end
 
   def alert_icon type

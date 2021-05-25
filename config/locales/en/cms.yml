@@ -120,6 +120,10 @@ en:
         marker_set:
           title: "Map marker set!"
           description: "Make sure that the location shown on the map looks correct."
+      manager:
+        administrator:
+          title: "Creating a global administrator"
+          description: "Adding a manager to worldwide data will create them as an administrator. They will have complete access to make changes to the Sahaj Atlas."
 
     details:
       details_for_record: "Details for %{resource}"

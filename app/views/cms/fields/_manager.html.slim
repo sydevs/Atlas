@@ -2,5 +2,11 @@
 = f.input :name
 = f.input :email
 
-- if current_user.administrator?
-  = f.input :administrator, as: :boolean, wrapper: :semantic_checkbox
+- if current_user.administrator? && @context.nil?
+  = f.input :administrator, as: :hidden, input_html: { value: true }
+  .ui.icon.message
+    = manager_icon :worldwide
+    .content
+      .header = translate('cms.hints.manager.administrator.title')
+      .description
+        = translate('cms.hints.manager.administrator.description')
