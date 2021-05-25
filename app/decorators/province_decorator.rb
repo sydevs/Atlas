@@ -15,7 +15,7 @@ module ProvinceDecorator
   def self.get_name province_code, country_code
     return nil unless province_code.present? && country_code.present?
     
-    ISO3166::Country[country_code].subdivisions[province_code]['name'].split(',')[0]
+    ISO3166::Country[country_code].subdivisions.dig(province_code, 'translations', I18n.locale.to_s).split(',')[0]
   end
 
   def self.get_label province_code, country_code
