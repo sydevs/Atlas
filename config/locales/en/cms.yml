@@ -63,6 +63,7 @@ en:
       successfully_confirmed: "Thank you for confirming that this %{resource} is up to date."
       not_logged_in: "You are not logged in!"
       no_comment: "(No comment)"
+      temporary_mail_error: "Email server is temporarily busy, please try again."
       event:
         invalid_end_date: "cannot be before the start date"
         passed_end_date: "cannot be before today"

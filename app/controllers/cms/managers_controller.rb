@@ -29,23 +29,28 @@ class CMS::ManagersController < CMS::ApplicationController
     @record.administrator = manager_params[:administrator] if manager_params.key?(:administrator)
     success = false
 
-    if @context.present?
-      if @context.managers.where(id: @record.id).exists?
-        flash[:error] = translate('cms.messages.manager.already_added', manager: @record.name, resource: @context.model_name.singular)
-      elsif !new_record || @record.save
+    ActiveRecord::Base.transaction do
+      if @context.present?
+        if @context.managers.where(id: @record.id).exists?
+          flash[:error] = translate('cms.messages.manager.already_added', manager: @record.name, resource: @context.model_name.singular)
+        elsif !new_record || @record.save
+          flash[:success] = translate('cms.messages.manager.success')
+          @context.managed_records << ManagedRecord.new(manager: @record, record: @context, assigned_by_id: current_user.id)
+          @context.save! validate: false
+          ManagerMailer.with(manager: @record, context: @context).welcome.deliver_now
+          success = true
+        end
+      elsif !new_record
+        flash[:notice] = translate('cms.messages.manager.already_exists', name: @record.name, email: @record.email)
+        success = true
+      elsif @record.save
         flash[:success] = translate('cms.messages.manager.success')
-        @context.managed_records << ManagedRecord.new(manager: @record, record: @context, assigned_by_id: current_user.id)
-        @context.save! validate: false
-        ManagerMailer.with(manager: @record, context: @context).welcome.deliver_now
+        ManagerMailer.with(manager: @record, context: @context).welcome.deliver_now if @record.administrator?
         success = true
       end
-    elsif !new_record
-      flash[:notice] = translate('cms.messages.manager.already_exists', name: @record.name, email: @record.email)
-      success = true
-    elsif @record.save
-      flash[:success] = translate('cms.messages.manager.success')
-      ManagerMailer.with(manager: @record, context: @context).welcome.deliver_now if @record.administrator?
-      success = true
+    rescue Net::SMTPServerBusy
+      flash[:error] = translate('cms.messages.temporary_mail_error')
+      raise ActiveRecord::Rollback
     end
 
     if success
