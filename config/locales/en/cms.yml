@@ -178,6 +178,10 @@ en:
         title: "Wondering how to create a public program?"
         description: "Choose a venue on the \"%{action}\" tab."
         action: "Go now"
+      create_event_on_venue:
+        title: "Wondering how to create an event?"
+        description: "Click on the \"%{action}\" tab, and press \"Add Event\""
+        action: "Add Event"
       create_province_manager:
         title: "Wondering how to create a regional manager?"
         description: "Choose a province, state or county on the \"%{action}\" tab."
