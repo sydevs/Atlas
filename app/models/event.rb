@@ -171,9 +171,9 @@ class Event < ApplicationRecord
   private
 
     def validate_end_time
-      return if end_date.nil? || duration.positive?
+      return if end_time.nil? || duration.positive?
       
-      self.errors.add(:end_date, I18n.translate('cms.messages.event.invalid_end_time'))
+      self.errors.add(:end_time, I18n.translate('cms.messages.event.invalid_end_time'))
     end
 
     def validate_end_date
