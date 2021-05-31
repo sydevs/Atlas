@@ -39,6 +39,7 @@ class Event < ApplicationRecord
   validates :manager, presence: true
   validates :online_url, presence: true, if: :online?
   validates_associated :pictures
+  validate :validate_end_time
   validate :validate_end_date
 
   # Scopes
@@ -114,22 +115,46 @@ class Event < ApplicationRecord
     end
   end
 
-  def next_recurrence_at
-    @next_recurrence_at ||= begin
-      return nil if end_date && end_date < Date.today
+  def duration
+    return nil if end_time.nil?
 
-      date = start_date > Date.today ? start_date : Date.today
-      time = start_time.split(':').map(&:to_i)
-      datetime = date.to_time.change(hour: time[0], min: time[1])
+    start_time = self.start_time.split(':').map(&:to_f)
+    end_time = self.end_time.split(':').map(&:to_f)
+    (end_time[0] - start_time[0]) + ((end_time[1] - start_time[1]) / 60.0)
+  end
 
-      if datetime > Time.now
-        datetime
-      elsif recurrence == 'day'
-        datetime + 1.day
-      else
-        (datetime + 1.week).beginning_of_week(recurrence.to_sym).change(hour: time[0], min: time[1])
-      end
+  def next_occurrences_after first_datetime, limit: 10
+    first_date = first_datetime.to_date
+    return [] if end_date && end_date < first_date
+
+    occurrences = []
+    
+    date = start_date > first_date ? start_date : first_date
+    time = start_time.split(':').map(&:to_i)
+    datetime = date.to_time(:utc).in_time_zone(venue.time_zone).change(hour: time[0], min: time[1])
+
+    if datetime > first_datetime
+      occurrences.push(datetime)
+    elsif recurrence == 'day'
+      occurrences.push(datetime + 1.day)
+    else
+      next_datetime = (datetime + 1.week).beginning_of_week(recurrence.to_sym)
+      next_datetime = next_datetime.change(hour: time[0], min: time[1])
+      occurrences.push(next_datetime)
     end
+
+    while occurrences.length < limit
+      next_datetime = occurrences.last + (recurrence == 'day' ? 1.day : 1.week)
+      break if end_date && next_datetime.to_date > end_date
+
+      occurrences.push(next_datetime)
+    end
+
+    occurrences
+  end
+
+  def next_occurrence_at
+    @next_occurrence_at ||= next_occurrences_after(Time.now, limit: 1).first
   end
 
   def label
@@ -143,6 +168,12 @@ class Event < ApplicationRecord
   end
 
   private
+
+    def validate_end_time
+      return if duration.positive?
+      
+      self.errors.add(:end_date, I18n.translate('cms.messages.event.invalid_end_time'))
+    end
 
     def validate_end_date
       self.end_date = start_date if recurrence == 'day' && !end_date.present?

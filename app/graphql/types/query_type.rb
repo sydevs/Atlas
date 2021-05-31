@@ -8,6 +8,7 @@ module Types
     field :events, [EventType], null: false do
       description 'Returns all events'
       argument :online, Boolean, required: false
+      argument :country, String, required: false
     end
 
     field :event, EventType, null: true do
@@ -55,15 +56,11 @@ module Types
       decorate Venue.find(id)
     end
 
-    def events(online: nil)
+    def events(online: nil, country: nil)
       scope = Event.publicly_visible
-
-      if online == true
-        scope = scope.where(online: true)
-      elsif online == false
-        scope = scope.where(online: false)
-      end
-
+      scope = scope.where(online: online) unless online.nil?
+      scope = scope.joins(:venue).where(venues: { country_code: country }) unless country.nil?
+      
       decorate scope
     end
 

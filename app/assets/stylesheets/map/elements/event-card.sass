@@ -79,6 +79,35 @@
     font-size: 15px
     letter-spacing: 0.49px
 
+  &__timezone
+    position: relative
+    font-weight: $font-semibold
+    font-size: 13px
+    letter-spacing: 0.36px
+    text-decoration: underline dotted
+    cursor: help
+
+  &__timezone::after
+    content: attr(data-title)
+    background: white
+    color: $color-blue
+    border: 1px solid $color-blue
+    border-radius: 5px
+    padding: 0 5px
+    box-shadow: $shadow-subtle
+
+    position: absolute
+    top: 18px
+    left: 50%
+    transform: translateX(-40%)
+    white-space: nowrap
+    opacity: 0
+    transition: opacity 0.15s ease
+
+  &__timezone:hover::after
+    opacity: 1
+
+
 // ===== ACTIONS ===== //
 .event__action
   position: absolute

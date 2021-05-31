@@ -5,5 +5,7 @@ module Types
     field :start_time, String, null: false
     field :end_time, String, null: true
     field :recurrence, String, null: false
+    field :duration, Float, null: true
+    field :time_zone, String, null: false
   end
 end

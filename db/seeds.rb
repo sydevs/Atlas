@@ -9,6 +9,15 @@ if Rails.env.production? && !ENV['force']
   return
 end
 
+def get_time_zone country_code
+  case country_code
+  when 'US'
+    'America/New_York'
+  when 'GB'
+    'Europe/London'
+  end
+end
+
 def load_country country_code
   country = Country.find_or_initialize_by(country_code: country_code)
   if country.new_record?
@@ -44,6 +53,7 @@ def load_venue address, country_code, index
     city: address[1],
     country_code: load_country(country_code),
     province_code: load_province(address[2], country_code),
+    time_zone: get_time_zone(country_code)
     postcode: address[3],
     latitude: address[4],
     longitude: address[5],

@@ -20,7 +20,7 @@ class Venue < ApplicationRecord
   validates :street, presence: true
   validates :province_code, presence: true, if: :country_has_provinces?
   validates :country_code, presence: true
-  validates :latitude, :longitude, presence: true
+  validates :latitude, :longitude, :time_zone, presence: true
 
   # Scopes
   scope :publicly_visible, -> { published.has_events }
@@ -29,9 +29,10 @@ class Venue < ApplicationRecord
   scope :has_online_events, -> { has_events.where(events: { online: true }) }
 
   # Delegations
-  delegate :all_managers, :managed_by?, to: :parent
+  delegate :all_managers, to: :parent
 
   # Callbacks
+  before_validation :fetch_time_zone
   after_save :ensure_local_area_consistency
   after_save :update_activity_timestamps
 
@@ -65,6 +66,12 @@ class Venue < ApplicationRecord
   end
 
   private
+
+    def fetch_time_zone
+      return unless latitude_changed? || longitude_changed? || time_zone.nil?
+
+      self.time_zone = Timezone.lookup(latitude, longitude)
+    end
 
     def ensure_local_area_consistency
       return unless (previous_changes.keys & %w[latitude longitude province_code country_code]).present?

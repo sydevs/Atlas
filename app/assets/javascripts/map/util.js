@@ -1,3 +1,4 @@
+/* global luxon */
 /* exported Util */
 
 const Util = {
@@ -74,18 +75,53 @@ const Util = {
     return dig(key.split('.'), window.translations)
   },
 
-  parseTiming(timing) {
-    if (timing.startDate == timing.endDate) {
-      return Util.formatDate(timing.startDate)
-    } else if (timing.recurrence == 'day' && timing.endDate) {
-      return `${Util.formatDate(timing.startDate)} - ${Util.formatDate(timing.endDate)}`
-    } else {
-      return Util.translate(`recurrence.${timing.recurrence}`)
-    }
-  },
+  parseEventTiming(event, type) {
+    const localTimeZone = luxon.DateTime.local().zoneName
+    let startDateTime = luxon.DateTime.fromISO(event.firstOccurrence, { zone: event.timing.timeZone })
+    let nextDateTime = luxon.DateTime.fromISO(event.upcomingOccurrences[0], { zone: event.timing.timeZone })
+    let endDateTime = event.lastOccurrence ? luxon.DateTime.fromISO(event.lastOccurrence, { zone: event.timing.timeZone }) : null
 
-  parseTime(timing) {
-    return timing.endTime ? `${timing.startTime} - ${timing.endTime}` : timing.startTime
+    if (event.online) {
+      startDateTime = startDateTime.setZone(localTimeZone)
+      nextDateTime = nextDateTime.setZone(localTimeZone)
+      if (endDateTime) endDateTime = endDateTime.setZone(localTimeZone)
+    }
+    
+    switch (type) {
+    case 'startDate':
+      return startDateTime.toLocaleString({ month: 'long', day: 'numeric' })
+    case 'startTime':
+      return startDateTime.toLocaleString(luxon.DateTime.TIME_SIMPLE)
+    case 'recurrence':
+      if (startDateTime == endDateTime) {
+        return startDateTime
+      } else if (event.timing.recurrence == 'day' && event.lastOccurrence) {
+        return `${startDateTime} - ${endDateTime}`
+      } else {
+        return Util.translate(`recurrence.${nextDateTime.toLocaleString({ weekday: 'long' }).toLowerCase()}`)
+      }
+    case 'duration': {
+      const startTime = nextDateTime.toLocaleString(luxon.DateTime.TIME_SIMPLE)
+
+      if (event.duration) {
+        const endTime = nextDateTime.plus({ hours: event.duration }).toLocaleString(luxon.DateTime.TIME_SIMPLE)
+        return `${startTime} - ${endTime}`
+      } else {
+        return startTime
+      }
+    }
+    case 'occurrences':
+      return event.upcomingOccurrences.map(datetime => {
+        datetime = luxon.DateTime.fromISO(datetime, { zone: event.timing.timeZone })
+        return datetime.setZone(localTimeZone)
+      })
+    case 'shortTimeZone':
+      return nextDateTime.toFormat('ZZZZ')
+    case 'longTimeZone':
+      return nextDateTime.toFormat('ZZZZZ')
+    default:
+      return null
+    }
   },
 
   parseEventCategoryDescription(event) {
@@ -104,15 +140,6 @@ const Util = {
     } else {
       return Util.translate('timing_labels.ongoing')
     }
-  },
-
-  formatDate(date) {
-    if (!Util.formatter) {
-      Util.formatter = new Intl.DateTimeFormat(undefined, { month: 'short', day: 'numeric' })
-    }
-
-    date = Date.parse(date)
-    return Util.formatter.format(date)
   },
 
   distance(lat1, lon1, lat2, lon2, unit = 'K') {

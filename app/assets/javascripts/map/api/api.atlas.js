@@ -25,12 +25,12 @@ class AtlasAPI {
           registrationUrl
           path
           timing {
-            recurrence
-            startDate
-            endDate
-            startTime
-            endTime
+            duration
+            timeZone
           }
+          firstOccurrence
+          lastOccurrence
+          upcomingOccurrences
           images {
             url
             thumbnailUrl

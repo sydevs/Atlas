@@ -9,8 +9,12 @@ module Types
     field :category, String, null: false
     field :language, String, null: false, method: :language_name
     field :language_code, String, null: false, method: :language_code
-    field :timing, Types::TimingType, null: false, resolver_method: :get_timing
     field :address, String, null: false
+
+    field :timing, Types::TimingType, null: false, resolver_method: :get_timing
+    field :first_occurrence, GraphQL::Types::ISO8601DateTime, null: false, resolver_method: :get_first_occurrence
+    field :last_occurrence, GraphQL::Types::ISO8601DateTime, null: true, resolver_method: :get_last_occurrence
+    field :upcoming_occurrences, [GraphQL::Types::ISO8601DateTime], null: false, resolver_method: :get_upcoming_occurrences
 
     field :online, Boolean, null: false
     field :online_url, String, null: true
@@ -38,6 +42,8 @@ module Types
         end_date: object.end_date&.to_s,
         start_time: object.start_time,
         end_time: object.end_time,
+        duration: object.duration,
+        time_zone: object.venue.time_zone,
       }
     end
 
@@ -48,6 +54,20 @@ module Types
           thumbnail_url: picture.file.url(:thumbnail),
         }
       }
+    end
+
+    def get_upcoming_occurrences
+      object.next_occurrences_after(Time.now, limit: 7)
+    end
+
+    def get_first_occurrence
+      object.next_occurrences_after(object.start_date, limit: 1).first
+    end
+
+    def get_last_occurrence
+      return nil unless object.end_date
+
+      object.next_occurrences_after(object.end_date, limit: 1).first
     end
   end
 end

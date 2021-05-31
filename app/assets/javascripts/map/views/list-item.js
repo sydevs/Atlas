@@ -18,16 +18,30 @@ class ListItem {
 
     distanceElement.style = (distance == null ? 'display: none' : '')
 
-    element.querySelector('[data-attribute="name"]').textContent = event.label
-    element.querySelector('[data-attribute="address"]').textContent = event.address
-    element.querySelector('[data-attribute="day"]').textContent = Util.parseTiming(event.timing)
-    element.querySelector('[data-attribute="time"]').textContent = Util.parseTime(event.timing)
+    this.elements = {}
+    const attributes = ['name', 'address', 'day', 'time', 'timezone', 'language']
+    attributes.forEach(attribute => {
+      this.elements[attribute] = this.container.querySelector(`[data-attribute="${attribute}"]`)
+    })
+
+    this.elements.name.textContent = event.label
+    this.elements.address.textContent = event.address
+    this.elements.day.textContent = Util.parseEventTiming(event, 'recurrence')
+    this.elements.time.textContent = Util.parseEventTiming(event, 'duration')
+
+    if (event.online) {
+      this.elements.timezone.textContent = Util.parseEventTiming(event, 'shortTimeZone')
+      this.elements.timezone.dataset.title = Util.parseEventTiming(event, 'longTimeZone')
+    } else {
+      this.elements.timezone.remove()
+    }
+
     element.addEventListener('click', () => this.open())
 
     if (event.languageCode && document.documentElement.lang.toUpperCase() != event.languageCode) {
-      element.querySelector('[data-attribute="language"]').textContent = event.languageCode
+      this.elements.language.textContent = event.languageCode
     } else {
-      element.querySelector('[data-attribute="language"]').remove()
+      this.elements.language.remove()
     }
   }
 

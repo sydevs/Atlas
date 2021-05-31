@@ -5,8 +5,9 @@ module Types
     field :url, String, null: false, method: :map_url
     
     field :label, String, null: true
-    field :latitude, Float, null: true
+    field :latitude, Float, null: false
     field :longitude, Float, null: false
+    field :time_zone, String, null: false
     
     field :address, String, null: false
     field :street, String, null: true

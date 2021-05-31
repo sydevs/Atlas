@@ -17,12 +17,12 @@ module GraphqlAPI
     registrationUrl
     venueId
     path
+    firstOccurrence
+    lastOccurrence
+    upcomingOccurrences
     timing {
-      recurrence
-      startDate
-      endDate
-      startTime
-      endTime
+      duration
+      timeZone
     }
     images {
       url

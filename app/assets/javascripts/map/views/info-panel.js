@@ -1,4 +1,4 @@
-/* global Application, Util */
+/* global Application, Util, luxon */
 /* exported InfoPanel */
 
 class InfoPanel {
@@ -25,28 +25,42 @@ class InfoPanel {
     document.getElementById('js-info-close').addEventListener('click', () => Application.back())
     document.getElementById('js-registration-share').addEventListener('click', () => Application.share.show(this.event))
     document.getElementById('js-registration-close').addEventListener('click', () => this.hideMessages())
+
+    this.elements = {}
+    const attributes = ['name', 'address', 'day', 'description', 'online', 'time', 'timezone', 'directions', 'language']
+    attributes.forEach(attribute => {
+      this.elements[attribute] = this.container.querySelector(`[data-attribute="${attribute}"]`)
+    })
   }
 
   show(event, venue = null) {
     this.event = event
     this.container.scrollTop = 0
 
-    this.container.querySelector('[data-attribute="name"]').textContent = event.label
-    this.container.querySelector('[data-attribute="address"]').textContent = event.address
-    this.container.querySelector('[data-attribute="day"]').textContent = Util.parseTiming(event.timing)
-    this.container.querySelector('[data-attribute="time"]').textContent = Util.parseTime(event.timing)
-    this.container.querySelector('[data-attribute="description"]').innerHTML = Util.simpleFormat(event.description || '')
-    this.container.querySelector('[data-attribute="online"]').style = event.online ? '' : 'display: none'
+    this.elements.name.textContent = event.label
+    this.elements.address.textContent = event.address
+    this.elements.description.innerHTML = Util.simpleFormat(event.description || '')
+    this.elements.online.style = event.online ? '' : 'display: none'
+    this.elements.day.textContent = Util.parseEventTiming(event, 'recurrence')
+    this.elements.time.textContent = Util.parseEventTiming(event, 'duration')
+
+    const localTimeZone = luxon.DateTime.local().zoneName
+    if (event.online || localTimeZone != event.timing.timeZone) {
+      this.elements.timezone.textContent = Util.parseEventTiming(event, 'shortTimeZone')
+      this.elements.timezone.dataset.title = Util.parseEventTiming(event, 'longTimeZone')
+    } else {
+      this.elements.timezone.textContent = ''
+      this.elements.timezone.dataset.title = ''
+    }
 
     this.form.classList.toggle('registration--confirmed', Boolean(event.registered))
     this.form.style = Date.parse(event.timing.registration_end_time) < Date.now() ? 'display: none' : ''
 
-    const directions = this.container.querySelector('[data-attribute="directions"]')
-    directions.style = venue ? '' : 'display: none'
-    directions.href = venue ? venue.directionsUrl : null
+    this.elements.directions.style = venue ? '' : 'display: none'
+    this.elements.directions.href = venue ? venue.directionsUrl : null
 
     this.languageBlock.style = (Boolean(event.languageCode) && document.documentElement.lang.toUpperCase() != event.languageCode ? '' : 'display: none')
-    this.container.querySelector('[data-attribute="language"]').textContent = Util.translate(`languages.${event.languageCode}`).split(/[,;]/)[0]
+    this.elements.language.textContent = Util.translate(`languages.${event.languageCode}`).split(/[,;]/)[0]
 
     this.timingDescription.textContent = Util.parseEventCategoryDescription(event)
 
