@@ -33,7 +33,7 @@ class EventMailer < ApplicationMailer
 
   def reminder
     setup
-    if (params && params[:test]) || (@event.next_recurrence_at && @event.next_recurrence_at <= 1.day.from_now)
+    if (params && params[:test]) || (@event.next_occurrence_at && @event.next_occurrence_at <= 1.day.from_now)
       puts "[MAIL] Sending reminder email for #{@event.label} to #{@manager.name}"
     else
       puts "[MAIL] Skip sending status for #{@event.label}"

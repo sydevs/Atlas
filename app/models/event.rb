@@ -20,6 +20,7 @@ class Event < ApplicationRecord
 
   # Associations
   belongs_to :venue
+  has_many :local_areas, through: :venue
   acts_as_mappable through: :venue
 
   has_many :pictures, as: :parent, dependent: :destroy
@@ -78,7 +79,7 @@ class Event < ApplicationRecord
   end
 
   def should_finish?
-    next_recurrence_at.nil?
+    next_occurrence_at.nil?
   end
 
   def find_manager
@@ -170,7 +171,7 @@ class Event < ApplicationRecord
   private
 
     def validate_end_time
-      return if duration.positive?
+      return if end_date.nil? || duration.positive?
       
       self.errors.add(:end_date, I18n.translate('cms.messages.event.invalid_end_time'))
     end

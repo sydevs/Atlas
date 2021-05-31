@@ -5,7 +5,7 @@ table.data cellpadding=0
     tr
       th = translate('mail.event.next_date')
       td
-        = event.next_recurrence_at.to_s(:day)
+        = event.next_occurrence_at.to_s(:day)
   tr
     th = translate('mail.event.location')
     td = event.address

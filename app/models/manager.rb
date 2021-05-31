@@ -111,10 +111,10 @@ class Manager < ApplicationRecord
     if administrator?
       Event.default_scoped
     else
-      events_via_countries = Event.joins(:venue).where(venues: { country_code: countries.select(:country_code) })
-      events_via_provinces = Event.joins(:venue).where(venues: { province_code: provinces.select(:province_code) })
-      events_via_local_areas = Event.joins(:venue).where(venues: { province_code: local_area_venues.select(:province_code) })
-      Event.joins(:venue).where(id: events).or(events_via_countries).or(events_via_provinces).or(events_via_local_areas)
+      events_via_countries = Event.joins(:venue).left_outer_joins(:local_areas).where(venues: { country_code: countries.select(:country_code) })
+      events_via_provinces = Event.joins(:venue).left_outer_joins(:local_areas).where(venues: { province_code: provinces.select(:province_code) })
+      events_via_local_areas = Event.joins(:venue).left_outer_joins(:local_areas).where(local_areas: { id: local_areas.select(:id) })
+      Event.joins(:venue).left_outer_joins(:local_areas).where(id: events).or(events_via_countries).or(events_via_provinces).or(events_via_local_areas)
     end
   end
 

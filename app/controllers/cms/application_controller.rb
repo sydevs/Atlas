@@ -185,8 +185,10 @@ class CMS::ApplicationController < ActionController::Base
 
     def set_scope!
       if @context
+        puts 'EVENTS'
         @scope = @context.send(@model.table_name)
       elsif @model
+        puts 'ACCESSIBLE EVENTS'
         @scope = current_user.try("accessible_#{@model.table_name}") || @model
       end
       

@@ -2,7 +2,7 @@
 - content_for :preview, translate('mail.event.reminder.preview',
                         event: @event.label,
                         count: @registrations.count,
-                        duration: time_from_now_in_words(@event.next_recurrence_at),
+                        duration: time_from_now_in_words(@event.next_occurrence_at),
                         time: @event.start_time)
 
 h2
@@ -10,13 +10,13 @@ h2
   .subtitle = translate('mail.event.reminder.title')
 
 p.narrow.explanation
-  = translate('mail.event.reminder.explanation', duration: time_from_now_in_words(@event.next_recurrence_at), time: @event.start_time)
+  = translate('mail.event.reminder.explanation', duration: time_from_now_in_words(@event.next_occurrence_at), time: @event.start_time)
 
 table.data cellpadding=0
   tr
     th = translate('mail.event.next_date')
     td
-      = @event.next_recurrence_at.to_s(:day)
+      = @event.next_occurrence_at.to_s(:day)
   tr
     th = translate('mail.event.location')
     td = @event.address
@@ -32,7 +32,7 @@ table.data cellpadding=0
       - manager = @event.manager
       = mail_to manager.email, manager.name
 
-.byline = translate('mail.event.reminder.byline', count: @registrations.count, date: @event.next_recurrence_at.to_date.to_s(:short))
+.byline = translate('mail.event.reminder.byline', count: @registrations.count, date: @event.next_occurrence_at.to_date.to_s(:short))
 
 table.registrations cellpadding=0
   - @registrations.limit(10).each do |registration|
