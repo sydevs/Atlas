@@ -248,6 +248,9 @@ en:
         review:
           title: "Soon to expire events"
           description: "Several published events have not been updated in a few months. Please check that the event details are still correct, and save the event so that we know that it is still accurate. Otherwise it will be removed from the map."
+          view_all:
+            one: "View %{count} expiring event"
+            other: "View all %{count} expiring events"
         expired:
           title: "Expired events"
           description: "Several published events are hidden from the map because they have not been verified recently. Please check and resave these events to re-enable them."

@@ -109,6 +109,7 @@ en:
         verified_at: "Verified At"
         archived_at: "Archived At"
         finished_at: "Finished At"
+        updated_at: "Updated At"
 
       # Regions
       country:
@@ -215,6 +216,7 @@ en:
         status_email_sent_at: :activerecord.attributes.generic.status_email_sent_at # Do not translate
         reminder_email_sent_at: :activerecord.attributes.generic.reminder_email_sent_at # Do not translate
         should_update_status_at: :activerecord.attributes.generic.should_update_status_at # Do not translate
+        updated_at: :activerecord.attributes.generic.updated_at # Do not translate
         expired_at: :activerecord.attributes.generic.expired_at # Do not translate
         verified_at: :activerecord.attributes.generic.verified_at # Do not translate
         archived_at: :activerecord.attributes.generic.archived_at # Do not translate

@@ -34,6 +34,7 @@ class CMS::ApplicationController < ActionController::Base
     @resources += current_user.events
     @events_for_review = current_user.accessible_events.needs_review
     @events_recently_expired = current_user.accessible_events.expired
+    @events_expiring_count = @events_for_review.count + @events_recently_expired.count
     @events_archived_count = current_user.accessible_events.archived.count
   end
 

@@ -8,41 +8,52 @@ h2.ui.header
   .ui.message class=key
     = message
 
-h3.ui.small.dividing.grey.header = translate('cms.dashboard.alerts.review.title')
+h3.ui.small.dividing.grey.header id='expiring'
+  = translate('cms.dashboard.alerts.review.title')
 
 - if @events_for_review.present?
   p = translate('cms.dashboard.alerts.review.description')
-  .ui.divided.list
-    - @events_for_review.each do |event|
-      .item
-        .content
-          a href=edit_cms_event_url(event)
-            = event.label
-          '  - 
-          = time_ago_in_words(event.updated_at)
+  table.ui.very.basic.very.compact.table
+    thead
+      tr
+        th = translate_attribute(Event, :name)
+        th = translate_model(Province)
+        th = translate_attribute(Event, :updated_at)
+    tbody
+      - @events_for_review.each do |event|
+        tr
+          td = link_to event.label, edit_cms_event_url(event), target: :blank
+          td = link_to event.venue.parent.label, url_for([:cms, event.venue.parent]), target: :blank
+          td = time_ago_in_words(event.updated_at)
 - else
   p = translate('cms.dashboard.alerts.empty')
 
-h3.ui.small.dividing.grey.header = translate('cms.dashboard.alerts.expired.title')
+h3.ui.small.dividing.grey.header id='expired'
+  = translate('cms.dashboard.alerts.expired.title')
 
 - if @events_expired.present?
   p = translate('cms.dashboard.alerts.expired.description')
-  .ui.divided.list
-    - @events_expired.each do |event|
-      .item
-        .content
-          a href=edit_cms_event_url(event)
-            = event.label
-          '  - 
-          = time_ago_in_words(event.updated_at)
+  table.ui.very.basic.very.compact.table
+    thead
+      tr
+        th = translate_attribute(Event, :name)
+        th = translate_model(Province)
+        th = translate_attribute(Event, :expired_at)
+    tbody
+      - @events_expired.each do |event|
+        tr
+          td = link_to event.label, edit_cms_event_url(event), target: :blank
+          td = link_to event.venue.parent.label, url_for([:cms, event.venue.parent]), target: :blank
+          td = time_ago_in_words(event.expired_at)
 - else
   p = translate('cms.dashboard.alerts.empty')
 
-h3.ui.small.dividing.grey.header = translate('cms.dashboard.alerts.archived.title')
+h3.ui.small.dividing.grey.header id='archived'
+  = translate('cms.dashboard.alerts.archived.title')
 
 - if @events_archived.present?
   p = translate('cms.dashboard.alerts.archived.description', count: @events_archived.count)
-  table.ui.very.basic.table
+  table.ui.very.basic.very.compact.table
     thead
       tr
         th = translate_attribute(Event, :name)
@@ -51,9 +62,8 @@ h3.ui.small.dividing.grey.header = translate('cms.dashboard.alerts.archived.titl
     tbody
       - @events_archived.each do |event|
         tr
-          td: a href=edit_cms_event_url(event)
-            = event.label
-          td = event.parent.parent.label
+          td = link_to event.label, edit_cms_event_url(event), target: :blank
+          td = link_to event.venue.parent.label, url_for([:cms, event.venue.parent]), target: :blank
           td = time_ago_in_words(event.expired_at)
 - else
   p = translate('cms.dashboard.alerts.empty')

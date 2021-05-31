@@ -46,6 +46,7 @@ h2.ui.header
 
     .column
       - if @events_for_review.present? || @events_recently_expired.present?
+        - limit = 10
         .ui.segment class=('top attached' if @events_archived_count.positive?)
           h3.ui.header
             i.sync.icon
@@ -54,7 +55,7 @@ h2.ui.header
               .sub.header = translate('cms.dashboard.alerts.subtitle')
 
           .ui.divided.list
-            - @events_for_review.each do |event|
+            - @events_for_review.limit(limit).each do |event|
               .item
                 i.middle.aligned.exclamation.icon
                 .content
@@ -63,17 +64,24 @@ h2.ui.header
                   .description
                     = translate('cms.dashboard.alerts.should_expire_at', time: time_from_now_in_words(event.should_expire_at))
 
-            - @events_recently_expired.each do |event|
-              .item
-                i.middle.aligned.eye.slash.icon
-                .content
-                  a.header href=edit_cms_event_url(event)
-                    = event.label
-                  .description
-                    = translate('cms.dashboard.alerts.expired_at', time: time_ago_in_words(event.expired_at))
+            - if @events_for_review.count < limit
+              - @events_recently_expired.limit(limit - @events_for_review.count).each do |event|
+                .item
+                  i.middle.aligned.eye.slash.icon
+                  .content
+                    a.header href=edit_cms_event_url(event)
+                      = event.label
+                    .description
+                      = translate('cms.dashboard.alerts.expired_at', time: time_ago_in_words(event.expired_at))
+
+        - if @events_expiring_count > limit
+          a.ui.basic.bottom.attached.button href=cms_review_path
+            i.warning.sign.icon
+            = translate('cms.dashboard.alerts.review.view_all', count: @events_expiring_count)
+            i.right.arrow.icon
 
         - if @events_archived_count.positive?
-          a.ui.basic.bottom.attached.button href=cms_review_path
+          a.ui.basic.bottom.attached.button href=cms_review_path(anchor: :archived)
             = translate('cms.dashboard.alerts.archived.view_all', count: @events_archived_count)
             i.right.arrow.icon
       - else
