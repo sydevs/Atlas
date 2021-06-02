@@ -152,6 +152,8 @@ en:
         description: "This %{resource} hasn't been updated in %{updated_ago}. This event will be removed from the map unless it is reviewed within %{expires_in}. Go to the edit page and press save to confirm the event details are still correct."
         alt_description: "This %{resource} hasn't been updated in %{updated_ago}. Please review the details below and press save to confirm that the event details are correct."
         action: "Review"
+      record_needs_urgent_review:
+        title: "%{resource} Needs Urgent Review"
       record_finished:
         title: "%{resource} Completed"
         description: "This %{resource} is over. It's last occurence was %{date}."

@@ -9,12 +9,12 @@
           i.right.arrow.icon
         .header = translate('cms.details.record_expired.title', resource: translate_model(@model))
         .description = translate('cms.details.record_expired.description', resource: translate_model(@model).downcase, updated_ago: time_ago_in_words(@record.updated_at))
-  - elsif @record.needs_review?
+  - elsif @record.needs_review? || @record.needs_urgent_review?
     .ui.small.yellow.icon.message
       i.exclamation.icon
       .content
         a.ui.right.floated.yellow.button href=url_for([:edit, :cms, @record])
-          = translate('cms.details.record_needs_review.action')
+          = translate("cms.details.record_#{@record.status}.action")
           i.right.arrow.icon
         .header = translate('cms.details.record_needs_review.title', resource: translate_model(@model))
         .description = translate('cms.details.record_needs_review.description', resource: translate_model(@model).downcase, updated_ago: time_ago_in_words(@record.updated_at), expires_in: time_from_now_in_words(@record.should_expire_at))
