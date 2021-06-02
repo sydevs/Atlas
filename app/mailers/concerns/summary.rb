@@ -21,7 +21,7 @@ module Summary
 
   def last_summary_too_soon? datetime
     cooldown_interval = self.class::SUMMARY_PERIOD - (self.class::SUMMARY_PERIOD >= 1.week ? 1.day : 6.hours)
-    return false if datetime <= cooldown_interval.ago
+    return false if datetime > cooldown_interval.ago
 
     puts "[MAIL] Skip sending summary email"
     true
