@@ -16,7 +16,7 @@ namespace :mail do
   desc 'Send event reminder emails.'
   task events: :environment do
     events = Event.publicly_visible.ready_for_reminder_email.joins(:manager, :registrations)
-    puts "[MAIL] Attempting to send reminder emails for #{reminder_events.count} events"
+    puts "[MAIL] Attempting to send reminder emails for #{events.count} events"
     events.in_batches.each_record do |event|
       EventMailer.with(event: event).reminder.deliver_now
     end
