@@ -11,7 +11,7 @@ class ApplicationMailer < ActionMailer::Base
 
   def summary
     last_summary_email_sent_at = Stash.get(:summary_email_sent_at) || 1.year.ago
-    return if params.dig(:test) || last_summary_too_soon?(last_summary_email_sent_at)
+    return if params&.dig(:test) || last_summary_too_soon?(last_summary_email_sent_at)
 
     puts "[MAIL] Sending summary for Sahaj Atlas"
     set_summary_period!
