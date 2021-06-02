@@ -55,6 +55,7 @@ module Expirable
         transitions to: :expired, if: :should_expire?
         transitions to: :needs_urgent_review, if: :should_need_urgent_review?
         transitions to: :needs_review, if: :should_need_review?
+        transitions to: :verified
       end
 
       event :verify do

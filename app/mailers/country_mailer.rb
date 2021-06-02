@@ -40,7 +40,7 @@ class CountryMailer < ApplicationMailer
       puts "[MAIL] Sent summary for #{@country.label} to #{manager.name}"
     end
 
-    @event.update_column(:summary_email_sent_at, Time.now) unless params[:test]
+    @country.update_column(:summary_email_sent_at, Time.now) unless params[:test]
   end
 
   private

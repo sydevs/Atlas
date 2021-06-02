@@ -49,7 +49,7 @@ class RegionMailer < ApplicationMailer
       puts "[MAIL] Sent summary for #{@region.label} to #{manager.name}"
     end
 
-    @event.update_column(:summary_email_sent_at, Time.now) unless params[:test]
+    @region.update_column(:summary_email_sent_at, Time.now) unless params[:test]
   end
 
   private
