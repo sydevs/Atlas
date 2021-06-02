@@ -30,7 +30,7 @@ module Expirable
       finished: 5,
     }, _scopes: false
 
-    aasm column: :status, enum: true, skip_validation_on_save: true do
+    aasm column: :status, enum: true, skip_validation_on_save: true, whiny_transitions: false do
       state :verified, initial: true
       state :needs_review
       state :needs_urgent_review
@@ -47,6 +47,14 @@ module Expirable
         transitions from: :needs_review, to: :needs_urgent_review, if: :should_need_urgent_review?
         transitions from: :needs_urgent_review, to: :expired, if: :should_expire?
         transitions from: :expired, to: :archived, if: :should_archive?
+      end
+
+      event :reset_status do
+        transitions to: :finished, if: :should_finish?
+        transitions to: :archived, if: :should_archive?
+        transitions to: :expired, if: :should_expire?
+        transitions to: :needs_urgent_review, if: :should_need_urgent_review?
+        transitions to: :needs_review, if: :should_need_review?
       end
 
       event :verify do
@@ -90,6 +98,8 @@ module Expirable
   end
 
   def log_event
+    return if aasm.current_event == :reset_status! || aasm.current_event == :reset_status
+
     try(:log_status_change)
   end
 
