@@ -9,13 +9,7 @@ class RegionMailer < ApplicationMailer
   def summary
     setup
     last_summary_email_sent_at = @region.summary_email_sent_at || 1.year.ago
-    cooldown_interval = ENV['TEST_EMAILS'] ? 1.day : SUMMARY_PERIOD - 1.day
-    if params[:test] || last_summary_email_sent_at < cooldown_interval.ago
-      puts "[MAIL] Sending summary email for #{@region.label}"
-    else
-      puts "[MAIL] Skip sending summary for #{@region.label}"
-      return
-    end
+    return if !params&.dig(:test) && last_summary_too_soon?(last_summary_email_sent_at)
     
     @start_of_period = SUMMARY_PERIOD.ago.beginning_of_week
     @end_of_period = @start_of_period + SUMMARY_PERIOD
