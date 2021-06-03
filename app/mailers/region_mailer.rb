@@ -1,9 +1,10 @@
 class RegionMailer < ApplicationMailer
 
+  SUMMARY_PERIOD = 1.week
+  include Summary
+
   default template_path: 'mail/regions'
   layout 'mail/admin'
-
-  SUMMARY_PERIOD = 1.week
 
   def summary
     setup

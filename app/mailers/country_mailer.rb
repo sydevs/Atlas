@@ -1,14 +1,15 @@
 class CountryMailer < ApplicationMailer
 
+  SUMMARY_PERIOD = 2.weeks
+  include Summary
+
   default template_path: 'mail/countries'
   layout 'mail/admin'
-
-  SUMMARY_PERIOD = 2.weeks
 
   def summary
     setup
     last_summary_email_sent_at = @country.summary_email_sent_at || 1.year.ago
-    return if params.dig(:test) || last_summary_too_soon?(last_summary_email_sent_at)
+    return if !params&.dig(:test) && last_summary_too_soon?(last_summary_email_sent_at)
 
     puts "[MAIL] Sending summary email for #{@country.label}"
 
