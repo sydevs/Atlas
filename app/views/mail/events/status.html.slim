@@ -11,7 +11,10 @@ ruby:
 
 .box
   h2
-    = translate(@status, scope: 'mail.event.status.title')
+    - if @status == :needs_urgent_review && @event.manager != @manager
+      = translate('mail.event.status.title.escalation')
+    - else
+      = translate(@status, scope: 'mail.event.status.title')
     .subtitle = @event.label
 
 = email_status_icon(@status)
@@ -23,13 +26,14 @@ p.byline
 
 - if @status == :needs_urgent_review
   p.explanation
-    = translate('mail.event.status.escalation', region: @event.venue.parent.label)
+    - type = @event.manager != @manager ? :super_manager : :event_manager
+    = translate(type, scope: 'mail.event.status.escalation', region: @event.venue.parent.label)
 
 p.explanation
   = translate(@status, scope: 'mail.event.status.explanation')
 
 table.actions
-  - if @status == :needs_urgent_review
+  - if @status == :needs_urgent_review && @event.manager != @manager
     tr
       td colspan=2
         a.button href="mailto:#{@event.manager.email}"

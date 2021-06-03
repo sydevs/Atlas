@@ -5,7 +5,9 @@ class Mail::ApplicationController < ActionController::Base
   include Passwordless::ControllerHelpers
 
   helper_method :current_user
-  before_action :verify_admin!
+
+  # This verification is no longer needed since the /mail routes are only available in development
+  # before_action :verify_admin!
 
   SUMMARY_PERIOD = 1.month
 

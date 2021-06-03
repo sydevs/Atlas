@@ -12,7 +12,7 @@ en:
           description: "The links in this email allow access to edit the Sahaj Atlas. Forwarding this email will compromise the security of the website."
         automated:
           title: "Automated email / Unsubscribe"
-          description: "If you don't know why you receive this email, no longer want to receive these emails, or have any questions: please write to"
+          description: "This is an automated email. If you don't know why you receive this email, no longer want to receive these emails, or have any questions: please write to"
 
     login:
       title: "Login to Sahaj Atlas"
@@ -65,15 +65,16 @@ en:
         preview:
           created: "You are the manager of a new event. '%{event}'' has been created in %{region}."
           needs_review: "'%{event}' needs to be reviewed or else it will be removed from the map. Please check that the event information is still correct."
-          needs_urgent_review: "The manager of '%{event}' has not responded to our email. This event must be updated soon or it will be removed from the map."
+          needs_urgent_review: "'%{event}' will soon be removed from the map, because the event manager has not yet responded to our email."
           expired: "'%{event}'' has not been updated in %{duration}, and has been removed from the map. Update this event to make it public again."
           finished: "'%{event}' has concluded as scheduled. The final class for this event is over, so the event will be hidden from the map."
         title:
           created: "New Event Created"
           needs_review: "Event Needs Review"
-          needs_urgent_review: "Manager Not Responding"
+          needs_urgent_review: "Event Expiring Soon"
           expired: "Event Expired"
           finished: "Event Finished"
+          escalation: "Manager Has Not Responded"
         byline:
           created: "Created on %{date}"
           needs_review: "Last updated on %{date}"
@@ -83,10 +84,12 @@ en:
         explanation:
           created: "You are the manager of a new event which has been created on the Sahaj Atlas."
           needs_review: "This event, which you manage, needs to be checked for accuracy or else it will be removed from the map."
-          needs_urgent_review: "Please urgently contact the event manager or update this event yourself, or else it will be hidden from the map."
+          needs_urgent_review: "This event will be removed from the map soon, unless it's accuracy is checked and updated."
           expired: "This event has been removed from the map because it has not been updated recently. To add it back to the map, update the event."
           finished: "This event has concluded."
-        escalation: "You are a manager for %{region}. This warning is being sent to you because this event's manager has not responded to our email."
+        escalation:
+          event_manager: "This event, which you manage, urgently needs to be checked for accuracy. This is the last reminder you will receive. We've also emailed the managers of the %{region} region to make sure this event isn't removed by mistake."
+          super_manager: "You are a manager for %{region}. This warning is being sent to you because this event's manager has not yet responded to our email."
 
       reminder:
         subject: "[Reminder] Upcoming Event"

@@ -20,12 +20,13 @@ class EventMailer < ApplicationMailer
       parameters['X-Priority'] = '1'
     end
 
+    mail(parameters)
+
     if @status == :needs_urgent_review
       @event.venue.parent.managers.each do |manager|
+        @manager = manager
         mail(parameters.merge({ to: manager.email }))
       end
-    else
-      mail(parameters)
     end
 
     @event.update_column(:status_email_sent_at, Time.now) unless params[:test]

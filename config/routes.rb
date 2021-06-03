@@ -13,32 +13,34 @@ Rails.application.routes.draw do
     get :statistics, to: 'application#statistics'
   end
 
-  namespace :mail do
-    get :summary, to: 'application#summary'
+  if Rails.env.development?
+    namespace :mail do
+      get :summary, to: 'application#summary'
 
-    resources :managers, only: %i[] do
-      get :welcome
-      get :welcome, on: :collection
-      get :login
-      get :login, on: :collection
-    end
+      resources :managers, only: %i[] do
+        get :welcome
+        get :welcome, on: :collection
+        get :login
+        get :login, on: :collection
+      end
 
-    resources :events, only: %i[] do
-      get :status
-      get :reminder
-      get :status, on: :collection
-      get :reminder, on: :collection
-    end
+      resources :events, only: %i[] do
+        get :status
+        get :reminder
+        get :status, on: :collection
+        get :reminder, on: :collection
+      end
 
-    resources :countries, :provinces, :local_areas, only: %i[] do
-      get :summary
-      get :summary, on: :collection
-    end
+      resources :countries, :provinces, :local_areas, only: %i[] do
+        get :summary
+        get :summary, on: :collection
+      end
 
-    resources :managed_records, only: %i[] do
-      get :created
-      get :created, on: :collection
-      get 'created/:type', on: :collection, action: :created
+      resources :managed_records, only: %i[] do
+        get :created
+        get :created, on: :collection
+        get 'created/:type', on: :collection, action: :created
+      end
     end
   end
 

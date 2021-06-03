@@ -5,6 +5,7 @@ class Mail::EventsController < Mail::ApplicationController
   def status
     @status = params[:status]&.to_sym || @event.status.to_sym || :created
     @status = :created if @status == :verified
+    @manager = @event.manager if params[:self]
     @subject = I18n.translate(@status, scope: 'mail.event.status.subject')
   end
 
