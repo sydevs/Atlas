@@ -52,8 +52,8 @@ const RegionMap = {
 
   setCircle(latitude, longitude, radius) {
     RegionMap.circle = L.circle([latitude, longitude], radius * 1000, {
-      color: 'red',
-      fillColor: '#f03',
+      color: '#2185d0',
+      fillColor: '#2185d0',
       fillOpacity: 0.3,
     }).addTo(RegionMap.instance)
   },

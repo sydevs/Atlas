@@ -54,6 +54,14 @@ class LocalArea < ApplicationRecord
     false
   end
 
+  def to_bounds flexible: false
+    {
+      latitude: latitude,
+      longitude: longitude,
+      radius: flexible ? flexible_radius : radius,
+    }
+  end
+
   private
 
     def ensure_country_consistency

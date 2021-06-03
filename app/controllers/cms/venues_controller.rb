@@ -16,7 +16,15 @@ class CMS::VenuesController < CMS::ApplicationController
   end
 
   def create
-    super parameters
+    @record = @scope.new(parameters)
+    
+    if @context.is_a?(LocalArea) && !@context.contains?(@record)
+      authorize LocalArea, :new?
+      @record.errors.add(:base, I18n.translate('cms.messages.venue.out_of_bounds', local_area: @context.name))
+      render 'cms/views/new'
+    else
+      super parameters
+    end
   end
 
   def update

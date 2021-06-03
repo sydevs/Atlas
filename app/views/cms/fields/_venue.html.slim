@@ -43,7 +43,11 @@
       .three.wide.field
         = f.input_field :postcode, placeholder: translate_attribute(Venue, :postcode)
 
-#venue-map data-editable='true'
+- if @context.is_a?(LocalArea)
+  #venue-map data-editable='true' data-bounds=@context.to_bounds(flexible: true).to_json
+- else
+  #venue-map data-editable='true'
+
 .ui.map.message class="#{'hidden' if f.object.coordinates?}"
   .header = translate('cms.hints.venue.marker_not_set.title')
   p = translate('cms.hints.venue.marker_not_set.description')

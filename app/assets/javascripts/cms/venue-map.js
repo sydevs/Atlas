@@ -19,6 +19,11 @@ const VenueMap = {
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(VenueMap.instance)
 
+    if (VenueMap.data.bounds) {
+      const bounds = VenueMap.data.bounds
+      VenueMap.setCircle(bounds.latitude, bounds.longitude, bounds.radius)
+    }
+
     if (VenueMap.data.editable == true) {
       VenueMap.initEditableMap()
     } else {
@@ -52,6 +57,14 @@ const VenueMap = {
     //VenueMap.instance.touchZoom.disable()
     //VenueMap.instance.doubleClickZoom.disable()
     //VenueMap.instance.scrollWheelZoom.disable()
+  },
+
+  setCircle(latitude, longitude, radius) {
+    VenueMap.circle = L.circle([latitude, longitude], radius * 1000, {
+      color: '#2185d0',
+      fillColor: '#DFF0FF',
+      fillOpacity: 0.2,
+    }).addTo(VenueMap.instance)
   },
 
   setMarker(latitude, longitude) {
