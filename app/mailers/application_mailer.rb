@@ -48,6 +48,7 @@ class ApplicationMailer < ActionMailer::Base
         authenticatable: manager,
         user_agent: 'Command Line',
         remote_addr: 'unknown',
+        timeout_at: 1.week.from_now,
       })
 
       session.save!
