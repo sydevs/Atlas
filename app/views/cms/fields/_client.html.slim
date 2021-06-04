@@ -1,0 +1,18 @@
+
+= f.input :enabled
+= f.input :label
+= f.input :domain
+
+.ui.small.dividing.violet.header = translate('cms.forms.client.keys')
+.two.fields
+  = f.input :secret_key unless f.object.new_record?
+  = f.input :public_key unless f.object.new_record?
+
+- if policy(@record).set_manager?
+  .ui.small.dividing.violet.header = translate('cms.forms.client.manager')
+
+  - @record.manager = Manager.new unless @record.manager.present?
+  = f.simple_fields_for :manager, include_id: false do |ff|
+    .two.fields
+      = ff.input :name, input_html: { value: @record.manager&.name }
+      = ff.input :email, input_html: { value: @record.manager&.email }

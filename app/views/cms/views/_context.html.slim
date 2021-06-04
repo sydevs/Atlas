@@ -43,6 +43,7 @@ h2.ui.header
 
   .ui.stackable.secondary.pointing.menu
     = menu_item translate('cms.menu.details'), @context, action: 'show' if allow.show?
+    = menu_item translate_model(Client, :plural), @context, index: 'clients' if allow.index_association?(:clients)
     = menu_item translate_model(Picture, :plural), @context, index: 'pictures' if allow.index_association?(:pictures)
     = menu_item translate(regions_type, scope: %i[cms menu regions]), @context, index: 'regions' if allow.index_association?(:regions)
     = menu_item translate_model(Manager, :plural), @context, index: 'managers' if allow.index_association?(:managers)

@@ -26,11 +26,11 @@ class WorldwidePolicy < DatabasePolicy
   def new_association? association
     return nil if association == :events
     
-    manage? && %i[countries local_areas venues managers access_keys].include?(association)
+    manage? && %i[countries local_areas venues managers clients access_keys].include?(association)
   end
 
   def destroy_association? association = nil
-    manage? && %i[countries local_areas access_keys].include?(association)
+    manage? && %i[countries local_areas clients access_keys].include?(association)
   end
 
 end

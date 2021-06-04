@@ -5,7 +5,7 @@ class CMS::ApplicationController < ActionController::Base
   include Passwordless::ControllerHelpers
   include Pundit
 
-  helper_method :current_user
+  helper_method :current_user, :back_path
 
   before_action :require_login!
   before_action :set_locale!
@@ -94,7 +94,7 @@ class CMS::ApplicationController < ActionController::Base
     authorize @record
 
     if @record.save
-      redirect_to [:cms, @record], flash: { success: translate('cms.messages.successfully_created', resource: @model.model_name.human.downcase) }
+      redirect_to back_path, flash: { success: translate('cms.messages.successfully_created', resource: @model.model_name.human.downcase) }
       true
     else
       render 'cms/views/new'
@@ -111,7 +111,7 @@ class CMS::ApplicationController < ActionController::Base
     authorize @record
 
     if @record.update(attributes)
-      redirect_to [:cms, @record], flash: { success: translate('cms.messages.successfully_updated', resource: @model.model_name.human.downcase) }
+      redirect_to back_path, flash: { success: translate('cms.messages.successfully_updated', resource: @model.model_name.human.downcase) }
       true
     else
       render 'cms/views/edit'
@@ -145,6 +145,13 @@ class CMS::ApplicationController < ActionController::Base
   def help
     set_context!
     authorize :dashboard, :view_help?
+  end
+
+  def back_path
+    return cms_root_path if @record == current_user
+    return url_for([:cms, @record]) if policy(@record).show?
+    
+    url_for([:cms, @record.parent, @model.model_name.route_key])
   end
 
   protected

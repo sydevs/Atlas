@@ -77,6 +77,13 @@ en:
         # Countable
         one: "API key"
         other: "API keys"
+      client:
+        # Basic pluralization
+        single: "App"
+        plural: "Apps"
+        # Countable
+        one: "App"
+        other: "Apps"
       picture:
         # Basic pluralization
         single: "Image"
@@ -250,5 +257,15 @@ en:
         key: "API Key"
         suspended: "Suspended"
         last_accessed_at: "Last Access"
+
+      client:
+        label: "Label"
+        config: "Configuration"
+        domain: "Domain"
+        secret_key: "Secret API Key"
+        public_key: "Public API Key"
+        enabled: "Enabled"
+        last_accessed_at: "Last Access"
+        manager_id: :activerecord.models.manager.single # Do not translate
 
       pictures:

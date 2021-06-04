@@ -117,6 +117,7 @@ Rails.application.routes.draw do
 
     resources :registrations, only: %i[index]
     resources :audits, only: %i[index]
+    resources :clients
     resources :access_keys, only: %i[index new create edit update destroy]
   end
 

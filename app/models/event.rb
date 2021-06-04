@@ -5,6 +5,7 @@ class Event < ApplicationRecord
   include AASM # State machine - required for Expirable
   include Expirable
   include ActivityMonitorable
+  include Managed
 
   nilify_blanks
   searchable_columns %w[name description]
@@ -27,9 +28,6 @@ class Event < ApplicationRecord
   accepts_nested_attributes_for :pictures
 
   has_many :registrations, dependent: :delete_all
-
-  belongs_to :manager
-  accepts_nested_attributes_for :manager
 
   # Validations
   validates :custom_name, length: { maximum: 255 }
@@ -54,8 +52,6 @@ class Event < ApplicationRecord
   scope :offline, -> { where.not(online: true) }
 
   # Callbacks
-  before_validation :find_manager
-  after_save :find_or_create_manager
   after_save :notify_new_manager
 
   # Delegations
@@ -64,14 +60,6 @@ class Event < ApplicationRecord
   alias associated_registrations registrations
 
   # Methods
-  attr_accessor :new_manager_record
-
-  def managed_by? manager, super_manager: nil
-    return true if super_manager != true && self.manager == manager
-    return true if venue.managed_by?(manager) && super_manager != false
-
-    false
-  end
 
   def language_code= value
     # Only accept languages which are in the language list
@@ -80,40 +68,6 @@ class Event < ApplicationRecord
 
   def should_finish?
     next_occurrence_at.nil?
-  end
-
-  def find_manager
-    return unless manager.email.present?
-
-    existing_manager = Manager.where(email: manager.email).first
-
-    if existing_manager
-      self.manager = existing_manager
-    else
-      self.manager_id = nil
-    end
-  end
-
-  def find_or_create_manager
-    return unless manager.email.present?
-
-    self.new_manager_record = false
-
-    self.manager = Manager.find_or_create_by(email: manager.email) do |new_manager|
-      new_manager.name = manager.name
-      self.new_manager_record = true
-    end
-  end
-
-  def notify_new_manager
-    return if self.new_manager_record
-    return unless saved_change_to_attribute?(:manager_id)
-
-    if created_at_changed?
-      EventMailer.with(event: self).status.deliver_now
-    else
-      ManagedRecordMailer.with(event: self).created.deliver_now
-    end
   end
 
   def duration
@@ -169,6 +123,17 @@ class Event < ApplicationRecord
   end
 
   private
+
+    def notify_new_manager
+      return if self.new_manager_record
+      return unless saved_change_to_attribute?(:manager_id)
+
+      if created_at_changed?
+        EventMailer.with(event: self).status.deliver_now
+      else
+        ManagedRecordMailer.with(event: self).created.deliver_now
+      end
+    end
 
     def validate_end_time
       return if end_time.nil? || duration.positive?

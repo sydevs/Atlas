@@ -85,6 +85,9 @@ en:
         timing: "Timing"
         registration: "Registration"
         manager: "Manager"
+      client:
+        keys: "Access Keys"
+        manager: "Manager"
 
     hints:
       unspecified: "Unspecified"

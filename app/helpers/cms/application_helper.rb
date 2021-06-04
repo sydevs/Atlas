@@ -9,7 +9,7 @@ module CMS::ApplicationHelper
     managers: 'user secret',
     registrations: 'user',
     audits: 'clipboard list',
-    access_keys: 'key',
+    clients: 'broadcast tower',
     pictures: 'image',
   }.freeze
 

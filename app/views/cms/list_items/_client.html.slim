@@ -1,0 +1,25 @@
+
+- allow = @context ? policy(@context) : policy(:dashboard)
+
+.item
+  - if allow.destroy_association?(:clients) && policy(client).destroy?
+    .right.floated.content
+      a.ui.basic.circular.icon.label href=url_for([:cms, @context, client]) data={ method: 'DELETE', confirm: translate('cms.messages.confirm_destroy') }
+        i.trash.icon
+  = model_icon Client
+  .content
+    - if policy(client).edit?
+      a.header href=url_for([:edit, :cms, client]) = client.label
+    - else
+      .header = client.label
+    .description
+      - if client.enabled?
+        em = translate_attribute(client, :enabled)
+      - elsif client.last_accessed_at.present?
+        = translate_attribute(client, :last_accessed_at)
+        ' : 
+        = client.last_accessed_at.to_s(:long)
+      - else
+        = translate_attribute(client, :last_accessed_at)
+        ' : 
+        = translate('cms.hints.never')
