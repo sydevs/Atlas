@@ -14,7 +14,7 @@
       i.exclamation.icon
       .content
         a.ui.right.floated.yellow.button href=url_for([:edit, :cms, @record])
-          = translate("cms.details.record_#{@record.status}.action")
+          = translate("cms.details.record_needs_review.action")
           i.right.arrow.icon
         .header = translate('cms.details.record_needs_review.title', resource: translate_model(@model))
         .description = translate('cms.details.record_needs_review.description', resource: translate_model(@model).downcase, updated_ago: time_ago_in_words(@record.updated_at), expires_in: time_from_now_in_words(@record.should_expire_at))
