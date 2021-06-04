@@ -67,4 +67,14 @@ module GraphqlAPI
     })['data']['venue']
   end
 
+  def self.country code
+    AtlasSchema.execute(%{
+      query {
+        country(code: "#{code}") {
+          bounds
+        }
+      }
+    })['data']['country']
+  end
+
 end

@@ -30,6 +30,10 @@ class Map::ApplicationController < ActionController::Base
       longitude: coordinates[1],
     }
 
+    if params[:country] && Country.where(country_code: params[:country]).exists?
+      @config[:country] = GraphqlAPI.country(params[:country])
+    end
+
     render 'map/show'
   end
 

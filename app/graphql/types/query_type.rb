@@ -2,7 +2,10 @@ module Types
   class QueryType < Types::BaseObject
     description 'The query root of this schema'
 
-    field :geojson, GeojsonType, 'Returns all events in the geojson format', null: false
+    field :geojson, GeojsonType, null: false do
+      description 'Returns all events in the geojson format'
+      argument :country, String, required: false
+    end
 
     field :venues, [VenueType], 'Returns all events', null: false
     field :events, [EventType], null: false do
@@ -11,13 +14,18 @@ module Types
       argument :country, String, required: false
     end
 
-    field :event, EventType, null: true do
-      description 'Find an event by ID'
-      argument :id, ID, required: true
+    field :country, CountryType, null: true do
+      description 'Find a country by code'
+      argument :code, String, required: true
     end
 
     field :venue, VenueType, null: true do
       description 'Find a venue by ID'
+      argument :id, ID, required: true
+    end
+
+    field :event, EventType, null: true do
+      description 'Find an event by ID'
       argument :id, ID, required: true
     end
 
@@ -28,8 +36,10 @@ module Types
     end
 
 
-    def geojson
-      venues = decorate Venue.publicly_visible.has_offline_events
+    def geojson(country: nil)
+      scope = Venue
+      scope = scope.where(country_code: country) if country
+      venues = decorate scope.publicly_visible.has_offline_events
 
       {
         type: 'FeatureCollection',
@@ -55,6 +65,10 @@ module Types
     def venue(id:)
       decorate Venue.find(id)
     end
+  
+    def country(code:)
+      decorate Country.find_by_country_code(code)
+    end
 
     def events(online: nil, country: nil)
       scope = Event.publicly_visible
@@ -78,7 +92,6 @@ module Types
       if object.is_a? ActiveRecord::Relation
         object.map { |r| r.extend("#{object.model}Decorator".constantize) }
       else
-        puts "DECORATE #{object.class}"
         object.extend("#{object.class}Decorator".constantize)
       end
     end

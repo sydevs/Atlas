@@ -25,6 +25,15 @@ class MapView {
     if (venue) {
       config.center = [venue.longitude, venue.latitude]
       config.zoom = this.highlightZoom
+    } else if (element.dataset.countryBounds) {
+      config.bounds = JSON.parse(element.dataset.countryBounds)
+
+      console.log(config.bounds, {
+        west: config.bounds[0][0],
+        south: config.bounds[0][1],
+        east: config.bounds[1][0],
+        north: config.bounds[1][1],       
+      })
     } else if (element.dataset.latitude && element.dataset.longitude) {
       config.center = [element.dataset.longitude, element.dataset.latitude]
       config.zoom = 10
