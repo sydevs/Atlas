@@ -99,10 +99,15 @@ namespace :mail do
 
     namespace :events do
       desc 'Sends status for one event'
-      task status: :environment do
+      task :status, [:status] => :environment do |_, args|
         ActionMailer::Base.delivery_method = :letter_opener
-        event = Event.joins(:manager, :registrations).reorder('RANDOM()').first
-        EventMailer.with(event: event, test: true).status.deliver_now
+        if args.status
+          event = Event.where(status: args.status).joins(:manager, :registrations).reorder('RANDOM()').first
+        else
+          event = Event.joins(:manager, :registrations).reorder('RANDOM()').first
+        end
+
+        EventMailer.with(event: event, test: true).status.deliver_now if event
       end
   
       desc 'Sends reminder for one event'
