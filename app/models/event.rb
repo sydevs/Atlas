@@ -61,6 +61,10 @@ class Event < ApplicationRecord
 
   # Methods
 
+  def region_association?
+    false
+  end
+
   def language_code= value
     # Only accept languages which are in the language list
     super value if I18nData.languages.key?(value)
