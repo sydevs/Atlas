@@ -13,11 +13,17 @@ namespace :status do
   desc 'Reset the status of all expirable items'
   task :reset, [:id] => :environment do |_, args|
     if args.id
-      Event.find(args.id).reset_status!
+      event = Event.find(args.id)
+      puts "Resetting event ##{event.id}"
+      event.reset_status!
+      event.update_column :expired_at, Time.now if event.expired_at.nil? && event.archived?
     else
       events = Event.all
       puts "Resetting #{events.count} event statuses"
-      events.in_batches.each_record(&:reset_status!)
+      events.in_batches.each_record do |event|
+        event.reset_status!
+        event.update_column :expired_at, Time.now if event.expired_at.nil? && event.archived?
+      end
     end
   end
 end
