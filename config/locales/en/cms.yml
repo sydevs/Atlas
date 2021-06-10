@@ -134,6 +134,12 @@ en:
         administrator:
           title: "Creating a global administrator"
           description: "Adding a manager to worldwide data will create them as an administrator. They will have complete access to make changes to the Sahaj Atlas."
+      client:
+        domain: "Only this domain will be allowed to embed the map using your secret key."
+        public_key: "Use this to embed the map."
+        secret_key: "Use this to access the API."
+        bounds: "Restrict the map to these coordinates. The coordinates should be entered as 4 comma-separated numbers (south,west,north,east)."
+        location: "Set a country, region or city where most of your visitors will be from. When a user searches the map, it will be weighted to this area."
 
     details:
       details_for_record: "Details for %{resource}"

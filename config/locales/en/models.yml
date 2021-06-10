@@ -265,6 +265,8 @@ en:
         secret_key: "Secret API Key"
         public_key: "Public API Key"
         enabled: "Enabled"
+        location: "Preferred Location"
+        bounds: "Bounds"
         last_accessed_at: "Last Access"
         manager_id: :activerecord.models.manager.single # Do not translate
 

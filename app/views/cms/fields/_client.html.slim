@@ -1,12 +1,22 @@
 
 = f.input :enabled
 = f.input :label
-= f.input :domain
+= f.input :domain, hint: translate('cms.hints.client.domain')
 
-.ui.small.dividing.violet.header = translate('cms.forms.client.keys')
-.two.fields
-  = f.input :secret_key unless f.object.new_record?
-  = f.input :public_key unless f.object.new_record?
+- unless f.object.new_record?
+  .ui.small.dividing.violet.header = translate('cms.forms.client.keys')
+  .two.fields
+    = f.input :secret_key, hint: translate('cms.hints.client.secret_key')
+    = f.input :public_key, hint: translate('cms.hints.client.public_key')
+
+/.ui.small.dividing.violet.header = translate_attribute(f.object, :config)
+/= f.simple_fields_for :config do |ff|
+  = ff.input :bounds, hint: translate('cms.hints.client.bounds')
+  = ff.label translate_attribute(f.object, :location)
+  = ff.hint translate('cms.hints.client.location')
+  .two.fields
+    = ff.input :location_type, label: false
+    = ff.input :location_id, label: false
 
 - if policy(@record).set_manager?
   .ui.small.dividing.violet.header = translate('cms.forms.client.manager')
