@@ -34,12 +34,10 @@ class CountryMailer < ApplicationMailer
 
     country_label = CountryDecorator.get_short_label(@country.country_code)
     subject = I18n.translate('mail.country.summary.subject', country: country_label)
-    managers = params[:test] ? @country.managers.limit(1) : @country.managers
-    managers.each do |manager|
-      create_session! manager
-      mail(to: manager.email, subject: subject)
-      puts "[MAIL] Sent summary for #{@country.label} to #{manager.name}"
-    end
+
+    create_session! @manager
+    mail(to: @manager.email, subject: subject)
+    puts "[MAIL] Sent summary for #{@country.label} to #{@manager.name}"
 
     @country.update_column(:summary_email_sent_at, Time.now) unless params[:test]
   end
@@ -48,6 +46,7 @@ class CountryMailer < ApplicationMailer
 
     def setup
       @country = params[:country] || params[:record]
+      @manager = params[:manager]
     end
 
 end

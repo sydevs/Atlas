@@ -18,22 +18,26 @@ namespace :mail do
     events = Event.publicly_visible.ready_for_reminder_email.joins(:manager, :registrations)
     puts "[MAIL] Attempting to send reminder emails for #{events.count} events"
     events.in_batches.each_record do |event|
-      EventMailer.with(event: event).reminder.deliver_now
+      EventMailer.with(event: event, manager: event.manager).reminder.deliver_now
     end
   end
 
   desc 'Send summary emails.'
   task summaries: :environment do
     [Country, Province, LocalArea].each do |model|
-      records = model.active_since(6.months.ago).ready_for_summary_email.joins(:managers)
+      records = model.active_since(6.months.ago).ready_for_summary_email.includes(:managers)
       puts "[MAIL] Attempting to send summary emails for #{records.count} #{model.model_name.plural.downcase}"
       mailer = model == Country ? CountryMailer : RegionMailer
       records.in_batches.each_record do |record|
-        mailer.with(record: record).summary.deliver_now
+        record.managers.each do |manager|
+          mailer.with(record: record, manager: manager).summary.deliver_now
+        end
       end
     end
     
-    ApplicationMailer.summary.deliver_now
+    Manager.administrators.each do |manager|
+      ApplicationMailer.summary(manager: manager).deliver_now
+    end
   end
 
   namespace :test do
@@ -57,7 +61,8 @@ namespace :mail do
       desc 'Sends summary for one country'
       task summary: :environment do
         ActionMailer::Base.delivery_method = :letter_opener
-        ApplicationMailer.with(test: true).summary.deliver_now
+        manager = Manager.administrators.reorder('RANDOM()').first
+        ApplicationMailer.with(test: true, manager: manager).summary.deliver_now
       end
     end
 
@@ -75,7 +80,8 @@ namespace :mail do
       task :summary, [:id] => :environment do |_, args|
         ActionMailer::Base.delivery_method = :letter_opener
         country = args.id ? Country.find(args.id) : Country.joins(:managers).reorder('RANDOM()').first
-        CountryMailer.with(country: country, test: true).summary.deliver_now
+        manager = country.managers.reorder('RANDOM()').first
+        CountryMailer.with(country: country, manager: manager, test: true).summary.deliver_now
       end
     end
 
@@ -84,7 +90,8 @@ namespace :mail do
       task :summary, [:id] => :environment do |_, args|
         ActionMailer::Base.delivery_method = :letter_opener
         province = args.id ? Province.find(args.id) : Province.joins(:managers).reorder('RANDOM()').first
-        RegionMailer.with(region: province, test: true).summary.deliver_now
+        manager = province.managers.reorder('RANDOM()').first
+        RegionMailer.with(region: province, manager: manager, test: true).summary.deliver_now
       end
     end
 
@@ -93,7 +100,8 @@ namespace :mail do
       task :summary, [:id] => :environment do |_, args|
         ActionMailer::Base.delivery_method = :letter_opener
         local_area = args.id ? LocalArea.find(args.id) : LocalArea.joins(:managers).reorder('RANDOM()').first
-        RegionMailer.with(region: local_area, test: true).summary.deliver_now
+        manager = local_area.managers.reorder('RANDOM()').first
+        RegionMailer.with(region: local_area, manager: manager, test: true).summary.deliver_now
       end
     end
 

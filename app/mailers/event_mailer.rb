@@ -24,8 +24,8 @@ class EventMailer < ApplicationMailer
 
     if @status == :needs_urgent_review
       @event.venue.parent.managers.each do |manager|
-        @manager = manager
         puts "[MAIL] Sending status email to city manager: #{manager.name}"
+        @manager = manager
         mail(parameters.merge({ to: manager.email }))
       end
     end
@@ -54,7 +54,7 @@ class EventMailer < ApplicationMailer
 
     def setup
       @event = params[:event] || params[:record]
-      @manager = @event.manager
+      @manager = params[:manager] || @event.manager
       @status = @event.status.to_sym
       @status = :created if @status == :verified && @event.created_at > 1.week.ago
     end

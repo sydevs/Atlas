@@ -37,12 +37,9 @@ class RegionMailer < ApplicationMailer
     end
 
     subject = I18n.translate('mail.region.summary.subject', region: label)
-    managers = params[:test] ? @region.managers.limit(1) : @region.managers
-    managers.each do |manager|
-      create_session! manager
-      mail(to: manager.email, subject: subject)
-      puts "[MAIL] Sent summary for #{@region.label} to #{manager.name}"
-    end
+    create_session! @manager
+    mail(to: @manager.email, subject: subject)
+    puts "[MAIL] Sent summary for #{@region.label} to #{@manager.name}"
 
     @region.update_column(:summary_email_sent_at, Time.now) unless params[:test]
   end
@@ -51,6 +48,7 @@ class RegionMailer < ApplicationMailer
 
     def setup
       @region = params[:region] || params[:record]
+      @manager = params[:manager]
     end
 
 end
