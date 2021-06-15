@@ -16,7 +16,7 @@
 
     - if @model == Audit && @context.present?
       - last_activity_on = @context.try(:last_activity_on) || @context.updated_at.to_date
-      = floating_action last_activity_on.to_s(:long), class: 'active teal', data: { tooltip: translate('cms.activity.last_activity_on') }
+      = floating_action last_activity_on.to_s(:long), class: 'active teal', data: { tooltip: translate_attribute(@context, :last_activity_on) }
 
     .content
       - if controller_name == 'managers' && @context.try(:parent_managers)&.present?
@@ -60,8 +60,9 @@
             strong = translate_attribute(@context, timestamp)
           dd
             - if time
-              = timestamp == :should_update_status_at ? time_from_now_in_words(time) : time_ago_in_words(time)
-              '  - 
+              - unless timestamp.to_s.ends_with?('_on')
+                = timestamp == :should_update_status_at ? time_from_now_in_words(time) : time_ago_in_words(time)
+                '  - 
               = time.to_s(:long)
             - else
               | -

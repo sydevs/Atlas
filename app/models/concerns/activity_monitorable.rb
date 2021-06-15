@@ -14,7 +14,7 @@ module ActivityMonitorable
 
   def update_activity_timestamps(force = false)
     return unless force || changed?
-    return if self[:last_activity_on].present? && self[:last_activity_on] >= Date.today
+    return if has_attribute?(:last_activity_on) && self[:last_activity_on].present? && self[:last_activity_on] >= Date.today
 
     if has_attribute?(:last_activity_on)
       if new_record?
