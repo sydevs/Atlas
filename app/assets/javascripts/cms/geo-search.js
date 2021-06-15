@@ -1,4 +1,4 @@
-/* global $ */
+/* global $, RegionMap */
 /* exported GeoSearch */
 
 const GeoSearch = {
@@ -26,6 +26,10 @@ const GeoSearch = {
     this.$latitude = $('#local_area_latitude')
     this.$longitude = $('#local_area_longitude')
     this.$radius = $('#local_area_radius')
+
+    this.$latitude.change(() => this.onManualUpdate())
+    this.$longitude.change(() => this.onManualUpdate())
+    this.$radius.change(() => this.onManualUpdate())
 
     this.$search.search({
       minCharacters: 3,
@@ -72,6 +76,12 @@ const GeoSearch = {
       dataType: 'json',
       data: { place_id: place_id },
       success: (data) => {
+        data.radius = data.radius.toFixed(2)
+        data.latitude = data.latitude.toFixed(3)
+        data.longitude = data.longitude.toFixed(3)
+
+        this.disabledAutoUpdate = true
+
         if (this.mode == 'area') {
           this.$latitude.val(data.latitude)
           this.$longitude.val(data.longitude)
@@ -81,12 +91,24 @@ const GeoSearch = {
           this.$longitude.val(data.longitude)
           this.$radius.val(data.radius)
         }
+
+        this.disabledAutoUpdate = false
+        RegionMap.setCircle(data.latitude, data.longitude, data.radius)
       },
       error: (data) => {
         this.$search.search('display message', data, 'message')
       },
     })
   },
+
+  onManualUpdate() {
+    if (this.disabledAutoUpdate) return
+
+    const latitude = this.$latitude.val()
+    const longitude = this.$longitude.val()
+    const radius = this.$radius.val()
+    RegionMap.setCircle(latitude, longitude, radius)
+  }
 }
 
 $(document).on('ready', function() { GeoSearch.load() })

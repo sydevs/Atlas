@@ -9,17 +9,16 @@ const RegionMap = {
   load() {
     console.log('Loading RegionMap') // eslint-disable-line no-console
 
-    const $map = $('#region-map')
-    RegionMap.data = $map.data()
+    RegionMap.$container = $('#region-map')
+    RegionMap.data = RegionMap.$container.data()
     RegionMap.instance = L.map('region-map', {
       attributionControl: false,
       //zoomControl: false,
     })
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(RegionMap.instance)
-    $map.css('min-height', '360px').css('opacity', '1')
 
-    if (RegionMap.data.editable == 'true') {
+    if (RegionMap.data.editable == true) {
       RegionMap.initEditableMap()
     } else {
       RegionMap.initPreviewMap()
@@ -29,7 +28,10 @@ const RegionMap = {
   },
 
   initEditableMap() {
-    console.error('Editable region map is not implemented as of yet') // eslint-disable-line no-console
+    var radius = $('#local_area_radius').val()
+    var latitude = $('#local_area_latitude').val()
+    var longitude = $('#local_area_longitude').val()
+    RegionMap.setCircle(latitude, longitude, radius)
   },
 
   initPreviewMap() {
@@ -45,17 +47,30 @@ const RegionMap = {
       RegionMap.instance.setView([40, 0], 1.25)
     } else {
       RegionMap.setCircle(data.latitude, data.longitude, data.radius)
-      const bounds = L.latLng(data.latitude, data.longitude).toBounds(parseInt(data.radius) * 2000)
-      RegionMap.instance.fitBounds(bounds)
     }
+
+    RegionMap.$container.css('min-height', '360px').css('opacity', '1')
   },
 
   setCircle(latitude, longitude, radius) {
+    if (latitude == '' || longitude == '' || radius == '') {
+      return
+    }
+
+    if (RegionMap.circle) {
+      RegionMap.circle.removeFrom(RegionMap.instance)
+    }
+
+    RegionMap.$container.css('min-height', '360px').css('opacity', '1')
+
     RegionMap.circle = L.circle([latitude, longitude], radius * 1000, {
       color: '#2185d0',
       fillColor: '#2185d0',
       fillOpacity: 0.3,
     }).addTo(RegionMap.instance)
+
+    const bounds = L.latLng(latitude, longitude).toBounds(parseInt(radius) * 2000)
+    RegionMap.instance.fitBounds(bounds)
   },
 
   setCountry(country) {
