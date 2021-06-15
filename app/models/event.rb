@@ -132,6 +132,10 @@ class Event < ApplicationRecord
     end
   end
 
+  def cache_key
+    "#{super}-#{state}-#{last_activity_on.strftime("%d%m%Y")}"
+  end
+
   private
 
     def notify_new_manager

@@ -65,6 +65,10 @@ class Venue < ApplicationRecord
     super value if I18nData.countries.keys.include?(value)
   end
 
+  def cache_key
+    "#{super}-#{last_activity_on.strftime("%d%m%Y")}"
+  end
+
   private
 
     def fetch_time_zone
