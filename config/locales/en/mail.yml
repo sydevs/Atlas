@@ -111,6 +111,13 @@ en:
 
     manager:
       welcome:
+        subject:
+          worldwide: "Welcome! You are now an administrator on Sahaj Atlas."
+          country: "Welcome! You are now a country manager on Sahaj Atlas."
+          province: "Welcome! You are now a local manager on Sahaj Atlas."
+          local_area: "Welcome! You are now a local manager on Sahaj Atlas."
+          event: "Welcome! You are now an event manager on Sahaj Atlas."
+          none: "Welcome! You are now a manager on Sahaj Atlas."
         title: "Welcome to Sahaj Atlas"
         preview:
           worldwide: "You have been invited to become an administrator of the Sahaj Atlas."

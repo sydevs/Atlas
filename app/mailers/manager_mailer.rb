@@ -6,7 +6,7 @@ class ManagerMailer < ApplicationMailer
   def welcome
     setup
     
-    subject = I18n.translate('mail.manager.welcome.title', context: @context&.label)
+    subject = I18n.translate(@manager.type, scope: 'mail.manager.welcome.subject')
     puts "[MAIL] Sending welcome email to #{@manager.name} for #{@context}"
     mail(to: @manager.email, subject: subject)
   end
