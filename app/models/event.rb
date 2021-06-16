@@ -133,7 +133,7 @@ class Event < ApplicationRecord
   end
 
   def cache_key
-    "#{super}-#{state}-#{last_activity_on.strftime("%d%m%Y")}"
+    "#{super}-#{status}-#{last_activity_on.strftime("%d%m%Y")}"
   end
 
   private
