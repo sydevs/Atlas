@@ -123,11 +123,11 @@ class Event < ApplicationRecord
   def log_status_change
     return if archived? || new_record?
     
-    EventMailer.with(event: self, manager: self.manager).status.deliver_now
+    EventMailer.with(event: self, manager: manager).status.deliver_now
 
     if needs_urgent_review?
-      venue.parent.managers.each do |manager|
-        EventMailer.with(event: self, manager: manager).status.deliver_now
+      venue.parent.managers.each do |parent_manager|
+        EventMailer.with(event: self, manager: parent_manager).status.deliver_now
       end
     end
   end

@@ -39,14 +39,17 @@ module Expirable
       state :finished
 
       after_all_events :update_timestamps
-      after_all_events :log_event
 
-      event :update_status do
+      event :update_status, after_enter: :log_event do
         transitions to: :finished, if: :should_finish?
         transitions from: :verified, to: :needs_review, if: :should_need_review?
         transitions from: :needs_review, to: :needs_urgent_review, if: :should_need_urgent_review?
         transitions from: :needs_urgent_review, to: :expired, if: :should_expire?
         transitions from: :expired, to: :archived, if: :should_archive?
+        
+        after do
+          try(:log_status_change) if saved_change_to_status?
+        end
       end
 
       event :reset_status do
@@ -96,12 +99,6 @@ module Expirable
     elsif respond_to?("#{status}_at")
       update_column "#{status}_at", Time.now
     end
-  end
-
-  def log_event
-    return if aasm.current_event == :reset_status! || aasm.current_event == :reset_status
-
-    try(:log_status_change)
   end
 
   def should_finish?
