@@ -61,7 +61,7 @@ html
                 a.section href=breadcrumb_url(ancestor)
                   = ancestor.try(:short_label) || ancestor.label
               - else
-                .section = ancestor.label
+                span.section = ancestor.label
               i.right.angle.icon.divider
               
             - if action_name == 'new'
