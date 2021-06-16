@@ -50,7 +50,7 @@
   = f.input :registration_url, as: :url, placeholder: map_event_url(@record&.id || 0, anchor: 'register'), wrapper_html: { class: 'twelve wide' }
 = help_link :registration
 
-= f.input :disable_notifications, hint: translate('cms.hints.event.disable_notifications')
+//= f.input :disable_notifications, hint: translate('cms.hints.event.disable_notifications')
 
 - if policy(@record).set_manager?
   .ui.small.dividing.violet.header = translate('cms.forms.event.manager')
