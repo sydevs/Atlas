@@ -287,6 +287,41 @@ en:
     help:
       guide: "How do I use Sahaj Atlas?"
       learn_more: "Learn more"
+      categories:
+        title: "What are event categories for?"
+        description:
+          introduction: "Categories help the system to understand what kind of event you have added. We can use that information for a variety of purposes."
+        benefits:
+          marketing:
+            icon: ad # Do not translate
+            title: "Marketing"
+            description: "We can recommend follow up classes to seekers based on the event category. If someone registers for a concert, then after the concert we can suggest an intro class. When they have been to many intro classes, we could suggest they join a course to go deeper. If there is a big music concert, we might make it appear differently on the map to attract more attention."
+          labeling:
+            icon: info circle # Do not translate
+            title: "Event Labeling"
+            description: "We can present present extra information about the event to seekers. For example: A message recommending that seekers register for an intro class, before attending a going deeper class."
+          analytics:
+            icon: chart area # Do not translate
+            title: "Analytics"
+            description: "We can analyse what kind of events seekers are registering for to improve the way we present these events."
+        types:
+          title: "Available Categories"
+          intro:
+            title: :activerecord.attributes.event.categories.intro
+            description: "An introductory class for seekers just starting with Sahaja Yoga."
+          intermediate:
+            title: :activerecord.attributes.event.categories.intermediate
+            description: "A class for seekers to go deeper in Sahaja Yoga, once they've already attended an intro class."
+          course:
+            title: :activerecord.attributes.event.categories.course
+            description: "Usually a weekly course that runs for a limited time. Taking a seeker from beginner to intermeditate over the course of a set number of weeks."
+          public_event:
+            title: :activerecord.attributes.event.categories.public_event
+            description: "When Sahaja Yoga is participating in an existing public event. Such as having a stall at a festival or farmer's market."
+          concert:
+            title: :activerecord.attributes.event.categories.concert
+            description: "A large one time cultural event, usually involving music, maybe dance, and realisation."
+
       expiration:
         title: "Why isn't my event appearing on the map?"
         alt_title: "How does event expiration work?"
@@ -297,19 +332,19 @@ en:
           expiration: "If %{duration} pass without the event being verified, then it's hidden from the map until someone checks and updates it."
         steps:
           verified:
-            icon: green check circle
+            icon: green check circle # Do not translate
             active_label: "Up To Date"
             inactive_label: "Last Updated"
             title: "Up To Date"
             description: "When an event is created or updated"
           should_need_review:
-            icon: orange question circle
+            icon: orange question circle # Do not translate
             active_label: "Needs Review"
             inactive_label: "Will Need Review"
             title: "Needs Review"
             description: "If %{duration} pass without the event being updated"
           should_expire:
-            icon: red times circle
+            icon: red times circle # Do not translate
             active_label: "Expired"
             inactive_label: "Expires"
             label: "Expires" # This should be present tense as in the phrase "The event expires on March 3"

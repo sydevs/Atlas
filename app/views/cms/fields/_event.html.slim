@@ -10,6 +10,7 @@
 .ui.small.dividing.violet.header = translate('cms.forms.event.details')
 
 = f.input :category, collection: categories
+= help_link :categories
 
 = f.input :description do 
   .hint = translate('cms.hints.event.description', min: 40, max: 600)

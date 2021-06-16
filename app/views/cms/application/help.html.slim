@@ -4,15 +4,36 @@
 h1.ui.header = translate('cms.menu.faq')
 
 .ui.fluid.accordion
-  .title class=active_accordion?(:guide)
+  - unless current_user.administrator?
+    .title class=active_accordion?(:guide)
+      i.dropdown.icon
+      = translate('cms.help.guide')
+      |  (
+      = manager_icon current_user
+      = translate("cms.dashboard.role.#{current_user.type}.title")
+      | )
+    .content class=active_accordion?(:guide)
+      .ui.embed data-source='youtube' data-id='ScMzIvxBSi4' data-placeholder='http://i3.ytimg.com/vi/ScMzIvxBSi4/maxresdefault.jpg'
+
+  .title class=active_accordion?(:categories)
     i.dropdown.icon
-    = translate('cms.help.guide')
-    |  (
-    = manager_icon current_user
-    = translate("cms.dashboard.role.#{current_user.type}.title")
-    | )
-  .content class=active_accordion?(:guide)
-    .ui.embed data-source='youtube' data-id='ScMzIvxBSi4' data-placeholder='http://i3.ytimg.com/vi/ScMzIvxBSi4/maxresdefault.jpg'
+    = translate('cms.help.categories.title')
+  .content class=active_accordion?(:categories)
+    p = translate('cms.help.categories.description.introduction')
+    .ui.list
+      - %w[marketing labeling analytics].each do |benefit|
+        .item
+          i.icon class=translate("cms.help.categories.benefits.#{benefit}.icon")
+          .content
+            .header = translate("cms.help.categories.benefits.#{benefit}.title")
+            .description = translate("cms.help.categories.benefits.#{benefit}.description")
+    p: strong = translate('cms.help.categories.types.title')
+    .ui.bulleted.list
+      - Event.categories.each do |category, _index|
+        .item
+          .content
+            .header = translate("cms.help.categories.types.#{category}.title")
+            .description = translate("cms.help.categories.types.#{category}.description")
 
   .title class=active_accordion?(:expiration)
     i.dropdown.icon
