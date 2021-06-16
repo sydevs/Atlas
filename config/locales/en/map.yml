@@ -72,3 +72,6 @@ en:
       facebook: "Register on Facebook"
       eventbrite: "Register on Eventbrite"
       meetup: "Register on Meetup"
+    language_codes:
+      uk: UA #Ukrainian
+    

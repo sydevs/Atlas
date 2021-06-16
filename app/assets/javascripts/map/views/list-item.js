@@ -39,7 +39,7 @@ class ListItem {
     element.addEventListener('click', () => this.open())
 
     if (event.languageCode && document.documentElement.lang.toUpperCase() != event.languageCode) {
-      this.elements.language.textContent = event.languageCode
+      this.elements.language.textContent = Util.translate(`language_codes.${event.languageCode.toLowerCase()}`) || event.languageCode
     } else {
       this.elements.language.remove()
     }
