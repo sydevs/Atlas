@@ -166,10 +166,10 @@ en:
     managed_record:
       created:
         subject:
-          country: "New Country Manager"
-          province: "New Local Manager"
-          local_area: "New Local Manager"
-          event: "New Event Manager"
+          country: "You are now a country manager"
+          province: "You are now a local manager"
+          local_area: "You are now a local manager"
+          event: "You are now an event manager"
         title:
           country: "Country Manager for %{record}"
           province: "Local Manager for %{record}"
