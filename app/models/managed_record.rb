@@ -14,7 +14,12 @@ class ManagedRecord < ApplicationRecord
 
   after_create do |record|
     Manager.set_counter(record_type, :increment, manager_id)
-    ManagedRecordMailer.with(managed_record: self).created.deliver_now unless manager.created_at_previously_changed?
+
+    if manager.new_record?
+      ManagerMailer.with(manager: manager, context: record).welcome.deliver_now
+    else
+      ManagedRecordMailer.with(managed_record: self).created.deliver_now
+    end
   end
 
   after_destroy do |record|

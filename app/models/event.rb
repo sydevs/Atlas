@@ -143,7 +143,7 @@ class Event < ApplicationRecord
       return unless saved_change_to_attribute?(:manager_id)
 
       if created_at_changed?
-        EventMailer.with(event: self, manager: manager).status.deliver_now
+        ManagerMailer.with(manager: manager, context: self).welcome.deliver_now
       else
         ManagedRecordMailer.with(event: self).created.deliver_now
       end
