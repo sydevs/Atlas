@@ -139,10 +139,9 @@ class Event < ApplicationRecord
   private
 
     def notify_new_manager
-      return if self.new_manager_record
       return unless saved_change_to_attribute?(:manager_id)
 
-      if created_at_changed?
+      if self.new_manager_record
         ManagerMailer.with(manager: manager, context: self).welcome.deliver_now
       else
         ManagedRecordMailer.with(event: self).created.deliver_now
