@@ -47,9 +47,7 @@ module Expirable
         transitions from: :needs_urgent_review, to: :expired, if: :should_expire?
         transitions from: :expired, to: :archived, if: :should_archive?
         
-        after do
-          try(:log_status_change) if saved_change_to_status?
-        end
+        after { try(:log_status_change) }
       end
 
       event :reset_status do
