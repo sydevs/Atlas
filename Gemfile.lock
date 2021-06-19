@@ -110,6 +110,7 @@ GEM
       google-cloud-storage (~> 1.10)
     childprocess (3.0.0)
     concurrent-ruby (1.1.8)
+    connection_pool (2.2.5)
     countries (3.0.1)
       i18n_data (~> 0.10.0)
       sixarm_ruby_unaccent (~> 1.1)
@@ -360,6 +361,7 @@ GEM
     rb-fsevent (0.10.4)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
+    redis (4.3.1)
     representable (3.0.4)
       declarative (< 0.1.0)
       declarative-option (< 0.2.0)
@@ -381,6 +383,10 @@ GEM
     selenium-webdriver (3.142.7)
       childprocess (>= 0.5, < 4.0)
       rubyzip (>= 1.2.2)
+    sidekiq (6.2.1)
+      connection_pool (>= 2.2.2)
+      rack (~> 2.0)
+      redis (>= 4.2.0)
     signet (0.15.0)
       addressable (~> 2.3)
       faraday (>= 0.17.3, < 2.0)
@@ -484,6 +490,7 @@ DEPENDENCIES
   sassc
   sassc-rails
   selenium-webdriver
+  sidekiq
   simple_form
   slim-rails
   spring

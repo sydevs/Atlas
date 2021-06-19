@@ -16,9 +16,9 @@ class ManagedRecord < ApplicationRecord
     Manager.set_counter(record_type, :increment, manager_id)
 
     if manager.new_record?
-      ManagerMailer.with(manager: manager, context: record).welcome.deliver_now
+      ManagerMailer.with(manager: manager, context: record).welcome.deliver_later
     else
-      ManagedRecordMailer.with(managed_record: self).created.deliver_now
+      ManagedRecordMailer.with(managed_record: self).created.deliver_later
     end
   end
 

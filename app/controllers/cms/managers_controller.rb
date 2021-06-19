@@ -44,7 +44,7 @@ class CMS::ManagersController < CMS::ApplicationController
         success = true
       elsif @record.save
         flash[:success] = translate('cms.messages.manager.success')
-        ManagerMailer.with(manager: @record, context: @context).welcome.deliver_now if @record.administrator?
+        ManagerMailer.with(manager: @record, context: @context).welcome.deliver_later if @record.administrator?
         success = true
       end
     rescue Net::SMTPServerBusy

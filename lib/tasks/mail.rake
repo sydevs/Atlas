@@ -18,7 +18,7 @@ namespace :mail do
     events = Event.publicly_visible.ready_for_reminder_email.joins(:manager, :registrations)
     puts "[MAIL] Attempting to send reminder emails for #{events.count} events"
     events.in_batches.each_record do |event|
-      EventMailer.with(event: event, manager: event.manager).reminder.deliver_now
+      EventMailer.with(event: event, manager: event.manager).reminder.deliver_later
     end
   end
 
@@ -30,13 +30,13 @@ namespace :mail do
       mailer = model == Country ? CountryMailer : RegionMailer
       records.in_batches.each_record do |record|
         record.managers.each do |manager|
-          mailer.with(record: record, manager: manager).summary.deliver_now
+          mailer.with(record: record, manager: manager).summary.deliver_later
         end
       end
     end
     
     Manager.administrators.each do |manager|
-      ApplicationMailer.summary(manager: manager).deliver_now
+      ApplicationMailer.summary(manager: manager).deliver_later
     end
   end
 end

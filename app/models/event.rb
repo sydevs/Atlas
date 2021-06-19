@@ -125,11 +125,11 @@ class Event < ApplicationRecord
     
     if needs_urgent_review?
       venue.parent.managers.each do |parent_manager|
-        EventMailer.with(event: self, manager: parent_manager).status.deliver_now
+        EventMailer.with(event: self, manager: parent_manager).status.deliver_later
       end
     end
 
-    EventMailer.with(event: self, manager: self.manager).status.deliver_now
+    EventMailer.with(event: self, manager: self.manager).status.deliver_later
   end
 
   def cache_key
@@ -142,9 +142,9 @@ class Event < ApplicationRecord
       return unless saved_change_to_attribute?(:manager_id)
 
       if self.new_manager_record
-        ManagerMailer.with(manager: manager, context: self).welcome.deliver_now
+        ManagerMailer.with(manager: manager, context: self).welcome.deliver_later
       else
-        ManagedRecordMailer.with(event: self).created.deliver_now
+        ManagedRecordMailer.with(event: self).created.deliver_later
       end
     end
 

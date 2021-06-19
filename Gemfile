@@ -17,6 +17,7 @@ gem 'sassc-rails' # Use SASS for stylesheets
 gem 'slim-rails' # Use Slim for views
 gem 'terser' # Use Uglifier as compressor for JavaScript assets
 gem 'sprockets', '3.7.2'
+gem 'sidekiq' # For async jobs, including emails
 
 ### Security Fix
 gem 'loofah', '>= 2.3.1'
