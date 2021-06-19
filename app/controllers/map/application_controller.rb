@@ -37,6 +37,13 @@ class Map::ApplicationController < ActionController::Base
     render 'map/show'
   end
 
+  def index
+    I18n.locale = params[:locale]&.to_sym || :en
+    @events = GraphqlAPI.events(online: params[:online])
+
+    render 'map/index'
+  end
+
   def privacy
     render 'map/privacy'
   end

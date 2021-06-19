@@ -49,6 +49,7 @@ Rails.application.routes.draw do
     get '/event/:event_id', to: 'application#show', as: :event
     get '/venue/:venue_id', to: 'application#show', as: :venue
     get :privacy, to: 'application#privacy'
+    get :index, to: 'application#index'
     get :closest, to: 'application#closest'
     get :online, to: 'application#online'
     post :registrations, to: 'registrations#create'

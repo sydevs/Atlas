@@ -38,6 +38,19 @@ module GraphqlAPI
     directionsUrl
   }
 
+  def self.events online: nil
+    AtlasSchema.execute(%{
+      query {
+        events(#{online.nil? ? '' : "online: #{online}"}) {
+          #{EVENT_FRAGMENT}
+          venue {
+            #{VENUE_FRAGMENT}
+          }
+        }
+      }
+    })['data']['events']
+  end
+
   def self.event id
     AtlasSchema.execute(%{
       query {
