@@ -44,7 +44,7 @@ en:
       regions:
         countries: "Countries"
         regions: "Regions"
-        cities: "Cities / Regions"
+        cities: "Cities / Areas"
       breadcrumbs:
         world: "World"
         help: "Help"
