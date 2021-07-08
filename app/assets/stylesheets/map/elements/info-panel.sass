@@ -1,7 +1,6 @@
 @import '../_mixins'
 
 .info
-  @include panel
   padding: $panel-padding-mobile
   padding-bottom: $panel-padding-mobile * 2
   background: white
@@ -15,6 +14,14 @@
 
   .event
     margin-bottom: 15px
+
+body[data-page="index"] .info
+  max-width: 600px
+  margin: auto
+  position: relative
+
+body[data-page="show"] .info
+  @include panel
 
   body[data-list="online"] &
     box-shadow: $shadow-heavy

@@ -11,3 +11,18 @@
 // about supported directives.
 //
 //= require_tree ./map
+
+/* global MapApplicationInstance, ListApplicationInstance */
+
+document.addEventListener('DOMContentLoaded', () => {
+  switch (document.body.dataset.page) {
+  case 'index':
+    window.Application = new ListApplicationInstance()
+    window.Application.loadEvents()
+    break
+  case 'show':
+    window.Application = new MapApplicationInstance()
+    window.Application.loadMap()
+    break
+  }
+})

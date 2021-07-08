@@ -9,12 +9,15 @@ class ListPanel {
     this.items = []
     this.itemTemplate = document.getElementById('js-item-template')
     this.itemsContainer = document.getElementById('js-list-results')
-    this.modeInputs = document.getElementById('js-list-mode').querySelectorAll('input')
     this.closestVenueTitle = document.getElementById('js-list-closest-venue')
     this.closestVenueTitle.addEventListener('click', () => this.triggerAlternativeQuery())
 
-    for (let i = 0; i < this.modeInputs.length; i++) {
-      this.modeInputs[i].addEventListener('change', event => Application._setListingType(event.target.value))
+    if (document.getElementById('js-list-mode')) {
+      this.modeInputs = document.getElementById('js-list-mode').querySelectorAll('input')
+
+      for (let i = 0; i < this.modeInputs.length; i++) {
+        this.modeInputs[i].addEventListener('change', event => Application._setListingType(event.target.value))
+      }
     }
   }
 
@@ -52,6 +55,18 @@ class ListPanel {
         event.venueId = venue.id
         this.appendEvent(event, venue)
       }
+    }
+  }
+
+  showEvents(events) {
+    this.reset()
+
+    if (events.length < 1) return
+
+    for (let n = 0; n < events.length; n++) {
+      const event = events[n]
+      event.venueId = event.venue.id
+      this.appendEvent(event, event.venue)
     }
   }
 

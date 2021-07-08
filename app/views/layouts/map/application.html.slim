@@ -8,7 +8,7 @@ html lang=I18n.locale
     = stylesheet_link_tag 'map', media: 'all'
     = javascript_include_tag 'map'
 
-  body class="#{action_name} mode--#{@mode}" data-list=@list_type
+  body class=("mode--#{@mode}" if @mode) data-page=action_name data-list=@list_type
     = yield
 
   javascript:

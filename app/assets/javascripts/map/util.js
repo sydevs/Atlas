@@ -102,6 +102,7 @@ const Util = {
       }
     case 'duration': {
       const startTime = nextDateTime.toLocaleString(luxon.DateTime.TIME_SIMPLE)
+      console.log('duration', nextDateTime, startTime)
 
       if (event.duration) {
         const endTime = nextDateTime.plus({ hours: event.duration }).toLocaleString(luxon.DateTime.TIME_SIMPLE)

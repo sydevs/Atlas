@@ -4,6 +4,7 @@
 class ListItem {
 
   constructor(element, event, venue = null) {
+    console.log(event)
     this.container = element
     this.event = event
     this.venue = venue
@@ -11,7 +12,7 @@ class ListItem {
     let distance = null
     const distanceElement = element.querySelector('[data-attribute="distance"]')
 
-    if (venue) {
+    if (venue && Application.map) {
       distance = Application.map.distance(venue)
       distanceElement.textContent = `${Math.round(distance * 10) / 10} km`
     }

@@ -1,6 +1,7 @@
 /* global AtlasAPI, MapView, Navbar, ListPanel, ListToggle, InfoPanel, ImageGallery, TimingCarousel, SharingModal */
+/* exported MapApplicationInstance */
 
-class ApplicationInstance {
+class MapApplicationInstance {
 
   constructor() {
     this.container = document.getElementById('map')
@@ -14,7 +15,7 @@ class ApplicationInstance {
     this.timingCarousel = new TimingCarousel(document.getElementById('js-timing-carousel'))
     this.listToggle = new ListToggle(document.getElementById('js-list-toggle'))
     this.share = new SharingModal(document.getElementById('js-share'))
-    this.atlas = new AtlasAPI(this.container.dataset.api)
+    this.atlas = new AtlasAPI()
 
     // Workaround for an iOS bug that causes grey blocks when you focus an input
     const inputs = document.querySelectorAll('input, textarea')
@@ -189,8 +190,3 @@ class ApplicationInstance {
     this.map.invalidateSize()
   }
 }
-
-document.addEventListener('DOMContentLoaded', () => {
-  window.Application = new ApplicationInstance()
-  window.Application.loadMap()
-})

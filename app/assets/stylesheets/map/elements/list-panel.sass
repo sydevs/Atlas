@@ -1,12 +1,17 @@
 @import '../_mixins'
 
 .list
+  @include mode([event, map])
+    display: none
+
+body[data-page="index"] .list
+  max-width: 600px
+  margin: auto
+
+body[data-page="show"] .list
   @include panel
   transition: box-shadow 0.5s
   background: white
-
-  @include mode([event, map])
-    display: none
 
   @include tablet-or-larger
     top: $header-height
