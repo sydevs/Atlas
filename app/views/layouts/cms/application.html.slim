@@ -9,6 +9,7 @@ html
     = csrf_meta_tags
     = stylesheet_link_tag 'cms', media: 'all'
     = javascript_include_tag 'cms'
+    = content_for :head
 
   body class="cms #{controller_name} #{controller.action_name}"
     header

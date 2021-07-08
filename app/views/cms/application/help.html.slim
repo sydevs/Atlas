@@ -1,5 +1,7 @@
 
 - content_for :title, translate('cms.menu.breadcrumbs.help')
+- content_for :head do
+  script src="https://player.vimeo.com/api/player.js" data-turbolinks=false
 
 h1.ui.header = translate('cms.menu.faq')
 
@@ -13,6 +15,7 @@ h1.ui.header = translate('cms.menu.faq')
       = translate("cms.dashboard.role.#{current_user.type}.title")
       | )
     .content class=active_accordion?(:guide)
+      //iframe src="https://player.vimeo.com/video/#{role_vimeo_ids[current_user.role.to_sym]}" width='672' height='378' frameborder='0' allow='autoplay; fullscreen' allowfullscreen=true
       .ui.embed data-source='youtube' data-id='ScMzIvxBSi4' data-placeholder='http://i3.ytimg.com/vi/ScMzIvxBSi4/maxresdefault.jpg'
 
   .title class=active_accordion?(:categories)

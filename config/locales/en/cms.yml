@@ -285,8 +285,22 @@ en:
         action: "Watch tutorial video"
 
     help:
-      guide: "How do I use Sahaj Atlas?"
       learn_more: "Learn more"
+      guide:
+        title: "How do I use Sahaj Atlas?"
+        videos:
+          general:
+            title: "What is Sahaj Atlas?"
+            id: 570209591
+          event_manager:
+            title: "How to manage your event"
+            id: 570207541
+          country_manager:
+            title: "How to manager your country"
+            id: 570202890
+          creating_venues:
+            title: "How to create an event (pt. 1)"
+            id: 570202890
       categories:
         title: "What are event categories for?"
         description:
@@ -321,7 +335,6 @@ en:
           concert:
             title: :activerecord.attributes.event.categories.concert
             description: "A large one time cultural event, usually involving music, maybe dance, and realisation."
-
       expiration:
         title: "Why isn't my event appearing on the map?"
         alt_title: "How does event expiration work?"
