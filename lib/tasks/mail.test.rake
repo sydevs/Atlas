@@ -86,18 +86,25 @@ namespace :mail do
     end
 
     namespace :managed_records do
-      desc 'Sends status for one event'
+      desc 'Sends notification for a manager change'
       task created: :environment do
         ActionMailer::Base.delivery_method = :letter_opener
         record = ManagedRecord.joins(:manager).reorder('RANDOM()').first
         ManagedRecordMailer.with(managed_record: record, test: true).created.deliver_now
       end
   
-      desc 'Sends reminder for one event'
+      desc 'Sends notification for a client manager change'
+      task client_manager_changed: :environment do
+        ActionMailer::Base.delivery_method = :letter_opener
+        client = Client.joins(:manager).reorder('RANDOM()').first
+        ManagedRecordMailer.with(record: client, test: true).created.deliver_now
+      end
+  
+      desc 'Sends notification for an event manager change'
       task event_manager_changed: :environment do
         ActionMailer::Base.delivery_method = :letter_opener
         event = Event.where.not(status: :finished).joins(:manager).reorder('RANDOM()').first
-        ManagedRecordMailer.with(event: event, test: true).created.deliver_now
+        ManagedRecordMailer.with(record: event, test: true).created.deliver_now
       end
     end
   end

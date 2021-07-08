@@ -51,9 +51,6 @@ class Event < ApplicationRecord
   scope :online, -> { where(online: true) }
   scope :offline, -> { where.not(online: true) }
 
-  # Callbacks
-  after_save :notify_new_manager
-
   # Delegations
   delegate :full_address, to: :venue
   alias parent venue
@@ -137,16 +134,6 @@ class Event < ApplicationRecord
   end
 
   private
-
-    def notify_new_manager
-      return unless saved_change_to_attribute?(:manager_id)
-
-      if self.new_manager_record
-        ManagerMailer.with(manager: manager, context: self).welcome.deliver_later
-      else
-        ManagedRecordMailer.with(event: self).created.deliver_later
-      end
-    end
 
     def validate_end_time
       return if end_time.nil? || duration.positive?

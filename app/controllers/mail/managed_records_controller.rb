@@ -15,6 +15,10 @@ class Mail::ManagedRecordsController < Mail::ApplicationController
         @record = Event.joins(:manager).reorder('RANDOM()').first
         @manager = @record.manager
         return
+      elsif params[:type] && params[:type].classify == 'Client'
+        @record = Client.joins(:manager).reorder('RANDOM()').first
+        @manager = @record.manager
+        return
       elsif params[:type]
         managed_record = ManagedRecord.joins(:manager).where(record_type: params[:type].classify).reorder('RANDOM()').first
       else

@@ -14,8 +14,8 @@ class ManagedRecordMailer < ApplicationMailer
   private
 
     def setup
-      if params[:event]
-        @record = params[:event]
+      if params[:record]
+        @record = params[:record]
         @manager = @record.manager
       else
         managed_record = params[:managed_record]
