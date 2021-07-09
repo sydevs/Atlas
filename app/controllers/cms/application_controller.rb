@@ -28,7 +28,8 @@ class CMS::ApplicationController < ActionController::Base
 
   def dashboard
     authorize current_user, :dashboard?
-    @resources = current_user.countries
+    @resources = current_user.clients
+    @resources += current_user.countries
     @resources += current_user.provinces.joins(:country).where(countries: { enable_province_management: true })
     @resources += current_user.local_areas
     @resources += current_user.events

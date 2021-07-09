@@ -1,0 +1,14 @@
+
+h3.ui.small.dividing.grey.header = translate('cms.details.management_for_record', resource: translate_model(@model).downcase)
+.ui.list
+  .item
+    = model_icon Manager
+    .content
+      .header = translate_model(Manager)
+      a.description href=url_for([:cms, @record.manager])
+        | #{@record.manager.label} (#{@record.manager.email})
+  .item
+    i.clock.icon
+    .content
+      .header = translate('cms.details.updated_at')
+      .description = time_ago_in_words(@record.updated_at)

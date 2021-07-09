@@ -15,7 +15,7 @@ module Managed
 
   def managed_by? manager, super_manager: nil
     return true if super_manager != true && self.manager == manager
-    return true if venue.managed_by?(manager) && super_manager != false
+    return true if respond_to?(:venue) && venue.managed_by?(manager) && super_manager != false
 
     false
   end

@@ -35,4 +35,8 @@ class ManagerPolicy < DatabasePolicy
     user == record
   end
 
+  def clients?
+    user == record
+  end
+
 end

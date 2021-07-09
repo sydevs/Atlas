@@ -111,14 +111,18 @@ Rails.application.routes.draw do
       get :activity
       get :countries
       get :provinces
+      resources :clients, only: %i[index]
       resources :venues, only: %i[index]
       resources :events, only: %i[index]
       resources :audits, only: %i[index]
     end
 
+    resources :clients do
+      resources :audits, only: %i[index]
+    end
+
     resources :registrations, only: %i[index]
     resources :audits, only: %i[index]
-    resources :clients
     resources :access_keys, only: %i[index new create edit update destroy]
   end
 

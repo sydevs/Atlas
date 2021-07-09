@@ -115,6 +115,14 @@ class CMS::ManagersController < CMS::ApplicationController
     end
   end
 
+  def clients
+    manager = @scope&.find(params[:manager_id])
+    authorize manager
+
+    @clients = manager.clients
+    render format: :json
+  end
+
   private
 
     def parameters

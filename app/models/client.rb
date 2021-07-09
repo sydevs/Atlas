@@ -5,7 +5,9 @@ class Client < ApplicationRecord
   include Managed
 
   searchable_columns %w[label domain]
-  audited
+  audited except: %i[
+    summary_email_sent_at
+  ]
 
   # Validations
   validates_presence_of :label, :domain, :public_key, :secret_key

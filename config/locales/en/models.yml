@@ -82,8 +82,8 @@ en:
         single: "App"
         plural: "Apps"
         # Countable
-        one: "App"
-        other: "Apps"
+        one: "external app"
+        other: "external apps"
       picture:
         # Basic pluralization
         single: "Image"
