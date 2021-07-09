@@ -18,6 +18,7 @@ module CMS::ApplicationHelper
     country: 'chess bishop',
     local: 'chess knight',
     event: 'chess pawn',
+    client: 'chess rook',
     none: 'minus',
   }.freeze
 

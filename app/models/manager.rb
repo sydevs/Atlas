@@ -13,6 +13,7 @@ class Manager < ApplicationRecord
   has_many :local_area_venues, through: :local_areas, source: :venues
   has_many :local_area_provinces, through: :local_areas, source: :province
   has_many :events
+  has_many :clients, through: :managed_records, source: :record, source_type: 'Client', dependent: :destroy
   has_many :actions, class_name: 'Audit', as: :user
 
   # Validations
@@ -25,6 +26,7 @@ class Manager < ApplicationRecord
   scope :country_managers, -> { where('managed_countries_counter > 0') }
   scope :local_managers, -> { where('managed_localities_counter > 0') }
   scope :event_managers, -> { joins(:events) }
+  scope :client_managers, -> { joins(:clients) }
 
   # Methods
 
@@ -36,6 +38,8 @@ class Manager < ApplicationRecord
       parent = local_areas.international.first || provinces.first || local_areas.cross_province.first || local_areas.first
     when :event
       parent = events.first
+    when :client
+      parent = client.first
     end
     
     parent unless parent&.new_record?
@@ -55,6 +59,8 @@ class Manager < ApplicationRecord
       :country
     elsif managed_localities_counter.positive?
       :local
+    elsif clients.exists?
+      :client
     elsif events.exists?
       :event
     else

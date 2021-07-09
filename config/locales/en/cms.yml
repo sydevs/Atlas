@@ -243,6 +243,10 @@ en:
           title: "Event Manager"
           description: "Can update the details of the events assigned to them."
           instruction: "It's your responsibility to keep your classes up to date. You will be sent emails every few months asking you confirm that your events are up to date. If the location of your class changes, you will need to ask the manager for you local area to update it."
+        client:
+          title: "App Manager"
+          description: "Can modify the configuration for your external app"
+          instruction: "You have access to the configuration for your external app."
         none:
           title: "No-Access Manager"
           description: "This user no events or regions assigned to them. They have no access to manage the atlas."
