@@ -40,10 +40,6 @@ module Atlas
       end
     end
 
-    config.action_dispatch.default_headers = {
-      'X-Frame-Options' => 'ALLOWALL'
-    }
-
     config.i18n.load_path += Dir["#{Rails.root}/config/locales/**/*.{rb,yml}"]
   end
 end

@@ -1,8 +1,9 @@
 class Map::ApplicationController < ActionController::Base
 
+  include Passwordless::ControllerHelpers
   include Geokit::Geocoders
   layout 'map/application'
-  before_action :set_cors!
+  before_action :setup_client!
 
   def show
     I18n.locale = params[:locale]&.to_sym || :en
@@ -85,11 +86,21 @@ class Map::ApplicationController < ActionController::Base
       end
     end
 
-    def set_cors!
-      headers['Access-Control-Allow-Origin'] = '*'
+    def setup_client!
+      @client = Client.find_by_public_key(params[:api_key])
+      return if current_user && !params[:api_key].present?
+      raise ActionController::RoutingError.new('Not Allowed') if !current_user
+      raise ActionController::RoutingError.new('Not Found') if @client.nil?
+
+      headers['X-FRAME-OPTIONS'] = "ALLOW-FROM #{@client.domain}"
+      headers['Access-Control-Allow-Origin'] = @client.domain
       headers['Access-Control-Allow-Methods'] = 'GET'
       headers['Access-Control-Request-Method'] = '*'
       headers['Access-Control-Allow-Headers'] = 'Origin, X-Requested-With, Content-Type, Accept, Authorization'
+    end
+
+    def current_user
+      @current_user ||= authenticate_by_session(Manager)
     end
 
 end

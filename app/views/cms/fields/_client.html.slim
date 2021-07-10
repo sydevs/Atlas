@@ -3,7 +3,7 @@
 = f.input :label
 = f.input :domain, hint: translate('cms.hints.client.domain')
 
-- unless f.object.new_record?
+- unless f.object.new_record? && current_user.administrator?
   .ui.small.dividing.violet.header = translate('cms.forms.client.keys')
   .two.fields
     = f.input :secret_key, hint: translate('cms.hints.client.secret_key')

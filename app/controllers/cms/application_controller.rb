@@ -177,7 +177,7 @@ class CMS::ApplicationController < ActionController::Base
     end
 
     def set_context!
-      [Registration, Event, Venue, Manager, LocalArea, Province, Country].each do |model|
+      [Registration, Event, Venue, Manager, LocalArea, Province, Country, Client].each do |model|
         keys = model.model_name
         param_key = "#{keys.param_key}_id"
         next unless params[param_key]

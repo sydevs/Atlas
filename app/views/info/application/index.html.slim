@@ -8,7 +8,7 @@
     .splash__content__inner
       p.splash__content__description = translate('info.index.description')
       p
-        a.button href=map_root_path
+        a.button href=(current_user ? map_root_path : 'https://wemeditate.com/map')
           = translate('info.index.view_map')
         a.button href=info_statistics_path
           = translate('info.index.view_statistics')

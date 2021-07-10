@@ -1,4 +1,15 @@
 
+.ui.form
+  .field
+    label = translate_attribute(Client, :map_url)
+    .ui.fluid.input
+      input value=map_key_url(@record.public_key)
+
+  .field
+    label = translate_attribute(Client, :index_url)
+    .ui.fluid.input
+      input value=map_index_key_url(api_key: @record.public_key)
+
 h3.ui.small.dividing.grey.header = translate('cms.details.management_for_record', resource: translate_model(@model).downcase)
 .ui.list
   .item

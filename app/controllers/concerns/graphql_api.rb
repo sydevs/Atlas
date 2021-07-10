@@ -41,7 +41,7 @@ module GraphqlAPI
   def self.events online: nil
     AtlasSchema.execute(%{
       query {
-        events(#{online.nil? ? '' : "online: #{online}"}) {
+        events#{online.nil? ? '' : "(online: #{online})"} {
           #{EVENT_FRAGMENT}
           venue {
             #{VENUE_FRAGMENT}
