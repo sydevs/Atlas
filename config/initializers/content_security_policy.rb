@@ -11,7 +11,7 @@ Rails.application.config.content_security_policy do |policy|
   policy.object_src  :none
   policy.script_src  :self, :unsafe_eval, :unsafe_inline, :https
   policy.style_src   :self, :unsafe_inline, :https
-  policy.frame_src   'www.youtube.com'
+  policy.frame_src   'www.youtube.com', 'player.vimeo.com'
   policy.frame_ancestors nil
   policy.worker_src  :blob
   policy.child_src   :blob

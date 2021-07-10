@@ -290,21 +290,22 @@ en:
 
     help:
       learn_more: "Learn more"
-      guide:
-        title: "How do I use Sahaj Atlas?"
-        videos:
-          general:
-            title: "What is Sahaj Atlas?"
-            id: 570209591
-          event_manager:
-            title: "How to manage your event"
-            id: 570207541
-          country_manager:
-            title: "How to manager your country"
-            id: 570202890
-          creating_venues:
-            title: "How to create an event (pt. 1)"
-            id: 570202890
+      guides:
+        country_manager:
+          title: "How to manager your country"
+          video_id: 570202890
+        local_manager:
+          title: "How to manager your region"
+          video_id: 570202890
+        event_manager:
+          title: "How to manage your event"
+          video_id: 570207541
+        general:
+          title: "What is Sahaj Atlas?"
+          video_id: 570209591
+        creating_events:
+          title: "How to create an event"
+          video_id: 573299436
       categories:
         title: "What are event categories for?"
         description:

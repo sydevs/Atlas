@@ -6,17 +6,49 @@
 h1.ui.header = translate('cms.menu.faq')
 
 .ui.fluid.accordion
-  - unless current_user.administrator?
-    .title class=active_accordion?(:guide)
+  - if %i[country worldwide].include?(current_user.type)
+    .title class=active_accordion?(:general_guide)
       i.dropdown.icon
-      = translate('cms.help.guide')
+      = translate('cms.help.guides.general.title')
+    .content class=active_accordion?(:general_guide)
+      iframe src="https://player.vimeo.com/video/#{translate('cms.help.guides.general.video_id')}" width='672' height='378' frameborder='0' allow='autoplay; fullscreen' allowfullscreen=true
+      //.ui.embed data-source='youtube' data-id='ScMzIvxBSi4' data-placeholder='http://i3.ytimg.com/vi/ScMzIvxBSi4/maxresdefault.jpg'
+  - if %i[country worldwide].include?(current_user.type)
+    .title class=active_accordion?(:country_guide)
+      i.dropdown.icon
+      = translate('cms.help.guides.country_manager.title')
       |  (
-      = manager_icon current_user
-      = translate("cms.dashboard.role.#{current_user.type}.title")
+      = manager_icon :country
+      = translate('cms.dashboard.role.country.title')
       | )
-    .content class=active_accordion?(:guide)
-      //iframe src="https://player.vimeo.com/video/#{role_vimeo_ids[current_user.role.to_sym]}" width='672' height='378' frameborder='0' allow='autoplay; fullscreen' allowfullscreen=true
-      .ui.embed data-source='youtube' data-id='ScMzIvxBSi4' data-placeholder='http://i3.ytimg.com/vi/ScMzIvxBSi4/maxresdefault.jpg'
+    .content class=active_accordion?(:country_guide)
+      iframe src="https://player.vimeo.com/video/#{translate('cms.help.guides.country_manager.video_id')}" width='672' height='378' frameborder='0' allow='autoplay; fullscreen' allowfullscreen=true
+  /- if %i[local country worldwide].include?(current_user.type)
+    .title class=active_accordion?(:local_guide)
+      i.dropdown.icon
+      = translate('cms.help.guides.local_manager.title')
+      |  (
+      = manager_icon :local
+      = translate('cms.dashboard.role.local.title')
+      | )
+    .content class=active_accordion?(:local_guide)
+      iframe src="https://player.vimeo.com/video/#{translate('cms.help.guides.local_manager.video_id')}" width='672' height='378' frameborder='0' allow='autoplay; fullscreen' allowfullscreen=true
+  - if %i[event local country worldwide].include?(current_user.type)
+    .title class=active_accordion?(:event_guide)
+      i.dropdown.icon
+      = translate('cms.help.guides.event_manager.title')
+      |  (
+      = manager_icon :event
+      = translate('cms.dashboard.role.event.title')
+      | )
+    .content class=active_accordion?(:event_guide)
+      iframe src="https://player.vimeo.com/video/#{translate('cms.help.guides.event_manager.video_id')}" width='672' height='378' frameborder='0' allow='autoplay; fullscreen' allowfullscreen=true
+  - if %i[event local country worldwide].include?(current_user.type)
+    .title class=active_accordion?(:create_event_guide)
+      i.dropdown.icon
+      = translate('cms.help.guides.creating_events.title')
+    .content class=active_accordion?(:create_event_guide)
+      iframe src="https://player.vimeo.com/video/#{translate('cms.help.guides.creating_events.video_id')}" width='672' height='378' frameborder='0' allow='autoplay; fullscreen' allowfullscreen=true
 
   .title class=active_accordion?(:categories)
     i.dropdown.icon

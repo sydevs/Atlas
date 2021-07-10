@@ -95,6 +95,7 @@ h2.ui.header
 .ui.basic.segment
   h3.ui.small.dividing.grey.header = translate('cms.dashboard.help.title')
   p = translate('cms.dashboard.help.description')
-  a.ui.basic.small.button href=cms_help_url(q: :guide, anchor: :guide)
+  - guide = "#{current_user.type}_guide"
+  a.ui.basic.small.button href=cms_help_url(q: guide, anchor: guide)
     = translate('cms.dashboard.help.action')
     i.right.arrow.icon
