@@ -1,8 +1,4 @@
 
-// ===== SEARCH PANEL ===== //
-.list id='js-search-panel'
-  = select_tag 'recurrence', Event.recurrences.map { |k, v| [k, v] }, include_blank: "All"
-
 // ===== LIST PANEL ===== //
 .list id='js-list-panel' data-events=@events.to_json
   .list__no-results
