@@ -21,4 +21,16 @@ class Client < ApplicationRecord
   before_validation :find_manager
   after_save :find_or_create_manager
 
+  # Methods
+
+  def map_config
+    result = {}
+    result[:bounds] = begin
+      bounds = config['bounds'].split(',')
+      [[bounds[0], bounds[1]], [bounds[2], bounds[3]]]
+    end if config['bounds'].present?
+
+    result
+  end
+
 end

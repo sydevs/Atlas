@@ -4,7 +4,6 @@
 class ListItem {
 
   constructor(element, event, venue = null) {
-    console.log(event)
     this.container = element
     this.event = event
     this.venue = venue

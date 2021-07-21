@@ -9,14 +9,15 @@
     = f.input :secret_key, hint: translate('cms.hints.client.secret_key')
     = f.input :public_key, hint: translate('cms.hints.client.public_key')
 
-/.ui.small.dividing.violet.header = translate_attribute(f.object, :config)
-/= f.simple_fields_for :config do |ff|
-  = ff.input :bounds, hint: translate('cms.hints.client.bounds')
-  = ff.label translate_attribute(f.object, :location)
-  = ff.hint translate('cms.hints.client.location')
-  .two.fields
-    = ff.input :location_type, label: false
-    = ff.input :location_id, label: false
+.ui.small.dividing.violet.header = translate_attribute(f.object, :config)
+= f.simple_fields_for :config do |ff|
+  = ff.input :bounds, hint: translate('cms.hints.client.bounds'), required: false, input_html: { value: f.object.config['bounds'] }
+  //= ff.input :location, label: translate_attribute(f.object, :location), required: false do
+    = ff.hint translate('cms.hints.client.location')
+    .two.fields
+      - options = %i[country region city].map { |o| [o.to_s.humanize, o] }
+      = ff.input :location_type, label: false, collection: options, selected: f.object.config['location_type'], prompt: "Choose Type"
+      = ff.input :location_id, label: false, input_html: { value: f.object.config['location_id'] }
 
 - if policy(@record).set_manager?
   .ui.small.dividing.violet.header = translate('cms.forms.client.manager')

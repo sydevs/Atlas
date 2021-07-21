@@ -35,6 +35,8 @@ class Map::ApplicationController < ActionController::Base
       @config[:country] = GraphqlAPI.country(params[:country])
     end
 
+    @config.merge!(@client.map_config) if @client
+
     render 'map/show'
   end
 
