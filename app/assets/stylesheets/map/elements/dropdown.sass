@@ -1,0 +1,37 @@
+@import '../_mixins'
+
+.dropdown
+  position: relative
+  width: 100%
+
+.dropdown select
+  appearance: none
+  border-radius: 0
+  background: white
+
+  padding: 17px 20px
+  border: 1px solid $color-border-light
+  width: 100%
+  max-width: 100%
+
+  font-weight: $font-semibold
+  font-size: 14px
+  line-height: 1.15
+  letter-spacing: 0.17px
+  color: $color-grey-normal
+
+// This :after element is the dropdown arrow
+.dropdown:after
+  content: ''
+  display: block
+
+  position: absolute
+  right: 20px
+  top: 50%
+
+  width: 10px
+  height: 10px
+
+  border-left: 2px solid $color-grey-normal
+  border-bottom: 2px solid $color-grey-normal
+  transform: translateY(-75%) rotate(-45deg)

@@ -44,6 +44,12 @@ class Map::ApplicationController < ActionController::Base
     I18n.locale = params[:locale]&.to_sym || :en
     @events = GraphqlAPI.events(online: params[:online])
 
+    if params[:online]
+      @language_codes = Event.where(online: params[:online]).distinct.pluck(:language_code) || []
+    else
+      @language_codes = Event.distinct.pluck(:language_code) || []
+    end
+
     render 'map/index'
   end
 

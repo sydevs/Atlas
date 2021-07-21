@@ -1,6 +1,9 @@
 
 en:
   map:
+    search:
+      all_recurrences: "All Timings"
+      all_languages: "All Languages"
     listing:
       search: "Search for location"
       more_info: "More Info"

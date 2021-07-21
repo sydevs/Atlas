@@ -1,14 +1,14 @@
 
 // ===== SEARCH PANEL ===== //
-.list id='js-search-panel'
+.search id='js-search-panel'
   = hidden_field_tag 'online', params[:online]
 
   - options = options_for_select(Event.recurrences.map { |k, _v| [translate_enum_value(Event, :recurrence, k), k] })
-  = select_tag 'recurrence', options, include_blank: "All"
+  .dropdown = select_tag 'recurrence', options, include_blank: translate('map.search.all_recurrences')
 
   - languages = I18nData.languages(I18n.locale)
   - options = options_for_select(@language_codes.map { |l| [languages[l].split(/[,;]/)[0], l] })
-  = select_tag 'languageCode', options, include_blank: "All"
+  .dropdown = select_tag 'languageCode', options, include_blank: translate('map.search.all_languages')
 
 // ===== LIST PANEL ===== //
 .list id='js-list-panel' data-events=@events.to_json

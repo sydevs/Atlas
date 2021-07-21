@@ -36,6 +36,37 @@ class AtlasAPI {
             thumbnailUrl
           }
         }`,
+        eventWithVenue: `on Event {
+          id
+          label
+          description
+          category
+          address
+          languageCode
+          online
+          onlineUrl
+          registrationMode
+          registrationUrl
+          path
+          timing {
+            duration
+            timeZone
+          }
+          firstOccurrence
+          lastOccurrence
+          upcomingOccurrences
+          images {
+            url
+            thumbnailUrl
+          }
+          venue {
+            id
+            label
+            latitude
+            longitude
+            directionsUrl
+          }
+        }`,
         venue: `on Venue {
           id
           label
@@ -70,6 +101,14 @@ class AtlasAPI {
     this.onlineEventsQuery = this.graph.query(`{
       events(online: true) { ...event }
     }`)
+
+    this.searchEventsQuery = this.graph.query(`
+      query ($online: Boolean, $recurrence: String, $languageCode: String) {
+        events(online: $online, recurrence: $recurrence, languageCode: $languageCode) {
+          ...eventWithVenue
+        }
+      }
+    `)
 
     this.closestVenueQuery = this.graph.query(`(@autodeclare) {
       closestVenue(latitude: $latitude, longitude: $longitude) {
@@ -107,6 +146,13 @@ class AtlasAPI {
 
     const data = await this.onlineEventsQuery(coordinates)
     this.setCache('onlineEvents', coordinates, data.events)
+    console.log('[AtlasAPI]', 'received', data) // eslint-disable-line no-console
+    callback(data.events)
+  }
+
+  async searchEvents(params, callback) {
+    console.log('[AtlasAPI]', 'searching events', params) // eslint-disable-line no-console
+    const data = await this.searchEventsQuery(params)
     console.log('[AtlasAPI]', 'received', data) // eslint-disable-line no-console
     callback(data.events)
   }

@@ -1,4 +1,4 @@
-/* global AtlasAPI, ListPanel, InfoPanel, ImageGallery, TimingCarousel, SharingModal */
+/* global AtlasAPI, ListPanel, SearchPanel, InfoPanel, ImageGallery, TimingCarousel, SharingModal */
 /* exported ListApplicationInstance */
 
 class ListApplicationInstance {
@@ -7,6 +7,7 @@ class ListApplicationInstance {
     this.container = document.getElementById('js-list-panel')
     this.listingType = document.body.dataset.list
     this.listPanel = new ListPanel(this.container)
+    this.searchPanel = new SearchPanel(document.getElementById('js-search-panel'))
     this.infoPanel = new InfoPanel(document.getElementById('js-info-panel'))
     this.imageGallery = new ImageGallery(document.getElementById('js-image-gallery'))
     this.timingCarousel = new TimingCarousel(document.getElementById('js-timing-carousel'))
@@ -20,9 +21,7 @@ class ListApplicationInstance {
   }
 
   showEvents(events) {
-    if (events.length) {
-      this.listPanel.showEvents(events)
-    }
+    this.listPanel.showEvents(events)
   }
 
   showOnlineEvents(events) {
