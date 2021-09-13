@@ -10,7 +10,7 @@ class Client < ApplicationRecord
   ]
 
   # Validations
-  validates_presence_of :label, :domain, :public_key, :secret_key
+  validates_presence_of :label, :public_key, :secret_key
 
   # Scopes
   default_scope { order(last_accessed_at: :desc, updated_at: :desc) }
