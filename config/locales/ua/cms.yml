@@ -1,0 +1,402 @@
+
+ua:
+  cms:
+    actions:
+      simple:
+        new: "Add"
+        edit: "Edit"
+        update: "Save"
+        destroy: "Delete"
+        back: "Back"
+
+      target:
+        new: "Add %{resource}"
+        create: "Create %{resource}"
+        edit: "Edit %{resource}"
+        update: "Save %{resource}"
+        destroy: "Delete %{resource}"
+        back: "Back to %{resource}"
+        search: "Search %{resources}..."
+        choose: "Choose a %{resource}"
+
+      special:
+        edit_profile: "Edit My Profile"
+
+    menu:
+      home: "Home"
+      # Top level menu
+      about: "About Sahaj Atlas"
+      statistics: "Statistics"
+      map: "View Map"
+      report_issue: "Report Issue"
+      help: "Help (FAQ)"
+      sign_out: "Log Out"
+      sign_in: "Log In"
+      # Secondary menu
+      dashboard: "Dashboard for %{user}"
+      review: "All Alerts for %{user}"
+      worldwide: "Worldwide Data"
+      faq: "Frequently Asked Questions"
+      context: "%{resource} for %{parent}"
+      # Tertiary menu
+      details: "Info"
+      activity: "Activity"
+      regions:
+        countries: "Countries"
+        regions: "Regions"
+        cities: "Cities / Areas"
+      breadcrumbs:
+        world: "World"
+        help: "Help"
+        regions: "Regions"
+        review: "Review Alerts"
+        dashboard: "Dashboard"
+
+    messages:
+      errors: "Errors"
+      no_records_found: "No %{resources} found."
+      confirm_destroy: "Are you sure you want to delete this? This cannot be undone."
+      successfully_created: "Created %{resource} successfully."
+      successfully_updated: "Saved %{resource} successfully."
+      successfully_deleted: "%{resource} successfully deleted. This cannot be undone."
+      successfully_removed: "%{resource} successfully removed from this %{context}."
+      successfully_confirmed: "Thank you for confirming that this %{resource} is up to date."
+      not_logged_in: "You are not logged in!"
+      no_comment: "(No comment)"
+      temporary_mail_error: "Email server is temporarily busy, please try again."
+      venue:
+        out_of_bounds: "Venue cannot be outside the radius of %{local_area}"
+      event:
+        invalid_end_time: "cannot be before the start time"
+        invalid_end_date: "cannot be before the start date"
+        passed_end_date: "cannot be before today"
+      manager:
+        success: "Added manager successfully"
+        already_added: "%{manager} already manages this #{resource}"
+        already_exists: "%{name} <%{email}> already exists"
+      cannot_create:
+        event: "New events cannot be created here, they must be added directly to a venue."
+        venue: "New venues cannot be created here, they must be added directly to a region within a country."
+
+    forms:
+      event:
+        details: "Event Details"
+        online: "Online Classes"
+        timing: "Timing"
+        registration: "Registration"
+        manager: "Manager"
+      client:
+        keys: "Access Keys"
+        manager: "Manager"
+
+    hints:
+      unspecified: "Unspecified"
+      never: "Never"
+      geosearch:
+        prompt: "Search for location"
+        description: "You can use this search to automatically fill the fields below. It uses the Google API. If Google is blocked in your country, or if the search fails, you will need to enter the data manually."
+      country:
+        must_be_new: "Only countries which haven't already been added are listed below."
+        language: "The default language that events in this country are usually in."
+        no_default_language: "No default"
+        province_management: "If enabled, you will be able to view and assign managers to regions (provinces, states, etc) within this country. This is useful for larger countries (China, USA, Australia, etc), and unnessecary for small countries (Belgium, Lithuania, Singapore, etc)."
+      province:
+        must_be_new: "Only regions which haven't already been added are listed below."
+        prompt: "Province / State / County"
+      local_area:
+        location: "A custom area is defined using coordinates on the map (latitude and longitude) and a radius, to make a circular region."
+      event:
+        custom_name: "If you want to override the name of the event, you can do so here."
+        description: "Provide a description of the program for seekers. Give them an idea of what to expect, and any special instructions to find the location, or what to bring. This description should be between %{min} to %{max} characters."
+        description_count: " characters"
+        room: "Which room in the building is the event in?"
+        language: "What is the primary language that this event if given in?"
+        disable_notifications: "If selected, managers for this event will not receive emails about who has registered for the event."
+        registration_mode: "Where should seekers go to register for the event? We strongly recommend that you leave this as '%{native}.' Having seekers register on this website will allow us send them reminder and follow-up emails."
+        registration_url: "The registration URL will be set automatically if the mode is set \"%{native}.\""
+        online: "Check this box if the program will take place online."
+        online_url: "If the class is online, this link is where seekers should join the class (eg. a link to Zoom, YouTube, Google Meet, etc)."
+        manager: "The manager should be set to a yogi(ni) who will take responsibility for this event. Every week a list of new registrations will be sent to the manager and every few months they will be asked to confirm that the program information is still correct."
+      venue:
+        manual_location: "Set location manually"
+        location: "If the location cannot be set automatically by pressing \"Find Location\", you can enter the details manually below."
+        find_marker: "Find Location"
+        marker_not_set:
+          title: "Map marker has not been set"
+          description: "Press 'Find Location' to automatically detect the coordinates of the venue's address."
+        cant_find_address:
+          title: "Couldn't find address"
+          description: "The address you entered could not be found. Try adding more information, or enter the latitude and longitude manually."
+        marker_set:
+          title: "Map marker set!"
+          description: "Make sure that the location shown on the map looks correct."
+      manager:
+        administrator:
+          title: "Creating a global administrator"
+          description: "Adding a manager to worldwide data will create them as an administrator. They will have complete access to make changes to the Sahaj Atlas."
+      client:
+        domain: "Only this domain will be allowed to embed the map using your secret key."
+        public_key: "Use this to embed the map."
+        secret_key: "Use this to access the API."
+        bounds: "Restrict the map to these coordinates. The coordinates should be entered as 4 comma-separated numbers (south,west,north,east)."
+        location: "Set a country, region or city where most of your visitors will be from. When a user searches the map, it will be weighted to this area."
+
+    details:
+      details_for_record: "Details for %{resource}"
+      registration_for_record: "Registration trend"
+      management_for_record: "Management for this %{resource}"
+      managers_for_record: "Managers for %{resource}"
+      location_of_record: "Location of this %{resource}"
+      dates_and_timing: "Dates & Timing"
+      map_of_record: "Map of this %{resource}"
+      area_in_words: "%{radius} km around %{latitude}, %{longitude}"
+      records_in_recent_days: "%{resources} in the last 30 days"
+      record_has_language: "%{resource} offered in %{language}"
+      updated_at: "Last updated"
+      resources_managed:
+        title: "Resources Managed"
+      event_coverage:
+        title: "Event Coverage"
+        description: "%{events} (%{venues})"
+      record_needs_review:
+        title: "%{resource} Needs Review"
+        description: "This %{resource} hasn't been updated in %{updated_ago}. This event will be removed from the map unless it is reviewed within %{expires_in}. Go to the edit page and press save to confirm the event details are still correct."
+        alt_description: "This %{resource} hasn't been updated in %{updated_ago}. Please review the details below and press save to confirm that the event details are correct."
+        action: "Review"
+      record_needs_urgent_review:
+        title: "%{resource} Needs Urgent Review"
+      record_finished:
+        title: "%{resource} Completed"
+        description: "This %{resource} is over. It's last occurence was %{date}."
+      record_has_no_events:
+        title: "No Events"
+        description: "This %{resource} has no events, and so it will not appear on the map."
+      record_expired:
+        title: "%{resource} Expired"
+        description: "This %{resource} has been hidden from the public, because it hasn't been updated in %{updated_ago}. Go to the edit page and press save to confirm the event details are still correct."
+        alt_description: "This %{resource} has been hidden from the public, because it hasn't been updated in %{updated_ago}. Please review the details below and press save to confirm that the event details are correct."
+        action: "Review"
+      record_archived:
+        title: "%{resource} Archived"
+        description: "This %{resource} has not been updated in a long time (%{time}). It will not be shown on the map unless it is reviewed and saved."
+        alt_description: "This %{resource} has been hidden from the public, because it hasn't been updated in a long time (%{time}). Please review the details below and press save to confirm that the event details are correct."
+        action: "Unarchive"
+      external_registration:
+        title: "Event is Using External Registration"
+        description: "This event is set to have seekers register on %{mode}. It's better if you have seekers register on the Sahaj Atlas, because then we will be able to send them reminders and confirmation emails."
+      record_not_published:
+        title: "Not Published"
+        description: "This %{resource} is currently hidden from the public, because it is not published."
+        parent: "This %{resource} is currently hidden from the public, because its %{parent} is not published."
+      create_event:
+        title: "Wondering how to create a public program?"
+        description: "Choose a venue on the \"%{action}\" tab."
+        action: "Go now"
+      create_event_on_venue:
+        title: "Wondering how to create an event?"
+        description: "Click on the \"%{action}\" tab, and press \"Add Event\""
+        action: "Add Event"
+      create_province_manager:
+        title: "Wondering how to create a regional manager?"
+        description: "Choose a province, state or county on the \"%{action}\" tab."
+        action: "Go now"
+      create_city_manager:
+        title: "Wondering how to create a city manager?"
+        description: "Choose a city page on the \"%{action}\" tab."
+        action: "Go now"
+
+    images:
+      title: "Images of this %{resource}"
+      upload: "Upload Images"
+
+    regions:
+      new_province: "Add Region"
+      provinces_header: "Provinces / States / Counties"
+      local_areas_header:
+        provincial: "Metropolitan Areas"
+        national: "Custom Regions"
+        global: "Custom International Areas"
+
+    activity:
+      title: :cms.menu.activity
+      description: "This is a log of all actions taken by this manager."
+      changed_by: "by %{name}"
+      changed_to: "changed to"
+
+    dashboard:
+      role:
+        intro: "You are a %{role}"
+        learn_more: "Learn more."
+        worldwide:
+          title: "Global Administrator"
+          description: "Can manage all atlas content and managers."
+          instruction: "You have access to all aspects of the atlas CMS (Content Management System). It is your job to create new country managers and help them learn to use the system."
+        country:
+          title: "Country Manager"
+          description: "Can create regions, venues, events and assign managers within %{region}"
+          instruction: "It's your responsibility to create regions within your country and assign managers to those regions to set up events. You may also create venues and events within your country."
+        local:
+          title: "Local Manager"
+          description: "Can create venues and events within %{region}"
+          instruction: "It's your responsibility to create events within your local area. You will first need to create a venue, before you can create an event at that venue."
+        event:
+          title: "Event Manager"
+          description: "Can update the details of the events assigned to them."
+          instruction: "It's your responsibility to keep your classes up to date. You will be sent emails every few months asking you confirm that your events are up to date. If the location of your class changes, you will need to ask the manager for you local area to update it."
+        client:
+          title: "App Manager"
+          description: "Can modify the configuration for your external app"
+          instruction: "You have access to the configuration for your external app."
+        none:
+          title: "No-Access Manager"
+          description: "This user no events or regions assigned to them. They have no access to manage the atlas."
+          instruction: "You don't have access to any part of the website. If you believe this is a mistake, please contact the manager for your local area."
+      resources:
+        title: "My Responsibilities"
+        subtitle: "Regions or events where you are a direct manager."
+        description: "These are the events or regions that you are directly responsible for."
+      alerts:
+        title: "Expiring Events"
+        subtitle: "These events need to be checked to ensure they are still accurate."
+        all_good: "All events are up to date."
+        empty: "No alerts right now, keep up the good work!"
+        should_expire_at: "Expires in %{time}"
+        expired_at: "Expired %{time} ago"
+        review:
+          title: "Soon to expire events"
+          description: "Several published events have not been updated in a few months. Please check that the event details are still correct, and save the event so that we know that it is still accurate. Otherwise it will be removed from the map."
+          view_all:
+            one: "View %{count} expiring event"
+            other: "View all %{count} expiring events"
+        expired:
+          title: "Expired events"
+          description: "Several published events are hidden from the map because they have not been verified recently. Please check and resave these events to re-enable them."
+          other:
+            one: "There is %{count} older expired event in the system."
+            other: "There are %{count} older expired events in the system."
+        archived:
+          title: "Archived events"
+          description:
+            one: "%{count} event has been expired for a long time and has been archived. It will not show on the map unless it is reviewed and updated."
+            other: "%{count} events have been expired for a long time and have been archived. They will not show on the map unless they are reviewed and updated."
+          view_all:
+            one: "View %{count} archived event"
+            other: "View %{count} archived events"
+
+      help:
+        title: "How do I use this site?"
+        description: "You are currently viewing the Content Management System (CMS) for the Sahaj Atlas. We have recorded a video tutorial to help you get started. Email us if you need help (contact@sydevelopers.com)."
+        action: "Watch tutorial video"
+
+    help:
+      learn_more: "Learn more"
+      guides:
+        country_manager:
+          title: "How to manager your country"
+          video_id: 570202890
+        local_manager:
+          title: "How to manager your region"
+          video_id: 570202890
+        event_manager:
+          title: "How to manage your event"
+          video_id: 570207541
+        general:
+          title: "What is Sahaj Atlas?"
+          video_id: 570209591
+        creating_events:
+          title: "How to create an event"
+          video_id: 573299436
+      categories:
+        title: "What are event categories for?"
+        description:
+          introduction: "Categories help the system to understand what kind of event you have added. We can use that information for a variety of purposes."
+        benefits:
+          marketing:
+            icon: ad # Do not translate
+            title: "Marketing"
+            description: "We can recommend follow up classes to seekers based on the event category. If someone registers for a concert, then after the concert we can suggest an intro class. When they have been to many intro classes, we could suggest they join a course to go deeper. If there is a big music concert, we might make it appear differently on the map to attract more attention."
+          labeling:
+            icon: info circle # Do not translate
+            title: "Event Labeling"
+            description: "We can present present extra information about the event to seekers. For example: A message recommending that seekers register for an intro class, before attending a going deeper class."
+          analytics:
+            icon: chart area # Do not translate
+            title: "Analytics"
+            description: "We can analyse what kind of events seekers are registering for to improve the way we present these events."
+        types:
+          title: "Available Categories"
+          intro:
+            title: :activerecord.attributes.event.categories.intro
+            description: "An introductory class for seekers just starting with Sahaja Yoga."
+          intermediate:
+            title: :activerecord.attributes.event.categories.intermediate
+            description: "A class for seekers to go deeper in Sahaja Yoga, once they've already attended an intro class."
+          course:
+            title: :activerecord.attributes.event.categories.course
+            description: "Usually a weekly course that runs for a limited time. Taking a seeker from beginner to intermeditate over the course of a set number of weeks."
+          public_event:
+            title: :activerecord.attributes.event.categories.public_event
+            description: "When Sahaja Yoga is participating in an existing public event. Such as having a stall at a festival or farmer's market."
+          concert:
+            title: :activerecord.attributes.event.categories.concert
+            description: "A large one time cultural event, usually involving music, maybe dance, and realisation."
+      expiration:
+        title: "Why isn't my event appearing on the map?"
+        alt_title: "How does event expiration work?"
+        description:
+          problem: "We don't want seekers to see classes which are no longer running. Many Sahaj website have out of date program information, but even when the details are updated they quickly become outdated again."
+          solution: "To solve this, we've created an automatic system that will email the yogis who run each program every few months to ask if the information is still correct. If they do not respond, the program will be hidden from the public until it is checked."
+          review: "As soon as an event becomes classified as \"Needs Review\" the program manager will be sent an email asking them to confirm that the event details are still correct. If they do not respond within 1 week, the city manager will be sent an email asking them to check the details instead."
+          expiration: "If %{duration} pass without the event being verified, then it's hidden from the map until someone checks and updates it."
+        steps:
+          verified:
+            icon: green check circle # Do not translate
+            active_label: "Up To Date"
+            inactive_label: "Last Updated"
+            title: "Up To Date"
+            description: "When an event is created or updated"
+          should_need_review:
+            icon: orange question circle # Do not translate
+            active_label: "Needs Review"
+            inactive_label: "Will Need Review"
+            title: "Needs Review"
+            description: "If %{duration} pass without the event being updated"
+          should_expire:
+            icon: red times circle # Do not translate
+            active_label: "Expired"
+            inactive_label: "Expires"
+            label: "Expires" # This should be present tense as in the phrase "The event expires on March 3"
+            title: "Expired"
+            description: "If an event has not been updated in %{duration}"
+      registration:
+        title: "Why should seekers register on Sahaj Atlas?"
+        description:
+          introduction: "Even though we support having seeker register on external websites (Meetup, Eventbrite, Facebook, etc), there are everal benefitss to having seekers register directy on the Sahaj Atlas."
+        benefits:
+          accessibility:
+            icon: universal access # Do not translate
+            title: "Accessibility"
+            description: "Many people do not have Facebook or Meetup accounts. Facebook's popularity has sharply declined with younger generations and Meetup is less popular with elders. Registering directly on Sahaj Atlas is easier and doesn't require an account - making it more likely for seekers to register."
+          reminders:
+            icon: bell # Do not translate
+            title: "Automatic Reminders"
+            description: "Seekers who register on Sahaj Atlas will receive a confirmation email and an automatic reminder email 1 day before their first class. The yogi(ni) who runs the public program will also receive a list of new registrations every week by email."
+          marketing:
+            icon: envelope # Do not translate
+            title: "Future Marketing"
+            description: "When seekers register on Sahaj Atlas we can store their email address (without the restrictions of Meetup, Eventbrite, or Facebook). This means we can use these email addresses to send follow-up materials, or recommend special Sahaj events in their area (eg. concerts or intermediate programs)."
+      contact:
+        title: "I have other questions or suggestions"
+        description: "If you need further help, or if you want to help with the development of the Sahaj Atlas, please write to the email below. Please write your message in english."
+
+    country_codes:
+      gb: UK
+      us: USA
+    
+  passwordless:
+    sessions:
+      create:
+        try_again: "Try a different email address"
+        back: "Back"
+      new:
+        back: "Back"
