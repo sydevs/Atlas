@@ -1,79 +1,79 @@
 ru:
   map:
     search:
-      all_recurrences: "All Timings"
-      all_languages: "All Languages"
+      all_recurrences: "Все даты"
+      all_languages: "Все языки"
     listing:
-      search: "Search for location"
-      more_info: "More Info"
-      register: "Register"
-      no_area_results: "There are no classes in this area, the closest free meditation class is in"
-      no_place_results: "The closest free meditation class at"
-      show: "Show list"
-      event_name: "%{category} at %{venue}"
-      online_event_name: "%{category} from %{city}"
+      search: "Поиск по местонахождению"
+      more_info: "Подробнее"
+      register: "Записаться"
+      no_area_results: "В этой местности нет занятий, ближайший бесплатный класс медитации находится в"
+      no_place_results: "Ближайший бесплатный класс медитации в"
+      show: "Показать список"
+      event_name: "%{category} at %{venue}" # TODO: Translate
+      online_event_name: "%{category} from %{city}" # TODO: Translate
       filter:
-        prefix: "Showing results at"
-        clear: "Clear"
+        prefix: "Отображать результаты"
+        clear: "Очистить"
       mode:
-        offline: "In Person"
-        online: "Online"
+        offline: "Лично"
+        online: "Онлайн"
     information:
-      register: "Register"
-      language: "This class is in"
-      directions: "Get directions"
-      online: "Online Class"
-      online_from: "From"
+      register: "Записаться"
+      language: "Этот класс на"
+      directions: "Как найти"
+      online: "Онлайн-класс"
+      online_from: "From" # TODO: Translate
     registration:
-      header: "Register now"
+      header: "Записаться сейчас"
       form:
-        timing: "I’d like to start on:"
-        email: "Email"
-        name: "Name"
-        message: "Questions / Comments"
-        submit: "Confirm"
+        timing: "Я бы хотел начать:"
+        email: "Эл. адрес"
+        name: "Имя"
+        message: "Вопросы / Комментарии"
+        submit: "Подтвердить"
       notice:
-        text: "By submitting you confirm your agreement with our %{link}."
-        link: "privacy policy"
+        text: "Отправляя, вы подтверждаете свое согласие с нашими %{link}."
+        link: "политика конфиденциальности"
       feedback:
-        duplicate: "You are already registered. See you soon."
-        success: "Success! You will receive a confirmation email shortly."
-        error: "Error! Please try again later."
+        duplicate: "Вы уже зарегистрированы. До скорого."
+        success: "Успешно! Скоро вы получите электронное письмо с подтверждением."
+        error: "Ошибка! Пожалуйста, попробуйте позже."
       confirmation:
-        title: "Thank you for registering"
-        subtitle: "you will receive an email shortly"
-        back: "Register someone else"
+        title: "Спасибо за регистрацию"
+        subtitle: "в ближайшее время вы получите электронное письмо"
+        back: "Зарегистрировать кого-нибудь еще"
     sharing:
-      invite: "Invite a friend along"
-      share: "Share"
-      copied: "Copied!"
+      invite: "Пригласить друга"
+      share: "Поделиться"
+      copied: "Скопировано!"
     weekdays:
-      0: Sunday
-      1: Monday
-      2: Tuesday
-      3: Wednesday
-      4: Thursday
-      5: Friday
-      6: Saturday
+      0: "Воскресенье"
+      1: "Понедельник"
+      2: "Вторник"
+      3: "Среда"
+      4: "Четверг"
+      5: "Пятница"
+      6: "Суббота"
 
   javascript:
     recurrence:
-      day: "Daily"
-      monday: "Mondays"
-      tuesday: "Tuesdays"
-      wednesday: "Wednesdays"
-      thursday: "Thursdays"
-      friday: "Fridays"
-      saturday: "Saturdays"
-      sunday: "Sundays"
+      day: "Ежедневно"
+      monday: "По Понедельникам"
+      tuesday: "По Вторникам"
+      wednesday: "По Средам"
+      thursday: "По Четвергам"
+      friday: "По Пятницам"
+      saturday: "По Субботам"
+      sunday: "По Воскресеньям"
     timing_labels:
-      course_fallback: "This is a weekly course"
-      course: "%{weeks}-week course"
-      ongoing: "This class is on-going"
+      course_fallback: "Это еженедельный курс"
+      course: "%{weeks}-недельный курс"
+      ongoing: "Этот класс регулярный"
     registration:
-      facebook: "Register on Facebook"
-      eventbrite: "Register on Eventbrite"
-      meetup: "Register on Meetup"
+      facebook: "Зарегистрироваться на Facebook"
+      eventbrite: "Зарегистрироваться на Eventbrite"
+      meetup: "Зарегистрироваться на Meetup"
     language_codes:
-      uk: UA #Ukrainian
+      uk: UA # Ukrainian
     

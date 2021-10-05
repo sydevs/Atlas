@@ -1,17 +1,17 @@
 ru:
-  sahaj_atlas: "Sahaj Atlas"
-  meditation_atlas: "Meditation Atlas"
+  sahaj_atlas: "Сахадж Атлас"
+  meditation_atlas: "Атлас Медитаций"
 
   info:
     index:
-      description: "Sahaj Atlas is a project to map free meditation classes offered by Sahaja Yoga around the world."
-      view_map: "View Map"
-      view_statistics: "Stats"
-      view_cms: "Manage"
-      sign_in: "Log In"
+      description: "Сахадж Атлас - это проект по нанесению на карту бесплатных уроков по медитации, предлагаемых Сахаджа Йогой по всему миру."
+      view_map: "Посмотреть Карту"
+      view_statistics: "Статистика"
+      view_cms: "Управлять"
+      sign_in: "Авторизоваться"
     
     about:
-      title: "About"
+      title: "Описание"
     
     statistics:
-      title: "Statistics"
+      title: "Статистика"
