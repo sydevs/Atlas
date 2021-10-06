@@ -48,6 +48,8 @@ class MapApplicationInstance {
       this.atlas.getClosestVenue(center, venue => {
         this.listPanel.showClosestVenue(venue, center)
       })
+    } else {
+      this.listPanel.reset()
     }
   }
 
@@ -170,7 +172,7 @@ class MapApplicationInstance {
 
     this.listingType = type
     document.body.dataset.list = type
-    this.map.updateRenderedVenues()
+    this.map.updateRenderedVenues(true)
   }
 
   _setMode(mode) {

@@ -47,7 +47,8 @@ body[data-page="show"] .list
   &-toggle__item
     display: none
 
-    &:checked + label
+  @each $list in online offline
+    body[data-list="#{$list}"] & label[for="list-mode-#{$list}"]
       background: $color-blue
       color: white
 
@@ -59,7 +60,6 @@ body[data-page="show"] .list
 
     &:not(:last-child)
       border-right: 1px solid $color-blue
-
 
 // ===== NO RESULT MESSAGE ===== //
 .list__no-results

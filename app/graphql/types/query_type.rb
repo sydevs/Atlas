@@ -87,7 +87,7 @@ module Types
     end
 
     def closest_venue(latitude:, longitude:)
-      decorate Venue.publicly_visible.by_distance(origin: [latitude, longitude]).first
+      decorate Venue.publicly_visible.by_distance(origin: [latitude, longitude]).joins(:events).where(events: { online: false }).first
     end
 
     def decorate object
