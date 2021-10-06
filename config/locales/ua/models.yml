@@ -197,8 +197,10 @@ ua:
         registration_mode: "Registration Mode"
         registration_modes:
           native: "Sahaj Atlas"
+          external: "External"
           meetup: "Meetup"
           eventbrite: "Eventbrite"
+          facebook: "Facebook"
         registration_url: "Registration Link (URL)"
         recurrence: "Recurrence"
         recurrences:

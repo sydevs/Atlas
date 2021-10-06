@@ -72,6 +72,7 @@ ua:
       course: "%{weeks}-week course"
       ongoing: "This class is on-going"
     registration:
+      external: "Register"
       facebook: "Register on Facebook"
       eventbrite: "Register on Eventbrite"
       meetup: "Register on Meetup"

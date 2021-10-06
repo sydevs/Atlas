@@ -196,8 +196,10 @@ ru:
         registration_mode: "Режим Регистрации"
         registration_modes:
           native: "Сахадж Атлас"
+          external: "External"
           meetup: "Встреча"
           eventbrite: "Eventbrite"
+          facebook: "Facebook"
         registration_url: "Ссылка Для Регистрации(URL)"
         recurrence: "Повторение"
         recurrences:

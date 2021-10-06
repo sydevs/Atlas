@@ -71,9 +71,10 @@ ru:
       course: "%{weeks}-недельный курс"
       ongoing: "Этот класс регулярный"
     registration:
-      facebook: "Зарегистрироваться на Facebook"
+      external: "Зарегистрироваться"
       eventbrite: "Зарегистрироваться на Eventbrite"
       meetup: "Зарегистрироваться на Meetup"
+      facebook: "Зарегистрироваться на Facebook"
     language_codes:
       uk: UA # Ukrainian
     

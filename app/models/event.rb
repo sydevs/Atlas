@@ -17,7 +17,7 @@ class Event < ApplicationRecord
 
   enum category: { intro: 1, intermediate: 2, course: 3, public_event: 4, concert: 5 }
   enum recurrence: { day: 0, monday: 1, tuesday: 2, wednesday: 3, thursday: 4, friday: 5, saturday: 6, sunday: 7 }
-  enum registration_mode: { native: 0, meetup: 1, eventbrite: 2 }, _suffix: true
+  enum registration_mode: { native: 0, external: 1, meetup: 2, eventbrite: 3, facebook: 4 }, _suffix: true
 
   # Associations
   belongs_to :venue
