@@ -24,8 +24,11 @@ ruby:
     ul.navbar__results id='js-search-results'
 
 .list-toggle.list-toggle--closed id='js-list-toggle'
-  .list-toggle__closed Show list
-  .list-toggle__open Back to map
+  .list-toggle__closed id='js-list-mode'
+    - %w[offline online].each do |mode|
+      input id="list-mode-#{mode}" type='radio' name='list-mode' value=mode checked=(mode == @list_type)
+      label for="list-mode-#{mode}" = translate("map.listing.toggle.#{mode}")
+  .list-toggle__open = translate('map.listing.toggle.back')
 
 // ===== MAP ===== //
 #map data=@config data-state=state.to_json

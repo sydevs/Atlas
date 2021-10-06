@@ -12,6 +12,10 @@ en:
       show: "Show list"
       event_name: "%{category} at %{venue}"
       online_event_name: "%{category} from %{city}"
+      toggle:
+        offline: "Show list"
+        online: "Online classes"
+        back: "Back to map"
       filter:
         prefix: "Showing results at"
         clear: "Clear"

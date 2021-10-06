@@ -41,3 +41,28 @@
     @include mode(list)
       @include mobile
         display: none
+
+  .list-toggle__closed
+    display: flex
+    flex-direction: row
+    justify-content: space-evenly
+
+  input
+    display: none
+
+  label[data-count]::after
+    content: attr(data-count)
+    display: inline-block
+
+    color: white
+    font-weight: bold
+    letter-spacing: 0.17px
+    text-align: center
+    padding: 2px
+    padding-top: 1px
+    line-height: 14px
+    margin-left: 4px
+
+    background: $color-blue
+    border: 1px solid $color-blue
+    border-radius: 5px

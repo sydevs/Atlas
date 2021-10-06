@@ -16,7 +16,9 @@ class ListPanel {
       this.modeInputs = document.getElementById('js-list-mode').querySelectorAll('input')
 
       for (let i = 0; i < this.modeInputs.length; i++) {
-        this.modeInputs[i].addEventListener('change', event => Application._setListingType(event.target.value))
+        this.modeInputs[i].addEventListener('change', event => {
+          Application._setListingType(event.target.value)
+        })
       }
     }
   }
