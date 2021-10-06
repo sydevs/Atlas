@@ -328,7 +328,7 @@ class MapView {
   }
 
   isZoomWide() {
-    return this.mapbox.getZoom() < 10
+    return this.mapbox.getZoom() < 7.5
   }
 
   _easing(t) {
