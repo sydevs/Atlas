@@ -73,6 +73,7 @@ class Venue < ApplicationRecord
 
     def fetch_time_zone
       return unless latitude_changed? || longitude_changed? || time_zone.nil?
+      return unless latitude? && longitude?
 
       self.time_zone = Timezone.lookup(latitude, longitude)
     end
