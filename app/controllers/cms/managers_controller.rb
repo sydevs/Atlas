@@ -16,7 +16,7 @@ class CMS::ManagersController < CMS::ApplicationController
 
   def create
     manager_params = parameters
-    @record = Manager.find_or_initialize_by(email: manager_params[:email])
+    @record = Manager.find_or_initialize_by(email: manager_params[:email].downcase)
 
     if @context
       authorize @context, :create_manager?

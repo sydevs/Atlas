@@ -35,7 +35,7 @@ module Managed
     def find_manager
       return unless manager&.email.present?
 
-      existing_manager = Manager.where(email: manager.email).first
+      existing_manager = Manager.where(email: manager.email.downcase).first
 
       if existing_manager
         self.manager = existing_manager
@@ -49,7 +49,7 @@ module Managed
 
       self.new_manager_record = false
 
-      self.manager = Manager.find_or_create_by(email: manager.email) do |new_manager|
+      self.manager = Manager.find_or_create_by(email: manager.email.downcase) do |new_manager|
         new_manager.name = manager.name
         self.new_manager_record = true
       end

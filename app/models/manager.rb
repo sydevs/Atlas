@@ -17,6 +17,7 @@ class Manager < ApplicationRecord
   has_many :actions, class_name: 'Audit', as: :user
 
   # Validations
+  before_validation { self.email = self.email.downcase }
   validates :name, presence: true
   validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
 
