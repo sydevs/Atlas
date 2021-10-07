@@ -80,7 +80,6 @@ class MapApplicationInstance {
     if (this.listingType == 'online') {
       this.map.updateRenderedVenues()
       this._setListingType('offline')
-      this.listPanel.selectType('offline')
     }
 
     if (venue.events.length > 1) {

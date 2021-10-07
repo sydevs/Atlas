@@ -11,15 +11,13 @@ class ListPanel {
     this.itemsContainer = document.getElementById('js-list-results')
     this.closestVenueTitle = document.getElementById('js-list-closest-venue')
     this.closestVenueTitle.addEventListener('click', () => this.triggerAlternativeQuery())
+    this.listModeContainer = document.getElementById('js-list-mode')
 
-    if (document.getElementById('js-list-mode')) {
-      this.modeInputs = document.getElementById('js-list-mode').querySelectorAll('input')
-
-      for (let i = 0; i < this.modeInputs.length; i++) {
-        this.modeInputs[i].addEventListener('change', event => {
-          Application._setListingType(event.target.value)
-        })
-      }
+    let elements = document.getElementsByClassName('js-list-mode')
+    for (let i = 0; i < elements.length; i++) {
+      elements[i].addEventListener('click', event => {
+        Application._setListingType(event.target.dataset.value)
+      })
     }
   }
 
@@ -123,21 +121,9 @@ class ListPanel {
     Application.navbar.select(this.closestVenueData)
   }
 
-  selectType(mode) {
-    for (let i = 0; i < this.modeInputs.length; i++) {
-      const element = this.modeInputs[i]
-
-      if (element.value == mode) {
-        element.checked = true
-        return
-      }
-    }
-  }
-
   toggleTypeInput(shown = null) {
-    const parent = this.modeInputs[0].parentElement.parentElement
-    if (shown == null) shown = parent.style == 'display: none'
-    parent.style = shown ? '' : 'display: none'
+    if (shown == null) shown = this.listModeContainer.style == 'display: none'
+    this.listModeContainer.style = shown ? '' : 'display: none'
   }
 
   reset() {

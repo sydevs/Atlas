@@ -138,6 +138,7 @@ class MapView {
         if (error) {
           console.error(error) // eslint-disable-line no-console
         } else {
+          Application._setListingType('offline')
           this.mapbox.easeTo({
             center: features[0].geometry.coordinates,
             zoom: zoom + 1,

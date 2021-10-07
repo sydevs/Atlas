@@ -45,21 +45,41 @@ body[data-page="show"] .list
     border-radius: 5px
 
   &-toggle__item
-    display: none
-
-  @each $list in online offline
-    body[data-list="#{$list}"] & label[for="list-mode-#{$list}"]
-      background: $color-blue
-      color: white
-
-  label
     display: inline-block
-    flex-grow: 1
-    padding: 6px
+    flex-basis: 50%
+    padding: 0 6px
+    line-height: 28px
     cursor: pointer
 
     &:not(:last-child)
       border-right: 1px solid $color-blue
+
+    @each $list in online offline
+      body[data-list="#{$list}"] &[data-value="#{$list}"]
+        background: $color-blue
+        color: white
+
+        &::after
+          display: none
+  
+  &-toggle__item[data-count]::after
+    content: attr(data-count)
+    display: inline-block
+
+    color: white
+    font-family: $font-number
+    font-weight: bold
+    letter-spacing: 0.17px
+    text-align: center
+    padding: 4px
+    padding-bottom: 1px
+    line-height: 12px
+    margin-left: 4px
+
+    background: $color-blue
+    border: 1px solid $color-blue
+    border-radius: 5px
+
 
 // ===== NO RESULT MESSAGE ===== //
 .list__no-results

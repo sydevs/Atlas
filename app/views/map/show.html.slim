@@ -24,10 +24,10 @@ ruby:
     ul.navbar__results id='js-search-results'
 
 .list-toggle.list-toggle--closed id='js-list-toggle'
-  .list-toggle__closed id='js-list-mode'
+  .list-toggle__closed
     - %w[offline online].each do |mode|
-      input id="list-mode-#{mode}" type='radio' name='list-mode' value=mode checked=(mode == @list_type)
-      label for="list-mode-#{mode}" = translate("map.listing.toggle.#{mode}")
+      .list-toggle__item class="js-list-mode" data-value=mode
+        = translate("map.listing.toggle.#{mode}")
   .list-toggle__open = translate('map.listing.toggle.back')
 
 // ===== MAP ===== //
@@ -40,8 +40,8 @@ ruby:
   .list__mode
     .list__mode-toggle id='js-list-mode'
       - %w[offline online].each do |mode|
-        input.list__mode-toggle__item id="list-mode-#{mode}" type='radio' name='list-mode' value=mode checked=(mode == @list_type)
-        label for="list-mode-#{mode}" = translate("map.listing.mode.#{mode}")
+        .list__mode-toggle__item class="js-list-mode" data-value=mode
+          = translate("map.listing.mode.#{mode}")
   .list__no-results
     .list__no-results__message.list__no-results__message--far = translate('map.listing.no_area_results')
     .list__no-results__message.list__no-results__message--close = translate('map.listing.no_place_results')
