@@ -23,7 +23,7 @@ ruby:
     
     ul.navbar__results id='js-search-results'
 
-.list-toggle.list-toggle--closed id='js-list-toggle'
+.list-toggle class="list-toggle--#{params[:type] ? 'open' : 'closed'}" id='js-list-toggle'
   .list-toggle__closed
     - %w[offline online].each do |mode|
       .list-toggle__item class="js-list-mode" data-value=mode
@@ -40,7 +40,7 @@ ruby:
   .list__mode
     .list__mode-toggle id='js-list-mode'
       - %w[offline online].each do |mode|
-        .list__mode-toggle__item class="js-list-mode" data-value=mode
+        .list__mode-toggle__item class="js-list-mode" data-value=mode data-count=2
           = translate("map.listing.mode.#{mode}")
   .list__no-results
     .list__no-results__message.list__no-results__message--far = translate('map.listing.no_area_results')

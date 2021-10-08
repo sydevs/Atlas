@@ -23,7 +23,7 @@ ru:
       language: "Этот класс на"
       directions: "Как найти"
       online: "Онлайн-класс"
-      online_from: "From" # TODO: Translate
+      online_from: "Hosted from" # TODO: Translate
     registration:
       header: "Записаться сейчас"
       form:
