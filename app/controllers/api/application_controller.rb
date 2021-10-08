@@ -1,10 +1,10 @@
 class API::ApplicationController < ActionController::Base
 
-  before_action :authenticate_access_key!
+  before_action :authenticate_client!
 
   private
 
-    def authenticate_access_key!
+    def authenticate_client!
       return if %w[GET HEAD OPTIONS].include?(request.method)
       client = Client.find_by(secret_key: params[:key])
       render('api/views/error', status: 400) && return unless client.present?

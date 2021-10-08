@@ -70,13 +70,6 @@ ua:
         # Countable
         one: "log"
         other: "logs"
-      access_key:
-        # Basic pluralization
-        single: "API Key"
-        plural: "API Keys"
-        # Countable
-        one: "API key"
-        other: "API keys"
       client:
         # Basic pluralization
         single: "App"
@@ -255,12 +248,6 @@ ua:
           update: "Updated"
           create: "Created"
           destroy: "Deleted"
-
-      access_key:
-        label: "Label"
-        key: "API Key"
-        suspended: "Suspended"
-        last_accessed_at: "Last Access"
 
       client:
         label: "Label"

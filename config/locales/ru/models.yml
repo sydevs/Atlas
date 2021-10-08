@@ -69,13 +69,6 @@ ru:
         # Countable
         one: "Лог"
         other: "Логов"
-      access_key:
-        # Basic pluralization
-        single: "API Ключ"
-        plural: "API Ключи"
-        # Countable
-        one: "API Ключ"
-        other: "API Ключей"
       client:
         # Basic pluralization
         single: "Приложение"
@@ -254,12 +247,6 @@ ru:
           update: "Обновлено"
           create: "Создано"
           destroy: "Удалено"
-
-      access_key:
-        label: "Ярлык"
-        key: "API Ключ"
-        suspended: "Приостановлено"
-        last_accessed_at: "Последний Доступ"
 
       client:
         label: "Ярлык"

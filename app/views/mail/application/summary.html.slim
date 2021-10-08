@@ -28,12 +28,12 @@ table.data
           div
             = link_to manager.name, email_login(cms_manager_url(manager))
             |  (#{CountryDecorator.get_short_label(managed_record.record.country_code)})
-  - if @new_access_keys.present?
+  - if @new_clients.present?
     tr
-      th = translate('mail.summary.data.new_access_keys')
+      th = translate('mail.summary.data.new_clients')
       td
-        - @new_access_keys.each do |access_key|
-          div = link_to access_key.label, email_login(cms_access_key_url(access_key))
+        - @new_clients.each do |client|
+          div = link_to client.label, email_login(cms_client_url(client))
 
 .actions
   a.button href=info_statistics_url

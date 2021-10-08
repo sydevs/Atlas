@@ -35,7 +35,6 @@ ru:
       data:
         new_countries: "Новые Страны"
         new_managers: "Новые Менеджеры"
-        new_access_keys: "Новые Ключи Доступа"
         new_clients: "Новые Приложения"
         new_events: "Новые События"
         expiring_events: "Срок Событий Истекает"

@@ -21,7 +21,7 @@ class ApplicationMailer < ActionMailer::Base
 
     @new_countries = Country.where(*query)
     @new_country_managers = ManagedRecord.where(record_type: 'Country').joins(:manager).where(*managed_records_query)
-    @new_access_keys = AccessKey.where(*query)
+    @new_clients = Client.where(*query)
     @stats = {
       active_countries: Country.active_since(SUMMARY_PERIOD.ago).count,
       active_events: Event.publicly_visible.count,

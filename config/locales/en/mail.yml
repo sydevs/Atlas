@@ -35,7 +35,6 @@ en:
       data:
         new_countries: "New Countries"
         new_managers: "New Managers"
-        new_access_keys: "New Access Keys"
         new_clients: "New Apps"
         new_events: "New Events"
         expiring_events: "Expiring Events"

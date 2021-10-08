@@ -16,14 +16,14 @@ class Mail::ApplicationController < ActionController::Base
     @subject = I18n.translate('mail.summary.title')
 
     @start_of_period = summary_period.ago.beginning_of_month
-    @end_of_period = summary_period.ago.end_of_period
+    @end_of_period = summary_period.ago.end_of_month
     @end_of_period = Time.now # For testing
     query = ['created_at >= ? AND created_at <= ?', @start_of_period, @end_of_period]
     managed_records_query = ['managed_records.created_at >= ? AND managed_records.created_at <= ?', @start_of_period, @end_of_period]
 
     @new_countries = Country.where(*query)
     @new_country_managers = ManagedRecord.where(record_type: 'Country').joins(:manager).where(*managed_records_query)
-    @new_access_keys = AccessKey.where(*query)
+    @new_clients = Client.where(*query)
     @stats = {
       active_countries: Country.active_since(summary_period.ago).count,
       active_events: Event.publicly_visible.count,
