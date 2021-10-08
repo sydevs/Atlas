@@ -117,6 +117,8 @@ ua:
         online: "Check this box if the program will take place online."
         online_url: "If the class is online, this link is where seekers should join the class (eg. a link to Zoom, YouTube, Google Meet, etc)."
         manager: "The manager should be set to a yogi(ni) who will take responsibility for this event. Every week a list of new registrations will be sent to the manager and every few months they will be asked to confirm that the program information is still correct."
+        phone_number: "A local phone number that seekers can call to ask questions."
+        phone_name: "The first name of the yogi who will answer the phone."
       venue:
         manual_location: "Set location manually"
         location: "If the location cannot be set automatically by pressing \"Find Location\", you can enter the details manually below."

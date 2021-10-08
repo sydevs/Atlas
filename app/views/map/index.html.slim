@@ -55,9 +55,14 @@
       '  
       abbr.event__meta__timezone data-attribute='timezone' data-title="Local Time" LT
 
-  a.info__directions data-attribute='directions' target='_blank'
-    span.icon.icon--location
-    = translate('map.information.directions')
+  .info__actions
+    a.info__phone data-attribute='phone'
+      span.icon.icon--location
+      span.info__phone__text = "+44 7344564711"
+
+    a.info__directions data-attribute='directions' target='_blank'
+      span.icon.icon--location
+      = translate('map.information.directions')
 
   .info__description data-attribute='description'
     = simple_format @event&.dig(:description)

@@ -17,6 +17,9 @@ module Types
     field :last_occurrence, GraphQL::Types::ISO8601DateTime, null: true, resolver_method: :get_last_occurrence
     field :upcoming_occurrences, [GraphQL::Types::ISO8601DateTime], null: false, resolver_method: :get_upcoming_occurrences
 
+    field :phone_number, String, null: true
+    field :phone_name, String, null: true
+
     field :online, Boolean, null: false
     field :online_url, String, null: true
 

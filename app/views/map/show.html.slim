@@ -40,7 +40,7 @@ ruby:
   .list__mode
     .list__mode-toggle id='js-list-mode'
       - %w[offline online].each do |mode|
-        .list__mode-toggle__item class="js-list-mode" data-value=mode data-count=2
+        .list__mode-toggle__item class="js-list-mode" data-value=mode
           = translate("map.listing.mode.#{mode}")
   .list__no-results
     .list__no-results__message.list__no-results__message--far = translate('map.listing.no_area_results')
@@ -85,9 +85,14 @@ ruby:
       '  
       abbr.event__meta__timezone data-attribute='timezone' data-title="Local Time" LT
 
-  a.info__directions data-attribute='directions' target='_blank'
-    span.icon.icon--location
-    = translate('map.information.directions')
+  .info__actions
+    a.info__phone data-attribute='phone'
+      span.icon.icon--location
+      span.info__phone__text = "+44 7344564711"
+
+    a.info__directions data-attribute='directions' target='_blank'
+      span.icon.icon--location
+      = translate('map.information.directions')
 
   .info__description data-attribute='description'
     = simple_format @event&.dig(:description)

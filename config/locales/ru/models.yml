@@ -217,6 +217,8 @@ ru:
         end_time: "Время Окончания"
         online: "Онлайн-класс"
         online_url: "Ссылка на встречу онлайн"
+        phone_number: "Contact Number" # TODO: Translate
+        phone_name: "First Name for Phone Calls" # TODO: Translate
         language: "Язык"
         images: :activerecord.models.picture.plural # Do not translate
         venue_id: :activerecord.models.manager.single # Do not translate

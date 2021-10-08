@@ -35,6 +35,7 @@ gem 'audited' # Logs changes to any record
 gem 'kaminari' # Pagination
 gem 'nilify_blanks' # Convert empty string to null in the database
 gem 'passwordless' # For email based user authentication
+gem 'phonelib' # For telephone validation
 gem 'premailer-rails' # Generate inline styles for emails
 gem 'pundit' # Permissions
 gem 'aasm' # State machine for managing expiration status

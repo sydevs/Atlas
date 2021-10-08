@@ -19,6 +19,7 @@ class AtlasAPI {
           category
           address
           languageCode
+          phoneNumber
           online
           onlineUrl
           registrationMode
@@ -43,6 +44,7 @@ class AtlasAPI {
           category
           address
           languageCode
+          phoneNumber
           online
           onlineUrl
           registrationMode

@@ -23,6 +23,10 @@
   = f.input :room, hint: translate('cms.hints.event.room')
   = f.input :language_code, collection: languages, selected: @record.language_code || @record.venue.country.default_language_code || I18n.locale.upcase, input_html: { class: 'search' }, hint: translate('cms.hints.event.language')
 
+.two.fields
+  = f.input :phone_number, as: :tel, hint: translate('cms.hints.event.phone_number')
+  = f.input :phone_name, as: :string, hint: translate('cms.hints.event.phone_name')
+
 = f.input :custom_name, placeholder: @record.category_name, hint: translate('cms.hints.event.custom_name')
 
 .ui.small.dividing.violet.header = translate('cms.forms.event.online')

@@ -217,6 +217,8 @@ en:
         end_time: "End Time"
         online: "Online Class"
         online_url: "Online Meeting Link"
+        phone_number: "Contact Number"
+        phone_name: "First Name for Phone Calls"
         language: "Language"
         images: :activerecord.models.picture.plural # Do not translate
         venue_id: :activerecord.models.manager.single # Do not translate

@@ -35,11 +35,13 @@ class Event < ApplicationRecord
   validates :recurrence, :start_date, :start_time, presence: true
   validates :description, length: { minimum: 40, maximum: 600, allow_blank: true }
   validates :registration_url, url: true, unless: :native_registration_mode?
+  validates :phone_number, phone: { possible: true, allow_blank: true, country_specifier: -> event { event.venue.country_code } }
   validates :manager, presence: true
   validates :online_url, presence: true, if: :online?
   validates_associated :pictures
   validate :validate_end_time
   validate :validate_end_date
+  validate :parse_phone_number
 
   # Scopes
   scope :with_new_registrations, -> { where('latest_registration_at >= summary_email_sent_at') }
@@ -147,6 +149,10 @@ class Event < ApplicationRecord
       
       self.errors.add(:end_date, I18n.translate('cms.messages.event.invalid_end_date')) if end_date < start_date
       self.errors.add(:end_date, I18n.translate('cms.messages.event.passed_end_date')) if end_date < Date.today
+    end
+
+    def parse_phone_number
+      self.phone_number = Phonelib.parse(phone_number, venue.country_code).international
     end
 
 end

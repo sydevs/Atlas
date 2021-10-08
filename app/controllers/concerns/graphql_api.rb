@@ -11,6 +11,7 @@ module GraphqlAPI
     category
     address
     languageCode
+    phoneNumber
     online
     onlineUrl
     registrationMode

@@ -306,6 +306,7 @@ GEM
       bcrypt (~> 3.1.11)
       rails (>= 5.1.4)
     pg (1.2.3)
+    phonelib (0.6.53)
     premailer (1.14.2)
       addressable
       css_parser (>= 1.6.0)
@@ -480,6 +481,7 @@ DEPENDENCIES
   normalize-rails
   passwordless
   pg
+  phonelib
   premailer-rails
   puma
   pundit

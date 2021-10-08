@@ -26,17 +26,23 @@ body[data-page="show"] .info
   body[data-list="online"] &
     box-shadow: $shadow-heavy
 
-.info__directions
-  display: inline-block
-  color: $color-blue
-  transition: opacity 0.2s ease
-  margin: 0
+.info__actions
+  display: flex
+  flex-direction: row
+
   font-weight: $font-medium
-  font-style: italic
   font-size: 13px
   letter-spacing: 0.36px
   line-height: 22px
-  text-decoration: none
+
+  transition: opacity 0.2s ease
+  margin: 20px 0
+
+  > *
+    flex-basis: 1
+    flex-grow: 1
+    color: $color-blue
+    text-decoration: none
 
   .icon
     font-size: 22px
@@ -45,6 +51,12 @@ body[data-page="show"] .info
 
   &:hover
     opacity: 0.8
+
+.info__directions
+  font-style: italic
+
+.info__phone__text
+  border-bottom: 0.5px solid $color-blue
 
 .info__description
   margin-bottom: 12px
