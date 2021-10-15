@@ -27,7 +27,7 @@
     .icon.icon--share
   
   .event__sidebar
-    a.event__sidebar__button id='js-info-action' href='#register'
+    a.event__sidebar__button href='#register'
       = translate('map.information.register')
     .event__sidebar__language id='js-info-language' style='display: none'
       = translate('map.information.language')
@@ -54,11 +54,14 @@
         = endTime ? "#{startTime} - #{endTime}" : startTime
       '  
       abbr.event__meta__timezone data-attribute='timezone' data-title="Local Time" LT
+    a.event__phone data-attribute='phone'
+      span.event__phone__number data-attribute='phoneNumber'
+      span.event__phone__name data-attribute='phoneName'
 
   .info__actions
-    a.info__phone data-attribute='phone'
-      span.icon.icon--location
-      span.info__phone__text = "+44 7344564711"
+    /a.info__register href='#register'
+      span.icon.icon--signup
+      = translate('map.information.register')
 
     a.info__directions data-attribute='directions' target='_blank'
       span.icon.icon--location

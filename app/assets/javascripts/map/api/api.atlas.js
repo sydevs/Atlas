@@ -19,6 +19,7 @@ class AtlasAPI {
           category
           address
           languageCode
+          phoneName
           phoneNumber
           online
           onlineUrl
@@ -44,6 +45,7 @@ class AtlasAPI {
           category
           address
           languageCode
+          phoneName
           phoneNumber
           online
           onlineUrl

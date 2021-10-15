@@ -27,7 +27,7 @@ class InfoPanel {
     document.getElementById('js-registration-close').addEventListener('click', () => this.hideMessages())
 
     this.elements = {}
-    const attributes = ['name', 'address', 'day', 'description', 'online', 'time', 'timezone', 'directions', 'phone', 'language']
+    const attributes = ['name', 'address', 'day', 'description', 'online', 'time', 'timezone', 'directions', 'phone', 'phoneName', 'phoneNumber', 'language']
     attributes.forEach(attribute => {
       this.elements[attribute] = this.container.querySelector(`[data-attribute="${attribute}"]`)
     })
@@ -60,8 +60,10 @@ class InfoPanel {
     this.elements.directions.href = venue ? venue.directionsUrl : null
 
     this.elements.phone.style = event.phoneNumber ? '' : 'display: none'
-    this.elements.phone.querySelector('.info__phone__text').innerText = event.phoneNumber
     this.elements.phone.href = `tel:${event.phoneNumber}`
+    this.elements.phoneNumber.innerText = event.phoneNumber
+    this.elements.phoneName.style = event.phoneName ? '' : 'display: none'
+    this.elements.phoneName.innerText = event.phoneName
 
     this.languageBlock.style = (Boolean(event.languageCode) && document.documentElement.lang.toUpperCase() != event.languageCode ? '' : 'display: none')
     this.elements.language.textContent = Util.translate(`languages.${event.languageCode}`).split(/[,;]/)[0]
