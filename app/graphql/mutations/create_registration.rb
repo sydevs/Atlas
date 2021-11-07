@@ -8,6 +8,7 @@ class Mutations::CreateRegistration < Mutations::BaseMutation
   argument :email, String, required: true
   argument :message, String, required: true
   argument :starting_at, GraphQL::Types::ISO8601DateTime, required: true
+  argument :time_zone, String, required: false
 
   field :status, String, null: false
   field :message, String, null: false
@@ -28,7 +29,7 @@ class Mutations::CreateRegistration < Mutations::BaseMutation
       {
         status: 'info',
         message: I18n.translate('map.registration.feedback.duplicate'),
-        created_at: registration.created_at.utc,
+        created_at: registration.crea ted_at.utc,
         registration: registration,
       }
     elsif registration.save
