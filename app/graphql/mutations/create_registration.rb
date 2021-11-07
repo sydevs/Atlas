@@ -29,7 +29,7 @@ class Mutations::CreateRegistration < Mutations::BaseMutation
       {
         status: 'info',
         message: I18n.translate('map.registration.feedback.duplicate'),
-        created_at: registration.crea ted_at.utc,
+        created_at: registration.created_at.utc,
         registration: registration,
       }
     elsif registration.save
