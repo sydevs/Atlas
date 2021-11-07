@@ -13,7 +13,7 @@ class InfoPanel {
     this.submitButton.addEventListener('click', event => { this.submit(); event.preventDefault() })
 
     this.formInputs = []
-    const formInputNames = ['name', 'email', 'message']
+    const formInputNames = ['name', 'email', 'message', 'timeZone']
     formInputNames.forEach(name => {
       const formInput = this.form.querySelector(`[name=${name}]`)
       if (formInput) {
@@ -95,6 +95,7 @@ class InfoPanel {
 
     parameters.eventId = this.event.id
     parameters.startingAt = new Date(this.form.querySelector('.js-timing.is-selected input[name=startingAt]').value)
+    parameters.timezone = luxon.DateTime.local().zoneName
 
     Application.atlas.createRegistration(parameters, response => {
       this.submitButton.removeAttribute('disabled')

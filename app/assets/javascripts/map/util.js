@@ -113,7 +113,7 @@ const Util = {
     case 'occurrences':
       return event.upcomingOccurrences.map(datetime => {
         datetime = luxon.DateTime.fromISO(datetime, { zone: event.timing.timeZone })
-        return datetime.setZone(localTimeZone)
+        return event.online ? datetime.setZone(localTimeZone) : datetime
       })
     case 'shortTimeZone':
       return nextDateTime.toFormat('ZZZZ')
