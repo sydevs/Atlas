@@ -8,7 +8,7 @@ class Event < ApplicationRecord
   include Managed
 
   nilify_blanks
-  searchable_columns %w[name description]
+  searchable_columns %w[custom_name description]
   audited except: %i[
     summary_email_sent_at status_email_sent_at latest_registration_at
     should_update_status_at verified_at expired_at archived_at finished_at
@@ -91,10 +91,12 @@ class Event < ApplicationRecord
     time = start_time.split(':').map(&:to_i)
     datetime = date.to_time(:utc).in_time_zone(venue.time_zone).change(hour: time[0], min: time[1])
 
-    if datetime > first_datetime
-      occurrences.push(datetime)
-    elsif recurrence == 'day'
-      occurrences.push(datetime + 1.day)
+    if recurrence == 'day'
+      if datetime > first_datetime
+        occurrences.push(datetime)
+      else
+        occurrences.push(datetime + 1.day)
+      end
     else
       next_datetime = (datetime + 1.week).beginning_of_week(recurrence.to_sym)
       next_datetime = next_datetime.change(hour: time[0], min: time[1])
