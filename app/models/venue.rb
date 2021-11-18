@@ -82,7 +82,7 @@ class Venue < ApplicationRecord
       return unless (previous_changes.keys & %w[latitude longitude province_code country_code]).present?
 
       radius = LocalArea.maximum(:radius)
-      local_areas = LocalArea.select('id, name, radius, latitude, longitude').within(radius, origin: self)
+      local_areas = LocalArea.select('id, name, radius, latitude, longitude, country_code, province_code').within(radius, origin: self)
       local_areas = local_areas.where(country_code: country_code) if country_code?
       local_areas = local_areas.where(province: province_code) if province_code?
       local_areas = local_areas.to_a.filter { |area| area.contains?(self) }

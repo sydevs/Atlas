@@ -48,8 +48,8 @@ class LocalArea < ApplicationRecord
 
   def managed_by? manager, super_manager: nil
     return true if managers.include?(manager) && super_manager != true
-    return true if province_code.present? && province.present? && province.managed_by?(manager) && super_manager != false
-    return true if country_code.present? && country.present? && country.managed_by?(manager) && super_manager != false
+    return true if province.present? && province.managed_by?(manager) && super_manager != false
+    return true if country.present? && country.managed_by?(manager) && super_manager != false
 
     false
   end
