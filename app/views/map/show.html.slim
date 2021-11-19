@@ -127,7 +127,7 @@ ruby:
       .registration__message id='js-registration-feedback'
 
       .registration__notice
-        - link = tag.a translate('map.registration.notice.link'), class: 'registration__notice-link', href: map_privacy_path, target: '_blank'
+        - link = tag.a translate('map.registration.notice.link'), class: 'registration__notice-link', href: info_privacy_path, target: '_blank'
         = translate('map.registration.notice.text', link: link).html_safe
 
       button.registration__submit id='js-registration-submit'

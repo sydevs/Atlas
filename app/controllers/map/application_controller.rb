@@ -53,10 +53,6 @@ class Map::ApplicationController < ActionController::Base
     render 'map/index'
   end
 
-  def privacy
-    render 'map/privacy'
-  end
-
   private
 
     def scope

@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     root to: 'application#index'
     get :about, to: 'application#about'
     get :statistics, to: 'application#statistics'
+    get :privacy, to: 'application#privacy'
   end
 
   if Rails.env.development?
@@ -53,7 +54,6 @@ Rails.application.routes.draw do
 
     get '/event/:event_id', to: 'application#show', as: :event
     get '/venue/:venue_id', to: 'application#show', as: :venue
-    get :privacy, to: 'application#privacy'
     get :closest, to: 'application#closest'
     get :online, to: 'application#online'
     post :registrations, to: 'registrations#create'
