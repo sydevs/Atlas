@@ -27,7 +27,7 @@ class InfoPanel {
     document.getElementById('js-registration-close').addEventListener('click', () => this.hideMessages())
 
     this.elements = {}
-    const attributes = ['name', 'address', 'day', 'description', 'online', 'time', 'timezone', 'directions', 'phone', 'phoneName', 'phoneNumber', 'language']
+    const attributes = ['name', 'address', 'day', 'description', 'online', 'time', 'timeZone', 'directions', 'phone', 'phoneName', 'phoneNumber', 'language']
     attributes.forEach(attribute => {
       this.elements[attribute] = this.container.querySelector(`[data-attribute="${attribute}"]`)
     })
@@ -46,11 +46,11 @@ class InfoPanel {
 
     const localTimeZone = luxon.DateTime.local().zoneName
     if (event.online || localTimeZone != event.timing.timeZone) {
-      this.elements.timezone.textContent = Util.parseEventTiming(event, 'shortTimeZone')
-      this.elements.timezone.dataset.title = Util.parseEventTiming(event, 'longTimeZone')
+      this.elements.timeZone.textContent = Util.parseEventTiming(event, 'shortTimeZone')
+      this.elements.timeZone.dataset.title = Util.parseEventTiming(event, 'longTimeZone')
     } else {
-      this.elements.timezone.textContent = ''
-      this.elements.timezone.dataset.title = ''
+      this.elements.timeZone.textContent = ''
+      this.elements.timeZone.dataset.title = ''
     }
 
     this.form.classList.toggle('registration--confirmed', Boolean(event.registered))
@@ -90,12 +90,14 @@ class InfoPanel {
 
     let parameters = {}
     this.formInputs.forEach(input => {
+      console.log('collect', input.name, input.value)
       parameters[input.name] = input.value
     })
 
     parameters.eventId = this.event.id
     parameters.startingAt = new Date(this.form.querySelector('.js-timing.is-selected input[name=startingAt]').value)
-    parameters.timezone = luxon.DateTime.local().zoneName
+    parameters.timeZone = luxon.DateTime.local().zoneName
+    console.log('set timeZone', luxon.DateTime.local().zoneName, parameters)
 
     Application.atlas.createRegistration(parameters, response => {
       this.submitButton.removeAttribute('disabled')

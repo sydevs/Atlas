@@ -53,7 +53,7 @@
       time.event__meta__time data-attribute='time' datetime=startTime
         = endTime ? "#{startTime} - #{endTime}" : startTime
       '  
-      abbr.event__meta__timezone data-attribute='timezone' data-title="Local Time" LT
+      abbr.event__meta__timezone data-attribute='timeZone' data-title="Local Time" LT
     a.event__phone data-attribute='phone'
       span.event__phone__number data-attribute='phoneNumber'
       span.event__phone__name data-attribute='phoneName'
@@ -147,7 +147,7 @@ template id='js-item-template'
         span.event__meta__day data-attribute='day'
         span.event__meta__time data-attribute='time'
         '  
-        abbr.event__meta__timezone data-attribute='timezone' data-title="Local Time" LT
+        abbr.event__meta__timezone data-attribute='timeZone' data-title="Local Time" LT
 
 template id='js-timing-template'
   .registration__timing__cell class='js-timing'
@@ -157,4 +157,4 @@ template id='js-timing-template'
       .registration__timing__month data-attribute='date'
     .registration__timing__time
       .registration__timing__hour data-attribute='time'
-      .registration__timing__timezone data-attribute='timezone'
+      .registration__timing__timezone data-attribute='timeZone'

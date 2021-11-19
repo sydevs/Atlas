@@ -19,7 +19,7 @@ class ListItem {
     distanceElement.style = (distance == null ? 'display: none' : '')
 
     this.elements = {}
-    const attributes = ['name', 'address', 'day', 'time', 'timezone', 'language']
+    const attributes = ['name', 'address', 'day', 'time', 'timeZone', 'language']
     attributes.forEach(attribute => {
       this.elements[attribute] = this.container.querySelector(`[data-attribute="${attribute}"]`)
     })
@@ -30,10 +30,10 @@ class ListItem {
     this.elements.time.textContent = Util.parseEventTiming(event, 'duration')
 
     if (event.online) {
-      this.elements.timezone.textContent = Util.parseEventTiming(event, 'shortTimeZone')
-      this.elements.timezone.dataset.title = Util.parseEventTiming(event, 'longTimeZone')
+      this.elements.timeZone.textContent = Util.parseEventTiming(event, 'shortTimeZone')
+      this.elements.timeZone.dataset.title = Util.parseEventTiming(event, 'longTimeZone')
     } else {
-      this.elements.timezone.remove()
+      this.elements.timeZone.remove()
     }
 
     element.addEventListener('click', () => this.open())
