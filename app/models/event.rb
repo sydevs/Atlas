@@ -46,7 +46,8 @@ class Event < ApplicationRecord
   # Scopes
   scope :with_new_registrations, -> { where('latest_registration_at >= summary_email_sent_at') }
   scope :notifications_enabled, -> { where.not(disable_notifications: true) }
-  scope :publicly_visible, -> { publishable.published }
+  scope :current, -> { where('end_date IS NULL OR end_date >= ?', DateTime.now) }
+  scope :publicly_visible, -> { current.publishable.published }
 
   scope :ready_for_reminder_email, -> { where("reminder_email_sent_at IS NULL OR reminder_email_sent_at <= ?", 12.hours.ago) }
 

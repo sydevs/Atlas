@@ -100,7 +100,7 @@ module Expirable
   end
 
   def should_finish?
-    false
+    end_date < DateTime.now
   end
 
 end
