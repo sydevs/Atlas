@@ -60,7 +60,7 @@ gem 'rack-cors'
 gem 'rack-attack'
 gem 'graphql'
 gem 'graphql-cache'
-gem 'graphiql-rails', group: :development
+gem 'graphiql-rails'
 
 ### Utility
 gem 'inline_svg' # Allows SVGs to be rendered inline
