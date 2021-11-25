@@ -90,14 +90,12 @@ class InfoPanel {
 
     let parameters = {}
     this.formInputs.forEach(input => {
-      console.log('collect', input.name, input.value)
       parameters[input.name] = input.value
     })
 
     parameters.eventId = this.event.id
     parameters.startingAt = new Date(this.form.querySelector('.js-timing.is-selected input[name=startingAt]').value)
     parameters.timeZone = luxon.DateTime.local().zoneName
-    console.log('set timeZone', luxon.DateTime.local().zoneName, parameters)
 
     Application.atlas.createRegistration(parameters, response => {
       this.submitButton.removeAttribute('disabled')
