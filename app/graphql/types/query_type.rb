@@ -46,8 +46,11 @@ module Types
       {
         type: 'FeatureCollection',
         features: venues.map do |venue|
+          events = venue.events.publicly_visible
+          next if events.empty?
+
           {
-            type: "Feature #{venue.events.length}",
+            type: "Feature #{events.length}",
             id: venue.id,
             geometry: {
               type: 'Point',
@@ -55,7 +58,7 @@ module Types
             },
             properties: venue,
           }
-        end,
+        end.compact,
         created_at: DateTime.now.to_s,
       }
     end
