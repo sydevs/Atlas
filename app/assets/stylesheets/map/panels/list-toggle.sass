@@ -41,6 +41,25 @@
       @include mobile
         display: none
 
+  .list-toggle__item
+    position: relative
+
+  .list-toggle__item[data-count]::after
+    content: attr(data-count)
+    display: inline-block
+
+    color: white
+    font-weight: bold
+    letter-spacing: 0.17px
+    text-align: center
+    padding: 2px 3px
+    line-height: 13px
+    margin-left: 4px
+
+    background: $color-grey-normal
+    border: 1px solid $color-grey-normal
+    border-radius: 5px
+
   .list-toggle__closed
     display: flex
     flex-direction: row

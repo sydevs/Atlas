@@ -21,11 +21,11 @@ class ListApplicationInstance {
   }
 
   showEvents(events) {
-    this.listPanel.showEvents(events)
+    this.listPanel.showEvents(events, 'offline')
   }
 
   showOnlineEvents(events) {
-    this.listPanel.showOnlineEvents(events)
+    this.listPanel.showEvents(events, 'online')
   }
 
   showEvent(event) {
@@ -43,6 +43,7 @@ class ListApplicationInstance {
 
     this.listingType = type
     document.body.dataset.list = type
+    this.listPanel.setListingType(type)
   }
 
   _setMode(mode) {

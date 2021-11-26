@@ -38,6 +38,10 @@ class MapApplicationInstance {
     }
 
     this.currentMapOverview = null // There is no previous map overview
+
+    this.atlas.getOnlineEvents(this.map.getCenter(), events => {
+      this.showOnlineEvents(events)
+    })
   }
 
   showVenues(venues, allowFallback = false) {
@@ -49,12 +53,12 @@ class MapApplicationInstance {
         this.listPanel.showClosestVenue(venue, center)
       })
     } else {
-      this.listPanel.reset()
+      this.listPanel.reset('offline')
     }
   }
 
   showOnlineEvents(events) {
-    this.listPanel.showOnlineEvents(events)
+    this.listPanel.showEvents(events, 'online')
   }
 
   showEvent(event, venue) {

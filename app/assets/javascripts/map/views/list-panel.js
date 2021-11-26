@@ -6,9 +6,7 @@ class ListPanel {
   constructor(element) {
     this.container = element
     this.activeItem = null
-    this.items = []
     this.itemTemplate = document.getElementById('js-item-template')
-    this.itemsContainer = document.getElementById('js-list-results')
     this.closestVenueTitle = document.getElementById('js-list-closest-venue')
     this.closestVenueTitle.addEventListener('click', () => this.triggerAlternativeQuery())
     this.listModeContainer = document.getElementById('js-list-mode')
@@ -19,23 +17,34 @@ class ListPanel {
         Application._setListingType(event.target.dataset.value)
       })
     }
+
+    this.data = {}
+    let types = ['online', 'offline']
+    types.forEach(type => {
+      this.data[type] = {
+        items: {},
+        container: document.getElementById(`js-list-${type}`),
+        counters: document.querySelectorAll(`.js-list-mode[data-value="${type}"]`)
+      }
+    })
   }
 
   setEmptyResults(shown) {
-    const was_shown = document.body.classList.contains('state--no-results')
-    if (was_shown != shown) {
+    const wasShown = document.body.classList.contains('state--no-results')
+    if (wasShown != shown) {
       document.body.classList.toggle('state--no-results', shown)
       Application.map.invalidateSize()
     }
   }
 
-  showLoading() {
+  /*showLoading() {
     this.setEmptyResults(false)
     this.reset()
-  }
+  }*/
 
   showVenues(venues) {
-    this.reset()
+    let type = 'offline'
+    this.reset(type)
 
     if (venues.length < 1) return
 
@@ -53,35 +62,37 @@ class ListPanel {
       for (let n = 0; n < events.length; n++) {
         const event = events[n]
         event.venueId = venue.id
-        this.appendEvent(event, venue)
+        this.appendEvent(type, event, venue)
       }
     }
+
+    this.resetCounters(type)
   }
 
-  showEvents(events) {
-    this.reset()
-
-    if (events.length < 1) return
-
-    for (let n = 0; n < events.length; n++) {
-      const event = events[n]
-      event.venueId = event.venue.id
-      this.appendEvent(event, event.venue)
-    }
-  }
-
-  showOnlineEvents(events) {
-    this.reset()
+  showEvents(events, type) {
+    this.reset(type)
 
     if (events.length < 1) return
 
     this.setEmptyResults(false)
-    this.appendEvents(events)
+    for (let n = 0; n < events.length; n++) {
+      const event = events[n]
+      if (type == 'offline') event.venueId = event.venue.id
+      this.appendEvent(type, event, event.venue)
+    }
+
+    this.resetCounters(type)
+  }
+
+  appendEvent(type, event, venue = null) {
+    const element = document.importNode(this.itemTemplate.content, true).querySelector('.js-item')
+    this.data[type].items[event.id] = new ListItem(element, event, venue)
+    this.data[type].container.appendChild(element)
   }
 
   showClosestVenue(venue, currentCenter) {
     this.setEmptyResults(true)
-    this.reset()
+    this.reset('offline')
 
     if (venue) {
       const distance = Util.distance(venue.latitude, venue.longitude, currentCenter.latitude, currentCenter.longitude)
@@ -103,20 +114,6 @@ class ListPanel {
     }
   }
 
-  appendEvents(events, venue = null) {
-    for (let n = 0; n < events.length; n++) {
-      const event = events[n]
-      event.venueId = venue ? venue.id : null
-      this.appendEvent(event, venue)
-    }
-  }
-
-  appendEvent(event, venue = null) {
-    const element = document.importNode(this.itemTemplate.content, true).querySelector('.js-item')
-    this.items[event.id] = new ListItem(element, event, venue)
-    this.itemsContainer.appendChild(element)
-  }
-
   triggerAlternativeQuery() {
     Application.navbar.select(this.closestVenueData)
   }
@@ -126,10 +123,24 @@ class ListPanel {
     this.listModeContainer.style = shown ? '' : 'display: none'
   }
 
-  reset() {
+  reset(type) {
     this.container.scrollTop = 0
-    this.itemsContainer.innerHTML = null
-    this.items = []
+    this.data[type].items = {}
+    this.data[type].container.innerHTML = null
+    this.resetCounters(type)
+  }
+
+  resetCounters(type) {
+    let counters = this.data[type].counters
+    let count = this.data[type].container.childElementCount
+
+    for (let i = 0; i < counters.length; i++) {
+      if (count > 0) {
+        counters[i].dataset.count = count
+      } else {
+        delete counters[i].dataset.count
+      }
+    }
   }
 
 }

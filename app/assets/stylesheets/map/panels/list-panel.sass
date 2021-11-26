@@ -46,6 +46,7 @@ body[data-page="show"] .list
 
   &-toggle__item
     display: inline-block
+    position: relative
     flex-basis: 50%
     padding: 0 6px
     line-height: 28px
@@ -107,3 +108,9 @@ body[data-page="show"] .list
     line-height: 1.4444
     border-bottom: 1px solid $color-grey-normal
     cursor: pointer
+
+
+// ===== LIST RESULTS ===== //
+body[data-list="online"] .list__results[data-type="offline"],
+body[data-list="offline"] .list__results[data-type="online"]
+  display: none
