@@ -30,7 +30,9 @@ body[data-page="show"] .list
 // ===== MODE TOGGLE ===== //
 .list__mode
   padding: 1.5rem
-  padding-bottom: 0.5rem
+  
+  @include tablet-or-larger
+    padding-bottom: 0.5rem
 
   &-toggle
     display: flex
