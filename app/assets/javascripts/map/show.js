@@ -175,7 +175,10 @@ class MapApplicationInstance {
 
     this.listingType = type
     document.body.dataset.list = type
-    this.map.updateRenderedVenues(true)
+
+    if (type == 'offline') {
+      this.map.updateRenderedVenues(true)
+    }
   }
 
   _setMode(mode) {

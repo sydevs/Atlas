@@ -11,12 +11,12 @@ class ListToggle {
   toggle() {
     if (event.target.tagName == 'INPUT') return
 
-    if (Application.listingType == 'online') {
-      Application._setListingType('offline')
-    }
-    
     this.container.classList.toggle('list-toggle--closed')
     this.container.classList.toggle('list-toggle--open')
+    if (this.container.classList.contains('list-toggle--closed')) {
+      Application._setListingType('offline')
+    }
+
     Application.map.invalidateSize()
   }
 
