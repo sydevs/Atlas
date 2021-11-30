@@ -43,9 +43,9 @@ module CMS::ApplicationHelper
     active = action_name == action if action
 
     if action.present?
-      content_tag :a, label, class: "#{'active' if active} item", href: action == 'show' ? url_for([:cms, record || :worldwide]) : url_for([action, :cms, record])
+      content_tag :a, label, class: "#{'active' if active} item", href: action == 'show' ? url_for([:cms, record || :worldwide]) : url_for([action.to_sym, :cms, record])
     elsif controller.present?
-      content_tag :a, label, class: "#{'active' if active} item", href: url_for([:cms, record, index])
+      content_tag :a, label, class: "#{'active' if active} item", href: url_for([:cms, record, index.to_sym])
     else
       content_tag :div, label, class: 'item'
     end
@@ -66,7 +66,7 @@ module CMS::ApplicationHelper
 
   def breadcrumb_url ancestor
     if action_name == 'index' && policy(ancestor).index_association?(controller_name)
-      url_for([:cms, ancestor, controller_name])
+      url_for([:cms, ancestor, controller_name.to_sym])
     elsif action_name == 'regions' && policy(ancestor).index_association?(:regions)
       url_for([:cms, ancestor, :regions])
     else

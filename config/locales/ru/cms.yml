@@ -132,6 +132,7 @@ ru:
           title: "Метка карты установлена!"
           description: "Убедитесь, что местоположение, указанное на карте, выглядит корректно."
       manager:
+        language: "The preferred language for emails and UI for this manager." # TODO: Translate
         administrator:
           title: "Создание глобального администратора"
           description: "Adding a manager to worldwide data will create them as an administrator. У них будет полный доступ для внесения изменений в Сахадж Атлас."

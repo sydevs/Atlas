@@ -152,7 +152,7 @@ class CMS::ApplicationController < ActionController::Base
     return cms_root_path if @record == current_user
     return url_for([:cms, @record]) if policy(@record).show?
     
-    url_for([:cms, @record.parent, @model.model_name.route_key])
+    url_for([:cms, @record.parent, @model.model_name.route_key.to_sym])
   end
 
   protected
@@ -169,7 +169,7 @@ class CMS::ApplicationController < ActionController::Base
     end
 
     def set_locale!
-      I18n.locale = params[:locale]&.to_sym || :en
+      I18n.locale = params[:locale]&.to_sym || current_user.language_code&.downcase&.to_sym || :en
     end
 
     def set_model_name!

@@ -17,10 +17,6 @@ class Client < ApplicationRecord
   scope :enabled, -> { where(enabled: true) }
   scope :disabled, -> { where(enabled: false) }
 
-  # Callbacks
-  before_validation :find_manager
-  after_save :find_or_create_manager
-
   # Methods
 
   def map_config

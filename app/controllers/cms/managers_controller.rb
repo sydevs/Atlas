@@ -128,12 +128,12 @@ class CMS::ManagersController < CMS::ApplicationController
     def parameters
       if current_user.administrator?
         params.fetch(:manager, {}).permit(
-          :name, :email, :administrator,
+          :name, :email, :administrator, :language_code,
           country_ids: [], province_ids: [], local_area_ids: []
         )
       else
         params.fetch(:manager, {}).permit(
-          :name, :email,
+          :name, :email, :language_code,
           country_ids: [], province_ids: [], local_area_ids: []
         )
       end

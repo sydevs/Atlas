@@ -238,7 +238,8 @@ en:
         manager_id: :activerecord.models.manager.single # Do not translate
         name: :activerecord.attributes.generic.name # Do not translate
         email: :activerecord.attributes.generic.email # Do not translate
-        administrator: Global Administrator
+        administrator: "Global Administrator"
+        language_code: "Language"
 
       audit:
         user: :activerecord.models.manager.single # Do not translate

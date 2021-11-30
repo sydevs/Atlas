@@ -51,8 +51,11 @@ module Managed
 
       self.manager = Manager.find_or_create_by(email: manager.email.downcase) do |new_manager|
         new_manager.name = manager.name
+        new_manager.locale = language_code || I18n.locale
         self.new_manager_record = true
       end
+
+      self.manager.update_column(:language_code, language_code || I18n.locale) if self.manager.language_code.nil?
     end
 
 end

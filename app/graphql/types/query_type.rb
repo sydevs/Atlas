@@ -90,7 +90,11 @@ module Types
     end
 
     def closest_venue(latitude:, longitude:)
-      decorate Venue.publicly_visible.by_distance(origin: [latitude, longitude]).joins(:events).where(events: { online: false }).first
+      venues = Venue.publicly_visible.by_distance(origin: [latitude, longitude]).joins(:events).where(events: { online: false }).limit(5)
+
+      venues.each do |venue|
+        return decorate(venue) if venue.events.present?
+      end
     end
 
     def decorate object
