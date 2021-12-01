@@ -2,6 +2,7 @@ class Info::ApplicationController < ActionController::Base
 
   include Passwordless::ControllerHelpers
   helper_method :current_user
+  before_action :set_locale!
 
   def index
   end
@@ -35,6 +36,10 @@ class Info::ApplicationController < ActionController::Base
 
     def current_user
       @current_user ||= authenticate_by_session(Manager)
+    end
+
+    def set_locale!
+      I18n.locale = params[:locale]&.to_sym || :en
     end
 
 end
