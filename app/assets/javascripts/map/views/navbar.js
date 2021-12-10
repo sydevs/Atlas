@@ -35,6 +35,7 @@ class Navbar {
   }
 
   select(location) {
+    console.log('select location', location)
     this.focusedItem = null
     this.enableGeoSearch = false
     this.searchInput.value = null
@@ -43,6 +44,7 @@ class Navbar {
 
     if (location) {
       this.searchInput.placeholder = location.label || this.searchPlaceholder
+      console.log('go to location')
 
       if (location.west && location.east && location.north && location.south) {
         Application.map.fitTo(location)

@@ -274,11 +274,16 @@ class MapView {
     this.updatePadding()
 
     if (Util.isDevice('mobile')) {
+      console.log('jump to', {
+        center: [location.longitude, location.latitude],
+        zoom: zoom,
+      })
       this.mapbox.jumpTo({
         center: [location.longitude, location.latitude],
         zoom: zoom,
       })
     } else {
+      console.log('fly to', location, zoom)
       this.mapbox.flyTo({
         center: [location.longitude, location.latitude],
         zoom: zoom,
@@ -288,6 +293,7 @@ class MapView {
   }
 
   fitTo(bounds) {
+    console.log('fit to', bounds)
     bounds = [[bounds.west, bounds.south], [bounds.east, bounds.north]]
     this.updatePadding()
     this.mapbox.fitBounds(bounds)
