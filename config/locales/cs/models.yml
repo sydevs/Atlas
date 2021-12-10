@@ -1,0 +1,266 @@
+cs:
+  datetime:
+    distance_in_words:
+      soon: "a few minutes"
+      x_weeks:
+        one: "%{count} week"
+        other: "%{count} weeks"
+
+  activerecord:
+    models:
+      # Regions
+      country:
+        # Basic pluralization
+        single: "Country"
+        plural: "Countries"
+        # Countable
+        one: "country"
+        other: "countries"
+      province:
+        # Basic pluralization
+        single: "Region"
+        plural: "Regions"
+        # Countable
+        one: "region"
+        other: "regions"
+      local_area:
+        # Basic pluralization
+        single: "Area"
+        plural: "Areas"
+        # Countable
+        one: "area"
+        other: "areas"
+
+      # Events
+      venue:
+        # Basic pluralization
+        single: "Venue"
+        plural: "Venues"
+        # Countable
+        one: "venue"
+        other: "venues"
+      event:
+        # Basic pluralization
+        single: "Event"
+        plural: "Events"
+        # Countable
+        one: "event"
+        other: "events"
+      registration:
+        # Basic pluralization
+        single: "Attendee"
+        plural: "Attendees"
+        # Countable
+        one: "registration"
+        other: "registrations"
+
+      # Other
+      manager:
+        # Basic pluralization
+        single: "Manager"
+        plural: "Managers"
+        # Countable
+        one: "manager"
+        other: "managers"
+      audit:
+        # Basic pluralization
+        single: "History"
+        plural: "History"
+        # Countable
+        one: "log"
+        other: "logs"
+      client:
+        # Basic pluralization
+        single: "App"
+        plural: "Apps"
+        # Countable
+        one: "external app"
+        other: "external apps"
+      picture:
+        # Basic pluralization
+        single: "Image"
+        plural: "Images"
+        # Countable
+        one: "image"
+        other: "images"
+
+    attributes:
+      generic:
+        name: "Name"
+        published: "Published"
+        email: "Email Address"
+        identifier: "Filter Identifier"
+        status: "Status"
+        statuses:
+          verified: "Verified"
+          needs_review: "Needs Review"
+          needs_urgent_review: "Needs Urgent Review"
+          expired: "Expired"
+          archived: "Archived"
+          finished: "Finished"
+        
+        last_activity_on: "Last activity"
+        summary_email_sent_at: "Summary email sent"
+        status_email_sent_at: "Status email sent"
+        reminder_email_sent_at: "Reminder email sent"
+        should_update_status_at: "Next status update"
+        expired_at: "Expired At"
+        verified_at: "Verified At"
+        archived_at: "Archived At"
+        finished_at: "Finished At"
+        updated_at: "Updated At"
+
+      # Regions
+      country:
+        manager_id: :activerecord.models.manager.single # Do not translate
+        country_code: :activerecord.models.country.single # Do not translate
+        default_language_code: "Default Event Language"
+        enable_province_management: "Enable Regional Management"
+        last_activity_on: :activerecord.attributes.generic.last_activity_on # Do not translate
+        summary_email_sent_at: :activerecord.attributes.generic.summary_email_sent_at # Do not translate
+
+      province:
+        manager_id: :activerecord.models.manager.single # Do not translate
+        country_code: :activerecord.models.country.single # Do not translate
+        province_code: :activerecord.models.province.single # Do not translate
+        last_activity_on: :activerecord.attributes.generic.last_activity_on # Do not translate
+        summary_email_sent_at: :activerecord.attributes.generic.summary_email_sent_at # Do not translate
+
+      local_area:
+        manager_id: :activerecord.models.manager.single # Do not translate
+        name: :activerecord.attributes.generic.name # Do not translate
+        country_code: :activerecord.models.country.single # Do not translate
+        province_code: :activerecord.models.province.single # Do not translate
+        coordinates: "Location"
+        latitude: "Latitude"
+        longitude: "Longitude"
+        radius: "Radius (km)"
+        last_activity_on: :activerecord.attributes.generic.last_activity_on # Do not translate
+        summary_email_sent_at: :activerecord.attributes.generic.summary_email_sent_at # Do not translate
+
+      # Events
+      venue:
+        published: :activerecord.attributes.generic.published # Do not translate
+        name: "Building Name (Optional)"
+        manager_id: :activerecord.models.manager.single # Do not translate
+        address: "Address"
+        street: "Street Address"
+        city: "City"
+        province_code: :activerecord.models.province.single # Do not translate
+        country_code: :activerecord.models.country.single # Do not translate
+        postcode: "Postal Code"
+        coordinates: "Location"
+        latitude: "Latitude"
+        longitude: "Longitude"
+        place_id: "Google Place ID"
+        last_activity_on: :activerecord.attributes.generic.last_activity_on # Do not translate
+
+      event:
+        status: :activerecord.attributes.generic.status # Do not translate
+        statuses: :activerecord.attributes.generic.statuses # Do not translate
+        published: :activerecord.attributes.generic.published # Do not translate
+        manager_id: :activerecord.models.manager.single # Do not translate
+        name: :activerecord.attributes.generic.name # Do not translate
+        custom_name: "Custom Event Name (Optional)"
+        category: "Category"
+        categories:
+          intro: "Intro Meditation Class"
+          intermediate: "Intermediate Meditation Class"
+          course: "Meditation Course"
+          public_event: "Stall at Public Event"
+          concert: "Meditation & Music Concert"
+        category_labels:
+          intro: "Intro"
+          intermediate: "Going Deeper"
+          course: "Meditation Course"
+          public_event: "Stall"
+          concert: "Concert"
+        category_descriptions:
+          intro: "The first introductions to this kind of meditation."
+          intermediate: "A going deeper class for those who have already attended an introductory class."
+          course: "A several week course that takes you through various techniques of meditation."
+          public_event: "Offering free meditation instruction at a public event."
+          concert: "A performance combining meditation and music or dance."
+        description: "Description"
+        room: "Room"
+        building: "Building"
+        language_code: "Language"
+        disable_notifications: "Disable Notifications"
+        registration_mode: "Registration Mode"
+        registration_modes:
+          native: "Sahaj Atlas"
+          external: "External"
+          meetup: "Meetup"
+          eventbrite: "Eventbrite"
+          facebook: "Facebook"
+        registration_url: "Registration Link (URL)"
+        recurrence: "Recurrence"
+        recurrences:
+          day: "Daily"
+          monday: "Mondays"
+          tuesday: "Tuesdays"
+          wednesday: "Wednesdays"
+          thursday: "Thursdays"
+          friday: "Fridays"
+          saturday: "Saturdays"
+          sunday: "Sundays"
+        start_date: "Start Date"
+        end_date: "End Date"
+        start_time: "Start Time"
+        end_time: "End Time"
+        online: "Online Class"
+        online_url: "Online Meeting Link"
+        phone_number: "Contact Number"
+        phone_name: "First Name for Phone Calls"
+        language: "Language"
+        images: :activerecord.models.picture.plural # Do not translate
+        venue_id: :activerecord.models.manager.single # Do not translate
+        last_activity_on: :activerecord.attributes.generic.last_activity_on # Do not translate
+        status_email_sent_at: :activerecord.attributes.generic.status_email_sent_at # Do not translate
+        reminder_email_sent_at: :activerecord.attributes.generic.reminder_email_sent_at # Do not translate
+        should_update_status_at: :activerecord.attributes.generic.should_update_status_at # Do not translate
+        updated_at: :activerecord.attributes.generic.updated_at # Do not translate
+        expired_at: :activerecord.attributes.generic.expired_at # Do not translate
+        verified_at: :activerecord.attributes.generic.verified_at # Do not translate
+        archived_at: :activerecord.attributes.generic.archived_at # Do not translate
+        finished_at: :activerecord.attributes.generic.finished_at # Do not translate
+
+      registration:
+        manager_id: :activerecord.models.manager.single # Do not translate
+        name: :activerecord.attributes.generic.name # Do not translate
+        email: :activerecord.attributes.generic.email # Do not translate
+        comment: "Comment"
+        created_at: "Registered At - Local Time"
+        starting_at: "First Class On"
+
+      # Other
+      manager:
+        manager_id: :activerecord.models.manager.single # Do not translate
+        name: :activerecord.attributes.generic.name # Do not translate
+        email: :activerecord.attributes.generic.email # Do not translate
+        administrator: "Global Administrator"
+        language_code: "Language"
+
+      audit:
+        user: :activerecord.models.manager.single # Do not translate
+        action: "Action"
+        actions:
+          update: "Updated"
+          create: "Created"
+          destroy: "Deleted"
+
+      client:
+        label: "Label"
+        config: "Configuration"
+        domain: "Domain"
+        secret_key: "Secret API Key"
+        public_key: "Public API Key"
+        enabled: "Enabled"
+        location: "Preferred Location"
+        bounds: "Bounds"
+        last_accessed_at: "Last Access"
+        map_url: "Embeddable Map URL"
+        index_url: "Embeddable List URL"
+        manager_id: :activerecord.models.manager.single # Do not translate
+
+      pictures:

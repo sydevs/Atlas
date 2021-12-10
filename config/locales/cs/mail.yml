@@ -1,0 +1,192 @@
+cs:
+  mail:
+    layout:
+      sahaj_atlas: "Sahaj Atlas"
+      learn_more: "Learn more"
+      information:
+        atlas:
+          title: "What is Sahaj Atlas?"
+          description: "Sahaj Atlas is a project to create a central list of all public Sahaja Yoga events. To ensure that this event list is always up to date, so that seekers may always find active events near them."
+        security:
+          title: "Do not forward this email"
+          description: "The links in this email allow access to edit the Sahaj Atlas. Forwarding this email will compromise the security of the website."
+        automated:
+          title: "Automated email / Unsubscribe"
+          description: "This is an automated email. If you don't know why you receive this email, no longer want to receive these emails, or have any questions: please write to"
+
+    login:
+      title: "Login to Sahaj Atlas"
+      preview: "This link will automatically log you into the Sahaj Atlas CMS. Do not share this email with anyone else, or they will gain access to your account."
+      action: "Login"
+      explanation: "or copy this url to your browser"
+
+    summary:
+      subject: "Monthly Summary of Sahaj Atlas"
+      title: "Monthly Update"
+      preview: "Summary of changes on the Sahaj Atlas in the last month."
+      view_statistics: "Full Statistics"
+      next_week: "Next week"
+      last_week: "Last week"
+      stats:
+        new_registrations: "New Registrations"
+        active_events: "Active Events"
+        active_countries: "Active Countries"
+        active_regions: "Active Regions"
+      data:
+        new_countries: "New Countries"
+        new_managers: "New Managers"
+        new_clients: "New Apps"
+        new_events: "New Events"
+        expiring_events: "Expiring Events"
+        expired_events: "Recently Expired"
+        inactive_regions: "Inactive Regions"
+
+    event:
+      location: "Location"
+      next_date: "Next class"
+      start_date: "Start date"
+      timing: "Timing"
+      category: "Category"
+      created_by: "Created by"
+      updated_at: "Last updated"
+      manager: "Manager"
+      view: "View on Map"
+      edit: "Edit Event"
+      update: "Update Event"
+      contact: "Send Email"
+
+      status:
+        subject:
+          created: "New Event Created - %{event}"
+          needs_review: "[Warning] Event Needs Review - %{event}"
+          needs_urgent_review: "[Alert] Event Will Expire Soon - %{event}"
+          expired: "Event Expired - %{event}"
+          finished: "Event Finished - %{event}"
+        preview:
+          created: "You are the manager of a new event. '%{event}'' has been created in %{region}."
+          needs_review: "'%{event}' needs to be reviewed or else it will be removed from the map. Please check that the event information is still correct."
+          needs_urgent_review: "'%{event}' will soon be removed from the map, because the event manager has not yet responded to our email."
+          expired: "'%{event}'' has not been updated in %{duration}, and has been removed from the map. Update this event to make it public again."
+          finished: "'%{event}' has concluded as scheduled. The final class for this event is over, so the event will be hidden from the map."
+        title:
+          created: "New Event Created"
+          needs_review: "Event Needs Review"
+          needs_urgent_review: "Event Expiring Soon"
+          expired: "Event Expired"
+          finished: "Event Finished"
+          escalation: "Manager Has Not Responded"
+        byline:
+          created: "Created on %{date}"
+          needs_review: "Last updated on %{date}"
+          needs_urgent_review: "Will be removed on %{date}"
+          expired: "Expired on %{date}"
+          finished: "Finished on %{date}"
+        explanation:
+          created: "You are the manager of a new event which has been created on the Sahaj Atlas."
+          needs_review: "This event, which you manage, needs to be checked for accuracy or else it will be removed from the map."
+          needs_urgent_review: "This event will be removed from the map soon, unless it's accuracy is checked and updated."
+          expired: "This event has been removed from the map because it has not been updated recently. To add it back to the map, update the event."
+          finished: "This event has concluded."
+        escalation:
+          event_manager: "This event, which you manage, urgently needs to be checked for accuracy. This is the last reminder you will receive. We've also emailed the managers of the %{region} region to make sure this event isn't removed by mistake."
+          super_manager: "You are a manager for %{region}. This warning is being sent to you because this event's manager has not yet responded to our email."
+
+      reminder:
+        subject: "[Reminder] Upcoming Event"
+        title: "Upcoming Event"
+        preview:
+          zero: "Your event, \"%{event},\" is %{duration} from now at %{time}. No new registrations."
+          one: "Your event, \"%{event},\" is %{duration} from now at %{time}. %{count} new registration."
+          other: "Your event, \"%{event},\" is %{duration} from now at %{time}. %{count} new registrations."
+        explanation: "Your event is happening %{duration} from now at %{time}."
+        byline:
+          zero: "No New Registrations"
+          one: "%{count} New Registration for %{date}"
+          other: "%{count} New Registrations for %{date}"
+        not_shown:
+          one: "%{count} new registration not shown."
+          other: "%{count} new registrations not shown."
+        view_all: "View all"
+
+    manager:
+      welcome:
+        subject:
+          worldwide: "Welcome! You are now an administrator on Sahaj Atlas."
+          country: "Welcome! You are now a country manager on Sahaj Atlas."
+          province: "Welcome! You are now a local manager on Sahaj Atlas."
+          local_area: "Welcome! You are now a local manager on Sahaj Atlas."
+          event: "Welcome! You are now an event manager on Sahaj Atlas."
+          none: "Welcome! You are now a manager on Sahaj Atlas."
+        title: "Welcome to Sahaj Atlas"
+        preview:
+          worldwide: "You have been invited to become an administrator of the Sahaj Atlas."
+          country: "You have been invited to become a country manager for %{context}."
+          province: "You have been invited to become a local manager for %{context}."
+          local_area: "You have been invited to become a local manager the %{context} area."
+          event: "You have been invited to become the event manager for \"%{context}\"."
+          none: "You have been invited to become a manager of the Sahaj Atlas."
+        login: "Login"
+        view:
+          country: "View Country"
+          province: "View Region"
+          local_area: "View Area"
+          event: "View Event"
+        byline:
+          worldwide: "Global Administrator"
+          country: "Country Manager for %{context}"
+          province: "Local Manager for %{context}"
+          local_area: "Local Manager for %{context}"
+          event: "Event Manager for \"%{context}\""
+        explanation:
+          worldwide: "You have been invited to become an administrator of the Sahaj Atlas. It will be your job to onboard new country managers and keep an eye on the maintainance of the atlas."
+          country: "You have been invited to become a country manager on Sahaj Atlas. It will be your responsibility to create cities and regions within your country and assign managers to manage events in those regions."
+          province: "You have been invited to become a local manager on Sahaj Atlas. It will be your responsibility to create venues and list public Sahaj events within your region."
+          local_area: "You have been invited to become a local manager on Sahaj Atlas. It will be your responsibility to create venues and list public Sahaj events within your region."
+          event: "You have been invited to become an event manager on Sahaj Atlas. It will be your responsibility to keep your event up to date."
+          none: "You have been invited to become a manager on Sahaj Atlas. You have not yet been assigned any responsibilities. Please contact us if you need help."
+        data:
+          events: "Events"
+          venues: "Venues"
+
+    country:
+      summary:
+        subject: "Bi-Weekly Update %{country}"
+        title: "Bi-Weekly Update"
+        preview: "Summary of changes in %{country} in the last 2 weeks."
+        view: "View Country"
+
+    region:
+      summary:
+        subject: "Weekly Update for %{region}"
+        title: "Weekly Update"
+        preview: "Summary of changes in %{region} in the last week."
+        view: "View Region"
+
+    managed_record:
+      created:
+        subject:
+          country: "You are now a country manager"
+          province: "You are now a local manager"
+          local_area: "You are now a local manager"
+          event: "You are now an event manager"
+          client: "You are now an app manager"
+        title:
+          country: "Country Manager for %{record}"
+          province: "Local Manager for %{record}"
+          local_area: "Local Manager for %{record}"
+          event: "Event Manager for %{record}"
+          client: "App Manager for %{record}"
+        preview: "You have been set as a manager for %{record}."
+        byline:
+          country_html: "You have been given access to manage a country, %{record}."
+          province_html: "You have been given access to manage the %{record} region."
+          local_area_html: "You have been given access to manage the %{record} region."
+          event_html: "You have been given access to manage the event, %{record}."
+          client_html: "You have been given access to manage the configuration for the %{record} app."
+        explanation:
+          country: "It's your responsibility to create regions within your country and assign managers to those regions to set up events. You may also create venues and events within your country."
+          province: "It's your responsibility to create venues and events within your region. You may also create custom areas within your region for major cities and assign managers to those regions."
+          local_area: "It's your responsibility to create venues and events within your local area. You will also be sent an email if any events in your area are close to expiring, and need someone to check that they are still accurate."
+          event: "It's your responsibility to keep your classes up to date. Every few months you will receive an email asking you to confirm that your event information is still correct."
+          client: "You now have access to API keys which allow you to embed the Sahaj Atlas on your website or app. You are also able to change the default configuration for the map on your site."
+        view: "View %{model}"

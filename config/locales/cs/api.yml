@@ -1,0 +1,3 @@
+cs:
+  api:
+    distance: "%{distance} km away"

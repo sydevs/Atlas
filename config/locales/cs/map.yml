@@ -1,0 +1,84 @@
+cs:
+  map:
+    search:
+      all_recurrences: "All Timings"
+      all_languages: "All Languages"
+    listing:
+      search: "Search for location"
+      more_info: "More Info"
+      register: "Register"
+      no_area_results: "There are no classes in this area, the closest free meditation class is in"
+      no_place_results: "The closest free meditation class at"
+      show: "Show list"
+      event_name: "%{category} at %{venue}"
+      online_event_name: "%{category} from %{city}"
+      toggle:
+        offline: "Show list"
+        online: "Online classes"
+        back: "Back to map"
+      filter:
+        prefix: "Showing results at"
+        clear: "Clear"
+      mode:
+        offline: "In Person"
+        online: "Online"
+    information:
+      register: "Register"
+      language: "This class is in"
+      directions: "Get directions"
+      online: "Online Class"
+      online_from: "Hosted from"
+    registration:
+      header: "Register now"
+      form:
+        timing: "I’d like to start on:"
+        email: "Email"
+        name: "Name"
+        message: "Questions / Comments"
+        submit: "Confirm"
+      notice:
+        text: "By submitting you confirm your agreement with our %{link}."
+        link: "privacy policy"
+      feedback:
+        duplicate: "You are already registered. See you soon."
+        success: "Success! You will receive a confirmation email shortly."
+        error: "Error! Please try again later."
+      confirmation:
+        title: "Thank you for registering"
+        subtitle: "you will receive an email shortly"
+        back: "Register someone else"
+    sharing:
+      invite: "Invite a friend along"
+      share: "Share"
+      copied: "Copied!"
+    weekdays:
+      0: Sunday
+      1: Monday
+      2: Tuesday
+      3: Wednesday
+      4: Thursday
+      5: Friday
+      6: Saturday
+
+  javascript:
+    recurrence:
+      day: "Daily"
+      monday: "Mondays"
+      tuesday: "Tuesdays"
+      wednesday: "Wednesdays"
+      thursday: "Thursdays"
+      friday: "Fridays"
+      saturday: "Saturdays"
+      sunday: "Sundays"
+    timing_labels:
+      course_fallback: "This is a weekly course"
+      course: "%{weeks}-week course"
+      ongoing: "This class is on-going"
+    registration:
+      external: "Register"
+      facebook: "Register on Facebook"
+      eventbrite: "Register on Eventbrite"
+      meetup: "Register on Meetup"
+    language_codes:
+      uk: UA #Ukrainian
+    
