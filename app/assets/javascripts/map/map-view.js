@@ -296,7 +296,9 @@ class MapView {
     console.log('fit to', bounds)
     bounds = [[bounds.west, bounds.south], [bounds.east, bounds.north]]
     this.updatePadding()
-    this.mapbox.fitBounds(bounds)
+    this.mapbox.fitBounds(bounds, {
+      easing: { animate: !Util.isDevice('mobile') },
+    })
   }
 
   updatePadding() {
