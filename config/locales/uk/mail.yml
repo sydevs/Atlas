@@ -92,13 +92,15 @@ uk:
           super_manager: "You are a manager for %{region}. This warning is being sent to you because this event's manager has not yet responded to our email."
 
       reminder:
-        subject: "[Reminder] Upcoming Event"
-        title: "Upcoming Event"
+        subject: "[Reminder] New Event Registrations"
+        title: "New Registrations"
         preview:
-          zero: "Your event, \"%{event},\" is %{duration} from now at %{time}. No new registrations."
-          one: "Your event, \"%{event},\" is %{duration} from now at %{time}. %{count} new registration."
-          other: "Your event, \"%{event},\" is %{duration} from now at %{time}. %{count} new registrations."
-        explanation: "Your event is happening %{duration} from now at %{time}."
+          zero: "Your event, \"%{event},\" has no new registrations. Starting %{duration} from now at %{time}."
+          one: "Your event, \"%{event},\" has %{count} new registration. Starting %{duration} from now at %{time}."
+          other: "Your event, \"%{event},\" has %{count} new registrations. Starting %{duration} from now at %{time}."
+        explanation:
+          one: "Your event has %{count} new registration."
+          other: "Your event has %{count} new registrations."
         byline:
           zero: "No New Registrations"
           one: "%{count} New Registration for %{date}"

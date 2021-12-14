@@ -91,14 +91,16 @@ ru:
           event_manager: "Это событие, которым вы управляете, срочно нужно проверить на достоверность. Это последнее напоминание, которое вы получаете. Мы также отправили электронное письмо менеджерам %{region} региона, чтобы гарантировать, что это событие не будет удалено по ошибке."
           super_manager: "Вы являетесь менеджером %{region}. Это предупреждение отправлено вам, потому что менеджер этого мероприятия еще не ответил на наше электронное письмо."
 
-      reminder:
-        subject: "[Reminder] Предстоящее событие"
-        title: "Предстоящее событие"
+      reminder: # TODO: Translate
+        subject: "[Reminder] New Event Registrations"
+        title: "New Registrations"
         preview:
-          zero: "Ваше событие, \"%{event},\" длится %{duration} начиная с %{time}. Новых регистраций нет."
-          one: "Ваше событие, \"%{event},\" длится %{duration} начиная с %{time}. %{count} новых регистраций."
-          other: "Ваше событие, \"%{event},\" длится %{duration} начиная с %{time}. %{count} новых регистраций."
-        explanation: "Ваше событие проходит %{duration} начиная с %{time}."
+          zero: "Your event, \"%{event},\" has no new registrations. Starting %{duration} from now at %{time}."
+          one: "Your event, \"%{event},\" has %{count} new registration. Starting %{duration} from now at %{time}."
+          other: "Your event, \"%{event},\" has %{count} new registrations. Starting %{duration} from now at %{time}."
+        explanation:
+          one: "Your event has %{count} new registration."
+          other: "Your event has %{count} new registrations."
         byline:
           zero: "Новых Регистраций Нет"
           one: "%{count} Новых Негистраций на %{date}"

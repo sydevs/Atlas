@@ -42,9 +42,11 @@ class EventMailer < ApplicationMailer
       return
     end
 
-    create_session!
     @registrations = @event.registrations.since(@event.reminder_email_sent_at || @event.created_at)
     @registrations = @event.registrations.limit(10) if params[:test] && @registrations.empty?
+    return if @registrations.empty?
+
+    create_session!
     subject = I18n.translate('mail.event.reminder.subject', event: @event.label)
     mail(to: @manager.email, subject: subject)
     @event.update_column(:reminder_email_sent_at, Time.now) unless params[:test]

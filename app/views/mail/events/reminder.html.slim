@@ -10,7 +10,7 @@ h2
   .subtitle = translate('mail.event.reminder.title')
 
 p.narrow.explanation
-  = translate('mail.event.reminder.explanation', duration: time_from_now_in_words(@event.next_occurrence_at), time: @event.start_time)
+  = translate('mail.event.reminder.explanation', count: @registrations.count)
 
 table.data cellpadding=0
   tr
