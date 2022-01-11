@@ -3,403 +3,403 @@ uk:
   cms:
     actions:
       simple:
-        new: "Add"
-        edit: "Edit"
-        update: "Save"
-        destroy: "Delete"
-        back: "Back"
+        new: "Додати"
+        edit: "Редагувати"
+        update: "Зберегти"
+        destroy: "Видалити"
+        back: "Назад"
 
       target:
-        new: "Add %{resource}"
-        create: "Create %{resource}"
-        edit: "Edit %{resource}"
-        update: "Save %{resource}"
-        destroy: "Delete %{resource}"
-        back: "Back to %{resource}"
-        search: "Search %{resources}..."
-        choose: "Choose a %{resource}"
+        new: "Додати %{resource}"
+        create: "Створити %{resource}"
+        edit: "Редагувати %{resource}"
+        update: "Зберегти %{resource}"
+        destroy: "Видалити %{resource}"
+        back: "Назад до %{resource}"
+        search: "Пошук %{resources}..."
+        choose: "Обрати %{resource}"
 
       special:
-        edit_profile: "Edit My Profile"
+        edit_profile: "Редагувати мій профіль"
 
     menu:
-      home: "Home"
+      home: "Головна"
       # Top level menu
-      about: "About Sahaj Atlas"
-      statistics: "Statistics"
-      map: "View Map"
-      report_issue: "Report Issue"
-      help: "Help (FAQ)"
-      sign_out: "Log Out"
-      sign_in: "Log In"
+      about: "Про Сахадж Атлас"
+      statistics: "Статистика"
+      map: "Переглянути карту"
+      report_issue: "Повідомити про проблему"
+      help: "Довідка (FAQ)"
+      sign_out: "Вийти"
+      sign_in: "Увійти"
       # Secondary menu
-      dashboard: "Dashboard for %{user}"
-      review: "All Alerts for %{user}"
-      worldwide: "Worldwide Data"
-      faq: "Frequently Asked Questions"
-      context: "%{resource} for %{parent}"
+      dashboard: "Панель інструментів для %{user}"
+      review: "Усі сповіщення для %{user}"
+      worldwide: "Всесвітні дані"
+      faq: "Часті запитання"
+      context: "%{resource} для %{parent}"
       # Tertiary menu
-      details: "Info"
-      activity: "Activity"
+      details: "Інформація"
+      activity: "Діяльність"
       regions:
-        countries: "Countries"
-        regions: "Regions"
-        cities: "Cities / Areas"
+        countries: "Країни"
+        regions: "Регіони"
+        cities: "Міста / Райони"
       breadcrumbs:
-        world: "World"
-        help: "Help"
-        regions: "Regions"
-        review: "Review Alerts"
-        dashboard: "Dashboard"
+        world: "Світ"
+        help: "Допомога"
+        regions: "Регіони"
+        review: "Сповіщення про переглядs"
+        dashboard: "Панель приладів"
 
     messages:
-      errors: "Errors"
-      no_records_found: "No %{resources} found."
-      confirm_destroy: "Are you sure you want to delete this? This cannot be undone."
-      successfully_created: "Created %{resource} successfully."
-      successfully_updated: "Saved %{resource} successfully."
-      successfully_deleted: "%{resource} successfully deleted. This cannot be undone."
-      successfully_removed: "%{resource} successfully removed from this %{context}."
-      successfully_confirmed: "Thank you for confirming that this %{resource} is up to date."
-      not_logged_in: "You are not logged in!"
-      no_comment: "(No comment)"
-      temporary_mail_error: "Email server is temporarily busy, please try again."
+      errors: "Помилки"
+      no_records_found: "%{resources} не знайдено."
+      confirm_destroy: "Ви впевнені, що хочете видалити це? Дія не може бути скасована."
+      successfully_created: "Створено %{resource} успішно."
+      successfully_updated: "%{resource} успішно збережено."
+      successfully_deleted: "%{resource} успішно видалено. Дія не може бути скасована."
+      successfully_removed: "%{resource} успішно видалено з цього %{context}."
+      successfully_confirmed: "Дякуємо, що підтвердили, що цей %{resource} оновлений."
+      not_logged_in: "Ви не ввійшли в систему!"
+      no_comment: "(Без коментарів)"
+      temporary_mail_error: "Сервер електронної пошти тимчасово зайнятий, спробуйте ще раз."
       venue:
-        out_of_bounds: "Venue cannot be outside the radius of %{local_area}"
+        out_of_bounds: "Місце проведення не може бути за межами радіусу %{local_area}"
       event:
-        invalid_end_time: "cannot be before the start time"
-        invalid_end_date: "cannot be before the start date"
-        passed_end_date: "cannot be before today"
+        invalid_end_time: "не може бути раніше часу початку"
+        invalid_end_date: "не може бути раніше дати початку"
+        passed_end_date: "не може бути раніше ніж сьогодні"
       manager:
-        success: "Added manager successfully"
-        already_added: "%{manager} already manages this #{resource}"
-        already_exists: "%{name} <%{email}> already exists"
+        success: "Менеджера успішно додано"
+        already_added: "%{manager} вже керує цим #{resource}"
+        already_exists: "%{name} <%{email}> вже існує"
       cannot_create:
-        event: "New events cannot be created here, they must be added directly to a venue."
-        venue: "New venues cannot be created here, they must be added directly to a region within a country."
+        event: "Тут не можна створювати нові події, їх потрібно додати безпосередньо до місця проведення."
+        venue: "Тут не можна створювати нові місця, їх потрібно додати безпосередньо до регіону країни."
 
     forms:
       event:
-        details: "Event Details"
-        online: "Online Classes"
-        timing: "Timing"
-        registration: "Registration"
-        manager: "Manager"
+        details: "Деталі події"
+        online: "Онлайн-заняття"
+        timing: "Вибір часу"
+        registration: "Реєстрація"
+        manager: "Менеджер"
       client:
-        keys: "Access Keys"
-        manager: "Manager"
+        keys: "Ключі доступу"
+        manager: "Manager" # TODO: Translate
 
     hints:
-      unspecified: "Unspecified"
-      never: "Never"
+      unspecified: "Невизначено"
+      never: "Ніколи"
       geosearch:
-        prompt: "Search for location"
-        description: "You can use this search to automatically fill the fields below. It uses the Google API. If Google is blocked in your country, or if the search fails, you will need to enter the data manually."
+        prompt: "Пошук розташування"
+        description: "Ви можете використовувати цей пошук для автоматичного заповнення полів нижче. Він використовує API Google. Якщо Google заблоковано у вашій країні або якщо пошук не вдається, вам потрібно буде ввести дані вручну."
       country:
-        must_be_new: "Only countries which haven't already been added are listed below."
-        language: "The default language that events in this country are usually in."
-        no_default_language: "No default"
-        province_management: "If enabled, you will be able to view and assign managers to regions (provinces, states, etc) within this country. This is useful for larger countries (China, USA, Australia, etc), and unnessecary for small countries (Belgium, Lithuania, Singapore, etc)."
+        must_be_new: "Нижче наведено лише країни, які ще не були додані."
+        language: "Мова за замовчуванням, якою зазвичай проводяться події в цій країні."
+        no_default_language: "Немає за замовчуванням"
+        province_management: "Якщо ввімкнено, ви зможете переглядати та призначати менеджерів для регіонів (провінцій, штатів тощо) у цій країні. Це корисно для великих країн (Китай, США, Австралія тощо), і непотрібно для малих країн (Бельгія, Литва, Сінгапур тощо)."
       province:
-        must_be_new: "Only regions which haven't already been added are listed below."
-        prompt: "Province / State / County"
+        must_be_new: "Нижче наведено лише регіони, які ще не були додані."
+        prompt: "Провінція / штат / країна"
       local_area:
-        location: "A custom area is defined using coordinates on the map (latitude and longitude) and a radius, to make a circular region."
+        location: "Спеціальна область визначається за допомогою координат на карті (широта і довгота) і радіус, щоб створити кругову область."
       event:
-        custom_name: "If you want to override the name of the event, you can do so here."
-        description: "Provide a description of the program for seekers. Give them an idea of what to expect, and any special instructions to find the location, or what to bring. This description should be between %{min} to %{max} characters."
-        description_count: " characters"
-        room: "Which room in the building is the event in?"
-        language: "What is the primary language that this event if given in?"
-        disable_notifications: "If selected, managers for this event will not receive emails about who has registered for the event."
-        registration_mode: "Where should seekers go to register for the event? We strongly recommend that you leave this as '%{native}.' Having seekers register on this website will allow us send them reminder and follow-up emails."
-        registration_url: "The registration URL will be set automatically if the mode is set \"%{native}.\""
-        online: "Check this box if the program will take place online."
-        online_url: "If the class is online, this link is where seekers should join the class (eg. a link to Zoom, YouTube, Google Meet, etc)."
-        manager: "The manager should be set to a yogi(ni) who will take responsibility for this event. Every week a list of new registrations will be sent to the manager and every few months they will be asked to confirm that the program information is still correct."
-        phone_number: "A local phone number that seekers can call to ask questions."
-        phone_name: "The first name of the yogi who will answer the phone."
+        custom_name: "Якщо ви хочете змінити назву події, ви можете зробити це тут."
+        description: "Надайте опис програми для шукачів. Дайте їм уявлення про те, чого очікувати, і будь-які спеціальні вказівки щодо пошуку місця або того, що принести. Цей опис має бути від %{min} до %{max} символів."
+        description_count: " символів"
+        room: "В якому приміщенні будівлі проходить захід?"
+        language: "Якою основною мовою подається ця подія?"
+        disable_notifications: "Якщо вибрано, менеджери цієї події не отримають електронні листи про те, хто зареєструвався на подію."
+        registration_mode: "Куди шукачам звернутися, щоб зареєструватися на подію? Ми наполегливо рекомендуємо вам залишити це значення як \"%{native}\". Якщо шукачі зареєструються на цьому веб-сайті, ми зможемо надсилати їм нагадування та додаткові електронні листи."
+        registration_url: "URL-адреса реєстрації буде встановлено автоматично, якщо встановлено режим \"%{native}.\""
+        online: "Установіть цей прапорець, якщо програма буде проходити онлайн."
+        online_url: "Якщо курс онлайн, це посилання є місцем, де шукачі мають приєднатися до класу (наприклад, посилання на Zoom, YouTube, Google Meet тощо)."
+        manager: "Менеджером повинен бути йог(ні), який візьме на себе відповідальність за цю подію. Щотижня менеджеру буде надсилатися список нових реєстрацій, а кожні кілька місяців він проситиме підтвердити, що інформація про програму все ще правильна."
+        phone_number: "A local phone number that seekers can call to ask questions." # TODO: Translate
+        phone_name: "The first name of the yogi who will answer the phone." # TODO: Translate
       venue:
-        manual_location: "Set location manually"
-        location: "If the location cannot be set automatically by pressing \"Find Location\", you can enter the details manually below."
-        find_marker: "Find Location"
+        manual_location: "Встановіть місце розташування вручну"
+        location: "Якщо розташування неможливо встановити автоматично, натиснувши \"Знайти місцезнаходження\", ви можете ввести деталі вручну нижче."
+        find_marker: "Знайти місцезнаходження"
         marker_not_set:
-          title: "Map marker has not been set"
-          description: "Press 'Find Location' to automatically detect the coordinates of the venue's address."
+          title: "Позначка на карті не встановлено"
+          description: "Натисніть «Знайти місцезнаходження», щоб автоматично визначити координати адреси місця проведення."
         cant_find_address:
-          title: "Couldn't find address"
-          description: "The address you entered could not be found. Try adding more information, or enter the latitude and longitude manually."
+          title: "Не вдалося знайти адресу"
+          description: "Не вдалося знайти введену вами адресу. Спробуйте додати більше інформації або введіть широту та довготу вручну."
         marker_set:
-          title: "Map marker set!"
-          description: "Make sure that the location shown on the map looks correct."
+          title: "Набір міток на карті!"
+          description: "Переконайтеся, що місце, показане на карті, виглядає правильним."
       manager:
-        language: "The preferred language for emails and UI for this manager."
+        language: "The preferred language for emails and UI for this manager." # TODO: Translate
         administrator:
-          title: "Creating a global administrator"
-          description: "Adding a manager to worldwide data will create them as an administrator. They will have complete access to make changes to the Sahaj Atlas."
+          title: "Створення глобального адміністратора"
+          description: "Додавання менеджера до глобальних даних створить їх як адміністратора. Вони матимуть повний доступ до внесення змін до Сахадж Атласу."
       client:
-        domain: "Only this domain will be allowed to embed the map using your secret key."
-        public_key: "Use this to embed the map."
-        secret_key: "Use this to access the API."
-        bounds: "Restrict the map to these coordinates. The coordinates should be entered as 4 comma-separated numbers (south,west,north,east)."
-        location: "Set a country, region or city where most of your visitors will be from. When a user searches the map, it will be weighted to this area."
+        domain: "Тільки цьому домену буде дозволено вбудовувати карту за допомогою вашого секретного ключа."
+        public_key: "Використовуйте це, щоб вставити карту."
+        secret_key: "Використовуйте це для доступу до API."
+        bounds: "Обмежте карту цими координатами. Координати слід вводити як 4 числа, розділені комами (південь, захід, північ, схід)."
+        location: "Вкажіть країну, регіон або місто, звідки буде більшість відвідувачів. Коли користувач шукатиме карту, вона буде зважена до цієї області."
 
     details:
-      details_for_record: "Details for %{resource}"
-      registration_for_record: "Registration trend"
-      management_for_record: "Management for this %{resource}"
-      managers_for_record: "Managers for %{resource}"
-      location_of_record: "Location of this %{resource}"
-      dates_and_timing: "Dates & Timing"
-      map_of_record: "Map of this %{resource}"
-      area_in_words: "%{radius} km around %{latitude}, %{longitude}"
-      records_in_recent_days: "%{resources} in the last 30 days"
-      record_has_language: "%{resource} offered in %{language}"
-      updated_at: "Last updated"
+      details_for_record: "Деталі для %{resource}"
+      registration_for_record: "Тенденція реєстрації"
+      management_for_record: "Керування цим %{resource}"
+      managers_for_record: "Менеджери для %{resource}"
+      location_of_record: "Розташування цього %{resource}"
+      dates_and_timing: "Дати та час"
+      map_of_record: "Карта цього %{resource}"
+      area_in_words: "%{radius} км навколо %{latitude}, %{longitude}"
+      records_in_recent_days: "%{resources} за останні 30 днів"
+      record_has_language: "%{resource} пропонується на %{language}"
+      updated_at: "Останнє оновлення"
       resources_managed:
-        title: "Resources Managed"
+        title: "Керовані ресурси"
       event_coverage:
-        title: "Event Coverage"
+        title: "Висвітлення подій"
         description: "%{events} (%{venues})"
       record_needs_review:
-        title: "%{resource} Needs Review"
-        description: "This %{resource} hasn't been updated in %{updated_ago}. This event will be removed from the map unless it is reviewed within %{expires_in}. Go to the edit page and press save to confirm the event details are still correct."
-        alt_description: "This %{resource} hasn't been updated in %{updated_ago}. Please review the details below and press save to confirm that the event details are correct."
-        action: "Review"
+        title: "%{resource} потребує перевірки"
+        description: "Цей %{resource} не оновлювався в %{updated_ago}. Цю подію буде видалено з карти, якщо вона не буде переглянута протягом %{expires_in}. Перейдіть на сторінку редагування та натисніть зберегти, щоб підтвердити, що деталі події все ще правильні."
+        alt_description: "Цей %{resource} не оновлювався в %{updated_ago}. Будь ласка, перегляньте деталі нижче та натисніть зберегти, щоб підтвердити, що деталі події правильні."
+        action: "Огляд"
       record_needs_urgent_review:
-        title: "%{resource} Needs Urgent Review"
+        title: "%{resource} потребує термінової перевірки"
       record_finished:
-        title: "%{resource} Completed"
-        description: "This %{resource} is over. It's last occurence was %{date}."
+        title: "%{resource} Завершено"
+        description: "Цей %{resource} закінчено. Востаннє це було %{date}."
       record_has_no_events:
-        title: "No Events"
-        description: "This %{resource} has no events, and so it will not appear on the map."
+        title: "Немає подій"
+        description: "Цей %{resource} не має подій, тому він не відображатиметься на карті."
       record_expired:
-        title: "%{resource} Expired"
-        description: "This %{resource} has been hidden from the public, because it hasn't been updated in %{updated_ago}. Go to the edit page and press save to confirm the event details are still correct."
-        alt_description: "This %{resource} has been hidden from the public, because it hasn't been updated in %{updated_ago}. Please review the details below and press save to confirm that the event details are correct."
-        action: "Review"
+        title: "%{resource} Термін дії закінчився"
+        description: "Цей %{resource} приховано від громадськості, оскільки він не оновлювався в %{updated_ago}. Перейдіть на сторінку редагування та натисніть зберегти, щоб підтвердити, що деталі події все ще правильні."
+        alt_description: "Цей %{resource} приховано від громадськості, оскільки він не оновлювався в %{updated_ago}. Будь ласка, перегляньте деталі нижче та натисніть зберегти, щоб підтвердити, що деталі події правильні."
+        action: "Огляд"
       record_archived:
-        title: "%{resource} Archived"
-        description: "This %{resource} has not been updated in a long time (%{time}). It will not be shown on the map unless it is reviewed and saved."
-        alt_description: "This %{resource} has been hidden from the public, because it hasn't been updated in a long time (%{time}). Please review the details below and press save to confirm that the event details are correct."
-        action: "Unarchive"
+        title: "%{resource} заархівовано"
+        description: "Цей %{resource} не оновлювався протягом тривалого часу (%{time}). Він не відображатиметься на карті, якщо його не перевірять і не збережуть."
+        alt_description: "Цей %{resource} було приховано від громадськості, оскільки він не оновлювався протягом тривалого часу (%{time}). Будь ласка, перегляньте деталі нижче та натисніть зберегти, щоб підтвердити, що деталі події правильні."
+        action: "Розархівувати"
       external_registration:
-        title: "Event is Using External Registration"
-        description: "This event is set to have seekers register on %{mode}. It's better if you have seekers register on the Sahaj Atlas, because then we will be able to send them reminders and confirmation emails."
+        title: "Подія використовує зовнішню реєстрацію"
+        description: "Ця подія налаштована на реєстрацію шукачів на %{mode}. Краще, якщо у вас є шукачі, які зареєструються в Сахадж Аталасі, тому що тоді ми зможемо надсилати їм нагадування та електронні листи з підтвердженням."
       record_not_published:
-        title: "Not Published"
-        description: "This %{resource} is currently hidden from the public, because it is not published."
-        parent: "This %{resource} is currently hidden from the public, because its %{parent} is not published."
+        title: "Не опубліковано"
+        description: "Цей %{resource} наразі прихований від громадськості, оскільки він не опублікований."
+        parent: "Цей %{resource} наразі прихований від громадськості, оскільки його %{parent} не опубліковано."
       create_event:
-        title: "Wondering how to create a public program?"
-        description: "Choose a venue on the \"%{action}\" tab."
-        action: "Go now"
+        title: "Гадаєте як створити публічну програму?"
+        description: "Виберіть місце проведення на вкладці \"%{action}\"."
+        action: "Створити зараз"
       create_event_on_venue:
-        title: "Wondering how to create an event?"
-        description: "Click on the \"%{action}\" tab, and press \"Add Event\""
-        action: "Add Event"
+        title: "Гадаєте як створити подію?"
+        description: "Натисніть на вкладку \"%{action}\" і натисніть \"Додати подію\""
+        action: "Додати подію"
       create_province_manager:
-        title: "Wondering how to create a regional manager?"
-        description: "Choose a province, state or county on the \"%{action}\" tab."
-        action: "Go now"
+        title: "Гадаєте як створити регіонального менеджера?"
+        description: "Виберіть провінцію, штат чи округ на вкладці \"%{action}\"."
+        action: "Створити зараз"
       create_city_manager:
-        title: "Wondering how to create a city manager?"
-        description: "Choose a city page on the \"%{action}\" tab."
-        action: "Go now"
+        title: "Гадаєте як створити міського менеджера?"
+        description: "Виберіть сторінку міста на вкладці \"%{action}\"."
+        action: "Створити зараз"
 
     images:
-      title: "Images of this %{resource}"
-      upload: "Upload Images"
+      title: "Зображення цього %{resource}"
+      upload: "Завантажити зображення"
 
     regions:
-      new_province: "Add Region"
-      provinces_header: "Provinces / States / Counties"
+      new_province: "Додати регіон"
+      provinces_header: "Провінції / Штати / Країни"
       local_areas_header:
-        provincial: "Metropolitan Areas"
-        national: "Custom Regions"
-        global: "Custom International Areas"
+        provincial: "Столичні райони"
+        national: "Вказаний регіон"
+        global: "Спеціальні міжнародні зони"
 
     activity:
       title: :cms.menu.activity
-      description: "This is a log of all actions taken by this manager."
-      changed_by: "by %{name}"
-      changed_to: "changed to"
+      description: "Це журнал усіх дій, здійснених цим менеджером."
+      changed_by: "%{name}"
+      changed_to: "змінено на"
 
     dashboard:
       role:
-        intro: "You are a %{role}"
-        learn_more: "Learn more."
+        intro: "Ви %{role}"
+        learn_more: "Дізнатись більше."
         worldwide:
-          title: "Global Administrator"
-          description: "Can manage all atlas content and managers."
-          instruction: "You have access to all aspects of the atlas CMS (Content Management System). It is your job to create new country managers and help them learn to use the system."
+          title: "Глобальний адміністратор"
+          description: "Може керувати всім вмістом атласу та менеджерами."
+          instruction: "Ви маєте доступ до всіх аспектів атласу CMS (системи керування вмістом). Ваша робота полягає в тому, щоб створити нових керівників країни та допомогти їм навчитися користуватися системою."
         country:
-          title: "Country Manager"
-          description: "Can create regions, venues, events and assign managers within %{region}"
-          instruction: "It's your responsibility to create regions within your country and assign managers to those regions to set up events. You may also create venues and events within your country."
+          title: "Регіональний менеджер"
+          description: "Може створювати регіони, місця, події та призначати менеджерів у межах %{region}"
+          instruction: "Ви несете відповідальність за створення регіонів у вашій країні та призначити менеджерів у ці регіони для організації подій. Ви також можете створювати місця та події у своїй країні."
         local:
-          title: "Local Manager"
-          description: "Can create venues and events within %{region}"
-          instruction: "It's your responsibility to create events within your local area. You will first need to create a venue, before you can create an event at that venue."
+          title: "Місцевий менеджер"
+          description: "Може створювати місця та події в межах %{region}"
+          instruction: "Ви несете відповідальність за створення подій у вашій місцевості. Спочатку вам потрібно буде створити місце проведення, перш ніж ви зможете створити подію в цьому місці."
         event:
-          title: "Event Manager"
-          description: "Can update the details of the events assigned to them."
-          instruction: "It's your responsibility to keep your classes up to date. You will be sent emails every few months asking you confirm that your events are up to date. If the location of your class changes, you will need to ask the manager for you local area to update it."
+          title: "Менеджер подій"
+          description: "Може оновлювати деталі призначених їм подій."
+          instruction: "Ваша відповідальність – підтримувати курси в актуальному стані. Кожні кілька місяців вам надсилатимуться електронні листи з проханням підтвердити, що ваші події актуальні. Якщо місце розташування вашого класу зміниться, вам потрібно буде попросити менеджера вашого регіону оновити його."
         client:
-          title: "App Manager"
-          description: "Can modify the configuration for your external app"
-          instruction: "You have access to the configuration for your external app."
+          title: "Менеджер додатку"
+          description: "Можна змінити конфігурацію зовнішньої програми"
+          instruction: "Ви маєте доступ до конфігурації зовнішньої програми."
         none:
-          title: "No-Access Manager"
-          description: "This user no events or regions assigned to them. They have no access to manage the atlas."
-          instruction: "You don't have access to any part of the website. If you believe this is a mistake, please contact the manager for your local area."
+          title: "Менеджер без доступу"
+          description: "Для цього користувача немає подій чи регіонів. Вони не мають доступу до керування атласом."
+          instruction: "Ви не маєте доступу до жодної частини веб-сайту. Якщо ви вважаєте, що це помилка, зв’яжіться з менеджером у вашому регіоні."
       resources:
-        title: "My Responsibilities"
-        subtitle: "Regions or events where you are a direct manager."
-        description: "These are the events or regions that you are directly responsible for."
+        title: "Мої обов'язки"
+        subtitle: "Регіони або події, де ви є безпосереднім менеджером."
+        description: "Це події чи регіони, за які ви несете безпосередню відповідальність."
       alerts:
-        title: "Expiring Events"
-        subtitle: "These events need to be checked to ensure they are still accurate."
-        all_good: "All events are up to date."
-        empty: "No alerts right now, keep up the good work!"
-        should_expire_at: "Expires in %{time}"
-        expired_at: "Expired %{time} ago"
+        title: "Події, що закінчуються"
+        subtitle: "Ці події потрібно перевірити, щоб переконатися, що вони все ще точні."
+        all_good: "Усі події актуальні."
+        empty: "Наразі немає сповіщень, гарно впорались, продовжуйте в тому ж дусі!"
+        should_expire_at: "Термін дії закінчується через %{time}"
+        expired_at: "Термін дії закінчився %{time} тому"
         review:
-          title: "Soon to expire events"
-          description: "Several published events have not been updated in a few months. Please check that the event details are still correct, and save the event so that we know that it is still accurate. Otherwise it will be removed from the map."
+          title: "Події незабаром закінчаться"
+          description: "Кілька опублікованих подій не оновлювалися протягом кількох місяців. Будь ласка, переконайтеся, що деталі події все ще правильні, і збережіть подію, щоб ми знали, що вона все ще актуальна. Інакше її буде видалено з карти."
           view_all:
-            one: "View %{count} expiring event"
-            other: "View all %{count} expiring events"
+            one: "Переглянути %{count} подію, що закінчується"
+            other: "Переглянути всі %{count} подій, які закінчуються"
         expired:
-          title: "Expired events"
-          description: "Several published events are hidden from the map because they have not been verified recently. Please check and resave these events to re-enable them."
+          title: "Завершені події"
+          description: "Деякі опубліковані події приховані на карті, оскільки нещодавно їх не перевіряли. Перевірте та повторно збережіть ці події, щоб знову їх активувати."
           other:
-            one: "There is %{count} older expired event in the system."
-            other: "There are %{count} older expired events in the system."
+            one: "У системі є %{count} старіша подія, термін дії якої закінчився."
+            other: "У системі є %{count} старіших подій, термін дії яких закінчився."
         archived:
-          title: "Archived events"
+          title: "Архівні події"
           description:
-            one: "%{count} event has been expired for a long time and has been archived. It will not show on the map unless it is reviewed and updated."
-            other: "%{count} events have been expired for a long time and have been archived. They will not show on the map unless they are reviewed and updated."
+            one: "Термін дії події %{count} минув протягом тривалого часу та заархівовано. Він не відображатиметься на карті, якщо його не перевірять та не оновлять."
+            other: "Термін дії %{count} подій закінчився протягом тривалого часу та заархівовано. Вони не відображатимуться на карті, доки їх не перевірять та не оновлять."
           view_all:
-            one: "View %{count} archived event"
-            other: "View %{count} archived events"
+            one: "Переглянути %{count} заархівовану подію"
+            other: "Переглянути %{count} заархівованих подій"
 
       help:
-        title: "How do I use this site?"
-        description: "You are currently viewing the Content Management System (CMS) for the Sahaj Atlas. We have recorded a video tutorial to help you get started. Email us if you need help (contact@sydevelopers.com)."
-        action: "Watch tutorial video"
+        title: "Як я можу використовувати цей сайт?"
+        description: "Зараз ви переглядаєте систему керування вмістом (CMS) для Сахадж Атласу. Ми записали відеоурок, який допоможе вам розпочати роботу. Напишіть нам, якщо вам потрібна допомога (contact@sydevelopers.com)."
+        action: "Перегляньте навчальне відео"
 
     help:
-      learn_more: "Learn more"
+      learn_more: "Дізнатись більше"
       guides:
         country_manager:
-          title: "How to manager your country"
+          title: "Як керувати своєю країною"
           video_id: 570202890
         local_manager:
-          title: "How to manager your region"
+          title: "Як керувати своїм регіоном"
           video_id: 570202890
         event_manager:
-          title: "How to manage your event"
+          title: "Як керувати подією"
           video_id: 570207541
         general:
-          title: "What is Sahaj Atlas?"
+          title: "Що таке Сахадж Атлас?"
           video_id: 570209591
         creating_events:
-          title: "How to create an event"
+          title: "Як створити подію"
           video_id: 573299436
       categories:
-        title: "What are event categories for?"
+        title: "Для чого призначені категорії подій?"
         description:
-          introduction: "Categories help the system to understand what kind of event you have added. We can use that information for a variety of purposes."
+          introduction: "Категорії допомагають системі зрозуміти, яку подію ви додали. Ми можемо використовувати цю інформацію для різних цілей."
         benefits:
           marketing:
             icon: ad # Do not translate
-            title: "Marketing"
-            description: "We can recommend follow up classes to seekers based on the event category. If someone registers for a concert, then after the concert we can suggest an intro class. When they have been to many intro classes, we could suggest they join a course to go deeper. If there is a big music concert, we might make it appear differently on the map to attract more attention."
+            title: "Маркетинг"
+            description: "Ми можемо рекомендувати подальші заняття шукачам на основі категорії події. Якщо хтось зареєструється на концерт, то після концерту ми можемо запропонувати вступний клас. Коли вони були на багатьох вступних класах, ми могли б запропонувати їм приєднатися до курсу, щоб поглибити. Якщо буде великий музичний концерт, ми можемо зробити його іншим виглядом на карті, щоб привернути більше уваги."
           labeling:
             icon: info circle # Do not translate
-            title: "Event Labeling"
-            description: "We can present present extra information about the event to seekers. For example: A message recommending that seekers register for an intro class, before attending a going deeper class."
+            title: "Маркування подій"
+            description: "Ми можемо надати шукачам додаткову інформацію про подію. Наприклад: повідомлення, яке рекомендує шукачам зареєструватися на вступний клас, перш ніж відвідувати глибше заняття."
           analytics:
             icon: chart area # Do not translate
-            title: "Analytics"
-            description: "We can analyse what kind of events seekers are registering for to improve the way we present these events."
+            title: "Аналітика"
+            description: "Ми можемо аналізувати, на які події реєструються шукачі, щоб покращити те, як ми представляємо ці події."
         types:
-          title: "Available Categories"
+          title: "Доступні категорії"
           intro:
             title: :activerecord.attributes.event.categories.intro
-            description: "An introductory class for seekers just starting with Sahaja Yoga."
+            description: "Вступний урок для тих, хто тільки починає займатися Сахаджа Йогою."
           intermediate:
             title: :activerecord.attributes.event.categories.intermediate
-            description: "A class for seekers to go deeper in Sahaja Yoga, once they've already attended an intro class."
+            description: "Заняття для тих, хто шукає заглиблення в Сахаджа Йогу, коли вони вже відвідали вступний урок."
           course:
             title: :activerecord.attributes.event.categories.course
-            description: "Usually a weekly course that runs for a limited time. Taking a seeker from beginner to intermeditate over the course of a set number of weeks."
+            description: "Зазвичай це тижневий курс, який триває обмежений час. Переведення шукача від початківця до середнього протягом певної кількості тижнів."
           public_event:
             title: :activerecord.attributes.event.categories.public_event
-            description: "When Sahaja Yoga is participating in an existing public event. Such as having a stall at a festival or farmer's market."
+            description: "Коли Сахаджа Йога бере участь у наявному публічному заході. Наприклад, наявність локації на фестивалі чи фермерському ринку."
           concert:
             title: :activerecord.attributes.event.categories.concert
-            description: "A large one time cultural event, usually involving music, maybe dance, and realisation."
+            description: "Велика одноразова культурна подія, яка зазвичай включає музику, можливо танці та реалізацію."
       expiration:
-        title: "Why isn't my event appearing on the map?"
-        alt_title: "How does event expiration work?"
+        title: "Чому моя подія не відображається на карті?"
+        alt_title: "Як працює термін дії події?"
         description:
-          problem: "We don't want seekers to see classes which are no longer running. Many Sahaj website have out of date program information, but even when the details are updated they quickly become outdated again."
-          solution: "To solve this, we've created an automatic system that will email the yogis who run each program every few months to ask if the information is still correct. If they do not respond, the program will be hidden from the public until it is checked."
-          review: "As soon as an event becomes classified as \"Needs Review\" the program manager will be sent an email asking them to confirm that the event details are still correct. If they do not respond within 1 week, the city manager will be sent an email asking them to check the details instead."
-          expiration: "If %{duration} pass without the event being verified, then it's hidden from the map until someone checks and updates it."
+          problem: "Ми не хочемо, щоб шукачі бачили курси, які більше не актуальні. На багатьох Сахадж веб-сайтах є застаріла інформація про програму, але навіть коли деталі оновлюються, вони швидко стають знову застарілими."
+          solution: "Щоб вирішити цю проблему, ми створили автоматичну систему, яка кожні кілька місяців надсилатиме йогам, які запускають кожну програму, електронну пошту, щоб запитувати, чи інформація все ще вірна. Якщо вони не відповідають, програма буде прихована від громадськості, доки її не перевірять."
+          review: "Щойно подія буде класифікована як «Потребує перегляду», менеджеру програми буде надіслано електронний лист із проханням підтвердити, що деталі події все ще правильні. Якщо вони не відповідають протягом 1 тижня, керівнику міста буде надіслано електронний лист із проханням перевірити деталі."
+          expiration: "Якщо %{duration} проходить без підтвердження події, то вона прихована на карті, доки хтось не перевірить та не оновить її."
         steps:
           verified:
             icon: green check circle # Do not translate
-            active_label: "Up To Date"
-            inactive_label: "Last Updated"
-            title: "Up To Date"
-            description: "When an event is created or updated"
+            active_label: "Актуально"
+            inactive_label: "Останнє оновлення"
+            title: "Актуально"
+            description: "Коли подія створюється або оновлюється"
           should_need_review:
             icon: orange question circle # Do not translate
-            active_label: "Needs Review"
+            active_label: "Потребує огляду"
             inactive_label: "Will Need Review"
-            title: "Needs Review"
-            description: "If %{duration} pass without the event being updated"
+            title: "Потребує огляду"
+            description: "Якщо %{duration} проходить без оновлення події"
           should_expire:
             icon: red times circle # Do not translate
-            active_label: "Expired"
-            inactive_label: "Expires"
-            label: "Expires" # This should be present tense as in the phrase "The event expires on March 3"
-            title: "Expired"
-            description: "If an event has not been updated in %{duration}"
+            active_label: "Термін дії закінчився"
+            inactive_label: "Термін дії закінчується"
+            label: "Термін дії закінчується" # This should be present tense as in the phrase "The event expires on March 3"
+            title: "Термін дії закінчився"
+            description: "Якщо подія не була оновлена за %{duration}"
       registration:
-        title: "Why should seekers register on Sahaj Atlas?"
+        title: "Чому шукачі повинні реєструватися на Сахадж Атласі?"
         description:
-          introduction: "Even though we support having seeker register on external websites (Meetup, Eventbrite, Facebook, etc), there are everal benefitss to having seekers register directy on the Sahaj Atlas."
+          introduction: "Незважаючи на те, що ми підтримуємо реєстрацію шукачів на зовнішніх веб-сайтах (Meetup, Eventbrite, Facebook тощо), існує ряд переваг, якщо шукачі реєструються безпосередньо в Сахадж Атласі."
         benefits:
           accessibility:
             icon: universal access # Do not translate
-            title: "Accessibility"
-            description: "Many people do not have Facebook or Meetup accounts. Facebook's popularity has sharply declined with younger generations and Meetup is less popular with elders. Registering directly on Sahaj Atlas is easier and doesn't require an account - making it more likely for seekers to register."
+            title: "Доступність"
+            description: "Багато людей не мають акаунтів у Facebook або Meetup. Популярність Facebook різко знизилася серед молодших поколінь, а Meetup менш популярний серед старших. Реєстрація безпосередньо в Сахадж Атласі простіше і не вимагає облікового запису, що підвищує ймовірність реєстрації шукачів."
           reminders:
             icon: bell # Do not translate
-            title: "Automatic Reminders"
-            description: "Seekers who register on Sahaj Atlas will receive a confirmation email and an automatic reminder email 1 day before their first class. The yogi(ni) who runs the public program will also receive a list of new registrations every week by email."
+            title: "Автоматичні нагадування"
+            description: "Шукачі, які зареєструються на Сахадж Атлас, отримають електронний лист із підтвердженням та автоматичне нагадування за 1 день до першого заняття. Йог(ні), який керує публічною програмою, також отримуватиме список нових реєстрацій щотижня електронною поштою."
           marketing:
             icon: envelope # Do not translate
-            title: "Future Marketing"
-            description: "When seekers register on Sahaj Atlas we can store their email address (without the restrictions of Meetup, Eventbrite, or Facebook). This means we can use these email addresses to send follow-up materials, or recommend special Sahaj events in their area (eg. concerts or intermediate programs)."
+            title: "Майбутній маркетинг"
+            description: "Коли шукачі реєструються в Сахадж Атлас, ми можемо зберігати їх адресу електронної пошти (без обмежень Meetup, Eventbrite або Facebook). Це означає, що ми можемо використовувати ці адреси електронної пошти для надсилання наступних матеріалів або рекомендувати спеціальні Сахадж заходи у їхній місцевості (наприклад, концерти чи проміжні програми)."
       contact:
-        title: "I have other questions or suggestions"
-        description: "If you need further help, or if you want to help with the development of the Sahaj Atlas, please write to the email below. Please write your message in english."
+        title: "У мене є інші запитання чи пропозиції"
+        description: "Якщо вам потрібна додаткова допомога або ви хочете допомогти з розробкою Сахадж Атласу, будь ласка, напишіть на електронну адресу нижче. Будь ласка, напишіть своє повідомлення англійською мовою."
 
-    country_codes:
-      gb: UK
-      us: USA
+    country_codes: # TODO: Translate
+      gb: "UK"
+      us: "USA"
     
   passwordless:
     sessions:
       create:
-        try_again: "Try a different email address"
-        back: "Back"
+        try_again: "Спробуйте іншу адресу електронної пошти"
+        back: "Назад"
       new:
-        back: "Back"
+        back: "Назад"

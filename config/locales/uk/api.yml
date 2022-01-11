@@ -1,4 +1,4 @@
 
 uk:
   api:
-    distance: "%{distance} km away"
+    distance: "%{distance} км"

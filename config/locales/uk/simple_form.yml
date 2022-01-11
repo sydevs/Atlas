@@ -1,9 +1,9 @@
 uk:
   simple_form:
-    "yes": 'Yes'
-    "no": 'No'
+    "yes": "Так"
+    "no": "Ні"
     required:
-      text: 'required'
+      text: "обов'язковий"
       mark: '*'
     error_notification:
-      default_message: "Please review the problems below:"
+      default_message: "Перегляньте наведені нижче проблеми:"

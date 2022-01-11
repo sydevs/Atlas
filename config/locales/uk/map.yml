@@ -2,80 +2,80 @@
 uk:
   map:
     search:
-      all_recurrences: "All Timings"
-      all_languages: "All Languages"
+      all_recurrences: "Усі таймінги"
+      all_languages: "Усі мови"
     listing:
-      search: "Search for location"
-      more_info: "More Info"
-      register: "Register"
-      no_area_results: "There are no classes in this area, the closest free meditation class is in"
-      no_place_results: "The closest free meditation class at"
-      show: "Show list"
-      event_name: "%{category} at %{venue}"
-      online_event_name: "%{category} from %{city}"
+      search: "Пошук розташування"
+      more_info: "Більше інформації"
+      register: "Реєстрація"
+      no_area_results: "У цьому напрямі немає занять, найближче безкоштовне заняття з медитації"
+      no_place_results: "Найближчий безкоштовний урок медитації за адресою"
+      show: "Показати список"
+      event_name: "%{category} біля %{venue}"
+      online_event_name: "%{category} з %{city}"
       filter:
-        prefix: "Showing results at"
-        clear: "Clear"
+        prefix: "Відображення результатів за адресою"
+        clear: "Зрозуміло"
       mode:
-        offline: "In Person"
-        online: "Online"
+        offline: "Особисто"
+        online: "Онлайн"
     information:
-      register: "Register"
-      language: "This class is in"
-      directions: "Get directions"
-      online: "Online Class"
-      online_from: "Hosted from"
+      register: "Реєстрація"
+      language: "Цей клас у"
+      directions: "Отримати направлення"
+      online: "Онлайн клас"
+      online_from: "Від"
     registration:
-      header: "Register now"
+      header: "Зареєструйтеся зараз"
       form:
-        timing: "I’d like to start on:"
-        email: "Email"
-        name: "Name"
-        message: "Questions / Comments"
-        submit: "Confirm"
+        timing: "Я хотів би почати з:"
+        email: "Електронна пошта"
+        name: "Ім'я"
+        message: "Запитання / Коментарі"
+        submit: "Підтвердити"
       notice:
-        text: "By submitting you confirm your agreement with our %{link}."
-        link: "privacy policy"
+        text: "Надсилаючи, ви підтверджуєте свою згоду з нашими %{link}."
+        link: "політика конфіденційності"
       feedback:
-        duplicate: "You are already registered. See you soon."
-        success: "Success! You will receive a confirmation email shortly."
-        error: "Error! Please try again later."
+        duplicate: "Ви зареєструвались. До зустрічі."
+        success: "Успішно! Незабаром ви отримаєте підтвердження електронною поштою."
+        error: "Помилка! Будь-ласка спробуйте пізніше."
       confirmation:
-        title: "Thank you for registering"
-        subtitle: "you will receive an email shortly"
-        back: "Register someone else"
+        title: "Дякуємо за реєстрацію"
+        subtitle: "незабаром ви отримаєте електронний лист"
+        back: "Зареєструйте когось іншого"
     sharing:
-      invite: "Invite a friend along"
-      share: "Share"
-      copied: "Copied!"
+      invite: "Запросіть друга"
+      share: "Поділитись"
+      copied: "Скопійовано!"
     weekdays:
-      0: Sunday
-      1: Monday
-      2: Tuesday
-      3: Wednesday
-      4: Thursday
-      5: Friday
-      6: Saturday
+      0: "Неділя"
+      1: "Понеділок"
+      2: "Вівторок"
+      3: "Середа"
+      4: "Четвер"
+      5: "П'ятниця"
+      6: "Субота"
 
   javascript:
     recurrence:
-      day: "Daily"
-      monday: "Mondays"
-      tuesday: "Tuesdays"
-      wednesday: "Wednesdays"
-      thursday: "Thursdays"
-      friday: "Fridays"
-      saturday: "Saturdays"
-      sunday: "Sundays"
+      day: "Щодня"
+      monday: "Щопонеділка"
+      tuesday: "Щовівторка"
+      wednesday: "Щосереди"
+      thursday: "Щочетверга"
+      friday: "Щоп'ятниці"
+      saturday: "Щосуботи"
+      sunday: "Щонеділі"
     timing_labels:
-      course_fallback: "This is a weekly course"
-      course: "%{weeks}-week course"
-      ongoing: "This class is on-going"
+      course_fallback: "Це тижневий курс"
+      course: "%{weeks}-тижневий курс"
+      ongoing: "Цей клас триває"
     registration:
-      external: "Register"
-      facebook: "Register on Facebook"
-      eventbrite: "Register on Eventbrite"
-      meetup: "Register on Meetup"
+      external: "Зареєструйтеся"
+      facebook: "Зареєструйтеся на Facebook"
+      eventbrite: "Зареєструйтеся на Eventbrite"
+      meetup: "Зареєструйтеся на Meetup"
     language_codes:
-      uk: UA #Ukrainian
+      uk: UA # Ukrainian
     
