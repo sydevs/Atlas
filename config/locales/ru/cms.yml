@@ -7,6 +7,7 @@ ru:
         update: "Сохранить"
         destroy: "Удалить"
         back: "Назад"
+        view: "View" # TODO: Translate
 
       target:
         new: "Добавить %{resource}"
@@ -73,6 +74,8 @@ ru:
         success: "Менеджер добавлен успешно"
         already_added: "%{manager} уже управляет этим #{resource}"
         already_exists: "%{name} <%{email}> уже существует"
+        email_verified: "Your email address is now verified!" # TODO: Translate
+        email_verification_resent: "An email verification has been sent to %{name}" # TODO: Translate
       cannot_create:
         event: "Здесь нельзя создавать новые события, их нужно добавлять непосредственно в места проведения (площадки)."
         venue: "Здесь нельзя создавать новые площадки, их нужно добавлять непосредственно в регион внутри страны."
@@ -89,6 +92,7 @@ ru:
         manager: "Менеджер"
 
     hints:
+      verified: "Verified" # TODO: Translate
       unspecified: "Неопределён"
       never: "Никогда"
       geosearch:

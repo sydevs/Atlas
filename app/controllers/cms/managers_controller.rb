@@ -123,6 +123,15 @@ class CMS::ManagersController < CMS::ApplicationController
     render format: :json
   end
 
+  def resend_verification
+    manager = @scope&.find(params[:manager_id])
+    authorize manager
+    ManagerMailer.with(manager: manager).verify.deliver_later
+    manager.touch(:email_verification_sent_at)
+    flash[:success] = translate('cms.messages.manager.email_verification_resent', name: manager.name)
+    redirect_back(fallback_location: cms_manager_path(manager))
+  end
+
   private
 
     def parameters

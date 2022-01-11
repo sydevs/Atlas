@@ -7,6 +7,7 @@ en:
         update: "Save"
         destroy: "Delete"
         back: "Back"
+        view: "View"
 
       target:
         new: "Add %{resource}"
@@ -73,6 +74,8 @@ en:
         success: "Added manager successfully"
         already_added: "%{manager} already manages this #{resource}"
         already_exists: "%{name} <%{email}> already exists"
+        email_verified: "Your email address is now verified!"
+        email_verification_resent: "An email verification has been sent to %{name}"
       cannot_create:
         event: "New events cannot be created here, they must be added directly to a venue."
         venue: "New venues cannot be created here, they must be added directly to a region within a country."
@@ -89,6 +92,7 @@ en:
         manager: "Manager"
 
     hints:
+      verified: "Verified"
       unspecified: "Unspecified"
       never: "Never"
       geosearch:
@@ -190,6 +194,11 @@ en:
         title: "Not Published"
         description: "This %{resource} is currently hidden from the public, because it is not published."
         parent: "This %{resource} is currently hidden from the public, because its %{parent} is not published."
+      manager_not_verified:
+        title: "Manager Email Not Verified"
+        description: "Events associated with this manager are not public, because the manager's email has not been verified."
+        parent: "This %{resource} is currently hidden from the public, because the manager's email has not been verified."
+        action: "Resend"
       create_event:
         title: "Wondering how to create a public program?"
         description: "Choose a venue on the \"%{action}\" tab."

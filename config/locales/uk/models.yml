@@ -235,12 +235,14 @@ uk:
         starting_at: "Перший клас почнеться"
 
       # Other
-      manager:
+      manager: # TODO: Translate
         manager_id: :activerecord.models.manager.single # Do not translate
         name: :activerecord.attributes.generic.name # Do not translate
         email: :activerecord.attributes.generic.email # Do not translate
-        administrator: Global Administrator
-        language_code: "Language" # TODO: Translate
+        administrator: "Global Administrator"
+        language_code: "Language"
+        last_login_at: "Last Login"
+        email_verification_sent_at: "Last Email Verification Sent"
 
       audit:
         user: :activerecord.models.manager.single # Do not translate

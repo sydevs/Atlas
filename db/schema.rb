@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_30_133232) do
+ActiveRecord::Schema.define(version: 2022_01_06_123958) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -143,6 +143,9 @@ ActiveRecord::Schema.define(version: 2021_11_30_133232) do
     t.integer "managed_countries_counter", default: 0, null: false
     t.integer "managed_localities_counter", default: 0, null: false
     t.string "language_code", limit: 2
+    t.datetime "last_login_at"
+    t.boolean "email_verified"
+    t.datetime "email_verification_sent_at"
     t.index ["email"], name: "index_managers_on_email", unique: true
   end
 

@@ -19,6 +19,8 @@ Rails.application.routes.draw do
       resources :managers, only: %i[] do
         get :welcome
         get :welcome, on: :collection
+        get :verify
+        get :verify, on: :collection
         get :login
         get :login, on: :collection
       end
@@ -109,6 +111,7 @@ Rails.application.routes.draw do
     end
 
     resources :managers do
+      get :resend_verification
       get :regions
       get :activity
       get :countries

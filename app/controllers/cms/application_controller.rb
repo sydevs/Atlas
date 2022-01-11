@@ -8,6 +8,7 @@ class CMS::ApplicationController < ActionController::Base
   helper_method :current_user, :back_path
 
   before_action :require_login!
+  before_action :verify_manager
   before_action :set_locale!
   before_action :set_model_name!
   before_action :set_context!, only: %i[index new create regions destroy images]
@@ -166,6 +167,16 @@ class CMS::ApplicationController < ActionController::Base
 
       save_passwordless_redirect_location! Manager
       redirect_to managers.sign_in_path, flash: { error: translate('cms.messages.not_logged_in') }
+    end
+
+    def verify_manager
+      atts = { last_login_at: DateTime.now }
+      if params[:verify] == 'true'
+        atts[:email_verified] = true
+        flash.now[:success] = translate('cms.messages.manager.email_verified')
+      end
+
+      current_user.update!(atts)
     end
 
     def set_locale!

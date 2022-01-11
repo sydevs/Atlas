@@ -149,6 +149,17 @@ uk:
         data:
           events: "Події"
           venues: "Місця проведення"
+      verify: # TODO: Translate
+        subject: "Your email address must be verified."
+        title: "Email Verification"
+        preview: "To publish your events we must verify your email address."
+        verify: "Verify"
+        byline:
+          changed: "Your email has recently been changed."
+          event: "You have been added as an event manager for \"%{event}\""
+        explanation:
+          changed: "Please verify your email to keep your events published."
+          event: "We must verify your email before we can publish the event. This will allow us to reach you in the future to make sure the event is still accurate."
 
     country:
       summary:

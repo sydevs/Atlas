@@ -240,6 +240,8 @@ en:
         email: :activerecord.attributes.generic.email # Do not translate
         administrator: "Global Administrator"
         language_code: "Language"
+        last_login_at: "Last Login"
+        email_verification_sent_at: "Last Email Verification Sent"
 
       audit:
         user: :activerecord.models.manager.single # Do not translate

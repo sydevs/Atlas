@@ -9,6 +9,20 @@
           i.right.arrow.icon
         .header = translate('cms.details.record_expired.title', resource: translate_model(@model))
         .description = translate('cms.details.record_expired.description', resource: translate_model(@model).downcase, updated_ago: time_ago_in_words(@record.updated_at))
+  - if !@record.manager.email_verified?
+    .ui.small.orange.icon.message
+      i.exclamation.icon
+      .content
+        - if policy(@record.manager).resend_verification?
+          a.ui.right.floated.orange.button href=url_for([:cms, @record.manager, :resend_verification])
+            = translate('cms.details.manager_not_verified.action')
+            i.right.arrow.icon
+        - else
+          a.ui.right.floated.orange.button href=url_for([:cms, @record.manager])
+            = translate('cms.actions.simple.view')
+            i.right.arrow.icon
+        .header = translate('cms.details.manager_not_verified.title')
+        .description = translate('cms.details.manager_not_verified.parent', resource: translate_model(@model).downcase)
   - elsif @record.needs_review? || @record.needs_urgent_review?
     .ui.small.yellow.icon.message
       i.exclamation.icon
@@ -76,6 +90,12 @@ h3.ui.small.dividing.grey.header = translate('cms.details.management_for_record'
   = help_link :expiration, (translate("cms.help.expiration.alt_title") unless @record.expired?)
 
 .ui.list
+  - if !@record.manager.email_verified?
+    .item
+      i.orange.warning.sign.icon
+      .content
+        .header = translate('cms.details.manager_not_verified.title')
+        .description = translate('cms.details.manager_not_verified.parent', resource: translate_model(@model).downcase)
   - if !@record.published? || !@record.venue.published?
     .item
       i.warning.sign.icon

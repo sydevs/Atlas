@@ -8,6 +8,7 @@ uk:
         update: "Зберегти"
         destroy: "Видалити"
         back: "Назад"
+        view: "View" # TODO: Translate
 
       target:
         new: "Додати %{resource}"
@@ -74,6 +75,8 @@ uk:
         success: "Менеджера успішно додано"
         already_added: "%{manager} вже керує цим #{resource}"
         already_exists: "%{name} <%{email}> вже існує"
+        email_verified: "Your email address is now verified!" # TODO: Translate
+        email_verification_resent: "An email verification has been sent to %{name}" # TODO: Translate
       cannot_create:
         event: "Тут не можна створювати нові події, їх потрібно додати безпосередньо до місця проведення."
         venue: "Тут не можна створювати нові місця, їх потрібно додати безпосередньо до регіону країни."
@@ -90,6 +93,7 @@ uk:
         manager: "Manager" # TODO: Translate
 
     hints:
+      verified: "Verified" # TODO: Translate
       unspecified: "Невизначено"
       never: "Ніколи"
       geosearch:

@@ -1,0 +1,20 @@
+
+- content_for :preview, translate('mail.manager.verify.preview')
+
+h2
+  = translate('mail.manager.verify.title')
+  .subtitle = @manager.name
+
+- if @context.present? && @context.is_a?(Event)
+  p.byline = translate('mail.manager.verify.byline.event', event: @context&.label)
+  p.explanation = translate('mail.manager.verify.explanation.event')
+  = render 'mail/events/data', event: @context, status: :reminder
+- else
+  p.byline = translate('mail.manager.verify.byline.changed', event: @context&.label)
+  p.explanation = translate('mail.manager.verify.explanation.changed')
+
+table.actions
+  tr
+    td
+      a.button href=email_login("#{cms_root_url}?verify=true")
+        = translate('mail.manager.verify.verify')

@@ -4,6 +4,10 @@ class ManagerPolicy < DatabasePolicy
     user == record
   end
 
+  def resend_verification?
+    manage? && (!record.email_verification_sent_at || record.email_verification_sent_at < 5.minutes.ago)
+  end
+
   def destroy?
     user.administrator? && user != record
   end

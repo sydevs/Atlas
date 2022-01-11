@@ -21,6 +21,8 @@ h2.ui.header
       - text = translate('cms.details.record_expired.title', resource: translate_model(@context.class))
       - tooltip = translate('cms.details.record_expired.description', resource: translate_model(@context.class).downcase, updated_ago: time_ago_in_words(@context.updated_at))
       = floating_action text, 'exclamation', class: 'active orange', data: { tooltip: tooltip, position: 'bottom center' }
+    - elsif @context.try(:verified?)
+      = floating_action translate('cms.hints.verified'), 'check', class: 'active green'
   .content = @context&.label || translate('cms.menu.worldwide')
   - if @context
     .sub.header

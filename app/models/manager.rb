@@ -30,6 +30,7 @@ class Manager < ApplicationRecord
   scope :client_managers, -> { joins(:clients) }
 
   # Methods
+  before_save :unverify_email
 
   def parent
     case type
@@ -124,5 +125,15 @@ class Manager < ApplicationRecord
       Event.joins(:venue).left_outer_joins(:local_areas).where(id: events).or(events_via_countries).or(events_via_provinces).or(events_via_local_areas)
     end
   end
+
+  def verified?
+    email_verified?
+  end
+
+  private
+
+    def unverify_email
+      self[:email_verified] = false if email_changed?
+    end
 
 end

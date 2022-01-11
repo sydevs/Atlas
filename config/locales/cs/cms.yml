@@ -7,6 +7,7 @@ cs:
         update: "Save"
         destroy: "Delete"
         back: "Back"
+        view: "View"
 
       target:
         new: "Add %{resource}"
@@ -73,6 +74,8 @@ cs:
         success: "Added manager successfully"
         already_added: "%{manager} already manages this #{resource}"
         already_exists: "%{name} <%{email}> already exists"
+        email_verified: "Your email address is now verified!"
+        email_verification_resent: "An email verification has been sent to %{name}"
       cannot_create:
         event: "New events cannot be created here, they must be added directly to a venue."
         venue: "New venues cannot be created here, they must be added directly to a region within a country."
@@ -89,6 +92,7 @@ cs:
         manager: "Manager"
 
     hints:
+      verified: "Verified"
       unspecified: "Unspecified"
       never: "Never"
       geosearch:
