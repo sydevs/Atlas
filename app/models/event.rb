@@ -61,6 +61,7 @@ class Event < ApplicationRecord
   alias associated_registrations registrations
 
   # Methods
+  after_save :verify_manager
 
   def region_association?
     false
@@ -157,6 +158,13 @@ class Event < ApplicationRecord
 
     def parse_phone_number
       self.phone_number = Phonelib.parse(phone_number, venue.country_code).international
+    end
+
+    def verify_manager
+      return if manager.email_verified?
+
+      ManagerMailer.with(manager: manager, context: self).verify.deliver_later
+      manager.touch(:email_verification_sent_at)
     end
 
 end
