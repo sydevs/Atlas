@@ -140,6 +140,10 @@ class Event < ApplicationRecord
     "#{super}-#{status}-#{last_activity_on.strftime("%d%m%Y")}"
   end
 
+  def manager_verified?
+    manager.email_verified?
+  end
+
   private
 
     def validate_end_time
