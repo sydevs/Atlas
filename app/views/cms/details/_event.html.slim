@@ -17,7 +17,7 @@
           a.ui.right.floated.orange.button href=url_for([:cms, @record.manager, :resend_verification])
             = translate('cms.details.manager_not_verified.action')
             i.right.arrow.icon
-        - else
+        - elsif policy(@record.manager).show?
           a.ui.right.floated.orange.button href=url_for([:cms, @record.manager])
             = translate('cms.actions.simple.view')
             i.right.arrow.icon
