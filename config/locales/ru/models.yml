@@ -88,7 +88,7 @@ ru:
       generic:
         name: "Имя"
         published: "Опубликовано"
-        email: "Электронный Адрес"
+        email: "Email"
         identifier: "Идентификатор фильтра"
         status: "Статус"
         statuses:
