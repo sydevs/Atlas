@@ -6,4 +6,4 @@ ru:
       text: 'обязательно'
       mark: '*'
     error_notification:
-      default_message: "Пожалуйста, проверьте ошибки ниже:"
+      default_message: "Пожалуйста, проверь следующие ошибки:"
