@@ -16,20 +16,20 @@ ru:
         # Countable
         one: "Страна"
         other: "Стран"
-      province: # TODO: Translate
+      province:
         # Basic pluralization
-        single: "Region"
-        plural: "Regions"
+        single: "Регион"
+        plural: "Регионы"
         # Countable
-        one: "region"
-        other: "regions"
-      local_area: # TODO: Translate
+        one: "регион"
+        other: "регионов"
+      local_area: 
         # Basic pluralization
-        single: "Area"
-        plural: "Areas"
+        single: "Место" # ???
+        plural: "Места"
         # Countable
-        one: "area"
-        other: "areas"
+        one: "место" # ???
+        other: "мест"
 
       # Events
       venue:
@@ -88,15 +88,15 @@ ru:
       generic:
         name: "Имя"
         published: "Опубликовано"
-        email: "Электронный Адрес"
-        identifier: "Идентификатор Фильтра"
+        email: "Email"
+        identifier: "Идентификатор фильтра"
         status: "Статус"
         statuses:
           verified: "Проверено"
-          needs_review: "Требуется Проверка"
-          needs_urgent_review: "Требуется Срочная Проверка"
-          expired: "Срок Истёк"
-          archived: "Перенесено в Архив"
+          needs_review: "Требуется проверка"
+          needs_urgent_review: "Требуется срочная проверка"
+          expired: "Истёк срок"
+          archived: "Перенесено в архив"
           finished: "Завершено"
         
         last_activity_on: "Последняя активность"
@@ -104,18 +104,18 @@ ru:
         status_email_sent_at: "Email со статусом отправлен"
         reminder_email_sent_at: "Напоминание по email отправлено"
         should_update_status_at: "Следующее обновление статуса"
-        expired_at: "Срок Истек В"
-        verified_at: "Проверено В"
-        archived_at: "Помещено В Архив В"
-        finished_at: "Завершено В"
-        updated_at: "Обновлено В"
+        expired_at: "Истек срок в"
+        verified_at: "Проверено в"
+        archived_at: "Помещено в Архив в"
+        finished_at: "Завершено в"
+        updated_at: "Обновлено в"
 
       # Regions
       country:
         manager_id: :activerecord.models.manager.single # Do not translate
         country_code: :activerecord.models.country.single # Do not translate
-        default_language_code: "Язык События По Умолчанию"
-        enable_province_management: "Enable Regional Management" # TODO: Translate
+        default_language_code: "Язык события по умолчанию"
+        enable_province_management: "Разрешить региональное управление" 
         last_activity_on: :activerecord.attributes.generic.last_activity_on # Do not translate
         summary_email_sent_at: :activerecord.attributes.generic.summary_email_sent_at # Do not translate
 
@@ -141,18 +141,18 @@ ru:
       # Events
       venue:
         published: :activerecord.attributes.generic.published # Do not translate
-        name: "Название Здания (Опционально)"
+        name: "Название здания (Опционально)"
         manager_id: :activerecord.models.manager.single # Do not translate
         address: "Адрес"
         street: "Улица"
         city: "Город"
         province_code: :activerecord.models.province.single # Do not translate
         country_code: :activerecord.models.country.single # Do not translate
-        postcode: "Почтовый Индекс"
+        postcode: "Почтовый индекс"
         coordinates: "Местонахождение"
         latitude: "Широта"
         longitude: "Долгота"
-        place_id: "Google Place идентификатор"
+        place_id: "Идентификатор Google Place"
         last_activity_on: :activerecord.attributes.generic.last_activity_on # Do not translate
 
       event:
@@ -161,57 +161,57 @@ ru:
         published: :activerecord.attributes.generic.published # Do not translate
         manager_id: :activerecord.models.manager.single # Do not translate
         name: :activerecord.attributes.generic.name # Do not translate
-        custom_name: "Настраиваемое Название События (Опционально)"
+        custom_name: "Название события (Опционально)"
         category: "Категория"
         categories:
-          intro: "Вводное Занятие Медитацией"
-          intermediate: "Занятие Медитацией Для Продолжающих"
-          course: "Курс Медитаций"
-          public_event: "Стойка На Общественной Программе"
-          concert: "Медитация И Музыкальный Концерт"
+          intro: "Медитация для начинающих"
+          intermediate: "Медитация для продолжающих"
+          course: "Курс по медитации"
+          public_event: "Стенд на выставке или фестивале"
+          concert: "Медитация и концерт"
         category_labels:
-          intro: "Посвещение"
-          intermediate: "Углублёнка"
-          course: "Курс Медитаций"
-          public_event: "Стойка"
+          intro: "Вводное занятие"
+          intermediate: "Занятие для продолжающих"
+          course: "Курс"
+          public_event: "Стенд"
           concert: "Концерт"
         category_descriptions:
-          intro: "Первое знакомство с этим методом медитации."
-          intermediate: "Более глубокий курс для тех, кто уже прошел вводный."
-          course: "Курс на несколько недель, который познакомит вас с различными техниками медитации."
-          public_event: "Бесплатное обучение медитации на общественном мероприятии."
+          intro: "Первое знакомство с медитацией по методу Сахаджа Йога."
+          intermediate: "Более углублённые занятия для тех, кто уже прошел вводный курс."
+          course: "Курс на несколько недель, который познакомит с различными техниками медитации."
+          public_event: "Бесплатное обучение медитации в рамках выставки или фестиваля."
           concert: "Представление, сочетающее медитацию и музыку или танец."
         description: "Описание"
         room: "Помещение"
         building: "Здание"
         language_code: "Язык"
-        disable_notifications: "Отключить Уведомления"
-        registration_mode: "Режим Регистрации"
+        disable_notifications: "Отключить уведомления"
+        registration_mode: "Режим регистрации"
         registration_modes:
           native: "Сахадж Атлас"
-          external: "External"
-          meetup: "Встреча"
+          external: "Внешний"
+          meetup: "Meetup"
           eventbrite: "Eventbrite"
           facebook: "Facebook"
-        registration_url: "Ссылка Для Регистрации(URL)"
+        registration_url: "Ссылка для регистрации"
         recurrence: "Повторение"
         recurrences:
           day: "Ежедневно"
-          monday: "По Понедельникам"
-          tuesday: "По Вторникам"
-          wednesday: "По Средам"
-          thursday: "По Четвергам"
-          friday: "По Пятницам"
-          saturday: "По Субботам"
-          sunday: "По Воскресеньям"
-        start_date: "Дата Начала"
-        end_date: "Дата Окончания"
-        start_time: "Время Начала"
-        end_time: "Время Окончания"
+          monday: "По понедельникам"
+          tuesday: "По вторникам"
+          wednesday: "По средам"
+          thursday: "По четвергам"
+          friday: "По пятницам"
+          saturday: "По субботам"
+          sunday: "По воскресеньям"
+        start_date: "Дата начала"
+        end_date: "Дата окончания"
+        start_time: "Время начала"
+        end_time: "Время окончания"
         online: "Онлайн-класс"
         online_url: "Ссылка на встречу онлайн"
-        phone_number: "Contact Number" # TODO: Translate
-        phone_name: "First Name for Phone Calls" # TODO: Translate
+        phone_number: "Контактный телефон" 
+        phone_name: "Имя" 
         language: "Язык"
         images: :activerecord.models.picture.plural # Do not translate
         venue_id: :activerecord.models.manager.single # Do not translate
@@ -230,18 +230,18 @@ ru:
         name: :activerecord.attributes.generic.name # Do not translate
         email: :activerecord.attributes.generic.email # Do not translate
         comment: "Комментарий"
-        created_at: "Зарегистрировано В - Местное Время"
-        starting_at: "Первое Занятие В"
+        created_at: "Зарегистрировано в - (местное время)"
+        starting_at: "Первое занятие в"
 
       # Other
-      manager: # TODO: Translate
+      manager: 
         manager_id: :activerecord.models.manager.single # Do not translate
         name: :activerecord.attributes.generic.name # Do not translate
         email: :activerecord.attributes.generic.email # Do not translate
-        administrator: "Global Administrator"
-        language_code: "Language"
-        last_login_at: "Last Login"
-        email_verification_sent_at: "Last Email Verification Sent"
+        administrator: "Глобальный администратор"
+        language_code: "Язык"
+        last_login_at: "Последний логин"
+        email_verification_sent_at: "Последний отправленый email с подтверждением"
 
       audit:
         user: :activerecord.models.manager.single # Do not translate
@@ -255,14 +255,14 @@ ru:
         label: "Ярлык"
         config: "Конфигурация"
         domain: "Домен"
-        secret_key: "Секретный API Ключ"
-        public_key: "Публичный API Ключ"
+        secret_key: "Секретный API ключ"
+        public_key: "Публичный API ключ"
         enabled: "Включено"
-        location: "Предпочтительное Местоположение"
+        location: "Предпочтительное местоположение"
         bounds: "Границы"
-        last_accessed_at: "Последний Доступ"
-        map_url: "URL Встраиваемой Карты"
-        index_url: "URL Встраиваемого Списка"
+        last_accessed_at: "Последний доступ"
+        map_url: "URL встраиваемой карты"
+        index_url: "URL встраиваемого списка"
         manager_id: :activerecord.models.manager.single # Do not translate
 
       pictures:
