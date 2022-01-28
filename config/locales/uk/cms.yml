@@ -8,7 +8,7 @@ uk:
         update: "Зберегти"
         destroy: "Видалити"
         back: "Назад"
-        view: "View" # TODO: Translate
+        view: "Переглянути"
 
       target:
         new: "Додати %{resource}"
@@ -75,8 +75,8 @@ uk:
         success: "Менеджера успішно додано"
         already_added: "%{manager} вже керує цим #{resource}"
         already_exists: "%{name} <%{email}> вже існує"
-        email_verified: "Your email address is now verified!" # TODO: Translate
-        email_verification_resent: "An email verification has been sent to %{name}" # TODO: Translate
+        email_verified: "Вашу електронну адресу тепер підтверджено!"
+        email_verification_resent: "Підтвердження електронної пошти надіслано на %{name}"
       cannot_create:
         event: "Тут не можна створювати нові події, їх потрібно додати безпосередньо до місця проведення."
         venue: "Тут не можна створювати нові місця, їх потрібно додати безпосередньо до регіону країни."
@@ -90,10 +90,10 @@ uk:
         manager: "Менеджер"
       client:
         keys: "Ключі доступу"
-        manager: "Manager" # TODO: Translate
+        manager: "Vенеджер"
 
     hints:
-      verified: "Verified" # TODO: Translate
+      verified: "Підтверджено"
       unspecified: "Невизначено"
       never: "Ніколи"
       geosearch:
@@ -121,8 +121,8 @@ uk:
         online: "Установіть цей прапорець, якщо програма буде проходити онлайн."
         online_url: "Якщо курс онлайн, це посилання є місцем, де шукачі мають приєднатися до класу (наприклад, посилання на Zoom, YouTube, Google Meet тощо)."
         manager: "Менеджером повинен бути йог(ні), який візьме на себе відповідальність за цю подію. Щотижня менеджеру буде надсилатися список нових реєстрацій, а кожні кілька місяців він проситиме підтвердити, що інформація про програму все ще правильна."
-        phone_number: "A local phone number that seekers can call to ask questions." # TODO: Translate
-        phone_name: "The first name of the yogi who will answer the phone." # TODO: Translate
+        phone_number: "Місцевий номер телефону, за яким шукачі можуть зателефонувати, щоб поставити запитання."
+        phone_name: "Ім’я йога, який відповість на телефонний дзвінок."
       venue:
         manual_location: "Встановіть місце розташування вручну"
         location: "Якщо розташування неможливо встановити автоматично, натиснувши \"Знайти місцезнаходження\", ви можете ввести деталі вручну нижче."
@@ -137,7 +137,7 @@ uk:
           title: "Набір міток на карті!"
           description: "Переконайтеся, що місце, показане на карті, виглядає правильним."
       manager:
-        language: "The preferred language for emails and UI for this manager." # TODO: Translate
+        language: "Бажана мова для електронних листів та інтерфейсу користувача для цього менеджера."
         administrator:
           title: "Створення глобального адміністратора"
           description: "Додавання менеджера до глобальних даних створить їх як адміністратора. Вони матимуть повний доступ до внесення змін до Сахадж Атласу."

@@ -190,7 +190,7 @@ uk:
         registration_mode: "Режим реєстрації"
         registration_modes:
           native: "Сахадж Атлас"
-          external: "External" # TODO: Translate
+          external: "Іноземний"
           meetup: "Meetup"
           eventbrite: "Eventbrite"
           facebook: "Facebook"
@@ -211,8 +211,8 @@ uk:
         end_time: "Час закінчення"
         online: "Онлайн клас"
         online_url: "Посилання на онлайн-зустріч"
-        phone_number: "Contact Number" # TODO: Translate
-        phone_name: "First Name for Phone Calls" # TODO: Translate
+        phone_number: "Контактний номер"
+        phone_name: "Ім’я для телефонних дзвінків."
         language: "Мова"
         images: :activerecord.models.picture.plural # Do not translate
         venue_id: :activerecord.models.manager.single # Do not translate
@@ -235,14 +235,14 @@ uk:
         starting_at: "Перший клас почнеться"
 
       # Other
-      manager: # TODO: Translate
+      manager:
         manager_id: :activerecord.models.manager.single # Do not translate
         name: :activerecord.attributes.generic.name # Do not translate
         email: :activerecord.attributes.generic.email # Do not translate
-        administrator: "Global Administrator"
-        language_code: "Language"
-        last_login_at: "Last Login"
-        email_verification_sent_at: "Last Email Verification Sent"
+        administrator: "Глобальний адміністратор"
+        language_code: "Мова"
+        last_login_at: "Останній вхід"
+        email_verification_sent_at: "Останнє підтвердження електронної пошти надіслано"
 
       audit:
         user: :activerecord.models.manager.single # Do not translate

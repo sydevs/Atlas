@@ -98,9 +98,9 @@ uk:
           zero: "Ваша подія, \"%{event},\" має %{duration} від цього моменту в %{time}. Жодних нових реєстрацій."
           one: "Ваша подія, \"%{event},\" має %{duration} від цього моменту в %{time}. %{count} нова реєстрація."
           other: "Ваша подія, \"%{event},\" має %{duration} від цього моменту в %{time}. %{count} нових реєстрацій."
-        explanation: # TODO: Translate
-          one: "Your event has %{count} new registration."
-          other: "Your event has %{count} new registrations."
+        explanation:
+          one: "Ваша подія має %{count} нової реєстрації."
+          other: "Ваша подія має %{count} нових реєстрацій."
         byline:
           zero: "Немає нових реєстрацій"
           one: "%{count} Нова реєстрація для %{date}"
@@ -149,17 +149,17 @@ uk:
         data:
           events: "Події"
           venues: "Місця проведення"
-      verify: # TODO: Translate
-        subject: "Your email address must be verified."
-        title: "Email Verification"
-        preview: "To publish your events we must verify your email address."
-        verify: "Verify"
+      verify:
+        subject: "Ваша електронна адреса має бути підтверджена."
+        title: "Перевірка електронної пошти"
+        preview: "Щоб опублікувати ваші події, ми повинні підтвердити вашу електронну адресу."
+        verify: "Підтвердити"
         byline:
-          changed: "Your email has recently been changed."
-          event: "You have been added as an event manager for \"%{event}\""
+          changed: "Вашу електронну адресу нещодавно було змінено."
+          event: "Вас додали як менеджера подій для \"%{event}\""
         explanation:
-          changed: "Please verify your email to keep your events published."
-          event: "We must verify your email before we can publish the event. This will allow us to reach you in the future to make sure the event is still accurate."
+          changed: "Будь ласка, підтвердьте свою електронну адресу, щоб ваші події залишалися опублікованими."
+          event: "Ми повинні підтвердити вашу електронну адресу, перш ніж опублікувати подію. Це дозволить нам зв’язатися з вами в майбутньому, щоб переконатися, що подія все ще точна."
 
     country:
       summary:
