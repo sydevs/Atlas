@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     get :about, to: 'application#about'
     get :statistics, to: 'application#statistics'
     get :privacy, to: 'application#privacy'
+    get '(:locale)/privacy', to: 'application#privacy'
   end
 
   if Rails.env.development?

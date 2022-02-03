@@ -11,6 +11,7 @@ class Info::ApplicationController < ActionController::Base
   end
 
   def privacy
+    render "info/privacy/privacy.#{I18n.locale}"
   end
 
   def statistics
