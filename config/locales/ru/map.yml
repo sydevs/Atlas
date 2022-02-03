@@ -12,11 +12,15 @@ ru:
       show: "Показать список"
       event_name: "%{category} в %{venue}" 
       online_event_name: "%{category} из %{city}"
+      toggle: # TODO: Translate
+        offline: "Show list"
+        online: "Online classes"
+        back: "Back to map"
       filter:
         prefix: "Отображать результаты"
         clear: "Очистить"
       mode:
-        offline: "Лично" 
+        offline: "Лично"
         online: "Онлайн"
     information:
       register: "Записаться"
