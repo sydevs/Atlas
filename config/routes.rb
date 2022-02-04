@@ -48,6 +48,7 @@ Rails.application.routes.draw do
 
   namespace :map do
     get :index, to: 'application#index'
+    get '(:locale)', to: 'application#show'
     get 'index/:api_key', to: 'application#index', as: :index_key
 
     root to: 'application#show'

@@ -150,7 +150,9 @@ class MapApplicationInstance {
 
   saveHistoryState(path, highlightLocation = null) {
     let state = {}
-    
+
+    path += `?locale=${window.locale}`
+
     if (path.indexOf('#') == -1) {
       if (highlightLocation) {
         path += `#${this.map.highlightZoom}/${highlightLocation.latitude}/${highlightLocation.longitude}`

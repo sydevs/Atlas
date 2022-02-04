@@ -38,6 +38,7 @@ class TimingCarousel {
 
   createTimingItem(event, date) {
     const element = document.importNode(this.template.content, true).querySelector('.js-timing')
+    date = date.setLocale(window.locale)
 
     element.querySelector('[data-attribute="datetime"]').value = date.toISO().substring(0, 10)
     element.querySelector('[data-attribute="day"]').innerText = date.toLocaleString({ weekday: 'long' })

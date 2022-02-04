@@ -75,6 +75,10 @@ const Util = {
     return dig(key.split('.'), window.translations)
   },
 
+  translateWeekday(weekday) {
+    return Util.translate(`recurrence.${weekday.toLowerCase()}`)
+  },
+
   parseEventTiming(event, type) {
     const localTimeZone = luxon.DateTime.local().zoneName
     let startDateTime = luxon.DateTime.fromISO(event.firstOccurrence, { zone: event.timing.timeZone })
@@ -98,7 +102,7 @@ const Util = {
       } else if (event.timing.recurrence == 'day' && event.lastOccurrence) {
         return `${startDateTime} - ${endDateTime}`
       } else {
-        return Util.translate(`recurrence.${nextDateTime.toLocaleString({ weekday: 'long' }).toLowerCase()}`)
+        return Util.translateWeekday(nextDateTime.toLocaleString({ weekday: 'long' }))
       }
     case 'duration': {
       const startTime = nextDateTime.toLocaleString(luxon.DateTime.TIME_SIMPLE)
