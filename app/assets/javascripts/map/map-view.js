@@ -88,6 +88,7 @@ class MapView {
       filter: ['has', 'point_count'],
       layout: {
         'icon-allow-overlap': true,
+        'icon-ignore-placement': true,
         'icon-image': 'cluster-1',
         'text-field': '{point_count_abbreviated}',
         'text-font': ['DIN Offc Pro Bold', 'Arial Unicode MS Bold'],
@@ -104,6 +105,7 @@ class MapView {
       source: this.clusterSource,
       filter: ['!', ['has', 'point_count']],
       layout: {
+        'icon-ignore-placement': true,
         'icon-image': 'marker_default',
         'icon-anchor': 'bottom',
         'icon-size': 0.85,
@@ -117,6 +119,7 @@ class MapView {
       source: this.selectedVenueSource,
       filter: ['!', ['has', 'point_count']],
       layout: {
+        'icon-ignore-placement': true,
         'icon-image': 'marker_selected',
         'icon-anchor': 'bottom',
         'icon-size': 0.85,

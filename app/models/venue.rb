@@ -15,6 +15,7 @@ class Venue < ApplicationRecord
   has_many :local_area_venues
   has_many :local_areas, through: :local_area_venues
   has_many :events, dependent: :delete_all
+  has_many :publicly_visible_events, -> { publicly_visible }, class_name: 'Event'
 
   # Validations
   validates :street, presence: true
@@ -23,10 +24,10 @@ class Venue < ApplicationRecord
   validates :latitude, :longitude, :time_zone, presence: true
 
   # Scopes
-  scope :publicly_visible, -> { published.has_events }
-  scope :has_events, -> { joins(:events).where.not(events: { status: Event.statuses.values_at(*%w[expired archived finished]) }) }
-  scope :has_offline_events, -> { has_events.where(events: { online: false }) }
-  scope :has_online_events, -> { has_events.where(events: { online: true }) }
+  scope :publicly_visible, -> { published.has_public_events }
+  scope :has_public_events, -> { joins(:publicly_visible_events) }
+  scope :has_offline_events, -> { has_public_events.where(events: { online: false }) }
+  scope :has_online_events, -> { has_public_events.where(events: { online: true }) }
 
   # Delegations
   delegate :all_managers, to: :parent
