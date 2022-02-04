@@ -1,4 +1,4 @@
-/* global mapboxgl, Application, Util */
+/* global mapboxgl, MapboxLanguage, Application, Util */
 /* exported MapView */
 
 class MapView {
@@ -53,6 +53,7 @@ class MapView {
   }
 
   loadControlLayers() {
+    this.mapbox.addControl(new MapboxLanguage({ defaultLanguage: window.locale }))
     this.mapbox.addControl(new mapboxgl.NavigationControl({ showCompass: false }))
 
     const geolocater = new mapboxgl.GeolocateControl()
