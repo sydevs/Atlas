@@ -1,0 +1,11 @@
+# TODO: For some reason this file doesn't get loaded, it would be good to replace all locale query params with this directive instead
+class Directives::LocalizeDirective < GraphQL::Schema::Directive
+  description "Set locale for query"
+  locations QUERY
+
+  argument :locale, String, required: true
+
+  def self.resolve(object, arguments, context)
+    I18n.locale = arguments[:locale]
+  end
+end

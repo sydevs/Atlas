@@ -5,40 +5,51 @@ module Types
     field :geojson, GeojsonType, null: false do
       description 'Returns all events in the geojson format'
       argument :country, String, required: false
+      argument :locale, String, required: false
     end
 
-    field :venues, [VenueType], 'Returns all events', null: false
+    field :venues, [VenueType], null: false do
+      description 'Returns all venues'
+      argument :locale, String, required: false
+    end
+
     field :events, [EventType], null: false do
       description 'Returns all events'
       argument :online, Boolean, required: false
       argument :country, String, required: false
       argument :recurrence, String, required: false
       argument :language_code, String, required: false
+      argument :locale, String, required: false
     end
 
     field :country, CountryType, null: true do
       description 'Find a country by code'
       argument :code, String, required: true
+      argument :locale, String, required: false
     end
 
     field :venue, VenueType, null: true do
       description 'Find a venue by ID'
       argument :id, ID, required: true
+      argument :locale, String, required: false
     end
 
     field :event, EventType, null: true do
       description 'Find an event by ID'
       argument :id, ID, required: true
+      argument :locale, String, required: false
     end
 
     field :closest_venue, VenueType, null: true do
       description 'Find the closest event to some coordinates'
       argument :latitude, Float, required: true
       argument :longitude, Float, required: true
+      argument :locale, String, required: false
     end
 
 
-    def geojson(country: nil)
+    def geojson(country: nil, locale: 'en')
+      I18n.locale = locale.to_sym
       scope = Venue
       scope = scope.where(country_code: country) if country
       venues = decorate scope.publicly_visible.has_offline_events
@@ -63,19 +74,23 @@ module Types
       }
     end
   
-    def event(id:)
+    def event(id:, locale: 'en')
+      I18n.locale = locale.to_sym
       decorate Event.find(id)
     end
   
-    def venue(id:)
+    def venue(id:, locale: 'en')
+      I18n.locale = locale.to_sym
       decorate Venue.find(id)
     end
   
-    def country(code:)
+    def country(code:, locale: 'en')
+      I18n.locale = locale.to_sym
       decorate Country.find_by_country_code(code)
     end
 
-    def events(online: nil, country: nil, recurrence: nil, language_code: nil)
+    def events(online: nil, country: nil, recurrence: nil, language_code: nil, locale: 'en')
+      I18n.locale = locale.to_sym
       scope = Event.publicly_visible
       scope = scope.where(online: online) unless online.nil?
       scope = scope.joins(:venue).where(venues: { country_code: country }) unless country.nil?
@@ -85,11 +100,13 @@ module Types
       decorate scope
     end
 
-    def venues
+    def venues(locale: 'en')
+      I18n.locale = locale.to_sym
       decorate Venue.publicly_visible
     end
 
-    def closest_venue(latitude:, longitude:)
+    def closest_venue(latitude:, longitude:, locale: 'en')
+      I18n.locale = locale.to_sym
       venues = Venue.publicly_visible.has_offline_events.by_distance(origin: [latitude, longitude]).limit(5)
 
       venues.each do |venue|

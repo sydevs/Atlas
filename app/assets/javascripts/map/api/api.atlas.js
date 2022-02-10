@@ -99,15 +99,15 @@ class AtlasAPI {
     })
 
     this.geojsonQuery = this.graph.query(`{
-      geojson { ...geojson }
+      geojson(locale: "${window.locale}") { ...geojson }
     }`)
 
     this.onlineEventsQuery = this.graph.query(`{
-      events(online: true) { ...event }
+      events(online: true, locale: "${window.locale}") { ...event }
     }`)
 
     this.searchEventsQuery = this.graph.query(`
-      query ($online: Boolean, $recurrence: String, $languageCode: String) {
+      query ($online: Boolean, $recurrence: String, $languageCode: String, locale: "${window.locale}") {
         events(online: $online, recurrence: $recurrence, languageCode: $languageCode) {
           ...eventWithVenue
         }
@@ -115,7 +115,7 @@ class AtlasAPI {
     `)
 
     this.closestVenueQuery = this.graph.query(`(@autodeclare) {
-      closestVenue(latitude: $latitude, longitude: $longitude) {
+      closestVenue(latitude: $latitude, longitude: $longitude, locale: "${window.locale}") {
         id
         label
         city
@@ -126,7 +126,7 @@ class AtlasAPI {
     }`)
 
     this.registrationQuery = this.graph.mutate(`(@autodeclare) {
-      createRegistration(input: $input) {
+      createRegistration(input: $input, locale: "${window.locale}") {
         status
         message
       }
