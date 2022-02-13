@@ -48,7 +48,6 @@ Rails.application.routes.draw do
 
   namespace :map do
     get :index, to: 'application#index'
-    get '(:locale)', to: 'application#show'
     get 'index/:api_key', to: 'application#index', as: :index_key
 
     root to: 'application#show'
@@ -118,6 +117,7 @@ Rails.application.routes.draw do
       get :activity
       get :countries
       get :provinces
+      get :search
       resources :clients, only: %i[index]
       resources :venues, only: %i[index]
       resources :events, only: %i[index]
