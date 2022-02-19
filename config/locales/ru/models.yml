@@ -234,14 +234,22 @@ ru:
         starting_at: "Первое занятие в"
 
       # Other
-      manager: 
+      manager: # TODO: Translate
         manager_id: :activerecord.models.manager.single # Do not translate
-        name: :activerecord.attributes.generic.name # Do not translate
+        name: "Full Name"
         email: :activerecord.attributes.generic.email # Do not translate
+        phone: :activerecord.attributes.generic.phone # Do not translate
         administrator: "Глобальный администратор"
-        language_code: "Язык"
+        language_code: "Preferred Language"
+        contact_method: "Preferred Contact Method"
+        contact_methods:
+          email: "Email"
+          whatsapp: "WhatsApp"
+          telegram: "Telegram"
+          wechat: "WeChat"
         last_login_at: "Последний логин"
         email_verification_sent_at: "Последний отправленый email с подтверждением"
+        phone_verification_sent_at: "Last Phone Verification Sent"
 
       audit:
         user: :activerecord.models.manager.single # Do not translate

@@ -2,8 +2,10 @@ class Manager < ApplicationRecord
 
   # Extensions
   passwordless_with :email
-  searchable_columns %w[name email]
+  searchable_columns %w[name email phone]
   audited
+
+  enum contact_method: { email: 0, whatsapp: 1, telegram: 2, wechat: 3 }, _prefix: :contact_by
 
   # Associations
   has_many :managed_records, dependent: :delete_all
@@ -17,9 +19,12 @@ class Manager < ApplicationRecord
   has_many :actions, class_name: 'Audit', as: :user
 
   # Validations
-  before_validation { self.email = self.email.downcase }
-  validates :name, presence: true
+  before_validation { self.email = self.email&.downcase }
+  before_validation { self.phone = Phonelib.parse(phone).international if phone }
+  validates_presence_of :name, :language_code
   validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
+  validates_presence_of :email, if: :contact_by_email?
+  validates_presence_of :phone, unless: :contact_by_email?
 
   # Scopes
   default_scope { order(updated_at: :desc) }

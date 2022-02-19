@@ -1,0 +1,44 @@
+
+.hint = translate('cms.hints.event.manager.field')
+
+.ui.fluid.horizontal.card id='js-manager-card' class=(manager&.new_record? ? 'green' : '') style=('display: none' unless manager.present?)
+  .content
+    - if !manager.present?
+      .header
+      .meta
+    - elsif !manager.new_record?
+      .header = manager.name
+      .meta = [manager.email, manager.phone].compact.join(' • ')
+    - elsif manager.email?
+      .header Invite by Email
+      .meta = manager.email
+    - elsif manager.phone?
+      .header Invite through #{translate_enum_value(manager, :contact_method)}
+      .meta = manager.phone
+
+.field
+  .hint = translate('cms.hints.event.manager.search')
+  .ui.fluid.flipped.search id='js-manager-search'
+    .ui.icon.input
+      input.prompt type='text' placeholder=translate('cms.hints.manager.search') autocomplete='off'
+      i.search.icon
+
+.ui.accordion.required.field id='js-manager-fields'
+  .title class=('active' if manager&.new_record? || manager&.errors&.present?)
+    i.dropdown.icon
+    = f.label translate('cms.hints.event.manager.view_fields'), required: true
+  .content class=('active' if manager&.new_record? || manager&.errors&.present?)
+    = f.simple_fields_for :manager do |ff|
+      - new_manager = f.object.manager.new_record?
+      .two.fields
+        = f.hidden_field :manager_id
+        = ff.input :id, input_html: { disabled: true }
+        = ff.input :name, input_html: { disabled: !new_manager }
+      .two.fields
+        = ff.input :email, input_html: { disabled: !new_manager }
+        = ff.input :phone, input_html: { disabled: !new_manager }
+      .two.fields
+        - contact_methods = Manager.contact_methods.map { |k, v| [translate_enum_value(Manager, :contact_method, k), k] }
+        = ff.input :contact_method, collection: contact_methods, input_html: { class: ('disabled' unless new_manager) }
+        - languages = I18nData.languages(I18n.locale).map { |k, v| [v.split(/[,;]/)[0], k] }
+        = ff.input :language_code, collection: languages, selected: @record.try(:default_language_code), input_html: { class: "#{'disabled' unless new_manager} search", data: { default: 'en'.upcase } }

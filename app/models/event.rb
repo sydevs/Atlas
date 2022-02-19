@@ -24,10 +24,10 @@ class Event < ApplicationRecord
   has_many :local_areas, through: :venue
   acts_as_mappable through: :venue
 
+  has_many :registrations, dependent: :delete_all
   has_many :pictures, as: :parent, dependent: :destroy
   accepts_nested_attributes_for :pictures
-
-  has_many :registrations, dependent: :delete_all
+  accepts_nested_attributes_for :manager
 
   # Validations
   validates :custom_name, length: { maximum: 255 }
@@ -142,6 +142,10 @@ class Event < ApplicationRecord
 
   def manager_verified?
     manager.email_verified?
+  end
+
+  def default_language_code
+    language_code || venue.country.default_language_code || I18n.locale.upcase
   end
 
   private

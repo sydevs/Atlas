@@ -171,9 +171,9 @@ class CMS::ApplicationController < ActionController::Base
 
     def verify_manager
       atts = { last_login_at: DateTime.now }
-      if params[:verify] == 'true'
-        atts[:email_verified] = true
-        flash.now[:success] = translate('cms.messages.manager.email_verified')
+      if params[:verify] && current_user.respond_to?("#{params[:verify]}_verified")
+        atts[:"#{params[:verify]}_verified"] = true
+        flash.now[:success] = translate("cms.messages.manager.#{params[:verify]}_verified")
       end
 
       current_user.update!(atts)

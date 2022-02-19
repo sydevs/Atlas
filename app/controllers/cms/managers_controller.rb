@@ -9,6 +9,12 @@ class CMS::ManagersController < CMS::ApplicationController
       @records = policy_scope(@scope).page(params[:page]).per(10).search(params[:q])
       @records = @records.joins(:manager).order('managers.updated_at': :desc)
       render 'cms/views/index'
+    elsif request.format.json?
+      authorize Manager, :index?
+      @records = policy_scope(Manager).limit(3).search(params[:q])
+      @email_match = params[:q] if params[:q] =~ URI::MailTo::EMAIL_REGEXP
+      @phone_match = Phonelib.parse(params[:q]).international if Phonelib.valid?(params[:q])
+      @exact_match = @records.count == 1 && (@records.first.email == @email_match || @records.first.phone == @phone_match)
     else
       super
     end
@@ -85,6 +91,11 @@ class CMS::ManagersController < CMS::ApplicationController
     render 'cms/views/activity'
   end
 
+  def search
+    @records = @scope.limit(3).search(params[:q])
+    authorize Application, :index?
+  end
+
   def countries
     manager = @scope&.find(params[:manager_id])
     authorize manager
@@ -137,12 +148,16 @@ class CMS::ManagersController < CMS::ApplicationController
     def parameters
       if current_user.administrator?
         params.fetch(:manager, {}).permit(
-          :name, :email, :administrator, :language_code,
+          :name, :administrator, :language_code,
+          :email, :phone, :contact_method,
+          contact_settings: {},
           country_ids: [], province_ids: [], local_area_ids: []
         )
       else
         params.fetch(:manager, {}).permit(
-          :name, :email, :language_code,
+          :name, :language_code,
+          :email, :phone, :contact_method,
+          contact_settings: {},
           country_ids: [], province_ids: [], local_area_ids: []
         )
       end

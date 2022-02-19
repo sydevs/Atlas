@@ -8,6 +8,7 @@ cs:
         destroy: "Delete"
         back: "Back"
         view: "View"
+        search: "Search"
 
       target:
         new: "Add %{resource}"
@@ -75,6 +76,7 @@ cs:
         already_added: "%{manager} already manages this #{resource}"
         already_exists: "%{name} <%{email}> already exists"
         email_verified: "Your email address is now verified!"
+        phone_verified: "Your phone number is now verified!"
         email_verification_resent: "An email verification has been sent to %{name}"
       cannot_create:
         event: "New events cannot be created here, they must be added directly to a venue."
@@ -87,12 +89,17 @@ cs:
         timing: "Timing"
         registration: "Registration"
         manager: "Manager"
+      manager:
+        contact_methods: "Contact Methods"
+        contact_settings: "Contact Preferences"
       client:
         keys: "Access Keys"
         manager: "Manager"
 
     hints:
       verified: "Verified"
+      not_verified: "Not Verified"
+      not_set: "Not Set"
       unspecified: "Unspecified"
       never: "Never"
       geosearch:
@@ -119,9 +126,21 @@ cs:
         registration_url: "The registration URL will be set automatically if the mode is set \"%{native}.\""
         online: "Check this box if the program will take place online."
         online_url: "If the class is online, this link is where seekers should join the class (eg. a link to Zoom, YouTube, Google Meet, etc)."
-        manager: "The manager should be set to a yogi(ni) who will take responsibility for this event. Every week a list of new registrations will be sent to the manager and every few months they will be asked to confirm that the program information is still correct."
         phone_number: "A local phone number that seekers can call to ask questions."
         phone_name: "The first name of the yogi who will answer the phone."
+        manager:
+          view_fields: "View manager fields"
+          field: "The manager should be set to a yogi(ni) who will take responsibility for this event. Every week a list of new registrations will be sent to the manager and every few months they will be asked to confirm that the program information is still correct."
+          search: "Enter the full email or phone number of the person you'd like to add. If no existing manager is found, you can invite the manager by email or messenger."
+          categories:
+            managers: "Existing Managers"
+            invite: "Invite"
+          short_invitations:
+            email: "By email"
+            phone: "Through %{messenger}"
+          invitations:
+            email: "Invite by email"
+            phone: "Invite through %{messenger}"
       venue:
         manual_location: "Set location manually"
         location: "If the location cannot be set automatically by pressing \"Find Location\", you can enter the details manually below."
@@ -140,6 +159,28 @@ cs:
         administrator:
           title: "Creating a global administrator"
           description: "Adding a manager to worldwide data will create them as an administrator. They will have complete access to make changes to the Sahaj Atlas."
+        contact_method: "Which method do you prefer to be contacted by."
+        contact_settings:
+          hint: "Please select message types you want to receive from Sahaj Atlas. Currently some types can only be sent by email."
+          options:
+            email: "Email-only"
+            enabled: "Enabled"
+            disabled: "Disabled"
+          categories:
+            new_managed_record: "New Access"
+            event_verification: "Event Verification"
+            event_registrations: "Event Registrations"
+            region_summary: "Regional Summary"
+            country_summary: "Country Summary"
+            application_summary: "Sahaj Atlas Summary"
+          hints:
+            new_managed_record: "A message sent to you when you are given permission to manage a new event, region or resource on the Atlas."
+            event_verification: "Messages requesting event and city managers to check their events' accuracy. Sent every 3 months, for each event."
+            event_registrations: "A list of new registrations sent to event managers. Sent around 24 hours before each event."
+            region_summary: "A summary of changes within a region sent to regional managers. Sent every %{period}."
+            country_summary: "A summary of changes sent to country managers. Sent every %{period}."
+            application_summary: "A summary of all Atlas changes, sent to administrators. Sent every %{period}."
+        search: "Enter a name, email, or phone number..."
       client:
         domain: "Only this domain will be allowed to embed the map using your secret key."
         public_key: "Use this to embed the map."

@@ -19,6 +19,9 @@ h1
   opacity: 0.6
   margin-bottom: 6px
 
+  &.fitted
+    margin: 0
+
 .ui.active.button
   cursor: default
 
@@ -122,3 +125,17 @@ i.icon > i.icon
 
   &.yellow
     color: #fbbd08
+
+.ui.form .inline.fields > .field
+  flex-grow: 1
+  justify-content: space-around
+  display: flex
+
+.two.fields > input,
+.two.fields > select
+  margin: 0 5px !important
+
+.ui.flipped.search > .results
+  bottom: 100%
+  top: auto
+  margin-bottom: 0.5em

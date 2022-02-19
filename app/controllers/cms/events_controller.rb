@@ -27,7 +27,8 @@ class CMS::EventsController < CMS::ApplicationController
         :registration_mode, :registration_url,
         :recurrence, :start_date, :end_date, :start_time, :end_time,
         :online, :online_url,
-        manager_attributes: %i[email name]
+        :manager_id,
+        manager_attributes: %i[id name email phone contact_method language_code]
       )
     end
 

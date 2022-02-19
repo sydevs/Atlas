@@ -9,6 +9,7 @@ uk:
         destroy: "Видалити"
         back: "Назад"
         view: "Переглянути"
+        search: "Search" # TODO: Translate
 
       target:
         new: "Додати %{resource}"
@@ -76,6 +77,7 @@ uk:
         already_added: "%{manager} вже керує цим #{resource}"
         already_exists: "%{name} <%{email}> вже існує"
         email_verified: "Вашу електронну адресу тепер підтверджено!"
+        phone_verified: "Your phone number is now verified!" # TODO: Translate
         email_verification_resent: "Підтвердження електронної пошти надіслано на %{name}"
       cannot_create:
         event: "Тут не можна створювати нові події, їх потрібно додати безпосередньо до місця проведення."
@@ -88,12 +90,17 @@ uk:
         timing: "Вибір часу"
         registration: "Реєстрація"
         manager: "Менеджер"
+      manager: # TODO: Translate
+        contact_methods: "Contact Methods"
+        contact_settings: "Contact Preferences"
       client:
         keys: "Ключі доступу"
         manager: "Vенеджер"
 
     hints:
       verified: "Підтверджено"
+      not_verified: "Not Verified" # TODO: Translate
+      not_set: "Not Set" # TODO: Translate
       unspecified: "Невизначено"
       never: "Ніколи"
       geosearch:
@@ -120,9 +127,21 @@ uk:
         registration_url: "URL-адреса реєстрації буде встановлено автоматично, якщо встановлено режим \"%{native}.\""
         online: "Установіть цей прапорець, якщо програма буде проходити онлайн."
         online_url: "Якщо курс онлайн, це посилання є місцем, де шукачі мають приєднатися до класу (наприклад, посилання на Zoom, YouTube, Google Meet тощо)."
-        manager: "Менеджером повинен бути йог(ні), який візьме на себе відповідальність за цю подію. Щотижня менеджеру буде надсилатися список нових реєстрацій, а кожні кілька місяців він проситиме підтвердити, що інформація про програму все ще правильна."
         phone_number: "Місцевий номер телефону, за яким шукачі можуть зателефонувати, щоб поставити запитання."
         phone_name: "Ім’я йога, який відповість на телефонний дзвінок."
+        manager: # TODO: Translate
+          view_fields: "View manager fields"
+          field: "Менеджером повинен бути йог(ні), який візьме на себе відповідальність за цю подію. Щотижня менеджеру буде надсилатися список нових реєстрацій, а кожні кілька місяців він проситиме підтвердити, що інформація про програму все ще правильна."
+          search: "Enter the full email or phone number of the person you'd like to add. If no existing manager is found, you can invite the manager by email or messenger."
+          categories:
+            managers: "Existing Managers"
+            invite: "Invite"
+          short_invitations:
+            email: "By email"
+            phone: "Through %{messenger}"
+          invitations:
+            email: "Invite by email"
+            phone: "Invite through %{messenger}"
       venue:
         manual_location: "Встановіть місце розташування вручну"
         location: "Якщо розташування неможливо встановити автоматично, натиснувши \"Знайти місцезнаходження\", ви можете ввести деталі вручну нижче."
@@ -136,11 +155,33 @@ uk:
         marker_set:
           title: "Набір міток на карті!"
           description: "Переконайтеся, що місце, показане на карті, виглядає правильним."
-      manager:
+      manager: # TODO: Translate
         language: "Бажана мова для електронних листів та інтерфейсу користувача для цього менеджера."
         administrator:
           title: "Створення глобального адміністратора"
           description: "Додавання менеджера до глобальних даних створить їх як адміністратора. Вони матимуть повний доступ до внесення змін до Сахадж Атласу."
+        contact_method: "Which method do you prefer to be contacted by."
+        contact_settings:
+          hint: "Please select message types you want to receive from Sahaj Atlas. Currently some types can only be sent by email."
+          options:
+            email: "Email-only"
+            enabled: "Enabled"
+            disabled: "Disabled"
+          categories:
+            new_managed_record: "New Access"
+            event_verification: "Event Verification"
+            event_registrations: "Event Registrations"
+            region_summary: "Regional Summary"
+            country_summary: "Country Summary"
+            application_summary: "Sahaj Atlas Summary"
+          hints:
+            new_managed_record: "A message sent to you when you are given permission to manage a new event, region or resource on the Atlas."
+            event_verification: "Messages requesting event and city managers to check their events' accuracy. Sent every 3 months, for each event."
+            event_registrations: "A list of new registrations sent to event managers. Sent around 24 hours before each event."
+            region_summary: "A summary of changes within a region sent to regional managers. Sent every %{period}."
+            country_summary: "A summary of changes sent to country managers. Sent every %{period}."
+            application_summary: "A summary of all Atlas changes, sent to administrators. Sent every %{period}."
+        search: "Enter a name, email, or phone number..."
       client:
         domain: "Тільки цьому домену буде дозволено вбудовувати карту за допомогою вашого секретного ключа."
         public_key: "Використовуйте це, щоб вставити карту."

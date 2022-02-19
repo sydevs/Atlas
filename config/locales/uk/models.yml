@@ -235,14 +235,22 @@ uk:
         starting_at: "Перший клас почнеться"
 
       # Other
-      manager:
+      manager: # TODO: Translate
         manager_id: :activerecord.models.manager.single # Do not translate
-        name: :activerecord.attributes.generic.name # Do not translate
+        name: "Full Name"
         email: :activerecord.attributes.generic.email # Do not translate
+        phone: :activerecord.attributes.generic.phone # Do not translate
         administrator: "Глобальний адміністратор"
-        language_code: "Мова"
+        language_code: "Preferred Language"
+        contact_method: "Preferred Contact Method"
+        contact_methods:
+          email: "Email"
+          whatsapp: "WhatsApp"
+          telegram: "Telegram"
+          wechat: "WeChat"
         last_login_at: "Останній вхід"
         email_verification_sent_at: "Останнє підтвердження електронної пошти надіслано"
+        phone_verification_sent_at: "Last Phone Verification Sent"
 
       audit:
         user: :activerecord.models.manager.single # Do not translate

@@ -2,7 +2,6 @@
 - languages = I18nData.languages(I18n.locale).map { |k, v| [v.split(/[,;]/)[0], k] }
 
 = f.input :name
-= f.input :email
 = f.input :language_code, collection: languages, selected: @record.language_code || I18n.locale.upcase, input_html: { class: 'search' }, hint: translate('cms.hints.manager.language')
 
 - if current_user.administrator? && @context.nil?
@@ -13,3 +12,56 @@
       .header = translate('cms.hints.manager.administrator.title')
       .description
         = translate('cms.hints.manager.administrator.description')
+
+.ui.small.dividing.violet.header = translate('cms.forms.manager.contact_methods')
+table.ui.very.basic.stackable.table
+  - %w[email phone].each do |method|
+    tr
+      td.collapsing
+        strong = translate_attribute(Manager, method)
+      td
+        = f.input_field method
+      td.collapsing
+        - if !@record.send("#{method}?")
+          i.minus.circle.icon
+          = translate('cms.hints.not_set')
+        - elsif !@record.send("#{method}_verified?")
+          i.green.check.circle.icon
+          = translate('cms.hints.verified')
+        - else
+          i.red.times.circle.icon
+          = translate('cms.hints.not_verified')
+
+= f.input :contact_method, collection: Manager.contact_methods.map { |k, v| [translate_enum_value(Manager, :contact_method, k), k] }, hint: translate('cms.hints.manager.contact_method')
+
+
+.ui.small.dividing.violet.header = translate('cms.forms.manager.contact_settings')
+= f.simple_fields_for :contact_settings do |ff|
+  .hint = translate('cms.hints.manager.contact_settings.hint')
+  table.ui.very.basic.sortable.stackable.table
+    - contact_types(@record).each do |type|
+      - value = @record.contact_settings.dig(type)
+      tr
+        td
+          i.big.fitted.icon class=contact_type_icon(type) class=(value == 'false' ? 'grey' : 'blue')
+        td
+          strong = translate("cms.hints.manager.contact_settings.categories.#{type}")
+          .fitted.hint = translate("cms.hints.manager.contact_settings.hints.#{type}", period: contact_type_summary_period(type))
+        /td
+          .ui.toggle.checkbox
+            input type='checkbox' name="contact_settings[#{type}]" value='true' checked=('checked' if value != 'false')
+        td.single.line
+          .ui.radio.checkbox
+            input type='radio' name="manager[contact_settings][#{type}]" value='true' checked=('checked' unless value == 'false')
+            label
+              - if true || %w[event_registrations region_summary country_summary application_summary].include?(type)
+                i.envelope.icon
+                = translate('cms.hints.manager.contact_settings.options.email')
+              - else
+                i.chat.icon
+                = translate('cms.hints.manager.contact_settings.options.enabled')
+        td
+          - unless type == 'event_verification'
+            .ui.radio.checkbox class=('disabled' if type == 'event_verification')
+              input type='radio' name="manager[contact_settings][#{type}]" value='false' checked=('checked' if value == 'false')
+              label = translate('cms.hints.manager.contact_settings.options.disabled')

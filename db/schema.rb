@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_06_123958) do
+ActiveRecord::Schema.define(version: 2022_02_05_122257) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -96,6 +96,7 @@ ActiveRecord::Schema.define(version: 2022_01_06_123958) do
     t.integer "status", default: 0, null: false
     t.string "phone_name"
     t.string "phone_number"
+    t.integer "registration_limit"
     t.index ["manager_id"], name: "index_events_on_manager_id"
     t.index ["status"], name: "index_events_on_status"
     t.index ["venue_id"], name: "index_events_on_venue_id"
@@ -146,7 +147,13 @@ ActiveRecord::Schema.define(version: 2022_01_06_123958) do
     t.datetime "last_login_at"
     t.boolean "email_verified"
     t.datetime "email_verification_sent_at"
+    t.integer "contact_method", default: 0, null: false
+    t.string "phone"
+    t.boolean "phone_verified", default: false
+    t.datetime "phone_verification_sent_at"
+    t.json "contact_settings", default: {}
     t.index ["email"], name: "index_managers_on_email", unique: true
+    t.index ["phone"], name: "index_managers_on_phone", unique: true
   end
 
   create_table "passwordless_sessions", force: :cascade do |t|

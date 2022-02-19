@@ -21,7 +21,7 @@
 
 .two.fields
   = f.input :room, hint: translate('cms.hints.event.room')
-  = f.input :language_code, collection: languages, selected: @record.language_code || @record.venue.country.default_language_code || I18n.locale.upcase, input_html: { class: 'search' }, hint: translate('cms.hints.event.language')
+  = f.input :language_code, collection: languages, selected: @record.default_language_code, input_html: { class: 'search' }, hint: translate('cms.hints.event.language')
 
 = f.input :custom_name, placeholder: @record.category_name, hint: translate('cms.hints.event.custom_name')
 
@@ -56,17 +56,8 @@ br
   = f.input :phone_number, as: :tel, hint: translate('cms.hints.event.phone_number')
   = f.input :phone_name, as: :string, hint: translate('cms.hints.event.phone_name')
 
-//= f.input :disable_notifications, hint: translate('cms.hints.event.disable_notifications')
-
 - if policy(@record).set_manager?
   .ui.small.dividing.violet.header = translate('cms.forms.event.manager')
-
-  - @record.manager = Manager.new unless @record.manager.present?
-  = f.simple_fields_for :manager, include_id: false do |ff|
-    .ui.hint = translate('cms.hints.event.manager')
-
-    .two.fields
-      = ff.input :name, input_html: { value: @record.manager&.name }
-      = ff.input :email, input_html: { value: @record.manager&.email }
+  = render 'cms/managers/selector', f: f, manager: @record.manager
 
 .ui.hidden.section.divider
