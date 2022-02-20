@@ -5,6 +5,7 @@ class ManagedRecordMailer < ApplicationMailer
 
   def created
     setup
+    return unless @manager.notifications.new_managed_record?
     
     subject = I18n.translate(@record.model_name.i18n_key, scope: 'mail.managed_record.created.subject', record: @record.label)
     puts "[MAIL] Sending new managed record email to #{@manager.name} for #{@record}"

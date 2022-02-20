@@ -4,6 +4,9 @@ class EventMailer < ApplicationMailer
   layout 'mail/admin'
 
   def summary
+    setup
+    return unless @manager.notifications.client_summary?
+
     # stub
   end
 

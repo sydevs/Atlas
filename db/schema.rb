@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_05_122257) do
+ActiveRecord::Schema.define(version: 2022_02_19_190455) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -80,7 +80,6 @@ ActiveRecord::Schema.define(version: 2022_02_05_122257) do
     t.bigint "manager_id"
     t.boolean "published", default: true
     t.datetime "latest_registration_at"
-    t.boolean "disable_notifications", default: false, null: false
     t.integer "registration_mode", default: 0
     t.string "registration_url"
     t.string "language_code", limit: 2
@@ -152,6 +151,7 @@ ActiveRecord::Schema.define(version: 2022_02_05_122257) do
     t.boolean "phone_verified", default: false
     t.datetime "phone_verification_sent_at"
     t.json "contact_settings", default: {}
+    t.integer "notifications", default: 2147483647, null: false
     t.index ["email"], name: "index_managers_on_email", unique: true
     t.index ["phone"], name: "index_managers_on_phone", unique: true
   end

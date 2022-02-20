@@ -3,6 +3,7 @@ cs:
     layout:
       sahaj_atlas: "Sahaj Atlas"
       learn_more: "Learn more"
+      update_notifications: "Update notification settings"
       information:
         atlas:
           title: "What is Sahaj Atlas?"
@@ -11,8 +12,11 @@ cs:
           title: "Do not forward this email"
           description: "The links in this email allow access to edit the Sahaj Atlas. Forwarding this email will compromise the security of the website."
         automated:
-          title: "Automated email / Unsubscribe"
-          description: "This is an automated email. If you don't know why you receive this email, no longer want to receive these emails, or have any questions: please write to"
+          title: "Automated email"
+          description: "This is an automated email. If you don't know why you receive this email, or have any questions: please write to"
+        unsubscribe:
+          title: "Unsubscribe"
+          description: "You can manage which notifications you receive from Sahaj Atlas, by editing your profile."
 
     login:
       title: "Login to Sahaj Atlas"

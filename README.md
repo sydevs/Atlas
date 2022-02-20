@@ -60,7 +60,7 @@ We support only the most recent versions of Chrome, Safari, Firefox, Edge, and O
 
 Once the server is running you should be able to access the website at [localhost:3000](http://localhost:3000).
 
-To login to the Content Management System (CMS), you can enter this test email address `zoraida_parker@example.com`, then check the server log for a print out of the login email. Copy the login url from the server log into your browser to access the CMS.
+To login to the Content Management System (CMS), you can enter this test email address `admin@example.com`, then check the server log for a print out of the login email. Copy the login url from the server log into your browser to access the CMS.
 
 ## Framework & Languages
  - **Ruby on Rails** is our core server framework. If you are not familiar with Ruby, I recommend looking through [this summary](https://learnxinyminutes.com/docs/ruby/) of how to do standard programming things in Ruby. This README will not directly explain how Rails works, but rather just explain the things that you need to know to get started. However, you should be familiar with the concept of [Model-View-Controller](https://www.codecademy.com/articles/mvc), which Rails uses heavily.

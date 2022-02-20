@@ -10,25 +10,26 @@ module CMS::FieldsHelper
   }.freeze
 
   def contact_types manager
-    result = %w[new_managed_record event_verification]
-    result << 'event_registrations' if manager.events.present?
-    result << 'region_summary' if manager.provinces.present? || manager.local_areas.present?
-    result << 'country_summary' if manager.countries.present?
-    result << 'application_summary' if manager.administrator?
+    result = %i[new_managed_record event_verification]
+    result << :event_registrations if manager.events.present?
+    result << :region_summary if manager.provinces.present? || manager.local_areas.present?
+    result << :country_summary if manager.countries.present?
+    result << :application_summary if manager.administrator?
+    # result << :client_summary if manager.clients.present?
     result
   end
   
   def contact_type_icon type
-    CONTACT_TYPE_ICONS[type.to_sym]
+    CONTACT_TYPE_ICONS[type]
   end
   
   def contact_type_summary_period type
     case type
-    when 'region_summary'
+    when :region_summary
       distance_of_time_in_words(RegionMailer::SUMMARY_PERIOD)
-    when 'country_summary'
+    when :country_summary
       distance_of_time_in_words(CountryMailer::SUMMARY_PERIOD)
-    when 'application_summary'
+    when :application_summary
       distance_of_time_in_words(ApplicationMailer::SUMMARY_PERIOD)
     end
   end

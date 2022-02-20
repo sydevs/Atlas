@@ -185,7 +185,6 @@ ru:
         room: "Помещение"
         building: "Здание"
         language_code: "Язык"
-        disable_notifications: "Отключить уведомления"
         registration_mode: "Режим регистрации"
         registration_modes:
           native: "Сахадж Атлас"

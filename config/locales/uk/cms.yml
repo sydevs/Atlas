@@ -92,7 +92,7 @@ uk:
         manager: "Менеджер"
       manager: # TODO: Translate
         contact_methods: "Contact Methods"
-        contact_settings: "Contact Preferences"
+        notifications: "Notification Settings"
       client:
         keys: "Ключі доступу"
         manager: "Vенеджер"
@@ -122,7 +122,6 @@ uk:
         description_count: " символів"
         room: "В якому приміщенні будівлі проходить захід?"
         language: "Якою основною мовою подається ця подія?"
-        disable_notifications: "Якщо вибрано, менеджери цієї події не отримають електронні листи про те, хто зареєструвався на подію."
         registration_mode: "Куди шукачам звернутися, щоб зареєструватися на подію? Ми наполегливо рекомендуємо вам залишити це значення як \"%{native}\". Якщо шукачі зареєструються на цьому веб-сайті, ми зможемо надсилати їм нагадування та додаткові електронні листи."
         registration_url: "URL-адреса реєстрації буде встановлено автоматично, якщо встановлено режим \"%{native}.\""
         online: "Установіть цей прапорець, якщо програма буде проходити онлайн."
@@ -176,7 +175,7 @@ uk:
             application_summary: "Sahaj Atlas Summary"
           hints:
             new_managed_record: "A message sent to you when you are given permission to manage a new event, region or resource on the Atlas."
-            event_verification: "Messages requesting event and city managers to check their events' accuracy. Sent every 3 months, for each event."
+            event_verification: "Messages requesting event and city managers to check their events' accuracy. Sent every 3 months, for each event. This cannot be disabled."
             event_registrations: "A list of new registrations sent to event managers. Sent around 24 hours before each event."
             region_summary: "A summary of changes within a region sent to regional managers. Sent every %{period}."
             country_summary: "A summary of changes sent to country managers. Sent every %{period}."
@@ -200,6 +199,8 @@ uk:
       area_in_words: "%{radius} км навколо %{latitude}, %{longitude}"
       records_in_recent_days: "%{resources} за останні 30 днів"
       record_has_language: "%{resource} пропонується на %{language}"
+      notification_settings: "Notification Settings" # TODO: Translate
+      contact_details: "Contact Information" # TODO: Translate
       updated_at: "Останнє оновлення"
       resources_managed:
         title: "Керовані ресурси"

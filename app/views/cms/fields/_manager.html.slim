@@ -25,43 +25,54 @@ table.ui.very.basic.stackable.table
         - if !@record.send("#{method}?")
           i.minus.circle.icon
           = translate('cms.hints.not_set')
-        - elsif !@record.send("#{method}_verified?")
+        - elsif @record.send("#{method}_verified?")
           i.green.check.circle.icon
           = translate('cms.hints.verified')
+        /- elsif @record == current_user 
+          a.ui.basic.button Send Verification
         - else
           i.red.times.circle.icon
           = translate('cms.hints.not_verified')
+          /- if @record == current_user
+            br
+            a
+              ' Send Verification
+              i.right.arrow.icon
 
 = f.input :contact_method, collection: Manager.contact_methods.map { |k, v| [translate_enum_value(Manager, :contact_method, k), k] }, hint: translate('cms.hints.manager.contact_method')
 
-
-.ui.small.dividing.violet.header = translate('cms.forms.manager.contact_settings')
-= f.simple_fields_for :contact_settings do |ff|
-  .hint = translate('cms.hints.manager.contact_settings.hint')
-  table.ui.very.basic.sortable.stackable.table
-    - contact_types(@record).each do |type|
-      - value = @record.contact_settings.dig(type)
-      tr
-        td
-          i.big.fitted.icon class=contact_type_icon(type) class=(value == 'false' ? 'grey' : 'blue')
-        td
-          strong = translate("cms.hints.manager.contact_settings.categories.#{type}")
-          .fitted.hint = translate("cms.hints.manager.contact_settings.hints.#{type}", period: contact_type_summary_period(type))
-        /td
-          .ui.toggle.checkbox
-            input type='checkbox' name="contact_settings[#{type}]" value='true' checked=('checked' if value != 'false')
-        td.single.line
-          .ui.radio.checkbox
-            input type='radio' name="manager[contact_settings][#{type}]" value='true' checked=('checked' unless value == 'false')
-            label
-              - if true || %w[event_registrations region_summary country_summary application_summary].include?(type)
-                i.envelope.icon
-                = translate('cms.hints.manager.contact_settings.options.email')
-              - else
-                i.chat.icon
-                = translate('cms.hints.manager.contact_settings.options.enabled')
-        td
-          - unless type == 'event_verification'
-            .ui.radio.checkbox class=('disabled' if type == 'event_verification')
-              input type='radio' name="manager[contact_settings][#{type}]" value='false' checked=('checked' if value == 'false')
-              label = translate('cms.hints.manager.contact_settings.options.disabled')
+- if @record == current_user
+  .ui.small.dividing.violet.header id='notifications' = translate('cms.forms.manager.notifications')
+  = f.simple_fields_for :contact_settings do |ff|
+    .hint = translate('cms.hints.manager.contact_settings.hint')
+    table.ui.very.basic.sortable.stackable.centered.narrow.table
+      - contact_types(@record).each do |type|
+        - enabled = @record.notifications.set?(type)
+        tr
+          td
+            i.big.fitted.icon class=contact_type_icon(type) class=(enabled ? 'blue' : 'grey')
+          td
+            strong = translate("cms.hints.manager.contact_settings.categories.#{type}")
+            .fitted.hint = translate("cms.hints.manager.contact_settings.hints.#{type}", period: contact_type_summary_period(type))
+          td.single.line.center.aligned
+            .ui.toggle.checkbox class=('disabled' if type == :event_verification)
+              input type='checkbox' name='manager[notifications][]' value=type checked=('checked' if enabled)
+            - if true || %i[event_registrations region_summary country_summary application_summary].include?(type)
+              br
+              i.envelope.icon
+              = translate('cms.hints.manager.contact_settings.options.email')
+          /td.single.line
+            .ui.radio.checkbox
+              input type='radio' name="manager[contact_settings][#{type}]" value='true' checked=('checked' unless value == 'false')
+              label
+                - if true || %w[event_registrations region_summary country_summary application_summary].include?(type)
+                  i.envelope.icon
+                  = translate('cms.hints.manager.contact_settings.options.email')
+                - else
+                  i.chat.icon
+                  = translate('cms.hints.manager.contact_settings.options.enabled')
+          /td
+            - unless type == 'event_verification'
+              .ui.radio.checkbox class=('disabled' if type == 'event_verification')
+                input type='radio' name="manager[contact_settings][#{type}]" value='false' checked=('checked' if value == 'false')
+                label = translate('cms.hints.manager.contact_settings.options.disabled')

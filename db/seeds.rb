@@ -119,6 +119,12 @@ MANAGERS.count.upto(10).each do
   MANAGERS << Manager.create(name: name, email: email)
 end
 
+Manager.find_or_create_by(email: "admin@example.com") do |manager|
+  manager.name = "Test Admin"
+  manager.administrator = true
+end
+
+
 counter = 1
 File.open('db/seeds/us.addresses.txt', 'r').each_line do |line|
   load_venue(line, 'US', counter)

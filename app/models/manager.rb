@@ -6,6 +6,7 @@ class Manager < ApplicationRecord
   audited
 
   enum contact_method: { email: 0, whatsapp: 1, telegram: 2, wechat: 3 }, _prefix: :contact_by
+  flag :notifications, %i[new_managed_record event_verification event_registrations region_summary country_summary application_summary client_summary]
 
   # Associations
   has_many :managed_records, dependent: :delete_all
@@ -35,7 +36,7 @@ class Manager < ApplicationRecord
   scope :client_managers, -> { joins(:clients) }
 
   # Methods
-  before_save :unverify_email
+  before_save :unverify
 
   def parent
     case type
@@ -132,13 +133,14 @@ class Manager < ApplicationRecord
   end
 
   def verified?
-    email_verified?
+    email_verified? || phone_verified?
   end
 
   private
 
-    def unverify_email
+    def unverify
       self[:email_verified] = false if email_changed?
+      self[:phone_verified] = false if phone_changed?
     end
 
 end

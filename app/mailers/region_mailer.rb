@@ -9,6 +9,7 @@ class RegionMailer < ApplicationMailer
   def summary
     setup
     last_summary_email_sent_at = @region.summary_email_sent_at || 1.year.ago
+    return unless @manager.notifications.region_summary?
     return if !params&.dig(:test) && last_summary_too_soon?(last_summary_email_sent_at)
     
     @start_of_period = SUMMARY_PERIOD.ago.beginning_of_week

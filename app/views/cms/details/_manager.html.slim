@@ -18,16 +18,10 @@ h3.ui.small.dividing.grey.header = translate('cms.details.details_for_record', r
       .header = translate("cms.dashboard.role.#{@record.type}.title")
       .description = translate("cms.dashboard.role.#{@record.type}.description", region: @record.parent&.label)
   .item
-    i.mail.icon
+    i.translate.icon
     .content
-      .header = translate_attribute(Manager, :email)
-      .description = @record.email
-  - if !@record.email_verified? && @record.email_verification_sent_at
-    .item
-      i.check.circle.icon
-      .content
-        .header = translate_attribute(Manager, :email_verification_sent_at)
-        .description = time_ago_in_words(@record.email_verification_sent_at)
+      .header = translate_attribute(Manager, :language_code)
+      .description = @record.language_name
   .item
     i.clock.icon
     .content
@@ -43,3 +37,46 @@ h3.ui.small.dividing.grey.header = translate('cms.details.details_for_record', r
           div &nbsp;&nbsp;#{translate_model_count(Province, @record.managed_localities_counter)}
           div &nbsp;&nbsp;#{translate_model_count(Event, @record.events.count)}
           div &nbsp;&nbsp;#{translate_model_count(Client, @record.clients.count)}
+
+h3.ui.small.dividing.grey.header = translate('cms.details.contact_details')
+.ui.list
+  - %i[email phone].each do |key|
+    - if @record.try(key).present?
+      .item
+        i.icon class=(key == :email ? :mail : key)
+        .content
+          .header = translate_attribute(Manager, key)
+          .description = @record.send(key)
+      - if !@record.send(:"#{key}_verified?") && @record.send(:"#{key}_verification_sent_at")
+        .item
+          i.check.circle.icon
+          .content
+            .header = translate_attribute(Manager, :"#{key}_verification_sent_at")
+            .description = time_ago_in_words(@record.send(:"#{key}_verification_sent_at"))
+  .item
+    i.icon class=(@record.contact_by_email? ? :mail : @record.contact_method)
+    .content
+      .header = translate_attribute(Manager, :contact_method)
+      .description = translate_enum_value(@record, :contact_method)
+
+h3.ui.small.dividing.grey.header = translate('cms.details.notification_settings')
+table.ui.very.basic.compact.table
+  - contact_types(@record).each do |type|
+    - enabled = @record.notifications.set?(type)
+    tr
+      td
+        i.fitted.icon class=contact_type_icon(type) class=(enabled ? 'blue' : 'grey')
+      td
+        strong = translate("cms.hints.manager.contact_settings.categories.#{type}")
+      td
+        .fitted.hint = translate("cms.hints.manager.contact_settings.hints.#{type}", period: contact_type_summary_period(type))
+      td.single.line
+        - if !enabled
+          i.grey.times.icon
+          = translate('cms.hints.manager.contact_settings.options.disabled')
+        - elsif true || %w[event_registrations region_summary country_summary application_summary].include?(type)
+          i.blue.envelope.icon
+          = translate('cms.hints.manager.contact_settings.options.email')
+        - else
+          i.blue.check.icon
+          = translate('cms.hints.manager.contact_settings.options.enabled')

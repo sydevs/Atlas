@@ -20,6 +20,8 @@ class ManagerMailer < ApplicationMailer
   def new_managed_record
     managed_record = params[:managed_record]
     @manager = managed_record&.manager || params[:manager]
+    return unless @manager.notifications.new_managed_record?
+    
     @record = managed_record&.record || params[:record]
     create_session!
 

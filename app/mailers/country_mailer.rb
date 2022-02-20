@@ -9,6 +9,7 @@ class CountryMailer < ApplicationMailer
   def summary
     setup
     last_summary_email_sent_at = @country.summary_email_sent_at || 1.year.ago
+    return unless @manager.notifications.country_summary?
     return if !params&.dig(:test) && last_summary_too_soon?(last_summary_email_sent_at)
 
     puts "[MAIL] Sending summary email for #{@country.label}"

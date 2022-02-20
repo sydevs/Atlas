@@ -186,7 +186,6 @@ uk:
         room: "Кімната"
         building: "Будівля"
         language_code: "Мова"
-        disable_notifications: "Вимкнути сповіщення"
         registration_mode: "Режим реєстрації"
         registration_modes:
           native: "Сахадж Атлас"

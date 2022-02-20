@@ -91,7 +91,7 @@ ru:
         manager: "Менеджер"
       manager: # TODO: Translate
         contact_methods: "Contact Methods"
-        contact_settings: "Contact Preferences"
+        notifications: "Notification Settings"
       client:
         keys: "Ключи доступа"
         manager: "Менеджер"
@@ -121,7 +121,6 @@ ru:
         description_count: " символы"
         room: "В какой комнате проходит мероприятие?"
         language: "На каком языке проводится это событие, если указано в?"
-        disable_notifications: "Если этот параметр выбран, менеджеры этого события не будут получать email о том, кто зарегистрировался на мероприятие."
         registration_mode: "Куда отправлять искателей для регистрации на мероприятие? Мы настоятельно рекомендуем оставить здесь '%{native}.' Регистрация искателей на этом веб-сайте позволит нам отправлять им напоминания и последующие уведомления."
         registration_url: "URL-адрес регистрации будет установлен автоматически, если установлен режим \"%{native}.\""
         online: "Установи этот флажок, если программа будет проходить онлайн."
@@ -175,7 +174,7 @@ ru:
             application_summary: "Sahaj Atlas Summary"
           hints:
             new_managed_record: "A message sent to you when you are given permission to manage a new event, region or resource on the Atlas."
-            event_verification: "Messages requesting event and city managers to check their events' accuracy. Sent every 3 months, for each event."
+            event_verification: "Messages requesting event and city managers to check their events' accuracy. Sent every 3 months, for each event. This cannot be disabled."
             event_registrations: "A list of new registrations sent to event managers. Sent around 24 hours before each event."
             region_summary: "A summary of changes within a region sent to regional managers. Sent every %{period}."
             country_summary: "A summary of changes sent to country managers. Sent every %{period}."
@@ -199,6 +198,8 @@ ru:
       area_in_words: "%{radius} км вокруг %{latitude}, %{longitude}"
       records_in_recent_days: "%{resources} за последние 30 дней"
       record_has_language: "%{resource} предлагается на %{language}"
+      notification_settings: "Notification Settings" # TODO: Translate
+      contact_details: "Contact Information" # TODO: Translate
       updated_at: "Последнее обновление"
       resources_managed:
         title: "Управляемые ресурсы"

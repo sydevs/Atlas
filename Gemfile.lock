@@ -43,6 +43,8 @@ GEM
       rails-html-sanitizer (~> 1.1, >= 1.2.0)
     active_decorator (1.4.0)
       activesupport
+    active_flag (1.5.2)
+      activerecord (>= 5)
     activejob (6.1.4.1)
       activesupport (= 6.1.4.1)
       globalid (>= 0.3.6)
@@ -455,6 +457,7 @@ PLATFORMS
 DEPENDENCIES
   aasm
   active_decorator
+  active_flag
   after_commit_everywhere (~> 1.0)
   audited
   autoprefixer-rails

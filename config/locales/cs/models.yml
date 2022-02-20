@@ -185,7 +185,6 @@ cs:
         room: "Room"
         building: "Building"
         language_code: "Language"
-        disable_notifications: "Disable Notifications"
         registration_mode: "Registration Mode"
         registration_modes:
           native: "Sahaj Atlas"

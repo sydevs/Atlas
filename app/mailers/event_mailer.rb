@@ -5,6 +5,7 @@ class EventMailer < ApplicationMailer
 
   def status
     setup
+
     if @status.present? && @status != :verified
       puts "[MAIL] Sending status email (#{@event.status}) for #{@event.label} to #{@manager.name}"
     else
@@ -35,6 +36,8 @@ class EventMailer < ApplicationMailer
 
   def reminder
     setup
+    return unless @manager.notifications.event_registrations?
+
     if (params && params[:test]) || (@event.next_occurrence_at && @event.next_occurrence_at <= 1.day.from_now)
       puts "[MAIL] Sending reminder email for #{@event.label} to #{@manager.name}"
     else

@@ -39,6 +39,7 @@ gem 'phonelib' # For telephone validation
 gem 'premailer-rails' # Generate inline styles for emails
 gem 'pundit' # Permissions
 gem 'aasm' # State machine for managing expiration status
+gem 'active_flag' # Bitwise flag for storing notification settings
 gem 'after_commit_everywhere', '~> 1.0' # Dependency for aasm
 
 ### Geocoding

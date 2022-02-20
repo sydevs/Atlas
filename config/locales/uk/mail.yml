@@ -3,6 +3,7 @@ uk:
     layout:
       sahaj_atlas: "Сахадж Атлас"
       learn_more: "Дізнатись більше"
+      update_notifications: "Update notification settings" # TODO: Translate
       information:
         atlas:
           title: "Що таке Сахадж Атлас?"
@@ -10,9 +11,12 @@ uk:
         security:
           title: "Не пересилайте цей електронний лист"
           description: "Посилання в цьому електронному листі надають доступ до редагування Сахадж Атласу. Пересилання цього листа поставить під загрозу безпеку веб-сайту."
-        automated:
-          title: "Автоматична електронна пошта / Скасувати підписку"
-          description: "Це автоматизована електронна пошта. Якщо ви не знаєте, чому ви отримали цей лист, більше не хочете отримувати ці листи чи маєте запитання: напишіть на адресу"
+        automated: # TODO: Translate
+          title: "Автоматична електронна пошта"
+          description: "This is an automated email. If you don't know why you receive this email, or have any questions: please write to"
+        unsubscribe: # TODO: Translate
+          title: "Скасувати підписку"
+          description: "You can manage which notifications you receive from Sahaj Atlas, by editing your profile."
 
     login:
       title: "Увійдіть до Сахадж Атласу"
