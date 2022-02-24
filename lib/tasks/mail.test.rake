@@ -21,7 +21,7 @@ namespace :mail do
       task summary: :environment do
         ActionMailer::Base.delivery_method = :letter_opener
         manager = Manager.administrators.reorder('RANDOM()').first
-        ApplicationMailer.with(test: true, manager: manager).summary.deliver_now
+        ApplicationMailer.with(manager: manager, test: true).summary.deliver_now
       end
     end
 

@@ -36,7 +36,7 @@ namespace :mail do
     end
     
     Manager.administrators.each do |manager|
-      ApplicationMailer.summary(manager: manager).deliver_later
+      ApplicationMailer.with(manager: manager).summary.deliver_later
     end
   end
 end
