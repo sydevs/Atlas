@@ -28,6 +28,7 @@
     i.dropdown.icon
     = f.label translate('cms.hints.event.manager.view_fields'), required: true
   .content class=('active' if manager&.new_record? || manager&.errors&.present?)
+    - f.object.manager ||= Manager.new
     = f.simple_fields_for :manager do |ff|
       - new_manager = f.object.manager.new_record?
       .two.fields

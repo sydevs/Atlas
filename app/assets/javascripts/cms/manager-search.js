@@ -48,6 +48,7 @@ const ManagerSearch = {
           this.$fields.accordion('open', 0)
         }
 
+        this.$card.show()
         return false
       }
     })
