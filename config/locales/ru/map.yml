@@ -27,7 +27,8 @@ ru:
       language: "Язык занятия" 
       directions: "Как нас найти"
       online: "Онлайн-класс"
-      online_from: "Транслируется из" 
+      online_from: "Транслируется из"
+      tel: "tel" # TODO: Translate
     registration:
       header: "Записаться сейчас"
       form:

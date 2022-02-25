@@ -49,9 +49,9 @@
       time.event__meta__time data-attribute='time' datetime=startTime
         = endTime ? "#{startTime} - #{endTime}" : startTime
       '  
-      abbr.event__meta__timezone data-attribute='timeZone' data-title="Local Time" LT
+      abbr.event__meta__timezone data-attribute='timeZone' data-title='Local Time' LT
     a.event__phone data-attribute='phone'
-      span.event__phone__number data-attribute='phoneNumber'
+      span.event__phone__number data-attribute='phoneNumber' data-prefix="#{translate('map.information.tel')}: "
       span.event__phone__name data-attribute='phoneName'
 
   .info__actions

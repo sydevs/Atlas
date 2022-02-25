@@ -25,6 +25,7 @@ uk:
       directions: "Отримати направлення"
       online: "Онлайн клас"
       online_from: "Від"
+      tel: "tel" # TODO: Translate
     registration:
       header: "Зареєструйтеся зараз"
       form:

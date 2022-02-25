@@ -28,6 +28,7 @@ cs:
       directions: "Get directions"
       online: "Online Class"
       online_from: "Hosted from"
+      tel: "tel"
     registration:
       header: "Register now"
       form:
