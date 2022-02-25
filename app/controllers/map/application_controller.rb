@@ -7,7 +7,7 @@ class Map::ApplicationController < ActionController::Base
 
   def show
     I18n.locale = params[:locale]&.to_sym || :en
-    @list_type = params[:type] || 'offline'
+    @list_type = params[:type] == 'online' ? 'online' : 'offline'
     @mode = 'map'
 
     if params[:venue_id]

@@ -24,10 +24,6 @@ class Navbar {
         this.setActive(true)
       }
     })
-
-    if (this.searchInput.value) {
-      this.refreshGeoSearch()
-    }
   }
 
   setText(text) {

@@ -16,7 +16,7 @@ ruby:
         span id='js-venue-title' = @venue&.dig('label')
 
     .navbar__search
-      input.navbar__search__input id='js-search-input' type='text' tabindex='1' placeholder=translate('map.listing.search')
+      input.navbar__search__input id='js-search-input' type='text' tabindex='1' placeholder=translate('map.listing.search') value=params[:q]
       .navbar__search__icon
         i.icon.icon--search
         i.icon.icon--spinner
