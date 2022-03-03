@@ -4,6 +4,10 @@ class VenuePolicy < DatabasePolicy
     user.present?
   end
 
+  def mappable?
+    true
+  end
+
   def index_association? association = nil
     return false if association == :regions
 

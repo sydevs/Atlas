@@ -15,6 +15,7 @@ class EventMailer < ApplicationMailer
     def setup
       @client = params[:client] || params[:record]
       @manager = params[:manager] || @client.manager
+      create_session!
     end
 
 end

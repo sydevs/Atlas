@@ -103,4 +103,8 @@ module Expirable
     end_date < DateTime.now
   end
 
+  def publishable?
+    %i[verified needs_review needs_urgent_review].include?(status.to_sym)
+  end
+
 end

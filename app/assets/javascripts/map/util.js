@@ -99,8 +99,8 @@ const Util = {
     case 'recurrence':
       if (startDateTime == endDateTime) {
         return startDateTime
-      } else if (event.timing.recurrence == 'day' && event.lastOccurrence) {
-        return `${startDateTime} - ${endDateTime}`
+      } else if (event.timing.recurrence == 'day' && Boolean(event.lastOccurrence)) {
+        return `${startDateTime.toLocaleString({ month: 'long', day: 'numeric' })} - ${endDateTime.toLocaleString({ month: 'long', day: 'numeric' })}`
       } else {
         return Util.translateWeekday(nextDateTime.toLocaleString({ weekday: 'long' }))
       }

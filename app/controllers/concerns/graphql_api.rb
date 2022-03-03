@@ -25,6 +25,7 @@ module GraphqlAPI
     timing {
       duration
       timeZone
+      recurrence
     }
     images {
       url

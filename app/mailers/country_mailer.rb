@@ -48,6 +48,7 @@ class CountryMailer < ApplicationMailer
     def setup
       @country = params[:country] || params[:record]
       @manager = params[:manager]
+      create_session!
     end
 
 end

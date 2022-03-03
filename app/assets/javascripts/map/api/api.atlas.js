@@ -29,6 +29,7 @@ class AtlasAPI {
           timing {
             duration
             timeZone
+            recurrence
           }
           firstOccurrence
           lastOccurrence

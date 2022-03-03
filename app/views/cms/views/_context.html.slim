@@ -7,6 +7,8 @@ h2.ui.header
       = floating_action translate('cms.actions.simple.destroy'), 'trash', url_for([:cms, @context]), data: { method: 'DELETE', confirm: translate('cms.messages.confirm_destroy') }
     - if allow.edit?
       = floating_action translate('cms.actions.simple.edit'), 'edit', url_for([:edit, :cms, @context])
+    - if @context.try(:publicly_visible?)
+      = floating_action translate('cms.actions.simple.view'), 'marker', url_for([:map, @context]), target: '_blank'
     - if @context.respond_to?(:published) && !@context.published
       - text = translate('cms.details.record_not_published.title', resource: translate_model(@context.class))
       - tooltip = translate('cms.details.record_not_published.description', resource: translate_model(@context.class).downcase)

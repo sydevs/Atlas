@@ -57,6 +57,7 @@ class ApplicationMailer < ActionMailer::Base
 
     def setup
       @manager = params[:manager]
+      create_session!
     end
 
 end

@@ -62,6 +62,7 @@ class EventMailer < ApplicationMailer
       @manager = params[:manager] || @event.manager
       @status = @event.status.to_sym
       @status = :created if @status == :verified && @event.created_at > 1.week.ago
+      create_session!
     end
 
 end

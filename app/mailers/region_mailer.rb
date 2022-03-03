@@ -50,6 +50,7 @@ class RegionMailer < ApplicationMailer
     def setup
       @region = params[:region] || params[:record]
       @manager = params[:manager]
+      create_session!
     end
 
 end

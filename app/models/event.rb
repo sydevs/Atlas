@@ -47,7 +47,7 @@ class Event < ApplicationRecord
   scope :with_new_registrations, -> { where('events.latest_registration_at >= events.summary_email_sent_at') }
   scope :current, -> { where('events.end_date IS NULL OR events.end_date >= ?', DateTime.now) }
   scope :publicly_visible, -> { current.manager_verified.publishable.published }
-  scope :manager_verified, -> { joins(:manager).where(managers: { email_verified: true }) }
+  scope :manager_verified, -> { joins(:manager).where.not(managers: { email_verified: false, phone_verified: false }) }
 
   scope :ready_for_reminder_email, -> { where("reminder_email_sent_at IS NULL OR reminder_email_sent_at <= ?", 12.hours.ago) }
 
@@ -64,6 +64,10 @@ class Event < ApplicationRecord
 
   def region_association?
     false
+  end
+
+  def publicly_visible?
+    manager.verified? && published? && publishable?
   end
 
   def language_code= value

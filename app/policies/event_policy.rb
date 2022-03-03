@@ -4,4 +4,8 @@ class EventPolicy < DatabasePolicy
     manage? super_manager: true
   end
 
+  def mappable?
+    true
+  end
+
 end
