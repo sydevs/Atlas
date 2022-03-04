@@ -9,6 +9,7 @@ class InfoPanel {
     this.languageBlock = document.getElementById('js-info-language')
     this.form = document.getElementById('js-registration')
     this.formFeedback = document.getElementById('js-registration-feedback')
+    this.actions = document.getElementById('js-registration-actions')
     this.submitButton = document.getElementById('js-registration-submit')
     this.submitButton.addEventListener('click', event => { this.submit(); event.preventDefault() })
 
@@ -53,8 +54,8 @@ class InfoPanel {
       this.elements.timeZone.dataset.title = ''
     }
 
-    this.form.classList.toggle('registration--confirmed', Boolean(event.registered))
-    this.form.style = Date.parse(event.timing.registration_end_time) < Date.now() ? 'display: none' : ''
+    const registrationEnabled = !(event.registrationEndTime && Date.parse(event.registrationEndTime) < Date.now())
+    this.container.classList.toggle('info--registration', registrationEnabled)
 
     this.elements.directions.style = venue ? '' : 'display: none'
     this.elements.directions.href = venue ? venue.directionsUrl : null

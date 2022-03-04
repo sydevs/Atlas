@@ -7,11 +7,15 @@
   position: relative
 
 // ===== HEADER ===== //
+.registration__closed
+  font-size: 16px !important
+
 .registration__header
   margin: auto
   margin-top: 50px
   margin-bottom: 20px
   color: $color-grey-dark
+  font-size: 18px
 
   display: flex
   flex-direction: row
@@ -21,8 +25,8 @@
   &:before, &:after
     content: ''
     background: image-url('map/leaves.svg')
-    width: 48px
-    height: 53px
+    width: 2.667em
+    height: 2.944em
     display: inline-block
 
   &:before
@@ -39,13 +43,12 @@
 
   &__title
     font-weight: $font-semibold
-    font-size: 18px
     line-height: 1.25
     margin-bottom: 6px
 
   &__subtitle
     font-style: italic
-    font-size: 12px
+    font-size: 0.666em
     line-height: 1.1667
     letter-spacing: 0.36px
 

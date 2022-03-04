@@ -31,6 +31,7 @@ cs:
       tel: "tel"
     registration:
       header: "Register now"
+      closed: "Registration Closed"
       form:
         timing: "I’d like to start on:"
         email: "Email"

@@ -24,7 +24,7 @@ module Types
     field :online_url, String, null: true
 
     field :registration_mode, String, null: false
-    field :registration_end_time, GraphQL::Types::ISO8601DateTime, null: false
+    field :registration_end_time, GraphQL::Types::ISO8601DateTime, null: true
     field :registration_url, String, null: true
 
     field :images, [Types::ImageType], null: true, resolver_method: :get_images

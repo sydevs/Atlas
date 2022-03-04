@@ -28,6 +28,7 @@ uk:
       tel: "tel" # TODO: Translate
     registration:
       header: "Зареєструйтеся зараз"
+      closed: "Registration Closed" # TODO: Translate
       form:
         timing: "Я хотів би почати з:"
         email: "Електронна пошта"

@@ -17,6 +17,7 @@ module GraphqlAPI
     onlineUrl
     registrationMode
     registrationUrl
+    registrationEndTime
     venueId
     path
     firstOccurrence

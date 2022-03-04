@@ -16,7 +16,7 @@
   .list__results id='js-list-online' data-type='online'
 
 // ===== INFO PANEL ===== //
-.info id='js-info-panel'
+.info id='js-info-panel' class=('info--registration' unless @event&.dig(:timing, :registration_end_time)&.past?)
   .info__action.info__action--left id='js-info-close'
     .icon.icon--left
   .info__action.info__action--right id='js-info-share'
@@ -69,7 +69,12 @@
   .info__images.main-carousel id='js-image-gallery' data-attribute='images' style='display: none'
 
   #register
-  form.registration id='js-registration' style=(@event&.dig(:timing, :registration_end_time)&.past? ? 'display: none' : '')
+
+  form.registration id='js-registration'
+    .registration__header.registration__closed
+      .registration__header__text
+        .registration__header__title = translate('map.registration.closed')
+
     .registration__header
       .registration__header__text
         .registration__header__title = translate('map.registration.header')

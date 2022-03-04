@@ -26,6 +26,15 @@ body[data-page="show"] .info
   body[data-list="online"] &
     box-shadow: $shadow-heavy
 
+.info--registration
+  .registration__closed
+    display: none
+
+.info:not(.info--registration)
+  .info__register,
+  .registration__closed ~ *
+    display: none
+
 .info__actions
   display: flex
   flex-direction: row
