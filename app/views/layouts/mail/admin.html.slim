@@ -45,7 +45,7 @@ html
             = link_to translate('mail.layout.learn_more'), info_about_url
           - elsif key == :automated
             = mail_to 'contact@sydevelopers.com'
-          - elsif key == :unsubscribe
+          - elsif key == :unsubscribe && @manager.present?
             = link_to translate('mail.layout.update_notifications'), email_login("#{edit_cms_manager_url(@manager, anchor: 'notifications')}?verify=email")
 
     <!--[if mso]>
