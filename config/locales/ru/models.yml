@@ -193,6 +193,7 @@ ru:
           eventbrite: "Eventbrite"
           facebook: "Facebook"
         registration_url: "Ссылка для регистрации"
+        registration_deadline_at: "Regitration Deadline" # TODO: Translate
         recurrence: "Повторение"
         recurrences:
           day: "Ежедневно"

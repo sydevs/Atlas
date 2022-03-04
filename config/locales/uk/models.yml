@@ -194,6 +194,7 @@ uk:
           eventbrite: "Eventbrite"
           facebook: "Facebook"
         registration_url: "Посилання на реєстрацію (URL)"
+        registration_deadline_at: "Regitration Deadline" # TODO: Translate
         recurrence: "Повторення"
         recurrences:
           day: "Щодня"

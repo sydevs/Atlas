@@ -24,7 +24,7 @@ class CMS::EventsController < CMS::ApplicationController
         :published,
         :custom_name, :description, :room, :category, :language_code,
         :phone_name, :phone_number,
-        :registration_mode, :registration_url,
+        :registration_mode, :registration_url, :registration_deadline_at,
         :recurrence, :start_date, :end_date, :start_time, :end_time,
         :online, :online_url,
         :manager_id,

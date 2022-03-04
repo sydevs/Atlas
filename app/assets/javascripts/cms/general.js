@@ -13,6 +13,8 @@ const General = {
     $('.end.field .ui.date.calendar').calendar({ type: 'date', startCalendar: $('.start.field .ui.date.calendar') })
     $('.start.field .ui.time.calendar').calendar({ type: 'time', ampm: false, endCalendar: $('.end.field .ui.time.calendar') })
     $('.end.field .ui.time.calendar').calendar({ type: 'time', ampm: false, startCalendar: $('.start.field .ui.time.calendar') })
+    $('.field:not(.start):not(.end) .ui.date.calendar').calendar({ type: 'date' })
+    $('.field:not(.start):not(.end) .ui.time.calendar').calendar({ type: 'time', ampm: false })
 
     $('.search').parent().submit(General.onSearchSubmit)
     $('.ui.radio.menu .item').click(General.onRadioMenuSelect)

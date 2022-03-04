@@ -193,6 +193,7 @@ cs:
           eventbrite: "Eventbrite"
           facebook: "Facebook"
         registration_url: "Registration Link (URL)"
+        registration_deadline_at: "Regitration Deadline"
         recurrence: "Recurrence"
         recurrences:
           day: "Daily"

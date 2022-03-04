@@ -123,6 +123,7 @@ ru:
         language: "На каком языке проводится это событие, если указано в?"
         registration_mode: "Куда отправлять искателей для регистрации на мероприятие? Мы настоятельно рекомендуем оставить здесь '%{native}.' Регистрация искателей на этом веб-сайте позволит нам отправлять им напоминания и последующие уведомления."
         registration_url: "URL-адрес регистрации будет установлен автоматически, если установлен режим \"%{native}.\""
+        registration_deadline_at: "After this date, registrations will no longer be allowed. This is useful for meditation courses, where you don't want new registrations after the first week of classes." # TODO: Translate
         online: "Установи этот флажок, если программа будет проходить онлайн."
         online_url: "Если программа проходит онлайн, то по этой ссылке искатели смогут присоединиться к классу (например, ссылка на Zoom, YouTube, Google Meet и т.д.)."
         phone_number: "Местный номер телефона, по которому искатели могут позвонить, чтобы задать вопросы." 

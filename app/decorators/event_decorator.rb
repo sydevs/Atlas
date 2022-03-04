@@ -65,7 +65,11 @@ module EventDecorator
   end
 
   def registration_end_time
-    end_date ? Time.parse("#{end_date} #{end_time || start_time}") : nil
+    if registration_deadline_at?
+      Time.parse("#{registration_deadline_at} #{end_time || start_time}")
+    elsif end_date?
+      Time.parse("#{end_date} #{end_time || start_time}")
+    end
   end
 
   def map_path
@@ -89,7 +93,7 @@ module EventDecorator
         start_date: start_date.to_s,
         end_date: end_date&.to_s,
         time: formatted_start_end_time,
-        registration_end_time: end_date ? Time.parse("#{end_date} #{end_time || start_time}") : nil,
+        registration_end_time: registration_end_time,
       },
       language_code: language_code,
       images: pictures.map { |picture|

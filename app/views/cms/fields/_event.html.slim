@@ -52,6 +52,8 @@
 = help_link :registration
 br
 
+= f.input :registration_deadline_at, as: :string, wrapper: :semantic_date, hint: translate('cms.hints.event.registration_deadline_at'), input_html: { placeholder: translate('cms.hints.never') }
+
 .two.fields
   = f.input :phone_number, as: :tel, hint: translate('cms.hints.event.phone_number')
   = f.input :phone_name, as: :string, hint: translate('cms.hints.event.phone_name')

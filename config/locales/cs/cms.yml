@@ -123,6 +123,7 @@ cs:
         language: "What is the primary language that this event if given in?"
         registration_mode: "Where should seekers go to register for the event? We strongly recommend that you leave this as '%{native}.' Having seekers register on this website will allow us send them reminder and follow-up emails."
         registration_url: "The registration URL will be set automatically if the mode is set \"%{native}.\""
+        registration_deadline_at: "After this date, registrations will no longer be allowed. This is useful for meditation courses, where you don't want new registrations after the first week of classes."
         online: "Check this box if the program will take place online."
         online_url: "If the class is online, this link is where seekers should join the class (eg. a link to Zoom, YouTube, Google Meet, etc)."
         phone_number: "A local phone number that seekers can call to ask questions."
