@@ -138,5 +138,11 @@ Rails.application.routes.draw do
 
     post :graphql, to: "graphql#execute"
     get :graphql, to: "graphql#execute" if Rails.env.development?
+
+    namespace :wix do
+      get :auth, to: "wix#auth"
+      get :setup, to: "wix#setup"
+      get :config, to: "wix#config"
+    end
   end
 end
