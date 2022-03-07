@@ -136,6 +136,10 @@ class Manager < ApplicationRecord
     email_verified? || phone_verified?
   end
 
+  def contact_by_messenger?
+    !contact_by_email?
+  end
+
   private
 
     def unverify

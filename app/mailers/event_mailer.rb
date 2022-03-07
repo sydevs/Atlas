@@ -7,21 +7,31 @@ class EventMailer < ApplicationMailer
     setup
 
     if @status.present? && @status != :verified
-      puts "[MAIL] Sending status email (#{@event.status}) for #{@event.label} to #{@manager.name}"
+      puts "[MAIL] Sending status message (#{@event.status}) for #{@event.label} to #{@manager.name}"
     else
-      puts "[MAIL] Skip sending status for #{@event.label}"
+      puts "[MAIL] Skip sending status for #{@event.label} (#{@event.status})"
       return
     end
 
     create_session!
     subject = I18n.translate(@status, scope: 'mail.event.status.title', event: @event.label)
-    parameters = { to: @manager.email, subject: subject }
-    if @status == :needs_urgent_review
-      parameters['Importance'] = 'high'
-      parameters['X-Priority'] = '1'
-    end
 
-    mail(parameters)
+    if false && @manager.contact_by_email?
+      parameters = { to: @manager.email, subject: subject }
+      if @status == :needs_urgent_review
+        parameters['Importance'] = 'high'
+        parameters['X-Priority'] = '1'
+      end
+
+      mail(parameters)
+    else
+      send_message('support', [
+        { default: 'Roberto Test' },
+        { default: '123' },
+        { default: 'new coffee machine' },
+        { default: 'MessageBird, Trompenburgstraat 2C, 1079TX Amsterdam' }
+      ])
+    end
 
     if @status == :needs_urgent_review
       @event.venue.parent.managers.each do |manager|
