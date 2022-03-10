@@ -8,7 +8,7 @@ ru:
         destroy: "Удалить"
         back: "Назад"
         view: "Открыть"
-        search: "Search" # TODO: Translate
+        search: "Поиск" 
 
       target:
         new: "Добавить %{resource}"
@@ -32,7 +32,7 @@ ru:
       report_issue: "Сообщить о проблеме"
       help: "Помощь (FAQ)"
       sign_out: "Выйти"
-      sign_in: "Авторизоваться" # Войти в систему
+      sign_in: "Вход"
       # Secondary menu
       dashboard: "Панель инструментов для %{user}"
       review: "Все оповещения для %{user}"
@@ -76,7 +76,7 @@ ru:
         already_added: "%{manager} уже управляет #{resource}"
         already_exists: "%{name} <%{email}> уже существует"
         email_verified: "Твой E-mail подтверждён!"
-        phone_verified: "Your phone number is now verified!" # TODO: Translate
+        phone_verified: "Твой номер телефона теперь подтверждён!"
         email_verification_resent: "E-mail с подтверждением был отправлен на %{name}"
       cannot_create:
         event: "Здесь нельзя создавать новые события, их нужно добавлять непосредственно в места проведения (площадки)."
@@ -89,17 +89,17 @@ ru:
         timing: "Расписание"
         registration: "Регистрация"
         manager: "Менеджер"
-      manager: # TODO: Translate
-        contact_methods: "Contact Methods"
-        notifications: "Notification Settings"
+      manager: 
+        contact_methods: "Способы связи"
+        notifications: "Настройка оповещений"
       client:
         keys: "Ключи доступа"
         manager: "Менеджер"
 
     hints:
       verified: "Проверено"
-      not_verified: "Not Verified" # TODO: Translate
-      not_set: "Not Set" # TODO: Translate
+      not_verified: "Не подтверждено" 
+      not_set: "Не задано" 
       unspecified: "Неопределено"
       never: "Никогда"
       geosearch:
@@ -118,29 +118,29 @@ ru:
       event:
         custom_name: "Если хочешь изменить название события, ты можешь сделать это здесь."
         description: "Сделай описание программы для искателей. Расскажи, что им ожидать от занятия, как найти место или что взять с собой. Это описание должно быть от %{min} до %{max} символов."
-        description_count: " символы"
+        description_count: " символов"
         room: "В какой комнате проходит мероприятие?"
         language: "На каком языке проводится это событие, если указано в?"
         registration_mode: "Куда отправлять искателей для регистрации на мероприятие? Мы настоятельно рекомендуем оставить здесь '%{native}.' Регистрация искателей на этом веб-сайте позволит нам отправлять им напоминания и последующие уведомления."
         registration_url: "URL-адрес регистрации будет установлен автоматически, если установлен режим \"%{native}.\""
-        registration_deadline_at: "After this date, registrations will no longer be allowed. This is useful for meditation courses, where you don't want new registrations after the first week of classes." # TODO: Translate
+        registration_deadline_at: "После этой даты регистрация не будет возможна. Это полезно для курсов, где не предполагается новых участников после первого занятия."
         online: "Установи этот флажок, если программа будет проходить онлайн."
         online_url: "Если программа проходит онлайн, то по этой ссылке искатели смогут присоединиться к классу (например, ссылка на Zoom, YouTube, Google Meet и т.д.)."
         phone_number: "Местный номер телефона, по которому искатели могут позвонить, чтобы задать вопросы." 
         phone_name: "Имя йога, который отвечает на звонки." 
-        manager: # TODO: Translate
-          view_fields: "View manager fields"
+        manager:
+          view_fields: "Просмотреть область ответственности менеджера"
           field: "Менеджером должен быть йог(иня), который(ая) возьмет на себя ответственность за это событие. Каждую неделю менеджеру будет рассылаться список новых регистраций, и каждые несколько месяцев его будут просить подтвердить, что информация о программе по-прежнему верна."
-          search: "Enter the full email or phone number of the person you'd like to add. If no existing manager is found, you can invite the manager by email or messenger."
+          search: "Введи email или номер телефона менеджера, которого хочешь добавить. Если такой менеджер не найден, ты можешь пригласить его через email или мессенджер."
           categories:
-            managers: "Existing Managers"
-            invite: "Invite"
+            managers: "Действующие менеджеры"
+            invite: "Пригласить"
           short_invitations:
-            email: "By email"
-            phone: "Through %{messenger}"
+            email: "По email"
+            phone: "Через %{messenger}"
           invitations:
-            email: "Invite by email"
-            phone: "Invite through %{messenger}"
+            email: "Пригласить по email"
+            phone: "Пригласить через %{messenger}"
       venue:
         manual_location: "Установить местоположение вручную"
         location: "Если местоположение не может быть установлено автоматически, нажав \"Найти местоположение\", ты можешь ввести данные вручную ниже."
@@ -154,33 +154,33 @@ ru:
         marker_set:
           title: "Метка карты установлена!"
           description: "Убедись, что местоположение, указанное на карте, выглядит корректно."
-      manager: # TODO: Translate
+      manager:
         language: "Язык пользовательского интерфейса и email сообщений для этого менеджера"
         administrator:
           title: "Создание глобального администратора"
           description: "Добавление менеджера в качестве глобального администратора. У него будет полный доступ для внесения изменений в Сахадж Атлас."
-        contact_method: "Which method do you prefer to be contacted by."
+        contact_method: "Какой способ связи ты предпочитаешь?"
         contact_settings:
-          hint: "Please select message types you want to receive from Sahaj Atlas. Currently some types can only be sent by email."
+          hint: "Пожалуйста, выбери, как ты хочешь получать сообщения от Атласа. В настоящее время некоторые типы сообщений могут быть отправлены только по email.
           options:
-            email: "Email-only"
-            enabled: "Enabled"
-            disabled: "Disabled"
+            email: "Только еmail"
+            enabled: "Включено"
+            disabled: "Отключено"
           categories:
-            new_managed_record: "New Access"
-            event_verification: "Event Verification"
-            event_registrations: "Event Registrations"
-            region_summary: "Regional Summary"
-            country_summary: "Country Summary"
-            application_summary: "Sahaj Atlas Summary"
+            new_managed_record: "Новый доступ"
+            event_verification: "Проверка актуальности события"
+            event_registrations: "Регистрации на событие"
+            region_summary: "Сводка по региону"
+            country_summary: "Сводка по стране"
+            application_summary: "Сводка по Атласу"
           hints:
-            new_managed_record: "A message sent to you when you are given permission to manage a new event, region or resource on the Atlas."
-            event_verification: "Messages requesting event and city managers to check their events' accuracy. Sent every 3 months, for each event. This cannot be disabled."
-            event_registrations: "A list of new registrations sent to event managers. Sent around 24 hours before each event."
-            region_summary: "A summary of changes within a region sent to regional managers. Sent every %{period}."
-            country_summary: "A summary of changes sent to country managers. Sent every %{period}."
-            application_summary: "A summary of all Atlas changes, sent to administrators. Sent every %{period}."
-        search: "Enter a name, email, or phone number..."
+            new_managed_record: "Сообщение о том, что ты получаешь разрешение на управление новым событием, регионом или ресурсом в Атласе."
+            event_verification: "Сообщения к менеджерам событий и города проверить актуальность данных о событиях. Отправляется каждые 3 месяца, для каждого события. Это нельзя отключить."
+            event_registrations: "Список новых регистраций, отправленных менеджерам события. Отправляется примерно за 24 часа до события."
+            region_summary: "Сводка всех изменений Атласа внутри региона, отправляемая менеджерам каждый %{period}."
+            country_summary: "Сводка всех изменений Атласа внутри страны, отправляемая менеджерам каждый %{period}."
+            application_summary: "Сводка всех изменений Атласа, отправляемая администраторам каждый %{period}."
+        search: "Введи имя, email или номер телефона..."
       client:
         domain: "Только этому домену будет разрешено встраивать карту, используя твой секретный ключ."
         public_key: "Используй это, чтобы встроить карту."
@@ -199,8 +199,8 @@ ru:
       area_in_words: "%{radius} км вокруг %{latitude}, %{longitude}"
       records_in_recent_days: "%{resources} за последние 30 дней"
       record_has_language: "%{resource} предлагается на %{language}"
-      notification_settings: "Notification Settings" # TODO: Translate
-      contact_details: "Contact Information" # TODO: Translate
+      notification_settings: "Настройка оповещений"
+      contact_details: "Контакты"
       updated_at: "Последнее обновление"
       resources_managed:
         title: "Управляемые ресурсы"
@@ -256,7 +256,7 @@ ru:
 
     images:
       title: "Изображения %{resource}"
-      upload: "Загрузить Изображения"
+      upload: "Загрузить изображения"
 
     regions:
       new_province: "Добавить регион"
@@ -441,6 +441,7 @@ ru:
     country_codes:
       gb: UK
       us: USA
+      ru: РУС
     
   passwordless:
     sessions:
