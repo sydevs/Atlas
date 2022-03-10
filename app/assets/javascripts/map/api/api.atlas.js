@@ -128,7 +128,7 @@ class AtlasAPI {
     }`)
 
     this.registrationQuery = this.graph.mutate(`(@autodeclare) {
-      createRegistration(input: $input, locale: "${window.locale}") {
+      createRegistration(input: $input) {
         status
         message
       }
@@ -180,6 +180,7 @@ class AtlasAPI {
   }
 
   async createRegistration(parameters, callback) {
+    parameters.locale = window.locale
     console.log('[AtlasAPI]', 'creating registration', parameters) // eslint-disable-line no-console
     const data = await this.registrationQuery({
       'input!CreateRegistrationInput': parameters

@@ -9,19 +9,22 @@ class Mutations::CreateRegistration < Mutations::BaseMutation
   argument :message, String, required: true
   argument :starting_at, GraphQL::Types::ISO8601DateTime, required: true
   argument :time_zone, String, required: false
+  argument :locale, String, required: false
 
   field :status, String, null: false
   field :message, String, null: false
   field :registration, Types::RegistrationType, null: true
   field :created_at, GraphQL::Types::ISO8601DateTime, null: true
-  field :errors, [String], null: false
+  field :errors, [String], null: true
 
   def resolve(**arguments)
+    I18n.locale = arguments[:locale]&.to_sym || :en
     event = Event.find(arguments[:event_id])
     time = event.start_time.split(':')
     arguments[:starting_at] = arguments[:starting_at].utc.change(hour: time[0].to_i, min: time[1].to_i)
     arguments[:comment] = arguments[:message]
     arguments.delete :message
+    arguments.delete :locale
 
     registration = Registration.joins(:event, event: :venue).find_or_initialize_by(arguments)
 
@@ -56,7 +59,7 @@ class Mutations::CreateRegistration < Mutations::BaseMutation
     {
       status: 'error',
       message: I18n.translate('map.registration.feedback.error'),
-      error: error.message,
+      errors: [error.message],
     }
   end
 end
