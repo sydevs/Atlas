@@ -20,7 +20,7 @@ ru:
         prefix: "Отображать результаты"
         clear: "Очистить"
       mode:
-        offline: "Лично"
+        offline: "Оффлайн"
         online: "Онлайн"
     information:
       register: "Записаться"
@@ -28,10 +28,10 @@ ru:
       directions: "Как нас найти"
       online: "Онлайн-класс"
       online_from: "Транслируется из"
-      tel: "tel" # TODO: Translate
+      tel: "тел"
     registration:
       header: "Записаться сейчас"
-      closed: "Registration Closed" # TODO: Translate
+      closed: "Регистрация закрыта" 
       form:
         timing: "Я хочу начать:" 
         email: "Email"  
@@ -73,7 +73,7 @@ ru:
       saturday: "По субботам"
       sunday: "По воскресеньям"
     timing_labels:
-      course_fallback: "Это еженедельный курс" # ???
+      course_fallback: "Это еженедельный курс"
       course: "%{weeks}-недельный курс"
       ongoing: "Регулярный класс" 
     registration:
