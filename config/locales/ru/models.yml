@@ -25,10 +25,10 @@ ru:
         other: "регионов"
       local_area: 
         # Basic pluralization
-        single: "Место" # ???
+        single: "Место"
         plural: "Места"
         # Countable
-        one: "место" # ???
+        one: "место"
         other: "мест"
 
       # Events
@@ -164,13 +164,13 @@ ru:
         custom_name: "Название события (Опционально)"
         category: "Категория"
         categories:
-          intro: "Медитация для начинающих"
-          intermediate: "Медитация для продолжающих"
-          course: "Курс по медитации"
+          intro: "Для начинающих"
+          intermediate: "Для продолжающих"
+          course: "Курс"
           public_event: "Стенд на выставке или фестивале"
           concert: "Медитация и концерт"
         category_labels:
-          intro: "Вводное занятие"
+          intro: "Занятие для начинающих"
           intermediate: "Занятие для продолжающих"
           course: "Курс"
           public_event: "Стенд"
@@ -193,7 +193,7 @@ ru:
           eventbrite: "Eventbrite"
           facebook: "Facebook"
         registration_url: "Ссылка для регистрации"
-        registration_deadline_at: "Regitration Deadline" # TODO: Translate
+        registration_deadline_at: "Регистрация возможна до" 
         recurrence: "Повторение"
         recurrences:
           day: "Ежедневно"
@@ -234,22 +234,22 @@ ru:
         starting_at: "Первое занятие в"
 
       # Other
-      manager: # TODO: Translate
+      manager:
         manager_id: :activerecord.models.manager.single # Do not translate
-        name: "Full Name"
+        name: "Имя, фамилия"
         email: :activerecord.attributes.generic.email # Do not translate
         phone: :activerecord.attributes.generic.phone # Do not translate
         administrator: "Глобальный администратор"
-        language_code: "Preferred Language"
-        contact_method: "Preferred Contact Method"
+        language_code: "Предпочитаемый язык"
+        contact_method: "Предпочитаемый способ связи"
         contact_methods:
           email: "Email"
           whatsapp: "WhatsApp"
           telegram: "Telegram"
           wechat: "WeChat"
         last_login_at: "Последний логин"
-        email_verification_sent_at: "Последний отправленый email с подтверждением"
-        phone_verification_sent_at: "Last Phone Verification Sent"
+        email_verification_sent_at: "Последний запрос для подтверждения через email"
+        phone_verification_sent_at: "Последний запрос для подтверждения через телефон"
 
       audit:
         user: :activerecord.models.manager.single # Do not translate
