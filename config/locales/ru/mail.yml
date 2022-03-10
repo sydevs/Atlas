@@ -3,7 +3,7 @@ ru:
     layout:
       sahaj_atlas: "Сахадж Атлас"
       learn_more: "Узнать больше"
-      update_notifications: "Update notification settings" # TODO: Translate
+      update_notifications: "Обновить настройки оповещений"
       information:
         atlas:
           title: "Что такое Сахадж Атлас?"
@@ -11,12 +11,12 @@ ru:
         security:
           title: "Не пересылать это письмо"
           description: "Ссылки в этом письме открывают доступ к редактированию Сахадж Атласа. Пересылка этого письма поставит под угрозу безопасность веб-сайта."
-        automated: # TODO: Translate
+        automated:
           title: "Автоматическая рассылка"
-          description: "This is an automated email. If you don't know why you receive this email, or have any questions: please write to"
-        unsubscribe: # TODO: Translate
-          title: "Unsubscribe"
-          description: "You can manage which notifications you receive from Sahaj Atlas, by editing your profile."
+          description: "Это автоматический email. Если вы не знаете, почему вы получили это письмо, или у вас есть какие-либо вопросы, то напишите по адресу"
+        unsubscribe:
+          title: "Отписаться"
+          description: "Ты можешь настроить получение уведомлений от Сахадж Атласа, отредактировав свой профиль."
 
     login:
       title: "Авторизация в Сахадж Атласе"
