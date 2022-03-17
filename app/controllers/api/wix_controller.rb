@@ -8,7 +8,7 @@ class API::WixController < API::ApplicationController
       appId: ENV.fetch('WIX_APP_ID'),
       redirectUrl: api_wix_setup_url,
       state: @client.id
-    }.to_query}}"
+    }.to_query}"
   end
 
   def setup
