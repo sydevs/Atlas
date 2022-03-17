@@ -132,18 +132,18 @@ Rails.application.routes.draw do
   end
 
   namespace :api do
-    get '404', to: 'api/application#error' # Not found
-    get '429', to: 'api/application#error' # Too many requests
-    get '500', to: 'api/application#error' # Internal server error
+    get '404', to: 'application#error' # Not found
+    get '429', to: 'application#error' # Too many requests
+    get '500', to: 'application#error' # Internal server error
 
     post :graphql, to: 'graphql#execute'
     get :graphql, to: 'graphql#execute' if Rails.env.development?
 
     namespace :wix do
-      get '/', to: 'wix#dashboard'
-      get :auth, to: 'wix#auth'
-      get :setup, to: 'wix#setup'
-      get :config, to: 'wix#config'
+      get '/', action: 'dashboard'
+      get :auth
+      get :setup
+      get :settings
     end
   end
 end

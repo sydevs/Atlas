@@ -1,12 +1,12 @@
-class API::GraphqlController < API::ApplicationController
+class API::WixController < API::ApplicationController
   skip_before_action :authenticate_client!
 
   def auth
     @client = Client.new
     redirect_to "https://www.wix.com/installer/install?#{{
       token: params[:token],
-      appId: ENV.fetch['WIX_APP_ID'],
-      redirectUrl: api_wix_login_url,
+      appId: ENV.fetch('WIX_APP_ID'),
+      redirectUrl: api_wix_setup_url,
       state: @client.id
     }.to_query}}"
   end
@@ -20,12 +20,12 @@ class API::GraphqlController < API::ApplicationController
     WixAPI.close_window(tokens['access_token'])
   end
 
-  def config
-    WixAPI.send_event(WixAPI::Event::SETUP_COMPLETE)
+  def settings
+    # WixAPI.send_event(WixAPI::Event::SETUP_COMPLETE)
   end
 
   def dashboard
-    
+
   end
 
 end

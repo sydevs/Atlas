@@ -7,7 +7,7 @@ module WixAPI
   end
 
   def self.get_tokens token, auth: false
-    response = HTTParty.post('https://www.wix.com/oauth/access', {
+    HTTParty.post('https://www.wix.com/oauth/access', {
       body: {
         grant_type: auth ? 'authorization_code' : 'refresh_token',
         client_id: ENV.fetch('WIX_APP_ID'),
@@ -16,8 +16,6 @@ module WixAPI
         refresh_token: token,
       }
     })
-
-    response
   end
 
   def self.update_site_data client, access_token = nil
@@ -32,9 +30,9 @@ module WixAPI
   def self.send_event event
     HTTParty.post('https://www.wixapis.com/apps/v1/bi-event', {
       body: {
-        eventName: "APP_FINISHED_CONFIGURATION"
+        eventName: event
       }
     })
-    end
+  end
 
 end
