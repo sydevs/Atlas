@@ -18,7 +18,7 @@ class API::WixController < API::ApplicationController
       public_key: SecureRandom.uuid,
       wix_id: data['instance']['instanceId'],
       wix_refresh_token: tokens['refresh_token'],
-      domain: URI(data['site']['url'] || "").host,
+      domain: URI(data.dig('site', 'url') || "").host,
       # default_config: {
       #   locale: data['site']['locale']
       # },
@@ -27,8 +27,8 @@ class API::WixController < API::ApplicationController
     email = data['instance']['ownerInfo']['email'].downcase
     @client.manager = Manager.find_or_create_by(email: email) do |new_manager|
       new_manager.name = email.split('@').first.humanize
-      new_manager.locale = data['site']['locale']
-      new_manager.email_verified = data['site']['ownerInfo']['emailStatus'].starts_with?("VERIFIED")
+      new_manager.locale = data.dig('site', 'locale')
+      new_manager.email_verified = data.dig('site', 'ownerInfo', 'emailStatus').starts_with?("VERIFIED")
     end
 
     tokens = WixAPI.refresh_tokens(tokens['refresh_token'])
