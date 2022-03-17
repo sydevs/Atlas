@@ -8,6 +8,9 @@ module WixAPI
 
   def self.fetch_tokens refresh_token: nil, auth_code: nil
     response = HTTParty.post('https://www.wix.com/oauth/access', {
+      headers: {
+        'Content-Type' => 'application/json',
+      }
       body: {
         grant_type: auth_code ? 'authorization_code' : 'refresh_token',
         client_id: ENV.fetch('WIX_APP_ID'),
@@ -24,7 +27,8 @@ module WixAPI
   def self.fetch_site_properties token
     response = HTTParty.get('https://www.wixapis.com/apps/v1/instance', {
       headers: {
-        'Authorization' => token
+        'Authorization' => token,
+        'Content-Type' => 'application/json',
       }
     })
 
