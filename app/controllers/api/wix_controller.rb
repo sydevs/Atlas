@@ -27,7 +27,7 @@ class API::WixController < API::ApplicationController
     email = data['site']['ownerInfo']['email'].downcase
     @client.manager = Manager.find_or_create_by(email: email) do |new_manager|
       new_manager.name = email.split('@').first.humanize
-      new_manager.locale = data['site']['locale']
+      new_manager.language_code = data['site']['locale']
       new_manager.email_verified = data['site']['ownerInfo']['emailStatus'].starts_with?("VERIFIED")
     end
 
