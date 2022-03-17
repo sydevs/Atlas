@@ -6,21 +6,24 @@ module WixAPI
     SETUP_COMPLETE = 'APP_FINISHED_CONFIGURATION'
   end
 
-  def self.get_tokens token, auth: false
+  def self.fetch_tokens refresh_token: nil, auth_code: nil
     HTTParty.post('https://www.wix.com/oauth/access', {
       body: {
-        grant_type: auth ? 'authorization_code' : 'refresh_token',
+        grant_type: auth_code ? 'authorization_code' : 'refresh_token',
         client_id: ENV.fetch('WIX_APP_ID'),
         client_secret: ENV.fetch('WIX_SECRET_KEY'),
-        code: token,
-        refresh_token: token,
+        code: auth_code ? auth_code : nil,
+        refresh_token: !auth_code ? refresh_token : nil,
       }
     })
   end
 
-  def self.update_site_data client, access_token = nil
-    # access_token = self.fetch_refresh_token(client, client.refresh_token) unless access_token.present?search
-    # Do nothing for now
+  def self.fetch_site_properties token
+    HTTParty.get('https://www.wixapis.com/apps/v1/instance', {
+      headers: {
+        'Authorization' => token
+      }
+    })
   end
 
   def self.close_window token
