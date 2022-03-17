@@ -7,6 +7,7 @@ module WixAPI
   end
 
   def self.fetch_tokens auth_code
+    puts "FETCH TOKENS WITH [#{auth_code.inspect}]"
     response = HTTParty.post('https://www.wix.com/oauth/access', {
       headers: {
         'Content-Type' => 'application/json',
@@ -25,6 +26,7 @@ module WixAPI
   end
 
   def self.refresh_tokens refresh_token
+    puts "REFRESH TOKENS WITH [#{refresh_token.inspect}]"
     response = HTTParty.post('https://www.wix.com/oauth/access', {
       headers: {
         'Content-Type' => 'application/json',
@@ -43,6 +45,7 @@ module WixAPI
   end
 
   def self.fetch_site_properties token
+    puts "FETCH SITE PROPS WITH [#{token.inspect}]"
     response = HTTParty.get('https://www.wixapis.com/apps/v1/instance', {
       headers: {
         'Authorization' => token,
@@ -56,6 +59,7 @@ module WixAPI
   end
 
   def self.close_window token
+    puts "CLOSE WINDOW WITH [#{token.inspect}]"
     response = HTTParty.get("https://www.wix.com/installer/close-window?access_token=#{token}", {
       debug_output: $stdout,
     })
