@@ -10,14 +10,14 @@ module WixAPI
     response = HTTParty.post('https://www.wix.com/oauth/access', {
       headers: {
         'Content-Type' => 'application/json',
-      }
+      },
       body: {
         grant_type: auth_code ? 'authorization_code' : 'refresh_token',
         client_id: ENV.fetch('WIX_APP_ID'),
         client_secret: ENV.fetch('WIX_SECRET_KEY'),
         code: auth_code ? auth_code : nil,
         refresh_token: !auth_code ? refresh_token : nil,
-      }
+      },
     })
 
     puts "FETCH TOKENS #{response.pretty_inspect}"
@@ -29,7 +29,7 @@ module WixAPI
       headers: {
         'Authorization' => token,
         'Content-Type' => 'application/json',
-      }
+      },
     })
 
     puts "FETCH SITE PROPS #{response.pretty_inspect}"
@@ -47,7 +47,7 @@ module WixAPI
     response = HTTParty.post('https://www.wixapis.com/apps/v1/bi-event', {
       body: {
         eventName: event
-      }
+      },
     })
 
     puts "SEND EVENT #{event} #{response.pretty_inspect}"
