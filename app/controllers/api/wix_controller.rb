@@ -17,7 +17,7 @@ class API::WixController < API::ApplicationController
       secret_key: SecureRandom.uuid,
       public_key: SecureRandom.uuid,
       wix_id: params[:instanceId],
-      refresh_token: tokens['refresh_token'],
+      wix_refresh_token: tokens['refresh_token'],
     })
 
     WixAPI.close_window(tokens['access_token'])
