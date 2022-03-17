@@ -13,7 +13,7 @@ class API::WixController < API::ApplicationController
     puts "SETUP #{params.pretty_inspect}"
     tokens = WixAPI.get_tokens(params[:code], auth: true)
     @client = Client.create({
-      label: "Wix App #{params[:instanceId]}"
+      label: "Wix App #{params[:instanceId]}",
       secret_key: SecureRandom.uuid,
       public_key: SecureRandom.uuid,
       wix_id: params[:instanceId],
