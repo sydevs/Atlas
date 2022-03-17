@@ -12,7 +12,6 @@ class API::WixController < API::ApplicationController
   def setup
     tokens = WixAPI.fetch_tokens(auth_code: params[:code])
     data = WixAPI.fetch_site_properties(tokens['access_token'])
-    puts "SETUP DATA #{data.pretty_inspect}"
     @client = Client.new({
       label: data['site']['siteDisplayName'],
       secret_key: SecureRandom.uuid,
