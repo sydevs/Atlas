@@ -18,7 +18,7 @@ class API::WixController < API::ApplicationController
       public_key: SecureRandom.uuid,
       wix_id: data['instance']['instanceId'],
       wix_refresh_token: tokens['refresh_token'],
-      domain: URI(data['site']['url']).host,
+      domain: URI(data['site']['url'] || "").host,
       # default_config: {
       #   locale: data['site']['locale']
       # },
