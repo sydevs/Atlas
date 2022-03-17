@@ -17,7 +17,7 @@ module WixAPI
         client_id: ENV.fetch('WIX_APP_ID'),
         client_secret: ENV.fetch('WIX_SECRET_KEY'),
         code: auth_code,
-      },
+      }.to_json,
       debug_output: $stdout,
     })
 
@@ -36,7 +36,7 @@ module WixAPI
         client_id: ENV.fetch('WIX_APP_ID'),
         client_secret: ENV.fetch('WIX_SECRET_KEY'),
         refresh_token: refresh_token,
-      },
+      }.to_json,
       debug_output: $stdout,
     })
 
