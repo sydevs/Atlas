@@ -10,7 +10,7 @@ class API::WixController < API::ApplicationController
   end
 
   def setup
-    tokens = WixAPI.fetch_tokens(auth_code: params[:code])
+    tokens = WixAPI.fetch_tokens(params[:code])
     data = WixAPI.fetch_site_properties(tokens['access_token'])
     @client = Client.new({
       label: data['site']['siteDisplayName'],
@@ -18,7 +18,7 @@ class API::WixController < API::ApplicationController
       public_key: SecureRandom.uuid,
       wix_id: data['instance']['instanceId'],
       wix_refresh_token: tokens['refresh_token'],
-      domain: data['site']['url'],
+      domain: URI(data['site']['url']).host,
       # default_config: {
       #   locale: data['site']['locale']
       # },
@@ -31,7 +31,7 @@ class API::WixController < API::ApplicationController
       new_manager.email_verified = data['site']['ownerInfo']['emailStatus'].starts_with?("VERIFIED")
     end
 
-    tokens = WixAPI.fetch_tokens(refresh_token: tokens['access_token'])
+    tokens = WixAPI.refresh_tokens(tokens['refresh_token'])
     @client.wix_refresh_token = tokens['refresh_token']
     @client.save!
     WixAPI.close_window(tokens['access_token'])

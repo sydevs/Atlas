@@ -6,21 +6,39 @@ module WixAPI
     SETUP_COMPLETE = 'APP_FINISHED_CONFIGURATION'
   end
 
-  def self.fetch_tokens refresh_token: nil, auth_code: nil
+  def self.fetch_tokens auth_code
     response = HTTParty.post('https://www.wix.com/oauth/access', {
       headers: {
         'Content-Type' => 'application/json',
       },
       body: {
-        grant_type: auth_code ? 'authorization_code' : 'refresh_token',
+        grant_type: 'authorization_code',
         client_id: ENV.fetch('WIX_APP_ID'),
         client_secret: ENV.fetch('WIX_SECRET_KEY'),
-        code: auth_code ? auth_code : nil,
-        refresh_token: !auth_code ? refresh_token : nil,
+        code: auth_code,
       },
+      debug_output: $stdout,
     })
 
     puts "FETCH TOKENS #{response.pretty_inspect}"
+    response
+  end
+
+  def self.refresh_tokens refresh_token
+    response = HTTParty.post('https://www.wix.com/oauth/access', {
+      headers: {
+        'Content-Type' => 'application/json',
+      },
+      body: {
+        grant_type: 'refresh_token',
+        client_id: ENV.fetch('WIX_APP_ID'),
+        client_secret: ENV.fetch('WIX_SECRET_KEY'),
+        refresh_token: refresh_token,
+      },
+      debug_output: $stdout,
+    })
+
+    puts "REFRESH TOKENS #{response.pretty_inspect}"
     response
   end
 
@@ -30,6 +48,7 @@ module WixAPI
         'Authorization' => token,
         'Content-Type' => 'application/json',
       },
+      debug_output: $stdout,
     })
 
     puts "FETCH SITE PROPS #{response.pretty_inspect}"
@@ -37,7 +56,9 @@ module WixAPI
   end
 
   def self.close_window token
-    response = HTTParty.get("https://www.wix.com/installer/close-window?access_token=#{token}")
+    response = HTTParty.get("https://www.wix.com/installer/close-window?access_token=#{token}", {
+      debug_output: $stdout,
+    })
 
     puts "CLOSE WINDOW #{response.pretty_inspect}"
     response
