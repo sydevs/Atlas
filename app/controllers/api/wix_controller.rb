@@ -10,7 +10,7 @@ class API::WixController < API::ApplicationController
   end
 
   def setup
-    tokens = WixAPI.fetch_tokens(auth: params[:code])
+    tokens = WixAPI.fetch_tokens(auth_code: params[:code])
     data = WixAPI.fetch_site_properties(tokens['access_token'])
     puts "SETUP DATA #{data.pretty_inspect}"
     @client = Client.new({
