@@ -18,7 +18,6 @@ module WixAPI
         client_secret: ENV.fetch('WIX_SECRET_KEY'),
         code: auth_code,
       }.to_json,
-      debug_output: $stdout,
     })
 
     puts "FETCH TOKENS #{response.pretty_inspect}"
@@ -37,7 +36,6 @@ module WixAPI
         client_secret: ENV.fetch('WIX_SECRET_KEY'),
         refresh_token: refresh_token,
       }.to_json,
-      debug_output: $stdout,
     })
 
     puts "REFRESH TOKENS #{response.pretty_inspect}"
@@ -51,7 +49,6 @@ module WixAPI
         'Authorization' => token,
         'Content-Type' => 'application/json',
       },
-      debug_output: $stdout,
     })
 
     puts "FETCH SITE PROPS #{response.pretty_inspect}"
@@ -60,9 +57,7 @@ module WixAPI
 
   def self.close_window token
     puts "CLOSE WINDOW WITH [#{token.inspect}]"
-    response = HTTParty.get("https://www.wix.com/installer/close-window?access_token=#{token}", {
-      debug_output: $stdout,
-    })
+    response = HTTParty.get("https://www.wix.com/installer/close-window?access_token=#{token}")
 
     puts "CLOSE WINDOW #{response.pretty_inspect}"
     response
