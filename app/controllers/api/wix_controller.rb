@@ -24,4 +24,8 @@ class API::GraphqlController < API::ApplicationController
     WixAPI.send_event(WixAPI::Event::SETUP_COMPLETE)
   end
 
+  def dashboard
+    
+  end
+
 end
