@@ -2,7 +2,7 @@ class API::ApplicationController < ActionController::Base
 
   before_action :authenticate_client!
 
-  private
+  protected
 
     def authenticate_client!
       return if %w[GET HEAD OPTIONS].include?(request.method)
