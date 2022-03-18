@@ -25,7 +25,7 @@ class EventMailer < ApplicationMailer
 
       mail(parameters)
     else
-      send_message('support', [
+      MessageBirdAPI.send(:support, @manager, [
         { default: 'Roberto Test' },
         { default: '123' },
         { default: 'new coffee machine' },

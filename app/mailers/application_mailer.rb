@@ -1,4 +1,3 @@
-require 'messagebird'
 
 class ApplicationMailer < ActionMailer::Base
 
@@ -60,37 +59,6 @@ class ApplicationMailer < ActionMailer::Base
     def setup
       @manager = params[:manager]
       create_session!
-    end
-
-    def send_message template, parameters
-      @message_client ||= MessageBird::Client.new(ENV.fetch('MESSAGEBIRD_ACCESSTOKEN'))
-      @message_client.send_conversation_message(
-        'd2b725c0673946a7addc77422ffe8040',
-        '+4367764396552',
-        type: 'text',
-        content: {
-          text: "This is a test"
-        }
-      )
-
-=begin
-      @message_client.send_conversation_message(
-        type: 'hsm',
-        content: {
-          hsm: {
-            namespace: '425e40e8_71fc_46ab_80f2_3aad657a385b',
-            templateName: template,
-            language: {
-              policy: 'deterministic',
-              code: @manager.language_code,
-            },
-            params: parameters
-          }
-        }
-      )
-=end
-    rescue MessageBird::ErrorException => ex
-      print ex.errors.pretty_inspect
     end
 
 end

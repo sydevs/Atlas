@@ -43,7 +43,6 @@ gem 'after_commit_everywhere', '~> 1.0' # Dependency for aasm
 
 ### Communication
 gem 'premailer-rails' # Generate inline styles for emails
-gem 'messagebird-rest', require: 'messagebird' # Send 
 
 ### Geocoding
 gem 'geokit-rails'
