@@ -7,7 +7,7 @@ class Map::ApplicationController < ActionController::Base
   after_action :allow_iframe
 
   content_security_policy do |policy|
-    policy.frame_ancestors client.domain, ('editor.wix.com' if client.wix?)
+    policy.frame_ancestors -> { [client.domain, ('editor.wix.com' if client.wix?)].compact }
   end
 
   def show
