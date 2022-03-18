@@ -74,7 +74,7 @@ module WixAPI
     response
   end
 
-  def self.parse_instance instance
+  def self.parse_instance signed_instance
     signature, encoded_json = signed_instance.split('.', 2)
  
     # Need to add Base64 padding to make base64 decode work in Ruby. (ref: http://stackoverflow.com/questions/4987772/decoding-facebooks-signed-request-in-ruby-sinatra)
