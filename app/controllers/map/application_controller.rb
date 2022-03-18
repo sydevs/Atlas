@@ -98,8 +98,13 @@ class Map::ApplicationController < ActionController::Base
     end
 
     def setup_client!
-      if params[:api_key].present? || params[:instance].present?
-        @client = Client.find_by_public_key(params[:api_key] || params[:instance])
+      if params[:instance].present?
+        wix_data = WixAPI.parse_instance(params[:instance])
+        params[:api_key] = wix_data['instanceId']
+      end
+
+      if params[:api_key].present?
+        @client = Client.find_by_public_key(params[:api_key])
       else
         return
       end
