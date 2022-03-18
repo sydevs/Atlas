@@ -99,6 +99,7 @@ class Map::ApplicationController < ActionController::Base
         headers['X-FRAME-OPTIONS'] = "ALLOW-FROM #{@client.domain}"
         headers['Access-Control-Allow-Origin'] = @client.domain
       else
+        headers['X-FRAME-OPTIONS'] = 'ALLOWALL'
         headers['Access-Control-Allow-Origin'] = '*'
       end
 
