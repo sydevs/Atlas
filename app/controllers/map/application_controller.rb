@@ -95,9 +95,11 @@ class Map::ApplicationController < ActionController::Base
       return if !params[:api_key].present?
       raise ActionController::RoutingError.new('Not Found') if @client.nil?
 
-      if @client.domain
+      if @client.domain?
         headers['X-FRAME-OPTIONS'] = "ALLOW-FROM #{@client.domain}"
         headers['Access-Control-Allow-Origin'] = @client.domain
+      else
+        headers['Access-Control-Allow-Origin'] = '*'
       end
 
       headers['Access-Control-Allow-Methods'] = 'GET'
