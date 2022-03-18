@@ -13,7 +13,7 @@ class API::WixController < API::ApplicationController
     tokens = WixAPI.fetch_tokens(params[:code])
     data = WixAPI.fetch_site_properties(tokens['access_token'])
     @client = Client.new({
-      type: :wix,
+      client_type: :wix,
       label: data['site']['siteDisplayName'],
       secret_key: SecureRandom.uuid,
       public_key: SecureRandom.uuid,

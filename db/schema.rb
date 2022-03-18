@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_18_062020) do
+ActiveRecord::Schema.define(version: 2022_03_18_064110) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,7 +50,7 @@ ActiveRecord::Schema.define(version: 2022_03_18_062020) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "external_id"
     t.string "external_token"
-    t.integer "type", default: 0, null: false
+    t.integer "client_type", default: 0, null: false
     t.index ["external_id"], name: "index_clients_on_external_id", unique: true
     t.index ["manager_id"], name: "index_clients_on_manager_id"
   end

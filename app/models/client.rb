@@ -9,7 +9,7 @@ class Client < ApplicationRecord
     summary_email_sent_at
   ]
 
-  enum type: { website: 0, app: 1, wix: 2, other: 100 }
+  enum client_type: { website: 0, app: 1, wix: 2, other: 100 }
 
   # Validations
   validates_presence_of :label, :public_key, :secret_key
