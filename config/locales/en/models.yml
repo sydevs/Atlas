@@ -248,6 +248,13 @@ en:
           whatsapp: "WhatsApp"
           telegram: "Telegram"
           wechat: "WeChat"
+        types:
+          worldwide: "Global Administrator"
+          country: "Country Manager"
+          local: "Local Manager"
+          event: "Event Manager"
+          client: "App Manager"
+          none: "No-Access Manager"
         last_login_at: "Last Login"
         email_verification_sent_at: "Last Email Verification Sent"
         phone_verification_sent_at: "Last Phone Verification Sent"
