@@ -273,5 +273,10 @@ en:
         map_url: "Embeddable Map URL"
         index_url: "Embeddable List URL"
         manager_id: :activerecord.models.manager.single # Do not translate
+        client_types:
+          website: "Website"
+          app: "Mobile App"
+          wix: "Wix Website"
+          other: "Other"
 
       pictures:
