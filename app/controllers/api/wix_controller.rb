@@ -14,9 +14,9 @@ class API::WixController < API::ApplicationController
     data = WixAPI.fetch_site_properties(tokens['access_token'])
     @client = Client.new({
       client_type: :wix,
-      label: data['site']['siteDisplayName'],
+      label: "#{data['site']['siteDisplayName']} (Wix)",
       secret_key: SecureRandom.uuid,
-      public_key: SecureRandom.uuid,
+      public_key: data['instance']['instanceId'],
       external_id: data['instance']['instanceId'],
       external_token: tokens['refresh_token'],
       domain: URI(data['site']['url'] || "").host,

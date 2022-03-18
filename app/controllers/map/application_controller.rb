@@ -8,7 +8,6 @@ class Map::ApplicationController < ActionController::Base
 
   content_security_policy do |policy|
     policy.frame_ancestors -> {
-      puts "TEST FRAME ANCESTORS #{[client&.domain, ('editor.wix.com' if client&.wix?)].inspect}"
       [client&.domain, ('editor.wix.com' if client&.wix?)].compact
     }
   end
@@ -99,10 +98,8 @@ class Map::ApplicationController < ActionController::Base
     end
 
     def setup_client!
-      if params[:api_key].present?
-        @client = Client.find_by_public_key(params[:api_key])
-      elsif params[:instance].present?
-        @client = Client.find_by_external_id(params[:instance])
+      if params[:api_key].present? || params[:instance].present?
+        @client = Client.find_by_public_key(params[:api_key] || params[:instance])
       else
         return
       end

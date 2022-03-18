@@ -14,7 +14,7 @@ class CMS::ClientsController < CMS::ApplicationController
 
     def parameters
       params.fetch(:client, {}).permit(
-        :label, :domain, :enabled,
+        :label, :domain, :enabled, :client_type,
         config: {},
         manager_attributes: %i[email name]
       )
