@@ -7,7 +7,10 @@ class Map::ApplicationController < ActionController::Base
   after_action :allow_iframe
 
   content_security_policy do |policy|
-    policy.frame_ancestors -> { [client&.domain, ('editor.wix.com' if client&.wix?)].compact }
+    policy.frame_ancestors -> {
+      puts "TEST FRAME ANCESTORS #{[client&.domain, ('editor.wix.com' if client&.wix?)].inspect}"
+      [client&.domain, ('editor.wix.com' if client&.wix?)].compact
+    }
   end
 
   def show
@@ -96,8 +99,14 @@ class Map::ApplicationController < ActionController::Base
     end
 
     def setup_client!
-      return unless params[:api_key].present?
-      @client = Client.find_by_public_key(params[:api_key])
+      if params[:api_key].present?
+        @client = Client.find_by_public_key(params[:api_key])
+      elsif params[:instance].present?
+        @client = Client.find_by_external_id(params[:instance])
+      else
+        return
+      end
+        
       raise ActionController::RoutingError.new('Not Found') if @client.nil?
       @client
     end
