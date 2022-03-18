@@ -7,7 +7,7 @@ class Map::ApplicationController < ActionController::Base
   after_action :allow_iframe
 
   content_security_policy do |policy|
-    policy.frame_ancestors -> { [client.domain, ('editor.wix.com' if client.wix?)].compact }
+    policy.frame_ancestors -> { [client&.domain, ('editor.wix.com' if client&.wix?)].compact }
   end
 
   def show
@@ -103,7 +103,7 @@ class Map::ApplicationController < ActionController::Base
     end
 
     def allow_iframe
-      if client.website?
+      if client&.website?
         headers['X-Frame-Options'] = "ALLOW-FROM #{@client.domain}"
         headers['Access-Control-Allow-Origin'] = @client.domain
       else
