@@ -8,7 +8,7 @@ class Map::ApplicationController < ActionController::Base
 
   content_security_policy do |policy|
     policy.frame_ancestors -> {
-      [client&.domain, ('editor.wix.com' if client&.wix?)].compact
+      client&.website? ? client&.domain : '*'
     }
   end
 
