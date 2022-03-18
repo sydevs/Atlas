@@ -13,11 +13,12 @@ class API::WixController < API::ApplicationController
     tokens = WixAPI.fetch_tokens(params[:code])
     data = WixAPI.fetch_site_properties(tokens['access_token'])
     @client = Client.new({
+      type: :wix,
       label: data['site']['siteDisplayName'],
       secret_key: SecureRandom.uuid,
       public_key: SecureRandom.uuid,
-      wix_id: data['instance']['instanceId'],
-      wix_refresh_token: tokens['refresh_token'],
+      external_id: data['instance']['instanceId'],
+      external_token: tokens['refresh_token'],
       domain: URI(data['site']['url'] || "").host,
       # default_config: {
       #   locale: data['site']['locale']
@@ -32,7 +33,7 @@ class API::WixController < API::ApplicationController
     end
 
     tokens = WixAPI.refresh_tokens(tokens['refresh_token'])
-    @client.wix_refresh_token = tokens['refresh_token']
+    @client.external_token = tokens['refresh_token']
     @client.save!
     WixAPI.close_window(tokens['access_token'])
   end

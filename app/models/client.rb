@@ -9,8 +9,11 @@ class Client < ApplicationRecord
     summary_email_sent_at
   ]
 
+  enum type: { website: 1, app: 2, wix: 3, other: 5 }
+
   # Validations
   validates_presence_of :label, :public_key, :secret_key
+  # validates_presence_of :domain, if: :requires_domain?
 
   # Scopes
   default_scope { order(last_accessed_at: :desc, updated_at: :desc) }
@@ -28,5 +31,11 @@ class Client < ApplicationRecord
 
     result
   end
+
+  private
+
+    def requires_domain?
+      website? || wix?
+    end
 
 end
