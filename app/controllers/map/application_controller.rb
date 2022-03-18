@@ -4,6 +4,11 @@ class Map::ApplicationController < ActionController::Base
   include Geokit::Geocoders
   layout 'map/application'
   before_action :setup_client!
+  after_filter :allow_iframe
+
+  content_security_policy do |policy|
+    policy.frame_ancestors client.domain, ('editor.wix.com' if client.wix?)
+  end
 
   def show
     I18n.locale = params[:locale]&.to_sym || :en
@@ -91,11 +96,14 @@ class Map::ApplicationController < ActionController::Base
     end
 
     def setup_client!
+      return unless params[:api_key].present?
       @client = Client.find_by_public_key(params[:api_key])
-      return if !params[:api_key].present?
       raise ActionController::RoutingError.new('Not Found') if @client.nil?
+      @client
+    end
 
-      if @client.domain?
+    def allow_iframe
+      if client.website?
         headers['X-Frame-Options'] = "ALLOW-FROM #{@client.domain}"
         headers['Access-Control-Allow-Origin'] = @client.domain
       else
@@ -106,6 +114,10 @@ class Map::ApplicationController < ActionController::Base
       headers['Access-Control-Allow-Methods'] = 'GET'
       headers['Access-Control-Request-Method'] = '*'
       headers['Access-Control-Allow-Headers'] = 'Origin, X-Requested-With, Content-Type, Accept, Authorization'
+    end
+
+    def client
+      @client ||= setup_client!
     end
 
     def current_user
