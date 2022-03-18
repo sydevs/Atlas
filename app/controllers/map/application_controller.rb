@@ -96,10 +96,10 @@ class Map::ApplicationController < ActionController::Base
       raise ActionController::RoutingError.new('Not Found') if @client.nil?
 
       if @client.domain?
-        headers['X-FRAME-OPTIONS'] = "ALLOW-FROM #{@client.domain}"
+        headers['X-Frame-Options'] = "ALLOW-FROM #{@client.domain}"
         headers['Access-Control-Allow-Origin'] = @client.domain
       else
-        headers['X-FRAME-OPTIONS'] = 'ALLOWALL'
+        headers.delete('X-Frame-Options')
         headers['Access-Control-Allow-Origin'] = '*'
       end
 
