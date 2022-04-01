@@ -31,7 +31,8 @@ class CountryMailer < ApplicationMailer
       new_registrations: @country.associated_registrations.since(SUMMARY_PERIOD.ago).count,
     }
 
-    @old_stats = @stats.map { |key, value| [key, (value * rand(0.7..1.5)).to_i] }.to_h
+    @old_stats = @stats
+    # @old_stats = @stats.map { |key, value| [key, (value * rand(0.7..1.5)).to_i] }.to_h
 
     country_label = CountryDecorator.get_short_label(@country.country_code)
     subject = I18n.translate('mail.country.summary.subject', country: country_label)

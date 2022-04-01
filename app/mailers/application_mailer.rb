@@ -30,7 +30,8 @@ class ApplicationMailer < ActionMailer::Base
       new_registrations: Registration.where(*query).count,
     }
 
-    @old_stats = @stats.map { |key, value| [key, (value * rand(0.7..1.5)).to_i] }.to_h
+    @old_stats = @stats
+    # @old_stats = @stats.map { |key, value| [key, (value * rand(0.7..1.5)).to_i] }.to_h
 
     subject = I18n.translate('mail.summary.title')
     # create_session! @manager

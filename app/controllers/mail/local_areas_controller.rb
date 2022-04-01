@@ -20,7 +20,8 @@ class Mail::LocalAreasController < Mail::ApplicationController
       new_registrations: @region.associated_registrations.since(summary_period.ago).count,
     }
 
-    @old_stats = @stats.map { |key, value| [key, (value * rand(0.7..1.5)).to_i] }.to_h
+    @old_stats = @stats
+    # @old_stats = @stats.map { |key, value| [key, (value * rand(0.7..1.5)).to_i] }.to_h
     render 'mail/regions/summary'
   end
 

@@ -24,10 +24,11 @@ class RegionMailer < ApplicationMailer
 
     @stats = {
       active_events: @region.events.publicly_visible.count,
-      new_registrations: 100, # @region.associated_registrations.since(SUMMARY_PERIOD.ago).count,
+      new_registrations: @region.associated_registrations.since(SUMMARY_PERIOD.ago).count,
     }
 
-    @old_stats = @stats.map { |key, value| [key, (value * rand(0.7..1.5)).to_i] }.to_h
+    @old_stats = @stats
+    # @old_stats = @stats.map { |key, value| [key, (value * rand(0.7..1.5)).to_i] }.to_h
 
     if @region.is_a?(Province)
       label = ProvinceDecorator.get_name(@region.province_code, @region.country.country_code)

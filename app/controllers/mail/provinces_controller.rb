@@ -19,10 +19,11 @@ class Mail::ProvincesController < Mail::ApplicationController
 
     @stats = {
       active_events: @region.events.publicly_visible.count,
-      new_registrations: 100, # @region.associated_registrations.since(summary_period.ago).count,
+      # new_registrations: @region.associated_registrations.since(summary_period.ago).count,
     }
 
-    @old_stats = @stats.map { |key, value| [key, (value * rand(0.7..1.5)).to_i] }.to_h
+    @old_stats = @stats
+    # @old_stats = @stats.map { |key, value| [key, (value * rand(0.7..1.5)).to_i] }.to_h
     render 'mail/regions/summary'
   end
 
