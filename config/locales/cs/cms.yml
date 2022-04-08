@@ -110,6 +110,7 @@ cs:
         language: "The default language that events in this country are usually in."
         no_default_language: "No default"
         province_management: "If enabled, you will be able to view and assign managers to regions (provinces, states, etc) within this country. This is useful for larger countries (China, USA, Australia, etc), and unnessecary for small countries (Belgium, Lithuania, Singapore, etc)."
+        bounds: "If a country is specified when embedding the map, these bounds will be used as the initial view. The coordinates should be entered as 4 comma-separated numbers (south,west,north,east)."
       province:
         must_be_new: "Only regions which haven't already been added are listed below."
         prompt: "Province / State / County"

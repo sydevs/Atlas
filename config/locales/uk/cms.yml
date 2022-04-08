@@ -111,6 +111,7 @@ uk:
         language: "Мова за замовчуванням, якою зазвичай проводяться події в цій країні."
         no_default_language: "Немає за замовчуванням"
         province_management: "Якщо ввімкнено, ви зможете переглядати та призначати менеджерів для регіонів (провінцій, штатів тощо) у цій країні. Це корисно для великих країн (Китай, США, Австралія тощо), і непотрібно для малих країн (Бельгія, Литва, Сінгапур тощо)."
+        bounds: "If a country is specified when embedding the map, these bounds will be used as the initial view. The coordinates should be entered as 4 comma-separated numbers (south,west,north,east)." # TODO: Translate
       province:
         must_be_new: "Нижче наведено лише регіони, які ще не були додані."
         prompt: "Провінція / штат / країна"

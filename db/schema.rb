@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_04_184553) do
+ActiveRecord::Schema.define(version: 2022_04_08_102759) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,7 +40,7 @@ ActiveRecord::Schema.define(version: 2022_03_04_184553) do
   create_table "clients", force: :cascade do |t|
     t.string "label", null: false
     t.jsonb "config", default: "{}", null: false
-    t.string "domain", null: false
+    t.string "domain"
     t.bigint "manager_id", null: false
     t.string "public_key", null: false
     t.string "secret_key", null: false
@@ -48,6 +48,10 @@ ActiveRecord::Schema.define(version: 2022_03_04_184553) do
     t.datetime "last_accessed_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "external_id"
+    t.string "external_token"
+    t.integer "client_type", default: 0, null: false
+    t.index ["external_id"], name: "index_clients_on_external_id", unique: true
     t.index ["manager_id"], name: "index_clients_on_manager_id"
   end
 
@@ -60,6 +64,7 @@ ActiveRecord::Schema.define(version: 2022_03_04_184553) do
     t.datetime "summary_email_sent_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
     t.jsonb "summary_metadata", default: "{}"
     t.string "default_language_code", limit: 2
+    t.string "bounds"
     t.index ["country_code"], name: "index_countries_on_country_code", unique: true
   end
 
@@ -97,6 +102,7 @@ ActiveRecord::Schema.define(version: 2022_03_04_184553) do
     t.string "phone_number"
     t.integer "registration_limit"
     t.datetime "registration_deadline_at"
+    t.integer "registration_type", default: 0, null: false
     t.index ["manager_id"], name: "index_events_on_manager_id"
     t.index ["status"], name: "index_events_on_status"
     t.index ["venue_id"], name: "index_events_on_venue_id"

@@ -37,6 +37,10 @@ class Country < ApplicationRecord
     false
   end
 
+  def bounds
+    self[:bounds].split(',')
+  end
+
   def default_language_code= value
     # Only accept languages which are in the language list
     super value if I18nData.languages.key?(value)
