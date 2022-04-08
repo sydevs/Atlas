@@ -1,0 +1,15 @@
+doctype html
+
+html
+  head
+    title #{content_for :title} | #{translate 'sahaj_atlas'}
+    meta name='viewport' content='width=device-width, initial-scale=1.0'
+
+    = render 'layouts/favicons'
+    = stylesheet_link_tag 'api', media: 'all'
+
+  body class="api #{controller_name} #{controller.action_name}"
+    .container
+      = yield
+
+    .ui.hidden.section.divider

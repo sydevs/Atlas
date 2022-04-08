@@ -1,0 +1,14 @@
+/*
+ *= require semantic-ui
+ */
+
+* {
+  box-sizing: border-box;
+}
+
+.container {
+  max-width: 520px;
+  padding: 1em;
+  padding-top: 3em;
+  margin: auto;
+}

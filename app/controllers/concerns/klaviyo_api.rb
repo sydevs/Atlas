@@ -1,6 +1,4 @@
 require 'klaviyo'
-require 'httparty'
-require 'pp'
 
 ## KLAVIYO
 # This concern simplifies requests to Klaviyo

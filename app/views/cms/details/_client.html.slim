@@ -10,6 +10,13 @@
     .ui.fluid.input
       input value=map_index_key_url(api_key: @record.public_key)
 
+.ui.list
+  .item
+    i.wix.icon
+    .content
+      .header Wix ID
+      .description = @record.external_id
+
 h3.ui.small.dividing.grey.header = translate('cms.details.management_for_record', resource: translate_model(@model).downcase)
 .ui.list
   .item

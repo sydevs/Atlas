@@ -1,0 +1,9 @@
+| Wix Dashboard
+
+//
+  = f.input :enabled
+  = f.input :label
+  = f.input :domain, hint: translate('cms.hints.client.domain')
+  .ui.small.dividing.violet.header = translate_attribute(f.object, :config)
+  = f.simple_fields_for :config do |ff|
+    = ff.input :bounds, hint: translate('cms.hints.client.bounds'), required: false, input_html: { value: f.object.config['bounds'] }

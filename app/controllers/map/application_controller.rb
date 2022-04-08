@@ -4,6 +4,13 @@ class Map::ApplicationController < ActionController::Base
   include Geokit::Geocoders
   layout 'map/application'
   before_action :setup_client!
+  after_action :allow_iframe
+
+  content_security_policy do |policy|
+    policy.frame_ancestors -> {
+      client&.website? ? client&.domain : '*'
+    }
+  end
 
   def show
     I18n.locale = params[:locale]&.to_sym || :en
@@ -91,15 +98,37 @@ class Map::ApplicationController < ActionController::Base
     end
 
     def setup_client!
-      @client = Client.find_by_public_key(params[:api_key])
-      return if !params[:api_key].present?
-      raise ActionController::RoutingError.new('Not Found') if @client.nil?
+      if params[:instance].present?
+        wix_data = WixAPI.parse_instance(params[:instance])
+        params[:api_key] = wix_data['instanceId']
+      end
 
-      headers['X-FRAME-OPTIONS'] = "ALLOW-FROM #{@client.domain}"
-      headers['Access-Control-Allow-Origin'] = @client.domain
+      if params[:api_key].present?
+        @client = Client.find_by_public_key(params[:api_key])
+      else
+        return
+      end
+        
+      raise ActionController::RoutingError.new('Not Found') if @client.nil?
+      @client
+    end
+
+    def allow_iframe
+      if client&.website?
+        headers['X-Frame-Options'] = "ALLOW-FROM #{@client.domain}"
+        headers['Access-Control-Allow-Origin'] = @client.domain
+      else
+        response.headers.delete('X-Frame-Options')
+        headers['Access-Control-Allow-Origin'] = '*'
+      end
+
       headers['Access-Control-Allow-Methods'] = 'GET'
       headers['Access-Control-Request-Method'] = '*'
       headers['Access-Control-Allow-Headers'] = 'Origin, X-Requested-With, Content-Type, Accept, Authorization'
+    end
+
+    def client
+      @client ||= setup_client!
     end
 
     def current_user

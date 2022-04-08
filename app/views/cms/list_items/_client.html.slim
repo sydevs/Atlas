@@ -9,4 +9,4 @@
     - else
       .header = client.label
     .description
-      = client.domain
+      = client.website? ? client.domain : translate_enum_value(client, :client_type)

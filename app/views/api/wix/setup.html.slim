@@ -1,0 +1,28 @@
+
+- content_for :title, 'Wix Install'
+h1.ui.centered.header
+  i.green.check.circle.icon
+  | Wix App Installed
+
+.ui.divider
+
+.ui.list
+  .item
+    i.compass.icon
+    .content
+      .header Domain
+      .description = @client.domain
+  .item
+    i.key.icon
+    .content
+      .header Public Key
+      .description = @client.public_key
+  .item
+    = model_icon Manager
+    .content
+      .header = translate_model(Manager)
+      .description
+        | #{@client.manager.label} (#{@client.manager.email})
+
+/.ui.button href='javascript:window.close()'
+  | Close Window

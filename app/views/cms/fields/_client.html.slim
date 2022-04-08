@@ -1,7 +1,7 @@
 
 = f.input :enabled
 = f.input :label
-= f.input :domain, hint: translate('cms.hints.client.domain')
+= f.input :client_type, collection: Client.client_types.map { |k, v| [translate_enum_value(Client, :client_type, k), k] }, hint: translate('cms.hints.manager.contact_method')
 
 - unless f.object.new_record? && current_user.administrator?
   .ui.small.dividing.violet.header = translate('cms.forms.client.keys')
@@ -10,6 +10,7 @@
     = f.input :public_key, hint: translate('cms.hints.client.public_key')
 
 .ui.small.dividing.violet.header = translate_attribute(f.object, :config)
+= f.input :domain, hint: translate('cms.hints.client.domain')
 = f.simple_fields_for :config do |ff|
   = ff.input :bounds, hint: translate('cms.hints.client.bounds'), required: false, input_html: { value: f.object.config['bounds'] }
   //= ff.input :location, label: translate_attribute(f.object, :location), required: false do
