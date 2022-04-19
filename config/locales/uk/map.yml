@@ -36,7 +36,7 @@ uk:
         message: "Запитання / Коментарі"
         submit: "Підтвердити"
       notice:
-        text: "Надсилаючи, ви підтверджуєте свою згоду з нашими %{link}."
+        text: "By submitting you confirm you agree to receive follow up messages about this and similar events, in accordance with our %{link}." # TODO: Translate
         link: "політика конфіденційності"
       feedback:
         duplicate: "Ви зареєструвались. До зустрічі."

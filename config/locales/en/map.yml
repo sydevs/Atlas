@@ -39,7 +39,7 @@ en:
         message: "Questions / Comments"
         submit: "Confirm"
       notice:
-        text: "By submitting you confirm your agreement with our %{link}."
+        text: "By submitting you confirm you agree to receive follow up messages about this and similar events, in accordance with our %{link}."
         link: "privacy policy"
       feedback:
         duplicate: "You are already registered. See you soon."
