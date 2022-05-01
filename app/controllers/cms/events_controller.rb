@@ -14,11 +14,11 @@ class CMS::EventsController < CMS::ApplicationController
     @record.touch if super parameters
   end
 
-  def confirm
+  def verify
     @record = Event.find(params[:event_id])
     authorize @record, :update?
+    @context = @record
     @record.touch
-    redirect_to [:cms, @record], flash: { success: translate('cms.messages.successfully_confirmed', resource: @model.model_name.human.downcase) }
   end
 
   private

@@ -21,16 +21,19 @@ uk:
         back: "Назад до %{resource}"
         search: "Пошук %{resources}..."
         choose: "Обрати %{resource}"
+        verify: "Verify %{resource}" # TODO: Translate
+        view: "View %{resource}" # TODO: Translate
 
       special:
         edit_profile: "Редагувати мій профіль"
+        view_map: "Переглянути карту"
 
     menu:
       home: "Головна"
       # Top level menu
       about: "Про Сахадж Атлас"
       statistics: "Статистика"
-      map: "Переглянути карту"
+      map: :cms.actions.special.view_map # Do not translate
       report_issue: "Повідомити про проблему"
       help: "Довідка (FAQ)"
       sign_out: "Вийти"
@@ -63,13 +66,13 @@ uk:
       successfully_updated: "%{resource} успішно збережено."
       successfully_deleted: "%{resource} успішно видалено. Дія не може бути скасована."
       successfully_removed: "%{resource} успішно видалено з цього %{context}."
-      successfully_confirmed: "Дякуємо, що підтвердили, що цей %{resource} оновлений."
       not_logged_in: "Ви не ввійшли в систему!"
       no_comment: "(Без коментарів)"
       temporary_mail_error: "Сервер електронної пошти тимчасово зайнятий, спробуйте ще раз."
       venue:
         out_of_bounds: "Місце проведення не може бути за межами радіусу %{local_area}"
       event:
+        verified: "Thank you for confirming your event's accuracy." # TODO: Translate
         invalid_end_time: "не може бути раніше часу початку"
         invalid_end_date: "не може бути раніше дати початку"
         passed_end_date: "не може бути раніше ніж сьогодні"

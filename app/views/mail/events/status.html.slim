@@ -33,15 +33,22 @@ p.explanation
   = translate(@status, scope: 'mail.event.status.explanation')
 
 table.actions
+  - if %i[needs_review needs_urgent_review expired].include?(@status)
+    tr
+      td.question colspan=3 = translate('mail.event.status.question')
   - if @status == :needs_urgent_review && @event.manager != @manager
     tr
-      td colspan=2
+      td colspan=3
         a.button href="mailto:#{@event.manager.email}"
           = translate('mail.event.contact')
   tr
+    - if %i[needs_review needs_urgent_review expired].include?(@status)
+      td: a.button href=email_login(cms_event_verify_url(@event))
+        = translate('mail.event.status.verify')
+      td.or = translate('mail.event.status.or')
+    - elsif !%i[expired finished].include?(@status)
+      td: a.button href=map_event_url(@event)
+        = translate('mail.event.view')
     td: a.button href=email_login(cms_event_url(@event))
-      = translate(@status == :created ? 'edit' : 'update', scope: 'mail.event')
-    - unless %i[expired finished].include?(@status)
-      td
-        a.button href=map_event_url(@event)
-          = translate('mail.event.view')
+      = translate('mail.event.edit')
+    

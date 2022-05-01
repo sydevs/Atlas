@@ -103,7 +103,7 @@ Rails.application.routes.draw do
 
     resources :events do
       get :regions
-      get :confirm
+      get :verify
       resources :pictures, only: %i[index create destroy]
       resources :managers, only: %i[index new create destroy]
       resources :registrations, only: %i[index]

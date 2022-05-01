@@ -60,12 +60,15 @@ a
   display: inline-block
   text-align: center
   transition: all 0.5s
-  background: $theme-color-bold
   -moz-border-radius: 5px
   border-radius: 5px
-  border: 7px solid $theme-color-bold
-  color: white !important
+  padding: 5px
+  border: 2px solid $theme-color-bold
   font-weight: bold
+
+  &:not(.outline)
+    background: $theme-color-bold
+    color: white !important
 
 .actions
   text-align: center
@@ -77,6 +80,10 @@ a
     display: inline-block
     width: 150px
     margin: 2px
+
+  .or
+    vertical-align: middle
+    font-weight: bold
 
 .information
   max-width: 360px

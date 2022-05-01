@@ -59,7 +59,10 @@ ru:
       update: "Обновить событие"
       contact: "Отправить email"
 
-      status:
+      status: # TODO: Translate
+        question: "Is the above information still correct?"
+        verify: "Event is Correct"
+        or: "OR"
         subject:
           created: "Новое событие создано - %{event}"
           needs_review: "[Warning] Необходима проверка события - %{event}"

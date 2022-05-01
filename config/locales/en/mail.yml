@@ -60,6 +60,9 @@ en:
       contact: "Send Email"
 
       status:
+        question: "Is the above information still correct?"
+        verify: "Event is Correct"
+        or: "OR"
         subject:
           created: "New Event Created - %{event}"
           needs_review: "[Warning] Event Needs Review - %{event}"

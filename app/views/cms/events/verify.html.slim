@@ -1,0 +1,47 @@
+
+- content_for :title, translate('cms.actions.target.verify', resource: translate_model(@model))
+
+.ui.top.attached.placeholder.segment
+  .ui.icon.header
+    i.green.check.circle.icon
+    = translate('cms.messages.event.verified')
+  .inline
+    a.ui.button href=edit_cms_event_url(@record)
+      = translate('cms.actions.target.edit', resource: translate_model(@model))
+    - if @context.publicly_visible?
+      a.ui.primary.button href=map_event_url(@record)
+        = translate('cms.actions.special.view_map')
+    - else
+      a.ui.primary.button href=cms_event_url(@record)
+        = translate('cms.actions.target.view', resource: translate_model(@model))
+.ui.bottom.attached.segment
+  .ui.small.header = @record.label
+  p = simple_format @record.description
+  .ui.relaxed.list
+    .item
+      i.hashtag.icon
+      .content
+        strong = @record.category_name
+        '  - 
+        = @record.category_description
+    .item
+      i.calendar.icon
+      .content = @record.timing_in_words
+    .item
+      = model_icon(@record.parent.class)
+      .content = @record.parent.try(:address) || @record.parent.label
+    - if @record.phone_number?
+      .item
+        i.phone.icon
+        .content #{@record.phone_name} (#{@record.phone_number})
+    - if @record.online?
+      .item
+        i.satellite.dish.icon
+        .content = translate_attribute(@record, :online)
+    .item
+      i.language.icon
+      .content = @record.language_name
+    - if !@record.native_registration_mode?
+      .item
+        = model_icon(Registration)
+        .content #{translate_enum_value(@record, :registration_mode)} (#{translate_attribute(@record, :registration_mode)})

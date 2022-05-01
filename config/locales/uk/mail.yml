@@ -59,7 +59,10 @@ uk:
       update: "Оновити подію"
       contact: "Відправити лист"
 
-      status:
+      status: # TODO: Translate
+        question: "Is the above information still correct?"
+        verify: "Event is Correct"
+        or: "OR"
         subject:
           created: "Створено нову подію - %{event}"
           needs_review: "[Попередження] Подія потребує перегляду - %{event}"

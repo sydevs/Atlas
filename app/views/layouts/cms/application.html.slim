@@ -72,7 +72,7 @@ html
               i.right.angle.icon.divider
               span.active.section
                 = translate('cms.actions.target.new', resource: translate_model(@model))
-            - elsif action_name == 'edit'
+            - elsif %w[edit verify].include?(action_name)
               a.section href=url_for([:cms, @context])
                 = @context.label
             - else

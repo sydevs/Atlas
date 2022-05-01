@@ -20,16 +20,19 @@ en:
         back: "Back to %{resource}"
         search: "Search %{resources}..."
         choose: "Choose a %{resource}"
+        verify: "Verify %{resource}"
+        view: "View %{resource}"
 
       special:
         edit_profile: "Edit My Profile"
+        view_map: "View Map"
 
     menu:
       home: "Home"
       # Top level menu
       about: "About Sahaj Atlas"
       statistics: "Statistics"
-      map: "View Map"
+      map: :cms.actions.special.view_map # Do not translate
       report_issue: "Report Issue"
       help: "Help (FAQ)"
       sign_out: "Log Out"
@@ -62,13 +65,13 @@ en:
       successfully_updated: "Saved %{resource} successfully."
       successfully_deleted: "%{resource} successfully deleted. This cannot be undone."
       successfully_removed: "%{resource} successfully removed from this %{context}."
-      successfully_confirmed: "Thank you for confirming that this %{resource} is up to date."
       not_logged_in: "You are not logged in!"
       no_comment: "(No comment)"
       temporary_mail_error: "Email server is temporarily busy, please try again."
       venue:
         out_of_bounds: "Venue cannot be outside the radius of %{local_area}"
       event:
+        verified: "Thank you for confirming your event's accuracy."
         invalid_end_time: "cannot be before the start time"
         invalid_end_date: "cannot be before the start date"
         passed_end_date: "cannot be before today"
