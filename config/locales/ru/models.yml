@@ -164,23 +164,23 @@ ru:
         name: :activerecord.attributes.generic.name # Do not translate
         custom_name: "Название события (Опционально)"
         category: "Категория"
-        categories:
-          intro: "Для начинающих"
-          intermediate: "Для продолжающих"
+        categories: # TODO: Translate
+          dropin: "Drop-In Class"
+          single: "One-time Class"
           course: "Курс"
-          public_event: "Стенд на выставке или фестивале"
+          festival: "Stall at Public Event"
           concert: "Медитация и концерт"
-        category_labels:
-          intro: "Занятие для начинающих"
-          intermediate: "Занятие для продолжающих"
+        category_labels: # TODO: Translate
+          dropin: "Drop-In"
+          single: "Meditation"
           course: "Курс"
-          public_event: "Стенд"
+          festival: "Stall"
           concert: "Концерт"
-        category_descriptions:
-          intro: "Первое знакомство с медитацией по методу Сахаджа Йога."
-          intermediate: "Более углублённые занятия для тех, кто уже прошел вводный курс."
+        category_descriptions: # TODO: Translate
+          dropin: "A weekly class, where seekers can drop-in any time."
+          single: "A one-time class, suitable for a tour or other special event."
           course: "Курс на несколько недель, который познакомит с различными техниками медитации."
-          public_event: "Бесплатное обучение медитации в рамках выставки или фестиваля."
+          festival: "Offering free meditation instruction at a public event."
           concert: "Представление, сочетающее медитацию и музыку или танец."
         description: "Описание"
         room: "Помещение"

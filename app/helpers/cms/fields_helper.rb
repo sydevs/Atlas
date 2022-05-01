@@ -9,6 +9,14 @@ module CMS::FieldsHelper
     application_summary: 'world',
   }.freeze
 
+  EVENT_CATEGORY_ICONS = {
+    dropin: 'calendar',
+    single: 'calendar outline',
+    course: 'calendar alternate',
+    festival: 'dumpster',
+    concert: 'microphone alternate',
+  }.freeze
+
   def contact_types manager
     result = %i[new_managed_record event_verification]
     result << :event_registrations if manager.events.present?
@@ -32,6 +40,10 @@ module CMS::FieldsHelper
     when :application_summary
       distance_of_time_in_words(ApplicationMailer::SUMMARY_PERIOD)
     end
+  end
+  
+  def event_category_icon category
+    EVENT_CATEGORY_ICONS[category.to_sym]
   end
   
 end

@@ -2,21 +2,21 @@
 
 phoenix_center_monday:
   venue: phoenix_center
-  category: intro
+  category: dropin
   start_date: <%= 5.days.ago.to_s(:db) %>
   start_time: '18:30'
   recurrence: monday
 
 phoenix_center_wednesday:
   venue: phoenix_center
-  category: intermediate
+  category: single
   start_date: <%= 5.days.ago.to_s(:db) %>
   start_time: '18:30'
   recurrence: wednesday
 
 phoenix_center_saturday:
   venue: phoenix_center
-  category: intro
+  category: dropin
   description: Join us on Saturdays for Tea and Meditation
   start_date: <%= 5.days.ago.to_s(:db) %>
   start_time: '11:00'
@@ -24,14 +24,14 @@ phoenix_center_saturday:
 
 chula_vista_eastlake_wednesday:
   venue: chula_vista_eastlake
-  category: intro
+  category: dropin
   start_date: <%= 5.days.ago.to_s(:db) %>
   start_time: '18:30'
   recurrence: wednesday
 
 oak_park_community_thursday:
   venue: oak_park_community
-  category: intro
+  category: dropin
   start_date: <%= 5.days.ago.to_s(:db) %>
   start_time: '17:45'
   end_time: '18:45'
@@ -39,7 +39,7 @@ oak_park_community_thursday:
 
 burbank_rec_center_friday:
   venue: burbank_rec_center
-  category: intro
+  category: dropin
   room: 'Meeting Room #2'
   start_date: <%= 5.days.ago.to_s(:db) %>
   start_time: '17:00'
@@ -48,7 +48,7 @@ burbank_rec_center_friday:
 
 folsom_dance_studio_sunday:
   venue: folsom_dance_studio
-  category: intro
+  category: dropin
   start_date: <%= 5.days.ago.to_s(:db) %>
   start_time: '9:00'
   end_time: '10:00'
@@ -56,7 +56,7 @@ folsom_dance_studio_sunday:
 
 fremont_center_tuesday:
   venue: fremont_center
-  category: intro
+  category: dropin
   start_date: <%= 5.days.ago.to_s(:db) %>
   start_time: '19:30'
   end_time: '20:30'
@@ -64,7 +64,7 @@ fremont_center_tuesday:
 
 fremont_center_saturday:
   venue: fremont_center
-  category: intro
+  category: dropin
   start_date: <%= 5.days.ago.to_s(:db) %>
   start_time: '11:00'
   end_time: '12:00'
@@ -72,7 +72,7 @@ fremont_center_saturday:
 
 fremont_center_sunday:
   venue: fremont_center
-  category: intro
+  category: dropin
   start_date: <%= 5.days.ago.to_s(:db) %>
   start_time: '11:00'
   end_time: '12:00'

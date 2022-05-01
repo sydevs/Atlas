@@ -20,4 +20,5 @@
         i.left.arrow.icon
         = translate('cms.actions.target.back', resource: translate_model(@model, :plural).downcase)
 
-      button.ui.basic.positive.button = translate('cms.actions.simple.update')
+      - unless @record.is_a?(Event) && @record.category.nil?
+        button.ui.basic.positive.button = translate('cms.actions.simple.update')

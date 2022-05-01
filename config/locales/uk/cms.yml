@@ -10,6 +10,7 @@ uk:
         back: "Назад"
         view: "Переглянути"
         search: "Search" # TODO: Translate
+        select: "Select" # TODO: Translate
 
       target:
         new: "Додати %{resource}"
@@ -376,17 +377,17 @@ uk:
             description: "Ми можемо аналізувати, на які події реєструються шукачі, щоб покращити те, як ми представляємо ці події."
         types:
           title: "Доступні категорії"
-          intro:
-            title: :activerecord.attributes.event.categories.intro
+          dropin:
+            title: :activerecord.attributes.event.categories.dropin
             description: "Вступний урок для тих, хто тільки починає займатися Сахаджа Йогою."
-          intermediate:
-            title: :activerecord.attributes.event.categories.intermediate
+          single:
+            title: :activerecord.attributes.event.categories.single
             description: "Заняття для тих, хто шукає заглиблення в Сахаджа Йогу, коли вони вже відвідали вступний урок."
           course:
             title: :activerecord.attributes.event.categories.course
             description: "Зазвичай це тижневий курс, який триває обмежений час. Переведення шукача від початківця до середнього протягом певної кількості тижнів."
-          public_event:
-            title: :activerecord.attributes.event.categories.public_event
+          festival:
+            title: :activerecord.attributes.event.categories.festival
             description: "Коли Сахаджа Йога бере участь у наявному публічному заході. Наприклад, наявність локації на фестивалі чи фермерському ринку."
           concert:
             title: :activerecord.attributes.event.categories.concert

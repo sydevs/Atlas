@@ -1,6 +1,6 @@
 IMAGE_SETS = {
   concert: 2,
-  public_event: 2,
+  festival: 2,
   other: 6,
 }.freeze
 
@@ -70,7 +70,7 @@ def load_venue address, country_code, index
     start_date = Faker::Date.between(from: 1.month.ago, to: 1.year.from_now)
     contact = [true, true, false].sample ? "#{Faker::Name.first_name} #{Faker::Name.last_name}" : nil
     category = Event.categories.keys.sample
-    images_folder = %i[concert public_event].include?(category) ? category : :other
+    images_folder = %i[concert festival].include?(category) ? category : :other
     images_folder = "db/seeds/files/#{images_folder}/#{rand(1..IMAGE_SETS[images_folder])}"
 
     event = venue.events.new({

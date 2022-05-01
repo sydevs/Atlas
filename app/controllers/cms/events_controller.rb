@@ -2,6 +2,10 @@ class CMS::EventsController < CMS::ApplicationController
 
   prepend_before_action { @model = Event }
 
+  def new
+    super category: params[:category], online: params[:online] == 'true'
+  end
+
   def create
     super parameters
   end

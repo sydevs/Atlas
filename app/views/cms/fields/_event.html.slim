@@ -1,65 +1,55 @@
 
-- categories = Event.categories.map { |k, v| [translate_enum_value(Event, :category, k), k] }
-- languages = I18nData.languages(I18n.locale).map { |k, v| [v.split(/[,;]/)[0], k] }
+- if @record.category.present?
+  = f.input :published
 
-= f.input :published
+  = f.input :custom_name, placeholder: @record.category_name, hint: translate('cms.hints.event.custom_name')
 
-= f.input :venue do
-  .hint = [@record.venue.name, @record.venue.address].compact.join(', ')
+  = f.input :description do 
+    .hint = translate('cms.hints.event.description', min: 40, max: 600)
+    = f.input_field :description, as: :text, placeholder: @record.category_description do 
+    .hint
+      span.js-character-count data={ for: 'event_description', min: 40, max: 600 } = @record.description&.length || 0
+      = translate('cms.hints.event.description_count', min: 40, max: 600)
 
-.ui.small.dividing.violet.header = translate('cms.forms.event.details')
+  .ui.small.dividing.violet.header = translate('cms.forms.event.details')
+  - if @record.online?
+    = f.input :online_url, hint: translate('cms.hints.event.online_url'), wrapper_html: { class: 'required' }
 
-= f.input :category, collection: categories
-= help_link :categories
-
-= f.input :description do 
-  .hint = translate('cms.hints.event.description', min: 40, max: 600)
-  = f.input_field :description, as: :text, placeholder: @record.category_description do 
-  .hint
-    span.js-character-count data={ for: 'event_description', min: 40, max: 600 } = @record.description&.length || 0
-    = translate('cms.hints.event.description_count', min: 40, max: 600)
-
-.two.fields
-  = f.input :room, hint: translate('cms.hints.event.room')
+  - languages = I18nData.languages(I18n.locale).map { |k, v| [v.split(/[,;]/)[0], k] }
   = f.input :language_code, collection: languages, selected: @record.default_language_code, input_html: { class: 'search' }, hint: translate('cms.hints.event.language')
 
-= f.input :custom_name, placeholder: @record.category_name, hint: translate('cms.hints.event.custom_name')
+  = f.input :phone_number do
+    .two.fields
+      = f.input :phone_number, as: :tel, label: false, hint: translate('cms.hints.event.phone_number'), placeholder: translate_attribute(@record, :phone_number)
+      = f.input :phone_name, as: :string, label: false, hint: translate('cms.hints.event.phone_name'), placeholder: translate_attribute(@record, :phone_name)
 
-.ui.small.dividing.violet.header = translate('cms.forms.event.online')
+  = render "cms/fields/categories/#{@record.category}", f: f
 
-= f.input :online, hint: translate('cms.hints.event.online')
-= f.input :online_url, hint: translate('cms.hints.event.online_url')
+  - if policy(@record).set_manager?
+    .ui.small.dividing.violet.header = translate('cms.forms.event.manager')
+    = render 'cms/managers/selector', f: f, manager: @record.manager
 
-.ui.small.dividing.violet.header = translate('cms.forms.event.timing')
+  .ui.hidden.section.divider
+- else
+  - categories = Event.categories.dup
+  - categories.except!(:festival) if @record.online?
 
-= f.input :recurrence, collection: Event.recurrences.map { |k, v| [translate_enum_value(Event, :recurrence, k), k] }
+  - if @record.online?
+    .ui.label = translate_attribute(@record, :online)
 
-.two.fields
-  = f.input :start_date, as: :string, wrapper: :semantic_date, wrapper_html: { class: 'start' }
-  = f.input :end_date, as: :string, wrapper: :semantic_date, wrapper_html: { class: 'end' }, input_html: { placeholder: translate('cms.hints.never') }
-
-.two.fields
-  = f.input :start_time, wrapper_html: { class: 'start' }, input_html: { type: 'time', autocomplete: 'off' }
-  = f.input :end_time, wrapper_html: { class: 'end' }, input_html: { type: 'time', autocomplete: 'off', placeholder: translate('cms.hints.unspecified') }
-
-.ui.small.dividing.violet.header = translate('cms.forms.event.registration')
-
-.hint = translate('cms.hints.event.registration_mode', native: translate_enum_value(@record, :registration_mode, :native))
-.hint = translate('cms.hints.event.registration_url', native: translate_enum_value(@record, :registration_mode, :native))
-.fields
-  = f.input :registration_mode, collection: Event.registration_modes.map { |k, v| [translate_enum_value(Event, :registration_mode, k), k] }, wrapper_html: { class: 'four wide' }
-  = f.input :registration_url, as: :url, placeholder: map_event_url(@record&.id || 0, anchor: 'register'), wrapper_html: { class: 'twelve wide' }
-= help_link :registration
-br
-
-= f.input :registration_deadline_at, as: :string, wrapper: :semantic_date, hint: translate('cms.hints.event.registration_deadline_at'), input_html: { placeholder: translate('cms.hints.never') }
-
-.two.fields
-  = f.input :phone_number, as: :tel, hint: translate('cms.hints.event.phone_number')
-  = f.input :phone_name, as: :string, hint: translate('cms.hints.event.phone_name')
-
-- if policy(@record).set_manager?
-  .ui.small.dividing.violet.header = translate('cms.forms.event.manager')
-  = render 'cms/managers/selector', f: f, manager: @record.manager
-
-.ui.hidden.section.divider
+  = help_link :categories
+  br
+  table.ui.very.basic.table
+    tbody
+      - categories.each do |category, index|
+        tr
+          td.center.aligned
+            i.huge.fitted.icon class=event_category_icon(category)
+          td
+            strong = I18n.translate(category, scope: 'activerecord.attributes.event.categories')
+            div = I18n.translate(category, scope: 'activerecord.attributes.event.category_descriptions')
+          td
+            a.ui.basic.primary.button href="?category=#{category}&online=#{@record.online?}"
+              = translate('cms.actions.simple.select')
+              /i.right.chevron.icon
+  br

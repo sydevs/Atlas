@@ -15,7 +15,7 @@ class Event < ApplicationRecord
     status
   ]
 
-  enum category: { intro: 1, intermediate: 2, course: 3, public_event: 4, concert: 5 }
+  enum category: { dropin: 1, course: 3, single: 2, festival: 4, concert: 5 }, _suffix: true
   enum recurrence: { day: 0, monday: 1, tuesday: 2, wednesday: 3, thursday: 4, friday: 5, saturday: 6, sunday: 7 }
   enum registration_mode: { native: 0, external: 1, meetup: 2, eventbrite: 3, facebook: 4 }, _suffix: true
 
@@ -36,6 +36,8 @@ class Event < ApplicationRecord
   validates :description, length: { minimum: 40, maximum: 600, allow_blank: true }
   validates :registration_url, url: true, unless: :native_registration_mode?
   validates :phone_number, phone: { possible: true, allow_blank: true, country_specifier: -> event { event.venue.country_code } }
+  validates :end_date, presence: true, unless: :dropin_category?
+  validates :end_time, presence: true, if: -> { festival_category? || concert_category? }
   validates :manager, presence: true
   validates :online_url, presence: true, if: :online?
   validates_associated :pictures

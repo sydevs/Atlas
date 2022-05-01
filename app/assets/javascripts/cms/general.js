@@ -19,6 +19,20 @@ const General = {
     $('.search').parent().submit(General.onSearchSubmit)
     $('.ui.radio.menu .item').click(General.onRadioMenuSelect)
 
+    let $registration_mode = $('.event_registration_mode')
+    let $registration_select = $('.event_registration_mode > .ui.selection')
+    let $registration_url = $('.event_registration_url')
+    let onRegistrationModeSelect = (value) => {
+      const visible = value != 'native'
+      $registration_mode.toggleClass('four', visible)
+      $registration_mode.toggleClass('sixteen', !visible)
+      $registration_url.toggle(visible)
+    }
+
+    let value = $registration_select.dropdown('get value')
+    onRegistrationModeSelect(value)
+    $registration_select.dropdown({ onChange: onRegistrationModeSelect })
+
     $('.js-character-count').each((_index, counter) => {
       $(`#${counter.dataset.for}`).on('input', event => {
         const length = event.currentTarget.value.length
@@ -42,6 +56,13 @@ const General = {
     $item.siblings('input').val($item.data('value'))
     $item.siblings('.active').removeClass('active')
     $item.addClass('active')
+  },
+
+  onRegistrationModeSelect: function(value) {
+    const visible = value != 'native'
+    $registration_mode.toggleClass('four', visible)
+    $registration_mode.toggleClass('sixteen', !visible)
+    $registration_url.toggle(visible)
   },
 }
 

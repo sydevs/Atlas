@@ -165,23 +165,23 @@ uk:
         name: :activerecord.attributes.generic.name # Do not translate
         custom_name: "Custom Event Name (Optional)"
         category: "Категорія"
-        categories:
-          intro: "Вступний клас з медитації"
-          intermediate: "Більш поглиблений клас медитації"
+        categories: # TODO: Translate
+          dropin: "Drop-In Class"
+          single: "One-time Class"
           course: "Курс з медитації"
-          public_event: "Локації на громадських заходах"
+          festival: "Stall at Public Event"
           concert: "Медитація та музичний концерт"
-        category_labels:
-          intro: "Вступ"
-          intermediate: "Поглиблення"
+        category_labels: # TODO: Translate
+          dropin: "Drop-In"
+          single: "Meditation"
           course: "Курс з медитації"
-          public_event: "Локація"
+          festival: "Stall"
           concert: "Концерт"
-        category_descriptions:
-          intro: "Перші знайомства з цим видом медитації."
-          intermediate: "Поглиблене заняття для тих, хто вже відвідав вступний клас."
+        category_descriptions: # TODO: Translate
+          dropin: "A weekly class, where seekers can drop-in any time."
+          single: "A one-time class, suitable for a tour or other special event."
           course: "Кількатижневий курс, який навчить вас різні техніки медитації."
-          public_event: "Пропонуємо безкоштовний гід з медитації на публічному заході."
+          festival: "Offering free meditation instruction at a public event."
           concert: "Вистава, що поєднує медитацію та музику чи танець."
         description: "Опис"
         room: "Кімната"

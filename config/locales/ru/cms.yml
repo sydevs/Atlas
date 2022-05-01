@@ -9,6 +9,7 @@ ru:
         back: "Назад"
         view: "Открыть"
         search: "Поиск"
+        select: "Select" # TODO: Translate
 
       target:
         new: "Добавить %{resource}"
@@ -375,17 +376,17 @@ ru:
             description: "Мы можем проанализировать, на какие события регистрируются искатели, чтобы улучшить то, как мы представляем эти события."
         types:
           title: "Доступные Категории"
-          intro:
-            title: :activerecord.attributes.event.categories.intro
+          dropin:
+            title: :activerecord.attributes.event.categories.dropin
             description: "Вводный класс для искателей, только начинающих заниматься Сахаджа Йогой."
-          intermediate:
-            title: :activerecord.attributes.event.categories.intermediate
+          single:
+            title: :activerecord.attributes.event.categories.single
             description: "Класс для искателей, пожелавших глубже погрузиться в Сахаджа Йогу после того, как они уже посетили вводный класс."
           course:
             title: :activerecord.attributes.event.categories.course
             description: "Обычно это еженедельный курс, который длится ограниченное время. Служит для превращение искателя из новичка в продолжающего, в течение нескольких недель."
-          public_event:
-            title: :activerecord.attributes.event.categories.public_event
+          festival:
+            title: :activerecord.attributes.event.categories.festival
             description: "Когда Сахаджа Йога участвует в общественном мероприятии. Например, стенд на фестивале или выставке."
           concert:
             title: :activerecord.attributes.event.categories.concert

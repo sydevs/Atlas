@@ -1,0 +1,10 @@
+
+.ui.small.dividing.violet.header = translate('cms.forms.event.timing')
+
+.two.fields
+  = f.input :start_date, as: :string, wrapper: :semantic_date, wrapper_html: { class: 'start' }
+  = f.input :end_date, as: :string, wrapper: :semantic_date, wrapper_html: { class: 'end' }, wrapper_html: { class: 'required' }
+
+.two.fields
+  = f.input :start_time, wrapper_html: { class: 'start' }, input_html: { type: 'time', autocomplete: 'off' }
+  = f.input :end_time, wrapper_html: { class: 'end' }, input_html: { type: 'time', autocomplete: 'off' }, wrapper_html: { class: 'required' }
