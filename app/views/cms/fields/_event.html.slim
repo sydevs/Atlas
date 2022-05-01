@@ -1,6 +1,8 @@
 
 - if @record.category.present?
   = f.input :published
+  = f.input :category, as: :hidden
+  = f.input :online, as: :hidden
 
   = f.input :custom_name, placeholder: @record.category_name, hint: translate('cms.hints.event.custom_name')
 

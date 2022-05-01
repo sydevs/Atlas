@@ -26,6 +26,8 @@ module Types
     field :registration_mode, String, null: false
     field :registration_end_time, GraphQL::Types::ISO8601DateTime, null: true
     field :registration_url, String, null: true
+    field :registration_count, Integer, null: true, resolver_method: :registration_count
+    field :registration_limit, Integer, null: true
 
     field :images, [Types::ImageType], null: true, resolver_method: :get_images
 
@@ -69,9 +71,13 @@ module Types
     end
 
     def get_last_occurrence
-      return nil unless object.end_date
+      return nil unless object.registration_end_time
 
-      object.next_occurrences_after(object.end_date, limit: 1).first
+      object.next_occurrences_after(object.registration_end_time, limit: 1).first
+    end
+
+    def registration_count
+      object.registrations.count
     end
   end
 end

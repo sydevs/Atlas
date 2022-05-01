@@ -178,10 +178,10 @@ en:
           festival: "Stall"
           concert: "Concert"
         category_descriptions:
-          dropin: "A weekly class, where seekers can drop-in any time."
-          single: "A one-time class, suitable for a tour or other special event."
-          course: "A several week course that takes you through various techniques of meditation."
-          festival: "Offering free meditation instruction at a public event."
+          dropin: "A standard weekly class, where seekers can drop-in any time."
+          single: "A one-off class, suitable for a tour or other special event."
+          course: "A fixed-duration course where seekers can only join at the start of the course."
+          festival: "A stand at a public event, where seekers can show up without registering."
           concert: "A performance combining meditation and music or dance."
         description: "Description"
         room: "Room"
@@ -195,7 +195,7 @@ en:
           eventbrite: "Eventbrite"
           facebook: "Facebook"
         registration_url: "Registration Link (URL)"
-        registration_deadline_at: "Regitration Deadline"
+        registration_limit: "Registration Limit"
         recurrence: "Recurrence"
         recurrences:
           day: "Daily"

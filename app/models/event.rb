@@ -36,10 +36,11 @@ class Event < ApplicationRecord
   validates :description, length: { minimum: 40, maximum: 600, allow_blank: true }
   validates :registration_url, url: true, unless: :native_registration_mode?
   validates :phone_number, phone: { possible: true, allow_blank: true, country_specifier: -> event { event.venue.country_code } }
-  validates :end_date, presence: true, unless: :dropin_category?
+  validates :end_date, presence: true, if: :course_category?
   validates :end_time, presence: true, if: -> { festival_category? || concert_category? }
   validates :manager, presence: true
   validates :online_url, presence: true, if: :online?
+  validates_numericality_of :registration_limit, greater_than: 0, allow_nil: true
   validates_associated :pictures
   validate :validate_end_time
   validate :validate_end_date
@@ -91,7 +92,7 @@ class Event < ApplicationRecord
 
   def next_occurrences_after first_datetime, limit: 10
     first_date = first_datetime.to_date
-    return [] if end_date && end_date < first_date
+    return [] if registration_end_time && registration_end_time < first_datetime
 
     occurrences = []
     
@@ -111,6 +112,8 @@ class Event < ApplicationRecord
       occurrences.push(next_datetime)
     end
 
+    return occurrences if course_category?
+
     while occurrences.length < limit
       next_datetime = occurrences.last + (recurrence == 'day' ? 1.day : 1.week)
       break if end_date && next_datetime.to_date > end_date
@@ -123,6 +126,16 @@ class Event < ApplicationRecord
 
   def next_occurrence_at
     @next_occurrence_at ||= next_occurrences_after(Time.now, limit: 1).first
+  end
+
+  def registration_end_time
+    @registration_end_time ||= begin
+      if %i[course single concert].include?(category)
+        Time.parse("#{start_date} #{start_time}")
+      elsif end_date?
+        Time.parse("#{end_date} #{start_time}")
+      end
+    end
   end
 
   def label
@@ -166,7 +179,7 @@ class Event < ApplicationRecord
       return if end_date.nil?
       
       self.errors.add(:end_date, I18n.translate('cms.messages.event.invalid_end_date')) if end_date < start_date
-      self.errors.add(:end_date, I18n.translate('cms.messages.event.passed_end_date')) if end_date < Date.today
+      # self.errors.add(:end_date, I18n.translate('cms.messages.event.passed_end_date')) if end_date < Date.today
     end
 
     def parse_phone_number

@@ -64,14 +64,6 @@ module EventDecorator
     I18nData.languages(I18n.locale)[language_code].split(/[,;]/)[0]
   end
 
-  def registration_end_time
-    if registration_deadline_at?
-      Time.parse("#{registration_deadline_at} #{end_time || start_time}")
-    elsif end_date?
-      Time.parse("#{end_date} #{end_time || start_time}")
-    end
-  end
-
   def map_path
     Rails.application.routes.url_helpers.map_event_path(self)
   end

@@ -106,6 +106,7 @@ uk:
       not_verified: "Not Verified" # TODO: Translate
       not_set: "Not Set" # TODO: Translate
       unspecified: "Невизначено"
+      unlimited: "Unlimited" # TODO: Translate
       never: "Ніколи"
       geosearch:
         prompt: "Пошук розташування"
@@ -129,7 +130,7 @@ uk:
         language: "Якою основною мовою подається ця подія?"
         registration_mode: "Куди шукачам звернутися, щоб зареєструватися на подію? Ми наполегливо рекомендуємо вам залишити це значення як \"%{native}\". Якщо шукачі зареєструються на цьому веб-сайті, ми зможемо надсилати їм нагадування та додаткові електронні листи."
         registration_url: "URL-адреса реєстрації буде встановлено автоматично, якщо встановлено режим \"%{native}.\""
-        registration_deadline_at: "After this date, registrations will no longer be allowed. This is useful for meditation courses, where you don't want new registrations after the first week of classes." # TODO: Translate
+        registration_limit: "Limit the number of registrations to this amount." # TODO: Translate
         online: "Установіть цей прапорець, якщо програма буде проходити онлайн."
         online_url: "Якщо курс онлайн, це посилання є місцем, де шукачі мають приєднатися до класу (наприклад, посилання на Zoom, YouTube, Google Meet тощо)."
         phone_number: "Місцевий номер телефону, за яким шукачі можуть зателефонувати, щоб поставити запитання."

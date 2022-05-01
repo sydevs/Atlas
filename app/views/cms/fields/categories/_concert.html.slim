@@ -1,8 +1,7 @@
 
 .ui.small.dividing.violet.header = translate('cms.forms.event.timing')
 
-.two.fields
-  = f.input :start_date, as: :string, wrapper: :semantic_date, wrapper_html: { class: 'start' }
+= f.input :start_date, as: :string, wrapper: :semantic_date, wrapper_html: { class: 'start' }
 
 .two.fields
   = f.input :start_time, wrapper_html: { class: 'start' }, input_html: { type: 'time', autocomplete: 'off' }
@@ -17,3 +16,5 @@
   = f.input :registration_url, as: :url, wrapper_html: { class: 'twelve wide', style: 'display: none' }
 = help_link :registration
 br
+
+= f.input :registration_limit, placeholder: translate('cms.hints.unlimited'), hint: translate('cms.hints.event.registration_limit')

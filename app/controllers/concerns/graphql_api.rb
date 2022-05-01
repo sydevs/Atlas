@@ -18,6 +18,8 @@ module GraphqlAPI
     registrationMode
     registrationUrl
     registrationEndTime
+    registrationLimit
+    registrationCount
     venueId
     path
     firstOccurrence

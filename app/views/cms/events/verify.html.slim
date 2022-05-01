@@ -45,3 +45,7 @@
       .item
         = model_icon(Registration)
         .content #{translate_enum_value(@record, :registration_mode)} (#{translate_attribute(@record, :registration_mode)})
+    - if @record.registration_limit?
+      .item
+        i.user.slash.icon
+        .content #{translate_attribute(@record, :registration_limit)}: #{translate_enum_value(@record, :registration_limit)}

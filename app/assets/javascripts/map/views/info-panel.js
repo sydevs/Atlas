@@ -54,8 +54,8 @@ class InfoPanel {
       this.elements.timeZone.dataset.title = ''
     }
 
-    const registrationEnabled = !(event.registrationEndTime && Date.parse(event.registrationEndTime) < Date.now())
-    this.container.classList.toggle('info--registration', registrationEnabled)
+    const registrationDisabled = (event.registrationEndTime && Date.parse(event.registrationEndTime) < Date.now()) || (event.registrationLimit && event.registrationLimit <= event.registrationCount)
+    this.container.classList.toggle('info--registration', !registrationDisabled)
 
     this.elements.directions.style = venue ? '' : 'display: none'
     this.elements.directions.href = venue ? venue.directionsUrl : null

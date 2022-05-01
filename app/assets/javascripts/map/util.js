@@ -91,16 +91,19 @@ const Util = {
       if (endDateTime) endDateTime = endDateTime.setZone(localTimeZone)
     }
     
+    const startDateString = startDateTime.toLocaleString({ month: 'long', day: 'numeric' })
+    const endDateString = endDateTime ? endDateTime.toLocaleString({ month: 'long', day: 'numeric' }) : null
+
     switch (type) {
     case 'startDate':
-      return startDateTime.toLocaleString({ month: 'long', day: 'numeric' })
+      return startDateString
     case 'startTime':
       return startDateTime.toLocaleString(luxon.DateTime.TIME_SIMPLE)
     case 'recurrence':
-      if (startDateTime == endDateTime) {
-        return startDateTime
+      if (startDateString == endDateString) {
+        return startDateString
       } else if (event.timing.recurrence == 'day' && Boolean(event.lastOccurrence)) {
-        return `${startDateTime.toLocaleString({ month: 'long', day: 'numeric' })} - ${endDateTime.toLocaleString({ month: 'long', day: 'numeric' })}`
+        return `${startDateString} - ${endDateString}`
       } else {
         return Util.translateWeekday(nextDateTime.toLocaleString({ weekday: 'long' }))
       }

@@ -20,3 +20,5 @@
   = f.input :registration_url, as: :url, wrapper_html: { class: 'twelve wide', style: 'display: none' }
 = help_link :registration
 br
+
+= f.input :registration_limit, placeholder: translate('cms.hints.unlimited'), hint: translate('cms.hints.event.registration_limit')

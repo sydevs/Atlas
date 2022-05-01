@@ -59,6 +59,12 @@ p = simple_format @record.description
     .content
       .header = translate_attribute(Event, :language_code)
       .description = @record.language_name
+  - if @record.registration_limit?
+    .item
+      i.user.slash.icon
+      .content
+        .header = translate_attribute(Event, :registration_limit)
+        .description = translate_model_count(Registration, @record.registration_limit)
 
 h3.ui.small.dividing.grey.header = translate('cms.details.management_for_record', resource: translate_model(@model).downcase)
 - if @record.finished?

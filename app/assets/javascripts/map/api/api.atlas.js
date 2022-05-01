@@ -26,6 +26,8 @@ class AtlasAPI {
           registrationMode
           registrationUrl
           registrationEndTime
+          registrationLimit
+          registrationCount
           path
           timing {
             duration

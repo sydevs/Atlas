@@ -177,10 +177,10 @@ ru:
           festival: "Stall"
           concert: "Концерт"
         category_descriptions: # TODO: Translate
-          dropin: "A weekly class, where seekers can drop-in any time."
-          single: "A one-time class, suitable for a tour or other special event."
-          course: "Курс на несколько недель, который познакомит с различными техниками медитации."
-          festival: "Offering free meditation instruction at a public event."
+          dropin: "A standard weekly class, where seekers can drop-in any time."
+          single: "A one-off class, suitable for a tour or other special event."
+          course: "A fixed-duration course where seekers can only join at the start of the course."
+          festival: "A stand at a public event, where seekers can show up without registering."
           concert: "Представление, сочетающее медитацию и музыку или танец."
         description: "Описание"
         room: "Помещение"
@@ -194,7 +194,7 @@ ru:
           eventbrite: "Eventbrite"
           facebook: "Facebook"
         registration_url: "Ссылка для регистрации"
-        registration_deadline_at: "Регистрация возможна до" 
+        registration_limit: "Registration Limit"
         recurrence: "Повторение"
         recurrences:
           day: "Ежедневно"

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_08_102759) do
+ActiveRecord::Schema.define(version: 2022_05_01_162059) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -100,9 +100,8 @@ ActiveRecord::Schema.define(version: 2022_04_08_102759) do
     t.integer "status", default: 0, null: false
     t.string "phone_name"
     t.string "phone_number"
-    t.integer "registration_limit"
-    t.datetime "registration_deadline_at"
     t.integer "registration_type", default: 0, null: false
+    t.integer "registration_limit"
     t.index ["manager_id"], name: "index_events_on_manager_id"
     t.index ["status"], name: "index_events_on_status"
     t.index ["venue_id"], name: "index_events_on_venue_id"
