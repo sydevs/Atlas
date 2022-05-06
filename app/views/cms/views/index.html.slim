@@ -24,8 +24,18 @@
       - else
         = translate_model(@model, :plural)
 
+    - if @model == Event
+      .ui.secondary.menu
+        a.item class=('active' unless @query[:online]) href="?online=false"
+          = translate('cms.menu.events.offline')
+        a.item class=('active' if @query[:online]) href="?online=true"
+          = translate('cms.menu.events.online')
+
   - if @records.present? || params[:q]
     = simple_form_for url_for([:cms, @model]), html: { method: 'GET', data: { remote: 'true' }, autocomplete: 'off' }
+      - if @query[:online].present?
+        input name='online' type='hidden' value=@query[:online].to_s
+
       .search.ui.fluid.icon.small.input data-search=@model_name.route_key
         - search_placeholder = translate('cms.actions.target.search', resources: translate_model(@model, :plural).downcase)
         input name='q' type='text' placeholder=search_placeholder value=(params[:q] || '')

@@ -51,6 +51,9 @@ uk:
         countries: "Країни"
         regions: "Регіони"
         cities: "Міста / Райони"
+      events: # TODO: Translate
+        offline: "In-Person Events"
+        online: "Online Events"
       breadcrumbs:
         world: "Світ"
         help: "Допомога"

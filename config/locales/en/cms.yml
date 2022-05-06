@@ -50,6 +50,9 @@ en:
         countries: "Countries"
         regions: "Regions"
         cities: "Cities / Areas"
+      events:
+        offline: "In-Person Events"
+        online: "Online Events"
       breadcrumbs:
         world: "World"
         help: "Help"
@@ -89,7 +92,6 @@ en:
     forms:
       event:
         details: "Event Details"
-        online: "Online Classes"
         timing: "Timing"
         registration: "Registration"
         manager: "Manager"

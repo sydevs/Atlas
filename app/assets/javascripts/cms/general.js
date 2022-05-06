@@ -47,7 +47,8 @@ const General = {
     $input.siblings('.input').addClass('loading')
     $input.blur()
 
-    var url = window.location.protocol + '//' + window.location.host + window.location.pathname + '?q=' + $input.val()
+    var query = $input.closest('form').serialize()
+    var url = window.location.protocol + '//' + window.location.host + window.location.pathname + '?' + query
     window.history.pushState({ path: url }, '', url)
   },
 

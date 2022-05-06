@@ -50,6 +50,9 @@ ru:
         countries: "Страны"
         regions: "Регионы"
         cities: "Города"
+      events: # TODO: Translate
+        offline: "In-Person Events"
+        online: "Online Events"
       breadcrumbs:
         world: "Мир"
         help: "Помощь"

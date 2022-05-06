@@ -47,8 +47,10 @@ class CMS::ApplicationController < ActionController::Base
     @events_archived = current_user.accessible_events.archived.order(updated_at: :desc)
   end
 
-  def index
+  def index query = {}
     authorize_association! @model
+    @query = query
+    @scope = @scope.where(query) if query.present?
     @records = policy_scope(@scope).page(params[:page]).per(15).search(params[:q])
     @records = @records.order(updated_at: :desc) if @model.column_names.include?('updated_at')
     @records = @records.with_associations if @records.respond_to?(:with_associations)
@@ -204,10 +206,8 @@ class CMS::ApplicationController < ActionController::Base
 
     def set_scope!
       if @context
-        puts 'EVENTS'
         @scope = @context.send(@model.table_name)
       elsif @model
-        puts 'ACCESSIBLE EVENTS'
         @scope = current_user.try("accessible_#{@model.table_name}") || @model
       end
       
