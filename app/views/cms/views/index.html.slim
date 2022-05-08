@@ -24,7 +24,7 @@
       - else
         = translate_model(@model, :plural)
 
-    - if @model == Event
+    - if @model == Event && !@context.is_a?(Venue)
       .ui.secondary.menu
         a.item class=('active' unless @query[:online]) href="?online=false"
           = translate('cms.menu.events.offline')
