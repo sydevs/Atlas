@@ -90,7 +90,7 @@ Rails.application.routes.draw do
       get :autocomplete, on: :collection
       resources :managers, only: %i[index new create destroy]
       resources :venues, only: %i[index new create]
-      resources :events, only: %i[index]
+      resources :events, only: %i[index new create]
       resources :audits, only: %i[index]
     end
 

@@ -7,7 +7,8 @@ class CMS::EventsController < CMS::ApplicationController
   end
 
   def new
-    super category: params[:category], online: params[:online] == 'true'
+    type = @context.is_a?(LocalArea) ? 'OnlineEvent' : 'OfflineEvent'
+    super category: params[:category], type: type
   end
 
   def create
@@ -34,7 +35,7 @@ class CMS::EventsController < CMS::ApplicationController
         :phone_name, :phone_number,
         :registration_mode, :registration_url, :registration_limit,
         :recurrence, :start_date, :end_date, :start_time, :end_time,
-        :online, :online_url,
+        :online_url,
         :manager_id,
         manager_attributes: %i[id name email phone contact_method language_code]
       )

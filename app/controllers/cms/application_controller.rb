@@ -205,12 +205,15 @@ class CMS::ApplicationController < ActionController::Base
     end
 
     def set_scope!
-      if @context
+      if @context && @model == Event
+        @scope = @context.try(:associated_events) || @context.events
+      elsif @context
         @scope = @context.send(@model.table_name)
       elsif @model
         @scope = current_user.try("accessible_#{@model.table_name}") || @model
       end
       
+      @query ||= {}
       puts "SET SCOPE #{@scope.inspect}"
     end
 

@@ -1,11 +1,10 @@
-class LocalArea < ApplicationRecord
+class LocalArea < Location
 
   # Extensions
   include Manageable
   include ActivityMonitorable
 
   nilify_blanks
-  acts_as_mappable lat_column_name: :latitude, lng_column_name: :longitude
   searchable_columns %w[name identifier province_code country_code]
   audited except: %i[summary_email_sent_at summary_metadata]
 
@@ -15,8 +14,9 @@ class LocalArea < ApplicationRecord
 
   has_many :local_area_venues
   has_many :venues, through: :local_area_venues
-  has_many :events, through: :venues
-  has_many :associated_registrations, through: :events, source: :registrations
+  has_many :events, as: :location
+  has_many :online_events, as: :location, class_name: "OnlineEvent"
+  # has_many :associated_registrations, through: :associated_events, source: :registrations
 
   # Validations
   before_validation :ensure_country_consistency
@@ -36,6 +36,15 @@ class LocalArea < ApplicationRecord
 
   def parent
     province || country || nil
+  end
+
+  def associated_events
+    events_via_venues = Event.where(venue_id: venues)
+    events.or(events_via_venues)
+  end
+
+  def associated_registrations
+    Registration.where(event_id: events)
   end
 
   def flexible_radius
@@ -62,6 +71,10 @@ class LocalArea < ApplicationRecord
     }
   end
 
+  def published?
+    true
+  end
+
   private
 
     def ensure_country_consistency
@@ -73,7 +86,7 @@ class LocalArea < ApplicationRecord
 
       venues = Venue.select('id, latitude, longitude').within(flexible_radius, origin: self)
       venues = venues.where(country_code: country_code) if country_code?
-      venues = venues.where(province: province_code) if province_code?
+      venues = venues.where(province_code: province_code) if province_code?
       self.venues = venues
     end
 

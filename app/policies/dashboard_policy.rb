@@ -23,7 +23,7 @@ class DashboardPolicy < DatabasePolicy
     user.administrator?
   end
 
-  def new_association? association
+  def new_association? association, query = {}
     return nil if association == :events
     
     user.administrator? && %i[countries local_areas venues managers clients].include?(association)

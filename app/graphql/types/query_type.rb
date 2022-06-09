@@ -52,7 +52,7 @@ module Types
       I18n.locale = locale.to_sym
       scope = Venue
       scope = scope.where(country_code: country) if country
-      venues = decorate scope.publicly_visible.has_offline_events
+      venues = decorate scope.publicly_visible
 
       {
         type: 'FeatureCollection',
@@ -107,7 +107,7 @@ module Types
 
     def closest_venue(latitude:, longitude:, locale: 'en')
       I18n.locale = locale.to_sym
-      venues = Venue.publicly_visible.has_offline_events.by_distance(origin: [latitude, longitude]).limit(5)
+      venues = Venue.publicly_visible.by_distance(origin: [latitude, longitude]).limit(5)
 
       venues.each do |venue|
         return decorate(venue) unless venue.publicly_visible_events.empty?

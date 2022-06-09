@@ -1,4 +1,4 @@
-class Venue < ApplicationRecord
+class Venue < Location
 
   # Extensions
   include Publishable
@@ -6,16 +6,17 @@ class Venue < ApplicationRecord
 
   audited
   nilify_blanks
-  acts_as_mappable lat_column_name: :latitude, lng_column_name: :longitude
   searchable_columns %w[name street city province_code country_code]
 
   # Associations
   belongs_to :country, foreign_key: :country_code, primary_key: :country_code, optional: true
   belongs_to :province, foreign_key: :province_code, primary_key: :province_code, optional: true
+
   has_many :local_area_venues
   has_many :local_areas, through: :local_area_venues
-  has_many :events, dependent: :delete_all
-  has_many :publicly_visible_events, -> { publicly_visible }, class_name: 'Event'
+  has_many :offline_events, dependent: :delete_all, class_name: "OfflineEvent"
+#  has_many :events, dependent: :delete_all
+#  has_many :publicly_visible_events, -> { publicly_visible }, class_name: 'Event'
 
   # Validations
   validates :street, presence: true
@@ -25,9 +26,6 @@ class Venue < ApplicationRecord
 
   # Scopes
   scope :publicly_visible, -> { published.has_public_events }
-  scope :has_public_events, -> { joins(:publicly_visible_events) }
-  scope :has_offline_events, -> { has_public_events.where(events: { online: false }) }
-  scope :has_online_events, -> { has_public_events.where(events: { online: true }) }
 
   # Delegations
   delegate :all_managers, to: :parent
@@ -85,7 +83,7 @@ class Venue < ApplicationRecord
       radius = LocalArea.maximum(:radius)
       local_areas = LocalArea.select('id, name, radius, latitude, longitude, country_code, province_code').within(radius, origin: self)
       local_areas = local_areas.where(country_code: country_code) if country_code?
-      local_areas = local_areas.where(province: province_code) if province_code?
+      local_areas = local_areas.where(province_code: province_code) if province_code?
       local_areas = local_areas.to_a.filter { |area| area.contains?(self) }
       self.local_areas = local_areas
     end

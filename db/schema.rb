@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_01_162059) do
+ActiveRecord::Schema.define(version: 2022_05_08_170232) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -69,7 +69,6 @@ ActiveRecord::Schema.define(version: 2022_05_01_162059) do
   end
 
   create_table "events", force: :cascade do |t|
-    t.bigint "venue_id"
     t.integer "category", default: 0
     t.string "custom_name"
     t.string "room"
@@ -102,9 +101,12 @@ ActiveRecord::Schema.define(version: 2022_05_01_162059) do
     t.string "phone_number"
     t.integer "registration_type", default: 0, null: false
     t.integer "registration_limit"
+    t.string "type"
+    t.string "location_type"
+    t.bigint "location_id"
+    t.index ["location_type", "location_id"], name: "index_events_on_location"
     t.index ["manager_id"], name: "index_events_on_manager_id"
     t.index ["status"], name: "index_events_on_status"
-    t.index ["venue_id"], name: "index_events_on_venue_id"
   end
 
   create_table "local_area_venues", force: :cascade do |t|

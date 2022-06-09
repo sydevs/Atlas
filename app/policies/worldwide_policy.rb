@@ -23,7 +23,7 @@ class WorldwidePolicy < DatabasePolicy
     manage?
   end
 
-  def new_association? association
+  def new_association? association, query = {}
     return nil if association == :events
     
     manage? && %i[countries local_areas venues managers clients].include?(association)

@@ -1,18 +1,18 @@
 module EventDecorator
 
-  def decorated_venue
-    @venue ||= venue&.extend(VenueDecorator)
+  def decorated_location
+    @location ||= begin
+      location.is_a?(LocalArea) ? location.extend(LocalAreaDecorator) : location.extend(VenueDecorator)
+    end
   end
 
   def label
     if custom_name.present?
       custom_name
-    elsif category && venue&.name
-      if online?
-        I18n.translate('map.listing.online_event_name', category: category_label, city: venue.city)
-      else
-        I18n.translate('map.listing.event_name', category: category_label, venue: decorated_venue.label)
-      end
+    elsif location.is_a?(LocalArea)
+      I18n.translate('map.listing.online_event_name', category: category_label, city: decorated_location.label)
+    elsif location.is_a?(Venue)
+      I18n.translate('map.listing.event_name', category: category_label, venue: decorated_location.label)
     else
       category_name
     end
@@ -20,9 +20,11 @@ module EventDecorator
 
   def address
     @address ||= begin
-      fields = online ? [venue.city, decorated_venue.province_name] : [room, venue.street, venue.city, decorated_venue.province_name]
-      fields << CountryDecorator.get_short_label(venue.country_code)
-      fields.compact.join(', ')
+      if online?
+        local_area.label
+      else
+        [room, venue.street, venue.city, decorated_location.province_name].compact.join(', ')
+      end
     end
   end
 

@@ -18,8 +18,7 @@ class CMS::RegistrationsController < CMS::ApplicationController
     def set_time_zone
       return unless @context.is_a?(Event)
 
-      venue = @context.venue
-      @time_zone = Timezone.lookup(venue.latitude, venue.longitude)
+      @time_zone = @context.location.time_zone
     end
 
     def parameters

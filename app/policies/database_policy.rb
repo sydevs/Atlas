@@ -35,7 +35,7 @@ class DatabasePolicy < ApplicationPolicy
     record.respond_to?(association)
   end
 
-  def new_association? association = nil
+  def new_association? association = nil, query = {}
     return false if association == :audits
 
     record.respond_to?(association) && manage?

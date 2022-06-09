@@ -20,9 +20,7 @@ class Event < ApplicationRecord
   enum registration_mode: { native: 0, external: 1, meetup: 2, eventbrite: 3, facebook: 4 }, _suffix: true
 
   # Associations
-  belongs_to :venue
-  has_many :local_areas, through: :venue
-  acts_as_mappable through: :venue
+  belongs_to :location, polymorphic: true
 
   has_many :registrations, dependent: :delete_all
   has_many :pictures, as: :parent, dependent: :destroy
@@ -39,7 +37,6 @@ class Event < ApplicationRecord
   validates :end_date, presence: true, if: :course_category?
   validates :end_time, presence: true, if: -> { festival_category? || concert_category? }
   validates :manager, presence: true
-  validates :online_url, presence: true, if: :online?
   validates_numericality_of :registration_limit, greater_than: 0, allow_nil: true
   validates_associated :pictures
   validate :validate_end_time
@@ -50,17 +47,16 @@ class Event < ApplicationRecord
   scope :with_new_registrations, -> { where('events.latest_registration_at >= events.summary_email_sent_at') }
   scope :current, -> { where('events.end_date IS NULL OR events.end_date >= ?', DateTime.now) }
   scope :publicly_visible, -> { current.manager_verified.publishable.published }
-  scope :manager_verified, -> { joins(:manager).where.not(managers: { email_verified: false, phone_verified: false }) }
+  scope :manager_verified, -> { joins(:manager).where('managers.email_verified = TRUE OR managers.phone_verified = TRUE') }
 
   scope :ready_for_reminder_email, -> { where("reminder_email_sent_at IS NULL OR reminder_email_sent_at <= ?", 12.hours.ago) }
 
-  scope :online, -> { where(online: true) }
-  scope :offline, -> { where.not(online: true) }
+  scope :online, -> { where(type: 'OnlineEvent') }
+  scope :offline, -> { where(type: 'OfflineEvent') }
 
   # Delegations
-  delegate :full_address, to: :venue
-  alias parent venue
   alias associated_registrations registrations
+  delegate :latitude, :longitude, to: :parent
 
   # Methods
   after_save :verify_manager
@@ -76,6 +72,10 @@ class Event < ApplicationRecord
   def language_code= value
     # Only accept languages which are in the language list
     super value if I18nData.languages.key?(value)
+  end
+
+  def online?
+    type == "OnlineEvent"
   end
 
   def should_finish?
@@ -146,7 +146,7 @@ class Event < ApplicationRecord
     return if archived? || new_record?
     
     if needs_urgent_review?
-      venue.parent.managers.each do |parent_manager|
+      parent_managers.each do |parent_manager|
         EventMailer.with(event: self, manager: parent_manager).status.deliver_later
       end
     end
@@ -163,7 +163,15 @@ class Event < ApplicationRecord
   end
 
   def default_language_code
-    language_code || venue.country.default_language_code || I18n.locale.upcase
+    language_code || location.country.default_language_code || I18n.locale.upcase
+  end
+
+  def parent_managers
+    parent.managers
+  end
+
+  def self.model_name
+    ActiveModel::Name.new(base_class)
   end
 
   private
@@ -183,7 +191,7 @@ class Event < ApplicationRecord
     end
 
     def parse_phone_number
-      self.phone_number = Phonelib.parse(phone_number, venue.country_code).international
+      self.phone_number = Phonelib.parse(phone_number, location.country_code).international
     end
 
     def verify_manager

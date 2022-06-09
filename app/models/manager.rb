@@ -127,8 +127,14 @@ class Manager < ApplicationRecord
     else
       events_via_countries = Event.joins(:venue).left_outer_joins(:local_areas).where(venues: { country_code: countries.select(:country_code) })
       events_via_provinces = Event.joins(:venue).left_outer_joins(:local_areas).where(venues: { province_code: provinces.select(:province_code) })
-      events_via_local_areas = Event.joins(:venue).left_outer_joins(:local_areas).where(local_areas: { id: local_areas.select(:id) })
-      Event.joins(:venue).left_outer_joins(:local_areas).where(id: events).or(events_via_countries).or(events_via_provinces).or(events_via_local_areas)
+      offline_events_via_local_areas = Event.joins(:venue).left_outer_joins(:local_areas).where(local_areas: { id: local_areas.select(:id) })
+      online_events_via_local_areas = Event.where(local_area_id: local_areas.select(:id))
+      Event.joins(:venue).left_outer_joins(:local_areas)
+        .where(id: events)
+        .or(events_via_countries)
+        .or(events_via_provinces)
+        .or(offline_events_via_local_areas)
+        .or(online_events_via_local_areas)
     end
   end
 

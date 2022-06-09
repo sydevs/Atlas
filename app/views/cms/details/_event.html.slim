@@ -1,5 +1,5 @@
 
-- if @record.published? && @record.venue.published?
+- if @record.published? && @record.parent.published?
   - if @record.expired?
     .ui.small.orange.icon.message
       i.exclamation.icon
@@ -83,7 +83,7 @@ h3.ui.small.dividing.grey.header = translate('cms.details.management_for_record'
         a.ui.right.floated.basic.button href=edit_cms_event_url(@record) = translate('cms.details.record_archived.action')
         .description = translate('cms.details.record_archived.description', resource: translate_model(Event).downcase, time: time_ago_in_words(@record.updated_at))
   = help_link :expiration, translate("cms.help.expiration.title")
-- elsif @record.published? && @record.venue.published?
+- elsif @record.published? && @record.parent.published?
   .ui.three.event.steps
     - { verified: :verified, should_need_review: :needs_review, should_expire: :expired }.each do |step, status|
       - active = @record.send(:"#{status}?")
@@ -102,7 +102,7 @@ h3.ui.small.dividing.grey.header = translate('cms.details.management_for_record'
       .content
         .header = translate('cms.details.manager_not_verified.title')
         .description = translate('cms.details.manager_not_verified.parent', resource: translate_model(@model).downcase)
-  - if !@record.published? || !@record.venue.published?
+  - if !@record.published? || !@record.parent.published?
     .item
       i.warning.sign.icon
       .content
@@ -125,23 +125,34 @@ h3.ui.small.dividing.grey.header = translate('cms.details.management_for_record'
       .description = time_ago_in_words(@record.updated_at)
 
 h3.ui.small.dividing.grey.header = translate('cms.details.location_of_record', resource: translate_model(@model).downcase)
-= hidden_field_tag :venue_address, @record.venue.address
-= hidden_field_tag :venue_latitude, @record.venue.latitude
-= hidden_field_tag :venue_longitude, @record.venue.longitude
-= hidden_field_tag :venue_place_id, @record.venue.place_id
-#venue-map data-latitude=@record.venue.latitude data-longitude=@record.venue.longitude
+- if @record.location.is_a?(LocalArea)
+  #region-map data-latitude=@record.local_area.latitude data-longitude=@record.local_area.longitude data-radius=@record.local_area.radius
+- else
+  = hidden_field_tag :venue_address, @record.venue.address
+  = hidden_field_tag :venue_latitude, @record.venue.latitude
+  = hidden_field_tag :venue_longitude, @record.venue.longitude
+  = hidden_field_tag :venue_place_id, @record.venue.place_id
+  #venue-map data-latitude=@record.venue.latitude data-longitude=@record.venue.longitude
 
 .ui.list
-  .item
-    i.building.icon
-    .content
-      .header = translate_attribute(Event, :building)
-      .description = [@record.venue.name, @record.room].compact.join(', ')
-  .item
-    i.map.marked.alternate.icon
-    .content
-      .header = translate_attribute(Venue, :address)
-      .description = @record.address
+  - if @record.location.is_a?(LocalArea)
+    .item
+      = model_icon(LocalArea)
+      .content
+        .header = translate_model(LocalArea)
+        /.header = translate_attribute(Event, :local_area)
+        .description = @record.local_area.label
+  - else
+    .item
+      i.building.icon
+      .content
+        .header = translate_attribute(Event, :building)
+        .description = [@record.venue.name, @record.room].compact.join(', ')
+    .item
+      i.map.marked.alternate.icon
+      .content
+        .header = translate_attribute(Venue, :address)
+        .description = @record.address
 
 h3.ui.small.dividing.grey.header = translate('cms.details.registration_for_record', resource: @record.label)
 .ct-chart.ct-minor-seventh id='chart' data-plot=@registrations_data.to_json

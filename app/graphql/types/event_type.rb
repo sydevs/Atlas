@@ -31,14 +31,20 @@ module Types
 
     field :images, [Types::ImageType], null: true, resolver_method: :get_images
 
-    field :venue_id, Integer, null: false
+    field :location_id, Integer, null: false
+    field :location_type, Integer, null: false
     field :venue, Types::VenueType, null: false, resolver_method: :get_venue
+    field :venue, Types::LocalAreaType, null: false, resolver_method: :get_area
 
     field :created_at, GraphQL::Types::ISO8601DateTime, null: false
     field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
 
     def get_venue
       object.venue.extend(VenueDecorator)
+    end
+
+    def get_area
+      object.local_area.extend(LocalAreaDecorator)
     end
 
     def get_timing

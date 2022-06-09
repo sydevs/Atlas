@@ -11,7 +11,7 @@ class Province < ApplicationRecord
   belongs_to :country, foreign_key: :country_code, primary_key: :country_code
   has_many :local_areas, inverse_of: :province, foreign_key: :province_code, primary_key: :province_code, dependent: :delete_all
 
-  has_many :venues, foreign_key: :province, primary_key: :province_code
+  has_many :venues, foreign_key: :province_code, primary_key: :province_code
   has_many :events, through: :venues
   # has_many :associated_registrations, through: :events, source: :registrations
 

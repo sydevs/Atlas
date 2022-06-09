@@ -20,7 +20,8 @@ module GraphqlAPI
     registrationEndTime
     registrationLimit
     registrationCount
-    venueId
+    locationId
+    locationType
     path
     firstOccurrence
     lastOccurrence
@@ -42,6 +43,13 @@ module GraphqlAPI
     latitude
     longitude
     directionsUrl
+  }
+
+  AREA_FRAGMENT = %{
+    id
+    label
+    latitude
+    longitude
   }
 
   def self.events online: nil
@@ -84,6 +92,19 @@ module GraphqlAPI
         }
       }
     })['data']['venue']
+  end
+
+  def self.area id
+    AtlasSchema.execute(%{
+      query {
+        area(id: #{id}) {
+          #{AREA_FRAGMENT}
+          events {
+            #{EVENT_FRAGMENT}
+          }
+        }
+      }
+    })['data']['area']
   end
 
   def self.country code

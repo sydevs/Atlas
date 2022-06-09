@@ -51,7 +51,7 @@
             strong = I18n.translate(category, scope: 'activerecord.attributes.event.categories')
             div = I18n.translate(category, scope: 'activerecord.attributes.event.category_descriptions')
           td
-            a.ui.basic.primary.button href="?category=#{category}&online=#{@record.online?}"
+            a.ui.basic.primary.button href="?category=#{category}"
               = translate('cms.actions.simple.select')
               /i.right.chevron.icon
   br

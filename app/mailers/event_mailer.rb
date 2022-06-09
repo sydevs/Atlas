@@ -34,7 +34,7 @@ class EventMailer < ApplicationMailer
     end
 
     if @status == :needs_urgent_review
-      @event.venue.parent.managers.each do |manager|
+      @event.parent_managers.each do |manager|
         puts "[MAIL] Sending status email to city manager: #{manager.name}"
         @manager = manager
         mail(parameters.merge({ to: manager.email }))
