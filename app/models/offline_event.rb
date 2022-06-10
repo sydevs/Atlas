@@ -4,7 +4,7 @@ class OfflineEvent < Event
   acts_as_mappable through: :venue
 
   # Validations
-  validates :location_type, presence: true, inclusion: { in: [Venue] }
+  validates :location_type, presence: true, inclusion: { in: ['Venue'] }
 
   # Delegations
   alias parent venue

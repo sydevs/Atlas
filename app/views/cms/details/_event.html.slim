@@ -125,29 +125,29 @@ h3.ui.small.dividing.grey.header = translate('cms.details.management_for_record'
       .description = time_ago_in_words(@record.updated_at)
 
 h3.ui.small.dividing.grey.header = translate('cms.details.location_of_record', resource: translate_model(@model).downcase)
-- if @record.location.is_a?(LocalArea)
-  #region-map data-latitude=@record.local_area.latitude data-longitude=@record.local_area.longitude data-radius=@record.local_area.radius
+- if @record.online?
+  #region-map data-latitude=@record.location.latitude data-longitude=@record.location.longitude data-radius=@record.location.radius
 - else
-  = hidden_field_tag :venue_address, @record.venue.address
-  = hidden_field_tag :venue_latitude, @record.venue.latitude
-  = hidden_field_tag :venue_longitude, @record.venue.longitude
-  = hidden_field_tag :venue_place_id, @record.venue.place_id
-  #venue-map data-latitude=@record.venue.latitude data-longitude=@record.venue.longitude
+  = hidden_field_tag :venue_address, @record.location.address
+  = hidden_field_tag :venue_latitude, @record.location.latitude
+  = hidden_field_tag :venue_longitude, @record.location.longitude
+  = hidden_field_tag :venue_place_id, @record.location.place_id
+  #venue-map data-latitude=@record.location.latitude data-longitude=@record.location.longitude
 
 .ui.list
-  - if @record.location.is_a?(LocalArea)
+  - if @record.online?
     .item
       = model_icon(LocalArea)
       .content
         .header = translate_model(LocalArea)
         /.header = translate_attribute(Event, :local_area)
-        .description = @record.local_area.label
+        .description = @record.location.label
   - else
     .item
       i.building.icon
       .content
         .header = translate_attribute(Event, :building)
-        .description = [@record.venue.name, @record.room].compact.join(', ')
+        .description = [@record.location.name, @record.room].compact.join(', ')
     .item
       i.map.marked.alternate.icon
       .content

@@ -33,11 +33,16 @@ module Types
 
     field :location_id, Integer, null: false
     field :location_type, Integer, null: false
+    field :location, Types::LocationType, null: false, resolver_method: :get_location
     field :venue, Types::VenueType, null: false, resolver_method: :get_venue
-    field :venue, Types::LocalAreaType, null: false, resolver_method: :get_area
+    field :area, Types::LocalAreaType, null: false, resolver_method: :get_area
 
     field :created_at, GraphQL::Types::ISO8601DateTime, null: false
     field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
+
+    def get_location
+      object.location.extend("#{object.location_type}Decorator".constantize)
+    end
 
     def get_venue
       object.venue.extend(VenueDecorator)
@@ -55,7 +60,7 @@ module Types
         start_time: object.start_time,
         end_time: object.end_time,
         duration: object.duration,
-        time_zone: object.venue.time_zone,
+        time_zone: object.time_zone,
       }
     end
 

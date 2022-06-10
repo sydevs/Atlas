@@ -2,11 +2,24 @@ module Types
   class QueryType < Types::BaseObject
     description 'The query root of this schema'
 
+    # SPECIAL QUERIES
+
     field :geojson, GeojsonType, null: false do
       description 'Returns all events in the geojson format'
+      argument :online, Boolean, required: false
       argument :country, String, required: false
+      argument :area, String, required: false
       argument :locale, String, required: false
     end
+
+    field :closest_venue, VenueType, null: true do
+      description 'Find the closest event to some coordinates'
+      argument :latitude, Float, required: true
+      argument :longitude, Float, required: true
+      argument :locale, String, required: false
+    end
+
+    # LIST QUERIES
 
     field :venues, [VenueType], null: false do
       description 'Returns all venues'
@@ -22,9 +35,17 @@ module Types
       argument :locale, String, required: false
     end
 
+    # INDIVIDUAL QUERIES
+
     field :country, CountryType, null: true do
       description 'Find a country by code'
       argument :code, String, required: true
+      argument :locale, String, required: false
+    end
+
+    field :area, LocalAreaType, null: true do
+      description 'Find a local area by id'
+      argument :id, ID, required: true
       argument :locale, String, required: false
     end
 
@@ -40,34 +61,36 @@ module Types
       argument :locale, String, required: false
     end
 
-    field :closest_venue, VenueType, null: true do
-      description 'Find the closest event to some coordinates'
-      argument :latitude, Float, required: true
-      argument :longitude, Float, required: true
-      argument :locale, String, required: false
-    end
 
+    # Methods
 
-    def geojson(country: nil, locale: 'en')
+    def geojson(online: nil, country: nil, area: nil, locale: 'en')
       I18n.locale = locale.to_sym
-      scope = Venue
-      scope = scope.where(country_code: country) if country
-      venues = decorate scope.publicly_visible
+
+      if area
+        scope = LocalArea.where(id: area)
+        scope = scope.venues unless online
+      else
+        scope = online ? LocalArea : Venue
+        scope = scope.where(country_code: country) if country
+      end
+
+      locations = decorate scope.publicly_visible
 
       {
         type: 'FeatureCollection',
-        features: venues.map do |venue|
-          events = venue.events.publicly_visible
+        features: locations.map do |location|
+          events = location.events.publicly_visible
           next if events.empty?
 
           {
             type: "Feature #{events.length}",
-            id: venue.id,
+            id: location.id,
             geometry: {
               type: 'Point',
-              coordinates: [venue.longitude, venue.latitude]
+              coordinates: [location.longitude, location.latitude]
             },
-            properties: venue,
+            properties: location,
           }
         end.compact,
         created_at: DateTime.now.to_s,
@@ -84,6 +107,11 @@ module Types
       decorate Venue.find(id)
     end
   
+    def area(id:, locale: 'en')
+      I18n.locale = locale.to_sym
+      decorate LocalArea.find(id)
+    end
+
     def country(code:, locale: 'en')
       I18n.locale = locale.to_sym
       decorate Country.find_by_country_code(code)
@@ -91,9 +119,9 @@ module Types
 
     def events(online: nil, country: nil, recurrence: nil, language_code: nil, locale: 'en')
       I18n.locale = locale.to_sym
-      scope = Event.publicly_visible
-      scope = scope.where(online: online) unless online.nil?
-      scope = scope.joins(:venue).where(venues: { country_code: country }) unless country.nil?
+      scope = online ? OnlineEvent : OfflineEvent
+      scope = scope.publicly_visible
+      scope = scope.joins(:location).where(locations: { country_code: country }) unless country.nil?
       scope = scope.where(recurrence: recurrence) if Event.recurrences.key?(recurrence)
       scope = scope.where(language_code: language_code) unless language_code.nil?
       
@@ -107,22 +135,19 @@ module Types
 
     def closest_venue(latitude:, longitude:, locale: 'en')
       I18n.locale = locale.to_sym
-      venues = Venue.publicly_visible.by_distance(origin: [latitude, longitude]).limit(5)
-
-      venues.each do |venue|
-        return decorate(venue) unless venue.publicly_visible_events.empty?
-      end
-
-      nil
+      decorate Venue.publicly_visible.by_distance(origin: [latitude, longitude]).first
     end
 
     def decorate object
       return nil if object.nil?
 
-      if object.is_a? ActiveRecord::Relation
-        object.map { |r| r.extend("#{object.model}Decorator".constantize) }
+      klass = object.is_a?(ActiveRecord::Relation) ? object.model : object.class
+      klass = Event if klass.base_class == Event
+
+      if object.is_a?(ActiveRecord::Relation)
+        object.map { |r| r.extend("#{klass}Decorator".constantize) }
       else
-        object.extend("#{object.class}Decorator".constantize)
+        object.extend("#{klass}Decorator".constantize)
       end
     end
   end

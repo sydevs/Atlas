@@ -2,7 +2,7 @@ module EventDecorator
 
   def decorated_location
     @location ||= begin
-      location.is_a?(LocalArea) ? location.extend(LocalAreaDecorator) : location.extend(VenueDecorator)
+      location.extend("#{location.class}Decorator".constantize)
     end
   end
 
@@ -21,7 +21,7 @@ module EventDecorator
   def address
     @address ||= begin
       if online?
-        local_area.label
+        decorated_location.label
       else
         [room, venue.street, venue.city, decorated_location.province_name].compact.join(', ')
       end

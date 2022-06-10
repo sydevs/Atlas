@@ -37,7 +37,7 @@ module GraphqlAPI
     }
   }
 
-  VENUE_FRAGMENT = %{
+  LOCATION_FRAGMENT = %{
     id
     label
     latitude
@@ -57,8 +57,8 @@ module GraphqlAPI
       query {
         events#{online.nil? ? '' : "(online: #{online})"} {
           #{EVENT_FRAGMENT}
-          venue {
-            #{VENUE_FRAGMENT}
+          location {
+            #{LOCATION_FRAGMENT}
           }
         }
       }
@@ -70,8 +70,8 @@ module GraphqlAPI
       query {
         event(id: #{id}) {
           #{EVENT_FRAGMENT}
-          venue {
-            #{VENUE_FRAGMENT}
+          location {
+            #{LOCATION_FRAGMENT}
             events {
               #{EVENT_FRAGMENT}
             }

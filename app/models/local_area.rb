@@ -1,8 +1,9 @@
-class LocalArea < Location
+class LocalArea < ApplicationRecord
 
   # Extensions
   include Manageable
   include ActivityMonitorable
+  include Location
 
   nilify_blanks
   searchable_columns %w[name identifier province_code country_code]
@@ -14,16 +15,21 @@ class LocalArea < Location
 
   has_many :local_area_venues
   has_many :venues, through: :local_area_venues
-  has_many :events, as: :location
-  has_many :online_events, as: :location, class_name: "OnlineEvent"
   # has_many :associated_registrations, through: :associated_events, source: :registrations
+
+  has_many :events, as: :location, dependent: :delete_all, class_name: "OnlineEvent"
+  has_many :publicly_visible_events, -> { publicly_visible }, as: :location, class_name: 'OnlineEvent'
 
   # Validations
   before_validation :ensure_country_consistency
-  validates_presence_of :latitude, :longitude, :radius, :name
+  validates_presence_of :radius, :name
 
   # Scopes
   default_scope { order(name: :desc) }
+
+  scope :publicly_visible, -> { has_public_events }
+  scope :has_public_events, -> { joins(:publicly_visible_events) }
+
   scope :cross_province, -> { where(province_code: nil) }
   scope :international, -> { cross_province.where(country_code: nil) }
 
@@ -39,7 +45,7 @@ class LocalArea < Location
   end
 
   def associated_events
-    events_via_venues = Event.where(venue_id: venues)
+    events_via_venues = Event.where(location_id: venues)
     events.or(events_via_venues)
   end
 

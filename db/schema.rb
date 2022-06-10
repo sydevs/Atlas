@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_08_170232) do
+ActiveRecord::Schema.define(version: 2022_06_10_164625) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -130,6 +130,7 @@ ActiveRecord::Schema.define(version: 2022_05_08_170232) do
     t.date "last_activity_on"
     t.datetime "summary_email_sent_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
     t.jsonb "summary_metadata", default: "{}"
+    t.string "time_zone"
   end
 
   create_table "managed_records", force: :cascade do |t|

@@ -42,7 +42,7 @@ class AtlasAPI {
             thumbnailUrl
           }
         }`,
-        eventWithVenue: `on Event {
+        eventWithLocation: `on Event {
           id
           label
           description
@@ -67,12 +67,22 @@ class AtlasAPI {
             url
             thumbnailUrl
           }
-          venue {
+          location {
             id
             label
             latitude
             longitude
             directionsUrl
+          }
+        }`,
+        location: `on Location {
+          id
+          label
+          latitude
+          longitude
+          directionsUrl
+          events {
+            ...event
           }
         }`,
         venue: `on Venue {
@@ -95,7 +105,7 @@ class AtlasAPI {
               coordinates
             }
             properties {
-              ...venue
+              ...location
             }
           }
         }`

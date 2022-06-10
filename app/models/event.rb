@@ -56,7 +56,8 @@ class Event < ApplicationRecord
 
   # Delegations
   alias associated_registrations registrations
-  delegate :latitude, :longitude, to: :parent
+  alias parent location
+  delegate :latitude, :longitude, :time_zone, to: :location
 
   # Methods
   after_save :verify_manager
@@ -98,7 +99,7 @@ class Event < ApplicationRecord
     
     date = start_date > first_date ? start_date : first_date
     time = start_time.split(':').map(&:to_i)
-    datetime = date.to_time(:utc).in_time_zone(venue.time_zone).change(hour: time[0], min: time[1])
+    datetime = date.to_time(:utc).in_time_zone(location.time_zone).change(hour: time[0], min: time[1])
 
     if recurrence == 'day'
       if datetime > first_datetime
