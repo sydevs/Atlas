@@ -1,0 +1,93 @@
+@import '../_mixins'
+@import '../icons'
+
+.search
+  z-index: $z-control + 1
+  background: white
+  border-bottom: 1px solid lightgrey
+  position: relative
+  height: $header-height
+
+.search--floating
+  @include mobile
+    position: absolute
+    top: 20px
+    left: $control-offset-x * 0.375
+    right: $control-offset-x * 0.375
+    box-shadow: $shadow-light
+    height: 50px
+
+// ===== SEARCH ===== //
+.search__input
+  width: 100%
+  height: 100%
+  padding: 15px 20px
+  padding-right: $header-height
+  border: 0
+  transition: all $control-transition ease
+
+  font-size: 17px
+  letter-spacing: 0.2px
+  color: $color-grey-normal
+  font-family: raleway, sans-serif
+
+  @include tablet-or-larger
+    padding: 22px 20px
+    padding-right: $header-height
+
+.search__icon
+  $margin: 6px
+  $size: $header-height - ($margin * 2)
+
+  position: absolute
+  top: $margin
+  right: $margin
+  height: $size
+  width: $size
+  padding: 0
+  cursor: pointer
+  text-align: center
+  transition: all $control-transition ease
+  font-size: 24px
+
+  > .icon
+    line-height: $size
+    transition: all $control-transition ease
+
+  .search--floating &
+    @include mobile
+      $size: 50 - ($margin * 2)      
+      top: $margin
+      right: $margin
+      height: $size
+      width: $size
+
+      > .icon
+        line-height: $size
+
+// ===== GEOSEARCH AUTOCOMPLETE RESULTS ====== //
+.search__results
+  display: none
+  background: white
+  list-style: none
+  margin: 0
+  padding: 0
+  box-shadow: $shadow-light
+
+  .search--active &
+    display: block
+
+.search__results > li
+  padding: 12px 20px
+  font-size: 14px
+  line-height: 1.15
+  background: white
+  border-top: 1px solid $color-grey-normal
+  cursor: pointer
+  transition: background-color 0.25s ease
+
+  &:hover,
+  &.focus
+    outline: none
+    background: $color-background
+    color: $color-orange

@@ -47,22 +47,16 @@ $color-grey-light: #d8d8d8
 $color-border: #979797
 $color-border-light: #d8d8d8
 
-$color-background: rgba(230, 230, 230, 0.6)
+$color-background: #e6e6e6
 $color-background-hover: #f4f4f4
 
 $color-orange: #e08e79
-$color-blue: #92BBB8 // #7590ac // wemeditate: #c5e0dc
+$color-blue: #92bbb8 // wemeditate: #c5e0dc
 
 // ===== SHADOWS ===== //
 $shadow-subtle: 0 2px 5px 0 rgba(0, 0, 0, 0.2)
 $shadow-light: 0 2px 25px 0 rgba(0, 0, 0, 0.2)
 $shadow-heavy: 0 2px 50px 0 rgba(0, 0, 0, 0.5)
-
-// ===== SIZES ===== //
-// These are the minimum widths for each device
-// Devices smaller than 320px width are not supported.
-$tablet-width: 768px
-$desktop-width: 1100px
 
 // ===== PANELS ===== //
 $header-height: 64px
@@ -88,6 +82,11 @@ $z-hidden: -100
   @return map-get($icons, $key)
 
 // ===== MEDIA QUERIES ===== //
+// These are the minimum widths for each device
+// Devices smaller than 320px width are not supported.
+$tablet-width: 768px
+$desktop-width: 1100px
+
 @mixin mobile
   @media only screen and (max-width: #{$tablet-width - 1px})
     @content
@@ -108,32 +107,47 @@ $z-hidden: -100
   @media only screen and (min-width: #{$desktop-width})
     @content
 
-// ===== MODES ===== //
-@mixin mode($modes)
-  @each $mode in $modes
-    body.mode--#{$mode} &
-      @content
+// ===== ANIMATIONS ===== //
+@include keyframes(fade-in)
+  from
+    opacity: 0
+  to
+    opacity: 1
 
-@mixin not-mode($mode)
-  body:not(.mode--#{$mode}) &
-    @content
+@include keyframes(fade-out)
+  from
+    opacity: 1
+  to
+    opacity: 0
 
-// ===== OTHER ====== //
-@mixin panel
-  @include tablet-or-larger
-    position: absolute
-    top: 0
-    left: 0
-    bottom: 0
-    width: $panel-width-thin
-    z-index: $z-panel
-    box-shadow: $shadow-light
-    scroll-behavior: smooth
-    overflow-x: hidden
-    overflow-y: scroll
+@include keyframes(scale-in)
+  from
+    transform: scale(0)
+  to
+    transform: scale(1)
 
-  @include desktop-or-larger
-    top: $control-offset-y
-    left: $control-offset-x
-    bottom: $control-offset-y
-    width: $panel-width
+@include keyframes(circle-in)
+  from
+    transform: scale(0) rotate(-45deg)
+  to
+    transform: scale(1) rotate(0)
+
+// ===== REUSEABLE ELEMENTS ===== //
+@mixin button
+  transition: all 0.2s
+  cursor: pointer
+  background: transparent
+  text-align: center
+
+  padding: 0
+  color: inherit
+  text-align: center
+  font-weight: $font-normal
+  line-height: 48px
+  font-size: 14px
+  letter-spacing: 0.17px
+  border: 1px solid $color-border
+  text-decoration: none
+
+  &:hover
+    background: $color-background-hover

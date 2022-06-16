@@ -1,0 +1,38 @@
+
+ruby:
+  state = {
+    venue: @venue&.as_json,
+    event: @event&.as_json,
+  }
+
+// ===== SEARCH BOX ===== //
+.navbar id='js-navbar' data-key=ENV['MAPBOX_ACCESSTOKEN'] data-country=params[:country]
+  .navbar__box
+    .navbar__venue
+      .navbar__venue__back id='js-venue-back'
+        i.icon.icon--left
+      .navbar__venue__title
+        strong Events at
+        span id='js-venue-title' = @venue&.dig('label')
+
+    .navbar__search
+      input.navbar__search__input id='js-search-input' type='text' tabindex='1' placeholder=translate('map.listing.search') value=params[:q]
+      .navbar__search__icon
+        i.icon.icon--search
+        i.icon.icon--spinner
+    
+    ul.navbar__results id='js-search-results'
+
+.list-toggle class="list-toggle--#{params[:type] ? 'open' : 'closed'}" id='js-list-toggle'
+  .list-toggle__closed
+    - %w[offline online].each do |mode|
+      .list-toggle__item class="js-list-mode" data-value=mode
+        = translate("map.listing.toggle.#{mode}")
+  .list-toggle__open = translate('map.listing.toggle.back')
+
+// ===== MAP ===== //
+#map data=@config data-state=state.to_json
+  #js-debug-viewport
+  #js-debug-viewport-center
+
+= render 'map/list', with_toggle: true

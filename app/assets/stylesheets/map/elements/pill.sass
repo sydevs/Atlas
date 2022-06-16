@@ -1,0 +1,23 @@
+@import '../_mixins'
+
+.pill
+  display: inline-block
+  vertical-align: text-bottom
+  color: $color-blue
+  border: 1px solid $color-blue
+  border-radius: 5px
+  padding: 0 5px
+
+  font-weight: $font-semibold
+  letter-spacing: 0.36px
+  margin-left: 8px
+  margin-right: 8px
+
+  &:before
+    content: '\A'
+
+  &:first-child
+    margin-left: 0
+
+  &:last-child
+    margin-right: 0

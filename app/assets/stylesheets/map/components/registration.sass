@@ -1,0 +1,245 @@
+@import '../_mixins'
+
+.registration
+  margin-top: 65px
+  margin-bottom: 0
+  position: relative
+  min-height: 500px
+
+// ===== HEADER ===== //
+.registration__closed
+  font-size: 16px !important
+
+.registration__header
+  margin: auto
+  margin-top: 50px
+  margin-bottom: 20px
+  color: $color-grey-dark
+  font-size: 18px
+
+  display: flex
+  flex-direction: row
+  justify-content: center
+  text-align: center
+
+  &:before, &:after
+    content: ''
+    background: image-url('map/leaves.svg')
+    width: 2.667em
+    height: 2.944em
+    display: inline-block
+
+  &:before
+    transform: rotate(-90deg)
+
+  &:after
+    transform: rotate(90deg)
+
+  &__text
+    display: flex
+    flex-direction: column
+    justify-content: center
+    margin: 0 20px
+
+  &__title
+    font-weight: $font-semibold
+    line-height: 1.25
+    margin-bottom: 6px
+
+  &__subtitle
+    font-style: italic
+    font-size: 0.666em
+    line-height: 1.1667
+    letter-spacing: 0.36px
+
+// ===== EXTERNAL REGISTRATION ===== //
+.registration__external
+  display: none
+
+  &__action
+    @include button
+
+    display: block
+    font-size: 17px
+    letter-spacing: 0.2px
+    color: $color-grey-dark
+    width: 100%
+    max-width: 325px
+    margin: auto
+
+// ===== FIELDS ===== //
+.registration__fields
+  &.removing
+    animation: fade-out 0.25s
+  
+.registration__description
+  margin-bottom: 12px
+
+  font-size: 14px
+  line-height: 1.785
+  letter-spacing: 0.39px
+
+.registration__description > p
+  margin-bottom: 16px
+
+.registration__input,
+.registration__textarea
+  appearance: none
+  border-radius: 0
+  background: white
+
+  padding: 17px 20px
+  border: 1px solid $color-border-light
+  width: 100%
+  max-width: 100%
+  margin-bottom: 18px
+
+  font-weight: $font-semibold
+  font-size: 14px
+  line-height: 1.15
+  letter-spacing: 0.17px
+  color: $color-grey-normal
+
+  &::placeholder,
+  &::-webkit-input-placeholder,
+  &:-ms-input-placeholder
+    color: $color-grey-normal
+    opacity: 0.6
+
+.registration__notice
+  text-align: center
+  margin-bottom: 20px
+  padding: 0 30px
+
+  font-size: 12px
+  line-height: 1.25
+  letter-spacing: 0.36px
+
+.registration__notice-link
+  transition: all 0.2s ease
+  cursor: pointer
+  text-decoration: none
+  color: $color-blue
+
+  &:hover
+    color: $color-grey-dark
+
+.registration__message
+  font-size: 14px
+  margin-bottom: 1.5em
+
+  &.success
+    color: $color-blue
+
+  &.error
+    color: $color-orange
+
+.registration__submit
+  @include button
+
+  display: block
+  font-size: 17px
+  letter-spacing: 0.2px
+  color: $color-grey-dark
+  width: 100%
+  max-width: 325px
+  margin: auto
+
+// ===== CONFIRMATION ===== //
+$circle-size: 360px
+
+.registration__confirmation
+  position: absolute
+  height: 450px
+
+  display: flex
+  flex-direction: column
+  align-items: center
+  justify-content: center
+
+  animation: fade-in 0.5s
+
+  font-size: 16px
+  text-align: center
+
+  @include desktop-or-larger
+    padding-top: 140px
+
+  &__circle::before
+    content: image-url('map/circle.svg')
+    position: absolute
+    top: 50%
+    left: 50%
+    width: $circle-size
+    height: $circle-size
+    min-height: $circle-size
+    transition: all 0.5s ease-out
+    transform: translate(-#{$circle-size / 2}, -#{$circle-size / 2})
+    align-self: center
+
+  &__circle
+    position: relative
+    display: inline-flex
+    flex-direction: column
+    justify-content: center
+    width: $circle-size
+    height: $circle-size
+    padding: 16%
+
+    animation: circle-in 0.5s
+
+    @mixin tablet-or-larger
+      margin-top: 30px
+      margin-bottom: 30px
+
+  &__title
+    font-size: 1.875em
+    line-height: 1.16667
+    letter-spacing: 0.8px
+    color: $color-grey-dark
+    margin-bottom: 25px
+    margin-top: 40px
+
+  &__subtitle
+    font-size: 1em
+    line-height: 1.5625
+    letter-spacing: 0.44px
+    max-width: 180px
+    margin: 0 auto
+
+  &__actions
+    color: $color-grey-dark
+    font-weight: $font-semibold
+    font-size: 13px
+    line-height: 15px
+    text-align: left
+    
+    display: flex
+    flex-direction: row
+    justify-content: space-evenly
+
+    width: 400px
+    max-width: 100%
+    margin-top: 20px
+
+  &__share
+    width: #{80 + 34}px
+
+  &__back
+    width: #{90 + 34}px
+
+  &__share,
+  &__back
+    display: inline-block
+    cursor: pointer
+    opacity: 0.8
+    transition: ease 0.2s
+
+    &:hover
+      opacity: 1
+
+    > .icon
+      float: left
+      margin-right: 10px
+      font-size: 24px
+      line-height: 30px

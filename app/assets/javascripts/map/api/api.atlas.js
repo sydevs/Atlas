@@ -41,6 +41,10 @@ class AtlasAPI {
             url
             thumbnailUrl
           }
+          location {
+            id
+            directionsUrl
+          }
         }`,
         eventWithLocation: `on Event {
           id
@@ -112,12 +116,12 @@ class AtlasAPI {
       }
     })
 
-    this.geojsonQuery = this.graph.query(`{
-      geojson(locale: "${window.locale}") { ...geojson }
+    this.geojsonQuery = this.graph.query(`(@autodeclare) {
+      geojson(online: $online, locale: "${window.locale}") { ...geojson }
     }`)
 
-    this.onlineEventsQuery = this.graph.query(`{
-      events(online: true, locale: "${window.locale}") { ...event }
+    this.eventsQuery = this.graph.query(`($online: Boolean) {
+      events(online: $online, locale: "${window.locale}") { ...event }
     }`)
 
     this.searchEventsQuery = this.graph.query(`
@@ -128,15 +132,25 @@ class AtlasAPI {
       }
     `)
 
-    this.closestVenueQuery = this.graph.query(`(@autodeclare) {
-      closestVenue(latitude: $latitude, longitude: $longitude, locale: "${window.locale}") {
-        id
-        label
-        city
-        countryCode
-        latitude
-        longitude
+    this.closestVenueQuery = this.graph.query(`
+      query ($latitude: Float!, $longitude: Float!) {
+        closestVenue(latitude: $latitude, longitude: $longitude, locale: "${window.locale}") {
+          id
+          label
+          city
+          countryCode
+          latitude
+          longitude
+        }
       }
+    `)
+
+    this.eventQuery = this.graph.query(`(@autodeclare) {
+      event(id: $id, locale: "${window.locale}") { ...event }
+    }`)
+
+    this.venueQuery = this.graph.query(`(@autodeclare) {
+      venue(id: $id, locale: "${window.locale}") { ...venue }
     }`)
 
     this.registrationQuery = this.graph.mutate(`(@autodeclare) {
@@ -147,23 +161,56 @@ class AtlasAPI {
     }`)
   }
 
-  async getGeojson(callback) {
-    const data = await this.geojsonQuery()
+  async getGeojson(mode, callback) {
+    const data = await this.geojsonQuery({ online: mode == 'online' })
     callback(data.geojson)
   }
 
-  async getOnlineEvents(coordinates, callback) {
-    console.log('[AtlasAPI]', 'getting online events', coordinates) // eslint-disable-line no-console
+  async getVenue(id, callback) {
+    console.log('[AtlasAPI]', 'getting venue', id) // eslint-disable-line no-console
 
-    const cacheResponse = this.checkCache('onlineEvents', coordinates, 100)
+    const cacheResponse = this.checkCache('venue', id, 100)
     if (cacheResponse) {
       console.log('[AtlasAPI]', 'cache hit', cacheResponse) // eslint-disable-line no-console
       callback(cacheResponse)
       return
     }
 
-    const data = await this.onlineEventsQuery(coordinates)
-    this.setCache('onlineEvents', coordinates, data.events)
+    const data = await this.venueQuery(id)
+    this.setCache('venue', id, data.venue)
+    console.log('[AtlasAPI]', 'received', data) // eslint-disable-line no-console
+    callback(data.venue)
+  }
+
+  async getEvent(id, callback) {
+    console.log('[AtlasAPI]', 'getting event', id) // eslint-disable-line no-console
+
+    const cacheResponse = this.checkCache('event', id, 100)
+    if (cacheResponse) {
+      console.log('[AtlasAPI]', 'cache hit', cacheResponse) // eslint-disable-line no-console
+      callback(cacheResponse)
+      return
+    }
+
+    const data = await this.eventQuery({ id: id })
+    this.setCache('event', id, data.event)
+    console.log('[AtlasAPI]', 'received', data) // eslint-disable-line no-console
+    callback(data.event)
+  }
+
+  async getEvents(params, callback) {
+    const mode = params.online ? 'online' : 'offline'
+    console.log('[AtlasAPI]', 'getting', mode, 'events', params.coordinates) // eslint-disable-line no-console
+
+    const cacheResponse = this.checkCache('events', mode, params.coordinates, 100)
+    if (cacheResponse) {
+      console.log('[AtlasAPI]', 'cache hit', cacheResponse) // eslint-disable-line no-console
+      callback(cacheResponse)
+      return
+    }
+
+    const data = await this.eventsQuery({ online: params.online })
+    this.setCache('events', params, data.events)
     console.log('[AtlasAPI]', 'received', data) // eslint-disable-line no-console
     callback(data.events)
   }

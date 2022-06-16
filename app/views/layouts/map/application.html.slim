@@ -5,10 +5,12 @@ html lang=I18n.locale
     
     = render 'layouts/favicons'
     = csrf_meta_tags
+
+    script src="https://unpkg.com/mithril/mithril.js"
     = stylesheet_link_tag 'map', media: 'all'
     = javascript_include_tag 'map'
 
-  body class=("mode--#{@mode}" if @mode) data-page=action_name data-list=@list_type
+  body
     = yield
 
   javascript:

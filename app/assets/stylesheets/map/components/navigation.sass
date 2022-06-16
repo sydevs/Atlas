@@ -1,0 +1,99 @@
+@import '../_mixins'
+
+.navigation
+  --color: $color-grey-normal
+
+  text-align: center
+  line-height: 70px
+  display: flex
+  flex-direction: row
+
+  @include mobile
+    position: absolute
+    bottom: 0
+    left: 0
+    right: 0
+    background: white
+    box-shadow: $shadow-light
+
+  @include tablet-or-larger
+    --color: #{$color-blue}
+
+    margin: 1.5rem
+    margin-bottom: 0.5rem
+    line-height: 30px
+    font-size: 14px
+    letter-spacing: 0.17px
+
+    border: 1px solid $color-blue
+    border-radius: 5px
+
+.navigation--floating
+  position: absolute
+  bottom: 0
+  left: 0
+  right: 0
+  box-shadow: $shadow-light
+
+.navigation__item
+  //position: relative
+  color: var(--color)
+  font-weight: $font-medium
+  text-decoration: underline
+  flex-grow: 1
+
+  @include tablet-or-larger
+    font-weight: $font-bold
+    text-decoration: none
+    padding: 0 6px
+
+  &--active
+    @include tablet-or-larger
+      background: $color-blue
+      color: white
+
+// ===== NAVIGATION BUTTONS ===== //
+.navigation-button
+  $size: 33px
+
+  z-index: $z-control
+  position: absolute
+
+  text-decoration: none
+
+  width: $size
+  height: $size
+  border: 1px solid white
+  border-radius: 100%
+  color: $color-border
+  background: white
+  transition: all 0.2s ease
+  cursor: pointer
+
+  @include mobile
+    top: 20px
+
+    &--left
+      left: 22px
+
+    &--right
+      right: 22px
+
+  @include tablet-or-larger
+    position: absolute
+    top: $panel-padding-thin - 5px
+
+    &--left
+      left: 5px
+
+    &--right
+      right: 5px
+
+  .icon
+    height: 100%
+    text-align: center
+    line-height: $size
+
+  &:hover
+    opacity: 0.7
+    color: black

@@ -1,0 +1,94 @@
+@import '../_mixins'
+//@import '../general'
+
+// ===== LAYOUT ===== //
+.card
+  display: flex
+  position: relative
+  padding: 20px
+  padding-left: $panel-padding-mobile
+  padding-right: $panel-padding-mobile
+  background: white
+  transition: background-color 0.25s ease
+  min-height: 140px
+
+.card__content
+  min-height: 100px
+  display: flex
+  flex-direction: column
+  justify-content: center
+
+.card__content > *  > *
+  display: inline-block
+
+.card__action
+  padding: 10px
+
+// ===== CONTENT ===== //
+.card__title
+  font-weight: $font-semibold
+  font-size: 17px
+  line-height: 20px
+  color: $color-grey-dark
+  margin-bottom: 8px
+  min-height: 22px
+
+.card__subtitle
+  font-size: 13px
+  line-height: 14px
+  letter-spacing: 0.36px
+  margin-bottom: 4px
+
+  > *:last-child::before
+    content: ' • '
+
+  > *:last-child
+    color: $color-blue
+    white-space: nowrap
+
+.card__meta
+  line-height: 17px
+  font-size: 12px
+  margin-bottom: 7px
+
+  &__day
+    text-transform: uppercase
+    letter-spacing: 0.36px
+
+  &__day::after
+    content: ''
+    height: 14px
+    border-left: 1px solid $color-border-light
+    margin: 0 9px
+    vertical-align: text-bottom
+
+  &__time
+    font-weight: $font-medium
+    letter-spacing: 0.49px
+
+  &__timezone
+    position: relative
+    font-weight: $font-semibold
+    letter-spacing: 0.36px
+    text-decoration: underline dotted
+    cursor: help
+    margin-left: 3px
+
+// ===== ACTIONS ===== //
+.card__action
+  position: absolute
+  right: $panel-padding-mobile
+  top: 50%
+  transform: translateY(-50%)
+  white-space: nowrap
+  font-weight: $font-semibold
+  font-size: 14px
+
+  > *
+    vertical-align: middle
+
+  .icon
+    display: inline-block
+    margin-left: -2px
+    margin-bottom: -2px
+    font-size: 24px
