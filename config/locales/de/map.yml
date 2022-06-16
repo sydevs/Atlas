@@ -1,0 +1,86 @@
+de:
+  map:
+    search:
+      all_recurrences: "Alle Zeiten"
+      all_languages: "Alle Sprachen"
+    listing:
+      search: "Suchen nach Standort"
+      more_info: "Mehr Infos"
+      register: "Anmelden"
+      no_area_results: "Es gibt keine Klassen in diesem Bereich, die nächste Freizeitmeditation ist in"
+      no_place_results: "Die nächste Freimachungsklasse bei"
+      show: "Liste anzeigen"
+      event_name: "%{category} bei %{venue}"
+      online_event_name: "%{category} von %{city}"
+      toggle:
+        offline: "Liste anzeigen"
+        online: "Online-Kurse"
+        back: "Zurück zur Karte"
+      filter:
+        prefix: "Zeige Ergebnisse bei"
+        clear: "Clear"
+      mode:
+        offline: "In Person"
+        online: "Online"
+    information:
+      register: "Anmelden"
+      language: "Diese Klasse ist in"
+      directions: "Wegbeschreibung"
+      online: "Online-Kurse"
+      online_from: "Gastgeber aus"
+      tel: "Tel"
+    registration:
+      header: "jetzt Anmelden"
+      closed: "Anmeldung geschlossen"
+      form:
+        timing: "Ich möchte anfangen:"
+        email: "E-Mail"
+        name: "Name"
+        message: "Fragen / Kommentare"
+        submit: "Bestätigen"
+      notice:
+        text: "Durch die Anmeldung, stimmen Sie zu, dass Sie Nachrichten über diese und ähnliche Veranstaltungen in übereinstimmung mit unserer %{link} erhalten."
+        link: "Datenschutzrichtlinie"
+      feedback:
+        duplicate: "Sie sind bereits registriert. Bis bald."
+        success: "Erfolg! Sie erhalten in kürze eine Bestätigungs-E-Mail."
+        error: "Fehler! Bitte versuchen Sie es später noch einmal."
+      confirmation:
+        title: "Danke für die Registrierung"
+        subtitle: "Sie erhalten in kürze eine E-Mail"
+        back: "Weitere anmeldung durchführen"
+    sharing:
+      invite: "Ein Freund einladen"
+      share: "Teilen"
+      copied: "Kopiert!"
+    weekdays:
+      0: "Sonntag"
+      1: "Montag"
+      2: "Dienstag"
+      3: "Mittwoch"
+      4: "Donnerstag"
+      5: "Freitag"
+      6: "Samstag"
+
+  javascript:
+    recurrence:
+      day: "Daily"
+      monday: "Montags"
+      tuesday: "Dienstags"
+      wednesday: "Mittwochs"
+      thursday: "Donnerstags"
+      friday: "Freitags"
+      saturday: "Samstags"
+      sunday: "Sonntags"
+    timing_labels:
+      course_fallback: "Dies ist ein wöchentlicher Kurs"
+      course: "%{weeks}-Wochen Kurs"
+      ongoing: "Diese Klasse ist fortlaufend"
+    registration:
+      external: "Anmelden"
+      facebook: "Registrieren Sie sich auf Facebook"
+      eventbrite: "Registrieren Sie sich auf Eventbrite"
+      meetup: "Registrieren Sie sich auf Meetup"
+    language_codes:
+      uk: UA # Ukrainian
+    

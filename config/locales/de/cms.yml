@@ -1,0 +1,464 @@
+de:
+  cms:
+    actions:
+      simple:
+        new: "Hinzufügen"
+        edit: "Bearbeiten"
+        update: "Speichern"
+        destroy: "Löschen"
+        back: "Zurück"
+        view: "Anzeigen"
+        search: "Suchen"
+        select: "Auswählen"
+
+      target:
+        new: "Hunzugügen %{resource}"
+        create: "Anlegen %{resource}"
+        edit: "Bearbeite %{resource}"
+        update: "Speichere %{resource}"
+        destroy: "Lösche %{resource}"
+        back: "Zurück zu %{resource}"
+        search: "Suche %{resources}..."
+        choose: "Wähle  %{resource}"
+        verify: "Bestätige %{resource}"
+        view: "Zeige %{resource}"
+
+      special:
+        edit_profile: "Bearbeite mein Profil"
+        view_map: "Karte anzeigen"
+
+    menu:
+      home: "Home"
+      # Top level menu
+      about: "Über Sahaj Atlas"
+      statistics: "Statistik"
+      map: :cms.actions.special.view_map # Do not translate
+      report_issue: "Problem einmeldlen"
+      help: "Help (FAQ)"
+      sign_out: "Abmelden"
+      sign_in: "Anmelden"
+      # Secondary menu
+      dashboard: "Schaltzentrale für %{user}"
+      review: "Alle Benachrichtigungen für %{user}"
+      worldwide: "Weltweite Daten"
+      faq: "Häufig gestellte Fragen"
+      context: "%{resource} für %{parent}"
+      # Tertiary menu
+      details: "Info"
+      activity: "Aktivität"
+      regions:
+        countries: "Länder"
+        regions: "Regionen"
+        cities: "Städte / Bereiche"
+      events:
+        offline: "Vorort Veranstaltungen"
+        online: "Online Veranstaltungen"
+      breadcrumbs:
+        world: "Welt"
+        help: "Hilfe"
+        regions: "Regionen"
+        review: "Kontroliere Benachrichtigungen"
+        dashboard: "Schaltzentrale"
+
+    messages:
+      errors: "Fehler"
+      no_records_found: "Keine %{resources} gefunden."
+      confirm_destroy: "Bist du sicher das die das löschen willst? Das löschen kann nicht rückgängig gemacht werden."
+      successfully_created: "%{resource} erfolgreich angelegt."
+      successfully_updated: "%{resource} erfolgreich gespeichert."
+      successfully_deleted: "%{resource} erfolgrcih geläscht, kann nicht rückgängig gemacht werden."
+      successfully_removed: "%{resource} erfolgreich aus %{context} entfernt."
+      not_logged_in: "Du bist nicht eingeloggt!"
+      no_comment: "(kein Komentar)"
+      temporary_mail_error: "Email server ist gerade beschäftigt, bitte später nochmal versuchen."
+      venue:
+        out_of_bounds: "Die veranstaltung darf nicht weiter als %{local_area} entfernt sein."
+      event:
+        verified: "Vielen Dank für die Bestätigung der gültigkeit der Veranstaltung."
+        invalid_end_time: "darf nicht vor dem beginn zeitpunkt sein"
+        invalid_end_date: "daft nicht vor dem beginn datum sein"
+        passed_end_date: "kann nicht vor dem heutigen tag sein"
+      manager:
+        success: "Manager erfolgreich hinzugefügt"
+        already_added: "%{manager} verwaltet bereits diese #{resource}"
+        already_exists: "%{name} <%{email}> existiert bereits"
+        email_verified: "Ihre E-Mail-Adresse wird jetzt überprüft!"
+        phone_verified: "Ihre Telefonnummer wird jetzt überprüft!"
+        email_verification_resent: "Eine E-Mail-Überprüfung wurde an \"%{name}\" geschickt"
+      cannot_create:
+        event: "Neue Events können hier nicht erstellt werden, sie müssen direkt zu einem Veranstaltungsort hinzugefügt werden."
+        venue: "Neue Veranstaltungsorte können hier nicht erstellt werden, sie müssen direkt in eine Region innerhalb eines Landes hinzugefügt werden."
+
+    forms:
+      event:
+        details: "Ereignisdetails"
+        timing: "Timing"
+        registration: "Anmeldung"
+        manager: "Manager"
+      manager:
+        contact_methods: "Kontaktmethoden"
+        notifications: "Benachrichtigungseinstellungen"
+      client:
+        keys: "Zugriffsschlüssel"
+        manager: "Manager"
+
+    hints:
+      verified: "Verifiziert"
+      not_verified: "Nicht verifiziert"
+      not_set: "Nicht gesetzt"
+      unspecified: "Nicht spezifiziert"
+      unlimited: "Unbegrenzte"
+      never: "Nie"
+      geosearch:
+        prompt: "Suchen nach Standort"
+        description: "Sie können diese Suche verwenden, um die Felder automatisch auszufüllen. Es verwendet die Google-API. Wenn Google in Ihrem Land blockiert ist oder die Suche ausfällt, müssen Sie die Daten manuell eingeben."
+      country:
+        must_be_new: "Nur Länder, die noch nicht hinzugefügt wurden, sind unten aufgeführt."
+        language: "Die Standardsprache, die Veranstaltungen in diesem Land normalerweise abgehalten werden."
+        no_default_language: "Kein Standard"
+        province_management: "Wenn es aktiviert ist, können Sie Regionen (Provinzen, Staaten usw.) in diesem Land an die Regionen ausschalten und zuordnen. Dies ist nützlich für größere Länder (China, USA, Australien, etc.) und unnötig für kleine Länder (Belgien, Litauen, Singapur usw.)."
+        bounds: "Wenn ein Land angegeben wird, wenn die Karte eingebettet wird, werden diese Grenzen als die erste Ansicht verwendet. Die Koordinaten sollten als 4 Komma seperirte  Nummern eingegeben werden (Süden, Westen, Nord, Ost)."
+      province:
+        must_be_new: "Nur Regionen, die noch nicht hinzugefügt wurden, sind unten aufgeführt."
+        prompt: "Landkreis / Bundesland / Land"
+      local_area:
+        location: Ein "spezieller Bereich" wird via Koordinaten auf der Karte (Breitengrad und Längengrad) und einem Radius definiert, um einen Kreis festzulegen. "
+      event:
+        custom_name: "Wenn Sie den Namen der Veranstaltung überschreiben möchten, können Sie dies hier tun."
+        description: "Geben Sie eine Beschreibung des Programms für Sucher an. Geben Sie ihnen eine Vorstellung davon, was Sie erwarten sollen, und besondere Anweisungen, um den Veranstaltungsort zu finden, oder wenn etwas mitzubringen ist. Diese Beschreibung sollte zwischen %{min} und %{max} Zeichen sein."
+        description_count: "Zeichen"
+        room: "In welchem Raum findet die Veranstaltung statt?"
+        language: "Was ist die Hauptsprache, dass dieses Veranstaltung abgehalten wird? "
+        registration_mode: "Wo sollten sich Sucher für die Veranstaltung anmelden? Wir empfehlen dringend, dass Sie dies als \"%{nativ} \" zu lassen. Damit wir ihm Erinnerungen und E-Mails zu folgeprogrammen senden können. "
+        registration_url: "Die Registrierungs-URL wird automatisch gesetzt, wenn der Modus \"%{nativ}\" gesetzt wird."
+        registration_limit: "Setzen Sie das Limit für Anmeldungen."
+        online: "Aktivieren Sie diese Box, wenn dies ein online Programm ist."
+        online_url: "Wenn die Klasse online abgehalten wird, geben sie hier den Beitrits Link an (zB. für Zoom, YouTube, Google Meet, etc.)"
+        phone_number: "Eine lokale Telefonnummer, die Sucher anrufen können, um Fragen zu stellen."
+        phone_name: "Der Vorname des Yogi, der die obige Telefonnummer beträut."
+        manager:
+          view_fields: "Manager-Felder ansehen"
+          field: "Der Manager sollte auf einen Yogi gesetzt werden, der die Verantwortung für diese Veranstaltung übernimmt. Deiser bekommt jede Woche die Liste neuer anmeldungen und alle paar Monate den bestätigungs link für das Programm."
+          search: "Geben Sie die vollständige E-Mail- oder Telefonnummer der Person ein, die Sie hinzufügen möchten. Wenn kein vorhandener Manager gefunden wird, können Sie den Manager per E-Mail oder Messenger einladen."
+          categories:
+            managers: "Bestehende Manager"
+            invite: "Laden"
+          short_invitations:
+            email: "Per E-Mail"
+            phone: "Via %{messenger}"
+          invitations:
+            email: "Einladen mittels E-Mail"
+            phone: "Einladen mittels %{messenger}"
+      venue:
+        manual_location: "Den Ort manuell eintragen"
+        location: "Wenn der Standort nicht automatisch eingestellt werden kann, indem Sie \"finde Veranstaltungsort\" verwenden, können Sie die Details unten manuell eingeben."
+        find_marker: "Finde Veranstaltungsort"
+        marker_not_set:
+          title: "Atlas-Manager wurde nicht gesetzt"
+          description: "Drücke 'Finde Veranstaltungsort', um die Koordinaten der Veranstaltung Automatisch zu setzen."
+        cant_find_address:
+          title: "Es konnte keine Adresse gefunden werden."
+          description: "Die Adresse, die Sie eingegeben haben, konnten nicht gefunden werden. Versuchen Sie, weitere Informationen hinzuzufügen, oder geben Sie die Breite und Längengrad manuell ein."
+        marker_set:
+          title: "Kartenmacher festgelegt!"
+          description: "Stellen Sie sicher, dass der auf der Karte angezeigte Ort korrekt aussieht."
+      manager:
+        language: "Die bevorzugte Sprache für E-Mails und UI für diesen Manager."
+        administrator:
+          title: "Global Administrator erstellen"
+          description: "Das Hinzufügen eines Managers zum Weltweiten Datensatz fürd dazu das sie als Administrator angelegt werden. Sie werden einen vollständigen Zugriff haben, um alle Änderungen an den Sahaj Atlas zu treffen."
+        contact_method: "Welche Kontakt Methode bevorzugen Sie?"
+        contact_settings:
+          hint: "Bitte wählen Sie Nachrichtentypen aus, die Sie von Sahaj Atlas erhalten möchten. Aktuell können einige Typen nur per E-Mail gesendet werden."
+          options:
+            email: "nur E-Mail"
+            enabled: "Freigegeben"
+            disabled: "Deaktiviert"
+          categories:
+            new_managed_record: "Neuer Zugriff"
+            event_verification: "Ereignisverifikation"
+            event_registrations: "Ereignisregistrierungen"
+            region_summary: "Regionale Zusammenfassung"
+            country_summary: "Landes Zusammenfassung"
+            application_summary: "Sahaj Atlas Summary"
+          hints:
+            new_managed_record: "Eine Nachricht die an Sie gesentet wurde, wenn Sie die Erlaubnis erhalten haben, ein neues Ereignis, eine Region oder eine Ressource auf dem Atlas zu verwalten."
+            event_verification: "Nachrichten, die Ereignis- und Stadtmanager anfordern, die Genauigkeit ihrer Ereignisse zu überprüfen. Wird für jeden Veranstaltungen.alle 3 Monate Versandt, Sie können nicht deaktiviert werden."
+            event_registrations: "Eine Liste neuer Anmeldungen, die an Ereignismanager gesendet wurden. Wird etwa 24 Stunden vor der Veranstaltung gesendet."
+            region_summary: "Eine Zusammenfassung von Änderungen innerhalb einer Region, die an regionale Manager gesendet wird. Wird alle %{periode} versandt."
+            country_summary: "Eine Zusammenfassung von Änderungen, die an Ländermanager gesendet wird. Wird alle %{periode} gesendet."
+            application_summary: "Eine Zusammenfassung aller Atlas änderungen, die an Administratoren gesendet wurden. Wird alle %{periode} gesendet."
+        search: "Geben Sie einen Namen, eine E-Mail oder eine Telefonnummer ein ..."
+      client:
+        domain: "Nur von dieser Domain darf, die Karte mit Ihrem geheimen Schlüssel eingebettet werden."
+        public_key: "Verwenden Sie diesen Schlüssel, um die Karte einzubetten."
+        secret_key: "Verwenden Sie diesen Schlüssel, um auf die API zuzugreifen."
+        bounds: "Begrenzte die Karte auf diesen Koordinaten. Die Koordinaten sollten als 4 durch Komme getrennte Nummern eingegeben werden (Süden, West, Nord, Ost)."
+        location: "Legen Sie ein Land, eine Region oder Stadt, fest aus der die meisten Ihrer Besucher Kommen. Wenn ein Benutzer die Karte durchsucht, wird in diesem Bereich gesucht."
+
+    details:
+      details_for_record: "Details über %{ressource}"
+      registration_for_record: "Registrierungstrend"
+      management_for_record: "Management für diese %{ressource}"
+      managers_for_record: "Manager für %{ressource}"
+      location_of_record: "Lage dieser %{ressource}"
+      dates_and_timing: "Termine & Timing"
+      map_of_record: "Karte dieser %{ressource}"
+      area_in_words: "%{radius} KM um %{latitude}, %{longitude}"
+      records_in_recent_days: " %{ressources} in den letzten 30 Tagen"
+      record_has_language: " %{ressource} in %{language} angeboten"
+      notification_settings: "Benachrichtigungseinstellungen"
+      contact_details: "Kontaktinformationen"
+      updated_at: "Letzte Aktualisierung"
+      resources_managed:
+        title: "Ressourcen verwaltet"
+      event_coverage:
+        title: "Eventberichterstattung"
+        description: "%{events} (%{venues})"
+      record_needs_review:
+        title: " %{ressource} braucht überprüfung"
+        description: "Diese %{ressource} wurde vor %{updates_ago} aktualisiert. Diese Veranstaltung wird von der Karte entfernt, es sei denn, es wird innerhalb von %{expires_in} überprüft. Gehe zu der Seite Bearbeiten und drücken Sie Speichern, um zu bestätigen, dass die Ereignisdetails noch korrekt sind."
+        alt_description: "Diese %{ressource} wurde nicht in %{updates_ago} aktualisiert. Bitte bewerten Sie die folgenden Details und drücken Sie Speichern, um zu bestätigen, dass die Ereignisdetails korrekt sind."
+        action: "Bewertungen!"
+      record_needs_urgent_review:
+        title: " %{ressource} benötigt dringend eine Bewertung"
+      record_finished:
+        title: " %{ressource} abgeschlossen"
+        description: "Diese %{ressource} ist vorbei. Das letzte Ereigniss fand am %{date} statt."
+      record_has_no_events:
+        title: "Keine Ereignisse"
+        description: "Diese %{ressource} hat keine Ereignisse und wird deshalb nicht auf der Karte angezeigt."
+      record_expired:
+        title: " %{ressource} abgelaufen"
+        description: "Diese %{ressource} wurde von der Öffentlichkeit versteckt, weil es seit %{updates_ago} nicht aktualisiert wurde. Seite bearbeiten und Speichern, um zu bestätigen, dass die Ereignisdetails noch korrekt sind."
+        alt_description: "Diese %{ressource} wurde von der Öffentlichkeit versteckt, weil es seit %{updates_ago} nicht aktualisiert wurde. Bitte kontrollieren Sie die folgenden Details und drücken Sie Speichern, um zu bestätigen, dass die Ereignisdetails korrekt sind."
+        action: "Bewertungen!"
+      record_archived:
+        title: " %{ressource} archiviert"
+        description: "Diese %{ressource} wurde lange nicht aktualisiert ( %{time}). Es wird nicht auf der Karte angezeigt, es sei denn, es wird überprüft und gespeichert."
+        alt_description: "Diese %{ressource} wurde von der Öffentlichkeit versteckt, weil es lange nicht aktualisiert wurde ( %{time}). Bitte bewerten Sie die folgenden Details und drücken Sie Speichern, um zu bestätigen, dass die Ereignisdetails korrekt sind."
+        action: "Dearchivieren"
+      external_registration:
+        title: "Ereignis verwendet externe Registrierung"
+        description: "Diese Veranstaltung ist konfiguriert, um Sucher hier %{mode} zu registrieren.  Es ist besser, wenn Sie Sucher auf dem Sahaj Atlas registrieren, denn dann schicken wir ihnen erinnerungen."
+      record_not_published:
+        title: "Nicht veröffentlicht"
+        description: "Diese %{ressource} ist derzeit für die Öffentlichkeit versteckt."
+        parent: "Diese %{ressource} ist derzeit für die Öffentlichkeit versteckt, weil sein %{parent} nicht veröffentlicht wird."
+      manager_not_verified:
+        title: "Manager-E-Mail Nicht überprüft"
+        description: "Ereignisse, die mit diesem Manager verbunden sind, sind nicht öffentlich, denn die E-Mail des Managers wurde nicht überprüft."
+        parent: "Diese %{ressource} ist derzeit für die Öffentlichkeit versteckt, weil die E-Mail-Adresse des Managers nicht überprüft wurde."
+        action: "Senden"
+      create_event:
+        title: "Wundern Sie sich, wie man ein öffentliches Programm erstellt?"
+        description: "Wählen Sie einen Veranstaltungsort auf der Registerkarte \"%{action}\"."
+        action: "Jetzt gehen"
+      create_event_on_venue:
+        title: "Fragst du dich, wie man ein Ereignis erstellt?"
+        description: "Klicken Sie auf die Registerkarte \"%{action}\" und drücken Sie \"Event hinzufügen\""
+        action: "Event hinzufügen"
+      create_province_manager:
+        title: "Wundern Sie sich, wie Sie einen Regionalmanager erstellen?"
+        description: "Wählen Sie ein Bundesland oder Region  auf der Registerkarte\"%{action}\""
+        action: "Jetzt gehen"
+      create_city_manager:
+        title: "Fragst du dich, wie man einen Stadtmanager erstellt?"
+        description: "Wählen Sie eine Stadtseite auf der Registerkarte \"%{action}\""
+        action: "Jetzt gehen"
+
+    images:
+      title: "Bilder dieser %{ressource}"
+      upload: "Bilder hochladen"
+
+    regions:
+      new_province: "Region hinzufügen"
+      provinces_header: "Provinzen / Bundesländer / Landkreise"
+      local_areas_header:
+        provincial: "Ballungsraum Bereich"
+        national: "Benutzerdefinierte Regionen"
+        global: "Benutzerdefinierte internationale Bereiche"
+
+    activity:
+      title: :cms.menu.activity
+      description: "Dies ist ein Protokoll aller Aktionen, die von diesem Manager unternommen wurden."
+      changed_by: "von %{name}"
+      changed_to: "Geändert auf"
+
+    dashboard:
+      role:
+        intro: "Du bist ein %{role}"
+        learn_more: "Erfahren Sie mehr."
+        worldwide:
+          title: "Globaler Administrator"
+          description: "Kann alle Atlas-Inhalte und -manager verwalten."
+          instruction: "Sie haben Zugriff auf alle Aspekte des Atlas CMS (Content Management System). Es ist Ihre Aufgabe, neue Ländermanager zu erstellen und ihnen zu helfen, das System zu verwenden."
+        country:
+          title: "Landes Manager"
+          description: "Kann Regionen, Veranstaltungsorte, Ereignisse und Manager inerhalb der %{region} erstellen."
+          instruction: "Es ist Ihre Verantwortung, Regionen in Ihrem Land zu erstellen und Regionale Managern zuzuweisen um Ereignisse zu erstellen. Sie können auch Orte und Events in Ihrem Land anlegen."
+        local:
+          title: "Lokaler Manager"
+          description: "Kann Orte und Ereignisse in %{region} erstellen"
+          instruction: "Es ist Ihre Verantwortung, Ereignisse in Ihrem lokalen Bereich zu erstellen. Sie müssen zuerst einen Veranstaltungsort erstellen, bevor Sie Ereignise an diesem Ort erstellen können."
+        event:
+          title: "Ereignismanager"
+          description: "Kann die Details der ihnen zugewiesenen Veranstalltungen bearbeiten."
+          instruction: "Es ist Ihre Verantwortung die Details, Ihrer Kurse aktuell zu halten. Wir werden Sie alle paar Monate erinnern, die Details Ihrer Ereignisse auf den neuesten Stand zu bringen. Wenn der Ort Ihrer Veranstaltung ändert, müssen Sie den Manager für Ihre Region kontaktiren, um diese änderung einzupflegen."
+        client:
+          title: "App-Manager"
+          description: "Kann die Konfiguration für Ihre externe App ändern"
+          instruction: "Sie haben Zugriff auf die Konfiguration für Ihre externe App."
+        none:
+          title: "No-Access Manager"
+          description: "Dieser Benutzer hat noch keine Ereignisse oder Regionen zugewiesen. Sie haben keinen Zugang zum Verwalten des Atlas."
+          instruction: "Sie haben aktuell keinen Zugang zur Website. Wenn Sie glauben, dass dies ein Fehler ist, wenden Sie sich bitte an den Manager für Ihren Bereich."
+      resources:
+        title: "Meine Verantwortlichkeiten"
+        subtitle: "Regionen oder Veranstaltungen, wo Sie ein Direktmanager sind."
+        description: "Dies sind die Ereignisse oder Regionen, für die Sie direkt verantwortlich sind."
+      alerts:
+        title: "Ereignisse die bald Auslaufen"
+        subtitle: "Diese Ereignisse müssen überprüft werden, um sicherzustellen, dass sie immer noch aktuell sind."
+        all_good: "Alle Veranstaltungen sind auf dem neuesten Stand."
+        empty: "Aktuell keine benachrichtigungen, weiter so!"
+        should_expire_at: "Läuft in %{time} ab."
+        expired_at: "Vor %{time} Abgelauflen"
+        review:
+          title: "Bald ablaufende Veranstaltungen"
+          description: "Mehrere veröffentlichte Veranstaltungen wurden in den letzten  Monaten nicht aktualisiert. Bitte überprüfen Sie, ob die Ereignisdetails noch korrekt sind und speichern sie das Event erneut ab, damit wir wissen, dass es immer noch aktuell ist. Ansonsten wird es aus der Karte entfernt."
+          view_all:
+            one: "Zeige %{count} Ablauflende Ereignise"
+            other: "Zerige alle Ablaufenden %{count} Ereignisse"
+        expired:
+          title: "Abgelaufene Ereignisse"
+          description: "Mehrere veröffentlichte Ereignisse sind auf der Karte versteckt, weil sie vor kurzem nicht überprüft wurden. Bitte überprüfen und Speichern Sie diese Ereignisse, um sie wieder zu aktivieren."
+          other:
+            one: "Es gibt %{count} älteres abgelaufener Ereignis im System."
+            other: "Es gibt %{count} ältere abgelaufene Ereignisse im System."
+        archived:
+          title: "Archivierte Ereignisse"
+          description:
+            one: " %{count} Veranstaltung ist vor langer Zeit abgelaufen und wurde archiviert. Es wird nicht auf der Karte angezeigt, es sei denn, es wird überprüft und aktualisiert."
+            other: " %{count} Veranstaltungen sind von langer Zeit abgelaufen und wurden archiviert. Sie werden nicht auf der Karte angezeigt, es sei denn, sie werden überprüft und aktualisiert werden."
+          view_all:
+            one: "Zeige %{count} archiviertes Ereignis"
+            other: "Zeige %{count} archivierte Ereignisse"
+
+      help:
+        title: "Wie nutze ich diese Seite?"
+        description: "Sie sehen derzeit das Content Management System (CMS) für den Sahaj Atlas an. Wir haben ein Video-Tutorial aufgezeichnet, um Ihnen zu helfen. Senden Sie uns ein E-Mail wenn Sie weitere Hilfe benötigen (contact@syvelopers.com)."
+        action: "Watch Tutorial Video"
+
+    help:
+      learn_more: "Erfahren Sie mehr"
+      guides:
+        country_manager:
+          title: "Wie verwalte ich mein Land"
+          video_id: 570202890
+        local_manager:
+          title: "Wie verwalte ich meine Region "
+          video_id: 570202890
+        event_manager:
+          title: "Wie Sie Ihre Ereignise verwalten"
+          video_id: 570207541
+        general:
+          title: "Was ist Sahaj Atlas?"
+          video_id: 570209591
+        creating_events:
+          title: "Wie man ein Ereignis erstellt"
+          video_id: 573299436
+      categories:
+        title: "Warum gibt es Ereigniskategorien?"
+        description:
+          introduction: "Kategorien helfen dem System zu verstehen, welche Art von Ereignis Sie hinzugefügt haben. Wir können diese Informationen für eine Vielzahl von Zwecken verwenden"
+        benefits:
+          marketing:
+            icon: ad # Do not translate
+            title: "Marketing"
+            description: "Wir können folgeprogramme empfehlen die auf der Ereigniskategorie basieren. Wenn sich jemand für ein Konzert anmeldet, wir im anschluss eine einführungs Veranstaltung vorschlagen. Wenn die Sucherschon viele einführungs Veranstaltung besucht haben, könnten wir  einen fortgeschriggenen Kurs vorschlagen. Wenn es ein großes Musikkonzert gibt, könnten wir es der Karte hervorgehoben Darstelltn, um mehr Aufmerksamkeit zu gewinnen."
+          labeling:
+            icon: info circle # Nicht übersetzen
+            title: "Ereignisetikettierung"
+            description: "Wir können zusätzliche Informationen über das Ereignis anzeigen. Zum Beispiel: Eine Nachricht empfiehlt, dass Sucher sich für eine einfühungs-Veranstaltung anmelden, bevor Sie einen fortgeschrittenen Kurs besuchen."
+          analytics:
+            icon: chart area # Do not translate
+            title: "Analytics"
+            description: "Wir können analysieren, welche Veranstaltungen die Sucher suchen, um die Art und Weise zu verbessern, wie wir diese präsentieren."
+        types:
+          title: "Verfügbare Kategorien"
+          dropin:
+            title: :activerecord.attributes.event.categories.dropin
+            description: "Eine einführungs Veranstaltung für Sucher, die gerade mit Sahaja Yoga beginnen."
+          single:
+            title: :activerecord.attributes.event.categories.single
+            description: "Eine fortgeschrittene Veranstaltung für Sucher, die in Sahaja Yoga tiefer gehen, nachdem sie bereits eine einführungs Veranstaltung besucht haben."
+          course:
+            title: :activerecord.attributes.event.categories.course
+            description: "Einen wöchentlicher stattfindender Kurs, der für eine begrenzte Zeit läuft. Beginnend für Anfänger und langsam aufbauend."
+          festival:
+            title: :activerecord.attributes.event.categories.festival
+            description: "Wenn Sahaja Yoga an einem bestehenden öffentlichen Ereignis teilnimmt. Wie ein Zelt bei einem Festival oder Markt."
+          concert:
+            title: :activerecord.attributes.event.categories.concert
+            description: "Ein großes Zeitkulturereignis, in der Regel mit Musik, vielleicht Tanz und Realisierung."
+      expiration:
+        title: "Warum ist mein Veranstalt nicht auf der Karte?"
+        alt_title: "Wie funktioniert das Ablaufen von Veranstaltungen?"
+        description:
+          problem: "Wir wollen nicht das Sucher, Veranstaltungen sehen, die schon beendet sind. Viele Sahaj-Website haben veraltete Programminformationen, auch wenn sie gepflegt werden sind sie schnell wieder veraltet."
+          solution: "Um dies zu lösen, haben wir ein automatisches System erstellt, das den Yogis per E-Mail erinnert, jedes Programm alle paar Monate, zu überprüfen. Wenn sie nicht reagieren, wird das Programm von der Öffentlichkeit verborgen, bis es überprüft wird."
+          review: "Sobald eine Veranstaltung al \"Abgelauflen\" makiert wird, wird an den Programmmanager eine E-Mail gesendet, die Sie bitten, zu prüfen, ob die Ereignisdetails noch korrekt sind. Wenn sie nicht innerhalb von 1 Woche antworten, wird der Stadt Manager eine E-Mail, erhalten."
+          expiration: "Wenn %{duration} ohne das Verifizierter passieren, wird es von der Karte versteckt, bis jemand bestätigt das die details noch aktuell sind und die änderungen speichert."
+        steps:
+          verified:
+            icon: green check circle # Do not translate
+            active_label: "Auf dem neuesten Stand"
+            inactive_label: "Letzte Aktualisierung"
+            title: "Auf dem neuesten Stand"
+            description: "Wenn ein Ereignis erstellt oder aktualisiert wird"
+          should_need_review:
+            icon: orange question circle # Do not translate
+            active_label: "überprüfung notwendig"
+            inactive_label: "benütigt in kürze Überprpfung"
+            title: "überprüfung notwendig"
+            description: "Wenn %{duration} vergangen ist ohne das die Veranstalltung überprüft wurde"
+          should_expire:
+            icon: red times circle # Do not translate
+            active_label: "Abgelaufen"
+            inactive_label: "Abgelaufen"
+            label: "läuft ab" # wie in  "Die Veranstaltung läuft am 3. März ab"
+            title: "Abgelaufen"
+            description: "Wenn ein Ereignis nicht in %{duration} aktualisiert wurde"
+      registration:
+        title: "Warum sollten Sucher sich auf Sahaj Atlas anmelden?"
+        description:
+          introduction: "Auch wenn es möglich ist das sich Sucher auf externen Websiten (Meetup, Eventbrite, Facebook usw.) anmelden, gibt es mehre vorteile, wenn sich Sucher direct auf dem Sahaj Atlas registrieren."
+        benefits:
+          accessibility:
+            icon: universal access # Do not translate
+            title: "Zugänglichkeit"
+            description: "Viele Menschen haben keine Facebook- oder Meetup-Konten. Die Popularität von Facebook ist bei der jüngeren Generationen stark reduziert, und Meetup ist bei älteren Menschen weniger beliebt. Die Registrierung direkt auf Sahaj Atlas ist einfacher und erfordert kein Konto, was die warscheinlichkeit erhöht das sich sucher anmelden."
+          reminders:
+            icon: bell # Do not translate
+            title: "Automatische Erinnerungen"
+            description: "Sucher, die sich auf Sahaj Atlas anmelden, erhalten eine Bestätigungs-E-Mail und eine automatische Erinnerung per E-Mail 1 Tag bevor ihrer erster Kurs beginnt. Der Yogi(ni), der/die das öffentliche Programm ausführt, wird jede Woche eine Liste neuer Anmeldungen per E-Mail erhalten."
+          marketing:
+            icon: envelope # Do not translate
+            title: "Future Marketing"
+            description: "Wenn sich Sucher auf Sahaj Atlas anmelden, können wir ihre E-Mail-Adresse (ohne die Einschränkungen von Meetup, Eventbrite oder Facebook) speichern. Dies bedeutet, dass wir diese E-Mail-Adressen verwenden können, um Folgeveranstaltungen vorzuschlagen oder spezielle Sahaj-Ereignisse in ihrer Gegend zu empfehlen (zB.: Konzerte oder Zwischenprogramme)."
+      contact:
+        title: "Ich habe andere Fragen oder Vorschläge"
+        description: "Wenn Sie weitere Hilfe benötigen oder wenn Sie mit der Entwicklung des Sahaj Atlas helfen möchten, schreiben Sie bitte an die unten angegebene E-Mail. Bitte schreiben Sie Ihre Nachricht in Englisch."
+
+    country_codes:
+      gb: "UK"
+      us: "USA"
+
+  passwordless:
+    sessions:
+      create:
+        try_again: "Versuchen Sie eine andere E-Mail-Adresse"
+        back: "Zurück"
+      new:
+        back: "Zurück"
