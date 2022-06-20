@@ -4,6 +4,9 @@
 // ===== LAYOUT ===== //
 .card
   display: flex
+  align-items: center
+  justify-content: space-between
+
   position: relative
   padding: 20px
   padding-left: $panel-padding-mobile
@@ -20,9 +23,6 @@
 
 .card__content > *  > *
   display: inline-block
-
-.card__action
-  padding: 10px
 
 // ===== CONTENT ===== //
 .card__title
@@ -76,10 +76,7 @@
 
 // ===== ACTIONS ===== //
 .card__action
-  position: absolute
-  right: $panel-padding-mobile
-  top: 50%
-  transform: translateY(-50%)
+  padding-left: 10px
   white-space: nowrap
   font-weight: $font-semibold
   font-size: 14px

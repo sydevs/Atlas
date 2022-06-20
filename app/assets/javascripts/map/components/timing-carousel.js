@@ -33,7 +33,7 @@ function TimingCarousel() {
           value: selectedValue.toISO().substring(0, 10),
         }),
         m('.registration__timing__label',
-          m('.registration__timing__text', "I’D LIKE TO START ON:")
+          m('.registration__timing__text', Util.translate('registration.form.timing'))
         ),
         m('.registration__timing#timings',
           timings.map(function(date) {

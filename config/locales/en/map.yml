@@ -1,39 +1,46 @@
 en:
   map:
     search:
+      prompt: "Search for location"
       all_recurrences: "All Timings"
       all_languages: "All Languages"
-    listing:
-      search: "Search for location"
-      more_info: "More Info"
-      register: "Register"
-      no_area_results: "There are no classes in this area, the closest free meditation class is in"
-      no_place_results: "The closest free meditation class at"
-      show: "Show list"
-      event_name: "%{category} at %{venue}"
-      online_event_name: "%{category} from %{city}"
-      toggle:
-        offline: "Show list"
-        online: "Online classes"
-        back: "Back to map"
       filter:
         prefix: "Showing results at"
         clear: "Clear"
-      mode:
+
+    navigation:
+      desktop:
         offline: "In Person"
         online: "Online"
-    information:
+      mobile:
+        offline: "Show list"
+        online: "Online classes"
+        back: "Back to map"
+
+    list:
+      search: "Search for location"
+      more_info: "More Info"
+      register: "Register"
+      fallback:
+        area: "There are no classes in this area, the closest free meditation class is in"
+        venue: "The closest free meditation class at"
+
+    venue:
+      header: "Events at %{venue}"
+
+    event:
       register: "Register"
       language: "This class is in"
       directions: "Get directions"
       online: "Online Class"
       online_from: "Hosted from"
       tel: "tel"
+
     registration:
       header: "Register now"
       closed: "Registration Closed"
       form:
-        timing: "I’d like to start on:"
+        timing: "I’d like to start on"
         email: "Email"
         name: "Name"
         message: "Questions / Comments"
@@ -48,11 +55,19 @@ en:
       confirmation:
         title: "Thank you for registering"
         subtitle: "you will receive an email shortly"
-        back: "Register someone else"
+        dismiss: "Register someone else"
+        invite: "Invite a friend along"
+      button:
+        external: "Register"
+        facebook: "Register on Facebook"
+        eventbrite: "Register on Eventbrite"
+        meetup: "Register on Meetup"
+
     sharing:
-      invite: "Invite a friend along"
+      header: "Invite a friend"
       share: "Share"
       copied: "Copied!"
+
     weekdays:
       0: "Sunday"
       1: "Monday"
@@ -62,7 +77,6 @@ en:
       5: "Friday"
       6: "Saturday"
 
-  javascript:
     recurrence:
       day: "Daily"
       monday: "Mondays"
@@ -72,15 +86,12 @@ en:
       friday: "Fridays"
       saturday: "Saturdays"
       sunday: "Sundays"
+
     timing_labels:
       course_fallback: "This is a weekly course"
       course: "%{weeks}-week course"
       ongoing: "This class is on-going"
-    registration:
-      external: "Register"
-      facebook: "Register on Facebook"
-      eventbrite: "Register on Eventbrite"
-      meetup: "Register on Meetup"
+
     language_codes:
       uk: UA #Ukrainian
     

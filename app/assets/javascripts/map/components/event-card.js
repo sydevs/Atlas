@@ -28,7 +28,7 @@ function EventCard() {
           )
         ),
         m('a.card__action',
-          m('span', "More info"),
+          m('span', Util.translate('list.more_info')),
           m('i.icon.icon--right')
         )
       )

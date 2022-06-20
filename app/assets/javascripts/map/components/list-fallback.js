@@ -1,5 +1,5 @@
 /* exported ListFallback */
-/* global m */
+/* global m, Util */
 
 function ListFallback() {
   let venue = null
@@ -17,9 +17,7 @@ function ListFallback() {
 
       return m('.list-fallback', 
         m('.list-fallback__message',
-          distance < 8 ?
-            "There are no classes in this area, the closest free meditation class is in" :
-            "The closest free meditation class at"
+          Util.translate(distance < 8 ? 'list.fallback.nearby' : 'list.fallback.far')
         ),
         venue ?
           m(m.route.Link, {

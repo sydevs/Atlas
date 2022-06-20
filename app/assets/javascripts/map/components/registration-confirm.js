@@ -1,5 +1,5 @@
 /* exported RegistrationConfirm */
-/* global m, TimingCarousel */
+/* global m, Util */
 
 function RegistrationConfirm() {
   return {
@@ -8,8 +8,8 @@ function RegistrationConfirm() {
 
       return m('.registration__confirmation', 
         m('.registration__confirmation__circle', 
-          m('.registration__confirmation__title', "Thank you for registering"),
-          m('.registration__confirmation__subtitle', "you will receive an email shortly")
+          m('.registration__confirmation__title', Util.translate('registration.confirmation.title')),
+          m('.registration__confirmation__subtitle', Util.translate('registration.confirmation.subtitle'))
         ),
         m('.registration__confirmation__actions', 
           m(m.route.Link,
@@ -18,7 +18,7 @@ function RegistrationConfirm() {
               class: 'registration__confirmation__back',
             },
             m('span.icon.icon--addon'),
-            m('span', "Register someone else")
+            m('span', Util.translate('registration.confirmation.dismiss'))
           ),
           m(m.route.Link,
             {
@@ -26,7 +26,7 @@ function RegistrationConfirm() {
               class: 'registration__confirmation__share',
             },
             m('span.icon.icon--share'),
-            m('span', "Invite a friend along")
+            m('span', Util.translate('registration.confirmation.invite'))
           ),
         ),
       )

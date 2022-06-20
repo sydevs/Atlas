@@ -11,15 +11,15 @@ function EventInfo() {
         m('.event',
           m('.event__sidebar',
             m('.event__sidebar__language', [
-              m('div', "Language"),
+              m('div', Util.translate('event.language')),
               m('.event__sidebar__language-text', language),
             ])
           ),
           m('.event__label', event.label),
           m('.event__subtitle',
             event.online ? m('span.event__subtitle__online',
-              m('strong', "Online Class"),
-              m('div', "Hosted from")
+              m('strong', Util.translate('event.online')),
+              m('div', Util.translate('event.online_from'))
             ) : null,
             m('span.event__subtitle__address', event.address)
           ),
@@ -32,7 +32,7 @@ function EventInfo() {
           ),
           event.phoneNumber ? m('a.event__phone',
             m('span.event__phone__number', {
-              'data-prefix': "tel: ",
+              'data-prefix': Util.translate('event.tel') + ': ',
             }, event.phoneNumber),
             m('span.event__phone__name', event.phoneName)
           ) : null
@@ -44,7 +44,7 @@ function EventInfo() {
               href: '#register',
             },
             m('span.icon.icon--signup'),
-            m('span', "Register")
+            m('span', Util.translate('event.register'))
           ),
           event.location.directionsUrl ? m('a',
             {
@@ -52,7 +52,7 @@ function EventInfo() {
               href: event.location.directionsUrl,
             },
             m('span.icon.icon--location'),
-            m('span', "Directions")
+            m('span', Util.translate('event.directions'))
           ) : null
         ),
         m('.event__description', event.description),

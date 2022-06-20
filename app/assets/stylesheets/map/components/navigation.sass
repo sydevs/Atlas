@@ -47,6 +47,9 @@
     text-decoration: none
     padding: 0 6px
 
+  &:not(:last-child)
+    border-right: 1px solid $color-blue
+
   &--active
     @include tablet-or-larger
       background: $color-blue

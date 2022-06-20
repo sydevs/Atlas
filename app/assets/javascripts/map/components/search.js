@@ -1,5 +1,5 @@
 /* exported Search */
-/* global m, GeoSearchAPI */
+/* global m, Util, GeoSearchAPI */
 
 function Search() {
   let focused = false
@@ -38,7 +38,7 @@ function Search() {
         m('input.search__input', {
           type: 'text',
           tabindex: 1,
-          placeholder: "Search...",
+          placeholder: Util.translate('search.prompt'),
           //value: query,
           onkeyup: onChange,
           onfocus: () => { focused = true },

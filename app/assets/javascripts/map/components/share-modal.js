@@ -1,5 +1,5 @@
 /* exported ShareModal */
-/* global m */
+/* global m, Util */
 
 function ShareModal() {
   const SHARING_URLS = {
@@ -57,7 +57,7 @@ function ShareModal() {
 
       return m('.share-background',
         m('.share',
-          m('.share__header', "Invite a friend"),
+          m('.share__header', Util.translate('sharing.header')),
           m(m.route.Link, {
             class: 'share__close',
             href: backPath,
@@ -70,7 +70,7 @@ function ShareModal() {
               onclick: copyLink,
               onfocus: copyLink,
             }),
-            m('.share__link__confirmation', "Copied!"),
+            m('.share__link__confirmation', Util.translate('sharing.copied')),
           ),
           m('.share__social',
             Object.entries(SHARING_URLS).map(function([key, template]) {

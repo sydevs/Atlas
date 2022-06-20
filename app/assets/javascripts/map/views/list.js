@@ -23,8 +23,8 @@ function ListView() {
         m(Search),
         m(Navigation, {
           items: mobile ?
-            [["Back to map", '/map']] :
-            ['offline', 'online'].map((mode) => [mode, `/list/${mode}`, type == mode])
+            [[Util.translate('navigation.mobile.back'), '/map']] :
+            ['offline', 'online'].map((mode) => [Util.translate(`navigation.desktop.${mode}`), `/list/${mode}`, type == mode])
         }),
         events.length > 0 ?
           m(List, { events: events }) :

@@ -1,39 +1,46 @@
 ru:
   map:
     search:
+      prompt: "Поиск по местоположению"
       all_recurrences: "Все даты" # время программ?
       all_languages: "Все языки"
-    listing:
-      search: "Поиск по местоположению"
-      more_info: "Подробнее"
-      register: "Записаться"
-      no_area_results: "Здесь пока нет занятий, ближайщий центр медитации находится в"
-      no_place_results: "Ближайший центр медитации находится в"
-      show: "Показать список"
-      event_name: "%{category} в %{venue}" 
-      online_event_name: "%{category} из %{city}"
-      toggle: 
-        offline: "Показать список"
-        online: "Онлайн занятия"
-        back: "Вернуться к карте"
       filter:
         prefix: "Отображать результаты"
         clear: "Очистить"
-      mode:
+
+    navigation:
+      desktop:
         offline: "Оффлайн"
         online: "Онлайн"
-    information:
+      mobile: 
+        offline: "Показать список"
+        online: "Онлайн занятия"
+        back: "Вернуться к карте"
+
+    list:
+      search: "Поиск по местоположению"
+      more_info: "Подробнее"
+      register: "Записаться"
+      fallback:
+        area: "Здесь пока нет занятий, ближайщий центр медитации находится в"
+        venue: "Ближайший центр медитации находится в"
+
+    venue: # TODO: Translate
+      header: "Events at %{venue}"
+
+    event:
       register: "Записаться"
       language: "Язык занятия" 
       directions: "Как нас найти"
       online: "Онлайн-класс"
       online_from: "Транслируется из"
       tel: "тел"
+
     registration:
       header: "Записаться сейчас"
       closed: "Регистрация закрыта" 
       form:
-        timing: "Я хочу начать:" 
+        timing: "Я хочу начать" 
         email: "Email"  
         name: "Имя"
         message: "Вопросы / Комментарии"
@@ -48,11 +55,19 @@ ru:
       confirmation:
         title: "Спасибо за регистрацию"
         subtitle: "в ближайшее время ты получешь email с подтверждением" 
-        back: "Зарегистрировать кого-нибудь ещё"
+        dismiss: "Зарегистрировать кого-нибудь ещё"
+        invite: "Пригласить друга"
+      button:
+        external: "Зарегистрироваться"
+        eventbrite: "Зарегистрироваться на Eventbrite"
+        meetup: "Зарегистрироваться на Meetup"
+        facebook: "Зарегистрироваться на Facebook"
+  
     sharing:
-      invite: "Пригласить друга"
+      header: "Пригласить друга"
       share: "Поделиться"
       copied: "Скопировано!"
+
     weekdays:
       0: "Воскресенье"
       1: "Понедельник"
@@ -62,7 +77,6 @@ ru:
       5: "Пятница"
       6: "Суббота"
 
-  javascript:
     recurrence:
       day: "Ежедневно"
       monday: "По понедельникам"
@@ -72,15 +86,12 @@ ru:
       friday: "По пятницам"
       saturday: "По субботам"
       sunday: "По воскресеньям"
+
     timing_labels:
       course_fallback: "Это еженедельный курс"
       course: "%{weeks}-недельный курс"
-      ongoing: "Регулярный класс" 
-    registration:
-      external: "Зарегистрироваться"
-      eventbrite: "Зарегистрироваться на Eventbrite"
-      meetup: "Зарегистрироваться на Meetup"
-      facebook: "Зарегистрироваться на Facebook"
+      ongoing: "Регулярный класс"
+
     language_codes:
       uk: UA # Ukrainian
     

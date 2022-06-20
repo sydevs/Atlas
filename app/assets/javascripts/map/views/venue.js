@@ -1,6 +1,6 @@
 /* exported VenueView */
 
-/* global m, List, NavigationButton, AtlasAPI */
+/* global m, List, NavigationButton, AtlasAPI, Util */
 
 function VenueView() {
   const atlas = new AtlasAPI()
@@ -24,7 +24,7 @@ function VenueView() {
           url: '/map',
           icon: 'left',
         }),
-        m('.panel__header', "Events at " + venue.label),
+        m('.panel__header', Util.translate('venue.header', { venue: venue.label })),
         m(List, { events: venue.events }),
       ]
     }

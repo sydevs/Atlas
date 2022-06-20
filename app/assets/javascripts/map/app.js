@@ -1,11 +1,10 @@
 
-/* global AtlasAPI, MapFrame */
+/* global AtlasAPI */
 
 const App = {
 
   load: function() {
     App.atlas = new AtlasAPI()
-    //App.map = new MapFrame('map')
   }
 
 }

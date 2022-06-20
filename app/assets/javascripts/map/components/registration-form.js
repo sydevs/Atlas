@@ -3,7 +3,6 @@
 
 function RegistrationForm() {
   let alert = null // { type: 'error', message: "This is a test of the alert message." }
-  let registered = true
 
   return {
     view: function(vnode) {
@@ -14,21 +13,25 @@ function RegistrationForm() {
         m('input.registration__input', {
           type: 'text',
           name: 'name',
-          placeholder: "Name",
+          placeholder: Util.translate('registration.form.name'),
         }),
         m('input.registration__input', {
           type: 'text',
           name: 'email',
-          placeholder: "Email",
+          placeholder: Util.translate('registration.form.email'),
         }),
         m('textarea.registration__textarea', {
           rows: 3,
           name: 'messsage',
-          placeholder: "Message",
+          placeholder: Util.translate('registration.form.message'),
         }),
         alert ? m('.registration__message', { class: alert.type }, alert.message) : null,
-        m('.registration__notice'),
-        m('button.registration__submit', "Submit")
+        m('.registration__notice',
+          m.trust(Util.translate('registration.notice.text', {
+            link: `<a class="registration__notice-link" href="/${window.locale}/privacy" target="_blank">${Util.translate('registration.notice.link')}</a>`
+          }))
+        ),
+        m('button.registration__submit', Util.translate('registration.form.submit'))
       )
     }
   }
