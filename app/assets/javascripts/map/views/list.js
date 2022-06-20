@@ -7,13 +7,12 @@ function ListView() {
 
   return {
     oncreate: function() {
-      App.atlas = new AtlasAPI()
-      App.atlas.getEvents({
+      /*App.atlas.getEvents({
         online: m.route.param('type') == 'online',
-      }, response => {
+      }).then(response => {
         events = response
         m.redraw()
-      })
+      })*/
     },
     view: function() {
       let type = m.route.param('type')

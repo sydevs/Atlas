@@ -1,18 +1,18 @@
 /* exported EventView */
 
-/* global m, EventInfo, ImageCarousel, Registration, NavigationButton, AtlasAPI */
+/* global m, EventInfo, ImageCarousel, Registration, NavigationButton, App */
 
 function EventView() {
-  const atlas = new AtlasAPI()
   let event = null
 
-  const id = m.route.param('id')
-  atlas.getEvent(id, response => {
-    event = response
-    m.redraw()
-  })
-
   return {
+    oncreate: function() {
+      const id = m.route.param('id')
+      App.atlas.getEvent(id).then(response => {
+        event = response
+        m.redraw()
+      })
+    },
     view: function() {
       if (!event) return null //m('div', "Event not found")
 
@@ -24,7 +24,7 @@ function EventView() {
         }),
         m(NavigationButton, {
           float: 'right',
-          url: `/event/${id}?share=1`,
+          url: `/event/${event.id}?share=1`,
           icon: 'share',
         }),
         m(EventInfo, event),

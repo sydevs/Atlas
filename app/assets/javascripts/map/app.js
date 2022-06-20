@@ -1,14 +1,13 @@
 
-/* global AtlasAPI */
+/* global m, AtlasAPI */
+/* exported App */
 
-const App = {
+const App = {}
 
-  load: function() {
-    App.atlas = new AtlasAPI()
-  }
-
-}
+document.addEventListener('resize', () => {
+  m.redraw()
+})
 
 document.addEventListener('DOMContentLoaded', () => {
-  App.load()
+  App.atlas = new AtlasAPI()
 })

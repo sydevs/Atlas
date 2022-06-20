@@ -1,20 +1,21 @@
 /* exported VenueView */
 
-/* global m, List, NavigationButton, AtlasAPI, Util */
+/* global m, List, NavigationButton, App, Util */
 
 function VenueView() {
-  const atlas = new AtlasAPI()
   let venue = null
 
-  const id = m.route.param('id')
-  atlas.getVenue({
-    id: id
-  }, response => {
-    venue = response
-    m.redraw()
-  })
-
   return {
+    oncreate: function() {
+      const id = m.route.param('id')
+      App.atlas.getVenue(id).then(response => {
+        venue = response
+        App.atlas.getEvents(venue.eventIds).then(events => {
+          venue.events = events
+          m.redraw()
+        })
+      })
+    },
     view: function() {
       if (!venue) return null //m('div', "Venue not found")
 

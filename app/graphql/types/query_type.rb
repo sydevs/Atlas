@@ -28,6 +28,7 @@ module Types
 
     field :events, [EventType], null: false do
       description 'Returns all events'
+      argument :ids, [ID], required: false
       argument :online, Boolean, required: false
       argument :country, String, required: false
       argument :recurrence, String, required: false
@@ -117,13 +118,14 @@ module Types
       decorate Country.find_by_country_code(code)
     end
 
-    def events(online: nil, country: nil, recurrence: nil, language_code: nil, locale: 'en')
+    def events(ids: [], online: nil, country: nil, recurrence: nil, language_code: nil, locale: 'en')
       I18n.locale = locale.to_sym
       scope = online ? OnlineEvent : OfflineEvent
       scope = scope.publicly_visible
-      scope = scope.joins(:location).where(locations: { country_code: country }) unless country.nil?
+      scope = scope.joins(:location).where(locations: { country_code: country }) if country.present?
       scope = scope.where(recurrence: recurrence) if Event.recurrences.key?(recurrence)
-      scope = scope.where(language_code: language_code) unless language_code.nil?
+      scope = scope.where(language_code: language_code) if language_code.present?
+      scope = scope.where(id: ids) if ids.present?
       
       decorate scope
     end

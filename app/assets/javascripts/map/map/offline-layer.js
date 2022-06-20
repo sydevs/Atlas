@@ -15,7 +15,7 @@ class OfflineMapLayer {
       selectedSource: 'offline-selectedSource',
     }
 
-    App.atlas.getGeojson('offline', geojson => {
+    App.atlas.getGeojson('offline').then(geojson => {
       this.loadLayers(geojson)
       this.createEvents()
       this.loading = false
@@ -86,11 +86,11 @@ class OfflineMapLayer {
       if (features.length < 1) return
 
       let venue = parseVenue(features[0])
-      console.log('show venue?', venue)
-      if (venue.events.length > 0) {
+      console.log('show venue?', venue.eventIds.length, venue)
+      if (venue.eventIds.length > 1) {
         m.route.set('/venue/:id', { id: venue.id })
       } else {
-        m.route.set('/event/:id', { id: venue.events[0].id })
+        m.route.set('/event/:id', { id: venue.eventIds[0] })
       }
     })
 
@@ -129,8 +129,8 @@ class OfflineMapLayer {
 
 const parseVenue = function(feature) {
   const venue = feature.properties
-  if (typeof venue.events === 'string') {
-    venue.events = JSON.parse(venue.events)
+  if (typeof venue.eventIds === 'string') {
+    venue.eventIds = JSON.parse(venue.eventIds)
   }
   return venue
 }

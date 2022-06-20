@@ -17,7 +17,3 @@ document.addEventListener('DOMContentLoaded', () => {
     '/venue/:id': layout(VenueView),
   })
 })
-
-document.addEventListener('resize', () => {
-  m.redraw()
-})
