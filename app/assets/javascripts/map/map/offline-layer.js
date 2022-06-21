@@ -3,12 +3,17 @@
 
 class OfflineMapLayer extends AbstractMapLayer {
 
+  static STYLE = 'mapbox://styles/sydevadmin/ck7g6nag70rn11io09f45odkq'
+
+  get style() {
+    return OfflineMapLayer.STYLE
+  }
+
   constructor(mapbox, config) {
     super(mapbox, Object.assign({
       id: 'offline',
-      style: 'mapbox://styles/sydevadmin/ck7g6nag70rn11io09f45odkq',
       cluster: true,
-      visible: true,
+      fetchGeojson: App.atlas.getGeojson('offline'),
     }, config))
   }
 

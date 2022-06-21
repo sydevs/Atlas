@@ -4,6 +4,7 @@ module Types
     field :path, String, null: false, method: :map_path
     field :url, String, null: false, method: :map_url
     field :status, String, null: false
+    field :layer, String, null: false, resolver_method: :get_layer
 
     field :label, String, null: false
     field :description, String, null: true
@@ -85,6 +86,10 @@ module Types
       return nil unless object.registration_end_time
 
       object.next_occurrences_after(object.registration_end_time, limit: 1).first
+    end
+
+    def get_layer
+      object.online? ? 'online' : 'offline'
     end
 
     def registration_count

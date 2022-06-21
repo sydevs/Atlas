@@ -3,11 +3,17 @@
 
 class OnlineMapLayer extends AbstractMapLayer {
 
+  static STYLE = 'mapbox://styles/sydevadmin/cl4nw934f001j14l8jnof3a7w'
+
+  get style() {
+    return OnlineMapLayer.STYLE
+  }
+
   constructor(mapbox, config) {
     super(mapbox, Object.assign({
       id: 'online',
-      style: 'mapbox://styles/sydevadmin/cl4nw934f001j14l8jnof3a7w',
       cluster: true,
+      fetchGeojson: App.atlas.getGeojson('online'),
     }, config))
   }
 

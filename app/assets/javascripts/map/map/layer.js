@@ -3,33 +3,37 @@
 
 class AbstractMapLayer {
 
-  // Private methods
-  #config
-  #visible = false
-  #loading = true
+  // Public variables
+  visible = false
 
-  // Protected methods
+  // Protected variables
   _mapbox
   _layers = {}
 
+  // Private variables
+  #config
+  #loading = true
+
   // Getters
-  get #visibility() {
-    return this.#visible ? 'visibility' : 'none'
+  get id() {
+    return this.#config.id
+  }
+
+  get loading() {
+    return this.#loading
   }
 
   constructor(mapbox, config) {
     config = Object.assign({
-      autoload: true,
       cluster: true,
+      interactive: true,
       pointIcon: 'marker_default',
       clusterIcon: 'cluster-1',
-      visible: false,
-      interactive: true,
+      fetchGeojson: Promise.resolve(null)
     }, config)
 
     this.#config = config
     this._mapbox = mapbox
-    this.#visible = config.visible
     this._layers = {
       source: `${config.id}-source`,
       points: `${config.id}-points`,
@@ -39,25 +43,22 @@ class AbstractMapLayer {
       this._layers.clusters = `${config.id}-clusters`
     }
 
-    if (config.autoload) {
-      App.atlas.getGeojson(config.id).then(geojson => this.load(config, geojson))
-    } else {
-      this.load(config)
-    }
-  }
-
-  load(config, geojson) {
-    this.loadLayers(config, geojson)
     if (config.interactive) {
-      this.createEvents(config)
+      this.createEvents()
     }
-
-    if (config.onload) config.onload(config.id)
-    this.#loading = false
   }
 
-  loadLayers(config, geojson = null) {
-    if (config.cluster) {
+  load() {
+    return this.#config.fetchGeojson.then(geojson => {
+      this.#loadSublayers(geojson)
+    })
+  }
+
+  #loadSublayers(geojson) {
+    console.log('load sublayers', this.id)
+
+    // Create source
+    if (this.#config.cluster) {
       this._mapbox.addSource(this._layers.source, {
         type: 'geojson',
         data: geojson,
@@ -72,17 +73,17 @@ class AbstractMapLayer {
       })
     }
 
-    if (config.cluster) {
+    // Create cluster layer
+    if (this.#config.cluster) {
       this._mapbox.addLayer({
         id: this._layers.clusters,
         type: 'symbol',
         source: this._layers.source,
         filter: ['has', 'point_count'],
         layout: {
-          //'visibility': this.#visibility,
           'icon-allow-overlap': true,
           'icon-ignore-placement': true,
-          'icon-image': config.clusterIcon,
+          'icon-image': this.#config.clusterIcon,
           'text-field': '{point_count_abbreviated}',
           'text-font': ['DIN Offc Pro Bold', 'Arial Unicode MS Bold'],
           'text-size': 12,
@@ -93,23 +94,23 @@ class AbstractMapLayer {
       })
     }
 
+    // Create points layer
     this._mapbox.addLayer({
       id: this._layers.points,
       type: 'symbol',
       source: this._layers.source,
       filter: ['!', ['has', 'point_count']],
       layout: {
-        //'visibility': this.#visibility,
         'icon-ignore-placement': true,
-        'icon-image': config.pointIcon,
+        'icon-image': this.#config.pointIcon,
         'icon-anchor': 'bottom',
         'icon-size': 0.85,
       },
     })
   }
 
-  createEvents(config) {
-    this._mapbox.on('click', event => {
+  createEvents() {
+    this._mapbox.on('click', this._layers.points, event => {
       let features = this._mapbox.queryRenderedFeatures(event.point, { layers: [this._layers.points] })
       if (features.length < 1) return
 
@@ -117,7 +118,7 @@ class AbstractMapLayer {
       this.showLocation(location)
     })
 
-    if (config.cluster) {
+    if (this.#config.cluster) {
       this._mapbox.on('click', this._layers.clusters, event => {
         var features = this._mapbox.queryRenderedFeatures(event.point, { layers: [this._layers.clusters] })
         var clusterId = features[0].properties.cluster_id
@@ -137,7 +138,7 @@ class AbstractMapLayer {
   
     // Indicate that symbols are clickable by changing the cursor style to 'pointer'.
     this._mapbox.on('mousemove', event => {
-      if (!this.#visible) return
+      if (!this.visible) return
 
       let features = this._mapbox.queryRenderedFeatures(event.point, { layers: [this._layers.points, this._layers.clusters] })
       this._mapbox.getCanvas().style.cursor = features.length ? 'pointer' : ''
@@ -146,15 +147,6 @@ class AbstractMapLayer {
 
   showLocation(location) {
     throw new Error('showLocation() must be implemented in a layer subclass')
-  }
-
-  toggle(visible) {
-    this.#visible = visible
-    if (this.#loading) return
-
-    this._mapbox.setLayoutProperty(this._layers.clusters, 'visibility', this.#visibility)
-    this._mapbox.setLayoutProperty(this._layers.points, 'visibility', this.#visibility)
-    this._mapbox.setStyle(this.#config.style)
   }
 
   #parseLocation(feature) {

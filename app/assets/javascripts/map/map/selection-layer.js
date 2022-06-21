@@ -8,17 +8,13 @@ class SelectionMapLayer extends AbstractMapLayer {
       id: 'selection',
       pointIcon: 'marker_selected',
       cluster: false,
-      visible: true,
       interactive: false,
-      autoload: false,
     }, config))
+
+    this.visible = true
   }
 
-  surfaceSelectionLayer() {
-    this._mapbox.moveLayer(this._layers.points)
-  }
-
-  setSelection(location) {
+  setSelection(location, options) {
     if (location) {
       this._mapbox.getSource(this._layers.source).setData({
         type: 'FeatureCollection',
@@ -31,8 +27,7 @@ class SelectionMapLayer extends AbstractMapLayer {
         }]
       })
 
-      console.log('flyTo', location)
-      this.flyTo(location, 16)
+      this.flyTo(location, options)
     } else {
       this._mapbox.getSource(this._layers.source).setData({
         type: 'FeatureCollection',
@@ -48,16 +43,16 @@ class SelectionMapLayer extends AbstractMapLayer {
     }
   }
 
-  flyTo(location, zoom) {
-    let options = {
+  flyTo(location, options = {}) {
+    let args = {
       center: [location.longitude, location.latitude],
-      zoom: zoom,
+      zoom: options.zoom || 16,
     }
 
-    if (Util.isDevice('mobile')) {
-      this._mapbox.jumpTo(options)
+    if (Util.isDevice('mobile') || options.transition == false) {
+      this._mapbox.jumpTo(args)
     } else {
-      this._mapbox.flyTo(options)
+      this._mapbox.flyTo(args)
     }
   }
 

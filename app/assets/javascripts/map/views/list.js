@@ -8,14 +8,14 @@ function ListView() {
   return {
     oncreate: function() {
       /*App.atlas.getEvents({
-        online: m.route.param('type') == 'online',
+        online: m.route.param('layer') == 'online',
       }).then(response => {
         events = response
         m.redraw()
       })*/
     },
     view: function() {
-      let type = m.route.param('type')
+      let layer = m.route.param('layer')
       let mobile = Util.isDevice('mobile')
     
       return [
@@ -23,7 +23,7 @@ function ListView() {
         m(Navigation, {
           items: mobile ?
             [[Util.translate('navigation.mobile.back'), '/map']] :
-            ['offline', 'online'].map((mode) => [Util.translate(`navigation.desktop.${mode}`), `/list/${mode}`, type == mode])
+            ['offline', 'online'].map((l) => [Util.translate(`navigation.desktop.${l}`), `/list/${l}`, layer == l])
         }),
         events.length > 0 ?
           m(List, { events: events }) :

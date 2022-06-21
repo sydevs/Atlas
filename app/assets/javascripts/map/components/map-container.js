@@ -5,29 +5,40 @@ function MapContainer() {
   let map
   let selectionId
   let selectionModel
+  let layer
 
-  function updateSelection(attrs) {
+  function updateSelection(attrs, options) {
     if (attrs.selectionId != selectionId || attrs.selectionModel != selectionModel) {
       selectionId = attrs.selectionId
       selectionModel = attrs.selectionModel
 
       App.atlas.getRecord(selectionModel, selectionId).then(function(record) {
         if (selectionModel == 'event') record = record.location
-        map.setSelection(record)
+        map.setSelection(record, options)
       })
+    }
+  }
+
+  function updateLayer(newLayer) {
+    if (layer != newLayer) {
+      layer = newLayer
+      map.showLayer(layer)
     }
   }
 
   return {
     oncreate: function(vnode) {
+      layer = vnode.attrs.layer || 'offline'
       map = new MapFrame('map', {
-        onload: () => updateSelection(vnode.attrs)
+        layer: vnode.attrs.layer,
+        onload: () => updateSelection(vnode.attrs, { transition: false })
       })
     },
     onupdate: function(vnode) {
       if (map.loading) return
 
       updateSelection(vnode.attrs)
+      updateLayer(vnode.attrs.layer)
       map.resize()
     },
     onremove: function() {

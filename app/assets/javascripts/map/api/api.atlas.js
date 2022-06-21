@@ -20,6 +20,7 @@ class AtlasAPI {
       fragments: {
         event: `on Event {
           id
+          layer
           label
           description
           category
@@ -124,9 +125,9 @@ class AtlasAPI {
 
   // NON-CACHED REQUESTS
 
-  getGeojson(mode) {
-    console.log('[AtlasAPI]', 'getting geojson', mode) // eslint-disable-line no-console
-    return this.geojsonQuery({ online: mode == 'online' }).then(data => data.geojson)
+  getGeojson(layer) {
+    console.log('[AtlasAPI]', 'getting geojson', layer) // eslint-disable-line no-console
+    return this.geojsonQuery({ online: layer == 'online' }).then(data => data.geojson)
   }
 
   searchEvents(params) {
@@ -136,24 +137,24 @@ class AtlasAPI {
 
   // CACHED REQUESTS
 
-  async getVenue(id) {
+  getVenue(id) {
     console.log('[AtlasAPI]', 'getting venue', id) // eslint-disable-line no-console
     if (id in this.#cache.venues) {
-      return this.#cache.venues[id]
+      return Promise.resolve(this.#cache.venues[id])
     } else {
-      return await this.venueQuery({ id: id }).then(data => {
+      return this.venueQuery({ id: id }).then(data => {
         this.#cache.venues[id] = data.venue
         return data.venue
       })
     }
   }
 
-  async getEvent(id) {
+  getEvent(id) {
     console.log('[AtlasAPI]', 'getting event', id) // eslint-disable-line no-console
     if (id in this.#cache.events) {
-      return this.#cache.events[id]
+      return Promise.resolve(this.#cache.events[id])
     } else {
-      return await this.eventQuery({ id: id }).then(data => {
+      return this.eventQuery({ id: id }).then(data => {
         this.#cache.events[id] = data.event
         return data.event
       })
@@ -177,21 +178,15 @@ class AtlasAPI {
   async getClosestVenue(params) {
     console.log('[AtlasAPI]', 'getting closest venue', params) // eslint-disable-line no-console
     
-    let result = null
     let cache = this.#cache.closestVenue
     if (cache) {
       const distance = Util.distance(params.latitude, params.longitude, cache.latitude, cache.longitude)
       if (distance <= 0.2) {
-        result = cache
+        return Promise.resolve(cache)
       }
     }
-
-    if (!result) {
-      const data = await this.closestVenueQuery(params)
-      result = data.venue
-    }
-
-    return result
+    
+    return this.closestVenueQuery(params)
   }
 
   // MUTATION REQUESTS

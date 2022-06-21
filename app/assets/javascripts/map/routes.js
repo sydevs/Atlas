@@ -19,9 +19,20 @@ const layout = function(view, attrs) {
 
 document.addEventListener('DOMContentLoaded', () => {
   m.route(document.body, '/', {
-    '/': layout(MapView, { map: 'fullscreen', panel: 'overflow' }),
-    '/list/:type': layout(ListView, { map: 'hidden' }),
-    '/event/:id': layout(EventView, { panel: 'padded', model: 'event' }),
-    '/venue/:id': layout(VenueView, { model: 'venue' }),
+    '/': layout(MapView, {
+      map: 'fullscreen',
+      panel: 'overflow',
+    }),
+    '/list/:layer': layout(ListView, {
+      map: 'hidden'
+    }),
+    '/event/:id': layout(EventView, {
+      panel: 'padded',
+      model: 'event',
+    }),
+    '/venue/:id': layout(VenueView, {
+      model: 'venue',
+      layer: 'offline',
+    }),
   })
 })
