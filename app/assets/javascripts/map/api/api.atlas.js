@@ -3,10 +3,13 @@
 
 class AtlasAPI {
 
+  #cache
+
   constructor() {
     this.prepareGraphQL()
-    this.cache = {
+    this.#cache = {
       events: {},
+      venues: {},
       closestVenue: null,
     }
     console.log('loading AtlasAPI.js') // eslint-disable-line no-console
@@ -126,14 +129,6 @@ class AtlasAPI {
     return this.geojsonQuery({ online: mode == 'online' }).then(data => data.geojson)
   }
 
-  async getVenue(id) {
-    console.log('[AtlasAPI]', 'getting venue', id) // eslint-disable-line no-console
-    return this.venueQuery({ id: id }).then(data => data.venue).then(venue => {
-      console.log('[AtlasAPI]', 'got venue', venue) // eslint-disable-line no-console
-      return venue
-    })
-  }
-
   searchEvents(params) {
     console.log('[AtlasAPI]', 'searching events', params) // eslint-disable-line no-console
     return this.searchEventsQuery(params).then(data => data.events)
@@ -141,34 +136,49 @@ class AtlasAPI {
 
   // CACHED REQUESTS
 
+  async getVenue(id) {
+    console.log('[AtlasAPI]', 'getting venue', id) // eslint-disable-line no-console
+    if (id in this.#cache.venues) {
+      return this.#cache.venues[id]
+    } else {
+      return await this.venueQuery({ id: id }).then(data => {
+        this.#cache.venues[id] = data.venue
+        return data.venue
+      })
+    }
+  }
+
   async getEvent(id) {
     console.log('[AtlasAPI]', 'getting event', id) // eslint-disable-line no-console
-    if (id in this.cache.events) {
-      return this.cache.events[id]
+    if (id in this.#cache.events) {
+      return this.#cache.events[id]
     } else {
-      return await this.eventQuery({ id: id }).then(data => data.event)
+      return await this.eventQuery({ id: id }).then(data => {
+        this.#cache.events[id] = data.event
+        return data.event
+      })
     }
   }
 
   async getEvents(ids) {
-    let uncachedEventIds = ids.filter(id => !(id in this.cache.events))
+    let uncachedEventIds = ids.filter(id => !(id in this.#cache.events))
     console.log('[AtlasAPI]', 'getting events', ids, '(' + (1 - uncachedEventIds.length / ids.length) * 100 + '% cached)') // eslint-disable-line no-console
 
     if (uncachedEventIds.length > 0) {
       const data = await this.eventsQuery({ ids: uncachedEventIds })
       data.events.forEach(event => {
-        this.cache.events[event.id] = event
+        this.#cache.events[event.id] = event
       })
     }
 
-    return ids.map(id => this.cache.events[id])
+    return ids.map(id => this.#cache.events[id])
   }
 
   async getClosestVenue(params) {
     console.log('[AtlasAPI]', 'getting closest venue', params) // eslint-disable-line no-console
     
     let result = null
-    let cache = this.cache.closestVenue
+    let cache = this.#cache.closestVenue
     if (cache) {
       const distance = Util.distance(params.latitude, params.longitude, cache.latitude, cache.longitude)
       if (distance <= 0.2) {
@@ -196,20 +206,8 @@ class AtlasAPI {
 
   // CACHE FUNCTIONS
 
-  setCache(key, parameters, response) {
-    this.cache[key] = {
-      latitude: parameters.latitude,
-      longitude: parameters.longitude,
-      response: response
-    }
-  }
-
-  checkCache(key, params, allowedDistance) {
-    if (!this.cache[key]) return null
-    
-    const cache = this.cache[key]
-    const distance = Util.distance(params.latitude, params.longitude, cache.latitude, cache.longitude)
-    return distance <= allowedDistance ? cache.response : null
+  setCache(key, object) {
+    this.#cache[key][object.id] = object
   }
 
 }

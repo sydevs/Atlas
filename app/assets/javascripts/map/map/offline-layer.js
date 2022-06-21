@@ -88,6 +88,8 @@ class OfflineMapLayer {
       let venue = parseVenue(features[0])
       console.log('show venue?', venue.eventIds.length, venue)
       if (venue.eventIds.length > 1) {
+        // TODO: avoid this direct access to the cache
+        App.atlas.setCache('venues', venue)
         m.route.set('/venue/:id', { id: venue.id })
       } else {
         m.route.set('/event/:id', { id: venue.eventIds[0] })
@@ -132,5 +134,6 @@ const parseVenue = function(feature) {
   if (typeof venue.eventIds === 'string') {
     venue.eventIds = JSON.parse(venue.eventIds)
   }
+
   return venue
 }
