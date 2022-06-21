@@ -18,13 +18,11 @@ const layout = function(view, attrs) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+  m.route.prefix = '/map'
   m.route(document.body, '/', {
     '/': layout(MapView, {
       map: 'fullscreen',
       panel: 'overflow',
-    }),
-    '/list/:layer': layout(ListView, {
-      map: 'hidden'
     }),
     '/event/:id': layout(EventView, {
       panel: 'padded',
@@ -33,6 +31,9 @@ document.addEventListener('DOMContentLoaded', () => {
     '/venue/:id': layout(VenueView, {
       model: 'venue',
       layer: 'offline',
+    }),
+    '/:layer': layout(ListView, {
+      map: 'hidden'
     }),
   })
 })

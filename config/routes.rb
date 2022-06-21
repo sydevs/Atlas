@@ -50,14 +50,16 @@ Rails.application.routes.draw do
     get :index, to: 'application#index'
     get 'index/:api_key', to: 'application#index', as: :index_key
 
-    root to: 'application#show'
-    get '/:api_key', to: 'application#show', as: :key
+    get '(*path)', to: 'application#show'
+    get '/:api_key/*path', to: 'application#show', as: :key
 
+    # For generating helpers
     get '/event/:event_id', to: 'application#show', as: :event
     get '/venue/:venue_id', to: 'application#show', as: :venue
-    get :closest, to: 'application#closest'
-    get :online, to: 'application#online'
-    post :registrations, to: 'registrations#create'
+
+    #get :closest, to: 'application#closest'
+    #get :online, to: 'application#online'
+    #post :registrations, to: 'registrations#create'
   end
 
   namespace :cms do

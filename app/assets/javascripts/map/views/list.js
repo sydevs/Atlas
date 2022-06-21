@@ -23,7 +23,7 @@ function ListView() {
         m(Navigation, {
           items: mobile ?
             [[Util.translate('navigation.mobile.back'), '/map']] :
-            ['offline', 'online'].map((l) => [Util.translate(`navigation.desktop.${l}`), `/list/${l}`, layer == l])
+            ['offline', 'online'].map((l) => [Util.translate(`navigation.desktop.${l}`), `/${l}`, layer == l])
         }),
         events.length > 0 ?
           m(List, { events: events }) :

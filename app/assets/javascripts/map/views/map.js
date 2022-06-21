@@ -9,7 +9,7 @@ const MapView = {
     return [
       m(Search, { floating: true }),
       m(Navigation, {
-        items: ['offline', 'online'].map((mode) => [Util.translate(`navigation.${device}.${mode}`), `/list/${mode}`])
+        items: ['offline', 'online'].map(layer => [Util.translate(`navigation.${device}.${layer}`), `/${layer}`])
       }),
     ]
   }

@@ -49,8 +49,10 @@ class AbstractMapLayer {
   }
 
   load() {
+    this.#loading = true
     return this.#config.fetchGeojson.then(geojson => {
       this.#loadSublayers(geojson)
+      this.#loading = false
     })
   }
 
@@ -138,7 +140,7 @@ class AbstractMapLayer {
   
     // Indicate that symbols are clickable by changing the cursor style to 'pointer'.
     this._mapbox.on('mousemove', event => {
-      if (!this.visible) return
+      if (!this.visible || this.loading) return
 
       let features = this._mapbox.queryRenderedFeatures(event.point, { layers: [this._layers.points, this._layers.clusters] })
       this._mapbox.getCanvas().style.cursor = features.length ? 'pointer' : ''

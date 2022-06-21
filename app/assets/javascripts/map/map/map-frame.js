@@ -33,7 +33,7 @@ class MapFrame {
       style: MapFrame.EMPTY_STYLE,
       minZoom: 1,
       dragRotate: false,
-      //hash: true,
+      hash: true,
     })
 
     let initalizing = true

@@ -18,7 +18,7 @@ function EventView() {
       return [
         m(NavigationButton, {
           float: 'left',
-          url: `/list/${event.online ? 'online' : 'offline'}`,
+          url: `/${event.online ? 'online' : 'offline'}`,
           icon: 'left',
         }),
         m(NavigationButton, {
