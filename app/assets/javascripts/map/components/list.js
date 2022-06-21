@@ -5,7 +5,7 @@ function List() {
   return {
     view: function(vnode) {
       return m('.list', vnode.attrs.events.map(function(event) {
-        return m(EventCard, { class: 'list__item', event: event })
+        return m(EventCard, { key: event.id, class: 'list__item', event: event })
       }))
     }
   }

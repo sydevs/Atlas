@@ -9,8 +9,14 @@ function Layout() {
 
       return m('.layout', { class: share ? 'noscroll' : null },
         share ? m(ShareModal) : null,
-        m(MapContainer, { mode: vnode.attrs.map }),
-        m('.panel', { class: vnode.attrs.panel ? `panel--${vnode.attrs.panel}` : null }, vnode.children)
+        m(MapContainer, {
+          mode: vnode.attrs.map,
+          selectionId: vnode.attrs.id,
+          selectionModel: vnode.attrs.model,
+        }),
+        m('.panel', {
+          class: vnode.attrs.panel ? `panel--${vnode.attrs.panel}` : null
+        }, vnode.children)
       )
     }
   }

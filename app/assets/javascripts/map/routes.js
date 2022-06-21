@@ -4,7 +4,15 @@
 const layout = function(view, attrs) {
   return {
     render: function() {
-      return m(Layout, attrs, m(view))
+      let id = m.route.param('id')
+      let viewAttrs = {}
+
+      if (id) {
+        attrs.id = id
+        viewAttrs = { id: id, key: id }
+      }
+
+      return m(Layout, attrs, m(view, viewAttrs))
     }
   }
 }
@@ -13,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
   m.route(document.body, '/', {
     '/': layout(MapView, { map: 'fullscreen', panel: 'overflow' }),
     '/list/:type': layout(ListView, { map: 'hidden' }),
-    '/event/:id': layout(EventView, { panel: 'padded' }),
-    '/venue/:id': layout(VenueView),
+    '/event/:id': layout(EventView, { panel: 'padded', model: 'event' }),
+    '/venue/:id': layout(VenueView, { model: 'venue' }),
   })
 })

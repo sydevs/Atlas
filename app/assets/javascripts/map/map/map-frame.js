@@ -1,9 +1,15 @@
 /* exported MapFrame */
-/* global mapboxgl, MapboxLanguage, OnlineMapLayer, OfflineMapLayer */
+/* global mapboxgl, MapboxLanguage, OnlineMapLayer, OfflineMapLayer, SelectionMapLayer */
 
 class MapFrame {
 
-  constructor(containerId) {
+  #loading = true
+
+  get loading() {
+    return this.#loading
+  }
+
+  constructor(containerId, config) {
     mapboxgl.accessToken = 'pk.eyJ1Ijoic3lkZXZhZG1pbiIsImEiOiJjazczcXV4ZzQwZXJtM3JxZTF6a2g0dW9hIn0.avMfkC306-2PqpNRnz6otg'
     this.mapbox = new mapboxgl.Map({
       container: containerId,
@@ -17,12 +23,19 @@ class MapFrame {
 
     this.mapbox.on('load', _event => {
       this.layers = {
-        //online: new OnlineMapLayer(this.mapbox),
-        offline: new OfflineMapLayer(this.mapbox),
+        //online: new OnlineMapLayer(this.mapbox, { onload: (layerId) => this.onLayerLoaded(layerId) }),
+        offline: new OfflineMapLayer(this.mapbox, { onload: (layerId) => this.onLayerLoaded(layerId) }),
       }
 
+      this.selectionLayer = new SelectionMapLayer(this.mapbox)
       //this.showLayer('offline')
+      config.onload()
+      this.#loading = false
     })
+  }
+
+  onLayerLoaded(layerId) {
+    this.selectionLayer.surfaceSelectionLayer()
   }
 
   loadControlLayers() {
@@ -33,7 +46,7 @@ class MapFrame {
     this.mapbox.addControl(geolocater)
 
     geolocater.on('geolocate', event => {
-      this.setLocation(event.coords, true)
+      this.setUserLocation(event.coords, true)
     })
   }
 
@@ -46,6 +59,10 @@ class MapFrame {
       console.log('layer', key, '/', layer)
       layer.toggle(key == layerName)
     })
+  }
+
+  setSelection(location) {
+    this.selectionLayer.setSelection(location)
   }
 
   resize() {

@@ -204,10 +204,20 @@ class AtlasAPI {
     })
   }
 
-  // CACHE FUNCTIONS
+  // HELPER METHODS
 
   setCache(key, object) {
     this.#cache[key][object.id] = object
+  }
+
+  getRecord(model, id) {
+    if (model == 'venue') {
+      return this.getVenue(id)
+    } else if (model == 'event') {
+      return this.getEvent(id)
+    } else {
+      return Promise.resolve(null)
+    }
   }
 
 }

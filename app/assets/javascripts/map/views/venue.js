@@ -6,9 +6,8 @@ function VenueView() {
   let venue = null
 
   return {
-    oncreate: function() {
-      const id = m.route.param('id')
-      App.atlas.getVenue(id).then(response => {
+    oninit: function(vnode) {
+      App.atlas.getVenue(vnode.attrs.id).then(response => {
         venue = response
         App.atlas.getEvents(venue.eventIds).then(events => {
           venue.events = events
