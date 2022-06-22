@@ -41,7 +41,7 @@ function EventInfo() {
           m('a',
             {
               tabindex: 1,
-              href: '#register',
+              href: '#registration',
             },
             m('span.icon.icon--signup'),
             m('span', Util.translate('event.register'))

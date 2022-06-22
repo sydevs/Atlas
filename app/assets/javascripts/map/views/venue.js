@@ -21,8 +21,8 @@ function VenueView() {
       return [
         m(NavigationButton, {
           float: 'left',
-          url: '/',
           icon: 'left',
+          href: '/',
         }),
         m('.panel__header', Util.translate('venue.header', { venue: venue.label })),
         m(List, { events: venue.events }),

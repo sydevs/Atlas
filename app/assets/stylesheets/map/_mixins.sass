@@ -126,6 +126,12 @@ $desktop-width: 1100px
   to
     transform: scale(1)
 
+@include keyframes(scale-in-modal)
+  from
+    transform: translate(-50%, -50%) scale(0)
+  to
+    transform: translate(-50%, -50%) scale(1)
+
 @include keyframes(circle-in)
   from
     transform: scale(0) rotate(-45deg)

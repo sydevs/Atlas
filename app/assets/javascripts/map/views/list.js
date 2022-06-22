@@ -7,15 +7,13 @@ function ListView() {
 
   function updateEvents() {
     App.map.getRenderedEventIds().then(eventIds => {
-      if (eventIds == null || eventIds.length < 1) {
-        events = eventIds
-        m.redraw()
-      } else {
-        App.atlas.getEvents(eventIds).then(response => {
-          events = response
-          m.redraw()
-        })
-      }
+      return eventIds.length > 0 ? App.atlas.getEvents(eventIds) : []
+    }).then(response => {
+      events = response
+    }).catch(() => {
+      events = null
+    }).finally(() => {
+      m.redraw()
     })
   }
 

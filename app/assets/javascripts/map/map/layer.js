@@ -50,6 +50,7 @@ class AbstractMapLayer {
 
   load() {
     this.#loading = true
+
     return this.#config.fetchGeojson.then(geojson => {
       this.#loadSublayers(geojson)
       this.#loading = false
@@ -122,9 +123,11 @@ class AbstractMapLayer {
 
     if (this.#config.cluster) {
       this._mapbox.on('click', this._layers.clusters, event => {
-        var features = this._mapbox.queryRenderedFeatures(event.point, { layers: [this._layers.clusters] })
-        var clusterId = features[0].properties.cluster_id
-        this._mapbox.getSource(this._layers.cluster).getClusterExpansionZoom(clusterId, (error, zoom) => {
+        const features = this._mapbox.queryRenderedFeatures(event.point, { layers: [this._layers.clusters] })
+        const clusterId = features[0].properties.cluster_id
+        const source = this._mapbox.getSource(this._layers.source)
+
+        source.getClusterExpansionZoom(clusterId, (error, zoom) => {
           if (error) {
             console.error(error) // eslint-disable-line no-console
           } else {
@@ -152,7 +155,7 @@ class AbstractMapLayer {
   }
 
   getRenderedEventIds() {
-    if (this.#loading) return null
+    if (this.#loading) return Promise.reject()
 
     const layers = [this._layers.points]
     if (this.#config.cluster) layers.push(this._layers.clusters)

@@ -17,14 +17,20 @@ class OnlineMapLayer extends AbstractMapLayer {
     }, config))
   }
 
+  load() {
+    // These bounds contain most of the inhabited world.
+    this._mapbox.fitBounds([-180, -55, 180, 70])
+    return super.load()
+  }
+
   _gotoLocation(area) {
-    m.route.set('/event/:id', { id: area.eventIds[0] })
+    m.route.set('/:layer/:id', { id: area.eventIds[0], layer: 'online' })
 
     /*if (venue.eventIds.length > 1) {
       App.atlas.setCache('venues', venue)
       m.route.set('/venue/:id', { id: venue.id })
     } else {
-      m.route.set('/event/:id', { id: venue.eventIds[0] })
+      m.route.set('/:layer/:id', { id: venue.eventIds[0], layer: 'online' })
     }*/
   }
 

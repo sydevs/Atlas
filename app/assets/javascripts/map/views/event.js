@@ -18,13 +18,15 @@ function EventView() {
       return [
         m(NavigationButton, {
           float: 'left',
-          url: `/${event.online ? 'online' : 'offline'}`,
           icon: 'left',
+          href: '/:layer',
+          params: { layer: event.layer },
         }),
         m(NavigationButton, {
           float: 'right',
-          url: `/event/${event.id}?share=1`,
           icon: 'share',
+          href: `/:layer/:id?share=1`,
+          params: { id: event.id, layer: event.layer },
         }),
         m(EventInfo, event),
         event.images.length > 0 ? m(ImageCarousel, { images: event.images }) : null,

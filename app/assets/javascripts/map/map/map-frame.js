@@ -99,7 +99,7 @@ class MapFrame extends EventTarget {
   }
 
   getRenderedEventIds() {
-    if (this.#loading) return null
+    if (this.#loading) return Promise.reject()
 
     return this.#currentLayer.getRenderedEventIds()
   }

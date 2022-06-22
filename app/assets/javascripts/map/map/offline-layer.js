@@ -22,7 +22,7 @@ class OfflineMapLayer extends AbstractMapLayer {
       App.atlas.setCache('venues', venue)
       m.route.set('/venue/:id', { id: venue.id })
     } else {
-      m.route.set('/event/:id', { id: venue.eventIds[0] })
+      m.route.set('/:layer/:id', { id: venue.eventIds[0], layer: 'offline' })
     }
   }
 

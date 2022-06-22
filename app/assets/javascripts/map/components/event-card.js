@@ -16,7 +16,8 @@ function EventCard() {
       return m(m.route.Link,
         {
           class: `card ${vnode.attrs.class}`,
-          href: `/event/${event.id}`,
+          href: '/:layer/:id',
+          params: { layer: event.layer, id: event.id },
         },
         m('.card__content',
           m('.card__title', event.label),

@@ -23,10 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
     '/': layout(MapView, {
       map: 'fullscreen',
       panel: 'overflow',
-    }),
-    '/event/:id': layout(EventView, {
-      panel: 'padded',
-      model: 'event',
+      layer: 'offline',
     }),
     '/venue/:id': layout(VenueView, {
       model: 'venue',
@@ -34,6 +31,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }),
     '/:layer': layout(ListView, {
       map: 'hidden'
+    }),
+    '/:layer/:id': layout(EventView, {
+      panel: 'padded',
+      model: 'event',
     }),
   })
 })
