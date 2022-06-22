@@ -37,6 +37,7 @@ class Event < ApplicationRecord
   validates :end_date, presence: true, if: :course_category?
   validates :end_time, presence: true, if: -> { festival_category? || concert_category? }
   validates :manager, presence: true
+  validates :type, presence: true
   validates_numericality_of :registration_limit, greater_than: 0, allow_nil: true
   validates_associated :pictures
   validate :validate_end_time
@@ -144,7 +145,7 @@ class Event < ApplicationRecord
   end
 
   def language_code
-    self[:language_code].downcase.to_sym
+    self[:language_code]&.downcase&.to_sym
   end
 
   def log_status_change

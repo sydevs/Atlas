@@ -113,8 +113,9 @@ class MapFrame extends EventTarget {
     this.#mapbox.setStyle(this.#layers[layerId].style)
   }
 
-  async setSelection(location, options) {
+  async setSelection(location, options = {}) {
     this.waitForLoad().then(() => {
+      options.zoom ||= this.#currentLayerId == 'online' ? 4 : 16
       this.#selectionLayer.setSelection(location, options)
     })
   }

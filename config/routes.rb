@@ -47,6 +47,7 @@ Rails.application.routes.draw do
   end
 
   namespace :map do
+    root to: 'application#show'
     get :index, to: 'application#index'
     get 'index/:api_key', to: 'application#index', as: :index_key
 

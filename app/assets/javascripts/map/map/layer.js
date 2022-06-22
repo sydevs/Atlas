@@ -27,8 +27,8 @@ class AbstractMapLayer {
     config = Object.assign({
       cluster: true,
       interactive: true,
-      pointIcon: 'marker_default',
-      clusterIcon: 'cluster-1',
+      pointIcon: 'point',
+      clusterIcon: 'cluster',
       fetchGeojson: Promise.resolve(null)
     }, config)
 
@@ -98,18 +98,38 @@ class AbstractMapLayer {
     }
 
     // Create points layer
-    this._mapbox.addLayer({
-      id: this._layers.points,
-      type: 'symbol',
-      source: this._layers.source,
-      filter: ['!', ['has', 'point_count']],
-      layout: {
-        'icon-ignore-placement': true,
-        'icon-image': this.#config.pointIcon,
-        'icon-anchor': 'bottom',
-        'icon-size': 0.85,
-      },
-    })
+    if (this.#config.pointIcon == 'cluster') {
+      this._mapbox.addLayer({
+        id: this._layers.points,
+        type: 'symbol',
+        source: this._layers.source,
+        filter: ['!', ['has', 'point_count']],
+        layout: {
+          'icon-ignore-placement': true,
+          'icon-image': this.#config.pointIcon,
+          'text-field': '1',
+          'text-font': ['DIN Offc Pro Bold', 'Arial Unicode MS Bold'],
+          'text-size': 12,
+          'icon-size': 0.85,
+        },
+        paint: {
+          'text-color': '#FFFFFF',
+        },
+      })
+    } else {
+      this._mapbox.addLayer({
+        id: this._layers.points,
+        type: 'symbol',
+        source: this._layers.source,
+        filter: ['!', ['has', 'point_count']],
+        layout: {
+          'icon-ignore-placement': true,
+          'icon-image': this.#config.pointIcon,
+          'icon-anchor': 'bottom',
+          'icon-size': 0.85,
+        },
+      })
+    }
   }
 
   _setupHooks() {

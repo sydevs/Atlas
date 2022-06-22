@@ -5,27 +5,38 @@
 function ListView() {
   let events = null
 
-  function updateEvents() {
-    App.map.getRenderedEventIds().then(eventIds => {
-      return eventIds.length > 0 ? App.atlas.getEvents(eventIds) : []
-    }).then(response => {
-      events = response
-    }).catch(() => {
-      events = null
-    }).finally(() => {
-      m.redraw()
-    })
+  function updateEvents(layer) {
+    if (layer == 'offline') {
+      return App.map.getRenderedEventIds().then(eventIds => {
+        return eventIds.length > 0 ? App.atlas.getEvents(eventIds) : []
+      }).then(response => {
+        events = response
+      }).catch(() => {
+        events = null
+      })
+    } else {
+      return App.atlas.getOnlineList().then(response => {
+        events = response
+      })
+    }
   }
 
   return {
-    oncreate: function() {
+    oncreate: function(vnode) {
       App.map.addEventListener('update', () => {
-        updateEvents()
+        updateEvents(vnode.attrs.layer).finally(() => m.redraw())
       })
     },
-    view: function() {
+    view: function(vnode) {
       let layer = m.route.param('layer')
       let mobile = Util.isDevice('mobile')
+
+      let list = null
+      if (events && events.length > 0) {
+        list = m(List, { events: events })
+      } else if (vnode.attrs.layer == 'offline') {
+        list = m(ListFallback)
+      }
     
       return [
         m(Search),
@@ -34,11 +45,7 @@ function ListView() {
             [[Util.translate('navigation.mobile.back'), '/']] :
             ['offline', 'online'].map((l) => [Util.translate(`navigation.desktop.${l}`), `/${l}`, layer == l])
         }),
-        events == null ?
-          null :
-          (events.length > 0 ?
-            m(List, { events: events }) :
-            m(ListFallback)),
+        list,
       ]
     }
   }

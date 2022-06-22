@@ -10,6 +10,7 @@ class AtlasAPI {
     this.#cache = {
       events: {},
       venues: {},
+      onlineList: null,
       closestVenue: null,
     }
     console.log('loading AtlasAPI.js') // eslint-disable-line no-console
@@ -100,6 +101,10 @@ class AtlasAPI {
       }
     `)
 
+    this.onlineListQuery = this.graph.query(`(@autodeclare) {
+      events(online: true, locale: "${window.locale}") { ...event }
+    }`)
+
     this.venueQuery = this.graph.query(`(@autodeclare) {
       venue(id: $id, locale: "${window.locale}") { ...venue }
     }`)
@@ -173,6 +178,19 @@ class AtlasAPI {
     }
 
     return ids.map(id => this.#cache.events[id])
+  }
+
+  getOnlineList() {
+    console.log('[AtlasAPI]', 'getting online list') // eslint-disable-line no-console
+
+    if (this.#cache.onlineList) {
+      return Promise.resolve(this.#cache.onlineList)
+    } else {
+      return this.onlineListQuery().then(response => {
+        this.#cache.onlineList = response.events
+        return response.events
+      })
+    }
   }
 
   async getClosestVenue(params) {

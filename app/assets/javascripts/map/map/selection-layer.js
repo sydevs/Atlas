@@ -6,7 +6,7 @@ class SelectionMapLayer extends AbstractMapLayer {
   constructor(mapbox, config) {
     super(mapbox, Object.assign({
       id: 'selection',
-      pointIcon: 'marker_selected',
+      pointIcon: 'selected',
       cluster: false,
       interactive: false,
     }, config))

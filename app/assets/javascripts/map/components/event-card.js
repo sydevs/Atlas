@@ -26,7 +26,7 @@ function EventCard() {
             m('span', event.distance)
           ),
           m('.card__meta',
-            event.languageCode != window.locale ? m('.pill', language) : null,
+            event.languageCode != window.locale ? m('.pill', language.toUpperCase()) : null,
             m('.card__meta__day', Util.parseEventTiming(event, 'recurrence')),
             m('.card__meta__time', Util.parseEventTiming(event, 'duration')),
             !event.online ? m('abbr.card__meta__timezone', {
