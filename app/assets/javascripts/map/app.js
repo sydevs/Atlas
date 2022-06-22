@@ -2,7 +2,10 @@
 /* global m, AtlasAPI */
 /* exported App */
 
-const App = {}
+const App = {
+  atlas: null,
+  map: null,
+}
 
 document.addEventListener('resize', () => {
   m.redraw()

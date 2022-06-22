@@ -17,7 +17,7 @@ class OnlineMapLayer extends AbstractMapLayer {
     }, config))
   }
 
-  showLocation(area) {
+  _gotoLocation(area) {
     m.route.set('/event/:id', { id: area.eventIds[0] })
 
     /*if (venue.eventIds.length > 1) {

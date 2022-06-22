@@ -1,7 +1,7 @@
 /* exported MapFrame */
 /* global mapboxgl, MapboxLanguage, OnlineMapLayer, OfflineMapLayer, SelectionMapLayer */
 
-class MapFrame {
+class MapFrame extends EventTarget {
 
   static EMPTY_STYLE = { version: 8,sources: {},layers: [] }
 
@@ -22,6 +22,8 @@ class MapFrame {
   }
 
   constructor(containerId, config) {
+    super()
+
     config = Object.assign({
       onload: () => {},
     }, config)
@@ -49,21 +51,33 @@ class MapFrame {
 
       this.showLayer(config.layer)
       this.loadControlLayers()
+      this._setupHooks()
     })
 
     this.#mapbox.on('style.load', () => {
       if (initalizing) return
 
-      console.log('mapbox style load')
+      console.log('mapbox style loaded')
       this.#loading = true
       this.#currentLayer.visible = true
 
       this.#currentLayer.load().then(() => {
         this.#selectionLayer.load()
         this.#loading = false
-        config.onload()
+        this.dispatchEvent(new Event('load'))
+        this.dispatchEvent(new Event('update'))
       })
     })
+  }
+
+  waitForLoad() {
+    if (this.#loading) {
+      return new Promise((resolve, reject) => {
+        this.addEventListener('load', () => resolve())
+      })
+    } else {
+      return Promise.resolve()
+    }
   }
 
   loadControlLayers() {
@@ -78,8 +92,14 @@ class MapFrame {
     })
   }
 
-  createEvents() {
+  _setupHooks() {
     //window.addEventListener('resize', _event => this.updatePadding())
+    this.#mapbox.on('render', _event => this.dispatchEvent(new Event('update')))
+    //this.#mapbox.on('moveend', _event => this.dispatchEvent(new Event('update')))
+  }
+
+  getRenderedEventIds() {
+    return this.#currentLayer.getRenderedEventIds()
   }
 
   showLayer(layerId) {
@@ -91,8 +111,15 @@ class MapFrame {
     this.#mapbox.setStyle(this.#layers[layerId].style)
   }
 
-  setSelection(location, options) {
-    this.#selectionLayer.setSelection(location, options)
+  async setSelection(location, options) {
+    this.waitForLoad().then(() => {
+      this.#selectionLayer.setSelection(location, options)
+    })
+  }
+
+  getCenter() {
+    const center = this.#mapbox.getCenter()
+    return { latitude: center.lat, longitude: center.lng }
   }
 
   resize() {

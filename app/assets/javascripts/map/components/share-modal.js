@@ -38,7 +38,7 @@ function ShareModal() {
 
   return {
     onbeforeremove: function(vnode) {
-      vnode.dom.classList.add('removing')
+      vnode.dom.classList.add('fadeout')
       return new Promise(function(resolve) {
         vnode.dom.addEventListener('animationend', resolve)
       })

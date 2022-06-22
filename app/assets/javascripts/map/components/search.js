@@ -14,7 +14,9 @@ function Search() {
     if (query.length >= 3) {
       loading = true
 
-      geoSearch.query(query, [0, 0], response => {
+      let center = App.map.getCenter()
+      let coords = [center.longitude, center.latitude]
+      geoSearch.query(query, coords, response => {
         results = response
         m.redraw()
 

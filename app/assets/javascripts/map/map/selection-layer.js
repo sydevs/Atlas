@@ -31,14 +31,7 @@ class SelectionMapLayer extends AbstractMapLayer {
     } else {
       this._mapbox.getSource(this._layers.source).setData({
         type: 'FeatureCollection',
-        //features: [],
-        features: [{
-          type: 'Feature',
-          geometry: {
-            type: 'Point',
-            coordinates: [0, 0],
-          },
-        }]
+        features: [],
       })
     }
   }

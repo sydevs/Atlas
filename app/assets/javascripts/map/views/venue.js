@@ -21,7 +21,7 @@ function VenueView() {
       return [
         m(NavigationButton, {
           float: 'left',
-          url: '/map',
+          url: '/',
           icon: 'left',
         }),
         m('.panel__header', Util.translate('venue.header', { venue: venue.label })),

@@ -179,14 +179,19 @@ class AtlasAPI {
     console.log('[AtlasAPI]', 'getting closest venue', params) // eslint-disable-line no-console
     
     let cache = this.#cache.closestVenue
-    if (cache) {
-      const distance = Util.distance(params.latitude, params.longitude, cache.latitude, cache.longitude)
-      if (distance <= 0.2) {
+    let cacheQuery = this.#cache.closestVenueQuery
+    if (cache && cacheQuery) {
+      const distance = Util.distance(params.latitude, params.longitude, cacheQuery.latitude, cacheQuery.longitude)
+      if (distance <= 0.5) {
         return Promise.resolve(cache)
       }
     }
     
-    return this.closestVenueQuery(params)
+    return this.closestVenueQuery(params).then(data => {
+      this.#cache.closestVenueQuery = params
+      this.#cache.closestVenue = data.closestVenue
+      return data.closestVenue
+    })
   }
 
   // MUTATION REQUESTS

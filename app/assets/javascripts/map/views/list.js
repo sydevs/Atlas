@@ -5,14 +5,25 @@
 function ListView() {
   let events = []
 
+  function updateEvents() {
+    App.map.getRenderedEventIds().then(eventIds => {
+      if (eventIds.length < 1) {
+        events = []
+        m.redraw()
+      } else {
+        App.atlas.getEvents(eventIds).then(response => {
+          events = response
+          m.redraw()
+        })
+      }
+    })
+  }
+
   return {
     oncreate: function() {
-      /*App.atlas.getEvents({
-        online: m.route.param('layer') == 'online',
-      }).then(response => {
-        events = response
-        m.redraw()
-      })*/
+      App.map.addEventListener('update', () => {
+        updateEvents()
+      })
     },
     view: function() {
       let layer = m.route.param('layer')
@@ -22,7 +33,7 @@ function ListView() {
         m(Search),
         m(Navigation, {
           items: mobile ?
-            [[Util.translate('navigation.mobile.back'), '/map']] :
+            [[Util.translate('navigation.mobile.back'), '/']] :
             ['offline', 'online'].map((l) => [Util.translate(`navigation.desktop.${l}`), `/${l}`, layer == l])
         }),
         events.length > 0 ?

@@ -17,7 +17,7 @@ class OfflineMapLayer extends AbstractMapLayer {
     }, config))
   }
 
-  showLocation(venue) {
+  _gotoLocation(venue) {
     if (venue.eventIds.length > 0) {
       App.atlas.setCache('venues', venue)
       m.route.set('/venue/:id', { id: venue.id })

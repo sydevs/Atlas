@@ -31,15 +31,18 @@ function MapContainer() {
       layer = vnode.attrs.layer || 'offline'
       map = new MapFrame('map', {
         layer: vnode.attrs.layer,
-        onload: () => updateSelection(vnode.attrs, { transition: false })
+        //onload: () => updateSelection(vnode.attrs, { transition: false })
       })
+
+      updateSelection(vnode.attrs, { transition: false })
+      App.map = map
     },
     onupdate: function(vnode) {
       if (map.loading) return
 
       updateSelection(vnode.attrs)
       updateLayer(vnode.attrs.layer)
-      map.resize()
+      //map.resize()
     },
     onremove: function() {
       map.destroy()

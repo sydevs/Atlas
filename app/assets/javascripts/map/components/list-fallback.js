@@ -2,24 +2,27 @@
 /* global m, Util */
 
 function ListFallback() {
-  let venue = null
+  let venue = {}
 
   return {
-    oncreate: function() {
-      App.atlas = new AtlasAPI()
-      App.atlas.getClosestVenue({ latitude: 0, longitude: 0 }, response => {
-        venue = response
-        m.redraw()
+    onupdate: function() {
+      App.atlas.getClosestVenue(App.map.getCenter()).then(response => {
+        if (venue.id != response.id) {
+          venue = response
+          m.redraw()
+        }
       })
     },
     view: function() {
-      const distance = 7 //Util.distance(venue.latitude, venue.longitude, currentCenter.latitude, currentCenter.longitude)
+      if (!venue.id) return
+      const center = App.map.getCenter()
+      const distance = Util.distance(venue.latitude, venue.longitude, center.latitude, center.longitude)
 
       return m('.list-fallback', 
         m('.list-fallback__message',
-          Util.translate(distance < 8 ? 'list.fallback.nearby' : 'list.fallback.far')
+          Util.translate(distance < 8 ? 'list.fallback.venue' : 'list.fallback.area')
         ),
-        venue ?
+        venue.id ?
           m(m.route.Link, {
             href: `/venue/${venue.id}`,
             class: 'list-fallback__link',

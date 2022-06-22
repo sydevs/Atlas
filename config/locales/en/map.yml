@@ -23,7 +23,7 @@ en:
       register: "Register"
       fallback:
         area: "There are no classes in this area, the closest free meditation class is in"
-        venue: "The closest free meditation class at"
+        venue: "The closest free meditation class is at"
 
     venue:
       header: "Events at %{venue}"
