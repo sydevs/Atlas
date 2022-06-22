@@ -14,7 +14,7 @@ class MapFrame extends EventTarget {
 
   // Getters
   get loading() {
-    return this.#loading
+    return this.#loading || this.#currentLayer.loading
   }
 
   get #currentLayer() {
@@ -99,6 +99,8 @@ class MapFrame extends EventTarget {
   }
 
   getRenderedEventIds() {
+    if (this.#loading) return null
+
     return this.#currentLayer.getRenderedEventIds()
   }
 

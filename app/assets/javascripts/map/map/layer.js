@@ -19,6 +19,10 @@ class AbstractMapLayer {
     return this.#config.id
   }
 
+  get loading() {
+    return this.#loading
+  }
+
   constructor(mapbox, config) {
     config = Object.assign({
       cluster: true,
@@ -148,6 +152,8 @@ class AbstractMapLayer {
   }
 
   getRenderedEventIds() {
+    if (this.#loading) return null
+
     const layers = [this._layers.points]
     if (this.#config.cluster) layers.push(this._layers.clusters)
     const features = this._mapbox.queryRenderedFeatures({ layers: layers })

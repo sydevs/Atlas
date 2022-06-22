@@ -3,12 +3,12 @@
 /* global m, App, Search, List, ListFallback, Navigation, Util */
 
 function ListView() {
-  let events = []
+  let events = null
 
   function updateEvents() {
     App.map.getRenderedEventIds().then(eventIds => {
-      if (eventIds.length < 1) {
-        events = []
+      if (eventIds == null || eventIds.length < 1) {
+        events = eventIds
         m.redraw()
       } else {
         App.atlas.getEvents(eventIds).then(response => {
@@ -36,9 +36,11 @@ function ListView() {
             [[Util.translate('navigation.mobile.back'), '/']] :
             ['offline', 'online'].map((l) => [Util.translate(`navigation.desktop.${l}`), `/${l}`, layer == l])
         }),
-        events.length > 0 ?
-          m(List, { events: events }) :
-          m(ListFallback),
+        events == null ?
+          null :
+          (events.length > 0 ?
+            m(List, { events: events }) :
+            m(ListFallback)),
       ]
     }
   }
