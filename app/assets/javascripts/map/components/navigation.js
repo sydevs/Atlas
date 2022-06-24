@@ -5,10 +5,14 @@
 const Navigation = {
   view: function(vnode) {
     return m('.navigation',
-      vnode.attrs.items.map(function([label, url, active]) {
+      vnode.attrs.items.map(function(item) {
         let classes = ['navigation__item']
-        if (active) classes.push('navigation__item--active')
-        return m(m.route.Link, { class: classes.join(' '), href: url }, label)
+        if (item.active) classes.push('navigation__item--active')
+        return m(m.route.Link, {
+          class: classes.join(' '),
+          href: item.href,
+          'data-badge': item.badge,
+        }, item.label)
       })
     )
   }

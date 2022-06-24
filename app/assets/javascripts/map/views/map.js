@@ -2,15 +2,29 @@
 
 /* global m, Search, Navigation, Util */
 
-const MapView = {
-  view: function() {
-    let device = Util.isDevice('mobile') ? 'mobile' : 'desktop'
+function MapView() {
+  let onlineEventsCount = null
 
-    return [
-      m(Search, { floating: true }),
-      m(Navigation, {
-        items: ['offline', 'online'].map(layer => [Util.translate(`navigation.${device}.${layer}`), `/${layer}`])
-      }),
-    ]
+  return {
+    view: function(vnode) {
+      let device = Util.isDevice('mobile') ? 'mobile' : 'desktop'
+
+      App.atlas.getOnlineList().then(events => { onlineEventsCount = events.length })
+
+      return [
+        m(Search, { floating: true }),
+        m(Navigation, {
+          items: ['offline', 'online'].map((layer) => {
+            const active = vnode.attrs.layer == layer
+            return {
+              label: Util.translate(`navigation.desktop.${layer}`),
+              href: `/${layer}`,
+              active: active,
+              badge: (layer == 'online' && !active) ? onlineEventsCount : null,
+            }
+          })
+        }),
+      ]
+    }
   }
 }

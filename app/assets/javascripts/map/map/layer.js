@@ -9,6 +9,7 @@ class AbstractMapLayer {
   // Protected variables
   _mapbox
   _layers = {}
+  _sources = {}
 
   // Private variables
   #config
@@ -25,27 +26,58 @@ class AbstractMapLayer {
 
   constructor(mapbox, config) {
     config = Object.assign({
-      cluster: true,
-      interactive: true,
-      pointIcon: 'point',
-      clusterIcon: 'cluster',
+      clusters: {},
+      points: {},
+      selection: {},
       fetchGeojson: Promise.resolve(null)
     }, config)
 
     this.#config = config
     this._mapbox = mapbox
+    this._sources = {
+      locations: `${config.id}-locations`,
+      selection: `${config.id}-selection`,
+    }
+
     this._layers = {
-      source: `${config.id}-source`,
       points: `${config.id}-points`,
+      clusters: `${config.id}-clusters`,
+      selection: `${config.id}-selection`,
     }
 
-    if (config.cluster) {
-      this._layers.clusters = `${config.id}-clusters`
+
+    // Setup config
+    this.#config.clusters = {
+      ...{
+        'icon-allow-overlap': true,
+        'icon-ignore-placement': true,
+        'icon-image': 'cluster',
+        'text-field': '{point_count_abbreviated}',
+        'text-font': ['DIN Offc Pro Bold', 'Arial Unicode MS Bold'],
+        'text-size': 12,
+      },
+      ...this.#config.clusters,
     }
 
-    if (config.interactive) {
-      this._setupHooks()
+    this.#config.points = {
+      ...{
+        'icon-ignore-placement': true,
+        'icon-image': 'point',
+        'text-font': ['DIN Offc Pro Bold', 'Arial Unicode MS Bold'],
+        'text-size': 12,
+      },
+      ...this.#config.points,
     }
+
+    this.#config.selection = {
+      ...this.#config.points,
+      ...{
+        'icon-image': 'selected',
+      },
+      ...this.#config.selection,
+    }
+
+    this._setupHooks()
   }
 
   load() {
@@ -58,78 +90,52 @@ class AbstractMapLayer {
   }
 
   #loadSublayers(geojson) {
-    console.log('load sublayers', this.id)
+    // Create sources
+    this._mapbox.addSource(this._sources.locations, {
+      type: 'geojson',
+      data: geojson,
+      cluster: true,
+      clusterMaxZoom: 12, // Max zoom to cluster points on
+      clusterRadius: 50, // Radius of each cluster when clustering points
+    })
 
-    // Create source
-    if (this.#config.cluster) {
-      this._mapbox.addSource(this._layers.source, {
-        type: 'geojson',
-        data: geojson,
-        cluster: true,
-        clusterMaxZoom: 12, // Max zoom to cluster points on
-        clusterRadius: 50, // Radius of each cluster when clustering points
-      })
-    } else {
-      this._mapbox.addSource(this._layers.source, {
-        type: 'geojson',
-        data: geojson,
-      })
-    }
+    this._mapbox.addSource(this._sources.selection, {
+      type: 'geojson',
+      data: null,
+    })
 
-    // Create cluster layer
-    if (this.#config.cluster) {
-      this._mapbox.addLayer({
-        id: this._layers.clusters,
-        type: 'symbol',
-        source: this._layers.source,
-        filter: ['has', 'point_count'],
-        layout: {
-          'icon-allow-overlap': true,
-          'icon-ignore-placement': true,
-          'icon-image': this.#config.clusterIcon,
-          'text-field': '{point_count_abbreviated}',
-          'text-font': ['DIN Offc Pro Bold', 'Arial Unicode MS Bold'],
-          'text-size': 12,
-        },
-        paint: {
-          'text-color': '#FFFFFF',
-        },
-      })
-    }
+    // Create layers
+    this._mapbox.addLayer({
+      id: this._layers.clusters,
+      type: 'symbol',
+      source: this._sources.locations,
+      filter: ['has', 'point_count'],
+      layout: this.#config.clusters,
+      paint: {
+        'text-color': '#FFFFFF',
+      },
+    })
 
-    // Create points layer
-    if (this.#config.pointIcon == 'cluster') {
-      this._mapbox.addLayer({
-        id: this._layers.points,
-        type: 'symbol',
-        source: this._layers.source,
-        filter: ['!', ['has', 'point_count']],
-        layout: {
-          'icon-ignore-placement': true,
-          'icon-image': this.#config.pointIcon,
-          'text-field': '1',
-          'text-font': ['DIN Offc Pro Bold', 'Arial Unicode MS Bold'],
-          'text-size': 12,
-          'icon-size': 0.85,
-        },
-        paint: {
-          'text-color': '#FFFFFF',
-        },
-      })
-    } else {
-      this._mapbox.addLayer({
-        id: this._layers.points,
-        type: 'symbol',
-        source: this._layers.source,
-        filter: ['!', ['has', 'point_count']],
-        layout: {
-          'icon-ignore-placement': true,
-          'icon-image': this.#config.pointIcon,
-          'icon-anchor': 'bottom',
-          'icon-size': 0.85,
-        },
-      })
-    }
+    this._mapbox.addLayer({
+      id: this._layers.points,
+      type: 'symbol',
+      source: this._sources.locations,
+      filter: ['!', ['has', 'point_count']],
+      layout: this.#config.points,
+      paint: {
+        'text-color': '#FFFFFF',
+      },
+    })
+
+    this._mapbox.addLayer({
+      id: this._layers.selection,
+      type: 'symbol',
+      source: this._sources.selection,
+      layout: this.#config.selection,
+      paint: {
+        'text-color': '#FFFFFF',
+      },
+    })
   }
 
   _setupHooks() {
@@ -141,25 +147,23 @@ class AbstractMapLayer {
       this._gotoLocation(location)
     })
 
-    if (this.#config.cluster) {
-      this._mapbox.on('click', this._layers.clusters, event => {
-        const features = this._mapbox.queryRenderedFeatures(event.point, { layers: [this._layers.clusters] })
-        const clusterId = features[0].properties.cluster_id
-        const source = this._mapbox.getSource(this._layers.source)
+    this._mapbox.on('click', this._layers.clusters, event => {
+      const features = this._mapbox.queryRenderedFeatures(event.point, { layers: [this._layers.clusters] })
+      const clusterId = features[0].properties.cluster_id
+      const source = this._mapbox.getSource(this._sources.locations)
 
-        source.getClusterExpansionZoom(clusterId, (error, zoom) => {
-          if (error) {
-            console.error(error) // eslint-disable-line no-console
-          } else {
-            this._mapbox.easeTo({
-              center: features[0].geometry.coordinates,
-              zoom: zoom + 1,
-              duration: 500,
-            })
-          }
-        })
+      source.getClusterExpansionZoom(clusterId, (error, zoom) => {
+        if (error) {
+          console.error(error) // eslint-disable-line no-console
+        } else {
+          this._mapbox.easeTo({
+            center: features[0].geometry.coordinates,
+            zoom: zoom + 1,
+            duration: 500,
+          })
+        }
       })
-    }
+    })
   
     // Indicate that symbols are clickable by changing the cursor style to 'pointer'.
     this._mapbox.on('mousemove', event => {
@@ -177,9 +181,7 @@ class AbstractMapLayer {
   getRenderedEventIds() {
     if (this.#loading) return Promise.reject()
 
-    const layers = [this._layers.points]
-    if (this.#config.cluster) layers.push(this._layers.clusters)
-    const features = this._mapbox.queryRenderedFeatures({ layers: layers })
+    const features = this._mapbox.queryRenderedFeatures({ layers: [this._layers.points, this._layers.clusters] })
 
     return Promise.all(features.map(
       feature => this.#getRenderedEventIds(feature))
@@ -200,7 +202,7 @@ class AbstractMapLayer {
 
   #getClusterFeatures(cluster) {
     return new Promise((resolve, reject) => {
-      const clusterData = this._mapbox.getSource(this._layers.source)
+      const clusterData = this._mapbox.getSource(this._sources.locations)
       clusterData.getClusterLeaves(cluster.properties.cluster_id, 100, 0, (error, features) => {
         if (error) {
           reject(error)
@@ -209,6 +211,26 @@ class AbstractMapLayer {
         }
       })
     })
+  }
+
+  setSelection(location) {
+    if (location) {
+      this._mapbox.getSource(this._sources.selection).setData({
+        type: 'FeatureCollection',
+        features: [{
+          type: 'Feature',
+          geometry: {
+            type: 'Point',
+            coordinates: [location.longitude, location.latitude],
+          },
+        }]
+      })
+    } else {
+      this._mapbox.getSource(this._sources.selection).setData({
+        type: 'FeatureCollection',
+        features: [],
+      })
+    }
   }
 
   #parseLocation(feature) {

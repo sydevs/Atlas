@@ -4,15 +4,8 @@
 const layout = function(view, attrs) {
   return {
     render: function() {
-      let id = m.route.param('id')
-      let viewAttrs = {}
-
-      if (id) {
-        attrs.id = id
-        viewAttrs = { id: id, key: id }
-      }
-
-      return m(Layout, attrs, m(view, viewAttrs))
+      attrs.view = view
+      return m(Layout, attrs)
     }
   }
 }

@@ -19,7 +19,9 @@ function TimingCarousel() {
       }
     },
     onremove: function() {
-      flickity.destroy()
+      if (flickity) {
+        flickity.destroy()
+      }
     },
     view: function(vnode) {
       const event = vnode.attrs

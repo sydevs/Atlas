@@ -9,7 +9,6 @@ class MapFrame extends EventTarget {
   #mapbox
   #loading = true
   #layers = {}
-  #selectionLayer
   #currentLayerId
 
   // Getters
@@ -41,9 +40,7 @@ class MapFrame extends EventTarget {
     let initalizing = true
 
     this.#mapbox.on('load', () => {
-      console.log('mapbox load')
       initalizing = false
-      this.#selectionLayer = new SelectionMapLayer(this.#mapbox)
       this.#layers = {
         online: new OnlineMapLayer(this.#mapbox),
         offline: new OfflineMapLayer(this.#mapbox),
@@ -57,12 +54,10 @@ class MapFrame extends EventTarget {
     this.#mapbox.on('style.load', () => {
       if (initalizing) return
 
-      console.log('mapbox style loaded')
       this.#loading = true
       this.#currentLayer.visible = true
 
       this.#currentLayer.load().then(() => {
-        this.#selectionLayer.load()
         this.#loading = false
         this.dispatchEvent(new Event('load'))
         this.dispatchEvent(new Event('update'))
@@ -115,8 +110,12 @@ class MapFrame extends EventTarget {
 
   async setSelection(location, options = {}) {
     this.waitForLoad().then(() => {
-      options.zoom ||= this.#currentLayerId == 'online' ? 4 : 16
-      this.#selectionLayer.setSelection(location, options)
+      this.#currentLayer.setSelection(location)
+
+      this.goTo(location, Object.assign({
+        zoom: this.#currentLayerId == 'online' ? 4 : 16,
+        transition: true,
+      }, options))
     })
   }
 
@@ -131,6 +130,21 @@ class MapFrame extends EventTarget {
 
   destroy() {
     this.#mapbox.remove()
+  }
+
+  goTo(location, options = {}) {
+    if (!location) return
+    
+    const args = {
+      center: [location.longitude, location.latitude],
+      zoom: options.zoom || 16,
+    }
+
+    if (Util.isDevice('mobile') || options.transition == false) {
+      this.#mapbox.jumpTo(args)
+    } else {
+      this.#mapbox.flyTo(args)
+    }
   }
 
 }

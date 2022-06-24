@@ -120,7 +120,8 @@ module Types
 
     def events(ids: [], online: nil, country: nil, recurrence: nil, language_code: nil, locale: 'en')
       I18n.locale = locale.to_sym
-      scope = online ? OnlineEvent : OfflineEvent
+      scope = Event
+      scope = online ? OnlineEvent : OfflineEvent unless online.nil?
       scope = scope.publicly_visible
       scope = scope.joins(:location).where(locations: { country_code: country }) if country.present?
       scope = scope.where(recurrence: recurrence) if Event.recurrences.key?(recurrence)

@@ -143,10 +143,10 @@ class AtlasAPI {
   // CACHED REQUESTS
 
   getVenue(id) {
-    console.log('[AtlasAPI]', 'getting venue', id) // eslint-disable-line no-console
     if (id in this.#cache.venues) {
       return Promise.resolve(this.#cache.venues[id])
     } else {
+      console.log('[AtlasAPI]', 'getting venue', id) // eslint-disable-line no-console
       return this.venueQuery({ id: id }).then(data => {
         this.#cache.venues[id] = data.venue
         return data.venue
@@ -155,10 +155,10 @@ class AtlasAPI {
   }
 
   getEvent(id) {
-    console.log('[AtlasAPI]', 'getting event', id) // eslint-disable-line no-console
     if (id in this.#cache.events) {
       return Promise.resolve(this.#cache.events[id])
     } else {
+      console.log('[AtlasAPI]', 'getting event', id) // eslint-disable-line no-console
       return this.eventQuery({ id: id }).then(data => {
         this.#cache.events[id] = data.event
         return data.event
@@ -168,24 +168,23 @@ class AtlasAPI {
 
   async getEvents(ids) {
     let uncachedEventIds = ids.filter(id => !(id in this.#cache.events))
-    console.log('[AtlasAPI]', 'getting events', ids, '(' + (1 - uncachedEventIds.length / ids.length) * 100 + '% cached)') // eslint-disable-line no-console
 
     if (uncachedEventIds.length > 0) {
+      console.log('[AtlasAPI]', 'getting events', ids, '(' + (1 - uncachedEventIds.length / ids.length) * 100 + '% cached)') // eslint-disable-line no-console
       const data = await this.eventsQuery({ ids: uncachedEventIds })
       data.events.forEach(event => {
         this.#cache.events[event.id] = event
       })
     }
 
-    return ids.map(id => this.#cache.events[id])
+    return ids.map(id => this.#cache.events[id]).filter(Boolean)
   }
 
   getOnlineList() {
-    console.log('[AtlasAPI]', 'getting online list') // eslint-disable-line no-console
-
     if (this.#cache.onlineList) {
       return Promise.resolve(this.#cache.onlineList)
     } else {
+      console.log('[AtlasAPI]', 'getting online list') // eslint-disable-line no-console
       return this.onlineListQuery().then(response => {
         this.#cache.onlineList = response.events
         return response.events
@@ -194,8 +193,6 @@ class AtlasAPI {
   }
 
   async getClosestVenue(params) {
-    console.log('[AtlasAPI]', 'getting closest venue', params) // eslint-disable-line no-console
-    
     let cache = this.#cache.closestVenue
     let cacheQuery = this.#cache.closestVenueQuery
     if (cache && cacheQuery) {
@@ -205,6 +202,7 @@ class AtlasAPI {
       }
     }
     
+    console.log('[AtlasAPI]', 'getting closest venue', params) // eslint-disable-line no-console
     return this.closestVenueQuery(params).then(data => {
       this.#cache.closestVenueQuery = params
       this.#cache.closestVenue = data.closestVenue

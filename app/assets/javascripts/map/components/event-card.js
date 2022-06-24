@@ -3,12 +3,12 @@
 
 function EventCard() {
   return {
-    onbeforeremove: function(vnode) {
+    /*onbeforeremove: function(vnode) {
       vnode.dom.classList.add('fadeout')
       return new Promise(function(resolve) {
         vnode.dom.addEventListener('animationend', resolve)
       })
-    },
+    },*/
     view: function(vnode) {
       const event = vnode.attrs.event
       let language = Util.translate(`language_codes.${event.languageCode.toLowerCase()}`) || event.languageCode

@@ -12,7 +12,10 @@ class OfflineMapLayer extends AbstractMapLayer {
   constructor(mapbox, config) {
     super(mapbox, Object.assign({
       id: 'offline',
-      cluster: true,
+      points: {
+        'icon-anchor': 'bottom',
+        'icon-size': 0.85,
+      },
       fetchGeojson: App.atlas.getGeojson('offline'),
     }, config))
   }

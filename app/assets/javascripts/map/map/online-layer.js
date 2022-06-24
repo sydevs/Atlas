@@ -12,8 +12,13 @@ class OnlineMapLayer extends AbstractMapLayer {
   constructor(mapbox, config) {
     super(mapbox, Object.assign({
       id: 'online',
-      pointIcon: 'cluster',
-      cluster: true,
+      points: {
+        'text-field': '1',
+        'icon-image': 'cluster',
+      },
+      selection: {
+        'text-field': '',
+      },
       fetchGeojson: App.atlas.getGeojson('online'),
     }, config))
   }
