@@ -12,6 +12,8 @@ function EventCard() {
     view: function(vnode) {
       const event = vnode.attrs.event
       let language = Util.translate(`language_codes.${event.languageCode.toLowerCase()}`) || event.languageCode
+      let distance = event.layer == 'offline' && App.map.userLocation && event.distanceTo(App.map.userLocation)
+      if (distance) distance = Math.round(distance * 10) / 10
 
       return m(m.route.Link,
         {
@@ -23,7 +25,7 @@ function EventCard() {
           m('.card__title', event.label),
           m('.card__subtitle',
             m('span', event.address),
-            m('span', event.distance)
+            distance ? m('span', Util.translate('event.distance', { distance: distance })) : null,
           ),
           m('.card__meta',
             event.languageCode != window.locale ? m('.pill', language.toUpperCase()) : null,

@@ -132,6 +132,7 @@ class AbstractMapLayer {
       type: 'symbol',
       source: this._sources.selection,
       layout: this.#config.selection,
+      minzoom: 12,
       paint: {
         'text-color': '#FFFFFF',
       },

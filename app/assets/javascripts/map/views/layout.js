@@ -7,13 +7,14 @@ function Layout() {
     view: function(vnode) {
       const share = Boolean(m.route.param('share'))
       const layer = m.route.param('layer')
+      const id = m.route.param('id')
 
       return m('.layout', { class: share ? 'noscroll' : null },
         share ? m(ShareModal) : null,
         m(MapContainer, {
           mode: vnode.attrs.map,
-          layer: vnode.attrs.layer,
-          selectionId: vnode.attrs.id,
+          layer: layer,
+          selectionId: id,
           selectionModel: vnode.attrs.model,
         }),
         m('.panel', {

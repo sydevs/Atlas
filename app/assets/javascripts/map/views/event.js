@@ -6,8 +6,9 @@ function EventView() {
   let event = null
 
   return {
-    oninit: function(vnode) {
-      App.atlas.getEvent(vnode.attrs.id).then(response => {
+    oninit: function() {
+      const id = m.route.param('id')
+      App.data.getEvent(id).then(response => {
         event = response
         m.redraw()
       })

@@ -19,7 +19,7 @@ class OnlineMapLayer extends AbstractMapLayer {
       selection: {
         'text-field': '',
       },
-      fetchGeojson: App.atlas.getGeojson('online'),
+      fetchGeojson: App.data.getGeojson('online'),
     }, config))
   }
 
@@ -33,7 +33,7 @@ class OnlineMapLayer extends AbstractMapLayer {
     m.route.set('/:layer/:id', { id: area.eventIds[0], layer: 'online' })
 
     /*if (venue.eventIds.length > 1) {
-      App.atlas.setCache('venues', venue)
+      App.data.setCache('venues', venue)
       m.route.set('/venue/:id', { id: venue.id })
     } else {
       m.route.set('/:layer/:id', { id: venue.eventIds[0], layer: 'online' })

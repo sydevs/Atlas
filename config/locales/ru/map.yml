@@ -35,6 +35,7 @@ ru:
       online: "Онлайн-класс"
       online_from: "Транслируется из"
       tel: "тел"
+      distance: "%{distance} km away" # TODO: Translate
 
     registration:
       header: "Записаться сейчас"

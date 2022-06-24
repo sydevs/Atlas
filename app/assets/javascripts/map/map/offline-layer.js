@@ -16,13 +16,13 @@ class OfflineMapLayer extends AbstractMapLayer {
         'icon-anchor': 'bottom',
         'icon-size': 0.85,
       },
-      fetchGeojson: App.atlas.getGeojson('offline'),
+      fetchGeojson: App.data.getGeojson('offline'),
     }, config))
   }
 
   _gotoLocation(venue) {
     if (venue.eventIds.length > 0) {
-      App.atlas.setCache('venues', venue)
+      App.data.setCache('venues', venue)
       m.route.set('/venue/:id', { id: venue.id })
     } else {
       m.route.set('/:layer/:id', { id: venue.eventIds[0], layer: 'offline' })

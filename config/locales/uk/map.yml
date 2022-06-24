@@ -36,6 +36,7 @@ uk:
       online: "Онлайн клас"
       online_from: "Від"
       tel: "tel" # TODO: Translate
+      distance: "%{distance} km away" # TODO: Translate
 
     registration:
       header: "Зареєструйтеся зараз"

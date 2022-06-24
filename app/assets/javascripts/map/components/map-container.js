@@ -12,7 +12,7 @@ function MapContainer() {
       selectionId = attrs.selectionId
       selectionModel = attrs.selectionModel
 
-      App.atlas.getRecord(selectionModel, selectionId).then(function(record) {
+      App.data.getRecord(selectionModel, selectionId).then(function(record) {
         if (selectionModel == 'event') record = record.location
         map.setSelection(record, options)
       })
@@ -33,6 +33,8 @@ function MapContainer() {
         layer: vnode.attrs.layer,
         //onload: () => updateSelection(vnode.attrs, { transition: false })
       })
+
+      map.addEventListener('move', () => App.data.clearCache('lists'))
 
       updateSelection(vnode.attrs, { transition: false })
       App.map = map

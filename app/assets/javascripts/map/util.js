@@ -111,7 +111,11 @@ const Util = {
     }
   },
 
-  distance(lat1, lon1, lat2, lon2, unit = 'K') {
+  distance(p1, p2) {
+    return this.calcDistance(p1.latitude, p1.longitude, p2.latitude, p2.longitude)
+  },
+
+  calcDistance(lat1, lon1, lat2, lon2, unit = 'K') {
     if ((lat1 == lat2) && (lon1 == lon2)) {
       return 0
     } else {

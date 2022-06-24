@@ -35,6 +35,7 @@ de:
       online: "Online-Kurse"
       online_from: "Gastgeber aus"
       tel: "Tel"
+      distance: "%{distance} km away" # TODO: Translate
 
     registration:
       header: "Jetzt Anmelden"

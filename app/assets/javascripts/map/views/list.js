@@ -9,12 +9,12 @@ function ListView() {
 
   function updateEvents() {
     if (layer == 'online') {
-      return App.atlas.getOnlineList().then(response => {
+      return App.data.getList('online').then(response => {
         events = response
       })
     } else {
       return App.map.getRenderedEventIds().then(eventIds => {
-        return eventIds.length > 0 ? App.atlas.getEvents(eventIds) : []
+        return eventIds.length > 0 ? App.data.getList('offline', eventIds) : []
       }).then(response => {
         events = response
       }).catch(() => {
@@ -50,7 +50,7 @@ function ListView() {
         list = m(ListFallback)
       }
 
-      App.atlas.getOnlineList().then(events => { onlineEventsCount = events.length })
+      App.data.getList('online').then(events => { onlineEventsCount = events.length })
 
       return [
         m(Search),

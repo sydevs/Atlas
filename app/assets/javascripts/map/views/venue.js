@@ -6,10 +6,11 @@ function VenueView() {
   let venue = null
 
   return {
-    oninit: function(vnode) {
-      App.atlas.getVenue(vnode.attrs.id).then(response => {
+    oninit: function() {
+      const id = m.route.param('id')
+      App.data.getVenue(id).then(response => {
         venue = response
-        App.atlas.getEvents(venue.eventIds).then(events => {
+        App.data.getEvents(venue.eventIds).then(events => {
           venue.events = events
           m.redraw()
         })

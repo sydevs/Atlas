@@ -3,17 +3,11 @@
 
 class AtlasAPI {
 
-  #cache
-
   constructor() {
-    this.prepareGraphQL()
-    this.#cache = {
-      events: {},
-      venues: {},
-      onlineList: null,
-      closestVenue: null,
-    }
     console.log('loading AtlasAPI.js') // eslint-disable-line no-console
+    this.prepareGraphQL()
+    this.prepareQueries()
+    this.prepareMutators()
   }
 
   prepareGraphQL() {
@@ -80,20 +74,26 @@ class AtlasAPI {
         }`
       }
     })
+  }
 
-    this.geojsonQuery = this.graph.query(`(@autodeclare) {
-      geojson(online: $online, locale: "${window.locale}") { ...geojson }
+  prepareQueries() {
+    this.fetchGeojson = this.graph.query(`($online: Boolean, $languageCode: String) {
+      geojson(online: $online, languageCode: $languageCode, locale: "${window.locale}") { ...geojson }
     }`)
 
-    this.eventQuery = this.graph.query(`(@autodeclare) {
+    this.fetchEvent = this.graph.query(`(@autodeclare) {
       event(id: $id, locale: "${window.locale}") { ...event }
     }`)
 
-    this.eventsQuery = this.graph.query(`($ids: [ID!]) {
+    this.fetchEvents = this.graph.query(`($ids: [ID!]) {
       events(ids: $ids, locale: "${window.locale}") { ...event }
     }`)
 
-    this.searchEventsQuery = this.graph.query(`
+    this.fetchVenue = this.graph.query(`(@autodeclare) {
+      venue(id: $id, locale: "${window.locale}") { ...venue }
+    }`)
+
+    this.searchEvents = this.graph.query(`
       query ($online: Boolean, $recurrence: String, $languageCode: String, locale: "${window.locale}") {
         events(online: $online, recurrence: $recurrence, languageCode: $languageCode) {
           ...event
@@ -101,15 +101,11 @@ class AtlasAPI {
       }
     `)
 
-    this.onlineListQuery = this.graph.query(`(@autodeclare) {
-      events(online: true, locale: "${window.locale}") { ...event }
+    this.fetchOnlineList = this.graph.query(`(@autodeclare) {
+      events(online: true, languageCode: "${window.locale}", locale: "${window.locale}") { ...event }
     }`)
 
-    this.venueQuery = this.graph.query(`(@autodeclare) {
-      venue(id: $id, locale: "${window.locale}") { ...venue }
-    }`)
-
-    this.closestVenueQuery = this.graph.query(`
+    this.fetchClosestVenue = this.graph.query(`
       query ($latitude: Float!, $longitude: Float!) {
         closestVenue(latitude: $latitude, longitude: $longitude, locale: "${window.locale}") {
           id
@@ -119,121 +115,15 @@ class AtlasAPI {
         }
       }
     `)
+  }
 
-    this.registrationQuery = this.graph.mutate(`(@autodeclare) {
+  prepareMutators() {
+    this.sendRegistration = this.graph.mutate(`(@autodeclare) {
       createRegistration(input: $input) {
         status
         message
       }
     }`)
-  }
-
-  // NON-CACHED REQUESTS
-
-  getGeojson(layer) {
-    console.log('[AtlasAPI]', 'getting geojson', layer) // eslint-disable-line no-console
-    return this.geojsonQuery({ online: layer == 'online' }).then(data => data.geojson)
-  }
-
-  searchEvents(params) {
-    console.log('[AtlasAPI]', 'searching events', params) // eslint-disable-line no-console
-    return this.searchEventsQuery(params).then(data => data.events)
-  }
-
-  // CACHED REQUESTS
-
-  getVenue(id) {
-    if (id in this.#cache.venues) {
-      return Promise.resolve(this.#cache.venues[id])
-    } else {
-      console.log('[AtlasAPI]', 'getting venue', id) // eslint-disable-line no-console
-      return this.venueQuery({ id: id }).then(data => {
-        this.#cache.venues[id] = data.venue
-        return data.venue
-      })
-    }
-  }
-
-  getEvent(id) {
-    if (id in this.#cache.events) {
-      return Promise.resolve(this.#cache.events[id])
-    } else {
-      console.log('[AtlasAPI]', 'getting event', id) // eslint-disable-line no-console
-      return this.eventQuery({ id: id }).then(data => {
-        this.#cache.events[id] = data.event
-        return data.event
-      })
-    }
-  }
-
-  async getEvents(ids) {
-    let uncachedEventIds = ids.filter(id => !(id in this.#cache.events))
-
-    if (uncachedEventIds.length > 0) {
-      console.log('[AtlasAPI]', 'getting events', ids, '(' + (1 - uncachedEventIds.length / ids.length) * 100 + '% cached)') // eslint-disable-line no-console
-      const data = await this.eventsQuery({ ids: uncachedEventIds })
-      data.events.forEach(event => {
-        this.#cache.events[event.id] = event
-      })
-    }
-
-    return ids.map(id => this.#cache.events[id]).filter(Boolean)
-  }
-
-  getOnlineList() {
-    if (this.#cache.onlineList) {
-      return Promise.resolve(this.#cache.onlineList)
-    } else {
-      console.log('[AtlasAPI]', 'getting online list') // eslint-disable-line no-console
-      return this.onlineListQuery().then(response => {
-        this.#cache.onlineList = response.events
-        return response.events
-      })
-    }
-  }
-
-  async getClosestVenue(params) {
-    let cache = this.#cache.closestVenue
-    let cacheQuery = this.#cache.closestVenueQuery
-    if (cache && cacheQuery) {
-      const distance = Util.distance(params.latitude, params.longitude, cacheQuery.latitude, cacheQuery.longitude)
-      if (distance <= 0.5) {
-        return Promise.resolve(cache)
-      }
-    }
-    
-    console.log('[AtlasAPI]', 'getting closest venue', params) // eslint-disable-line no-console
-    return this.closestVenueQuery(params).then(data => {
-      this.#cache.closestVenueQuery = params
-      this.#cache.closestVenue = data.closestVenue
-      return data.closestVenue
-    })
-  }
-
-  // MUTATION REQUESTS
-
-  createRegistration(params) {
-    params.locale = window.locale
-    console.log('[AtlasAPI]', 'creating registration', params) // eslint-disable-line no-console
-    return this.registrationQuery({
-      'input!CreateRegistrationInput': params
-    })
-  }
-
-  // HELPER METHODS
-
-  setCache(key, object) {
-    this.#cache[key][object.id] = object
-  }
-
-  getRecord(model, id) {
-    if (model == 'venue') {
-      return this.getVenue(id)
-    } else if (model == 'event') {
-      return this.getEvent(id)
-    } else {
-      return Promise.resolve(null)
-    }
   }
 
 }

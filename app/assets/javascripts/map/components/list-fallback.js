@@ -6,7 +6,7 @@ function ListFallback() {
 
   return {
     onupdate: function() {
-      App.atlas.getClosestVenue(App.map.getCenter()).then(response => {
+      App.data.getClosestVenue(App.map.getCenter()).then(response => {
         if (venue.id != response.id) {
           venue = response
           m.redraw()
@@ -16,7 +16,7 @@ function ListFallback() {
     view: function() {
       if (!venue.id) return
       const center = App.map.getCenter()
-      const distance = Util.distance(venue.latitude, venue.longitude, center.latitude, center.longitude)
+      const distance = Util.distance(venue, center)
 
       return m('.list-fallback', 
         m('.list-fallback__message',

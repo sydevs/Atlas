@@ -9,6 +9,7 @@ module Types
       argument :online, Boolean, required: false
       argument :country, String, required: false
       argument :area, String, required: false
+      argument :language_code, String, required: false
       argument :locale, String, required: false
     end
 
@@ -65,7 +66,7 @@ module Types
 
     # Methods
 
-    def geojson(online: nil, country: nil, area: nil, locale: 'en')
+    def geojson(online: nil, country: nil, area: nil, language_code: nil, locale: 'en')
       I18n.locale = locale.to_sym
 
       if area
@@ -82,6 +83,7 @@ module Types
         type: 'FeatureCollection',
         features: locations.map do |location|
           events = location.events.publicly_visible
+          events = events.where(language_code: language_code.upcase) if language_code.present?
           next if events.empty?
 
           {
@@ -125,7 +127,7 @@ module Types
       scope = scope.publicly_visible
       scope = scope.joins(:location).where(locations: { country_code: country }) if country.present?
       scope = scope.where(recurrence: recurrence) if Event.recurrences.key?(recurrence)
-      scope = scope.where(language_code: language_code) if language_code.present?
+      scope = scope.where(language_code: language_code.upcase) if language_code.present?
       scope = scope.where(id: ids) if ids.present?
       
       decorate scope

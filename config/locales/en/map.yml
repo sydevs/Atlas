@@ -35,6 +35,7 @@ en:
       online: "Online Class"
       online_from: "Hosted from"
       tel: "tel"
+      distance: "%{distance} km away"
 
     registration:
       header: "Register now"

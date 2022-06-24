@@ -10,10 +10,20 @@ class MapFrame extends EventTarget {
   #loading = true
   #layers = {}
   #currentLayerId
+  #userLocation = null
+  #userLocationMarker
 
   // Getters
   get loading() {
     return this.#loading || this.#currentLayer.loading
+  }
+
+  get sortLocation() {
+    return this.#userLocation || this.#mapbox.getCenter()
+  }
+
+  get userLocation() {
+    return this.#userLocation
   }
 
   get #currentLayer() {
@@ -90,7 +100,7 @@ class MapFrame extends EventTarget {
   _setupHooks() {
     //window.addEventListener('resize', _event => this.updatePadding())
     this.#mapbox.on('render', _event => this.dispatchEvent(new Event('update')))
-    //this.#mapbox.on('moveend', _event => this.dispatchEvent(new Event('update')))
+    this.#mapbox.on('moveend', _event => this.dispatchEvent(new Event('move')))
   }
 
   getRenderedEventIds() {
@@ -144,6 +154,20 @@ class MapFrame extends EventTarget {
       this.#mapbox.jumpTo(args)
     } else {
       this.#mapbox.flyTo(args)
+    }
+  }
+
+  setUserLocation(location, disableMarker = false) {
+    this.location = location
+
+    if (!this.#userLocationMarker) {
+      this.#userLocationMarker = new mapboxgl.Marker()
+    }
+
+    if (disableMarker || location == null) {
+      this.#userLocationMarker.remove()
+    } else {
+      this.#userLocationMarker.setLngLat([location.longitude, location.latitude]).addTo(this.#mapbox)
     }
   }
 

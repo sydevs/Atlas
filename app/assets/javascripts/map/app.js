@@ -3,7 +3,7 @@
 /* exported App */
 
 const App = {
-  atlas: null,
+  data: null,
   map: null,
 }
 
@@ -12,5 +12,5 @@ document.addEventListener('resize', () => {
 })
 
 document.addEventListener('DOMContentLoaded', () => {
-  App.atlas = new AtlasAPI()
+  App.data = new DataCache()
 })

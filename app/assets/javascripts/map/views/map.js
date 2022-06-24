@@ -9,7 +9,7 @@ function MapView() {
     view: function(vnode) {
       let device = Util.isDevice('mobile') ? 'mobile' : 'desktop'
 
-      App.atlas.getOnlineList().then(events => { onlineEventsCount = events.length })
+      App.data.getList('online').then(events => { onlineEventsCount = events.length })
 
       return [
         m(Search, { floating: true }),
