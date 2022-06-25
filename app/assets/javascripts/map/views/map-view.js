@@ -9,7 +9,10 @@ function MapView() {
     view: function(vnode) {
       let device = Util.isDevice('mobile') ? 'mobile' : 'desktop'
 
-      App.data.getList('online').then(events => { onlineEventsCount = events.length })
+      App.data.getList('online').then(events => {
+        onlineEventsCount = events.length
+        m.redraw()
+      })
 
       return [
         m(Search, { floating: true }),

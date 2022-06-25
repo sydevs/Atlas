@@ -50,14 +50,20 @@ function ListView() {
         list = m(ListFallback)
       }
 
-      App.data.getList('online').then(events => { onlineEventsCount = events.length })
+      App.data.getList('online').then(events => {
+        onlineEventsCount = events.length
+        m.redraw()
+      })
 
       return [
         m(Search),
         m(Navigation, {
           items: mobile ?
-            [[Util.translate('navigation.mobile.back'), '/']] :
-            ['offline', 'online'].map((layer) => {
+            [{
+              label: Util.translate('navigation.mobile.back'),
+              href: '/',
+            }] :
+            ['offline', 'online'].map(layer => {
               const active = vnode.attrs.layer == layer
               return {
                 label: Util.translate(`navigation.desktop.${layer}`),
