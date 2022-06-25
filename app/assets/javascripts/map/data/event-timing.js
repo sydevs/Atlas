@@ -70,7 +70,7 @@ class EventTiming {
   }
 
   get startingSoon() {
-    return this.#online ? startingInMinutes < 60 : false
+    return this.#online ? this.minutesUntilNextDateTime < 60 : false
   }
 
   timeZone(format = 'long') {
