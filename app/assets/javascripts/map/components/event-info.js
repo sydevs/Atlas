@@ -24,11 +24,13 @@ function EventInfo() {
             m('span.event__subtitle__address', event.address)
           ),
           m('.event__meta',
-            m('.event__meta__day', Util.parseEventTiming(event, 'recurrence')),
-            m('.event__meta__time', Util.parseEventTiming(event, 'duration')),
-            !event.online ? m('abbr.event__meta__timezone', {
-              'data-title': Util.parseEventTiming(event, 'longTimeZone'),
-            }, Util.parseEventTiming(event, 'shortTimeZone')) : null,
+            m('.event__meta__day', event.timing.dateString),
+            m('.event__meta__time', event.timing.timeString),
+            event.online ?
+              null :
+              m('abbr.card__meta__timezone', {
+                'data-tooltip': event.timing.timeZone('long'),
+              }, event.timing.timeZone('short')),
           ),
           event.phoneNumber ? m('a.event__phone',
             m('span.event__phone__number', {

@@ -1,5 +1,8 @@
+/* exported AtlasVenue */
 
-class Venue extends Record {
+/* global Record */
+
+class AtlasVenue extends AtlasRecord {
 
   constructor(attrs) {
     super(attrs)

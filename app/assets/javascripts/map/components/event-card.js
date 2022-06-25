@@ -13,7 +13,6 @@ function EventCard() {
       const event = vnode.attrs.event
       let language = Util.translate(`language_codes.${event.languageCode.toLowerCase()}`) || event.languageCode
       let distance = event.layer == 'offline' && App.map.userLocation && event.distanceTo(App.map.userLocation)
-      if (distance) distance = Math.round(distance * 10) / 10
 
       return m(m.route.Link,
         {
@@ -29,11 +28,13 @@ function EventCard() {
           ),
           m('.card__meta',
             event.languageCode != window.locale ? m('.pill', language.toUpperCase()) : null,
-            m('.card__meta__day', Util.parseEventTiming(event, 'recurrence')),
-            m('.card__meta__time', Util.parseEventTiming(event, 'duration')),
-            !event.online ? m('abbr.card__meta__timezone', {
-              'data-tooltip': Util.parseEventTiming(event, 'longTimeZone'),
-            }, Util.parseEventTiming(event, 'shortTimeZone')) : null,
+            m('.card__meta__day', event.timing.dateString),
+            m('.card__meta__time', event.timing.timeString),
+            event.online ?
+              null :
+              m('abbr.card__meta__timezone', {
+                'data-tooltip': event.timing.timeZone('long'),
+              }, event.timing.timeZone('short')),
           )
         ),
         m('a.card__action',

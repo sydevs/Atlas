@@ -34,7 +34,8 @@ function MapContainer() {
         //onload: () => updateSelection(vnode.attrs, { transition: false })
       })
 
-      map.addEventListener('move', () => App.data.clearCache('lists'))
+      map.addEventListener('move', () => App.data.clearCache('sortedLists'))
+      map.addEventListener('moveend', () => App.data.clearCache('lists'))
 
       updateSelection(vnode.attrs, { transition: false })
       App.map = map

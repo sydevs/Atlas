@@ -1,8 +1,12 @@
+/* exported AtlasEvent */
 
-class AtlasEvent extends Record {
+/* global Record */
+
+class AtlasEvent extends AtlasRecord {
 
   constructor(attrs) {
     super(attrs)
+    this.timing = new EventTiming(attrs)
   }
 
   get order() {
@@ -12,7 +16,8 @@ class AtlasEvent extends Record {
   }
 
   distanceTo(location) {
-    this.distance = Util.distance(this.location, location)
+    let distance = Util.distance(this.location.latitude, this.location.longitude, location.latitude, location.longitude)
+    return Math.round(distance * 10) / 10
   }
 
 }

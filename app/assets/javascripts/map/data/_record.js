@@ -1,5 +1,6 @@
+/* exported AtlasRecord */
 
-class Record {
+class AtlasRecord {
 
   constructor(attrs) {
     Object.assign(this, attrs)

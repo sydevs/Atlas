@@ -1,3 +1,6 @@
+/* exported DataCache */
+
+/* global AtlasAPI */
 
 class DataCache {
   
@@ -11,6 +14,7 @@ class DataCache {
       venues: {},
       geojsons: {},
       lists: {},
+      sortedLists: {},
       closestVenue: null,
       closestfetchVenue: null,
     }
@@ -42,7 +46,7 @@ class DataCache {
     } else {
       console.log('[Data]', 'getting venue', id) // eslint-disable-line no-console
       return this.#atlas.fetchVenue({ id: id }).then(data => {
-        const venue = new Venue(data.venue)
+        const venue = new AtlasVenue(data.venue)
         this.#cache.venues[id] = venue
         return venue
       })
@@ -62,25 +66,33 @@ class DataCache {
     }
   }
 
-  async getEvents(ids) {
+  getEvents(ids) {
     let uncachedEventIds = ids.filter(id => !(id in this.#cache.events))
+    let fetchEvents
 
     if (uncachedEventIds.length > 0) {
       console.log('[Data]', 'getting events', ids, '(' + (1 - uncachedEventIds.length / ids.length) * 100 + '% cached)') // eslint-disable-line no-console
-      const data = await this.#atlas.fetchEvents({ ids: uncachedEventIds })
-      data.events.forEach(event => {
-        this.#cache.events[event.id] = new AtlasEvent(event)
+      fetchEvents = this.#atlas.fetchEvents({ ids: uncachedEventIds }).then(response => {
+        response.events.forEach(event => {
+          this.#cache.events[event.id] = new AtlasEvent(event)
+        })
       })
+    } else {
+      fetchEvents = Promise.resolve()
     }
 
-    return ids.map(id => this.#cache.events[id]).filter(Boolean)
+    return fetchEvents.then(() => {
+      return ids.map(id => this.#cache.events[id]).filter(Boolean)
+    })
   }
 
   getList(layer, ids = null) {
     let fetchList
 
-    if (this.#cache.lists[layer]) {
-      return Promise.resolve(this.#cache.lists[layer])
+    if (layer in this.#cache.sortedLists) {
+      return Promise.resolve(this.#cache.sortedLists[layer])
+    } else if (layer in this.#cache.lists) {
+      fetchList = Promise.resolve(this.#cache.lists[layer])
     } else if (layer == 'online') {
       console.log('[Data]', 'getting list', layer) // eslint-disable-line no-console
       fetchList = this.#atlas.fetchOnlineList().then(response => {
@@ -96,8 +108,9 @@ class DataCache {
     }
 
     return fetchList.then(list => {
-      list.sort((a, b) => a.priority - b.priority)
       this.#cache.lists[layer] = list
+      list = list.sort((a, b) => a.order - b.order)
+      this.#cache.sortedLists[layer] = list
       return list
     })
   }

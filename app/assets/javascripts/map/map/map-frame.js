@@ -19,7 +19,7 @@ class MapFrame extends EventTarget {
   }
 
   get sortLocation() {
-    return this.#userLocation || this.#mapbox.getCenter()
+    return this.#userLocation || this.getCenter()
   }
 
   get userLocation() {
@@ -100,7 +100,8 @@ class MapFrame extends EventTarget {
   _setupHooks() {
     //window.addEventListener('resize', _event => this.updatePadding())
     this.#mapbox.on('render', _event => this.dispatchEvent(new Event('update')))
-    this.#mapbox.on('moveend', _event => this.dispatchEvent(new Event('move')))
+    this.#mapbox.on('move', _event => this.dispatchEvent(new Event('move')))
+    this.#mapbox.on('moveend', _event => this.dispatchEvent(new Event('moveend')))
   }
 
   getRenderedEventIds() {
@@ -169,6 +170,11 @@ class MapFrame extends EventTarget {
     } else {
       this.#userLocationMarker.setLngLat([location.longitude, location.latitude]).addTo(this.#mapbox)
     }
+  }
+
+  getCenter() {
+    const center = this.#mapbox.getCenter()
+    return { latitude: center.lat, longitude: center.lng }
   }
 
 }

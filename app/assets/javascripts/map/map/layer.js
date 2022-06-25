@@ -180,7 +180,7 @@ class AbstractMapLayer {
   }
 
   getRenderedEventIds() {
-    if (this.#loading) return Promise.reject()
+    if (!this.visible || this.#loading) return Promise.reject()
 
     const features = this._mapbox.queryRenderedFeatures({ layers: [this._layers.points, this._layers.clusters] })
 

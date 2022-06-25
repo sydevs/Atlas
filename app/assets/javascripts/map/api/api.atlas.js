@@ -31,10 +31,10 @@ class AtlasAPI {
           timing {
             duration
             timeZone
+            firstDate
+            lastDate
+            upcomingDates
           }
-          firstOccurrence
-          lastOccurrence
-          upcomingOccurrences
           images {
             url
             thumbnailUrl

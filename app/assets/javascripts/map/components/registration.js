@@ -15,7 +15,7 @@ function Registration() {
             m('.registration__header__title',
               Util.translate(registerable ? 'registration.header' : 'registration.closed')
             ),
-            m('.registration__header__subtitle', Util.parseEventCategoryDescription(event))
+            m('.registration__header__subtitle', event.timing.description)
           )
         ),
         registerable ?
