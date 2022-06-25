@@ -6,6 +6,7 @@ function MapContainer() {
   let selectionId
   let selectionModel
   let layer
+  let mode
 
   function updateSelection(attrs, options) {
     if (attrs.selectionId != selectionId || attrs.selectionModel != selectionModel) {
@@ -26,12 +27,18 @@ function MapContainer() {
     }
   }
 
+  function updateMode(newMode) {
+    if (mode != newMode) {
+      mode = newMode
+      map.resize()
+    }
+  }
+
   return {
     oncreate: function(vnode) {
       layer = vnode.attrs.layer || 'offline'
       map = new MapFrame('map', {
         layer: vnode.attrs.layer,
-        //onload: () => updateSelection(vnode.attrs, { transition: false })
       })
 
       map.addEventListener('move', () => App.data.clearCache('sortedLists'))
@@ -45,7 +52,7 @@ function MapContainer() {
 
       updateSelection(vnode.attrs)
       updateLayer(vnode.attrs.layer)
-      //map.resize()
+      updateMode(vnode.attrs.mode)
     },
     onremove: function() {
       map.destroy()
