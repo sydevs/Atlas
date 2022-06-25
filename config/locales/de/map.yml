@@ -33,9 +33,10 @@ de:
       language: "Diese Klasse ist in"
       directions: "Wegbeschreibung"
       online: "Online-Kurse"
-      online_from: "Gastgeber aus"
+      online_from: "Gastgeber aus %{city}"
       tel: "Tel"
       distance: "%{distance} km away" # TODO: Translate
+      upcoming: "Starting soon" # TODO: Translate
 
     registration:
       header: "Jetzt Anmelden"

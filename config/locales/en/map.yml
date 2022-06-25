@@ -33,9 +33,10 @@ en:
       language: "This class is in"
       directions: "Get directions"
       online: "Online Class"
-      online_from: "Hosted from"
+      online_from: "Hosted from %{city}"
       tel: "tel"
       distance: "%{distance} km away"
+      upcoming: "Starting soon"
 
     registration:
       header: "Register now"

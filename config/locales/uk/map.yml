@@ -34,9 +34,10 @@ uk:
       language: "Цей клас у"
       directions: "Отримати направлення"
       online: "Онлайн клас"
-      online_from: "Від"
+      online_from: "Від %{city}"
       tel: "tel" # TODO: Translate
       distance: "%{distance} km away" # TODO: Translate
+      upcoming: "Starting soon" # TODO: Translate
 
     registration:
       header: "Зареєструйтеся зараз"

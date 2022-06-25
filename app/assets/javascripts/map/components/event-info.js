@@ -17,11 +17,10 @@ function EventInfo() {
           ),
           m('.event__label', event.label),
           m('.event__subtitle',
-            event.online ? m('span.event__subtitle__online',
-              m('strong', Util.translate('event.online')),
-              m('div', Util.translate('event.online_from'))
-            ) : null,
-            m('span.event__subtitle__address', event.address)
+            event.online ?
+              m('.event__subtitle__online', Util.translate('event.online')) :
+              null,
+            m('.event__subtitle__address', event.online ? Util.translate('event.online_from', { city: event.address }) : event.address)
           ),
           m('.event__meta',
             m('.event__meta__day', event.timing.dateString),
@@ -30,7 +29,7 @@ function EventInfo() {
               null :
               m('abbr.card__meta__timezone', {
                 'data-tooltip': event.timing.timeZone('long'),
-              }, event.timing.timeZone('short')),
+              }, event.timing.timeZone('short'))
           ),
           event.phoneNumber ? m('a.event__phone',
             m('span.event__phone__number', {

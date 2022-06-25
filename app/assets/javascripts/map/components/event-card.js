@@ -13,7 +13,7 @@ function EventCard() {
       const event = vnode.attrs.event
       let language = Util.translate(`language_codes.${event.languageCode.toLowerCase()}`) || event.languageCode
       let distance = event.layer == 'offline' && App.map.userLocation && event.distanceTo(App.map.userLocation)
-
+      
       return m(m.route.Link,
         {
           class: `card ${vnode.attrs.class}`,
@@ -23,8 +23,8 @@ function EventCard() {
         m('.card__content',
           m('.card__title', event.label),
           m('.card__subtitle',
-            m('span', event.address),
-            distance ? m('span', Util.translate('event.distance', { distance: distance })) : null,
+            m('span.card__subtitle__address', event.address),
+            distance ? m('span.card__subtitle__distance', Util.translate('event.distance', { distance: distance })) : null,
           ),
           m('.card__meta',
             event.languageCode != window.locale ? m('.pill', language.toUpperCase()) : null,
@@ -35,7 +35,8 @@ function EventCard() {
               m('abbr.card__meta__timezone', {
                 'data-tooltip': event.timing.timeZone('long'),
               }, event.timing.timeZone('short')),
-          )
+            event.timing.startingSoon ? m('.pill', Util.translate('event.upcoming')) : null,
+          ),
         ),
         m('a.card__action',
           m('span', Util.translate('list.more_info')),

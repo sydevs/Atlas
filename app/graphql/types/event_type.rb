@@ -5,6 +5,7 @@ module Types
     field :url, String, null: false, method: :map_url
     field :status, String, null: false
     field :layer, String, null: false, resolver_method: :get_layer
+    field :type, String, null: false
 
     field :label, String, null: false
     field :description, String, null: true
@@ -18,7 +19,7 @@ module Types
     field :phone_number, String, null: true
     field :phone_name, String, null: true
 
-    field :online, Boolean, null: false
+    field :online, Boolean, null: false, method: :online?
     field :online_url, String, null: true
 
     field :registration_mode, String, null: false

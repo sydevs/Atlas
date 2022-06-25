@@ -33,9 +33,10 @@ ru:
       language: "Язык занятия" 
       directions: "Как нас найти"
       online: "Онлайн-класс"
-      online_from: "Транслируется из"
+      online_from: "Транслируется из %{city}"
       tel: "тел"
       distance: "%{distance} km away" # TODO: Translate
+      upcoming: "Starting soon" # TODO: Translate
 
     registration:
       header: "Записаться сейчас"
