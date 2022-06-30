@@ -3,8 +3,14 @@
 
 function RegistrationConfirm() {
   return {
+    onbeforeremove: function(vnode) {
+      vnode.dom.classList.add('fadeout')
+      return new Promise(function(resolve) {
+        vnode.dom.addEventListener('animationend', resolve)
+      })
+    },
     view: function(vnode) {
-      const event = vnode.attrs
+      const event = vnode.attrs.event
 
       return m('.registration__confirmation', 
         m('.registration__confirmation__circle', 
@@ -16,6 +22,7 @@ function RegistrationConfirm() {
             {
               href: m.route.get(), // TODO: Close registration confirmation
               class: 'registration__confirmation__back',
+              onclick: () => vnode.attrs.ondismiss(),
             },
             m('span.icon.icon--addon'),
             m('span', Util.translate('registration.confirmation.dismiss'))

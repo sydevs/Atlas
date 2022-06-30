@@ -51,7 +51,7 @@ en:
         text: "By submitting you confirm you agree to receive follow up messages about this and similar events, in accordance with our %{link}."
         link: "privacy policy"
       feedback:
-        duplicate: "You are already registered. See you soon."
+        duplicate: "You are already registered. See you soon!"
         success: "Success! You will receive a confirmation email shortly."
         error: "Error! Please try again later."
       confirmation:

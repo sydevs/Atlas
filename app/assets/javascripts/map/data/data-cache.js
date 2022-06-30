@@ -138,9 +138,9 @@ class DataCache {
   createRegistration(params) {
     console.log('[Data]', 'creating registration', params) // eslint-disable-line no-console
     params.locale = window.locale
-    return this.sendRegistration({
+    return this.#atlas.sendRegistration({
       'input!CreateRegistrationInput': params
-    })
+    }).then(data => data.createRegistration)
   }
 
   // HELPER METHODS

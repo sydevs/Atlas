@@ -7,16 +7,22 @@ function TimingCarousel() {
   let timings
 
   return {
-    oncreate: function() {
+    oncreate: function(vnode) {
       if (timings.length > 1) {
         flickity = new Flickity('#timings', {
           setGallerySize: false,
           pageDots: false,
         })
 
-        flickity.on('select', (index) => { selectedValue = timings[index] })
+        flickity.on('select', (index) => {
+          selectedValue = timings[index]
+          vnode.attrs.onselect(selectedValue)
+        })
+
         flickity.resize()
       }
+
+      vnode.attrs.onselect(selectedValue)
     },
     onremove: function() {
       if (flickity) {
@@ -24,16 +30,11 @@ function TimingCarousel() {
       }
     },
     view: function(vnode) {
-      const event = vnode.attrs
+      const event = vnode.attrs.event
       timings = event.timing.upcomingDateTimes.map(datetime => datetime.setLocale(window.locale))
       selectedValue = timings[0]
 
       return m('div',
-        m('input', {
-          type: 'hidden',
-          name: 'startingAt',
-          value: selectedValue.toISO().substring(0, 10),
-        }),
         m('.registration__timing__label',
           m('.registration__timing__text', Util.translate('registration.form.timing'))
         ),

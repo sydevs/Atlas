@@ -64,7 +64,7 @@ class EventTiming {
   }
 
   get minutesUntilNextDateTime() {
-    const diffMilliseconds = this.upcomingDateTimes[0] - luxon.DateTime.local()
+    const diffMilliseconds = this.nextDateTime - luxon.DateTime.local()
     const diffMinutes = Math.floor((diffMilliseconds / 1000) / 60)
     return diffMinutes > 0 ? diffMinutes : Infinity
   }
@@ -73,8 +73,12 @@ class EventTiming {
     return this.#online ? this.minutesUntilNextDateTime < 60 : false
   }
 
+  get nextDateTime() {
+    return this.upcomingDateTimes[0]
+  }
+
   timeZone(format = 'long') {
-    return this.upcomingDateTimes[0].toFormat(format == 'short' ? 'ZZZZ' : 'ZZZZZ')
+    return this.nextDateTime.toFormat(format == 'short' ? 'ZZZZ' : 'ZZZZZ')
   }
 
 }

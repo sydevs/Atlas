@@ -26,7 +26,7 @@ class Mutations::CreateRegistration < Mutations::BaseMutation
     arguments.delete :message
     arguments.delete :locale
 
-    registration = Registration.joins(:event, event: :venue).find_or_initialize_by(arguments)
+    registration = Registration.joins(:event).find_or_initialize_by(arguments)
 
     if !registration.new_record?
       {

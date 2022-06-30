@@ -2,11 +2,12 @@
 /* global m, RegistrationForm, RegistrationConfirm, Util */
 
 function Registration() {
+  let registered = false
+
   return {
     view: function(vnode) {
       const event = vnode.attrs
-      let registered = false
-      let registerable = true
+      let registerable = Boolean(event.timing.nextDateTime)
 
       return m('form.registration',
         m('#registration'),
@@ -20,12 +21,22 @@ function Registration() {
         ),
         registerable ?
           (registered ?
-            m(RegistrationConfirm, event) :
+            m(RegistrationConfirm, {
+              event: event,
+              ondismiss: () => { registered = false }
+            }) :
             (event.registrationMode != 'native' ? m('registration__external',
               m('a.registration__external__action', {
                 target: '_blank',
               }, Util.translate(`registration.button.${event.registrationMode}`))
-            ) : m(RegistrationForm, event))) :
+            ) : m(RegistrationForm, {
+              event: event,
+              onsubmit: () => {
+                console.log('on submit')
+                registered = true
+                m.redraw()
+              },
+            }))) :
           null
       )
     }
