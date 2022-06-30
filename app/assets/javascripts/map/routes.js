@@ -19,6 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
       layer: 'offline',
     }),
     '/venue/:id': layout(VenueView, {
+      map: 'freeze',
       model: 'venue',
       layer: 'offline',
     }),
@@ -26,6 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
       map: 'hidden'
     }),
     '/:layer/:id': layout(EventView, {
+      map: 'freeze',
       panel: 'padded',
       model: 'event',
     }),

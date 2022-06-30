@@ -30,6 +30,15 @@ function MapContainer() {
   function updateMode(newMode) {
     if (mode != newMode) {
       mode = newMode
+
+      if (newMode == 'freeze') {
+        map.removeControlLayers()
+        map.setFreeze(true)
+      } else {
+        map.loadControlLayers()
+        map.setFreeze(false)
+      }
+
       map.resize()
     }
   }

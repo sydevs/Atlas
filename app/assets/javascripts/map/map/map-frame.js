@@ -9,6 +9,7 @@ class MapFrame extends EventTarget {
   #mapbox
   #loading = true
   #layers = {}
+  #controls = {}
   #currentLayerId
   #userLocation = null
   #userLocationMarker
@@ -86,15 +87,34 @@ class MapFrame extends EventTarget {
   }
 
   loadControlLayers() {
-    this.#mapbox.addControl(new MapboxLanguage({ defaultLanguage: window.locale }))
-    this.#mapbox.addControl(new mapboxgl.NavigationControl({ showCompass: false }))
+    if (this.#controls != null) this.removeControlLayers()
 
-    const geolocater = new mapboxgl.GeolocateControl()
-    this.#mapbox.addControl(geolocater)
+    this.#controls = {
+      language: new MapboxLanguage({ defaultLanguage: window.locale }),
+      navigation: new mapboxgl.NavigationControl({ showCompass: false }),
+      geolocater: new mapboxgl.GeolocateControl(),
+    }
 
-    geolocater.on('geolocate', event => {
+    this.#controls.geolocater.on('geolocate', event => {
       this.setUserLocation(event.coords, true)
     })
+
+    Object.values(this.#controls).forEach(control => this.#mapbox.addControl(control))
+  }
+
+  removeControlLayers() {
+    Object.values(this.#controls).forEach(control => this.#mapbox.removeControl(control))
+    this.#controls = null
+  }
+
+  setFreeze(freeze) {
+    const handlers = ['scrollZoom', 'boxZoom', 'dragRotate', 'dragPan', 'keyboard', 'doubleClickZoom', 'touchZoomRotate']
+
+    if (freeze) {
+      handlers.forEach(handler => this.#mapbox[handler].disable())
+    } else {
+      handlers.forEach(handler => this.#mapbox[handler].enable())
+    }
   }
 
   _setupHooks() {
