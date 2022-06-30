@@ -7,9 +7,11 @@ function Search() {
   let accessToken = 'pk.eyJ1Ijoic3lkZXZhZG1pbiIsImEiOiJjazczcXV4ZzQwZXJtM3JxZTF6a2g0dW9hIn0.avMfkC306-2PqpNRnz6otg'
   let geoSearch = new GeoSearchAPI(accessToken)
   let results = []
+  let selected = null
 
   function onChange() {
     let query = this.value
+    selected = null
 
     if (query.length >= 3) {
       loading = true
@@ -29,6 +31,16 @@ function Search() {
       results = []
     }
   }
+
+  function select(location) {
+    if (location.west && location.east && location.north && location.south) {
+      App.map.fitTo(location)
+    } else {
+      App.map.goTo(location, location.zoom || 11)
+    }
+
+    selected = location
+  }
   
   return {
     view: function(vnode) {
@@ -41,7 +53,7 @@ function Search() {
           type: 'text',
           tabindex: 1,
           placeholder: Util.translate('search.prompt'),
-          //value: query,
+          value: selected ? selected.label : null,
           onkeyup: onChange,
           onfocus: () => { focused = true },
           onblur: () => { focused = false },
@@ -54,7 +66,7 @@ function Search() {
         m('ul.search__results', results.map(function(result) {
           return m('li', {
             tabindex: 0,
-            'data-parameters': JSON.stringify(result),
+            onmousedown: () => select(result)
           }, result.label)
         }))
       )

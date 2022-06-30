@@ -179,6 +179,16 @@ class MapFrame extends EventTarget {
     }
   }
 
+  fitTo(bounds) {
+    if (!bounds) return
+    
+    bounds = [[bounds.west, bounds.south], [bounds.east, bounds.north]]
+    //this.updatePadding()
+    this.#mapbox.fitBounds(bounds, {
+      animate: !Util.isDevice('mobile'),
+    })
+  }
+
   setUserLocation(location, disableMarker = false) {
     this.location = location
 
