@@ -1,0 +1,63 @@
+@import '../_mixins'
+
+.layout
+  @include tablet
+    display: flex
+    flex-direction: row-reverse
+
+  &.noscroll
+    height: 100vh
+    overflow: hidden
+
+.panel
+  overflow-x: hidden
+  overflow-y: auto
+  background: white
+  flex-shrink: 0
+  scroll-behavior: smooth
+
+  @include tablet-or-larger
+    position: relative
+    width: $panel-width-thin
+    height: 100vh
+    z-index: $z-panel
+    box-shadow: $shadow-light
+
+  @include desktop-or-larger
+    position: absolute
+    top: $control-offset-y
+    left: $control-offset-x
+    height: auto
+    max-height: calc(100vh - #{$control-offset-y} * 2)
+    width: $panel-width
+
+.panel--padded
+  padding: $panel-padding-mobile
+  padding-bottom: $panel-padding-mobile * 2
+
+  @include tablet-or-larger
+    padding: $panel-padding-thin $panel-padding
+    padding-bottom: $panel-padding * 2
+
+.panel--overflow
+  overflow: visible
+
+.panel__header
+  padding: 0 24px
+  font-size: 17px
+  line-height: 50px
+  font-weight: 500
+  background: #EEE //#F5F5F5
+
+  white-space: nowrap
+  overflow: hidden
+  text-overflow: ellipsis
+
+  @include tablet-or-larger
+    padding-left: 50px
+    line-height: 82px
+    background: white
+    border-bottom: 1px solid lightgrey
+
+.panel > *
+  animation: fade-in 0.4s

@@ -3,7 +3,6 @@
 html, body
   height: 100%
   height: stretch
-  background: white
   overflow-x: hidden
   scroll-behavior: smooth
 
@@ -14,9 +13,7 @@ body
   font-family: $font-text
   font-feature-settings: "lnum"
   padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left)
-
-body.noscroll
-  overflow: hidden
+  background: white
 
 *
   box-sizing: border-box
@@ -30,20 +27,11 @@ button
   font-weight: $font-semibold
 
 .button
-  transition: all 0.2s
-  cursor: pointer
-  background: transparent
-  text-align: center
+  @include button
 
-  padding: 0
+a
   color: inherit
-  text-align: center
-  font-weight: $font-normal
-  line-height: 48px
-  font-size: 14px
-  letter-spacing: 0.17px
-  border: 1px solid $color-border
   text-decoration: none
 
-  &:hover
-    background: $color-background-hover
+.fadeout
+  animation: fade-out 0.25s

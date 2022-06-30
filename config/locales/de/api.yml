@@ -1,3 +1,6 @@
 de:
   api:
     distance: "%{distance} km entfernt"
+    event:
+      label: "%{category} bei %{venue}"
+      online_label: "%{category} von %{city}"

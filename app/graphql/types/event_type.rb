@@ -4,6 +4,8 @@ module Types
     field :path, String, null: false, method: :map_path
     field :url, String, null: false, method: :map_url
     field :status, String, null: false
+    field :layer, String, null: false, resolver_method: :get_layer
+    field :type, String, null: false
 
     field :label, String, null: false
     field :description, String, null: true
@@ -13,14 +15,11 @@ module Types
     field :address, String, null: false
 
     field :timing, Types::TimingType, null: false, resolver_method: :get_timing
-    field :first_occurrence, GraphQL::Types::ISO8601DateTime, null: false, resolver_method: :get_first_occurrence
-    field :last_occurrence, GraphQL::Types::ISO8601DateTime, null: true, resolver_method: :get_last_occurrence
-    field :upcoming_occurrences, [GraphQL::Types::ISO8601DateTime], null: false, resolver_method: :get_upcoming_occurrences
 
     field :phone_number, String, null: true
     field :phone_name, String, null: true
 
-    field :online, Boolean, null: false
+    field :online, Boolean, null: false, method: :online?
     field :online_url, String, null: true
 
     field :registration_mode, String, null: false
@@ -54,13 +53,24 @@ module Types
 
     def get_timing
       {
-        recurrence: object.recurrence,
-        start_date: object.start_date.to_s,
-        end_date: object.end_date&.to_s,
+        first_date: object.next_occurrences_after(object.start_date, limit: 1).first,
+        last_date: object.registration_end_time ? object.next_occurrences_after(object.registration_end_time, limit: 1).first : nil,
+        upcoming_dates: object.next_occurrences_after(Time.now, limit: 7),
+
         start_time: object.start_time,
         end_time: object.end_time,
+
+        recurrence: object.recurrence,
         duration: object.duration,
         time_zone: object.time_zone,
+      }
+    end
+
+    def get_occurrences
+      {
+        first: object.next_occurrences_after(object.start_date, limit: 1).first,
+        last: object.registration_end_time ? object.next_occurrences_after(object.registration_end_time, limit: 1).first : null,
+        upcoming: object.next_occurrences_after(Time.now, limit: 7),
       }
     end
 
@@ -73,18 +83,8 @@ module Types
       }
     end
 
-    def get_upcoming_occurrences
-      object.next_occurrences_after(Time.now, limit: 7)
-    end
-
-    def get_first_occurrence
-      object.next_occurrences_after(object.start_date, limit: 1).first
-    end
-
-    def get_last_occurrence
-      return nil unless object.registration_end_time
-
-      object.next_occurrences_after(object.registration_end_time, limit: 1).first
+    def get_layer
+      object.online? ? 'online' : 'offline'
     end
 
     def registration_count

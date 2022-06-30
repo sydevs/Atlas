@@ -1,0 +1,39 @@
+@import '../_mixins'
+
+.map
+  position: relative !important
+  width: 100vw
+  height: 174px
+  user-select: none
+  overflow: hidden
+  
+  @include tablet-or-larger
+    height: 100vh
+
+.map--fullscreen
+  @include mobile
+    height: calc(100vh - 70px)
+
+.map--hidden
+  @include mobile
+    height: 0
+
+
+// ===== CONTROLS ===== //
+.mapboxgl-control-container
+  @include mobile
+    .map:not(.map--fullscreen) &
+      display: none
+
+    .mapboxgl-ctrl
+      &-top-left,
+      &-top-right
+        top: 70px
+
+      &-top-right,
+      &-bottom-right
+        right: ($control-offset-x * 0.375) - 10
+
+      &-top-left,
+      &-bottom-left
+        left: ($control-offset-x * 0.375) - 10

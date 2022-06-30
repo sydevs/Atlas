@@ -1,3 +1,6 @@
 ru:
   api:
     distance: "%{distance} км отсюда"
+    event:
+      label: "%{category} в %{venue}"
+      online_label: "%{category} из %{city}"

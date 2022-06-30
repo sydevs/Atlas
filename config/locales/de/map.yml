@@ -1,39 +1,48 @@
 de:
   map:
     search:
+      prompt: "Suchen nach Standort"
       all_recurrences: "Alle Zeiten"
       all_languages: "Alle Sprachen"
-    listing:
-      search: "Suchen nach Standort"
-      more_info: "Mehr Infos"
-      register: "Anmelden"
-      no_area_results: "Es gibt keine Klassen in diesem Bereich, die nächste Freizeitmeditation ist in"
-      no_place_results: "Die nächste Freimachungsklasse bei"
-      show: "Liste anzeigen"
-      event_name: "%{category} bei %{venue}"
-      online_event_name: "%{category} von %{city}"
-      toggle:
-        offline: "Liste anzeigen"
-        online: "Online-Kurse"
-        back: "Zurück zur Karte"
       filter:
         prefix: "Zeige Ergebnisse bei"
         clear: "Clear"
-      mode:
+
+    navigation:
+      desktop: # TODO: Translate
         offline: "In Person"
         online: "Online"
-    information:
+      mobile:
+        offline: "Liste anzeigen"
+        online: "Online-Kurse"
+        back: "Zurück zur Karte"
+
+    list:
+      search: "Suchen nach Standort"
+      more_info: "Mehr Infos"
+      register: "Anmelden"
+      fallback:
+        area: "Es gibt keine Klassen in diesem Bereich, die nächste Freizeitmeditation ist in"
+        venue: "Die nächste Freimachungsklasse bei"
+
+    venue: # TODO: Translate
+      header: "Events at %{venue}"
+
+    event:
       register: "Anmelden"
       language: "Diese Klasse ist in"
       directions: "Wegbeschreibung"
       online: "Online-Kurse"
-      online_from: "Gastgeber aus"
+      online_from: "Gastgeber aus %{city}"
       tel: "Tel"
+      distance: "%{distance} km away" # TODO: Translate
+      upcoming: "Starting soon" # TODO: Translate
+
     registration:
-      header: "jetzt Anmelden"
+      header: "Jetzt Anmelden"
       closed: "Anmeldung geschlossen"
       form:
-        timing: "Ich möchte anfangen:"
+        timing: "Ich möchte anfangen"
         email: "E-Mail"
         name: "Name"
         message: "Fragen / Kommentare"
@@ -48,11 +57,19 @@ de:
       confirmation:
         title: "Danke für die Registrierung"
         subtitle: "Sie erhalten in kürze eine E-Mail"
-        back: "Weitere anmeldung durchführen"
+        dismiss: "Weitere anmeldung durchführen"
+        invite: "Ein Freund einladen"
+      button:
+        external: "Anmelden"
+        facebook: "Registrieren Sie sich auf Facebook"
+        eventbrite: "Registrieren Sie sich auf Eventbrite"
+        meetup: "Registrieren Sie sich auf Meetup"
+
     sharing:
-      invite: "Ein Freund einladen"
+      header: "Ein Freund einladen"
       share: "Teilen"
       copied: "Kopiert!"
+
     weekdays:
       0: "Sonntag"
       1: "Montag"
@@ -62,7 +79,6 @@ de:
       5: "Freitag"
       6: "Samstag"
 
-  javascript:
     recurrence:
       day: "Daily"
       monday: "Montags"
@@ -72,15 +88,12 @@ de:
       friday: "Freitags"
       saturday: "Samstags"
       sunday: "Sonntags"
+
     timing_labels:
       course_fallback: "Dies ist ein wöchentlicher Kurs"
       course: "%{weeks}-Wochen Kurs"
       ongoing: "Diese Klasse ist fortlaufend"
-    registration:
-      external: "Anmelden"
-      facebook: "Registrieren Sie sich auf Facebook"
-      eventbrite: "Registrieren Sie sich auf Eventbrite"
-      meetup: "Registrieren Sie sich auf Meetup"
+
     language_codes:
       uk: UA # Ukrainian
     

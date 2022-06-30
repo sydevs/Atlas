@@ -10,9 +10,9 @@ module EventDecorator
     if custom_name.present?
       custom_name
     elsif location.is_a?(LocalArea)
-      I18n.translate('map.listing.online_event_name', category: category_label, city: decorated_location.label)
+      I18n.translate('api.event.online_label', category: category_label, city: decorated_location.label)
     elsif location.is_a?(Venue)
-      I18n.translate('map.listing.event_name', category: category_label, venue: decorated_location.label)
+      I18n.translate('api.event.label', category: category_label, venue: decorated_location.label)
     else
       category_name
     end
@@ -63,7 +63,8 @@ module EventDecorator
   end
 
   def language_name
-    I18nData.languages(I18n.locale)[language_code].split(/[,;]/)[0]
+    code = self[:language_code]
+    I18nData.languages(I18n.locale)[code].split(/[,;]/)[0]
   end
 
   def map_path

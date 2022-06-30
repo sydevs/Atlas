@@ -33,10 +33,11 @@ class Event < ApplicationRecord
   validates :recurrence, :start_date, :start_time, presence: true
   validates :description, length: { minimum: 40, maximum: 600, allow_blank: true }
   validates :registration_url, url: true, unless: :native_registration_mode?
-  validates :phone_number, phone: { possible: true, allow_blank: true, country_specifier: -> event { event.venue.country_code } }
+  validates :phone_number, phone: { possible: true, allow_blank: true, country_specifier: -> event { event.location.country_code } }
   validates :end_date, presence: true, if: :course_category?
   validates :end_time, presence: true, if: -> { festival_category? || concert_category? }
   validates :manager, presence: true
+  validates :type, presence: true
   validates_numericality_of :registration_limit, greater_than: 0, allow_nil: true
   validates_associated :pictures
   validate :validate_end_time
@@ -141,6 +142,10 @@ class Event < ApplicationRecord
 
   def label
     custom_name || venue.street
+  end
+
+  def language_code
+    self[:language_code]&.downcase&.to_sym
   end
 
   def log_status_change

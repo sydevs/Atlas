@@ -9,6 +9,7 @@ module Types
       argument :online, Boolean, required: false
       argument :country, String, required: false
       argument :area, String, required: false
+      argument :language_code, String, required: false
       argument :locale, String, required: false
     end
 
@@ -28,6 +29,7 @@ module Types
 
     field :events, [EventType], null: false do
       description 'Returns all events'
+      argument :ids, [ID], required: false
       argument :online, Boolean, required: false
       argument :country, String, required: false
       argument :recurrence, String, required: false
@@ -64,7 +66,7 @@ module Types
 
     # Methods
 
-    def geojson(online: nil, country: nil, area: nil, locale: 'en')
+    def geojson(online: nil, country: nil, area: nil, language_code: nil, locale: 'en')
       I18n.locale = locale.to_sym
 
       if area
@@ -81,6 +83,7 @@ module Types
         type: 'FeatureCollection',
         features: locations.map do |location|
           events = location.events.publicly_visible
+          events = events.where(language_code: language_code.upcase) if language_code.present?
           next if events.empty?
 
           {
@@ -117,13 +120,15 @@ module Types
       decorate Country.find_by_country_code(code)
     end
 
-    def events(online: nil, country: nil, recurrence: nil, language_code: nil, locale: 'en')
+    def events(ids: [], online: nil, country: nil, recurrence: nil, language_code: nil, locale: 'en')
       I18n.locale = locale.to_sym
-      scope = online ? OnlineEvent : OfflineEvent
+      scope = Event
+      scope = online ? OnlineEvent : OfflineEvent unless online.nil?
       scope = scope.publicly_visible
-      scope = scope.joins(:location).where(locations: { country_code: country }) unless country.nil?
+      scope = scope.joins(:location).where(locations: { country_code: country }) if country.present?
       scope = scope.where(recurrence: recurrence) if Event.recurrences.key?(recurrence)
-      scope = scope.where(language_code: language_code) unless language_code.nil?
+      scope = scope.where(language_code: language_code.upcase) if language_code.present?
+      scope = scope.where(id: ids) if ids.present?
       
       decorate scope
     end

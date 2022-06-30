@@ -1,0 +1,170 @@
+@import '../_mixins'
+
+.event__label
+  font-weight: $font-semibold
+  font-size: 17px
+  line-height: 20px
+  color: $color-grey-dark
+  margin-bottom: 8px
+  min-height: 22px
+
+.event__subtitle
+  font-size: 13px
+  line-height: 14px
+  letter-spacing: 0.36px
+  margin-bottom: 4px
+
+  &__online
+    font-weight: bold
+    line-height: 1.25
+
+  &__distance::before
+    content: '• '
+    margin-left: 4px
+
+  &__distance
+    color: $color-blue
+    white-space: nowrap
+
+.event__meta
+  line-height: 17px
+  font-size: 12px
+  margin-bottom: 7px
+
+  > *
+    display: inline-block
+
+  &__day
+    text-transform: uppercase
+    letter-spacing: 0.36px
+
+  &__day::after
+    content: ''
+    height: 14px
+    border-left: 1px solid $color-border-light
+    margin: 0 9px
+    vertical-align: text-bottom
+
+  &__time
+    font-weight: $font-medium
+    letter-spacing: 0.49px
+
+  &__timezone
+    position: relative
+    font-weight: $font-semibold
+    letter-spacing: 0.36px
+    text-decoration: underline dotted
+    cursor: help
+    margin-left: 3px
+
+  &__timezone::after
+    content: attr(data-title)
+    background: white
+    color: $color-blue
+    border: 1px solid $color-blue
+    border-radius: 5px
+    padding: 0 5px
+    box-shadow: $shadow-subtle
+
+    position: absolute
+    bottom: 18px
+    left: 50%
+    transform: translateX(-40%)
+    white-space: nowrap
+    opacity: 0
+    transition: opacity 0.15s ease
+
+  &__timezone:hover::after
+    opacity: 1
+
+.event__description
+  margin-bottom: 12px
+
+  font-size: 14px
+  line-height: 1.785
+  letter-spacing: 0.39px
+
+  > p
+    margin-bottom: 16px
+
+// ===== PHONE NUMBER ===== //
+.event__phone
+  color: $color-grey-normal
+  text-decoration: none
+  font-size: 13px
+  font-weight: $font-light
+  letter-spacing: 0.36px
+  transition: color 0.5s
+
+  > *
+    display: inline-block
+
+  &__number:before
+    content: attr(data-prefix)
+    display: inline
+
+  &__name:before
+    content: ', '
+    display: inline
+
+  &:hover
+    text-decoration: underline
+
+  &:hover > *
+    text-decoration: underline
+
+// ===== ACTIONS ===== //
+.event__actions
+  display: flex
+  flex-direction: row
+  gap: 24px
+
+  font-weight: $font-medium
+  font-size: 13px
+  font-style: italic
+  letter-spacing: 0.36px
+  line-height: 22px
+
+  transition: opacity 0.2s ease
+  margin: 20px 0
+
+  > *
+    color: $color-blue
+    text-decoration: none
+
+  .icon
+    font-size: 22px
+    vertical-align: middle
+    margin-right: 7px
+
+  &:hover
+    opacity: 0.8
+
+// ===== SIDEBAR ===== //
+.event__sidebar
+  float: right
+  width: 100px
+  margin-left: 8px
+  margin-bottom: 8px
+  
+  &__button
+    @include button
+    display: block
+
+  &__language
+    font-size: 10px
+    line-height: 14px
+    letter-spacing: 0.17px
+    text-align: center
+    padding: 9px
+    font-style: italic
+
+    border: 1px solid $color-blue
+    border-radius: 5px
+
+  &__language-text
+    color: $color-blue
+    font-size: 11px
+    font-weight: $font-bold
+    font-style: normal
+    letter-spacing: 0.36px
