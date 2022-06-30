@@ -35,10 +35,7 @@ function RegistrationForm() {
         },
         m(TimingCarousel, {
           event: event,
-          onselect: value => {
-            console.log('on select', value)
-            data.startingAt = value.toISO().substring(0, 10)
-          },
+          onselect: value => { data.startingAt = value.toISO().substring(0, 10) },
         }),
         m('input.registration__input', {
           type: 'text',

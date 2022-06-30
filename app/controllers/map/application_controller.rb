@@ -93,8 +93,8 @@ class Map::ApplicationController < ActionController::Base
     end
 
     def setup_client!
-      @client = Client.find_by_public_key(params[:api_key])
-      return if !params[:api_key].present?
+      @client = Client.find_by_public_key(params[:key])
+      return if !params[:key].present?
       raise ActionController::RoutingError.new('Not Found') if @client.nil?
 
       headers['X-FRAME-OPTIONS'] = "ALLOW-FROM #{@client.domain}"
