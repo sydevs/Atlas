@@ -41,8 +41,10 @@ function MapContainer() {
         layer: vnode.attrs.layer,
       })
 
-      map.addEventListener('move', () => App.data.clearCache('sortedLists'))
-      map.addEventListener('moveend', () => App.data.clearCache('lists'))
+      map.addEventListener('move', () => {
+        App.data.clearCache('lists')
+        App.data.clearCache('sortedLists')
+      })
 
       updateSelection(vnode.attrs, { transition: false })
       App.map = map
