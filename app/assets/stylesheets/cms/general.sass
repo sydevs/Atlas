@@ -139,9 +139,13 @@ i.icon > i.icon
   width: 100%
   resize: none
 
-.ui.code.input
+.ui.code.input > *
+  font-family: monospace
+  background: #EEE
+  color: #555
 
-  > *
-    font-family: monospace
-    background: #EEE
-    color: #555
+  &:focus
+    border-color: #85B7D9
+    background: #FFFFFF
+    color: rgba(0, 0, 0, 0.8)
+    box-shadow: none
