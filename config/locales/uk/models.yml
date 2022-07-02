@@ -271,8 +271,8 @@ uk:
         location: "Бажане розташування"
         bounds: "Межі"
         last_accessed_at: "Останній доступ"
-        map_url: "URL-вбудовувана адреса карти"
-        index_url: "URL-адреса списку для вбудовування"
+        map_url: "Bбудовувана адреса карти"
+        index_url: "Aдреса списку для вбудовування"
         manager_id: :activerecord.models.manager.single # Do not translate
 
       pictures:

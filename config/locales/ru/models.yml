@@ -270,8 +270,8 @@ ru:
         location: "Предпочтительное местоположение"
         bounds: "Границы"
         last_accessed_at: "Последний доступ"
-        map_url: "URL встраиваемой карты"
-        index_url: "URL встраиваемого списка"
+        map_url: "Bстраиваемой карты"
+        index_url: "Bстраиваемого списка"
         manager_id: :activerecord.models.manager.single # Do not translate
 
       pictures:

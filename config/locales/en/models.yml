@@ -278,8 +278,8 @@ en:
         location: "Preferred Location"
         bounds: "Bounds"
         last_accessed_at: "Last Access"
-        map_url: "Embeddable Map URL"
-        index_url: "Embeddable List URL"
+        map_url: "Embeddable Map"
+        index_url: "Embeddable List"
         manager_id: :activerecord.models.manager.single # Do not translate
 
       pictures:

@@ -278,8 +278,8 @@ de:
         location: "Bevorzugter Ort"
         bounds: "Grenzen"
         last_accessed_at: "Letzter Zugang"
-        map_url: "Einbettbare Karten-URL"
-        index_url: "Einbettbare Liste URL"
+        map_url: "Einbettbare Karten"
+        index_url: "Einbettbare Liste"
         manager_id: :accessrecord.models.manager.single # setzen nicht übersetzen
 
       pictures:

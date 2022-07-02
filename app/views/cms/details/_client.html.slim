@@ -1,16 +1,21 @@
 
 h3.ui.small.dividing.grey.header = translate_attribute(Client, :map_url)
 
-/.ui.secondary.menu
-  /.item data-tab='script' SCRIPT (Preferred)
-  a.active.tab.item data-tab='iframe' IFRAME (Preferred)
-  a.tab.item data-tab='url' Link
-/.ui.segment data-tab='iframe'
-.ui.fluid.input
-  textarea = "<iframe width=\"100%\">#{map_root_url(key: @record.public_key)}</iframe>"
-/.ui.inverted.segment data-tab='url'
-  .ui.fluid.inverted.input
-    input value=map_root_url(key: @record.public_key)
+.ui.secondary.tiny.menu
+  /a.tab.item data-tab='script' script (preferred)
+  a.tab.item data-tab='iframe' iframe (preferred)
+  a.tab.item data-tab='url' link
+.ui.tab data-tab='script'
+  .ui.fluid.code.input
+    textarea onclick="this.select()"
+      = "<script src=\"#{map_root_url(key: @record.public_key)}\" />"
+.ui.tab data-tab='iframe'
+  .ui.fluid.code.input
+    textarea onclick="this.select()"
+      = "<iframe width=\"100%\" border=\"0\">#{map_root_url(key: @record.public_key)}</iframe>"
+.ui.tab data-tab='url'
+  .ui.fluid.code.input
+    input value=map_root_url(key: @record.public_key) onclick="this.select()"
 
 /.field
   label = translate_attribute(Client, :index_url)
