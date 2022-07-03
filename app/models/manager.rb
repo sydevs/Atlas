@@ -122,19 +122,24 @@ class Manager < ApplicationRecord
   end
 
   def accessible_events
-    if administrator?
+    if !administrator?
       Event.default_scoped
     else
-      events_via_countries = Event.joins(:venue).left_outer_joins(:local_areas).where(venues: { country_code: countries.select(:country_code) })
-      events_via_provinces = Event.joins(:venue).left_outer_joins(:local_areas).where(venues: { province_code: provinces.select(:province_code) })
-      offline_events_via_local_areas = Event.joins(:venue).left_outer_joins(:local_areas).where(local_areas: { id: local_areas.select(:id) })
+=begin
+      # TODO: Fix this
+      events_via_countries = Event.left_outer_joins(:local_areas).where(locations: { country_code: countries.select(:country_code) })
+      events_via_provinces = Event.left_outer_joins(:local_areas).where(locations: { province_code: provinces.select(:province_code) })
+      offline_events_via_local_areas = Event.left_outer_joins(:local_areas).where(local_areas: { id: local_areas.select(:id) })
       online_events_via_local_areas = Event.where(local_area_id: local_areas.select(:id))
-      Event.joins(:venue).left_outer_joins(:local_areas)
+      
+      Event.left_outer_joins(:local_areas)
         .where(id: events)
         .or(events_via_countries)
         .or(events_via_provinces)
         .or(offline_events_via_local_areas)
         .or(online_events_via_local_areas)
+=end
+      Event.default_scoped
     end
   end
 
