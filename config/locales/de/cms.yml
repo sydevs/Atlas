@@ -197,16 +197,16 @@ de:
         location: "Legen Sie ein Land, eine Region oder Stadt, fest aus der die meisten Ihrer Besucher Kommen. Wenn ein Benutzer die Karte durchsucht, wird in diesem Bereich gesucht."
 
     details:
-      details_for_record: "Details über %{ressource}"
+      details_for_record: "Details über %{resource}"
       registration_for_record: "Registrierungstrend"
-      management_for_record: "Management für diese %{ressource}"
-      managers_for_record: "Manager für %{ressource}"
-      location_of_record: "Lage dieser %{ressource}"
+      management_for_record: "Management für diese %{resource}"
+      managers_for_record: "Manager für %{resource}"
+      location_of_record: "Lage dieser %{resource}"
       dates_and_timing: "Termine & Timing"
-      map_of_record: "Karte dieser %{ressource}"
+      map_of_record: "Karte dieser %{resource}"
       area_in_words: "%{radius} KM um %{latitude}, %{longitude}"
-      records_in_recent_days: " %{ressources} in den letzten 30 Tagen"
-      record_has_language: " %{ressource} in %{language} angeboten"
+      records_in_recent_days: " %{resources} in den letzten 30 Tagen"
+      record_has_language: " %{resource} in %{language} angeboten"
       notification_settings: "Benachrichtigungseinstellungen"
       contact_details: "Kontaktinformationen"
       updated_at: "Letzte Aktualisierung"
@@ -216,39 +216,39 @@ de:
         title: "Eventberichterstattung"
         description: "%{events} (%{venues})"
       record_needs_review:
-        title: " %{ressource} braucht überprüfung"
-        description: "Diese %{ressource} wurde vor %{updates_ago} aktualisiert. Diese Veranstaltung wird von der Karte entfernt, es sei denn, es wird innerhalb von %{expires_in} überprüft. Gehe zu der Seite Bearbeiten und drücken Sie Speichern, um zu bestätigen, dass die Ereignisdetails noch korrekt sind."
-        alt_description: "Diese %{ressource} wurde nicht in %{updates_ago} aktualisiert. Bitte bewerten Sie die folgenden Details und drücken Sie Speichern, um zu bestätigen, dass die Ereignisdetails korrekt sind."
+        title: " %{resource} braucht überprüfung"
+        description: "Diese %{resource} wurde vor %{updates_ago} aktualisiert. Diese Veranstaltung wird von der Karte entfernt, es sei denn, es wird innerhalb von %{expires_in} überprüft. Gehe zu der Seite Bearbeiten und drücken Sie Speichern, um zu bestätigen, dass die Ereignisdetails noch korrekt sind."
+        alt_description: "Diese %{resource} wurde nicht in %{updates_ago} aktualisiert. Bitte bewerten Sie die folgenden Details und drücken Sie Speichern, um zu bestätigen, dass die Ereignisdetails korrekt sind."
         action: "Bewertungen!"
       record_needs_urgent_review:
-        title: " %{ressource} benötigt dringend eine Bewertung"
+        title: " %{resource} benötigt dringend eine Bewertung"
       record_finished:
-        title: " %{ressource} abgeschlossen"
-        description: "Diese %{ressource} ist vorbei. Das letzte Ereigniss fand am %{date} statt."
+        title: " %{resource} abgeschlossen"
+        description: "Diese %{resource} ist vorbei. Das letzte Ereigniss fand am %{date} statt."
       record_has_no_events:
         title: "Keine Ereignisse"
-        description: "Diese %{ressource} hat keine Ereignisse und wird deshalb nicht auf der Karte angezeigt."
+        description: "Diese %{resource} hat keine Ereignisse und wird deshalb nicht auf der Karte angezeigt."
       record_expired:
-        title: " %{ressource} abgelaufen"
-        description: "Diese %{ressource} wurde von der Öffentlichkeit versteckt, weil es seit %{updates_ago} nicht aktualisiert wurde. Seite bearbeiten und Speichern, um zu bestätigen, dass die Ereignisdetails noch korrekt sind."
-        alt_description: "Diese %{ressource} wurde von der Öffentlichkeit versteckt, weil es seit %{updates_ago} nicht aktualisiert wurde. Bitte kontrollieren Sie die folgenden Details und drücken Sie Speichern, um zu bestätigen, dass die Ereignisdetails korrekt sind."
+        title: " %{resource} abgelaufen"
+        description: "Diese %{resource} wurde von der Öffentlichkeit versteckt, weil es seit %{updates_ago} nicht aktualisiert wurde. Seite bearbeiten und Speichern, um zu bestätigen, dass die Ereignisdetails noch korrekt sind."
+        alt_description: "Diese %{resource} wurde von der Öffentlichkeit versteckt, weil es seit %{updates_ago} nicht aktualisiert wurde. Bitte kontrollieren Sie die folgenden Details und drücken Sie Speichern, um zu bestätigen, dass die Ereignisdetails korrekt sind."
         action: "Bewertungen!"
       record_archived:
-        title: " %{ressource} archiviert"
-        description: "Diese %{ressource} wurde lange nicht aktualisiert ( %{time}). Es wird nicht auf der Karte angezeigt, es sei denn, es wird überprüft und gespeichert."
-        alt_description: "Diese %{ressource} wurde von der Öffentlichkeit versteckt, weil es lange nicht aktualisiert wurde ( %{time}). Bitte bewerten Sie die folgenden Details und drücken Sie Speichern, um zu bestätigen, dass die Ereignisdetails korrekt sind."
+        title: " %{resource} archiviert"
+        description: "Diese %{resource} wurde lange nicht aktualisiert ( %{time}). Es wird nicht auf der Karte angezeigt, es sei denn, es wird überprüft und gespeichert."
+        alt_description: "Diese %{resource} wurde von der Öffentlichkeit versteckt, weil es lange nicht aktualisiert wurde ( %{time}). Bitte bewerten Sie die folgenden Details und drücken Sie Speichern, um zu bestätigen, dass die Ereignisdetails korrekt sind."
         action: "Dearchivieren"
       external_registration:
         title: "Ereignis verwendet externe Registrierung"
         description: "Diese Veranstaltung ist konfiguriert, um Sucher hier %{mode} zu registrieren.  Es ist besser, wenn Sie Sucher auf dem Sahaj Atlas registrieren, denn dann schicken wir ihnen erinnerungen."
       record_not_published:
         title: "Nicht veröffentlicht"
-        description: "Diese %{ressource} ist derzeit für die Öffentlichkeit versteckt."
-        parent: "Diese %{ressource} ist derzeit für die Öffentlichkeit versteckt, weil sein %{parent} nicht veröffentlicht wird."
+        description: "Diese %{resource} ist derzeit für die Öffentlichkeit versteckt."
+        parent: "Diese %{resource} ist derzeit für die Öffentlichkeit versteckt, weil sein %{parent} nicht veröffentlicht wird."
       manager_not_verified:
         title: "Manager-E-Mail Nicht überprüft"
         description: "Ereignisse, die mit diesem Manager verbunden sind, sind nicht öffentlich, denn die E-Mail des Managers wurde nicht überprüft."
-        parent: "Diese %{ressource} ist derzeit für die Öffentlichkeit versteckt, weil die E-Mail-Adresse des Managers nicht überprüft wurde."
+        parent: "Diese %{resource} ist derzeit für die Öffentlichkeit versteckt, weil die E-Mail-Adresse des Managers nicht überprüft wurde."
         action: "Senden"
       create_event:
         title: "Wundern Sie sich, wie man ein öffentliches Programm erstellt?"
@@ -268,7 +268,7 @@ de:
         action: "Jetzt gehen"
 
     images:
-      title: "Bilder dieser %{ressource}"
+      title: "Bilder dieser %{resource}"
       upload: "Bilder hochladen"
 
     regions:
