@@ -21,9 +21,10 @@ module EventDecorator
   def address
     @address ||= begin
       if online?
-        decorated_location.label
+        "#{local_area.name}, #{CountryDecorator.get_short_label(local_area.country_code)}"
       else
-        [room, venue.street, venue.city, decorated_location.province_name].compact.join(', ')
+        venue.address
+        # "address" # [room, venue.street, venue.city, decorated_location.province_name].compact.join(', ')
       end
     end
   end

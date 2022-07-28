@@ -1,5 +1,5 @@
 class CMS::LocalAreasController < CMS::ApplicationController
-  include AutocompleteAPI
+  include GoogleMapsAPI
 
   prepend_before_action { @model = LocalArea }
 
@@ -36,11 +36,11 @@ class CMS::LocalAreasController < CMS::ApplicationController
 
     if params[:place_id].present?
       data[:placeid] = params[:place_id]
-      result = AutocompleteAPI.fetch_area(data)
+      result = GoogleMapsAPI.fetch_area(data)
     else
       data[:components] = "country:#{params[:country]}" if params[:country].present?
       data[:input] = params[:query]
-      result = AutocompleteAPI.predict(data)
+      result = GoogleMapsAPI.predict(data)
     end
 
     if result

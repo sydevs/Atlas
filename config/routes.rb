@@ -99,7 +99,7 @@ Rails.application.routes.draw do
 
     resources :venues do
       get :geocode, on: :collection
-      get :autocomplete, on: :collection
+      get :geosearch, on: :collection
       resources :events, only: %i[index new create]
       resources :audits, only: %i[index]
     end

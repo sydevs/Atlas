@@ -10,8 +10,4 @@ class LocalAreaPolicy < RegionPolicy
     true
   end
 
-  def autocomplete?
-    user.present?
-  end
-
 end

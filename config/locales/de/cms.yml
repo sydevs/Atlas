@@ -9,6 +9,7 @@ de:
         back: "Zurück"
         view: "Anzeigen"
         search: "Suchen"
+        searching: "Suchen..."
         select: "Auswählen"
 
       target:

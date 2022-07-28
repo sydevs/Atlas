@@ -9,6 +9,7 @@ en:
         back: "Back"
         view: "View"
         search: "Search"
+        searching: "Search..."
         select: "Select"
 
       target:
@@ -93,6 +94,7 @@ en:
       event:
         details: "Event Details"
         timing: "Timing"
+        location: "Location"
         registration: "Registration"
         manager: "Manager"
       manager:
@@ -136,6 +138,9 @@ en:
         online_url: "If the class is online, this link is where seekers should join the class (eg. a link to Zoom, YouTube, Google Meet, etc)."
         phone_number: "A local phone number that seekers can call to ask questions."
         phone_name: "The first name of the yogi who will answer the phone."
+        venue:
+          search: "Search for address"
+          view_fields: "View location fields"
         manager:
           view_fields: "View manager fields"
           field: "The manager should be set to a yogi(ni) who will take responsibility for this event. Every week a list of new registrations will be sent to the manager and every few months they will be asked to confirm that the program information is still correct."

@@ -9,7 +9,7 @@ uk:
         destroy: "Видалити"
         back: "Назад"
         view: "Переглянути"
-        search: "Search" # TODO: Translate
+        searching: "Search..." # TODO: Translate
         select: "Select" # TODO: Translate
 
       target:

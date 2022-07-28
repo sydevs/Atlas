@@ -9,6 +9,7 @@ ru:
         back: "Назад"
         view: "Открыть"
         search: "Поиск"
+        searching: "Поиск..."
         select: "Select" # TODO: Translate
 
       target:

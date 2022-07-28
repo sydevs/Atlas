@@ -16,13 +16,15 @@ class Venue < ApplicationRecord
   has_many :local_area_venues
   has_many :local_areas, through: :local_area_venues
 
-  has_many :events, as: :location, dependent: :delete_all, class_name: "OfflineEvent"
+  has_many :events, inverse_of: :venue
+  # has_many :events, as: :location, dependent: :delete_all, class_name: "OfflineEvent"
   has_many :publicly_visible_events, -> { publicly_visible }, as: :location, class_name: 'OfflineEvent'
 
   # Validations
-  validates :street, presence: true
-  validates :province_code, presence: true, if: :country_has_provinces?
-  validates :country_code, presence: true
+  # validates :street, presence: true
+  # validates :province_code, presence: true, if: :country_has_provinces?
+  # validates :country_code, presence: true
+  validates_presence_of :place_id, :address
 
   # Scopes
   scope :has_public_events, -> { joins(:publicly_visible_events) }
@@ -34,12 +36,19 @@ class Venue < ApplicationRecord
   # Callbacks
   after_save :ensure_local_area_consistency
   after_save :update_activity_timestamps
+  before_create :fetch_coordinates
 
   # Methods
 
   def parent
     local_areas.first || (country.enable_province_management? ? province || country : country)
   end
+
+=begin
+  def street
+    address&.split(',', 2)&.first# || self[:street]
+  end
+=end
 
   def managed_by? manager, super_manager: nil
     manager.local_areas.each do |local_area|
@@ -83,6 +92,16 @@ class Venue < ApplicationRecord
 
     def country_has_provinces?
       return country.nil? || country.enable_province_management
+    end
+
+    def fetch_coordinates
+      result = GoogleMapsAPI.fetch_place({
+        language: I18n.locale,
+        placeid: place_id,
+      })
+
+      self.latitude = result[:latitude]
+      self.longitude = result[:longitude]
     end
 
 end

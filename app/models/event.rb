@@ -6,6 +6,7 @@ class Event < ApplicationRecord
   include Expirable
   include ActivityMonitorable
   include Managed
+  # include Venueable
 
   nilify_blanks
   searchable_columns %w[custom_name description]
@@ -21,11 +22,15 @@ class Event < ApplicationRecord
 
   # Associations
   belongs_to :location, polymorphic: true
+  # alias venue location
+
+  belongs_to :local_area, optional: true
+  belongs_to :venue, optional: true, inverse_of: :events
 
   has_many :registrations, dependent: :delete_all
   has_many :pictures, as: :parent, dependent: :destroy
-  accepts_nested_attributes_for :pictures
-  accepts_nested_attributes_for :manager
+
+  accepts_nested_attributes_for :pictures, :venue
 
   # Validations
   validates :custom_name, length: { maximum: 255 }
@@ -37,7 +42,7 @@ class Event < ApplicationRecord
   validates :end_date, presence: true, if: :course_category?
   validates :end_time, presence: true, if: -> { festival_category? || concert_category? }
   validates :manager, presence: true
-  validates :type, presence: true
+  # validates :type, presence: true
   validates_numericality_of :registration_limit, greater_than: 0, allow_nil: true
   validates_associated :pictures
   validate :validate_end_time
@@ -52,13 +57,18 @@ class Event < ApplicationRecord
 
   scope :ready_for_reminder_email, -> { where("reminder_email_sent_at IS NULL OR reminder_email_sent_at <= ?", 12.hours.ago) }
 
-  scope :online, -> { where(type: 'OnlineEvent') }
-  scope :offline, -> { where(type: 'OfflineEvent') }
+  scope :online, -> { where(place_id: nil) }
+  scope :offline, -> { where.not(place_id: nil) }
+  # scope :online, -> { where(type: 'OnlineEvent') }
+  # scope :offline, -> { where(type: 'OfflineEvent') }
 
   # Delegations
   alias associated_registrations registrations
   alias parent location
   delegate :latitude, :longitude, :time_zone, to: :location
+
+  # Callbacks
+  before_validation :find_venue
 
   # Methods
   after_save :verify_manager
@@ -77,7 +87,8 @@ class Event < ApplicationRecord
   end
 
   def online?
-    type == "OnlineEvent"
+    !venue_id?
+    # type == "OnlineEvent"
   end
 
   def should_finish?
@@ -205,6 +216,12 @@ class Event < ApplicationRecord
 
       ManagerMailer.with(manager: manager, context: self).verify.deliver_later
       manager.touch(:email_verification_sent_at)
+    end
+
+    def find_venue
+      # return unless place_id_changed?
+
+      self.venue_id = Venue.find_by_place_id(venue.place_id)&.id
     end
 
 end
