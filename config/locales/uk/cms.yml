@@ -93,10 +93,11 @@ uk:
     forms:
       event:
         details: "Деталі події"
-        online: "Онлайн-заняття"
         timing: "Вибір часу"
         registration: "Реєстрація"
         manager: "Менеджер"
+        offline: "Особиста подія"
+        online: "Онлайн подія"
       manager: # TODO: Translate
         contact_methods: "Contact Methods"
         notifications: "Notification Settings"

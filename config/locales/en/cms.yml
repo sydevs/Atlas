@@ -97,6 +97,8 @@ en:
         location: "Location"
         registration: "Registration"
         manager: "Manager"
+        offline: "In Person Event"
+        online: "Online Event"
       manager:
         contact_methods: "Contact Methods"
         notifications: "Notification Settings"

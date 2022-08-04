@@ -93,10 +93,11 @@ ru:
     forms:
       event:
         details: "Детали события"
-        online: "Онлайн-классы"
         timing: "Расписание"
         registration: "Регистрация"
         manager: "Менеджер"
+        offline: "In Person Event" # TODO: Translate
+        online: "Online Event" # TODO: Translate
       manager: 
         contact_methods: "Способы связи"
         notifications: "Настройка оповещений"

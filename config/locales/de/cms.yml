@@ -96,6 +96,8 @@ de:
         timing: "Timing"
         registration: "Anmeldung"
         manager: "Manager"
+        offline: "In Person Event"
+        online: "Online Event"
       manager:
         contact_methods: "Kontaktmethoden"
         notifications: "Benachrichtigungseinstellungen"

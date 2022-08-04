@@ -7,12 +7,10 @@ class CMS::EventsController < CMS::ApplicationController
   end
 
   def new
-    # type = @context.is_a?(LocalArea) ? 'OnlineEvent' : 'OfflineEvent'
-    super category: params[:category]#, type: type
+    super category: params[:category], online: params[:online]
   end
 
   def create
-    # parameters[:type] = @context.is_a?(LocalArea) ? 'OnlineEvent' : 'OfflineEvent'
     super parameters
   end
 
