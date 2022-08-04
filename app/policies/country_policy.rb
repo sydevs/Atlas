@@ -6,4 +6,10 @@ class CountryPolicy < RegionPolicy
     %i[provinces areas venues managers].include?(association) && super
   end
 
+  def index_association? association = nil
+    return false if association == :areas
+
+    super
+  end
+
 end

@@ -23,13 +23,13 @@ ru:
         # Countable
         one: "регион"
         other: "регионов"
-      area: 
+      area: # TODO: Translate
         # Basic pluralization
-        single: "Место"
-        plural: "Места"
+        single: "City Area"
+        plural: "City Areas"
         # Countable
-        one: "место"
-        other: "мест"
+        one: "city"
+        other: "cities"
 
       # Events
       venue:

@@ -24,13 +24,13 @@ uk:
         # Countable
         one: "регіон"
         other: "регіони"
-      area:
+      area: # TODO: Translate
         # Basic pluralization
-        single: "Область"
-        plural: "Області"
+        single: "City Area"
+        plural: "City Areas"
         # Countable
-        one: "область"
-        other: "області"
+        one: "city"
+        other: "cities"
 
       # Events
       venue:

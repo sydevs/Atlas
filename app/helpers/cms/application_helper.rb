@@ -29,6 +29,17 @@ module CMS::ApplicationHelper
     expired: 'info circle',
   }.freeze
 
+  GEOGRAPHIC_MODELS = %i[
+    regions
+    areas
+  ]
+
+  # GEOGRAPHIC_MODELS = %i[
+  #   countries
+  #   provinces
+  #   areas
+  # ]
+
   def floating_action text, icon = nil, url = nil, **args
     klass = %w[ui basic right floated compact tiny button]
     klass << args[:class] if args[:class].present?
@@ -65,10 +76,12 @@ module CMS::ApplicationHelper
   end
 
   def breadcrumb_url ancestor
-    if action_name == 'index' && policy(ancestor).index_association?(controller_name)
+    if action_name == 'index' && GEOGRAPHIC_MODELS.include?(controller_name.to_sym)
+      GEOGRAPHIC_MODELS.each do |model|
+        return url_for([:cms, ancestor, model]) if policy(ancestor).index_association?(model)
+      end
+    elsif action_name == 'index' && policy(ancestor).index_association?(controller_name)
       url_for([:cms, ancestor, controller_name.to_sym])
-    elsif action_name == 'regions' && policy(ancestor).index_association?(:regions)
-      url_for([:cms, ancestor, :regions])
     else
       url_for([:cms, ancestor])
     end

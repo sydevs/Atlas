@@ -28,7 +28,7 @@ class CMS::AreasController < CMS::ApplicationController
   end
 
   def autocomplete
-    authorize Area
+    authorize Area, :geosearch?
     data = {
       language: I18n.locale,
       sessiontoken: session.id,

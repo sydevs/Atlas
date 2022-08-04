@@ -23,13 +23,13 @@ de:
         # Countable
         one: "Region"
         other: "Regionen"
-      area:
+      area: # TODO: Translate
         # Basic pluralization
-        single: "Bereich"
-        plural: "Bereiche"
+        single: "City Area"
+        plural: "City Areas"
         # Countable
-        one: "Bereich"
-        other: "Bereiche"
+        one: "city"
+        other: "cities"
 
       # Events
       venue:

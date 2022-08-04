@@ -25,11 +25,11 @@ en:
         other: "regions"
       area:
         # Basic pluralization
-        single: "Area"
-        plural: "Areas"
+        single: "City Area"
+        plural: "City Areas"
         # Countable
-        one: "area"
-        other: "areas"
+        one: "city"
+        other: "cities"
 
       # Events
       venue:

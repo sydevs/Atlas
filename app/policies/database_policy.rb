@@ -48,6 +48,10 @@ class DatabasePolicy < ApplicationPolicy
     false
   end
 
+  def search?
+    index?
+  end
+
   def geosearch?
     user.present?
   end

@@ -81,11 +81,10 @@ Rails.application.routes.draw do
     end
 
     resources :provinces, except: %i[edit update index] do
-      get :regions
       resources :managers, only: %i[index new create destroy]
       resources :venues, only: %i[index new create]
       resources :events, only: %i[index]
-      resources :areas, only: %i[new create]
+      resources :areas, only: %i[index new create]
       resources :audits, only: %i[index]
     end
 

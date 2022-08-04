@@ -137,10 +137,8 @@ class CMS::ApplicationController < ActionController::Base
     if @context
       @countries = @context.countries if @context.respond_to?(:countries)
       @provinces = @context.provinces if @context.respond_to?(:provinces)
-      @areas = @context.areas if @context.respond_to?(:areas)
     else
       @countries = Country.default_scoped
-      @areas = Area.international
     end
 
     render 'cms/views/regions'
