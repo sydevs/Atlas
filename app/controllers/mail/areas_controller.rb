@@ -1,6 +1,6 @@
-class Mail::LocalAreasController < Mail::ApplicationController
+class Mail::AreasController < Mail::ApplicationController
 
-  before_action :fetch_local_area
+  before_action :fetch_area
 
   def summary
     summary_period = RegionMailer::SUMMARY_PERIOD
@@ -27,11 +27,11 @@ class Mail::LocalAreasController < Mail::ApplicationController
 
   private
 
-    def fetch_local_area
-      if params[:local_area_id]
-        @region = LocalArea.find(params[:local_area_id])
+    def fetch_area
+      if params[:area_id]
+        @region = Area.find(params[:area_id])
       else
-        @region = LocalArea.order('RANDOM()').first
+        @region = Area.order('RANDOM()').first
       end
     end
 

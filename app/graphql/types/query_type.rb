@@ -45,7 +45,7 @@ module Types
       argument :locale, String, required: false
     end
 
-    field :area, LocalAreaType, null: true do
+    field :area, AreaType, null: true do
       description 'Find a local area by id'
       argument :id, ID, required: true
       argument :locale, String, required: false
@@ -70,10 +70,10 @@ module Types
       I18n.locale = locale.to_sym
 
       if area
-        scope = LocalArea.where(id: area)
+        scope = Area.where(id: area)
         scope = scope.venues unless online
       else
-        scope = online ? LocalArea : Venue
+        scope = online ? Area : Venue
         scope = scope.where(country_code: country) if country
       end
 
@@ -112,7 +112,7 @@ module Types
   
     def area(id:, locale: 'en')
       I18n.locale = locale.to_sym
-      decorate LocalArea.find(id)
+      decorate Area.find(id)
     end
 
     def country(code:, locale: 'en')
@@ -125,7 +125,7 @@ module Types
       scope = Event
       scope = online ? OnlineEvent : OfflineEvent unless online.nil?
       scope = scope.publicly_visible
-      scope = scope.joins(:local_area).where(local_areas: { country_code: country }) if country.present?
+      scope = scope.joins(:area).where(areas: { country_code: country }) if country.present?
       scope = scope.where(recurrence: recurrence) if Event.recurrences.key?(recurrence)
       scope = scope.where(language_code: language_code.upcase) if language_code.present?
       scope = scope.where(id: ids) if ids.present?

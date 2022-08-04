@@ -43,14 +43,14 @@ table.wide.data
             = link_to event.label, email_login(cms_event_url(event))
             |  (#{event.venue.city})
 
-  - if @inactive_local_areas.present?
+  - if @inactive_areas.present?
     tr
       th = translate('mail.summary.data.inactive_regions')
       td
-        - @inactive_local_areas.each do |local_area|
+        - @inactive_areas.each do |area|
           div
-            = link_to local_area.name, email_login(cms_local_area_url(local_area))
-            |  (#{time_ago_in_words local_area.last_activity_on})
+            = link_to area.name, email_login(cms_area_url(area))
+            |  (#{time_ago_in_words area.last_activity_on})
 
 .actions
   a.button href=email_login(url_for([:cms, @region]))

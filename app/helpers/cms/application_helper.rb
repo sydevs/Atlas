@@ -3,7 +3,7 @@ module CMS::ApplicationHelper
   MODEL_ICONS = {
     countries: 'globe americas',
     provinces: 'map',
-    local_areas: 'dot circle',
+    areas: 'dot circle',
     venues: 'map marker',
     events: 'calendar',
     managers: 'user secret',

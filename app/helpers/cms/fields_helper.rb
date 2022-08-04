@@ -20,7 +20,7 @@ module CMS::FieldsHelper
   def contact_types manager
     result = %i[new_managed_record event_verification]
     result << :event_registrations if manager.events.present?
-    result << :region_summary if manager.provinces.present? || manager.local_areas.present?
+    result << :region_summary if manager.provinces.present? || manager.areas.present?
     result << :country_summary if manager.countries.present?
     result << :application_summary if manager.administrator?
     # result << :client_summary if manager.clients.present?

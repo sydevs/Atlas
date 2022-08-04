@@ -28,9 +28,9 @@ const RegionMap = {
   },
 
   initEditableMap() {
-    var radius = $('#local_area_radius').val()
-    var latitude = $('#local_area_latitude').val()
-    var longitude = $('#local_area_longitude').val()
+    var radius = $('#area_radius').val()
+    var latitude = $('#area_latitude').val()
+    var longitude = $('#area_longitude').val()
     RegionMap.setCircle(latitude, longitude, radius)
   },
 

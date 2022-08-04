@@ -10,13 +10,13 @@
 
 #region-map data-editable='true' data-latitude=@record.latitude data-longitude=@record.longitude data-radius=@record.radius
 
-.hint = translate('cms.hints.local_area.location')
+.hint = translate('cms.hints.area.location')
 
-= f.input :radius, placeholder: translate_attribute(LocalArea, :radius)
+= f.input :radius, placeholder: translate_attribute(Area, :radius)
 
 .two.fields
-  = f.input :latitude, placeholder: translate_attribute(LocalArea, :latitude)
-  = f.input :longitude, placeholder: translate_attribute(LocalArea, :longitude)
+  = f.input :latitude, placeholder: translate_attribute(Area, :latitude)
+  = f.input :longitude, placeholder: translate_attribute(Area, :longitude)
 
 = f.hidden_field :province_code
 = f.hidden_field :country_code

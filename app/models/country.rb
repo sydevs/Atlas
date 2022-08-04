@@ -9,13 +9,13 @@ class Country < ApplicationRecord
 
   # Associations
   has_many :provinces, inverse_of: :country, foreign_key: :country_code, primary_key: :country_code, dependent: :delete_all
-  has_many :local_areas, inverse_of: :country, foreign_key: :country_code, primary_key: :country_code, dependent: :delete_all
+  has_many :areas, inverse_of: :country, foreign_key: :country_code, primary_key: :country_code, dependent: :delete_all
 
   has_many :venues, foreign_key: :country_code, primary_key: :country_code
   has_many :events, through: :venues
   has_many :associated_registrations, through: :events, source: :registrations
   has_many :province_manager_records, through: :provinces, source: :managed_records
-  has_many :local_area_manager_records, through: :local_areas, source: :managed_records
+  has_many :area_manager_records, through: :areas, source: :managed_records
 
   # Validations
   validates_presence_of :country_code

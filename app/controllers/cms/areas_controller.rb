@@ -1,7 +1,7 @@
-class CMS::LocalAreasController < CMS::ApplicationController
+class CMS::AreasController < CMS::ApplicationController
   include GoogleMapsAPI
 
-  prepend_before_action { @model = LocalArea }
+  prepend_before_action { @model = Area }
 
   def new
     if @context.is_a?(Province)
@@ -28,7 +28,7 @@ class CMS::LocalAreasController < CMS::ApplicationController
   end
 
   def autocomplete
-    authorize LocalArea
+    authorize Area
     data = {
       language: I18n.locale,
       sessiontoken: session.id,
@@ -53,7 +53,7 @@ class CMS::LocalAreasController < CMS::ApplicationController
   private
 
     def parameters
-      params.fetch(:local_area, {}).permit(
+      params.fetch(:area, {}).permit(
         :name, :identifier, :country_code, :province_code,
         :latitude, :longitude, :radius, :restriction
       )

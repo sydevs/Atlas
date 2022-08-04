@@ -1,4 +1,4 @@
-class LocalAreaPolicy < RegionPolicy
+class AreaPolicy < RegionPolicy
 
   def mappable?
     true

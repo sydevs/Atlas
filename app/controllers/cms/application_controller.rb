@@ -32,7 +32,7 @@ class CMS::ApplicationController < ActionController::Base
     @resources = current_user.clients
     @resources += current_user.countries
     @resources += current_user.provinces.joins(:country).where(countries: { enable_province_management: true })
-    @resources += current_user.local_areas
+    @resources += current_user.areas
     @resources += current_user.events
     @events_for_review = current_user.accessible_events.needs_review
     @events_recently_expired = current_user.accessible_events.expired
@@ -137,10 +137,10 @@ class CMS::ApplicationController < ActionController::Base
     if @context
       @countries = @context.countries if @context.respond_to?(:countries)
       @provinces = @context.provinces if @context.respond_to?(:provinces)
-      @local_areas = @context.local_areas if @context.respond_to?(:local_areas)
+      @areas = @context.areas if @context.respond_to?(:areas)
     else
       @countries = Country.default_scoped
-      @local_areas = LocalArea.international
+      @areas = Area.international
     end
 
     render 'cms/views/regions'
@@ -203,7 +203,7 @@ class CMS::ApplicationController < ActionController::Base
     end
 
     def set_context!
-      [Registration, Event, Venue, Manager, LocalArea, Province, Country, Client].each do |model|
+      [Registration, Event, Venue, Manager, Area, Province, Country, Client].each do |model|
         keys = model.model_name
         param_key = "#{keys.param_key}_id"
         next unless params[param_key]

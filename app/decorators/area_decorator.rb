@@ -1,4 +1,4 @@
-module LocalAreaDecorator
+module AreaDecorator
 
   def label
     if country_code?

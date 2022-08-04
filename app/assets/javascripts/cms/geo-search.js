@@ -22,10 +22,10 @@ const GeoSearch = {
   },
 
   loadAreaSearch: function() {
-    this.$name = $('#local_area_name')
-    this.$latitude = $('#local_area_latitude')
-    this.$longitude = $('#local_area_longitude')
-    this.$radius = $('#local_area_radius')
+    this.$name = $('#area_name')
+    this.$latitude = $('#area_latitude')
+    this.$longitude = $('#area_longitude')
+    this.$radius = $('#area_radius')
 
     this.$latitude.change(() => this.onManualUpdate())
     this.$longitude.change(() => this.onManualUpdate())
@@ -34,7 +34,7 @@ const GeoSearch = {
     this.$search.search({
       minCharacters: 3,
       apiSettings: {
-        url: `/cms/local_areas/autocomplete?country=${this.$search.data('country')}&query={query}`,
+        url: `/cms/areas/autocomplete?country=${this.$search.data('country')}&query={query}`,
       },
       onSelect: (result, _response) => {
         this.$name.val(result.structured_formatting.main_text)
@@ -71,7 +71,7 @@ const GeoSearch = {
 
   fetchGeometry(place_id) {
     $.ajax({
-      url: '/cms/local_areas/autocomplete',
+      url: '/cms/areas/autocomplete',
       type: 'GET',
       dataType: 'json',
       data: { place_id: place_id },

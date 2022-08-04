@@ -31,7 +31,7 @@ module Types
     field :images, [Types::ImageType], null: true, resolver_method: :get_images
 
     field :venue, Types::VenueType, null: false, resolver_method: :get_venue
-    field :area, Types::LocalAreaType, null: false, resolver_method: :get_area
+    field :area, Types::AreaType, null: false, resolver_method: :get_area
     field :location, Types::LocationType, null: false, resolver_method: :get_location
 
     field :created_at, GraphQL::Types::ISO8601DateTime, null: false
@@ -46,7 +46,7 @@ module Types
     end
 
     def get_area
-      object.local_area.extend(LocalAreaDecorator)
+      object.area.extend(AreaDecorator)
     end
 
     def get_timing

@@ -12,17 +12,17 @@ h2
 = render 'mail/application/stats', stats: @stats, old_stats: @old_stats
 
 table.data
-  - if @new_provinces.present? || @new_local_areas.present?
+  - if @new_provinces.present? || @new_areas.present?
     tr
       th = translate('mail.summary.data.new_regions')
       td
         - @new_provinces.each do |province|
           div
             = link_to ProvinceDecorator.get_name(province.province_code, province.country.country_code), email_login(cms_province_url(province))
-        - @new_local_areas.each do |local_area|
+        - @new_areas.each do |area|
           div
-            = link_to local_area.name, email_login(cms_local_area_url(local_area))
-  - if @new_province_managers.present? || @new_local_area_managers.present?
+            = link_to area.name, email_login(cms_area_url(area))
+  - if @new_province_managers.present? || @new_area_managers.present?
     tr
       th = translate('mail.summary.data.new_managers')
       td
@@ -36,7 +36,7 @@ table.data
             - else
               |  (#{record.name})
               
-        - @new_local_area_managers.each do |managed_record|
+        - @new_area_managers.each do |managed_record|
           - manager = managed_record.manager
           - record = managed_record.record
           div
@@ -46,7 +46,7 @@ table.data
             - else
               |  (#{record.name})
   
-  - if @inactive_provinces.present? || @inactive_local_areas.present?
+  - if @inactive_provinces.present? || @inactive_areas.present?
     tr
       th = translate('mail.summary.data.inactive_regions')
       td
@@ -54,10 +54,10 @@ table.data
           div
             = link_to ProvinceDecorator.get_name(province.province_code, province.country.country_code), email_login(cms_province_url(province))
             |  (#{time_ago_in_words province.last_activity_on})
-        - @inactive_local_areas.each do |local_area|
+        - @inactive_areas.each do |area|
           div
-            = link_to local_area.name, email_login(cms_local_area_url(local_area))
-            |  (#{time_ago_in_words local_area.last_activity_on})
+            = link_to area.name, email_login(cms_area_url(area))
+            |  (#{time_ago_in_words area.last_activity_on})
 
 .actions
   a.button href=email_login(cms_country_url(@country))

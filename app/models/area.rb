@@ -1,4 +1,4 @@
-class LocalArea < ApplicationRecord
+class Area < ApplicationRecord
 
   # Extensions
   include Manageable
@@ -13,8 +13,8 @@ class LocalArea < ApplicationRecord
   belongs_to :country, foreign_key: :country_code, primary_key: :country_code, optional: true
   belongs_to :province, foreign_key: :province_code, primary_key: :province_code, optional: true
 
-  has_many :local_area_venues
-  has_many :venues, through: :local_area_venues
+  has_many :area_venues
+  has_many :venues, through: :area_venues
   # has_many :associated_registrations, through: :associated_events, source: :registrations
 
   has_many :events, dependent: :delete_all, class_name: "OnlineEvent"

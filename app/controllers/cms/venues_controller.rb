@@ -4,7 +4,7 @@ class CMS::VenuesController < CMS::ApplicationController
   prepend_before_action { @model = Venue }
 
   def new
-    if @context.is_a?(LocalArea)
+    if @context.is_a?(Area)
       super country_code: @context.country_code, province_code: @context.province_code
     elsif @context.is_a?(Province)
       super country_code: @context.country_code, province_code: @context.province_code
@@ -18,9 +18,9 @@ class CMS::VenuesController < CMS::ApplicationController
   def create
     @record = @scope.new(parameters)
     
-    if @record.valid? && @context.is_a?(LocalArea) && !@context.contains?(@record)
-      authorize LocalArea, :new?
-      @record.errors.add(:base, I18n.translate('cms.messages.venue.out_of_bounds', local_area: @context.name))
+    if @record.valid? && @context.is_a?(Area) && !@context.contains?(@record)
+      authorize Area, :new?
+      @record.errors.add(:base, I18n.translate('cms.messages.venue.out_of_bounds', area: @context.name))
       render 'cms/views/new'
     else
       super parameters

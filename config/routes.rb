@@ -33,7 +33,7 @@ Rails.application.routes.draw do
         get :reminder, on: :collection
       end
 
-      resources :countries, :provinces, :local_areas, only: %i[] do
+      resources :countries, :provinces, :areas, only: %i[] do
         get :summary
         get :summary, on: :collection
       end
@@ -76,7 +76,7 @@ Rails.application.routes.draw do
       resources :venues, only: %i[index new create]
       resources :events, only: %i[index]
       resources :provinces, only: %i[new create]
-      resources :local_areas, only: %i[new create]
+      resources :areas, only: %i[new create]
       resources :audits, only: %i[index]
     end
 
@@ -85,11 +85,11 @@ Rails.application.routes.draw do
       resources :managers, only: %i[index new create destroy]
       resources :venues, only: %i[index new create]
       resources :events, only: %i[index]
-      resources :local_areas, only: %i[new create]
+      resources :areas, only: %i[new create]
       resources :audits, only: %i[index]
     end
 
-    resources :local_areas, except: %i[index] do
+    resources :areas, except: %i[index] do
       get :autocomplete, on: :collection
       resources :managers, only: %i[index new create destroy]
       resources :venues, only: %i[index new create]
