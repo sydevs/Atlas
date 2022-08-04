@@ -34,7 +34,7 @@ const GeoSearch = {
     this.$search.search({
       minCharacters: 3,
       apiSettings: {
-        url: `/cms/areas/autocomplete?country=${this.$search.data('country')}&query={query}`,
+        url: `/cms/areas/geosearch?country=${this.$search.data('country')}&query={query}`,
       },
       onSelect: (result, _response) => {
         this.$name.val(result.structured_formatting.main_text)
@@ -58,7 +58,7 @@ const GeoSearch = {
     this.$search.search({
       minCharacters: 3,
       apiSettings: {
-        url: country ? `/cms/venues/autocomplete?country=${country}&query={query}` : '/cms/venues/autocomplete?query={query}',
+        url: country ? `/cms/venues/geosearch?country=${country}&query={query}` : '/cms/venues/geosearch?query={query}',
       },
       onSelect: (result, _response) => {
         this.$name.val(result.structured_formatting.main_text)
@@ -71,7 +71,7 @@ const GeoSearch = {
 
   fetchGeometry(place_id) {
     $.ajax({
-      url: '/cms/areas/autocomplete',
+      url: '/cms/areas/geocode',
       type: 'GET',
       dataType: 'json',
       data: { place_id: place_id },

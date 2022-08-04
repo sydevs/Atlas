@@ -27,27 +27,17 @@ class CMS::AreasController < CMS::ApplicationController
     redirect_to [:cms, @record.parent, :regions]
   end
 
-  def autocomplete
-    authorize Area, :geosearch?
-    data = {
+  def geocode args = {}
+    authorize @record || @model
+    args.merge!({
       language: I18n.locale,
       sessiontoken: session.id,
-    }
+      placeid: params[:place_id],
+    })
 
-    if params[:place_id].present?
-      data[:placeid] = params[:place_id]
-      result = GoogleMapsAPI.fetch_area(data)
-    else
-      data[:components] = "country:#{params[:country]}" if params[:country].present?
-      data[:input] = params[:query]
-      result = GoogleMapsAPI.predict(data)
-    end
-
-    if result
-      render json: result
-    else
-      render json: {}, status: 404
-    end
+    result = GoogleMapsAPI.fetch_area(args)
+    puts "RESULT #{result.inspect}"
+    render json: result, status: result ? 200 : 404
   end
 
   private
