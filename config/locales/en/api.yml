@@ -3,4 +3,4 @@ en:
     distance: "%{distance} km away"
     event:
       label: "%{category} at %{venue}"
-      online_label: "%{category} from %{city}"
+      online_label: "%{category} from %{area}"

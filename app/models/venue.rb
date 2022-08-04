@@ -18,7 +18,7 @@ class Venue < ApplicationRecord
 
   has_many :events, inverse_of: :venue
   # has_many :events, as: :location, dependent: :delete_all, class_name: "OfflineEvent"
-  has_many :publicly_visible_events, -> { publicly_visible }, as: :location, class_name: 'OfflineEvent'
+  has_many :publicly_visible_events, -> { publicly_visible }, class_name: 'OfflineEvent'
 
   # Validations
   # validates :street, presence: true

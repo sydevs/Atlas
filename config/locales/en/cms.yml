@@ -87,8 +87,7 @@ en:
         phone_verified: "Your phone number is now verified!"
         email_verification_resent: "An email verification has been sent to %{name}"
       cannot_create:
-        event: "New events cannot be created here, they must be added directly to a venue."
-        venue: "New venues cannot be created here, they must be added directly to a region within a country."
+        event: "New events cannot be created here, they must be added directly to a city."
 
     forms:
       event:

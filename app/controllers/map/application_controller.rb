@@ -47,7 +47,7 @@ class Map::ApplicationController < ActionController::Base
     @events = GraphqlAPI.events(online: params[:online])
 
     if params[:online]
-      @language_codes = Event.where(online: params[:online]).distinct.pluck(:language_code) || []
+      @language_codes = Event.online(params[:online]).distinct.pluck(:language_code) || []
     else
       @language_codes = Event.distinct.pluck(:language_code) || []
     end

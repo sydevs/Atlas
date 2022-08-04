@@ -3,4 +3,4 @@ ru:
     distance: "%{distance} км отсюда"
     event:
       label: "%{category} в %{venue}"
-      online_label: "%{category} из %{city}"
+      online_label: "%{category} из %{area}"

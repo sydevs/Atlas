@@ -125,7 +125,7 @@ module Types
       scope = Event
       scope = online ? OnlineEvent : OfflineEvent unless online.nil?
       scope = scope.publicly_visible
-      scope = scope.joins(:location).where(locations: { country_code: country }) if country.present?
+      scope = scope.joins(:local_area).where(local_areas: { country_code: country }) if country.present?
       scope = scope.where(recurrence: recurrence) if Event.recurrences.key?(recurrence)
       scope = scope.where(language_code: language_code.upcase) if language_code.present?
       scope = scope.where(id: ids) if ids.present?

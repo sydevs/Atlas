@@ -1,20 +1,24 @@
 module EventDecorator
 
-  def decorated_location
-    @location ||= begin
-      location.extend("#{location.class}Decorator".constantize)
+  def decorated_local_area
+    @local_area ||= begin
+      local_area.extend(LocalAreaDecorator)
+    end
+  end
+
+  def decorated_venue
+    @venue ||= begin
+      venue.extend(VenueDecorator)
     end
   end
 
   def label
     if custom_name.present?
       custom_name
-    elsif location.is_a?(LocalArea)
-      I18n.translate('api.event.online_label', category: category_label, city: decorated_location.label)
-    elsif location.is_a?(Venue)
-      I18n.translate('api.event.label', category: category_label, venue: decorated_location.label)
+    elsif online?
+      I18n.translate('api.event.online_label', category: category_label, area: decorated_local_area.label)
     else
-      category_name
+      I18n.translate('api.event.label', category: category_label, venue: decorated_venue.label)
     end
   end
 
@@ -24,7 +28,6 @@ module EventDecorator
         "#{local_area.name}, #{CountryDecorator.get_short_label(local_area.country_code)}"
       else
         venue.address
-        # "address" # [room, venue.street, venue.city, decorated_location.province_name].compact.join(', ')
       end
     end
   end
@@ -102,7 +105,7 @@ module EventDecorator
         mode: registration_mode,
         url: registration_url,
       },
-      online: online,
+      online: online?,
       online_url: online_url,
     }
   end
