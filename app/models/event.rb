@@ -42,6 +42,7 @@ class Event < ApplicationRecord
   validates :end_date, presence: true, if: :course_category?
   validates :end_time, presence: true, if: -> { festival_category? || concert_category? }
   validates :manager, presence: true
+  validates_presence_of :venue, if: :online?
   # validates :type, presence: true
   validates_numericality_of :registration_limit, greater_than: 0, allow_nil: true
   validates_associated :pictures
@@ -84,11 +85,6 @@ class Event < ApplicationRecord
   def language_code= value
     # Only accept languages which are in the language list
     super value if I18nData.languages.key?(value)
-  end
-
-  def online?
-    !venue_id?
-    # type == "OnlineEvent"
   end
 
   def should_finish?
