@@ -8,11 +8,4 @@ class OfflineEvent < Event
 
   # Delegations
   delegate :latitude, :longitude, to: :venue
-  alias parent venue
-
-  # Methods
-
-  def parent_managers
-    venue.parent.managers
-  end
 end

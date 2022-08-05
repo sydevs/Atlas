@@ -8,5 +8,4 @@ class OnlineEvent < Event
 
   # Delegations
   delegate :latitude, :longitude, to: :area
-  alias parent area
 end
