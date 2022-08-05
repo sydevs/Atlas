@@ -16,7 +16,7 @@ ru:
         # Countable
         one: "Страна"
         other: "Стран"
-      province:
+      region:
         # Basic pluralization
         single: "Регион"
         plural: "Регионы"
@@ -122,15 +122,15 @@ ru:
         manager_id: :activerecord.models.manager.single # Do not translate
         country_code: :activerecord.models.country.single # Do not translate
         default_language_code: "Язык события по умолчанию"
-        enable_province_management: "Разрешить региональное управление" 
+        enable_region_management: "Разрешить региональное управление" 
         bounds: "Bounds" # TODO: Translate
         last_activity_on: :activerecord.attributes.generic.last_activity_on # Do not translate
         summary_email_sent_at: :activerecord.attributes.generic.summary_email_sent_at # Do not translate
 
-      province:
+      region:
         manager_id: :activerecord.models.manager.single # Do not translate
         country_code: :activerecord.models.country.single # Do not translate
-        province_code: :activerecord.models.province.single # Do not translate
+        province_code: :activerecord.models.region.single # Do not translate
         last_activity_on: :activerecord.attributes.generic.last_activity_on # Do not translate
         summary_email_sent_at: :activerecord.attributes.generic.summary_email_sent_at # Do not translate
 
@@ -138,7 +138,7 @@ ru:
         manager_id: :activerecord.models.manager.single # Do not translate
         name: :activerecord.attributes.generic.name # Do not translate
         country_code: :activerecord.models.country.single # Do not translate
-        province_code: :activerecord.models.province.single # Do not translate
+        province_code: :activerecord.models.region.single # Do not translate
         coordinates: "Местонахождение"
         latitude: "Широта"
         longitude: "Долгота"
@@ -154,7 +154,7 @@ ru:
         address: "Адрес"
         street: "Улица"
         city: "Город"
-        province_code: :activerecord.models.province.single # Do not translate
+        province_code: :activerecord.models.region.single # Do not translate
         country_code: :activerecord.models.country.single # Do not translate
         postcode: "Почтовый индекс"
         coordinates: "Местонахождение"

@@ -33,7 +33,7 @@ Rails.application.routes.draw do
         get :reminder, on: :collection
       end
 
-      resources :countries, :provinces, :areas, only: %i[] do
+      resources :countries, :regions, :areas, only: %i[] do
         get :summary
         get :summary, on: :collection
       end
@@ -73,12 +73,12 @@ Rails.application.routes.draw do
       resources :managers, only: %i[index new create destroy]
       resources :venues, only: %i[index new create]
       resources :events, only: %i[index]
-      resources :provinces, only: %i[index new create]
+      resources :regions, only: %i[index new create]
       resources :areas, only: %i[index new create]
       resources :audits, only: %i[index]
     end
 
-    resources :provinces, except: %i[edit update index] do
+    resources :regions, except: %i[edit update index] do
       resources :managers, only: %i[index new create destroy]
       resources :venues, only: %i[new create]
       resources :events, only: %i[index]
@@ -114,7 +114,7 @@ Rails.application.routes.draw do
       get :resend_verification
       get :activity
       get :countries
-      get :provinces
+      get :regions
       get :search
       resources :managed_records, only: %i[index]
       resources :clients, only: %i[index]

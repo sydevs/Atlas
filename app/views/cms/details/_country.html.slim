@@ -1,14 +1,14 @@
 
-- if policy(@record).new_association?(:provinces) || policy(@record).new_association?(:areas)
+- if policy(@record).new_association?(:regions) || policy(@record).new_association?(:areas)
   .ui.small.icon.message
     i.question.icon
     .content
-      - if @record.enable_province_management?
-        a.ui.right.floated.button href=url_for([:cms, @record, :provinces])
-          = translate('cms.details.create_province_manager.action')
+      - if @record.enable_region_management?
+        a.ui.right.floated.button href=url_for([:cms, @record, :regions])
+          = translate('cms.details.create_region_manager.action')
           i.right.arrow.icon
-        .header = translate('cms.details.create_province_manager.title')
-        .description = translate('cms.details.create_province_manager.description', action: translate_model(Province))
+        .header = translate('cms.details.create_region_manager.title')
+        .description = translate('cms.details.create_region_manager.description', action: translate_model(Region))
       - else
         a.ui.right.floated.button href=url_for([:cms, @record, :areas])
           = translate('cms.details.create_city_manager.action')

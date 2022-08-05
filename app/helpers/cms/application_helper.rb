@@ -2,7 +2,7 @@ module CMS::ApplicationHelper
 
   MODEL_ICONS = {
     countries: 'globe americas',
-    provinces: 'map',
+    regions: 'map',
     areas: 'dot circle',
     venues: 'map marker',
     events: 'calendar',
@@ -31,7 +31,7 @@ module CMS::ApplicationHelper
 
   PLACE_MODELS = %i[
     countries
-    provinces
+    regions
     areas
   ]
 

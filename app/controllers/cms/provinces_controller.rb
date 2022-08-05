@@ -1,6 +1,6 @@
-class CMS::ProvincesController < CMS::ApplicationController
+class CMS::RegionsController < CMS::ApplicationController
 
-  prepend_before_action { @model = Province }
+  prepend_before_action { @model = Region }
 
   def create
     super parameters
@@ -13,7 +13,7 @@ class CMS::ProvincesController < CMS::ApplicationController
   private
 
     def parameters
-      params.fetch(:province, {}).permit(:country_code, :province_code)
+      params.fetch(:region, {}).permit(:country_code, :province_code)
     end
 
 end

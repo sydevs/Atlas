@@ -113,9 +113,9 @@ de:
         must_be_new: "Nur Länder, die noch nicht hinzugefügt wurden, sind unten aufgeführt."
         language: "Die Standardsprache, die Veranstaltungen in diesem Land normalerweise abgehalten werden."
         no_default_language: "Kein Standard"
-        province_management: "Wenn es aktiviert ist, können Sie Regionen (Provinzen, Staaten usw.) in diesem Land an die Regionen ausschalten und zuordnen. Dies ist nützlich für größere Länder (China, USA, Australien, etc.) und unnötig für kleine Länder (Belgien, Litauen, Singapur usw.)."
+        region_management: "Wenn es aktiviert ist, können Sie Regionen (Provinzen, Staaten usw.) in diesem Land an die Regionen ausschalten und zuordnen. Dies ist nützlich für größere Länder (China, USA, Australien, etc.) und unnötig für kleine Länder (Belgien, Litauen, Singapur usw.)."
         bounds: "Wenn ein Land angegeben wird, wenn die Karte eingebettet wird, werden diese Grenzen als die erste Ansicht verwendet. Die Koordinaten sollten als 4 Komma seperirte  Nummern eingegeben werden (Süden, Westen, Nord, Ost)."
-      province:
+      region:
         must_be_new: "Nur Regionen, die noch nicht hinzugefügt wurden, sind unten aufgeführt."
         prompt: "Landkreis / Bundesland / Land"
       area:
@@ -255,7 +255,7 @@ de:
         title: "Fragst du dich, wie man ein Ereignis erstellt?"
         description: "Klicken Sie auf die Registerkarte \"%{action}\" und drücken Sie \"Event hinzufügen\""
         action: "Event hinzufügen"
-      create_province_manager:
+      create_region_manager:
         title: "Wundern Sie sich, wie Sie einen Regionalmanager erstellen?"
         description: "Wählen Sie ein Bundesland oder Region  auf der Registerkarte\"%{action}\""
         action: "Jetzt gehen"

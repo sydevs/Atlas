@@ -49,7 +49,7 @@ module KlaviyoAPI
         'room': event.room,
         'address1': venue.street,
         'city': venue.city,
-        'region': venue.province_name,
+        'region': venue.region_name,
         'country': venue.country_name,
         'postcode': venue.postcode,
         'latitude': venue.latitude,

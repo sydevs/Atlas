@@ -11,7 +11,7 @@ class Area < ApplicationRecord
 
   # Associations
   belongs_to :country, foreign_key: :country_code, primary_key: :country_code, optional: true
-  belongs_to :province, foreign_key: :province_code, primary_key: :province_code, optional: true
+  belongs_to :region, foreign_key: :province_code, primary_key: :province_code, optional: true
 
   has_many :area_venues
   has_many :venues, through: :area_venues
@@ -39,7 +39,7 @@ class Area < ApplicationRecord
   # Methods
 
   def parent
-    province || country || nil
+    region || country || nil
   end
 
   def associated_events
@@ -61,7 +61,7 @@ class Area < ApplicationRecord
 
   def managed_by? manager, super_manager: nil
     return true if managers.include?(manager) && super_manager != true
-    return true if province.present? && province.managed_by?(manager) && super_manager != false
+    return true if region.present? && region.managed_by?(manager) && super_manager != false
     return true if country.present? && country.managed_by?(manager) && super_manager != false
 
     false
@@ -82,7 +82,7 @@ class Area < ApplicationRecord
   private
 
     def ensure_country_consistency
-      self.country_code = province.country_code if province.present?
+      self.country_code = region.country_code if region.present?
     end
 
     def ensure_venue_consistency

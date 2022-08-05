@@ -5,7 +5,7 @@ namespace :mail do
       %w[
         managers:welcome
         application:summary
-        countries:summary provinces:summary areas:summary
+        countries:summary regions:summary areas:summary
         events:status events:reminder
         managed_records:created managed_records:event_manager_changed
       ].each_with_index do |test, index|
@@ -44,13 +44,13 @@ namespace :mail do
       end
     end
 
-    namespace :provinces do
-      desc 'Sends summary for one province'
+    namespace :regions do
+      desc 'Sends summary for one region'
       task :summary, [:id] => :environment do |_, args|
         ActionMailer::Base.delivery_method = :letter_opener
-        province = args.id ? Province.find(args.id) : Province.joins(:managers).reorder('RANDOM()').first
-        manager = province.managers.reorder('RANDOM()').first
-        PlaceMailer.with(place: province, manager: manager, test: true).summary.deliver_now
+        region = args.id ? Region.find(args.id) : Region.joins(:managers).reorder('RANDOM()').first
+        manager = region.managers.reorder('RANDOM()').first
+        PlaceMailer.with(place: region, manager: manager, test: true).summary.deliver_now
       end
     end
 

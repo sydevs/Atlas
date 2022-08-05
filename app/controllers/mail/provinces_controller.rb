@@ -1,11 +1,11 @@
-class Mail::ProvincesController < Mail::ApplicationController
+class Mail::RegionsController < Mail::ApplicationController
 
-  before_action :fetch_province
+  before_action :fetch_region
 
   def summary
     summary_period = PlaceMailer::SUMMARY_PERIOD
-    province_label = ProvinceDecorator.get_name(@place.province_code, @place.country.country_code)
-    @subject = I18n.translate('mail.place.summary.subject', place: province_label)
+    region_label = RegionDecorator.get_name(@place.province_code, @place.country.country_code)
+    @subject = I18n.translate('mail.place.summary.subject', place: region_label)
 
     @start_of_period = summary_period.ago.beginning_of_week
     @end_of_period = @start_of_period + summary_period
@@ -29,11 +29,11 @@ class Mail::ProvincesController < Mail::ApplicationController
 
   private
 
-    def fetch_province
-      if params[:province_id]
-        @place = Province.find(params[:province_id])
+    def fetch_region
+      if params[:region_id]
+        @place = Region.find(params[:region_id])
       else
-        @place = Province.reorder('RANDOM()').first
+        @place = Region.reorder('RANDOM()').first
       end
     end
 

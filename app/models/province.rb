@@ -1,4 +1,4 @@
-class Province < ApplicationRecord
+class Region < ApplicationRecord
 
   # Extensios
   include Manageable
@@ -9,7 +9,7 @@ class Province < ApplicationRecord
 
   # Associations
   belongs_to :country, foreign_key: :country_code, primary_key: :country_code
-  has_many :areas, inverse_of: :province, foreign_key: :province_code, primary_key: :province_code, dependent: :delete_all
+  has_many :areas, inverse_of: :region, foreign_key: :province_code, primary_key: :province_code, dependent: :delete_all
 
   has_many :venues, foreign_key: :province_code, primary_key: :province_code
   has_many :events, through: :venues
@@ -29,7 +29,7 @@ class Province < ApplicationRecord
   # Methods
 
   def contains? venue
-    venue.province == province_code
+    venue.region == province_code
   end
 
   def managed_by? manager, super_manager: nil

@@ -4,7 +4,7 @@ class CMS::AreasController < CMS::ApplicationController
   prepend_before_action { @model = Area }
 
   def new
-    if @context.is_a?(Province)
+    if @context.is_a?(Region)
       super country_code: @context.country_code
     else
       super

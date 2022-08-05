@@ -31,7 +31,7 @@ class CMS::ApplicationController < ActionController::Base
     authorize current_user, :dashboard?
     @resources = current_user.clients
     @resources += current_user.countries
-    @resources += current_user.provinces.joins(:country).where(countries: { enable_province_management: true })
+    @resources += current_user.regions.joins(:country).where(countries: { enable_region_management: true })
     @resources += current_user.areas
     @resources += current_user.events
     @events_for_review = current_user.accessible_events.needs_review
@@ -188,7 +188,7 @@ class CMS::ApplicationController < ActionController::Base
     end
 
     def set_context!
-      [Registration, Event, Venue, Manager, Area, Province, Country, Client].each do |model|
+      [Registration, Event, Venue, Manager, Area, Region, Country, Client].each do |model|
         keys = model.model_name
         param_key = "#{keys.param_key}_id"
         next unless params[param_key]

@@ -6,7 +6,7 @@ class CMS::VenuesController < CMS::ApplicationController
   def new
     if @context.is_a?(Area)
       super country_code: @context.country_code, province_code: @context.province_code
-    elsif @context.is_a?(Province)
+    elsif @context.is_a?(Region)
       super country_code: @context.country_code, province_code: @context.province_code
     elsif @context.is_a?(Country)
       super country_code: @context.country_code

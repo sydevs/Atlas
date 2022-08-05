@@ -13,15 +13,15 @@ class Mail::CountriesController < Mail::ApplicationController
     query = ['created_at >= ? AND created_at <= ?', @start_of_period, @end_of_period]
     managed_records_query = ['managed_records.created_at >= ? AND managed_records.created_at <= ?', @start_of_period, @end_of_period]
 
-    @new_provinces = @country.provinces.where(*query)
+    @new_regions = @country.regions.where(*query)
     @new_areas = @country.areas.where(*query)
-    @new_province_managers = @country.province_manager_records.where(*managed_records_query).joins(:manager)
+    @new_region_managers = @country.region_manager_records.where(*managed_records_query).joins(:manager)
     @new_area_managers = @country.area_manager_records.where(*managed_records_query).joins(:manager)
-    @inactive_provinces = @country.provinces.inactive_since(summary_period.ago)
+    @inactive_regions = @country.regions.inactive_since(summary_period.ago)
     @inactive_areas = @country.areas.inactive_since(summary_period.ago)
 
     @stats = {
-      active_provinces: @country.provinces.active_since(summary_period.ago).count,
+      active_regions: @country.regions.active_since(summary_period.ago).count,
       active_events: @country.events.publicly_visible.count,
       new_registrations: @country.associated_registrations.since(summary_period.ago).count,
     }

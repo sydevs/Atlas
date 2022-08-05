@@ -18,7 +18,7 @@ class ManagerPolicy < DatabasePolicy
 
   def index_association? association = nil
     return false if association == :audits
-    return false if %i[clients countries provinces areas].include?(association)
+    return false if %i[clients countries regions areas].include?(association)
     return false if association == :events && user.type == :worldwide
     return true if association == :managed_records && !(user == record && %i[worldwide event none].include?(user.type))
 
@@ -33,7 +33,7 @@ class ManagerPolicy < DatabasePolicy
     user == record
   end
 
-  def provinces?
+  def regions?
     user == record
   end
 

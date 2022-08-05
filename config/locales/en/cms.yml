@@ -114,11 +114,11 @@ en:
         must_be_new: "Only countries which haven't already been added are listed below."
         language: "The default language that events in this country are usually in."
         no_default_language: "No default"
-        province_management: "If enabled, you will be able to view and assign managers to regions (provinces, states, etc) within this country. This is useful for larger countries (China, USA, Australia, etc), and unnessecary for small countries (Belgium, Lithuania, Singapore, etc)."
+        region_management: "If enabled, you will be able to view and assign managers to regions (regions, states, etc) within this country. This is useful for larger countries (China, USA, Australia, etc), and unnessecary for small countries (Belgium, Lithuania, Singapore, etc)."
         bounds: "If a country is specified when embedding the map, these bounds will be used as the initial view. The coordinates should be entered as 4 comma-separated numbers (south,west,north,east)."
-      province:
+      region:
         must_be_new: "Only regions which haven't already been added are listed below."
-        prompt: "Province / State / County"
+        prompt: "Region / State / County"
       area:
         location: "A custom area is defined using coordinates on the map (latitude and longitude) and a radius, to make a circular region."
       event:
@@ -259,9 +259,9 @@ en:
         title: "Wondering how to create an event?"
         description: "Click on the \"%{action}\" tab, and press \"Add Event\""
         action: "Add Event"
-      create_province_manager:
+      create_region_manager:
         title: "Wondering how to create a regional manager?"
-        description: "Choose a province, state or county on the \"%{action}\" tab."
+        description: "Choose a region, state or county on the \"%{action}\" tab."
         action: "Go now"
       create_city_manager:
         title: "Wondering how to create a city manager?"

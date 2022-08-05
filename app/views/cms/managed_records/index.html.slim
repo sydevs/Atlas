@@ -3,7 +3,7 @@ ruby:
   content_for :title, [translate_model(ManagedRecord), @context&.label].compact.join(' | ')
 
 = render 'cms/views/context' do
-  - [Client, Country, Province, Area].each do |model|
+  - [Client, Country, Region, Area].each do |model|
     - records = @context.send(model.model_name.route_key)
     - if records.present?
       h3.ui.dividing.header

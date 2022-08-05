@@ -11,7 +11,7 @@ class Venue < ApplicationRecord
 
   # Associations
   belongs_to :country, foreign_key: :country_code, primary_key: :country_code, optional: true
-  belongs_to :province, foreign_key: :province_code, primary_key: :province_code, optional: true
+  belongs_to :region, foreign_key: :province_code, primary_key: :province_code, optional: true
 
   has_many :area_venues
   has_many :areas, through: :area_venues
@@ -22,7 +22,7 @@ class Venue < ApplicationRecord
 
   # Validations
   # validates :street, presence: true
-  # validates :province_code, presence: true, if: :country_has_provinces?
+  # validates :province_code, presence: true, if: :country_has_regions?
   # validates :country_code, presence: true
   validates_presence_of :place_id, :address
 
@@ -41,7 +41,7 @@ class Venue < ApplicationRecord
   # Methods
 
   def parent
-    areas.first || (country.enable_province_management? ? province || country : country)
+    areas.first || (country.enable_region_management? ? region || country : country)
   end
 
 =begin
@@ -90,8 +90,8 @@ class Venue < ApplicationRecord
       self.areas = areas
     end
 
-    def country_has_provinces?
-      return country.nil? || country.enable_province_management
+    def country_has_regions?
+      return country.nil? || country.enable_region_management
     end
 
     def fetch_coordinates
