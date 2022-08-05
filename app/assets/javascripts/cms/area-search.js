@@ -5,14 +5,10 @@ const AreaSearch = {
   load() {
     this.$search = $('#js-area-search')
     this.$name = $('#area_name')
-    this.$latitude = $('#area_latitude')
-    this.$longitude = $('#area_longitude')
-    this.$radius = $('#area_radius')
-
-    this.$latitude.change(() => this.onManualUpdate())
-    this.$longitude.change(() => this.onManualUpdate())
-    this.$radius.change(() => this.onManualUpdate())
-
+    this.$latitude = $('#js-map-latitude')
+    this.$longitude = $('#js-map-longitude')
+    this.$radius = $('#js-map-radius')
+    
     this.$search.search({
       minCharacters: 3,
       apiSettings: {
@@ -34,38 +30,16 @@ const AreaSearch = {
       dataType: 'json',
       data: { place_id: place_id },
       success: (data) => {
-        data.radius = data.radius.toFixed(2)
-        data.latitude = data.latitude.toFixed(3)
-        data.longitude = data.longitude.toFixed(3)
+        this.$latitude.val(data.latitude.toFixed(3)).trigger('change')
+        this.$longitude.val(data.longitude.toFixed(3)).trigger('change')
+        this.$radius.val(data.radius.toFixed(2)).trigger('change')
 
-        this.disabledAutoUpdate = true
-
-        if (this.mode == 'area') {
-          this.$latitude.val(data.latitude)
-          this.$longitude.val(data.longitude)
-          this.$radius.val(data.radius)
-        } else {
-          this.$latitude.val(data.latitude)
-          this.$longitude.val(data.longitude)
-          this.$radius.val(data.radius)
-        }
-
-        this.disabledAutoUpdate = false
-        RegionMap.setCircle(data.latitude, data.longitude, data.radius)
+        if (Map.instance) Map.instance.invalidate()
       },
       error: (data) => {
         this.$search.search('display message', data, 'message')
       },
     })
-  },
-
-  onManualUpdate() {
-    if (this.disabledAutoUpdate) return
-
-    const latitude = this.$latitude.val()
-    const longitude = this.$longitude.val()
-    const radius = this.$radius.val()
-    RegionMap.setCircle(latitude, longitude, radius)
   }
 }
 

@@ -8,15 +8,15 @@
 
 = f.input :name
 
-#region-map data-editable='true' data-latitude=@record.latitude data-longitude=@record.longitude data-radius=@record.radius
+#map data-editable='true'
 
 .hint = translate('cms.hints.area.location')
 
-= f.input :radius, placeholder: translate_attribute(Area, :radius)
+= f.input :radius, placeholder: translate_attribute(Area, :radius), input_html: { id: 'js-map-radius', step: 0.5 }
 
 .two.fields
-  = f.input :latitude, placeholder: translate_attribute(Area, :latitude)
-  = f.input :longitude, placeholder: translate_attribute(Area, :longitude)
+  = f.input :latitude, placeholder: translate_attribute(Area, :latitude), input_html: { id: 'js-map-latitude' }
+  = f.input :longitude, placeholder: translate_attribute(Area, :longitude), input_html: { id: 'js-map-longitude' }
 
 = f.hidden_field :province_code
 = f.hidden_field :country_code
