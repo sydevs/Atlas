@@ -1,15 +1,15 @@
 module RegionDecorator
 
-  def name
-    RegionDecorator.get_name(province_code, country_code)
-  end
+  # def name
+  #   RegionDecorator.get_name(province_code, country_code)
+  # end
 
   def label
-    RegionDecorator.get_label(province_code, country_code)
+    "#{short_label}, #{country_code}"
   end
 
   def short_label
-    name
+    translations[I18n.locale.to_s] || name || RegionDecorator.get_label(province_code, country_code)
   end
 
   def self.get_name province_code, country_code

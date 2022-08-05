@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_05_142803) do
+ActiveRecord::Schema.define(version: 2022_08_05_181951) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -201,6 +201,8 @@ ActiveRecord::Schema.define(version: 2022_08_05_142803) do
     t.jsonb "geojson"
     t.string "name"
     t.integer "osm_id"
+    t.json "translations"
+    t.jsonb "bounds"
   end
 
   create_table "registrations", force: :cascade do |t|

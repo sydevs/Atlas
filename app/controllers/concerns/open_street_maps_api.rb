@@ -31,7 +31,7 @@ module OpenStreetMapsAPI
     puts "#{url} - #{response.pretty_inspect}"
 
     data = JSON.parse(response.body)
-    data[0]['geojson']
+    data[0].deep_symbolize_keys
   end
 
 end

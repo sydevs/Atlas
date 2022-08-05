@@ -132,7 +132,9 @@ ru:
         country_code: :activerecord.models.country.single # Do not translate
         province_code: :activerecord.models.region.single # Do not translate
         osm_id: "OpenStreetMap ID" # TODO: Translate
-        geojson: "Boundaries" # TODO: Translate
+        bounds: "Bounds" # TODO: Translate
+        geojson: "Borders" # TODO: Translate
+        translations: "Translations" # TODO: Translate
         last_activity_on: :activerecord.attributes.generic.last_activity_on # Do not translate
         summary_email_sent_at: :activerecord.attributes.generic.summary_email_sent_at # Do not translate
 

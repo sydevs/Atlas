@@ -1,8 +1,18 @@
 
+= f.input :name
+
 = f.input :osm_id do
   = f.input_field :osm_id
   = f.hint (translate('cms.hints.region.osm_id', model: translate_model(Region).downcase) + ' ' + tag.a('www.openstreetmap.org', href: 'https://www.openstreetmap.org', target: '_blank')).html_safe
 end
 
-= f.input :name
-= f.input :geojson, as: :json, required: false, input_html: { disabled: true, value: @record.geojson.to_json }
+- unless @record.new_record?
+  - %i[bounds geojson translations].each do |field|
+    - data = @record.send(field)
+    .ui.accordion
+      .ui.title
+        i.dropdown.icon
+        = translate_attribute(@record, field)
+      .content
+        .ui.code.input
+          textarea rows=(1 if field == :bounds) = data ? data.to_json : "Not set"

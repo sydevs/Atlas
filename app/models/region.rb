@@ -43,9 +43,21 @@ class Region < ApplicationRecord
   private
 
     def fetch_geojson
-      return unless osm_id_changed? || geojson.nil?
+      return unless osm_id_changed? || geojson.nil? || bounds.nil? || translations.nil?
 
-      self.geojson = OpenStreetMapsAPI.fetch_data(osm_id)
+      data = OpenStreetMapsAPI.fetch_data(osm_id)
+
+      if data[:address][:country_code] != country_code.downcase
+        self.errors.add(:osm_id, :invalid, "is not within #{country_code}")
+        return
+      end
+
+      self.geojson = data[:geojson]
+      self.bounds = data[:boundingbox]
+      self.translations = data[:namedetails].to_a.filter_map do |key, value|
+        key = key.to_s.split(':')
+        [key[1] || 'en', value] if key[0] == 'name'
+      end.to_h
     end
 
 end
