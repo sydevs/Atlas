@@ -43,7 +43,7 @@ class Manager < ApplicationRecord
     when :country
       parent = countries.first
     when :local
-      parent = areas.international.first || provinces.first || areas.cross_province.first || areas.first
+      parent = provinces.first || areas.first
     when :event
       parent = events.first
     when :client

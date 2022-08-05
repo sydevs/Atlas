@@ -82,10 +82,6 @@ class CMS::ManagersController < CMS::ApplicationController
     end
   end
 
-  def places
-    authorize_association! :places
-  end
-
   def activity
     set_context!
     authorize @context, :view_activity?

@@ -47,7 +47,6 @@ uk:
       # Tertiary menu
       details: "Інформація"
       activity: "Діяльність"
-      places: "Places" # TODO: Translate
       events: # TODO: Translate
         offline: "In-Person Events"
         online: "Online Events"

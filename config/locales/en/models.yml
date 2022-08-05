@@ -62,7 +62,7 @@ en:
         # Countable
         one: "manager"
         other: "managers"
-      managed_records:
+      managed_record:
         # Basic pluralization
         single: "Responsibility"
         plural: "Responsibilities"

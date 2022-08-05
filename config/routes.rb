@@ -112,7 +112,6 @@ Rails.application.routes.draw do
 
     resources :managers do
       get :resend_verification
-      get :places
       get :activity
       get :countries
       get :provinces
@@ -123,6 +122,8 @@ Rails.application.routes.draw do
       resources :events, only: %i[index]
       resources :audits, only: %i[index]
     end
+
+    resources :managed_records, only: %i[index]
 
     resources :clients do
       resources :audits, only: %i[index]

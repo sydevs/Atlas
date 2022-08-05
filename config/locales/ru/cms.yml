@@ -47,7 +47,6 @@ ru:
       # Tertiary menu
       details: "Информация"
       activity: "Активность"
-      places: "Places" # TODO: Translate
       events: # TODO: Translate
         offline: "In-Person Events"
         online: "Online Events"

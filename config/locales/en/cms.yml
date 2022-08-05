@@ -47,7 +47,6 @@ en:
       # Tertiary menu
       details: "Info"
       activity: "Activity"
-      places: "Places"
       events:
         offline: "In-Person Events"
         online: "Online Events"

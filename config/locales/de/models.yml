@@ -62,6 +62,13 @@ de:
         # Countable
         one: "Manager"
         other: "Manager"
+      managed_record: # TODO: Translate
+        # Basic pluralization
+        single: "Responsibility"
+        plural: "Responsibilities"
+        # Countable
+        one: "responsibility"
+        other: "responsibilities"
       audit:
         # Basic pluralization
         single: "Geschichte"

@@ -47,7 +47,6 @@ de:
       # Tertiary menu
       details: "Info"
       activity: "Aktivität"
-      places: "Places" # TODO: Translate
       events:
         offline: "Vorort Veranstaltungen"
         online: "Online Veranstaltungen"

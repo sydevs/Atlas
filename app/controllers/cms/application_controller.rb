@@ -11,8 +11,8 @@ class CMS::ApplicationController < ActionController::Base
   before_action :verify_manager
   before_action :set_locale!
   before_action :set_model_name!
-  before_action :set_context!, only: %i[index new create destroy places images]
-  before_action :set_scope!, except: %i[places images]
+  before_action :set_context!, only: %i[index new create destroy images]
+  before_action :set_scope!, except: %i[images]
   before_action :set_record!, only: %i[show edit update destroy]
   protect_from_forgery with: :exception
 

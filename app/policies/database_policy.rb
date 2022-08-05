@@ -30,6 +30,7 @@ class DatabasePolicy < ApplicationPolicy
 
   def index_association? association = nil
     return false unless manage?
+    return false if association == :managed_records
 
     record.respond_to?(association)
   end

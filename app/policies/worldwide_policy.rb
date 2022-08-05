@@ -18,7 +18,8 @@ class WorldwidePolicy < DatabasePolicy
 
   def index_association? association
     association = association.to_sym
-    return false if %i[registrations pictures].include?(association)
+    return false if %i[managed_records registrations pictures].include?(association)
+    return false if %i[provinces areas].include?(association)
 
     manage?
   end
