@@ -1,4 +1,4 @@
-class CountryPolicy < RegionPolicy
+class CountryPolicy < PlacePolicy
 
   def new_association? association = nil, query = {}
     return nil if association == :events

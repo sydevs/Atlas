@@ -1,4 +1,4 @@
-class RegionPolicy < DatabasePolicy
+class PlacePolicy < DatabasePolicy
 
   def show?
     true

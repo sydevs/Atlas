@@ -50,7 +50,7 @@ namespace :mail do
         ActionMailer::Base.delivery_method = :letter_opener
         province = args.id ? Province.find(args.id) : Province.joins(:managers).reorder('RANDOM()').first
         manager = province.managers.reorder('RANDOM()').first
-        RegionMailer.with(region: province, manager: manager, test: true).summary.deliver_now
+        PlaceMailer.with(place: province, manager: manager, test: true).summary.deliver_now
       end
     end
 
@@ -60,7 +60,7 @@ namespace :mail do
         ActionMailer::Base.delivery_method = :letter_opener
         area = args.id ? Area.find(args.id) : Area.joins(:managers).reorder('RANDOM()').first
         manager = area.managers.reorder('RANDOM()').first
-        RegionMailer.with(region: area, manager: manager, test: true).summary.deliver_now
+        PlaceMailer.with(place: area, manager: manager, test: true).summary.deliver_now
       end
     end
 

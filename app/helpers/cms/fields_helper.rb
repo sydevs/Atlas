@@ -4,7 +4,7 @@ module CMS::FieldsHelper
     new_managed_record: 'plus circle',
     event_verification: 'check circle',
     event_registrations: 'calendar alternate',
-    region_summary: 'dot circle',
+    place_summary: 'dot circle',
     country_summary: 'compass',
     application_summary: 'world',
   }.freeze
@@ -20,7 +20,7 @@ module CMS::FieldsHelper
   def contact_types manager
     result = %i[new_managed_record event_verification]
     result << :event_registrations if manager.events.present?
-    result << :region_summary if manager.provinces.present? || manager.areas.present?
+    result << :place_summary if manager.provinces.present? || manager.areas.present?
     result << :country_summary if manager.countries.present?
     result << :application_summary if manager.administrator?
     # result << :client_summary if manager.clients.present?
@@ -33,8 +33,8 @@ module CMS::FieldsHelper
   
   def contact_type_summary_period type
     case type
-    when :region_summary
-      distance_of_time_in_words(RegionMailer::SUMMARY_PERIOD)
+    when :place_summary
+      distance_of_time_in_words(PlaceMailer::SUMMARY_PERIOD)
     when :country_summary
       distance_of_time_in_words(CountryMailer::SUMMARY_PERIOD)
     when :application_summary

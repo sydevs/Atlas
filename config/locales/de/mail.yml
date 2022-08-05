@@ -35,7 +35,7 @@ de:
         new_registrations: "Neuzulassungen"
         active_events: "Aktive Ereignisse"
         active_countries: "Aktive Länder"
-        active_regions: "Aktive Regionen"
+        active_provinces: "Aktive Regionen"
       data:
         new_countries: "Neue Länder"
         new_managers: "Neue Manager"
@@ -43,7 +43,7 @@ de:
         new_events: "Neue Ereignisse"
         expiring_events: "Auslaufende Ereignisse"
         expired_events: "Vor kurzem abgelaufen"
-        inactive_regions: "Inaktive Regionen"
+        inactive_provinces: "Inaktive Regionen"
 
     event:
       location: "Lage"
@@ -70,7 +70,7 @@ de:
           expired: "Ereignis abgelaufen - %{event}"
           finished: "Ereignis - beendet - %{event}"
         preview:
-          created: "Du bist der Manager eines neuen Ereignisses. '%{event}' wurde in %{region} erstellt."
+          created: "Du bist der Manager eines neuen Ereignisses. '%{event}' wurde in %{place} erstellt."
           needs_review: "'%{event}' muss überprüft werden oder sonst wird es aus der Karte entfernt. Bitte überprüfen Sie, ob die Ereignisinformationen noch korrekt sind."
           needs_urgent_review: "'%{event}' wird bald aus der Karte entfernt, weil der Ereignis-Manager noch nicht auf unsere E-Mail reagiert hat."
           expired: "'%{event}' wurde nicht in %{duration}, aktualisiert und wurde von der Karte entfernt. Aktualisieren Sie dieses Ereignis, um es wieder öffentlich zu machen."
@@ -175,11 +175,11 @@ de:
         preview: "Zusammenfassung der Änderungen in %{country} der letzten 2 Wochen."
         view: "Land Ansehen"
 
-    region:
+    place:
       summary:
-        subject: "Wöchentliches Update für %{region}"
+        subject: "Wöchentliches Update für %{place}"
         title: "Wöchentliches Update"
-        preview: "Zusammenfassung der Änderungen in %{region} in der letzten Woche."
+        preview: "Zusammenfassung der Änderungen in %{place} in der letzten Woche."
         view: "Region ansehen"
 
     managed_record:

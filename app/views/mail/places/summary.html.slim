@@ -1,13 +1,13 @@
 
 - content_for :preview do
-  = translate('mail.region.summary.preview', region: @region.label)
+  = translate('mail.place.summary.preview', place: @place.label)
   '  
   - @stats.each do |key, value|
     ' #{translate(key, scope: 'mail.summary.stats')}: #{value}. 
 
 h2
-  = translate('mail.region.summary.title')
-  .subtitle = @region.label
+  = translate('mail.place.summary.title')
+  .subtitle = @place.label
 
 = render 'mail/application/stats', stats: @stats, old_stats: @old_stats
 
@@ -45,7 +45,7 @@ table.wide.data
 
   - if @inactive_areas.present?
     tr
-      th = translate('mail.summary.data.inactive_regions')
+      th = translate('mail.summary.data.inactive_provinces')
       td
         - @inactive_areas.each do |area|
           div
@@ -53,5 +53,5 @@ table.wide.data
             |  (#{time_ago_in_words area.last_activity_on})
 
 .actions
-  a.button href=email_login(url_for([:cms, @region]))
-    span = translate('mail.region.summary.view')
+  a.button href=email_login(url_for([:cms, @place]))
+    span = translate('mail.place.summary.view')

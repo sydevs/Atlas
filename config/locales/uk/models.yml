@@ -9,7 +9,7 @@ uk:
 
   activerecord:
     models:
-      # Regions
+      # Places
       country:
         # Basic pluralization
         single: "Країна"
@@ -118,7 +118,7 @@ uk:
         finished_at: "Закінчив на"
         updated_at: "Оновлено о"
 
-      # Regions
+      # Places
       country:
         manager_id: :activerecord.models.manager.single # Do not translate
         country_code: :activerecord.models.country.single # Do not translate

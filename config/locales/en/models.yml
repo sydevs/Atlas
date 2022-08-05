@@ -8,7 +8,7 @@ en:
 
   activerecord:
     models:
-      # Regions
+      # Places
       country:
         # Basic pluralization
         single: "Country"
@@ -118,7 +118,7 @@ en:
         finished_at: "Finished At"
         updated_at: "Updated At"
 
-      # Regions
+      # Places
       country:
         manager_id: :activerecord.models.manager.single # Do not translate
         country_code: :activerecord.models.country.single # Do not translate

@@ -175,14 +175,14 @@ de:
             new_managed_record: "Neuer Zugriff"
             event_verification: "Ereignisverifikation"
             event_registrations: "Ereignisregistrierungen"
-            region_summary: "Regionale Zusammenfassung"
+            place_summary: "Regionale Zusammenfassung"
             country_summary: "Landes Zusammenfassung"
             application_summary: "Sahaj Atlas Summary"
           hints:
             new_managed_record: "Eine Nachricht die an Sie gesentet wurde, wenn Sie die Erlaubnis erhalten haben, ein neues Ereignis, eine Region oder eine Ressource auf dem Atlas zu verwalten."
             event_verification: "Nachrichten, die Ereignis- und Stadtmanager anfordern, die Genauigkeit ihrer Ereignisse zu überprüfen. Wird für jeden Veranstaltungen.alle 3 Monate Versandt, Sie können nicht deaktiviert werden."
             event_registrations: "Eine Liste neuer Anmeldungen, die an Ereignismanager gesendet wurden. Wird etwa 24 Stunden vor der Veranstaltung gesendet."
-            region_summary: "Eine Zusammenfassung von Änderungen innerhalb einer Region, die an regionale Manager gesendet wird. Wird alle %{periode} versandt."
+            place_summary: "Eine Zusammenfassung von Änderungen innerhalb einer Region, die an regionale Manager gesendet wird. Wird alle %{periode} versandt."
             country_summary: "Eine Zusammenfassung von Änderungen, die an Ländermanager gesendet wird. Wird alle %{periode} gesendet."
             application_summary: "Eine Zusammenfassung aller Atlas änderungen, die an Administratoren gesendet wurden. Wird alle %{periode} gesendet."
         search: "Geben Sie einen Namen, eine E-Mail oder eine Telefonnummer ein ..."
@@ -284,11 +284,11 @@ de:
           instruction: "Sie haben Zugriff auf alle Aspekte des Atlas CMS (Content Management System). Es ist Ihre Aufgabe, neue Ländermanager zu erstellen und ihnen zu helfen, das System zu verwenden."
         country:
           title: "Landes Manager"
-          description: "Kann Regionen, Veranstaltungsorte, Ereignisse und Manager inerhalb der %{region} erstellen."
+          description: "Kann Regionen, Veranstaltungsorte, Ereignisse und Manager inerhalb der %{place} erstellen."
           instruction: "Es ist Ihre Verantwortung, Regionen in Ihrem Land zu erstellen und Regionale Managern zuzuweisen um Ereignisse zu erstellen. Sie können auch Orte und Events in Ihrem Land anlegen."
         local:
           title: "Lokaler Manager"
-          description: "Kann Orte und Ereignisse in %{region} erstellen"
+          description: "Kann Orte und Ereignisse in %{place} erstellen"
           instruction: "Es ist Ihre Verantwortung, Ereignisse in Ihrem lokalen Bereich zu erstellen. Sie müssen zuerst einen Veranstaltungsort erstellen, bevor Sie Ereignise an diesem Ort erstellen können."
         event:
           title: "Ereignismanager"

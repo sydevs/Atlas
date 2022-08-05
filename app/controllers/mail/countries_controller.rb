@@ -21,7 +21,7 @@ class Mail::CountriesController < Mail::ApplicationController
     @inactive_areas = @country.areas.inactive_since(summary_period.ago)
 
     @stats = {
-      active_regions: @country.provinces.active_since(summary_period.ago).count,
+      active_provinces: @country.provinces.active_since(summary_period.ago).count,
       active_events: @country.events.publicly_visible.count,
       new_registrations: @country.associated_registrations.since(summary_period.ago).count,
     }

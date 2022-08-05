@@ -31,7 +31,7 @@ class Area < ApplicationRecord
   scope :publicly_visible, -> { has_public_events }
   scope :has_public_events, -> { joins(:publicly_visible_events) }
 
-  scope :ready_for_summary_email, -> { where("summary_email_sent_at IS NULL OR summary_email_sent_at <= ?", RegionMailer::SUMMARY_PERIOD.ago) }
+  scope :ready_for_summary_email, -> { where("summary_email_sent_at IS NULL OR summary_email_sent_at <= ?", PlaceMailer::SUMMARY_PERIOD.ago) }
 
   # Callbacks
   after_save :ensure_venue_consistency

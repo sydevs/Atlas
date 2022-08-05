@@ -1,4 +1,4 @@
-class ProvincePolicy < RegionPolicy
+class ProvincePolicy < PlacePolicy
 
   def update?
     false

@@ -74,7 +74,7 @@ table.ui.very.basic.compact.table
         - if !enabled
           i.grey.times.icon
           = translate('cms.hints.manager.contact_settings.options.disabled')
-        - elsif true || %w[event_registrations region_summary country_summary application_summary].include?(type)
+        - elsif true || %w[event_registrations place_summary country_summary application_summary].include?(type)
           i.blue.envelope.icon
           = translate('cms.hints.manager.contact_settings.options.email')
         - else

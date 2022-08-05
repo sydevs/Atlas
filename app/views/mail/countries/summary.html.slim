@@ -14,7 +14,7 @@ h2
 table.data
   - if @new_provinces.present? || @new_areas.present?
     tr
-      th = translate('mail.summary.data.new_regions')
+      th = translate('mail.summary.data.new_places')
       td
         - @new_provinces.each do |province|
           div
@@ -48,7 +48,7 @@ table.data
   
   - if @inactive_provinces.present? || @inactive_areas.present?
     tr
-      th = translate('mail.summary.data.inactive_regions')
+      th = translate('mail.summary.data.inactive_provinces')
       td
         - @inactive_provinces.each do |province|
           div

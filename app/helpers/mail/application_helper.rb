@@ -20,7 +20,7 @@ module Mail::ApplicationHelper
     new_registrations: 'registration',
     active_events: 'verified',
     active_countries: 'country',
-    active_regions: 'location',
+    active_provinces: 'location',
   }
 
   def email_image_tag(image, **options)

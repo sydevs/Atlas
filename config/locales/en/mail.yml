@@ -35,7 +35,7 @@ en:
         new_registrations: "New Registrations"
         active_events: "Active Events"
         active_countries: "Active Countries"
-        active_regions: "Active Regions"
+        active_provinces: "Active Regions"
       data:
         new_countries: "New Countries"
         new_managers: "New Managers"
@@ -43,7 +43,7 @@ en:
         new_events: "New Events"
         expiring_events: "Expiring Events"
         expired_events: "Recently Expired"
-        inactive_regions: "Inactive Regions"
+        inactive_provinces: "Inactive Regions"
 
     event:
       location: "Location"
@@ -70,7 +70,7 @@ en:
           expired: "Event Expired - %{event}"
           finished: "Event Finished - %{event}"
         preview:
-          created: "You are the manager of a new event. '%{event}'' has been created in %{region}."
+          created: "You are the manager of a new event. '%{event}'' has been created in %{place}."
           needs_review: "'%{event}' needs to be reviewed or else it will be removed from the map. Please check that the event information is still correct."
           needs_urgent_review: "'%{event}' will soon be removed from the map, because the event manager has not yet responded to our email."
           expired: "'%{event}'' has not been updated in %{duration}, and has been removed from the map. Update this event to make it public again."
@@ -95,8 +95,8 @@ en:
           expired: "This event has been removed from the map because it has not been updated recently. To add it back to the map, update the event."
           finished: "This event has concluded."
         escalation:
-          event_manager: "This event, which you manage, urgently needs to be checked for accuracy. This is the last reminder you will receive. We've also emailed the managers of the %{region} region to make sure this event isn't removed by mistake."
-          super_manager: "You are a manager for %{region}. This warning is being sent to you because this event's manager has not yet responded to our email."
+          event_manager: "This event, which you manage, urgently needs to be checked for accuracy. This is the last reminder you will receive. We've also emailed the managers of the %{place} region to make sure this event isn't removed by mistake."
+          super_manager: "You are a manager for %{place}. This warning is being sent to you because this event's manager has not yet responded to our email."
 
       reminder:
         subject: "[Reminder] New Event Registrations"
@@ -175,11 +175,11 @@ en:
         preview: "Summary of changes in %{country} in the last 2 weeks."
         view: "View Country"
 
-    region:
+    place:
       summary:
-        subject: "Weekly Update for %{region}"
+        subject: "Weekly Update for %{place}"
         title: "Weekly Update"
-        preview: "Summary of changes in %{region} in the last week."
+        preview: "Summary of changes in %{place} in the last week."
         view: "View Region"
 
     managed_record:

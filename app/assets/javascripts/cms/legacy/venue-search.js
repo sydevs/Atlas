@@ -60,11 +60,10 @@ const VenueSearch = {
       dataType: 'json',
       data: { place_id: place_id },
       success: (data) => {
-        data.latitude = data.latitude.toFixed(6)
-        data.longitude = data.longitude.toFixed(6)
-        this.$latitude.val(data.latitude)
-        this.$longitude.val(data.longitude)
-        //RegionMap.setCircle(data.latitude, data.longitude, data.radius)
+        this.$latitude.val(data.latitude.toFixed(6))
+        this.$longitude.val(data.longitude.toFixed(6))
+
+        if (Map.instance) Map.instance.invalidate()
       },
       error: (data) => {
         this.$search.search('display message', data, 'message')

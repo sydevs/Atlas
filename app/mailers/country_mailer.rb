@@ -26,7 +26,7 @@ class CountryMailer < ApplicationMailer
     @inactive_areas = @country.areas.inactive_since(SUMMARY_PERIOD.ago)
 
     @stats = {
-      active_regions: @country.provinces.active_since(SUMMARY_PERIOD.ago).count,
+      active_provinces: @country.provinces.active_since(SUMMARY_PERIOD.ago).count,
       active_events: @country.events.publicly_visible.count,
       new_registrations: @country.associated_registrations.since(SUMMARY_PERIOD.ago).count,
     }

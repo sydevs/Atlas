@@ -175,14 +175,14 @@ uk:
             new_managed_record: "New Access"
             event_verification: "Event Verification"
             event_registrations: "Event Registrations"
-            region_summary: "Regional Summary"
+            place_summary: "Regional Summary"
             country_summary: "Country Summary"
             application_summary: "Sahaj Atlas Summary"
           hints:
             new_managed_record: "A message sent to you when you are given permission to manage a new event, region or resource on the Atlas."
             event_verification: "Messages requesting event and city managers to check their events' accuracy. Sent every 3 months, for each event. This cannot be disabled."
             event_registrations: "A list of new registrations sent to event managers. Sent around 24 hours before each event."
-            region_summary: "A summary of changes within a region sent to regional managers. Sent every %{period}."
+            place_summary: "A summary of changes within a region sent to regional managers. Sent every %{period}."
             country_summary: "A summary of changes sent to country managers. Sent every %{period}."
             application_summary: "A summary of all Atlas changes, sent to administrators. Sent every %{period}."
         search: "Enter a name, email, or phone number..."
@@ -279,11 +279,11 @@ uk:
           instruction: "Ви маєте доступ до всіх аспектів атласу CMS (системи керування вмістом). Ваша робота полягає в тому, щоб створити нових керівників країни та допомогти їм навчитися користуватися системою."
         country:
           title: "Регіональний менеджер"
-          description: "Може створювати регіони, місця, події та призначати менеджерів у межах %{region}"
+          description: "Може створювати регіони, місця, події та призначати менеджерів у межах %{place}"
           instruction: "Ви несете відповідальність за створення регіонів у вашій країні та призначити менеджерів у ці регіони для організації подій. Ви також можете створювати місця та події у своїй країні."
         local:
           title: "Місцевий менеджер"
-          description: "Може створювати місця та події в межах %{region}"
+          description: "Може створювати місця та події в межах %{place}"
           instruction: "Ви несете відповідальність за створення подій у вашій місцевості. Спочатку вам потрібно буде створити місце проведення, перш ніж ви зможете створити подію в цьому місці."
         event:
           title: "Менеджер подій"

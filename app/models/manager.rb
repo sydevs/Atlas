@@ -6,7 +6,7 @@ class Manager < ApplicationRecord
   audited except: %i[last_login_at]
 
   enum contact_method: { email: 0, whatsapp: 1, telegram: 2, wechat: 3 }, _prefix: :contact_by
-  flag :notifications, %i[new_managed_record event_verification event_registrations region_summary country_summary application_summary client_summary]
+  flag :notifications, %i[new_managed_record event_verification event_registrations place_summary country_summary application_summary client_summary]
 
   # Associations
   has_many :managed_records, dependent: :delete_all
