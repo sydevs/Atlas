@@ -1,6 +1,8 @@
 
-- existing_regions = @record.country.regions.pluck(:province_code)
-- regions = ISO3166::Country[@record.country_code].subdivisions.map { |k,v| [v['name'] || v.dig('translations', I18n.locale.to_s), k] unless existing_regions.include?(k) }.compact
+= f.input :osm_id do
+  = f.input_field :osm_id
+  = f.hint (translate('cms.hints.region.osm_id', model: translate_model(Region).downcase) + ' ' + tag.a('www.openstreetmap.org', href: 'https://www.openstreetmap.org', target: '_blank')).html_safe
+end
 
-.hint = translate('cms.hints.region.must_be_new')
-= f.input :province_code, label: false, prompt: translate('cms.actions.target.choose', resource: translate('cms.hints.region.prompt')), collection: regions, input_html: { class: 'search' }
+= f.input :name
+= f.input :geojson, as: :json, required: false, input_html: { disabled: true, value: @record.geojson.to_json }

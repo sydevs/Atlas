@@ -1,9 +1,5 @@
 class RegionPolicy < PlacePolicy
 
-  def update?
-    false
-  end
-
   def new_association? association = nil, query = {}
     return nil if association == :events
   

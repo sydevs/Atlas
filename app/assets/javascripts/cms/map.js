@@ -6,8 +6,7 @@ class Map {
   #data = {}
   #leaflet
   #inputs = {}
-  #circle = null
-  #point = null
+  #layer = null
 
   constructor(container) {
     console.log('Loading Map') // eslint-disable-line no-console
@@ -21,12 +20,13 @@ class Map {
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(this.#leaflet)
 
     if (this.#data.editable) {
-      const fields = ['latitude', 'longitude', 'radius']
+      const fields = ['latitude', 'longitude', 'radius', 'geojson']
       fields.forEach(field => {
         this.#inputs[field] = this.setupInput(field)
       })
     }
 
+    this.#leaflet.scrollWheelZoom.disable()
     this.#invalidate()
   }
 
@@ -63,6 +63,8 @@ class Map {
       this.setCircle(data.latitude, data.longitude, data.radius)
     } else if (data.latitude && data.longitude) {
       this.setPoint(data.latitude, data.longitude)
+    } else if (data.geojson) {
+      this.setGeojson(data.geojson)
     }
 
     this.#leaflet.invalidateSize()
@@ -73,12 +75,11 @@ class Map {
       return
     }
 
-    if (this.#point) this.#point.removeFrom(this.#leaflet)
-    if (this.#circle) this.#circle.removeFrom(this.#leaflet)
+    if (this.#layer) this.#layer.removeFrom(this.#leaflet)
 
     $(this.#container).css('min-height', '360px').css('opacity', '1')
 
-    this.#circle = L.circle([latitude, longitude], radius * 1000, {
+    this.#layer = L.circle([latitude, longitude], radius * 1000, {
       color: '#2185d0',
       fillColor: '#2185d0',
       fillOpacity: 0.3,
@@ -89,12 +90,11 @@ class Map {
   }
 
   setPoint(latitude, longitude) {
-    if (this.#circle) this.#circle.removeFrom(this.#leaflet)
-    if (this.#point) this.#point.removeFrom(this.#leaflet)
+    if (this.#layer) this.#layer.removeFrom(this.#leaflet)
 
     $(this.#container).css('min-height', '240px').css('opacity', '1')
 
-    this.#point = L.marker([latitude, longitude]).addTo(this.#leaflet)
+    this.#layer = L.marker([latitude, longitude]).addTo(this.#leaflet)
     this.#leaflet.setView([latitude, longitude], 13)
 
     /*if (VenueMap.messages) {
@@ -102,11 +102,21 @@ class Map {
     }*/
   }
 
+  setGeojson(geojson) {
+    console.log('geojson', JSON.parse(geojson))
+    if (this.#layer) this.#layer.removeFrom(this.#leaflet)
+
+    $(this.#container).css('min-height', '240px').css('opacity', '1')
+
+    geojson = JSON.parse(geojson)
+    this.#layer = L.geoJSON(geojson).addTo(this.#leaflet)
+    this.#leaflet.fitBounds(this.#layer.getBounds(), { padding: [20, 20] })
+  }
+
   disableInteractions() {
     this.#leaflet.dragging.disable()
     this.#leaflet.touchZoom.disable()
     this.#leaflet.doubleClickZoom.disable()
-    this.#leaflet.scrollWheelZoom.disable()
   }
 }
 

@@ -115,9 +115,8 @@ de:
         no_default_language: "Kein Standard"
         region_management: "Wenn es aktiviert ist, können Sie Regionen (Provinzen, Staaten usw.) in diesem Land an die Regionen ausschalten und zuordnen. Dies ist nützlich für größere Länder (China, USA, Australien, etc.) und unnötig für kleine Länder (Belgien, Litauen, Singapur usw.)."
         bounds: "Wenn ein Land angegeben wird, wenn die Karte eingebettet wird, werden diese Grenzen als die erste Ansicht verwendet. Die Koordinaten sollten als 4 Komma seperirte  Nummern eingegeben werden (Süden, Westen, Nord, Ost)."
-      region:
-        must_be_new: "Nur Regionen, die noch nicht hinzugefügt wurden, sind unten aufgeführt."
-        prompt: "Landkreis / Bundesland / Land"
+      region: # TODO: Translate
+        osm_id: "Please visit Open Street Maps, and lookup the ID for the %{model} that you are setting up. Then enter it above to automatically generate the boundaries of this %{model}."
       area:
         location: Ein "spezieller Bereich" wird via Koordinaten auf der Karte (Breitengrad und Längengrad) und einem Radius definiert, um einen Kreis festzulegen. "
       event:
