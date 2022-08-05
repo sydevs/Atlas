@@ -61,6 +61,7 @@ class Event < ApplicationRecord
   # Delegations
   delegate :time_zone, to: :local_area
   alias associated_registrations registrations
+  alias parent local_area
 
   # Callbacks
   before_validation :find_venue
