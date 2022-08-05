@@ -16,7 +16,7 @@ h3.ui.small.dividing.grey.header = translate('cms.details.details_for_record', r
     = manager_icon @record
     .content
       .header = translate("cms.dashboard.role.#{@record.type}.title")
-      .description = translate("cms.dashboard.role.#{@record.type}.description", region: @record.parent&.label)
+      .description = translate("cms.dashboard.role.#{@record.type}.description", place: @record.parent&.label)
   .item
     i.translate.icon
     .content

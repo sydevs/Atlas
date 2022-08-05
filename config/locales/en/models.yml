@@ -62,6 +62,13 @@ en:
         # Countable
         one: "manager"
         other: "managers"
+      managed_records:
+        # Basic pluralization
+        single: "Responsibility"
+        plural: "Responsibilities"
+        # Countable
+        one: "responsibility"
+        other: "responsibilities"
       audit:
         # Basic pluralization
         single: "History"

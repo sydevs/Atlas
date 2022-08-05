@@ -6,7 +6,7 @@
   h3.ui.dividing.header
     - if policy(@model).new?
       - create_action_text = translate('cms.actions.target.new', resource: translate_model(@model))
-      - allow_new = allow.new_association?(@model.table_name.to_sym, @query)
+      - allow_new = allow.new_association?(@model.table_name.to_sym)
 
       - if allow_new == nil
         - tooltip = { tooltip: translate(@model.model_name.i18n_key, scope: 'cms.messages.cannot_create'), position: 'bottom right', variation: 'small basic' }

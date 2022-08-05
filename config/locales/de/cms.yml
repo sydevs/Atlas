@@ -47,17 +47,13 @@ de:
       # Tertiary menu
       details: "Info"
       activity: "Aktivität"
-      regions:
-        countries: "Länder"
-        regions: "Regionen"
-        cities: "Städte / Bereiche"
+      places: "Places" # TODO: Translate
       events:
         offline: "Vorort Veranstaltungen"
         online: "Online Veranstaltungen"
       breadcrumbs:
         world: "Welt"
         help: "Hilfe"
-        regions: "Regionen"
         review: "Kontroliere Benachrichtigungen"
         dashboard: "Schaltzentrale"
 
@@ -272,14 +268,6 @@ de:
     images:
       title: "Bilder dieser %{resource}"
       upload: "Bilder hochladen"
-
-    regions:
-      new_province: "Region hinzufügen"
-      provinces_header: "Provinzen / Bundesländer / Landkreise"
-      areas_header:
-        provincial: "Ballungsraum Bereich"
-        national: "Benutzerdefinierte Regionen"
-        global: "Benutzerdefinierte internationale Bereiche"
 
     activity:
       title: :cms.menu.activity

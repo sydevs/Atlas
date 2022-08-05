@@ -18,11 +18,9 @@ class ManagerPolicy < DatabasePolicy
 
   def index_association? association = nil
     return false if association == :audits
-
-    if user == record
-      return false if %i[event none].include?(user.type) && association == :regions
-      return false if user.type == :none && association == :regions
-    end
+    return false if %i[countries provinces areas].include?(association)
+    return false if user == record && %i[event none].include?(user.type) && association == :places
+    return true if association == :places
 
     super
   end

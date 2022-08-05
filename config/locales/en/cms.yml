@@ -47,17 +47,13 @@ en:
       # Tertiary menu
       details: "Info"
       activity: "Activity"
-      regions:
-        countries: "Countries"
-        regions: "Regions"
-        cities: "Cities / Areas"
+      places: "Places"
       events:
         offline: "In-Person Events"
         online: "Online Events"
       breadcrumbs:
         world: "World"
         help: "Help"
-        regions: "Regions"
         review: "Review Alerts"
         dashboard: "Dashboard"
 
@@ -277,14 +273,6 @@ en:
       title: "Images of this %{resource}"
       upload: "Upload Images"
 
-    regions:
-      new_province: "Add Region"
-      provinces_header: "Provinces / States / Counties"
-      areas_header:
-        provincial: "Metropolitan Areas"
-        national: "Custom Regions"
-        global: "Custom International Areas"
-
     activity:
       title: :cms.menu.activity
       description: "This is a log of all actions taken by this manager."
@@ -301,11 +289,11 @@ en:
           instruction: "You have access to all aspects of the atlas CMS (Content Management System). It is your job to create new country managers and help them learn to use the system."
         country:
           title: "Country Manager"
-          description: "Can create regions, venues, events and assign managers within %{region}"
+          description: "Can create regions, venues, events and assign managers within %{place}"
           instruction: "It's your responsibility to create regions within your country and assign managers to those regions to set up events. You may also create venues and events within your country."
         local:
           title: "Local Manager"
-          description: "Can create venues and events within %{region}"
+          description: "Can create venues and events within %{place}"
           instruction: "It's your responsibility to create events within your local area. You will first need to create a venue, before you can create an event at that venue."
         event:
           title: "Event Manager"

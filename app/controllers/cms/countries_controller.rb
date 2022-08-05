@@ -10,13 +10,6 @@ class CMS::CountriesController < CMS::ApplicationController
     super parameters
   end
 
-  def regions
-    authorize_association! :regions
-
-    @provinces = @context.provinces if @context.enable_province_management?
-    render 'cms/views/regions'
-  end
-
   private
 
     def parameters

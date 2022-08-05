@@ -47,17 +47,13 @@ ru:
       # Tertiary menu
       details: "Информация"
       activity: "Активность"
-      regions:
-        countries: "Страны"
-        regions: "Регионы"
-        cities: "Города"
+      places: "Places" # TODO: Translate
       events: # TODO: Translate
         offline: "In-Person Events"
         online: "Online Events"
       breadcrumbs:
         world: "Мир"
         help: "Помощь"
-        regions: "Регионы"
         review: "Просмотреть оповещений"
         dashboard: "Панель инструментов"
 
@@ -267,14 +263,6 @@ ru:
     images:
       title: "Изображения %{resource}"
       upload: "Загрузить изображения"
-
-    regions:
-      new_province: "Добавить регион"
-      provinces_header: "Провинции / Штаты / Области" 
-      areas_header: 
-        provincial: "Алгомерация"
-        national: "Пользовательских регион"
-        global: "Пользовательские международные зоны"
 
     activity:
       title: :cms.menu.activity

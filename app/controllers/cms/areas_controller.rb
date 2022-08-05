@@ -24,7 +24,7 @@ class CMS::AreasController < CMS::ApplicationController
     @record.destroy
 
     flash[:success] = translate('cms.messages.successfully_deleted', resource: @model.model_name.human.titleize)
-    redirect_to [:cms, @record.parent, :regions]
+    redirect_to [:cms, @record.parent, :areas]
   end
 
   def geocode args = {}

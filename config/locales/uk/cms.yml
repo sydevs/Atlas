@@ -47,17 +47,13 @@ uk:
       # Tertiary menu
       details: "Інформація"
       activity: "Діяльність"
-      regions:
-        countries: "Країни"
-        regions: "Регіони"
-        cities: "Міста / Райони"
+      places: "Places" # TODO: Translate
       events: # TODO: Translate
         offline: "In-Person Events"
         online: "Online Events"
       breadcrumbs:
         world: "Світ"
         help: "Допомога"
-        regions: "Регіони"
         review: "Сповіщення про переглядs"
         dashboard: "Панель приладів"
 
@@ -267,14 +263,6 @@ uk:
     images:
       title: "Зображення цього %{resource}"
       upload: "Завантажити зображення"
-
-    regions:
-      new_province: "Додати регіон"
-      provinces_header: "Провінції / Штати / Країни"
-      areas_header:
-        provincial: "Столичні райони"
-        national: "Вказаний регіон"
-        global: "Спеціальні міжнародні зони"
 
     activity:
       title: :cms.menu.activity

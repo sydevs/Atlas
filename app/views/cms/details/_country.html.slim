@@ -4,17 +4,17 @@
     i.question.icon
     .content
       - if @record.enable_province_management?
-        a.ui.right.floated.button href=url_for([:cms, @record, :regions])
+        a.ui.right.floated.button href=url_for([:cms, @record, :provinces])
           = translate('cms.details.create_province_manager.action')
           i.right.arrow.icon
         .header = translate('cms.details.create_province_manager.title')
-        .description = translate('cms.details.create_province_manager.description', action: translate('cms.menu.regions.regions'))
+        .description = translate('cms.details.create_province_manager.description', action: translate_model(Province))
       - else
-        a.ui.right.floated.button href=url_for([:cms, @record, :regions])
+        a.ui.right.floated.button href=url_for([:cms, @record, :areas])
           = translate('cms.details.create_city_manager.action')
           i.right.arrow.icon
         .header = translate('cms.details.create_city_manager.title')
-        .description = translate('cms.details.create_city_manager.description', action: translate('cms.menu.regions.cities'))
+        .description = translate('cms.details.create_city_manager.description', action: translate_model(Area))
 
 h3.ui.small.dividing.grey.header = translate('cms.details.details_for_record', resource: @record.label)
 .ui.list

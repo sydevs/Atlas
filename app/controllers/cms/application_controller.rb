@@ -11,8 +11,8 @@ class CMS::ApplicationController < ActionController::Base
   before_action :verify_manager
   before_action :set_locale!
   before_action :set_model_name!
-  before_action :set_context!, only: %i[index new create regions destroy images]
-  before_action :set_scope!, except: %i[regions images]
+  before_action :set_context!, only: %i[index new create destroy places images]
+  before_action :set_scope!, except: %i[places images]
   before_action :set_record!, only: %i[show edit update destroy]
   protect_from_forgery with: :exception
 
@@ -129,19 +129,6 @@ class CMS::ApplicationController < ActionController::Base
 
     flash[:success] = translate('cms.messages.successfully_deleted', resource: @model.model_name.human.titleize)
     redirect_to [:cms, @record.parent, @model]
-  end
-
-  def regions
-    authorize_association! :regions
-
-    if @context
-      @countries = @context.countries if @context.respond_to?(:countries)
-      @provinces = @context.provinces if @context.respond_to?(:provinces)
-    else
-      @countries = Country.default_scoped
-    end
-
-    render 'cms/views/regions'
   end
 
   def help

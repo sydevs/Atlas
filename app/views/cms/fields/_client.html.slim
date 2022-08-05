@@ -15,7 +15,7 @@
   //= ff.input :location, label: translate_attribute(f.object, :location), required: false do
     = ff.hint translate('cms.hints.client.location')
     .two.fields
-      - options = %i[country region city].map { |o| [o.to_s.humanize, o] }
+      - options = %i[country province area].map { |o| [o.to_s.humanize, o] }
       = ff.input :location_type, label: false, collection: options, selected: f.object.config['location_type'], prompt: "Choose Type"
       = ff.input :location_id, label: false, input_html: { value: f.object.config['location_id'] }
 
