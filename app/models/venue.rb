@@ -41,7 +41,7 @@ class Venue < ApplicationRecord
   # Methods
 
   def parent
-    areas.first || (country.enable_region_management? ? region || country : country)
+    areas.first || (country.enable_regions? ? region || country : country)
   end
 
 =begin
@@ -91,7 +91,7 @@ class Venue < ApplicationRecord
     end
 
     def country_has_regions?
-      return country.nil? || country.enable_region_management
+      return country.nil? || country.enable_regions
     end
 
     def fetch_coordinates

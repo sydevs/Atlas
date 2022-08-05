@@ -19,7 +19,7 @@
     .five.wide.field
       = f.input_field :city, placeholder: translate_attribute(Venue, :city)
   .fields
-    - if f.object.country_code.present? && !f.object.country.enable_region_management?
+    - if f.object.country_code.present? && !f.object.country.enable_regions?
       .eleven.wide.field
         = f.hidden_field :country_code
         = f.input_field :country, as: :string, value: f.object.country.label, disabled: true

@@ -114,7 +114,7 @@ class Manager < ApplicationRecord
     elsif country_code
       Region.where(id: regions, country_code: country_code)
     else
-      regions_via_country = Region.where(country_code: countries.select(:country_code).where(enable_region_management: true))
+      regions_via_country = Region.where(country_code: countries.select(:country_code).where(enable_regions: true))
       regions_via_area = Region.where(id: area_regions)
       regions_via_event = Region.where(province_code: events.select(:province_code))
       Region.where(id: regions).or(regions_via_country).or(regions_via_area).or(regions_via_event)

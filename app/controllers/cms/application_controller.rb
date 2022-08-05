@@ -31,7 +31,7 @@ class CMS::ApplicationController < ActionController::Base
     authorize current_user, :dashboard?
     @resources = current_user.clients
     @resources += current_user.countries
-    @resources += current_user.regions.joins(:country).where(countries: { enable_region_management: true })
+    @resources += current_user.regions.joins(:country).where(countries: { enable_regions: true })
     @resources += current_user.areas
     @resources += current_user.events
     @events_for_review = current_user.accessible_events.needs_review

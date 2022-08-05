@@ -3,7 +3,7 @@
   .ui.small.icon.message
     i.question.icon
     .content
-      - if @record.enable_region_management?
+      - if @record.enable_regions?
         a.ui.right.floated.button href=url_for([:cms, @record, :regions])
           = translate('cms.details.create_region_manager.action')
           i.right.arrow.icon

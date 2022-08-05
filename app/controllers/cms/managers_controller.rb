@@ -109,7 +109,7 @@ class CMS::ManagersController < CMS::ApplicationController
     authorize manager
     country_code = params[:country_code]
 
-    if Country.where(country_code: country_code, enable_region_management: false).exists?
+    if Country.where(country_code: country_code, enable_regions: false).exists?
       render json: {
         success: true,
         results: ISO3166::Country[country_code].subdivisions.map { |k, v|
