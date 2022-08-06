@@ -9,10 +9,18 @@ end
 - unless @record.new_record?
   - %i[bounds geojson translations].each do |field|
     - data = @record.send(field)
-    .ui.accordion
-      .ui.title
-        i.dropdown.icon
+    - if data
+      .ui.accordion
+        .ui.title
+          i.dropdown.icon
+          = translate_attribute(@record, field)
+        .content
+            .ui.code.input
+              textarea rows=(1 if field == :bounds) = data.to_json 
+    - else
+      .ui.label
+        i.warning.icon
         = translate_attribute(@record, field)
-      .content
-        .ui.code.input
-          textarea rows=(1 if field == :bounds) = data ? data.to_json : "Not set"
+        '  
+        = translate('cms.hints.not_set')
+

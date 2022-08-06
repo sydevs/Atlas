@@ -18,4 +18,10 @@ h3.ui.small.dividing.grey.header = translate('cms.details.details_for_record', r
       .description = translate('cms.details.event_coverage.description', events: translate_model_count(@record.events.publicly_visible), venues: translate_model_count(@record.venues.publicly_visible))
 
 h3.ui.small.dividing.grey.header = translate('cms.details.location_of_record', resource: translate_model(Region).downcase)
-#map data-geojson=@record.geojson.to_json
+- if @record.geojson && @record.bounds
+  #map data-geojson=@record.geojson.to_json
+- else
+  p
+    .ui.label
+      i.warning.icon
+      = translate('cms.hints.not_set')
