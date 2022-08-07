@@ -54,7 +54,6 @@ class CMS::ApplicationController < ActionController::Base
     @records = policy_scope(@scope).page(params[:page]).per(15).search(params[:q])
     @records = @records.order(updated_at: :desc) if @model.column_names.include?('updated_at')
     @records = @records.with_associations if @records.respond_to?(:with_associations)
-    render 'cms/views/index'
   end
 
   def show
@@ -83,14 +82,11 @@ class CMS::ApplicationController < ActionController::Base
         ],
       }
     end
-
-    render 'cms/views/show'
   end
 
   def new attributes = {}
     @record = @scope.new(**attributes)
     authorize @record
-    render 'cms/views/new'
   end
 
   def create attributes
@@ -101,7 +97,6 @@ class CMS::ApplicationController < ActionController::Base
       redirect_to back_path, flash: { success: translate('cms.messages.successfully_created', resource: @model.model_name.human.downcase) }
       true
     else
-      render 'cms/views/new'
       false
     end
   end
@@ -109,7 +104,6 @@ class CMS::ApplicationController < ActionController::Base
   def edit attributes = {}
     authorize @record
     @record.assign_attributes(attributes)
-    render 'cms/views/edit'
   end
 
   def update attributes
@@ -119,7 +113,6 @@ class CMS::ApplicationController < ActionController::Base
       redirect_to back_path, flash: { success: translate('cms.messages.successfully_updated', resource: @model.model_name.human.downcase) }
       true
     else
-      render 'cms/views/edit'
       false
     end
   end
@@ -155,6 +148,10 @@ class CMS::ApplicationController < ActionController::Base
     return url_for([:cms, @record]) if policy(@record).show?
     
     url_for([:cms, @record.parent, @model.model_name.route_key.to_sym])
+  end
+
+  def self.controller_path
+    "cms/views"
   end
 
   protected

@@ -37,4 +37,26 @@ class Region < ApplicationRecord
     return true if country.managed_by?(manager) && super_manager != false
   end
 
+  def fetch_geo_data!
+    return if osm_id.nil?
+
+    data = OpenStreetMapsAPI.fetch_data(osm_id)
+
+    if data[:address][:country_code] != country_code.downcase
+      self.errors.add(:osm_id, "is not within #{CountryDecorator.get_label(country_code)}")
+      return
+    end
+
+    self.assign_attributes({
+      name: data[:display_name].split(',', 2).first,
+      osm_id: osm_id, 
+      geojson: data[:geojson],
+      bounds: data[:boundingbox],
+      translations: data[:namedetails].to_a.filter_map do |key, value|
+        key = key.to_s.split(':')
+        [key[1] || 'en', value] if key[0] == 'name'
+      end.to_h,
+    })
+  end
+
 end

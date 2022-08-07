@@ -1,5 +1,5 @@
 
-- if params[:osm_id]
+- if @record.geojson || params[:osm_id] == 'custom'
   = f.input :geojson do
     - if @record.geojson
       #map data-geojson=@record.geojson.to_json
