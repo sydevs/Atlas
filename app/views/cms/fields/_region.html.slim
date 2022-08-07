@@ -1,12 +1,12 @@
 
-= f.input :name
+- if params[:osm_id]
+  = f.input :geojson do
+    #map data-geojson=@record.geojson.to_json
 
-= f.input :osm_id do
-  = f.input_field :osm_id
-  = f.hint (translate('cms.hints.region.osm_id', model: translate_model(Region).downcase) + ' ' + tag.a('www.openstreetmap.org', href: 'https://www.openstreetmap.org', target: '_blank')).html_safe
-end
+  = f.input :name
+  = f.input :osm_id, disabled: true
+  = f.hidden_field :osm_id
 
-- unless @record.new_record?
   - %i[bounds geojson translations].each do |field|
     - data = @record.send(field)
     - if data
@@ -23,4 +23,12 @@ end
         = translate_attribute(@record, field)
         '  
         = translate('cms.hints.not_set')
+- else
+  .field id='js-osm-search' data-country=f.object.country_code data-type='settlement'
+    .ui.search
+      .ui.left.icon.action.input
+        i.search.icon
+        input.prompt type='text' name='query' placeholder=translate('cms.hints.geosearch.prompt')
+        button.ui.submit.button Search
 
+    table.ui.very.basic.table

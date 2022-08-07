@@ -14,6 +14,10 @@ module OpenStreetMapsAPI
   end
 
   def self.fetch_data osm_id
+    cache_key = "osm-#{osm_id}"
+    data = Rails.cache.read(cache_key)
+    return data if data
+    
     url = "http://polygons.openstreetmap.fr/get_geojson.py?id=#{osm_id}&params=0.090000-0.090000-0.090000"
     response = HTTParty.get('https://nominatim.openstreetmap.org/lookup', {
       headers: { 'Content-Type': 'application/json' },
@@ -28,10 +32,13 @@ module OpenStreetMapsAPI
       },
       log_level: :debug
     })
-    puts "#{url} - #{response.pretty_inspect}"
 
+    # TODO: Implement error handling
     data = JSON.parse(response.body)
-    data[0].deep_symbolize_keys
+    data = data[0].deep_symbolize_keys
+
+    Rails.cache.write(cache_key, data, expires_in: 1.day)
+    data
   end
 
 end

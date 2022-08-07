@@ -106,8 +106,9 @@ class CMS::ApplicationController < ActionController::Base
     end
   end
 
-  def edit
+  def edit attributes = {}
     authorize @record
+    @record.assign_attributes(attributes)
     render 'cms/views/edit'
   end
 

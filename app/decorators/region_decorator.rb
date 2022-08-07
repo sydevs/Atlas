@@ -1,8 +1,9 @@
 module RegionDecorator
 
-  # def name
-  #   RegionDecorator.get_name(province_code, country_code)
-  # end
+  # TODO: Deprecated
+  def name
+    RegionDecorator.get_name(province_code, country_code)
+  end
 
   def label
     "#{short_label}, #{country_code}"
