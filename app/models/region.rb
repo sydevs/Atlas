@@ -16,7 +16,7 @@ class Region < ApplicationRecord
   # has_many :associated_registrations, through: :events, source: :registrations
 
   # Validations
-  validates_presence_of :name, :osm_id, :geojson, :country_code
+  validates_presence_of :name, :geojson, :country_code
 
   # Scopes
   default_scope { order(name: :desc) }
@@ -25,9 +25,6 @@ class Region < ApplicationRecord
 
   # Delegations
   alias parent country
-
-  # Callbacks
-  before_validation :fetch_geojson
 
   # Methods
 
@@ -39,25 +36,5 @@ class Region < ApplicationRecord
     return true if managers.include?(manager) && super_manager != true
     return true if country.managed_by?(manager) && super_manager != false
   end
-
-  private
-
-    def fetch_geojson
-      return unless osm_id_changed? || geojson.nil? || bounds.nil? || translations.nil?
-
-      data = OpenStreetMapsAPI.fetch_data(osm_id)
-
-      if data[:address][:country_code] != country_code.downcase
-        self.errors.add(:osm_id, :invalid, "is not within #{country_code}")
-        return
-      end
-
-      self.geojson = data[:geojson]
-      self.bounds = data[:boundingbox]
-      self.translations = data[:namedetails].to_a.filter_map do |key, value|
-        key = key.to_s.split(':')
-        [key[1] || 'en', value] if key[0] == 'name'
-      end.to_h
-    end
 
 end

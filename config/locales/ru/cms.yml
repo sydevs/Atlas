@@ -116,7 +116,7 @@ ru:
         region_management: "Если этот параметр включен, ты сможешь просматривать и назначать менеджеров по регионам (провинциям, штатам и т.д.) в этой стране. Это полезно для больших стран (Китай, США, Австралия и т.д.) и необязательно для небольших стран (Бельгия, Литва, Сингапур и т.д.)."
         bounds: "If a country is specified when embedding the map, these bounds will be used as the initial view. The coordinates should be entered as 4 comma-separated numbers (south,west,north,east)." # TODO: Translate
       region: # TODO: Translate
-        osm_id: "Please visit Open Street Maps, and lookup the ID for the %{model} that you are setting up. Then enter it above to automatically generate the boundaries of this %{model}."
+        polygon: "Drag / click on a faded square to add a new corner to the polygon. Click on an existing corner to remove it."
       area:
         location: "Пользовательская область определяется с использованием координат на карте (широта и долгота) и радиуса, чтобы расширить границы региона."
       event:

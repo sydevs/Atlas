@@ -4,6 +4,7 @@
 class Map {
   #container
   #data = {}
+  leaflet
   #leaflet
   #inputs = {}
   #layer = null
@@ -17,6 +18,8 @@ class Map {
       //zoomControl: false,
     })
 
+    this.leaflet = this.#leaflet
+
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(this.#leaflet)
 
     if (this.#data.editable) {
@@ -26,8 +29,38 @@ class Map {
       })
     }
 
-    this.#leaflet.scrollWheelZoom.disable()
+    if (this.#data.polygon) {
+      this.setupPolygonDraw()
+    } else {
+      this.#leaflet.scrollWheelZoom.disable()
+    }
+
     this.#invalidate()
+  }
+
+  setupPolygonDraw() {
+    this.#layer = new L.Polygon([
+			[51.51, -0.1],
+			[51.5, -0.06],
+			[51.52, -0.03],
+		]).addTo(this.#leaflet)
+
+    this.#layer.editing.enable()
+
+    this.setHeight(360)
+    this.#leaflet.fitBounds(this.#layer.getBounds(), { padding: [20, 20] })
+
+    const fields = ['bounds', 'geojson']
+    fields.forEach(field => {
+      this.#inputs[field] = document.getElementById(`js-map-${field}`)
+    })
+
+    this.#layer.on('edit', () => {
+      let bounds = this.#layer.getBounds()
+      bounds = [bounds.getSouth(), bounds.getNorth(), bounds.getWest(), bounds.getEast()]
+			this.#inputs.bounds.value = JSON.stringify(bounds)
+      this.#inputs.geojson.value = JSON.stringify(this.#layer.toGeoJSON()['geometry'])
+		})
   }
 
   setupInput(field) {
@@ -66,8 +99,6 @@ class Map {
     } else if (data.geojson) {
       this.setGeojson(data.geojson)
     }
-
-    this.#leaflet.invalidateSize()
   }
 
   setCircle(latitude, longitude, radius) {
@@ -77,7 +108,7 @@ class Map {
 
     if (this.#layer) this.#layer.removeFrom(this.#leaflet)
 
-    $(this.#container).css('min-height', '360px').css('opacity', '1')
+    this.setHeight(360)
 
     this.#layer = L.circle([latitude, longitude], radius * 1000, {
       color: '#2185d0',
@@ -92,7 +123,7 @@ class Map {
   setPoint(latitude, longitude) {
     if (this.#layer) this.#layer.removeFrom(this.#leaflet)
 
-    $(this.#container).css('min-height', '240px').css('opacity', '1')
+    this.setHeight(240)
 
     this.#layer = L.marker([latitude, longitude]).addTo(this.#leaflet)
     this.#leaflet.setView([latitude, longitude], 13)
@@ -117,6 +148,11 @@ class Map {
     this.#leaflet.dragging.disable()
     this.#leaflet.touchZoom.disable()
     this.#leaflet.doubleClickZoom.disable()
+  }
+
+  setHeight(height) {
+    $(this.#container).css('min-height', `${height}px`).css('opacity', '1')
+    this.#leaflet.invalidateSize()
   }
 }
 

@@ -132,6 +132,7 @@ de:
         manager_id: :activerecord.models.manager.single # Do not translate
         country_code: :activerecord.models.country.single # Do not translate
         province_code: :activerecord.models.region.single # Do not translate
+        geo_data: "Geo Data" # TODO: Translate
         osm_id: "OpenStreetMap ID" # TODO: Translate
         bounds: "Bounds" # TODO: Translate
         geojson: "Borders" # TODO: Translate

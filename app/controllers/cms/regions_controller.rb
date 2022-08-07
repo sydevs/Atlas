@@ -3,7 +3,7 @@ class CMS::RegionsController < CMS::ApplicationController
   prepend_before_action { @model = Region }
 
   def new
-    super **fetch_osm_data(params[:osm_id])
+    super **fetch_osm_data(params[:osm_id], country_code: @context.country_code)
   end
 
   def create
@@ -11,7 +11,7 @@ class CMS::RegionsController < CMS::ApplicationController
   end
 
   def edit
-    super **fetch_osm_data(params[:osm_id])
+    super **fetch_osm_data(params[:osm_id], country_code: @context.country_code)
   end
 
   def update
@@ -21,16 +21,15 @@ class CMS::RegionsController < CMS::ApplicationController
   private
 
     def parameters
-      params.fetch(:region, {}).permit(:country_code, :name, :osm_id)
+      params.fetch(:region, {}).permit(:country_code, :name, :osm_id, :geojson, :bounds, :translations)
     end
 
-    def fetch_osm_data osm_id=nil
-      
-      return {} if osm_id.nil?
+    def fetch_osm_data osm_id=nil, country_code: nil
+      return {} if osm_id.nil? || osm_id.to_i == 0
 
       data = OpenStreetMapsAPI.fetch_data(osm_id)
 
-      # if data[:address][:country_code] != country_code.downcase
+      # if country_code.present? && data[:address][:country_code] != country_code.downcase
       #   self.errors.add(:osm_id, :invalid, "is not within #{country_code}")
       #   return
       # end

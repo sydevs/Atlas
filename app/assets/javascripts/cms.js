@@ -2,7 +2,6 @@
 
 //= require jquery
 //= require rails-ujs
-//= require leaflet
 //= require semantic-ui
 //= require_tree ./cms
 
