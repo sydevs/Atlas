@@ -127,7 +127,7 @@ en:
         enable_custom_regions: "Allow Custom Region Creation"
         geo_data: "Geo Data"
         osm_id: "OpenStreetMap ID"
-        bounds: "Bounds"
+        bounds: "Viewport"
         geojson: "Borders"
         translations: "Translations"
         last_activity_on: :activerecord.attributes.generic.last_activity_on # Do not translate
@@ -139,7 +139,7 @@ en:
         province_code: :activerecord.models.region.single # Do not translate
         geo_data: "Geo Data"
         osm_id: "OpenStreetMap ID"
-        bounds: "Bounds"
+        bounds: "Viewport"
         geojson: "Borders"
         translations: "Translations"
         last_activity_on: :activerecord.attributes.generic.last_activity_on # Do not translate
@@ -293,7 +293,7 @@ en:
         public_key: "Public API Key"
         enabled: "Enabled"
         location: "Preferred Location"
-        bounds: "Bounds"
+        bounds: "Viewport"
         last_accessed_at: "Last Access"
         map_url: "Embeddable Map"
         index_url: "Embeddable List"

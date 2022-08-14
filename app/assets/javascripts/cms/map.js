@@ -30,7 +30,7 @@ class Map {
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(this.#leaflet)
 
-    if (this.#data.editable) {
+    if (this.#data.changeable || this.#data.editable) {
       const fields = ['latitude', 'longitude', 'radius', 'bounds', 'geojson']
       fields.forEach(field => {
         this.#inputs[field] = this.setupInput(field)
@@ -48,7 +48,9 @@ class Map {
     if (!input) return
 
     this.#data[field] = input.value
+
     input.addEventListener('change', event => {
+      console.log('on change', field)
       this.#data[field] = event.currentTarget.value
       this.#invalidate()
     })
@@ -125,7 +127,6 @@ class Map {
   }
 
   setEditablePolygon(geojson = null, border = null) {
-    console.log('set editable polygon')
     let coordinates
 
     if (!this.#layer) {
@@ -134,7 +135,6 @@ class Map {
       if (geojson) {
         geojson = JSON.parse(geojson)
         coordinates = geojson['coordinates']
-        console.log('create polygon from geojson', coordinates)
       } else {
         border = JSON.parse(border)
         const center = L.geoJSON(border).getBounds().getCenter()
@@ -145,7 +145,6 @@ class Map {
           [center.lat + padding, center.lng + padding],
           [center.lat - padding, center.lng + padding],
         ]
-        console.log('create default polygon', coordinates, 'from', center)
       }
 
       this.#layer = new L.Polygon(coordinates).addTo(this.#leaflet)
@@ -159,7 +158,6 @@ class Map {
       
       this.#leaflet.fitBounds(this.#layer.getBounds(), { padding: [100, 100] })
     } else if (geojson) {
-      console.log('update polygon', geojson)
       this.#layer.setLatLngs(geojson['coordinates'][0])
     }
   }
@@ -185,19 +183,26 @@ class Map {
     }
   }
  
-  setBounds(geojson) {
-    if (this.#bounds) this.#bounds.removeFrom(this.#leaflet)
+  setBounds(bounds) {
+    bounds = JSON.parse(bounds)
+    const coordinates = [
+      [bounds[0], bounds[2]],
+      [bounds[1], bounds[2]],
+      [bounds[1], bounds[3]],
+      [bounds[0], bounds[3]],
+    ]
 
-    geojson = JSON.parse(geojson)
-    this.#bounds = L.geoJSON(geojson, {
-      style: {
+    if (this.#bounds) {
+      this.#bounds.setLatLngs(coordinates)
+    } else {
+      this.#bounds = new L.Polygon(coordinates, {
         color: 'black',
         opacity: 0.5,
         weight: 2,
         dashArray: '8, 8',
         fillOpacity: 0,
-      }
-    }).addTo(this.#leaflet)
+      }).addTo(this.#leaflet)
+    }
   }
 
   disableInteractions() {

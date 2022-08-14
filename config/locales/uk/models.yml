@@ -127,7 +127,7 @@ uk:
         enable_custom_regions: "Allow Custom Region Creation"
         geo_data: "Geo Data"
         osm_id: "OpenStreetMap ID"
-        bounds: "Bounds"
+        bounds: "Viewport"
         geojson: "Borders"
         translations: "Translations"
         last_activity_on: :activerecord.attributes.generic.last_activity_on # Do not translate
@@ -139,7 +139,7 @@ uk:
         province_code: :activerecord.models.region.single # Do not translate
         geo_data: "Geo Data" # TODO: Translate
         osm_id: "OpenStreetMap ID" # TODO: Translate
-        bounds: "Bounds" # TODO: Translate
+        bounds: "Viewport" # TODO: Translate
         geojson: "Borders" # TODO: Translate
         translations: "Translations" # TODO: Translate
         last_activity_on: :activerecord.attributes.generic.last_activity_on # Do not translate
@@ -286,7 +286,7 @@ uk:
         public_key: "Публічний ключ API"
         enabled: "Увімкнено"
         location: "Бажане розташування"
-        bounds: "Межі"
+        bounds: "Viewport" # TODO: Translate
         last_accessed_at: "Останній доступ"
         map_url: "Bбудовувана адреса карти"
         index_url: "Aдреса списку для вбудовування"

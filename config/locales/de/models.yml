@@ -127,7 +127,7 @@ de:
         enable_custom_regions: "Allow Custom Region Creation"
         geo_data: "Geo Data"
         osm_id: "OpenStreetMap ID"
-        bounds: "Grenzen"
+        bounds: "Viewport" # TODO: Translate
         geojson: "Borders"
         translations: "Translations"
         last_activity_on: :activerecord.attributes.generic.last_activity_on # Do not translate
@@ -139,7 +139,7 @@ de:
         province_code: :activerecord.models.region.single # Do not translate
         geo_data: "Geo Data" # TODO: Translate
         osm_id: "OpenStreetMap ID" # TODO: Translate
-        bounds: "Bounds" # TODO: Translate
+        bounds: "Viewport" # TODO: Translate
         geojson: "Borders" # TODO: Translate
         translations: "Translations" # TODO: Translate
         last_activity_on: :activerecord.attributes.generic.last_activity_on # Do not translate

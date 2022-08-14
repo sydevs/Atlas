@@ -2,9 +2,9 @@
 - if (@record.osm_id && @record.geojson && @record.bounds) || params[:osm_id] == '0'
   = f.input :geojson do
     - if @record.geojson
-      #map data-geojson=@record.geojson.to_json data-bounds=@record.bounds_geojson.to_json
+      #map data-geojson=@record.geojson.to_json data-bounds=@record.bounds.to_json
     - else
-      #map data-geojson=@record.geojson.to_json data-border=@record.parent.geojson.to_json data-editable='true'
+      #map data-editable='true' data-geojson=@record.geojson.to_json data-border=@record.parent.geojson.to_json
       .hint = translate('cms.hints.region.polygon')
 
   = f.input :name
