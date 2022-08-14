@@ -116,8 +116,8 @@ en:
         must_be_new: "Only countries which haven't already been added are listed below."
         language: "The default language that events in this country are usually in."
         no_default_language: "No default"
-        region_management: "If enabled, you will be able to view and assign managers to regions (regions, states, etc) within this country. This is useful for larger countries (China, USA, Australia, etc), and unnessecary for small countries (Belgium, Lithuania, Singapore, etc)."
-        bounds: "If a country is specified when embedding the map, these bounds will be used as the initial view. The coordinates should be entered as 4 comma-separated numbers (south,west,north,east)."
+        enable_regions: "If enabled, you will be able to view and assign managers to regions (regions, states, etc) within this country. This is useful for larger countries (China, USA, Australia, etc), and unnessecary for small countries (Belgium, Lithuania, Singapore, etc)."
+        enable_custom_regions: "Allow the creation of custom regions."
       region:
         polygon: "Drag / click on a faded square to add a new corner to the polygon. Click on an existing corner to remove it."
       area:

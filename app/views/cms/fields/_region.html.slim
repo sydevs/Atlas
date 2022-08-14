@@ -1,8 +1,8 @@
 
-- if @record.geojson || params[:osm_id] == 'custom'
+- if (@record.osm_id && @record.geojson && @record.bounds) || params[:osm_id] == 'custom'
   = f.input :geojson do
     - if @record.geojson
-      #map data-geojson=@record.geojson.to_json
+      #map data-geojson=@record.geojson.to_json data-border=@record.bounds_geojson.to_json
     - else
       #map data-polygon='true'
       .hint = translate('cms.hints.region.polygon')
@@ -22,11 +22,11 @@
           .ui.code.input
             = f.input_field field, as: (textareas.include?(field) ? :text : :string), placeholder: translate('cms.hints.not_set'), id: "js-map-#{field}", value: data&.to_json
 - else
-  .field id='js-osm-search' data-country=f.object.country_code data-type='settlement'
+  .field id='js-osm-search' data-country=f.object.country_code data-type='settlement' data-custom=(@context.enable_custom_regions ? 'true' : nil)
     .ui.search
       .ui.left.icon.action.input
         i.search.icon
         input.prompt type='text' name='query' placeholder=translate('cms.hints.geosearch.prompt')
-        button.ui.submit.button Search
+        button.ui.submit.button = translate('cms.actions.simple.search')
 
     table.ui.very.basic.table

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_05_181951) do
+ActiveRecord::Schema.define(version: 2022_08_14_135040) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -90,7 +90,12 @@ ActiveRecord::Schema.define(version: 2022_08_05_181951) do
     t.datetime "summary_email_sent_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
     t.jsonb "summary_metadata", default: "{}"
     t.string "default_language_code", limit: 2
-    t.string "bounds"
+    t.string "name"
+    t.boolean "enable_custom_regions", default: false
+    t.jsonb "geojson"
+    t.integer "osm_id"
+    t.json "translations"
+    t.string "bounds", default: [], array: true
     t.index ["country_code"], name: "index_countries_on_country_code", unique: true
   end
 

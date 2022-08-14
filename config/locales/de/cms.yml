@@ -115,8 +115,8 @@ de:
         must_be_new: "Nur Länder, die noch nicht hinzugefügt wurden, sind unten aufgeführt."
         language: "Die Standardsprache, die Veranstaltungen in diesem Land normalerweise abgehalten werden."
         no_default_language: "Kein Standard"
-        region_management: "Wenn es aktiviert ist, können Sie Regionen (Provinzen, Staaten usw.) in diesem Land an die Regionen ausschalten und zuordnen. Dies ist nützlich für größere Länder (China, USA, Australien, etc.) und unnötig für kleine Länder (Belgien, Litauen, Singapur usw.)."
-        bounds: "Wenn ein Land angegeben wird, wenn die Karte eingebettet wird, werden diese Grenzen als die erste Ansicht verwendet. Die Koordinaten sollten als 4 Komma seperirte  Nummern eingegeben werden (Süden, Westen, Nord, Ost)."
+        enable_regions: "Wenn es aktiviert ist, können Sie Regionen (Provinzen, Staaten usw.) in diesem Land an die Regionen ausschalten und zuordnen. Dies ist nützlich für größere Länder (China, USA, Australien, etc.) und unnötig für kleine Länder (Belgien, Litauen, Singapur usw.)."
+        enable_custom_regions: "Allow the creation of custom regions." # TODO: Translate
       region: # TODO: Translate
         polygon: "Drag / click on a faded square to add a new corner to the polygon. Click on an existing corner to remove it."
       area:

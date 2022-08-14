@@ -119,12 +119,17 @@ de:
         updated_at: "Aktualisiert"
 
       # Places
-      country:
+      country: # TODO: Translate
         manager_id: :activerecord.models.manager.single # Do not translate
         country_code: :activerecord.models.country.single # Do not translate
         default_language_code: "Veranstaltungs Sprache"
         enable_regions: "Regionales Management aktivieren"
+        enable_custom_regions: "Allow Custom Region Creation"
+        geo_data: "Geo Data"
+        osm_id: "OpenStreetMap ID"
         bounds: "Grenzen"
+        geojson: "Borders"
+        translations: "Translations"
         last_activity_on: :activerecord.attributes.generic.last_activity_on # Do not translate
         summary_email_sent_at: :activerecord.attributes.generic.summary_email_sent_at # Do not translate
 

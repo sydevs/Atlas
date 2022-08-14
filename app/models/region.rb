@@ -60,6 +60,21 @@ class Region < ApplicationRecord
     })
   end
 
+  def bounds_geojson
+    return nil unless bounds.present?
+
+    {
+      type: 'Polygon',
+      coordinates: [[
+        [bounds[2].to_f, bounds[0].to_f],
+        [bounds[3].to_f, bounds[0].to_f],
+        [bounds[3].to_f, bounds[1].to_f],
+        [bounds[2].to_f, bounds[1].to_f],
+        [bounds[2].to_f, bounds[0].to_f],
+      ]],
+    }
+  end
+
   private
 
     def polygon
