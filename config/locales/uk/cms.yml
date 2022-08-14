@@ -67,6 +67,8 @@ uk:
       not_logged_in: "Ви не ввійшли в систему!"
       no_comment: "(Без коментарів)"
       temporary_mail_error: "Сервер електронної пошти тимчасово зайнятий, спробуйте ще раз."
+      region: # TODO: Translate
+        invalid_geojson: "must be fully within the borders of %{region}"
       area: # TODO: Translate
         invalid_location: "cannot be outside the borders of %{region}"
       venue:

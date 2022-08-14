@@ -5,7 +5,7 @@ class CMS::RegionsController < CMS::ApplicationController
   def new
     if params[:osm_id]
       super osm_id: params[:osm_id]
-      @record.fetch_geo_data! unless params[:osm_id] == 'custom'
+      @record.fetch_geo_data! unless @record.custom_geodata?
     else
       super
     end
@@ -18,7 +18,7 @@ class CMS::RegionsController < CMS::ApplicationController
   def edit
     if params[:osm_id]
       super osm_id: params[:osm_id]
-      @record.fetch_geo_data! unless params[:osm_id] == 'custom'
+      @record.fetch_geo_data! unless @record.custom_geodata?
     else
       super
     end
@@ -32,10 +32,7 @@ class CMS::RegionsController < CMS::ApplicationController
 
     def parameters
       parameters = params.fetch(:region, {}).permit(:country_code, :name, :osm_id, :geojson, :bounds, :translations)
-      %i[bounds geojson translations].each do |key|
-        parameters[key] = JSON.parse(parameters[key])
-      end
-      parameters
+      GeoData.parse_params(parameters)
     end
 
 end

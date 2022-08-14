@@ -1,5 +1,5 @@
 
-- if (@record.osm_id && @record.geojson && @record.bounds) || params[:osm_id] == 'custom'
+- if (@record.osm_id && @record.geojson && @record.bounds) || params[:osm_id] == '0'
   = f.input :geojson do
     - if @record.geojson
       #map data-geojson=@record.geojson.to_json data-border=@record.bounds_geojson.to_json

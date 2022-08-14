@@ -97,6 +97,8 @@ class CMS::ApplicationController < ActionController::Base
 
     if @record.save
       redirect_to back_path, flash: { success: translate('cms.messages.successfully_created', resource: @model.model_name.human.downcase) }
+    else
+      render 'cms/views/new'
     end
   end
 

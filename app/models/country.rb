@@ -1,10 +1,11 @@
 class Country < ApplicationRecord
 
   # Extensions
+  include GeoData
   include Manageable
   include ActivityMonitorable
 
-  searchable_columns %w[country_code]
+  searchable_columns %w[name country_code translations]
   audited except: %i[summary_email_sent_at summary_metadata]
 
   # Associations
@@ -28,7 +29,7 @@ class Country < ApplicationRecord
 
   # Methods
 
-  def contains? venue
+  def contains? location
     venue.country_code == country_code
   end
 
@@ -36,38 +37,6 @@ class Country < ApplicationRecord
     return managers.include?(manager) unless super_manager == true
 
     false
-  end
-
-  def bounds_geojson
-    return nil unless bounds.present?
-
-    {
-      type: 'Polygon',
-      coordinates: [[
-        [bounds[2].to_f, bounds[0].to_f],
-        [bounds[3].to_f, bounds[0].to_f],
-        [bounds[3].to_f, bounds[1].to_f],
-        [bounds[2].to_f, bounds[1].to_f],
-        [bounds[2].to_f, bounds[0].to_f],
-      ]],
-    }
-  end
-
-  def fetch_geo_data!
-    return if osm_id.nil?
-
-    data = OpenStreetMapsAPI.fetch_data(osm_id)
-    self.assign_attributes({
-      name: data[:display_name].split(',', 2).first,
-      osm_id: osm_id, 
-      geojson: data[:geojson],
-      bounds: data[:boundingbox],
-      country_code: data[:address][:country_code],
-      translations: data[:namedetails].to_a.filter_map do |key, value|
-        key = key.to_s.split(':')
-        [key[1] || 'en', value] if key[0] == 'name'
-      end.to_h,
-    })
   end
 
   private

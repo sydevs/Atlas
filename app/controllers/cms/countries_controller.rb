@@ -32,10 +32,7 @@ class CMS::CountriesController < CMS::ApplicationController
 
     def parameters
       parameters = params.fetch(:country, {}).permit(:name, :country_code, :osm_id, :geojson, :bounds, :translations, :default_language_code, :enable_regions, :enable_custom_regions)
-      %i[bounds geojson translations].each do |key|
-        parameters[key] = JSON.parse(parameters[key])
-      end
-      parameters
+      GeoData.parse_params(parameters)
     end
 
 end
