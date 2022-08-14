@@ -69,6 +69,7 @@ ru:
       temporary_mail_error: "Сервер электронной почты временно занят, попробуй ещё раз."
       region: # TODO: Translate
         invalid_geojson: "must be fully within the borders of %{region}"
+        invalid_osm_id: "is not within %{country}"
       area: # TODO: Translate
         invalid_location: "cannot be outside the borders of %{region}"
       venue:
@@ -118,7 +119,7 @@ ru:
         language: "Язык по умолчанию, на котором обычно проводятся мероприятия в этой стране."
         no_default_language: "Отсутствует язык по умолчанию"
         enable_regions: "Если этот параметр включен, ты сможешь просматривать и назначать менеджеров по регионам (провинциям, штатам и т.д.) в этой стране. Это полезно для больших стран (Китай, США, Австралия и т.д.) и необязательно для небольших стран (Бельгия, Литва, Сингапур и т.д.)."
-        enable_custom_regions: "Allow the creation of custom regions." # TODO: Translate
+        enable_custom_regions: "Allow the creation of custom regions. This is an advanced feature, which should only be used if you understand what you are doing." # TODO: Translate
       region: # TODO: Translate
         polygon: "Drag / click on a faded square to add a new corner to the polygon. Click on an existing corner to remove it."
       area:

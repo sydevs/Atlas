@@ -40,8 +40,8 @@ module GeoData
   end
 
   def fetch_geo_data! data: nil
-    return if osm_id.nil?
-    
+    return if osm_id.nil? || custom_geodata?
+
     data ||= OpenStreetMapsAPI.fetch_data(osm_id)
     self.assign_attributes({
       name: data[:display_name].split(',', 2).first,
@@ -65,14 +65,12 @@ module GeoData
     params
   end
 
-  private
+  def polygons
+    return [] unless geojson?
 
-    def polygons
-      return [] unless geojson?
-
-      @polygons ||= geojson['coordinates'].map do |coordinates|
-        Geokit::Polygon.new(coordinates[0].map { |c| Geokit::LatLng.new(c[1], c[0]) })
-      end
+    @polygons ||= geojson['coordinates'].map do |coordinates|
+      Geokit::Polygon.new(coordinates[0].map { |c| Geokit::LatLng.new(c[1], c[0]) })
     end
+  end
 
 end

@@ -36,12 +36,12 @@ class Region < ApplicationRecord
   end
 
   def fetch_geo_data!
-    return if osm_id.nil?
+    return if osm_id.nil? || custom_geodata?
 
     data = OpenStreetMapsAPI.fetch_data(osm_id)
 
     if data[:address][:country_code] != country_code.downcase
-      self.errors.add(:osm_id, "is not within #{CountryDecorator.get_label(country_code)}")
+      self.errors.add(:osm_id, I18n.translate('cms.messages.region.invalid_osm_id', country: CountryDecorator.get_label(country_code)))
     else
       super data: data
     end

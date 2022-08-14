@@ -2,10 +2,8 @@
 - if @record.osm_id && @record.geojson && @record.bounds
   - languages = I18nData.languages(I18n.locale).map { |k, v| [v.split(/[,;]/)[0], k] }
 
-  pre = @record.bounds.inspect
-
   = f.input :geojson do
-    #map data-geojson=@record.geojson.to_json data-border=@record.bounds_geojson.to_json
+    #map data-geojson=@record.geojson.to_json data-bounds=@record.bounds_geojson.to_json
 
   = f.input :name
   = f.input :default_language_code, collection: languages, selected: @record.default_language_code, input_html: { class: 'search' }, hint: translate('cms.hints.country.language'), include_blank: translate('cms.hints.country.no_default_language')

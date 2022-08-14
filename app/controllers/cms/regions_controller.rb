@@ -5,7 +5,7 @@ class CMS::RegionsController < CMS::ApplicationController
   def new
     if params[:osm_id]
       super osm_id: params[:osm_id]
-      @record.fetch_geo_data! unless @record.custom_geodata?
+      @record.fetch_geo_data!
     else
       super
     end
@@ -18,7 +18,7 @@ class CMS::RegionsController < CMS::ApplicationController
   def edit
     if params[:osm_id]
       super osm_id: params[:osm_id]
-      @record.fetch_geo_data! unless @record.custom_geodata?
+      @record.fetch_geo_data!
     else
       super
     end

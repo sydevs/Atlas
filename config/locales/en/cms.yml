@@ -69,6 +69,7 @@ en:
       temporary_mail_error: "Email server is temporarily busy, please try again."
       region:
         invalid_geojson: "must be fully within the borders of %{region}"
+        invalid_osm_id: "is not within %{country}"
       area:
         invalid_location: "cannot be outside the borders of %{region}"
       venue:
@@ -119,7 +120,7 @@ en:
         language: "The default language that events in this country are usually in."
         no_default_language: "No default"
         enable_regions: "If enabled, you will be able to view and assign managers to regions (regions, states, etc) within this country. This is useful for larger countries (China, USA, Australia, etc), and unnessecary for small countries (Belgium, Lithuania, Singapore, etc)."
-        enable_custom_regions: "Allow the creation of custom regions."
+        enable_custom_regions: "Allow the creation of custom regions. This is an advanced feature, which should only be used if you understand what you are doing."
       region:
         polygon: "Drag / click on a faded square to add a new corner to the polygon. Click on an existing corner to remove it."
       area:
