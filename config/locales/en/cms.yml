@@ -23,6 +23,7 @@ en:
         choose: "Choose a %{resource}"
         verify: "Verify %{resource}"
         view: "View %{resource}"
+        reload: "Reload %{resource}"
 
       special:
         edit_profile: "Edit My Profile"

@@ -10,6 +10,9 @@
   = f.input :enable_regions, as: :boolean, wrapper: :semantic_checkbox, hint: translate('cms.hints.country.enable_regions')
   = f.input :enable_custom_regions, as: :boolean, wrapper: :semantic_checkbox, hint: translate('cms.hints.country.enable_custom_regions')
 
+  a.ui.right.floated.tiny.compact.basic.button href="?osm_id=#{@record.osm_id}"
+    = translate('cms.actions.target.reload', resource: translate_attribute(@record, :geo_data))
+
   .ui.accordion
     .ui.title
       i.dropdown.icon
@@ -20,6 +23,8 @@
       - (strings + textareas).each do |field|
         - data = @record.send(field)
         = f.input field do
+          - if field == :geojson
+            = f.hint pluralize(data['coordinates'].flatten.length / 2, 'point')
           .ui.code.input
             = f.input_field field, as: (textareas.include?(field) ? :text : :string), placeholder: translate('cms.hints.not_set'), id: "js-map-#{field}", value: data&.to_json
 - else

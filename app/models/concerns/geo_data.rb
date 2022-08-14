@@ -11,11 +11,17 @@ module GeoData
     polygons.any? { |p| p.contains?(point) }
   end
 
-  def contains_geojson? geojson
-    geojson['coordinates'].all? do |coordinates|
-      coordinates.all? do |point|
-        point = Geokit::LatLng.new(point[1], point[0])
-        polygons.any? { |p| p.contains?(point) }
+  def contains_geojson? record, strict: false
+    if strict
+      record.geojson['coordinates'].all? do |coordinates|
+        coordinates.all? do |point|
+          point = Geokit::LatLng.new(point[1], point[0])
+          polygons.any? { |p| p.contains?(point) }
+        end
+      end
+    else
+      record.polygons.all? do |p|
+        polygons.any? { |polygon| polygon.contains?(p.centroid) }
       end
     end
   end

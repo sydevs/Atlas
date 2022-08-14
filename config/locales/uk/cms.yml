@@ -23,6 +23,7 @@ uk:
         choose: "Обрати %{resource}"
         verify: "Verify %{resource}" # TODO: Translate
         view: "View %{resource}" # TODO: Translate
+        reload: "Reload %{resource}" # TODO: Translate
 
       special:
         edit_profile: "Редагувати мій профіль"

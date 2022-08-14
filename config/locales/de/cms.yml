@@ -23,6 +23,7 @@ de:
         choose: "Wähle  %{resource}"
         verify: "Bestätige %{resource}"
         view: "Zeige %{resource}"
+        reload: "Reload %{resource}" # TODO: Translate
 
       special:
         edit_profile: "Bearbeite mein Profil"

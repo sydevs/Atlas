@@ -38,8 +38,7 @@ class Region < ApplicationRecord
   def fetch_geo_data!
     return if osm_id.nil? || custom_geodata?
 
-    data = OpenStreetMapsAPI.fetch_data(osm_id)
-
+    data = OpenStreetMapsAPI.fetch_data(osm_id, precision: 0.06)
     if data[:address][:country_code] != country_code.downcase
       self.errors.add(:osm_id, I18n.translate('cms.messages.region.invalid_osm_id', country: CountryDecorator.get_label(country_code)))
     else
@@ -51,7 +50,7 @@ class Region < ApplicationRecord
 
     def validate_geojson
       return unless geojson.present?
-      return if parent.contains_geojson?(geojson)
+      return if parent.contains_geojson?(self)
 
       errors.add(:geojson, I18n.translate('cms.messages.region.invalid_geojson', region: parent.name))
     end
