@@ -67,6 +67,8 @@ ru:
       not_logged_in: "Ты не авторизован!"
       no_comment: "(Нет комментариев)"
       temporary_mail_error: "Сервер электронной почты временно занят, попробуй ещё раз."
+      area: # TODO: Translate
+        invalid_location: "cannot be outside the borders of %{region}"
       venue:
         out_of_bounds: "Место проведения не может находиться за пределами радиуса %{area}"
       event:

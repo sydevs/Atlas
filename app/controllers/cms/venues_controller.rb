@@ -18,8 +18,8 @@ class CMS::VenuesController < CMS::ApplicationController
   def create
     @record = @scope.new(parameters)
     
-    if @record.valid? && @context.is_a?(Area) && !@context.contains?(@record)
-      authorize Area, :new?
+    if @record.valid? && !@context.contains?(@record)
+      authorize Venue, :new?
       @record.errors.add(:base, I18n.translate('cms.messages.venue.out_of_bounds', area: @context.name))
       render 'cms/views/new'
     else

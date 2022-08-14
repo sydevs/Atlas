@@ -28,8 +28,9 @@ class Region < ApplicationRecord
 
   # Methods
 
-  def contains? venue
-    venue.region == province_code
+  def contains? location
+    point = Geokit::LatLng.new(location.latitude, location.longitude)
+    polygon.contains?(point)
   end
 
   def managed_by? manager, super_manager: nil
@@ -58,5 +59,16 @@ class Region < ApplicationRecord
       end.to_h,
     })
   end
+
+  private
+
+    def polygon
+      return nil unless geojson?
+
+      @polygon ||= begin
+        coordinates = geojson['coordinates'].flatten(1).map { |c| Geokit::LatLng.new(c[1], c[0]) }
+        Geokit::Polygon.new(coordinates)
+      end
+    end
 
 end

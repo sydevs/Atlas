@@ -8,9 +8,9 @@
 
 = f.input :name
 
-#map data-editable='true'
-
+#map data-editable='true' data-border=@context.geojson.to_json data-error=(@record.errors[:coordinates].present? ? 'true' : nil)
 .hint = translate('cms.hints.area.location')
+= f.error :coordinates
 
 = f.input :radius, placeholder: translate_attribute(Area, :radius), input_html: { id: 'js-map-radius', step: 0.5 }
 

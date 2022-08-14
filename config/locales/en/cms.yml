@@ -67,6 +67,8 @@ en:
       not_logged_in: "You are not logged in!"
       no_comment: "(No comment)"
       temporary_mail_error: "Email server is temporarily busy, please try again."
+      area:
+        invalid_location: "cannot be outside the borders of %{region}"
       venue:
         out_of_bounds: "Venue cannot be outside the radius of %{area}"
       event:

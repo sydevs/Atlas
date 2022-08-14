@@ -67,6 +67,8 @@ de:
       not_logged_in: "Du bist nicht eingeloggt!"
       no_comment: "(kein Komentar)"
       temporary_mail_error: "Email server ist gerade beschäftigt, bitte später nochmal versuchen."
+      area: # TODO: Translate
+        invalid_location: "cannot be outside the borders of %{region}"
       venue:
         out_of_bounds: "Die veranstaltung darf nicht weiter als %{area} entfernt sein."
       event:

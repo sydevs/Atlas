@@ -24,6 +24,7 @@ class Area < ApplicationRecord
   # Validations
   before_validation :ensure_country_consistency
   validates_presence_of :radius, :name
+  validate :validate_location
 
   # Scopes
   default_scope { order(name: :desc) }
@@ -92,6 +93,13 @@ class Area < ApplicationRecord
       venues = venues.where(country_code: country_code) if country_code?
       venues = venues.where(province_code: province_code) if province_code?
       self.venues = venues
+    end
+
+    def validate_location
+      return unless latitude.present? && longitude.present?
+      return if parent.contains?(self)
+
+      errors.add(:coordinates, I18n.translate('cms.messages.area.invalid_location', region: parent.name))
     end
 
 end

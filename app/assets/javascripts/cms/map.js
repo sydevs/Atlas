@@ -4,10 +4,10 @@
 class Map {
   #container
   #data = {}
-  leaflet
   #leaflet
   #inputs = {}
   #layer = null
+  #border = null
 
   constructor(container) {
     console.log('Loading Map') // eslint-disable-line no-console
@@ -15,7 +15,8 @@ class Map {
     this.#data = container.dataset
     this.#leaflet = L.map(container.id, {
       attributionControl: false,
-      //zoomControl: false,
+      zoomSnap: 0.25,
+      zoomDelta: 0.5,
     })
 
     this.leaflet = this.#leaflet
@@ -26,12 +27,13 @@ class Map {
       const fields = ['latitude', 'longitude', 'radius', 'geojson']
       fields.forEach(field => {
         this.#inputs[field] = this.setupInput(field)
+        if (!this.#inputs[field]) delete this.#inputs[field]
       })
     }
 
     if (this.#data.polygon) {
       this.setupPolygonDraw()
-    } else {
+    } else if (!this.#data.editable) {
       this.#leaflet.scrollWheelZoom.disable()
     }
 
@@ -98,14 +100,16 @@ class Map {
       this.setPoint(data.latitude, data.longitude)
     } else if (data.geojson) {
       this.setGeojson(data.geojson)
+    } else {
+      return
+    }
+
+    if (data.border) {
+      this.setBorder(data.border)
     }
   }
 
   setCircle(latitude, longitude, radius) {
-    if (!(latitude && longitude && radius)) {
-      return
-    }
-
     if (this.#layer) this.#layer.removeFrom(this.#leaflet)
 
     this.setHeight(360)
@@ -116,7 +120,7 @@ class Map {
       fillOpacity: 0.3,
     }).addTo(this.#leaflet)
 
-    const bounds = L.latLng(latitude, longitude).toBounds(parseInt(radius) * 2000)
+    const bounds = L.latLng(latitude, longitude).toBounds(parseFloat(radius) * 2000)
     this.#leaflet.fitBounds(bounds)
   }
 
@@ -134,14 +138,38 @@ class Map {
   }
 
   setGeojson(geojson) {
-    console.log('geojson', JSON.parse(geojson))
     if (this.#layer) this.#layer.removeFrom(this.#leaflet)
 
-    $(this.#container).css('min-height', '240px').css('opacity', '1')
+    this.setHeight(360)
 
     geojson = JSON.parse(geojson)
-    this.#layer = L.geoJSON(geojson).addTo(this.#leaflet)
-    this.#leaflet.fitBounds(this.#layer.getBounds(), { padding: [20, 20] })
+    this.#layer = L.geoJSON(geojson, {
+      color: '#2185d0',
+      fillColor: '#2185d0',
+      fillOpacity: 0.3,
+    }).addTo(this.#leaflet)
+    this.#leaflet.fitBounds(this.#layer.getBounds(), { padding: [10, 10] })
+  }
+ 
+  setBorder(geojson) {
+    if (this.#border) this.#border.removeFrom(this.#leaflet)
+
+    geojson = JSON.parse(geojson)
+    this.#border = L.geoJSON(geojson, {
+      style: {
+        color: 'black',
+        opacity: 0.8,
+        weight: 2,
+        dashArray: '8, 8',
+        fillOpacity: 0,
+      }
+    }).addTo(this.#leaflet)
+
+    if (this.#data.error) {
+      let bounds = this.#border.getBounds()
+      bounds.extend(this.#layer.getBounds())
+      this.#leaflet.fitBounds(bounds, { padding: [20, 20] })
+    }
   }
 
   disableInteractions() {

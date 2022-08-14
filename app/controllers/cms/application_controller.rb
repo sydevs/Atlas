@@ -38,6 +38,8 @@ class CMS::ApplicationController < ActionController::Base
     @events_recently_expired = current_user.accessible_events.expired
     @events_expiring_count = @events_for_review.count + @events_recently_expired.count
     @events_archived_count = current_user.accessible_events.archived.count
+
+    render 'cms/application/dashboard'
   end
 
   def review
@@ -95,9 +97,6 @@ class CMS::ApplicationController < ActionController::Base
 
     if @record.save
       redirect_to back_path, flash: { success: translate('cms.messages.successfully_created', resource: @model.model_name.human.downcase) }
-      true
-    else
-      false
     end
   end
 
@@ -111,9 +110,8 @@ class CMS::ApplicationController < ActionController::Base
 
     if @record.update(attributes)
       redirect_to back_path, flash: { success: translate('cms.messages.successfully_updated', resource: @model.model_name.human.downcase) }
-      true
     else
-      false
+      render 'cms/views/edit'
     end
   end
 
@@ -215,7 +213,7 @@ class CMS::ApplicationController < ActionController::Base
 
     def set_record!
       @record = @scope&.find(params[:id])
-      @context ||= @record
+      @context ||= @record.parent
       puts "SET RECORD #{@record.inspect}"
     end
 
