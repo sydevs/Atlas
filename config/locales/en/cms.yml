@@ -107,6 +107,7 @@ en:
         manager: "Manager"
 
     hints:
+      unnamed: "(Unnamed)"
       verified: "Verified"
       not_verified: "Not Verified"
       not_set: "Not Set"

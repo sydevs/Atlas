@@ -106,6 +106,7 @@ ru:
         manager: "Менеджер"
 
     hints:
+      unnamed: "(Unnamed)" # TODO: Translate
       verified: "Проверено"
       not_verified: "Не подтверждено"
       not_set: "Не задано"

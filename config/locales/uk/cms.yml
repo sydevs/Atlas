@@ -106,6 +106,7 @@ uk:
         manager: "Vенеджер"
 
     hints:
+      unnamed: "(Unnamed)" # TODO: Translate
       verified: "Підтверджено"
       not_verified: "Not Verified" # TODO: Translate
       not_set: "Not Set" # TODO: Translate

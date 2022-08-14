@@ -106,6 +106,7 @@ de:
         manager: "Manager"
 
     hints:
+      unnamed: "(Unnamed)" # TODO: Translate
       verified: "Verifiziert"
       not_verified: "Nicht verifiziert"
       not_set: "Nicht gesetzt"
