@@ -28,13 +28,7 @@ class Map::ApplicationController < ActionController::Base
 
     country = Country.find_by_country_code(params[:country]) if params[:country].present?
     @config[:bounds] = country.bounds if country.present?
-
-    unless @config[:bounds].present?
-      @config.merge!({
-        latitude: coordinates[0],
-        longitude: coordinates[1],
-      })
-    end
+    @config[:center] = coordinates unless @config[:bounds].present?
 
     @config.merge!(@client.map_config) if @client
     @config[:language] ||= params[:language]

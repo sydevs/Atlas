@@ -38,7 +38,7 @@ class MapFrame extends EventTarget {
       onload: () => {},
     }, config)
 
-    mapboxgl.accessToken = 'pk.eyJ1Ijoic3lkZXZhZG1pbiIsImEiOiJjazczcXV4ZzQwZXJtM3JxZTF6a2g0dW9hIn0.avMfkC306-2PqpNRnz6otg'
+    mapboxgl.accessToken = window.config.token
 
     this.#mapbox = new mapboxgl.Map({
       container: containerId,
@@ -46,6 +46,8 @@ class MapFrame extends EventTarget {
       minZoom: 1,
       dragRotate: false,
       hash: true,
+      bounds: window.config.bounds,
+      center: window.config.center,
     })
 
     let initalizing = true
