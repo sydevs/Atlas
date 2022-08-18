@@ -46,6 +46,8 @@ class CMS::ApplicationController < ActionController::Base
     @events_for_review = current_user.accessible_events.needs_review.order(updated_at: :desc)
     @events_expired = current_user.accessible_events.expired.order(updated_at: :desc)
     @events_archived = current_user.accessible_events.archived.order(updated_at: :desc)
+
+    render 'cms/application/review'
   end
 
   def index query = {}
