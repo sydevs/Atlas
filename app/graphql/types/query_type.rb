@@ -84,7 +84,7 @@ module Types
               type: 'Point',
               coordinates: [location.longitude, location.latitude]
             },
-            properties: location, #.as_json.merge(events: events),
+            properties: location,
           }
         end.compact,
         created_at: DateTime.now.to_s,

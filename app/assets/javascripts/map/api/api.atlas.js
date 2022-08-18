@@ -59,6 +59,7 @@ class AtlasAPI {
           label
           latitude
           longitude
+          radius
           eventIds
         }`,
         geojson: `on Geojson {
@@ -75,6 +76,7 @@ class AtlasAPI {
               label
               latitude
               longitude
+              radius
               eventIds
             }
           }

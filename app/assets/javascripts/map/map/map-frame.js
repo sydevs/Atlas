@@ -146,10 +146,16 @@ class MapFrame extends EventTarget {
     this.waitForLoad().then(() => {
       this.#currentLayer.setSelection(location)
 
-      this.goTo(location, Object.assign({
-        zoom: this.#currentLayerId == 'online' ? 4 : 16,
-        transition: true,
-      }, options))
+      if (location.radius) {
+        this.fitTo(location, Object.assign({
+          transition: true
+        }, options))
+      } else {
+        this.goTo(location, Object.assign({
+          zoom: this.#currentLayerId == 'online' ? 4 : 16,
+          transition: true,
+        }, options))
+      }
     })
   }
 
@@ -181,13 +187,18 @@ class MapFrame extends EventTarget {
     }
   }
 
-  fitTo(bounds) {
+  fitTo(bounds, options = {}) {
     if (!bounds) return
     
-    bounds = [[bounds.west, bounds.south], [bounds.east, bounds.north]]
+    if (bounds.radius) {
+      bounds = new mapboxgl.LngLat(bounds.longitude, bounds.latitude).toBounds(bounds.radius * 1000)
+    } else {
+      bounds = [[bounds.west, bounds.south], [bounds.east, bounds.north]]
+    }
+
     //this.updatePadding()
     this.#mapbox.fitBounds(bounds, {
-      animate: !Util.isDevice('mobile'),
+      animate: options.transition && !Util.isDevice('mobile'),
     })
   }
 
