@@ -13,7 +13,7 @@ class OnlineMapLayer extends AbstractMapLayer {
     super(mapbox, Object.assign({
       id: 'online',
       points: {
-        'text-field': '1',
+        'text-field': '',
         'icon-image': 'cluster',
       },
       selection: {
@@ -30,13 +30,14 @@ class OnlineMapLayer extends AbstractMapLayer {
   }
 
   _gotoLocation(area) {
+    // TODO: Implement the area view
     m.route.set('/:layer/:id', { id: area.eventIds[0], layer: 'online' })
 
-    /*if (venue.eventIds.length > 1) {
-      App.data.setCache('venues', venue)
-      m.route.set('/venue/:id', { id: venue.id })
+    /*if (area.eventIds.length > 1) {
+      App.data.setCache('areas', venue)
+      m.route.set('/area/:id', { id: area.id })
     } else {
-      m.route.set('/:layer/:id', { id: venue.eventIds[0], layer: 'online' })
+      m.route.set('/:layer/:id', { id: area.eventIds[0], layer: 'online' })
     }*/
   }
 
