@@ -22,8 +22,10 @@ en:
       more_info: "More Info"
       register: "Register"
       fallback:
-        area: "There are no classes in this area, the closest free meditation class is in"
-        venue: "The closest free meditation class is at"
+        nearby: "The closest free meditation class is at"
+        far: "There are no classes in this area, the closest free meditation class is in"
+        online: "There are no classes in this area, consider an"
+        online_event: "Online Class"
 
     venue:
       header: "Events at %{venue}"

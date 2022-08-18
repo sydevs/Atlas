@@ -7,7 +7,7 @@ class CountryPolicy < PlacePolicy
   end
 
   def index_association? association = nil
-    return false if association == :areas
+    return false if association == (record.enable_regions? ? :areas : :regions)
 
     super
   end

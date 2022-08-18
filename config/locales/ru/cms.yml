@@ -48,9 +48,6 @@ ru:
       # Tertiary menu
       details: "Информация"
       activity: "Активность"
-      events: # TODO: Translate
-        offline: "In-Person Events"
-        online: "Online Events"
       breadcrumbs:
         world: "Мир"
         help: "Помощь"
@@ -96,8 +93,6 @@ ru:
         timing: "Расписание"
         registration: "Регистрация"
         manager: "Менеджер"
-        offline: "In Person Event" # TODO: Translate
-        online: "Online Event" # TODO: Translate
       manager: 
         contact_methods: "Способы связи"
         notifications: "Настройка оповещений"
@@ -217,7 +212,7 @@ ru:
         title: "Управляемые ресурсы"
       event_coverage:
         title: "Освещение события" 
-        description: "%{events} (%{venues})"
+        description: "%{events} in %{resource}" # TODO: Translate
       record_needs_review:
         title: "Требуется проверить %{resource}"
         description: "Это %{resource} не обновлялось за %{updated_ago}. Это событие будет удалено с карты, если оно не будет проверено в %{expires_in}. Перейди на страницу редактирования и нажми «Сохранить», чтобы подтвердить правильность сведений о событии."
@@ -249,10 +244,6 @@ ru:
         description: "Это %{resource} скрыто из общего доступа, потому что не опубликовано."
         parent: "Это %{resource} скрыто из общего доступа, потому что %{parent} не опубликовано."
       create_event:
-        title: "Хочешь узнать, как создать событие (публичную программу)?"
-        description: "Выбери площадку на вкладке \"%{action}\"."
-        action: "Перейти"
-      create_event_on_venue:
         title: "Хочешь узнать, как создать событие?"
         description: "Перейди на вкладку \"%{action}\" и нажми \"Add Event\""
         action: "Добавить Событие"

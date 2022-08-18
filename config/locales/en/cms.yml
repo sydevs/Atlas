@@ -48,9 +48,6 @@ en:
       # Tertiary menu
       details: "Info"
       activity: "Activity"
-      events:
-        offline: "In-Person Events"
-        online: "Online Events"
       breadcrumbs:
         world: "World"
         help: "Help"
@@ -97,8 +94,6 @@ en:
         location: "Location"
         registration: "Registration"
         manager: "Manager"
-        offline: "In Person Event"
-        online: "Online Event"
       manager:
         contact_methods: "Contact Methods"
         notifications: "Notification Settings"
@@ -221,7 +216,7 @@ en:
         title: "Resources Managed"
       event_coverage:
         title: "Event Coverage"
-        description: "%{events} (%{venues})"
+        description: "%{events} in %{resource}"
       record_needs_review:
         title: "%{resource} Needs Review"
         description: "This %{resource} hasn't been updated in %{updated_ago}. This event will be removed from the map unless it is reviewed within %{expires_in}. Go to the edit page and press save to confirm the event details are still correct."
@@ -258,10 +253,6 @@ en:
         parent: "This %{resource} is currently hidden from the public, because the manager's email has not been verified."
         action: "Resend"
       create_event:
-        title: "Wondering how to create a public program?"
-        description: "Choose a venue on the \"%{action}\" tab."
-        action: "Go now"
-      create_event_on_venue:
         title: "Wondering how to create an event?"
         description: "Click on the \"%{action}\" tab, and press \"Add Event\""
         action: "Add Event"

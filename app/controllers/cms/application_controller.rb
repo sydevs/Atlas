@@ -50,7 +50,6 @@ class CMS::ApplicationController < ActionController::Base
 
   def index query = {}
     authorize_association! @model
-    @query = query
     @scope = @scope.where(query) if query.present?
     @records = policy_scope(@scope).page(params[:page]).per(15).search(params[:q])
     @records = @records.order(updated_at: :desc) if @model.column_names.include?('updated_at')
@@ -208,7 +207,6 @@ class CMS::ApplicationController < ActionController::Base
         @scope = current_user.try("accessible_#{@model.table_name}") || @model
       end
       
-      @query ||= {}
       puts "SET SCOPE #{@scope.inspect}"
     end
 

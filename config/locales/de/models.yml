@@ -46,6 +46,20 @@ de:
         # Countable
         one: "Event"
         other: "Ereignisse"
+      online_event: # TODO: Translate
+        # Basic pluralization
+        single: "Online Event"
+        plural: "Online Events"
+        # Countable
+        one: "online event"
+        other: "online events"
+      offline_event: # TODO: Translate
+        # Basic pluralization
+        single: "In-Person Event"
+        plural: "In-Person Events"
+        # Countable
+        one: "in-person event"
+        other: "in-person events"
       registration:
         # Basic pluralization
         single: "Teilnehmer"

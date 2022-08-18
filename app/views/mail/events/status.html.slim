@@ -47,7 +47,7 @@ table.actions
         = translate('mail.event.status.verify')
       td.or = translate('mail.event.status.or')
     - elsif !%i[expired finished].include?(@status)
-      td: a.button href=map_event_url(@event)
+      td: a.button href=map_event_url(@event, layer: @event.layer)
         = translate('mail.event.view')
     td: a.button href=email_login(cms_event_url(@event))
       = translate('mail.event.edit')

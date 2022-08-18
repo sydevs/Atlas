@@ -32,15 +32,15 @@ class Event < ApplicationRecord
   accepts_nested_attributes_for :pictures, :venue
 
   # Validations
+  validates_presence_of :type, :category, :language_code, :manager, :recurrence, :start_date, :start_time
+  validates_presence_of :end_date, if: :course_category?
+  validates_presence_of :end_time, if: -> { festival_category? || concert_category? }
+  validates_presence_of :online_url, if: :online?
+  validates_presence_of :venue, unless: :online?
   validates :custom_name, length: { maximum: 255 }
-  validates_presence_of :type, :category, :language_code, :manager
-  validates :recurrence, :start_date, :start_time, presence: true
   validates :description, length: { minimum: 40, maximum: 600, allow_blank: true }
   validates :registration_url, url: true, unless: :native_registration_mode?
   validates :phone_number, phone: { possible: true, allow_blank: true, country_specifier: -> event { event.area.country_code } }
-  validates_presence_of :end_date, if: :course_category?
-  validates_presence_of :end_time, if: -> { festival_category? || concert_category? }
-  validates_presence_of :venue, :online_url, if: :online?
   validates_numericality_of :registration_limit, greater_than: 0, allow_nil: true
   validates_associated :pictures
   validate :validate_end_time
@@ -56,8 +56,9 @@ class Event < ApplicationRecord
 
   scope :ready_for_reminder_email, -> { where("reminder_email_sent_at IS NULL OR reminder_email_sent_at <= ?", 12.hours.ago) }
 
-  scope :online, -> (online=true) { online ? where(venue_id: nil) : offline }
-  scope :offline, -> { where.not(venue_id: nil) }
+  scope :layer, -> (layer) { layer == 'online' ? online : offline }
+  scope :online, -> (online=true) { online ? where(type: 'OnlineEvent') : offline }
+  scope :offline, -> { where(type: 'OfflineEvent') }
 
   # Delegations
   delegate :time_zone, to: :area
@@ -65,11 +66,15 @@ class Event < ApplicationRecord
   alias parent area
 
   # Callbacks
-  before_validation :find_venue
-  before_save -> { self[:type] = online? ? 'OnlineEvent' : 'OfflineEvent' }
+  before_validation :find_venue, unless: :online?
+  # before_validation -> { self[:type] = venue_id? ? 'OfflineEvent' : 'OnlineEvent' }
   after_save :verify_manager
 
   # Methods
+
+  def layer
+    online? ? 'online' : 'offline'
+  end
 
   def online?
     type == 'OnlineEvent'
@@ -196,7 +201,8 @@ class Event < ApplicationRecord
     end
 
     def validate_language_code
-      return if I18nData.languages.key?(language_code)
+      self[:language_code] = self[:language_code]&.upcase
+      return if I18nData.languages.key?(self[:language_code])
 
       self.errors.add(:language_code)
     end
@@ -213,7 +219,7 @@ class Event < ApplicationRecord
     end
 
     def find_venue
-      # return unless place_id_changed?
+      return unless venue_id.nil? || venue.place_id_changed?
 
       self.venue_id = Venue.find_by_place_id(venue.place_id)&.id
     end

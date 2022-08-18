@@ -1,0 +1,117 @@
+
+.ui.form .ui.checkbox label.required:after
+  margin: 0
+
+.ui.dividing.header
+  position: relative
+
+  .floated.button
+    position: absolute
+    right: 0
+    bottom: 2px
+
+.ui.accordion
+  margin: 1em 0
+
+  > .title:not(.ui)
+    font-size: 1.1em
+    font-weight: bold
+    border-top: 1px solid rgba(34, 36, 38, 0.15)
+    margin-top: 0.5em
+    padding-top: 1em
+
+  > .title > .floated
+    float: right
+
+  &:not(.styled) > .title ~ .content:not(.ui)
+    p, .ui.list
+      padding: 0 1.5em
+
+  > .content .ui.steps > .step
+    padding: 1em !important
+
+    &:not(:first-child)
+      padding-left: 1.5em !important
+
+.ui.button:not(.disabled)[disabled="disabled"]
+  cursor: not-allowed
+  background: transparentize(#E0E1E2, 0.4)
+  box-shadow: none !important
+  color: rgba(0, 0, 0, 0.6)
+
+.ui.right.floated.breadcrumbs
+  float: right
+
+.ui.form textarea
+  resize: none
+
+.ui.header > svg
+  height: 1.2em
+
+.ui.form .hint
+  font-size: 90%
+  opacity: 0.6
+  margin-bottom: 6px
+
+  &.fitted
+    margin: 0
+
+.ui.active.button
+  cursor: default
+
+.ui.lookup.button
+  margin-top: 0.25em
+  margin-bottom: 1em
+
+.ui.help
+  font-size: 90%
+  font-style: italic
+  text-align: right
+  margin-top: 3px
+  float: right
+
+  .ui.message + &,
+  .fields + &
+    @media (min-width: 768px)
+      margin-top: -10px
+      margin-bottom: 10px
+
+.ui.search > .results
+  z-index: 1100
+
+.ui.accordion
+  .title label
+    cursor: inherit
+
+.ui.event.steps
+  margin: 0
+
+i.icon > i.icon
+  margin: 0 !important
+
+.ui.list > .item .alert
+  display: inline
+  font-weight: 500
+
+  &.orange
+    color: #f2711c
+
+  &.yellow
+    color: #fbbd08
+
+.ui.form .inline.fields > .field
+  flex-grow: 1
+  justify-content: space-around
+  display: flex
+
+.two.fields > input,
+.two.fields > select
+  margin: 0 5px !important
+
+.ui.fluid.input > textarea
+  width: 100%
+  resize: none
+
+tr.disabled a
+  opacity: 0.5
+  pointer-events: none

@@ -75,7 +75,8 @@ module GeoData
     return [] unless geojson?
 
     @polygons ||= geojson['coordinates'].map do |coordinates|
-      Geokit::Polygon.new(coordinates[0].map { |c| Geokit::LatLng.new(c[1], c[0]) })
+      coordinates = coordinates[0] if coordinates[0].length > 2
+      Geokit::Polygon.new(coordinates.map { |c| Geokit::LatLng.new(c[1], c[0]) })
     end
   end
 

@@ -48,9 +48,6 @@ uk:
       # Tertiary menu
       details: "Інформація"
       activity: "Діяльність"
-      events: # TODO: Translate
-        offline: "In-Person Events"
-        online: "Online Events"
       breadcrumbs:
         world: "Світ"
         help: "Допомога"
@@ -96,8 +93,6 @@ uk:
         timing: "Вибір часу"
         registration: "Реєстрація"
         manager: "Менеджер"
-        offline: "Особиста подія"
-        online: "Онлайн подія"
       manager: # TODO: Translate
         contact_methods: "Contact Methods"
         notifications: "Notification Settings"
@@ -217,7 +212,7 @@ uk:
         title: "Керовані ресурси"
       event_coverage:
         title: "Висвітлення подій"
-        description: "%{events} (%{venues})"
+        description: "%{events} in %{resource}" # TODO: Translate
       record_needs_review:
         title: "%{resource} потребує перевірки"
         description: "Цей %{resource} не оновлювався в %{updated_ago}. Цю подію буде видалено з карти, якщо вона не буде переглянута протягом %{expires_in}. Перейдіть на сторінку редагування та натисніть зберегти, щоб підтвердити, що деталі події все ще правильні."
@@ -249,10 +244,6 @@ uk:
         description: "Цей %{resource} наразі прихований від громадськості, оскільки він не опублікований."
         parent: "Цей %{resource} наразі прихований від громадськості, оскільки його %{parent} не опубліковано."
       create_event:
-        title: "Гадаєте як створити публічну програму?"
-        description: "Виберіть місце проведення на вкладці \"%{action}\"."
-        action: "Створити зараз"
-      create_event_on_venue:
         title: "Гадаєте як створити подію?"
         description: "Натисніть на вкладку \"%{action}\" і натисніть \"Додати подію\""
         action: "Додати подію"

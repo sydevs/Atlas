@@ -6,11 +6,11 @@ class Area < ApplicationRecord
   include Location
 
   nilify_blanks
-  searchable_columns %w[name identifier province_code country_code]
+  searchable_columns %w[name]
   audited except: %i[summary_email_sent_at summary_metadata]
 
   # Associations
-  belongs_to :country, foreign_key: :country_code, primary_key: :country_code, optional: true
+  belongs_to :country, foreign_key: :country_code, primary_key: :country_code
   belongs_to :region, foreign_key: :province_code, primary_key: :province_code, optional: true
 
   has_many :area_venues
@@ -22,8 +22,8 @@ class Area < ApplicationRecord
   has_many :publicly_visible_events, -> { publicly_visible }, class_name: 'OnlineEvent'
 
   # Validations
-  before_validation :ensure_country_consistency
-  validates_presence_of :radius, :name
+  before_validation :set_country_code
+  validates_presence_of :name, :radius
   validate :validate_location
 
   # Scopes
@@ -82,7 +82,7 @@ class Area < ApplicationRecord
 
   private
 
-    def ensure_country_consistency
+    def set_country_code
       self.country_code = region.country_code if region.present?
     end
 

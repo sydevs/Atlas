@@ -129,7 +129,7 @@ class DataCache {
     return this.#atlas.fetchClosestVenue(params).then(data => {
       this.#cache.closestfetchVenue = params
       this.#cache.closestVenue = data.closestVenue
-      return data.closestVenue
+      return data.closestVenue || {}
     })
   }
 

@@ -22,8 +22,10 @@ ru:
       more_info: "Подробнее"
       register: "Записаться"
       fallback:
-        area: "Здесь пока нет занятий, ближайщий центр медитации находится в"
-        venue: "Ближайший центр медитации находится в"
+        nearby: "Ближайший центр медитации находится в"
+        far: "Здесь пока нет занятий, ближайщий центр медитации находится в"
+        online: "There are no classes in this area, consider an" # TODO: Translate
+        online_event: "Online Class" # TODO: Translate
 
     venue: # TODO: Translate
       header: "Events at %{venue}"

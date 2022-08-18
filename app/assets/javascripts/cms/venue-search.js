@@ -37,9 +37,6 @@ const VenueSearch = {
           if (field.name == 'event[venue][id]') {
             field.value = data.id
           } else {
-            console.log('field', index, field)
-            //const key = field.name.match(/^event\[venue_attributes\]\[(.+)\]$/)[1]
-            console.log(field.name.match(/^event\[venue_attributes\]\[(.+)\]$/))
             const key = field.name.match(/^event\[venue_attributes\]\[(.+)\]$/)[1]
             field.value = data[key] || field.dataset.default || ''
             //$(field).prop('disabled', key == 'id')

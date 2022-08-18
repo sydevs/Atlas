@@ -96,8 +96,6 @@ de:
         timing: "Timing"
         registration: "Anmeldung"
         manager: "Manager"
-        offline: "In Person Event"
-        online: "Online Event"
       manager:
         contact_methods: "Kontaktmethoden"
         notifications: "Benachrichtigungseinstellungen"
@@ -217,7 +215,7 @@ de:
         title: "Ressourcen verwaltet"
       event_coverage:
         title: "Eventberichterstattung"
-        description: "%{events} (%{venues})"
+        description: "%{events} in %{resource}" # TODO: Translate
       record_needs_review:
         title: " %{resource} braucht überprüfung"
         description: "Diese %{resource} wurde vor %{updates_ago} aktualisiert. Diese Veranstaltung wird von der Karte entfernt, es sei denn, es wird innerhalb von %{expires_in} überprüft. Gehe zu der Seite Bearbeiten und drücken Sie Speichern, um zu bestätigen, dass die Ereignisdetails noch korrekt sind."
@@ -254,10 +252,6 @@ de:
         parent: "Diese %{resource} ist derzeit für die Öffentlichkeit versteckt, weil die E-Mail-Adresse des Managers nicht überprüft wurde."
         action: "Senden"
       create_event:
-        title: "Wundern Sie sich, wie man ein öffentliches Programm erstellt?"
-        description: "Wählen Sie einen Veranstaltungsort auf der Registerkarte \"%{action}\"."
-        action: "Jetzt gehen"
-      create_event_on_venue:
         title: "Fragst du dich, wie man ein Ereignis erstellt?"
         description: "Klicken Sie auf die Registerkarte \"%{action}\" und drücken Sie \"Event hinzufügen\""
         action: "Event hinzufügen"

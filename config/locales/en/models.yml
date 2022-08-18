@@ -46,6 +46,20 @@ en:
         # Countable
         one: "event"
         other: "events"
+      online_event:
+        # Basic pluralization
+        single: "Online Event"
+        plural: "Online Events"
+        # Countable
+        one: "online event"
+        other: "online events"
+      offline_event:
+        # Basic pluralization
+        single: "In-Person Event"
+        plural: "In-Person Events"
+        # Countable
+        one: "in-person event"
+        other: "in-person events"
       registration:
         # Basic pluralization
         single: "Attendee"
@@ -195,7 +209,7 @@ en:
           festival: "Stall"
           concert: "Concert"
         category_descriptions:
-          dropin: "A standard weekly class, where seekers can drop-in any time."
+          dropin: "A standard weekly class, where seekers can join at any time."
           single: "A one-off class, suitable for a tour or other special event."
           course: "A fixed-duration course where seekers can only join at the start of the course."
           festival: "A stand at a public event, where seekers can show up without registering."

@@ -9,9 +9,9 @@ class Mail::AreasController < Mail::ApplicationController
     @start_of_period = summary_period.ago.beginning_of_week
     @end_of_period = @start_of_period + summary_period
     @end_of_period = Time.now # For testing
-    query = ['events.created_at >= ? AND events.created_at <= ?', @start_of_period, @end_of_period]
+    query = { created_at: @start_of_period..@end_of_period }
 
-    @new_events = @place.events.publicly_visible.where(*query)
+    @new_events = @place.events.publicly_visible.where(query)
     @expiring_events = @place.events.needs_urgent_review
     @expired_events = @place.events.expired
 

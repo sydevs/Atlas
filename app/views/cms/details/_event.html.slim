@@ -47,6 +47,10 @@ p = simple_format @record.description
   .item
     i.hashtag.icon
     .content
+      .header = translate_model(@record.type.constantize)
+  .item
+    i.hashtag.icon
+    .content
       .header = @record.category_name
       .description = @record.category_description
   .item

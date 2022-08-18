@@ -3,12 +3,11 @@ class CMS::EventsController < CMS::ApplicationController
   prepend_before_action { @model = Event }
 
   def index
-    online = params[:online] == 'true' || (params[:online] != 'false' && @context.is_a?(Area))
-    super type: online ? 'OnlineEvent' : 'OfflineEvent'
+    super type: params[:online] == 'true' ? 'OnlineEvent' : 'OfflineEvent'
   end
 
   def new
-    super category: params[:category], type: params[:online] ? 'OnlineEvent' : 'OfflineEvent'
+    super category: params[:category], type: params[:online] == 'true' ? 'OnlineEvent' : 'OfflineEvent'
   end
 
   def create

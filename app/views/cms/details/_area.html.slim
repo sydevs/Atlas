@@ -1,13 +1,13 @@
 
-- if policy(@record).new_association?(:venues)
+- if policy(@record).new_association?(:events)
   .ui.small.icon.message
     i.question.icon
     .content
-      a.ui.right.floated.button href=url_for([:cms, @record, :venues])
+      a.ui.right.floated.button href=url_for([:new, :cms, @record, :event])
         = translate('cms.details.create_event.action')
         i.right.arrow.icon
       .header = translate('cms.details.create_event.title')
-      .description = translate('cms.details.create_event.description', action: translate_model(Venue))
+      .description = translate('cms.details.create_event.description', action: translate_model(Event))
 
 h3.ui.small.dividing.grey.header = translate('cms.details.details_for_record', resource: @record.label)
 .ui.list
@@ -15,7 +15,7 @@ h3.ui.small.dividing.grey.header = translate('cms.details.details_for_record', r
     i.sitemap.icon
     .content
       .header = translate('cms.details.event_coverage.title')
-      .description = translate('cms.details.event_coverage.description', events: translate_model_count(@record.events.publicly_visible), venues: translate_model_count(@record.venues.publicly_visible))
+      .description = translate('cms.details.event_coverage.description', events: translate_model_count(@record.events.publicly_visible), resource: translate_model(@record).downcase)
 
 h3.ui.small.dividing.grey.header = translate('cms.details.location_of_record', resource: translate_model(Area).downcase)
 p = translate('cms.details.area_in_words', radius: number_with_precision(@record.radius, precision: 1, strip_insignificant_zeros: true), latitude: number_with_precision(@record.latitude, precision: 4, strip_insignificant_zeros: true), longitude: number_with_precision(@record.longitude, precision: 4, strip_insignificant_zeros: true))

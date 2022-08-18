@@ -8,7 +8,7 @@ h2.ui.header
     - if allow.edit?
       = floating_action translate('cms.actions.simple.edit'), 'edit', url_for([:edit, :cms, @context])
     - if @context.try(:publicly_visible?)
-      = floating_action translate('cms.actions.simple.view'), 'marker', url_for([:map, @context]), target: '_blank'
+      = floating_action translate('cms.actions.simple.view'), 'marker', url_for([:map, @context, layer: @context.layer]), target: '_blank'
     - if @context.respond_to?(:published) && !@context.published
       - text = translate('cms.details.record_not_published.title', resource: translate_model(@context.class))
       - tooltip = translate('cms.details.record_not_published.description', resource: translate_model(@context.class).downcase)
@@ -46,7 +46,6 @@ h2.ui.header
     = menu_item translate_model(Country, :plural), @context, index: 'countries' if allow.index_association?(:countries)
     = menu_item translate_model(Region, :plural), @context, index: 'regions' if allow.index_association?(:regions)
     = menu_item translate_model(Area, :plural), @context, index: 'areas' if allow.index_association?(:areas)
-    /= menu_item translate_model(Venue, :plural), @context, index: 'venues' if allow.index_association?(:venues)
     = menu_item translate_model(Event, :plural), @context, index: 'events' if allow.index_association?(:events)
     = menu_item translate_model(Registration, :plural), @context, index: 'registrations' if allow.index_association?(:registrations)
     = menu_item translate_model(Manager, :plural), @context, index: 'managers' if allow.index_association?(:managers)

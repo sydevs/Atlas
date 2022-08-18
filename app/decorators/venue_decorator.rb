@@ -4,17 +4,9 @@ module VenueDecorator
     name || street
   end
 
-  def location_label
-    "#{city || region || street || name}, #{country_name(:short)}"
-  end
-
-  def address
-    self[:address] || [street, city, region_name, country_name(:short)].compact.join(', ')
-  end
-
   def directions_url
     if place_id?
-      "https://www.google.com/maps/search/?api=1&query=#{address}>&query_place_id=#{place_id}"
+      "https://www.google.com/maps/search?api=1&query=#{address}&query_place_id=#{place_id}"
     else
       "http://www.google.com/maps/place/#{latitude},#{longitude}"
     end
@@ -44,17 +36,6 @@ module VenueDecorator
 
   def map_url
     Rails.application.routes.url_helpers.map_venue_url(self)
-  end
-
-  def as_json(_context = nil)
-    {
-      id: id,
-      label: label,
-      latitude: latitude,
-      longitude: longitude,
-      directions_url: directions_url,
-      events: events.publicly_visible.map { |event| event.extend(EventDecorator).as_json },
-    }
   end
 
 end

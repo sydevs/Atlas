@@ -48,10 +48,10 @@ module KlaviyoAPI
         'description': event.description,
         'room': event.room,
         'address1': venue.street,
-        'city': venue.city,
-        'region': venue.region_name,
-        'country': venue.country_name,
-        'postcode': venue.postcode,
+        # 'city': venue.city,
+        # 'region': venue.region_name,
+        # 'country': venue.country_name,
+        # 'postcode': venue.postcode,
         'latitude': venue.latitude,
         'longitude': venue.longitude,
         'timing': event.formatted_start_end_time,
@@ -59,7 +59,7 @@ module KlaviyoAPI
         'date': registration.starting_at.strftime("%-d %b %Y"),
         'language': event.language_name,
         'directions_url': venue.directions_url,
-        'url': Rails.application.routes.url_helpers.map_event_url(event, host: 'https://atlas.sydevelopers.com'),
+        'url': Rails.application.routes.url_helpers.map_event_url(event, layer: event.layer, host: 'https://atlas.sydevelopers.com'),
       },
     })
   end

@@ -72,42 +72,11 @@ module EventDecorator
   end
 
   def map_path
-    Rails.application.routes.url_helpers.map_event_path(self)
+    Rails.application.routes.url_helpers.map_event_path(self, layer: layer)
   end
 
   def map_url
-    Rails.application.routes.url_helpers.map_event_url(self)
-  end
-
-  def as_json(_context = nil)
-    {
-      id: id,
-      label: label,
-      path: Rails.application.routes.url_helpers.map_event_path(self),
-      description: description,
-      address: address,
-      category: category,
-      timing: {
-        recurrence: recurrence,
-        start_date: start_date.to_s,
-        end_date: end_date&.to_s,
-        time: formatted_start_end_time,
-        registration_end_time: registration_end_time,
-      },
-      language_code: language_code,
-      images: pictures.map { |picture|
-        {
-          url: picture.file.url,
-          thumbnail_url: picture.file.url(:thumbnail),
-        }
-      },
-      registration: {
-        mode: registration_mode,
-        url: registration_url,
-      },
-      online: online?,
-      online_url: online_url,
-    }
+    Rails.application.routes.url_helpers.map_event_url(self, layer: layer)
   end
 
 end

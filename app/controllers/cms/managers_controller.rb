@@ -8,13 +8,13 @@ class CMS::ManagersController < CMS::ApplicationController
       @scope = @context.managed_records || Manager
       @records = policy_scope(@scope).page(params[:page]).per(10).search(params[:q])
       @records = @records.joins(:manager).order('managers.updated_at': :desc)
-      render 'cms/views/index'
     elsif request.format.json?
       authorize Manager, :index?
       @records = policy_scope(Manager).limit(3).search(params[:q])
       @email_match = params[:q] if params[:q] =~ URI::MailTo::EMAIL_REGEXP
       @phone_match = Phonelib.parse(params[:q]).international if Phonelib.valid?(params[:q])
       @exact_match = @records.count == 1 && (@records.first.email == @email_match || @records.first.phone == @phone_match)
+      render 'cms/managers/index'
     else
       super
     end

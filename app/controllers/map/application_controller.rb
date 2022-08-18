@@ -7,31 +7,14 @@ class Map::ApplicationController < ActionController::Base
 
   def show
     I18n.locale = params[:locale]&.to_sym || :en
-    @list_type = params[:type] == 'online' ? 'online' : 'offline'
-    @mode = 'map'
-
-    if params[:venue_id]
-      @venue = GraphqlAPI.venue(params[:venue_id])
-      @mode = 'venue'
-    elsif params[:event_id]
-      @event = GraphqlAPI.event(params[:event_id])
-      @mode = 'event'
-      
-      if @event['online']
-        @list_type = 'online'
-      else 
-        @venue = @event['venue']
-      end
-    end
-
     @config = { token: ENV['MAPBOX_ACCESSTOKEN'] }
 
     country = Country.find_by_country_code(params[:country]) if params[:country].present?
     @config[:bounds] = country.bounds if country.present?
     @config[:center] = coordinates unless @config[:bounds].present?
 
-    @config.merge!(@client.map_config) if @client
-    @config[:language] ||= params[:language]
+    # @config.merge!(@client.map_config) if @client
+    # @config[:language] ||= params[:language]
 
     render 'map/show'
   end

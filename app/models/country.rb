@@ -19,7 +19,7 @@ class Country < ApplicationRecord
   has_many :area_manager_records, through: :areas, source: :managed_records
 
   # Validations
-  validates_presence_of :country_code
+  validates_presence_of :name, :country_code
   validate :validate_language_code
 
   # Scopes
@@ -28,10 +28,6 @@ class Country < ApplicationRecord
   scope :ready_for_summary_email, -> { where("summary_email_sent_at IS NULL OR summary_email_sent_at <= ?", CountryMailer::SUMMARY_PERIOD.ago) }
 
   # Methods
-
-  def contains? location
-    venue.country_code == country_code
-  end
 
   def managed_by? manager, super_manager: nil
     return managers.include?(manager) unless super_manager == true
