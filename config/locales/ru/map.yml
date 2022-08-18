@@ -27,6 +27,9 @@ ru:
         online: "There are no classes in this area, consider an" # TODO: Translate
         online_event: "Online Class" # TODO: Translate
 
+    area: # TODO: Translate
+      header: "Events in %{area}"
+
     venue: # TODO: Translate
       header: "Events at %{venue}"
 

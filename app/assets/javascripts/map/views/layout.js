@@ -6,7 +6,7 @@ function Layout() {
   return {
     view: function(vnode) {
       const share = Boolean(m.route.param('share'))
-      const layer = m.route.param('layer')
+      const layer = m.route.param('layer') || vnode.attrs.layer
       const id = m.route.param('id')
 
       return m('.layout', { class: share ? 'noscroll' : null },

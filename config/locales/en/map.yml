@@ -27,6 +27,9 @@ en:
         online: "There are no classes in this area, consider an"
         online_event: "Online Class"
 
+    area:
+      header: "Events in %{area}"
+
     venue:
       header: "Events at %{venue}"
 

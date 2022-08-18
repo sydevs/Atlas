@@ -12,6 +12,7 @@ class DataCache {
     this.#cache = {
       events: {},
       venues: {},
+      areas: {},
       geojsons: {},
       lists: {},
       sortedLists: {},
@@ -36,6 +37,19 @@ class DataCache {
       }).then(data => {
         this.#cache.geojsons[layer] = data.geojson
         return data.geojson
+      })
+    }
+  }
+
+  getArea(id) {
+    if (id in this.#cache.areas) {
+      return Promise.resolve(this.#cache.areas[id])
+    } else {
+      console.log('[Data]', 'getting area', id) // eslint-disable-line no-console
+      return this.#atlas.fetchArea({ id: id }).then(data => {
+        const area = new AtlasArea(data.area)
+        this.#cache.areas[id] = area
+        return area
       })
     }
   }
@@ -146,7 +160,9 @@ class DataCache {
   // HELPER METHODS
 
   getRecord(model, id) {
-    if (model == 'venue') {
+    if (model == 'area') {
+      return this.getArea(id)
+    } else if (model == 'venue') {
       return this.getVenue(id)
     } else if (model == 'event') {
       return this.getEvent(id)

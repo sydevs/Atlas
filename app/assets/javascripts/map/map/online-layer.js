@@ -30,15 +30,12 @@ class OnlineMapLayer extends AbstractMapLayer {
   }
 
   _gotoLocation(area) {
-    // TODO: Implement the area view
-    m.route.set('/:layer/:id', { id: area.eventIds[0], layer: 'online' })
-
-    /*if (area.eventIds.length > 1) {
-      App.data.setCache('areas', venue)
+    if (area.eventIds.length > 1) {
+      App.data.setCache('areas', area)
       m.route.set('/area/:id', { id: area.id })
     } else {
       m.route.set('/:layer/:id', { id: area.eventIds[0], layer: 'online' })
-    }*/
+    }
   }
 
 }

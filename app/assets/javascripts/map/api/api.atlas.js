@@ -54,6 +54,13 @@ class AtlasAPI {
           longitude
           eventIds
         }`,
+        area: `on Area {
+          id
+          label
+          latitude
+          longitude
+          eventIds
+        }`,
         geojson: `on Geojson {
           type
           features {
@@ -91,6 +98,10 @@ class AtlasAPI {
 
     this.fetchVenue = this.graph.query(`(@autodeclare) {
       venue(id: $id, locale: "${window.locale}") { ...venue }
+    }`)
+
+    this.fetchArea = this.graph.query(`(@autodeclare) {
+      area(id: $id, locale: "${window.locale}") { ...area }
     }`)
 
     this.searchEvents = this.graph.query(`

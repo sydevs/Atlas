@@ -139,7 +139,6 @@ class MapFrame extends EventTarget {
 
     Object.values(this.#layers).forEach(layer => { layer.visible = false })
     this.#currentLayerId = layerId
-    console.log('show layer', layerId, this.#layers)
     this.#mapbox.setStyle(this.#layers[layerId].style)
   }
 
