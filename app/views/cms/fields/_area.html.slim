@@ -6,6 +6,8 @@
       i.search.icon
   .hint = translate('cms.hints.geosearch.description')
 
+.ui.small.divider
+
 = f.input :name
 
 #map data-changeable='true' data-border=@context.geojson.to_json data-error=(@record.errors[:coordinates].present? ? 'true' : nil)

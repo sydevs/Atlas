@@ -5,6 +5,7 @@ class Country < ApplicationRecord
   include Manageable
   include ActivityMonitorable
 
+  nilify_blanks
   searchable_columns %w[name country_code translations]
   audited except: %i[summary_email_sent_at summary_metadata]
 

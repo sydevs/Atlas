@@ -11,7 +11,7 @@ class Area < ApplicationRecord
 
   # Associations
   belongs_to :country, foreign_key: :country_code, primary_key: :country_code
-  belongs_to :region, foreign_key: :province_code, primary_key: :province_code, optional: true
+  belongs_to :region, optional: true
 
   has_many :area_venues
   has_many :venues, through: :area_venues
@@ -35,7 +35,7 @@ class Area < ApplicationRecord
   scope :ready_for_summary_email, -> { where("summary_email_sent_at IS NULL OR summary_email_sent_at <= ?", PlaceMailer::SUMMARY_PERIOD.ago) }
 
   # Callbacks
-  after_save :ensure_venue_consistency
+  after_save :set_venues
 
   # Methods
 
@@ -53,7 +53,7 @@ class Area < ApplicationRecord
   end
 
   def flexible_radius
-    radius * 1.2
+    radius + 1 # Allow 1km extra
   end
 
   def contains? venue
@@ -86,13 +86,10 @@ class Area < ApplicationRecord
       self.country_code = region.country_code if region.present?
     end
 
-    def ensure_venue_consistency
-      return unless (previous_changes.keys & %w[radius latitude longitude province_code country_code]).present?
+    def set_venues
+      return unless (previous_changes.keys & %w[radius latitude longitude]).present?
 
-      venues = Venue.select('id, latitude, longitude').within(flexible_radius, origin: self)
-      venues = venues.where(country_code: country_code) if country_code?
-      venues = venues.where(province_code: province_code) if province_code?
-      self.venues = venues
+      self.venues = Venue.select('id, latitude, longitude').within(flexible_radius, origin: self)
     end
 
     def validate_location

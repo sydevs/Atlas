@@ -173,7 +173,7 @@ class Event < ApplicationRecord
   end
 
   def default_language_code
-    language_code || area.country.default_language_code || I18n.locale.upcase
+    (language_code || area.country.default_language_code || I18n.locale).to_s.upcase
   end
 
   def parent_managers
