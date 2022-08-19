@@ -6,7 +6,7 @@ class Mutations::CreateRegistration < Mutations::BaseMutation
   argument :event_id, ID, required: true
   argument :name, String, required: true
   argument :email, String, required: true
-  argument :message, String, required: true
+  argument :message, String, required: false
   argument :starting_at, GraphQL::Types::ISO8601DateTime, required: true
   argument :time_zone, String, required: false
   argument :locale, String, required: false

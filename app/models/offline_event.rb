@@ -5,8 +5,8 @@ class OfflineEvent < Event
 
   # Scopes
   default_scope { offline }
-  scope :with_location, -> (country_code) { joins(:venue).where_country(country_code) }
-  scope :where_country, -> (country_code) { where(venues: { country_code: country_code }) if country_code }
+  scope :with_location, -> (country_code) { joins(:venue, :area).where_country(country_code) }
+  scope :where_country, -> (country_code) { where(areas: { country_code: country_code }) if country_code }
 
   # Delegations
   alias location venue

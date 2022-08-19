@@ -145,6 +145,7 @@ class MapFrame extends EventTarget {
   async setSelection(location, options = {}) {
     this.waitForLoad().then(() => {
       this.#currentLayer.setSelection(location)
+      if (!location) return
 
       if (location.radius) {
         this.fitTo(location, Object.assign({
@@ -152,7 +153,7 @@ class MapFrame extends EventTarget {
         }, options))
       } else {
         this.goTo(location, Object.assign({
-          zoom: this.#currentLayerId == 'online' ? 4 : 16,
+          zoom: this.#currentLayerId == 'offline' ? 4 : 16,
           transition: true,
         }, options))
       }

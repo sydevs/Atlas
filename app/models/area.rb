@@ -15,15 +15,14 @@ class Area < ApplicationRecord
 
   has_many :area_venues
   has_many :venues, through: :area_venues
-  # has_many :associated_registrations, through: :associated_events, source: :registrations
+  has_many :registrations, through: :events
 
-  has_many :events, dependent: :delete_all, class_name: "OnlineEvent"
-  has_many :abstract_events, class_name: "Event"
+  has_many :events, dependent: :delete_all
   has_many :publicly_visible_events, -> { publicly_visible }, class_name: 'OnlineEvent'
 
   # Validations
   before_validation :set_country_code
-  validates_presence_of :name, :radius
+  validates_presence_of :name, :radius, :country_code
   validate :validate_location
 
   # Scopes
@@ -41,11 +40,6 @@ class Area < ApplicationRecord
 
   def parent
     region || country || nil
-  end
-
-  def associated_events
-    events_via_venues = Event.where(venue_id: venues)
-    abstract_events.or(events_via_venues)
   end
 
   def associated_registrations

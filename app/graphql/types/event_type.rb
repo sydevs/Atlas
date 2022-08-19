@@ -38,7 +38,7 @@ module Types
     field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
 
     def get_location
-      object.parent.extend("#{object.parent.class}Decorator".constantize)
+      object.location.extend("#{object.location.class}Decorator".constantize)
     end
 
     def get_venue

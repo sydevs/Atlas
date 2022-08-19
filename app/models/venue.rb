@@ -10,9 +10,6 @@ class Venue < ApplicationRecord
   searchable_columns %w[name address]
 
   # Associations
-  # belongs_to :country, foreign_key: :country_code, primary_key: :country_code, optional: true
-  # belongs_to :region, foreign_key: :province_code, primary_key: :province_code, optional: true
-
   has_many :area_venues
   has_many :areas, through: :area_venues
 

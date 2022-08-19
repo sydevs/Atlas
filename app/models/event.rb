@@ -40,7 +40,7 @@ class Event < ApplicationRecord
   validates :custom_name, length: { maximum: 255 }
   validates :description, length: { minimum: 40, maximum: 600, allow_blank: true }
   validates :registration_url, url: true, unless: :native_registration_mode?
-  validates :phone_number, phone: { possible: true, allow_blank: true, country_specifier: -> event { event.area.country_code } }
+  validates :phone_number, phone: { possible: true, allow_blank: true, country_specifier: -> event { event.country_code } }
   validates_numericality_of :registration_limit, greater_than: 0, allow_nil: true
   validates_associated :pictures
   validate :validate_end_time
@@ -61,7 +61,7 @@ class Event < ApplicationRecord
   scope :offline, -> { where(type: 'OfflineEvent') }
 
   # Delegations
-  delegate :time_zone, to: :area
+  delegate :time_zone, :country_code, to: :area
   alias associated_registrations registrations
   alias parent area
 
@@ -74,6 +74,10 @@ class Event < ApplicationRecord
 
   def layer
     online? ? 'online' : 'offline'
+  end
+
+  def location
+    online? ? area : venue
   end
 
   def online?
@@ -208,7 +212,7 @@ class Event < ApplicationRecord
     end
 
     def parse_phone_number
-      self.phone_number = Phonelib.parse(phone_number, area.country_code).international
+      self.phone_number = Phonelib.parse(phone_number, country_code).international
     end
 
     def verify_manager
