@@ -153,7 +153,7 @@ class MapFrame extends EventTarget {
         }, options))
       } else {
         this.goTo(location, Object.assign({
-          zoom: this.#currentLayerId == 'offline' ? 4 : 16,
+          zoom: this.#currentLayerId == 'online' ? 7 : 16,
           transition: true,
         }, options))
       }

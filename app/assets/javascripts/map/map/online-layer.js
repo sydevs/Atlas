@@ -16,6 +16,7 @@ class OnlineMapLayer extends AbstractMapLayer {
         'text-field': '',
         'icon-image': 'cluster',
       },
+      selectionZoom: 7,
       selection: {
         'text-field': '',
       },
