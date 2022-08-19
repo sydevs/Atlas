@@ -50,6 +50,12 @@ class CMS::ApplicationController < ActionController::Base
     render 'cms/application/review'
   end
 
+  def help
+    set_context!
+    authorize :dashboard, :help?
+    render 'cms/application/help'
+  end
+
   def index query = {}
     authorize_association! @model
     @scope = @scope.where(query) if query.present?
@@ -123,11 +129,6 @@ class CMS::ApplicationController < ActionController::Base
 
     flash[:success] = translate('cms.messages.successfully_deleted', resource: @model.model_name.human.titleize)
     redirect_to [:cms, @record.parent, @model]
-  end
-
-  def help
-    set_context!
-    authorize :dashboard, :view_help?
   end
 
   def geosearch args = {}

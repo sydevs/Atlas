@@ -86,37 +86,4 @@ module GoogleMapsAPI
     end
   end
 
-  # Unfortunately this doesn't return consistent address results, so this method is not currently used.
-  def self.fetch_address parameters
-    parameters.merge!({
-      key: ENV.fetch('GOOGLE_PLACES_API_KEY'),
-      types: 'address',
-      fields: 'geometry,address_component',
-    })
-
-    url = "https://maps.googleapis.com/maps/api/place/details/json?#{parameters.to_query}"
-    response = HTTParty.get(url, { headers: { 'Content-Type': 'application/json' }, log_level: :debug })
-    puts "#{url} - #{response.pretty_inspect}"
-
-    if response['result'].present?
-      geometry = response['result']['geometry']
-      address = response['result']['address_components'].map do |component|
-        [ component['types'][0].to_sym, { name: component['long_name'], value: component['short_name'] } ]
-      end
-      address = address.to_h
-
-      {
-        latitude: geometry['location']['lat'],
-        longitude: geometry['location']['lng'],
-        street: [address.dig(:street_number, :name), address.dig(:route, :name)].compact.join(' '),
-        city: address.dig(:postal_town, :name),
-        country: address.dig(:country, :name),
-        country_code: address.dig(:country, :value),
-        postcode: address.dig(:postal_code, :name),
-      }
-    else
-      nil
-    end
-  end
-
 end
