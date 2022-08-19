@@ -4,10 +4,10 @@ ruby:
 
 = render 'cms/views/context' do
   - [Client, Country, Region, Area].each do |model|
-    - records = @context.send(model.model_name.route_key)
+    - records = @context.send(model.table_name)
     - if records.present?
       h3.ui.dividing.header
-        - if allow.new_association?(model.model_name.route_key.to_sym) && policy(model).new?
+        - if allow.new_association?(model.table_name.to_sym) && policy(model).new?
           = floating_action translate('cms.actions.target.new', resource: translate_model(model)), 'plus', url_for([:new, :cms, model.model_name.singular_route_key.to_sym])
         .content = translate_model(model, :plural)
 

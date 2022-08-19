@@ -35,7 +35,7 @@ h3.ui.small.dividing.grey.header = translate('cms.details.details_for_record', r
         .header = translate_model(ManagedRecord, :plural)
         .description
           - [Country, Region, Area, Event, Client].each do |model|
-            - count = @record.send(model.model_name.route_key).count
+            - count = @record.send(model.table_name).count
             - if count.positive?
               div &nbsp;&nbsp;#{translate_model_count(model, count)}
 

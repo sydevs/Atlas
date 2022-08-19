@@ -22,13 +22,14 @@ const OsmSearch = {
         return settings
       },
       onSuccess: (response) => {
-        console.log('got osm', response)
         this.$body.empty()
+        response = response.filter(item => item.class == 'boundary')
 
         if (response.length > 0) {
           for (const index in response) {
             const result = response[index]
-            this.$body.append(`<tr><td>${result.display_name}</td><td class="collapsing right aligned"><a class="ui button" href=?osm_id=${result.osm_id}>${"Choose"}<i class="right arrow icon"></i></a></tr>`)
+            osm_id = result.osm_type[0].toUpperCase() + result.osm_id
+            this.$body.append(`<tr><td>${result.display_name}</td><td class="collapsing right aligned"><a class="ui button" href=?osm_id=${osm_id}>${"Choose"}<i class="right arrow icon"></i></a></tr>`)
           }
         } else {
           this.$body.append(`<tr class="negative"><td colspan=2><i class="exclamation circle icon"></i>${this.$body.data('empty')}</td></tr>`)

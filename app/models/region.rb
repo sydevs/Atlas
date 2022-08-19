@@ -45,6 +45,8 @@ class Region < ApplicationRecord
     else
       super data: data
     end
+  rescue OpenStreetMapsAPI::ResponseError => e
+    errors.add(:osm_id, ': ' + e.message)
   end
 
   private

@@ -5,6 +5,7 @@ module GeoData
   included do
     validates_presence_of :osm_id, :geojson, :bounds, :translations, :country_code
     before_validation -> { country_code.upcase! }
+    validates :osm_id, format: { with: /custom|[RN][0-9]+/ }
   end
 
   def contains? location
@@ -28,7 +29,7 @@ module GeoData
   end
 
   def custom_geodata?
-    osm_id.to_i == 0
+    osm_id == 'custom'
   end
 
   def bounds_geojson
@@ -61,6 +62,8 @@ module GeoData
         [key[1] || 'en', value] if key[0] == 'name'
       end.to_h,
     })
+  rescue OpenStreetMapsAPI::ResponseError => e
+    errors.add(:osm_id, ': ' + e.message)
   end
 
   def self.parse_params params
@@ -68,7 +71,6 @@ module GeoData
       params[key] = params[key].present? ? JSON.parse(params[key]) : nil
     end
 
-    params[:osm_id] = params[:osm_id].to_f
     params
   end
 

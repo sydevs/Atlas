@@ -93,7 +93,7 @@ ActiveRecord::Schema.define(version: 2022_08_15_180055) do
     t.string "name"
     t.boolean "enable_custom_regions", default: false
     t.jsonb "geojson"
-    t.integer "osm_id"
+    t.string "osm_id"
     t.json "translations"
     t.string "bounds", default: [], array: true
     t.index ["country_code"], name: "index_countries_on_country_code", unique: true
@@ -205,7 +205,7 @@ ActiveRecord::Schema.define(version: 2022_08_15_180055) do
     t.jsonb "summary_metadata", default: "{}"
     t.jsonb "geojson"
     t.string "name"
-    t.integer "osm_id"
+    t.string "osm_id"
     t.json "translations"
     t.jsonb "bounds"
   end
