@@ -108,8 +108,10 @@ de:
       verified: "Verifiziert"
       not_verified: "Nicht verifiziert"
       not_set: "Nicht gesetzt"
+      not_found: "No Results Found" # TODO: Translate
       unspecified: "Nicht spezifiziert"
       unlimited: "Unbegrenzte"
+      edit_warning: "Do not edit these fields, unless you know what you're doing!" # TODO: Translate
       never: "Nie"
       geosearch:
         prompt: "Suchen nach Standort"

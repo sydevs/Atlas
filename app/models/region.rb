@@ -17,7 +17,7 @@ class Region < ApplicationRecord
   # has_many :associated_registrations, through: :events, source: :registrations
 
   # Validations
-  validates_presence_of :name, :country_code
+  validates_presence_of :name
   validate :validate_geojson
 
   # Scopes

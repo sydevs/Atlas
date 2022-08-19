@@ -21,12 +21,17 @@ const OsmSearch = {
         console.log('settings', settings)
         return settings
       },
-      onSuccess: (response, test, test1) => {
-        console.log('got osm', response, test, test1)
+      onSuccess: (response) => {
+        console.log('got osm', response)
         this.$body.empty()
-        for (const index in response) {
-          const result = response[index]
-          this.$body.append(`<tr><td>${result.display_name}</td><td class="collapsing right aligned"><a class="ui button" href=?osm_id=${result.osm_id}>${"Choose"}<i class="right arrow icon"></i></a></tr>`)
+
+        if (response.length > 0) {
+          for (const index in response) {
+            const result = response[index]
+            this.$body.append(`<tr><td>${result.display_name}</td><td class="collapsing right aligned"><a class="ui button" href=?osm_id=${result.osm_id}>${"Choose"}<i class="right arrow icon"></i></a></tr>`)
+          }
+        } else {
+          this.$body.append(`<tr class="negative"><td colspan=2><i class="exclamation circle icon"></i>${this.$body.data('empty')}</td></tr>`)
         }
 
         if (allowCustom) {

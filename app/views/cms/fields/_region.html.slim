@@ -1,37 +1,14 @@
 
 - if (@record.osm_id && @record.geojson && @record.bounds) || params[:osm_id] == '0'
-  = f.input :geojson do
-    - if @record.geojson
-      #map data-geojson=@record.geojson.to_json data-bounds=@record.bounds.to_json
-    - else
-      #map data-editable='true' data-geojson=@record.geojson.to_json data-border=@record.parent.geojson.to_json
-      .hint = translate('cms.hints.region.polygon')
+  = render 'cms/fields/partials/geo_data', f: f
 
   = f.input :name
-
-  a.ui.right.floated.tiny.compact.basic.button href="?osm_id=#{@record.osm_id}"
-    = translate('cms.actions.target.reload', resource: translate_attribute(@record, :geo_data))
-
-  .ui.accordion
-    .ui.title
-      i.dropdown.icon
-      = translate_attribute(@record, :geo_data)
-    .content
-      - strings = %i[osm_id bounds]
-      - textareas = %i[geojson translations]
-      - (strings + textareas).each do |field|
-        - data = @record.send(field)
-        = f.input field do
-          - if field == :geojson
-            = f.hint pluralize(data['coordinates'].flatten.length / 2, 'point')
-          .ui.code.input
-            = f.input_field field, as: (textareas.include?(field) ? :text : :string), placeholder: translate('cms.hints.not_set'), id: "js-map-#{field}", value: data&.to_json
 - else
-  .field id='js-osm-search' data-country=f.object.country_code data-type='settlement' data-custom=(@context.enable_custom_regions ? 'true' : nil)
+  .field id='js-osm-search' data-country=f.object.country_code data-type='settlement' data-custom=(@context.enable_custom_regions ? 'true' : nil) data-empty=translate('cms.hints.not_found')
     .ui.search
       .ui.left.icon.action.input
         i.search.icon
         input.prompt type='text' name='query' placeholder=translate('cms.hints.geosearch.prompt')
         button.ui.submit.button = translate('cms.actions.simple.search')
 
-    table.ui.very.basic.table
+    table.ui.very.basic.unstackable.table data-empty=translate('cms.hints.not_found')

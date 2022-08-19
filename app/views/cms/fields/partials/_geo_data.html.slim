@@ -1,0 +1,37 @@
+
+= f.input :geojson do
+  - if @record.geojson
+    #map data-changeable='true' data-geojson=@record.geojson.to_json data-bounds=@record.bounds.to_json
+  - elsif @record.is_a?(Region)
+    #map data-editable='true' data-geojson=@record.geojson.to_json data-border=@record.parent.geojson.to_json
+    .hint = translate('cms.hints.region.polygon')
+
+- unless @record.new_record?
+  a.ui.right.floated.tiny.compact.basic.button href="?osm_id=#{@record.osm_id}"
+    = translate('cms.actions.target.reload', resource: translate_attribute(@record, :geo_data))
+
+.ui.accordion
+  .ui.title
+    i.dropdown.icon
+    = translate_attribute(@record, :geo_data)
+  .content
+    .ui.red.message
+      i.warning.sign.icon
+      = translate('cms.hints.edit_warning')
+
+    - disabled = %i[country_code osm_id]
+    - textareas = %i[geojson translations]
+    - %i[bounds geojson translations osm_id country_code].each do |field|
+      - data = @record.send(field)
+      - type = (textareas.include?(field) ? :text : :string)
+      = f.input field do
+        - if field == :geojson
+          = f.hint pluralize(data['coordinates'].flatten.length / 2, 'point')
+        .ui.code.input
+          - if disabled.include?(field)
+            = f.input_field field, as: type, disabled: true
+            = f.input_field field, as: :hidden
+          - else
+            = f.input_field field, as: type, placeholder: translate('cms.hints.not_set'), id: "js-map-#{field}", value: data&.to_json
+
+.ui.small.divider

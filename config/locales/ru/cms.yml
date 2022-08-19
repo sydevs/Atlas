@@ -105,9 +105,11 @@ ru:
       verified: "Проверено"
       not_verified: "Не подтверждено"
       not_set: "Не задано"
+      not_found: "No Results Found" # TODO: Translate
       unspecified: "Неопределено"
       unlimited: "Unlimited" # TODO: Translate
       never: "Никогда"
+      edit_warning: "Do not edit these fields, unless you know what you're doing!" # TODO: Translate
       geosearch:
         prompt: "Поиск по местонахождению"
         description: "Ты можешь использовать этот поиск для автоматического заполнения полей ниже. Он использует API Google. Если Google заблокирован в вашей стране или поиск не удался, тебе нужно будет ввести данные вручную."

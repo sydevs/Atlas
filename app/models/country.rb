@@ -19,7 +19,7 @@ class Country < ApplicationRecord
   has_many :area_manager_records, through: :areas, source: :managed_records
 
   # Validations
-  validates_presence_of :name, :country_code
+  validates_presence_of :name
   validate :validate_language_code
 
   # Scopes
@@ -38,6 +38,7 @@ class Country < ApplicationRecord
   private
 
     def validate_language_code
+      return unless default_language_code.present?
       return if I18nData.languages.key?(default_language_code)
 
       self.errors.add(:default_language_code)

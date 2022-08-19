@@ -3,7 +3,8 @@ module GeoData
   extend ActiveSupport::Concern
 
   included do
-    validates_presence_of :osm_id, :geojson, :bounds, :translations
+    validates_presence_of :osm_id, :geojson, :bounds, :translations, :country_code
+    before_validation -> { country_code.upcase! }
   end
 
   def contains? location
@@ -54,7 +55,7 @@ module GeoData
       osm_id: osm_id, 
       geojson: data[:geojson],
       bounds: data[:boundingbox],
-      country_code: data[:address][:country_code],
+      country_code: data[:address][:country_code].upcase,
       translations: data[:namedetails].to_a.filter_map do |key, value|
         key = key.to_s.split(':')
         [key[1] || 'en', value] if key[0] == 'name'

@@ -106,9 +106,11 @@ en:
       verified: "Verified"
       not_verified: "Not Verified"
       not_set: "Not Set"
+      not_found: "No Results Found"
       unspecified: "Unspecified"
       unlimited: "Unlimited"
       never: "Never"
+      edit_warning: "Do not edit these fields, unless you know what you're doing!"
       geosearch:
         prompt: "Search for location"
         description: "You can use this search to automatically fill the fields below. It uses the Google API. If Google is blocked in your country, or if the search fails, you will need to enter the data manually."
