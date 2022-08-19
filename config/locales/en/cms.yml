@@ -186,12 +186,12 @@ en:
             country_summary: "Country Summary"
             application_summary: "Sahaj Atlas Summary"
           hints:
-            new_managed_record: "A message sent to you when you are given permission to manage a new event, region or resource on the Atlas."
-            event_verification: "Messages requesting event and city managers to check their events' accuracy. Sent every 3 months, for each event. This cannot be disabled."
-            event_registrations: "A list of new registrations sent to event managers. Sent around 24 hours before each event."
-            place_summary: "A summary of changes within a region sent to regional managers. Sent every %{period}."
-            country_summary: "A summary of changes sent to country managers. Sent every %{period}."
-            application_summary: "A summary of all Atlas changes, sent to administrators. Sent every %{period}."
+            new_managed_record: "Sent when you are given permission to manage a new event, region or resource on the Atlas."
+            event_verification: "Requesting event and city managers to check their events' accuracy. Sent every 3 months, for each event. This cannot be disabled."
+            event_registrations: "A list of new registrations for your event. Sent around 24 hours before each event."
+            place_summary: "A summary of changes within a region you manage. Sent every %{period}."
+            country_summary: "A summary of changes within a country you manage. Sent every %{period}."
+            application_summary: "A summary of all Atlas changes. Sent every %{period}."
         search: "Enter a name, email, or phone number..."
       client:
         domain: "Only this domain will be allowed to embed the map using your secret key."
@@ -214,8 +214,6 @@ en:
       notification_settings: "Notification Settings"
       contact_details: "Contact Information"
       updated_at: "Last updated"
-      resources_managed:
-        title: "Resources Managed"
       event_coverage:
         title: "Event Coverage"
         description: "%{events} in %{resource}"

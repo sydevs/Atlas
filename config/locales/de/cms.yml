@@ -213,8 +213,6 @@ de:
       notification_settings: "Benachrichtigungseinstellungen"
       contact_details: "Kontaktinformationen"
       updated_at: "Letzte Aktualisierung"
-      resources_managed:
-        title: "Ressourcen verwaltet"
       event_coverage:
         title: "Eventberichterstattung"
         description: "%{events} in %{resource}" # TODO: Translate

@@ -210,8 +210,6 @@ ru:
       notification_settings: "Настройка оповещений"
       contact_details: "Контакты"
       updated_at: "Последнее обновление"
-      resources_managed:
-        title: "Управляемые ресурсы"
       event_coverage:
         title: "Освещение события" 
         description: "%{events} in %{resource}" # TODO: Translate
