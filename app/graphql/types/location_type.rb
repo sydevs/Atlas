@@ -10,10 +10,6 @@ module Types
     field :time_zone, String, null: false
     
     field :address, String, null: false
-    field :province, String, null: true, method: :province_name
-    field :country, String, null: true, method: :country_name
-    field :province_code, String, null: true
-    field :country_code, String, null: true
     field :directions_url, String, null: true, resolver_method: :get_directions_url
 
     field :events, [Types::EventType], null: false, resolver_method: :get_events

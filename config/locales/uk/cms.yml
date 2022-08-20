@@ -9,7 +9,7 @@ uk:
         destroy: "Видалити"
         back: "Назад"
         view: "Переглянути"
-        search: "Search" # TODO: Translate
+        searching: "Search..." # TODO: Translate
         select: "Select" # TODO: Translate
 
       target:
@@ -87,16 +87,16 @@ uk:
         phone_verified: "Your phone number is now verified!" # TODO: Translate
         email_verification_resent: "Підтвердження електронної пошти надіслано на %{name}"
       cannot_create:
-        event: "Тут не можна створювати нові події, їх потрібно додати безпосередньо до місця проведення."
-        venue: "Тут не можна створювати нові місця, їх потрібно додати безпосередньо до регіону країни."
+        event: "New events cannot be created here, they must be added directly to a city." # TODO: Translate
 
     forms:
       event:
         details: "Деталі події"
-        online: "Онлайн-заняття"
         timing: "Вибір часу"
         registration: "Реєстрація"
         manager: "Менеджер"
+        offline: "Особиста подія"
+        online: "Онлайн подія"
       manager: # TODO: Translate
         contact_methods: "Contact Methods"
         notifications: "Notification Settings"

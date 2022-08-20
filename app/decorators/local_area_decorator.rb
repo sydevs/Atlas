@@ -12,4 +12,8 @@ module LocalAreaDecorator
     name
   end
 
+  def address
+    label
+  end
+
 end

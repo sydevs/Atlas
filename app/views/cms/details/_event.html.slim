@@ -126,13 +126,9 @@ h3.ui.small.dividing.grey.header = translate('cms.details.management_for_record'
 
 h3.ui.small.dividing.grey.header = translate('cms.details.location_of_record', resource: translate_model(@model).downcase)
 - if @record.online?
-  #region-map data-latitude=@record.location.latitude data-longitude=@record.location.longitude data-radius=@record.location.radius
+  #region-map data-latitude=@record.local_area.latitude data-longitude=@record.local_area.longitude data-radius=@record.local_area.radius
 - else
-  = hidden_field_tag :venue_address, @record.location.address
-  = hidden_field_tag :venue_latitude, @record.location.latitude
-  = hidden_field_tag :venue_longitude, @record.location.longitude
-  = hidden_field_tag :venue_place_id, @record.location.place_id
-  #venue-map data-latitude=@record.location.latitude data-longitude=@record.location.longitude
+  #venue-map data-latitude=@record.venue.latitude data-longitude=@record.venue.longitude
 
 .ui.list
   - if @record.online?
@@ -141,18 +137,18 @@ h3.ui.small.dividing.grey.header = translate('cms.details.location_of_record', r
       .content
         .header = translate_model(LocalArea)
         /.header = translate_attribute(Event, :local_area)
-        .description = @record.location.label
+        .description = @record.local_area.label
   - else
     .item
       i.building.icon
       .content
         .header = translate_attribute(Event, :building)
-        .description = [@record.location.name, @record.room].compact.join(', ')
+        .description = @record.venue.name
     .item
       i.map.marked.alternate.icon
       .content
         .header = translate_attribute(Venue, :address)
-        .description = @record.address
+        .description = @record.venue.address
 
 h3.ui.small.dividing.grey.header = translate('cms.details.registration_for_record', resource: @record.label)
 .ct-chart.ct-minor-seventh id='chart' data-plot=@registrations_data.to_json

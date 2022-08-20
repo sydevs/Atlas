@@ -17,9 +17,9 @@ class LocalArea < ApplicationRecord
   has_many :venues, through: :local_area_venues
   # has_many :associated_registrations, through: :associated_events, source: :registrations
 
-  has_many :events, as: :location, dependent: :delete_all, class_name: "OnlineEvent"
-  has_many :abstract_events, as: :location, class_name: "Event"
-  has_many :publicly_visible_events, -> { publicly_visible }, as: :location, class_name: 'OnlineEvent'
+  has_many :events, dependent: :delete_all, class_name: "OnlineEvent"
+  has_many :abstract_events, class_name: "Event"
+  has_many :publicly_visible_events, -> { publicly_visible }, class_name: 'OnlineEvent'
 
   # Validations
   before_validation :ensure_country_consistency
@@ -46,7 +46,7 @@ class LocalArea < ApplicationRecord
   end
 
   def associated_events
-    events_via_venues = Event.where(location_id: venues)
+    events_via_venues = Event.where(venue_id: venues)
     abstract_events.or(events_via_venues)
   end
 

@@ -9,6 +9,7 @@ ru:
         back: "Назад"
         view: "Открыть"
         search: "Поиск"
+        searching: "Поиск..."
         select: "Select" # TODO: Translate
 
       target:
@@ -86,16 +87,16 @@ ru:
         phone_verified: "Твой номер телефона теперь подтверждён!"
         email_verification_resent: "E-mail с подтверждением был отправлен на %{name}"
       cannot_create:
-        event: "Здесь нельзя создавать новые события, их нужно добавлять непосредственно в места проведения (площадки)."
-        venue: "Здесь нельзя создавать новые площадки, их нужно добавлять непосредственно в регион внутри страны."
+        event: "New events cannot be created here, they must be added directly to a city." # TODO: Translate
 
     forms:
       event:
         details: "Детали события"
-        online: "Онлайн-классы"
         timing: "Расписание"
         registration: "Регистрация"
         manager: "Менеджер"
+        offline: "In Person Event" # TODO: Translate
+        online: "Online Event" # TODO: Translate
       manager: 
         contact_methods: "Способы связи"
         notifications: "Настройка оповещений"
