@@ -60,7 +60,7 @@ class AtlasAPI {
           latitude
           longitude
           radius
-          eventIds
+          onlineEventIds
         }`,
         geojson: `on Geojson {
           type
