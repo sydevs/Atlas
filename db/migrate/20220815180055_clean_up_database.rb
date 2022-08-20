@@ -8,6 +8,9 @@ class CleanUpDatabase < ActiveRecord::Migration[6.1]
     # remove_column :venues, :country_code, :string
     # remove_column :venues, :postcode, :string
 
+    # remove_columns :managers, :managed_countries_counter, :integer
+    # remove_columns :managers, :managed_localities_counter, :integer
+
     reversible do |dir|
       dir.up do
         [Country, Region].each do |model|
