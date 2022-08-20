@@ -6,24 +6,23 @@ class Area < ApplicationRecord
   include Location
 
   nilify_blanks
-  searchable_columns %w[name identifier province_code country_code]
+  searchable_columns %w[name]
   audited except: %i[summary_email_sent_at summary_metadata]
 
   # Associations
-  belongs_to :country, foreign_key: :country_code, primary_key: :country_code, optional: true
-  belongs_to :region, foreign_key: :province_code, primary_key: :province_code, optional: true
+  belongs_to :country, foreign_key: :country_code, primary_key: :country_code
+  belongs_to :region, optional: true
 
   has_many :area_venues
   has_many :venues, through: :area_venues
-  # has_many :associated_registrations, through: :associated_events, source: :registrations
+  has_many :registrations, through: :events
 
-  has_many :events, dependent: :delete_all, class_name: "OnlineEvent"
-  has_many :abstract_events, class_name: "Event"
+  has_many :events, dependent: :delete_all
   has_many :publicly_visible_events, -> { publicly_visible }, class_name: 'OnlineEvent'
 
   # Validations
-  before_validation :ensure_country_consistency
-  validates_presence_of :radius, :name
+  before_validation :set_country_code
+  validates_presence_of :name, :radius, :country_code
   validate :validate_location
 
   # Scopes
@@ -35,7 +34,7 @@ class Area < ApplicationRecord
   scope :ready_for_summary_email, -> { where("summary_email_sent_at IS NULL OR summary_email_sent_at <= ?", PlaceMailer::SUMMARY_PERIOD.ago) }
 
   # Callbacks
-  after_save :ensure_venue_consistency
+  after_save :set_venues
 
   # Methods
 
@@ -43,17 +42,12 @@ class Area < ApplicationRecord
     region || country || nil
   end
 
-  def associated_events
-    events_via_venues = Event.where(venue_id: venues)
-    abstract_events.or(events_via_venues)
-  end
-
   def associated_registrations
     Registration.where(event_id: events)
   end
 
   def flexible_radius
-    radius * 1.2
+    radius + 1 # Allow 1km extra
   end
 
   def contains? venue
@@ -82,24 +76,21 @@ class Area < ApplicationRecord
 
   private
 
-    def ensure_country_consistency
+    def set_country_code
       self.country_code = region.country_code if region.present?
     end
 
-    def ensure_venue_consistency
-      return unless (previous_changes.keys & %w[radius latitude longitude province_code country_code]).present?
+    def set_venues
+      return unless (previous_changes.keys & %w[radius latitude longitude]).present?
 
-      venues = Venue.select('id, latitude, longitude').within(flexible_radius, origin: self)
-      venues = venues.where(country_code: country_code) if country_code?
-      venues = venues.where(province_code: province_code) if province_code?
-      self.venues = venues
+      self.venues = Venue.select('id, latitude, longitude').within(flexible_radius, origin: self)
     end
 
     def validate_location
       return unless latitude.present? && longitude.present?
       return if parent.contains?(self)
 
-      errors.add(:coordinates, I18n.translate('cms.messages.area.invalid_location', region: parent.name))
+      errors.add(:coordinates, I18n.translate('cms.messages.area.invalid_location', region: parent.name, country: parent.parent.name))
     end
 
 end

@@ -6,6 +6,8 @@
       i.search.icon
   .hint = translate('cms.hints.geosearch.description')
 
+.ui.small.divider
+
 = f.input :name
 
 #map data-changeable='true' data-border=@context.geojson.to_json data-error=(@record.errors[:coordinates].present? ? 'true' : nil)
@@ -18,5 +20,4 @@
   = f.input :latitude, placeholder: translate_attribute(Area, :latitude), input_html: { id: 'js-map-latitude' }
   = f.input :longitude, placeholder: translate_attribute(Area, :longitude), input_html: { id: 'js-map-longitude' }
 
-= f.hidden_field :province_code
 = f.hidden_field :country_code

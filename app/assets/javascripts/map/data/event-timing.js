@@ -2,6 +2,7 @@
 class EventTiming {
 
   #online
+  #timeZoneDateTime
 
   // Raw dates
   #firstDateTime
@@ -14,6 +15,8 @@ class EventTiming {
   startTime
   endTime
 
+  isUpcoming
+
   dateString
   timeString
   description = ''
@@ -24,12 +27,14 @@ class EventTiming {
     let firstDateTime = luxon.DateTime.fromISO(timing.firstDate, { zone: timing.timeZone })
     let lastDateTime = timing.lastDate ? luxon.DateTime.fromISO(timing.lastDate, { zone: timing.timeZone }) : null
     this.upcomingDateTimes = timing.upcomingDates.map(datetime => luxon.DateTime.fromISO(datetime, { zone: event.timing.timeZone }))
+    this.isUpcoming = this.upcomingDateTimes.length > 0
 
     this.#online = event.online
+    this.#timeZoneDateTime = luxon.DateTime.local().setZone(timing.timeZone)
 
     if (event.online) {
       firstDateTime = firstDateTime.setZone(localTimeZone)
-      lastDateTime = lastDateTime.setZone(localTimeZone)
+      lastDateTime = lastDateTime ? lastDateTime.setZone(localTimeZone) : null
       this.upcomingDateTimes.map(datetime => datetime.setZone(localTimeZone))
     }
 
@@ -78,7 +83,7 @@ class EventTiming {
   }
 
   timeZone(format = 'long') {
-    return this.nextDateTime.toFormat(format == 'short' ? 'ZZZZ' : 'ZZZZZ')
+    return this.#timeZoneDateTime.toFormat(format == 'short' ? 'ZZZZ' : 'ZZZZZ')
   }
 
 }

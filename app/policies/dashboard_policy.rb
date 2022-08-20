@@ -32,7 +32,7 @@ class DashboardPolicy < DatabasePolicy
     user.administrator? && %i[countries areas clients].include?(association)
   end
 
-  def view_help?
+  def help?
     user.present?
   end
 

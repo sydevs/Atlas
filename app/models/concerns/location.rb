@@ -8,11 +8,19 @@ module Location
     before_validation :fetch_time_zone
   end
 
+  def coordinates?
+    latitude.present? && longitude.present?
+  end
+
+  def coordinates
+    [latitude, longitude]
+  end
+
   private
 
     def fetch_time_zone
       return unless latitude_changed? || longitude_changed? || time_zone.nil?
-      return if latitude.nil? && longitude.nil?
+      return unless coordinates?
 
       self.time_zone = Timezone.lookup(latitude, longitude)
     end

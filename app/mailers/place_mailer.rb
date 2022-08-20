@@ -15,9 +15,9 @@ class PlaceMailer < ApplicationMailer
     @start_of_period = SUMMARY_PERIOD.ago.beginning_of_week
     @end_of_period = @start_of_period + SUMMARY_PERIOD
     @end_of_period = Time.now
-    query = ['events.created_at >= ? AND events.created_at <= ?', @start_of_period, @end_of_period]
+    query = { created_at: @start_of_period..@end_of_period }
 
-    @new_events = @place.events.publicly_visible.where(*query)
+    @new_events = @place.events.publicly_visible.where(query)
     @expiring_events = @place.events.needs_urgent_review
     @expired_events = @place.events.expired
     @inactive_areas = @place.areas.inactive_since(SUMMARY_PERIOD.ago) if @place.is_a?(Region)

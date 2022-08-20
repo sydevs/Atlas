@@ -4,8 +4,4 @@ class CMS::ManagedRecordsController < CMS::ApplicationController
 
   skip_after_action :verify_policy_scoped, only: %i[index]
 
-  def index
-    authorize_association! @model
-  end
-
 end

@@ -16,4 +16,10 @@ class PlacePolicy < DatabasePolicy
     false
   end
 
+  def index_association? association = nil
+    return false if association == :registrations
+    
+    super
+  end
+
 end

@@ -66,28 +66,19 @@ module Types
 
     # Methods
 
-    def geojson(online: nil, country: nil, area: nil, language_code: nil, locale: 'en')
+    def geojson(online: false, country: nil, area: nil, language_code: nil, locale: 'en')
       I18n.locale = locale.to_sym
-
-      if area
-        scope = Area.where(id: area)
-        scope = scope.venues unless online
-      else
-        scope = online ? Area : Venue
-        scope = scope.where(country_code: country) if country
-      end
-
-      locations = decorate scope.publicly_visible
+      events = (online ? OnlineEvent : OfflineEvent).publicly_visible
+      events = events.with_location(country)
+      events = events.where(language_code: language_code.upcase) if language_code.present?
 
       {
         type: 'FeatureCollection',
-        features: locations.map do |location|
-          events = location.events.publicly_visible
-          events = events.where(language_code: language_code.upcase) if language_code.present?
-          next if events.empty?
+        features: events.group_by(&:location).map do |location, events|
+          location = decorate(location)
 
           {
-            type: "Feature #{events.length}",
+            type: "Feature",
             id: location.id,
             geometry: {
               type: 'Point',

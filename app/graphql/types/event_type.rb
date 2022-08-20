@@ -4,7 +4,7 @@ module Types
     field :path, String, null: false, method: :map_path
     field :url, String, null: false, method: :map_url
     field :status, String, null: false
-    field :layer, String, null: false, resolver_method: :get_layer
+    field :layer, String, null: false
     field :type, String, null: false
 
     field :label, String, null: false
@@ -38,7 +38,7 @@ module Types
     field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
 
     def get_location
-      object.parent.extend("#{object.parent.class}Decorator".constantize)
+      object.location.extend("#{object.location.class}Decorator".constantize)
     end
 
     def get_venue
@@ -79,10 +79,6 @@ module Types
           thumbnail_url: picture.file.url(:thumbnail),
         }
       }
-    end
-
-    def get_layer
-      object.online? ? 'online' : 'offline'
     end
 
     def registration_count

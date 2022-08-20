@@ -3,6 +3,9 @@
   = model_icon Country
   .content
     - if policy(country).show?
-      a.header href=url_for([:cms, country]) = country.label || translate('cms.hints.unnamed')
+      - url = url_for([:cms, country])
+      - if @context.nil?
+        - url = country.enable_regions? ? url_for([:cms, country, :regions]) : url_for([:cms, country, :areas])
+      a.header href=url = country.label || translate('cms.hints.unnamed')
     - else
       .header = country.label || translate('cms.hints.unnamed')

@@ -35,20 +35,32 @@ module GoogleMapsAPI
   def self.fetch_place parameters
     parameters.merge!({
       key: ENV.fetch('GOOGLE_PLACES_API_KEY'),
-      fields: 'geometry',
+      fields: 'name,geometry,address_components',
     })
 
     url = "https://maps.googleapis.com/maps/api/place/details/json?#{parameters.to_query}"
     response = HTTParty.get(url, { headers: { 'Content-Type': 'application/json' }, log_level: :debug })
+    puts "#{url} - #{response.pretty_inspect}"
 
     if response['result'].present?
       geometry = response['result']['geometry']
-      v = response['result']['geometry']['viewport']
       center = Geokit::LatLng.normalize(geometry['location']['lat'], geometry['location']['lng'])
 
+      address = response['result']['address_components']
+      address = address.map { |c| [c['types'][0], c['short_name']] }.to_h
+      name = response['result']['name']
+      street = [address['street_number'], address['route']].join(' ')
+
       {
+        name: (name if name != street),
+        place_id: parameters[:placeid],
         latitude: center.lat,
         longitude: center.lng,
+        street: street,
+        city: address['locality'],
+        region_code: address['administrative_area_level_1'],
+        country_code: address['country'],
+        post_code: address['postal_code'],
       }
     else
       nil
@@ -80,39 +92,6 @@ module GoogleMapsAPI
         latitude: center.lat,
         longitude: center.lng,
         radius: radius,
-      }
-    else
-      nil
-    end
-  end
-
-  # Unfortunately this doesn't return consistent address results, so this method is not currently used.
-  def self.fetch_address parameters
-    parameters.merge!({
-      key: ENV.fetch('GOOGLE_PLACES_API_KEY'),
-      types: 'address',
-      fields: 'geometry,address_component',
-    })
-
-    url = "https://maps.googleapis.com/maps/api/place/details/json?#{parameters.to_query}"
-    response = HTTParty.get(url, { headers: { 'Content-Type': 'application/json' }, log_level: :debug })
-    puts "#{url} - #{response.pretty_inspect}"
-
-    if response['result'].present?
-      geometry = response['result']['geometry']
-      address = response['result']['address_components'].map do |component|
-        [ component['types'][0].to_sym, { name: component['long_name'], value: component['short_name'] } ]
-      end
-      address = address.to_h
-
-      {
-        latitude: geometry['location']['lat'],
-        longitude: geometry['location']['lng'],
-        street: [address.dig(:street_number, :name), address.dig(:route, :name)].compact.join(' '),
-        city: address.dig(:postal_town, :name),
-        country: address.dig(:country, :name),
-        country_code: address.dig(:country, :value),
-        postcode: address.dig(:postal_code, :name),
       }
     else
       nil

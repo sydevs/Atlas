@@ -3,34 +3,6 @@ class CMS::VenuesController < CMS::ApplicationController
 
   prepend_before_action { @model = Venue }
 
-  def new
-    if @context.is_a?(Area)
-      super country_code: @context.country_code, province_code: @context.province_code
-    elsif @context.is_a?(Region)
-      super country_code: @context.country_code, province_code: @context.province_code
-    elsif @context.is_a?(Country)
-      super country_code: @context.country_code
-    else
-      super
-    end
-  end
-
-  def create
-    @record = @scope.new(parameters)
-    
-    if @record.valid? && !@context.contains?(@record)
-      authorize Venue, :new?
-      @record.errors.add(:base, I18n.translate('cms.messages.venue.out_of_bounds', area: @context.name))
-      render 'cms/views/new'
-    else
-      super parameters
-    end
-  end
-
-  def update
-    super parameters
-  end
-
   def geosearch
     super({
       types: 'street_address|premise|subpremise|room|place_of_worship',
@@ -50,16 +22,5 @@ class CMS::VenuesController < CMS::ApplicationController
     puts "RESULT #{result.inspect}"
     render json: result, status: result ? 200 : 404
   end
-
-  private
-
-    def parameters
-      params.fetch(:venue, {}).permit(
-        :published,
-        :name, :category, :latitude, :longitude, :place_id,
-        :street, :city, :province_code, :country_code, :postcode,
-        manager: {}
-      )
-    end
 
 end

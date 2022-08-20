@@ -3,6 +3,7 @@
   = model_icon Region
   .content
     - if policy(region).show?
-      a.header href=url_for([:cms, region]) = region.short_label || translate('cms.hints.unnamed')
+      - url = @context == region.parent ? url_for([:cms, region, :areas]) : url_for([:cms, region])
+      a.header href=url = region.short_label || translate('cms.hints.unnamed')
     - else
       .header = region.short_label || translate('cms.hints.unnamed')

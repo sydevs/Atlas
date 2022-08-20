@@ -32,7 +32,8 @@ module KlaviyoAPI
 
     registration = ActiveDecorator::Decorator.instance.decorate(registration)
     event = ActiveDecorator::Decorator.instance.decorate(registration.event)
-    venue = ActiveDecorator::Decorator.instance.decorate(event.venue)
+    location = ActiveDecorator::Decorator.instance.decorate(event.location)
+    area = ActiveDecorator::Decorator.instance.decorate(event.area)
     name = registration.name.split(' ')
   
     Klaviyo::Public.track('Registered for Class', {
@@ -46,20 +47,21 @@ module KlaviyoAPI
         '$event_id': registration.id,
         'label': event.label,
         'description': event.description,
-        'room': event.room,
-        'address1': venue.street,
-        'city': venue.city,
-        'region': venue.region_name,
-        'country': venue.country_name,
-        'postcode': venue.postcode,
-        'latitude': venue.latitude,
-        'longitude': venue.longitude,
+        # 'room': event.room,
+        'address1': location.address,
+        # 'address1': venue.street,
+        # 'city': venue.city,
+        'region': area.region.name,
+        'country': area.country.name,
+        # 'postcode': venue.post_code,
+        'latitude': location.latitude,
+        'longitude': location.longitude,
         'timing': event.formatted_start_end_time,
         'weekday': registration.starting_at_weekday,
         'date': registration.starting_at.strftime("%-d %b %Y"),
         'language': event.language_name,
-        'directions_url': venue.directions_url,
-        'url': Rails.application.routes.url_helpers.map_event_url(event, host: 'https://atlas.sydevelopers.com'),
+        'directions_url': location.directions_url,
+        'url': Rails.application.routes.url_helpers.map_event_url(event, layer: event.layer, host: 'https://atlas.sydevelopers.com'),
       },
     })
   end

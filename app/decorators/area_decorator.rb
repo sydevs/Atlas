@@ -16,4 +16,12 @@ module AreaDecorator
     label
   end
 
+  def map_path
+    Rails.application.routes.url_helpers.map_area_path(self)
+  end
+
+  def map_url
+    Rails.application.routes.url_helpers.map_area_url(self)
+  end
+
 end

@@ -28,24 +28,6 @@ const VenueSearch = {
         this.$search.search('hide results')
         this.$search.removeClass('loading')
 
-        data = {
-          place_id: result.place_id,
-          address: result.description,
-        }
-
-        this.$inputs.each((index, field) => {
-          if (field.name == 'event[venue][id]') {
-            field.value = data.id
-          } else {
-            console.log('field', index, field)
-            //const key = field.name.match(/^event\[venue_attributes\]\[(.+)\]$/)[1]
-            console.log(field.name.match(/^event\[venue_attributes\]\[(.+)\]$/))
-            const key = field.name.match(/^event\[venue_attributes\]\[(.+)\]$/)[1]
-            field.value = data[key] || field.dataset.default || ''
-            //$(field).prop('disabled', key == 'id')
-          }
-        })
-
         this.fetchGeometry(result.place_id)
         this.$card.show()
         return false
@@ -60,8 +42,7 @@ const VenueSearch = {
       dataType: 'json',
       data: { place_id: place_id },
       success: (data) => {
-        this.$latitude.val(data.latitude.toFixed(6))
-        this.$longitude.val(data.longitude.toFixed(6))
+        this.setInputs(data)
 
         if (Map.instance) Map.instance.invalidate()
       },
@@ -69,7 +50,14 @@ const VenueSearch = {
         this.$search.search('display message', data, 'message')
       },
     })
-  }
+  },
+
+  setInputs(data) {
+    this.$inputs.each((index, field) => {
+      const key = field.name.match(/^event\[venue_attributes\]\[(.+)\]$/)[1]
+      field.value = data[key] || field.dataset.default || ''
+    })
+  },
 }
 
 $(document).on('ready', function() {

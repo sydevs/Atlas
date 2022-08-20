@@ -48,9 +48,6 @@ ru:
       # Tertiary menu
       details: "Информация"
       activity: "Активность"
-      events: # TODO: Translate
-        offline: "In-Person Events"
-        online: "Online Events"
       breadcrumbs:
         world: "Мир"
         help: "Помощь"
@@ -69,10 +66,10 @@ ru:
       no_comment: "(Нет комментариев)"
       temporary_mail_error: "Сервер электронной почты временно занят, попробуй ещё раз."
       region: # TODO: Translate
-        invalid_geojson: "must be fully within the borders of %{region}"
+        invalid_geojson: "must have it's center within the borders of %{country}"
         invalid_osm_id: "is not within %{country}"
       area: # TODO: Translate
-        invalid_location: "cannot be outside the borders of %{region}"
+        invalid_location: "must have it's center within the borders of %{region} and %{country}"
       venue:
         out_of_bounds: "Место проведения не может находиться за пределами радиуса %{area}"
       event:
@@ -96,8 +93,6 @@ ru:
         timing: "Расписание"
         registration: "Регистрация"
         manager: "Менеджер"
-        offline: "In Person Event" # TODO: Translate
-        online: "Online Event" # TODO: Translate
       manager: 
         contact_methods: "Способы связи"
         notifications: "Настройка оповещений"
@@ -110,9 +105,11 @@ ru:
       verified: "Проверено"
       not_verified: "Не подтверждено"
       not_set: "Не задано"
+      not_found: "No Results Found" # TODO: Translate
       unspecified: "Неопределено"
       unlimited: "Unlimited" # TODO: Translate
       never: "Никогда"
+      edit_warning: "Do not edit these fields, unless you know what you're doing!" # TODO: Translate
       geosearch:
         prompt: "Поиск по местонахождению"
         description: "Ты можешь использовать этот поиск для автоматического заполнения полей ниже. Он использует API Google. Если Google заблокирован в вашей стране или поиск не удался, тебе нужно будет ввести данные вручную."
@@ -152,19 +149,6 @@ ru:
           invitations:
             email: "Пригласить по email"
             phone: "Пригласить через %{messenger}"
-      venue:
-        manual_location: "Установить местоположение вручную"
-        location: "Если местоположение не может быть установлено автоматически, нажав \"Найти местоположение\", ты можешь ввести данные вручную ниже."
-        find_marker: "Найти местоположение"
-        marker_not_set:
-          title: "Метка карты не установлена"
-          description: "Нажми 'Найти местоположение', чтобы автоматически определить координаты места проведения."
-        cant_find_address:
-          title: "Не удалось найти адрес"
-          description: "Введенный адрес не может быть найден. Попробуй добавить дополнительную информацию или введи широту и долготу вручную."
-        marker_set:
-          title: "Метка карты установлена!"
-          description: "Убедись, что местоположение, указанное на карте, выглядит корректно."
       manager:
         language: "Язык пользовательского интерфейса и email сообщений для этого менеджера"
         administrator:
@@ -213,11 +197,9 @@ ru:
       notification_settings: "Настройка оповещений"
       contact_details: "Контакты"
       updated_at: "Последнее обновление"
-      resources_managed:
-        title: "Управляемые ресурсы"
       event_coverage:
         title: "Освещение события" 
-        description: "%{events} (%{venues})"
+        description: "%{events} in %{resource}" # TODO: Translate
       record_needs_review:
         title: "Требуется проверить %{resource}"
         description: "Это %{resource} не обновлялось за %{updated_ago}. Это событие будет удалено с карты, если оно не будет проверено в %{expires_in}. Перейди на страницу редактирования и нажми «Сохранить», чтобы подтвердить правильность сведений о событии."
@@ -249,10 +231,6 @@ ru:
         description: "Это %{resource} скрыто из общего доступа, потому что не опубликовано."
         parent: "Это %{resource} скрыто из общего доступа, потому что %{parent} не опубликовано."
       create_event:
-        title: "Хочешь узнать, как создать событие (публичную программу)?"
-        description: "Выбери площадку на вкладке \"%{action}\"."
-        action: "Перейти"
-      create_event_on_venue:
         title: "Хочешь узнать, как создать событие?"
         description: "Перейди на вкладку \"%{action}\" и нажми \"Add Event\""
         action: "Добавить Событие"

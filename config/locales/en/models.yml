@@ -46,6 +46,20 @@ en:
         # Countable
         one: "event"
         other: "events"
+      online_event:
+        # Basic pluralization
+        single: "Online Event"
+        plural: "Online Events"
+        # Countable
+        one: "online event"
+        other: "online events"
+      offline_event:
+        # Basic pluralization
+        single: "In-Person Event"
+        plural: "In-Person Events"
+        # Countable
+        one: "in-person event"
+        other: "in-person events"
       registration:
         # Basic pluralization
         single: "Attendee"
@@ -97,7 +111,6 @@ en:
         published: "Published"
         email: "Email Address"
         phone: "Phone Number"
-        identifier: "Filter Identifier"
         status: "Status"
         statuses:
           verified: "Verified"
@@ -136,7 +149,6 @@ en:
       region:
         manager_id: :activerecord.models.manager.single # Do not translate
         country_code: :activerecord.models.country.single # Do not translate
-        province_code: :activerecord.models.region.single # Do not translate
         geo_data: "Geo Data"
         osm_id: "OpenStreetMap ID"
         bounds: "Viewport"
@@ -149,7 +161,6 @@ en:
         manager_id: :activerecord.models.manager.single # Do not translate
         name: :activerecord.attributes.generic.name # Do not translate
         country_code: :activerecord.models.country.single # Do not translate
-        province_code: :activerecord.models.region.single # Do not translate
         coordinates: "Location"
         latitude: "Latitude"
         longitude: "Longitude"
@@ -160,14 +171,14 @@ en:
       # Events
       venue:
         published: :activerecord.attributes.generic.published # Do not translate
-        name: "Building Name (Optional)"
+        name: "Building Name"
         manager_id: :activerecord.models.manager.single # Do not translate
         address: "Address"
         street: "Street Address"
         city: "City"
-        province_code: :activerecord.models.region.single # Do not translate
+        region_code: :activerecord.models.region.single # Do not translate
         country_code: :activerecord.models.country.single # Do not translate
-        postcode: "Postal Code"
+        post_code: "Postal Code"
         coordinates: "Location"
         latitude: "Latitude"
         longitude: "Longitude"
@@ -195,7 +206,7 @@ en:
           festival: "Stall"
           concert: "Concert"
         category_descriptions:
-          dropin: "A standard weekly class, where seekers can drop-in any time."
+          dropin: "A standard weekly class, where seekers can join at any time."
           single: "A one-off class, suitable for a tour or other special event."
           course: "A fixed-duration course where seekers can only join at the start of the course."
           festival: "A stand at a public event, where seekers can show up without registering."

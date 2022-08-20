@@ -5,6 +5,7 @@ class Region < ApplicationRecord
   include Manageable
   include ActivityMonitorable
 
+  nilify_blanks
   searchable_columns %w[name country_code translations]
   audited except: %i[summary_email_sent_at summary_metadata]
 
@@ -12,12 +13,12 @@ class Region < ApplicationRecord
   belongs_to :country, foreign_key: :country_code, primary_key: :country_code
   has_many :areas, dependent: :delete_all
 
-  has_many :venues, foreign_key: :province_code, primary_key: :province_code
-  has_many :events, through: :venues
-  # has_many :associated_registrations, through: :events, source: :registrations
+  has_many :events, through: :areas
+  has_many :venues, through: :events
+  has_many :registrations, through: :events
 
   # Validations
-  validates_presence_of :name, :country_code
+  validates_presence_of :name
   validate :validate_geojson
 
   # Scopes
@@ -29,6 +30,10 @@ class Region < ApplicationRecord
   alias parent country
 
   # Methods
+
+  def contains? location
+    super && parent.contains?(location)
+  end
 
   def managed_by? manager, super_manager: nil
     return true if managers.include?(manager) && super_manager != true
@@ -44,6 +49,8 @@ class Region < ApplicationRecord
     else
       super data: data
     end
+  rescue OpenStreetMapsAPI::ResponseError => e
+    errors.add(:osm_id, ': ' + e.message)
   end
 
   private
@@ -52,7 +59,7 @@ class Region < ApplicationRecord
       return unless geojson.present?
       return if parent.contains_geojson?(self)
 
-      errors.add(:geojson, I18n.translate('cms.messages.region.invalid_geojson', region: parent.name))
+      errors.add(:geojson, I18n.translate('cms.messages.region.invalid_geojson', country: parent.name))
     end
 
 end

@@ -55,12 +55,8 @@ Rails.application.routes.draw do
     #get '/:api_key(/*path)', to: 'application#show', as: :key
 
     # For generating helpers
-    get '/event/:event_id', to: 'application#show', as: :event
     get '/venue/:venue_id', to: 'application#show', as: :venue
-
-    #get :closest, to: 'application#closest'
-    #get :online, to: 'application#online'
-    #post :registrations, to: 'registrations#create'
+    get '/:layer/:event_id', to: 'application#show', as: :event
   end
 
   namespace :cms do
@@ -71,7 +67,6 @@ Rails.application.routes.draw do
 
     resources :countries do
       resources :managers, only: %i[index new create destroy]
-      resources :venues, only: %i[index new create]
       resources :events, only: %i[index]
       resources :regions, only: %i[index new create]
       resources :areas, only: %i[index new create]
@@ -80,7 +75,6 @@ Rails.application.routes.draw do
 
     resources :regions, except: %i[index] do
       resources :managers, only: %i[index new create destroy]
-      resources :venues, only: %i[new create]
       resources :events, only: %i[index]
       resources :areas, only: %i[index new create]
       resources :audits, only: %i[index]
@@ -90,16 +84,13 @@ Rails.application.routes.draw do
       get :geosearch, on: :collection
       get :geocode, on: :collection
       resources :managers, only: %i[index new create destroy]
-      resources :venues, only: %i[index new create]
       resources :events, only: %i[index new create]
       resources :audits, only: %i[index]
     end
 
-    resources :venues do
+    resources :venues, only: [] do
       get :geosearch, on: :collection
       get :geocode, on: :collection
-      resources :events, only: %i[index new create]
-      resources :audits, only: %i[index]
     end
 
     resources :events do
@@ -113,12 +104,9 @@ Rails.application.routes.draw do
     resources :managers do
       get :resend_verification
       get :activity
-      get :countries
-      get :regions
       get :search
       resources :managed_records, only: %i[index]
       resources :clients, only: %i[index]
-      resources :venues, only: %i[index]
       resources :events, only: %i[index]
       resources :audits, only: %i[index]
     end

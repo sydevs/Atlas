@@ -47,6 +47,20 @@ uk:
         # Countable
         one: "подія"
         other: "події"
+      online_event: # TODO: Translate
+        # Basic pluralization
+        single: "Online Event"
+        plural: "Online Events"
+        # Countable
+        one: "online event"
+        other: "online events"
+      offline_event: # TODO: Translate
+        # Basic pluralization
+        single: "In-Person Event"
+        plural: "In-Person Events"
+        # Countable
+        one: "in-person event"
+        other: "in-person events"
       registration:
         # Basic pluralization
         single: "Учасник"
@@ -97,7 +111,6 @@ uk:
         name: "Ім'я"
         published: "Опубліковано"
         email: "Електронна адреса"
-        identifier: "Ідентифікатор фільтра"
         status: "Статус"
         statuses:
           verified: "Перевірено"
@@ -136,7 +149,6 @@ uk:
       region:
         manager_id: :activerecord.models.manager.single # Do not translate
         country_code: :activerecord.models.country.single # Do not translate
-        province_code: :activerecord.models.region.single # Do not translate
         geo_data: "Geo Data" # TODO: Translate
         osm_id: "OpenStreetMap ID" # TODO: Translate
         bounds: "Viewport" # TODO: Translate
@@ -149,7 +161,6 @@ uk:
         manager_id: :activerecord.models.manager.single # Do not translate
         name: :activerecord.attributes.generic.name # Do not translate
         country_code: :activerecord.models.country.single # Do not translate
-        province_code: :activerecord.models.region.single # Do not translate
         coordinates: "Місцеположення"
         latitude: "Широта"
         longitude: "Довгота"
@@ -160,14 +171,14 @@ uk:
       # Events
       venue:
         published: :activerecord.attributes.generic.published # Do not translate
-        name: "Назва будівлі (необов'язково)"
+        name: "Назва будівлі"
         manager_id: :activerecord.models.manager.single # Do not translate
         address: "Адреса"
         street: "Адреса вулиці"
         city: "Місто"
-        province_code: :activerecord.models.region.single # Do not translate
+        region_coderegion_code: :activerecord.models.region.single # Do not translate
         country_code: :activerecord.models.country.single # Do not translate
-        postcode: "Поштовий індекс"
+        post_code: "Поштовий індекс"
         coordinates: "Місцезнаходження"
         latitude: "Широта"
         longitude: "Довгота"
@@ -195,7 +206,7 @@ uk:
           festival: "Stall"
           concert: "Концерт"
         category_descriptions: # TODO: Translate
-          dropin: "A standard weekly class, where seekers can drop-in any time."
+          dropin: "A standard weekly class, where seekers can join at any time."
           single: "A one-off class, suitable for a tour or other special event."
           course: "A fixed-duration course where seekers can only join at the start of the course."
           festival: "A stand at a public event, where seekers can show up without registering."

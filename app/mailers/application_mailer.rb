@@ -18,16 +18,15 @@ class ApplicationMailer < ActionMailer::Base
 
     puts "[MAIL] Sending summary for Sahaj Atlas"
     set_summary_period!
-    query = ['created_at >= ? AND created_at <= ?', @start_of_period, @end_of_period]
-    managed_records_query = ['managed_records.created_at >= ? AND managed_records.created_at <= ?', @start_of_period, @end_of_period]
+    query = { created_at: @start_of_period..@end_of_period }
 
-    @new_countries = Country.where(*query)
-    @new_country_managers = ManagedRecord.where(record_type: 'Country').joins(:manager).where(*managed_records_query)
-    @new_clients = Client.where(*query)
+    @new_countries = Country.where(query)
+    @new_country_managers = ManagedRecord.where(record_type: 'Country').joins(:manager).where(managed_records: query)
+    @new_clients = Client.where(query)
     @stats = {
       active_countries: Country.active_since(SUMMARY_PERIOD.ago).count,
       active_events: Event.publicly_visible.count,
-      new_registrations: Registration.where(*query).count,
+      new_registrations: Registration.where(query).count,
     }
 
     @old_stats = @stats

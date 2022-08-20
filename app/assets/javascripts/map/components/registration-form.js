@@ -5,9 +5,9 @@ function RegistrationForm() {
   let alert = null // { type: 'error', message: "This is a test of the alert message." }
   let data = {
     eventId: null,
-    name: 'Dave',
-    email: 'test@test.com ',
-    message: 'testing...',
+    name: null,
+    email: null,
+    message: null,
     startingAt: null,
   }
 

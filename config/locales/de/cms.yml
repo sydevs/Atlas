@@ -69,10 +69,10 @@ de:
       no_comment: "(kein Komentar)"
       temporary_mail_error: "Email server ist gerade beschäftigt, bitte später nochmal versuchen."
       region: # TODO: Translate
-        invalid_geojson: "must be fully within the borders of %{region}"
+        invalid_geojson: "must have it's center within the borders of %{country}"
         invalid_osm_id: "is not within %{country}"
       area: # TODO: Translate
-        invalid_location: "cannot be outside the borders of %{region}"
+        invalid_location: "must have it's center within the borders of %{region} and %{country}"
       venue:
         out_of_bounds: "Die veranstaltung darf nicht weiter als %{area} entfernt sein."
       event:
@@ -96,8 +96,6 @@ de:
         timing: "Timing"
         registration: "Anmeldung"
         manager: "Manager"
-        offline: "In Person Event"
-        online: "Online Event"
       manager:
         contact_methods: "Kontaktmethoden"
         notifications: "Benachrichtigungseinstellungen"
@@ -110,8 +108,10 @@ de:
       verified: "Verifiziert"
       not_verified: "Nicht verifiziert"
       not_set: "Nicht gesetzt"
+      not_found: "No Results Found" # TODO: Translate
       unspecified: "Nicht spezifiziert"
       unlimited: "Unbegrenzte"
+      edit_warning: "Do not edit these fields, unless you know what you're doing!" # TODO: Translate
       never: "Nie"
       geosearch:
         prompt: "Suchen nach Standort"
@@ -152,19 +152,6 @@ de:
           invitations:
             email: "Einladen mittels E-Mail"
             phone: "Einladen mittels %{messenger}"
-      venue:
-        manual_location: "Den Ort manuell eintragen"
-        location: "Wenn der Standort nicht automatisch eingestellt werden kann, indem Sie \"finde Veranstaltungsort\" verwenden, können Sie die Details unten manuell eingeben."
-        find_marker: "Finde Veranstaltungsort"
-        marker_not_set:
-          title: "Atlas-Manager wurde nicht gesetzt"
-          description: "Drücke 'Finde Veranstaltungsort', um die Koordinaten der Veranstaltung Automatisch zu setzen."
-        cant_find_address:
-          title: "Es konnte keine Adresse gefunden werden."
-          description: "Die Adresse, die Sie eingegeben haben, konnten nicht gefunden werden. Versuchen Sie, weitere Informationen hinzuzufügen, oder geben Sie die Breite und Längengrad manuell ein."
-        marker_set:
-          title: "Kartenmacher festgelegt!"
-          description: "Stellen Sie sicher, dass der auf der Karte angezeigte Ort korrekt aussieht."
       manager:
         language: "Die bevorzugte Sprache für E-Mails und UI für diesen Manager."
         administrator:
@@ -213,11 +200,9 @@ de:
       notification_settings: "Benachrichtigungseinstellungen"
       contact_details: "Kontaktinformationen"
       updated_at: "Letzte Aktualisierung"
-      resources_managed:
-        title: "Ressourcen verwaltet"
       event_coverage:
         title: "Eventberichterstattung"
-        description: "%{events} (%{venues})"
+        description: "%{events} in %{resource}" # TODO: Translate
       record_needs_review:
         title: " %{resource} braucht überprüfung"
         description: "Diese %{resource} wurde vor %{updates_ago} aktualisiert. Diese Veranstaltung wird von der Karte entfernt, es sei denn, es wird innerhalb von %{expires_in} überprüft. Gehe zu der Seite Bearbeiten und drücken Sie Speichern, um zu bestätigen, dass die Ereignisdetails noch korrekt sind."
@@ -254,10 +239,6 @@ de:
         parent: "Diese %{resource} ist derzeit für die Öffentlichkeit versteckt, weil die E-Mail-Adresse des Managers nicht überprüft wurde."
         action: "Senden"
       create_event:
-        title: "Wundern Sie sich, wie man ein öffentliches Programm erstellt?"
-        description: "Wählen Sie einen Veranstaltungsort auf der Registerkarte \"%{action}\"."
-        action: "Jetzt gehen"
-      create_event_on_venue:
         title: "Fragst du dich, wie man ein Ereignis erstellt?"
         description: "Klicken Sie auf die Registerkarte \"%{action}\" und drücken Sie \"Event hinzufügen\""
         action: "Event hinzufügen"

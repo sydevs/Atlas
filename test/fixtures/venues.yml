@@ -8,7 +8,7 @@ phoenix_center:
   city: Phoenix
   province_code: AZ
   country_code: US
-  postcode: '85016'
+  post_code: '85016'
 
 chula_vista_eastlake:
   name: Eastlake Beach Club Pavilion
@@ -18,7 +18,7 @@ chula_vista_eastlake:
   city: Phoenix
   province_code: AZ
   country_code: US
-  postcode: '85016'
+  post_code: '85016'
 
 oak_park_community:
   name: Oak Park Community Center
@@ -28,7 +28,7 @@ oak_park_community:
   city: Oak Park
   province_code: CA
   country_code: US
-  postcode: '91377'
+  post_code: '91377'
 
 burbank_rec_center:
   name: McCambridge Recreation Center
@@ -38,7 +38,7 @@ burbank_rec_center:
   city: Burbank
   province_code: CA
   country_code: US
-  postcode: '91504'
+  post_code: '91504'
 
 folsom_dance_studio:
   name: Cynthia Dance Studio
@@ -48,7 +48,7 @@ folsom_dance_studio:
   city: Folsom
   province_code: CA
   country_code: US
-  postcode: '95630'
+  post_code: '95630'
 
 fremont_center:
   name: Fremont Meditation Center
@@ -58,4 +58,4 @@ fremont_center:
   city: Fremont
   province_code: CA
   country_code: US
-  postcode: '94536'
+  post_code: '94536'

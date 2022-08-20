@@ -17,11 +17,12 @@ h3.ui.small.dividing.grey.header = translate('cms.details.details_for_record', r
     .content
       .header = translate("cms.dashboard.role.#{@record.type}.title")
       .description = translate("cms.dashboard.role.#{@record.type}.description", place: @record.parent&.label)
-  .item
-    i.translate.icon
-    .content
-      .header = translate_attribute(Manager, :language_code)
-      .description = @record.language_name
+  - if @record.language_code.present?
+    .item
+      i.translate.icon
+      .content
+        .header = translate_attribute(Manager, :language_code)
+        .description = @record.language_name
   .item
     i.clock.icon
     .content
@@ -31,12 +32,12 @@ h3.ui.small.dividing.grey.header = translate('cms.details.details_for_record', r
     .item
       i.sitemap.icon
       .content
-        .header = translate('cms.details.resources_managed.title')
+        .header = translate_model(ManagedRecord, :plural)
         .description
-          div &nbsp;&nbsp;#{translate_model_count(Country, @record.managed_countries_counter)}
-          div &nbsp;&nbsp;#{translate_model_count(Region, @record.managed_localities_counter)}
-          div &nbsp;&nbsp;#{translate_model_count(Event, @record.events.count)}
-          div &nbsp;&nbsp;#{translate_model_count(Client, @record.clients.count)}
+          - [Country, Region, Area, Event, Client].each do |model|
+            - count = @record.send(model.table_name).count
+            - if count.positive?
+              div &nbsp;&nbsp;#{translate_model_count(model, count)}
 
 h3.ui.small.dividing.grey.header = translate('cms.details.contact_details')
 .ui.list

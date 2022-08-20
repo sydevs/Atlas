@@ -22,8 +22,13 @@ de:
       more_info: "Mehr Infos"
       register: "Anmelden"
       fallback:
-        area: "Es gibt keine Klassen in diesem Bereich, die nächste Freizeitmeditation ist in"
-        venue: "Die nächste Freimachungsklasse bei"
+        nearby: "Die nächste Freimachungsklasse bei"
+        far: "Es gibt keine Klassen in diesem Bereich, die nächste Freizeitmeditation ist in"
+        online: "There are no classes in this area, consider an" # TODO: Translate
+        online_event: "Online Class" # TODO: Translate
+
+    area: # TODO: Translate
+      header: "Events in %{area}"
 
     venue: # TODO: Translate
       header: "Events at %{venue}"

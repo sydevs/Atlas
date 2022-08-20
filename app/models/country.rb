@@ -5,6 +5,7 @@ class Country < ApplicationRecord
   include Manageable
   include ActivityMonitorable
 
+  nilify_blanks
   searchable_columns %w[name country_code translations]
   audited except: %i[summary_email_sent_at summary_metadata]
 
@@ -12,14 +13,13 @@ class Country < ApplicationRecord
   has_many :regions, inverse_of: :country, foreign_key: :country_code, primary_key: :country_code, dependent: :delete_all
   has_many :areas, inverse_of: :country, foreign_key: :country_code, primary_key: :country_code, dependent: :delete_all
 
-  has_many :venues, foreign_key: :country_code, primary_key: :country_code
-  has_many :events, through: :venues
+  has_many :events, through: :areas
   has_many :associated_registrations, through: :events, source: :registrations
   has_many :region_manager_records, through: :regions, source: :managed_records
   has_many :area_manager_records, through: :areas, source: :managed_records
 
   # Validations
-  validates_presence_of :country_code
+  validates_presence_of :name
   validate :validate_language_code
 
   # Scopes
@@ -28,10 +28,6 @@ class Country < ApplicationRecord
   scope :ready_for_summary_email, -> { where("summary_email_sent_at IS NULL OR summary_email_sent_at <= ?", CountryMailer::SUMMARY_PERIOD.ago) }
 
   # Methods
-
-  def contains? location
-    venue.country_code == country_code
-  end
 
   def managed_by? manager, super_manager: nil
     return managers.include?(manager) unless super_manager == true
@@ -42,6 +38,7 @@ class Country < ApplicationRecord
   private
 
     def validate_language_code
+      return unless default_language_code.present?
       return if I18nData.languages.key?(default_language_code)
 
       self.errors.add(:default_language_code)

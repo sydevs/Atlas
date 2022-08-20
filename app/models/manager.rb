@@ -30,8 +30,8 @@ class Manager < ApplicationRecord
   # Scopes
   default_scope { order(updated_at: :desc) }
   scope :administrators, -> { where(administrator: true) }
-  scope :country_managers, -> { where('managed_countries_counter > 0') }
-  scope :local_managers, -> { where('managed_localities_counter > 0') }
+  scope :country_managers, -> {joins(:countries) }
+  scope :local_managers, -> { joins(:regions, :areas) }
   scope :event_managers, -> { joins(:events) }
   scope :client_managers, -> { joins(:clients) }
 
@@ -63,9 +63,9 @@ class Manager < ApplicationRecord
   def type
     if administrator?
       :worldwide
-    elsif managed_countries_counter.positive?
+    elsif countries.exists?
       :country
-    elsif managed_localities_counter.positive?
+    elsif regions.exists? || areas.exists?
       :local
     elsif clients.exists?
       :client
@@ -81,22 +81,6 @@ class Manager < ApplicationRecord
     name
   end
 
-  def set_counter record, direction
-    Manager.set_counter
-  end
-
-  def self.set_counter klass, direction, id
-    if klass == 'Country'
-      column = :managed_countries_counter
-    elsif klass == 'Event'
-      column = :managed_events_counter
-    elsif %w[Region Area].include?(klass)
-      column = :managed_localities_counter
-    end
-
-    Manager.send("#{direction}_counter", column, id) if column
-  end
-  
   def accessible_countries area: false
     if administrator? || area
       Country.default_scoped

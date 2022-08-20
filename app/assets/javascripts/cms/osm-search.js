@@ -16,21 +16,25 @@ const OsmSearch = {
     this.$submit.api({
       url: `https://nominatim.openstreetmap.org/search?q={query}&format=json&featuretype=${type}&countrycodes=${countryCode}`,
       beforeSend: (settings) => {
-        console.log('beforeSend', settings)
         settings.urlData = { query: this.$input.val() }
-        console.log('settings', settings)
         return settings
       },
-      onSuccess: (response, test, test1) => {
-        console.log('got osm', response, test, test1)
+      onSuccess: (response) => {
         this.$body.empty()
-        for (const index in response) {
-          const result = response[index]
-          this.$body.append(`<tr><td>${result.display_name}</td><td class="collapsing right aligned"><a class="ui button" href=?osm_id=${result.osm_id}>${"Choose"}<i class="right arrow icon"></i></a></tr>`)
+        response = response.filter(item => item.class == 'boundary')
+
+        if (response.length > 0) {
+          for (const index in response) {
+            const result = response[index]
+            osm_id = result.osm_type[0].toUpperCase() + result.osm_id
+            this.$body.append(`<tr><td>${result.display_name}</td><td class="collapsing right aligned"><a class="ui button" href=?osm_id=${osm_id}>${"Choose"}<i class="right arrow icon"></i></a></tr>`)
+          }
+        } else {
+          this.$body.append(`<tr class="negative"><td colspan=2><i class="exclamation circle icon"></i>${this.$body.data('empty')}</td></tr>`)
         }
 
         if (allowCustom) {
-          this.$body.append(`<tr><td></td><td class="collapsing"><a class="ui button" href="?osm_id=0"><i class="vector square icon"></i>${"Custom Region"}<i class="right arrow icon"></i></a></tr>`)
+          this.$body.append(`<tr><td></td><td class="collapsing"><a class="ui button" href="?osm_id=custom"><i class="vector square icon"></i>${"Custom Region"}<i class="right arrow icon"></i></a></tr>`)
         }
       }
     })

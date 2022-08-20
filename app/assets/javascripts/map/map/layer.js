@@ -95,7 +95,7 @@ class AbstractMapLayer {
       type: 'geojson',
       data: geojson,
       cluster: true,
-      clusterMaxZoom: 12, // Max zoom to cluster points on
+      clusterMaxZoom: this.#config.selectionZoom || 12, // Max zoom to cluster points on
       clusterRadius: 50, // Radius of each cluster when clustering points
     })
 
@@ -132,7 +132,7 @@ class AbstractMapLayer {
       type: 'symbol',
       source: this._sources.selection,
       layout: this.#config.selection,
-      minzoom: 12,
+      minzoom: this.#config.selectionZoom || 12,
       paint: {
         'text-color': '#FFFFFF',
       },

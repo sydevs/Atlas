@@ -48,9 +48,6 @@ uk:
       # Tertiary menu
       details: "Інформація"
       activity: "Діяльність"
-      events: # TODO: Translate
-        offline: "In-Person Events"
-        online: "Online Events"
       breadcrumbs:
         world: "Світ"
         help: "Допомога"
@@ -69,10 +66,10 @@ uk:
       no_comment: "(Без коментарів)"
       temporary_mail_error: "Сервер електронної пошти тимчасово зайнятий, спробуйте ще раз."
       region: # TODO: Translate
-        invalid_geojson: "must be fully within the borders of %{region}"
+        invalid_geojson: "must have it's center within the borders of %{country}"
         invalid_osm_id: "is not within %{country}"
       area: # TODO: Translate
-        invalid_location: "cannot be outside the borders of %{region}"
+        invalid_location: "must have it's center within the borders of %{region} and %{country}"
       venue:
         out_of_bounds: "Місце проведення не може бути за межами радіусу %{area}"
       event:
@@ -96,8 +93,6 @@ uk:
         timing: "Вибір часу"
         registration: "Реєстрація"
         manager: "Менеджер"
-        offline: "Особиста подія"
-        online: "Онлайн подія"
       manager: # TODO: Translate
         contact_methods: "Contact Methods"
         notifications: "Notification Settings"
@@ -110,9 +105,11 @@ uk:
       verified: "Підтверджено"
       not_verified: "Not Verified" # TODO: Translate
       not_set: "Not Set" # TODO: Translate
+      not_found: "No Results Found" # TODO: Translate
       unspecified: "Невизначено"
       unlimited: "Unlimited" # TODO: Translate
       never: "Ніколи"
+      edit_warning: "Do not edit these fields, unless you know what you're doing!" # TODO: Translate
       geosearch:
         prompt: "Пошук розташування"
         description: "Ви можете використовувати цей пошук для автоматичного заповнення полів нижче. Він використовує API Google. Якщо Google заблоковано у вашій країні або якщо пошук не вдається, вам потрібно буде ввести дані вручну."
@@ -152,19 +149,6 @@ uk:
           invitations:
             email: "Invite by email"
             phone: "Invite through %{messenger}"
-      venue:
-        manual_location: "Встановіть місце розташування вручну"
-        location: "Якщо розташування неможливо встановити автоматично, натиснувши \"Знайти місцезнаходження\", ви можете ввести деталі вручну нижче."
-        find_marker: "Знайти місцезнаходження"
-        marker_not_set:
-          title: "Позначка на карті не встановлено"
-          description: "Натисніть «Знайти місцезнаходження», щоб автоматично визначити координати адреси місця проведення."
-        cant_find_address:
-          title: "Не вдалося знайти адресу"
-          description: "Не вдалося знайти введену вами адресу. Спробуйте додати більше інформації або введіть широту та довготу вручну."
-        marker_set:
-          title: "Набір міток на карті!"
-          description: "Переконайтеся, що місце, показане на карті, виглядає правильним."
       manager: # TODO: Translate
         language: "Бажана мова для електронних листів та інтерфейсу користувача для цього менеджера."
         administrator:
@@ -185,12 +169,12 @@ uk:
             country_summary: "Country Summary"
             application_summary: "Sahaj Atlas Summary"
           hints:
-            new_managed_record: "A message sent to you when you are given permission to manage a new event, region or resource on the Atlas."
-            event_verification: "Messages requesting event and city managers to check their events' accuracy. Sent every 3 months, for each event. This cannot be disabled."
-            event_registrations: "A list of new registrations sent to event managers. Sent around 24 hours before each event."
-            place_summary: "A summary of changes within a region sent to regional managers. Sent every %{period}."
-            country_summary: "A summary of changes sent to country managers. Sent every %{period}."
-            application_summary: "A summary of all Atlas changes, sent to administrators. Sent every %{period}."
+            new_managed_record: "Sent when you are given permission to manage a new event, region or resource on the Atlas."
+            event_verification: "Requesting event and city managers to check their events' accuracy. Sent every 3 months, for each event. This cannot be disabled."
+            event_registrations: "A list of new registrations for your event. Sent around 24 hours before each event."
+            place_summary: "A summary of changes within a region you manage. Sent every %{period}."
+            country_summary: "A summary of changes within a country you manage. Sent every %{period}."
+            application_summary: "A summary of all Atlas changes. Sent every %{period}."
         search: "Enter a name, email, or phone number..."
       client:
         domain: "Тільки цьому домену буде дозволено вбудовувати карту за допомогою вашого секретного ключа."
@@ -213,11 +197,9 @@ uk:
       notification_settings: "Notification Settings" # TODO: Translate
       contact_details: "Contact Information" # TODO: Translate
       updated_at: "Останнє оновлення"
-      resources_managed:
-        title: "Керовані ресурси"
       event_coverage:
         title: "Висвітлення подій"
-        description: "%{events} (%{venues})"
+        description: "%{events} in %{resource}" # TODO: Translate
       record_needs_review:
         title: "%{resource} потребує перевірки"
         description: "Цей %{resource} не оновлювався в %{updated_ago}. Цю подію буде видалено з карти, якщо вона не буде переглянута протягом %{expires_in}. Перейдіть на сторінку редагування та натисніть зберегти, щоб підтвердити, що деталі події все ще правильні."
@@ -249,10 +231,6 @@ uk:
         description: "Цей %{resource} наразі прихований від громадськості, оскільки він не опублікований."
         parent: "Цей %{resource} наразі прихований від громадськості, оскільки його %{parent} не опубліковано."
       create_event:
-        title: "Гадаєте як створити публічну програму?"
-        description: "Виберіть місце проведення на вкладці \"%{action}\"."
-        action: "Створити зараз"
-      create_event_on_venue:
         title: "Гадаєте як створити подію?"
         description: "Натисніть на вкладку \"%{action}\" і натисніть \"Додати подію\""
         action: "Додати подію"

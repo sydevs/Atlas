@@ -33,6 +33,7 @@ class CMS::ApplicationController < ActionController::Base
     @resources += current_user.regions.joins(:country).where(countries: { enable_regions: true })
     @resources += current_user.areas
     @resources += current_user.events
+    
     @events_for_review = current_user.accessible_events.needs_review
     @events_recently_expired = current_user.accessible_events.expired
     @events_expiring_count = @events_for_review.count + @events_recently_expired.count
@@ -46,11 +47,18 @@ class CMS::ApplicationController < ActionController::Base
     @events_for_review = current_user.accessible_events.needs_review.order(updated_at: :desc)
     @events_expired = current_user.accessible_events.expired.order(updated_at: :desc)
     @events_archived = current_user.accessible_events.archived.order(updated_at: :desc)
+
+    render 'cms/application/review'
+  end
+
+  def help
+    set_context!
+    authorize :dashboard, :help?
+    render 'cms/application/help'
   end
 
   def index query = {}
     authorize_association! @model
-    @query = query
     @scope = @scope.where(query) if query.present?
     @records = policy_scope(@scope).page(params[:page]).per(15).search(params[:q])
     @records = @records.order(updated_at: :desc) if @model.column_names.include?('updated_at')
@@ -124,11 +132,6 @@ class CMS::ApplicationController < ActionController::Base
     redirect_to [:cms, @record.parent, @model]
   end
 
-  def help
-    set_context!
-    authorize :dashboard, :view_help?
-  end
-
   def geosearch args = {}
     authorize @record || @model
     args.merge!({
@@ -200,15 +203,12 @@ class CMS::ApplicationController < ActionController::Base
     end
 
     def set_scope!
-      if @context && @model == Event
-        @scope = @context.try(:associated_events) || @context.events
-      elsif @context
+      if @context
         @scope = @context.send(@model.table_name)
       elsif @model
         @scope = current_user.try("accessible_#{@model.table_name}") || @model
       end
       
-      @query ||= {}
       puts "SET SCOPE #{@scope.inspect}"
     end
 
