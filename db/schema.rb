@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_04_171726) do
+ActiveRecord::Schema.define(version: 2022_06_10_164625) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -87,6 +87,7 @@ ActiveRecord::Schema.define(version: 2022_08_04_171726) do
     t.integer "registration_mode", default: 0
     t.string "registration_url"
     t.string "language_code", limit: 2
+    t.boolean "online", default: false, null: false
     t.string "online_url"
     t.datetime "status_email_sent_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
     t.datetime "reminder_email_sent_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
@@ -101,12 +102,11 @@ ActiveRecord::Schema.define(version: 2022_08_04_171726) do
     t.integer "registration_type", default: 0, null: false
     t.integer "registration_limit"
     t.string "type"
-    t.bigint "venue_id"
-    t.bigint "local_area_id"
-    t.index ["local_area_id"], name: "index_events_on_local_area_id"
+    t.string "location_type"
+    t.bigint "location_id"
+    t.index ["location_type", "location_id"], name: "index_events_on_location"
     t.index ["manager_id"], name: "index_events_on_manager_id"
     t.index ["status"], name: "index_events_on_status"
-    t.index ["venue_id"], name: "index_events_on_venue_id"
   end
 
   create_table "local_area_venues", force: :cascade do |t|
@@ -231,8 +231,6 @@ ActiveRecord::Schema.define(version: 2022_08_04_171726) do
     t.string "place_id"
     t.date "last_activity_on"
     t.string "time_zone"
-    t.string "address", null: false
-    t.index ["place_id"], name: "index_venues_on_place_id", unique: true
   end
 
 end

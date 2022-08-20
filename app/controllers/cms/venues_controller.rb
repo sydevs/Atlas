@@ -31,24 +31,43 @@ class CMS::VenuesController < CMS::ApplicationController
     super parameters
   end
 
-  def geosearch
-    super({
-      types: 'street_address|premise|subpremise|room|place_of_worship',
-      components: ("country:#{params[:country]}" if params[:country].present?),
+  def geocode
+    authorize Venue
+
+    result = GeocodeAPI.googlemaps({
+      input: params[:query],
+      language: I18n.locale,
     })
+
+    if result
+      render json: result
+    else
+      render json: {}, status: 404
+    end
   end
 
-  def geocode args = {}
-    authorize @record || @model
-    args.merge!({
+  # Unfortunately this doesn't return consistent address results, so this method is not currently used.
+  def autocomplete
+    authorize LocalArea
+    data = {
       language: I18n.locale,
       sessiontoken: session.id,
-      placeid: params[:place_id],
-    })
+    }
 
-    result = GoogleMapsAPI.fetch_place(args)
-    puts "RESULT #{result.inspect}"
-    render json: result, status: result ? 200 : 404
+    if params[:place_id].present?
+      data[:placeid] = params[:place_id]
+      result = AutocompleteAPI.fetch_address(data)
+    else
+      data[:components] = "country:#{params[:country]}" if params[:country].present?
+      data[:input] = params[:query]
+      result = AutocompleteAPI.predict(data)
+    end
+
+    if result
+      render json: result
+    else
+      render json: {}, status: 404
+    end
   end
 
   private

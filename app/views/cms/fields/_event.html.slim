@@ -25,9 +25,6 @@
       = f.input :phone_number, as: :tel, label: false, hint: translate('cms.hints.event.phone_number'), placeholder: translate_attribute(@record, :phone_number)
       = f.input :phone_name, as: :string, label: false, hint: translate('cms.hints.event.phone_name'), placeholder: translate_attribute(@record, :phone_name)
 
-  .ui.small.dividing.violet.header = translate('cms.forms.event.location')
-  = render 'cms/venues/selector', f: f, venue: @record.venue
-
   = render "cms/fields/categories/#{@record.category}", f: f
 
   - if policy(@record).set_manager?
@@ -39,7 +36,9 @@
   - categories = Event.categories.dup
   - categories.except!(:festival) if @record.online?
 
-  .ui.label = I18n.translate(@record.online? ? 'online' : 'offline', scope: 'cms.forms.event')
+  - if @record.online?
+    .ui.label = translate_attribute(@record, :online)
+
   = help_link :categories
   br
   table.ui.very.basic.table

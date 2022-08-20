@@ -9,7 +9,6 @@ de:
         back: "Zurück"
         view: "Anzeigen"
         search: "Suchen"
-        searching: "Suchen..."
         select: "Auswählen"
 
       target:
@@ -87,7 +86,8 @@ de:
         phone_verified: "Ihre Telefonnummer wird jetzt überprüft!"
         email_verification_resent: "Eine E-Mail-Überprüfung wurde an \"%{name}\" geschickt"
       cannot_create:
-        event: "Neue Events können hier nicht erstellt werden, sie müssen direkt zu einer Stadt hinzugefügt werden."
+        event: "Neue Events können hier nicht erstellt werden, sie müssen direkt zu einem Veranstaltungsort hinzugefügt werden."
+        venue: "Neue Veranstaltungsorte können hier nicht erstellt werden, sie müssen direkt in eine Region innerhalb eines Landes hinzugefügt werden."
 
     forms:
       event:
@@ -95,8 +95,6 @@ de:
         timing: "Timing"
         registration: "Anmeldung"
         manager: "Manager"
-        offline: "In Person Event"
-        online: "Online Event"
       manager:
         contact_methods: "Kontaktmethoden"
         notifications: "Benachrichtigungseinstellungen"

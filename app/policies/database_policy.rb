@@ -48,8 +48,4 @@ class DatabasePolicy < ApplicationPolicy
     false
   end
 
-  def geosearch?
-    user.present?
-  end
-
 end
