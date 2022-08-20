@@ -23,6 +23,7 @@ uk:
         choose: "Обрати %{resource}"
         verify: "Verify %{resource}" # TODO: Translate
         view: "View %{resource}" # TODO: Translate
+        reload: "Reload %{resource}" # TODO: Translate
 
       special:
         edit_profile: "Редагувати мій профіль"
@@ -67,6 +68,9 @@ uk:
       not_logged_in: "Ви не ввійшли в систему!"
       no_comment: "(Без коментарів)"
       temporary_mail_error: "Сервер електронної пошти тимчасово зайнятий, спробуйте ще раз."
+      region: # TODO: Translate
+        invalid_geojson: "must be fully within the borders of %{region}"
+        invalid_osm_id: "is not within %{country}"
       area: # TODO: Translate
         invalid_location: "cannot be outside the borders of %{region}"
       venue:
@@ -102,6 +106,7 @@ uk:
         manager: "Vенеджер"
 
     hints:
+      unnamed: "(Unnamed)" # TODO: Translate
       verified: "Підтверджено"
       not_verified: "Not Verified" # TODO: Translate
       not_set: "Not Set" # TODO: Translate
@@ -115,8 +120,8 @@ uk:
         must_be_new: "Нижче наведено лише країни, які ще не були додані."
         language: "Мова за замовчуванням, якою зазвичай проводяться події в цій країні."
         no_default_language: "Немає за замовчуванням"
-        region_management: "Якщо ввімкнено, ви зможете переглядати та призначати менеджерів для регіонів (провінцій, штатів тощо) у цій країні. Це корисно для великих країн (Китай, США, Австралія тощо), і непотрібно для малих країн (Бельгія, Литва, Сінгапур тощо)."
-        bounds: "If a country is specified when embedding the map, these bounds will be used as the initial view. The coordinates should be entered as 4 comma-separated numbers (south,west,north,east)." # TODO: Translate
+        enable_regions: "Якщо ввімкнено, ви зможете переглядати та призначати менеджерів для регіонів (провінцій, штатів тощо) у цій країні. Це корисно для великих країн (Китай, США, Австралія тощо), і непотрібно для малих країн (Бельгія, Литва, Сінгапур тощо)."
+        enable_custom_regions: "Allow the creation of custom regions. This is an advanced feature, which should only be used if you understand what you are doing." # TODO: Translate
       region: # TODO: Translate
         polygon: "Drag / click on a faded square to add a new corner to the polygon. Click on an existing corner to remove it."
       area:

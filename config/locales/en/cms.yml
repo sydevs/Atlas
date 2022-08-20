@@ -23,6 +23,7 @@ en:
         choose: "Choose a %{resource}"
         verify: "Verify %{resource}"
         view: "View %{resource}"
+        reload: "Reload %{resource}"
 
       special:
         edit_profile: "Edit My Profile"
@@ -67,6 +68,9 @@ en:
       not_logged_in: "You are not logged in!"
       no_comment: "(No comment)"
       temporary_mail_error: "Email server is temporarily busy, please try again."
+      region:
+        invalid_geojson: "must be fully within the borders of %{region}"
+        invalid_osm_id: "is not within %{country}"
       area:
         invalid_location: "cannot be outside the borders of %{region}"
       venue:
@@ -103,6 +107,7 @@ en:
         manager: "Manager"
 
     hints:
+      unnamed: "(Unnamed)"
       verified: "Verified"
       not_verified: "Not Verified"
       not_set: "Not Set"
@@ -116,8 +121,8 @@ en:
         must_be_new: "Only countries which haven't already been added are listed below."
         language: "The default language that events in this country are usually in."
         no_default_language: "No default"
-        region_management: "If enabled, you will be able to view and assign managers to regions (regions, states, etc) within this country. This is useful for larger countries (China, USA, Australia, etc), and unnessecary for small countries (Belgium, Lithuania, Singapore, etc)."
-        bounds: "If a country is specified when embedding the map, these bounds will be used as the initial view. The coordinates should be entered as 4 comma-separated numbers (south,west,north,east)."
+        enable_regions: "If enabled, you will be able to view and assign managers to regions (regions, states, etc) within this country. This is useful for larger countries (China, USA, Australia, etc), and unnessecary for small countries (Belgium, Lithuania, Singapore, etc)."
+        enable_custom_regions: "Allow the creation of custom regions. This is an advanced feature, which should only be used if you understand what you are doing."
       region:
         polygon: "Drag / click on a faded square to add a new corner to the polygon. Click on an existing corner to remove it."
       area:

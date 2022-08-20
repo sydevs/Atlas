@@ -1,12 +1,38 @@
-- languages = I18nData.languages(I18n.locale).map { |k, v| [v.split(/[,;]/)[0], k] }
 
-- if @record.new_record?
-  - existing_countries = Country.pluck(:country_code)
-  - countries = ISO3166::Country.translations.map { |k,v| [v, k] unless existing_countries.include?(k) }.compact
+- if @record.osm_id && @record.geojson && @record.bounds
+  - languages = I18nData.languages(I18n.locale).map { |k, v| [v.split(/[,;]/)[0], k] }
 
-  .hint = translate('cms.hints.country.must_be_new')
-  = f.input :country_code, label: false, prompt: translate('cms.actions.target.choose', resource: translate_model(Country).downcase), collection: countries, input_html: { class: 'search' }
+  = f.input :geojson do
+    #map data-changeable='true' data-geojson=@record.geojson.to_json data-bounds=@record.bounds.to_json
 
-= f.input :default_language_code, collection: languages, selected: @record.default_language_code, input_html: { class: 'search' }, include_blank: translate('cms.hints.country.no_default_language'), hint: translate('cms.hints.country.language')
-= f.input :enable_regions, as: :boolean, wrapper: :semantic_checkbox, hint: translate('cms.hints.country.region_management')
-= f.input :bounds, hint: translate('cms.hints.country.bounds'), required: false, input_html: { value: f.object[:bounds] }
+  = f.input :name
+  = f.input :default_language_code, collection: languages, selected: @record.default_language_code, input_html: { class: 'search' }, hint: translate('cms.hints.country.language'), include_blank: translate('cms.hints.country.no_default_language')
+  = f.input :enable_regions, as: :boolean, wrapper: :semantic_checkbox, hint: translate('cms.hints.country.enable_regions')
+  = f.input :enable_custom_regions, as: :boolean, wrapper: :semantic_checkbox, hint: translate('cms.hints.country.enable_custom_regions')
+
+  a.ui.right.floated.tiny.compact.basic.button href="?osm_id=#{@record.osm_id}"
+    = translate('cms.actions.target.reload', resource: translate_attribute(@record, :geo_data))
+
+  .ui.accordion
+    .ui.title
+      i.dropdown.icon
+      = translate_attribute(@record, :geo_data)
+    .content
+      - strings = %i[osm_id bounds]
+      - textareas = %i[geojson translations]
+      - (strings + textareas).each do |field|
+        - data = @record.send(field)
+        = f.input field do
+          - if field == :geojson
+            = f.hint pluralize(data['coordinates'].flatten.length / 2, 'point')
+          .ui.code.input
+            = f.input_field field, as: (textareas.include?(field) ? :text : :string), placeholder: translate('cms.hints.not_set'), id: "js-map-#{field}", value: data&.to_json
+- else
+  .field id='js-osm-search' data-type='country'
+    .ui.search
+      .ui.left.icon.action.input
+        i.search.icon
+        input.prompt type='text' name='query' placeholder=translate('cms.hints.geosearch.prompt')
+        button.ui.submit.button = translate('cms.actions.simple.search')
+
+    table.ui.very.basic.table

@@ -1,7 +1,7 @@
 module CountryDecorator
 
   def label
-    CountryDecorator.get_label(country_code)
+    (translations || {})[I18n.locale.to_s] || name || CountryDecorator.get_label(country_code)
   end
 
   def short_label

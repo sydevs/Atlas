@@ -16,10 +16,9 @@ class CMS::ApplicationController < ActionController::Base
   before_action :set_record!, only: %i[show edit update destroy]
   protect_from_forgery with: :exception
 
-  # TODO: Remove this development code
+  # TODO: Remove thes development checks
   after_action :verify_authorized, except: :home
   after_action :verify_policy_scoped, only: :index
-  # END TODO
 
   def home
     raise ActionController::RoutingError.new('Not Found') unless defined?(current_user) && current_user.present?
@@ -97,6 +96,8 @@ class CMS::ApplicationController < ActionController::Base
 
     if @record.save
       redirect_to back_path, flash: { success: translate('cms.messages.successfully_created', resource: @model.model_name.human.downcase) }
+    else
+      render 'cms/views/new'
     end
   end
 

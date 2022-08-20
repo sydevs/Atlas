@@ -5,20 +5,11 @@ require 'httparty'
 
 module OpenStreetMapsAPI
 
-  def self.fetch_geojson osm_id
-    url = "http://polygons.openstreetmap.fr/get_geojson.py?id=#{osm_id}&params=0.090000-0.090000-0.090000"
-    response = HTTParty.get(url, { headers: { 'Content-Type': 'application/json' }, log_level: :debug })
-    puts "#{url} - #{response.pretty_inspect}"
-
-    JSON.parse(response.body)
-  end
-
-  def self.fetch_data osm_id
+  def self.fetch_data osm_id, precision: 0.06
     cache_key = "osm-#{osm_id}"
     data = Rails.cache.read(cache_key)
     return data if data
     
-    url = "http://polygons.openstreetmap.fr/get_geojson.py?id=#{osm_id}&params=0.090000-0.090000-0.090000"
     response = HTTParty.get('https://nominatim.openstreetmap.org/lookup', {
       headers: { 'Content-Type': 'application/json' },
       query: {
@@ -26,7 +17,7 @@ module OpenStreetMapsAPI
         osm_ids: "R#{osm_id}",
         namedetails: 1,
         polygon_geojson: 1,
-        polygon_threshold: 0.06,
+        polygon_threshold: precision,
         email: 'contact@sydevelopers.com',
         'accept-language': I18n.locale.to_s,
       },

@@ -119,12 +119,17 @@ uk:
         updated_at: "Оновлено о"
 
       # Places
-      country:
+      country: # TODO: Translate
         manager_id: :activerecord.models.manager.single # Do not translate
         country_code: :activerecord.models.country.single # Do not translate
         default_language_code: "Мова події за замовчуванням"
         enable_regions: "Увімкнути регіональне керування"
-        bounds: "Bounds" # TODO: Translate
+        enable_custom_regions: "Allow Custom Region Creation"
+        geo_data: "Geo Data"
+        osm_id: "OpenStreetMap ID"
+        bounds: "Viewport"
+        geojson: "Borders"
+        translations: "Translations"
         last_activity_on: :activerecord.attributes.generic.last_activity_on # Do not translate
         summary_email_sent_at: :activerecord.attributes.generic.summary_email_sent_at # Do not translate
 
@@ -134,7 +139,7 @@ uk:
         province_code: :activerecord.models.region.single # Do not translate
         geo_data: "Geo Data" # TODO: Translate
         osm_id: "OpenStreetMap ID" # TODO: Translate
-        bounds: "Bounds" # TODO: Translate
+        bounds: "Viewport" # TODO: Translate
         geojson: "Borders" # TODO: Translate
         translations: "Translations" # TODO: Translate
         last_activity_on: :activerecord.attributes.generic.last_activity_on # Do not translate
@@ -281,7 +286,7 @@ uk:
         public_key: "Публічний ключ API"
         enabled: "Увімкнено"
         location: "Бажане розташування"
-        bounds: "Межі"
+        bounds: "Viewport" # TODO: Translate
         last_accessed_at: "Останній доступ"
         map_url: "Bбудовувана адреса карти"
         index_url: "Aдреса списку для вбудовування"

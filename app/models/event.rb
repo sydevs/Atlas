@@ -45,6 +45,7 @@ class Event < ApplicationRecord
   validates_associated :pictures
   validate :validate_end_time
   validate :validate_end_date
+  validate :validate_language_code
   validate :parse_phone_number
 
   # Scopes
@@ -76,11 +77,6 @@ class Event < ApplicationRecord
 
   def publicly_visible?
     manager.verified? && published? && publishable?
-  end
-
-  def language_code= value
-    # Only accept languages which are in the language list
-    super value if I18nData.languages.key?(value)
   end
 
   def should_finish?
@@ -197,6 +193,12 @@ class Event < ApplicationRecord
       
       self.errors.add(:end_date, I18n.translate('cms.messages.event.invalid_end_date')) if end_date < start_date
       # self.errors.add(:end_date, I18n.translate('cms.messages.event.passed_end_date')) if end_date < Date.today
+    end
+
+    def validate_language_code
+      return if I18nData.languages.key?(language_code)
+
+      self.errors.add(:language_code)
     end
 
     def parse_phone_number

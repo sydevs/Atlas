@@ -8,6 +8,13 @@ class Map {
   #inputs = {}
   #layer = null
   #border = null
+  #bounds = null
+
+  #defaultStyle = {
+    color: '#2185d0',
+    fillColor: '#2185d0',
+    fillOpacity: 0.3,
+  }
 
   constructor(container) {
     console.log('Loading Map') // eslint-disable-line no-console
@@ -23,46 +30,17 @@ class Map {
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(this.#leaflet)
 
-    if (this.#data.editable) {
-      const fields = ['latitude', 'longitude', 'radius', 'geojson']
+    if (this.#data.changeable || this.#data.editable) {
+      const fields = ['latitude', 'longitude', 'radius', 'bounds', 'geojson']
       fields.forEach(field => {
         this.#inputs[field] = this.setupInput(field)
         if (!this.#inputs[field]) delete this.#inputs[field]
       })
-    }
-
-    if (this.#data.polygon) {
-      this.setupPolygonDraw()
-    } else if (!this.#data.editable) {
+    } else {
       this.#leaflet.scrollWheelZoom.disable()
     }
 
     this.#invalidate()
-  }
-
-  setupPolygonDraw() {
-    this.#layer = new L.Polygon([
-			[51.51, -0.1],
-			[51.5, -0.06],
-			[51.52, -0.03],
-		]).addTo(this.#leaflet)
-
-    this.#layer.editing.enable()
-
-    this.setHeight(360)
-    this.#leaflet.fitBounds(this.#layer.getBounds(), { padding: [20, 20] })
-
-    const fields = ['bounds', 'geojson']
-    fields.forEach(field => {
-      this.#inputs[field] = document.getElementById(`js-map-${field}`)
-    })
-
-    this.#layer.on('edit', () => {
-      let bounds = this.#layer.getBounds()
-      bounds = [bounds.getSouth(), bounds.getNorth(), bounds.getWest(), bounds.getEast()]
-			this.#inputs.bounds.value = JSON.stringify(bounds)
-      this.#inputs.geojson.value = JSON.stringify(this.#layer.toGeoJSON()['geometry'])
-		})
   }
 
   setupInput(field) {
@@ -70,7 +48,9 @@ class Map {
     if (!input) return
 
     this.#data[field] = input.value
+
     input.addEventListener('change', event => {
+      console.log('on change', field)
       this.#data[field] = event.currentTarget.value
       this.#invalidate()
     })
@@ -98,13 +78,16 @@ class Map {
       this.setCircle(data.latitude, data.longitude, data.radius)
     } else if (data.latitude && data.longitude) {
       this.setPoint(data.latitude, data.longitude)
+    } else if (data.editable && data.border) {
+      this.setEditablePolygon(data.geojson, data.border)
     } else if (data.geojson) {
       this.setGeojson(data.geojson)
+      if (data.bounds) this.setBounds(data.bounds)
     } else {
       return
     }
 
-    if (data.border) {
+    if (data.border && !data.editable) {
       this.setBorder(data.border)
     }
   }
@@ -114,11 +97,7 @@ class Map {
 
     this.setHeight(360)
 
-    this.#layer = L.circle([latitude, longitude], radius * 1000, {
-      color: '#2185d0',
-      fillColor: '#2185d0',
-      fillOpacity: 0.3,
-    }).addTo(this.#leaflet)
+    this.#layer = L.circle([latitude, longitude], radius * 1000, this.#defaultStyle).addTo(this.#leaflet)
 
     const bounds = L.latLng(latitude, longitude).toBounds(parseFloat(radius) * 2000)
     this.#leaflet.fitBounds(bounds)
@@ -143,12 +122,44 @@ class Map {
     this.setHeight(360)
 
     geojson = JSON.parse(geojson)
-    this.#layer = L.geoJSON(geojson, {
-      color: '#2185d0',
-      fillColor: '#2185d0',
-      fillOpacity: 0.3,
-    }).addTo(this.#leaflet)
+    this.#layer = L.geoJSON(geojson, this.#defaultStyle).addTo(this.#leaflet)
     this.#leaflet.fitBounds(this.#layer.getBounds(), { padding: [10, 10] })
+  }
+
+  setEditablePolygon(geojson = null, border = null) {
+    let coordinates
+
+    if (!this.#layer) {
+      this.setHeight(420)
+
+      if (geojson) {
+        geojson = JSON.parse(geojson)
+        coordinates = geojson['coordinates']
+      } else {
+        border = JSON.parse(border)
+        const center = L.geoJSON(border).getBounds().getCenter()
+        const padding = 1
+        coordinates = [
+          [center.lat - padding, center.lng - padding],
+          [center.lat + padding, center.lng - padding],
+          [center.lat + padding, center.lng + padding],
+          [center.lat - padding, center.lng + padding],
+        ]
+      }
+
+      this.#layer = new L.Polygon(coordinates).addTo(this.#leaflet)
+      this.#layer.editing.enable()
+      this.#layer.on('edit', () => {
+        let bounds = this.#layer.getBounds()
+        bounds = [bounds.getSouth(), bounds.getNorth(), bounds.getWest(), bounds.getEast()]
+        this.#inputs.bounds.value = JSON.stringify(bounds)
+        this.#inputs.geojson.value = JSON.stringify(this.#layer.toGeoJSON()['geometry'])
+      })
+      
+      this.#leaflet.fitBounds(this.#layer.getBounds(), { padding: [100, 100] })
+    } else if (geojson) {
+      this.#layer.setLatLngs(geojson['coordinates'][0])
+    }
   }
  
   setBorder(geojson) {
@@ -169,6 +180,28 @@ class Map {
       let bounds = this.#border.getBounds()
       bounds.extend(this.#layer.getBounds())
       this.#leaflet.fitBounds(bounds, { padding: [20, 20] })
+    }
+  }
+ 
+  setBounds(bounds) {
+    bounds = JSON.parse(bounds)
+    const coordinates = [
+      [bounds[0], bounds[2]],
+      [bounds[1], bounds[2]],
+      [bounds[1], bounds[3]],
+      [bounds[0], bounds[3]],
+    ]
+
+    if (this.#bounds) {
+      this.#bounds.setLatLngs(coordinates)
+    } else {
+      this.#bounds = new L.Polygon(coordinates, {
+        color: 'black',
+        opacity: 0.5,
+        weight: 2,
+        dashArray: '8, 8',
+        fillOpacity: 0,
+      }).addTo(this.#leaflet)
     }
   }
 

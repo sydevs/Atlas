@@ -1,10 +1,11 @@
 class Region < ApplicationRecord
 
   # Extensios
+  include GeoData
   include Manageable
   include ActivityMonitorable
 
-  searchable_columns %w[province_code country_code]
+  searchable_columns %w[name country_code translations]
   audited except: %i[summary_email_sent_at summary_metadata]
 
   # Associations
@@ -16,7 +17,8 @@ class Region < ApplicationRecord
   # has_many :associated_registrations, through: :events, source: :registrations
 
   # Validations
-  validates_presence_of :name, :geojson, :country_code
+  validates_presence_of :name, :country_code
+  validate :validate_geojson
 
   # Scopes
   default_scope { order(name: :desc) }
@@ -28,47 +30,29 @@ class Region < ApplicationRecord
 
   # Methods
 
-  def contains? location
-    point = Geokit::LatLng.new(location.latitude, location.longitude)
-    polygon.contains?(point)
-  end
-
   def managed_by? manager, super_manager: nil
     return true if managers.include?(manager) && super_manager != true
     return true if country.managed_by?(manager) && super_manager != false
   end
 
   def fetch_geo_data!
-    return if osm_id.nil?
+    return if osm_id.nil? || custom_geodata?
 
-    data = OpenStreetMapsAPI.fetch_data(osm_id)
-
+    data = OpenStreetMapsAPI.fetch_data(osm_id, precision: 0.06)
     if data[:address][:country_code] != country_code.downcase
-      self.errors.add(:osm_id, "is not within #{CountryDecorator.get_label(country_code)}")
-      return
+      self.errors.add(:osm_id, I18n.translate('cms.messages.region.invalid_osm_id', country: CountryDecorator.get_label(country_code)))
+    else
+      super data: data
     end
-
-    self.assign_attributes({
-      name: data[:display_name].split(',', 2).first,
-      osm_id: osm_id, 
-      geojson: data[:geojson],
-      bounds: data[:boundingbox],
-      translations: data[:namedetails].to_a.filter_map do |key, value|
-        key = key.to_s.split(':')
-        [key[1] || 'en', value] if key[0] == 'name'
-      end.to_h,
-    })
   end
 
   private
 
-    def polygon
-      return nil unless geojson?
+    def validate_geojson
+      return unless geojson.present?
+      return if parent.contains_geojson?(self)
 
-      @polygon ||= begin
-        coordinates = geojson['coordinates'].flatten(1).map { |c| Geokit::LatLng.new(c[1], c[0]) }
-        Geokit::Polygon.new(coordinates)
-      end
+      errors.add(:geojson, I18n.translate('cms.messages.region.invalid_geojson', region: parent.name))
     end
 
 end

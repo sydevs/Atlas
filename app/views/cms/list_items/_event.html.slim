@@ -15,9 +15,9 @@
   .content
     .header
       - if policy(event).show?
-        a href=url_for([:cms, event]) = event.label
+        a href=url_for([:cms, event]) = event.label || translate('cms.hints.unnamed')
       - else
-        = event.label
+        = event.label || translate('cms.hints.unnamed')
 
       - if @context != event.parent
         |  - #{event.parent.try(:city) || event.parent.label}

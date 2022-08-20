@@ -3,6 +3,6 @@
   = model_icon Area
   .content
     - if policy(area).show?
-      a.header href=url_for([:cms, area]) = area.label
+      a.header href=url_for([:cms, area]) = area.label || translate('cms.hints.unnamed')
     - else
-      .header = area.label
+      .header = area.label || translate('cms.hints.unnamed')

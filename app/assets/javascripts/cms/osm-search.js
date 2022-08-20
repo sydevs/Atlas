@@ -8,8 +8,10 @@ const OsmSearch = {
     this.$submit = $('#js-osm-search .submit.button')
     this.$body = $('#js-osm-search table')
 
-    const countryCode = this.$search.data('country').toLowerCase()
+    const allowCustom = this.$search.data('custom')
     const type = this.$search.data('type')
+    let countryCode = this.$search.data('country')
+    if (countryCode) countryCode = countryCode.toLowerCase()
 
     this.$submit.api({
       url: `https://nominatim.openstreetmap.org/search?q={query}&format=json&featuretype=${type}&countrycodes=${countryCode}`,
@@ -24,10 +26,12 @@ const OsmSearch = {
         this.$body.empty()
         for (const index in response) {
           const result = response[index]
-          this.$body.append(`<tr><td>${result.display_name}</td><td class="right aligned"><a class="ui button" href=?osm_id=${result.osm_id}>${"Choose"}<i class="right arrow icon"></i></a></tr>`)
+          this.$body.append(`<tr><td>${result.display_name}</td><td class="collapsing right aligned"><a class="ui button" href=?osm_id=${result.osm_id}>${"Choose"}<i class="right arrow icon"></i></a></tr>`)
         }
 
-        this.$body.append(`<tr><td></td><td class="collapsing"><a class="ui button" href=?osm_id=custom><i class="vector square icon"></i>${"Custom Region"}<i class="right arrow icon"></i></a></tr>`)
+        if (allowCustom) {
+          this.$body.append(`<tr><td></td><td class="collapsing"><a class="ui button" href="?osm_id=0"><i class="vector square icon"></i>${"Custom Region"}<i class="right arrow icon"></i></a></tr>`)
+        }
       }
     })
   },

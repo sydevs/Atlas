@@ -1,10 +1,11 @@
 class Country < ApplicationRecord
 
   # Extensions
+  include GeoData
   include Manageable
   include ActivityMonitorable
 
-  searchable_columns %w[country_code]
+  searchable_columns %w[name country_code translations]
   audited except: %i[summary_email_sent_at summary_metadata]
 
   # Associations
@@ -19,6 +20,7 @@ class Country < ApplicationRecord
 
   # Validations
   validates_presence_of :country_code
+  validate :validate_language_code
 
   # Scopes
   default_scope { order(country_code: :desc) }
@@ -27,7 +29,7 @@ class Country < ApplicationRecord
 
   # Methods
 
-  def contains? venue
+  def contains? location
     venue.country_code == country_code
   end
 
@@ -37,13 +39,12 @@ class Country < ApplicationRecord
     false
   end
 
-  def bounds
-    self[:bounds].split(',')
-  end
+  private
 
-  def default_language_code= value
-    # Only accept languages which are in the language list
-    super value if I18nData.languages.key?(value)
-  end
+    def validate_language_code
+      return if I18nData.languages.key?(default_language_code)
+
+      self.errors.add(:default_language_code)
+    end
 
 end
