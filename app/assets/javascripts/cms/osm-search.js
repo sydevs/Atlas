@@ -16,9 +16,7 @@ const OsmSearch = {
     this.$submit.api({
       url: `https://nominatim.openstreetmap.org/search?q={query}&format=json&featuretype=${type}&countrycodes=${countryCode}`,
       beforeSend: (settings) => {
-        console.log('beforeSend', settings)
         settings.urlData = { query: this.$input.val() }
-        console.log('settings', settings)
         return settings
       },
       onSuccess: (response) => {
@@ -36,7 +34,7 @@ const OsmSearch = {
         }
 
         if (allowCustom) {
-          this.$body.append(`<tr><td></td><td class="collapsing"><a class="ui button" href="?osm_id=0"><i class="vector square icon"></i>${"Custom Region"}<i class="right arrow icon"></i></a></tr>`)
+          this.$body.append(`<tr><td></td><td class="collapsing"><a class="ui button" href="?osm_id=custom"><i class="vector square icon"></i>${"Custom Region"}<i class="right arrow icon"></i></a></tr>`)
         }
       }
     })

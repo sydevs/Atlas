@@ -3,7 +3,8 @@ module GeoData
   extend ActiveSupport::Concern
 
   included do
-    validates_presence_of :osm_id, :geojson, :bounds, :translations, :country_code
+    validates_presence_of :osm_id, :geojson, :bounds, :country_code
+    validates_presence_of :translations, unless: :custom_geodata?
     before_validation -> { country_code.upcase! }
     validates :osm_id, format: { with: /custom|[RN][0-9]+/ }
   end

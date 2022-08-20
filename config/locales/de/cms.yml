@@ -69,10 +69,10 @@ de:
       no_comment: "(kein Komentar)"
       temporary_mail_error: "Email server ist gerade beschäftigt, bitte später nochmal versuchen."
       region: # TODO: Translate
-        invalid_geojson: "must be fully within the borders of %{region}"
+        invalid_geojson: "must have it's center within the borders of %{country}"
         invalid_osm_id: "is not within %{country}"
       area: # TODO: Translate
-        invalid_location: "cannot be outside the borders of %{region}"
+        invalid_location: "must have it's center within the borders of %{region} and %{country}"
       venue:
         out_of_bounds: "Die veranstaltung darf nicht weiter als %{area} entfernt sein."
       event:

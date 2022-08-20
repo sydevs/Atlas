@@ -66,10 +66,10 @@ en:
       no_comment: "(No comment)"
       temporary_mail_error: "Email server is temporarily busy, please try again."
       region:
-        invalid_geojson: "must be fully within the borders of %{region}"
+        invalid_geojson: "must have it's center within the borders of %{country}"
         invalid_osm_id: "is not within %{country}"
       area:
-        invalid_location: "cannot be outside the borders of %{region}"
+        invalid_location: "must have it's center within the borders of %{region} and %{country}"
       venue:
         out_of_bounds: "Venue cannot be outside the radius of %{area}"
       event:
@@ -344,10 +344,10 @@ en:
       learn_more: "Learn more"
       guides:
         country_manager:
-          title: "How to manager your country"
+          title: "How to manage your country"
           video_id: 570202890
         local_manager:
-          title: "How to manager your region"
+          title: "How to manage your region"
           video_id: 570202890
         event_manager:
           title: "How to manage your event"

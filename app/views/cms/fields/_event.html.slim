@@ -38,14 +38,20 @@
   .ui.hidden.section.divider
 - else
   /= f.input :type, as: :boolean, wrapper: :semantic_checkbox_toggle, label: translate_attribute(@record, :online), checked: @record.online?,  unchecked_value: 'OfflineEvent', checked_value: 'OnlineEvent', input_html: { onchange: "document.getElementById('category-festival').classList.toggle('disabled', this.checked)" }
+  .ui.tiny.compact.buttons
+    a.ui.button href=("?online=false" if @record.online?) class=(@record.online? ? 'basic' : 'primary')
+      = translate_model(OfflineEvent)
+    /.or
+    a.ui.button href=("?online=true" unless @record.online?) class=(!@record.online? ? 'basic' : 'primary')
+      = translate_model(OnlineEvent)
 
-  .ui.label = translate_model(@record.type.constantize)
+  //.ui.label = translate_model(@record.type.constantize)
   = help_link :categories
   br
   table.ui.very.basic.table
     tbody
       - Event.categories.each do |category, index|
-        - next if category == 'festival'
+        - next if category == 'festival' && @record.online?
         tr id="category-#{category}" class=('disabled' if category == 'festival' && @record.online?)
           td.center.aligned
             i.huge.fitted.icon class=event_category_icon(category)

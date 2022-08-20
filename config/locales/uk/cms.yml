@@ -66,10 +66,10 @@ uk:
       no_comment: "(Без коментарів)"
       temporary_mail_error: "Сервер електронної пошти тимчасово зайнятий, спробуйте ще раз."
       region: # TODO: Translate
-        invalid_geojson: "must be fully within the borders of %{region}"
+        invalid_geojson: "must have it's center within the borders of %{country}"
         invalid_osm_id: "is not within %{country}"
       area: # TODO: Translate
-        invalid_location: "cannot be outside the borders of %{region}"
+        invalid_location: "must have it's center within the borders of %{region} and %{country}"
       venue:
         out_of_bounds: "Місце проведення не може бути за межами радіусу %{area}"
       event:

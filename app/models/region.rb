@@ -31,6 +31,10 @@ class Region < ApplicationRecord
 
   # Methods
 
+  def contains? location
+    super && parent.contains?(location)
+  end
+
   def managed_by? manager, super_manager: nil
     return true if managers.include?(manager) && super_manager != true
     return true if country.managed_by?(manager) && super_manager != false
@@ -55,7 +59,7 @@ class Region < ApplicationRecord
       return unless geojson.present?
       return if parent.contains_geojson?(self)
 
-      errors.add(:geojson, I18n.translate('cms.messages.region.invalid_geojson', region: parent.name))
+      errors.add(:geojson, I18n.translate('cms.messages.region.invalid_geojson', country: parent.name))
     end
 
 end

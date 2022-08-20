@@ -25,7 +25,7 @@
       - data = @record.send(field)
       - type = (textareas.include?(field) ? :text : :string)
       = f.input field do
-        - if field == :geojson
+        - if field == :geojson && data.present?
           = f.hint pluralize(data['coordinates'].flatten.length / 2, 'point')
         .ui.code.input
           - if disabled.include?(field)

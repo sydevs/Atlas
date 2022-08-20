@@ -90,7 +90,7 @@ class Area < ApplicationRecord
       return unless latitude.present? && longitude.present?
       return if parent.contains?(self)
 
-      errors.add(:coordinates, I18n.translate('cms.messages.area.invalid_location', region: parent.name))
+      errors.add(:coordinates, I18n.translate('cms.messages.area.invalid_location', region: parent.name, country: parent.parent.name))
     end
 
 end
