@@ -2,7 +2,7 @@ module CMS::ApplicationHelper
 
   MODEL_ICONS = {
     countries: 'globe americas',
-    provinces: 'map',
+    regions: 'map',
     areas: 'dot circle',
     venues: 'map marker',
     events: 'calendar',
@@ -29,16 +29,11 @@ module CMS::ApplicationHelper
     expired: 'info circle',
   }.freeze
 
-  GEOGRAPHIC_MODELS = %i[
+  PLACE_MODELS = %i[
+    countries
     regions
     areas
   ]
-
-  # GEOGRAPHIC_MODELS = %i[
-  #   countries
-  #   provinces
-  #   areas
-  # ]
 
   def floating_action text, icon = nil, url = nil, **args
     klass = %w[ui basic right floated compact tiny button]
@@ -76,10 +71,12 @@ module CMS::ApplicationHelper
   end
 
   def breadcrumb_url ancestor
-    if action_name == 'index' && GEOGRAPHIC_MODELS.include?(controller_name.to_sym)
-      GEOGRAPHIC_MODELS.each do |model|
+    if action_name == 'index' && PLACE_MODELS.include?(controller_name.to_sym)
+      PLACE_MODELS.each do |model|
         return url_for([:cms, ancestor, model]) if policy(ancestor).index_association?(model)
       end
+    elsif @context.is_a?(Manager)
+      url_for([:cms, ancestor, :managers])
     elsif action_name == 'index' && policy(ancestor).index_association?(controller_name)
       url_for([:cms, ancestor, controller_name.to_sym])
     else

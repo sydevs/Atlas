@@ -6,15 +6,15 @@ class Manager < ApplicationRecord
   audited except: %i[last_login_at]
 
   enum contact_method: { email: 0, whatsapp: 1, telegram: 2, wechat: 3 }, _prefix: :contact_by
-  flag :notifications, %i[new_managed_record event_verification event_registrations region_summary country_summary application_summary client_summary]
+  flag :notifications, %i[new_managed_record event_verification event_registrations place_summary country_summary application_summary client_summary]
 
   # Associations
   has_many :managed_records, dependent: :delete_all
   has_many :countries, through: :managed_records, source: :record, source_type: 'Country', dependent: :destroy
-  has_many :provinces, through: :managed_records, source: :record, source_type: 'Province', dependent: :destroy
+  has_many :regions, through: :managed_records, source: :record, source_type: 'Region', dependent: :destroy
   has_many :areas, through: :managed_records, source: :record, source_type: 'Area', dependent: :destroy
   has_many :area_venues, through: :areas, source: :venues
-  has_many :area_provinces, through: :areas, source: :province
+  has_many :area_regions, through: :areas, source: :region
   has_many :events
   has_many :clients
   has_many :actions, class_name: 'Audit', as: :user
@@ -43,7 +43,7 @@ class Manager < ApplicationRecord
     when :country
       parent = countries.first
     when :local
-      parent = areas.international.first || provinces.first || areas.cross_province.first || areas.first
+      parent = regions.first || areas.first
     when :event
       parent = events.first
     when :client
@@ -90,7 +90,7 @@ class Manager < ApplicationRecord
       column = :managed_countries_counter
     elsif klass == 'Event'
       column = :managed_events_counter
-    elsif %w[Province Area].include?(klass)
+    elsif %w[Region Area].include?(klass)
       column = :managed_localities_counter
     end
 
@@ -101,23 +101,23 @@ class Manager < ApplicationRecord
     if administrator? || area
       Country.default_scoped
     else
-      countries_via_province = Country.where(country_code: provinces.select(:country_code))
+      countries_via_region = Country.where(country_code: regions.select(:country_code))
       countries_via_area = Country.where(country_code: areas.select(:country_code))
       countries_via_event = Country.where(country_code: events.select(:country_code))
-      Country.where(id: countries).or(countries_via_province).or(countries_via_area).or(countries_via_event)
+      Country.where(id: countries).or(countries_via_region).or(countries_via_area).or(countries_via_event)
     end
   end
   
-  def accessible_provinces country_code = nil, area: false
+  def accessible_regions country_code = nil, area: false
     if administrator? || area
-      country_code ? Province.where(country_code: country_code) : Province.default_scoped
+      country_code ? Region.where(country_code: country_code) : Region.default_scoped
     elsif country_code
-      Province.where(id: provinces, country_code: country_code)
+      Region.where(id: regions, country_code: country_code)
     else
-      provinces_via_country = Province.where(country_code: countries.select(:country_code).where(enable_province_management: true))
-      provinces_via_area = Province.where(id: area_provinces)
-      provinces_via_event = Province.where(province_code: events.select(:province_code))
-      Province.where(id: provinces).or(provinces_via_country).or(provinces_via_area).or(provinces_via_event)
+      regions_via_country = Region.where(country_code: countries.select(:country_code).where(enable_regions: true))
+      regions_via_area = Region.where(id: area_regions)
+      regions_via_event = Region.where(province_code: events.select(:province_code))
+      Region.where(id: regions).or(regions_via_country).or(regions_via_area).or(regions_via_event)
     end
   end
 
@@ -128,14 +128,14 @@ class Manager < ApplicationRecord
 =begin
       # TODO: Fix this
       events_via_countries = Event.left_outer_joins(:areas).where(locations: { country_code: countries.select(:country_code) })
-      events_via_provinces = Event.left_outer_joins(:areas).where(locations: { province_code: provinces.select(:province_code) })
+      events_via_regions = Event.left_outer_joins(:areas).where(locations: { province_code: regions.select(:province_code) })
       offline_events_via_areas = Event.left_outer_joins(:areas).where(areas: { id: areas.select(:id) })
       online_events_via_areas = Event.where(area_id: areas.select(:id))
       
       Event.left_outer_joins(:areas)
         .where(id: events)
         .or(events_via_countries)
-        .or(events_via_provinces)
+        .or(events_via_regions)
         .or(offline_events_via_areas)
         .or(online_events_via_areas)
 =end

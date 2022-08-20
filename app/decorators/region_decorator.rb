@@ -1,15 +1,16 @@
-module ProvinceDecorator
+module RegionDecorator
 
+  # TODO: Deprecated
   def name
-    ProvinceDecorator.get_name(province_code, country_code)
+    RegionDecorator.get_name(province_code, country_code)
   end
 
   def label
-    ProvinceDecorator.get_label(province_code, country_code)
+    "#{short_label}, #{country_code}"
   end
 
   def short_label
-    name
+    (translations || {})[I18n.locale.to_s] || name || RegionDecorator.get_label(province_code, country_code)
   end
 
   def self.get_name province_code, country_code
@@ -21,7 +22,7 @@ module ProvinceDecorator
   def self.get_label province_code, country_code
     return nil unless province_code.present? && country_code.present?
     
-    "#{ProvinceDecorator.get_name(province_code, country_code)}, #{CountryDecorator.get_short_label(country_code)}"
+    "#{RegionDecorator.get_name(province_code, country_code)}, #{CountryDecorator.get_short_label(country_code)}"
   end
 
 end

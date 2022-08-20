@@ -61,9 +61,6 @@ h1
 .translation_missing
   background: beige
 
-.leaflet-pane
-  z-index: 0
-
 .ui.dividing.header
   position: relative
 
@@ -136,13 +133,19 @@ i.icon > i.icon
   width: 100%
   resize: none
 
-.ui.code.input > *
-  font-family: monospace
-  background: #EEE
-  color: #555
+.ui.code.input
+  width: 100%
 
-  &:focus
-    border-color: #85B7D9
-    background: #FFFFFF
-    color: rgba(0, 0, 0, 0.8)
-    box-shadow: none
+.ui.code.input
+  & > input[type=text],
+  & > textarea
+    font-family: monospace
+    background: #EEE
+    color: #555
+    width: 100%
+
+    &:focus
+      border-color: #85B7D9
+      background: #FFFFFF
+      color: rgba(0, 0, 0, 0.8)
+      box-shadow: none

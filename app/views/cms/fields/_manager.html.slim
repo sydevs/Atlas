@@ -57,7 +57,7 @@ table.ui.very.basic.stackable.table
           td.single.line.center.aligned
             .ui.toggle.checkbox class=('disabled' if type == :event_verification)
               input type='checkbox' name='manager[notifications][]' value=type checked=('checked' if enabled)
-            - if true || %i[event_registrations region_summary country_summary application_summary].include?(type)
+            - if true || %i[event_registrations place_summary country_summary application_summary].include?(type)
               br
               i.envelope.icon
               = translate('cms.hints.manager.contact_settings.options.email')
@@ -65,7 +65,7 @@ table.ui.very.basic.stackable.table
             .ui.radio.checkbox
               input type='radio' name="manager[contact_settings][#{type}]" value='true' checked=('checked' unless value == 'false')
               label
-                - if true || %w[event_registrations region_summary country_summary application_summary].include?(type)
+                - if true || %w[event_registrations place_summary country_summary application_summary].include?(type)
                   i.envelope.icon
                   = translate('cms.hints.manager.contact_settings.options.email')
                 - else

@@ -17,7 +17,7 @@ h3.ui.small.dividing.grey.header id='expiring'
     thead
       tr
         th = translate_attribute(Event, :name)
-        th = translate_model(Province)
+        th = translate_model(Region)
         th = translate_attribute(Event, :updated_at)
     tbody
       - @events_for_review.each do |event|
@@ -37,7 +37,7 @@ h3.ui.small.dividing.grey.header id='expired'
     thead
       tr
         th = translate_attribute(Event, :name)
-        th = translate_model(Province)
+        th = translate_model(Region)
         th = translate_attribute(Event, :expired_at)
     tbody
       - @events_expired.each do |event|
@@ -57,7 +57,7 @@ h3.ui.small.dividing.grey.header id='archived'
     thead
       tr
         th = translate_attribute(Event, :name)
-        th = translate_model(Province)
+        th = translate_model(Region)
         th = translate_attribute(Event, :expired_at)
     tbody
       - @events_archived.each do |event|

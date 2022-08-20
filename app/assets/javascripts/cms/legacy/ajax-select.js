@@ -4,7 +4,7 @@
 const AjaxSelect = {
   load: function() {
     const $country = $('#venue_country_code')
-    const $province = $('#venue_province_code')
+    const $region = $('#venue_province_code')
 
     $country.dropdown({
       apiSettings: { url: $country.data('url') },
@@ -12,12 +12,12 @@ const AjaxSelect = {
       filterRemoteData: true,
       ignoreDiacritics: true,
       onChange: (value, _text, _$selectedItem) => {
-        const $dropdown = $province.parent()
+        const $dropdown = $region.parent()
         
         $dropdown.dropdown('clear')
         $dropdown.dropdown({
-          apiSettings: { url: `${$province.data('url')}&country_code=${value}` },
-          placeholder: $province.data('prompt'),
+          apiSettings: { url: `${$region.data('url')}&country_code=${value}` },
+          placeholder: $region.data('prompt'),
           filterRemoteData: true,
           ignoreDiacritics: true,
           saveRemoteData: false,
@@ -26,16 +26,16 @@ const AjaxSelect = {
       }
     })
 
-    $province.dropdown({
-      apiSettings: { url: $province.data('url') },
-      placeholder: $province.data('prompt'),
+    $region.dropdown({
+      apiSettings: { url: $region.data('url') },
+      placeholder: $region.data('prompt'),
       filterRemoteData: true,
       ignoreDiacritics: true,
       saveRemoteData: false,
     })
 
     $country.dropdown('restore placeholder text')
-    $province.dropdown('restore placeholder text')
+    $region.dropdown('restore placeholder text')
   },
 }
 

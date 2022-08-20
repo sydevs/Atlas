@@ -8,7 +8,7 @@ ru:
 
   activerecord:
     models:
-      # Regions
+      # Places
       country:
         # Basic pluralization
         single: "Страна"
@@ -16,7 +16,7 @@ ru:
         # Countable
         one: "Страна"
         other: "Стран"
-      province:
+      region:
         # Basic pluralization
         single: "Регион"
         plural: "Регионы"
@@ -62,6 +62,13 @@ ru:
         # Countable
         one: "Менеджер"
         other: "Менеджеров"
+      managed_record: # TODO: Translate
+        # Basic pluralization
+        single: "Responsibility"
+        plural: "Responsibilities"
+        # Countable
+        one: "responsibility"
+        other: "responsibilities"
       audit:
         # Basic pluralization
         single: "История"
@@ -110,20 +117,25 @@ ru:
         finished_at: "Завершено в"
         updated_at: "Обновлено в"
 
-      # Regions
+      # Places
       country:
         manager_id: :activerecord.models.manager.single # Do not translate
         country_code: :activerecord.models.country.single # Do not translate
         default_language_code: "Язык события по умолчанию"
-        enable_province_management: "Разрешить региональное управление" 
+        enable_regions: "Разрешить региональное управление" 
         bounds: "Bounds" # TODO: Translate
         last_activity_on: :activerecord.attributes.generic.last_activity_on # Do not translate
         summary_email_sent_at: :activerecord.attributes.generic.summary_email_sent_at # Do not translate
 
-      province:
+      region:
         manager_id: :activerecord.models.manager.single # Do not translate
         country_code: :activerecord.models.country.single # Do not translate
-        province_code: :activerecord.models.province.single # Do not translate
+        province_code: :activerecord.models.region.single # Do not translate
+        geo_data: "Geo Data" # TODO: Translate
+        osm_id: "OpenStreetMap ID" # TODO: Translate
+        bounds: "Bounds" # TODO: Translate
+        geojson: "Borders" # TODO: Translate
+        translations: "Translations" # TODO: Translate
         last_activity_on: :activerecord.attributes.generic.last_activity_on # Do not translate
         summary_email_sent_at: :activerecord.attributes.generic.summary_email_sent_at # Do not translate
 
@@ -131,7 +143,7 @@ ru:
         manager_id: :activerecord.models.manager.single # Do not translate
         name: :activerecord.attributes.generic.name # Do not translate
         country_code: :activerecord.models.country.single # Do not translate
-        province_code: :activerecord.models.province.single # Do not translate
+        province_code: :activerecord.models.region.single # Do not translate
         coordinates: "Местонахождение"
         latitude: "Широта"
         longitude: "Долгота"
@@ -147,7 +159,7 @@ ru:
         address: "Адрес"
         street: "Улица"
         city: "Город"
-        province_code: :activerecord.models.province.single # Do not translate
+        province_code: :activerecord.models.region.single # Do not translate
         country_code: :activerecord.models.country.single # Do not translate
         postcode: "Почтовый индекс"
         coordinates: "Местонахождение"

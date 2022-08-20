@@ -70,7 +70,7 @@ en:
           expired: "Event Expired - %{event}"
           finished: "Event Finished - %{event}"
         preview:
-          created: "You are the manager of a new event. '%{event}'' has been created in %{region}."
+          created: "You are the manager of a new event. '%{event}'' has been created in %{place}."
           needs_review: "'%{event}' needs to be reviewed or else it will be removed from the map. Please check that the event information is still correct."
           needs_urgent_review: "'%{event}' will soon be removed from the map, because the event manager has not yet responded to our email."
           expired: "'%{event}'' has not been updated in %{duration}, and has been removed from the map. Update this event to make it public again."
@@ -95,8 +95,8 @@ en:
           expired: "This event has been removed from the map because it has not been updated recently. To add it back to the map, update the event."
           finished: "This event has concluded."
         escalation:
-          event_manager: "This event, which you manage, urgently needs to be checked for accuracy. This is the last reminder you will receive. We've also emailed the managers of the %{region} region to make sure this event isn't removed by mistake."
-          super_manager: "You are a manager for %{region}. This warning is being sent to you because this event's manager has not yet responded to our email."
+          event_manager: "This event, which you manage, urgently needs to be checked for accuracy. This is the last reminder you will receive. We've also emailed the managers of the %{place} region to make sure this event isn't removed by mistake."
+          super_manager: "You are a manager for %{place}. This warning is being sent to you because this event's manager has not yet responded to our email."
 
       reminder:
         subject: "[Reminder] New Event Registrations"
@@ -122,7 +122,7 @@ en:
         subject:
           worldwide: "Welcome! You are now an administrator on Sahaj Atlas."
           country: "Welcome! You are now a country manager on Sahaj Atlas."
-          province: "Welcome! You are now a local manager on Sahaj Atlas."
+          region: "Welcome! You are now a local manager on Sahaj Atlas."
           area: "Welcome! You are now a local manager on Sahaj Atlas."
           event: "Welcome! You are now an event manager on Sahaj Atlas."
           none: "Welcome! You are now a manager on Sahaj Atlas."
@@ -130,26 +130,26 @@ en:
         preview:
           worldwide: "You have been invited to become an administrator of the Sahaj Atlas."
           country: "You have been invited to become a country manager for %{context}."
-          province: "You have been invited to become a local manager for %{context}."
+          region: "You have been invited to become a local manager for %{context}."
           area: "You have been invited to become a local manager the %{context} area."
           event: "You have been invited to become the event manager for \"%{context}\"."
           none: "You have been invited to become a manager of the Sahaj Atlas."
         login: "Login"
         view:
           country: "View Country"
-          province: "View Region"
+          region: "View Region"
           area: "View Area"
           event: "View Event"
         byline:
           worldwide: "Global Administrator"
           country: "Country Manager for %{context}"
-          province: "Local Manager for %{context}"
+          region: "Local Manager for %{context}"
           area: "Local Manager for %{context}"
           event: "Event Manager for \"%{context}\""
         explanation:
           worldwide: "You have been invited to become an administrator of the Sahaj Atlas. It will be your job to onboard new country managers and keep an eye on the maintainance of the atlas."
           country: "You have been invited to become a country manager on Sahaj Atlas. It will be your responsibility to create cities and regions within your country and assign managers to manage events in those regions."
-          province: "You have been invited to become a local manager on Sahaj Atlas. It will be your responsibility to create venues and list public Sahaj events within your region."
+          region: "You have been invited to become a local manager on Sahaj Atlas. It will be your responsibility to create venues and list public Sahaj events within your region."
           area: "You have been invited to become a local manager on Sahaj Atlas. It will be your responsibility to create venues and list public Sahaj events within your region."
           event: "You have been invited to become an event manager on Sahaj Atlas. It will be your responsibility to keep your event up to date."
           none: "You have been invited to become a manager on Sahaj Atlas. You have not yet been assigned any responsibilities. Please contact us if you need help."
@@ -175,37 +175,37 @@ en:
         preview: "Summary of changes in %{country} in the last 2 weeks."
         view: "View Country"
 
-    region:
+    place:
       summary:
-        subject: "Weekly Update for %{region}"
+        subject: "Weekly Update for %{place}"
         title: "Weekly Update"
-        preview: "Summary of changes in %{region} in the last week."
+        preview: "Summary of changes in %{place} in the last week."
         view: "View Region"
 
     managed_record:
       created:
         subject:
           country: "You are now a country manager"
-          province: "You are now a local manager"
+          region: "You are now a local manager"
           area: "You are now a local manager"
           event: "You are now an event manager"
           client: "You are now an app manager"
         title:
           country: "Country Manager for %{record}"
-          province: "Local Manager for %{record}"
+          region: "Local Manager for %{record}"
           area: "Local Manager for %{record}"
           event: "Event Manager for %{record}"
           client: "App Manager for %{record}"
         preview: "You have been set as a manager for %{record}."
         byline:
           country_html: "You have been given access to manage a country, %{record}."
-          province_html: "You have been given access to manage the %{record} region."
+          region_html: "You have been given access to manage the %{record} region."
           area_html: "You have been given access to manage the %{record} region."
           event_html: "You have been given access to manage the event, %{record}."
           client_html: "You have been given access to manage the configuration for the %{record} app."
         explanation:
           country: "It's your responsibility to create regions within your country and assign managers to those regions to set up events. You may also create venues and events within your country."
-          province: "It's your responsibility to create venues and events within your region. You may also create custom areas within your region for major cities and assign managers to those regions."
+          region: "It's your responsibility to create venues and events within your region. You may also create custom areas within your region for major cities and assign managers to those regions."
           area: "It's your responsibility to create venues and events within your local area. You will also be sent an email if any events in your area are close to expiring, and need someone to check that they are still accurate."
           event: "It's your responsibility to keep your classes up to date. Every few months you will receive an email asking you to confirm that your event information is still correct."
           client: "You now have access to API keys which allow you to embed the Sahaj Atlas on your website or app. You are also able to change the default configuration for the map on your site."

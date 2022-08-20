@@ -19,7 +19,7 @@
     .five.wide.field
       = f.input_field :city, placeholder: translate_attribute(Venue, :city)
   .fields
-    - if f.object.country_code.present? && !f.object.country.enable_province_management?
+    - if f.object.country_code.present? && !f.object.country.enable_regions?
       .eleven.wide.field
         = f.hidden_field :country_code
         = f.input_field :country, as: :string, value: f.object.country.label, disabled: true
@@ -27,12 +27,12 @@
         = f.input_field :postcode, placeholder: translate_attribute(Venue, :postcode)
     - else
       .six.wide.field
-        - if f.object.province.present?
+        - if f.object.region.present?
           = f.hidden_field :province_code
-          = f.input_field :province, value: f.object.province_name, disabled: true
+          = f.input_field :region, value: f.object.region_name, disabled: true
         - else
-          - api_url = cms_manager_provinces_url(current_user, country_code: f.object.country_code, area: @context.is_a?(Area), format: :json)
-          = f.input_field :province_code, collection: [f.object.province_name], data: { url: api_url, prompt: translate('cms.hints.province.prompt') }, class: 'ajax search'
+          - api_url = cms_manager_regions_url(current_user, country_code: f.object.country_code, area: @context.is_a?(Area), format: :json)
+          = f.input_field :province_code, collection: [f.object.region_name], data: { url: api_url, prompt: translate('cms.hints.region.prompt') }, class: 'ajax search'
       .seven.wide.field
         - if f.object.country_code.present?
           = f.hidden_field :country_code

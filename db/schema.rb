@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_04_193817) do
+ActiveRecord::Schema.define(version: 2022_08_05_181951) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,6 +37,8 @@ ActiveRecord::Schema.define(version: 2022_08_04_193817) do
     t.datetime "summary_email_sent_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
     t.jsonb "summary_metadata", default: "{}"
     t.string "time_zone"
+    t.bigint "region_id"
+    t.index ["region_id"], name: "index_areas_on_region_id"
   end
 
   create_table "audits", force: :cascade do |t|
@@ -83,7 +85,7 @@ ActiveRecord::Schema.define(version: 2022_08_04_193817) do
     t.string "country_code", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "enable_province_management"
+    t.boolean "enable_regions"
     t.date "last_activity_on"
     t.datetime "summary_email_sent_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
     t.jsonb "summary_metadata", default: "{}"
@@ -188,7 +190,7 @@ ActiveRecord::Schema.define(version: 2022_08_04_193817) do
     t.index ["parent_type", "parent_id"], name: "index_pictures_on_parent_type_and_parent_id"
   end
 
-  create_table "provinces", force: :cascade do |t|
+  create_table "regions", force: :cascade do |t|
     t.string "country_code", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -196,6 +198,11 @@ ActiveRecord::Schema.define(version: 2022_08_04_193817) do
     t.date "last_activity_on"
     t.datetime "summary_email_sent_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
     t.jsonb "summary_metadata", default: "{}"
+    t.jsonb "geojson"
+    t.string "name"
+    t.integer "osm_id"
+    t.json "translations"
+    t.jsonb "bounds"
   end
 
   create_table "registrations", force: :cascade do |t|

@@ -47,17 +47,12 @@ en:
       # Tertiary menu
       details: "Info"
       activity: "Activity"
-      regions:
-        countries: "Countries"
-        regions: "Regions"
-        cities: "Cities / Areas"
       events:
         offline: "In-Person Events"
         online: "Online Events"
       breadcrumbs:
         world: "World"
         help: "Help"
-        regions: "Regions"
         review: "Review Alerts"
         dashboard: "Dashboard"
 
@@ -72,6 +67,8 @@ en:
       not_logged_in: "You are not logged in!"
       no_comment: "(No comment)"
       temporary_mail_error: "Email server is temporarily busy, please try again."
+      area:
+        invalid_location: "cannot be outside the borders of %{region}"
       venue:
         out_of_bounds: "Venue cannot be outside the radius of %{area}"
       event:
@@ -119,11 +116,10 @@ en:
         must_be_new: "Only countries which haven't already been added are listed below."
         language: "The default language that events in this country are usually in."
         no_default_language: "No default"
-        province_management: "If enabled, you will be able to view and assign managers to regions (provinces, states, etc) within this country. This is useful for larger countries (China, USA, Australia, etc), and unnessecary for small countries (Belgium, Lithuania, Singapore, etc)."
+        region_management: "If enabled, you will be able to view and assign managers to regions (regions, states, etc) within this country. This is useful for larger countries (China, USA, Australia, etc), and unnessecary for small countries (Belgium, Lithuania, Singapore, etc)."
         bounds: "If a country is specified when embedding the map, these bounds will be used as the initial view. The coordinates should be entered as 4 comma-separated numbers (south,west,north,east)."
-      province:
-        must_be_new: "Only regions which haven't already been added are listed below."
-        prompt: "Province / State / County"
+      region:
+        polygon: "Drag / click on a faded square to add a new corner to the polygon. Click on an existing corner to remove it."
       area:
         location: "A custom area is defined using coordinates on the map (latitude and longitude) and a radius, to make a circular region."
       event:
@@ -184,14 +180,14 @@ en:
             new_managed_record: "New Access"
             event_verification: "Event Verification"
             event_registrations: "Event Registrations"
-            region_summary: "Regional Summary"
+            place_summary: "Regional Summary"
             country_summary: "Country Summary"
             application_summary: "Sahaj Atlas Summary"
           hints:
             new_managed_record: "A message sent to you when you are given permission to manage a new event, region or resource on the Atlas."
             event_verification: "Messages requesting event and city managers to check their events' accuracy. Sent every 3 months, for each event. This cannot be disabled."
             event_registrations: "A list of new registrations sent to event managers. Sent around 24 hours before each event."
-            region_summary: "A summary of changes within a region sent to regional managers. Sent every %{period}."
+            place_summary: "A summary of changes within a region sent to regional managers. Sent every %{period}."
             country_summary: "A summary of changes sent to country managers. Sent every %{period}."
             application_summary: "A summary of all Atlas changes, sent to administrators. Sent every %{period}."
         search: "Enter a name, email, or phone number..."
@@ -264,9 +260,9 @@ en:
         title: "Wondering how to create an event?"
         description: "Click on the \"%{action}\" tab, and press \"Add Event\""
         action: "Add Event"
-      create_province_manager:
+      create_region_manager:
         title: "Wondering how to create a regional manager?"
-        description: "Choose a province, state or county on the \"%{action}\" tab."
+        description: "Choose a region, state or county on the \"%{action}\" tab."
         action: "Go now"
       create_city_manager:
         title: "Wondering how to create a city manager?"
@@ -276,14 +272,6 @@ en:
     images:
       title: "Images of this %{resource}"
       upload: "Upload Images"
-
-    regions:
-      new_province: "Add Region"
-      provinces_header: "Provinces / States / Counties"
-      areas_header:
-        provincial: "Metropolitan Areas"
-        national: "Custom Regions"
-        global: "Custom International Areas"
 
     activity:
       title: :cms.menu.activity
@@ -301,11 +289,11 @@ en:
           instruction: "You have access to all aspects of the atlas CMS (Content Management System). It is your job to create new country managers and help them learn to use the system."
         country:
           title: "Country Manager"
-          description: "Can create regions, venues, events and assign managers within %{region}"
+          description: "Can create regions, venues, events and assign managers within %{place}"
           instruction: "It's your responsibility to create regions within your country and assign managers to those regions to set up events. You may also create venues and events within your country."
         local:
           title: "Local Manager"
-          description: "Can create venues and events within %{region}"
+          description: "Can create venues and events within %{place}"
           instruction: "It's your responsibility to create events within your local area. You will first need to create a venue, before you can create an event at that venue."
         event:
           title: "Event Manager"

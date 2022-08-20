@@ -1,6 +1,0 @@
-
-- existing_provinces = @record.country.provinces.pluck(:province_code)
-- provinces = ISO3166::Country[@record.country_code].subdivisions.map { |k,v| [v['name'] || v.dig('translations', I18n.locale.to_s), k] unless existing_provinces.include?(k) }.compact
-
-.hint = translate('cms.hints.province.must_be_new')
-= f.input :province_code, label: false, prompt: translate('cms.actions.target.choose', resource: translate('cms.hints.province.prompt')), collection: provinces, input_html: { class: 'search' }

@@ -1,0 +1,32 @@
+
+- if @record.geojson || params[:osm_id] == 'custom'
+  = f.input :geojson do
+    - if @record.geojson
+      #map data-geojson=@record.geojson.to_json
+    - else
+      #map data-polygon='true'
+      .hint = translate('cms.hints.region.polygon')
+
+  = f.input :name
+
+  .ui.accordion
+    .ui.title
+      i.dropdown.icon
+      = translate_attribute(@record, :geo_data)
+    .content
+      - strings = %i[osm_id bounds]
+      - textareas = %i[geojson translations]
+      - (strings + textareas).each do |field|
+        - data = @record.send(field)
+        = f.input field do
+          .ui.code.input
+            = f.input_field field, as: (textareas.include?(field) ? :text : :string), placeholder: translate('cms.hints.not_set'), id: "js-map-#{field}", value: data&.to_json
+- else
+  .field id='js-osm-search' data-country=f.object.country_code data-type='settlement'
+    .ui.search
+      .ui.left.icon.action.input
+        i.search.icon
+        input.prompt type='text' name='query' placeholder=translate('cms.hints.geosearch.prompt')
+        button.ui.submit.button Search
+
+    table.ui.very.basic.table

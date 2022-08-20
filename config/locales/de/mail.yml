@@ -70,7 +70,7 @@ de:
           expired: "Ereignis abgelaufen - %{event}"
           finished: "Ereignis - beendet - %{event}"
         preview:
-          created: "Du bist der Manager eines neuen Ereignisses. '%{event}' wurde in %{region} erstellt."
+          created: "Du bist der Manager eines neuen Ereignisses. '%{event}' wurde in %{place} erstellt."
           needs_review: "'%{event}' muss überprüft werden oder sonst wird es aus der Karte entfernt. Bitte überprüfen Sie, ob die Ereignisinformationen noch korrekt sind."
           needs_urgent_review: "'%{event}' wird bald aus der Karte entfernt, weil der Ereignis-Manager noch nicht auf unsere E-Mail reagiert hat."
           expired: "'%{event}' wurde nicht in %{duration}, aktualisiert und wurde von der Karte entfernt. Aktualisieren Sie dieses Ereignis, um es wieder öffentlich zu machen."
@@ -122,7 +122,7 @@ de:
         subject:
           worldwide: "Willkommen! Sie sind jetzt ein Administrator auf Sahaj Atlas."
           country: "Willkommen! Sie befinden sich jetzt ein Landes-Manager auf Sahaj Atlas."
-          province: "Willkommen! Sie befinden sich jetzt ein Lokaler Manager auf Sahaj Atlas."
+          region: "Willkommen! Sie befinden sich jetzt ein Lokaler Manager auf Sahaj Atlas."
           area: "Willkommen! Sie befinden sich jetzt ein Lokaler Manager auf Sahaj Atlas."
           event: "Willkommen! Sie befinden sich jetzt ein Ereignismanager über Sahaj Atlas."
           none: "Willkommen! Sie sind jetzt ein Manager auf Sahaj Atlas."
@@ -130,26 +130,26 @@ de:
         preview:
           worldwide: "Sie wurden eingeladen, Administrator der Sahaj Atlas zu werden."
           country: "Sie wurden eingeladen, ein Ländermanager für %{context} zu werden."
-          province: "Sie wurden eingeladen, ein Lokalmanager für %{context} zu werden."
+          region: "Sie wurden eingeladen, ein Lokalmanager für %{context} zu werden."
           area: "Sie wurden eingeladen, ein lokaler Manager für %{context} zu werden."
           event: "Sie wurden eingeladen, das Ereignismanager für \"%{context} \"zu werden."
           none: "Sie wurden eingeladen, Manager des Sahaj Atlas zu werden."
         login: "Anmelden"
         view:
           country: "Land ansehen"
-          province: "Region ansehen"
+          region: "Region ansehen"
           area: "Region ansehen"
           event: "Veranstaltung ansehen"
         byline:
           worldwide: "Globaler Administrator"
           country: "Ländermanager für %{context}"
-          province: "Lokaler Manager für %{context}"
+          region: "Lokaler Manager für %{context}"
           area: "Lokaler Manager für %{context}"
           event: "Ereignismanager für \"%{context}\""
         explanation:
           worldwide: "Sie wurden eingeladen, Administrator für Sahaj Atlas zu werden. Es gehört zu Ihren Aufgaben, neue Ländermanager hinzuzufügen und die Wartung des Atlas zu übernehmen."
           country: "Sie wurden eingeladen, ein Ländermanager für Sahaj Atlas zu werden. Es wird Ihre Verantwortung sein, Städte und Regionen in Ihrem Land zu erstellen und Manager hinzuzufügen um Veranstaltungen in diesen Regionen zu verwalten."
-          province: "Sie wurden eingeladen, ein Lokal Manager auf Sahaj Atlas zu werden. Es wird Ihre Verantwortung sein, Veranstaltungsorte zu erstellen und die öffentlichen Sahaj-Events in Ihrer Region zu verwalten."
+          region: "Sie wurden eingeladen, ein Lokal Manager auf Sahaj Atlas zu werden. Es wird Ihre Verantwortung sein, Veranstaltungsorte zu erstellen und die öffentlichen Sahaj-Events in Ihrer Region zu verwalten."
           area: "Sie wurden eingeladen, ein Lokal Manager auf Sahaj Atlas zu werden. Es wird Ihre Verantwortung sein,Veranstaltungsorte zu erstellen und öffentliche Sahaj-Events in Ihrer Region zu verwalten."
           event: "Sie wurden eingeladen, für Sahaj-Atlas ein Event-Manager zu werden. Es wird Ihre Verantwortung sein, Ihre Veranstaltungen/Kurse auf dem neuesten Stand zu halten."
           none: "Sie wurden eingeladen, Manager auf Sahaj Atlas zu werden. Ihnen noch keine Verantwortlichkeit zugewiesen. Bitte kontaktieren Sie uns, wenn Sie Hilfe benötigen."
@@ -175,37 +175,37 @@ de:
         preview: "Zusammenfassung der Änderungen in %{country} der letzten 2 Wochen."
         view: "Land Ansehen"
 
-    region:
+    place:
       summary:
-        subject: "Wöchentliches Update für %{region}"
+        subject: "Wöchentliches Update für %{place}"
         title: "Wöchentliches Update"
-        preview: "Zusammenfassung der Änderungen in %{region} in der letzten Woche."
+        preview: "Zusammenfassung der Änderungen in %{place} in der letzten Woche."
         view: "Region ansehen"
 
     managed_record:
       created:
         subject:
           country: "Du bist jetzt ein Landes-Manager"
-          province: "Du bist jetzt ein lokaler Manager"
+          region: "Du bist jetzt ein lokaler Manager"
           area: "Du bist jetzt ein lokaler Manager"
           event: "Sie sind jetzt ein Ereignismanager"
           client: "Du bist jetzt ein App-Manager"
         title:
           country: "Landes-Manager für %{record}"
-          province: "Lokaler Manager für %{record}"
+          region: "Lokaler Manager für %{record}"
           area: "Lokaler Manager für %{record}"
           event: "Ereignismanager für %{record}"
           client: "App-Manager für %{record}"
         preview: "Sie sind als Manager für %{record} eingetragen."
         byline:
           country_html: "Sie haben Zugang zum Verwalten eines Landes gegeben, %{record}."
-          province_html: "Sie haben Zugang zum Verwalten der %{record} erteilt."
+          region_html: "Sie haben Zugang zum Verwalten der %{record} erteilt."
           area_html: "Sie haben Zugang zum Verwalten der %{record} erteilt."
           event_html: "Sie haben Zugang zum Verwalten des Ereignisses gegeben, %{record}."
           client_html: "Sie haben Zugriff auf die Konfiguration der %{record} App."
         explanation:
           country: "Es ist Ihre Verantwortung, Regionen in Ihrem Land zu erstellen und den Regionen Managern zuzuweisen (die wiederum Ereignisse anlegen). Sie können auch Orte und Events in Ihrem Land erstellen."
-          province: "Es ist Ihre Verantwortung, Orte und Ereignisse in Ihrer Region zu erstellen. Sie können auch benutzerdefinierte Bereiche in Ihrer Region für große Städte erstellen und den Regionen Manager zuordnen."
+          region: "Es ist Ihre Verantwortung, Orte und Ereignisse in Ihrer Region zu erstellen. Sie können auch benutzerdefinierte Bereiche in Ihrer Region für große Städte erstellen und den Regionen Manager zuordnen."
           area: "Es ist Ihre Verantwortung, Orte und Ereignisse in Ihrem lokalen Bereich zu erstellen. Sie erhalten auch eine E-Mail, für alle Ereignisse die in Ihrer Nähe anfangen, und müss überprüfen, ob diese noch aktuell sind."
           event: "Es ist Ihre Verantwortung, Ihre Veranstaltungen/Kurse auf dem Laufenden zu halten. Alle paar Monate erhalten Sie eine E-Mail, das Sie bestätigen müssen um zu überprügen, das die hinterlegte Veranstaltung noch aktuell ist."
           client: "Sie haben jetzt Zugriff auf API-Schlüssel, mit dem Sie Sahaj Atlas auf Ihrer Website oder in einer App einbetten können. Sie können auch die Standardansicht für die Karte auf Ihrer Website anpassen."

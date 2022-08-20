@@ -1,0 +1,8 @@
+
+.item
+  = model_icon Region
+  .content
+    - if policy(region).show?
+      a.header href=url_for([:cms, region]) = region.name
+    - else
+      .header = region.name

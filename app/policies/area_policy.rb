@@ -1,4 +1,4 @@
-class AreaPolicy < RegionPolicy
+class AreaPolicy < PlacePolicy
 
   def geocode?
     user.present?

@@ -11,7 +11,7 @@ class Area < ApplicationRecord
 
   # Associations
   belongs_to :country, foreign_key: :country_code, primary_key: :country_code, optional: true
-  belongs_to :province, foreign_key: :province_code, primary_key: :province_code, optional: true
+  belongs_to :region, foreign_key: :province_code, primary_key: :province_code, optional: true
 
   has_many :area_venues
   has_many :venues, through: :area_venues
@@ -24,6 +24,7 @@ class Area < ApplicationRecord
   # Validations
   before_validation :ensure_country_consistency
   validates_presence_of :radius, :name
+  validate :validate_location
 
   # Scopes
   default_scope { order(name: :desc) }
@@ -31,7 +32,7 @@ class Area < ApplicationRecord
   scope :publicly_visible, -> { has_public_events }
   scope :has_public_events, -> { joins(:publicly_visible_events) }
 
-  scope :ready_for_summary_email, -> { where("summary_email_sent_at IS NULL OR summary_email_sent_at <= ?", RegionMailer::SUMMARY_PERIOD.ago) }
+  scope :ready_for_summary_email, -> { where("summary_email_sent_at IS NULL OR summary_email_sent_at <= ?", PlaceMailer::SUMMARY_PERIOD.ago) }
 
   # Callbacks
   after_save :ensure_venue_consistency
@@ -39,7 +40,7 @@ class Area < ApplicationRecord
   # Methods
 
   def parent
-    province || country || nil
+    region || country || nil
   end
 
   def associated_events
@@ -61,7 +62,7 @@ class Area < ApplicationRecord
 
   def managed_by? manager, super_manager: nil
     return true if managers.include?(manager) && super_manager != true
-    return true if province.present? && province.managed_by?(manager) && super_manager != false
+    return true if region.present? && region.managed_by?(manager) && super_manager != false
     return true if country.present? && country.managed_by?(manager) && super_manager != false
 
     false
@@ -82,7 +83,7 @@ class Area < ApplicationRecord
   private
 
     def ensure_country_consistency
-      self.country_code = province.country_code if province.present?
+      self.country_code = region.country_code if region.present?
     end
 
     def ensure_venue_consistency
@@ -92,6 +93,13 @@ class Area < ApplicationRecord
       venues = venues.where(country_code: country_code) if country_code?
       venues = venues.where(province_code: province_code) if province_code?
       self.venues = venues
+    end
+
+    def validate_location
+      return unless latitude.present? && longitude.present?
+      return if parent.contains?(self)
+
+      errors.add(:coordinates, I18n.translate('cms.messages.area.invalid_location', region: parent.name))
     end
 
 end

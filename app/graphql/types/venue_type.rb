@@ -2,7 +2,7 @@ module Types
   class VenueType < LocationType
     field :street, String, null: true
     field :city, String, null: true
-    field :province, String, null: true, method: :province_name
+    field :region, String, null: true, method: :region_name
     field :country, String, null: true, method: :country_name
     field :postcode, String, null: true
 

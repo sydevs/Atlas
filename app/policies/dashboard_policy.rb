@@ -14,11 +14,10 @@ class DashboardPolicy < DatabasePolicy
 
   def index_association? association
     association = association.to_sym
-    return false if %i[registrations pictures].include?(association)
+    return false if %i[managed_records registrations pictures].include?(association)
     return false unless user.present?
     return false if user.type == :none
-    return false if association == :regions && user.type == :event
-    return true if %i[regions events].include?(association)
+    return true if association == :events
 
     user.administrator?
   end

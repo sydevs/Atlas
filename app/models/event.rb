@@ -74,10 +74,6 @@ class Event < ApplicationRecord
     type == 'OnlineEvent'
   end
 
-  def region_association?
-    false
-  end
-
   def publicly_visible?
     manager.verified? && published? && publishable?
   end
