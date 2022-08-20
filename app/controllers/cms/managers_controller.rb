@@ -151,14 +151,14 @@ class CMS::ManagersController < CMS::ApplicationController
           :name, :administrator, :language_code,
           :email, :phone, :contact_method,
           notifications: [],
-          country_ids: [], province_ids: [], local_area_ids: []
+          country_ids: [], province_ids: [], area_ids: []
         )
       else
         params.fetch(:manager, {}).permit(
           :name, :language_code,
           :email, :phone, :contact_method,
           notifications: [],
-          country_ids: [], province_ids: [], local_area_ids: []
+          country_ids: [], province_ids: [], area_ids: []
         )
       end
     end

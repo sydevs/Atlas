@@ -73,7 +73,7 @@ uk:
       no_comment: "(Без коментарів)"
       temporary_mail_error: "Сервер електронної пошти тимчасово зайнятий, спробуйте ще раз."
       venue:
-        out_of_bounds: "Місце проведення не може бути за межами радіусу %{local_area}"
+        out_of_bounds: "Місце проведення не може бути за межами радіусу %{area}"
       event:
         verified: "Thank you for confirming your event's accuracy." # TODO: Translate
         invalid_end_time: "не може бути раніше часу початку"
@@ -123,7 +123,7 @@ uk:
       province:
         must_be_new: "Нижче наведено лише регіони, які ще не були додані."
         prompt: "Провінція / штат / країна"
-      local_area:
+      area:
         location: "Спеціальна область визначається за допомогою координат на карті (широта і довгота) і радіус, щоб створити кругову область."
       event:
         custom_name: "Якщо ви хочете змінити назву події, ви можете зробити це тут."
@@ -271,7 +271,7 @@ uk:
     regions:
       new_province: "Додати регіон"
       provinces_header: "Провінції / Штати / Країни"
-      local_areas_header:
+      areas_header:
         provincial: "Столичні райони"
         national: "Вказаний регіон"
         global: "Спеціальні міжнародні зони"

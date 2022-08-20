@@ -126,18 +126,18 @@ h3.ui.small.dividing.grey.header = translate('cms.details.management_for_record'
 
 h3.ui.small.dividing.grey.header = translate('cms.details.location_of_record', resource: translate_model(@model).downcase)
 - if @record.online?
-  #region-map data-latitude=@record.local_area.latitude data-longitude=@record.local_area.longitude data-radius=@record.local_area.radius
+  #map data-latitude=@record.area.latitude data-longitude=@record.area.longitude data-radius=@record.area.radius
 - else
-  #venue-map data-latitude=@record.venue.latitude data-longitude=@record.venue.longitude
+  #map data-latitude=@record.venue.latitude data-longitude=@record.venue.longitude
 
 .ui.list
   - if @record.online?
     .item
-      = model_icon(LocalArea)
+      = model_icon(Area)
       .content
-        .header = translate_model(LocalArea)
-        /.header = translate_attribute(Event, :local_area)
-        .description = @record.local_area.label
+        .header = translate_model(Area)
+        /.header = translate_attribute(Event, :area)
+        .description = @record.area.label
   - else
     .item
       i.building.icon

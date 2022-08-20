@@ -73,7 +73,7 @@ en:
       no_comment: "(No comment)"
       temporary_mail_error: "Email server is temporarily busy, please try again."
       venue:
-        out_of_bounds: "Venue cannot be outside the radius of %{local_area}"
+        out_of_bounds: "Venue cannot be outside the radius of %{area}"
       event:
         verified: "Thank you for confirming your event's accuracy."
         invalid_end_time: "cannot be before the start time"
@@ -124,7 +124,7 @@ en:
       province:
         must_be_new: "Only regions which haven't already been added are listed below."
         prompt: "Province / State / County"
-      local_area:
+      area:
         location: "A custom area is defined using coordinates on the map (latitude and longitude) and a radius, to make a circular region."
       event:
         custom_name: "If you want to override the name of the event, you can do so here."
@@ -280,7 +280,7 @@ en:
     regions:
       new_province: "Add Region"
       provinces_header: "Provinces / States / Counties"
-      local_areas_header:
+      areas_header:
         provincial: "Metropolitan Areas"
         national: "Custom Regions"
         global: "Custom International Areas"

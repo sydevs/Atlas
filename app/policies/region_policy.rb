@@ -12,4 +12,8 @@ class RegionPolicy < DatabasePolicy
     manage? super_manager: true
   end
 
+  def search?
+    false
+  end
+
 end

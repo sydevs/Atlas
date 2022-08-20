@@ -15,8 +15,6 @@ const VenueSearch = {
       minCharacters: 3,
       apiSettings: {
         url: `/cms/venues/geosearch?query={query}`,
-        //url: `/cms/venues/autocomplete?country=${this.$search.data('country')}&query={query}`,
-        //url: '//maps.googleapis.com/maps/api/place/autocomplete/json?input={query}&key={key}',
         urlData: {
           key: 'AIzaSyAO7puRR_rzbuFoD-Wqtb3Ggv5pYxeomgs',
         },

@@ -14,7 +14,6 @@ class CMS::CountriesController < CMS::ApplicationController
     authorize_association! :regions
 
     @provinces = @context.provinces if @context.enable_province_management?
-    @local_areas = @context.local_areas.cross_province
     render 'cms/views/regions'
   end
 

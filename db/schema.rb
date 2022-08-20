@@ -10,10 +10,34 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_04_171726) do
+ActiveRecord::Schema.define(version: 2022_08_04_193817) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "area_venues", force: :cascade do |t|
+    t.bigint "area_id"
+    t.bigint "venue_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["area_id"], name: "index_area_venues_on_area_id"
+    t.index ["venue_id"], name: "index_area_venues_on_venue_id"
+  end
+
+  create_table "areas", force: :cascade do |t|
+    t.string "country_code"
+    t.string "name"
+    t.float "latitude"
+    t.float "longitude"
+    t.float "radius"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "province_code", limit: 3
+    t.date "last_activity_on"
+    t.datetime "summary_email_sent_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.jsonb "summary_metadata", default: "{}"
+    t.string "time_zone"
+  end
 
   create_table "audits", force: :cascade do |t|
     t.integer "auditable_id"
@@ -102,35 +126,11 @@ ActiveRecord::Schema.define(version: 2022_08_04_171726) do
     t.integer "registration_limit"
     t.string "type"
     t.bigint "venue_id"
-    t.bigint "local_area_id"
-    t.index ["local_area_id"], name: "index_events_on_local_area_id"
+    t.bigint "area_id"
+    t.index ["area_id"], name: "index_events_on_area_id"
     t.index ["manager_id"], name: "index_events_on_manager_id"
     t.index ["status"], name: "index_events_on_status"
     t.index ["venue_id"], name: "index_events_on_venue_id"
-  end
-
-  create_table "local_area_venues", force: :cascade do |t|
-    t.bigint "local_area_id"
-    t.bigint "venue_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["local_area_id"], name: "index_local_area_venues_on_local_area_id"
-    t.index ["venue_id"], name: "index_local_area_venues_on_venue_id"
-  end
-
-  create_table "local_areas", force: :cascade do |t|
-    t.string "country_code"
-    t.string "name"
-    t.float "latitude"
-    t.float "longitude"
-    t.float "radius"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "province_code", limit: 3
-    t.date "last_activity_on"
-    t.datetime "summary_email_sent_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
-    t.jsonb "summary_metadata", default: "{}"
-    t.string "time_zone"
   end
 
   create_table "managed_records", force: :cascade do |t|

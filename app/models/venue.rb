@@ -13,8 +13,8 @@ class Venue < ApplicationRecord
   belongs_to :country, foreign_key: :country_code, primary_key: :country_code, optional: true
   belongs_to :province, foreign_key: :province_code, primary_key: :province_code, optional: true
 
-  has_many :local_area_venues
-  has_many :local_areas, through: :local_area_venues
+  has_many :area_venues
+  has_many :areas, through: :area_venues
 
   has_many :events, inverse_of: :venue
   # has_many :events, as: :location, dependent: :delete_all, class_name: "OfflineEvent"
@@ -34,14 +34,14 @@ class Venue < ApplicationRecord
   delegate :all_managers, to: :parent
 
   # Callbacks
-  after_save :ensure_local_area_consistency
+  after_save :ensure_area_consistency
   after_save :update_activity_timestamps
   before_create :fetch_coordinates
 
   # Methods
 
   def parent
-    local_areas.first || (country.enable_province_management? ? province || country : country)
+    areas.first || (country.enable_province_management? ? province || country : country)
   end
 
 =begin
@@ -51,8 +51,8 @@ class Venue < ApplicationRecord
 =end
 
   def managed_by? manager, super_manager: nil
-    manager.local_areas.each do |local_area|
-      return true if local_area.contains?(self)
+    manager.areas.each do |area|
+      return true if area.contains?(self)
     end
 
     parent.managed_by?(manager)
@@ -79,15 +79,15 @@ class Venue < ApplicationRecord
 
   private
 
-    def ensure_local_area_consistency
+    def ensure_area_consistency
       return unless (previous_changes.keys & %w[latitude longitude province_code country_code]).present?
 
-      radius = LocalArea.maximum(:radius)
-      local_areas = LocalArea.select('id, name, radius, latitude, longitude, country_code, province_code').within(radius, origin: self)
-      local_areas = local_areas.where(country_code: country_code) if country_code?
-      local_areas = local_areas.where(province_code: province_code) if province_code?
-      local_areas = local_areas.to_a.filter { |area| area.contains?(self) }
-      self.local_areas = local_areas
+      radius = Area.maximum(:radius)
+      areas = Area.select('id, name, radius, latitude, longitude, country_code, province_code').within(radius, origin: self)
+      areas = areas.where(country_code: country_code) if country_code?
+      areas = areas.where(province_code: province_code) if province_code?
+      areas = areas.to_a.filter { |area| area.contains?(self) }
+      self.areas = areas
     end
 
     def country_has_provinces?

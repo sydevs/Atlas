@@ -23,7 +23,7 @@ class Event < ApplicationRecord
   # belongs_to :location, polymorphic: true
   # alias venue location
 
-  belongs_to :local_area, optional: true
+  belongs_to :area, optional: true
   belongs_to :venue, optional: true, inverse_of: :events
 
   has_many :registrations, dependent: :delete_all
@@ -37,7 +37,7 @@ class Event < ApplicationRecord
   validates :recurrence, :start_date, :start_time, presence: true
   validates :description, length: { minimum: 40, maximum: 600, allow_blank: true }
   validates :registration_url, url: true, unless: :native_registration_mode?
-  validates :phone_number, phone: { possible: true, allow_blank: true, country_specifier: -> event { event.local_area.country_code } }
+  validates :phone_number, phone: { possible: true, allow_blank: true, country_specifier: -> event { event.area.country_code } }
   validates_presence_of :end_date, if: :course_category?
   validates_presence_of :end_time, if: -> { festival_category? || concert_category? }
   validates_presence_of :venue, :online_url, if: :online?
@@ -59,9 +59,9 @@ class Event < ApplicationRecord
   scope :offline, -> { where.not(venue_id: nil) }
 
   # Delegations
-  delegate :time_zone, to: :local_area
+  delegate :time_zone, to: :area
   alias associated_registrations registrations
-  alias parent local_area
+  alias parent area
 
   # Callbacks
   before_validation :find_venue
@@ -176,7 +176,7 @@ class Event < ApplicationRecord
   end
 
   def default_language_code
-    language_code || local_area.country.default_language_code || I18n.locale.upcase
+    language_code || area.country.default_language_code || I18n.locale.upcase
   end
 
   def parent_managers
@@ -204,7 +204,7 @@ class Event < ApplicationRecord
     end
 
     def parse_phone_number
-      self.phone_number = Phonelib.parse(phone_number, local_area.country_code).international
+      self.phone_number = Phonelib.parse(phone_number, area.country_code).international
     end
 
     def verify_manager

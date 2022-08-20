@@ -73,7 +73,7 @@ de:
       no_comment: "(kein Komentar)"
       temporary_mail_error: "Email server ist gerade beschäftigt, bitte später nochmal versuchen."
       venue:
-        out_of_bounds: "Die veranstaltung darf nicht weiter als %{local_area} entfernt sein."
+        out_of_bounds: "Die veranstaltung darf nicht weiter als %{area} entfernt sein."
       event:
         verified: "Vielen Dank für die Bestätigung der gültigkeit der Veranstaltung."
         invalid_end_time: "darf nicht vor dem beginn zeitpunkt sein"
@@ -123,7 +123,7 @@ de:
       province:
         must_be_new: "Nur Regionen, die noch nicht hinzugefügt wurden, sind unten aufgeführt."
         prompt: "Landkreis / Bundesland / Land"
-      local_area:
+      area:
         location: Ein "spezieller Bereich" wird via Koordinaten auf der Karte (Breitengrad und Längengrad) und einem Radius definiert, um einen Kreis festzulegen. "
       event:
         custom_name: "Wenn Sie den Namen der Veranstaltung überschreiben möchten, können Sie dies hier tun."
@@ -276,7 +276,7 @@ de:
     regions:
       new_province: "Region hinzufügen"
       provinces_header: "Provinzen / Bundesländer / Landkreise"
-      local_areas_header:
+      areas_header:
         provincial: "Ballungsraum Bereich"
         national: "Benutzerdefinierte Regionen"
         global: "Benutzerdefinierte internationale Bereiche"

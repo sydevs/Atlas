@@ -23,13 +23,13 @@ ru:
         # Countable
         one: "регион"
         other: "регионов"
-      local_area: 
+      area: # TODO: Translate
         # Basic pluralization
-        single: "Место"
-        plural: "Места"
+        single: "City Area"
+        plural: "City Areas"
         # Countable
-        one: "место"
-        other: "мест"
+        one: "city"
+        other: "cities"
 
       # Events
       venue:
@@ -127,7 +127,7 @@ ru:
         last_activity_on: :activerecord.attributes.generic.last_activity_on # Do not translate
         summary_email_sent_at: :activerecord.attributes.generic.summary_email_sent_at # Do not translate
 
-      local_area:
+      area:
         manager_id: :activerecord.models.manager.single # Do not translate
         name: :activerecord.attributes.generic.name # Do not translate
         country_code: :activerecord.models.country.single # Do not translate

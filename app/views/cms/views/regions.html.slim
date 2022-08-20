@@ -34,23 +34,23 @@ ruby:
     - else
       p = translate('cms.messages.no_records_found', resources: translate_model(Province, :plural).downcase)
 
-  - if @local_areas
+  - if @areas
     h3.ui.dividing.header
       - if @context
-        - if allow.new_association?(:local_areas) && policy(LocalArea).new?
-          = floating_action translate('cms.actions.target.new', resource: translate_model(LocalArea)), 'plus', url_for([:new, :cms, @context, :local_area])
+        - if allow.new_association?(:areas) && policy(Area).new?
+          = floating_action translate('cms.actions.target.new', resource: translate_model(Area)), 'plus', url_for([:new, :cms, @context, :area])
         .content
           - if @context.is_a?(Province) || @context.is_a?(Country) && !@context.enable_province_management?
-            = translate('cms.regions.local_areas_header.provincial')
+            = translate('cms.regions.areas_header.provincial')
           - else
-            = translate('cms.regions.local_areas_header.national')
+            = translate('cms.regions.areas_header.national')
       - else
-        - if allow.new_association?(:local_areas) && policy(LocalArea).new?
-          = floating_action translate('cms.actions.target.new', resource: translate_model(LocalArea)), 'plus', url_for([:new, :cms, :local_area])
-        .content = translate('cms.regions.local_areas_header.global')
+        - if allow.new_association?(:areas) && policy(Area).new?
+          = floating_action translate('cms.actions.target.new', resource: translate_model(Area)), 'plus', url_for([:new, :cms, :area])
+        .content = translate('cms.regions.areas_header.global')
 
-    - if @local_areas.present?
+    - if @areas.present?
       .ui.list
-        = render partial: 'cms/list_items/local_area', collection: @local_areas, cached: true
+        = render partial: 'cms/list_items/area', collection: @areas, cached: true
     - else
-      p = translate('cms.messages.no_records_found', resources: translate_model(LocalArea, :plural).downcase)
+      p = translate('cms.messages.no_records_found', resources: translate_model(Area, :plural).downcase)

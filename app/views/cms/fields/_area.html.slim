@@ -1,0 +1,22 @@
+
+.field
+  .ui.search id='js-area-search' data-key=ENV.fetch('GOOGLE_PLACES_API_KEY') data-locale=I18n.locale data-country=f.object.country_code
+    .ui.left.icon.input
+      input.prompt type='text' placeholder=translate('cms.hints.geosearch.prompt')
+      i.search.icon
+  .hint = translate('cms.hints.geosearch.description')
+
+= f.input :name
+
+#map data-editable='true'
+
+.hint = translate('cms.hints.area.location')
+
+= f.input :radius, placeholder: translate_attribute(Area, :radius), input_html: { id: 'js-map-radius', step: 0.5 }
+
+.two.fields
+  = f.input :latitude, placeholder: translate_attribute(Area, :latitude), input_html: { id: 'js-map-latitude' }
+  = f.input :longitude, placeholder: translate_attribute(Area, :longitude), input_html: { id: 'js-map-longitude' }
+
+= f.hidden_field :province_code
+= f.hidden_field :country_code

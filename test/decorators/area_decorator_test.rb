@@ -2,10 +2,10 @@
 
 require 'test_helper'
 
-class LocalAreaDecoratorTest < ActiveSupport::TestCase
+class AreaDecoratorTest < ActiveSupport::TestCase
 
   def setup
-    @local_area = LocalArea.new.extend LocalAreaDecorator
+    @area = Area.new.extend AreaDecorator
   end
 
   # test "the truth" do

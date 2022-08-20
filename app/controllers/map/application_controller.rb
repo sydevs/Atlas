@@ -58,7 +58,7 @@ class Map::ApplicationController < ActionController::Base
         if params[:venue] || params[:event]
           scope = @venue
         elsif params[:area]
-          scope = LocalArea.find_by_identifier(params[:area])
+          scope = Area.find_by_identifier(params[:area])
         elsif params[:province]
           scope = Province.find_by_province_code(params[:province])
         elsif params[:country]

@@ -31,22 +31,22 @@
           = f.hidden_field :province_code
           = f.input_field :province, value: f.object.province_name, disabled: true
         - else
-          - api_url = cms_manager_provinces_url(current_user, country_code: f.object.country_code, area: @context.is_a?(LocalArea), format: :json)
+          - api_url = cms_manager_provinces_url(current_user, country_code: f.object.country_code, area: @context.is_a?(Area), format: :json)
           = f.input_field :province_code, collection: [f.object.province_name], data: { url: api_url, prompt: translate('cms.hints.province.prompt') }, class: 'ajax search'
       .seven.wide.field
         - if f.object.country_code.present?
           = f.hidden_field :country_code
           = f.input_field :country, as: :string, value: f.object.country.label, disabled: true
         - else
-          - api_url = cms_manager_countries_url(current_user, area: @context.is_a?(LocalArea), format: :json)
+          - api_url = cms_manager_countries_url(current_user, area: @context.is_a?(Area), format: :json)
           = f.input_field :country_code, collection: [f.object.country_name], data: { url: api_url, prompt: translate_attribute(Venue, :country_code) }, class: 'ajax search'
       .three.wide.field
         = f.input_field :postcode, placeholder: translate_attribute(Venue, :postcode)
 
-- if @context.is_a?(LocalArea)
-  #venue-map data-editable='true' data-bounds=@context.to_bounds(flexible: true).to_json
+- if @context.is_a?(Area)
+  #map data-editable='true' data-bounds=@context.to_bounds(flexible: true).to_json
 - else
-  #venue-map data-editable='true'
+  #map data-editable='true'
 
 .ui.map.message class="#{'hidden' if f.object.coordinates?}"
   .header = translate('cms.hints.venue.marker_not_set.title')

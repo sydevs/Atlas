@@ -26,11 +26,11 @@ class DashboardPolicy < DatabasePolicy
   def new_association? association, query = {}
     return nil if association == :events
     
-    user.administrator? && %i[countries local_areas venues managers clients].include?(association)
+    user.administrator? && %i[countries areas venues managers clients].include?(association)
   end
 
   def destroy_association? association = nil
-    user.administrator? && %i[countries local_areas clients].include?(association)
+    user.administrator? && %i[countries areas clients].include?(association)
   end
 
   def view_help?

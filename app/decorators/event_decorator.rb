@@ -1,8 +1,8 @@
 module EventDecorator
 
-  def decorated_local_area
-    @local_area ||= begin
-      local_area.extend(LocalAreaDecorator)
+  def decorated_area
+    @area ||= begin
+      area.extend(AreaDecorator)
     end
   end
 
@@ -16,7 +16,7 @@ module EventDecorator
     if custom_name.present?
       custom_name
     elsif online?
-      I18n.translate('api.event.online_label', category: category_label, area: decorated_local_area.label)
+      I18n.translate('api.event.online_label', category: category_label, area: decorated_area.label)
     else
       I18n.translate('api.event.label', category: category_label, venue: decorated_venue.label)
     end
@@ -25,7 +25,7 @@ module EventDecorator
   def address
     @address ||= begin
       if online?
-        "#{local_area.name}, #{CountryDecorator.get_short_label(local_area.country_code)}"
+        "#{area.name}, #{CountryDecorator.get_short_label(area.country_code)}"
       else
         venue.address
       end
