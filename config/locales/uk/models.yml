@@ -171,7 +171,7 @@ uk:
       # Events
       venue:
         published: :activerecord.attributes.generic.published # Do not translate
-        name: "Назва будівлі (необов'язково)"
+        name: "Назва будівлі"
         manager_id: :activerecord.models.manager.single # Do not translate
         address: "Адреса"
         street: "Адреса вулиці"

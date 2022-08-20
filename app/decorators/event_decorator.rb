@@ -1,5 +1,9 @@
 module EventDecorator
 
+  def decorated_location
+    @location ||= (online? ? decorated_area : decorated_venue)
+  end
+
   def decorated_area
     @area ||= begin
       area.extend(AreaDecorator)
@@ -23,7 +27,7 @@ module EventDecorator
   end
 
   def address
-    location.address
+    decorated_location.address
   end
 
   def category_name

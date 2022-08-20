@@ -147,7 +147,7 @@ class MapFrame extends EventTarget {
       this.#currentLayer.setSelection(location)
       if (!location) return
 
-      if (location.radius) {
+      if (location.radius && location.radius != 'null') {
         this.fitTo(location, Object.assign({
           transition: true
         }, options))

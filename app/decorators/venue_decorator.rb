@@ -7,7 +7,7 @@ module VenueDecorator
   def address
     # components = (country.enable_regions? ? [street, city, region_code, country_code] : [street, city, country_code])
     components = [street, city, region_code, country_code]
-    components.join(', ')
+    components.compact.join(', ')
   end
 
   def directions_url

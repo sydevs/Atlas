@@ -16,16 +16,6 @@ module AreaDecorator
     label
   end
 
-  def region_name
-    region.name
-  end
-
-  def country_name format = :full
-    return nil unless country_code
-
-    format == :short ? CountryDecorator.get_short_label(country_code) : CountryDecorator.get_label(country_code)
-  end
-
   def map_path
     Rails.application.routes.url_helpers.map_area_path(self)
   end

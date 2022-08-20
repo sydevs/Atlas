@@ -11,8 +11,6 @@ class CleanUpDatabase < ActiveRecord::Migration[6.1]
     remove_column :venues, :published, :boolean, default: true
     remove_column :venues, :address, :string
 
-    # remove_column :events, :room, :string
-
     reversible do |dir|
       dir.up do
         [Country, Region].each do |model|

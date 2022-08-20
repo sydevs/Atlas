@@ -1,7 +1,6 @@
 class Venue < ApplicationRecord
 
   # Extensions
-  include Publishable
   include ActivityMonitorable
   include Location
 
@@ -24,7 +23,7 @@ class Venue < ApplicationRecord
 
   # Scopes
   scope :has_public_events, -> { joins(:publicly_visible_events) }
-  scope :publicly_visible, -> { published.has_public_events }
+  scope :publicly_visible, -> { has_public_events }
 
   # Delegations
   delegate :all_managers, to: :parent

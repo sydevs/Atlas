@@ -35,7 +35,7 @@ module GoogleMapsAPI
   def self.fetch_place parameters
     parameters.merge!({
       key: ENV.fetch('GOOGLE_PLACES_API_KEY'),
-      fields: 'geometry,address_components',
+      fields: 'name,geometry,address_components',
     })
 
     url = "https://maps.googleapis.com/maps/api/place/details/json?#{parameters.to_query}"
@@ -48,12 +48,15 @@ module GoogleMapsAPI
 
       address = response['result']['address_components']
       address = address.map { |c| [c['types'][0], c['short_name']] }.to_h
+      name = response['result']['name']
+      street = [address['street_number'], address['route']].join(' ')
 
       {
+        name: (name if name != street),
         place_id: parameters[:placeid],
         latitude: center.lat,
         longitude: center.lng,
-        street: [address['street_number'], address['route']].join(' '),
+        street: street,
         city: address['locality'],
         region_code: address['administrative_area_level_1'],
         country_code: address['country'],
