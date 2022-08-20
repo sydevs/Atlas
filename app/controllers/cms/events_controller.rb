@@ -3,15 +3,16 @@ class CMS::EventsController < CMS::ApplicationController
   prepend_before_action { @model = Event }
 
   def index
-    online = params[:online] == 'true' || (params[:online] != 'false' && @context.is_a?(LocalArea))
-    super type: online ? 'OnlineEvent' : 'OfflineEvent'
+    super online: params[:online] == 'true' || (params[:online] != 'false' && @context.is_a?(LocalArea))
   end
 
   def new
-    super category: params[:category], type: params[:online] ? 'OnlineEvent' : 'OfflineEvent'
+    type = @context.is_a?(LocalArea) ? 'OnlineEvent' : 'OfflineEvent'
+    super category: params[:category], type: type
   end
 
   def create
+    parameters[:type] = @context.is_a?(LocalArea) ? 'OnlineEvent' : 'OfflineEvent'
     super parameters
   end
 
@@ -36,8 +37,7 @@ class CMS::EventsController < CMS::ApplicationController
         :registration_mode, :registration_url, :registration_limit,
         :recurrence, :start_date, :end_date, :start_time, :end_time,
         :online_url,
-        :venue_id, :manager_id,
-        venue_attributes: %i[id name address place_id latitude longitude],
+        :manager_id,
         manager_attributes: %i[id name email phone contact_method language_code]
       )
     end

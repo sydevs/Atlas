@@ -12,7 +12,7 @@
         - tooltip = { tooltip: translate(@model.model_name.i18n_key, scope: 'cms.messages.cannot_create'), position: 'bottom right', variation: 'small basic' }
         = floating_action create_action_text, 'plus', nil, disabled: true, data: tooltip
       - elsif allow_new
-        = floating_action create_action_text, 'plus', url_for([:new, :cms, @context, @model_name.singular_route_key.to_sym, online: @query[:online].present?])
+        = floating_action create_action_text, 'plus', url_for([:new, :cms, @context, @model_name.singular_route_key.to_sym])
 
     - if @model == Audit && @context.present?
       - last_activity_on = @context.try(:last_activity_on) || @context.updated_at.to_date

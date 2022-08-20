@@ -30,15 +30,17 @@ module Types
 
     field :images, [Types::ImageType], null: true, resolver_method: :get_images
 
+    field :location_id, Integer, null: false
+    field :location_type, Integer, null: false
+    field :location, Types::LocationType, null: false, resolver_method: :get_location
     field :venue, Types::VenueType, null: false, resolver_method: :get_venue
     field :area, Types::LocalAreaType, null: false, resolver_method: :get_area
-    field :location, Types::LocationType, null: false, resolver_method: :get_location
 
     field :created_at, GraphQL::Types::ISO8601DateTime, null: false
     field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
 
     def get_location
-      object.parent.extend("#{object.parent.class}Decorator".constantize)
+      object.location.extend("#{object.location_type}Decorator".constantize)
     end
 
     def get_venue

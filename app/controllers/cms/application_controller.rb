@@ -151,19 +151,6 @@ class CMS::ApplicationController < ActionController::Base
     authorize :dashboard, :view_help?
   end
 
-  def geosearch args = {}
-    authorize @record || @model
-    args.merge!({
-      language: I18n.locale,
-      sessiontoken: session.id,
-      input: params[:query],
-    })
-
-    result = GoogleMapsAPI.predict(args)
-    puts "RESULT #{result.inspect}"
-    render json: result, status: result ? 200 : 404
-  end
-
   def back_path
     return cms_root_path if @record == current_user
     return url_for([:cms, @record]) if policy(@record).show?

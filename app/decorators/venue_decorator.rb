@@ -9,7 +9,7 @@ module VenueDecorator
   end
 
   def address
-    self[:address] || [street, city, province_name, country_name(:short)].compact.join(', ')
+    @address ||= [street, city, province_name, country_name(:short)].compact.join(', ')
   end
 
   def directions_url
