@@ -13,9 +13,9 @@ class Region < ApplicationRecord
   belongs_to :country, foreign_key: :country_code, primary_key: :country_code
   has_many :areas, dependent: :delete_all
 
-  has_many :venues, foreign_key: :province_code, primary_key: :province_code
-  has_many :events, through: :venues
-  # has_many :associated_registrations, through: :events, source: :registrations
+  has_many :events, through: :areas
+  has_many :venues, through: :events
+  has_many :registrations, through: :events
 
   # Validations
   validates_presence_of :name

@@ -111,7 +111,6 @@ de:
         published: "Veröffentlicht"
         email: "E-Mail-Adresse"
         phone: "Telefonnummer"
-        identifier: "Filterbezeichner"
         status: "Status"
         statuses:
           verified: "Verifiziert"
@@ -150,7 +149,6 @@ de:
       region:
         manager_id: :activerecord.models.manager.single # Do not translate
         country_code: :activerecord.models.country.single # Do not translate
-        province_code: :activerecord.models.region.single # Do not translate
         geo_data: "Geo Data" # TODO: Translate
         osm_id: "OpenStreetMap ID" # TODO: Translate
         bounds: "Viewport" # TODO: Translate
@@ -163,7 +161,6 @@ de:
         manager_id: :activerecord.models.manager.single # Do not translate
         name: :activerecord.attributes.generic.name # Do not translate
         country_code: :activerecord.models.country.single # Do not translate
-        province_code: :activerecord.models.region.single # Do not translate
         coordinates: "Lage"
         latitude: "Breite"
         longitude: "Länge"
@@ -179,9 +176,9 @@ de:
         address: "Addresse"
         street: "Straßennamen"
         city: "Stadt"
-        province_code: :activerecord.models.region.single # Do not translate
+        region_code: :activerecord.models.region.single # Do not translate
         country_code: :activerecord.models.country.single # Do not translate
-        postcode: "Postleitzahl"
+        post_code: "Postleitzahl"
         coordinates: "Lage"
         latitude: "Breite"
         longitude: "Länge"

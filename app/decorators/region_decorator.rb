@@ -5,7 +5,7 @@ module RegionDecorator
   end
 
   def short_label
-    (translations || {})[I18n.locale.to_s] || name || RegionDecorator.get_name(province_code, country_code)
+    translations[I18n.locale.to_s] || name || RegionDecorator.get_name(province_code, country_code)
   end
 
   def self.get_name province_code, country_code

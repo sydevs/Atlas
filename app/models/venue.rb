@@ -5,11 +5,13 @@ class Venue < ApplicationRecord
   include ActivityMonitorable
   include Location
 
-  audited
+  # audited
   nilify_blanks
-  searchable_columns %w[name address]
+  searchable_columns %w[name street city region_code country_code post_code]
 
   # Associations
+  # belongs_to :country, foreign_key: :country_code, primary_key: :country_code
+
   has_many :area_venues
   has_many :areas, through: :area_venues
 
@@ -18,9 +20,7 @@ class Venue < ApplicationRecord
   has_many :publicly_visible_events, -> { publicly_visible }, class_name: 'OfflineEvent'
 
   # Validations
-  # validates :province_code, presence: true, if: :country_has_regions?
-  # validates :country_code, presence: true
-  validates_presence_of :place_id, :address
+  validates_presence_of :place_id, :street, :city, :country_code
 
   # Scopes
   scope :has_public_events, -> { joins(:publicly_visible_events) }
@@ -38,10 +38,6 @@ class Venue < ApplicationRecord
 
   def parent
     areas.first
-  end
-
-  def street
-    address&.split(',', 2)&.first
   end
 
   def managed_by? manager, super_manager: nil

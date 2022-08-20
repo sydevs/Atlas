@@ -153,19 +153,6 @@ en:
           invitations:
             email: "Invite by email"
             phone: "Invite through %{messenger}"
-      venue:
-        manual_location: "Set location manually"
-        location: "If the location cannot be set automatically by pressing \"Find Location\", you can enter the details manually below."
-        find_marker: "Find Location"
-        marker_not_set:
-          title: "Map marker has not been set"
-          description: "Press 'Find Location' to automatically detect the coordinates of the venue's address."
-        cant_find_address:
-          title: "Couldn't find address"
-          description: "The address you entered could not be found. Try adding more information, or enter the latitude and longitude manually."
-        marker_set:
-          title: "Map marker set!"
-          description: "Make sure that the location shown on the map looks correct."
       manager:
         language: "The preferred language for emails and UI for this manager."
         administrator:

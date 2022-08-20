@@ -44,8 +44,8 @@ class CMS::AreasController < CMS::ApplicationController
 
     def parameters
       params.fetch(:area, {}).permit(
-        :name, :identifier, :country_code, :province_code,
-        :latitude, :longitude, :radius, :restriction
+        :name, :country_code,
+        :latitude, :longitude, :radius
       )
     end
 

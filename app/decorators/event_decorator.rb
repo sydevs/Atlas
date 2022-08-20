@@ -23,13 +23,7 @@ module EventDecorator
   end
 
   def address
-    @address ||= begin
-      if online?
-        "#{area.name}, #{CountryDecorator.get_short_label(area.country_code)}"
-      else
-        venue.address
-      end
-    end
+    location.address
   end
 
   def category_name

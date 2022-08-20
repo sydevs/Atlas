@@ -3,11 +3,6 @@ class CMS::VenuesController < CMS::ApplicationController
 
   prepend_before_action { @model = Venue }
 
-
-  def update
-    super parameters
-  end
-
   def geosearch
     super({
       types: 'street_address|premise|subpremise|room|place_of_worship',
@@ -27,13 +22,5 @@ class CMS::VenuesController < CMS::ApplicationController
     puts "RESULT #{result.inspect}"
     render json: result, status: result ? 200 : 404
   end
-
-  private
-
-    def parameters
-      params.fetch(:venue, {}).permit(
-        :published, :name, :address, :latitude, :longitude, :place_id,
-      )
-    end
 
 end

@@ -152,19 +152,6 @@ de:
           invitations:
             email: "Einladen mittels E-Mail"
             phone: "Einladen mittels %{messenger}"
-      venue:
-        manual_location: "Den Ort manuell eintragen"
-        location: "Wenn der Standort nicht automatisch eingestellt werden kann, indem Sie \"finde Veranstaltungsort\" verwenden, können Sie die Details unten manuell eingeben."
-        find_marker: "Finde Veranstaltungsort"
-        marker_not_set:
-          title: "Atlas-Manager wurde nicht gesetzt"
-          description: "Drücke 'Finde Veranstaltungsort', um die Koordinaten der Veranstaltung Automatisch zu setzen."
-        cant_find_address:
-          title: "Es konnte keine Adresse gefunden werden."
-          description: "Die Adresse, die Sie eingegeben haben, konnten nicht gefunden werden. Versuchen Sie, weitere Informationen hinzuzufügen, oder geben Sie die Breite und Längengrad manuell ein."
-        marker_set:
-          title: "Kartenmacher festgelegt!"
-          description: "Stellen Sie sicher, dass der auf der Karte angezeigte Ort korrekt aussieht."
       manager:
         language: "Die bevorzugte Sprache für E-Mails und UI für diesen Manager."
         administrator:

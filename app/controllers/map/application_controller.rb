@@ -34,30 +34,6 @@ class Map::ApplicationController < ActionController::Base
 
   private
 
-    def scope
-      @scope ||= begin
-        scope = nil
-
-        if params[:venue] || params[:event]
-          scope = @venue
-        elsif params[:area]
-          scope = Area.find_by_identifier(params[:area])
-        elsif params[:region]
-          scope = Region.find_by_province_code(params[:region])
-        elsif params[:country]
-          scope = Country.find_by_country_code(params[:country])
-        end
-
-        if scope.respond_to?(:publicly_visible)
-          scope = scope.publicly_visible
-        elsif scope.respond_to?(:published)
-          scope = scope.published
-        end
-
-        scope
-      end
-    end
-
     def coordinates
       @coordinates ||= begin
         if params[:latitude].present? && params[:longitude].present?

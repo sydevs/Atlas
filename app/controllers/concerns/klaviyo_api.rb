@@ -53,7 +53,7 @@ module KlaviyoAPI
         # 'city': venue.city,
         'region': area.region.name,
         'country': area.country.name,
-        # 'postcode': venue.postcode,
+        # 'postcode': venue.post_code,
         'latitude': location.latitude,
         'longitude': location.longitude,
         'timing': event.formatted_start_end_time,

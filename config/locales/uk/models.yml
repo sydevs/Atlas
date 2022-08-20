@@ -111,7 +111,6 @@ uk:
         name: "Ім'я"
         published: "Опубліковано"
         email: "Електронна адреса"
-        identifier: "Ідентифікатор фільтра"
         status: "Статус"
         statuses:
           verified: "Перевірено"
@@ -150,7 +149,6 @@ uk:
       region:
         manager_id: :activerecord.models.manager.single # Do not translate
         country_code: :activerecord.models.country.single # Do not translate
-        province_code: :activerecord.models.region.single # Do not translate
         geo_data: "Geo Data" # TODO: Translate
         osm_id: "OpenStreetMap ID" # TODO: Translate
         bounds: "Viewport" # TODO: Translate
@@ -163,7 +161,6 @@ uk:
         manager_id: :activerecord.models.manager.single # Do not translate
         name: :activerecord.attributes.generic.name # Do not translate
         country_code: :activerecord.models.country.single # Do not translate
-        province_code: :activerecord.models.region.single # Do not translate
         coordinates: "Місцеположення"
         latitude: "Широта"
         longitude: "Довгота"
@@ -179,9 +176,9 @@ uk:
         address: "Адреса"
         street: "Адреса вулиці"
         city: "Місто"
-        province_code: :activerecord.models.region.single # Do not translate
+        region_coderegion_code: :activerecord.models.region.single # Do not translate
         country_code: :activerecord.models.country.single # Do not translate
-        postcode: "Поштовий індекс"
+        post_code: "Поштовий індекс"
         coordinates: "Місцезнаходження"
         latitude: "Широта"
         longitude: "Довгота"

@@ -4,6 +4,12 @@ module VenueDecorator
     name || street
   end
 
+  def address
+    # components = (country.enable_regions? ? [street, city, region_code, country_code] : [street, city, country_code])
+    components = [street, city, region_code, country_code]
+    components.join(', ')
+  end
+
   def directions_url
     if place_id?
       "https://www.google.com/maps/dir/?api=1&destination=#{address}&destination_place_id=#{place_id}"

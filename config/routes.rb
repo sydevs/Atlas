@@ -88,11 +88,9 @@ Rails.application.routes.draw do
       resources :audits, only: %i[index]
     end
 
-    resources :venues do
+    resources :venues, only: [] do
       get :geosearch, on: :collection
       get :geocode, on: :collection
-      resources :events, only: %i[index new create]
-      resources :audits, only: %i[index]
     end
 
     resources :events do

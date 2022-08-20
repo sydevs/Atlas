@@ -32,7 +32,6 @@ ActiveRecord::Schema.define(version: 2022_08_15_180055) do
     t.float "radius"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "province_code", limit: 3
     t.date "last_activity_on"
     t.datetime "summary_email_sent_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
     t.jsonb "summary_metadata", default: "{}"
@@ -94,7 +93,7 @@ ActiveRecord::Schema.define(version: 2022_08_15_180055) do
     t.boolean "enable_custom_regions", default: false
     t.jsonb "geojson"
     t.string "osm_id"
-    t.json "translations"
+    t.json "translations", default: {}, null: false
     t.string "bounds", default: [], array: true
     t.index ["country_code"], name: "index_countries_on_country_code", unique: true
   end
@@ -156,8 +155,6 @@ ActiveRecord::Schema.define(version: 2022_08_15_180055) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "administrator"
-    t.integer "managed_countries_counter", default: 0, null: false
-    t.integer "managed_localities_counter", default: 0, null: false
     t.string "language_code", limit: 2
     t.datetime "last_login_at"
     t.boolean "email_verified"
@@ -199,15 +196,14 @@ ActiveRecord::Schema.define(version: 2022_08_15_180055) do
     t.string "country_code", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "province_code", limit: 3
     t.date "last_activity_on"
     t.datetime "summary_email_sent_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
     t.jsonb "summary_metadata", default: "{}"
     t.jsonb "geojson"
     t.string "name"
     t.string "osm_id"
-    t.json "translations"
-    t.jsonb "bounds"
+    t.json "translations", default: {}, null: false
+    t.string "bounds", default: [], array: true
   end
 
   create_table "registrations", force: :cascade do |t|
@@ -235,15 +231,13 @@ ActiveRecord::Schema.define(version: 2022_08_15_180055) do
     t.string "street"
     t.string "city"
     t.string "country_code"
-    t.string "postcode"
+    t.string "post_code"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "province_code", limit: 3
-    t.boolean "published", default: true
+    t.string "region_code", limit: 3
     t.string "place_id"
     t.date "last_activity_on"
     t.string "time_zone"
-    t.string "address", null: false
     t.index ["place_id"], name: "index_venues_on_place_id", unique: true
   end
 

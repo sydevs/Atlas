@@ -35,20 +35,29 @@ module GoogleMapsAPI
   def self.fetch_place parameters
     parameters.merge!({
       key: ENV.fetch('GOOGLE_PLACES_API_KEY'),
-      fields: 'geometry',
+      fields: 'geometry,address_components',
     })
 
     url = "https://maps.googleapis.com/maps/api/place/details/json?#{parameters.to_query}"
     response = HTTParty.get(url, { headers: { 'Content-Type': 'application/json' }, log_level: :debug })
+    puts "#{url} - #{response.pretty_inspect}"
 
     if response['result'].present?
       geometry = response['result']['geometry']
-      v = response['result']['geometry']['viewport']
       center = Geokit::LatLng.normalize(geometry['location']['lat'], geometry['location']['lng'])
 
+      address = response['result']['address_components']
+      address = address.map { |c| [c['types'][0], c['short_name']] }.to_h
+
       {
+        place_id: parameters[:placeid],
         latitude: center.lat,
         longitude: center.lng,
+        street: [address['street_number'], address['route']].join(' '),
+        city: address['locality'],
+        region_code: address['administrative_area_level_1'],
+        country_code: address['country'],
+        post_code: address['postal_code'],
       }
     else
       nil

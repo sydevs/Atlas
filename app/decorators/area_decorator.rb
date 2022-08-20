@@ -18,7 +18,6 @@ module AreaDecorator
 
   def region_name
     region.name
-    RegionDecorator.get_name(province_code, country_code) if province_code && country_code
   end
 
   def country_name format = :full
