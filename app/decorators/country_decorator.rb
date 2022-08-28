@@ -16,4 +16,12 @@ module CountryDecorator
     I18n.translate(country_code.downcase, scope: 'cms.country_codes', default: country_code)
   end
 
+  def map_path
+    Rails.application.routes.url_helpers.map_country_path(self)
+  end
+
+  def map_url
+    Rails.application.routes.url_helpers.map_country_url(self)
+  end
+
 end

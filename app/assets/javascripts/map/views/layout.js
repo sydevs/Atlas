@@ -19,7 +19,10 @@ function Layout() {
         }),
         m('.panel', {
           class: vnode.attrs.panel ? `panel--${vnode.attrs.panel}` : null
-        }, m(vnode.attrs.view, { layer: layer }))
+        }, m(vnode.attrs.view, {
+          layer: layer,
+          model: vnode.attrs.model,
+        }))
       )
     }
   }

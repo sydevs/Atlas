@@ -1,8 +1,8 @@
-/* exported AtlasArea */
+/* exported AtlasCountry */
 
 /* global Record */
 
-class AtlasArea extends AtlasRecord {
+class AtlasCountry extends AtlasRecord {
 
   constructor(attrs) {
     super(attrs)

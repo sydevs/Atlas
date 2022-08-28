@@ -125,7 +125,7 @@ de:
       region: # TODO: Translate
         polygon: "Drag / click on a faded square to add a new corner to the polygon. Click on an existing corner to remove it."
       area:
-        location: Ein "spezieller Bereich" wird via Koordinaten auf der Karte (Breitengrad und Längengrad) und einem Radius definiert, um einen Kreis festzulegen. "
+        location: "Ein \"spezieller Bereich\" wird via Koordinaten auf der Karte (Breitengrad und Längengrad) und einem Radius definiert, um einen Kreis festzulegen."
       event:
         custom_name: "Wenn Sie den Namen der Veranstaltung überschreiben möchten, können Sie dies hier tun."
         description: "Geben Sie eine Beschreibung des Programms für Sucher an. Geben Sie ihnen eine Vorstellung davon, was Sie erwarten sollen, und besondere Anweisungen, um den Veranstaltungsort zu finden, oder wenn etwas mitzubringen ist. Diese Beschreibung sollte zwischen %{min} und %{max} Zeichen sein."

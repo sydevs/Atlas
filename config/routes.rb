@@ -55,8 +55,11 @@ Rails.application.routes.draw do
     #get '/:api_key(/*path)', to: 'application#show', as: :key
 
     # For generating helpers
-    get '/venue/:venue_id', to: 'application#show', as: :venue
-    get '/:layer/:event_id', to: 'application#show', as: :event
+    get '/off/country/:event_id', to: 'application#show', as: :country
+    get '/off/region/:event_id', to: 'application#show', as: :region
+    get '/off/area/:event_id', to: 'application#show', as: :area
+    get '/off/venue/:venue_id', to: 'application#show', as: :venue
+    get '/off/event/:event_id', to: 'application#show', as: :event
   end
 
   namespace :cms do

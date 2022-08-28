@@ -1,7 +1,7 @@
 
-/* global m, Layout, MapView, ListView, EventView, VenueView */
+/* global m, Layout, MapView, ListView, EventView, VenueView, AreaView, PlaceView */
 
-const layout = function(view, attrs) {
+const layout = function(view, attrs = {}) {
   return {
     render: function() {
       attrs.view = view
@@ -20,18 +20,20 @@ document.addEventListener('DOMContentLoaded', () => {
     '/:layer': layout(ListView, {
       map: 'hidden'
     }),
+    '/:layer/country/:id': layout(CountryView),
+    '/:layer/region/:id': layout(RegionView),
     '/:layer/area/:id': layout(AreaView, {
       map: 'freeze',
-      model: 'area',
+      model: AtlasArea,
     }),
     '/:layer/venue/:id': layout(VenueView, {
       map: 'freeze',
-      model: 'venue',
+      model: AtlasVenue,
     }),
     '/:layer/event/:id': layout(EventView, {
       map: 'freeze',
       panel: 'padded',
-      model: 'event',
+      model: AtlasEvent,
     }),
   })
 })

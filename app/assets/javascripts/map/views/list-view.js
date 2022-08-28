@@ -45,7 +45,9 @@ function ListView() {
       let list = null
 
       if (events && events.length > 0) {
-        list = m(List, { events: events })
+        list = m('.list', events.map(function(event) {
+          return m(EventCard, { key: event.id, class: 'list__item', event: event })
+        }))
       } else if (vnode.attrs.layer == AtlasEvent.LAYER.offline) {
         list = m(ListFallback)
       }
@@ -67,9 +69,10 @@ function ListView() {
               const active = vnode.attrs.layer == layer
               return {
                 label: Util.translate(`navigation.desktop.${key}`),
-                href: `/${layer}`,
                 active: active,
                 badge: (key == 'online' && !active) ? onlineEventsCount : null,
+                href: '/:layer',
+                params: { layer: layer },
               }
             })
         }),

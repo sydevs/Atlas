@@ -8,7 +8,7 @@ function EventView() {
   return {
     oninit: function() {
       const id = m.route.param('id')
-      App.data.getEvent(id).then(response => {
+      App.data.getRecord(AtlasEvent, id).then(response => {
         event = response
         m.redraw()
       })

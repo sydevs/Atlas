@@ -61,6 +61,37 @@ class AtlasAPI {
           longitude
           radius
           onlineEventIds
+          offlineEventIds
+          region {
+            id
+          }
+        }`,
+        region: `on Region {
+          id
+          label
+          onlineEventIds
+          offlineEventIds
+          areas {
+            id
+            label
+            onlineEventIds
+            offlineEventIds
+          }
+          country {
+            id
+          }
+        }`,
+        country: `on Country {
+          id
+          label
+          onlineEventIds
+          offlineEventIds
+          regions {
+            id
+            label
+            onlineEventIds
+            offlineEventIds
+          }
         }`,
         geojson: `on Geojson {
           type
@@ -94,25 +125,12 @@ class AtlasAPI {
       events(ids: $ids, locale: "${window.locale}") { ...event }
     }`)
 
-    this.fetchEvent = this.graph.query(`(@autodeclare) {
-      event(id: $id, locale: "${window.locale}") { ...event }
-    }`)
-
-    this.fetchVenue = this.graph.query(`(@autodeclare) {
-      venue(id: $id, locale: "${window.locale}") { ...venue }
-    }`)
-
-    this.fetchArea = this.graph.query(`(@autodeclare) {
-      area(id: $id, locale: "${window.locale}") { ...area }
-    }`)
-
-    this.searchEvents = this.graph.query(`
-      query ($online: Boolean, $recurrence: String, $languageCode: String, locale: "${window.locale}") {
-        events(online: $online, recurrence: $recurrence, languageCode: $languageCode) {
-          ...event
-        }
-      }
-    `)
+    const models = [AtlasCountry, AtlasRegion, AtlasArea, AtlasVenue, AtlasEvent]
+    models.forEach(Model => {
+      this[`fetch${Model.label}`] = this.graph.query(`(@autodeclare) {
+        ${Model.key}(id: $id, locale: "${window.locale}") { ...${Model.key} }
+      }`)
+    })
 
     this.fetchOnlineList = this.graph.query(`(@autodeclare) {
       events(online: true, languageCode: "${window.locale}", locale: "${window.locale}") { ...event }

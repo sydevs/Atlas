@@ -7,31 +7,39 @@ module Types
     field :label, String, null: true
     field :latitude, Float, null: false
     field :longitude, Float, null: false
-    field :radius, Float, null: true, resolver_method: :get_radius
+    field :radius, Float, null: true
     field :time_zone, String, null: false
     
     field :address, String, null: false
-    field :directions_url, String, null: true, resolver_method: :get_directions_url
+    field :directions_url, String, null: true
 
-    field :events, [Types::EventType], null: false, resolver_method: :get_events
-    field :event_ids, [ID], null: false, resolver_method: :get_event_ids
+    field :events, [Types::EventType], null: false
+    field :event_ids, [ID], null: false
 
     field :created_at, GraphQL::Types::ISO8601DateTime, null: false
     field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
 
-    def get_events
-      object.events.publicly_visible.map { |event| event.extend(EventDecorator) }
+    def events
+      object.events.publicly_visible.map { |venue| venue.extend(EventDecorator) }
     end
 
-    def get_event_ids
+    def event_ids
       object.events.publicly_visible.pluck(:id)
     end
 
-    def get_radius
+    def online_event_ids
+      object.events.online.publicly_visible.pluck(:id)
+    end
+
+    def offline_event_ids
+      object.events.offline.publicly_visible.pluck(:id)
+    end
+
+    def radius
       object.try(:radius)
     end
 
-    def get_directions_url
+    def directions_url
       object.try(:directions_url)
     end
   end

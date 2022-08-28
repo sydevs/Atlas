@@ -14,6 +14,8 @@ class Region < ApplicationRecord
   has_many :areas, dependent: :delete_all
 
   has_many :events, through: :areas
+  has_many :publicly_visible_events, -> { publicly_visible }, through: :areas, class_name: 'Event'
+
   has_many :venues, through: :events
   has_many :registrations, through: :events
 
@@ -24,6 +26,8 @@ class Region < ApplicationRecord
   # Scopes
   # default_scope { order(name: :desc) }
   
+  scope :publicly_visible, -> { has_public_events }
+  scope :has_public_events, -> { joins(:publicly_visible_events) }
   scope :ready_for_summary_email, -> { where("summary_email_sent_at IS NULL OR summary_email_sent_at <= ?", PlaceMailer::SUMMARY_PERIOD.ago) }
 
   # Delegations

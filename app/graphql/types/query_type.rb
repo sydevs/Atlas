@@ -41,7 +41,13 @@ module Types
 
     field :country, CountryType, null: true do
       description 'Find a country by code'
-      argument :code, String, required: true
+      argument :id, ID, required: true
+      argument :locale, String, required: false
+    end
+
+    field :region, RegionType, null: true do
+      description 'Find a region by id'
+      argument :id, ID, required: true
       argument :locale, String, required: false
     end
 
@@ -106,9 +112,14 @@ module Types
       decorate Area.find(id)
     end
 
-    def country(code:, locale: 'en')
+    def region(id:, locale: 'en')
       I18n.locale = locale.to_sym
-      decorate Country.find_by_country_code(code)
+      decorate Region.find(id)
+    end
+
+    def country(id:, locale: 'en')
+      I18n.locale = locale.to_sym
+      decorate Country.find(id)
     end
 
     def events(ids: [], online: nil, country: nil, recurrence: nil, language_code: nil, locale: 'en')

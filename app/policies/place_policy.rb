@@ -22,4 +22,8 @@ class PlacePolicy < DatabasePolicy
     super
   end
 
+  def mappable?
+    true
+  end
+
 end

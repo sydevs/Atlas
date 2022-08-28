@@ -18,7 +18,7 @@ class Area < ApplicationRecord
   has_many :registrations, through: :events
 
   has_many :events, dependent: :delete_all
-  has_many :publicly_visible_events, -> { publicly_visible }, class_name: 'OnlineEvent'
+  has_many :publicly_visible_events, -> { publicly_visible }, class_name: 'Event'
 
   # Validations
   before_validation :set_country_code

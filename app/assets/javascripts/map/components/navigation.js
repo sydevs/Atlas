@@ -11,6 +11,7 @@ const Navigation = {
         return m(m.route.Link, {
           class: classes.join(' '),
           href: item.href,
+          params: item.params,
           'data-badge': item.badge > 0 ? item.badge : null,
         }, item.label)
       })

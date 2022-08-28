@@ -1,6 +1,6 @@
 /* exported AreaView */
 
-/* global m, List, NavigationButton, App, Util */
+/* global m, NavigationButton, App, Util */
 
 function AreaView() {
   let area = null
@@ -8,7 +8,7 @@ function AreaView() {
   return {
     oninit: function() {
       const id = m.route.param('id')
-      App.data.getArea(id).then(response => {
+      App.data.getRecord(AtlasArea, id).then(response => {
         area = response
         App.data.getEvents(area.eventIds).then(events => {
           area.events = events
@@ -23,10 +23,13 @@ function AreaView() {
         m(NavigationButton, {
           float: 'left',
           icon: 'left',
-          href: '/',
+          href: vnode.attrs.layer == AtlasEvent.LAYER.online ? '/:layer' : '/:layer/country/:id',
+          params: { layer: vnode.attrs.layer, id: area.region.id }
         }),
         m('.panel__header', Util.translate('area.header', { area: area.label })),
-        m(List, { events: area.events }),
+        m('.list', area.events.map(function(event) {
+          return m(EventCard, { key: event.id, class: 'list__item', event: event })
+        }))
       ]
     }
   }

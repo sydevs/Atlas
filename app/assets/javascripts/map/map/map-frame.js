@@ -134,7 +134,6 @@ class MapFrame extends EventTarget {
 
   showLayer(layerId) {
     layerId ||= AtlasEvent.LAYER.offline
-    console.log(layerId, this.#layers)
     if (layerId == this.#currentLayerId) return
 
     Object.values(this.#layers).forEach(layer => { layer.visible = false })

@@ -1,9 +1,9 @@
 module Types
-  class CountryType < Types::BaseObject
+  class RegionType < Types::BaseObject
     field :id, ID, null: false
     field :path, String, null: false, method: :map_path
     field :url, String, null: false, method: :map_url
-
+    
     field :label, String, null: false
     field :bounds, [Float], null: false
 
@@ -14,7 +14,7 @@ module Types
 
     field :venues, [Types::VenueType], null: false
     field :areas, [Types::AreaType], null: false
-    field :regions, [Types::RegionType], null: false
+    field :country, Types::CountryType, null: false
 
     field :created_at, GraphQL::Types::ISO8601DateTime, null: false
     field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
@@ -43,8 +43,8 @@ module Types
       object.areas.publicly_visible.map { |area| area.extend(AreaDecorator) }
     end
 
-    def regions
-      object.regions.publicly_visible.map { |region| region.extend(RegionDecorator) }
+    def country
+      object.country.extend(CountryDecorator)
     end
   end
 end

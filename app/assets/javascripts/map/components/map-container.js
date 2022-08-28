@@ -14,7 +14,7 @@ function MapContainer() {
       selectionModel = attrs.selectionModel
 
       App.data.getRecord(selectionModel, selectionId).then(function(record) {
-        if (selectionModel == 'event') record = record.location
+        if (selectionModel == AtlasEvent) record = record.location
         map.setSelection(record, options)
       })
     }

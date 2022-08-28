@@ -1,30 +1,27 @@
 /* exported DataCache */
 
-/* global AtlasAPI */
+/* global AtlasAPI, Util */
 
 class DataCache {
-  
+
   #cache
   #atlas
-  #debug = false
+  #debug = true
+  #models = [AtlasCountry, AtlasRegion, AtlasArea, AtlasVenue, AtlasEvent]
 
   constructor() {
     this.#atlas = new AtlasAPI()
     this.#cache = {
-      events: {},
-      venues: {},
-      areas: {},
       geojsons: {},
       lists: {},
       sortedLists: {},
       closestVenue: null,
       closestfetchVenue: null,
     }
-  }
 
-  searchEvents(params) {
-    console.log('[Data]', 'searching events', params) // eslint-disable-line no-console
-    return this.#atlas.searchEvents(params).then(data => data.events)
+    this.#models.forEach(Model => {
+      this.#cache[Model.key] = {}
+    })
   }
 
   getGeojson(layer) {
@@ -42,54 +39,15 @@ class DataCache {
     }
   }
 
-  getArea(id) {
-    if (id in this.#cache.areas) {
-      return Promise.resolve(this.#cache.areas[id])
-    } else {
-      if (this.#debug) console.log('[Data]', 'getting area', id) // eslint-disable-line no-console
-      return this.#atlas.fetchArea({ id: id }).then(data => {
-        const area = new AtlasArea(data.area)
-        this.#cache.areas[id] = area
-        return area
-      })
-    }
-  }
-
-  getVenue(id) {
-    if (id in this.#cache.venues) {
-      return Promise.resolve(this.#cache.venues[id])
-    } else {
-      if (this.#debug) console.log('[Data]', 'getting venue', id) // eslint-disable-line no-console
-      return this.#atlas.fetchVenue({ id: id }).then(data => {
-        const venue = new AtlasVenue(data.venue)
-        this.#cache.venues[id] = venue
-        return venue
-      })
-    }
-  }
-
-  getEvent(id) {
-    if (id in this.#cache.events) {
-      return Promise.resolve(this.#cache.events[id])
-    } else {
-      if (this.#debug) console.log('[Data]', 'getting event', id) // eslint-disable-line no-console
-      return this.#atlas.fetchEvent({ id: id }).then(data => {
-        const event = new AtlasEvent(data.event)
-        this.#cache.events[id] = event
-        return event
-      })
-    }
-  }
-
   getEvents(ids) {
-    let uncachedEventIds = ids.filter(id => !(id in this.#cache.events))
+    let uncachedEventIds = ids.filter(id => !(id in this.#cache.event))
     let fetchEvents
 
     if (uncachedEventIds.length > 0) {
       if (this.#debug) console.log('[Data]', 'getting events', ids, '(' + (1 - uncachedEventIds.length / ids.length) * 100 + '% cached)') // eslint-disable-line no-console
       fetchEvents = this.#atlas.fetchEvents({ ids: uncachedEventIds }).then(response => {
         response.events.forEach(event => {
-          this.#cache.events[event.id] = new AtlasEvent(event)
+          this.#cache.event[event.id] = new AtlasEvent(event)
         })
       })
     } else {
@@ -97,7 +55,7 @@ class DataCache {
     }
 
     return fetchEvents.then(() => {
-      return ids.map(id => this.#cache.events[id]).filter(Boolean)
+      return ids.map(id => this.#cache.event[id]).filter(Boolean)
     })
   }
 
@@ -113,7 +71,7 @@ class DataCache {
       fetchList = this.#atlas.fetchOnlineList().then(response => {
         return response.events.map(event => {
           event = new AtlasEvent(event)
-          this.#cache.events[event.id] = event
+          this.#cache.event[event.id] = event
           return event
         })
       })
@@ -148,6 +106,25 @@ class DataCache {
     })
   }
 
+  getRecord(Model, id) {
+    if (!Model || !id) return Promise.resolve(null)
+
+    if (id in this.#cache[Model.key]) {
+      return Promise.resolve(this.#cache[Model.key][id])
+    } else {
+      const fetchRecord = this.#atlas[`fetch${Model.label}`]
+
+      if (!fetchRecord) return Promise.resolve(null)
+      if (this.#debug) console.log('[Data]', 'getting', Model.key, id) // eslint-disable-line no-console
+      
+      return fetchRecord({ id: id }).then(data => {
+        const record = new Model(data[Model.key])
+        this.#cache[Model.key][id] = record
+        return record
+      })
+    }
+  }
+
   // MUTATION REQUESTS
 
   createRegistration(params) {
@@ -159,18 +136,6 @@ class DataCache {
   }
 
   // HELPER METHODS
-
-  getRecord(model, id) {
-    if (model == 'area') {
-      return this.getArea(id)
-    } else if (model == 'venue') {
-      return this.getVenue(id)
-    } else if (model == 'event') {
-      return this.getEvent(id)
-    } else {
-      return Promise.resolve(null)
-    }
-  }
 
   setCache(key, object) {
     this.#cache[key][object.id] = object
