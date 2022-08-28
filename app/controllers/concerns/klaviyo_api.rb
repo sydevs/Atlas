@@ -61,7 +61,7 @@ module KlaviyoAPI
         'date': registration.starting_at.strftime("%-d %b %Y"),
         'language': event.language_name,
         'directions_url': location.directions_url,
-        'url': Rails.application.routes.url_helpers.map_event_url(event, layer: event.layer, host: 'https://atlas.sydevelopers.com'),
+        'url': event.map_url,
       },
     })
   end

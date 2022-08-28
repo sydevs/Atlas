@@ -39,6 +39,10 @@ class Country < ApplicationRecord
     false
   end
 
+  def publicly_visible?
+    true
+  end
+
   private
 
     def validate_language_code

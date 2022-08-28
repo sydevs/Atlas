@@ -74,7 +74,7 @@ module EventDecorator
   end
 
   def map_url
-    Rails.application.routes.url_helpers.map_event_url(self, layer: online? ? 'on' : 'off')
+    Rails.application.routes.url_helpers.map_event_url(self, layer: online? ? 'on' : 'off', host: canonical_url)
   end
 
 end

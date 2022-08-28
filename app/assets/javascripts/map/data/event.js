@@ -12,7 +12,7 @@ class AtlasEvent extends AtlasRecord {
   constructor(attrs) {
     super(attrs)
     this.timing = new EventTiming(attrs)
-    this.layer = AtlasEvent.LAYER[attrs.layer]
+    this.layer = attrs.online ? AtlasEvent.LAYER.online : AtlasEvent.LAYER.offline
   }
 
   get offline() {

@@ -44,6 +44,10 @@ class Region < ApplicationRecord
     return true if country.managed_by?(manager) && super_manager != false
   end
 
+  def publicly_visible?
+    true
+  end
+
   def fetch_geo_data!
     return if osm_id.nil? || custom_geodata?
 

@@ -21,7 +21,7 @@ module AreaDecorator
   end
 
   def map_url
-    Rails.application.routes.url_helpers.map_area_url(self)
+    Rails.application.routes.url_helpers.map_area_url(self, host: canonical_url)
   end
 
 end

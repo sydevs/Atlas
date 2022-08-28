@@ -62,6 +62,10 @@ class Area < ApplicationRecord
     false
   end
 
+  def publicly_visible?
+    true
+  end
+
   def to_bounds flexible: false
     {
       latitude: latitude,

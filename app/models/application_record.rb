@@ -4,4 +4,8 @@ class ApplicationRecord < ActiveRecord::Base
 
   include Searchable
   include Parentable
+
+  def canonical_url
+    Rails.env.development? ? 'localhost:3000' : 'wemeditate.com'
+  end
 end

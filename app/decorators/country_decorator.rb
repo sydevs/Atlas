@@ -21,7 +21,7 @@ module CountryDecorator
   end
 
   def map_url
-    Rails.application.routes.url_helpers.map_country_url(self)
+    Rails.application.routes.url_helpers.map_country_url(self, host: canonical_url)
   end
 
 end

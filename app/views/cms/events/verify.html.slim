@@ -9,7 +9,7 @@
     a.ui.button href=edit_cms_event_url(@record)
       = translate('cms.actions.target.edit', resource: translate_model(@model))
     - if @context.publicly_visible?
-      a.ui.primary.button href=map_event_url(@record, layer: @record.layer)
+      a.ui.primary.button href=@record.map_url
         = translate('cms.actions.special.view_map')
     - else
       a.ui.primary.button href=cms_event_url(@record)

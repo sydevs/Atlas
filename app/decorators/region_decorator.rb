@@ -13,7 +13,7 @@ module RegionDecorator
   end
 
   def map_url
-    Rails.application.routes.url_helpers.map_region_url(self)
+    Rails.application.routes.url_helpers.map_region_url(self, host: canonical_url)
   end
 
 end
