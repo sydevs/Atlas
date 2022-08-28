@@ -11,12 +11,12 @@ class OfflineMapLayer extends AbstractMapLayer {
 
   constructor(mapbox, config) {
     super(mapbox, Object.assign({
-      id: 'offline',
+      id: AtlasEvent.LAYER.offline,
       points: {
         'icon-anchor': 'bottom',
         'icon-size': 0.85,
       },
-      fetchGeojson: App.data.getGeojson('offline'),
+      fetchGeojson: App.data.getGeojson(AtlasEvent.LAYER.offline),
     }, config))
   }
 
@@ -25,7 +25,7 @@ class OfflineMapLayer extends AbstractMapLayer {
       App.data.setCache('venues', venue)
       m.route.set('/venue/:id', { id: venue.id })
     } else {
-      m.route.set('/:layer/:id', { id: venue.eventIds[0], layer: 'offline' })
+      m.route.set('/:layer/:id', { id: venue.eventIds[0], layer: AtlasEvent.LAYER.offline })
     }
   }
 

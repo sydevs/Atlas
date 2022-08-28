@@ -33,8 +33,8 @@ class DataCache {
     } else {
       if (this.#debug) console.log('[Data]', 'getting geojson', layer) // eslint-disable-line no-console
       return this.#atlas.fetchGeojson({
-        online: layer == 'online',
-        languageCode: (layer == 'online' ? window.locale : null),
+        online: layer == AtlasEvent.LAYER.online,
+        languageCode: (layer == AtlasEvent.LAYER.online ? window.locale : null),
       }).then(data => {
         this.#cache.geojsons[layer] = data.geojson
         return data.geojson
@@ -108,7 +108,7 @@ class DataCache {
       return Promise.resolve(this.#cache.sortedLists[layer])
     } else if (layer in this.#cache.lists) {
       fetchList = Promise.resolve(this.#cache.lists[layer])
-    } else if (layer == 'online') {
+    } else if (layer == AtlasEvent.LAYER.online) {
       if (this.#debug) console.log('[Data]', 'getting list', layer) // eslint-disable-line no-console
       fetchList = this.#atlas.fetchOnlineList().then(response => {
         return response.events.map(event => {

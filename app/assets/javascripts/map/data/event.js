@@ -4,9 +4,19 @@
 
 class AtlasEvent extends AtlasRecord {
 
+  static LAYER = {
+    online: 'on',
+    offline: 'off',
+  }
+
   constructor(attrs) {
     super(attrs)
     this.timing = new EventTiming(attrs)
+    this.layer = AtlasEvent.LAYER[attrs.layer]
+  }
+
+  get offline() {
+    return !this.online
   }
 
   get order() {

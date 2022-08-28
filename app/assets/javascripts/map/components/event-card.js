@@ -12,12 +12,12 @@ function EventCard() {
     view: function(vnode) {
       const event = vnode.attrs.event
       let language = Util.translate(`language_codes.${event.languageCode.toLowerCase()}`) || event.languageCode
-      let distance = event.layer == 'offline' && App.map.userLocation && event.distanceTo(App.map.userLocation)
+      let distance = event.offline && App.map.userLocation && event.distanceTo(App.map.userLocation)
       
       return m(m.route.Link,
         {
           class: `card ${vnode.attrs.class}`,
-          href: '/:layer/:id',
+          href: '/:layer/event/:id',
           params: { layer: event.layer, id: event.id },
         },
         m('.card__content',

@@ -90,12 +90,12 @@ class AtlasAPI {
       geojson(online: $online, languageCode: $languageCode, locale: "${window.locale}") { ...geojson }
     }`)
 
-    this.fetchEvent = this.graph.query(`(@autodeclare) {
-      event(id: $id, locale: "${window.locale}") { ...event }
-    }`)
-
     this.fetchEvents = this.graph.query(`($ids: [ID!]) {
       events(ids: $ids, locale: "${window.locale}") { ...event }
+    }`)
+
+    this.fetchEvent = this.graph.query(`(@autodeclare) {
+      event(id: $id, locale: "${window.locale}") { ...event }
     }`)
 
     this.fetchVenue = this.graph.query(`(@autodeclare) {

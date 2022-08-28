@@ -11,7 +11,7 @@ class OnlineMapLayer extends AbstractMapLayer {
 
   constructor(mapbox, config) {
     super(mapbox, Object.assign({
-      id: 'online',
+      id: AtlasEvent.LAYER.online,
       points: {
         'text-field': '',
         'icon-image': 'cluster',
@@ -20,7 +20,7 @@ class OnlineMapLayer extends AbstractMapLayer {
       selection: {
         'text-field': '',
       },
-      fetchGeojson: App.data.getGeojson('online'),
+      fetchGeojson: App.data.getGeojson(AtlasEvent.LAYER.online),
     }, config))
   }
 
@@ -35,7 +35,7 @@ class OnlineMapLayer extends AbstractMapLayer {
       App.data.setCache('areas', area)
       m.route.set('/area/:id', { id: area.id })
     } else {
-      m.route.set('/:layer/:id', { id: area.eventIds[0], layer: 'online' })
+      m.route.set('/:layer/:id', { id: area.eventIds[0], layer: AtlasEvent.LAYER.online })
     }
   }
 

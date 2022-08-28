@@ -54,10 +54,9 @@ class MapFrame extends EventTarget {
 
     this.#mapbox.on('load', () => {
       initalizing = false
-      this.#layers = {
-        online: new OnlineMapLayer(this.#mapbox),
-        offline: new OfflineMapLayer(this.#mapbox),
-      }
+      this.#layers = {}
+      this.#layers[AtlasEvent.LAYER.online] = new OnlineMapLayer(this.#mapbox)
+      this.#layers[AtlasEvent.LAYER.offline] = new OfflineMapLayer(this.#mapbox)
 
       this.showLayer(config.layer)
       this.loadControlLayers()
@@ -134,7 +133,8 @@ class MapFrame extends EventTarget {
   }
 
   showLayer(layerId) {
-    layerId ||= 'offline'
+    layerId ||= AtlasEvent.LAYER.offline
+    console.log(layerId, this.#layers)
     if (layerId == this.#currentLayerId) return
 
     Object.values(this.#layers).forEach(layer => { layer.visible = false })
@@ -153,7 +153,7 @@ class MapFrame extends EventTarget {
         }, options))
       } else {
         this.goTo(location, Object.assign({
-          zoom: this.#currentLayerId == 'online' ? 7 : 16,
+          zoom: this.#currentLayerId == AtlasEvent.LAYER.online ? 7 : 16,
           transition: true,
         }, options))
       }

@@ -45,7 +45,7 @@ function MapContainer() {
 
   return {
     oncreate: function(vnode) {
-      layer = vnode.attrs.layer || 'offline'
+      layer = vnode.attrs.layer || AtlasEvent.LAYER.offline
       map = new MapFrame('map', {
         layer: vnode.attrs.layer,
       })

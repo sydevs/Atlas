@@ -8,7 +8,7 @@ function MapView() {
 
   return {
     view: function(vnode) {
-      App.data.getList('online').then(events => {
+      App.data.getList(AtlasEvent.LAYER.online).then(events => {
         onlineEventsCount = events.length
         m.redraw()
       })
@@ -18,7 +18,7 @@ function MapView() {
           offlineEventsCount = eventIds.length
 
           if (offlineEventsCount > 0 && !Util.isDevice('mobile')) {
-            m.route.set('/offline')
+            m.route.set(`/${AtlasEvent.LAYER.offline}`)
           }
         }, _error => {
           offlineEventsCount = null
@@ -33,13 +33,13 @@ function MapView() {
       return [
         m(Search, { floating: true }),
         m(Navigation, {
-          items: ['offline', 'online'].map((layer) => {
+          items: Object.entries(AtlasEvent.LAYER).map(([key, layer]) => {
             const active = vnode.attrs.layer == layer
             return {
-              label: Util.translate(`navigation.desktop.${layer}`),
+              label: Util.translate(`navigation.desktop.${key}`),
               href: `/${layer}`,
               active: active,
-              badge: active ? null : (layer == 'online' ? onlineEventsCount : offlineEventsCount),
+              badge: active ? null : (key == 'online' ? onlineEventsCount : offlineEventsCount),
             }
           })
         }),

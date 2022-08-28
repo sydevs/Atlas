@@ -8,13 +8,13 @@ function ListView() {
   let layer = null
 
   function updateEvents() {
-    if (layer == 'online') {
-      return App.data.getList('online').then(response => {
+    if (layer == AtlasEvent.LAYER.online) {
+      return App.data.getList(AtlasEvent.LAYER.online).then(response => {
         events = response
       })
     } else {
       return App.map.getRenderedEventIds().then(eventIds => {
-        return eventIds.length > 0 ? App.data.getList('offline', eventIds) : []
+        return eventIds.length > 0 ? App.data.getList(AtlasEvent.LAYER.offline, eventIds) : []
       }).then(response => {
         events = response
       }).catch(() => {
@@ -46,11 +46,11 @@ function ListView() {
 
       if (events && events.length > 0) {
         list = m(List, { events: events })
-      } else if (vnode.attrs.layer == 'offline') {
+      } else if (vnode.attrs.layer == AtlasEvent.LAYER.offline) {
         list = m(ListFallback)
       }
 
-      App.data.getList('online').then(events => {
+      App.data.getList(AtlasEvent.LAYER.online).then(events => {
         onlineEventsCount = events.length
         m.redraw()
       })
@@ -63,13 +63,13 @@ function ListView() {
               label: Util.translate('navigation.mobile.back'),
               href: '/',
             }] :
-            ['offline', 'online'].map(layer => {
+            Object.entries(AtlasEvent.LAYER).map(([key, layer]) => {
               const active = vnode.attrs.layer == layer
               return {
-                label: Util.translate(`navigation.desktop.${layer}`),
+                label: Util.translate(`navigation.desktop.${key}`),
                 href: `/${layer}`,
                 active: active,
-                badge: (layer == 'online' && !active) ? onlineEventsCount : null,
+                badge: (key == 'online' && !active) ? onlineEventsCount : null,
               }
             })
         }),

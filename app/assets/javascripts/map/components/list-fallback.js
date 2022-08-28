@@ -35,11 +35,13 @@ function ListFallback() {
         ),
         mode == 'online' ?
           m(m.route.Link, {
-            href: 'online',
+            href: '/:layer',
+            params: { layer: AtlasEvent.LAYER.online },
             class: 'list-fallback__link',
           }, Util.translate('list.fallback.online_event')) :
           m(m.route.Link, {
-            href: `/venue/${venue.id}`,
+            href: '/:layer/venue/:id',
+            params: { layer: AtlasEvent.LAYER.offline, id: venue.id },
             class: 'list-fallback__link',
           }, venue.label)
       )

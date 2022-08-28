@@ -16,22 +16,19 @@ document.addEventListener('DOMContentLoaded', () => {
     '/': layout(MapView, {
       map: 'fullscreen',
       panel: 'overflow',
-      layer: 'offline',
-    }),
-    '/area/:id': layout(AreaView, {
-      map: 'freeze',
-      model: 'area',
-      layer: 'online',
-    }),
-    '/venue/:id': layout(VenueView, {
-      map: 'freeze',
-      model: 'venue',
-      layer: 'offline',
     }),
     '/:layer': layout(ListView, {
       map: 'hidden'
     }),
-    '/:layer/:id': layout(EventView, {
+    '/:layer/area/:id': layout(AreaView, {
+      map: 'freeze',
+      model: 'area',
+    }),
+    '/:layer/venue/:id': layout(VenueView, {
+      map: 'freeze',
+      model: 'venue',
+    }),
+    '/:layer/event/:id': layout(EventView, {
       map: 'freeze',
       panel: 'padded',
       model: 'event',

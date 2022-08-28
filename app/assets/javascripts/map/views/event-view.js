@@ -26,7 +26,7 @@ function EventView() {
         m(NavigationButton, {
           float: 'right',
           icon: 'share',
-          href: `/:layer/:id?share=1`,
+          href: `/:layer/event/:id?share=1`,
           params: { id: event.id, layer: event.layer },
         }),
         m(EventInfo, event),
