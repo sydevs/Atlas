@@ -20,10 +20,10 @@ class AtlasEvent extends AtlasRecord {
   }
 
   get order() {
-    let order = this.distance
+    let order = this.distanceTo(App.map.sortLocation)
     if (window.locale != this.languageCode) order *= 1.2
     if (this.timing.startingSoon) order *= 0.5
-    return this.distanceTo(App.map.sortLocation)
+    return order
   }
 
   distanceTo(location) {
