@@ -146,8 +146,11 @@ class MapFrame extends EventTarget {
       this.#currentLayer.setSelection(location)
       if (!location) {
         this.#mapbox.easeTo({ zoom: this.#mapbox.getZoom() * 0.75 })
+        window.document.title = Util.translate('atlas')
         return
       }
+
+      window.document.title = location.label
 
       if (location.bounds || (location.radius && location.radius != 'null')) {
         this.fitTo(location, Object.assign({
