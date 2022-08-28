@@ -48,11 +48,7 @@ Rails.application.routes.draw do
 
   namespace :map do
     root to: 'application#show'
-    #get :index, to: 'application#index'
-    #get 'index/:api_key', to: 'application#index', as: :index_key
-
     get '(*path)', to: 'application#show'
-    #get '/:api_key(/*path)', to: 'application#show', as: :key
 
     # For generating helpers
     get '/off/country/:country_id', to: 'application#show', as: :country
