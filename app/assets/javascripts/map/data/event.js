@@ -5,8 +5,8 @@
 class AtlasEvent extends AtlasRecord {
 
   static LAYER = {
-    offline: 'off',
-    online: 'on',
+    offline: 'f',
+    online: 'n',
   }
 
   constructor(attrs) {

@@ -51,11 +51,11 @@ Rails.application.routes.draw do
     get '(*path)', to: 'application#show'
 
     # For generating helpers
-    get '/off/country/:country_id', to: 'application#show', as: :country
-    get '/off/region/:region_id', to: 'application#show', as: :region
-    get '/off/area/:area_id', to: 'application#show', as: :area
-    get '/off/venue/:venue_id', to: 'application#show', as: :venue
-    get '/off/event/:event_id', to: 'application#show', as: :event
+    get '/country/:country_id', to: 'application#show', as: :country
+    get '/region/:region_id', to: 'application#show', as: :region
+    get '/area/:area_id', to: 'application#show', as: :area
+    get '/venue/:venue_id', to: 'application#show', as: :venue
+    get '/event/:event_id', to: 'application#show', as: :event
   end
 
   namespace :cms do
