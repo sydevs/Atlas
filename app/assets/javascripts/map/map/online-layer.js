@@ -26,7 +26,7 @@ class OnlineMapLayer extends AbstractMapLayer {
 
   load() {
     // These bounds contain most of the inhabited world.
-    this._mapbox.fitBounds([-180, -55, 180, 70])
+    //this._mapbox.fitBounds([-180, -55, 180, 70])
     return super.load()
   }
 

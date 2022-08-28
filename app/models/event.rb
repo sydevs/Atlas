@@ -67,7 +67,7 @@ class Event < ApplicationRecord
 
   # Callbacks
   before_validation :find_venue, unless: :online?
-  before_save -> { venue.id = Venue.select(:id).find_by_place_id(venue.place_id).id }
+  before_save -> { venue.id = Venue.select(:id).find_by_place_id(venue.place_id).id }, unless: :online?
   after_save :verify_manager
 
   # Methods

@@ -20,8 +20,12 @@ document.addEventListener('DOMContentLoaded', () => {
     '/:layer': layout(ListView, {
       map: 'hidden'
     }),
-    '/:layer/country/:id': layout(CountryView),
-    '/:layer/region/:id': layout(RegionView),
+    '/:layer/country/:id': layout(CountryView, {
+      model: AtlasCountry,
+    }),
+    '/:layer/region/:id': layout(RegionView, {
+      model: AtlasRegion,
+    }),
     '/:layer/area/:id': layout(AreaView, {
       map: 'freeze',
       model: AtlasArea,

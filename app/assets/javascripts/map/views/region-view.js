@@ -25,6 +25,7 @@ function RegionView() {
         }),
         m('.panel__header', region.label),
         m(Navigation, {
+          optional: true,
           items: Object.entries(AtlasEvent.LAYER).map(([key, layer]) => {
             const active = vnode.attrs.layer == layer
             const count = (key == 'online' ? region.onlineEventIds.length : region.offlineEventIds.length)
@@ -42,7 +43,6 @@ function RegionView() {
           if (!count) return
 
           return m(SimpleCard, {
-            key: area.id,
             class: 'list__item',
             id: area.id,
             label: area.label,

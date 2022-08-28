@@ -70,11 +70,11 @@ module EventDecorator
   end
 
   def map_path
-    Rails.application.routes.url_helpers.map_event_path(self, layer: online ? 'on' : 'off')
+    Rails.application.routes.url_helpers.map_event_path(self, layer: online? ? 'on' : 'off')
   end
 
   def map_url
-    Rails.application.routes.url_helpers.map_event_url(self, layer: online ? 'on' : 'off')
+    Rails.application.routes.url_helpers.map_event_url(self, layer: online? ? 'on' : 'off')
   end
 
 end

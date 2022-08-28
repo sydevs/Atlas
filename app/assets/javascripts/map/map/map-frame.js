@@ -146,7 +146,7 @@ class MapFrame extends EventTarget {
       this.#currentLayer.setSelection(location)
       if (!location) return
 
-      if (location.radius && location.radius != 'null') {
+      if (location.bounds || (location.radius && location.radius != 'null')) {
         this.fitTo(location, Object.assign({
           transition: true
         }, options))
@@ -187,13 +187,17 @@ class MapFrame extends EventTarget {
     }
   }
 
-  fitTo(bounds, options = {}) {
-    if (!bounds) return
+  fitTo(location, options = {}) {
+    if (!location) return
+    let bounds
     
-    if (bounds.radius) {
-      bounds = new mapboxgl.LngLat(bounds.longitude, bounds.latitude).toBounds(bounds.radius * 1000)
+    if (location.radius) {
+      bounds = new mapboxgl.LngLat(location.longitude, location.latitude).toBounds(location.radius * 1000)
+    } else if (location.bounds) {
+      bounds = location.bounds
+      bounds = [[bounds[2], bounds[0]], [bounds[3], bounds[1]]]
     } else {
-      bounds = [[bounds.west, bounds.south], [bounds.east, bounds.north]]
+      bounds = [[location.west, location.south], [location.east, location.north]]
     }
 
     //this.updatePadding()

@@ -4,8 +4,14 @@
 
 const Navigation = {
   view: function(vnode) {
+    const items = vnode.attrs.items
+
+    if (vnode.attrs.optional && !items.every(item => item.badge > 0)) {
+      return
+    }
+
     return m('.navigation',
-      vnode.attrs.items.map(function(item) {
+      items.map(function(item) {
         let classes = ['navigation__item']
         if (item.active) classes.push('navigation__item--active')
         return m(m.route.Link, {
