@@ -34,7 +34,7 @@ const AreaSearch = {
         this.$longitude.val(data.longitude.toFixed(3)).trigger('change')
         this.$radius.val(data.radius.toFixed(2)).trigger('change')
 
-        if (Map.instance) Map.instance.invalidate()
+        if (PreviewMap.instance) PreviewMap.instance.invalidate()
       },
       error: (data) => {
         this.$search.search('display message', data, 'message')

@@ -1,7 +1,7 @@
 /* global $, L */
-/* exported Map */
+/* exported PreviewMap */
 
-class Map {
+class PreviewMap {
   #container
   #data = {}
   #leaflet
@@ -17,7 +17,7 @@ class Map {
   }
 
   constructor(container) {
-    console.log('Loading Map') // eslint-disable-line no-console
+    console.log('Loading PreviewMap') // eslint-disable-line no-console
     this.#container = container
     this.#data = container.dataset
     this.#leaflet = L.map(container.id, {
@@ -110,10 +110,6 @@ class Map {
 
     this.#layer = L.marker([latitude, longitude]).addTo(this.#leaflet)
     this.#leaflet.setView([latitude, longitude], 13)
-
-    /*if (VenueMap.messages) {
-      VenueMap.messages.filter('.for-success').removeClass('hidden')
-    }*/
   }
 
   setGeojson(geojson) {
@@ -220,6 +216,6 @@ class Map {
 $(document).on('ready', function() {
   const map = document.getElementById('map')
   if (map) {
-    Map.instance = new Map(map)
+    PreviewMap.instance = new PreviewMap(map)
   }
 })

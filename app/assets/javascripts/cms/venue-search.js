@@ -44,7 +44,7 @@ const VenueSearch = {
       success: (data) => {
         this.setInputs(data)
 
-        if (Map.instance) Map.instance.invalidate()
+        if (PreviewMap.instance) PreviewMap.instance.invalidate()
       },
       error: (data) => {
         this.$search.search('display message', data, 'message')
