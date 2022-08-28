@@ -14,7 +14,7 @@ class CleanUpDatabase < ActiveRecord::Migration[6.1]
     reversible do |dir|
       dir.up do
         [Country, Region].each do |model|
-          model.where(translations: nil).update_all(translations: {})
+          model.where(translations: nil).update_all(translations: '{}')
           change_column model.table_name, :translations, :json, default: {}, null: false
           change_column model.table_name, :osm_id, :string, null: true
           model.where(osm_id: '0').update_all(osm_id: 'custom')
