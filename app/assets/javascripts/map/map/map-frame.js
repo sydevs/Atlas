@@ -119,7 +119,7 @@ class MapFrame extends EventTarget {
   }
 
   _setupHooks() {
-    //window.addEventListener('resize', _event => this.updatePadding())
+    window.addEventListener('resize', _event => this.#updatePadding())
     this.#mapbox.on('render', _event => this.dispatchEvent(new Event('update')))
     this.#mapbox.on('movestart', _event => this.dispatchEvent(new Event('movestart')))
     this.#mapbox.on('move', _event => this.dispatchEvent(new Event('move')))
@@ -186,6 +186,7 @@ class MapFrame extends EventTarget {
       zoom: options.zoom || 16,
     }
 
+    this.#updatePadding()
     if (Util.isDevice('mobile') || options.transition == false) {
       this.#mapbox.jumpTo(args)
     } else {
@@ -206,7 +207,7 @@ class MapFrame extends EventTarget {
       bounds = [[location.west, location.south], [location.east, location.north]]
     }
 
-    //this.updatePadding()
+    this.#updatePadding()
     this.#mapbox.fitBounds(bounds, {
       animate: options.transition && !Util.isDevice('mobile'),
     })
@@ -229,6 +230,25 @@ class MapFrame extends EventTarget {
   getCenter() {
     const center = this.#mapbox.getCenter()
     return { latitude: center.lat, longitude: center.lng }
+  }
+
+  #updatePadding() {
+    let padding = {}
+    const basePadding = 5
+
+    if (Util.isDevice('mobile')) {
+      padding = { top: 80 }
+    } else if (Util.isDevice('desktop')) {
+      padding = { left: 532 + basePadding }
+    }
+
+    ['top', 'left', 'bottom', 'right'].forEach(side => {
+      if (typeof padding[side] === 'undefined') {
+        padding[side] = basePadding
+      }
+    })
+
+    this.#mapbox.setPadding(padding)
   }
 
 }
