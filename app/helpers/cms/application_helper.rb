@@ -2,8 +2,8 @@ module CMS::ApplicationHelper
 
   MODEL_ICONS = {
     countries: 'globe americas',
-    provinces: 'map',
-    local_areas: 'dot circle',
+    regions: 'map',
+    areas: 'dot circle',
     venues: 'map marker',
     events: 'calendar',
     managers: 'user secret',
@@ -28,6 +28,12 @@ module CMS::ApplicationHelper
     recently_expired: 'warning sign',
     expired: 'info circle',
   }.freeze
+
+  PLACE_MODELS = %i[
+    countries
+    regions
+    areas
+  ]
 
   def floating_action text, icon = nil, url = nil, **args
     klass = %w[ui basic right floated compact tiny button]
@@ -65,10 +71,14 @@ module CMS::ApplicationHelper
   end
 
   def breadcrumb_url ancestor
-    if action_name == 'index' && policy(ancestor).index_association?(controller_name)
+    if action_name == 'index' && PLACE_MODELS.include?(controller_name.to_sym)
+      PLACE_MODELS.each do |model|
+        return url_for([:cms, ancestor, model]) if policy(ancestor).index_association?(model)
+      end
+    elsif @context.is_a?(Manager) && !ancestor.is_a?(Event)
+      url_for([:cms, ancestor, :managers])
+    elsif action_name == 'index' && policy(ancestor).index_association?(controller_name)
       url_for([:cms, ancestor, controller_name.to_sym])
-    elsif action_name == 'regions' && policy(ancestor).index_association?(:regions)
-      url_for([:cms, ancestor, :regions])
     else
       url_for([:cms, ancestor])
     end

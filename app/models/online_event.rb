@@ -1,15 +1,14 @@
 class OnlineEvent < Event
   # Associations
-  belongs_to :local_area, foreign_key: :location_id
-  acts_as_mappable through: :local_area
+  belongs_to :area
+  acts_as_mappable through: :area
 
-  # Validations
-  validates :location_type, presence: true, inclusion: { in: ['LocalArea'] }
-  validates :online_url, presence: true
+  # Scopes
+  default_scope { online }
+  scope :with_location, -> (country_code) { joins(:area).where_country(country_code) }
+  scope :where_country, -> (country_code) { where(areas: { country_code: country_code }) if country_code }
 
   # Delegations
-  alias parent local_area
-
-  # Callbacks
-  before_save -> { self[:location_type] = 'LocalArea' }
+  alias location area
+  delegate :latitude, :longitude, to: :area
 end

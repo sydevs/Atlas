@@ -8,7 +8,7 @@ de:
 
   activerecord:
     models:
-      # Regions
+      # Places
       country:
         # Basic pluralization
         single: "Land"
@@ -16,20 +16,20 @@ de:
         # Countable
         one: "Land"
         other: "Ländern"
-      province:
+      region:
         # Basic pluralization
         single: "Region"
         plural: "Regionen"
         # Countable
         one: "Region"
         other: "Regionen"
-      local_area:
+      area: # TODO: Translate
         # Basic pluralization
-        single: "Bereich"
-        plural: "Bereiche"
+        single: "City Area"
+        plural: "City Areas"
         # Countable
-        one: "Bereich"
-        other: "Bereiche"
+        one: "city"
+        other: "cities"
 
       # Events
       venue:
@@ -46,6 +46,20 @@ de:
         # Countable
         one: "Event"
         other: "Ereignisse"
+      online_event: # TODO: Translate
+        # Basic pluralization
+        single: "Online Event"
+        plural: "Online Events"
+        # Countable
+        one: "online event"
+        other: "online events"
+      offline_event: # TODO: Translate
+        # Basic pluralization
+        single: "In-Person Event"
+        plural: "In-Person Events"
+        # Countable
+        one: "in-person event"
+        other: "in-person events"
       registration:
         # Basic pluralization
         single: "Teilnehmer"
@@ -62,6 +76,13 @@ de:
         # Countable
         one: "Manager"
         other: "Manager"
+      managed_record: # TODO: Translate
+        # Basic pluralization
+        single: "Responsibility"
+        plural: "Responsibilities"
+        # Countable
+        one: "responsibility"
+        other: "responsibilities"
       audit:
         # Basic pluralization
         single: "Geschichte"
@@ -90,7 +111,6 @@ de:
         published: "Veröffentlicht"
         email: "E-Mail-Adresse"
         phone: "Telefonnummer"
-        identifier: "Filterbezeichner"
         status: "Status"
         statuses:
           verified: "Verifiziert"
@@ -111,28 +131,36 @@ de:
         finished_at: "Fertig bei"
         updated_at: "Aktualisiert"
 
-      # Regions
-      country:
+      # Places
+      country: # TODO: Translate
         manager_id: :activerecord.models.manager.single # Do not translate
         country_code: :activerecord.models.country.single # Do not translate
         default_language_code: "Veranstaltungs Sprache"
-        enable_province_management: "Regionales Management aktivieren"
-        bounds: "Grenzen"
+        enable_regions: "Regionales Management aktivieren"
+        enable_custom_regions: "Allow Custom Region Creation"
+        geo_data: "Geo Data"
+        osm_id: "OpenStreetMap ID"
+        bounds: "Viewport" # TODO: Translate
+        geojson: "Borders"
+        translations: "Translations"
         last_activity_on: :activerecord.attributes.generic.last_activity_on # Do not translate
         summary_email_sent_at: :activerecord.attributes.generic.summary_email_sent_at # Do not translate
 
-      province:
+      region:
         manager_id: :activerecord.models.manager.single # Do not translate
         country_code: :activerecord.models.country.single # Do not translate
-        province_code: :activerecord.models.province.single # Do not translate
+        geo_data: "Geo Data" # TODO: Translate
+        osm_id: "OpenStreetMap ID" # TODO: Translate
+        bounds: "Viewport" # TODO: Translate
+        geojson: "Borders" # TODO: Translate
+        translations: "Translations" # TODO: Translate
         last_activity_on: :activerecord.attributes.generic.last_activity_on # Do not translate
         summary_email_sent_at: :activerecord.attributes.generic.summary_email_sent_at # Do not translate
 
-      local_area:
+      area:
         manager_id: :activerecord.models.manager.single # Do not translate
         name: :activerecord.attributes.generic.name # Do not translate
         country_code: :activerecord.models.country.single # Do not translate
-        province_code: :activerecord.models.province.single # Do not translate
         coordinates: "Lage"
         latitude: "Breite"
         longitude: "Länge"
@@ -143,14 +171,14 @@ de:
       # Events
       venue:
         published: :activerecord.attributes.generic.published # Do not translate
-        name: "Gebäude Namen (optional)"
+        name: "Gebäude Namen"
         manager_id: :activerecord.models.manager.single # Do not translate
         address: "Addresse"
         street: "Straßennamen"
         city: "Stadt"
-        province_code: :activerecord.models.province.single # Do not translate
+        region_code: :activerecord.models.region.single # Do not translate
         country_code: :activerecord.models.country.single # Do not translate
-        postcode: "Postleitzahl"
+        post_code: "Postleitzahl"
         coordinates: "Lage"
         latitude: "Breite"
         longitude: "Länge"

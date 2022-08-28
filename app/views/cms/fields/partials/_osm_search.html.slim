@@ -1,0 +1,9 @@
+
+.field id='js-osm-search' data=data
+  .ui.search
+    .ui.left.icon.action.input
+      i.search.icon
+      input.prompt type='text' name='query' placeholder=translate('cms.hints.geosearch.prompt')
+      button.ui.submit.button = translate('cms.actions.simple.search')
+
+  table.ui.very.basic.unstackable.table data-empty=translate('cms.hints.not_found')

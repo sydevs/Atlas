@@ -29,8 +29,8 @@ class DatabasePolicy < ApplicationPolicy
   end
 
   def index_association? association = nil
-    return record.region_association? if association == :regions
     return false unless manage?
+    return false if association == :managed_records
 
     record.respond_to?(association)
   end
@@ -46,6 +46,14 @@ class DatabasePolicy < ApplicationPolicy
     return true if update? && association == :pictures
 
     false
+  end
+
+  def search?
+    index?
+  end
+
+  def geosearch?
+    user.present?
   end
 
 end

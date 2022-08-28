@@ -12,52 +12,52 @@ h2
 = render 'mail/application/stats', stats: @stats, old_stats: @old_stats
 
 table.data
-  - if @new_provinces.present? || @new_local_areas.present?
+  - if @new_regions.present? || @new_areas.present?
     tr
-      th = translate('mail.summary.data.new_regions')
+      th = translate('mail.summary.data.new_places')
       td
-        - @new_provinces.each do |province|
+        - @new_regions.each do |region|
           div
-            = link_to ProvinceDecorator.get_name(province.province_code, province.country.country_code), email_login(cms_province_url(province))
-        - @new_local_areas.each do |local_area|
+            = link_to RegionDecorator.get_name(region.province_code, region.country.country_code), email_login(cms_region_url(region))
+        - @new_areas.each do |area|
           div
-            = link_to local_area.name, email_login(cms_local_area_url(local_area))
-  - if @new_province_managers.present? || @new_local_area_managers.present?
+            = link_to area.name, email_login(cms_area_url(area))
+  - if @new_region_managers.present? || @new_area_managers.present?
     tr
       th = translate('mail.summary.data.new_managers')
       td
-        - @new_province_managers.each do |managed_record|
+        - @new_region_managers.each do |managed_record|
           - manager = managed_record.manager
           - record = managed_record.record
           div
             = link_to manager.name, email_login(cms_manager_url(manager))
-            - if record.is_a?(Province)
-              |  (#{ProvinceDecorator.get_name(record.province_code, record.country.country_code)})
+            - if record.is_a?(Region)
+              |  (#{RegionDecorator.get_name(record.province_code, record.country.country_code)})
             - else
               |  (#{record.name})
               
-        - @new_local_area_managers.each do |managed_record|
+        - @new_area_managers.each do |managed_record|
           - manager = managed_record.manager
           - record = managed_record.record
           div
             = link_to manager.name, email_login(cms_manager_url(manager))
-            - if record.is_a?(Province)
-              |  (#{ProvinceDecorator.get_name(record.province_code, record.country.country_code)})
+            - if record.is_a?(Region)
+              |  (#{RegionDecorator.get_name(record.province_code, record.country.country_code)})
             - else
               |  (#{record.name})
   
-  - if @inactive_provinces.present? || @inactive_local_areas.present?
+  - if @inactive_regions.present? || @inactive_areas.present?
     tr
       th = translate('mail.summary.data.inactive_regions')
       td
-        - @inactive_provinces.each do |province|
+        - @inactive_regions.each do |region|
           div
-            = link_to ProvinceDecorator.get_name(province.province_code, province.country.country_code), email_login(cms_province_url(province))
-            |  (#{time_ago_in_words province.last_activity_on})
-        - @inactive_local_areas.each do |local_area|
+            = link_to RegionDecorator.get_name(region.province_code, region.country.country_code), email_login(cms_region_url(region))
+            |  (#{time_ago_in_words region.last_activity_on})
+        - @inactive_areas.each do |area|
           div
-            = link_to local_area.name, email_login(cms_local_area_url(local_area))
-            |  (#{time_ago_in_words local_area.last_activity_on})
+            = link_to area.name, email_login(cms_area_url(area))
+            |  (#{time_ago_in_words area.last_activity_on})
 
 .actions
   a.button href=email_login(cms_country_url(@country))

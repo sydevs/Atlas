@@ -8,7 +8,7 @@ en:
 
   activerecord:
     models:
-      # Regions
+      # Places
       country:
         # Basic pluralization
         single: "Country"
@@ -16,20 +16,20 @@ en:
         # Countable
         one: "country"
         other: "countries"
-      province:
+      region:
         # Basic pluralization
         single: "Region"
         plural: "Regions"
         # Countable
         one: "region"
         other: "regions"
-      local_area:
+      area:
         # Basic pluralization
-        single: "Area"
-        plural: "Areas"
+        single: "City Area"
+        plural: "City Areas"
         # Countable
-        one: "area"
-        other: "areas"
+        one: "city"
+        other: "cities"
 
       # Events
       venue:
@@ -46,6 +46,20 @@ en:
         # Countable
         one: "event"
         other: "events"
+      online_event:
+        # Basic pluralization
+        single: "Online Event"
+        plural: "Online Events"
+        # Countable
+        one: "online event"
+        other: "online events"
+      offline_event:
+        # Basic pluralization
+        single: "In-Person Event"
+        plural: "In-Person Events"
+        # Countable
+        one: "in-person event"
+        other: "in-person events"
       registration:
         # Basic pluralization
         single: "Attendee"
@@ -62,6 +76,13 @@ en:
         # Countable
         one: "manager"
         other: "managers"
+      managed_record:
+        # Basic pluralization
+        single: "Responsibility"
+        plural: "Responsibilities"
+        # Countable
+        one: "responsibility"
+        other: "responsibilities"
       audit:
         # Basic pluralization
         single: "History"
@@ -90,7 +111,6 @@ en:
         published: "Published"
         email: "Email Address"
         phone: "Phone Number"
-        identifier: "Filter Identifier"
         status: "Status"
         statuses:
           verified: "Verified"
@@ -111,28 +131,36 @@ en:
         finished_at: "Finished At"
         updated_at: "Updated At"
 
-      # Regions
+      # Places
       country:
         manager_id: :activerecord.models.manager.single # Do not translate
         country_code: :activerecord.models.country.single # Do not translate
         default_language_code: "Default Event Language"
-        enable_province_management: "Enable Regional Management"
-        bounds: "Bounds"
+        enable_regions: "Enable Regional Management"
+        enable_custom_regions: "Allow Custom Region Creation"
+        geo_data: "Geo Data"
+        osm_id: "OpenStreetMap ID"
+        bounds: "Viewport"
+        geojson: "Borders"
+        translations: "Translations"
         last_activity_on: :activerecord.attributes.generic.last_activity_on # Do not translate
         summary_email_sent_at: :activerecord.attributes.generic.summary_email_sent_at # Do not translate
 
-      province:
+      region:
         manager_id: :activerecord.models.manager.single # Do not translate
         country_code: :activerecord.models.country.single # Do not translate
-        province_code: :activerecord.models.province.single # Do not translate
+        geo_data: "Geo Data"
+        osm_id: "OpenStreetMap ID"
+        bounds: "Viewport"
+        geojson: "Borders"
+        translations: "Translations"
         last_activity_on: :activerecord.attributes.generic.last_activity_on # Do not translate
         summary_email_sent_at: :activerecord.attributes.generic.summary_email_sent_at # Do not translate
 
-      local_area:
+      area:
         manager_id: :activerecord.models.manager.single # Do not translate
         name: :activerecord.attributes.generic.name # Do not translate
         country_code: :activerecord.models.country.single # Do not translate
-        province_code: :activerecord.models.province.single # Do not translate
         coordinates: "Location"
         latitude: "Latitude"
         longitude: "Longitude"
@@ -143,14 +171,14 @@ en:
       # Events
       venue:
         published: :activerecord.attributes.generic.published # Do not translate
-        name: "Building Name (Optional)"
+        name: "Building Name"
         manager_id: :activerecord.models.manager.single # Do not translate
         address: "Address"
         street: "Street Address"
         city: "City"
-        province_code: :activerecord.models.province.single # Do not translate
+        region_code: :activerecord.models.region.single # Do not translate
         country_code: :activerecord.models.country.single # Do not translate
-        postcode: "Postal Code"
+        post_code: "Postal Code"
         coordinates: "Location"
         latitude: "Latitude"
         longitude: "Longitude"
@@ -178,7 +206,7 @@ en:
           festival: "Stall"
           concert: "Concert"
         category_descriptions:
-          dropin: "A standard weekly class, where seekers can drop-in any time."
+          dropin: "A standard weekly class, where seekers can join at any time."
           single: "A one-off class, suitable for a tour or other special event."
           course: "A fixed-duration course where seekers can only join at the start of the course."
           festival: "A stand at a public event, where seekers can show up without registering."
@@ -276,7 +304,7 @@ en:
         public_key: "Public API Key"
         enabled: "Enabled"
         location: "Preferred Location"
-        bounds: "Bounds"
+        bounds: "Viewport"
         last_accessed_at: "Last Access"
         map_url: "Embeddable Map"
         index_url: "Embeddable List"

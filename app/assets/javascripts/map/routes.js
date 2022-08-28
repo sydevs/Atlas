@@ -18,6 +18,11 @@ document.addEventListener('DOMContentLoaded', () => {
       panel: 'overflow',
       layer: 'offline',
     }),
+    '/area/:id': layout(AreaView, {
+      map: 'freeze',
+      model: 'area',
+      layer: 'online',
+    }),
     '/venue/:id': layout(VenueView, {
       map: 'freeze',
       model: 'venue',

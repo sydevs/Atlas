@@ -66,10 +66,9 @@ SimpleForm.setup do |config|
   config.wrappers :semantic_checkbox, tag: 'div', class: 'inline field', error_class: 'error', hint_class: 'with_hint' do |b|
     b.use :html5
     b.wrapper tag: 'div', class: 'ui checkbox' do |input|
-      input.use :input
-      input.wrapper tag: 'label' do |box| end
+      input.use :input, required: false
+      input.use :label
     end
-    b.use :label
     b.use :hint, wrap_with: { tag: 'div', class: 'hint' }
     b.use :error, wrap_with: { tag: 'div', class: 'ui red pointing above label error' }
   end
@@ -78,9 +77,8 @@ SimpleForm.setup do |config|
     b.use :html5
     b.wrapper tag: 'div', class: 'ui slider checkbox' do |input|
       input.use :input
-      input.wrapper tag: 'label' do |slide| end
+      input.use :label
     end
-    b.use :label
     b.use :hint, wrap_with: { tag: 'div', class: 'hint' }
     b.use :error, wrap_with: { tag: 'div', class: 'ui red pointing above label error' }
   end
@@ -89,9 +87,8 @@ SimpleForm.setup do |config|
     b.use :html5
     b.wrapper tag: 'div', class: 'ui toggle checkbox' do |input|
       input.use :input
-      input.wrapper tag: 'label' do |slide| end
+      input.use :label
     end
-    b.use :label
     b.use :hint, wrap_with: { tag: 'div', class: 'hint' }
     b.use :error, wrap_with: { tag: 'div', class: 'ui red pointing above label error' }
   end

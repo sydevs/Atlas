@@ -45,7 +45,7 @@ module Types
       argument :locale, String, required: false
     end
 
-    field :area, LocalAreaType, null: true do
+    field :area, AreaType, null: true do
       description 'Find a local area by id'
       argument :id, ID, required: true
       argument :locale, String, required: false
@@ -66,28 +66,19 @@ module Types
 
     # Methods
 
-    def geojson(online: nil, country: nil, area: nil, language_code: nil, locale: 'en')
+    def geojson(online: false, country: nil, area: nil, language_code: nil, locale: 'en')
       I18n.locale = locale.to_sym
-
-      if area
-        scope = LocalArea.where(id: area)
-        scope = scope.venues unless online
-      else
-        scope = online ? LocalArea : Venue
-        scope = scope.where(country_code: country) if country
-      end
-
-      locations = decorate scope.publicly_visible
+      events = (online ? OnlineEvent : OfflineEvent).publicly_visible
+      events = events.with_location(country)
+      events = events.where(language_code: language_code.upcase) if language_code.present?
 
       {
         type: 'FeatureCollection',
-        features: locations.map do |location|
-          events = location.events.publicly_visible
-          events = events.where(language_code: language_code.upcase) if language_code.present?
-          next if events.empty?
+        features: events.group_by(&:location).map do |location, events|
+          location = decorate(location)
 
           {
-            type: "Feature #{events.length}",
+            type: "Feature",
             id: location.id,
             geometry: {
               type: 'Point',
@@ -112,7 +103,7 @@ module Types
   
     def area(id:, locale: 'en')
       I18n.locale = locale.to_sym
-      decorate LocalArea.find(id)
+      decorate Area.find(id)
     end
 
     def country(code:, locale: 'en')
@@ -125,7 +116,7 @@ module Types
       scope = Event
       scope = online ? OnlineEvent : OfflineEvent unless online.nil?
       scope = scope.publicly_visible
-      scope = scope.joins(:location).where(locations: { country_code: country }) if country.present?
+      scope = scope.joins(:area).where(areas: { country_code: country }) if country.present?
       scope = scope.where(recurrence: recurrence) if Event.recurrences.key?(recurrence)
       scope = scope.where(language_code: language_code.upcase) if language_code.present?
       scope = scope.where(id: ids) if ids.present?

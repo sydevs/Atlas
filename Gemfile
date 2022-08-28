@@ -26,7 +26,6 @@ gem 'loofah', '>= 2.3.1'
 gem 'autoprefixer-rails' # For automatic cross browser CSS compatibility
 gem 'fomantic-ui-sass' # Integrate Semantic UI for general styling
 gem 'jquery-rails' # Add jQuery
-gem 'leaflet-rails' # Integrate Leaflet for maps
 gem 'normalize-rails' # To normalize CSS
 
 ### Administration

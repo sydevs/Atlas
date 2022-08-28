@@ -10,10 +10,35 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_06_10_164625) do
+ActiveRecord::Schema.define(version: 2022_08_15_180055) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "area_venues", force: :cascade do |t|
+    t.bigint "area_id"
+    t.bigint "venue_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["area_id"], name: "index_area_venues_on_area_id"
+    t.index ["venue_id"], name: "index_area_venues_on_venue_id"
+  end
+
+  create_table "areas", force: :cascade do |t|
+    t.string "country_code"
+    t.string "name"
+    t.float "latitude"
+    t.float "longitude"
+    t.float "radius"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.date "last_activity_on"
+    t.datetime "summary_email_sent_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.jsonb "summary_metadata", default: "{}"
+    t.string "time_zone"
+    t.bigint "region_id"
+    t.index ["region_id"], name: "index_areas_on_region_id"
+  end
 
   create_table "audits", force: :cascade do |t|
     t.integer "auditable_id"
@@ -59,12 +84,17 @@ ActiveRecord::Schema.define(version: 2022_06_10_164625) do
     t.string "country_code", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "enable_province_management"
+    t.boolean "enable_regions"
     t.date "last_activity_on"
     t.datetime "summary_email_sent_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
     t.jsonb "summary_metadata", default: "{}"
     t.string "default_language_code", limit: 2
-    t.string "bounds"
+    t.string "name"
+    t.boolean "enable_custom_regions", default: false
+    t.jsonb "geojson"
+    t.string "osm_id"
+    t.json "translations", default: {}, null: false
+    t.string "bounds", default: [], array: true
     t.index ["country_code"], name: "index_countries_on_country_code", unique: true
   end
 
@@ -87,7 +117,6 @@ ActiveRecord::Schema.define(version: 2022_06_10_164625) do
     t.integer "registration_mode", default: 0
     t.string "registration_url"
     t.string "language_code", limit: 2
-    t.boolean "online", default: false, null: false
     t.string "online_url"
     t.datetime "status_email_sent_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
     t.datetime "reminder_email_sent_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
@@ -102,35 +131,12 @@ ActiveRecord::Schema.define(version: 2022_06_10_164625) do
     t.integer "registration_type", default: 0, null: false
     t.integer "registration_limit"
     t.string "type"
-    t.string "location_type"
-    t.bigint "location_id"
-    t.index ["location_type", "location_id"], name: "index_events_on_location"
+    t.bigint "venue_id"
+    t.bigint "area_id"
+    t.index ["area_id"], name: "index_events_on_area_id"
     t.index ["manager_id"], name: "index_events_on_manager_id"
     t.index ["status"], name: "index_events_on_status"
-  end
-
-  create_table "local_area_venues", force: :cascade do |t|
-    t.bigint "local_area_id"
-    t.bigint "venue_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["local_area_id"], name: "index_local_area_venues_on_local_area_id"
-    t.index ["venue_id"], name: "index_local_area_venues_on_venue_id"
-  end
-
-  create_table "local_areas", force: :cascade do |t|
-    t.string "country_code"
-    t.string "name"
-    t.float "latitude"
-    t.float "longitude"
-    t.float "radius"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "province_code", limit: 3
-    t.date "last_activity_on"
-    t.datetime "summary_email_sent_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
-    t.jsonb "summary_metadata", default: "{}"
-    t.string "time_zone"
+    t.index ["venue_id"], name: "index_events_on_venue_id"
   end
 
   create_table "managed_records", force: :cascade do |t|
@@ -149,8 +155,6 @@ ActiveRecord::Schema.define(version: 2022_06_10_164625) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "administrator"
-    t.integer "managed_countries_counter", default: 0, null: false
-    t.integer "managed_localities_counter", default: 0, null: false
     t.string "language_code", limit: 2
     t.datetime "last_login_at"
     t.boolean "email_verified"
@@ -188,14 +192,18 @@ ActiveRecord::Schema.define(version: 2022_06_10_164625) do
     t.index ["parent_type", "parent_id"], name: "index_pictures_on_parent_type_and_parent_id"
   end
 
-  create_table "provinces", force: :cascade do |t|
+  create_table "regions", force: :cascade do |t|
     t.string "country_code", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "province_code", limit: 3
     t.date "last_activity_on"
     t.datetime "summary_email_sent_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
     t.jsonb "summary_metadata", default: "{}"
+    t.jsonb "geojson"
+    t.string "name"
+    t.string "osm_id"
+    t.json "translations", default: {}, null: false
+    t.string "bounds", default: [], array: true
   end
 
   create_table "registrations", force: :cascade do |t|
@@ -223,14 +231,14 @@ ActiveRecord::Schema.define(version: 2022_06_10_164625) do
     t.string "street"
     t.string "city"
     t.string "country_code"
-    t.string "postcode"
+    t.string "post_code"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "province_code", limit: 3
-    t.boolean "published", default: true
+    t.string "region_code", limit: 3
     t.string "place_id"
     t.date "last_activity_on"
     t.string "time_zone"
+    t.index ["place_id"], name: "index_venues_on_place_id", unique: true
   end
 
 end

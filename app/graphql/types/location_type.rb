@@ -7,13 +7,10 @@ module Types
     field :label, String, null: true
     field :latitude, Float, null: false
     field :longitude, Float, null: false
+    field :radius, Float, null: true, resolver_method: :get_radius
     field :time_zone, String, null: false
     
     field :address, String, null: false
-    field :province, String, null: true, method: :province_name
-    field :country, String, null: true, method: :country_name
-    field :province_code, String, null: true
-    field :country_code, String, null: true
     field :directions_url, String, null: true, resolver_method: :get_directions_url
 
     field :events, [Types::EventType], null: false, resolver_method: :get_events
@@ -28,6 +25,10 @@ module Types
 
     def get_event_ids
       object.events.publicly_visible.pluck(:id)
+    end
+
+    def get_radius
+      object.try(:radius)
     end
 
     def get_directions_url

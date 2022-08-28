@@ -24,10 +24,10 @@ namespace :mail do
 
   desc 'Send summary emails.'
   task summaries: :environment do
-    [Country, Province, LocalArea].each do |model|
+    [Country, Region, Area].each do |model|
       records = model.active_since(6.months.ago).ready_for_summary_email.includes(:managers)
       puts "[MAIL] Attempting to send summary emails for #{records.count} #{model.model_name.plural.downcase}"
-      mailer = model == Country ? CountryMailer : RegionMailer
+      mailer = model == Country ? CountryMailer : PlaceMailer
       records.in_batches.each_record do |record|
         record.managers.each do |manager|
           mailer.with(record: record, manager: manager).summary.deliver_later

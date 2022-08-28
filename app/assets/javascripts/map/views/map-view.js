@@ -8,8 +8,6 @@ function MapView() {
 
   return {
     view: function(vnode) {
-      let device = Util.isDevice('mobile') ? 'mobile' : 'desktop'
-
       App.data.getList('online').then(events => {
         onlineEventsCount = events.length
         m.redraw()
@@ -18,6 +16,10 @@ function MapView() {
       if (App.map) {
         App.map.getRenderedEventIds().then(eventIds => {
           offlineEventsCount = eventIds.length
+
+          if (offlineEventsCount > 0 && !Util.isDevice('mobile')) {
+            m.route.set('/offline')
+          }
         }, _error => {
           offlineEventsCount = null
         }).finally(() => m.redraw())

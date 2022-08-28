@@ -9,6 +9,7 @@ de:
         back: "Zurück"
         view: "Anzeigen"
         search: "Suchen"
+        searching: "Suchen..."
         select: "Auswählen"
 
       target:
@@ -22,6 +23,7 @@ de:
         choose: "Wähle  %{resource}"
         verify: "Bestätige %{resource}"
         view: "Zeige %{resource}"
+        reload: "Reload %{resource}" # TODO: Translate
 
       special:
         edit_profile: "Bearbeite mein Profil"
@@ -46,17 +48,12 @@ de:
       # Tertiary menu
       details: "Info"
       activity: "Aktivität"
-      regions:
-        countries: "Länder"
-        regions: "Regionen"
-        cities: "Städte / Bereiche"
       events:
         offline: "Vorort Veranstaltungen"
         online: "Online Veranstaltungen"
       breadcrumbs:
         world: "Welt"
         help: "Hilfe"
-        regions: "Regionen"
         review: "Kontroliere Benachrichtigungen"
         dashboard: "Schaltzentrale"
 
@@ -71,8 +68,13 @@ de:
       not_logged_in: "Du bist nicht eingeloggt!"
       no_comment: "(kein Komentar)"
       temporary_mail_error: "Email server ist gerade beschäftigt, bitte später nochmal versuchen."
+      region: # TODO: Translate
+        invalid_geojson: "must have it's center within the borders of %{country}"
+        invalid_osm_id: "is not within %{country}"
+      area: # TODO: Translate
+        invalid_location: "must have it's center within the borders of %{region} and %{country}"
       venue:
-        out_of_bounds: "Die veranstaltung darf nicht weiter als %{local_area} entfernt sein."
+        out_of_bounds: "Die veranstaltung darf nicht weiter als %{area} entfernt sein."
       event:
         verified: "Vielen Dank für die Bestätigung der gültigkeit der Veranstaltung."
         invalid_end_time: "darf nicht vor dem beginn zeitpunkt sein"
@@ -86,8 +88,7 @@ de:
         phone_verified: "Ihre Telefonnummer wird jetzt überprüft!"
         email_verification_resent: "Eine E-Mail-Überprüfung wurde an \"%{name}\" geschickt"
       cannot_create:
-        event: "Neue Events können hier nicht erstellt werden, sie müssen direkt zu einem Veranstaltungsort hinzugefügt werden."
-        venue: "Neue Veranstaltungsorte können hier nicht erstellt werden, sie müssen direkt in eine Region innerhalb eines Landes hinzugefügt werden."
+        event: "Neue Events können hier nicht erstellt werden, sie müssen direkt zu einer Stadt hinzugefügt werden."
 
     forms:
       event:
@@ -103,11 +104,14 @@ de:
         manager: "Manager"
 
     hints:
+      unnamed: "(Unnamed)" # TODO: Translate
       verified: "Verifiziert"
       not_verified: "Nicht verifiziert"
       not_set: "Nicht gesetzt"
+      not_found: "No Results Found" # TODO: Translate
       unspecified: "Nicht spezifiziert"
       unlimited: "Unbegrenzte"
+      edit_warning: "Do not edit these fields, unless you know what you're doing!" # TODO: Translate
       never: "Nie"
       geosearch:
         prompt: "Suchen nach Standort"
@@ -116,12 +120,11 @@ de:
         must_be_new: "Nur Länder, die noch nicht hinzugefügt wurden, sind unten aufgeführt."
         language: "Die Standardsprache, die Veranstaltungen in diesem Land normalerweise abgehalten werden."
         no_default_language: "Kein Standard"
-        province_management: "Wenn es aktiviert ist, können Sie Regionen (Provinzen, Staaten usw.) in diesem Land an die Regionen ausschalten und zuordnen. Dies ist nützlich für größere Länder (China, USA, Australien, etc.) und unnötig für kleine Länder (Belgien, Litauen, Singapur usw.)."
-        bounds: "Wenn ein Land angegeben wird, wenn die Karte eingebettet wird, werden diese Grenzen als die erste Ansicht verwendet. Die Koordinaten sollten als 4 Komma seperirte  Nummern eingegeben werden (Süden, Westen, Nord, Ost)."
-      province:
-        must_be_new: "Nur Regionen, die noch nicht hinzugefügt wurden, sind unten aufgeführt."
-        prompt: "Landkreis / Bundesland / Land"
-      local_area:
+        enable_regions: "Wenn es aktiviert ist, können Sie Regionen (Provinzen, Staaten usw.) in diesem Land an die Regionen ausschalten und zuordnen. Dies ist nützlich für größere Länder (China, USA, Australien, etc.) und unnötig für kleine Länder (Belgien, Litauen, Singapur usw.)."
+        enable_custom_regions: "Allow the creation of custom regions. This is an advanced feature, which should only be used if you understand what you are doing." # TODO: Translate
+      region: # TODO: Translate
+        polygon: "Drag / click on a faded square to add a new corner to the polygon. Click on an existing corner to remove it."
+      area:
         location: Ein "spezieller Bereich" wird via Koordinaten auf der Karte (Breitengrad und Längengrad) und einem Radius definiert, um einen Kreis festzulegen. "
       event:
         custom_name: "Wenn Sie den Namen der Veranstaltung überschreiben möchten, können Sie dies hier tun."
@@ -149,19 +152,6 @@ de:
           invitations:
             email: "Einladen mittels E-Mail"
             phone: "Einladen mittels %{messenger}"
-      venue:
-        manual_location: "Den Ort manuell eintragen"
-        location: "Wenn der Standort nicht automatisch eingestellt werden kann, indem Sie \"finde Veranstaltungsort\" verwenden, können Sie die Details unten manuell eingeben."
-        find_marker: "Finde Veranstaltungsort"
-        marker_not_set:
-          title: "Atlas-Manager wurde nicht gesetzt"
-          description: "Drücke 'Finde Veranstaltungsort', um die Koordinaten der Veranstaltung Automatisch zu setzen."
-        cant_find_address:
-          title: "Es konnte keine Adresse gefunden werden."
-          description: "Die Adresse, die Sie eingegeben haben, konnten nicht gefunden werden. Versuchen Sie, weitere Informationen hinzuzufügen, oder geben Sie die Breite und Längengrad manuell ein."
-        marker_set:
-          title: "Kartenmacher festgelegt!"
-          description: "Stellen Sie sicher, dass der auf der Karte angezeigte Ort korrekt aussieht."
       manager:
         language: "Die bevorzugte Sprache für E-Mails und UI für diesen Manager."
         administrator:
@@ -178,14 +168,14 @@ de:
             new_managed_record: "Neuer Zugriff"
             event_verification: "Ereignisverifikation"
             event_registrations: "Ereignisregistrierungen"
-            region_summary: "Regionale Zusammenfassung"
+            place_summary: "Regionale Zusammenfassung"
             country_summary: "Landes Zusammenfassung"
             application_summary: "Sahaj Atlas Summary"
           hints:
             new_managed_record: "Eine Nachricht die an Sie gesentet wurde, wenn Sie die Erlaubnis erhalten haben, ein neues Ereignis, eine Region oder eine Ressource auf dem Atlas zu verwalten."
             event_verification: "Nachrichten, die Ereignis- und Stadtmanager anfordern, die Genauigkeit ihrer Ereignisse zu überprüfen. Wird für jeden Veranstaltungen.alle 3 Monate Versandt, Sie können nicht deaktiviert werden."
             event_registrations: "Eine Liste neuer Anmeldungen, die an Ereignismanager gesendet wurden. Wird etwa 24 Stunden vor der Veranstaltung gesendet."
-            region_summary: "Eine Zusammenfassung von Änderungen innerhalb einer Region, die an regionale Manager gesendet wird. Wird alle %{periode} versandt."
+            place_summary: "Eine Zusammenfassung von Änderungen innerhalb einer Region, die an regionale Manager gesendet wird. Wird alle %{periode} versandt."
             country_summary: "Eine Zusammenfassung von Änderungen, die an Ländermanager gesendet wird. Wird alle %{periode} gesendet."
             application_summary: "Eine Zusammenfassung aller Atlas änderungen, die an Administratoren gesendet wurden. Wird alle %{periode} gesendet."
         search: "Geben Sie einen Namen, eine E-Mail oder eine Telefonnummer ein ..."
@@ -210,11 +200,9 @@ de:
       notification_settings: "Benachrichtigungseinstellungen"
       contact_details: "Kontaktinformationen"
       updated_at: "Letzte Aktualisierung"
-      resources_managed:
-        title: "Ressourcen verwaltet"
       event_coverage:
         title: "Eventberichterstattung"
-        description: "%{events} (%{venues})"
+        description: "%{events} in %{resource}" # TODO: Translate
       record_needs_review:
         title: " %{resource} braucht überprüfung"
         description: "Diese %{resource} wurde vor %{updates_ago} aktualisiert. Diese Veranstaltung wird von der Karte entfernt, es sei denn, es wird innerhalb von %{expires_in} überprüft. Gehe zu der Seite Bearbeiten und drücken Sie Speichern, um zu bestätigen, dass die Ereignisdetails noch korrekt sind."
@@ -251,14 +239,10 @@ de:
         parent: "Diese %{resource} ist derzeit für die Öffentlichkeit versteckt, weil die E-Mail-Adresse des Managers nicht überprüft wurde."
         action: "Senden"
       create_event:
-        title: "Wundern Sie sich, wie man ein öffentliches Programm erstellt?"
-        description: "Wählen Sie einen Veranstaltungsort auf der Registerkarte \"%{action}\"."
-        action: "Jetzt gehen"
-      create_event_on_venue:
         title: "Fragst du dich, wie man ein Ereignis erstellt?"
         description: "Klicken Sie auf die Registerkarte \"%{action}\" und drücken Sie \"Event hinzufügen\""
         action: "Event hinzufügen"
-      create_province_manager:
+      create_region_manager:
         title: "Wundern Sie sich, wie Sie einen Regionalmanager erstellen?"
         description: "Wählen Sie ein Bundesland oder Region  auf der Registerkarte\"%{action}\""
         action: "Jetzt gehen"
@@ -270,14 +254,6 @@ de:
     images:
       title: "Bilder dieser %{resource}"
       upload: "Bilder hochladen"
-
-    regions:
-      new_province: "Region hinzufügen"
-      provinces_header: "Provinzen / Bundesländer / Landkreise"
-      local_areas_header:
-        provincial: "Ballungsraum Bereich"
-        national: "Benutzerdefinierte Regionen"
-        global: "Benutzerdefinierte internationale Bereiche"
 
     activity:
       title: :cms.menu.activity
@@ -295,11 +271,11 @@ de:
           instruction: "Sie haben Zugriff auf alle Aspekte des Atlas CMS (Content Management System). Es ist Ihre Aufgabe, neue Ländermanager zu erstellen und ihnen zu helfen, das System zu verwenden."
         country:
           title: "Landes Manager"
-          description: "Kann Regionen, Veranstaltungsorte, Ereignisse und Manager inerhalb der %{region} erstellen."
+          description: "Kann Regionen, Veranstaltungsorte, Ereignisse und Manager inerhalb der %{place} erstellen."
           instruction: "Es ist Ihre Verantwortung, Regionen in Ihrem Land zu erstellen und Regionale Managern zuzuweisen um Ereignisse zu erstellen. Sie können auch Orte und Events in Ihrem Land anlegen."
         local:
           title: "Lokaler Manager"
-          description: "Kann Orte und Ereignisse in %{region} erstellen"
+          description: "Kann Orte und Ereignisse in %{place} erstellen"
           instruction: "Es ist Ihre Verantwortung, Ereignisse in Ihrem lokalen Bereich zu erstellen. Sie müssen zuerst einen Veranstaltungsort erstellen, bevor Sie Ereignise an diesem Ort erstellen können."
         event:
           title: "Ereignismanager"

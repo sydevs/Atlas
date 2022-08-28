@@ -4,7 +4,7 @@ module Types
     field :path, String, null: false, method: :map_path
     field :url, String, null: false, method: :map_url
     field :status, String, null: false
-    field :layer, String, null: false, resolver_method: :get_layer
+    field :layer, String, null: false
     field :type, String, null: false
 
     field :label, String, null: false
@@ -30,17 +30,15 @@ module Types
 
     field :images, [Types::ImageType], null: true, resolver_method: :get_images
 
-    field :location_id, Integer, null: false
-    field :location_type, Integer, null: false
-    field :location, Types::LocationType, null: false, resolver_method: :get_location
     field :venue, Types::VenueType, null: false, resolver_method: :get_venue
-    field :area, Types::LocalAreaType, null: false, resolver_method: :get_area
+    field :area, Types::AreaType, null: false, resolver_method: :get_area
+    field :location, Types::LocationType, null: false, resolver_method: :get_location
 
     field :created_at, GraphQL::Types::ISO8601DateTime, null: false
     field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
 
     def get_location
-      object.location.extend("#{object.location_type}Decorator".constantize)
+      object.location.extend("#{object.location.class}Decorator".constantize)
     end
 
     def get_venue
@@ -48,7 +46,7 @@ module Types
     end
 
     def get_area
-      object.local_area.extend(LocalAreaDecorator)
+      object.area.extend(AreaDecorator)
     end
 
     def get_timing
@@ -81,10 +79,6 @@ module Types
           thumbnail_url: picture.file.url(:thumbnail),
         }
       }
-    end
-
-    def get_layer
-      object.online? ? 'online' : 'offline'
     end
 
     def registration_count

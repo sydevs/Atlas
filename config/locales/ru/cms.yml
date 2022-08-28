@@ -9,6 +9,7 @@ ru:
         back: "Назад"
         view: "Открыть"
         search: "Поиск"
+        searching: "Поиск..."
         select: "Select" # TODO: Translate
 
       target:
@@ -22,6 +23,7 @@ ru:
         choose: "Выбрать %{resource}"
         verify: "Verify %{resource}" # TODO: Translate
         view: "View %{resource}" # TODO: Translate
+        reload: "Reload %{resource}" # TODO: Translate
 
       special:
         edit_profile: "Редактировать мой профиль"
@@ -46,17 +48,9 @@ ru:
       # Tertiary menu
       details: "Информация"
       activity: "Активность"
-      regions:
-        countries: "Страны"
-        regions: "Регионы"
-        cities: "Города"
-      events: # TODO: Translate
-        offline: "In-Person Events"
-        online: "Online Events"
       breadcrumbs:
         world: "Мир"
         help: "Помощь"
-        regions: "Регионы"
         review: "Просмотреть оповещений"
         dashboard: "Панель инструментов"
 
@@ -71,8 +65,13 @@ ru:
       not_logged_in: "Ты не авторизован!"
       no_comment: "(Нет комментариев)"
       temporary_mail_error: "Сервер электронной почты временно занят, попробуй ещё раз."
+      region: # TODO: Translate
+        invalid_geojson: "must have it's center within the borders of %{country}"
+        invalid_osm_id: "is not within %{country}"
+      area: # TODO: Translate
+        invalid_location: "must have it's center within the borders of %{region} and %{country}"
       venue:
-        out_of_bounds: "Место проведения не может находиться за пределами радиуса %{local_area}"
+        out_of_bounds: "Место проведения не может находиться за пределами радиуса %{area}"
       event:
         verified: "Thank you for confirming your event's accuracy." # TODO: Translate
         invalid_end_time: "не может быть раньше времени начала"
@@ -86,13 +85,11 @@ ru:
         phone_verified: "Твой номер телефона теперь подтверждён!"
         email_verification_resent: "E-mail с подтверждением был отправлен на %{name}"
       cannot_create:
-        event: "Здесь нельзя создавать новые события, их нужно добавлять непосредственно в места проведения (площадки)."
-        venue: "Здесь нельзя создавать новые площадки, их нужно добавлять непосредственно в регион внутри страны."
+        event: "New events cannot be created here, they must be added directly to a city." # TODO: Translate
 
     forms:
       event:
         details: "Детали события"
-        online: "Онлайн-классы"
         timing: "Расписание"
         registration: "Регистрация"
         manager: "Менеджер"
@@ -104,12 +101,15 @@ ru:
         manager: "Менеджер"
 
     hints:
+      unnamed: "(Unnamed)" # TODO: Translate
       verified: "Проверено"
       not_verified: "Не подтверждено"
       not_set: "Не задано"
+      not_found: "No Results Found" # TODO: Translate
       unspecified: "Неопределено"
       unlimited: "Unlimited" # TODO: Translate
       never: "Никогда"
+      edit_warning: "Do not edit these fields, unless you know what you're doing!" # TODO: Translate
       geosearch:
         prompt: "Поиск по местонахождению"
         description: "Ты можешь использовать этот поиск для автоматического заполнения полей ниже. Он использует API Google. Если Google заблокирован в вашей стране или поиск не удался, тебе нужно будет ввести данные вручную."
@@ -117,12 +117,11 @@ ru:
         must_be_new: "Ниже перечислены страны, которые ещё не были добавлены."
         language: "Язык по умолчанию, на котором обычно проводятся мероприятия в этой стране."
         no_default_language: "Отсутствует язык по умолчанию"
-        province_management: "Если этот параметр включен, ты сможешь просматривать и назначать менеджеров по регионам (провинциям, штатам и т.д.) в этой стране. Это полезно для больших стран (Китай, США, Австралия и т.д.) и необязательно для небольших стран (Бельгия, Литва, Сингапур и т.д.)."
-        bounds: "If a country is specified when embedding the map, these bounds will be used as the initial view. The coordinates should be entered as 4 comma-separated numbers (south,west,north,east)." # TODO: Translate
-      province:
-        must_be_new: "Ниже перечислены регионы, которые ещё не были добавлены."
-        prompt: "Провинция / Штат / Область"
-      local_area:
+        enable_regions: "Если этот параметр включен, ты сможешь просматривать и назначать менеджеров по регионам (провинциям, штатам и т.д.) в этой стране. Это полезно для больших стран (Китай, США, Австралия и т.д.) и необязательно для небольших стран (Бельгия, Литва, Сингапур и т.д.)."
+        enable_custom_regions: "Allow the creation of custom regions. This is an advanced feature, which should only be used if you understand what you are doing." # TODO: Translate
+      region: # TODO: Translate
+        polygon: "Drag / click on a faded square to add a new corner to the polygon. Click on an existing corner to remove it."
+      area:
         location: "Пользовательская область определяется с использованием координат на карте (широта и долгота) и радиуса, чтобы расширить границы региона."
       event:
         custom_name: "Если хочешь изменить название события, ты можешь сделать это здесь."
@@ -150,19 +149,6 @@ ru:
           invitations:
             email: "Пригласить по email"
             phone: "Пригласить через %{messenger}"
-      venue:
-        manual_location: "Установить местоположение вручную"
-        location: "Если местоположение не может быть установлено автоматически, нажав \"Найти местоположение\", ты можешь ввести данные вручную ниже."
-        find_marker: "Найти местоположение"
-        marker_not_set:
-          title: "Метка карты не установлена"
-          description: "Нажми 'Найти местоположение', чтобы автоматически определить координаты места проведения."
-        cant_find_address:
-          title: "Не удалось найти адрес"
-          description: "Введенный адрес не может быть найден. Попробуй добавить дополнительную информацию или введи широту и долготу вручную."
-        marker_set:
-          title: "Метка карты установлена!"
-          description: "Убедись, что местоположение, указанное на карте, выглядит корректно."
       manager:
         language: "Язык пользовательского интерфейса и email сообщений для этого менеджера"
         administrator:
@@ -179,14 +165,14 @@ ru:
             new_managed_record: "Новый доступ"
             event_verification: "Проверка актуальности события"
             event_registrations: "Регистрации на событие"
-            region_summary: "Сводка по региону"
+            place_summary: "Сводка по региону"
             country_summary: "Сводка по стране"
             application_summary: "Сводка по Атласу"
           hints:
             new_managed_record: "Сообщение о том, что ты получаешь разрешение на управление новым событием, регионом или ресурсом в Атласе."
             event_verification: "Сообщения к менеджерам событий и города проверить актуальность данных о событиях. Отправляется каждые 3 месяца, для каждого события. Это нельзя отключить."
             event_registrations: "Список новых регистраций, отправленных менеджерам события. Отправляется примерно за 24 часа до события."
-            region_summary: "Сводка всех изменений Атласа внутри региона, отправляемая менеджерам каждый %{period}."
+            place_summary: "Сводка всех изменений Атласа внутри региона, отправляемая менеджерам каждый %{period}."
             country_summary: "Сводка всех изменений Атласа внутри страны, отправляемая менеджерам каждый %{period}."
             application_summary: "Сводка всех изменений Атласа, отправляемая администраторам каждый %{period}."
         search: "Введи имя, email или номер телефона..."
@@ -211,11 +197,9 @@ ru:
       notification_settings: "Настройка оповещений"
       contact_details: "Контакты"
       updated_at: "Последнее обновление"
-      resources_managed:
-        title: "Управляемые ресурсы"
       event_coverage:
         title: "Освещение события" 
-        description: "%{events} (%{venues})"
+        description: "%{events} in %{resource}" # TODO: Translate
       record_needs_review:
         title: "Требуется проверить %{resource}"
         description: "Это %{resource} не обновлялось за %{updated_ago}. Это событие будет удалено с карты, если оно не будет проверено в %{expires_in}. Перейди на страницу редактирования и нажми «Сохранить», чтобы подтвердить правильность сведений о событии."
@@ -247,14 +231,10 @@ ru:
         description: "Это %{resource} скрыто из общего доступа, потому что не опубликовано."
         parent: "Это %{resource} скрыто из общего доступа, потому что %{parent} не опубликовано."
       create_event:
-        title: "Хочешь узнать, как создать событие (публичную программу)?"
-        description: "Выбери площадку на вкладке \"%{action}\"."
-        action: "Перейти"
-      create_event_on_venue:
         title: "Хочешь узнать, как создать событие?"
         description: "Перейди на вкладку \"%{action}\" и нажми \"Add Event\""
         action: "Добавить Событие"
-      create_province_manager:
+      create_region_manager:
         title: "Хочешь узнать, как создать менеджера региона?"
         description: "Выбери провинцию, штат или облась на вкладке \"%{action}\"."
         action: "Перейти" 
@@ -266,14 +246,6 @@ ru:
     images:
       title: "Изображения %{resource}"
       upload: "Загрузить изображения"
-
-    regions:
-      new_province: "Добавить регион"
-      provinces_header: "Провинции / Штаты / Области" 
-      local_areas_header: 
-        provincial: "Алгомерация"
-        national: "Пользовательских регион"
-        global: "Пользовательские международные зоны"
 
     activity:
       title: :cms.menu.activity
@@ -291,11 +263,11 @@ ru:
           instruction: "У тебя есть доступ ко всем аспектам CMS (Система управления контентом). Твоя работа - создавать новых менеджеров по стране и помогать им научиться пользоваться системой."
         country:
           title: "Менеджер страны" 
-          description: "Может создавать regions, площадки, события и назначать менеджеров внутри %{region}"
+          description: "Может создавать regions, площадки, события и назначать менеджеров внутри %{place}"
           instruction: "Ты ответственен за создание регионов в своей стране и назначение менеджеров в этих регионах для организации событий. Также ты можешь создавать площадки и события в своей стране."
         local:
           title: "Менеджер региона" 
-          description: "Может создавать площадки и события в пределах %{region}"
+          description: "Может создавать площадки и события в пределах %{place}"
           instruction: "Ты ответственен за создание событий в своём регионе. Сначала тебе нужно будет создать площадку, на которой будет проходить событие, затем само событие."
         event:
           title: "Менеджер событий"

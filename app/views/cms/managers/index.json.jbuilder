@@ -30,8 +30,8 @@ json.results do
         if @email_match
           json.child! do
             json.category 'invite'
-            json.title translate('cms.hints.event.manager.short_invitation.email')
-            json.alt_title translate('cms.hints.event.manager.invitation.email')
+            json.title translate('cms.hints.event.manager.short_invitations.email')
+            json.alt_title translate('cms.hints.event.manager.invitations.email')
             json.description @email_match
 
             json.email @email_match
@@ -39,7 +39,7 @@ json.results do
           end
         end
         
-        if @phone_match
+        if @phone_match && false # TODO: Implement this
           Manager.contact_methods.keys.excluding('email').each do |key|
             json.child! do
               json.category 'invite'

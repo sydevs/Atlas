@@ -18,7 +18,8 @@ class WorldwidePolicy < DatabasePolicy
 
   def index_association? association
     association = association.to_sym
-    return false if %i[registrations pictures].include?(association)
+    return false if %i[managed_records registrations pictures].include?(association)
+    return false if %i[regions areas].include?(association)
 
     manage?
   end
@@ -26,11 +27,11 @@ class WorldwidePolicy < DatabasePolicy
   def new_association? association, query = {}
     return nil if association == :events
     
-    manage? && %i[countries local_areas venues managers clients].include?(association)
+    manage? && %i[countries areas venues managers clients].include?(association)
   end
 
   def destroy_association? association = nil
-    manage? && %i[countries local_areas clients].include?(association)
+    manage? && %i[countries areas clients].include?(association)
   end
 
 end

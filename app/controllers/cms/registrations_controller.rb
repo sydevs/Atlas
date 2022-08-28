@@ -18,7 +18,7 @@ class CMS::RegistrationsController < CMS::ApplicationController
     def set_time_zone
       return unless @context.is_a?(Event)
 
-      @time_zone = @context.location.time_zone
+      @time_zone = @context.area.time_zone
     end
 
     def parameters

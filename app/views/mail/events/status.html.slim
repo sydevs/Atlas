@@ -7,7 +7,7 @@ ruby:
     finished: :end_date
   }[@status])
 
-- content_for :preview, translate(@status, scope: 'mail.event.status.preview', event: @event.label, duration: time_ago_in_words(@event.updated_at), region: @event.venue.parent.label)
+- content_for :preview, translate(@status, scope: 'mail.event.status.preview', event: @event.label, duration: time_ago_in_words(@event.updated_at), place: @event.venue.parent.label)
 
 .box
   h2
@@ -27,7 +27,7 @@ p.byline
 - if @status == :needs_urgent_review
   p.explanation
     - type = @event.manager != @manager ? :super_manager : :event_manager
-    = translate(type, scope: 'mail.event.status.escalation', region: @event.venue.parent.label)
+    = translate(type, scope: 'mail.event.status.escalation', place: @event.venue.parent.label)
 
 p.explanation
   = translate(@status, scope: 'mail.event.status.explanation')
@@ -47,7 +47,7 @@ table.actions
         = translate('mail.event.status.verify')
       td.or = translate('mail.event.status.or')
     - elsif !%i[expired finished].include?(@status)
-      td: a.button href=map_event_url(@event)
+      td: a.button href=map_event_url(@event, layer: @event.layer)
         = translate('mail.event.view')
     td: a.button href=email_login(cms_event_url(@event))
       = translate('mail.event.edit')

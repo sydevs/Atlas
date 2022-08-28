@@ -14,11 +14,10 @@ class DashboardPolicy < DatabasePolicy
 
   def index_association? association
     association = association.to_sym
-    return false if %i[registrations pictures].include?(association)
+    return false if %i[managed_records registrations pictures].include?(association)
     return false unless user.present?
     return false if user.type == :none
-    return false if association == :regions && user.type == :event
-    return true if %i[regions events].include?(association)
+    return true if association == :events
 
     user.administrator?
   end
@@ -26,14 +25,14 @@ class DashboardPolicy < DatabasePolicy
   def new_association? association, query = {}
     return nil if association == :events
     
-    user.administrator? && %i[countries local_areas venues managers clients].include?(association)
+    user.administrator? && %i[countries areas venues managers clients].include?(association)
   end
 
   def destroy_association? association = nil
-    user.administrator? && %i[countries local_areas clients].include?(association)
+    user.administrator? && %i[countries areas clients].include?(association)
   end
 
-  def view_help?
+  def help?
     user.present?
   end
 

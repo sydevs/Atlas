@@ -8,13 +8,13 @@ class CMS::ManagersController < CMS::ApplicationController
       @scope = @context.managed_records || Manager
       @records = policy_scope(@scope).page(params[:page]).per(10).search(params[:q])
       @records = @records.joins(:manager).order('managers.updated_at': :desc)
-      render 'cms/views/index'
     elsif request.format.json?
       authorize Manager, :index?
       @records = policy_scope(Manager).limit(3).search(params[:q])
       @email_match = params[:q] if params[:q] =~ URI::MailTo::EMAIL_REGEXP
       @phone_match = Phonelib.parse(params[:q]).international if Phonelib.valid?(params[:q])
       @exact_match = @records.count == 1 && (@records.first.email == @email_match || @records.first.phone == @phone_match)
+      render 'cms/managers/index'
     else
       super
     end
@@ -104,12 +104,12 @@ class CMS::ManagersController < CMS::ApplicationController
     render format: :json
   end
 
-  def provinces
+  def regions
     manager = @scope&.find(params[:manager_id])
     authorize manager
     country_code = params[:country_code]
 
-    if Country.where(country_code: country_code, enable_province_management: false).exists?
+    if Country.where(country_code: country_code, enable_regions: false).exists?
       render json: {
         success: true,
         results: ISO3166::Country[country_code].subdivisions.map { |k, v|
@@ -121,7 +121,7 @@ class CMS::ManagersController < CMS::ApplicationController
         }.compact
       }
     else
-      @provinces = manager.accessible_provinces(country_code, area: params[:area])
+      @regions = manager.accessible_regions(country_code, area: params[:area])
       render format: :json
     end
   end
@@ -151,14 +151,14 @@ class CMS::ManagersController < CMS::ApplicationController
           :name, :administrator, :language_code,
           :email, :phone, :contact_method,
           notifications: [],
-          country_ids: [], province_ids: [], local_area_ids: []
+          country_ids: [], region_ids: [], area_ids: []
         )
       else
         params.fetch(:manager, {}).permit(
           :name, :language_code,
           :email, :phone, :contact_method,
           notifications: [],
-          country_ids: [], province_ids: [], local_area_ids: []
+          country_ids: [], region_ids: [], area_ids: []
         )
       end
     end

@@ -15,18 +15,17 @@ class CountryMailer < ApplicationMailer
     puts "[MAIL] Sending summary email for #{@country.label}"
 
     set_summary_period!
-    query = ['created_at >= ? AND created_at <= ?', @start_of_period, @end_of_period]
-    managed_records_query = ['managed_records.created_at >= ? AND managed_records.created_at <= ?', @start_of_period, @end_of_period]
+    query = { created_at: @start_of_period..@end_of_period }
 
-    @new_provinces = @country.provinces.where(*query)
-    @new_local_areas = @country.local_areas.where(*query)
-    @new_province_managers = @country.province_manager_records.where(*managed_records_query).joins(:manager)
-    @new_local_area_managers = @country.local_area_manager_records.where(*managed_records_query).joins(:manager)
-    @inactive_provinces = @country.provinces.inactive_since(SUMMARY_PERIOD.ago)
-    @inactive_local_areas = @country.local_areas.inactive_since(SUMMARY_PERIOD.ago)
+    @new_regions = @country.regions.where(query)
+    @new_areas = @country.areas.where(query)
+    @new_region_managers = @country.region_manager_records.where(managed_records: query).joins(:manager)
+    @new_area_managers = @country.area_manager_records.where(managed_records: query).joins(:manager)
+    @inactive_regions = @country.regions.inactive_since(SUMMARY_PERIOD.ago)
+    @inactive_areas = @country.areas.inactive_since(SUMMARY_PERIOD.ago)
 
     @stats = {
-      active_regions: @country.provinces.active_since(SUMMARY_PERIOD.ago).count,
+      active_regions: @country.regions.active_since(SUMMARY_PERIOD.ago).count,
       active_events: @country.events.publicly_visible.count,
       new_registrations: @country.associated_registrations.since(SUMMARY_PERIOD.ago).count,
     }

@@ -11,15 +11,14 @@ class CMS::ApplicationController < ActionController::Base
   before_action :verify_manager
   before_action :set_locale!
   before_action :set_model_name!
-  before_action :set_context!, only: %i[index new create regions destroy images]
-  before_action :set_scope!, except: %i[regions images]
+  before_action :set_context!, only: %i[index new create destroy images]
+  before_action :set_scope!, except: %i[images]
   before_action :set_record!, only: %i[show edit update destroy]
   protect_from_forgery with: :exception
 
-  # TODO: Remove this development code
+  # TODO: Remove thes development checks
   after_action :verify_authorized, except: :home
   after_action :verify_policy_scoped, only: :index
-  # END TODO
 
   def home
     raise ActionController::RoutingError.new('Not Found') unless defined?(current_user) && current_user.present?
@@ -31,13 +30,16 @@ class CMS::ApplicationController < ActionController::Base
     authorize current_user, :dashboard?
     @resources = current_user.clients
     @resources += current_user.countries
-    @resources += current_user.provinces.joins(:country).where(countries: { enable_province_management: true })
-    @resources += current_user.local_areas
+    @resources += current_user.regions.joins(:country).where(countries: { enable_regions: true })
+    @resources += current_user.areas
     @resources += current_user.events
+    
     @events_for_review = current_user.accessible_events.needs_review
     @events_recently_expired = current_user.accessible_events.expired
     @events_expiring_count = @events_for_review.count + @events_recently_expired.count
     @events_archived_count = current_user.accessible_events.archived.count
+
+    render 'cms/application/dashboard'
   end
 
   def review
@@ -45,16 +47,22 @@ class CMS::ApplicationController < ActionController::Base
     @events_for_review = current_user.accessible_events.needs_review.order(updated_at: :desc)
     @events_expired = current_user.accessible_events.expired.order(updated_at: :desc)
     @events_archived = current_user.accessible_events.archived.order(updated_at: :desc)
+
+    render 'cms/application/review'
+  end
+
+  def help
+    set_context!
+    authorize :dashboard, :help?
+    render 'cms/application/help'
   end
 
   def index query = {}
     authorize_association! @model
-    @query = query
     @scope = @scope.where(query) if query.present?
     @records = policy_scope(@scope).page(params[:page]).per(15).search(params[:q])
     @records = @records.order(updated_at: :desc) if @model.column_names.include?('updated_at')
     @records = @records.with_associations if @records.respond_to?(:with_associations)
-    render 'cms/views/index'
   end
 
   def show
@@ -83,14 +91,11 @@ class CMS::ApplicationController < ActionController::Base
         ],
       }
     end
-
-    render 'cms/views/show'
   end
 
   def new attributes = {}
     @record = @scope.new(**attributes)
     authorize @record
-    render 'cms/views/new'
   end
 
   def create attributes
@@ -99,16 +104,14 @@ class CMS::ApplicationController < ActionController::Base
 
     if @record.save
       redirect_to back_path, flash: { success: translate('cms.messages.successfully_created', resource: @model.model_name.human.downcase) }
-      true
     else
       render 'cms/views/new'
-      false
     end
   end
 
-  def edit
+  def edit attributes = {}
     authorize @record
-    render 'cms/views/edit'
+    @record.assign_attributes(attributes)
   end
 
   def update attributes
@@ -116,10 +119,8 @@ class CMS::ApplicationController < ActionController::Base
 
     if @record.update(attributes)
       redirect_to back_path, flash: { success: translate('cms.messages.successfully_updated', resource: @model.model_name.human.downcase) }
-      true
     else
       render 'cms/views/edit'
-      false
     end
   end
 
@@ -131,24 +132,17 @@ class CMS::ApplicationController < ActionController::Base
     redirect_to [:cms, @record.parent, @model]
   end
 
-  def regions
-    authorize_association! :regions
+  def geosearch args = {}
+    authorize @record || @model
+    args.merge!({
+      language: I18n.locale,
+      sessiontoken: session.id,
+      input: params[:query],
+    })
 
-    if @context
-      @countries = @context.countries if @context.respond_to?(:countries)
-      @provinces = @context.provinces if @context.respond_to?(:provinces)
-      @local_areas = @context.local_areas if @context.respond_to?(:local_areas)
-    else
-      @countries = Country.default_scoped
-      @local_areas = LocalArea.international
-    end
-
-    render 'cms/views/regions'
-  end
-
-  def help
-    set_context!
-    authorize :dashboard, :view_help?
+    result = GoogleMapsAPI.predict(args)
+    puts "RESULT #{result.inspect}"
+    render json: result, status: result ? 200 : 404
   end
 
   def back_path
@@ -156,6 +150,10 @@ class CMS::ApplicationController < ActionController::Base
     return url_for([:cms, @record]) if policy(@record).show?
     
     url_for([:cms, @record.parent, @model.model_name.route_key.to_sym])
+  end
+
+  def self.controller_path
+    "cms/views"
   end
 
   protected
@@ -190,7 +188,7 @@ class CMS::ApplicationController < ActionController::Base
     end
 
     def set_context!
-      [Registration, Event, Venue, Manager, LocalArea, Province, Country, Client].each do |model|
+      [Registration, Event, Venue, Manager, Area, Region, Country, Client].each do |model|
         keys = model.model_name
         param_key = "#{keys.param_key}_id"
         next unless params[param_key]
@@ -205,21 +203,18 @@ class CMS::ApplicationController < ActionController::Base
     end
 
     def set_scope!
-      if @context && @model == Event
-        @scope = @context.try(:associated_events) || @context.events
-      elsif @context
+      if @context
         @scope = @context.send(@model.table_name)
       elsif @model
         @scope = current_user.try("accessible_#{@model.table_name}") || @model
       end
       
-      @query ||= {}
       puts "SET SCOPE #{@scope.inspect}"
     end
 
     def set_record!
       @record = @scope&.find(params[:id])
-      @context ||= @record
+      @context ||= @record.parent
       puts "SET RECORD #{@record.inspect}"
     end
 

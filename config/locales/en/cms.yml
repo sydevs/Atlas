@@ -9,6 +9,7 @@ en:
         back: "Back"
         view: "View"
         search: "Search"
+        searching: "Search..."
         select: "Select"
 
       target:
@@ -22,6 +23,7 @@ en:
         choose: "Choose a %{resource}"
         verify: "Verify %{resource}"
         view: "View %{resource}"
+        reload: "Reload %{resource}"
 
       special:
         edit_profile: "Edit My Profile"
@@ -46,17 +48,9 @@ en:
       # Tertiary menu
       details: "Info"
       activity: "Activity"
-      regions:
-        countries: "Countries"
-        regions: "Regions"
-        cities: "Cities / Areas"
-      events:
-        offline: "In-Person Events"
-        online: "Online Events"
       breadcrumbs:
         world: "World"
         help: "Help"
-        regions: "Regions"
         review: "Review Alerts"
         dashboard: "Dashboard"
 
@@ -71,8 +65,13 @@ en:
       not_logged_in: "You are not logged in!"
       no_comment: "(No comment)"
       temporary_mail_error: "Email server is temporarily busy, please try again."
+      region:
+        invalid_geojson: "must have it's center within the borders of %{country}"
+        invalid_osm_id: "is not within %{country}"
+      area:
+        invalid_location: "must have it's center within the borders of %{region} and %{country}"
       venue:
-        out_of_bounds: "Venue cannot be outside the radius of %{local_area}"
+        out_of_bounds: "Venue cannot be outside the radius of %{area}"
       event:
         verified: "Thank you for confirming your event's accuracy."
         invalid_end_time: "cannot be before the start time"
@@ -86,13 +85,13 @@ en:
         phone_verified: "Your phone number is now verified!"
         email_verification_resent: "An email verification has been sent to %{name}"
       cannot_create:
-        event: "New events cannot be created here, they must be added directly to a venue."
-        venue: "New venues cannot be created here, they must be added directly to a region within a country."
+        event: "New events cannot be created here, they must be added directly to a city."
 
     forms:
       event:
         details: "Event Details"
         timing: "Timing"
+        location: "Location"
         registration: "Registration"
         manager: "Manager"
       manager:
@@ -103,12 +102,15 @@ en:
         manager: "Manager"
 
     hints:
+      unnamed: "(Unnamed)"
       verified: "Verified"
       not_verified: "Not Verified"
       not_set: "Not Set"
+      not_found: "No Results Found"
       unspecified: "Unspecified"
       unlimited: "Unlimited"
       never: "Never"
+      edit_warning: "Do not edit these fields, unless you know what you're doing!"
       geosearch:
         prompt: "Search for location"
         description: "You can use this search to automatically fill the fields below. It uses the Google API. If Google is blocked in your country, or if the search fails, you will need to enter the data manually."
@@ -116,12 +118,11 @@ en:
         must_be_new: "Only countries which haven't already been added are listed below."
         language: "The default language that events in this country are usually in."
         no_default_language: "No default"
-        province_management: "If enabled, you will be able to view and assign managers to regions (provinces, states, etc) within this country. This is useful for larger countries (China, USA, Australia, etc), and unnessecary for small countries (Belgium, Lithuania, Singapore, etc)."
-        bounds: "If a country is specified when embedding the map, these bounds will be used as the initial view. The coordinates should be entered as 4 comma-separated numbers (south,west,north,east)."
-      province:
-        must_be_new: "Only regions which haven't already been added are listed below."
-        prompt: "Province / State / County"
-      local_area:
+        enable_regions: "If enabled, you will be able to view and assign managers to regions (regions, states, etc) within this country. This is useful for larger countries (China, USA, Australia, etc), and unnessecary for small countries (Belgium, Lithuania, Singapore, etc)."
+        enable_custom_regions: "Allow the creation of custom regions. This is an advanced feature, which should only be used if you understand what you are doing."
+      region:
+        polygon: "Drag / click on a faded square to add a new corner to the polygon. Click on an existing corner to remove it."
+      area:
         location: "A custom area is defined using coordinates on the map (latitude and longitude) and a radius, to make a circular region."
       event:
         custom_name: "If you want to override the name of the event, you can do so here."
@@ -136,6 +137,9 @@ en:
         online_url: "If the class is online, this link is where seekers should join the class (eg. a link to Zoom, YouTube, Google Meet, etc)."
         phone_number: "A local phone number that seekers can call to ask questions."
         phone_name: "The first name of the yogi who will answer the phone."
+        venue:
+          search: "Search for address"
+          view_fields: "View location fields"
         manager:
           view_fields: "View manager fields"
           field: "The manager should be set to a yogi(ni) who will take responsibility for this event. Every week a list of new registrations will be sent to the manager and every few months they will be asked to confirm that the program information is still correct."
@@ -149,19 +153,6 @@ en:
           invitations:
             email: "Invite by email"
             phone: "Invite through %{messenger}"
-      venue:
-        manual_location: "Set location manually"
-        location: "If the location cannot be set automatically by pressing \"Find Location\", you can enter the details manually below."
-        find_marker: "Find Location"
-        marker_not_set:
-          title: "Map marker has not been set"
-          description: "Press 'Find Location' to automatically detect the coordinates of the venue's address."
-        cant_find_address:
-          title: "Couldn't find address"
-          description: "The address you entered could not be found. Try adding more information, or enter the latitude and longitude manually."
-        marker_set:
-          title: "Map marker set!"
-          description: "Make sure that the location shown on the map looks correct."
       manager:
         language: "The preferred language for emails and UI for this manager."
         administrator:
@@ -178,16 +169,16 @@ en:
             new_managed_record: "New Access"
             event_verification: "Event Verification"
             event_registrations: "Event Registrations"
-            region_summary: "Regional Summary"
+            place_summary: "Regional Summary"
             country_summary: "Country Summary"
             application_summary: "Sahaj Atlas Summary"
           hints:
-            new_managed_record: "A message sent to you when you are given permission to manage a new event, region or resource on the Atlas."
-            event_verification: "Messages requesting event and city managers to check their events' accuracy. Sent every 3 months, for each event. This cannot be disabled."
-            event_registrations: "A list of new registrations sent to event managers. Sent around 24 hours before each event."
-            region_summary: "A summary of changes within a region sent to regional managers. Sent every %{period}."
-            country_summary: "A summary of changes sent to country managers. Sent every %{period}."
-            application_summary: "A summary of all Atlas changes, sent to administrators. Sent every %{period}."
+            new_managed_record: "Sent when you are given permission to manage a new event, region or resource on the Atlas."
+            event_verification: "Requesting event and city managers to check their events' accuracy. Sent every 3 months, for each event. This cannot be disabled."
+            event_registrations: "A list of new registrations for your event. Sent around 24 hours before each event."
+            place_summary: "A summary of changes within a region you manage. Sent every %{period}."
+            country_summary: "A summary of changes within a country you manage. Sent every %{period}."
+            application_summary: "A summary of all Atlas changes. Sent every %{period}."
         search: "Enter a name, email, or phone number..."
       client:
         domain: "Only this domain will be allowed to embed the map using your secret key."
@@ -210,11 +201,9 @@ en:
       notification_settings: "Notification Settings"
       contact_details: "Contact Information"
       updated_at: "Last updated"
-      resources_managed:
-        title: "Resources Managed"
       event_coverage:
         title: "Event Coverage"
-        description: "%{events} (%{venues})"
+        description: "%{events} in %{resource}"
       record_needs_review:
         title: "%{resource} Needs Review"
         description: "This %{resource} hasn't been updated in %{updated_ago}. This event will be removed from the map unless it is reviewed within %{expires_in}. Go to the edit page and press save to confirm the event details are still correct."
@@ -251,16 +240,12 @@ en:
         parent: "This %{resource} is currently hidden from the public, because the manager's email has not been verified."
         action: "Resend"
       create_event:
-        title: "Wondering how to create a public program?"
-        description: "Choose a venue on the \"%{action}\" tab."
-        action: "Go now"
-      create_event_on_venue:
         title: "Wondering how to create an event?"
         description: "Click on the \"%{action}\" tab, and press \"Add Event\""
         action: "Add Event"
-      create_province_manager:
+      create_region_manager:
         title: "Wondering how to create a regional manager?"
-        description: "Choose a province, state or county on the \"%{action}\" tab."
+        description: "Choose a region, state or county on the \"%{action}\" tab."
         action: "Go now"
       create_city_manager:
         title: "Wondering how to create a city manager?"
@@ -270,14 +255,6 @@ en:
     images:
       title: "Images of this %{resource}"
       upload: "Upload Images"
-
-    regions:
-      new_province: "Add Region"
-      provinces_header: "Provinces / States / Counties"
-      local_areas_header:
-        provincial: "Metropolitan Areas"
-        national: "Custom Regions"
-        global: "Custom International Areas"
 
     activity:
       title: :cms.menu.activity
@@ -295,11 +272,11 @@ en:
           instruction: "You have access to all aspects of the atlas CMS (Content Management System). It is your job to create new country managers and help them learn to use the system."
         country:
           title: "Country Manager"
-          description: "Can create regions, venues, events and assign managers within %{region}"
+          description: "Can create regions, venues, events and assign managers within %{place}"
           instruction: "It's your responsibility to create regions within your country and assign managers to those regions to set up events. You may also create venues and events within your country."
         local:
           title: "Local Manager"
-          description: "Can create venues and events within %{region}"
+          description: "Can create venues and events within %{place}"
           instruction: "It's your responsibility to create events within your local area. You will first need to create a venue, before you can create an event at that venue."
         event:
           title: "Event Manager"
@@ -354,10 +331,10 @@ en:
       learn_more: "Learn more"
       guides:
         country_manager:
-          title: "How to manager your country"
+          title: "How to manage your country"
           video_id: 570202890
         local_manager:
-          title: "How to manager your region"
+          title: "How to manage your region"
           video_id: 570202890
         event_manager:
           title: "How to manage your event"

@@ -33,7 +33,7 @@ Rails.application.routes.draw do
         get :reminder, on: :collection
       end
 
-      resources :countries, :provinces, :local_areas, only: %i[] do
+      resources :countries, :regions, :areas, only: %i[] do
         get :summary
         get :summary, on: :collection
       end
@@ -55,57 +55,45 @@ Rails.application.routes.draw do
     #get '/:api_key(/*path)', to: 'application#show', as: :key
 
     # For generating helpers
-    get '/event/:event_id', to: 'application#show', as: :event
     get '/venue/:venue_id', to: 'application#show', as: :venue
-
-    #get :closest, to: 'application#closest'
-    #get :online, to: 'application#online'
-    #post :registrations, to: 'registrations#create'
+    get '/:layer/:event_id', to: 'application#show', as: :event
   end
 
   namespace :cms do
     root to: 'application#dashboard'
     get :review, to: 'application#review'
-    get :regions, to: 'application#regions'
     get :worldwide, to: 'application#show'
     get :help, to: 'application#help'
 
     resources :countries do
-      get :regions
       resources :managers, only: %i[index new create destroy]
-      resources :venues, only: %i[index new create]
       resources :events, only: %i[index]
-      resources :provinces, only: %i[new create]
-      resources :local_areas, only: %i[new create]
+      resources :regions, only: %i[index new create]
+      resources :areas, only: %i[index new create]
       resources :audits, only: %i[index]
     end
 
-    resources :provinces, except: %i[edit update index] do
-      get :regions
+    resources :regions, except: %i[index] do
       resources :managers, only: %i[index new create destroy]
-      resources :venues, only: %i[index new create]
       resources :events, only: %i[index]
-      resources :local_areas, only: %i[new create]
+      resources :areas, only: %i[index new create]
       resources :audits, only: %i[index]
     end
 
-    resources :local_areas, except: %i[index] do
-      get :autocomplete, on: :collection
-      resources :managers, only: %i[index new create destroy]
-      resources :venues, only: %i[index new create]
-      resources :events, only: %i[index new create]
-      resources :audits, only: %i[index]
-    end
-
-    resources :venues do
+    resources :areas, except: %i[index] do
+      get :geosearch, on: :collection
       get :geocode, on: :collection
-      get :autocomplete, on: :collection
+      resources :managers, only: %i[index new create destroy]
       resources :events, only: %i[index new create]
       resources :audits, only: %i[index]
+    end
+
+    resources :venues, only: [] do
+      get :geosearch, on: :collection
+      get :geocode, on: :collection
     end
 
     resources :events do
-      get :regions
       get :verify
       resources :pictures, only: %i[index create destroy]
       resources :managers, only: %i[index new create destroy]
@@ -115,16 +103,15 @@ Rails.application.routes.draw do
 
     resources :managers do
       get :resend_verification
-      get :regions
       get :activity
-      get :countries
-      get :provinces
       get :search
+      resources :managed_records, only: %i[index]
       resources :clients, only: %i[index]
-      resources :venues, only: %i[index]
       resources :events, only: %i[index]
       resources :audits, only: %i[index]
     end
+
+    resources :managed_records, only: %i[index]
 
     resources :clients do
       resources :audits, only: %i[index]

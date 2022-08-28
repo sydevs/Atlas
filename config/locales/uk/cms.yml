@@ -9,7 +9,7 @@ uk:
         destroy: "Видалити"
         back: "Назад"
         view: "Переглянути"
-        search: "Search" # TODO: Translate
+        searching: "Search..." # TODO: Translate
         select: "Select" # TODO: Translate
 
       target:
@@ -23,6 +23,7 @@ uk:
         choose: "Обрати %{resource}"
         verify: "Verify %{resource}" # TODO: Translate
         view: "View %{resource}" # TODO: Translate
+        reload: "Reload %{resource}" # TODO: Translate
 
       special:
         edit_profile: "Редагувати мій профіль"
@@ -47,17 +48,9 @@ uk:
       # Tertiary menu
       details: "Інформація"
       activity: "Діяльність"
-      regions:
-        countries: "Країни"
-        regions: "Регіони"
-        cities: "Міста / Райони"
-      events: # TODO: Translate
-        offline: "In-Person Events"
-        online: "Online Events"
       breadcrumbs:
         world: "Світ"
         help: "Допомога"
-        regions: "Регіони"
         review: "Сповіщення про переглядs"
         dashboard: "Панель приладів"
 
@@ -72,8 +65,13 @@ uk:
       not_logged_in: "Ви не ввійшли в систему!"
       no_comment: "(Без коментарів)"
       temporary_mail_error: "Сервер електронної пошти тимчасово зайнятий, спробуйте ще раз."
+      region: # TODO: Translate
+        invalid_geojson: "must have it's center within the borders of %{country}"
+        invalid_osm_id: "is not within %{country}"
+      area: # TODO: Translate
+        invalid_location: "must have it's center within the borders of %{region} and %{country}"
       venue:
-        out_of_bounds: "Місце проведення не може бути за межами радіусу %{local_area}"
+        out_of_bounds: "Місце проведення не може бути за межами радіусу %{area}"
       event:
         verified: "Thank you for confirming your event's accuracy." # TODO: Translate
         invalid_end_time: "не може бути раніше часу початку"
@@ -87,13 +85,11 @@ uk:
         phone_verified: "Your phone number is now verified!" # TODO: Translate
         email_verification_resent: "Підтвердження електронної пошти надіслано на %{name}"
       cannot_create:
-        event: "Тут не можна створювати нові події, їх потрібно додати безпосередньо до місця проведення."
-        venue: "Тут не можна створювати нові місця, їх потрібно додати безпосередньо до регіону країни."
+        event: "New events cannot be created here, they must be added directly to a city." # TODO: Translate
 
     forms:
       event:
         details: "Деталі події"
-        online: "Онлайн-заняття"
         timing: "Вибір часу"
         registration: "Реєстрація"
         manager: "Менеджер"
@@ -105,12 +101,15 @@ uk:
         manager: "Vенеджер"
 
     hints:
+      unnamed: "(Unnamed)" # TODO: Translate
       verified: "Підтверджено"
       not_verified: "Not Verified" # TODO: Translate
       not_set: "Not Set" # TODO: Translate
+      not_found: "No Results Found" # TODO: Translate
       unspecified: "Невизначено"
       unlimited: "Unlimited" # TODO: Translate
       never: "Ніколи"
+      edit_warning: "Do not edit these fields, unless you know what you're doing!" # TODO: Translate
       geosearch:
         prompt: "Пошук розташування"
         description: "Ви можете використовувати цей пошук для автоматичного заповнення полів нижче. Він використовує API Google. Якщо Google заблоковано у вашій країні або якщо пошук не вдається, вам потрібно буде ввести дані вручну."
@@ -118,12 +117,11 @@ uk:
         must_be_new: "Нижче наведено лише країни, які ще не були додані."
         language: "Мова за замовчуванням, якою зазвичай проводяться події в цій країні."
         no_default_language: "Немає за замовчуванням"
-        province_management: "Якщо ввімкнено, ви зможете переглядати та призначати менеджерів для регіонів (провінцій, штатів тощо) у цій країні. Це корисно для великих країн (Китай, США, Австралія тощо), і непотрібно для малих країн (Бельгія, Литва, Сінгапур тощо)."
-        bounds: "If a country is specified when embedding the map, these bounds will be used as the initial view. The coordinates should be entered as 4 comma-separated numbers (south,west,north,east)." # TODO: Translate
-      province:
-        must_be_new: "Нижче наведено лише регіони, які ще не були додані."
-        prompt: "Провінція / штат / країна"
-      local_area:
+        enable_regions: "Якщо ввімкнено, ви зможете переглядати та призначати менеджерів для регіонів (провінцій, штатів тощо) у цій країні. Це корисно для великих країн (Китай, США, Австралія тощо), і непотрібно для малих країн (Бельгія, Литва, Сінгапур тощо)."
+        enable_custom_regions: "Allow the creation of custom regions. This is an advanced feature, which should only be used if you understand what you are doing." # TODO: Translate
+      region: # TODO: Translate
+        polygon: "Drag / click on a faded square to add a new corner to the polygon. Click on an existing corner to remove it."
+      area:
         location: "Спеціальна область визначається за допомогою координат на карті (широта і довгота) і радіус, щоб створити кругову область."
       event:
         custom_name: "Якщо ви хочете змінити назву події, ви можете зробити це тут."
@@ -151,19 +149,6 @@ uk:
           invitations:
             email: "Invite by email"
             phone: "Invite through %{messenger}"
-      venue:
-        manual_location: "Встановіть місце розташування вручну"
-        location: "Якщо розташування неможливо встановити автоматично, натиснувши \"Знайти місцезнаходження\", ви можете ввести деталі вручну нижче."
-        find_marker: "Знайти місцезнаходження"
-        marker_not_set:
-          title: "Позначка на карті не встановлено"
-          description: "Натисніть «Знайти місцезнаходження», щоб автоматично визначити координати адреси місця проведення."
-        cant_find_address:
-          title: "Не вдалося знайти адресу"
-          description: "Не вдалося знайти введену вами адресу. Спробуйте додати більше інформації або введіть широту та довготу вручну."
-        marker_set:
-          title: "Набір міток на карті!"
-          description: "Переконайтеся, що місце, показане на карті, виглядає правильним."
       manager: # TODO: Translate
         language: "Бажана мова для електронних листів та інтерфейсу користувача для цього менеджера."
         administrator:
@@ -180,16 +165,16 @@ uk:
             new_managed_record: "New Access"
             event_verification: "Event Verification"
             event_registrations: "Event Registrations"
-            region_summary: "Regional Summary"
+            place_summary: "Regional Summary"
             country_summary: "Country Summary"
             application_summary: "Sahaj Atlas Summary"
           hints:
-            new_managed_record: "A message sent to you when you are given permission to manage a new event, region or resource on the Atlas."
-            event_verification: "Messages requesting event and city managers to check their events' accuracy. Sent every 3 months, for each event. This cannot be disabled."
-            event_registrations: "A list of new registrations sent to event managers. Sent around 24 hours before each event."
-            region_summary: "A summary of changes within a region sent to regional managers. Sent every %{period}."
-            country_summary: "A summary of changes sent to country managers. Sent every %{period}."
-            application_summary: "A summary of all Atlas changes, sent to administrators. Sent every %{period}."
+            new_managed_record: "Sent when you are given permission to manage a new event, region or resource on the Atlas."
+            event_verification: "Requesting event and city managers to check their events' accuracy. Sent every 3 months, for each event. This cannot be disabled."
+            event_registrations: "A list of new registrations for your event. Sent around 24 hours before each event."
+            place_summary: "A summary of changes within a region you manage. Sent every %{period}."
+            country_summary: "A summary of changes within a country you manage. Sent every %{period}."
+            application_summary: "A summary of all Atlas changes. Sent every %{period}."
         search: "Enter a name, email, or phone number..."
       client:
         domain: "Тільки цьому домену буде дозволено вбудовувати карту за допомогою вашого секретного ключа."
@@ -212,11 +197,9 @@ uk:
       notification_settings: "Notification Settings" # TODO: Translate
       contact_details: "Contact Information" # TODO: Translate
       updated_at: "Останнє оновлення"
-      resources_managed:
-        title: "Керовані ресурси"
       event_coverage:
         title: "Висвітлення подій"
-        description: "%{events} (%{venues})"
+        description: "%{events} in %{resource}" # TODO: Translate
       record_needs_review:
         title: "%{resource} потребує перевірки"
         description: "Цей %{resource} не оновлювався в %{updated_ago}. Цю подію буде видалено з карти, якщо вона не буде переглянута протягом %{expires_in}. Перейдіть на сторінку редагування та натисніть зберегти, щоб підтвердити, що деталі події все ще правильні."
@@ -248,14 +231,10 @@ uk:
         description: "Цей %{resource} наразі прихований від громадськості, оскільки він не опублікований."
         parent: "Цей %{resource} наразі прихований від громадськості, оскільки його %{parent} не опубліковано."
       create_event:
-        title: "Гадаєте як створити публічну програму?"
-        description: "Виберіть місце проведення на вкладці \"%{action}\"."
-        action: "Створити зараз"
-      create_event_on_venue:
         title: "Гадаєте як створити подію?"
         description: "Натисніть на вкладку \"%{action}\" і натисніть \"Додати подію\""
         action: "Додати подію"
-      create_province_manager:
+      create_region_manager:
         title: "Гадаєте як створити регіонального менеджера?"
         description: "Виберіть провінцію, штат чи округ на вкладці \"%{action}\"."
         action: "Створити зараз"
@@ -267,14 +246,6 @@ uk:
     images:
       title: "Зображення цього %{resource}"
       upload: "Завантажити зображення"
-
-    regions:
-      new_province: "Додати регіон"
-      provinces_header: "Провінції / Штати / Країни"
-      local_areas_header:
-        provincial: "Столичні райони"
-        national: "Вказаний регіон"
-        global: "Спеціальні міжнародні зони"
 
     activity:
       title: :cms.menu.activity
@@ -292,11 +263,11 @@ uk:
           instruction: "Ви маєте доступ до всіх аспектів атласу CMS (системи керування вмістом). Ваша робота полягає в тому, щоб створити нових керівників країни та допомогти їм навчитися користуватися системою."
         country:
           title: "Регіональний менеджер"
-          description: "Може створювати регіони, місця, події та призначати менеджерів у межах %{region}"
+          description: "Може створювати регіони, місця, події та призначати менеджерів у межах %{place}"
           instruction: "Ви несете відповідальність за створення регіонів у вашій країні та призначити менеджерів у ці регіони для організації подій. Ви також можете створювати місця та події у своїй країні."
         local:
           title: "Місцевий менеджер"
-          description: "Може створювати місця та події в межах %{region}"
+          description: "Може створювати місця та події в межах %{place}"
           instruction: "Ви несете відповідальність за створення подій у вашій місцевості. Спочатку вам потрібно буде створити місце проведення, перш ніж ви зможете створити подію в цьому місці."
         event:
           title: "Менеджер подій"

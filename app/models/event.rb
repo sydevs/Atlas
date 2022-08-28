@@ -20,28 +20,32 @@ class Event < ApplicationRecord
   enum registration_mode: { native: 0, external: 1, meetup: 2, eventbrite: 3, facebook: 4 }, _suffix: true
 
   # Associations
-  belongs_to :location, polymorphic: true
+  # belongs_to :location, polymorphic: true
+  # alias venue location
+
+  belongs_to :area, optional: true
+  belongs_to :venue, optional: true, inverse_of: :events
 
   has_many :registrations, dependent: :delete_all
   has_many :pictures, as: :parent, dependent: :destroy
-  accepts_nested_attributes_for :pictures
-  accepts_nested_attributes_for :manager
+
+  accepts_nested_attributes_for :pictures, :venue
 
   # Validations
+  validates_presence_of :type, :category, :language_code, :manager, :recurrence, :start_date, :start_time
+  validates_presence_of :end_date, if: :course_category?
+  validates_presence_of :end_time, if: -> { festival_category? || concert_category? }
+  validates_presence_of :online_url, if: :online?
+  validates_presence_of :venue, unless: :online?
   validates :custom_name, length: { maximum: 255 }
-  validates :category, :language_code, presence: true
-  validates :recurrence, :start_date, :start_time, presence: true
   validates :description, length: { minimum: 40, maximum: 600, allow_blank: true }
   validates :registration_url, url: true, unless: :native_registration_mode?
-  validates :phone_number, phone: { possible: true, allow_blank: true, country_specifier: -> event { event.location.country_code } }
-  validates :end_date, presence: true, if: :course_category?
-  validates :end_time, presence: true, if: -> { festival_category? || concert_category? }
-  validates :manager, presence: true
-  validates :type, presence: true
+  validates :phone_number, phone: { possible: true, allow_blank: true, country_specifier: -> event { event.country_code } }
   validates_numericality_of :registration_limit, greater_than: 0, allow_nil: true
   validates_associated :pictures
   validate :validate_end_time
   validate :validate_end_date
+  validate :validate_language_code
   validate :parse_phone_number
 
   # Scopes
@@ -52,32 +56,36 @@ class Event < ApplicationRecord
 
   scope :ready_for_reminder_email, -> { where("reminder_email_sent_at IS NULL OR reminder_email_sent_at <= ?", 12.hours.ago) }
 
-  scope :online, -> { where(type: 'OnlineEvent') }
+  scope :layer, -> (layer) { layer == 'online' ? online : offline }
+  scope :online, -> (online=true) { online ? where(type: 'OnlineEvent') : offline }
   scope :offline, -> { where(type: 'OfflineEvent') }
 
   # Delegations
+  delegate :time_zone, :country_code, to: :area
   alias associated_registrations registrations
-  alias parent location
-  delegate :latitude, :longitude, :time_zone, to: :location
+  alias parent area
 
-  # Methods
+  # Callbacks
+  before_validation :find_venue, unless: :online?
+  before_save -> { venue.id = Venue.select(:id).find_by_place_id(venue.place_id).id }
   after_save :verify_manager
 
-  def region_association?
-    false
+  # Methods
+
+  def layer
+    online? ? 'online' : 'offline'
+  end
+
+  def location
+    online? ? area : venue
+  end
+
+  def online?
+    type == 'OnlineEvent'
   end
 
   def publicly_visible?
     manager.verified? && published? && publishable?
-  end
-
-  def language_code= value
-    # Only accept languages which are in the language list
-    super value if I18nData.languages.key?(value)
-  end
-
-  def online?
-    type == "OnlineEvent"
   end
 
   def should_finish?
@@ -100,7 +108,7 @@ class Event < ApplicationRecord
     
     date = start_date > first_date ? start_date : first_date
     time = start_time.split(':').map(&:to_i)
-    datetime = date.to_time(:utc).in_time_zone(location.time_zone).change(hour: time[0], min: time[1])
+    datetime = date.to_time(:utc).in_time_zone(time_zone).change(hour: time[0], min: time[1])
 
     if recurrence == 'day'
       if datetime > first_datetime
@@ -169,7 +177,7 @@ class Event < ApplicationRecord
   end
 
   def default_language_code
-    language_code || location.country.default_language_code || I18n.locale.upcase
+    (language_code || area.country.default_language_code || I18n.locale).to_s.upcase
   end
 
   def parent_managers
@@ -196,8 +204,15 @@ class Event < ApplicationRecord
       # self.errors.add(:end_date, I18n.translate('cms.messages.event.passed_end_date')) if end_date < Date.today
     end
 
+    def validate_language_code
+      self[:language_code] = self[:language_code]&.upcase
+      return if I18nData.languages.key?(self[:language_code])
+
+      self.errors.add(:language_code)
+    end
+
     def parse_phone_number
-      self.phone_number = Phonelib.parse(phone_number, location.country_code).international
+      self.phone_number = Phonelib.parse(phone_number, country_code).international
     end
 
     def verify_manager
@@ -205,6 +220,12 @@ class Event < ApplicationRecord
 
       ManagerMailer.with(manager: manager, context: self).verify.deliver_later
       manager.touch(:email_verification_sent_at)
+    end
+
+    def find_venue
+      return unless venue_id.nil? || venue.place_id_changed?
+
+      self.venue_id = Venue.find_by_place_id(venue.place_id)&.id
     end
 
 end

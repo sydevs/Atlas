@@ -1,8 +1,14 @@
 module LocalizationHelper
 
+  I18N_KEYS = {
+    OfflineEvent => 'offline_event',
+    OnlineEvent => 'online_event',
+  }
+
   def translate_model model, pluralization = :singular
     key = pluralization == :plural ? 'plural' : 'single'
-    translate(key, scope: [:activerecord, :models, model.model_name.i18n_key])
+    i18n_key = I18N_KEYS[model] || model.model_name.i18n_key
+    translate(key, scope: [:activerecord, :models, i18n_key])
   end
 
   def translate_model_count model, count = nil
@@ -11,16 +17,19 @@ module LocalizationHelper
       model = model.klass
     end
 
-    "#{number_with_delimiter(count)} #{translate(model.model_name.i18n_key, scope: %i[activerecord models], count: count)}"
+    i18n_key = I18N_KEYS[model] || model.model_name.i18n_key
+    "#{number_with_delimiter(count)} #{translate(i18n_key, scope: %i[activerecord models], count: count)}"
   end
 
   def translate_enum_value model, attr, value = nil
     value ||= model.send(attr)
-    I18n.translate value, scope: [:activerecord, :attributes, model.model_name.i18n_key, attr.to_s.pluralize]
+    i18n_key = I18N_KEYS[model] || model.model_name.i18n_key
+    I18n.translate value, scope: [:activerecord, :attributes, i18n_key, attr.to_s.pluralize]
   end
 
   def translate_attribute model, attr
-    I18n.translate attr, scope: [:activerecord, :attributes, model.model_name.i18n_key]
+    i18n_key = I18N_KEYS[model] || model.model_name.i18n_key
+    I18n.translate attr, scope: [:activerecord, :attributes, i18n_key]
   end
 
 end

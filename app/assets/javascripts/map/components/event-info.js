@@ -9,12 +9,12 @@ function EventInfo() {
 
       return [
         m('.event',
-          m('.event__sidebar',
+          event.languageCode != window.locale ? m('.event__sidebar',
             m('.event__sidebar__language', [
               m('div', Util.translate('event.language')),
               m('.event__sidebar__language-text', language),
             ])
-          ),
+          ) : null,
           m('.event__label', event.label),
           m('.event__subtitle',
             event.online ?
@@ -50,6 +50,7 @@ function EventInfo() {
           event.location.directionsUrl ? m('a',
             {
               tabindex: 1,
+              target: '_blank',
               href: event.location.directionsUrl,
             },
             m('span.icon.icon--location'),

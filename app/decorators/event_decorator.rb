@@ -1,31 +1,33 @@
 module EventDecorator
 
   def decorated_location
-    @location ||= begin
-      location.extend("#{location.class}Decorator".constantize)
+    @location ||= (online? ? decorated_area : decorated_venue)
+  end
+
+  def decorated_area
+    @area ||= begin
+      area.extend(AreaDecorator)
+    end
+  end
+
+  def decorated_venue
+    @venue ||= begin
+      venue.extend(VenueDecorator)
     end
   end
 
   def label
     if custom_name.present?
       custom_name
-    elsif location.is_a?(LocalArea)
-      I18n.translate('api.event.online_label', category: category_label, city: decorated_location.label)
-    elsif location.is_a?(Venue)
-      I18n.translate('api.event.label', category: category_label, venue: decorated_location.label)
+    elsif online?
+      I18n.translate('api.event.online_label', category: category_label, area: decorated_area.label)
     else
-      category_name
+      I18n.translate('api.event.label', category: category_label, venue: decorated_venue.label)
     end
   end
 
   def address
-    @address ||= begin
-      if online?
-        decorated_location.label
-      else
-        [room, venue.street, venue.city, decorated_location.province_name].compact.join(', ')
-      end
-    end
+    decorated_location.address
   end
 
   def category_name
@@ -68,42 +70,11 @@ module EventDecorator
   end
 
   def map_path
-    Rails.application.routes.url_helpers.map_event_path(self)
+    Rails.application.routes.url_helpers.map_event_path(self, layer: layer)
   end
 
   def map_url
-    Rails.application.routes.url_helpers.map_event_url(self)
-  end
-
-  def as_json(_context = nil)
-    {
-      id: id,
-      label: label,
-      path: Rails.application.routes.url_helpers.map_event_path(self),
-      description: description,
-      address: address,
-      category: category,
-      timing: {
-        recurrence: recurrence,
-        start_date: start_date.to_s,
-        end_date: end_date&.to_s,
-        time: formatted_start_end_time,
-        registration_end_time: registration_end_time,
-      },
-      language_code: language_code,
-      images: pictures.map { |picture|
-        {
-          url: picture.file.url,
-          thumbnail_url: picture.file.url(:thumbnail),
-        }
-      },
-      registration: {
-        mode: registration_mode,
-        url: registration_url,
-      },
-      online: online,
-      online_url: online_url,
-    }
+    Rails.application.routes.url_helpers.map_event_url(self, layer: layer)
   end
 
 end

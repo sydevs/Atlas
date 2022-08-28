@@ -4,4 +4,4 @@ uk:
     distance: "%{distance} км"
     event:
       label: "%{category} біля %{venue}"
-      online_label: "%{category} з %{city}"
+      online_label: "%{category} з %{area}"

@@ -15,8 +15,7 @@
     = render "cms/fields/#{@model_name.singular_route_key}", f: f
 
     p
-      - page = [LocalArea, Province, Country].include?(@model) ? :regions : @model
-      a.ui.basic.button href=url_for([:cms, @context, page])
+      a.ui.basic.button href=url_for([:cms, @context, @model])
         i.left.arrow.icon
         = translate('cms.actions.target.back', resource: translate_model(@model, :plural).downcase)
 
