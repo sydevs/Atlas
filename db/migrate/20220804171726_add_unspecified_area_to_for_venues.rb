@@ -4,7 +4,8 @@ class AddUnspecifiedAreaToForVenues < ActiveRecord::Migration[6.1]
       events = country.events.where(local_area_id: nil).where.not(venue_id: nil)
       puts "No missing local areas in #{country.country_code}" && next unless events.present?
 
-      local_area = country.local_areas.create_with({
+      local_area = LocalArea.create_with({
+        country_code: country.country_code,
         latitude: 51.477928,
         longitude: -0.001545,
         radius: 0,
