@@ -215,7 +215,7 @@ class AbstractMapLayer {
   }
 
   setSelection(location) {
-    if (location.latitude && location.longitude) {
+    if (location && location.latitude && location.longitude) {
       this._mapbox.getSource(this._sources.selection).setData({
         type: 'FeatureCollection',
         features: [{

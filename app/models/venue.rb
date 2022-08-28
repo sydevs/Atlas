@@ -60,6 +60,7 @@ class Venue < ApplicationRecord
       areas = Area.select('id, name, radius, latitude, longitude').within(radius, origin: self)
       areas = areas.to_a.filter { |area| area.contains?(self) }
       self.areas = areas
+      save!
     end
 
     def fetch_coordinates

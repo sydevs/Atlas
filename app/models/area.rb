@@ -88,6 +88,7 @@ class Area < ApplicationRecord
       return unless (previous_changes.keys & %w[radius latitude longitude]).present?
 
       self.venues = Venue.select('id, latitude, longitude').within(flexible_radius, origin: self)
+      save!
     end
 
     def validate_location

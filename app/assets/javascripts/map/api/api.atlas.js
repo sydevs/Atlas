@@ -41,9 +41,13 @@ class AtlasAPI {
           }
           location {
             id
+            type
             label
             latitude
             longitude
+            eventIds
+            parentId
+            parentType
             directionsUrl
           }
         }`,
@@ -53,6 +57,7 @@ class AtlasAPI {
           latitude
           longitude
           eventIds
+          parentId
         }`,
         area: `on Area {
           id
@@ -111,6 +116,8 @@ class AtlasAPI {
               longitude
               radius
               eventIds
+              parentId
+              parentType
             }
           }
         }`

@@ -144,7 +144,10 @@ class MapFrame extends EventTarget {
   async setSelection(location, options = {}) {
     this.waitForLoad().then(() => {
       this.#currentLayer.setSelection(location)
-      if (!location) return
+      if (!location) {
+        this.#mapbox.easeTo({ zoom: this.#mapbox.getZoom() * 0.75 })
+        return
+      }
 
       if (location.bounds || (location.radius && location.radius != 'null')) {
         this.fitTo(location, Object.assign({

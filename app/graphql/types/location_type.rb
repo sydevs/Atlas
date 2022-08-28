@@ -1,6 +1,7 @@
 module Types
   class LocationType < Types::BaseObject
     field :id, ID, null: false
+    field :type, String, null: false
     # field :path, String, null: false, method: :map_path
     # field :url, String, null: false, method: :map_url
     
@@ -16,8 +17,23 @@ module Types
     field :events, [Types::EventType], null: false
     field :event_ids, [ID], null: false
 
+    field :parent_id, ID, null: false
+    field :parent_type, String, null: false
+
     field :created_at, GraphQL::Types::ISO8601DateTime, null: false
     field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
+
+    def parent_id
+      object.parent.id
+    end
+
+    def parent_type
+      object.parent.class.model_name
+    end
+
+    def type
+      object.class.model_name
+    end
 
     def events
       object.events.publicly_visible.map { |venue| venue.extend(EventDecorator) }

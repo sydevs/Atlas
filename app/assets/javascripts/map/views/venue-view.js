@@ -23,7 +23,8 @@ function VenueView() {
         m(NavigationButton, {
           float: 'left',
           icon: 'left',
-          href: '/',
+          href: '/:layer/area/:id',
+          params: { layer: AtlasEvent.LAYER.offline, id: venue.parentId }
         }),
         m('.panel__header', Util.translate('venue.header', { venue: venue.label })),
         m('.list', venue.events.map(function(event) {

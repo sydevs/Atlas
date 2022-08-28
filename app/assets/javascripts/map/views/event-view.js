@@ -16,12 +16,25 @@ function EventView() {
     view: function() {
       if (!event) return null //m('div', "Event not found")
 
+      let href = '/:layer/:model/:id'
+      let params = { layer: event.layer }
+
+      if (event.location.eventIds.length > 1) {
+        params['model'] = event.location.type.toLowerCase()
+        params['id'] = event.location.id
+      } else if (window.config.search) {
+        href = '/:layer'
+      } else {
+        params['model'] = event.location.parentType.toLowerCase()
+        params['id'] = event.location.parentId
+      }
+
       return [
         m(NavigationButton, {
           float: 'left',
           icon: 'left',
-          href: '/:layer',
-          params: { layer: event.layer },
+          href: href,
+          params: params,
         }),
         m(NavigationButton, {
           float: 'right',
