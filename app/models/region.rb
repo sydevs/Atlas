@@ -22,7 +22,7 @@ class Region < ApplicationRecord
   validate :validate_geojson
 
   # Scopes
-  default_scope { order(name: :desc) }
+  # default_scope { order(name: :desc) }
   
   scope :ready_for_summary_email, -> { where("summary_email_sent_at IS NULL OR summary_email_sent_at <= ?", PlaceMailer::SUMMARY_PERIOD.ago) }
 
