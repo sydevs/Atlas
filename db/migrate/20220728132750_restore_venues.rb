@@ -17,7 +17,7 @@ class RestoreVenues < ActiveRecord::Migration[6.1]
     end
 
     Venue.in_batches.each_record do |v|
-      province_name = ProvinceDecorator.get_name(v.province_code, v.country_code)
+      province_name = RegionDecorator.get_name(v.province_code, v.country_code)
       v.update_column(:address, [v[:street], v.city, province_name, v.country_code].compact.join(', '))
     end
 
