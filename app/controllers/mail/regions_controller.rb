@@ -4,8 +4,7 @@ class Mail::RegionsController < Mail::ApplicationController
 
   def summary
     summary_period = PlaceMailer::SUMMARY_PERIOD
-    region_label = RegionDecorator.get_name(@place.province_code, @place.country.country_code)
-    @subject = I18n.translate('mail.place.summary.subject', place: region_label)
+    @subject = I18n.translate('mail.place.summary.subject', place: @place.name)
 
     @start_of_period = summary_period.ago.beginning_of_week
     @end_of_period = @start_of_period + summary_period

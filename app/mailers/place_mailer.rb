@@ -30,9 +30,7 @@ class PlaceMailer < ApplicationMailer
     @old_stats = @stats
     # @old_stats = @stats.map { |key, value| [key, (value * rand(0.7..1.5)).to_i] }.to_h
 
-    if @place.is_a?(Region)
-      label = RegionDecorator.get_name(@place.province_code, @place.country.country_code)
-    elsif @place.try(:country_code)
+    if @place.try(:country_code)
       label = "#{@place.name}, #{CountryDecorator.get_short_label(@place.country_code)}"
     else
       label = @place.name

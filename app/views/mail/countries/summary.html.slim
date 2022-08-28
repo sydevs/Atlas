@@ -18,7 +18,7 @@ table.data
       td
         - @new_regions.each do |region|
           div
-            = link_to RegionDecorator.get_name(region.province_code, region.country.country_code), email_login(cms_region_url(region))
+            = link_to region.name, email_login(cms_region_url(region))
         - @new_areas.each do |area|
           div
             = link_to area.name, email_login(cms_area_url(area))
@@ -31,20 +31,14 @@ table.data
           - record = managed_record.record
           div
             = link_to manager.name, email_login(cms_manager_url(manager))
-            - if record.is_a?(Region)
-              |  (#{RegionDecorator.get_name(record.province_code, record.country.country_code)})
-            - else
-              |  (#{record.name})
+            |  (#{record.name})
               
         - @new_area_managers.each do |managed_record|
           - manager = managed_record.manager
           - record = managed_record.record
           div
             = link_to manager.name, email_login(cms_manager_url(manager))
-            - if record.is_a?(Region)
-              |  (#{RegionDecorator.get_name(record.province_code, record.country.country_code)})
-            - else
-              |  (#{record.name})
+            |  (#{record.name})
   
   - if @inactive_regions.present? || @inactive_areas.present?
     tr
@@ -52,7 +46,7 @@ table.data
       td
         - @inactive_regions.each do |region|
           div
-            = link_to RegionDecorator.get_name(region.province_code, region.country.country_code), email_login(cms_region_url(region))
+            = link_to region.name, email_login(cms_region_url(region))
             |  (#{time_ago_in_words region.last_activity_on})
         - @inactive_areas.each do |area|
           div
