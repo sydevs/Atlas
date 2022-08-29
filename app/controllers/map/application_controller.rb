@@ -19,18 +19,12 @@ class Map::ApplicationController < ActionController::Base
 
     render 'map/show'
   end
+  
+  def embed
+    # response.headers["Expires"] = 1.day.from_now.httpdate
+    # expires_in 1.day, public: true, must_revalidate: true
 
-  def index
-    I18n.locale = params[:locale]&.to_sym || :en
-    @events = GraphqlAPI.events(online: params[:online])
-
-    if params[:online]
-      @language_codes = Event.online(params[:online]).distinct.pluck(:language_code) || []
-    else
-      @language_codes = Event.distinct.pluck(:language_code) || []
-    end
-
-    render 'map/index'
+    render 'map/embed'
   end
 
   private

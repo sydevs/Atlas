@@ -201,6 +201,10 @@ en:
       notification_settings: "Notification Settings"
       contact_details: "Contact Information"
       updated_at: "Last updated"
+      embed_type:
+        script: "Script (preferred)"
+        iframe: "IFrame"
+        link: "Link"
       event_coverage:
         title: "Event Coverage"
         description: "%{events} in %{resource}"

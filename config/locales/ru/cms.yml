@@ -197,6 +197,10 @@ ru:
       notification_settings: "Настройка оповещений"
       contact_details: "Контакты"
       updated_at: "Последнее обновление"
+      embed_type: # TODO: Translate
+        script: "Script (preferred)"
+        iframe: "IFrame"
+        link: "Link"
       event_coverage:
         title: "Освещение события" 
         description: "%{events} in %{resource}" # TODO: Translate

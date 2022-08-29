@@ -48,6 +48,7 @@ Rails.application.routes.draw do
 
   namespace :map do
     root to: 'application#show'
+    get :embed, to: 'application#embed', constraints: { format: 'js' }
     get '(*path)', to: 'application#show'
 
     # For generating helpers

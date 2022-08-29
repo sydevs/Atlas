@@ -197,6 +197,10 @@ uk:
       notification_settings: "Notification Settings" # TODO: Translate
       contact_details: "Contact Information" # TODO: Translate
       updated_at: "Останнє оновлення"
+      embed_type: # TODO: Translate
+        script: "Script (preferred)"
+        iframe: "IFrame"
+        link: "Link"
       event_coverage:
         title: "Висвітлення подій"
         description: "%{events} in %{resource}" # TODO: Translate

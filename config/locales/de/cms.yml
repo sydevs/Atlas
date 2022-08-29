@@ -200,6 +200,10 @@ de:
       notification_settings: "Benachrichtigungseinstellungen"
       contact_details: "Kontaktinformationen"
       updated_at: "Letzte Aktualisierung"
+      embed_type: # TODO: Translate
+        script: "Script (preferred)"
+        iframe: "IFrame"
+        link: "Link"
       event_coverage:
         title: "Eventberichterstattung"
         description: "%{events} in %{resource}" # TODO: Translate

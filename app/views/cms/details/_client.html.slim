@@ -2,20 +2,20 @@
 h3.ui.small.dividing.grey.header = translate_attribute(Client, :map_url)
 
 .ui.blue.secondary.tiny.menu
-  /a.tab.item data-tab='script' Script (preferred)
-  a.tab.item data-tab='iframe' IFrame (preferred)
-  a.tab.item data-tab='url' Link
+  a.tab.item data-tab='script' = translate('cms.details.embed_type.script')
+  a.tab.item data-tab='iframe' = translate('cms.details.embed_type.iframe')
+  a.tab.item data-tab='url' = translate('cms.details.embed_type.link')
 .ui.tab data-tab='script'
   .ui.fluid.code.input
     textarea onclick="this.select()"
-      = "<script src=\"#{map_root_url(key: @record.public_key)}\" />"
+      = "<script src=\"#{map_embed_url(format: :js)}\" key=\"#{@record.public_key}\" path=\"?\" />"
 .ui.tab data-tab='iframe'
   .ui.fluid.code.input
     textarea onclick="this.select()"
-      = "<iframe width=\"100%\" border=\"0\">#{map_root_url(key: @record.public_key)}</iframe>"
+      = "<iframe src=\"#{map_root_url(key: @record.public_key)}\" width=\"100%\" border=\"0\"></iframe>"
 .ui.tab data-tab='url'
   .ui.fluid.code.input
-    input value=map_root_url(key: @record.public_key) onclick="this.select()"
+    input type="text" value="https://wemeditate.com/map?key=#{@record.public_key}" onclick="this.select()"
 
 /.field
   label = translate_attribute(Client, :index_url)
