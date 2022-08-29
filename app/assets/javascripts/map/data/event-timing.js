@@ -41,7 +41,8 @@ class EventTiming {
     this.startDate = firstDateTime.toLocaleString({ month: 'long', day: 'numeric' })
     this.endDate = lastDateTime ? lastDateTime.toLocaleString({ month: 'long', day: 'numeric' }) : null
     this.startTime = firstDateTime.toLocaleString(luxon.DateTime.TIME_SIMPLE)
-    this.endTime = event.duration ? firstDateTime.plus({ hours: event.duration }).toLocaleString(luxon.DateTime.TIME_SIMPLE) : null
+    this.endTime = timing.duration ? firstDateTime.plus({ hours: timing.duration }).toLocaleString(luxon.DateTime.TIME_SIMPLE) : null
+    this.duration = timing.duration
 
     this.timeString = this.endTime ? `${this.startTime} - ${this.endTime}` : this.startTime
 
@@ -80,6 +81,10 @@ class EventTiming {
 
   get nextDateTime() {
     return this.upcomingDateTimes[0]
+  }
+
+  get firstDateTime() {
+    return this.#firstDateTime
   }
 
   timeZone(format = 'long') {

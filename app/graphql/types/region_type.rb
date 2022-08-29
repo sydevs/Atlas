@@ -20,7 +20,7 @@ module Types
     field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
 
     def events
-      object.events.publicly_visible.map { |venue| venue.extend(EventDecorator) }
+      object.events.publicly_visible.map { |event| event.extend(EventDecorator) }
     end
 
     def event_ids

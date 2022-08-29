@@ -30,6 +30,7 @@ function EventView() {
       }
 
       return [
+        //m(EventMetadata, { event: event }),
         m(NavigationButton, {
           float: 'left',
           icon: 'left',
