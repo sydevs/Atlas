@@ -1,0 +1,9 @@
+
+const params = new URLSearchParams(location.search)
+const script = document.currentScript
+const iframe = document.createElement('IFRAME')
+iframe.src = `<%= map_url %>${script.getAttribute('path')}?key=${script.getAttribute('key')}`
+iframe.id = 'syatlas'
+iframe.width = '100%'
+iframe.style = 'border: none; width: 100vw; height: 100vh'
+script.replaceWith(iframe)
