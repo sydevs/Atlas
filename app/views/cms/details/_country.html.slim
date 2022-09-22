@@ -19,6 +19,11 @@
 h3.ui.small.dividing.grey.header = translate('cms.details.details_for_record', resource: @record.label)
 .ui.list
   .item
+    i.tv.icon
+    .content
+      .header = translate_attribute(@record, :canonical_domain)
+      .description = @record.canonical_domain
+  .item
     i.sitemap.icon
     .content
       .header = translate('cms.details.event_coverage.title')

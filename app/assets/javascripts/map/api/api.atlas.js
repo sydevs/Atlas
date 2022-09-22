@@ -11,7 +11,7 @@ class AtlasAPI {
   }
 
   prepareGraphQL() {
-    this.graph = graphql('/api/graphql', {
+    this.graph = graphql(window.config.endpoint, {
       fragments: {
         event: `on Event {
           id

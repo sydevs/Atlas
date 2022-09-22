@@ -1,5 +1,10 @@
 module EventDecorator
 
+  LAYER = {
+    offline: 'f',
+    online: 'n',
+  }
+
   def decorated_location
     @location ||= (online? ? decorated_area : decorated_venue)
   end
@@ -70,11 +75,11 @@ module EventDecorator
   end
 
   def map_path
-    Rails.application.routes.url_helpers.map_event_path(self, layer: online? ? 'on' : 'off')
+    Rails.application.routes.url_helpers.map_event_path(self, layer: LAYER[layer.to_sym])
   end
 
   def map_url
-    Rails.application.routes.url_helpers.map_event_url(self, layer: online? ? 'on' : 'off', host: canonical_url)
+    Rails.application.routes.url_helpers.map_event_url(self, layer: LAYER[layer.to_sym], host: canonical_host)
   end
 
 end

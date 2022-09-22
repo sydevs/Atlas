@@ -4,6 +4,7 @@
 
   = render 'cms/fields/partials/geo_data', f: f
   = f.input :name
+  = f.input :canonical_domain, hint: translate('cms.hints.country.canonical_domain')
   = f.input :default_language_code, collection: languages, selected: @record.default_language_code, input_html: { class: 'search' }, hint: translate('cms.hints.country.language'), include_blank: translate('cms.hints.country.no_default_language')
   = f.input :enable_regions, as: :boolean, wrapper: :semantic_checkbox, hint: translate('cms.hints.country.enable_regions')
   = f.input :enable_custom_regions, as: :boolean, wrapper: :semantic_checkbox, hint: translate('cms.hints.country.enable_custom_regions')

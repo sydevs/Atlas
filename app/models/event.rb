@@ -61,7 +61,7 @@ class Event < ApplicationRecord
   scope :offline, -> { where(type: 'OfflineEvent') }
 
   # Delegations
-  delegate :time_zone, :country_code, to: :area
+  delegate :time_zone, :country_code, :canonical_domain, to: :area
   alias associated_registrations registrations
   alias parent area
 

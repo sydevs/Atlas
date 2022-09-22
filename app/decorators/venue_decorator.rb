@@ -31,7 +31,7 @@ module VenueDecorator
   end
 
   def map_url
-    Rails.application.routes.url_helpers.map_venue_url(self)
+    Rails.application.routes.url_helpers.map_venue_url(self, layer: EventDecorator::LAYER[:offline], host: canonical_host)
   end
 
 end

@@ -36,6 +36,9 @@ class Area < ApplicationRecord
   # Callbacks
   after_save :set_venues
 
+  # Delegations
+  delegate :canonical_domain, to: :country
+
   # Methods
 
   def parent

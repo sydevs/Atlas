@@ -1,9 +1,27 @@
 
 const params = new URLSearchParams(location.search)
-const script = document.currentScript
-const iframe = document.createElement('IFRAME')
-iframe.src = `<%= map_url %>${script.getAttribute('path')}?key=${script.getAttribute('key')}`
-iframe.id = 'syatlas'
-iframe.width = '100%'
-iframe.style = 'border: none; width: 100vw; height: 90vh'
-script.replaceWith(iframe)
+const embed = document.currentScript
+
+const container = document.createElement('div')
+container.id = 'sahaj-atlas'
+embed.replaceWith(container)
+
+const script = document.createElement('script')
+script.setAttribute('id', 'sahaj-atlas-script')
+script.setAttribute('src', '<%= javascript_url "map" %>')
+script.setAttribute('type', 'text/javascript')
+document.head.appendChild(script)
+
+const style = document.createElement('link')
+style.setAttribute('id', 'sahaj-atlas-style')
+style.setAttribute('href', '<%= stylesheet_url "map" %>')
+style.setAttribute('type', 'text/css')
+style.setAttribute('rel', 'stylesheet')
+style.setAttribute('media', 'all')
+container.parentNode.appendChild(style)
+
+window.config = JSON.parse('<%= @config.to_json.html_safe %>')
+window.translations = JSON.parse('<%= translate("map").to_json.html_safe %>')
+window.translations.atlas = "<%= translate('meditation_atlas') %>"
+window.translations.languages = JSON.parse('<%= I18nData.languages(I18n.locale).to_json.html_safe %>')
+window.locale = "<%= I18n.locale %>"

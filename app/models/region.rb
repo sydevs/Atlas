@@ -31,6 +31,7 @@ class Region < ApplicationRecord
   scope :ready_for_summary_email, -> { where("summary_email_sent_at IS NULL OR summary_email_sent_at <= ?", PlaceMailer::SUMMARY_PERIOD.ago) }
 
   # Delegations
+  delegate :canonical_domain, to: :country
   alias parent country
 
   # Methods

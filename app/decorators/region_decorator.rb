@@ -13,7 +13,7 @@ module RegionDecorator
   end
 
   def map_url
-    Rails.application.routes.url_helpers.map_region_url(self, host: canonical_url)
+    Rails.application.routes.url_helpers.map_region_url(self, layer: EventDecorator::LAYER[:offline], host: canonical_host)
   end
 
 end

@@ -135,6 +135,7 @@ en:
       country:
         manager_id: :activerecord.models.manager.single # Do not translate
         country_code: :activerecord.models.country.single # Do not translate
+        canonical_domain: "Canonical Website"
         default_language_code: "Default Event Language"
         enable_regions: "Enable Regional Management"
         enable_custom_regions: "Allow Custom Region Creation"
