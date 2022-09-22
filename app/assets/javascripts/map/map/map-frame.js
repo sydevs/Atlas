@@ -38,7 +38,7 @@ class MapFrame extends EventTarget {
       onload: () => {},
     }, config)
 
-    mapboxgl.accessToken = window.config.token
+    mapboxgl.accessToken = window.sya.config.token
 
     this.#mapbox = new mapboxgl.Map({
       container: containerId,
@@ -46,8 +46,8 @@ class MapFrame extends EventTarget {
       minZoom: 1,
       dragRotate: false,
       hash: true,
-      bounds: window.config.bounds,
-      center: window.config.center,
+      bounds: window.sya.config.bounds,
+      center: window.sya.config.center,
     })
 
     let initalizing = true
@@ -91,7 +91,7 @@ class MapFrame extends EventTarget {
     if (this.#controls != null) this.removeControlLayers()
 
     this.#controls = {
-      language: new MapboxLanguage({ defaultLanguage: window.locale }),
+      language: new MapboxLanguage({ defaultLanguage: window.sya.locale }),
       navigation: new mapboxgl.NavigationControl({ showCompass: false }),
       geolocater: new mapboxgl.GeolocateControl(),
     }

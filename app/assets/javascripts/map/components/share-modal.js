@@ -55,29 +55,29 @@ function ShareModal() {
       }
       */
 
-      return m('.share-background',
-        m('.share',
-          m('.share__header', Util.translate('sharing.header')),
+      return m('.sya-share-background',
+        m('.sya-share',
+          m('.sya-share__header', Util.translate('sharing.header')),
           m(m.route.Link, {
-            class: 'share__close',
+            class: 'sya-share__close',
             href: backPath,
-          }, m('.icon.icon--close')),
-          m('.share__link',
-            m('.icon.icon--link'),
+          }, m('.sya-icon.icon--close')),
+          m('.sya-share__link',
+            m('.sya-icon.icon--link'),
             m('input', {
               type: 'text',
               value: shareUrl,
               onclick: copyLink,
               onfocus: copyLink,
             }),
-            m('.share__link__confirmation', Util.translate('sharing.copied')),
+            m('.sya-share__link__confirmation', Util.translate('sharing.copied')),
           ),
-          m('.share__social',
+          m('.sya-share__social',
             Object.entries(SHARING_URLS).map(function([key, template]) {
               return m(`a.share__${key}`, {
                 href: formatUrl(template, shareUrl),
                 target: '_blank',
-              }, m('.icon', { class: `icon--${key}` }))
+              }, m('.sya-icon', { class: `sya-icon--${key}` }))
             })
           )
         )

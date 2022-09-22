@@ -8,9 +8,9 @@ const NavigationButton = {
       {
         href: vnode.attrs.href,
         params: vnode.attrs.params,
-        class: `navigation-button navigation-button--${vnode.attrs.float || 'static'}`
+        class: `sya-navigation-button sya-navigation-button--${vnode.attrs.float || 'static'}`
       },
-      m(`.icon.icon--${vnode.attrs.icon}`)
+      m(`.sya-icon.sya-icon--${vnode.attrs.icon}`)
     )
   }
 }

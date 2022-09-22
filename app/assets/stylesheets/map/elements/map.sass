@@ -1,31 +1,35 @@
 @import '../_mixins'
 
-.map
+.sya-map
   position: relative !important
-  width: 100vw
+  width: 100%
   height: 174px
   user-select: none
   overflow: hidden
   
   @include tablet-or-larger
-    height: 100vh
+    height: 100%
 
-.map--fullscreen
+.sya-map--halfscreen
   @include mobile
-    height: calc(100vh - 70px)
+    height: 50%
 
-.map--hidden
+.sya-map--fullscreen
+  @include mobile
+    height: calc(100% - 70px)
+
+.sya-map--hidden
   @include mobile
     height: 0
 
 
 // ===== CONTROLS ===== //
-.mapboxgl-control-container
+.sya-mapboxgl-control-container
   @include mobile
-    .map:not(.map--fullscreen) &
+    .sya-map:not(.sya-map--fullscreen) &
       display: none
 
-    .mapboxgl-ctrl
+    .sya-mapboxgl-ctrl
       &-top-left,
       &-top-right
         top: 70px

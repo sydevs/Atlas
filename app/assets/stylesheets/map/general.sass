@@ -1,37 +1,35 @@
 @import '_mixins'
 
-html, body
+html, body, #sahaj-atlas
   height: 100%
   height: stretch
   overflow-x: hidden
   scroll-behavior: smooth
 
 body
-  position: relative
   margin: 0
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left)
+
+#sahaj-atlas
+  position: relative
   color: $color-grey-normal
   font-family: $font-text
   font-feature-settings: "lnum"
-  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left)
   background: white
 
-*
-  box-sizing: border-box
+  *
+    box-sizing: border-box
 
-input, textarea
-  &:focus
-    outline: 1px solid $color-blue
+  input, textarea
+    &:focus
+      outline: 1px solid $color-blue
 
-button
-  color: $color-grey-normal
-  font-weight: $font-semibold
+  a
+    color: inherit
+    text-decoration: none
 
-.button
+.sya-button
   @include button
 
-a
-  color: inherit
-  text-decoration: none
-
-.fadeout
+.sya-fadeout
   animation: fade-out 0.25s

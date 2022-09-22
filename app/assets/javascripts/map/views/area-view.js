@@ -8,10 +8,10 @@ function AreaView() {
   return {
     oninit: function(vnode) {
       const id = m.route.param('id')
-      App.data.getRecord(AtlasArea, id).then(response => {
+      AtlasApp.data.getRecord(AtlasArea, id).then(response => {
         area = response
         const eventIds = (vnode.attrs.layer == AtlasEvent.LAYER.online ? area.onlineEventIds : area.offlineEventIds)
-        App.data.getEvents(eventIds).then(events => {
+        AtlasApp.data.getEvents(eventIds).then(events => {
           area.events = events
           m.redraw()
         })
@@ -27,7 +27,7 @@ function AreaView() {
           href: vnode.attrs.layer == AtlasEvent.LAYER.online ? '/:layer' : '/:layer/region/:id',
           params: { layer: vnode.attrs.layer, id: area.region.id }
         }),
-        m('.panel__header', Util.translate('area.header', { area: area.label })),
+        m('.sya-panel__header', Util.translate('area.header', { area: area.label })),
         m(Navigation, {
           optional: true,
           items: Object.entries(AtlasEvent.LAYER).map(([key, layer]) => {
@@ -42,8 +42,8 @@ function AreaView() {
             }
           })
         }),
-        m('.list', area.events.map(function(event) {
-          return m(EventCard, { key: event.id, class: 'list__item', event: event })
+        m('.sya-list', area.events.map(function(event) {
+          return m(EventCard, { key: event.id, class: 'sya-list__item', event: event })
         }))
       ]
     }

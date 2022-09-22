@@ -16,7 +16,7 @@ function Search() {
     if (query.length >= 3) {
       loading = true
 
-      let center = App.map.getCenter()
+      let center = AtlasApp.map.getCenter()
       let coords = [center.longitude, center.latitude]
       geoSearch.query(query, coords, response => {
         results = response
@@ -34,9 +34,9 @@ function Search() {
 
   function select(location) {
     if (location.west && location.east && location.north && location.south) {
-      App.map.fitTo(location)
+      AtlasApp.map.fitTo(location)
     } else {
-      App.map.goTo(location, location.zoom || 11)
+      AtlasApp.map.goTo(location, location.zoom || 11)
     }
 
     selected = location
@@ -45,11 +45,11 @@ function Search() {
   return {
     view: function(vnode) {
       let classes = []
-      if (focused && results.length > 0) classes.push('search--active')
-      if (vnode.attrs.floating) classes.push('search--floating')
+      if (focused && results.length > 0) classes.push('sya-search--active')
+      if (vnode.attrs.floating) classes.push('sya-search--floating')
 
-      return m('.search', { class: classes.join(' ') },
-        m('input.search__input', {
+      return m('.sya-search', { class: classes.join(' ') },
+        m('input.sya-search__input', {
           type: 'text',
           tabindex: 1,
           placeholder: Util.translate('search.prompt'),
@@ -58,12 +58,12 @@ function Search() {
           onfocus: () => { focused = true },
           onblur: () => { focused = false },
         }),
-        m('.search__icon',
-          m('i.icon', {
-            class: `icon--${loading ? 'spinner' : 'search'}`,
+        m('.sya-search__icon',
+          m('i.sya-icon', {
+            class: `sya-icon--${loading ? 'spinner' : 'search'}`,
           })
         ),
-        m('ul.search__results', results.map(function(result) {
+        m('ul.sya-search__results', results.map(function(result) {
           return m('li', {
             tabindex: 0,
             onmousedown: () => select(result)

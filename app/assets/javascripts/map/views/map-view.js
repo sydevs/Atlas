@@ -8,13 +8,13 @@ function MapView() {
 
   return {
     view: function(vnode) {
-      App.data.getList(AtlasEvent.LAYER.online).then(events => {
+      AtlasApp.data.getList(AtlasEvent.LAYER.online).then(events => {
         onlineEventsCount = events.length
         m.redraw()
       })
 
-      if (App.map) {
-        App.map.getRenderedEventIds().then(eventIds => {
+      if (AtlasApp.map) {
+        AtlasApp.map.getRenderedEventIds().then(eventIds => {
           offlineEventsCount = eventIds.length
 
           if (offlineEventsCount > 0 && !Util.isDevice('mobile')) {
@@ -24,7 +24,7 @@ function MapView() {
           offlineEventsCount = null
         }).finally(() => m.redraw())
   
-        App.map.addEventListener('movestart', () => {
+        AtlasApp.map.addEventListener('movestart', () => {
           offlineEventsCount = null
           m.redraw()
         })

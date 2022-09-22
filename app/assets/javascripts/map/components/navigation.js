@@ -10,10 +10,10 @@ const Navigation = {
       return
     }
 
-    return m('.navigation',
+    return m('.sya-navigation',
       items.map(function(item) {
-        let classes = ['navigation__item']
-        if (item.active) classes.push('navigation__item--active')
+        let classes = ['sya-navigation__item']
+        if (item.active) classes.push('sya-navigation__item--active')
         return m(m.route.Link, {
           class: classes.join(' '),
           href: item.href,

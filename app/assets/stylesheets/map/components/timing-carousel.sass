@@ -1,7 +1,7 @@
 @import '../_mixins'
 
 // ===== TIMING ===== //
-.registration__timing
+.sya-registration__timing
   position: relative
   padding: 10px 0
   text-align: center
@@ -58,11 +58,11 @@
   &__timezone
     font-size: 12px
 
-.registration__timing
-  .flickity-button
+.sya-registration__timing
+  .sya-flickity-button
     background: white
 
-  .flickity-prev-next-button
+  .sya-flickity-prev-next-button
     width: 24px
     height: 30px
     border-radius: 0
@@ -76,7 +76,7 @@
     &:focus
       box-shadow: 0 0 0 3px $color-orange
 
-  .flickity-button-icon
+  .sya-flickity-button-icon
     fill: $color-border
     opacity: 1
     transition: all 0.2s ease
@@ -85,5 +85,5 @@
       fill: black
       opacity: 0.8
 
-  .flickity-button:disabled .flickity-button-icon
+  .sya-flickity-button:disabled .sya-flickity-button-icon
     fill: transparent

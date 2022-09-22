@@ -31,7 +31,7 @@ class DataCache {
       if (this.#debug) console.log('[Data]', 'getting geojson', layer) // eslint-disable-line no-console
       return this.#atlas.fetchGeojson({
         online: layer == AtlasEvent.LAYER.online,
-        languageCode: (layer == AtlasEvent.LAYER.online ? window.locale : null),
+        languageCode: (layer == AtlasEvent.LAYER.online ? window.sya.locale : null),
       }).then(data => {
         this.#cache.geojsons[layer] = data.geojson
         return data.geojson
@@ -129,7 +129,7 @@ class DataCache {
 
   createRegistration(params) {
     if (this.#debug) console.log('[Data]', 'creating registration', params) // eslint-disable-line no-console
-    params.locale = window.locale
+    params.locale = window.sya.locale
     return this.#atlas.sendRegistration({
       'input!CreateRegistrationInput': params
     }).then(data => data.createRegistration)

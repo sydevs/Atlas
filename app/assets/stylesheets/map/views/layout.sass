@@ -1,15 +1,17 @@
 @import '../_mixins'
 
-.layout
+.sya-layout
+  height: 100%
+
   @include tablet
     display: flex
     flex-direction: row-reverse
 
   &.noscroll
-    height: 100vh
+    height: 100%
     overflow: hidden
 
-.panel
+.sya-panel
   overflow-x: hidden
   overflow-y: auto
   background: white
@@ -19,7 +21,7 @@
   @include tablet-or-larger
     position: relative
     width: $panel-width-thin
-    height: 100vh
+    height: 100%
     z-index: $z-panel
     box-shadow: $shadow-light
 
@@ -28,10 +30,10 @@
     top: $control-offset-y
     left: $control-offset-x
     height: auto
-    max-height: calc(100vh - #{$control-offset-y} * 2)
+    max-height: calc(100% - #{$control-offset-y} * 2)
     width: $panel-width
 
-.panel--padded
+.sya-panel--padded
   padding: $panel-padding-mobile
   padding-bottom: $panel-padding-mobile * 2
 
@@ -39,10 +41,10 @@
     padding: $panel-padding-thin $panel-padding
     padding-bottom: $panel-padding * 2
 
-.panel--overflow
+.sya-panel--overflow
   overflow: visible
 
-.panel__header
+.sya-panel__header
   padding: 0 24px
   font-size: 17px
   line-height: 50px
@@ -59,5 +61,5 @@
     background: white
     border-bottom: 1px solid lightgrey
 
-.panel > *
+.sya-panel > *
   animation: fade-in 0.4s

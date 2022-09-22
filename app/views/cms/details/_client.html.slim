@@ -8,7 +8,7 @@ h3.ui.small.dividing.grey.header = translate_attribute(Client, :map_url)
 .ui.tab data-tab='script'
   .ui.fluid.code.input
     textarea onclick="this.select()"
-      = "<script src=\"#{map_embed_url(format: :js)}\" key=\"#{@record.public_key}\" path=\"?\" />"
+      = "<script src=\"#{map_embed_url(format: :js)}\" key=\"#{@record.public_key}\" routing=\"?\" />"
 .ui.tab data-tab='iframe'
   .ui.fluid.code.input
     textarea onclick="this.select()"

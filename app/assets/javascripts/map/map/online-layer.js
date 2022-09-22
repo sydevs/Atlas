@@ -20,7 +20,7 @@ class OnlineMapLayer extends AbstractMapLayer {
       selection: {
         'text-field': '',
       },
-      fetchGeojson: App.data.getGeojson(AtlasEvent.LAYER.online),
+      fetchGeojson: AtlasApp.data.getGeojson(AtlasEvent.LAYER.online),
     }, config))
   }
 
@@ -32,7 +32,7 @@ class OnlineMapLayer extends AbstractMapLayer {
 
   _gotoLocation(area) {
     if (area.eventIds.length > 1) {
-      App.data.setCache('area', area)
+      AtlasApp.data.setCache('area', area)
       m.route.set('/:layer/area/:id', { id: area.id, layer: AtlasEvent.LAYER.online })
     } else {
       m.route.set('/:layer/:id', { id: area.eventIds[0], layer: AtlasEvent.LAYER.online })

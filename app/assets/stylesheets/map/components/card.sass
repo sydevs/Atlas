@@ -2,7 +2,7 @@
 //@import '../general'
 
 // ===== LAYOUT ===== //
-.card
+.sya-card
   display: flex
   align-items: center
   justify-content: space-between
@@ -17,24 +17,24 @@
 
   animation: fade-in 0.4s
 
-  &.card--simple
+  &.sya-card--simple
     min-height: 0
     border-bottom: 1px solid transparentize(lightgrey, 0.4)
 
-.card__content
+.sya-card__content
   min-height: 100px
   display: flex
   flex-direction: column
   justify-content: center
 
-  .card--simple &
+  .sya-card--simple &
     min-height: 0
 
-.card__content > *  > *
+.sya-card__content > *  > *
   display: inline-block
 
 // ===== CONTENT ===== //
-.card__title
+.sya-card__title
   font-weight: $font-semibold
   font-size: 17px
   line-height: 20px
@@ -42,10 +42,10 @@
   margin-bottom: 8px
   min-height: 22px
 
-  .card--simple &
+  .sya-card--simple &
     margin-bottom: 0
 
-.card__subtitle
+.sya-card__subtitle
   font-size: 13px
   line-height: 14px
   letter-spacing: 0.36px
@@ -59,7 +59,7 @@
     color: $color-blue
     white-space: nowrap
 
-.card__meta
+.sya-card__meta
   line-height: 17px
   font-size: 12px
   margin-bottom: 7px
@@ -96,7 +96,7 @@
     white-space: nowrap
 
 // ===== ACTIONS ===== //
-.card__action
+.sya-card__action
   padding-left: 10px
   white-space: nowrap
   font-weight: $font-semibold
@@ -105,7 +105,7 @@
   > *
     vertical-align: middle
 
-  .icon
+  .sya-icon
     display: inline-block
     margin-left: -2px
     margin-bottom: -2px

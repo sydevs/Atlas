@@ -1,6 +1,6 @@
 @import '_mixins'
 
-.icon
+.sya-icon
   // Use !important to prevent issues with browser extensions that change fonts
   font-family: 'syatlas-icons' !important
   speak: none
@@ -15,20 +15,20 @@
   -moz-osx-font-smoothing: grayscale
   vertical-align: middle
 
-+keyframes(spin)
-  0%
-    transform: rotate(0deg)
-  100%
-    transform: rotate(360deg)
-
 @each $name, $code in $icons
-  .icon--#{$name}::before
+  .sya-icon--#{$name}::before
       content: $code
 
 @each $direction in up down left right
-  .icon--#{$direction}
+  .sya-icon--#{$direction}
     font-size: 2em
 
-.icon--spinner::before
+.sya-icon--spinner::before
   display: block
   animation: spin 2s linear infinite
+
++keyframes(spin)
+0%
+  transform: rotate(0deg)
+100%
+  transform: rotate(360deg)

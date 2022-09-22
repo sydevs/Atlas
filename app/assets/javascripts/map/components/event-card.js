@@ -12,35 +12,35 @@ function EventCard() {
     view: function(vnode) {
       const event = vnode.attrs.event
       let language = Util.translate(`language_codes.${event.languageCode.toLowerCase()}`) || event.languageCode
-      let distance = event.offline && App.map.userLocation && event.distanceTo(App.map.userLocation)
+      let distance = event.offline && AtlasApp.map.userLocation && event.distanceTo(AtlasApp.map.userLocation)
       
       return m(m.route.Link,
         {
-          class: `card ${vnode.attrs.class}`,
+          class: `sya-card ${vnode.attrs.class}`,
           href: '/:layer/event/:id',
           params: { layer: event.layer, id: event.id },
         },
-        m('.card__content',
-          m('.card__title', event.label),
-          m('.card__subtitle',
-            m('span.card__subtitle__address', event.address),
-            distance ? m('span.card__subtitle__distance', Util.translate('event.distance', { distance: distance })) : null,
+        m('.sya-card__content',
+          m('.sya-card__title', event.label),
+          m('.sya-card__subtitle',
+            m('span.sya-card__subtitle__address', event.address),
+            distance ? m('span.sya-card__subtitle__distance', Util.translate('event.distance', { distance: distance })) : null,
           ),
-          m('.card__meta',
-            event.languageCode != window.locale ? m('.pill', language.toUpperCase()) : null,
-            m('.card__meta__day', event.timing.dateString),
-            m('.card__meta__time', event.timing.timeString),
+          m('.sya-card__meta',
+            event.languageCode != window.sya.locale ? m('.sya-pill', language.toUpperCase()) : null,
+            m('.sya-card__meta__day', event.timing.dateString),
+            m('.sya-card__meta__time', event.timing.timeString),
             event.online ?
               null :
-              m('abbr.card__meta__timezone', {
+              m('abbr.sya-card__meta__timezone', {
                 'data-tooltip': event.timing.timeZone('long'),
               }, event.timing.timeZone('short')),
-            event.timing.startingSoon ? m('.pill', Util.translate('event.upcoming')) : null,
+            event.timing.startingSoon ? m('.sya-pill', Util.translate('event.upcoming')) : null,
           ),
         ),
-        m('a.card__action',
+        m('a.sya-card__action',
           m('span', Util.translate('list.more_info')),
-          m('i.icon.icon--right')
+          m('i.sya-icon.sya-icon--right')
         )
       )
     }

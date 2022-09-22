@@ -13,7 +13,7 @@ function MapContainer() {
       selectionId = attrs.selectionId
       selectionModel = attrs.selectionModel
 
-      App.data.getRecord(selectionModel, selectionId).then(function(record) {
+      AtlasApp.data.getRecord(selectionModel, selectionId).then(function(record) {
         if (selectionModel == AtlasEvent) record = record.location
         map.setSelection(record, options)
       })
@@ -46,17 +46,17 @@ function MapContainer() {
   return {
     oncreate: function(vnode) {
       layer = vnode.attrs.layer || AtlasEvent.LAYER.offline
-      map = new MapFrame('map', {
+      map = new MapFrame('sya-map', {
         layer: vnode.attrs.layer,
       })
 
       map.addEventListener('move', () => {
-        App.data.clearCache('lists')
-        App.data.clearCache('sortedLists')
+        AtlasApp.data.clearCache('lists')
+        AtlasApp.data.clearCache('sortedLists')
       })
 
       updateSelection(vnode.attrs, { transition: false })
-      App.map = map
+      AtlasApp.map = map
     },
     onupdate: function(vnode) {
       if (map.loading) return
@@ -69,8 +69,8 @@ function MapContainer() {
       map.destroy()
     },
     view: function(vnode) {
-      return m('#map.map', {
-        'class': vnode.attrs.mode ? `map--${vnode.attrs.mode}` : null,
+      return m('#sya-map.sya-map', {
+        class: vnode.attrs.mode ? `sya-map--${vnode.attrs.mode}` : null,
       })
     }
   }

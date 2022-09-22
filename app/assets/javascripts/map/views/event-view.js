@@ -8,7 +8,7 @@ function EventView() {
   return {
     oninit: function() {
       const id = m.route.param('id')
-      App.data.getRecord(AtlasEvent, id).then(response => {
+      AtlasApp.data.getRecord(AtlasEvent, id).then(response => {
         event = response
         m.redraw()
       })
@@ -22,7 +22,7 @@ function EventView() {
       if (event.location.eventIds.length > 1) {
         params['model'] = event.location.type.toLowerCase()
         params['id'] = event.location.id
-      } else if (window.config.search) {
+      } else if (window.sya.config.search) {
         href = '/:layer'
       } else {
         params['model'] = event.location.parentType.toLowerCase()

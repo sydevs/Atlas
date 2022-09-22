@@ -1,14 +1,14 @@
 @import '../_mixins'
 @import '../icons'
 
-.search
+.sya-search
   z-index: $z-control + 1
   background: white
   border-bottom: 1px solid lightgrey
   position: relative
   height: $header-height
 
-.search--floating
+.sya-search--floating
   @include mobile
     position: absolute
     top: 20px
@@ -18,7 +18,7 @@
     height: 50px
 
 // ===== SEARCH ===== //
-.search__input
+.sya-search__input
   width: 100%
   height: 100%
   padding: 15px 20px
@@ -35,7 +35,7 @@
     padding: 22px 20px
     padding-right: $header-height
 
-.search__icon
+.sya-search__icon
   $margin: 6px
   $size: $header-height - ($margin * 2)
 
@@ -50,11 +50,11 @@
   transition: all $control-transition ease
   font-size: 24px
 
-  > .icon
+  > .sya-icon
     line-height: $size
     transition: all $control-transition ease
 
-  .search--floating &
+  .sya-search--floating &
     @include mobile
       $size: 50 - ($margin * 2)      
       top: $margin
@@ -62,11 +62,11 @@
       height: $size
       width: $size
 
-      > .icon
+      > .sya-icon
         line-height: $size
 
 // ===== GEOSEARCH AUTOCOMPLETE RESULTS ====== //
-.search__results
+.sya-search__results
   display: none
   background: white
   list-style: none
@@ -74,10 +74,10 @@
   padding: 0
   box-shadow: $shadow-light
 
-  .search--active &
+  .sya-search--active &
     display: block
 
-.search__results > li
+.sya-search__results > li
   padding: 12px 20px
   font-size: 14px
   line-height: 1.15

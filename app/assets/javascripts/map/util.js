@@ -29,7 +29,7 @@ const Util = {
   translate(key, vars = {}) {
     // Copied from: https://twitter.com/sharifsbeat/status/843187365367767046
     const dig = (p, o) => p.reduce((xs, x) => (xs && xs[x]) ? xs[x] : null, o)
-    let text = dig(key.split('.'), window.translations) || ''
+    let text = dig(key.split('.'), window.sya.translations) || ''
     Object.entries(vars).forEach(([field, value]) => {
       text = text.replace(`%{${field}}`, value)
     })

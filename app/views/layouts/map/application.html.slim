@@ -12,9 +12,3 @@ html lang=I18n.locale
 
   body
     = yield
-
-  javascript:
-    window.translations = #{translate('map').to_json.html_safe}
-    window.translations.atlas = "#{translate('meditation_atlas')}"
-    window.translations.languages = #{I18nData.languages(I18n.locale).to_json.html_safe}
-    window.locale = "#{I18n.locale}"

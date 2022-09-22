@@ -8,9 +8,9 @@ function VenueView() {
   return {
     oninit: function() {
       const id = m.route.param('id')
-      App.data.getRecord(AtlasVenue, id).then(response => {
+      AtlasApp.data.getRecord(AtlasVenue, id).then(response => {
         venue = response
-        App.data.getEvents(venue.eventIds).then(events => {
+        AtlasApp.data.getEvents(venue.eventIds).then(events => {
           venue.events = events
           m.redraw()
         })
@@ -26,9 +26,9 @@ function VenueView() {
           href: '/:layer/area/:id',
           params: { layer: AtlasEvent.LAYER.offline, id: venue.parentId }
         }),
-        m('.panel__header', Util.translate('venue.header', { venue: venue.label })),
-        m('.list', venue.events.map(function(event) {
-          return m(EventCard, { key: event.id, class: 'list__item', event: event })
+        m('.sya-panel__header', Util.translate('venue.header', { venue: venue.label })),
+        m('.sya-list', venue.events.map(function(event) {
+          return m(EventCard, { key: event.id, class: 'sya-list__item', event: event })
         }))
       ]
     }

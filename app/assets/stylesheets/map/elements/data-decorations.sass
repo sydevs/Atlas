@@ -1,40 +1,41 @@
 @import '../_mixins'
 
-// ===== TOOLTIP ===== //
-[data-tooltip]::after
-  content: attr(data-tooltip)
-  background: white
-  color: $color-blue
-  border: 1px solid $color-blue
-  border-radius: 5px
-  padding: 0 5px
-  box-shadow: $shadow-subtle
+#sahaj-atlas
+  // ===== TOOLTIP ===== //
+  [data-tooltip]::after
+    content: attr(data-tooltip)
+    background: white
+    color: $color-blue
+    border: 1px solid $color-blue
+    border-radius: 5px
+    padding: 0 5px
+    box-shadow: $shadow-subtle
 
-  position: absolute
-  bottom: 18px
-  left: 50%
-  transform: translateX(-40%)
-  white-space: nowrap
-  opacity: 0
-  transition: opacity 0.15s ease
+    position: absolute
+    bottom: 18px
+    left: 50%
+    transform: translateX(-40%)
+    white-space: nowrap
+    opacity: 0
+    transition: opacity 0.15s ease
 
-[data-tooltip]:hover::after
-  opacity: 1
+  [data-tooltip]:hover::after
+    opacity: 1
 
 
-// ===== BADGE ===== //
-[data-badge]::after
-  content: attr(data-badge)
-  display: inline-block
+  // ===== BADGE ===== //
+  [data-badge]::after
+    content: attr(data-badge)
+    display: inline-block
 
-  color: var(--contrast-color)
-  font-weight: bold
-  letter-spacing: 0.17px
-  text-align: center
-  padding: 2px 3px
-  line-height: 13px
-  margin-left: 4px
+    color: var(--contrast-color)
+    font-weight: bold
+    letter-spacing: 0.17px
+    text-align: center
+    padding: 2px 3px
+    line-height: 13px
+    margin-left: 4px
 
-  background: var(--color)
-  border: 1px solid var(--color)
-  border-radius: 5px
+    background: var(--color)
+    border: 1px solid var(--color)
+    border-radius: 5px

@@ -9,14 +9,14 @@ function Registration() {
       const event = vnode.attrs
       let registerable = Boolean(event.timing.nextDateTime)
 
-      return m('form.registration',
+      return m('form.sya-registration',
         m('#registration'),
-        m('.registration__header',
-          m('.registration__header__text',
-            m('.registration__header__title',
+        m('.sya-registration__header',
+          m('.sya-registration__header__text',
+            m('.sya-registration__header__title',
               Util.translate(registerable ? 'registration.header' : 'registration.closed')
             ),
-            m('.registration__header__subtitle', event.timing.description)
+            m('.sya-registration__header__subtitle', event.timing.description)
           )
         ),
         registerable ?
@@ -25,8 +25,8 @@ function Registration() {
               event: event,
               ondismiss: () => { registered = false }
             }) :
-            (event.registrationMode != 'native' ? m('registration__external',
-              m('a.registration__external__action', {
+            (event.registrationMode != 'native' ? m('.sya-registration__external',
+              m('a.sya-registration__external__action', {
                 target: '_blank',
               }, Util.translate(`registration.button.${event.registrationMode}`))
             ) : m(RegistrationForm, {

@@ -8,7 +8,7 @@ function SimpleCard() {
       
       return m(m.route.Link,
         {
-          class: `card card--simple ${vnode.attrs.class}`,
+          class: `sya-card sya-card--simple ${vnode.attrs.class}`,
           href: '/:layer/:model/:id',
           params: {
             layer: vnode.attrs.layer,
@@ -16,12 +16,12 @@ function SimpleCard() {
             id: vnode.attrs.id,
           },
         },
-        m('.card__content',
-          m('.card__title', vnode.attrs.label),
+        m('.sya-card__content',
+          m('.sya-card__title', vnode.attrs.label),
         ),
-        m('a.card__action',
+        m('a.sya-card__action',
           m('span', vnode.attrs.count),
-          m('i.icon.icon--right')
+          m('i.sya-icon.sya-icon--right')
         )
       )
     }

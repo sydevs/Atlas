@@ -20,8 +20,10 @@ style.setAttribute('rel', 'stylesheet')
 style.setAttribute('media', 'all')
 container.parentNode.appendChild(style)
 
-window.config = JSON.parse('<%= @config.to_json.html_safe %>')
-window.translations = JSON.parse('<%= translate("map").to_json.html_safe %>')
-window.translations.atlas = "<%= translate('meditation_atlas') %>"
-window.translations.languages = JSON.parse('<%= I18nData.languages(I18n.locale).to_json.html_safe %>')
-window.locale = "<%= I18n.locale %>"
+window.sya = {}
+window.sya.config = JSON.parse('<%= @config.to_json.html_safe %>'),
+window.sya.config.prefix = embed.getAttribute('routing')
+window.sya.translations = JSON.parse('<%= translate("map").to_json.html_safe %>')
+window.sya.translations.atlas = "<%= translate('meditation_atlas') %>"
+window.sya.translations.languages = JSON.parse('<%= I18nData.languages(I18n.locale).to_json.html_safe %>')
+window.sya.locale = "<%= I18n.locale %>"

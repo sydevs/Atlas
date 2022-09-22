@@ -8,7 +8,7 @@ function RegionView() {
   return {
     oninit: function(vnode) {
       const id = m.route.param('id')
-      App.data.getRecord(AtlasRegion, id).then(response => {
+      AtlasApp.data.getRecord(AtlasRegion, id).then(response => {
         region = response
         m.redraw()
       })
@@ -23,7 +23,7 @@ function RegionView() {
           href: '/:layer/country/:id',
           params: { layer: vnode.attrs.layer, id: region.country.id }
         }),
-        m('.panel__header', region.label),
+        m('.sya-panel__header', region.label),
         m(Navigation, {
           optional: true,
           items: Object.entries(AtlasEvent.LAYER).map(([key, layer]) => {
@@ -38,12 +38,12 @@ function RegionView() {
             }
           })
         }),
-        m('.list.list--compact', region.areas.map(function(area) {
+        m('.sya-list.list--compact', region.areas.map(function(area) {
           const count = vnode.attrs.layer == AtlasEvent.LAYER.offline ? area.offlineEventIds.length : area.onlineEventIds.length
           if (!count) return
 
           return m(SimpleCard, {
-            class: 'list__item',
+            class: 'sya-list__item',
             id: area.id,
             label: area.label,
             count: count,

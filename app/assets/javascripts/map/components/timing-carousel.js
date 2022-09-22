@@ -31,23 +31,23 @@ function TimingCarousel() {
     },
     view: function(vnode) {
       const event = vnode.attrs.event
-      timings = event.timing.upcomingDateTimes.map(datetime => datetime.setLocale(window.locale))
+      timings = event.timing.upcomingDateTimes.map(datetime => datetime.setLocale(window.sya.locale))
       selectedValue = timings[0]
 
       return m('div',
-        m('.registration__timing__label',
-          m('.registration__timing__text', Util.translate('registration.form.timing'))
+        m('.sya-registration__timing__label',
+          m('.sya-registration__timing__text', Util.translate('registration.form.timing'))
         ),
-        m('.registration__timing#timings',
+        m('.sya-registration__timing#timings',
           timings.map(function(date) {
-            return m('.registration__timing__cell',
-              m('.registration__timing__date',
-                m('.registration__timing__day', date.toLocaleString({ weekday: 'long' })),
-                m('.registration__timing__month', date.toLocaleString({ month: 'long', day: 'numeric' }))
+            return m('.sya-registration__timing__cell',
+              m('.sya-registration__timing__date',
+                m('.sya-registration__timing__day', date.toLocaleString({ weekday: 'long' })),
+                m('.sya-registration__timing__month', date.toLocaleString({ month: 'long', day: 'numeric' }))
               ),
-              m('.registration__timing__time',
-                m('.registration__timing__hour', date.toLocaleString(luxon.DateTime.TIME_SIMPLE))
-                //m('.registration__timing__timezone', )
+              m('.sya-registration__timing__time',
+                m('.sya-registration__timing__hour', date.toLocaleString(luxon.DateTime.TIME_SIMPLE))
+                //m('.sya-registration__timing__timezone', )
               )
             )
           })

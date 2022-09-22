@@ -9,12 +9,12 @@ function ListView() {
 
   function updateEvents() {
     if (layer == AtlasEvent.LAYER.online) {
-      return App.data.getList(AtlasEvent.LAYER.online).then(response => {
+      return AtlasApp.data.getList(AtlasEvent.LAYER.online).then(response => {
         events = response
       })
     } else {
-      return App.map.getRenderedEventIds().then(eventIds => {
-        return eventIds.length > 0 ? App.data.getList(AtlasEvent.LAYER.offline, eventIds) : []
+      return AtlasApp.map.getRenderedEventIds().then(eventIds => {
+        return eventIds.length > 0 ? AtlasApp.data.getList(AtlasEvent.LAYER.offline, eventIds) : []
       }).then(response => {
         events = response
       }).catch(() => {
@@ -33,7 +33,7 @@ function ListView() {
   return {
     oncreate: function(vnode) {
       layer = m.route.param('layer') || vnode.attrs.layer
-      App.map.addEventListener('update', () => {
+      AtlasApp.map.addEventListener('update', () => {
         updateEvents().finally(() => m.redraw())
       })
     },
@@ -45,14 +45,14 @@ function ListView() {
       let list = null
 
       if (events && events.length > 0) {
-        list = m('.list', events.map(function(event) {
-          return m(EventCard, { key: event.id, class: 'list__item', event: event })
+        list = m('.sya-list', events.map(function(event) {
+          return m(EventCard, { key: event.id, class: 'sya-list__item', event: event })
         }))
       } else if (vnode.attrs.layer == AtlasEvent.LAYER.offline) {
         list = m(ListFallback)
       }
 
-      App.data.getList(AtlasEvent.LAYER.online).then(events => {
+      AtlasApp.data.getList(AtlasEvent.LAYER.online).then(events => {
         onlineEventsCount = events.length
         m.redraw()
       })

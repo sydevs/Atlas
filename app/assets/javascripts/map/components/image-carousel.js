@@ -25,7 +25,7 @@ function ImageCarousel() {
     view: function(vnode) {
       const images = vnode.attrs.images
 
-      return m('.image-carousel#images', images.map(function(image) {
+      return m('.sya-image-carousel#images', images.map(function(image) {
         return m('img', {
           //'data-flickityLazyloadSrc': image.url,
           src: image.url,
