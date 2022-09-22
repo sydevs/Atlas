@@ -10,6 +10,8 @@ function ShareModal() {
     flipboard: 'https://share.flipboard.com/bookmarklet/popout?v=2&title={title}&url={url}',
   }
 
+  let selection
+
   // TODO: Implement object sharing
   function formatUrl(template, url) {
     template = template.replace('{url}', encodeURIComponent(url))
@@ -43,9 +45,16 @@ function ShareModal() {
         vnode.dom.addEventListener('animationend', resolve)
       })
     },
-    view: function() {
+    view: function(vnode) {
+      if (!vnode.attrs.enabled) return
+
       const backPath = m.route.get().split('?')[0]
-      const shareUrl = window.location.href.split('?')[0]
+      const select = vnode.attrs.selection || {}
+
+      AtlasApp.data.getRecord(select.model, select.id).then(function(record) {
+        selection = record
+        m.redraw()
+      })
 
       // TODO: Implement native share
       /*
@@ -55,18 +64,20 @@ function ShareModal() {
       }
       */
 
+      if (!selection) return
+
       return m('.sya-share-background',
         m('.sya-share',
           m('.sya-share__header', Util.translate('sharing.header')),
           m(m.route.Link, {
             class: 'sya-share__close',
             href: backPath,
-          }, m('.sya-icon.icon--close')),
+          }, m('.sya-icon.sya-icon--close')),
           m('.sya-share__link',
-            m('.sya-icon.icon--link'),
+            m('.sya-icon.sya-icon--link'),
             m('input', {
               type: 'text',
-              value: shareUrl,
+              value: selection.url,
               onclick: copyLink,
               onfocus: copyLink,
             }),
@@ -74,8 +85,8 @@ function ShareModal() {
           ),
           m('.sya-share__social',
             Object.entries(SHARING_URLS).map(function([key, template]) {
-              return m(`a.share__${key}`, {
-                href: formatUrl(template, shareUrl),
+              return m(`a.sya-share__${key}`, {
+                href: formatUrl(template, selection.url),
                 target: '_blank',
               }, m('.sya-icon', { class: `sya-icon--${key}` }))
             })

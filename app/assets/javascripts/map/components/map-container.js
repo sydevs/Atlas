@@ -3,18 +3,16 @@
 
 function MapContainer() {
   let map
-  let selectionId
-  let selectionModel
+  let selection
   let layer
   let mode
 
-  function updateSelection(attrs, options) {
-    if (attrs.selectionId != selectionId || attrs.selectionModel != selectionModel) {
-      selectionId = attrs.selectionId
-      selectionModel = attrs.selectionModel
+  function updateSelection(id, model, options) {
+    if (!selection || selection.id != id || selection.model != model) {
+      selection = { id: id, model: model }
 
-      AtlasApp.data.getRecord(selectionModel, selectionId).then(function(record) {
-        if (selectionModel == AtlasEvent) record = record.location
+      AtlasApp.data.getRecord(selection.model, selection.id).then(function(record) {
+        if (selection.model == AtlasEvent) record = record.location
         map.setSelection(record, options)
       })
     }
@@ -55,13 +53,15 @@ function MapContainer() {
         AtlasApp.data.clearCache('sortedLists')
       })
 
-      updateSelection(vnode.attrs, { transition: false })
+      const selection = vnode.attrs.selection || {}
+      updateSelection(selection.id, selection.model, { transition: false })
       AtlasApp.map = map
     },
     onupdate: function(vnode) {
       if (map.loading) return
 
-      updateSelection(vnode.attrs)
+      const selection = vnode.attrs.selection || {}
+      updateSelection(selection.id, selection.model)
       updateLayer(vnode.attrs.layer)
       updateMode(vnode.attrs.mode)
     },

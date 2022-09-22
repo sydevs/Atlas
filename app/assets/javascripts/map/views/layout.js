@@ -9,14 +9,12 @@ function Layout() {
       const layer = m.route.param('layer') || AtlasEvent.LAYER.offline
       const id = m.route.param('id')
 
-      console.log("MODE", vnode.attrs)
       return m('.sya-layout', { class: share ? 'noscroll' : null },
-        share ? m(ShareModal) : null,
+        m(ShareModal, { enabled: share, selection: { id: id, model: vnode.attrs.model } }),
         m(MapContainer, {
           mode: vnode.attrs.map,
           layer: layer,
-          selectionId: id,
-          selectionModel: vnode.attrs.model,
+          selection: { id: id, model: vnode.attrs.model },
         }),
         m('.sya-panel', {
           class: vnode.attrs.panel ? `sya-panel--${vnode.attrs.panel}` : null

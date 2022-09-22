@@ -15,6 +15,7 @@ class AtlasAPI {
       fragments: {
         event: `on Event {
           id
+          url
           layer
           label
           description
