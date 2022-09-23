@@ -40,6 +40,7 @@ class MapFrame extends EventTarget {
 
     mapboxgl.accessToken = window.sya.config.token
 
+    console.log('CONFIG', window.sya.config)
     this.#mapbox = new mapboxgl.Map({
       container: containerId,
       style: MapFrame.EMPTY_STYLE,
@@ -91,7 +92,7 @@ class MapFrame extends EventTarget {
     if (this.#controls != null) this.removeControlLayers()
 
     this.#controls = {
-      language: new MapboxLanguage({ defaultLanguage: window.sya.locale }),
+      language: new MapboxLanguage({ defaultLanguage: window.sya.config.locale }),
       navigation: new mapboxgl.NavigationControl({ showCompass: false }),
       geolocater: new mapboxgl.GeolocateControl(),
     }

@@ -214,7 +214,7 @@ class PreviewMap {
 }
 
 $(document).on('ready', function() {
-  const map = document.getElementById('sya-map')
+  const map = document.getElementById('map')
   if (map) {
     PreviewMap.instance = new PreviewMap(map)
   }

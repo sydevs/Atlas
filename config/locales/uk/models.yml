@@ -111,6 +111,8 @@ uk:
         name: "Ім'я"
         published: "Опубліковано"
         email: "Електронна адреса"
+        phone: "Phone" # TODO: Translate
+        language: "Мова"
         status: "Статус"
         statuses:
           verified: "Перевірено"
@@ -215,7 +217,7 @@ uk:
         description: "Опис"
         room: "Кімната"
         building: "Будівля"
-        language_code: "Мова"
+        language_code: :activerecord.attributes.generic.language # Do not translate
         registration_mode: "Режим реєстрації"
         registration_modes:
           native: "Сахадж Атлас"
@@ -243,7 +245,7 @@ uk:
         online_url: "Посилання на онлайн-зустріч"
         phone_number: "Контактний номер"
         phone_name: "Ім’я для телефонних дзвінків."
-        language: "Мова"
+        language: :activerecord.attributes.generic.language # Do not translate
         images: :activerecord.models.picture.plural # Do not translate
         venue_id: :activerecord.models.manager.single # Do not translate
         last_activity_on: :activerecord.attributes.generic.last_activity_on # Do not translate
@@ -290,18 +292,29 @@ uk:
           create: "Створено"
           destroy: "Видалено"
 
-      client:
+      client: # TODO: Translate
         label: "Позначка"
         config: "Форма"
         domain: "Домен"
         secret_key: "Секретний ключ API"
         public_key: "Публічний ключ API"
         enabled: "Увімкнено"
-        location: "Бажане розташування"
-        bounds: "Viewport" # TODO: Translate
+        location: "Canonical Location"
         last_accessed_at: "Останній доступ"
         map_url: "Bбудовувана адреса карти"
-        index_url: "Aдреса списку для вбудовування"
+
+        locale: :activerecord.attributes.generic.language # Do not translate
+        location_id: "Location ID"
+        location_type: "Location Type"
+        embed_type: "Embed Method"
+        embed_types:
+          iframe: "IFrame (Simple)"
+          script: "JavaScript (Advanced)"
+          url: "Link"
+        routing_type: "Routing Method"
+        routing_types:
+          query: "Query (Simple)"
+          path: "Path (Advanced)"
         manager_id: :activerecord.models.manager.single # Do not translate
 
       pictures:

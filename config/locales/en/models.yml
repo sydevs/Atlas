@@ -111,6 +111,7 @@ en:
         published: "Published"
         email: "Email Address"
         phone: "Phone Number"
+        language: "Language"
         status: "Status"
         statuses:
           verified: "Verified"
@@ -215,7 +216,7 @@ en:
         description: "Description"
         room: "Room"
         building: "Building"
-        language_code: "Language"
+        language_code: :activerecord.attributes.generic.language # Do not translate
         registration_mode: "Registration Mode"
         registration_modes:
           native: "Sahaj Atlas"
@@ -243,7 +244,7 @@ en:
         online_url: "Online Meeting Link"
         phone_number: "Contact Number"
         phone_name: "First Name for Phone Calls"
-        language: "Language"
+        language: :activerecord.attributes.generic.language # Do not translate
         images: :activerecord.models.picture.plural # Do not translate
         venue_id: :activerecord.models.manager.single # Do not translate
         last_activity_on: :activerecord.attributes.generic.last_activity_on # Do not translate
@@ -304,11 +305,23 @@ en:
         secret_key: "Secret API Key"
         public_key: "Public API Key"
         enabled: "Enabled"
-        location: "Preferred Location"
+        location: "Canonical Location"
         bounds: "Viewport"
         last_accessed_at: "Last Access"
         map_url: "Embeddable Map"
-        index_url: "Embeddable List"
+
+        locale: :activerecord.attributes.generic.language # Do not translate
+        location_id: "Location ID"
+        location_type: "Location Type"
+        embed_type: "Embed Method"
+        embed_types:
+          iframe: "IFrame (Simple)"
+          script: "JavaScript (Advanced)"
+          url: "Link"
+        routing_type: "Routing Method"
+        routing_types:
+          query: "Query (Simple)"
+          path: "Path (Advanced)"
         manager_id: :activerecord.models.manager.single # Do not translate
 
       pictures:

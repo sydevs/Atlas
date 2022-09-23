@@ -1,7 +1,6 @@
 
 = f.input :enabled
 = f.input :label
-= f.input :domain, hint: translate('cms.hints.client.domain')
 
 - unless f.object.new_record? && current_user.administrator?
   .ui.small.dividing.violet.header = translate('cms.forms.client.keys')
@@ -10,14 +9,32 @@
     = f.input :public_key, hint: translate('cms.hints.client.public_key')
 
 .ui.small.dividing.violet.header = translate_attribute(f.object, :config)
-= f.simple_fields_for :config do |ff|
-  = ff.input :bounds, hint: translate('cms.hints.client.bounds'), required: false, input_html: { value: f.object.config['bounds'] }
-  //= ff.input :location, label: translate_attribute(f.object, :location), required: false do
-    = ff.hint translate('cms.hints.client.location')
-    .two.fields
-      - options = %i[country region area].map { |o| [o.to_s.humanize, o] }
-      = ff.input :location_type, label: false, collection: options, selected: f.object.config['location_type'], prompt: "Choose Type"
-      = ff.input :location_id, label: false, input_html: { value: f.object.config['location_id'] }
+
+table.ui.very.basic.table
+  tr
+    th.collapsing = f.label :location_type, translate_attribute(f.object, :location_type), required: false
+    td.five.wide = f.input :location_type, label: false, collection: [Country, Region, Area].map { |k, v| [translate_model(k), k] }, input_html: { class: 'clearable' }, include_blank: 'Worldwide'
+    td = f.hint translate('cms.hints.client.location_type')
+  tr
+    th.collapsing = f.label :location_id, translate_attribute(f.object, :location_id)
+    td.five.wide = f.input :location_id, label: false
+    td
+
+  = f.simple_fields_for :config do |ff|
+    - %i[domain locale embed_type routing_type].each do |field|
+      - is_enum = @model.respond_to?(field.to_s.pluralize)
+      - collection = @model.send(field.to_s.pluralize).map { |k, v| [translate_enum_value(@model, field, k), k] } if is_enum
+      tr
+        th.collapsing
+          = f.label field, translate_attribute(f.object, field), required: false
+        td.five.wide
+          - if is_enum
+            = f.input field, label: false, collection: collection, selected: f.object.config[field.to_s], include_blank: false, input_html: { name: "client[config][#{field}]" }
+          - else
+            = f.input field, label: false, input_html: { name: "client[config][#{field}]", value: f.object.config[field.to_s] }, placeholder: translate(field, scope: 'cms.hints.client.placeholder', default: '')
+        td = f.hint translate(field, scope: 'cms.hints.client')
+
+= f.hint translate('cms.hints.client.advanced')
 
 - if policy(@record).set_manager?
   .ui.small.dividing.violet.header = translate('cms.forms.client.manager')

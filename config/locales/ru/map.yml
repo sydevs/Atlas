@@ -1,5 +1,7 @@
 ru:
   map:
+    meditation_atlas: "Атлас Медитаций"
+
     search:
       prompt: "Поиск по местоположению"
       all_recurrences: "Все даты" # время программ?

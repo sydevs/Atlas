@@ -128,27 +128,27 @@ class AtlasAPI {
 
   prepareQueries() {
     this.fetchGeojson = this.graph.query(`($online: Boolean, $languageCode: String) {
-      geojson(online: $online, languageCode: $languageCode, locale: "${window.sya.locale}") { ...geojson }
+      geojson(online: $online, languageCode: $languageCode, locale: "${window.sya.config.locale}") { ...geojson }
     }`)
 
     this.fetchEvents = this.graph.query(`($ids: [ID!]) {
-      events(ids: $ids, locale: "${window.sya.locale}") { ...event }
+      events(ids: $ids, locale: "${window.sya.config.locale}") { ...event }
     }`)
 
     const models = [AtlasCountry, AtlasRegion, AtlasArea, AtlasVenue, AtlasEvent]
     models.forEach(Model => {
       this[`fetch${Model.label}`] = this.graph.query(`(@autodeclare) {
-        ${Model.key}(id: $id, locale: "${window.sya.locale}") { ...${Model.key} }
+        ${Model.key}(id: $id, locale: "${window.sya.config.locale}") { ...${Model.key} }
       }`)
     })
 
     this.fetchOnlineList = this.graph.query(`(@autodeclare) {
-      events(online: true, languageCode: "${window.sya.locale}", locale: "${window.sya.locale}") { ...event }
+      events(online: true, languageCode: "${window.sya.config.locale}", locale: "${window.sya.config.locale}") { ...event }
     }`)
 
     this.fetchClosestVenue = this.graph.query(`
       query ($latitude: Float!, $longitude: Float!) {
-        closestVenue(latitude: $latitude, longitude: $longitude, locale: "${window.sya.locale}") {
+        closestVenue(latitude: $latitude, longitude: $longitude, locale: "${window.sya.config.locale}") {
           id
           label
           latitude

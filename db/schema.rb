@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_09_22_162045) do
+ActiveRecord::Schema.define(version: 2022_09_23_103050) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -76,7 +76,10 @@ ActiveRecord::Schema.define(version: 2022_09_22_162045) do
     t.string "external_id"
     t.string "external_token"
     t.integer "client_type", default: 0, null: false
+    t.string "location_type"
+    t.bigint "location_id"
     t.index ["external_id"], name: "index_clients_on_external_id", unique: true
+    t.index ["location_type", "location_id"], name: "index_clients_on_location"
     t.index ["manager_id"], name: "index_clients_on_manager_id"
   end
 

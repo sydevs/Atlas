@@ -3,6 +3,7 @@ class Area < ApplicationRecord
   # Extensions
   include Manageable
   include ActivityMonitorable
+  include HasClient
   include Location
 
   nilify_blanks
@@ -67,6 +68,15 @@ class Area < ApplicationRecord
 
   def publicly_visible?
     true
+  end
+
+  def bounds
+    [
+      latitude - radius,
+      latitude + radius,
+      longitude - radius,
+      longitude + radius,
+    ]
   end
 
   def to_bounds flexible: false

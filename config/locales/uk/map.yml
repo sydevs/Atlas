@@ -1,6 +1,8 @@
 
 uk:
   map:
+    meditation_atlas: "Атлас медитацій"
+
     search:
       prompt: "Пошук розташування"
       all_recurrences: "Усі таймінги"

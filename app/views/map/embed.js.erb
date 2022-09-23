@@ -22,8 +22,5 @@ container.parentNode.appendChild(style)
 
 window.sya = {}
 window.sya.config = JSON.parse('<%= @config.to_json.html_safe %>'),
-window.sya.config.prefix = embed.getAttribute('routing')
 window.sya.translations = JSON.parse('<%= translate("map").to_json.html_safe %>')
-window.sya.translations.atlas = "<%= translate('meditation_atlas') %>"
 window.sya.translations.languages = JSON.parse('<%= I18nData.languages(I18n.locale).to_json.html_safe %>')
-window.sya.locale = "<%= I18n.locale %>"

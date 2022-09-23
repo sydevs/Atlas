@@ -3,6 +3,7 @@ class Region < ApplicationRecord
   # Extensios
   include GeoData
   include Manageable
+  include HasClient
   include ActivityMonitorable
 
   nilify_blanks

@@ -1,26 +1,45 @@
 
 h3.ui.small.dividing.grey.header = translate_attribute(Client, :map_url)
+.ui.fluid.code.input
+  - case @record.config['embed_type']
+    - when 'script'
+      textarea onclick="this.select()"
+        = "<script src=\"#{map_embed_url(format: :js, key: @record.public_key)}\" />"
+    - when 'iframe'
+      textarea onclick="this.select()"
+        = "<iframe src=\"#{map_root_url(key: @record.public_key)}\" width=\"100%\" border=\"0\"></iframe>"
+    - when 'link'
+      input type="text" value="https://wemeditate.com/#{@record.config['locale'] || 'en'}/map?key=#{@record.public_key}" onclick="this.select()"
 
-.ui.blue.secondary.tiny.menu
-  a.tab.item data-tab='script' = translate('cms.details.embed_type.script')
-  a.tab.item data-tab='iframe' = translate('cms.details.embed_type.iframe')
-  a.tab.item data-tab='url' = translate('cms.details.embed_type.link')
-.ui.tab data-tab='script'
-  .ui.fluid.code.input
-    textarea onclick="this.select()"
-      = "<script src=\"#{map_embed_url(format: :js)}\" key=\"#{@record.public_key}\" routing=\"?\" />"
-.ui.tab data-tab='iframe'
-  .ui.fluid.code.input
-    textarea onclick="this.select()"
-      = "<iframe src=\"#{map_root_url(key: @record.public_key)}\" width=\"100%\" border=\"0\"></iframe>"
-.ui.tab data-tab='url'
-  .ui.fluid.code.input
-    input type="text" value="https://wemeditate.com/map?key=#{@record.public_key}" onclick="this.select()"
-
-/.field
-  label = translate_attribute(Client, :index_url)
-  .ui.fluid.input
-    input value=map_index_key_url(api_key: @record.public_key)
+h3.ui.small.dividing.grey.header = translate_attribute(Client, :config)
+.ui.list
+  - if @record.location.present?
+    .item
+      = model_icon @record.location_type.constantize
+      .content
+        .header = translate_attribute(Client, :location)
+        a.description href=url_for([:cms, @record.location])
+          = @record.location.label
+          '  
+          i.small.right.arrow.icon
+  .item
+    i.linkify.icon
+    .content
+      .header = translate_attribute(Client, :domain)
+      a.description href="//#{@record.domain}" target="_blank"
+        = @record.config['domain']
+        '  
+        i.small.right.arrow.icon
+  .item
+    i.vector.square.icon
+    .content
+      .header = translate_attribute(Client, :embed_type)
+      .description = translate_enum_value(Client, :embed_types, @record.config['embed_type'])
+  .item
+    i.bezier.curve.icon
+    .content
+      .header = translate_attribute(Client, :routing_type)
+      .description = translate_enum_value(Client, :routing_types, @record.config['routing_type'])
 
 h3.ui.small.dividing.grey.header = translate('cms.details.management_for_record', resource: translate_model(@model).downcase)
 .ui.list
@@ -30,8 +49,15 @@ h3.ui.small.dividing.grey.header = translate('cms.details.management_for_record'
       .header = translate_model(Manager)
       a.description href=url_for([:cms, @record.manager])
         | #{@record.manager.label} (#{@record.manager.email})
+        '  
+        i.small.right.arrow.icon
   .item
     i.clock.icon
     .content
       .header = translate('cms.details.updated_at')
       .description = time_ago_in_words(@record.updated_at)
+  .item
+    i.key.icon
+    .content
+      .header = translate_attribute(Client, :last_accessed_at)
+      .description = @record.last_accessed_at ? time_ago_in_words(@record.last_accessed_at) : translate('cms.hints.never')

@@ -9,7 +9,7 @@ function EventInfo() {
 
       return [
         m('.sya-event',
-          event.languageCode != window.sya.locale ? m('.sya-event__sidebar',
+          event.languageCode != window.sya.config.locale ? m('.sya-event__sidebar',
             m('.sya-event__sidebar__language', [
               m('div', Util.translate('event.language')),
               m('.sya-event__sidebar__language-text', language),

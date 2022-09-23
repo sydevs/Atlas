@@ -3,6 +3,7 @@ class Country < ApplicationRecord
   # Extensions
   include GeoData
   include Manageable
+  include HasClient
   include ActivityMonitorable
 
   nilify_blanks

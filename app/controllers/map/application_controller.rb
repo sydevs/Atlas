@@ -19,18 +19,31 @@ class Map::ApplicationController < ActionController::Base
 
   private
 
+    def setup_client!
+      @client = Client.find_by_public_key(params[:client])
+      return if !params[:client].present?
+      raise ActionController::RoutingError.new('Not Found') if @client.nil?
+
+      headers['X-FRAME-OPTIONS'] = "ALLOW-FROM #{@client.domain}"
+      headers['Access-Control-Allow-Origin'] = @client.domain
+      headers['Access-Control-Allow-Methods'] = 'GET'
+      headers['Access-Control-Request-Method'] = '*'
+      headers['Access-Control-Allow-Headers'] = 'Origin, X-Requested-With, Content-Type, Accept, Authorization'
+    end
+
     def setup_config!
       I18n.locale = params[:locale]&.to_sym || :en
-      @config = { token: ENV['MAPBOX_ACCESSTOKEN'] }
+      @config = {
+        token: ENV['MAPBOX_ACCESSTOKEN'],
+        endpoint: api_graphql_url,
+        locale: I18n.locale,
+        search: !(params[:path] =~ /region|country/),
+      }
   
-      country = Country.find_by_country_code(params[:country]) if params[:country].present?
-      @config[:bounds] = country.bounds if country.present?
+      location = params[:country].present? ? Country.find_by_country_code(params[:country]) : @client&.location
+      @config[:bounds] = location.client_bounds if location.present? && location.bounds.present?
       @config[:center] = coordinates unless @config[:bounds].present?
-      @config[:search] = !(params[:path] =~ /region|country/)
-      @config[:endpoint] = api_graphql_url
-  
-      # @config.merge!(@client.map_config) if @client
-      # @config[:language] ||= params[:language]
+      @config.merge!(@client.config) if @client.present?
     end
 
     def coordinates
@@ -42,18 +55,6 @@ class Map::ApplicationController < ActionController::Base
           location.success ? [ location.lat, location.lng ] : [ 51.505, -0.09 ] # Default to london for now
         end
       end
-    end
-
-    def setup_client!
-      @client = Client.find_by_public_key(params[:key])
-      return if !params[:key].present?
-      raise ActionController::RoutingError.new('Not Found') if @client.nil?
-
-      headers['X-FRAME-OPTIONS'] = "ALLOW-FROM #{@client.domain}"
-      headers['Access-Control-Allow-Origin'] = @client.domain
-      headers['Access-Control-Allow-Methods'] = 'GET'
-      headers['Access-Control-Request-Method'] = '*'
-      headers['Access-Control-Allow-Headers'] = 'Origin, X-Requested-With, Content-Type, Accept, Authorization'
     end
 
     def current_user

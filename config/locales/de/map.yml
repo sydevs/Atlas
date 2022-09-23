@@ -1,5 +1,7 @@
 de:
   map:
+    meditation_atlas: "Meditation Atlas"
+
     search:
       prompt: "Suchen nach Standort"
       all_recurrences: "Alle Zeiten"
