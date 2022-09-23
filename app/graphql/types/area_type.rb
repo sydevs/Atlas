@@ -14,7 +14,7 @@ module Types
     field :offline_event_ids, [ID], null: false
 
     def events
-      object.events.publicly_visible.map { |venue| venue.extend(EventDecorator) }
+      object.events.publicly_visible.map { |event| event.extend(EventDecorator) }
     end
 
     def event_ids

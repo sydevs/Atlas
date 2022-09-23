@@ -6,6 +6,15 @@ class ApplicationRecord < ActiveRecord::Base
   include Parentable
 
   def canonical_host
-    try(:canonical_domain) || (Rails.env.development? ? 'localhost:3000' : "wemeditate.com/#{I18n.locale}")
+    try(:canonical_domain) || wemeditate_host
   end
+
+  private
+
+    def wemeditate_host
+      return 'localhost:3000' if Rails.env.development?
+      return 'wemeditate.com' if I18n.locale.to_sym == en
+
+      "wemeditate.com/#{I18n.locale}"
+    end
 end

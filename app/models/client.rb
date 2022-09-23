@@ -42,7 +42,7 @@ class Client < ApplicationRecord
   end
 
   def url
-    "//#{domain || "wemeditate.com/#{locale}"}/map"
+    "https://#{domain || "wemeditate.com#{"/" + locale if locale != 'en'}"}/map"
   end
 
   private
