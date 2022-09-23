@@ -6,6 +6,6 @@ class ApplicationRecord < ActiveRecord::Base
   include Parentable
 
   def canonical_host
-    canonical_domain || (Rails.env.development? ? 'localhost:3000' : 'wemeditate.com')
+    try(:canonical_domain) || (Rails.env.development? ? 'localhost:3000' : "wemeditate.com/#{I18n.locale}")
   end
 end

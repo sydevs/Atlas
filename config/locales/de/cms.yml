@@ -118,7 +118,6 @@ de:
         description: "Sie können diese Suche verwenden, um die Felder automatisch auszufüllen. Es verwendet die Google-API. Wenn Google in Ihrem Land blockiert ist oder die Suche ausfällt, müssen Sie die Daten manuell eingeben."
       country:
         must_be_new: "Nur Länder, die noch nicht hinzugefügt wurden, sind unten aufgeführt."
-        canonical_domain: "When a user shares events in this country, the link will go to this website." # TODO: Translate
         language: "Die Standardsprache, die Veranstaltungen in diesem Land normalerweise abgehalten werden."
         no_default_language: "Kein Standard"
         enable_regions: "Wenn es aktiviert ist, können Sie Regionen (Provinzen, Staaten usw.) in diesem Land an die Regionen ausschalten und zuordnen. Dies ist nützlich für größere Länder (China, USA, Australien, etc.) und unnötig für kleine Länder (Belgien, Litauen, Singapur usw.)."
@@ -206,6 +205,7 @@ de:
       record_has_language: " %{resource} in %{language} angeboten"
       notification_settings: "Benachrichtigungseinstellungen"
       contact_details: "Kontaktinformationen"
+      canonical_domain: "Canonical Website" # TODO: Translate
       updated_at: "Letzte Aktualisierung"
       embed_type: # TODO: Translate
         script: "Script (preferred)"

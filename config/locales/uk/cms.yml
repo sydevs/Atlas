@@ -115,7 +115,6 @@ uk:
         description: "Ви можете використовувати цей пошук для автоматичного заповнення полів нижче. Він використовує API Google. Якщо Google заблоковано у вашій країні або якщо пошук не вдається, вам потрібно буде ввести дані вручну."
       country:
         must_be_new: "Нижче наведено лише країни, які ще не були додані."
-        canonical_domain: "When a user shares events in this country, the link will go to this website." # TODO: Translate
         language: "Мова за замовчуванням, якою зазвичай проводяться події в цій країні."
         no_default_language: "Немає за замовчуванням"
         enable_regions: "Якщо ввімкнено, ви зможете переглядати та призначати менеджерів для регіонів (провінцій, штатів тощо) у цій країні. Це корисно для великих країн (Китай, США, Австралія тощо), і непотрібно для малих країн (Бельгія, Литва, Сінгапур тощо)."
@@ -203,6 +202,7 @@ uk:
       record_has_language: "%{resource} пропонується на %{language}"
       notification_settings: "Notification Settings" # TODO: Translate
       contact_details: "Contact Information" # TODO: Translate
+      canonical_domain: "Canonical Website" # TODO: Translate
       updated_at: "Останнє оновлення"
       embed_type: # TODO: Translate
         script: "Script (preferred)"

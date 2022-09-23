@@ -23,7 +23,7 @@ class SahajAtlas {
       }
     }
     
-    m.route.prefix = window.sya.config.path || '/map'
+    m.route.prefix = window.sya.config.path || window.location.pathname.split('map')[0] + 'map'
     m.route(this.#container, window.sya.config.prefix, {
       '/': layout(MapView, { map: 'fullscreen', panel: 'overflow' }),
   

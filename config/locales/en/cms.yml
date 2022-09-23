@@ -116,7 +116,6 @@ en:
         description: "You can use this search to automatically fill the fields below. It uses the Google API. If Google is blocked in your country, or if the search fails, you will need to enter the data manually."
       country:
         must_be_new: "Only countries which haven't already been added are listed below."
-        canonical_domain: "When a user shares events in this country, the link will go to this website."
         language: "The default language that events in this country are usually in."
         no_default_language: "No default"
         enable_regions: "If enabled, you will be able to view and assign managers to regions (regions, states, etc) within this country. This is useful for larger countries (China, USA, Australia, etc), and unnessecary for small countries (Belgium, Lithuania, Singapore, etc)."
@@ -207,6 +206,7 @@ en:
       record_has_language: "%{resource} offered in %{language}"
       notification_settings: "Notification Settings"
       contact_details: "Contact Information"
+      canonical_domain: "Canonical Website"
       updated_at: "Last updated"
       embed_type:
         script: "Script (preferred)"

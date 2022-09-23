@@ -136,7 +136,6 @@ ru:
       country: # TODO: Translate
         manager_id: :activerecord.models.manager.single # Do not translate
         country_code: :activerecord.models.country.single # Do not translate
-        canonical_domain: "Canonical Website"
         default_language_code: "Язык события по умолчанию"
         enable_regions: "Разрешить региональное управление" 
         enable_custom_regions: "Allow Custom Region Creation"

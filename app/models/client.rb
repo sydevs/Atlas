@@ -31,22 +31,28 @@ class Client < ApplicationRecord
     location || nil
   end
 
-  def validate_config
-    self.location_id = nil unless location_type.present?
-
-    errors.add(:location_id, :invalid) if location_id.present? && location.nil?
-    # errors.add(:domain, :blank) unless config['domain'].present?
-    errors.add(:domain, :invalid) unless !config['domain'].present? || config['domain'].match(/^[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?$/)
+  def domain
+    domain = config&.dig('domain')
+    domain if domain.present?
   end
 
-  def map_config
-    result = {}
-    result[:bounds] = begin
-      bounds = config['bounds'].split(',')
-      [[bounds[0], bounds[1]], [bounds[2], bounds[3]]]
-    end if config['bounds'].present?
-
-    result
+  def locale
+    locale = config&.dig('locale')
+    locale.present? ? locale : 'en'
   end
+
+  def url
+    "//#{domain || "wemeditate.com/#{locale}"}/map"
+  end
+
+  private
+
+    def validate_config
+      self.location_id = nil unless location_type.present?
+
+      errors.add(:location_id, :invalid) if location_id.present? && location.nil?
+      # errors.add(:domain, :blank) unless config['domain'].present?
+      errors.add(:domain, :invalid) unless !config['domain'].present? || config['domain'].match(/^[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?$/)
+    end
 
 end

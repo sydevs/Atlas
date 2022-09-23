@@ -18,11 +18,24 @@
 
 h3.ui.small.dividing.grey.header = translate('cms.details.details_for_record', resource: @record.label)
 .ui.list
-  .item
-    i.tv.icon
-    .content
-      .header = translate_attribute(@record, :canonical_domain)
-      .description = @record.canonical_domain
+  - if @record.client.present?
+    .item
+      = model_icon Client
+      .content
+        .header = translate_model(Client)
+        a.description href=url_for([:cms, @record.client])
+          = @record.client.label
+          '  
+          i.small.right.arrow.icon
+  - if @record.canonical_domain.present?
+    .item
+      i.tv.icon
+      .content
+        .header = translate('cms.details.canonical_domain')
+        a.description href=@record.canonical_map_url target="_blank"
+          = @record.canonical_domain
+          '  
+          i.small.right.arrow.icon
   .item
     i.sitemap.icon
     .content

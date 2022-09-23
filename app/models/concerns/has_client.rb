@@ -3,7 +3,7 @@ module HasClient
   extend ActiveSupport::Concern
 
   included do
-    # has_one :client, inverse_of: :location
+    has_one :client, as: :location
   end
 
   def client_bounds
@@ -11,7 +11,11 @@ module HasClient
   end
 
   def canonical_domain
-    # client&.dig('config', 'domain')
+    client&.domain || parent&.canonical_domain
+  end
+
+  def canonical_map_url
+    client&.url || parent&.canonical_map_url
   end
 
 end

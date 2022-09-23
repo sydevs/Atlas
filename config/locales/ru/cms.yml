@@ -115,7 +115,6 @@ ru:
         description: "Ты можешь использовать этот поиск для автоматического заполнения полей ниже. Он использует API Google. Если Google заблокирован в вашей стране или поиск не удался, тебе нужно будет ввести данные вручную."
       country:
         must_be_new: "Ниже перечислены страны, которые ещё не были добавлены."
-        canonical_domain: "When a user shares events in this country, the link will go to this website." # TODO: Translate
         language: "Язык по умолчанию, на котором обычно проводятся мероприятия в этой стране."
         no_default_language: "Отсутствует язык по умолчанию"
         enable_regions: "Если этот параметр включен, ты сможешь просматривать и назначать менеджеров по регионам (провинциям, штатам и т.д.) в этой стране. Это полезно для больших стран (Китай, США, Австралия и т.д.) и необязательно для небольших стран (Бельгия, Литва, Сингапур и т.д.)."
@@ -203,6 +202,7 @@ ru:
       record_has_language: "%{resource} предлагается на %{language}"
       notification_settings: "Настройка оповещений"
       contact_details: "Контакты"
+      canonical_domain: "Canonical Website" # TODO: Translate
       updated_at: "Последнее обновление"
       embed_type: # TODO: Translate
         script: "Script (preferred)"

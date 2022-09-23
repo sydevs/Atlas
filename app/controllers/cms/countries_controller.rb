@@ -31,7 +31,7 @@ class CMS::CountriesController < CMS::ApplicationController
   private
 
     def parameters
-      parameters = params.fetch(:country, {}).permit(:name, :country_code, :osm_id, :geojson, :bounds, :translations, :canonical_domain, :default_language_code, :enable_regions, :enable_custom_regions)
+      parameters = params.fetch(:country, {}).permit(:name, :country_code, :osm_id, :geojson, :bounds, :translations, :default_language_code, :enable_regions, :enable_custom_regions)
       GeoData.parse_params(parameters)
     end
 
