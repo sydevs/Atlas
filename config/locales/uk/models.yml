@@ -300,7 +300,6 @@ uk:
         enabled: "Увімкнено"
         location: "Canonical Location"
         last_accessed_at: "Останній доступ"
-        map_url: "Bбудовувана адреса карти"
 
         locale: :activerecord.attributes.generic.language # Do not translate
         location_id: "Location ID"

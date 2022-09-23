@@ -307,7 +307,6 @@ en:
         location: "Canonical Location"
         bounds: "Viewport"
         last_accessed_at: "Last Access"
-        map_url: "Embeddable Map"
 
         locale: :activerecord.attributes.generic.language # Do not translate
         location_id: "Location ID"

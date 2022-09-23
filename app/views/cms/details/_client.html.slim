@@ -1,5 +1,8 @@
 
-h3.ui.small.dividing.grey.header = translate_attribute(Client, :map_url)
+h3.ui.small.dividing.grey.header
+  = translate_attribute(Client, :embed_type)
+  ' : 
+  = translate_enum_value(Client, :embed_type, @record.config['embed_type'])
 .ui.fluid.code.input
   - case @record.config['embed_type']
     - when 'script'

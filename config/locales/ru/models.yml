@@ -299,7 +299,6 @@ ru:
         enabled: "Включено"
         location: "Canonical Location"
         last_accessed_at: "Последний доступ"
-        map_url: "Bстраиваемой карты"
 
         locale: :activerecord.attributes.generic.language # Do not translate
         location_id: "Location ID"

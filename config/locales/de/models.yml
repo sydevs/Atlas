@@ -307,7 +307,6 @@ de:
         location: "Canonical Location"
         bounds: "Grenzen"
         last_accessed_at: "Letzter Zugang"
-        map_url: "Einbettbare Karten"
 
         locale: :activerecord.attributes.generic.language # Do not translate
         location_id: "Location ID"
