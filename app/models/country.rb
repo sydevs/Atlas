@@ -29,7 +29,7 @@ class Country < ApplicationRecord
   default_scope { order(country_code: :desc) }
 
   scope :publicly_visible, -> { has_public_events }
-  scope :has_public_events, -> { joins(:publicly_visible_events) }
+  scope :has_public_events, -> { joins(:publicly_visible_events).uniq }
   scope :ready_for_summary_email, -> { where("summary_email_sent_at IS NULL OR summary_email_sent_at <= ?", CountryMailer::SUMMARY_PERIOD.ago) }
 
   # Methods

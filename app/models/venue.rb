@@ -22,8 +22,8 @@ class Venue < ApplicationRecord
   validates_presence_of :place_id, :street, :city, :country_code
 
   # Scopes
-  scope :has_public_events, -> { joins(:publicly_visible_events) }
   scope :publicly_visible, -> { has_public_events }
+  scope :has_public_events, -> { joins(:publicly_visible_events).uniq }
 
   # Delegations
   delegate :all_managers, to: :parent
