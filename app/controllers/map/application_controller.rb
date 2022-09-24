@@ -43,7 +43,10 @@ class Map::ApplicationController < ActionController::Base
       location = params[:country].present? ? Country.find_by_country_code(params[:country]) : @client&.location
       @config[:bounds] = location.client_bounds if location.present? && location.bounds.present?
       @config[:center] = coordinates unless @config[:bounds].present?
-      @config.merge!(@client.config) if @client.present?
+      @config.merge!(@client.config).merge!({
+        location_type: @client.location_type.downcase,
+        location_id: @client.location_id
+      }) if @client.present?
     end
 
     def coordinates

@@ -22,7 +22,7 @@ function EventView() {
       if (event.location.eventIds.length > 1) {
         params['model'] = event.location.type.toLowerCase()
         params['id'] = event.location.id
-      } else if (window.sya.config.search) {
+      } else if (AtlasApp.config.search) {
         href = '/:layer'
       } else {
         params['model'] = event.location.parentType.toLowerCase()

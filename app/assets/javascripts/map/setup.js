@@ -4,12 +4,18 @@
 class SahajAtlas {
   data = null
   map = null
+  #config = {}
   #container
 
+  get config() {
+    return this.#config
+  }
+
   constructor() {
-    this.data = new DataCache()
     this.#container = document.getElementById('sahaj-atlas')
     this.#container.style = `height: calc(100vh - ${this.#container.offsetTop}px)`
+    this.#config = window.sya.config
+    this.data = new DataCache(this.#config.endpoint, this.#config.locale)
     document.addEventListener('resize', () => m.redraw())
   }
 
@@ -23,8 +29,8 @@ class SahajAtlas {
       }
     }
     
-    m.route.prefix = window.sya.config.path || window.location.pathname.split('map')[0] + 'map'
-    m.route(this.#container, window.sya.config.prefix, {
+    m.route.prefix = this.#config.path || window.location.pathname.split('map')[0] + 'map'
+    m.route(this.#container, this.#config.prefix, {
       '/': layout(MapView, { map: 'fullscreen', panel: 'overflow' }),
   
       '/country/:id': layout(CountryView, { model: AtlasCountry, map: 'halfscreen' }),
@@ -40,6 +46,15 @@ class SahajAtlas {
       '/:layer/venue/:id': layout(VenueView, { model: AtlasVenue, map: 'freeze' }),
       '/:layer/event/:id': layout(EventView, { model: AtlasEvent, map: 'freeze', panel: 'padded' }),
     })
+
+    let path = m.route.get().split('#')[0]
+
+    if (this.config.default_view == 'list' && (path == '' || path == '/')) {
+      m.route.set('/:model/:id', {
+        model: this.#config.location_type,
+        id: this.#config.location_id,
+      })
+    }
   }
 }
 

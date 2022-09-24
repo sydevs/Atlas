@@ -9,9 +9,9 @@ class Client < ApplicationRecord
     summary_email_sent_at
   ]
 
-  enum embed_type: %i[iframe script url]
-  enum routing_type: %i[query path]
-  # enum location_type: %i[world country region area]
+  enum embed_type: %i[iframe script url], _suffix: 'embed'
+  enum routing_type: %i[query path], _suffix: 'routing'
+  enum default_view: %i[map list], _suffix: 'view'
 
   # Associations
   belongs_to :location, polymorphic: true, optional: true

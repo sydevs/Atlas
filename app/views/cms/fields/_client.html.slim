@@ -21,7 +21,7 @@ table.ui.very.basic.table
     td
 
   = f.simple_fields_for :config do |ff|
-    - %i[domain locale embed_type routing_type].each do |field|
+    - %i[domain locale embed_type routing_type default_view].each do |field|
       - is_enum = @model.respond_to?(field.to_s.pluralize)
       - collection = @model.send(field.to_s.pluralize).map { |k, v| [translate_enum_value(@model, field, k), k] } if is_enum
       tr

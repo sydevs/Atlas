@@ -38,17 +38,17 @@ class MapFrame extends EventTarget {
       onload: () => {},
     }, config)
 
-    mapboxgl.accessToken = window.sya.config.token
+    mapboxgl.accessToken = AtlasApp.config.token
 
-    console.log('CONFIG', window.sya.config)
+    console.log('CONFIG', AtlasApp.config)
     this.#mapbox = new mapboxgl.Map({
       container: containerId,
       style: MapFrame.EMPTY_STYLE,
       minZoom: 1,
       dragRotate: false,
       hash: true,
-      bounds: window.sya.config.bounds,
-      center: window.sya.config.center,
+      bounds: AtlasApp.config.bounds,
+      center: AtlasApp.config.center,
     })
 
     let initalizing = true
@@ -92,7 +92,7 @@ class MapFrame extends EventTarget {
     if (this.#controls != null) this.removeControlLayers()
 
     this.#controls = {
-      language: new MapboxLanguage({ defaultLanguage: window.sya.config.locale }),
+      language: new MapboxLanguage({ defaultLanguage: AtlasApp.config.locale }),
       navigation: new mapboxgl.NavigationControl({ showCompass: false }),
       geolocater: new mapboxgl.GeolocateControl(),
     }

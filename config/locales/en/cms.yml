@@ -97,9 +97,6 @@ en:
       manager:
         contact_methods: "Contact Methods"
         notifications: "Notification Settings"
-      client:
-        keys: "Access Keys"
-        manager: "Manager"
 
     hints:
       unnamed: "(Unnamed)"
@@ -180,18 +177,6 @@ en:
             country_summary: "A summary of changes within a country you manage. Sent every %{period}."
             application_summary: "A summary of all Atlas changes. Sent every %{period}."
         search: "Enter a name, email, or phone number..."
-      client:
-        public_key: "Use this to embed the map."
-        secret_key: "Use this to access the API."
-        domain: "The domain of your website. Only this domain will be allowed to embed the map using your public key."
-        routing_type: "\"Path\" based routing may be better for SEO, but requires special configuration of your site."
-        embed_type: "The method you will use to put Sahaj Atlas on your website. A \"JavaScript\" embed enables advanced features (SEO optimisation, shareable urls, etc)"
-        location_type: "Your map will focus on this area by default. Events in this area will be associated with your website."
-        locale: "The language to use for your map. This can also be set by adding '&locale=en' to your embed url."
-        advanced: "Please send an email to contact@sydevelopers.com for help with advanced configuration."
-        placeholder:
-          domain: www.example.com # Do not translate
-          locale: en # Do not translate
 
     details:
       details_for_record: "Details for %{resource}"
@@ -208,10 +193,6 @@ en:
       contact_details: "Contact Information"
       canonical_domain: "Canonical Website"
       updated_at: "Last updated"
-      embed_type:
-        script: "Script (preferred)"
-        iframe: "IFrame"
-        link: "Link"
       event_coverage:
         title: "Event Coverage"
         description: "%{events} in %{resource}"

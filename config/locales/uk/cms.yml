@@ -96,9 +96,6 @@ uk:
       manager: # TODO: Translate
         contact_methods: "Contact Methods"
         notifications: "Notification Settings"
-      client:
-        keys: "Ключі доступу"
-        manager: "Vенеджер"
 
     hints:
       unnamed: "(Unnamed)" # TODO: Translate
@@ -176,18 +173,6 @@ uk:
             country_summary: "A summary of changes within a country you manage. Sent every %{period}."
             application_summary: "A summary of all Atlas changes. Sent every %{period}."
         search: "Enter a name, email, or phone number..."
-      client: # TODO: Translate
-        public_key: "Використовуйте це, щоб вставити карту."
-        secret_key: "Використовуйте це для доступу до API."
-        domain: "The domain of your website. Only this domain will be allowed to embed the map using your public key."
-        routing_type: "\"Path\" based routing may be better for SEO, but requires special configuration of your site."
-        embed_type: "The method you will use to put Sahaj Atlas on your website. A \"JavaScript\" embed enables advanced features (SEO optimisation, shareable urls, etc)"
-        location_type: "Your map will focus on this area by default. Events in this area will be associated with your website."
-        locale: "The language to use for your map. This can also be set by adding '&locale=en' to your embed url."
-        advanced: "Please send an email to contact@sydevelopers.com for help with advanced configuration."
-        placeholder:
-          domain: www.example.com # Do not translate
-          locale: en # Do not translate
 
     details:
       details_for_record: "Деталі для %{resource}"
@@ -204,10 +189,6 @@ uk:
       contact_details: "Contact Information" # TODO: Translate
       canonical_domain: "Canonical Website" # TODO: Translate
       updated_at: "Останнє оновлення"
-      embed_type: # TODO: Translate
-        script: "Script (preferred)"
-        iframe: "IFrame"
-        link: "Link"
       event_coverage:
         title: "Висвітлення подій"
         description: "%{events} in %{resource}" # TODO: Translate

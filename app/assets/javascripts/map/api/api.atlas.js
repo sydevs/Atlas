@@ -3,15 +3,15 @@
 
 class AtlasAPI {
 
-  constructor() {
+  constructor(endpoint, locale) {
     console.log('loading AtlasAPI.js') // eslint-disable-line no-console
-    this.prepareGraphQL()
-    this.prepareQueries()
+    this.prepareGraphQL(endpoint)
+    this.prepareQueries(locale)
     this.prepareMutators()
   }
 
-  prepareGraphQL() {
-    this.graph = graphql(window.sya.config.endpoint, {
+  prepareGraphQL(endpoint) {
+    this.graph = graphql(endpoint, {
       fragments: {
         event: `on Event {
           id
@@ -126,29 +126,29 @@ class AtlasAPI {
     })
   }
 
-  prepareQueries() {
+  prepareQueries(locale) {
     this.fetchGeojson = this.graph.query(`($online: Boolean, $languageCode: String) {
-      geojson(online: $online, languageCode: $languageCode, locale: "${window.sya.config.locale}") { ...geojson }
+      geojson(online: $online, languageCode: $languageCode, locale: "${locale}") { ...geojson }
     }`)
 
     this.fetchEvents = this.graph.query(`($ids: [ID!]) {
-      events(ids: $ids, locale: "${window.sya.config.locale}") { ...event }
+      events(ids: $ids, locale: "${locale}") { ...event }
     }`)
 
     const models = [AtlasCountry, AtlasRegion, AtlasArea, AtlasVenue, AtlasEvent]
     models.forEach(Model => {
       this[`fetch${Model.label}`] = this.graph.query(`(@autodeclare) {
-        ${Model.key}(id: $id, locale: "${window.sya.config.locale}") { ...${Model.key} }
+        ${Model.key}(id: $id, locale: "${locale}") { ...${Model.key} }
       }`)
     })
 
     this.fetchOnlineList = this.graph.query(`(@autodeclare) {
-      events(online: true, languageCode: "${window.sya.config.locale}", locale: "${window.sya.config.locale}") { ...event }
+      events(online: true, languageCode: "${locale}", locale: "${locale}") { ...event }
     }`)
 
     this.fetchClosestVenue = this.graph.query(`
       query ($latitude: Float!, $longitude: Float!) {
-        closestVenue(latitude: $latitude, longitude: $longitude, locale: "${window.sya.config.locale}") {
+        closestVenue(latitude: $latitude, longitude: $longitude, locale: "${locale}") {
           id
           label
           latitude

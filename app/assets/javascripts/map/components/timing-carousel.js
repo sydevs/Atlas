@@ -31,7 +31,7 @@ function TimingCarousel() {
     },
     view: function(vnode) {
       const event = vnode.attrs.event
-      timings = event.timing.upcomingDateTimes.map(datetime => datetime.setLocale(window.sya.config.locale))
+      timings = event.timing.upcomingDateTimes.map(datetime => datetime.setLocale(AtlasApp.config.locale))
       selectedValue = timings[0]
 
       return m('div',

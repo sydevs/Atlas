@@ -9,8 +9,8 @@ class DataCache {
   #debug = true
   #models = [AtlasCountry, AtlasRegion, AtlasArea, AtlasVenue, AtlasEvent]
 
-  constructor() {
-    this.#atlas = new AtlasAPI()
+  constructor(endpoint, locale) {
+    this.#atlas = new AtlasAPI(endpoint, locale)
     this.#cache = {
       geojsons: {},
       lists: {},
@@ -31,7 +31,7 @@ class DataCache {
       if (this.#debug) console.log('[Data]', 'getting geojson', layer) // eslint-disable-line no-console
       return this.#atlas.fetchGeojson({
         online: layer == AtlasEvent.LAYER.online,
-        languageCode: (layer == AtlasEvent.LAYER.online ? window.sya.config.locale : null),
+        languageCode: (layer == AtlasEvent.LAYER.online ? AtlasApp.config.locale : null),
       }).then(data => {
         this.#cache.geojsons[layer] = data.geojson
         return data.geojson
@@ -129,7 +129,7 @@ class DataCache {
 
   createRegistration(params) {
     if (this.#debug) console.log('[Data]', 'creating registration', params) // eslint-disable-line no-console
-    params.locale = window.sya.config.locale
+    params.locale = AtlasApp.config.locale
     return this.#atlas.sendRegistration({
       'input!CreateRegistrationInput': params
     }).then(data => data.createRegistration)

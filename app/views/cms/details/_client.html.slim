@@ -34,16 +34,20 @@ h3.ui.small.dividing.grey.header = translate_attribute(Client, :config)
           = @record.domain
           '  
           i.small.right.arrow.icon
-  .item
-    i.vector.square.icon
-    .content
-      .header = translate_attribute(Client, :embed_type)
-      .description = translate_enum_value(Client, :embed_types, @record.config['embed_type'])
-  .item
-    i.bezier.curve.icon
-    .content
-      .header = translate_attribute(Client, :routing_type)
-      .description = translate_enum_value(Client, :routing_types, @record.config['routing_type'])
+  ruby: 
+    config = {
+      embed_type: 'vector square',
+      routing_type: 'bezier curve',
+      default_view: 'tablet alternate',
+    }
+  - config.map do |field, icon|
+    - value = @record.config[field.to_s]
+    - unless @model.send(field.to_s.pluralize)[value].zero?
+      .item
+        i.icon class=icon
+        .content
+          .header = translate_attribute(Client, field)
+          .description = translate_enum_value(Client, field.to_s.pluralize, value)
 
 h3.ui.small.dividing.grey.header = translate('cms.details.management_for_record', resource: translate_model(@model).downcase)
 .ui.list
