@@ -1,7 +1,7 @@
 class RemoveClientDomainColumn < ActiveRecord::Migration[6.1]
   def change
     Client.in_batches.each_record do |client|
-      client.config ||= {}
+      client.config = {} unless client.config.present?
       client.config['domain'] = client[:domain]
       client.save! validate: false
     end
