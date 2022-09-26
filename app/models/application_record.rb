@@ -13,7 +13,7 @@ class ApplicationRecord < ActiveRecord::Base
 
     def wemeditate_host
       return 'localhost:3000' if Rails.env.development?
-      return 'wemeditate.com' if I18n.locale.to_sym == en
+      return 'wemeditate.com' if I18n.locale.to_sym == :en
 
       "wemeditate.com/#{I18n.locale}"
     end
