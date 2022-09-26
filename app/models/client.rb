@@ -4,6 +4,7 @@ class Client < ApplicationRecord
   include Searchable
   include Managed
 
+  nilify_blanks
   searchable_columns %w[label domain]
   audited except: %i[
     summary_email_sent_at
@@ -20,6 +21,7 @@ class Client < ApplicationRecord
 
   # Validations
   before_validation -> { self.location_id = nil }, unless: :location_type?
+  before_validation -> { self.config.delete_if { |k, v| !v.present? } }
   validates_presence_of :label, :public_key, :secret_key, :domain
   validates :domain, format: { with: /[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?/ }
 
