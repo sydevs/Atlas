@@ -52,7 +52,7 @@ html
 
           - if @context.respond_to?(:ancestors)
             - if current_user.administrator?
-              a.section href=url_for([:cms, :countries])
+              a.section href=url_for([:cms, controller_name == 'clients' ? :clients : :countries])
                 = translate('cms.menu.breadcrumbs.world')
               
               i.right.angle.icon.divider
