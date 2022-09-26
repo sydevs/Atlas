@@ -11,6 +11,8 @@ module HasClient
   end
 
   def canonical_domain
+    return parent&.canonical_domain unless client&.script_embed?
+
     client&.domain || parent&.canonical_domain
   end
 
