@@ -2,9 +2,9 @@
 h3.ui.small.dividing.grey.header
   = translate_attribute(Client, :embed_type)
   ' : 
-  = translate_enum_value(Client, :embed_type, @record.config['embed_type'])
+  = translate_enum_value(@record, :embed_type)
 .ui.fluid.code.input
-  - case @record.config['embed_type']
+  - case @record.embed_type
     - when 'script'
       textarea onclick="this.select()"
         = "<script src=\"#{map_embed_url(format: :js, key: @record.public_key)}\" />"
@@ -41,8 +41,8 @@ h3.ui.small.dividing.grey.header = translate_attribute(Client, :config)
       default_view: 'tablet alternate',
     }
   - config.map do |field, icon|
-    - value = @record.config[field.to_s]
-    - unless @model.send(field.to_s.pluralize)[value].zero?
+    - value = @record.send(field)
+    - unless value.nil? || @model.send(field.to_s.pluralize)[value].zero?
       .item
         i.icon class=icon
         .content

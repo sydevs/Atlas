@@ -29,9 +29,9 @@ table.ui.very.basic.table
           = f.label field, translate_attribute(f.object, field), required: false
         td.five.wide
           - if is_enum
-            = f.input field, label: false, collection: collection, selected: f.object.config[field.to_s], include_blank: false, input_html: { name: "client[config][#{field}]" }
+            = f.input field, label: false, collection: collection, selected: f.object.send(field), include_blank: false, input_html: { name: "client[config][#{field}]" }
           - else
-            = f.input field, label: false, input_html: { name: "client[config][#{field}]", value: f.object.config[field.to_s] }, placeholder: translate(field, scope: 'cms.hints.client.placeholder', default: '')
+            = f.input field, label: false, input_html: { name: "client[config][#{field}]", value: f.object.send(field) }, placeholder: translate(field, scope: 'cms.hints.client.placeholder', default: '')
         td = f.hint translate(field, scope: 'cms.hints.client')
 
 = f.hint translate('cms.hints.client.advanced')
