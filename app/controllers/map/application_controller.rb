@@ -45,7 +45,7 @@ class Map::ApplicationController < ActionController::Base
       @config[:bounds] = location.client_bounds if location.present? && location.bounds.present?
       @config[:center] = coordinates unless @config[:bounds].present?
       @config.merge!(@client.config).merge!({
-        location_type: @client.location_type.downcase,
+        location_type: @client.location_type&.downcase,
         location_id: @client.location_id
       }) if @client.present?
     end
