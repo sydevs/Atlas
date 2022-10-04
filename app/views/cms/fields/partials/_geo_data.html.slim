@@ -1,10 +1,10 @@
 
 = f.input :geojson do
-  - if @record.geojson
-    #map data-changeable='true' data-geojson=@record.geojson.to_json data-bounds=@record.bounds.to_json
-  - elsif @record.is_a?(Region)
+  - if @record.is_a?(Region) && @record.osm_id == 'custom'
     #map data-editable='true' data-geojson=@record.geojson.to_json data-border=@record.parent.geojson.to_json
     .hint = translate('cms.hints.region.polygon')
+  - elsif @record.geojson
+    #map data-changeable='true' data-geojson=@record.geojson.to_json data-bounds=@record.bounds.to_json
 
 - unless @record.new_record?
   a.ui.right.floated.tiny.compact.basic.button href="?osm_id=#{@record.osm_id}"
