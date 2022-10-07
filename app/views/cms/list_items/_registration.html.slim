@@ -10,19 +10,22 @@
     .item
       i.comment.icon
       .content
-        - if registration.comment
+        - if registration.comment.present?
           .header = Registration.human_attribute_name(:comment)
-          .description = registration.comment || translate('cms.messages.no_comment')
+          .description = registration.comment
         - else
-          = registration.comment || translate('cms.messages.no_comment')
+          .header = translate('cms.messages.no_comment')
     .item
       i.clock.icon
       .content
         .header
           = Registration.human_attribute_name(:created_at)
-          = " (#{@time_zone.name.gsub('_', ' ')})" if @time_zone
+          = " (#{registration.time_zone.name.gsub('_', ' ')})" if registration.time_zone
         time.description datetime=registration.created_at
-          = @time_zone.utc_to_local(registration.created_at).to_s(:short)
+          - if registration.time_zone
+            = registration.time_zone.utc_to_local(registration.created_at).to_s(:short)
+          - else
+            = registration.created_at.to_s(:short)
     .item
       i.calendar.alternate.icon
       .content

@@ -163,6 +163,14 @@ class AtlasAPI {
       createRegistration(input: $input) {
         status
         message
+        registration {
+          id
+          firstName
+          lastName
+          email
+          timeZone
+          startingDate
+        }
       }
     }`)
   }

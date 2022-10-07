@@ -24,9 +24,12 @@ function RegistrationForm() {
               console.log('response', response)
               if (response.status == 'success') {
                 alert = null
-                vnode.attrs.onsubmit()
+                vnode.attrs.onsubmit(response)
               } else {
-                alert = response
+                alert = {
+                  status: response.status,
+                  message: response.message,
+                }
               }
               
               m.redraw()
@@ -61,7 +64,7 @@ function RegistrationForm() {
         alert ? m('.sya-registration__message', { class: alert.status }, alert.message) : null,
         m('.sya-registration__notice',
           m.trust(Util.translate('registration.notice.text', {
-            link: `<a class="registration__notice-link" href="/${AtlasApp.config.locale}/privacy" target="_blank">${Util.translate('registration.notice.link')}</a>`
+            link: `<a class="sya-registration__notice-link" href="/${AtlasApp.config.locale}/privacy" target="_blank">${Util.translate('registration.notice.link')}</a>`
           }))
         ),
         m('button.sya-registration__submit', Util.translate('registration.form.submit'))

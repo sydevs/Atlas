@@ -23,6 +23,7 @@ module Types
     field :online, Boolean, null: false, method: :online?
     field :online_url, String, null: true
 
+    field :registrations, [Types::RegistrationType], null: false
     field :registration_mode, String, null: false
     field :registration_end_time, GraphQL::Types::ISO8601DateTime, null: true
     field :registration_url, String, null: true

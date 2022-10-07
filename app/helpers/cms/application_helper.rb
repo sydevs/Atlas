@@ -77,7 +77,7 @@ module CMS::ApplicationHelper
       end
     elsif @context.is_a?(Manager) && !ancestor.is_a?(Event)
       url_for([:cms, ancestor, :managers])
-    elsif action_name == 'index' && policy(ancestor).index_association?(controller_name)
+    elsif action_name == 'index' && policy(ancestor).index_association?(controller_name.to_sym)
       url_for([:cms, ancestor, controller_name.to_sym])
     else
       url_for([:cms, ancestor])

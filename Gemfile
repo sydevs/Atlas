@@ -42,6 +42,8 @@ gem 'after_commit_everywhere', '~> 1.0' # Dependency for aasm
 
 ### Communication
 gem 'premailer-rails' # Generate inline styles for emails
+gem 'sib-api-v3-sdk' # API for sendinblue emailer
+gem 'klaviyo' # For integration with Klaviyo
 
 ### Geocoding
 gem 'geokit-rails'
@@ -67,7 +69,6 @@ gem 'graphiql-rails'
 ### Utility
 gem 'inline_svg' # Allows SVGs to be rendered inline
 gem 'rails_12factor', group: :production # For heroku support
-gem 'klaviyo' # For integration with Klaviyo
 gem 'httparty' # For http requests (specifically for Klaviyo)
 gem 'validate_url' # Validate url fields
 gem 'aws-sdk-s3' # For uploading to Mapbox

@@ -37,34 +37,33 @@
   right: 0
   box-shadow: $shadow-light
 
-#sahaj-atlas // Increase specificity to match the '#sahaj-atlas a' selector in general.sass
-  .sya-navigation__item
-    color: var(--color)
-    font-weight: $font-medium
-    text-decoration: underline
-    flex-grow: 1
+.sya-navigation__item
+  color: var(--color)
+  font-weight: $font-medium
+  text-decoration: underline
+  flex-grow: 1
 
+  @include tablet-or-larger
+    font-weight: $font-bold
+    text-decoration: none
+    padding: 0 6px
+
+  &:not(:last-child)
+    border-right: 1px solid var(--color)
+
+  &[data-badge]::after
+    @include mobile
+      margin-left: 6px
+
+  &--active
     @include tablet-or-larger
-      font-weight: $font-bold
-      text-decoration: none
-      padding: 0 6px
+      background: var(--color)
+      color: white
 
-    &:not(:last-child)
-      border-right: 1px solid var(--color)
-
-    &[data-badge]::after
-      @include mobile
-        margin-left: 6px
-
-    &--active
-      @include tablet-or-larger
-        background: var(--color)
-        color: white
-
-    &--active[data-badge]::after
-      @include tablet-or-larger
-        --contrast-color: #{$color-blue}
-        --color: white
+  &--active[data-badge]::after
+    @include tablet-or-larger
+      --contrast-color: #{$color-blue}
+      --color: white
 
 // ===== NAVIGATION BUTTONS ===== //
 .sya-navigation-button

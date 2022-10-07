@@ -3,6 +3,7 @@
 
 function Registration() {
   let registered = false
+  let registration = null
 
   return {
     view: function(vnode) {
@@ -14,16 +15,17 @@ function Registration() {
         m('.sya-registration__header',
           m('.sya-registration__header__text',
             m('.sya-registration__header__title',
-              Util.translate(registerable ? 'registration.header' : 'registration.closed')
+              Util.translate(`registration.${registerable ? 'header' : 'closed'}`)
             ),
             m('.sya-registration__header__subtitle', event.timing.description)
           )
         ),
         registerable ?
-          (registered ?
+          (registration ?
             m(RegistrationConfirm, {
               event: event,
-              ondismiss: () => { registered = false }
+              registration: registration,
+              ondismiss: () => { registration = null }
             }) :
             (event.registrationMode != 'native' ? m('.sya-registration__external',
               m('a.sya-registration__external__action', {
@@ -31,9 +33,8 @@ function Registration() {
               }, Util.translate(`registration.button.${event.registrationMode}`))
             ) : m(RegistrationForm, {
               event: event,
-              onsubmit: () => {
-                console.log('on submit')
-                registered = true
+              onsubmit: response => {
+                registration = response.registration
                 m.redraw()
               },
             }))) :
