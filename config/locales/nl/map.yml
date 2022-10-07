@@ -1,0 +1,105 @@
+nl:
+  map:
+    meditation_atlas: "Meditation Atlas" # TODO: Translate
+
+    search:
+      prompt: "Search for location" # TODO: Translate
+      all_recurrences: "Alle Tijden"
+      all_languages: "Alle Talen"
+      filter:
+        prefix: "Toon resultaten in"
+        clear: "Wissen"
+
+    navigation:
+      desktop:
+        offline: "In Persoon"
+        online: "Online"
+      mobile:
+        offline: "Toon lijst"
+        online: "Online lessen"
+        back: "Terug naar de kaart"
+
+    list: # TODO: Translate
+      search: "Search for location"
+      more_info: "More Info"
+      register: "Registeren"
+      fallback:
+        nearby: "The closest free meditation class is at"
+        far: "There are no classes in this area, the closest free meditation class is in"
+        online: "There are no classes in this area, consider an"
+        online_event: "Online Class"
+
+    area: # TODO: Translate
+      header: "Events in %{area}"
+
+    venue: # TODO: Translate
+      header: "Events at %{venue}"
+
+    event:
+      register: "Registeren"
+      language: "Deze les is in"
+      directions: "Routebeschrijving"
+      online: "Online Les"
+      online_from: "Gepresenteerd vanuit %{city}"
+      tel: "tel"
+      distance: "%{distance} km away" # TODO: Translate
+      upcoming: "Starting soon" # TODO: Translate
+
+    registration:
+      header: "Registeer nu"
+      closed: "Registratie Gesloten"
+      form:
+        timing: "Ik zou willen starten op:"
+        email: "E-mail"
+        name: "Naam"
+        message: " Vragen / Commentaar "
+        submit: "Bevestigen"
+      notice:
+        text: "Indien je bevestigt ga je akkoord met onze %{link}."
+        link: "privacybeleid"
+      feedback:
+        duplicate: "Je bent al geregistreerd. Tot snel."
+        success: "Success! Je krijgt binnenkort een confirmatie e-mail."
+        error: "Error! Probeer het later opnieuw."
+      confirmation:
+        title: "Bedankt voor het registeren"
+        subtitle: "je krijgt binnenkort een e-mail"
+        dismiss: "Registeer iemand anders"
+        invite: "Invite a friend along" # TODO: Translate
+      button:
+        external: "Registeer"
+        facebook: "Registeer op Facebook"
+        eventbrite: "Registeer op Eventbrite"
+        meetup: "Registeer op Meetup"
+
+    sharing:
+      invite: "Nodig een vriend uit"
+      share: "Delen"
+      copied: "Gekopieerd!"
+    weekdays:
+      0: "Zondag"
+      1: "Maandag"
+      2: "Dinsdag"
+      3: "Woensdag"
+      4: "Donderdag"
+      5: "Vrijdag"
+      6: "Zaterdag"
+
+    recurrence:
+      day: "Dagelijks"
+      monday: "Maandagen"
+      tuesday: "Dinsdagen"
+      wednesday: "Woensdagen"
+      thursday: "Donderdag"
+      friday: "Vrijdagen"
+      saturday: "Zaterdagen"
+      sunday: "Zondagen"
+
+    timing_labels:
+      course_fallback: "Dit is een wekelijkse cursus"
+      course: "%{weeks}-weekse cursus"
+      ongoing: "Deze lessen zijn doorlopend"
+
+    language_codes:
+      uk: UA # Ukrainian
+    
