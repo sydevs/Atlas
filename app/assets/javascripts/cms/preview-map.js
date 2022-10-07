@@ -130,7 +130,9 @@ class PreviewMap {
 
       if (geojson) {
         geojson = JSON.parse(geojson)
-        coordinates = geojson['coordinates']
+        coordinates = geojson['coordinates'].map(group => {
+          return group.map(latlng => latlng.reverse())
+        })
       } else {
         border = JSON.parse(border)
         const center = L.geoJSON(border).getBounds().getCenter()
@@ -144,6 +146,7 @@ class PreviewMap {
       }
 
       this.#layer = new L.Polygon(coordinates).addTo(this.#leaflet)
+      
       this.#layer.editing.enable()
       this.#layer.on('edit', () => {
         let bounds = this.#layer.getBounds()
