@@ -12,6 +12,7 @@ function RegistrationConfirm() {
     oninit: function(vnode) {
       const event = vnode.attrs.event
       const registration = vnode.attrs.registration
+      const startDate = luxon.DateTime.fromISO(registration.startingDate)
 
       console.log(
         'atlas_registration',
@@ -26,11 +27,12 @@ function RegistrationConfirm() {
           data: {
             url: event.url,
             label: event.label,
+            description: event.description,
             address: event.address,
             onlineUrl: event.onlineUrl,
             timing: event.timing.timeString,
             date: registration.startingDate,
-            weekday: registration.startingDate.toLocaleString({ weekday: 'long' }),
+            weekday: startDate.toLocaleString({ weekday: 'long' }).toUpperCase(),
           }
         }
       )
@@ -51,7 +53,7 @@ function RegistrationConfirm() {
             address: event.address,
             timing: event.timing.timeString,
             date: registration.startingDate,
-            weekday: registration.startingDate.toLocaleString({ weekday: 'long' }),
+            weekday: registration.startingDate.toLocaleString({ weekday: 'long' }).toUpperCase(),
           }
         }
       )
