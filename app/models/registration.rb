@@ -24,6 +24,19 @@ class Registration < ApplicationRecord
 
   # Methods
 
+  def first_name
+    name.split(' ', 2).first
+  end
+
+  def last_name
+    split = name.split(' ', 2)
+    split.last if split.length > 1
+  end
+
+  def starting_date
+    starting_at.to_date
+  end
+
   def self.to_csv
     attributes = %w[id name email created_at comment]
 

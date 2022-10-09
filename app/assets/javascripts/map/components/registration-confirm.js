@@ -9,55 +9,6 @@ function RegistrationConfirm() {
         vnode.dom.addEventListener('animationend', resolve)
       })
     },
-    oninit: function(vnode) {
-      const event = vnode.attrs.event
-      const registration = vnode.attrs.registration
-      const startDate = luxon.DateTime.fromISO(registration.startingDate)
-
-      console.log(
-        'atlas_registration',
-        {
-          email: registration.email,
-          FIRSTNAME: registration.firstName,
-          LASTNAME: registration.lastName,
-          TIMEZONE: registration.timeZone,
-        },
-        {
-          id: registration.id,
-          data: {
-            url: event.url,
-            label: event.label,
-            description: event.description,
-            address: event.address,
-            onlineUrl: event.onlineUrl,
-            timing: event.timing.timeString,
-            date: registration.startingDate,
-            weekday: startDate.toLocaleString({ weekday: 'long' }).toUpperCase(),
-          }
-        }
-      )
-
-      sendinblue.track(
-        'atlas_registration',
-        {
-          email: registration.email,
-          FIRSTNAME: registration.firstName,
-          LASTNAME: registration.lastName,
-          TIMEZONE: registration.timeZone,
-        },
-        {
-          id: registration.id,
-          data: {
-            url: event.url,
-            label: event.label,
-            address: event.address,
-            timing: event.timing.timeString,
-            date: registration.startingDate,
-            weekday: registration.startingDate.toLocaleString({ weekday: 'long' }).toUpperCase(),
-          }
-        }
-      )
-    },
     view: function(vnode) {
       const event = vnode.attrs.event
 

@@ -165,11 +165,6 @@ class AtlasAPI {
         message
         registration {
           id
-          firstName
-          lastName
-          email
-          timeZone
-          startingDate
         }
       }
     }`)

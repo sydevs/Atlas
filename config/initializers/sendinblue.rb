@@ -4,4 +4,6 @@ SibApiV3Sdk.configure do |config|
 
   # Set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
   # config.api_key_prefix['api-key'] = 'Bearer'
+
+  # config.debugging = true
 end
