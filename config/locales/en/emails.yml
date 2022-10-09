@@ -1,0 +1,37 @@
+en:
+  emails: # These are translations for email that are sent to the seekers.
+    common:
+      view_in_browser: "View in browser"
+      unsubscribe: "Unsubscribe"
+      reason: "You've received this email because you registered for this event."
+
+    confirmation:
+      offline:
+        subject: "Registration Confirmed - %{event_name}"
+        header: "Your registration is confirmed, %{name}"
+        subheader: "We're happy you decided to join our class and are looking forward to meditating together!"
+        invite_a_friend: "Invite a friend along with this link"
+        get_directions: "Get directions"
+        faqs:
+          - title: "What should I bring?"
+            content: "No special equipment is required. Come without expectations."
+      online:
+        subject: :emails.confirmation.offline.subject # Do not translate
+        header: :emails.confirmation.offline.subject # Do not translate
+        subheader: :emails.confirmation.offline.subject # Do not translate
+        invite_a_friend: :emails.confirmation.offline.invite_a_friend # Do not translate
+        faqs:
+          - title: "How do I join?"
+            content: "A link will be emailed to you approximately 1 hour before the event begins."
+
+    reminder:
+      offline:
+        subject: "Starting Tomorrow - %{event_name}"
+        header: "Your event is starting tomorrow, %{name}"
+        subheader: "We're happy you decided to join our class and are looking forward to meditating together!"
+        action: :emails.confirmation.offline.get_directions
+      online:
+        subject: "Starting Soon - %{event_name}"
+        header: "Your class is starting in 1 hour, %{name}"
+        subheader: "The class you registered for is about to start. Here is a link to join at the starting time."
+        action: "Join meeting"
