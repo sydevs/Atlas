@@ -4,7 +4,7 @@
 function RegistrationConfirm() {
   return {
     onbeforeremove: function(vnode) {
-      vnode.dom.classList.add('fadeout')
+      vnode.dom.classList.add('sya-fadeout')
       return new Promise(function(resolve) {
         vnode.dom.addEventListener('animationend', resolve)
       })
