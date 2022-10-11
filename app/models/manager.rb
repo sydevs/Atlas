@@ -15,6 +15,7 @@ class Manager < ApplicationRecord
   has_many :areas, through: :managed_records, source: :record, source_type: 'Area', dependent: :destroy
   has_many :area_venues, through: :areas, source: :venues
   has_many :area_regions, through: :areas, source: :region
+  has_many :venues, through: :events
   has_many :events
   has_many :clients
   has_many :actions, class_name: 'Audit', as: :user
@@ -100,8 +101,8 @@ class Manager < ApplicationRecord
     else
       regions_via_country = Region.where(country_code: countries.select(:country_code).where(enable_regions: true))
       regions_via_area = Region.where(id: area_regions)
-      regions_via_event = Region.where(province_code: events.select(:province_code))
-      Region.where(id: regions).or(regions_via_country).or(regions_via_area).or(regions_via_event)
+      regions_via_venue = Region.where(id: area_venues)
+      Region.where(id: regions).or(regions_via_country).or(regions_via_area).or(regions_via_venue)
     end
   end
 

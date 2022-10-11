@@ -176,7 +176,8 @@ class CMS::ApplicationController < ActionController::Base
         flash.now[:success] = translate("cms.messages.manager.#{params[:verify]}_verified")
       end
 
-      current_user.update!(atts)
+      current_user.assign_attributes(atts)
+      current_user.save!(validate: false)
     end
 
     def set_locale!
