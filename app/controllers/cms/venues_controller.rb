@@ -5,7 +5,7 @@ class CMS::VenuesController < CMS::ApplicationController
 
   def geosearch
     super({
-      types: 'street_address|premise|subpremise|room|place_of_worship',
+      # types: 'street_address|premise|subpremise|room|place_of_worship',
       components: ("country:#{params[:country]}" if params[:country].present?),
     })
   end
