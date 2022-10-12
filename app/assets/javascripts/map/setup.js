@@ -28,14 +28,16 @@ class SahajAtlas {
         }
       }
     }
-    
+
     if (this.#config.routing_type == 'path') {
-      m.route.prefix = this.#config.path || window.location.pathname.split('map')[0] + 'map'
+      m.route.prefix = '/'
     } else {
       m.route.prefix = '?'
+      window.history.replaceState({}, document.title, window.location.pathname)
     }
 
-    m.route(this.#container, this.#config.prefix, {
+    let basePath = this.#config.path || window.location.pathname.split('map')[0] + 'map'
+    m.route(this.#container, basePath, {
       '/': layout(MapView, { map: 'fullscreen', panel: 'overflow' }),
   
       '/country/:id': layout(CountryView, { model: AtlasCountry, map: 'halfscreen' }),
@@ -52,9 +54,9 @@ class SahajAtlas {
       '/:layer/event/:id': layout(EventView, { model: AtlasEvent, map: 'freeze', panel: 'padded' }),
     })
 
-    let path = m.route.get().split('#')[0]
+    let currentPath = m.route.get().split('#')[0]
 
-    if (this.config.default_view == 'list' && (path == '' || path == '/')) {
+    if (this.config.default_view == 'list' && (currentPath == '' || currentPath == '/')) {
       m.route.set('/:model/:id', {
         model: this.#config.location_type,
         id: this.#config.location_id,

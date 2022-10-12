@@ -142,7 +142,7 @@ module Types
 
     def closest_venue(latitude:, longitude:, locale: 'en')
       I18n.locale = locale.to_sym
-      decorate Venue.publicly_visible.by_distance(origin: [latitude, longitude]).first
+      decorate Venue.by_distance(origin: [latitude, longitude]).publicly_visible.first
     end
 
     def decorate object
