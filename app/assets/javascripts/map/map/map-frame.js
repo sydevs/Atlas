@@ -13,6 +13,7 @@ class MapFrame extends EventTarget {
   #currentLayerId
   #userLocation = null
   #userLocationMarker
+  #hasSelection = false
 
   // Getters
   get loading() {
@@ -47,9 +48,13 @@ class MapFrame extends EventTarget {
       minZoom: 1,
       dragRotate: false,
       hash: true,
+      fitBounds: { easing: { animate: false } },
       bounds: AtlasApp.config.bounds,
       center: AtlasApp.config.center,
+      worldview: AtlasApp.config.country,
     })
+
+    this.#updatePadding()
 
     let initalizing = true
 
@@ -146,11 +151,17 @@ class MapFrame extends EventTarget {
     this.waitForLoad().then(() => {
       this.#currentLayer.setSelection(location)
       if (!location) {
-        this.#mapbox.easeTo({ zoom: this.#mapbox.getZoom() * 0.75 })
+        if (this.#hasSelection) {
+          this.#mapbox.easeTo({ zoom: this.#mapbox.getZoom() * 0.75 })
+          this.#hasSelection = false
+        }
+
         window.document.title = Util.translate('atlas')
+        this.#hasSelection = false
         return
       }
 
+      this.#hasSelection = true
       window.document.title = location.label
 
       if (location.bounds || (location.radius && location.radius != 'null')) {

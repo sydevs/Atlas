@@ -7,7 +7,7 @@ module HasClient
   end
 
   def client_bounds
-    [[bounds[2], bounds[0]], [bounds[3], bounds[1]]] if respond_to?(:bounds)
+    [[bounds[2], bounds[0]], [bounds[3], bounds[1]]] if try(:bounds)&.present?
   end
 
   def canonical_domain
