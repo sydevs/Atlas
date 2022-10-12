@@ -48,7 +48,7 @@ class MapFrame extends EventTarget {
       minZoom: 1,
       dragRotate: false,
       hash: true,
-      fitBounds: { easing: { animate: false } },
+      fitBounds: { easing: { animate: false, padding: 10 } },
       bounds: AtlasApp.config.bounds,
       center: AtlasApp.config.center,
       worldview: AtlasApp.config.country,
