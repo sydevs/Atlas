@@ -29,7 +29,12 @@ class SahajAtlas {
       }
     }
     
-    m.route.prefix = this.#config.path || window.location.pathname.split('map')[0] + 'map'
+    if (this.#config.routing_type == 'path') {
+      m.route.prefix = this.#config.path || window.location.pathname.split('map')[0] + 'map'
+    } else {
+      m.route.prefix = '?'
+    }
+
     m.route(this.#container, this.#config.prefix, {
       '/': layout(MapView, { map: 'fullscreen', panel: 'overflow' }),
   
