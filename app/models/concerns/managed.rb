@@ -16,7 +16,7 @@ module Managed
   def managed_by? manager, super_manager: nil
     return true if super_manager != true && self.manager == manager
 
-    false
+    parent.managed_by?(manager)
   end
 
   private
@@ -54,14 +54,6 @@ module Managed
         new_manager.locale = default_language_code
         self.new_manager_record = true
       end
-
-      # if self.is_a?(Client)
-      #   SendinblueAPI.subscribe(manager.email, :client_managers, {
-      #     email: manager.email,
-      #     firstname: manager.first_name,
-      #     lastname: manager.last_name,
-      #   })
-      # end
 
       self.manager.update_column(:language_code, default_language_code) if self.manager.language_code.nil?
     end
