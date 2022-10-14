@@ -36,7 +36,7 @@ class Mutations::CreateRegistration < Mutations::BaseMutation
         registration: registration,
       }
     elsif registration.save
-      SendinblueAPI.subscribe(registration.email, SendinblueAPI::LISTS[:registrations], {
+      SendinblueAPI.subscribe(registration.email, :registrations, {
         email: registration.email,
         firstname: registration.first_name,
         lastname: registration.last_name,

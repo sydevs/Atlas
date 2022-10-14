@@ -47,14 +47,23 @@ module Managed
       return unless manager&.email.present?
 
       self.new_manager_record = false
+      default_language_code = try(:language_code) || try(:locale) || I18n.locale
 
       self.manager = Manager.find_or_create_by(email: manager.email.downcase) do |new_manager|
         new_manager.name = manager.name
-        new_manager.locale = language_code || I18n.locale
+        new_manager.locale = default_language_code
         self.new_manager_record = true
       end
 
-      self.manager.update_column(:language_code, language_code || I18n.locale) if self.manager.language_code.nil?
+      # if self.is_a?(Client)
+      #   SendinblueAPI.subscribe(manager.email, :client_managers, {
+      #     email: manager.email,
+      #     firstname: manager.first_name,
+      #     lastname: manager.last_name,
+      #   })
+      # end
+
+      self.manager.update_column(:language_code, default_language_code) if self.manager.language_code.nil?
     end
 
 end

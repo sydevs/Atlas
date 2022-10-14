@@ -30,6 +30,9 @@ class Client < ApplicationRecord
   scope :enabled, -> { where(enabled: true) }
   scope :disabled, -> { where(enabled: false) }
 
+  # Callbacks
+  after_save :subscribe_to_sendinblue, if: :manager_id_previously_changed?
+
   # Methods
 
   def parent
@@ -39,5 +42,19 @@ class Client < ApplicationRecord
   def url
     "https://#{domain || "wemeditate.com#{"/" + locale if locale != 'en'}"}/map"
   end
+
+  def locale
+    config&.dig(:locale)
+  end
+
+  private
+
+    def subscribe_to_sendinblue
+      SendinblueAPI.subscribe(manager.email, :client_managers, {
+        email: manager.email,
+        firstname: manager.first_name,
+        lastname: manager.last_name,
+      })
+    end
 
 end

@@ -6,6 +6,8 @@ module SendinblueAPI
 
   LISTS = {
     registrations: 13,
+    country_managers: 20,
+    client_managers: 19,
   }.freeze
 
   TEMPLATES = {
@@ -15,6 +17,7 @@ module SendinblueAPI
 
   def self.subscribe email, list_id, attributes
     client = SibApiV3Sdk::ContactsApi.new
+    list_id = SendinblueAPI::LISTS[list_id]
 
     # Create a contact
     p client.create_contact(
@@ -25,6 +28,16 @@ module SendinblueAPI
     )
   rescue SibApiV3Sdk::ApiError => e
     puts "Exception when calling ContactsApi->create_contact: #{e} #{e.response_body}"
+  end
+
+  def self.update_contact email, attributes
+    client = SibApiV3Sdk::ContactsApi.new
+    attributes.deep_transform_keys! { |key| key.to_s.upcase }
+
+    # Update a contact
+    p client.update_contact(email, 'attributes' => attributes)
+  rescue SibApiV3Sdk::ApiError => e
+    puts "Exception when calling ContactsApi->update_contact: #{e} #{e.response_body}"
   end
 
   def self.send_email template, config

@@ -36,8 +36,11 @@ class Manager < ApplicationRecord
   scope :event_managers, -> { joins(:events) }
   scope :client_managers, -> { joins(:clients) }
 
-  # Methods
+  # Callbacks
   before_save :unverify
+  after_save :update_sendinblue, if: :email_previously_changed?
+
+  # Methods
 
   def parent
     case type
@@ -59,6 +62,15 @@ class Manager < ApplicationRecord
     return true if manager.administrator? && super_manager != false
 
     false
+  end
+
+  def first_name
+    name.split(' ', 2).first
+  end
+
+  def last_name
+    split = name.split(' ', 2)
+    split.last if split.length > 1
   end
 
   def type
@@ -141,6 +153,14 @@ class Manager < ApplicationRecord
     def unverify
       self[:email_verified] = false if email_changed?
       self[:phone_verified] = false if phone_changed?
+    end
+
+    def update_sendinblue
+      SendinblueAPI.update_contact(email_previously_was, {
+        email: email,
+        firstname: first_name,
+        lastname: last_name,
+      })
     end
 
 end
