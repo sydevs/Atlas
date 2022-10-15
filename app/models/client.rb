@@ -50,11 +50,7 @@ class Client < ApplicationRecord
   private
 
     def subscribe_to_sendinblue
-      SendinblueAPI.subscribe(manager.email, :client_managers, {
-        email: manager.email,
-        firstname: manager.first_name,
-        lastname: manager.last_name,
-      })
+      manager.subscribe_to! :client_managers
     end
 
 end

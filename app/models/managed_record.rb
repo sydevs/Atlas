@@ -24,11 +24,7 @@ class ManagedRecord < ApplicationRecord
     def subscribe_to_sendinblue
       return unless record.is_a?(Country)
 
-      SendinblueAPI.subscribe(manager.email, :country_managers, {
-        email: manager.email,
-        firstname: manager.first_name,
-        lastname: manager.last_name,
-      })
+      manager.subscribe_to! :country_managers
     end
 
 end

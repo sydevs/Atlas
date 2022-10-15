@@ -36,12 +36,8 @@ class Mutations::CreateRegistration < Mutations::BaseMutation
         registration: registration,
       }
     elsif registration.save
-      SendinblueAPI.subscribe(registration.email, :registrations, {
-        email: registration.email,
-        firstname: registration.first_name,
-        lastname: registration.last_name,
-      })
-
+      registration.subscribe_to! :registrations
+      
       SendinblueAPI.send_confirmation_email(registration)
       SendinblueAPI.schedule_reminder_email(registration)
 

@@ -148,6 +148,14 @@ class Manager < ApplicationRecord
     !contact_by_email?
   end
 
+  def subscribe_to! list_id
+    SendinblueAPI.subscribe(email, list_id, {
+      email: email,
+      firstname: first_name,
+      lastname: last_name,
+    })
+  end
+
   private
 
     def unverify

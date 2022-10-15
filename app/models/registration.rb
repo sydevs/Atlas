@@ -37,6 +37,14 @@ class Registration < ApplicationRecord
     starting_at.to_date
   end
 
+  def subscribe_to! list_id
+    SendinblueAPI.subscribe(email, list_id, {
+      email: email,
+      firstname: first_name,
+      lastname: last_name,
+    })
+  end
+
   def self.to_csv
     attributes = %w[id name email created_at comment]
 
