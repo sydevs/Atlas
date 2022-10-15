@@ -70,8 +70,7 @@ module EventDecorator
   end
 
   def language_name
-    code = self[:language_code]
-    I18nData.languages(I18n.locale)[code].split(/[,;]/)[0]
+    LocalizationHelper.language_name(language_code)
   end
 
   def map_path

@@ -42,6 +42,14 @@ class Registration < ApplicationRecord
       email: email,
       firstname: first_name,
       lastname: last_name,
+      timezone: time_zone,
+      city: event.area&.name,
+      state_region: event.area&.region&.name,
+      country: event.area&.country&.name,
+      how_they_joined: "Sahaj Atlas Registration",
+      language: LocalizationHelper.language_name(event.language_code),
+      latitude: event.venue.latitude,
+      longitude: event.venue.longitude,
     })
   end
 

@@ -5,9 +5,7 @@ module ManagerDecorator
   end
 
   def language_name
-    return nil unless language_code.present?
-
-    I18nData.languages(I18n.locale)[language_code]&.split(/[,;]/)&.first
+    LocalizationHelper.language_name(language_code)
   end
 
 end

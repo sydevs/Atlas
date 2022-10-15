@@ -8,6 +8,7 @@ module SendinblueAPI
     registrations: 13,
     country_managers: 20,
     client_managers: 19,
+    test: 5,
   }.freeze
 
   TEMPLATES = {

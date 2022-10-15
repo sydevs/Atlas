@@ -32,4 +32,10 @@ module LocalizationHelper
     I18n.translate attr, scope: [:activerecord, :attributes, i18n_key], locale: locale
   end
 
+  def self.language_name language_code, locale: :en
+    return nil unless language_code.present?
+
+    I18nData.languages(locale)[language_code]&.split(/[,;]/)&.first
+  end
+
 end

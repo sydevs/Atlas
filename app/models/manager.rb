@@ -153,6 +153,12 @@ class Manager < ApplicationRecord
       email: email,
       firstname: first_name,
       lastname: last_name,
+      timezone: areas.first&.time_zone,
+      city: areas.first&.name,
+      state_region: regions.first&.name,
+      country: countries.first&.name,
+      how_they_joined: "Sahaj Atlas #{list_id.to_s.titleize}",
+      language: LocalizationHelper.language_name(language_code),
     })
   end
 
