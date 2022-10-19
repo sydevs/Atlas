@@ -1,9 +1,9 @@
 nl:
   map:
-    meditation_atlas: "Meditation Atlas" # TODO: Translate
+    meditation_atlas: "Meditatie Atlas"
 
     search:
-      prompt: "Search for location" # TODO: Translate
+      prompt: "Zoel op locatie"
       all_recurrences: "Alle Tijden"
       all_languages: "Alle Talen"
       filter:
@@ -19,21 +19,21 @@ nl:
         online: "Online lessen"
         back: "Terug naar de kaart"
 
-    list: # TODO: Translate
-      search: "Search for location"
-      more_info: "More Info"
+    list:
+      search: "Zoek op locatie"
+      more_info: "Meer Info"
       register: "Registeren"
       fallback:
-        nearby: "The closest free meditation class is at"
-        far: "There are no classes in this area, the closest free meditation class is in"
-        online: "There are no classes in this area, consider an"
-        online_event: "Online Class"
+        nearby: "De dichtsbijzijnde gratis meditatie les is in"
+        far: "Er zijn geen lessen in deze buurt, de dichtsbijzijnde gratis meditatie les is in"
+        online: "Er zijn geen lessen in deze buurt, probeer een"
+        online_event: "Online Les"
 
-    area: # TODO: Translate
-      header: "Events in %{area}"
+    area:
+      header: "Evenementen in %{area}"
 
-    venue: # TODO: Translate
-      header: "Events at %{venue}"
+    venue:
+      header: "Evenementen in %{venue}"
 
     event:
       register: "Registeren"
