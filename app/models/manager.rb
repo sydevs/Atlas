@@ -170,6 +170,8 @@ class Manager < ApplicationRecord
     end
 
     def update_sendinblue
+      return unless email_previously_was.present?
+
       SendinblueAPI.update_contact(email_previously_was, {
         email: email,
         firstname: first_name,

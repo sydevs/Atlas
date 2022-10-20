@@ -36,7 +36,7 @@ module SendinblueAPI
     attributes.deep_transform_keys! { |key| key.to_s.upcase }
 
     # Update a contact
-    p client.update_contact(email, 'attributes' => attributes)
+    p client.update_contact(CGI.escape(email), 'attributes' => attributes)
   rescue SibApiV3Sdk::ApiError => e
     puts "Exception when calling ContactsApi->update_contact: #{e} #{e.response_body}"
   end
