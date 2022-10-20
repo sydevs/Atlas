@@ -32,7 +32,7 @@ module EventDecorator
   end
 
   def address
-    decorated_location.address
+    [room, decorated_location.address].compact.join(', ')
   end
 
   def category_name

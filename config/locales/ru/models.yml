@@ -214,7 +214,7 @@ ru:
           concert: "Представление, сочетающее медитацию и музыку или танец."
         description: "Описание"
         room: "Помещение"
-        building: "Здание"
+        building: "Здание / Hомер"
         language_code: :activerecord.attributes.generic.language # Do not translate
         registration_mode: "Режим регистрации"
         registration_modes:

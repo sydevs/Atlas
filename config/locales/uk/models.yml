@@ -215,7 +215,7 @@ uk:
           concert: "Вистава, що поєднує медитацію та музику чи танець."
         description: "Опис"
         room: "Кімната"
-        building: "Будівля"
+        building: "Будівля / Кімната"
         language_code: :activerecord.attributes.generic.language # Do not translate
         registration_mode: "Режим реєстрації"
         registration_modes:

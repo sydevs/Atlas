@@ -214,7 +214,7 @@ de:
           concert: "Eine Veranstaltung, die Meditation und Musik oder Tanz kombiniert."
         description: "Beschreibung"
         room: "Zimmer"
-        building: "Gebäude"
+        building: "Gebäude / Zimmer"
         language_code: "Sprache"
         registration_mode: "Registrierungsmodus"
         registration_modes:

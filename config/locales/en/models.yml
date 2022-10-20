@@ -214,7 +214,7 @@ en:
           concert: "A performance combining meditation and music or dance."
         description: "Description"
         room: "Room"
-        building: "Building"
+        building: "Building / Room"
         language_code: :activerecord.attributes.generic.language # Do not translate
         registration_mode: "Registration Mode"
         registration_modes:

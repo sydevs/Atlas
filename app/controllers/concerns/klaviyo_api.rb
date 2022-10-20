@@ -47,7 +47,7 @@ module KlaviyoAPI
         '$event_id': registration.id,
         'label': event.label,
         'description': event.description,
-        # 'room': event.room,
+        'room': event.room,
         'address1': location.address,
         # 'address1': venue.street,
         # 'city': venue.city,
