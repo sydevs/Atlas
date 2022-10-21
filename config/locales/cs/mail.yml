@@ -1,0 +1,212 @@
+cs:
+  mail:
+    layout:
+      sahaj_atlas: "Sahadža Atlas"
+      learn_more: "Dozvědět se víc"
+      update_notifications: "Update notification settings" # TODO: Translate
+      information:
+        atlas:
+          title: "Co je Sahadža Atlas?"
+          description: "Sahadža Atlas je projekt na vytvoření centrálního seznamu všech veřejných akcí sahadža jógy. Aby byl tento seznam událostí vždy aktuální, aby zájemci o meditaci vždy našli aktivní události v jejich blízkosti."
+        security:
+          title: "Tento e-mail nepřeposílejte"
+          description: "Odkazy v tomto e-mailu umožňují přístup k úpravám Sahadža Atlasu. Přeposlání tohoto e-mailu ohrozí zabezpečení webu."
+        automated:
+          title: "Automatický e-mail / Odhlásit odběr"
+          description: "Toto je automatický e-mail. Pokud nevíte, proč dostáváte tento e-mail, nechcete již tyto e-maily dostávat nebo máte nějaké dotazy, napište na:"
+        unsubscribe: # TODO: Translate
+          title: "Unsubscribe"
+          description: "You can manage which notifications you receive from Sahaj Atlas, by editing your profile."
+
+    login:
+      title: "Přihlaste se do Sahadža Atlasu"
+      preview: "Tento odkaz vás automaticky přihlásí do Sahadža Atlasu CMS. Nesdílejte tento e-mail s nikým jiným, jinak získají přístup k vašemu účtu."
+      action: "Přihlásit se"
+      explanation: "nebo zkopírujte tuto adresu URL do svého prohlížeče"
+
+    summary:
+      subject: "Měsíční shrnutí Sahadža Atlasu"
+      title: "Měsíční aktualizace"
+      preview: "Souhrn změn na Sahadža Atlasu za poslední měsíc."
+      view_statistics: "Úplné statistiky"
+      next_week: "Příští týden"
+      last_week: "Minulý týden"
+      stats:
+        new_registrations: "Nové registrace"
+        active_events: "Aktivní události"
+        active_countries: "Aktivní země"
+        active_regions: "Aktivní regiony"
+      data:
+        new_countries: "Nové země"
+        new_managers: "Noví správci"
+        new_clients: "Nové aplikace"
+        new_events: "Nové události"
+        expiring_events: "Končící události"
+        expired_events: "Nedávno vypršela platnost"
+        inactive_regions: "Neaktivní regiony"
+
+    event:
+      location: "Umístění"
+      next_date: "Další kurz"
+      start_date: "Datum začátku"
+      timing: "Načasování"
+      category: "Kategorie"
+      created_by: "Vytvořeno kým"
+      updated_at: "Naposledy aktualizováno"
+      manager: "Správce"
+      view: "Zobrazit na mapě"
+      edit: "Upravit událost"
+      update: "Aktualizovat událost"
+      contact: "Poslat Email"
+
+      status:
+        question: "Is the above information still correct?" # TODO: Translate
+        verify: "Event is Correct" # TODO: Translate
+        or: "OR" # TODO: Translate
+        subject:
+          created: "Vytvořena nová událost - %{event}"
+          needs_review: "[Warning] Událost potřebuje kontrolu – %{event}"
+          needs_urgent_review: "[Alert] Akce brzy vyprší - %{event}"
+          expired: "Platnost události vypršela - %{event}"
+          finished: "Událost je ukončena - %{event}"
+        preview:
+          created: "Jste manažerem nové události. '%{event}'' byla vytvořena v %{region}."
+          needs_review: "'%{event}' je třeba zkontrolovat, jinak bude z mapy odstraněn. Zkontrolujte prosím, zda jsou informace o události stále správné."
+          needs_urgent_review: "'%{event}' bude brzy odstraněn z mapy, protože manažer události ještě neodpověděl na náš e-mail."
+          expired: "'%{event}'' nebyl aktualizován za %{duration} a byl odstraněn z mapy. Aktualizujte tuto událost, aby byla znovu veřejná."
+          finished: "'%{event}' byla uzavřena podle plánu. Poslední kurz pro tuto událost skončil, takže událost bude skryta z mapy."
+        title:
+          created: "Nová událost vytvořena"
+          needs_review: "Událost vyžaduje revizi"
+          needs_urgent_review: "Akce brzy vyprší"
+          expired: "Platnost události vypršela"
+          finished: "Událost je ukončena"
+          escalation: "Manažer neodpověděl"
+        byline:
+          created: "Vytvořeno %{date}"
+          needs_review: "Naposledy aktualizováno %{date}"
+          needs_urgent_review: "Bude odstraněno %{date}"
+          expired: "Platnost vypršela %{date}"
+          finished: "Ukončeno dne %{date}"
+        explanation:
+          created: "Jste manažerem nové události, která byla vytvořena na Sahadža Atlasu."
+          needs_review: "U této události, kterou spravujete, je třeba zkontrolovat přesnost, jinak bude z mapy odstraněna."
+          needs_urgent_review: "Tato událost bude brzy odstraněna z mapy, pokud nebude zkontrolována a aktualizována její přesnost."
+          expired: "Tato událost byla z mapy odstraněna, protože nebyla v poslední době aktualizována. Chcete-li ji přidat zpět na mapu, aktualizujte událost."
+          finished: "Tato akce skončila."
+        escalation:
+          event_manager: "U této události, kterou spravujete, je naléhavě nutné zkontrolovat přesnost. Toto je poslední připomenutí, které obdržíte. Poslali jsme také e-mail manažerům regionu %{region}, abychom se ujistili, že tato událost nebude odstraněna omylem."
+          super_manager: "Jste manažerem %{region}. Toto upozornění vám bylo zasláno, protože manažer této události ještě neodpověděl na náš e-mail."
+
+      reminder:
+        subject: "[Připomenutí] Nadcházející událost"
+        title: "Nadcházející událost"
+        preview:
+          zero: "Vaše událost, \"%{event},\" začne platit %{duration} od nynějška od %{time}. Žádné nové registrace."
+          one: "Vaše událost, \"%{event},\" začne platit %{duration} od nynějška od %{time}. %{count} nová registrace."
+          other: "Vaše událost, \"%{event},\" začne platit %{duration} od nynějška od %{time}. %{count} nových registrací."
+        explanation: # TODO: Translate
+          one: "Your event has %{count} new registration."
+          other: "Your event has %{count} new registrations."
+        byline:
+          zero: "Žádné nové registrace"
+          one: "%{count} Nová registrace na %{date}"
+          other: "%{count} Nové registrace na %{date}"
+        not_shown:
+          one: "%{count} nová registrace se nezobrazuje."
+          other: "%{count} nové registrace se nezobrazují."
+        view_all: "Zobrazit všechny"
+
+    manager:
+      welcome:
+        subject:
+          worldwide: "Vítejte! Nyní jste novým správcem Sahadža Atlasu."
+          country: "Vítejte! Nyní jste národním správcem Sahadža Atlasu."
+          region: "Vítejte! Nyní jste oblastním správcem Sahadža Atlasu."
+          area: "Vítejte! Nyní jste místním správcem Sahadža Atlasu."
+          event: "Vítejte! Nyní jste správcem událostí na Sahadža Atlasu."
+          none: "Vítejte! Nyní jste správcem Sahadža Atlasu."
+        title: "Vítejte na Sahadža Atlasu"
+        preview:
+          worldwide: "Byli jste pozváni, abyste se stali administrátorem Sahadža Atlasu."
+          country: "Byli jste pozváni, abyste se stali národním správcem pro %{context}."
+          region: "Byli jste pozváni, abyste se stali oblastním správcem pro %{context}."
+          area: "Byli jste pozváni, abyste se stali místním správcem pro územní část %{context}."
+          event: "Byli jste pozváni, abyste se stali správcem událostí pro \"%{context}\"."
+          none: "Byli jste pozváni, abyste se stali správcem Sahadža Atlasu."
+        login: "přihlásit se"
+        view:
+          country: "Zobrazit zemi"
+          region: "Zobrazit region"
+          area: "Zobrazit oblast"
+          event: "Zobrazit událost"
+        byline:
+          worldwide: "Hlavní Administrator"
+          country: "Správce země pro %{context}"
+          region: "Správce oblasti pro %{context}"
+          area: "Místní správce pro %{context}"
+          event: "Správce událost událostí pro \"%{context}\""
+        explanation:
+          worldwide: "Byli jste pozváni, abyste se stali administrátorem Sahadža Atlasu. Vaším úkolem bude přizvat nové správe zemí a dohlížet na údržbu atlasu."
+          country: "Byli jste pozváni, abyste se stali manažerem země na Sahadža Atlasu. Vaší odpovědností bude vytvořit města a regiony ve vaší zemi a přidělit k nim správce, aby řídili v nich řídili jednotlivé události."
+          region: "Byli jste pozváni, abyste se stali místním správcem na Sahaj Atlas. Vaší odpovědností bude vytvořit místa a seznam veřejných Sahadža akcí ve vašem regionu."
+          area: "Byli jste pozváni, abyste se stali místním správcem na Sahadža Atlasu. Vaší odpovědností bude vytvořit místa a seznam veřejných Sahadža ve vašem regionu."
+          event: "Byli jste pozváni, abyste se stali správcem událostí na Sahadža Atlasu. Vaší odpovědností bude zajistit, aby vaše událost byla aktuální a platná."
+          none: "Byli jste pozváni, abyste se stali správcem na Sahadža Atlasu. Dosud vám nebyly přiděleny žádné povinnosti. Pokud potřebujete pomoc, kontaktujte nás."
+        data:
+          events: "Události"
+          venues: "Místa konání"
+      verify: # TODO: Translate
+        subject: "Your email address must be verified."
+        title: "Email Verification"
+        preview: "To publish your events we must verify your email address."
+        verify: "Verify"
+        byline:
+          changed: "Your email has recently been changed."
+          event: "You have been added as an event manager for \"%{event}\""
+        explanation:
+          changed: "Please verify your email to keep your events published."
+          event: "We must verify your email before we can publish the event. This will allow us to reach you in the future to make sure the event is still accurate."
+
+    country:
+      summary:
+        subject: "Aktualizace jednou za dva týdny %{country}"
+        title: "Aktualizace jednou za dva týdny"
+        preview: "Souhrn změn v %{country} za poslední 2 týdny."
+        view: "Zobrazit zemi"
+
+    place:
+      summary:
+        subject: "Týdenní aktualizace pro %{region}"
+        title: "Týdenní aktualizace"
+        preview: "Souhrn změn v %{region} za poslední týden."
+        view: "Zobrazit region"
+
+    managed_record:
+      created:
+        subject:
+          country: "Nyní jste národním správcem"
+          region: "Nyní jste oblastním správcem"
+          area: "Nyní jste místním správcem"
+          event: "Nyní jste správcem událostí"
+          client: "Nyní jste správce aplikace"
+        title:
+          country: "Národní správce pro %{record}"
+          region: "Oblastní správce pro %{record}"
+          area: "Místní správce pro %{record}"
+          event: "Správce událostí pro %{record}"
+          client: "Správce aplikace pro %{record}"
+        preview: "Byli jste nastaveni jako správce pro %{record}."
+        byline:
+          country_html: "Byl vám udělen přístup ke správě ve vaší zemi, %{record}."
+          region_html: "Byl vám udělen přístup ke správě %{record} regionu."
+          area: "Byl vám udělen přístup ke správě %{record} oblasti."
+          event_html: "Byl vám udělen přístup ke správě událostí, %{record}."
+          client_html: "Byl vám udělen přístup ke správě konfigurace aplikace %{record}."
+        explanation:
+          country: "Je vaší odpovědností vytvořit regiony ve vaší zemi a přiřadit k nim správce, kteří zde budou organizovat události. Můžete také vytvářet místa a události ve vaší zemi."
+          region: "Je vaší odpovědností vytvářet místa a události ve vašem regionu. Můžete také vytvořit vlastní oblasti ve vašem regionu pro velká města a přiřadit k těmto regionům správce."
+          area: "Je vaší odpovědností vytvářet místa a události ve vaší oblasti. Také vám bude zaslán e-mail, pokud se nějaké události ve vaší oblasti blíží ke konci platnosti a bude zapotřebí někoho, kdo zkontroluje, zda jsou údaje o události stále platné."
+          event: "Je vaší odpovědností mít nebo být informován o nejaktuálnějších a nejpřesnějších informacích o vašem kurzu. Každých pár měsíců obdržíte e-mail s žádostí o potvrzení, že informace o vaší události jsou stále platné."
+          client: "Nyní máte přístup ke klíčům API, které vám umožní vložit Sahaj Atlas na váš web nebo do aplikace. Můžete také změnit výchozí konfiguraci mapy na vašem webu."
+        view: "Zobrazit %{model}"

@@ -1,0 +1,434 @@
+cs:
+  cms:
+    actions:
+      simple:
+        new: "Přidat"
+        edit: "Upravit"
+        update: "Uložit"
+        destroy: "Vymazat"
+        back: "Zpět"
+        view: "View" # TODO: Translate
+        search: "Search" # TODO: Translate
+        searching: "Search..." # TODO: Translate
+        select: "Select" # TODO: Translate
+
+      target:
+        new: "Přidat %{resource}"
+        create: "Vytvořit %{resource}"
+        edit: "Upravit %{resource}"
+        update: "Uložit %{resource}"
+        destroy: "Vymazat %{resource}"
+        back: "Zpět k %{resource}"
+        search: "Vyhledat %{resources}..."
+        choose: "Vybrat %{resource}"
+        verify: "Verify %{resource}" # TODO: Translate
+        view: "View %{resource}" # TODO: Translate
+        reload: "Reload %{resource}" # TODO: Translate
+
+      special:
+        edit_profile: "Editovat můj profil"
+        view_map: "View Map" # TODO: Translate
+
+    menu:
+      home: "Domů"
+      # Top level menu
+      about: "O Sahadža Atlasu"
+      statistics: "Statistiky"
+      map: :cms.actions.special.view_map # Do not translate
+      report_issue: "Nahlásit problém"
+      help: "Pomoc (Časté otázky)"
+      sign_out: "Odhásit se"
+      sign_in: "Přihlásit se"
+      # Secondary menu
+      dashboard: "Nástěnka pro %{user}"
+      review: "Všechna upozornění pro %{user}"
+      worldwide: "Světová data"
+      faq: "Často pokládané otázky"
+      context: "%{resource} pro %{parent}"
+      # Tertiary menu
+      details: "Info"
+      activity: "Aktivity"
+      breadcrumbs:
+        world: "Svět"
+        help: "Pomoc"
+        review: "Seznam upozornění"
+        dashboard: "Nástěnka"
+
+    messages:
+      errors: "Chyby"
+      no_records_found: "Nebyly nalezeny žádné %{resources} ."
+      confirm_destroy: "Opravdu toto chcete smazat? Tuto akci nelze vrátit zpět."
+      successfully_created: "Úspěšně %{resource} vytvořeno."
+      successfully_updated: "Úspěšně %{resource} uloženo."
+      successfully_deleted: "%{resource} úspěšně smazáno. Tuto akci nelze vrátit zpět."
+      successfully_removed: "%{resource} úspěšně ostraněno z této %{context}."
+      successfully_confirmed: "Děkujeme za potvrzení, že tento %{resource} je aktuální."
+      not_logged_in: "Nejste přihlášen/a!"
+      no_comment: "(bez komentáře)"
+      temporary_mail_error: "Emailový server je dočasně zaměstnán, zkuste to to prosím znovu."
+      region: # TODO: Translate
+        invalid_geojson: "must have it's center within the borders of %{country}"
+        invalid_osm_id: "is not within %{country}"
+      area: # TODO: Translate
+        invalid_location: "must have it's center within the borders of %{region} and %{country}"
+      venue:
+        out_of_bounds: "Místo konání nemůže být mimo okruh %{local_area}"
+      event:
+        verified: "Thank you for confirming your event's accuracy." # TODO: Translate
+        invalid_end_time: "nemůže být před časem zahájení"
+        invalid_end_date: "nemůže být před datem zahájení"
+        passed_end_date: "nemůže být dříve než dnes"
+      manager:
+        success: "Správce byl úspěšně přidán"
+        already_added: "%{manager} už dané zpracovává #{resource}"
+        already_exists: "%{name} <%{email}> již existuje"
+        email_verified: "Your email address is now verified!" # TODO: Translate
+        phone_verified: "Your phone number is now verified!" # TODO: Translate
+        email_verification_resent: "An email verification has been sent to %{name}" # TODO: Translate
+      cannot_create:
+        event: "Zde nelze vytvářet nové události, je nutné je přidat přímo do místa konání."
+
+    forms:
+      event:
+        details: "Detaily události"
+        timing: "Načasování"
+        location: "Location" # TODO: Translate
+        registration: "Registrace"
+        manager: "Správce"
+      manager: # TODO: Translate
+        contact_methods: "Contact Methods"
+        notifications: "Notification Settings"
+
+    hints:
+      unnamed: "(Unnamed)" # TODO: Translate
+      verified: "Verified" # TODO: Translate
+      not_verified: "Not Verified" # TODO: Translate
+      not_set: "Not Set" # TODO: Translate
+      not_found: "No Results Found" # TODO: Translate
+      unspecified: "Nespecifikováno"
+      unlimited: "Unlimited" # TODO: Translate
+      never: "Nikdy"
+      edit_warning: "Do not edit these fields, unless you know what you're doing!" # TODO: Translate
+      geosearch:
+        prompt: "Vyhledejte polohu"
+        description: "Toto vyhledávání můžete použít k automatickému vyplnění níže uvedených polí. Systém využívá Google API. Pokud je Google ve vaší zemi zablokován nebo pokud vyhledávání selže, budete muset data zadat ručně."
+      country:
+        must_be_new: "Země, které ještě nebyly přidány, jsou uvedeny níže."
+        language: "Výchozí jazyk, ve kterém se události v této zemi obvykle konají."
+        no_default_language: "Žádné výchozí nastavení"
+        enable_regions: "If enabled, you will be able to view and assign managers to regions (regions, states, etc) within this country. This is useful for larger countries (China, USA, Australia, etc), and unnessecary for small countries (Belgium, Lithuania, Singapore, etc)." # TODO: Translate
+        enable_custom_regions: "Allow the creation of custom regions. This is an advanced feature, which should only be used if you understand what you are doing." # TODO: Translate
+      region:
+        polygon: "Drag / click on a faded square to add a new corner to the polygon. Click on an existing corner to remove it." # TODO: Translate
+      area:
+        location: "Vlastní oblast je definována pomocí souřadnic na mapě (zeměpisná šířka a délka + rádius), aby se vytvořila kruhová oblast."
+      event:
+        custom_name: "Pokud chcete přepsat název události, můžete tak učinit zde."
+        description: "Uveďte popis programu (náplně meditace) pro hledající. Dejte jim představu o tom, co očekávat, případně jakékoli specialní instrukce k nalezení místa meditace nebo co si sebou mají vzít. Tento popis by měl být v rozsahu od %{min} do %{max} znaků."
+        description_count: " znaky"
+        room: "Ve které místnosti v budově se akce koná?"
+        language: "Jaký je hlavní jazyk této nadcházející události?"
+        registration_mode: "Kam (kde) se mají zájemci na akci přihlásit? Důrazně doporučujeme, abyste toto nechali jako '%{native}.' Registrace žadatelů na této webové stránce nám umožní zasílat jim upomínkové a následné e-maily."
+        registration_url: "Registrační URL bude nastaveno automaticky, pokud je nastaven režim \"%{native}.\""
+        registration_limit: "Limit the number of registrations to this amount." # TODO: Translate
+        online: "Zaškrtněte toto políčko, pokud bude program probíhat online."
+        online_url: "Pokud je kurz online, tento odkaz je místo, kde by se zájemci měli do kurzu připojit (např. odkaz na Zoom, YouTube, Google Meet atd.)."
+        phone_number: "Místní telefonní číslo, na které mohou zájemci volat a klást otázky."
+        phone_name: "Křestní jméno jogína, který zvedne telefon."
+        venue:
+          search: "Search for address" # TODO: Translate
+          view_fields: "View location fields" # TODO: Translate
+        manager: # TODO: Translate
+          view_fields: "View manager fields"
+          field: "The manager should be set to a yogi(ni) who will take responsibility for this event. Every week a list of new registrations will be sent to the manager and every few months they will be asked to confirm that the program information is still correct."
+          search: "Enter the full email or phone number of the person you'd like to add. If no existing manager is found, you can invite the manager by email or messenger."
+          categories:
+            managers: "Existing Managers"
+            invite: "Invite"
+          short_invitations:
+            email: "By email"
+            phone: "Through %{messenger}"
+          invitations:
+            email: "Invite by email"
+            phone: "Invite through %{messenger}"
+      manager:
+        language: "Preferovaný jazyk pro e-maily a uživatelské rozhraní tohoto správce."
+        administrator:
+          title: "Vytvoření globálního správce"
+          description: "Přidáním správce k celosvětovým datům je učiníte správci. Budou mít úplný přístup k provádění změn v Sahadža atlasu."
+        contact_method: "Which method do you prefer to be contacted by."
+        contact_settings: # TODO: Translate
+          hint: "Please select message types you want to receive from Sahaj Atlas. Currently some types can only be sent by email."
+          options:
+            email: "Email-only"
+            enabled: "Enabled"
+            disabled: "Disabled"
+          categories:
+            new_managed_record: "New Access"
+            event_verification: "Event Verification"
+            event_registrations: "Event Registrations"
+            place_summary: "Regional Summary"
+            country_summary: "Country Summary"
+            application_summary: "Sahaj Atlas Summary"
+          hints:
+            new_managed_record: "Sent when you are given permission to manage a new event, region or resource on the Atlas."
+            event_verification: "Requesting event and city managers to check their events' accuracy. Sent every 3 months, for each event. This cannot be disabled."
+            event_registrations: "A list of new registrations for your event. Sent around 24 hours before each event."
+            place_summary: "A summary of changes within a region you manage. Sent every %{period}."
+            country_summary: "A summary of changes within a country you manage. Sent every %{period}."
+            application_summary: "A summary of all Atlas changes. Sent every %{period}."
+        search: "Enter a name, email, or phone number..."
+
+    details:
+      details_for_record: "Podrobnosti k %{resource}"
+      registration_for_record: "Trend registrace"
+      management_for_record: "Management pro %{resource}"
+      managers_for_record: "Správci pro %{resource}"
+      location_of_record: "Umístění tohoto %{resource}"
+      dates_and_timing: "Termíny a načasování"
+      map_of_record: "Mapa tohoto %{resource}"
+      area_in_words: "%{radius} km okolo %{latitude}, %{longitude}"
+      records_in_recent_days: "%{resources} v posledních 30 dnech"
+      record_has_language: "%{resource} nabízeno v %{language}"
+      notification_settings: "Notification Settings" # TODO: Translate
+      contact_details: "Contact Information" # TODO: Translate
+      canonical_domain: "Canonical Website" # TODO: Translate
+      updated_at: "Naposledy aktualizováno"
+      event_coverage:
+        title: "Pokrytí událostí"
+        description: "%{events} (%{venues})"
+      record_needs_review:
+        title: "%{resource} Potřebuje revizi"
+        description: "Tento %{resource} nebyl aktualizován %{updated_ago}. Tato událost bude z mapy odstraněna, pokud nebude provedena revize %{expires_in}. Přejděte na stránku úprav a stisknutím tlačítka Uložit potvrďte, že podrobnosti události jsou stále správné."
+        alt_description: "Tento %{resource} nebyl aktualizován %{updated_ago}. Zkontrolujte prosím podrobnosti níže a stisknutím tlačítka Uložit potvrďte, že jsou podrobnosti události správné."
+        action: "Revize"
+      record_needs_urgent_review:
+        title: "%{resource} Vyžaduje naléhavou kontrolu"
+      record_finished:
+        title: "%{resource} Dokončeno"
+        description: "Tento %{resource} je ukončen. Poslední výskyt byl %{date}."
+      record_has_no_events:
+        title: "Žádné události"
+        description: "Tento %{resource} nemá žádné události, a proto se nezobrazí na mapě."
+      record_expired:
+        title: "%{resource} Platnost vypršela"
+        description: "Tento %{resource} byl skryt před veřejností, protože nebyl aktualizován %{updated_ago}. Přejděte na stránku úprav a stisknutím tlačítka Uložit potvrďte, že podrobnosti týkající se události jsou stále správné."
+        alt_description: "Tento %{resource} byl skryt před veřejností, protože nebyl aktualizován %{updated_ago}. Zkontrolujte prosím podrobnosti níže a stisknutím tlačítka Uložit potvrďte, že jsou podrobnosti události správné."
+        action: "Revize"
+      record_archived:
+        title: "%{resource} Archivováno"
+        description: "Tento %{resource} již dlouho nebyl aktualizován (%{time}). Nebude zobrazen na mapě, dokud nebude zkontrolován a uložen."
+        alt_description: "Tento %{resource} byl skryt před veřejností, protože nebyl dlouho aktualizován (%{time}). Zkontrolujte prosím podrobnosti níže a stisknutím tlačítka Uložit potvrďte, že jsou podrobnosti události správné."
+        action: "Zrušit archivaci"
+      external_registration:
+        title: "Událost využívá externí registraci"
+        description: "Tato událost je nastavena tak, aby se zájemci registrovali %{mode}. Je lepší, když se hledající zaregistrují na Sahadža Atlasu, protože pak jim budeme moci posílat upomínky a potvrzovací e-maily."
+      record_not_published:
+        title: "Nepublikováno"
+        description: "Tento %{resource} je v současné době skryt před veřejností, protože není zveřejněn."
+        parent: "Tento %{resource} je v současné době skryt před veřejností, protože není %{parent} zveřejněn."
+      manager_not_verified: # TODO: Translate
+        title: "Manager Email Not Verified"
+        description: "Events associated with this manager are not public, because the manager's email has not been verified."
+        parent: "This %{resource} is currently hidden from the public, because the manager's email has not been verified."
+        action: "Resend"
+      create_event:
+        title: "Zajímá vás, jak vytvořit veřejný program?"
+        description: "Vyberte místo konání na záložce \"%{action}\"."
+        action: "Jdi na to"
+      create_region_manager:
+        title: "Zajímá vás, jak vytvořit událost?"
+        description: "Klikněnte na záložku \"%{action}\", a zmáčkněnte \"Add Event\""
+        action: "Přidat událost"
+      create_city_manager:
+        title: "Zajímá vás, jak vytvořit správce města?"
+        description: "Vyberte stránku města na kartě \"%{action}\"."
+        action: "Začít"
+
+    images:
+      title: "Obrázky tohoto %{resource}"
+      upload: "Nahrajte obrázky"
+
+    activity:
+      title: :cms.menu.activity
+      description: "Toto je protokol všech akcí provedených tímto správcem."
+      changed_by: "provedeno %{name}"
+      changed_to: "změněno na"
+
+    dashboard:
+      role:
+        intro: "Jste %{role}"
+        learn_more: "Dozvědět se víc"
+        worldwide:
+          title: "Globální správce"
+          description: "Může spravovat veškerý obsah atlasu a správce."
+          instruction: "Máte přístup ke všem aspektům atlas CMS (Content Management System). Vaším úkolem je vytvářet nové správce zemí a pomáhat jim naučit se systém používat."
+        country:
+          title: "Správce v dané zemi"
+          description: "Může vytvářet regiony, místa, události a přidělovat správce v %{region}"
+          instruction: "Je vaší odpovědností vytvořit regiony ve vaší zemi a přiřadit k nim správce, kteří budou organizovat události. Můžete také vytvářet místa a události ve vaší zemi."
+        local:
+          title: "Místní správce"
+          description: "Může vytvářet místa konání a události uvnitř %{region}"
+          instruction: "Je vaší odpovědností vytvářet události ve vaší oblasti. Nejprve budete muset vytvořit místo konání, než budete moci vytvořit událost na tomto místě."
+        event:
+          title: "Správce událostí"
+          description: "Může aktualizovat podrobnosti událostí, které jsou jim přiřazeny."
+          instruction: "Je vaší odpovědností udržovat vaše kurzy aktuální. Každých pár měsíců vám budou zaslány e-maily s žádostí o potvrzení, že jsou vaše události aktuální. Pokud se změní adresa vašeho kurzu, budete muset požádat místního správce, aby ji aktualizoval."
+        client:
+          title: "Správce aplikace"
+          description: "Může upravit konfiguraci pro vaši externí aplikaci"
+          instruction: "Máte přístup ke konfiguraci vaší externí aplikace."
+        none:
+          title: "Správce bez oprávnění"
+          description: "Tomuto uživateli nejsou přiřazeny žádné události ani oblasti. Nemají přístup ke správě atlasu."
+          instruction: "Nemáte přístup k žádné části webu. Pokud se domníváte, že se jedná o omyl, kontaktujte prosím správce pro vaši oblast."
+      resources:
+        title: "Moje povinnosti"
+        subtitle: "Regiony nebo události, kde jste přímým správcem."
+        description: "Toto jsou události nebo regiony, za které nesete přímou odpovědnost."
+      alerts:
+        title: "Končící události"
+        subtitle: "Tyto události je třeba zkontrolovat, aby bylo zajištěno, že jsou stále přesné a aktuální."
+        all_good: "Všechny akce jsou aktuální."
+        empty: "Momentálně žádná upozornění, dobrá práce a jen tak dál!"
+        should_expire_at: "Vyprší za %{time}"
+        expired_at: "Platnost vypršela před %{time}"
+        review:
+          title: "Události, které brzy vyprší"
+          description: "Několik publikovaných událostí nebylo během několika měsíců aktualizováno. Zkontrolujte, zda jsou podrobnosti události stále správné, a událost uložte, abychom věděli, že je stále platná a aktuální. V opačném případě bude z mapy odstraněna."
+          view_all:
+            one: "Zobrazit %{count} končící událost"
+            other: "Zobrazit všechny %{count} končící události"
+        expired:
+          title: "Prošlé události"
+          description: "Několik publikovaných událostí je na mapě skryto, protože nebyly v poslední době ověřeny. Zkontrolujte a znovu uložte tyto události, abyste je znovu aktivovali."
+          other:
+            one: "V systému je %{count} starší událost, jejíž platnost vypršela."
+            other: "V systému je %{count} starších událostí, jejichž platnost vypršela."
+        archived:
+          title: "Archivované události"
+          description:
+            one: "%{count} událost již dávno vypršela a byla archivována. Nezobrazí se na mapě, dokud nebude zkontrolována a aktualizována."
+            other: "%{count} události již dávno vypršely a byly archivovány. Nezobrazí se na mapě, dokud nebudou zkontrolovány a aktualizovány."
+          view_all:
+            one: "Zobrazit %{count} archivovanou událost"
+            other: "Zobrazit %{count} archivované události"
+
+      help:
+        title: "Jak mohu používat tento web?"
+        description: "Právě si prohlížíte systém správy obsahu (CMS) pro Sahadža atlas. Natočili jsme video tutoriál, který vám pomůže začít. Pokud potřebujete pomoc, napište nám (contact@sydevelopers.com)."
+        action: "Podívejte se na výukové video"
+
+    help:
+      learn_more: "Dozvědět se víc"
+      guides:
+        country_manager:
+          title: "Jak spravovat vaši zemi"
+          video_id: 570202890
+        local_manager:
+          title: "Jak spravovat váš region"
+          video_id: 570202890
+        event_manager:
+          title: "Jak spravovat vaše události"
+          video_id: 570207541
+        general:
+          title: "Co je Sahadža Atlas?"
+          video_id: 570209591
+        creating_events:
+          title: "Jak vytvořit událost?"
+          video_id: 573299436
+      categories:
+        title: "K čemu jsou kategorie událostí?"
+        description:
+          introduction: "Kategorie pomáhají systému pochopit, jaký druh události jste přidali. Tyto informace můžeme použít pro různé účely."
+        benefits:
+          marketing:
+            icon: ad # Do not translate
+            title: "Marketing"
+            description: "Navazující kurzy můžeme zájemcům doporučit na základě kategorie události. Pokud se někdo přihlásí na koncert, tak po koncertě můžeme navrhnout úvodní hodinu. Když byli na mnoha úvodních lekcích, mohli bychom jim navrhnout, aby se připojili ke kurzu, aby šli hlouběji. Pokud se koná velký hudební koncert, můžeme to na mapě upravit jinak, abychom přitáhli více pozornosti."
+          labeling:
+            icon: info circle # Do not translate
+            title: "Označení události"
+            description: "Zájemcům můžeme poskytnout další informace o akci. Například: Zpráva doporučující zájemcům, aby se zaregistrovali na úvodní hodinu, než se zúčastní kurzu pro pokročilejší."
+          analytics:
+            icon: chart area # Do not translate
+            title: "Analýza"
+            description: "Můžeme analyzovat, na jaké akce se zájemci registrují, abychom zlepšili způsob, jakým tyto události prezentujeme."
+        types:
+          title: "Dostupné kategorie"
+          dropin: # TODO: Translate
+            title: :activerecord.attributes.event.categories.dropin
+            description: "An introductory class for seekers just starting with Sahaja Yoga."
+          single: # TODO: Translate
+            title: :activerecord.attributes.event.categories.single
+            description: "A class for seekers to go deeper in Sahaja Yoga, once they've already attended an intro class."
+          course:
+            title: :activerecord.attributes.event.categories.course
+            description: "Obvykle týdenní kurz, který probíhá po omezenou dobu. Převedení hledače od začátečníka ke středně pokročilému v průběhu stanoveného počtu týdnů."
+          festival: # TODO: Translate
+            title: :activerecord.attributes.event.categories.festival
+            description: "When Sahaja Yoga is participating in an existing public event. Such as having a stall at a festival or farmer's market."
+          concert:
+            title: :activerecord.attributes.event.categories.concert
+            description: "Velká jednorázová kulturní akce, obvykle zahrnující hudbu, možná tanec a realizaci."
+      expiration:
+        title: "Proč se moje událost nezobrazuje na mapě?"
+        alt_title: "Jak funguje vypršení platnosti události?"
+        description:
+          problem: "Nechceme, aby zájemci o meditaci viděli kurzy, které již neprobíhají. Mnoho webových sahadž stránek má zastaralé informace o programu, ale i když jsou podrobnosti aktualizovány, rychle se opět stanou zastaralými."
+          solution: "Abychom to vyřešili, vytvořili jsme automatický systém, který pošle e-mail jogínům, kteří provozují každý program, každých pár měsíců, aby se zeptali, zda jsou informace stále správné. Pokud nebudou reagovat, bude program před veřejností skryt, dokud nebude zaškrtnut."
+          review: "Jakmile bude událost klasifikována jako \"Potřebuje kontrolu\", bude správci programu zaslán e-mail s žádostí o potvrzení, že podrobnosti o události jsou stále správné. Pokud neodpoví do 1 týdne, bude správci města zaslán e-mail s žádostí, aby místo toho zkontroloval podrobnosti."
+          expiration: "Pokud %{duration} projde, aniž by byla událost ověřena, bude skryta na mapě, dokud ji někdo nezkontroluje a neaktualizuje."
+        steps:
+          verified:
+            icon: green check circle # Do not translate
+            active_label: "Aktuální"
+            inactive_label: "Naposledy aktualizováno"
+            title: "Aktuální"
+            description: "Když je událost vytvořena nebo aktualizována"
+          should_need_review:
+            icon: orange question circle # Do not translate
+            active_label: "Potřebuje revizi"
+            inactive_label: "Bude potřebovat revizi"
+            title: "Potřebuje revizi"
+            description: "Pokud %{duration} proběhne bez aktualizace události"
+          should_expire:
+            icon: red times circle # Do not translate
+            active_label: "Platnost vypršela"
+            inactive_label: "Platnost vyprší"
+            label: "Platnost vyprší" # This should be present tense as in the phrase "The event expires on March 3"
+            title: "Platnost vypršela"
+            description: "Pokud událost nebyla aktualizována po %{duration}"
+      registration:
+        title: "Proč by se hledající měli registrovat na Saha Atlasu?"
+        description:
+          introduction: "I když podporujeme registraci zájemců o meditaci na externích webových stránkách (Meetup, Eventbrite, Facebook atd.), existuje mnoho výhod, když se zájemci o meditaci zaregistrují přímo na Sahadža Atlasu."
+        benefits:
+          accessibility:
+            icon: universal access # Do not translate
+            title: "Přístupnost"
+            description: "Mnoho lidí nemá Facebook nebo Meetup účty. Popularita Facebooku prudce klesla u mladších generací a Meetup je méně populární u starších. Registrace přímo na Sahadža Atlas je snazší a nevyžaduje účet, takže je pro žadatele pravděpodobnější, že se zaregistrují."
+          reminders:
+            icon: bell # Do not translate
+            title: "Automatické upozorňování"
+            description: "Hledači, kteří se zaregistrují na Sahaj Atlas, obdrží potvrzovací e-mail a e-mail s automatickým připomenutím 1 den před svou první lekcí. Jogín(ni), který provozuje veřejný program, také každý týden obdrží e-mailem seznam nových registrací."
+          marketing:
+            icon: envelope # Do not translate
+            title: "Budoucí Marketing"
+            description: "Když se zájemci o meditaci zaregistrují na Sahadža Atlasu, můžeme uložit jejich e-mailovou adresu (bez omezení Meetup, Eventbrite nebo Facebook). To znamená, že můžeme tyto e-mailové adresy použít k zasílání navazujících materiálů nebo k doporučení speciálních Sahadž akcí v jejich oblasti (např. koncerty nebo programy pro mírně pokročilé). "
+      contact:
+        title: "Mám další otázky nebo návrhy"
+        description: "Pokud potřebujete další pomoc, nebo chcete-li pomoci s vývojem Sahadža atlasu, napište na níže uvedený e-mail. Napište prosím svou zprávu v angličtině."
+
+    country_codes:
+      gb: UK
+      us: USA
+
+  passwordless:
+    sessions:
+      create:
+        try_again: "Zkuste jinou emailovou adresu"
+        back: "Zpět"
+      new:
+        back: "Zpět"

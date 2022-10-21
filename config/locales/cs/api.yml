@@ -1,0 +1,6 @@
+cs:
+  api:
+    distance: "%{distance} km daleko"
+    event: # TODO: Translate
+      label: "%{category} at %{venue}"
+      online_label: "%{category} from %{area}"

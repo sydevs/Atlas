@@ -1,0 +1,9 @@
+cs:
+  simple_form:
+    "yes": "Ano"
+    "no": "Ne"
+    required:
+      text: "vyžadováno"
+      mark: '*'
+    error_notification:
+      default_message: "Zkontrolujte, prosím, níže uvedené problémy:"

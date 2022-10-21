@@ -1,0 +1,106 @@
+cs:
+  map:
+    meditation_atlas: "Meditace Atlas"
+
+    search:
+      prompt: "Search for location" # TODO: Translate
+      all_recurrences: "Všechny časy"
+      all_languages: "Všechny jazyky"
+      filter:
+        prefix: "Zobrazují se výsledky v"
+        clear: "Vymazat"
+
+    navigation: # TODO: Translate
+      desktop:
+        offline: "Osobně"
+        online: "Online"
+      mobile:
+        offline: "Show list"
+        online: "Online classes"
+        back: "Back to map"
+
+    list:
+      search: "Vyhledat oblast"
+      more_info: "Více informací"
+      register: "Registrovat se"
+      fallback:
+        nearby: "V této oblasti neprobíhají žádné kurzy, nejbližší bezplatný kurz meditace je v"
+        far: "Nejbližší bezplatný meditační kurz je v"
+        online: "There are no classes in this area, consider an" # TODO: Translate
+        online_event: "Online Class" # TODO: Translate
+
+    area:
+      header: "Events in %{area}" # TODO: Translate
+
+    venue:
+      header: "Events at %{venue}" # TODO: Translate
+
+    event:
+      register: "Registrovat"
+      language: "Tento kurz je v"
+      directions: "Obdržet pokyny"
+      online: "Online kurz"
+      online_from: "Vysíláno z"
+      tel: "tel" # TODO: Translate
+      distance: "%{distance} km away" # TODO: Translate
+      upcoming: "Starting soon" # TODO: Translate
+
+    registration:
+      header: "Zaregistrujte se nyní"
+      closed: "Registration Closed" # TODO: Translate
+      form:
+        timing: "Chtěl/a bych začít od:"
+        email: "Email"
+        name: "Jméno"
+        message: "Otázky / Komentáře"
+        submit: "Potvrdit"
+      notice:
+        text: "Odesláním potvrzujete svůj souhlas s našímy %{link}."
+        link: "Zásady ochrany osobních údajů"
+      feedback:
+        duplicate: "Již jste zaregistrováni. Brzy se uvidíme."
+        success: "Podařilo se! Brzy obdržíte potvrzovací e-mail."
+        error: "Zjištěna chyba! Prosím, zkuste to znovu později."
+      confirmation:
+        title: "Děkujeme za Vaší registraci"
+        subtitle: "brzy obdržíte e-mail"
+        dismiss: "Registrovat někoho dalšího"
+        invite: "Invite a friend along" # TODO: Translate
+      button: # TODO: Translate
+        external: "Register"
+        facebook: "Register on Facebook"
+        eventbrite: "Register on Eventbrite"
+        meetup: "Register on Meetup"
+
+    sharing:
+      header: "Pozvěte kamaráda"
+      share: "Sdílet"
+      copied: "Zkopírováno!"
+
+    weekdays:
+      0: "Neděle"
+      1: "Pondělí"
+      2: "Úterý"
+      3: "Středa"
+      4: "Čtvrtek"
+      5: "Pátek"
+      6: "Sobota"
+
+    recurrence:
+      day: "Denně"
+      monday: "Pondělí"
+      tuesday: "Úterý"
+      wednesday: "Středa"
+      thursday: "Čtvrtek"
+      friday: "Pátek"
+      saturday: "Sobota"
+      sunday: "Neděle"
+
+    timing_labels:
+      course_fallback: "Jedná se o týdenní kurz"
+      course: "%{weeks}týdenní kurz"
+      ongoing: "Tato třída probíhá"
+
+    language_codes:
+      uk: UA #Ukrainian
+
