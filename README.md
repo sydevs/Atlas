@@ -15,8 +15,6 @@
   - [Libraries](#libraries)
   - [Services](#services)
 
-this is a test
-
 # About Sahaj Atlas
 ## Rationale
 Sahaj Atlas is a project to solve the persistent worldwide challenge of out-of-date and poorly presented Sahaja Yoga programs.
