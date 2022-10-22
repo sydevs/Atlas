@@ -10,6 +10,8 @@ module GoogleMapsAPI
       key: ENV.fetch('GOOGLE_PLACES_API_KEY'),
     })
 
+    # A test changne
+
     url = "https://maps.googleapis.com/maps/api/place/autocomplete/json?#{parameters.to_query}"
     response = HTTParty.get(url, { headers: { 'Content-Type': 'application/json' }, log_level: :debug })
     puts "#{url} - #{response.pretty_inspect}"
