@@ -95,7 +95,7 @@ class Area < ApplicationRecord
     end
 
     def set_venues
-      return unless (previous_changes.keys & %w[radius latitude longitude]).present?
+      return unless (previous_changes.keys && %w[radius latitude longitude]).present?
 
       self.venues = Venue.select('id, latitude, longitude').within(flexible_radius, origin: self)
       save!
