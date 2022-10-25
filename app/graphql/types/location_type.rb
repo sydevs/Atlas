@@ -24,7 +24,8 @@ module Types
     field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
 
     def parent_id
-      object.parent.id
+      # TODO: Warn if there is no parent
+      object.parent&.id
     end
 
     def parent_type
