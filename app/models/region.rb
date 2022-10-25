@@ -16,6 +16,7 @@ class Region < ApplicationRecord
 
   has_many :events, through: :areas
   has_many :publicly_visible_events, -> { publicly_visible }, through: :areas, class_name: 'Event'
+  has_many :associated_registrations, through: :events, source: :registrations
 
   has_many :venues, through: :events
   has_many :registrations, through: :events
