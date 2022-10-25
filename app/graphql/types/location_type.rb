@@ -25,6 +25,7 @@ module Types
 
     def parent_id
       # TODO: Warn if there is no parent
+      warn "Couldn't find parent for #{object} ##{object.id}" if object.parent.nil?
       object.parent&.id
     end
 
