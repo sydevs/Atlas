@@ -35,7 +35,7 @@ class Area < ApplicationRecord
   scope :ready_for_summary_email, -> { where("summary_email_sent_at IS NULL OR summary_email_sent_at <= ?", PlaceMailer::SUMMARY_PERIOD.ago) }
 
   # Callbacks
-  after_save :set_venues
+  before_save :set_venues
 
   # Methods
 
@@ -95,10 +95,9 @@ class Area < ApplicationRecord
     end
 
     def set_venues
-      return unless (previous_changes.keys && %w[radius latitude longitude]).present?
+      return unless radius_changed? || latitude_changed? || longitude_changed?
 
       self.venues = Venue.select('id, latitude, longitude').within(flexible_radius, origin: self)
-      save!
     end
 
     def validate_location

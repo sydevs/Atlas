@@ -29,8 +29,7 @@ class Venue < ApplicationRecord
   delegate :all_managers, to: :parent
 
   # Callbacks
-  after_save :set_areas
-  after_save :update_activity_timestamps
+  before_save :set_areas
   before_validation :fetch_coordinates, if: :place_id_changed?
 
   # Methods
@@ -60,7 +59,6 @@ class Venue < ApplicationRecord
       areas = Area.select('id, name, radius, latitude, longitude').within(radius, origin: self)
       areas = areas.to_a.filter { |area| area.contains?(self) }
       self.areas = areas
-      save!
     end
 
     def fetch_coordinates

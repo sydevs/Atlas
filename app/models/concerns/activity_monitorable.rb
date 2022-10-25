@@ -16,14 +16,7 @@ module ActivityMonitorable
     return unless force || changed?
     return if has_attribute?(:last_activity_on) && self[:last_activity_on].present? && self[:last_activity_on] >= Date.today
 
-    if has_attribute?(:last_activity_on)
-      if new_record?
-        self.last_activity_on = Date.today
-      else
-        update_column(:last_activity_on, Date.today)
-      end
-    end
-    
+    self.last_activity_on = Date.today if has_attribute?(:last_activity_on)
     parent.update_activity_timestamps(true) if respond_to?(:parent) && parent.respond_to?(:update_activity_timestamps)
   end
 
