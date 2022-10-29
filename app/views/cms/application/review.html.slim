@@ -23,7 +23,7 @@ h3.ui.small.dividing.grey.header id='expiring'
       - @events_for_review.each do |event|
         tr
           td = link_to event.label, edit_cms_event_url(event), target: :blank
-          td = link_to event.venue.parent.label, url_for([:cms, event.venue.parent]), target: :blank
+          td = link_to event.area.label, url_for([:cms, event.area]), target: :blank
           td = time_ago_in_words(event.updated_at)
 - else
   p = translate('cms.dashboard.alerts.empty')
@@ -43,7 +43,7 @@ h3.ui.small.dividing.grey.header id='expired'
       - @events_expired.each do |event|
         tr
           td = link_to event.label, edit_cms_event_url(event), target: :blank
-          td = link_to event.venue.parent.label, url_for([:cms, event.venue.parent]), target: :blank
+          td = link_to event.area.label, url_for([:cms, event.area]), target: :blank
           td = time_ago_in_words(event.expired_at)
 - else
   p = translate('cms.dashboard.alerts.empty')
@@ -63,7 +63,7 @@ h3.ui.small.dividing.grey.header id='archived'
       - @events_archived.each do |event|
         tr
           td = link_to event.label, edit_cms_event_url(event), target: :blank
-          td = link_to event.venue.parent.label, url_for([:cms, event.venue.parent]), target: :blank
+          td = link_to event.area.label, url_for([:cms, event.area]), target: :blank
           td = time_ago_in_words(event.expired_at)
 - else
   p = translate('cms.dashboard.alerts.empty')
