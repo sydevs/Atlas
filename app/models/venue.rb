@@ -20,6 +20,7 @@ class Venue < ApplicationRecord
 
   # Validations
   validates_presence_of :place_id, :street, :city, :country_code
+  validates_length_of :region_code, maximum: 3
 
   # Scopes
   scope :publicly_visible, -> { has_public_events }
