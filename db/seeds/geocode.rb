@@ -5,7 +5,7 @@ require 'erb'
 include ERB::Util # rubocop:disable Style/MixinUsage
 
 # This script is used to process a CSV of addresses and output the addresses with latlong values attached.
-# The script uses the Nominatim API, so be careful to not run the script too many times, as you will hit bandwidth limits.
+# The script uses the Nominatim API, so be careful to not run the script too many times, as you will hit rate limits.
 
 def valid_coordinate? string
   string.include?('.') && !BigDecimal(string).nil?

@@ -51,6 +51,21 @@ class Venue < ApplicationRecord
     "#{super}-#{last_activity_on.strftime("%d%m%Y")}"
   end
 
+  def fetch_geo_data!
+    data ||= OpenStreetMapsAPI.fetch_data(osm_id)
+    self.assign_attributes({
+      name: data[:display_name].split(',', 2).first,
+      osm_id: osm_id, 
+      geojson: data[:geojson],
+      bounds: data[:boundingbox],
+      country_code: data[:address][:country_code].upcase,
+      translations: data[:namedetails].to_a.filter_map do |key, value|
+        key = key.to_s.split(':')
+        [key[1] || 'en', value] if key[0] == 'name'
+      end.to_h,
+    })
+  end
+
   private
 
     def set_areas

@@ -25,6 +25,7 @@
     - f.object.venue ||= Venue.new
     = f.simple_fields_for :venue do |ff|
       - new_venue = f.object.venue.new_record?
+      = ff.input :id, as: :hidden unless f.object.venue.new_record?
       .two.fields
         = ff.input :name
         = ff.input :street
@@ -32,6 +33,7 @@
         i.warning.sign.icon
         = translate('cms.hints.edit_warning')
       .three.fields
+        /= ff.input :id, disabled: true unless f.object.venue.new_record?
         = ff.input :place_id
         = ff.input :latitude
         = ff.input :longitude

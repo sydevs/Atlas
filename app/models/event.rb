@@ -23,7 +23,7 @@ class Event < ApplicationRecord
   # belongs_to :location, polymorphic: true
   # alias venue location
 
-  belongs_to :area, optional: true
+  belongs_to :area
   belongs_to :venue, optional: true, inverse_of: :events
 
   has_many :registrations, dependent: :delete_all
@@ -66,7 +66,7 @@ class Event < ApplicationRecord
   alias parent area
 
   # Callbacks
-  before_validation -> { self.description = description.encode(description.encoding, universal_newline: true) }
+  before_validation -> { self.description = description&.encode(description.encoding, universal_newline: true) || "" }
   before_validation :find_venue, unless: :online?
   after_save :verify_manager
 

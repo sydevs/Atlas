@@ -1,0 +1,19 @@
+Country, United Kingdom, GB, R62149
+Region, Scotland, GB, R58446
+Region, England, GB, R58447
+Region, Northern Ireland, GB, R156393
+Area, London, England, ChIJdd4hrwug2EcRmSrV3Vo6llI
+Area, Bristol, England, ChIJYdizgWaDcUgRH9eaSy6y5I4
+Area, Banbury, England, ChIJ5xOOaNPUcEgRquyg7y5e_-A
+Area, Manchester, England, ChIJ2_UmUkxNekgRqmv-BDgUvtk
+Area, Glasgow, Scotland, ChIJ685WIFYViEgRHlHvBbiD5nE
+Area, Aberdeen, Scotland, ChIJSXXXH0wFhEgRcsT0XNoFu-g
+Area, Belfast, Northern Ireland, ChIJO4rQ1_3_YEgRMcXH7ywWVy4
+Venue, 646 Kings Road, London, WC14 3DU, ChIJ73iS0YAPdkgRsAWhm0h61QI
+Venue, 14 Park Rd, London, N8 8TD, ChIJU-4b2MYbdkgRLyn43uCSjbg
+Venue, 44 Chelsham Rd, London, SW4 6NP, ChIJPWP3NVcEdkgRDUCOGp-Zwas
+Venue, Colston St, Bristol, BS1 5AP, ChIJMWJZgdeNcUgR7uQFDnVd0X4
+Venue, 55 Mosley St, Manchester, M2 3HQ, ChIJmYfZXMCxe0gRQkrb6S4yvY0
+Venue, 25 Cochrane St, Glasgow, G1 1HL, ChIJAztw_KBGiEgR3bxWvGfU6c4
+Venue, 40 Anderston Quay, Glasgow, G3 8DA, ChIJz1aH_INGiEgRPCh2ZSV-vc8
+Venue, 43 Belgrave Terrace, Aberdeen, AB25 2NT, ChIJ9QFYEd8RhEgRpwxLUj4WhG4
