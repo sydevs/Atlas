@@ -35,7 +35,7 @@ function EventInfo() {
             m('span.sya-event__phone__number', {
               'data-prefix': Util.translate('event.tel') + ': ',
             }, event.phoneNumber),
-            m('span.event__phone__name', event.phoneName)
+            m('span.sya-event__phone__name', event.phoneName)
           ) : null
         ),
         m('.sya-event__actions',
