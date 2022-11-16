@@ -29,6 +29,7 @@ function Registration() {
             }) :
             (event.registrationMode != 'native' ? m('.sya-registration__external',
               m('a.sya-registration__external__action', {
+                href: event.registrationUrl,
                 target: '_blank',
               }, Util.translate(`registration.button.${event.registrationMode}`))
             ) : m(RegistrationForm, {
