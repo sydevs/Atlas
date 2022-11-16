@@ -6,7 +6,7 @@ class DataCache {
 
   #cache
   #atlas
-  #debug = true
+  #debug = false
   #models = [AtlasCountry, AtlasRegion, AtlasArea, AtlasVenue, AtlasEvent]
 
   constructor(endpoint, locale) {

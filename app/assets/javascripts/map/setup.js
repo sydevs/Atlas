@@ -29,15 +29,16 @@ class SahajAtlas {
       }
     }
 
-    if (this.#config.routing_type == 'path') {
-      m.route.prefix = '/'
+    let basePath = this.#config.path || window.location.pathname.split('map')[0] + 'map'
+
+    if (this.#config.routing_type == 'path' || this.#config.routing_type === undefined) {
+      m.route.prefix = basePath
     } else {
       m.route.prefix = '?'
       window.history.replaceState({}, document.title, window.location.pathname)
     }
 
-    let basePath = this.#config.path || window.location.pathname.split('map')[0] + 'map'
-    m.route(this.#container, basePath, {
+    m.route(this.#container, '/', {
       '/': layout(MapView, { map: 'fullscreen', panel: 'overflow' }),
   
       '/country/:id': layout(CountryView, { model: AtlasCountry, map: 'halfscreen' }),
@@ -55,6 +56,7 @@ class SahajAtlas {
     })
 
     let currentPath = m.route.get().split('#')[0]
+    console.log('PATH', basePath, '-', currentPath)
 
     if (this.config.default_view == 'list' && (currentPath == '' || currentPath == '/')) {
       m.route.set('/:model/:id', {
