@@ -8,10 +8,10 @@ de:
       all_languages: "Alle Sprachen"
       filter:
         prefix: "Zeige Ergebnisse bei"
-        clear: "Clear"
+        clear: "Löschen"
 
     navigation:
-      desktop: # TODO: Translate
+      desktop:
         offline: "In Person"
         online: "Online"
       mobile:
@@ -32,8 +32,8 @@ de:
     area: # TODO: Translate
       header: "Events in %{area}"
 
-    venue: # TODO: Translate
-      header: "Events at %{venue}"
+    venue:
+      header: "Veranstaltungen in  %{venue}"
 
     event:
       register: "Anmelden"
@@ -42,8 +42,8 @@ de:
       online: "Online-Kurse"
       online_from: "Gastgeber aus %{city}"
       tel: "Tel"
-      distance: "%{distance} km away" # TODO: Translate
-      upcoming: "Starting soon" # TODO: Translate
+      distance: "%{distance} km entfernt"
+      upcoming: "Beginnt bald"
 
     registration:
       header: "Jetzt Anmelden"
