@@ -46,7 +46,8 @@ class AtlasAPI {
             label
             latitude
             longitude
-            eventIds
+            onlineEventIds
+            offlineEventIds
             parentId
             parentType
             directionsUrl
@@ -112,11 +113,13 @@ class AtlasAPI {
             }
             properties {
               id
+              type
               label
               latitude
               longitude
               radius
-              eventIds
+              onlineEventIds
+              offlineEventIds
               parentId
               parentType
             }

@@ -10,12 +10,14 @@ module Types
     field :longitude, Float, null: false
     field :radius, Float, null: true
     field :time_zone, String, null: false
-    
+
     field :address, String, null: false
     field :directions_url, String, null: true
 
     field :events, [Types::EventType], null: false
     field :event_ids, [ID], null: false
+    field :online_event_ids, [ID], null: false
+    field :offline_event_ids, [ID], null: false
 
     field :parent_id, ID, null: false
     field :parent_type, String, null: false

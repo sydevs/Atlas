@@ -56,7 +56,6 @@ class SahajAtlas {
     })
 
     let currentPath = m.route.get().split('#')[0]
-    console.log('PATH', basePath, '-', currentPath)
 
     if (this.config.default_view == 'list' && (currentPath == '' || currentPath == '/')) {
       m.route.set('/:model/:id', {

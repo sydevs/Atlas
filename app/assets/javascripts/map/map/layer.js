@@ -144,7 +144,7 @@ class AbstractMapLayer {
       let features = this._mapbox.queryRenderedFeatures(event.point, { layers: [this._layers.points] })
       if (features.length < 1) return
 
-      let location = this.#parseLocation(features[0])
+      let location = AtlasApp.data.parse(features[0].properties)
       this._gotoLocation(location)
     })
 
@@ -192,12 +192,13 @@ class AbstractMapLayer {
   }
 
   #getRenderedEventIds(feature) {
+    console.log('get event ids', this.id)
     if (feature.layer.id == this._layers.clusters) {
       return this.#getClusterFeatures(feature).then(features => {
-        return features.map(f => this.#parseLocation(f).eventIds)
+        return features.map(f => this.AtlasApp.data.parse(f.properties).getEventIds(this.id))
       })
     } else {
-      return Promise.resolve(this.#parseLocation(feature).eventIds)
+      return Promise.resolve(this.AtlasApp.data.parse(featur.properties).getEventIds(this.id))
     }
   }
 
@@ -232,15 +233,6 @@ class AbstractMapLayer {
         features: [],
       })
     }
-  }
-
-  #parseLocation(feature) {
-    const location = feature.properties
-    if (typeof location.eventIds === 'string') {
-      location.eventIds = JSON.parse(location.eventIds)
-    }
-
-    return location
   }
 
 }

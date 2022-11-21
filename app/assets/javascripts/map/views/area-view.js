@@ -10,11 +10,18 @@ function AreaView() {
       const id = m.route.param('id')
       AtlasApp.data.getRecord(AtlasArea, id).then(response => {
         area = response
-        const eventIds = (vnode.attrs.layer == AtlasEvent.LAYER.online ? area.onlineEventIds : area.offlineEventIds)
+        const eventIds = area.getEventIds(vnode.attrs.layer)
         AtlasApp.data.getEvents(eventIds).then(events => {
           area.events = events
           m.redraw()
         })
+      })
+    },
+    onupdate: function(vnode) {
+      const eventIds = area.getEventIds(vnode.attrs.layer)
+      AtlasApp.data.getEvents(eventIds).then(events => {
+        area.events = events
+        m.redraw()
       })
     },
     view: function(vnode) {
@@ -24,7 +31,7 @@ function AreaView() {
         m(NavigationButton, {
           float: 'left',
           icon: 'left',
-          href: vnode.attrs.layer == AtlasEvent.LAYER.online ? '/:layer' : '/:layer/region/:id',
+          href: (AtlasApp.config.default_view == 'list' ? '/:layer/region/:id' : '/:layer'),
           params: { layer: vnode.attrs.layer, id: area.region.id }
         }),
         m('.sya-panel__header', Util.translate('area.header', { area: area.label })),

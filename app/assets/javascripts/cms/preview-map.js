@@ -179,7 +179,6 @@ class PreviewMap {
     if (type == 'geojson') {
       this.#border = L.geoJSON(data, { style: this.#borderStyle }).addTo(this.#leaflet)
     } else if (type == 'circle') {
-      console.log('circle', data)
       this.#border = L.circle([data[0], data[1]], data[2] * 1000, this.#borderStyle).addTo(this.#leaflet)
     }
 
@@ -188,7 +187,6 @@ class PreviewMap {
 
       if (this.#layer instanceof L.Marker) {
         let latlng = this.#layer.getLatLng()
-        console.log(this.#layer, latlng)
         bounds.extend(new L.latLngBounds(latlng, latlng).pad(1))
       } else {
         bounds.extend(this.#layer.getBounds())
