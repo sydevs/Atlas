@@ -197,7 +197,7 @@ class AbstractMapLayer {
         return features.map(f => AtlasApp.data.parse(f.properties).getEventIds(this.id))
       })
     } else {
-      return Promise.resolve(AtlasApp.data.parse(featur.properties).getEventIds(this.id))
+      return Promise.resolve(AtlasApp.data.parse(feature.properties).getEventIds(this.id))
     }
   }
 
