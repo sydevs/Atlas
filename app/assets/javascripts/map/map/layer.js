@@ -192,13 +192,12 @@ class AbstractMapLayer {
   }
 
   #getRenderedEventIds(feature) {
-    console.log('get event ids', this.id)
     if (feature.layer.id == this._layers.clusters) {
       return this.#getClusterFeatures(feature).then(features => {
-        return features.map(f => this.AtlasApp.data.parse(f.properties).getEventIds(this.id))
+        return features.map(f => AtlasApp.data.parse(f.properties).getEventIds(this.id))
       })
     } else {
-      return Promise.resolve(this.AtlasApp.data.parse(featur.properties).getEventIds(this.id))
+      return Promise.resolve(AtlasApp.data.parse(featur.properties).getEventIds(this.id))
     }
   }
 
