@@ -194,10 +194,14 @@ class AbstractMapLayer {
   #getRenderedEventIds(feature) {
     if (feature.layer.id == this._layers.clusters) {
       return this.#getClusterFeatures(feature).then(features => {
-        return features.map(f => AtlasApp.data.parse(f.properties).getEventIds(this.id))
+        return features.map(f => {
+          const location = AtlasApp.data.parse(f.properties)
+          return location.getEventIds(this.id)
+        })
       })
     } else {
-      return Promise.resolve(AtlasApp.data.parse(feature.properties).getEventIds(this.id))
+      const location = AtlasApp.data.parse(feature.properties)
+      return Promise.resolve(location.getEventIds(this.id))
     }
   }
 
