@@ -43,6 +43,7 @@ uk:
       dashboard: "Панель інструментів для %{user}"
       review: "Усі сповіщення для %{user}"
       worldwide: "Всесвітні дані"
+      clients: "All Client Applications" # TODO: Translate
       faq: "Часті запитання"
       context: "%{resource} для %{parent}"
       # Tertiary menu

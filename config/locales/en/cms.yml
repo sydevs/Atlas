@@ -43,6 +43,8 @@ en:
       dashboard: "Dashboard for %{user}"
       review: "All Alerts for %{user}"
       worldwide: "Worldwide Data"
+      clients: "All Client Applications" # TODO: Translate
+      clients: "All Client Applications"
       faq: "Frequently Asked Questions"
       context: "%{resource} for %{parent}"
       # Tertiary menu

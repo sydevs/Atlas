@@ -35,6 +35,10 @@ h2.ui.header
         .ui.relaxed.divided.list
           - if current_user.administrator?
             .item
+              i.project.diagram.icon
+              .content
+                a.header href=url_for([:cms, :clients]) = translate('cms.menu.clients')
+            .item
               i.globe.icon
               .content
                 a.header href=url_for([:cms, :countries]) = translate('cms.menu.worldwide')

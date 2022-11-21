@@ -43,6 +43,7 @@ cs:
       dashboard: "Nástěnka pro %{user}"
       review: "Všechna upozornění pro %{user}"
       worldwide: "Světová data"
+      clients: "All Client Applications" # TODO: Translate
       faq: "Často pokládané otázky"
       context: "%{resource} pro %{parent}"
       # Tertiary menu

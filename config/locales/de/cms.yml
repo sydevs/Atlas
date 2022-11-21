@@ -43,6 +43,7 @@ de:
       dashboard: "Schaltzentrale für %{user}"
       review: "Alle Benachrichtigungen für %{user}"
       worldwide: "Weltweite Daten"
+      clients: "All Client Applications" # TODO: Translate
       faq: "Häufig gestellte Fragen"
       context: "%{resource} für %{parent}"
       # Tertiary menu

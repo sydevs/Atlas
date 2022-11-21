@@ -43,6 +43,7 @@ ru:
       dashboard: "Панель инструментов для %{user}"
       review: "Все оповещения для %{user}"
       worldwide: "Данные по всему миру"
+      clients: "All Client Applications" # TODO: Translate
       faq: "Часто задаваемые вопросы"
       context: "%{resource} для %{parent}"
       # Tertiary menu
