@@ -73,7 +73,7 @@ cs:
       area: # TODO: Translate
         invalid_location: "must have it's center within the borders of %{region} and %{country}"
       venue:
-        out_of_bounds: "Místo konání nemůže být mimo okruh %{local_area}"
+        invalid_location: "konání nemůže být mimo okruh %{local_area}"
       event:
         verified: "Thank you for confirming your event's accuracy." # TODO: Translate
         invalid_end_time: "nemůže být před časem zahájení"

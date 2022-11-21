@@ -72,7 +72,7 @@ uk:
       area: # TODO: Translate
         invalid_location: "must have it's center within the borders of %{region} and %{country}"
       venue:
-        out_of_bounds: "Місце проведення не може бути за межами радіусу %{area}"
+        invalid_location: "не може бути за межами радіусу %{area}"
       event:
         verified: "Thank you for confirming your event's accuracy." # TODO: Translate
         invalid_end_time: "не може бути раніше часу початку"

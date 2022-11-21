@@ -1,6 +1,13 @@
 
 /.hint = translate('cms.hints.event.venue.field')
 
+.field
+  .hint = translate('cms.hints.event.venue.search')
+  .ui.fluid.flipped.search id='js-venue-search'
+    .ui.icon.input
+      input.prompt type='text' placeholder=translate('cms.actions.simple.searching') autocomplete='off'
+      i.search.icon
+
 .ui.fluid.horizontal.card id='js-venue-card' style=('display: none' unless venue.present?)
   .content
     - if venue.present?
@@ -10,12 +17,9 @@
       .header
       .meta
 
-.field
-  .hint = translate('cms.hints.event.venue.search')
-  .ui.fluid.flipped.search id='js-venue-search'
-    .ui.icon.input
-      input.prompt type='text' placeholder=translate('cms.actions.simple.searching') autocomplete='off'
-      i.search.icon
+- unless @record.new_record?
+  #map data-latitude=@record.venue.latitude data-longitude=@record.venue.longitude data-circle=[@record.area.latitude, @record.area.longitude, @record.area.radius] data-error=(@record.errors.include?(:venue) ? 'true' : nil)
+  = f.error :venue
 
 .ui.accordion.required.field id='js-venue-fields'
   .title class=('active' if venue&.new_record? || venue&.errors&.present?)

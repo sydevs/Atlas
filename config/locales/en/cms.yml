@@ -73,7 +73,7 @@ en:
       area:
         invalid_location: "must have it's center within the borders of %{region} and %{country}"
       venue:
-        out_of_bounds: "Venue cannot be outside the radius of %{area}"
+        invalid_location: "cannot be outside the radius of %{area}"
       event:
         verified: "Thank you for confirming your event's accuracy."
         invalid_end_time: "cannot be before the start time"

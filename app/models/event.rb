@@ -46,6 +46,7 @@ class Event < ApplicationRecord
   validate :validate_end_time
   validate :validate_end_date
   validate :validate_language_code
+  validate :validate_location
   validate :parse_phone_number
 
   # Scopes
@@ -189,6 +190,13 @@ class Event < ApplicationRecord
   end
 
   private
+
+    def validate_location
+      return unless venue.present? && venue.latitude.present? && venue.longitude.present?
+      return if area.contains?(venue)
+
+      self.errors.add(:venue, I18n.translate('cms.messages.venue.invalid_location', area: area.name))
+    end
 
     def validate_end_time
       return if end_time.nil? || duration.positive?

@@ -72,7 +72,7 @@ ru:
       area: # TODO: Translate
         invalid_location: "must have it's center within the borders of %{region} and %{country}"
       venue:
-        out_of_bounds: "Место проведения не может находиться за пределами радиуса %{area}"
+        invalid_location: "не может находиться за пределами радиуса %{area}"
       event:
         verified: "Thank you for confirming your event's accuracy." # TODO: Translate
         invalid_end_time: "не может быть раньше времени начала"

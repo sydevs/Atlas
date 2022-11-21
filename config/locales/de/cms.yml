@@ -75,7 +75,7 @@ de:
       area: # TODO: Translate
         invalid_location: "must have it's center within the borders of %{region} and %{country}"
       venue:
-        out_of_bounds: "Die veranstaltung darf nicht weiter als %{area} entfernt sein."
+        invalid_location: "darf nicht weiter als %{area} entfernt sein."
       event:
         verified: "Vielen Dank für die Bestätigung der gültigkeit der Veranstaltung."
         invalid_end_time: "darf nicht vor dem beginn zeitpunkt sein"

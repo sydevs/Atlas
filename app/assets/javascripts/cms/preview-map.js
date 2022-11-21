@@ -16,6 +16,14 @@ class PreviewMap {
     fillOpacity: 0.3,
   }
 
+  #borderStyle = {
+    color: 'black',
+    opacity: 0.8,
+    weight: 2,
+    dashArray: '8, 8',
+    fillOpacity: 0,
+  }
+
   constructor(container) {
     console.log('Loading PreviewMap') // eslint-disable-line no-console
     this.#container = container
@@ -89,6 +97,8 @@ class PreviewMap {
 
     if (data.border && !data.editable) {
       this.setBorder(data.border)
+    } else if (data.circle) {
+      this.setBorder(data.circle, 'circle')
     }
   }
 
@@ -161,23 +171,29 @@ class PreviewMap {
     }
   }
  
-  setBorder(geojson) {
+  setBorder(data, type = 'geojson') {
     if (this.#border) this.#border.removeFrom(this.#leaflet)
 
-    geojson = JSON.parse(geojson)
-    this.#border = L.geoJSON(geojson, {
-      style: {
-        color: 'black',
-        opacity: 0.8,
-        weight: 2,
-        dashArray: '8, 8',
-        fillOpacity: 0,
-      }
-    }).addTo(this.#leaflet)
+    data = JSON.parse(data)
+
+    if (type == 'geojson') {
+      this.#border = L.geoJSON(data, { style: this.#borderStyle }).addTo(this.#leaflet)
+    } else if (type == 'circle') {
+      console.log('circle', data)
+      this.#border = L.circle([data[0], data[1]], data[2] * 1000, this.#borderStyle).addTo(this.#leaflet)
+    }
 
     if (this.#data.error) {
       let bounds = this.#border.getBounds()
-      bounds.extend(this.#layer.getBounds())
+
+      if (this.#layer instanceof L.Marker) {
+        let latlng = this.#layer.getLatLng()
+        console.log(this.#layer, latlng)
+        bounds.extend(new L.latLngBounds(latlng, latlng).pad(1))
+      } else {
+        bounds.extend(this.#layer.getBounds())
+      }
+
       this.#leaflet.fitBounds(bounds, { padding: [20, 20] })
     }
   }
