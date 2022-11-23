@@ -57,7 +57,7 @@ class EventTiming {
 
     if (event.category == 'course') {
       if (firstDateTime && lastDateTime) {
-        const weeksBetween = Math.round((firstDateTime - lastDateTime) / (7 * 24 * 60 * 60 * 1000))
+        const weeksBetween = Math.round((firstDateTime - lastDateTime) / (7 * 24 * 60 * 60 * 1000)) + 1
         this.description = Util.translate('timing_labels.course', {
           weeks: Math.abs(weeksBetween)
         })
