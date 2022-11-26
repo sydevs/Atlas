@@ -25,7 +25,7 @@ function AreaView() {
       })
     },
     view: function(vnode) {
-      if (!area) return null //m('div', "Area not found")
+      if (!area) return m(Loader)
 
       return [
         m(NavigationButton, {

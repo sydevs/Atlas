@@ -15,7 +15,7 @@ function CountryView() {
       })
     },
     view: function(vnode) {
-      if (!country) return null //m('div', "Place not found")
+      if (!country) return m(Loader)
 
       return [
         m(NavigationButton, {

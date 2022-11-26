@@ -14,7 +14,7 @@ function RegionView() {
       })
     },
     view: function(vnode) {
-      if (!region) return null //m('div', "Region not found")
+      if (!region) return m(Loader)
 
       return [
         m(NavigationButton, {

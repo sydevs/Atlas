@@ -58,7 +58,7 @@ class AtlasAPI {
           label
           latitude
           longitude
-          eventIds
+          offlineEventIds
           parentId
         }`,
         area: `on Area {

@@ -1,6 +1,6 @@
 /* exported EventView */
 
-/* global m, EventInfo, ImageCarousel, Registration, NavigationButton, App */
+/* global m, Loader, EventInfo, ImageCarousel, Registration, NavigationButton, App */
 
 function EventView() {
   let event = null
@@ -14,7 +14,7 @@ function EventView() {
       })
     },
     view: function() {
-      if (!event) return null //m('div', "Event not found")
+      if (!event) return m(Loader)
 
       let href = '/:layer/:model/:id'
       let params = { layer: event.layer }
