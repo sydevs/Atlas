@@ -221,7 +221,7 @@ class MapFrame extends EventTarget {
 
     this.#updatePadding()
     this.#mapbox.fitBounds(bounds, {
-      animate: options.transition && !Util.isDevice('mobile'),
+      animate: (options.transition || true) && !Util.isDevice('mobile'),
     })
   }
 
