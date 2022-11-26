@@ -156,13 +156,13 @@ class MapFrame extends EventTarget {
           this.#hasSelection = false
         }
 
-        window.document.title = Util.translate('atlas')
+        window.document.title = Util.translate('meditation_atlas')
         this.#hasSelection = false
         return
       }
 
       this.#hasSelection = true
-      window.document.title = location.label
+      window.document.title = location.label || Util.translate('meditation_atlas')
 
       if (location.bounds || (location.radius && location.radius != 'null')) {
         this.fitTo(location, Object.assign({
