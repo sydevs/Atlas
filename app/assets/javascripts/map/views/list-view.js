@@ -4,7 +4,7 @@
 
 function ListView() {
   let onlineEventsCount = null
-  let events = null
+  let events = undefined
   let layer = null
 
   function updateEvents() {
@@ -44,10 +44,12 @@ function ListView() {
       let mobile = Util.isDevice('mobile')
       let list = null
 
-      if (events && events.length > 0) {
-        list = m('.sya-list', events.map(function(event) {
+      if (events == undefined) {
+        list = m(Loader)
+      } else if (events && events.length > 0) {
+        list = events.map(function(event) {
           return m(EventCard, { key: event.id, class: 'sya-list__item', event: event })
-        }))
+        })
       } else if (vnode.attrs.layer == AtlasEvent.LAYER.offline) {
         list = m(ListFallback)
       }
@@ -76,7 +78,7 @@ function ListView() {
               }
             })
         }),
-        list,
+        m('.sya-list', list),
       ]
     }
   }

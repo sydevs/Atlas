@@ -12,16 +12,18 @@
     overflow: hidden
 
 .sya-panel
-  overflow-x: hidden
-  overflow-y: auto
+  height: 100%
+  overflow: hidden
   background: white
   flex-shrink: 0
   scroll-behavior: smooth
 
+  display: flex
+  flex-direction: column
+
   @include tablet-or-larger
     position: relative
     width: $panel-width-thin
-    height: 100%
     z-index: $z-panel
     box-shadow: $shadow-light
 

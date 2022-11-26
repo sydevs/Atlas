@@ -27,9 +27,10 @@ function VenueView() {
           params: { layer: AtlasEvent.LAYER.offline, id: venue.parentId }
         }),
         m('.sya-panel__header', Util.translate('venue.header', { venue: venue.label })),
-        m('.sya-list', venue.events.map(function(event) {
-          return m(EventCard, { key: event.id, class: 'sya-list__item', event: event })
-        }))
+          m('.sya-list', venue.events ? venue.events.map(function(event) {
+            return m(EventCard, { key: event.id, class: 'sya-list__item', event: event })
+          }) : m(Loader)
+        )
       ]
     }
   }

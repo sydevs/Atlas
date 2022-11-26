@@ -6,16 +6,16 @@
 
   text-align: center
   line-height: 70px
+  flex-shrink: 0
+
   display: flex
   flex-direction: row
 
   @include mobile
-    position: absolute
-    bottom: 0
-    left: 0
-    right: 0
+    order: 3
     background: white
     box-shadow: $shadow-light
+    z-index: 1
 
   @include tablet-or-larger
     --color: #{$color-blue}
