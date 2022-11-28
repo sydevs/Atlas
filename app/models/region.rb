@@ -26,7 +26,7 @@ class Region < ApplicationRecord
   validate :validate_geojson
 
   # Scopes
-  default_scope { order(name: :desc) }
+  default_scope { order(name: :asc) }
   
   scope :publicly_visible, -> { has_public_events }
   scope :has_public_events, -> { joins(:publicly_visible_events).uniq }
