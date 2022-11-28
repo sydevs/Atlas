@@ -5,6 +5,7 @@ module Types
     # field :path, String, null: false, method: :map_path
     # field :url, String, null: false, method: :map_url
     
+    field :name, String, null: true
     field :label, String, null: true
     field :latitude, Float, null: false
     field :longitude, Float, null: false

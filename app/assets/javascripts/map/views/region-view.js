@@ -45,7 +45,7 @@ function RegionView() {
           return m(SimpleCard, {
             class: 'sya-list__item',
             id: area.id,
-            label: area.label,
+            label: area.name,
             count: count,
             layer: vnode.attrs.layer,
             model: AtlasArea.key,

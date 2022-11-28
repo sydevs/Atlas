@@ -81,7 +81,7 @@ class AtlasAPI {
           offlineEventIds
           areas {
             id
-            label
+            name
             onlineEventIds
             offlineEventIds
           }
@@ -97,7 +97,7 @@ class AtlasAPI {
           offlineEventIds
           regions {
             id
-            label
+            name
             onlineEventIds
             offlineEventIds
           }

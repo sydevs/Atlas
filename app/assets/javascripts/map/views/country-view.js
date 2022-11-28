@@ -45,7 +45,7 @@ function CountryView() {
           return m(SimpleCard, {
             class: 'sya-list__item',
             id: region.id,
-            label: region.label,
+            label: region.name,
             count: count,
             layer: vnode.attrs.layer,
             model: AtlasRegion.key,

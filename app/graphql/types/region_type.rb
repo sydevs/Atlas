@@ -4,6 +4,7 @@ module Types
     field :path, String, null: false, method: :map_path
     field :url, String, null: false, method: :map_url
     
+    field :name, String, null: false
     field :label, String, null: false
     field :bounds, [Float], null: false
 
