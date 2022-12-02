@@ -35,6 +35,7 @@
     top: $control-offset-y
     left: $control-offset-x
     height: auto
+    min-height: auto
     max-height: calc(100% - #{$control-offset-y} * 2)
     width: $panel-width
 
@@ -67,7 +68,9 @@
     border-bottom: 1px solid lightgrey
 
 .sya-panel--padded > *
-  max-width: 400px
-  margin-left: auto
-  margin-right: auto
   animation: fade-in 0.4s
+  
+  @include mobile
+    max-width: 400px
+    margin-left: auto
+    margin-right: auto
