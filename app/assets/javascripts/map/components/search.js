@@ -43,7 +43,7 @@ function Search() {
   }
   
   return {
-    oninit: function() {
+    oncreate: function() {
       if (AtlasApp.config.query) {
         select(AtlasApp.config.query)
       }
