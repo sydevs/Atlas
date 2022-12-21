@@ -7,12 +7,13 @@ function MapView() {
   let offlineEventsCount = null
 
   return {
-    view: function(vnode) {
+    oninit: function() {
       AtlasApp.data.getList(AtlasEvent.LAYER.online).then(events => {
         onlineEventsCount = events.length
         m.redraw()
       })
-
+    },
+    view: function(vnode) {
       if (AtlasApp.map) {
         AtlasApp.map.getRenderedEventIds().then(eventIds => {
           offlineEventsCount = eventIds.length

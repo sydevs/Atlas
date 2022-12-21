@@ -4,6 +4,7 @@
 
 function ListView() {
   let onlineEventsCount = null
+  let eventIds = []
   let events = undefined
   let layer = null
 
@@ -13,8 +14,13 @@ function ListView() {
         events = response
       })
     } else {
-      return AtlasApp.map.getRenderedEventIds().then(eventIds => {
-        return eventIds.length > 0 ? AtlasApp.data.getList(AtlasEvent.LAYER.offline, eventIds) : []
+      return AtlasApp.map.getRenderedEventIds().then(ids => {
+        if (Util.areArraysEqual(eventIds, ids)) {
+          return events
+        } else {
+          eventIds = ids
+          return ids.length > 0 ? AtlasApp.data.getList(AtlasEvent.LAYER.offline, ids) : []
+        }
       }).then(response => {
         events = response
       }).catch(() => {
@@ -31,6 +37,12 @@ function ListView() {
   }
 
   return {
+    oninit: function() {
+      AtlasApp.data.getList(AtlasEvent.LAYER.online).then(events => {
+        onlineEventsCount = events.length
+        m.redraw()
+      })
+    },
     oncreate: function(vnode) {
       layer = m.route.param('layer') || vnode.attrs.layer
       AtlasApp.map.addEventListener('update', () => {
@@ -53,11 +65,6 @@ function ListView() {
       } else if (vnode.attrs.layer == AtlasEvent.LAYER.offline) {
         list = m(ListFallback)
       }
-
-      AtlasApp.data.getList(AtlasEvent.LAYER.online).then(events => {
-        onlineEventsCount = events.length
-        m.redraw()
-      })
 
       return [
         m(Search),
