@@ -46,13 +46,6 @@ class Map::ApplicationController < ActionController::Base
       @config[:center] = coordinates unless @config[:bounds].present?
       @config[:country] = location.country_code if location&.respond_to?(:country_code)
 
-      @config[:query] = {
-        label: params[:q],
-        latitude: params[:latitude],
-        longitude: params[:longitude],
-        type: params[:type],
-      } if params[:q].present? && params[:latitude].present? && params[:longitude].present?
-
       @config.merge!(@client.config).merge!({
         location_type: @client.location_type&.downcase,
         location_id: @client.location_id

@@ -17,6 +17,19 @@ class SahajAtlas {
     this.#config = window.sya.config
     this.data = new DataCache(this.#config.endpoint, this.#config.locale)
     document.addEventListener('resize', () => m.redraw())
+
+    const params = new Proxy(new URLSearchParams(window.location.search), {
+      get: (searchParams, prop) => searchParams.get(prop),
+    })
+
+    if (params.q && params.latitude && params.longitude) {
+      this.#config.query = {
+        label: params.q,
+        latitude: params.latitude,
+        longitude: params.longitude,
+        type: params.type,
+      }
+    }
   }
 
   setup() {
