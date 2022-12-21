@@ -43,6 +43,11 @@ function Search() {
   }
   
   return {
+    oninit: function() {
+      if (AtlasApp.config.query) {
+        select(AtlasApp.config.query)
+      }
+    },
     view: function(vnode) {
       let classes = []
       if (focused && results.length > 0) classes.push('sya-search--active')
