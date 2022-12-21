@@ -25,7 +25,7 @@ class Map::ApplicationController < ActionController::Base
       raise ActionController::RoutingError.new('Not Found') if @client.nil?
 
       headers['X-FRAME-OPTIONS'] = "ALLOW-FROM #{@client.domain}"
-      headers['Access-Control-Allow-Origin'] = @client.domain
+      headers['Access-Control-Allow-Origin'] = "https://#{@client.domain}"
       headers['Access-Control-Allow-Methods'] = 'GET'
       headers['Access-Control-Request-Method'] = '*'
       headers['Access-Control-Allow-Headers'] = 'Origin, X-Requested-With, Content-Type, Accept, Authorization'
