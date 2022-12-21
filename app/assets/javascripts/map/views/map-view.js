@@ -18,7 +18,7 @@ function MapView() {
           offlineEventsCount = eventIds.length
 
           if (offlineEventsCount > 0 && !Util.isDevice('mobile')) {
-            m.route.set(`/${AtlasEvent.LAYER.offline}`)
+            m.route.set(`/${AtlasEvent.LAYER.offline}`, {}, { replace: true })
           }
         }, _error => {
           offlineEventsCount = null
