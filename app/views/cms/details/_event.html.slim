@@ -71,7 +71,7 @@ p = simple_format @record.description
         .description = translate_model_count(Registration, @record.registration_limit)
 
 h3.ui.small.dividing.grey.header = translate('cms.details.management_for_record', resource: translate_model(@model).downcase)
-- if @record.finished?
+- if @record.should_finish?
   .ui.one.steps
     .step
       i.blue.check.circle.icon

@@ -1,7 +1,7 @@
 - status ||= nil
 
 table.data cellpadding=0
-  - if status == :reminder && !event.finished?
+  - if status == :reminder && !event.should_finish?
     tr
       th = translate('mail.event.next_date')
       td
