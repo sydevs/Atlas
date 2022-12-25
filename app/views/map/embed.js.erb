@@ -6,6 +6,8 @@ if (!container) {
   container = document.createElement('div')
   container.id = 'sahajatlas'
   document.currentScript.replaceWith(container)
+} else {
+  console.log('Found Sahaj Atlas target:', container)
 }
 
 const script = document.createElement('script')
