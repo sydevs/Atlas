@@ -12,7 +12,7 @@ class SahajAtlas {
   }
 
   constructor() {
-    this.#container = document.getElementById('sahaj-atlas')
+    this.#container = document.getElementById('sahajatlas')
     this.#container.style = `height: calc(100vh - ${this.#container.offsetTop}px)`
     this.#config = window.sya.config
     this.data = new DataCache(this.#config.endpoint, this.#config.locale)
