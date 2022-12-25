@@ -1,21 +1,21 @@
 
 const params = new URLSearchParams(location.search)
-let container = document.getElementById('sahaj-atlas')
+let container = document.getElementById('sahajatlas')
 
 if (!container) {
   container = document.createElement('div')
-  container.id = 'sahaj-atlas'
+  container.id = 'sahajatlas'
   document.currentScript.replaceWith(container)
 }
 
 const script = document.createElement('script')
-script.setAttribute('id', 'sahaj-atlas-script')
+script.setAttribute('id', 'sahajatlas-script')
 script.setAttribute('src', '<%= javascript_url "map" %>')
 script.setAttribute('type', 'text/javascript')
 document.head.appendChild(script)
 
 const style = document.createElement('link')
-style.setAttribute('id', 'sahaj-atlas-style')
+style.setAttribute('id', 'sahajatlas-style')
 style.setAttribute('href', '<%= stylesheet_url "map" %>')
 style.setAttribute('type', 'text/css')
 style.setAttribute('rel', 'stylesheet')
