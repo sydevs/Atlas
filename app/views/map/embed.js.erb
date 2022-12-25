@@ -1,14 +1,26 @@
 
 const params = new URLSearchParams(location.search)
-let container = document.getElementById('sahajatlas')
+const embed = document.currentScript
 
-if (!container) {
+function createSahajAtlasContainer() {
   container = document.createElement('div')
   container.id = 'sahajatlas'
-  document.currentScript.replaceWith(container)
+  embed.replaceWith(container)
   console.log('Creating Sahaj Atlas target', container)
+}
+
+if (embed.id == 'sahaj-atlas' || embed.id == 'sahajatlas') {
+  createSahajAtlasContainer()
 } else {
-  console.log('Found Sahaj Atlas target:', container)
+  document.addEventListener("DOMContentLoaded", function(event) {
+    let container = document.getElementById('sahajatlas')
+
+    if (!container) {
+      createSahajAtlasContainer()
+    } else {
+      console.log('Found Sahaj Atlas target:', container)
+    }
+  })
 }
 
 const script = document.createElement('script')
