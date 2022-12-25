@@ -11,8 +11,8 @@ class SahajAtlas {
     return this.#config
   }
 
-  constructor() {
-    this.#container = document.getElementById('sahajatlas')
+  constructor(container) {
+    this.#container = container
     this.#container.style = `height: calc(100vh - ${this.#container.offsetTop}px)`
     this.#config = window.sya.config
     this.data = new DataCache(this.#config.endpoint, this.#config.locale)
@@ -80,8 +80,13 @@ class SahajAtlas {
 }
 
 function loadAtlas() {
-  window.AtlasApp = new SahajAtlas()
-  AtlasApp.setup()
+  let container = document.getElementById('sahajatlas')
+  if (container) {
+    window.AtlasApp = new SahajAtlas(container)
+    AtlasApp.setup()
+  } else {
+    console.warn("Could not find #sahajatlas element.")
+  }
 }
 
 if (/complete|interactive|loaded/.test(document.readyState)) {
