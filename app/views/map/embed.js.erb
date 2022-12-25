@@ -1,10 +1,12 @@
 
 const params = new URLSearchParams(location.search)
-const embed = document.currentScript
+let container = document.getElementById('sahaj-atlas')
 
-const container = document.createElement('div')
-container.id = 'sahaj-atlas'
-embed.replaceWith(container)
+if (!container) {
+  container = document.createElement('div')
+  container.id = 'sahaj-atlas'
+  document.currentScript.replaceWith(container)
+}
 
 const script = document.createElement('script')
 script.setAttribute('id', 'sahaj-atlas-script')
