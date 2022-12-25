@@ -6,6 +6,7 @@ if (!container) {
   container = document.createElement('div')
   container.id = 'sahajatlas'
   document.currentScript.replaceWith(container)
+  console.log('Creating Sahaj Atlas target', container)
 } else {
   console.log('Found Sahaj Atlas target:', container)
 }
@@ -22,7 +23,7 @@ style.setAttribute('href', '<%= stylesheet_url "map" %>')
 style.setAttribute('type', 'text/css')
 style.setAttribute('rel', 'stylesheet')
 style.setAttribute('media', 'all')
-container.parentNode.appendChild(style)
+document.head.appendChild(style)
 
 window.sya = {}
 window.sya.config = JSON.parse('<%= @config.to_json.html_safe %>'),
