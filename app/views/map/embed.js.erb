@@ -6,17 +6,19 @@ function createSahajAtlasContainer() {
   container = document.createElement('div')
   container.id = 'sahajatlas'
   embed.replaceWith(container)
-  console.log('Creating Sahaj Atlas target', container)
 }
 
 if (embed.id == 'sahaj-atlas' || embed.id == 'sahajatlas') {
   createSahajAtlasContainer()
+  console.log('Creating Sahaj Atlas target', container)
 } else {
   document.addEventListener("DOMContentLoaded", function(event) {
     let container = document.getElementById('sahajatlas')
+    console.log('find container', container)
 
     if (!container) {
       createSahajAtlasContainer()
+      console.log('Setup Sahaj Atlas target', container)
     } else {
       console.log('Found Sahaj Atlas target:', container)
     }
