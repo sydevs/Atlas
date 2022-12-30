@@ -1,7 +1,7 @@
 cs:
   datetime:
     distance_in_words:
-      soon: "pár minut"
+      soon: "brzy"
       x_weeks:
         one: "%{count} týden"
         other: "%{count} týdny"
@@ -21,8 +21,8 @@ cs:
         single: "Oblast"
         plural: "Oblasti"
         # Countable
-        one: "Region"
-        other: "Regiony"
+        one: "oblast"
+        other: "oblasti"
       area:
         # Basic pluralization
         single: "Místo"
@@ -46,20 +46,20 @@ cs:
         # Countable
         one: "událost"
         other: "události"
-      online_event: # TODO: Translate
+      online_event:
         # Basic pluralization
-        single: "Online Event"
-        plural: "Online Events"
+        single: "Online události"
+        plural: "Online události"
         # Countable
-        one: "online event"
-        other: "online events"
-      offline_event: # TODO: Translate
+        one: "online událost"
+        other: "online události"
+      offline_event:
         # Basic pluralization
-        single: "In-Person Event"
-        plural: "In-Person Events"
+        single: "Osobní událost"
+        plural: "Osobní události"
         # Countable
-        one: "in-person event"
-        other: "in-person events"
+        one: "osobní událost"
+        other: "osobní události"
       registration:
         # Basic pluralization
         single: "Účastník"
@@ -76,20 +76,20 @@ cs:
         # Countable
         one: "správce"
         other: "správci"
-      managed_record: # TODO: Translate
+      managed_record:
         # Basic pluralization
-        single: "Responsibility"
-        plural: "Responsibilities"
+        single: "Odpovědnost"
+        plural: "Odpovědnosti"
         # Countable
-        one: "responsibility"
-        other: "responsibilities"
+        one: "odpovědnost"
+        other: "odpovědnosti"
       audit:
         # Basic pluralization
         single: "Historie"
         plural: "Historie"
         # Countable
-        one: "log"
-        other: "logs"
+        one: "záznam"
+        other: "záznamy"
       client:
         # Basic pluralization
         single: "Aplikace"
@@ -109,10 +109,10 @@ cs:
       generic:
         name: "Jméno"
         published: "Publikováno"
-        email: "Emailová adresa"
-        phone: "Phone Number" # TODO: Translate
-        language: "Language" # TODO: Translate
-        status: "Status" # TODO: Translate
+        email: "E-mailová adresa"
+        phone: "Telefonní číslo"
+        language: "Jazyk"
+        status: "Stav"
         statuses:
           verified: "Ověřeno"
           needs_review: "Potřebuje revizi"
@@ -122,9 +122,9 @@ cs:
           finished: "Ukončeno"
 
         last_activity_on: "Poslední aktivita"
-        summary_email_sent_at: "Souhrnný email odeslán"
-        status_email_sent_at: "Email o stavu odeslán"
-        reminder_email_sent_at: "Upozorňovací email odeslán"
+        summary_email_sent_at: "Souhrnný e-mail odeslán"
+        status_email_sent_at: "E-mail o stavu odeslán"
+        reminder_email_sent_at: "Upozorňovací e-mail odeslán"
         should_update_status_at: "Další aktualizace stavu"
         expired_at: "Platnost vypršela v"
         verified_at: "Ověřeno v"
@@ -133,28 +133,28 @@ cs:
         updated_at: "Aktualizováno v"
 
       # Places
-      country: # TODO: Translate
+      country:
         manager_id: :activerecord.models.manager.single # Do not translate
         country_code: :activerecord.models.country.single # Do not translate
         default_language_code: "Výchozí jazyk události"
-        enable_regions: "Povolit regionální správu"
-        enable_custom_regions: "Allow Custom Region Creation"
+        enable_regions: "Povolit oblastní správu"
+        enable_custom_regions: "Povolit vytváření vlastních oblastí"
         geo_data: "Geo Data"
         osm_id: "OpenStreetMap ID"
         bounds: "Viewport"
-        geojson: "Borders"
-        translations: "Translations"
+        geojson: "Hranice"
+        translations: "Překlady"
         last_activity_on: :activerecord.attributes.generic.last_activity_on # Do not translate
         summary_email_sent_at: :activerecord.attributes.generic.summary_email_sent_at # Do not translate
 
-      region: # TODO: Translate
+      region:
         manager_id: :activerecord.models.manager.single # Do not translate
         country_code: :activerecord.models.country.single # Do not translate
         geo_data: "Geo Data"
         osm_id: "OpenStreetMap ID"
         bounds: "Viewport"
-        geojson: "Borders"
-        translations: "Translations"
+        geojson: "Hranice"
+        translations: "Překlady"
         last_activity_on: :activerecord.attributes.generic.last_activity_on # Do not translate
         summary_email_sent_at: :activerecord.attributes.generic.summary_email_sent_at # Do not translate
 
@@ -165,7 +165,7 @@ cs:
         coordinates: "Místo"
         latitude: "Zeměpisná šířka"
         longitude: "Zeměpisná délka"
-        radius: "Rádius (km)"
+        radius: "Poloměr (km)"
         last_activity_on: :activerecord.attributes.generic.last_activity_on # Do not translate
         summary_email_sent_at: :activerecord.attributes.generic.summary_email_sent_at # Do not translate
 
@@ -175,15 +175,15 @@ cs:
         name: "Název budovy (volitelné)"
         manager_id: :activerecord.models.manager.single # Do not translate
         address: "Adresa"
-        street: "Adresa ulice"
+        street: "Ulice"
         city: "Město"
         region_code: :activerecord.models.province.single # Do not translate
         country_code: :activerecord.models.country.single # Do not translate
-        post_code: "poštovní směrovací číslo"
-        coordinates: "Poloha"
+        post_code: "Poštovní směrovací číslo"
+        coordinates: "Souřadnice"
         latitude: "Zeměpisná šířka"
         longitude: "Zeměpisná délka"
-        place_id: "Google Place ID"
+        place_id: "Google místní ID"
         last_activity_on: :activerecord.attributes.generic.last_activity_on # Do not translate
 
       event:
@@ -209,13 +209,13 @@ cs:
         category_descriptions:
           intro: "První seznámení s tímto druhem meditace."
           intermediate: "Kurz pro ty, kteří již úvodní hodinu absolvovali."
-          course: "Několika týdenní kurz, který vás provede různými technikami meditace."
+          course: "Několikatýdenní kurz, který vás provede různými technikami meditace."
           public_event: "Nabíka výuky meditace na veřejné akci zdarma."
           concert: "Představení kombinující meditaci a hudbu nebo tanec"
         description: "Popis"
         room: "Místnost"
         building: "Budova"
-        language_code: "Jakzyk"
+        language_code: "Jazyk"
         registration_mode: "Režim registrace"
         registration_modes:
           native: "Sahadža Atlas"
@@ -228,21 +228,21 @@ cs:
         recurrence: "Opakování"
         recurrences:
           day: "Denně"
-          monday: "Pondělí"
-          tuesday: "Úterý"
-          wednesday: "Středy"
-          thursday: "Čtvrtky"
-          friday: "pátky"
-          saturday: "Soboty"
-          sunday: "Neděle"
+          monday: "Každé pondělí"
+          tuesday: "Každé úterý"
+          wednesday: "Každou středu"
+          thursday: "Každý čtvrtek"
+          friday: "Každý pátek"
+          saturday: "Každou sobotu"
+          sunday: "Každou neděli"
         start_date: "Počáteční datum"
         end_date: "Datum konce"
         start_time: "Čas začátku"
         end_time: "Čas konce"
-        online: "Online třída"
+        online: "Online kurz"
         online_url: "Odkaz na online meditační setkání"
         phone_number: "Kontaktní číslo"
-        phone_name: "Jméno osob pro telefonické hovory"
+        phone_name: "Jméno osoby pro telefonické hovory"
         language: "Jazyk"
         images: :activerecord.models.picture.plural # Do not translate
         venue_id: :activerecord.models.manager.single # Do not translate
@@ -262,32 +262,32 @@ cs:
         email: :activerecord.attributes.generic.email # Do not translate
         comment: "Komentář"
         created_at: "Registrováno na - místní čas"
-        starting_at: "První online třída spuštěna"
+        starting_at: "První online setkání spuštěno"
 
       # Other
-      manager: # TODO: Translate
+      manager:
         manager_id: :activerecord.models.manager.single # Do not translate
-        name: "Full Name"
+        name: "Celé jméno"
         email: :activerecord.attributes.generic.email # Do not translate
         phone: :activerecord.attributes.generic.phone # Do not translate
         administrator: "Globální správce"
         language_code: "Jazyk"
-        contact_method: "Preferred Contact Method"
+        contact_method: "Preferovaný způsob kontaktu"
         contact_methods:
-          email: "Email"
+          email: "E-mail"
           whatsapp: "WhatsApp"
           telegram: "Telegram"
           wechat: "WeChat"
         types:
-          worldwide: "Global Administrator"
-          country: "Country Manager"
-          local: "Local Manager"
-          event: "Event Manager"
-          client: "App Manager"
-          none: "No-Access Manager"
-        last_login_at: "Last Login"
-        email_verification_sent_at: "Last Email Verification Sent"
-        phone_verification_sent_at: "Last Phone Verification Sent"
+          worldwide: "Globální správce"
+          country: "Národní správce"
+          local: "Oblastní správce"
+          event: "Správce události"
+          client: "Správce aplikace"
+          none: "Správce No-Access"
+        last_login_at: "Poslední přihlášení"
+        email_verification_sent_at: "Poslední ověřovací e-mail zaslán"
+        phone_verification_sent_at: "Poslední ověření přes mobilní telefon zasláno"
 
       audit:
         user: :activerecord.models.manager.single # Do not translate
@@ -297,11 +297,11 @@ cs:
           create: "Vytvořeno"
           destroy: "Smazáno"
 
-      client: # TODO: Translate
+      client:
         label: "Označení"
         config: "Konfigurace"
         domain: "Doména"
-        secret_key: "Tajný API klíč"
+        secret_key: "Skrytý API klíč"
         public_key: "Veřejný API klíč"
         enabled: "Povoleno"
         location: "Preferované místo"
@@ -309,17 +309,17 @@ cs:
         last_accessed_at: "Poslední přístup"
 
         locale: :activerecord.attributes.generic.language # Do not translate
-        location_id: "Location ID"
-        location_type: "Location Type"
-        embed_type: "Embed Method"
+        location_id: "ID umístění"
+        location_type: "Typ umístění"
+        embed_type: "Způsob vložení (embedingu)"
         embed_types:
-          iframe: "IFrame (Simple)"
-          script: "JavaScript (Advanced)"
-          url: "Link"
-        routing_type: "Routing Method"
+          iframe: "IFrame (jednoduchý)"
+          script: "JavaScript (pokročilý)"
+          url: "Odkaz"
+        routing_type: "Způsob routingu"
         routing_types:
-          query: "Query (Simple)"
-          path: "Path (Advanced)"
+          query: "Dotaz (jednoduché)"
+          path: "Cesta (pokročilé)"
         manager_id: :activerecord.models.manager.single # Do not translate
 
       pictures:

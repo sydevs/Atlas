@@ -3,7 +3,7 @@ cs:
 
   info:
     index:
-      description: "Sahadž Atlas je projekt mapující bezplatné kurzy meditace nabízené sahadža jógou po celém světě."
+      description: "Sahadža Atlas je projekt mapující bezplatné kurzy meditace nabízené sahadža jógou po celém světě."
       view_map: "Zobrazit mapu"
       view_statistics: "Statistiky"
       view_cms: "Spravovat"
