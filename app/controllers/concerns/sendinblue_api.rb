@@ -67,7 +67,7 @@ module SendinblueAPI
     scope = "emails.confirmation.#{event.layer}"
 
     text = {
-      header: I18n.translate('header', scope: scope, name: registration.first_name)
+      header: I18n.translate('header', scope: scope, name: registration.first_name, event_name: event.label)
     }
 
     %i[subheader invite_a_friend get_directions faqs].each do |field|
