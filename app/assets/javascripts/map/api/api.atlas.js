@@ -35,6 +35,7 @@ class AtlasAPI {
             firstDate
             lastDate
             upcomingDates
+            recurrence
           }
           images {
             url
