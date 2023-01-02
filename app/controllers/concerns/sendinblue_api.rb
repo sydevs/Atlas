@@ -71,7 +71,7 @@ module SendinblueAPI
     }
 
     %i[subheader invite_a_friend get_directions faqs].each do |field|
-      text[field] = I18n.translate(field, scope: scope)
+      text[field] = I18n.translate(field, scope: scope, event_name: event.label)
     end
 
     SendinblueAPI.send_email(:confirmation, {
@@ -101,12 +101,12 @@ module SendinblueAPI
     }
 
     %i[subheader action].each do |field|
-      text[field] = I18n.translate(field, scope: scope)
+      text[field] = I18n.translate(field, scope: scope, event_name: event.label)
     end
 
     schedule_at = registration.starting_at - (event.online? ? 1.hour : 1.day)
     schedule_at = 1.minute.from_now if event.online? && schedule_at < Time.now
-    schedule_at = 1.minute.from_now # For development
+    # schedule_at = 1.minute.from_now # For development
     return if schedule_at < Time.now
 
     SendinblueAPI.send_email(:reminder, {
