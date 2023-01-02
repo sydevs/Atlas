@@ -48,8 +48,8 @@ class Registration < ApplicationRecord
       country: event.area&.country&.name,
       how_they_joined: "Sahaj Atlas Registration",
       language: LocalizationHelper.language_name(event.language_code),
-      latitude: event.venue.latitude,
-      longitude: event.venue.longitude,
+      latitude: (event.venue&.latitude || event.area&.latitude),
+      longitude: (event.venue&.longitude || event.area&.longitude),
     })
   end
 
