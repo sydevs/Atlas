@@ -205,7 +205,6 @@ class Event < ApplicationRecord
     end
 
     def validate_end_date
-      self.end_date = start_date if recurrence == 'day' && !end_date.present?
       return if end_date.nil?
       
       self.errors.add(:end_date, I18n.translate('cms.messages.event.invalid_end_date')) if end_date < start_date
