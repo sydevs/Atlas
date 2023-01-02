@@ -26,6 +26,9 @@ class EventTiming {
     const localTimeZone = luxon.DateTime.local().zoneName
     let firstDateTime = luxon.DateTime.fromISO(timing.firstDate, { zone: timing.timeZone })
     let lastDateTime = timing.lastDate ? luxon.DateTime.fromISO(timing.lastDate, { zone: timing.timeZone }) : null
+    this.#firstDateTime = firstDateTime
+    this.#lastDateTime = lastDateTime
+
     this.upcomingDateTimes = timing.upcomingDates.map(datetime => luxon.DateTime.fromISO(datetime, { zone: event.timing.timeZone }))
     this.isUpcoming = this.upcomingDateTimes.length > 0
 
@@ -48,8 +51,12 @@ class EventTiming {
 
     if (this.startDate == this.endDate) {
       this.dateString = this.startDate
-    } else if (timing.recurrence == 'day' && Boolean(this.lastOccurrence)) {
-      this.dateString = `${this.startDate} - ${this.endDate}`
+    } else if (timing.recurrence == 'day') {
+      if (Boolean(this.lastOccurrence)) {
+        this.dateString = `${this.startDate} - ${this.endDate}`
+      } else {
+        this.dateString = Util.translate('recurrence.day')
+      }
     } else {
       let weekday = firstDateTime.toLocaleString({ weekday: 'long' })
       this.dateString = Util.translate(`recurrence.${weekday.toLowerCase()}`)
