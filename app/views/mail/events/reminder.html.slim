@@ -37,12 +37,16 @@ table.data cellpadding=0
 table.registrations cellpadding=0
   - @registrations.limit(10).each do |registration|
     tr
-      th = mail_to registration.email, registration.name
-      td
+      th
+        strong = registration.name
+        br
         = registration.created_at.to_s(:short)
+      td
+        = mail_to registration.email, registration.email
         - if registration.comment.present?
-          a href=email_login(cms_event_registrations_url(@event, anchor: registration.id, show: registration.id))
-            = image_tag 'mail/comment-blue.png', width: 15, height: 15
+          br
+          = image_tag 'mail/comment.png', width: 15, height: 15
+          em = "\"#{registration.comment}\""
   - if @registrations.count > 10
     tr.footer
       td colspan=2

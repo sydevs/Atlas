@@ -38,7 +38,7 @@
   box-shadow: $shadow-light
 
 .sya-navigation__item
-  color: var(--color)
+  color: $color-grey-normal
   font-weight: $font-medium
   text-decoration: underline
   flex-grow: 1
@@ -52,10 +52,14 @@
     border-right: 1px solid var(--color)
 
   &[data-badge]::after
+    --contrast-color: #{$color-grey-normal}
+
     @include mobile
       margin-left: 6px
 
   &--active
+    color: var(--color)
+    
     @include tablet-or-larger
       background: var(--color)
       color: white
