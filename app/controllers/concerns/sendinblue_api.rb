@@ -70,9 +70,11 @@ module SendinblueAPI
       header: I18n.translate('header', scope: scope, name: registration.first_name, event_name: event.label)
     }
 
-    %i[subheader invite_a_friend get_directions faqs].each do |field|
+    %i[subheader invite_a_friend get_directions joining_title joining_content faqs].each do |field|
       text[field] = I18n.translate(field, scope: scope, event_name: event.label)
     end
+
+    text[:faqs] ||= []
 
     SendinblueAPI.send_email(:confirmation, {
       subject: I18n.translate('subject', scope: scope, event_name: event.label),
@@ -85,6 +87,8 @@ module SendinblueAPI
         timing: [event.start_time, event.end_time].compact.join(' - '),
         date: registration.starting_date.to_s(:short),
         weekday: registration.starting_at_weekday.upcase,
+        online: event.online? ? true : nil,
+        link: event.online? ? event.online_url : event.decorated_venue&.directions_url,
         directions_url: event.decorated_venue&.directions_url,
         text: text,
       },
