@@ -41,6 +41,7 @@
   color: $color-grey-normal
   font-weight: $font-medium
   text-decoration: underline
+  opacity: 0.7
   flex-grow: 1
 
   @include tablet-or-larger
@@ -52,14 +53,15 @@
     border-right: 1px solid var(--color)
 
   &[data-badge]::after
-    --contrast-color: #{$color-grey-normal}
+    --color: #{$color-grey-normal}
 
     @include mobile
       margin-left: 6px
 
   &--active
     color: var(--color)
-    
+    opacity: 1
+
     @include tablet-or-larger
       background: var(--color)
       color: white
