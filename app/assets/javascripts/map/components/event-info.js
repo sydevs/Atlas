@@ -42,7 +42,8 @@ function EventInfo() {
           m('a',
             {
               tabindex: 1,
-              href: '#registration',
+              target: (event.registrationMode != 'native' ? '_self' : '_blank'),
+              href: (event.registrationMode != 'native' ? '#registration' : event.registrationUrl),
             },
             m('span.sya-icon.sya-icon--signup'),
             m('span', Util.translate('event.register'))
