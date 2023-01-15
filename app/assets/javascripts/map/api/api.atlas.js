@@ -77,7 +77,8 @@ class AtlasAPI {
         region: `on Region {
           id
           label
-          bounds
+          onlineEventBounds
+          offlineEventBounds
           onlineEventIds
           offlineEventIds
           areas {

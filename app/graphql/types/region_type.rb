@@ -7,6 +7,8 @@ module Types
     field :name, String, null: false
     field :label, String, null: false
     field :bounds, [Float], null: false
+    field :online_event_bounds, [Float], null: false
+    field :offline_event_bounds, [Float], null: false
 
     field :events, [Types::EventType], null: false
     field :event_ids, [ID], null: false
@@ -46,6 +48,14 @@ module Types
 
     def country
       object.country.extend(CountryDecorator)
+    end
+
+    def offline_event_bounds
+      object.event_bounds(:offline)
+    end
+
+    def online_event_bounds
+      object.event_bounds(:online)
     end
   end
 end

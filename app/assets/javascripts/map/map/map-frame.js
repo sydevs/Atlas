@@ -164,6 +164,10 @@ class MapFrame extends EventTarget {
       this.#hasSelection = true
       window.document.title = location.label || Util.translate('meditation_atlas')
 
+      if (location instanceof AtlasRegion) {
+        location.bounds = (this.#currentLayerId == AtlasEvent.LAYER.online ? location.onlineEventBounds : location.offlineEventBounds )
+      }
+      
       if (location.bounds || (location.radius && location.radius != 'null')) {
         this.fitTo(location, Object.assign({
           transition: true

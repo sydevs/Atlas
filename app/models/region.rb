@@ -50,6 +50,21 @@ class Region < ApplicationRecord
     true
   end
 
+  def event_bounds(type = :offline)
+    locations = type == :online ? areas : venues
+    locations = locations.publicly_visible.pluck(:latitude, :longitude)
+    latitudes = locations.map(&:first)
+    longitudes = locations.map(&:last)
+    pad = 0.5
+    
+    [
+      latitudes.min - pad,
+      latitudes.max + pad,
+      longitudes.min - pad,
+      longitudes.max + pad,
+    ]
+  end
+
   def fetch_geo_data!
     return if osm_id.nil? || custom_geodata?
 
