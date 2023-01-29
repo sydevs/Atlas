@@ -76,8 +76,7 @@ class Registration < ApplicationRecord
   private
 
     def send_registrations_notification
-      EventMailer.with(event: event, test: true).registrations.deliver_now
-      # EventMailer.with(event: event, manager: event.manager).registrations.deliver_later
+      EventMailer.with(event: event, manager: event.manager).registrations.deliver_later
     end
 
 end
