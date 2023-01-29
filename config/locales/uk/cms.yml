@@ -128,6 +128,7 @@ uk:
         room: "В якому приміщенні будівлі проходить захід?"
         language: "Якою основною мовою подається ця подія?"
         registration_mode: "Куди шукачам звернутися, щоб зареєструватися на подію? Ми наполегливо рекомендуємо вам залишити це значення як \"%{native}\". Якщо шукачі зареєструються на цьому веб-сайті, ми зможемо надсилати їм нагадування та додаткові електронні листи."
+        registration_notification: "How often do you want to receive notifications about new registrations?" # TODO: Translate
         registration_url: "URL-адреса реєстрації буде встановлено автоматично, якщо встановлено режим \"%{native}.\""
         registration_limit: "Limit the number of registrations to this amount." # TODO: Translate
         online: "Установіть цей прапорець, якщо програма буде проходити онлайн."

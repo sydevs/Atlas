@@ -63,7 +63,7 @@
 - if @model == Audit
   .ui.basic.segment
     dl
-      - %i[last_activity_on status_email_sent_at reminder_email_sent_at summary_email_sent_at should_update_status_at verified_at expired_at archived_at finished_at].each do |timestamp|
+      - %i[last_activity_on status_email_sent_at registrations_email_sent_at summary_email_sent_at should_update_status_at verified_at expired_at archived_at finished_at].each do |timestamp|
         - if @context.respond_to?(timestamp)
           - time = @context.send(timestamp)
           dt

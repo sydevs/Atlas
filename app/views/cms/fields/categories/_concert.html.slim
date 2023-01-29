@@ -17,4 +17,5 @@
 = help_link :registration
 br
 
+= f.input :registration_notification, collection: Event.registration_notifications.map { |k, v| [translate_enum_value(Event, :registration_notification, k), k] }, hint: translate('cms.hints.event.registration_notification')
 = f.input :registration_limit, placeholder: translate('cms.hints.unlimited'), hint: translate('cms.hints.event.registration_limit')

@@ -130,6 +130,7 @@ cs:
         room: "Ve které místnosti v budově se akce koná?"
         language: "Jaký je hlavní jazyk této nadcházející události?"
         registration_mode: "Kam (kde) se mají zájemci na akci přihlásit? Důrazně doporučujeme, abyste toto nechali jako '%{native}.' Registrace žadatelů na této webové stránce nám umožní zasílat jim upomínkové a následné e-maily."
+        registration_notification: "How often do you want to receive notifications about new registrations?" # TODO: Translate
         registration_url: "Registrační URL bude nastaveno automaticky, pokud je nastaven režim \"%{native}.\""
         registration_limit: "Omezit počet registrací na tuto hodnotu."
         online: "Zaškrtněte toto políčko, pokud bude program probíhat online."

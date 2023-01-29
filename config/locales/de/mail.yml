@@ -58,6 +58,7 @@ de:
       edit: "Veranstaltung bearbeiten"
       update: "Veranstaltung aktualisieren"
       contact: "E-Mail senden"
+      online_address: "Online - from %{city}" # TODO: Translate
 
       status:
         question: "Ist die obigen Informationen noch korrekt?"
@@ -98,7 +99,7 @@ de:
           event_manager: "Diese Veranstaltung, die Sie verwalten,muss dringend überprüft und bestätigt werden, sonst wird sie aus der Karte entfernt. Dies ist die letzte Erinnerung, die Sie erhalten werden. Wir haben auch die Manager der% {Region} Region benachrichtigt, um sicherzustellen, dass dieses Ereignis nicht entfernt wird."
           super_manager: "Sie sind ein Manager für% {Region}. Diese Warnung wird Ihnen gesendet, weil der Veranstaltungs Manager noch nicht auf unsere E-Mail reagiert hat."
 
-      reminder:
+      registrations:
         subject: "[Reminder] Neue Veranstaltungs Anmeldung"
         title: "Neue Anmeldungen"
         preview:

@@ -58,6 +58,7 @@ cs:
       edit: "Upravit událost"
       update: "Aktualizovat událost"
       contact: "Poslat e-mail"
+      online_address: "Online - from %{city}" # TODO: Translate
 
       status:
         question: "Jsou výše uvedené informace stále platné?"
@@ -98,7 +99,7 @@ cs:
           event_manager: "U této události, kterou spravujete, je naléhavě nutné zkontrolovat přesnost. Toto je poslední připomenutí, které obdržíte. Poslali jsme také e-mail správce oblasti %{region}, abychom se ujistili, že tato událost nebude odstraněna omylem."
           super_manager: "Jste správcem %{region}. Toto upozornění vám bylo zasláno, protože správce této události ještě neodpověděl na náš e-mail."
 
-      reminder:
+      registrations:
         subject: "[Připomenutí] Nadcházející události"
         title: "Nadcházející událost"
         preview:

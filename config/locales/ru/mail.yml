@@ -58,6 +58,7 @@ ru:
       edit: "Редактировать событие"
       update: "Обновить событие"
       contact: "Отправить email"
+      online_address: "Online - from %{city}" # TODO: Translate
 
       status: # TODO: Translate
         question: "Is the above information still correct?"
@@ -98,7 +99,7 @@ ru:
           event_manager: "Это событие, которым ты управляешь, срочно нужно проверить на актуальность. Это последнее напоминание, которое ты получишь. Мы также отправили email менеджерам региона %{place}, чтобы гарантировать, что это событие не будет удалено по ошибке."
           super_manager: "Ты являешься менеджером %{place}. Это предупреждение отправлено тебе, потому что менеджер этого события ещё не ответил на наш email."
 
-      reminder:
+      registrations:
         subject: "[Reminder] регистрация нового события"
         title: "Новые регистрации"
         preview:

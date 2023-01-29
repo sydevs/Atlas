@@ -77,11 +77,11 @@ namespace :mail do
         EventMailer.with(event: event, test: true).status.deliver_now if event
       end
   
-      desc 'Sends reminder for one event'
-      task reminder: :environment do
+      desc 'Sends registrations for one event'
+      task registrations: :environment do
         ActionMailer::Base.delivery_method = :letter_opener
         event = Event.where.not(status: :finished).joins(:manager, :registrations).reorder('RANDOM()').first
-        EventMailer.with(event: event, test: true).reminder.deliver_now
+        EventMailer.with(event: event, test: true).registrations.deliver_now
       end
     end
 

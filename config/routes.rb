@@ -28,9 +28,9 @@ Rails.application.routes.draw do
 
       resources :events, only: %i[] do
         get :status
-        get :reminder
+        get :registrations
         get :status, on: :collection
-        get :reminder, on: :collection
+        get :registrations, on: :collection
       end
 
       resources :countries, :regions, :areas, only: %i[] do

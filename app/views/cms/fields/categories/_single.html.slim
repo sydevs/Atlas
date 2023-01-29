@@ -16,3 +16,5 @@
   = f.input :registration_url, as: :url, wrapper_html: { class: 'twelve wide', style: 'display: none' }
 = help_link :registration
 br
+
+= f.input :registration_notification, collection: Event.registration_notifications.map { |k, v| [translate_enum_value(Event, :registration_notification, k), k] }, hint: translate('cms.hints.event.registration_notification')

@@ -58,6 +58,7 @@ uk:
       edit: "Редагувати подію"
       update: "Оновити подію"
       contact: "Відправити лист"
+      online_address: "Online - from %{city}" # TODO: Translate
 
       status: # TODO: Translate
         question: "Is the above information still correct?"
@@ -98,7 +99,7 @@ uk:
           event_manager: "Ця подія, якою ви керуєте, терміново потребує перевірки на точність. Це останнє нагадування, яке ви отримаєте. Ми також надіслали електронний лист менеджерам регіону %{place}, щоб переконатися, що цю подію не видалено помилково."
           super_manager: "Ви – менеджер %{place}. Це попередження надіслано вам, оскільки менеджер цієї події ще не відповів на нашу електронну пошту."
 
-      reminder:
+      registrations:
         subject: "[Нагадування] Майбутня подія"
         title: "Майбутня подія"
         preview:

@@ -124,7 +124,7 @@ en:
         last_activity_on: "Last activity"
         summary_email_sent_at: "Summary email sent"
         status_email_sent_at: "Status email sent"
-        reminder_email_sent_at: "Reminder email sent"
+        registrations_email_sent_at: "Reminder email sent"
         should_update_status_at: "Next status update"
         expired_at: "Expired At"
         verified_at: "Verified At"
@@ -223,6 +223,11 @@ en:
           meetup: "Meetup"
           eventbrite: "Eventbrite"
           facebook: "Facebook"
+        registration_notification: "Registration Notifications"
+        registration_notifications:
+          digest: "One Email per Day"
+          immediate: "Immediately"
+          disabled: "No Notifications"
         registration_url: "Registration Link (URL)"
         registration_limit: "Registration Limit"
         recurrence: "Recurrence"
@@ -248,7 +253,7 @@ en:
         venue_id: :activerecord.models.manager.single # Do not translate
         last_activity_on: :activerecord.attributes.generic.last_activity_on # Do not translate
         status_email_sent_at: :activerecord.attributes.generic.status_email_sent_at # Do not translate
-        reminder_email_sent_at: :activerecord.attributes.generic.reminder_email_sent_at # Do not translate
+        registrations_email_sent_at: :activerecord.attributes.generic.registrations_email_sent_at # Do not translate
         should_update_status_at: :activerecord.attributes.generic.should_update_status_at # Do not translate
         updated_at: :activerecord.attributes.generic.updated_at # Do not translate
         expired_at: :activerecord.attributes.generic.expired_at # Do not translate

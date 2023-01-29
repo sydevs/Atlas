@@ -1,0 +1,41 @@
+
+tr.registration
+  - if registration.comment.present?
+    th
+      strong = registration.name
+      br
+      = mail_to registration.email, registration.email
+      br
+      = registration.created_at.to_s(:short)
+    td colspan=2
+      u Comment
+      ' : 
+      em = "\"#{registration.comment}\""
+  - else 
+    th
+      strong = registration.name
+    td
+      = mail_to registration.email, registration.email
+    td.right-align
+      = registration.created_at.to_s(:short)
+
+/table.registration
+  tr
+    - if registration.comment.present?
+      th
+        strong = registration.name
+        br
+        = mail_to registration.email, registration.email
+        br
+        = registration.created_at.to_s(:short)
+      td
+        u Comment
+        ' : 
+        em = "\"#{registration.comment}\""
+    - else 
+      th
+        strong = registration.name
+      td
+        = mail_to registration.email, registration.email
+      td.right-align
+        = registration.created_at.to_s(:short)

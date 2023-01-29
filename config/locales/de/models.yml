@@ -124,7 +124,7 @@ de:
         last_activity_on: "Letzte Aktivitäten"
         summary_email_sent_at: "Zusammenfassungs E-Mail gesendet"
         status_email_sent_at: "Status-E-Mail gesendet"
-        reminder_email_sent_at: "Erinnerungs Email verschickt"
+        registrations_email_sent_at: "Erinnerungs Email verschickt"
         should_update_status_at: "Nächste Status-Aktualisierung"
         expired_at: "Abgelaufen am"
         verified_at: "Überprüft auf"
@@ -223,6 +223,11 @@ de:
           meetup: "Meetup"
           eventbrite: "Eventbrite"
           facebook: "Facebook"
+        registration_notification: "Registration Notifications" # TODO: Translate
+        registration_notifications: # TODO: Translate
+          digest: "One Email per Day"
+          immediate: "Immediately"
+          disabled: "No Notifications"
         registration_url: "Registrierungsverbindung (URL)"
         registration_limit: "Registrierungsbegrenzung"
         recurrence: "Wiederholung"
@@ -248,7 +253,7 @@ de:
         venue_id: :activerecord.models.manager.single # Do not translate
         last_activity_on: :activerecord.attributes.generic.last_activity_on # Do not translate
         status_email_sent_at: :activerecord.attributes.generic.status_email_sent_at # Do not translate
-        reminder_email_sent_at: :activerecord.attributes.generic.reminder_email_sent_at # Do not translate
+        registrations_email_sent_at: :activerecord.attributes.generic.registrations_email_sent_at # Do not translate
         should_update_status_at: :activerecord.attributes.generic.should_update_status_at # Do not translate
         updated_at: :activerecord.attributes.generic.updated_at # Do not translate
         expired_at: :activerecord.attributes.generic.expired_at # Do not translate

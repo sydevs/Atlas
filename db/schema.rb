@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_11_12_180913) do
+ActiveRecord::Schema.define(version: 2023_01_29_221822) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -123,7 +123,7 @@ ActiveRecord::Schema.define(version: 2022_11_12_180913) do
     t.string "language_code", limit: 2
     t.string "online_url"
     t.datetime "status_email_sent_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
-    t.datetime "reminder_email_sent_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.datetime "registrations_email_sent_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
     t.datetime "should_update_status_at", default: -> { "CURRENT_TIMESTAMP" }
     t.datetime "verified_at", default: -> { "CURRENT_TIMESTAMP" }
     t.datetime "expired_at"
@@ -137,6 +137,7 @@ ActiveRecord::Schema.define(version: 2022_11_12_180913) do
     t.string "type"
     t.bigint "venue_id"
     t.bigint "area_id"
+    t.integer "registration_notification", default: 0, null: false
     t.index ["area_id"], name: "index_events_on_area_id"
     t.index ["manager_id"], name: "index_events_on_manager_id"
     t.index ["status"], name: "index_events_on_status"

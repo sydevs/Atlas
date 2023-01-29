@@ -17,22 +17,32 @@
   &.narrow
     max-width: 260px
 
-td.question
-  font-size: 15px
-  font-weight: 500
-  padding: 12px
+table.registrations
+  border-collapse: collapse
+  margin-bottom: 18px
 
-.registrations
-  max-width: 500px
-  margin: 20px auto
-  margin-top: 0
-  padding: 0 6px
+tr.registration
+  width: 100%
+  margin: 10px
+  padding: 10px
+  border-top: 1px solid darkgrey
+  border-bottom: 1px solid darkgrey
+
+  th, td
+    padding: 16px 12px
 
   th
     font-weight: 300
 
-  img
-    height: 1em
-    opacity: 0.5
-    margin-right: 6px
-    vertical-align: middle
+  td
+    font-size: 15px
+
+  .right-align, th
+    width: 1px
+    white-space: nowrap
+
+  .right-align
+    text-align: right
+
+.more-registrations
+  text-align: center

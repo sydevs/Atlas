@@ -124,7 +124,7 @@ cs:
         last_activity_on: "Poslední aktivita"
         summary_email_sent_at: "Souhrnný e-mail odeslán"
         status_email_sent_at: "E-mail o stavu odeslán"
-        reminder_email_sent_at: "Upozorňovací e-mail odeslán"
+        registrations_email_sent_at: "Upozorňovací e-mail odeslán"
         should_update_status_at: "Další aktualizace stavu"
         expired_at: "Platnost vypršela v"
         verified_at: "Ověřeno v"
@@ -223,6 +223,11 @@ cs:
           meetup: "Meetup"
           eventbrite: "Eventbrite"
           facebook: "Facebook"
+        registration_notification: "Registration Notifications" # TODO: Translate
+        registration_notifications: # TODO: Translate
+          digest: "One Email per Day"
+          immediate: "Immediately"
+          disabled: "No Notifications"
         registration_url: "Registrační link (URL)"
         registration_limit: "Registration Limit" # TODO: Translate
         recurrence: "Opakování"
@@ -248,7 +253,7 @@ cs:
         venue_id: :activerecord.models.manager.single # Do not translate
         last_activity_on: :activerecord.attributes.generic.last_activity_on # Do not translate
         status_email_sent_at: :activerecord.attributes.generic.status_email_sent_at # Do not translate
-        reminder_email_sent_at: :activerecord.attributes.generic.reminder_email_sent_at # Do not translate
+        registrations_email_sent_at: :activerecord.attributes.generic.registrations_email_sent_at # Do not translate
         should_update_status_at: :activerecord.attributes.generic.should_update_status_at # Do not translate
         updated_at: :activerecord.attributes.generic.updated_at # Do not translate
         expired_at: :activerecord.attributes.generic.expired_at # Do not translate

@@ -21,6 +21,8 @@ function RegistrationForm() {
           onsubmit: event => {
             event.preventDefault()
             AtlasApp.data.createRegistration(data).then(response => {
+              alert = null
+              
               if (response.status == 'success') {
                 alert = null
                 vnode.attrs.onsubmit(response)
