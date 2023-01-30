@@ -131,6 +131,7 @@ uk:
         registration_notification: "How often do you want to receive notifications about new registrations?" # TODO: Translate
         registration_url: "URL-адреса реєстрації буде встановлено автоматично, якщо встановлено режим \"%{native}.\""
         registration_limit: "Limit the number of registrations to this amount." # TODO: Translate
+        registration_question: "What questions should seekers be asked when they register for the class." # TODO: Translate
         online: "Установіть цей прапорець, якщо програма буде проходити онлайн."
         online_url: "Якщо курс онлайн, це посилання є місцем, де шукачі мають приєднатися до класу (наприклад, посилання на Zoom, YouTube, Google Meet тощо)."
         phone_number: "Місцевий номер телефону, за яким шукачі можуть зателефонувати, щоб поставити запитання."

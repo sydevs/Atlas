@@ -230,6 +230,12 @@ en:
           disabled: "No Notifications"
         registration_url: "Registration Link (URL)"
         registration_limit: "Registration Limit"
+        registration_question: "Registration Questions"
+        registration_questions:
+          questions: "Do you have any questions about the event?"
+          experience: "Do you have any previous experience with Sahaja Yoga meditation?"
+          aspirations: "What do you hope to get out of meditation?"
+          referral: "How did you hear about us?"
         recurrence: "Recurrence"
         recurrences:
           day: "Daily"

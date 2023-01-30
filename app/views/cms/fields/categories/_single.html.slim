@@ -9,12 +9,4 @@
 
 .ui.small.dividing.violet.header = translate('cms.forms.event.registration')
 
-.hint = translate('cms.hints.event.registration_mode', native: translate_enum_value(@record, :registration_mode, :native))
-.hint = translate('cms.hints.event.registration_url', native: translate_enum_value(@record, :registration_mode, :native))
-.fields
-  = f.input :registration_mode, collection: Event.registration_modes.map { |k, v| [translate_enum_value(Event, :registration_mode, k), k] }, wrapper_html: { class: 'sixteen wide' }
-  = f.input :registration_url, as: :url, wrapper_html: { class: 'twelve wide', style: 'display: none' }
-= help_link :registration
-br
-
-= f.input :registration_notification, collection: Event.registration_notifications.map { |k, v| [translate_enum_value(Event, :registration_notification, k), k] }, hint: translate('cms.hints.event.registration_notification')
+= render 'cms/fields/partials/registration', f: f

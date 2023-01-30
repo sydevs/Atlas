@@ -131,6 +131,7 @@ ru:
         registration_notification: "How often do you want to receive notifications about new registrations?" # TODO: Translate
         registration_url: "URL-адрес регистрации будет установлен автоматически, если установлен режим \"%{native}.\""
         registration_limit: "Limit the number of registrations to this amount." # TODO: Translate
+        registration_question: "What questions should seekers be asked when they register for the class." # TODO: Translate
         online: "Установи этот флажок, если программа будет проходить онлайн."
         online_url: "Если программа проходит онлайн, то по этой ссылке искатели смогут присоединиться к классу (например, ссылка на Zoom, YouTube, Google Meet и т.д.)."
         phone_number: "Местный номер телефона, по которому искатели могут позвонить, чтобы задать вопросы." 

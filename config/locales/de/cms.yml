@@ -49,9 +49,6 @@ de:
       # Tertiary menu
       details: "Info"
       activity: "Aktivität"
-      events:
-        offline: "Vorort Veranstaltungen"
-        online: "Online Veranstaltungen"
       breadcrumbs:
         world: "Welt"
         help: "Hilfe"
@@ -134,6 +131,7 @@ de:
         registration_notification: "How often do you want to receive notifications about new registrations?" # TODO: Translate
         registration_url: "Die Registrierungs-URL wird automatisch gesetzt, wenn der Modus \"%{nativ}\" gesetzt wird."
         registration_limit: "Setzen Sie das Limit für Anmeldungen."
+        registration_question: "What questions should seekers be asked when they register for the class." # TODO: Translate
         online: "Aktivieren Sie diese Box, wenn dies ein online Programm ist."
         online_url: "Wenn die Klasse online abgehalten wird, geben sie hier den Beitrits Link an (zB. für Zoom, YouTube, Google Meet, etc.)"
         phone_number: "Eine lokale Telefonnummer, die Sucher anrufen können, um Fragen zu stellen."

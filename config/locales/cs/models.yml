@@ -230,6 +230,12 @@ cs:
           disabled: "No Notifications"
         registration_url: "Registrační link (URL)"
         registration_limit: "Registration Limit" # TODO: Translate
+        registration_question: "Registration Questions" # TODO: Translate
+        registration_questions: # TODO: Translate
+          questions: "Do you have any questions about the event?"
+          experience: "Do you have any previous experience with Sahaja Yoga meditation?"
+          aspirations: "What do you hope to get out of meditation?"
+          referral: "How did you hear about us?"
         recurrence: "Opakování"
         recurrences:
           day: "Denně"

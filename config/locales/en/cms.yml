@@ -133,6 +133,7 @@ en:
         registration_notification: "How often do you want to receive notifications about new registrations?"
         registration_url: "The registration URL will be set automatically if the mode is set \"%{native}.\""
         registration_limit: "Limit the number of registrations to this amount."
+        registration_question: "What questions should seekers be asked when they register for the class."
         online: "Check this box if the program will take place online."
         online_url: "If the class is online, this link is where seekers should join the class (eg. a link to Zoom, YouTube, Google Meet, etc)."
         phone_number: "A local phone number that seekers can call to ask questions."

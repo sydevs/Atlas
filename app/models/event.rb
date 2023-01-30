@@ -19,6 +19,7 @@ class Event < ApplicationRecord
   enum recurrence: { day: 0, monday: 1, tuesday: 2, wednesday: 3, thursday: 4, friday: 5, saturday: 6, sunday: 7 }
   enum registration_mode: { native: 0, external: 1, meetup: 2, eventbrite: 3, facebook: 4 }, _suffix: true
   enum registration_notification: { digest: 1, immediate: 2, disabled: 3 }, _suffix: true
+  flag :registration_question, %i[questions experience aspirations referral]
 
   # Associations
   # belongs_to :location, polymorphic: true
