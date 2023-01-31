@@ -26,9 +26,14 @@ class AtlasAPI {
           phoneNumber
           online
           onlineUrl
+          path
           registrationMode
           registrationUrl
-          path
+          registrationQuestions {
+            slug
+            title
+            rows
+          }
           timing {
             duration
             timeZone

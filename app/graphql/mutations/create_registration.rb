@@ -6,7 +6,7 @@ class Mutations::CreateRegistration < Mutations::BaseMutation
   argument :event_id, ID, required: true
   argument :name, String, required: true
   argument :email, String, required: true
-  argument :message, String, required: false
+  argument :questions, GraphQL::Types::JSON, required: false
   argument :starting_at, GraphQL::Types::ISO8601DateTime, required: true
   argument :time_zone, String, required: false
   argument :locale, String, required: false
@@ -22,7 +22,7 @@ class Mutations::CreateRegistration < Mutations::BaseMutation
     event = Event.find(arguments[:event_id])
     time = event.start_time.split(':')
     arguments[:starting_at] = arguments[:starting_at].utc.change(hour: time[0].to_i, min: time[1].to_i)
-    arguments[:comment] = arguments[:message]
+    arguments[:questions] = arguments[:questions]
     arguments.delete :message
     arguments.delete :locale
 

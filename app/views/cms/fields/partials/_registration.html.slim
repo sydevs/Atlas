@@ -7,11 +7,12 @@
 .fields
   = f.input :registration_mode, collection: Event.registration_modes.map { |k, v| [translate_enum_value(Event, :registration_mode, k), k] }, wrapper_html: { class: 'sixteen wide' }
   = f.input :registration_url, as: :url, wrapper_html: { class: 'twelve wide', style: 'display: none' }
+
 = help_link :registration
 br
 
 .event_registration_config
-  div class=('two fields' if config.include?(:limit) && config.include?(:notification))
+  div class=(config.include?(:limit) && config.include?(:notification) ? 'two fields' : 'field')
     - if config.include? :limit
       = f.input :registration_limit, placeholder: translate('cms.hints.unlimited'), hint: translate('cms.hints.event.registration_limit')
 

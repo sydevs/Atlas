@@ -130,10 +130,11 @@ def load_events count, area, venue = nil
     rand(5..15).times do
       first_name = Faker::Name.first_name
       name = "#{first_name} #{Faker::Name.last_name}"
+      question_count = [0, 0, 0, 1, 1, 2, 2, 3, 4].sample
       registration = event.registrations.create!({
         name: name,
         email: "#{first_name.parameterize}@example.com",
-        comment: [true, false].sample ? Faker::Lorem.paragraph : nil,
+        questions: Event.registration_questions.keys.sample(question_count).map { |q| [q, Faker::Lorem.paragraph] }.to_h,
         created_at: Faker::Time.backward(days: 14),
         starting_at: event.start_date,
       })

@@ -233,8 +233,8 @@ ru:
         registration_question: "Registration Questions" # TODO: Translate
         registration_questions: # TODO: Translate
           questions: "Do you have any questions about the event?"
-          experience: "Do you have any previous experience with Sahaja Yoga meditation?"
-          aspirations: "What do you hope to get out of meditation?"
+          experience: "Have you experienced Sahaja Yoga meditation before?"
+          aspirations: "What do looking for from meditation?"
           referral: "How did you hear about us?"
         recurrence: "Повторение"
         recurrences:

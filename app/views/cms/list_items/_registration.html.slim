@@ -1,20 +1,12 @@
 
 .title id=registration.id class=("active" if params[:show].to_i == registration.id)
-  - if registration.comment
+  - if registration.questions.present?
     .right.floated.content
       i.comment.icon
   i.dropdown.icon
   = registration.label
 .content class=("active" if params[:show].to_i == registration.id)
   .ui.list
-    .item
-      i.comment.icon
-      .content
-        - if registration.comment.present?
-          .header = Registration.human_attribute_name(:comment)
-          .description = registration.comment
-        - else
-          .header = translate('cms.messages.no_comment')
     .item
       i.clock.icon
       .content
@@ -32,3 +24,12 @@
         .header = Registration.human_attribute_name(:starting_at)
         time.description datetime=registration.starting_at
           = registration.starting_at.to_s(:short_date)
+    .item
+      i.comment.icon
+      .content
+        - if registration.questions.present?
+          - registration.questions.each do |question, answer|
+            .header = translate_enum_value(Event, :registration_questions, question)
+            p.description = answer
+        - else
+          .header = translate('cms.messages.no_comment')

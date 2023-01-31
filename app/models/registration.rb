@@ -18,9 +18,9 @@ class Registration < ApplicationRecord
   scope :since, -> (date) { where('registrations.created_at >= ?', date) }
   scope :group_by_month, -> { reorder(nil).group("DATE_TRUNC('month', registrations.created_at)") }
   scope :group_by_week, -> { reorder(nil).group("DATE_TRUNC('week', registrations.created_at)") }
-  scope :order_comments_first, -> do 
+  scope :order_with_comments_first, -> do 
     r = Registration.arel_table
-    reorder(r[:comment].eq(nil)).order(r[:created_at].asc)
+    reorder(r[:questions].eq({})).order(r[:created_at].asc)
   end
 
   # Delegations

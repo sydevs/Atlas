@@ -7,7 +7,7 @@ function RegistrationForm() {
     eventId: null,
     name: null,
     email: null,
-    message: null,
+    questions: {},
     startingAt: null,
   }
 
@@ -55,12 +55,14 @@ function RegistrationForm() {
           onchange: event => { data.email = event.currentTarget.value },
           placeholder: Util.translate('registration.form.email'),
         }),
-        m('textarea.sya-registration__textarea', {
-          rows: 3,
-          name: 'message',
-          value: data.message,
-          onchange: event => { data.message = event.currentTarget.value },
-          placeholder: Util.translate('registration.form.message'),
+        Object.values(event.registrationQuestions).map(function(question) {
+          // let element = question.rows == 1 ? 'input.sya-registration__input' : 'textarea.sya-registration__textarea'
+          return m('textarea.sya-registration__textarea', {
+            rows: question.rows,
+            //name: `messages[${question.slug}]`,
+            onchange: event => { data.questions[question.slug] = event.currentTarget.value },
+            placeholder: question.title,
+          })
         }),
         alert ? m('.sya-registration__message', { class: alert.status }, alert.message) : null,
         m('.sya-registration__notice',

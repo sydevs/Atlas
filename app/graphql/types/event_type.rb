@@ -1,5 +1,7 @@
 module Types
   class EventType < Types::BaseObject
+    include LocalizationHelper
+
     field :id, ID, null: false
     field :path, String, null: false, method: :map_path
     field :url, String, null: false, method: :map_url
@@ -29,6 +31,7 @@ module Types
     field :registration_url, String, null: true
     field :registration_count, Integer, null: true
     field :registration_limit, Integer, null: true
+    field :registration_questions, [RegistrationQuestionType], null: true
 
     field :images, [Types::ImageType], null: true
 
@@ -85,6 +88,18 @@ module Types
 
     def registration_count
       object.registrations.count
+    end
+
+    def registration_questions
+      row_count = { questions: 2, experience: 3, aspirations: 3, referral: 1 }
+
+      object.registration_question.map do |question|
+        {
+          slug: question,
+          title: translate_enum_value(Event, :registration_question, question),
+          rows: row_count[question],
+        }
+      end
     end
   end
 end

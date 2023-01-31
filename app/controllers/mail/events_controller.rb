@@ -10,7 +10,7 @@ class Mail::EventsController < Mail::ApplicationController
   end
 
   def registrations
-    @registrations = @event.registrations.order_comments_first
+    @registrations = @event.registrations.order_with_comments_first
     @subject = I18n.translate('mail.event.registrations.subject')
   end
 

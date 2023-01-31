@@ -55,8 +55,8 @@ class EventMailer < ApplicationMailer
       return
     end
 
-    @registrations = @event.registrations.order_comments_first.since(@event.registrations_email_sent_at || @event.created_at)
-    @registrations = @event.registrations.order_comments_first.limit(10) if params[:test] && @registrations.empty?
+    @registrations = @event.registrations.order_with_comments_first.since(@event.registrations_email_sent_at || @event.created_at)
+    @registrations = @event.registrations.order_with_comments_first.limit(10) if params[:test] && @registrations.empty?
     return if @registrations.empty?
 
     create_session!

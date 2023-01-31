@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_01_30_004307) do
+ActiveRecord::Schema.define(version: 2023_01_30_231544) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -216,11 +216,11 @@ ActiveRecord::Schema.define(version: 2023_01_30_004307) do
     t.bigint "event_id"
     t.string "name"
     t.string "email"
-    t.text "comment"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "starting_at"
     t.string "time_zone"
+    t.jsonb "questions", default: {}
     t.index ["event_id"], name: "index_registrations_on_event_id"
   end
 

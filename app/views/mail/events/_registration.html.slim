@@ -1,6 +1,6 @@
 
 tr.registration
-  - if registration.comment.present?
+  - if registration.questions.present?
     th
       strong = registration.name
       br
@@ -8,9 +8,11 @@ tr.registration
       br
       = registration.created_at.to_s(:short)
     td colspan=2
-      u Comment
-      ' : 
-      em = "\"#{registration.comment}\""
+      - registration.questions.each do |question, answer|
+        p
+          b = translate_enum_value(Event, :registration_questions, question)
+          '  
+          em = "\"#{answer}\""
   - else 
     th
       strong = registration.name
