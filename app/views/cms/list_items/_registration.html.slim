@@ -24,12 +24,9 @@
         .header = Registration.human_attribute_name(:starting_at)
         time.description datetime=registration.starting_at
           = registration.starting_at.to_s(:short_date)
-    .item
-      i.comment.icon
-      .content
-        - if registration.questions.present?
-          - registration.questions.each do |question, answer|
-            .header = translate_enum_value(Event, :registration_questions, question)
-            p.description = answer
-        - else
-          .header = translate('cms.messages.no_comment')
+    - registration.questions.each do |question, answer|
+      .item
+        i.comment.icon
+        .content
+          .header = translate_enum_value(Event, :registration_questions, question)
+          .description = answer
