@@ -4,6 +4,7 @@ cs:
       view_in_browser: "Zobrazit v prohlížeči"
       unsubscribe: "Odhlásit se"
       reason: "Tento e-mail jste obdrželi, protože jste se zaregistrovali na tuto událost."
+      responses: "Your responses:" # TODO: Translate
 
     confirmation:
       offline:

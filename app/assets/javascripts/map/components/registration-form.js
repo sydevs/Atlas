@@ -57,12 +57,15 @@ function RegistrationForm() {
         }),
         Object.values(event.registrationQuestions).map(function(question) {
           // let element = question.rows == 1 ? 'input.sya-registration__input' : 'textarea.sya-registration__textarea'
-          return m('textarea.sya-registration__textarea', {
-            rows: question.rows,
-            //name: `messages[${question.slug}]`,
-            onchange: event => { data.questions[question.slug] = event.currentTarget.value },
-            placeholder: question.title,
-          })
+          return [
+            m('label', question.title),
+            m('textarea.sya-registration__textarea', {
+              rows: question.rows,
+              //name: `messages[${question.slug}]`,
+              onchange: event => { data.questions[question.slug] = event.currentTarget.value },
+              //placeholder: question.title,
+            })
+          ]
         }),
         alert ? m('.sya-registration__message', { class: alert.status }, alert.message) : null,
         m('.sya-registration__notice',

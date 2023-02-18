@@ -4,6 +4,7 @@ en:
       view_in_browser: "View in browser"
       unsubscribe: "Unsubscribe"
       reason: "You've received this email because you registered for this event."
+      responses: "Your responses:" # TODO: Translate
 
     confirmation:
       offline:

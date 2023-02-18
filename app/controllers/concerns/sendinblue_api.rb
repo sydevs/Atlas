@@ -74,7 +74,7 @@ module SendinblueAPI
       text[field] = I18n.translate(field, scope: scope, event_name: event.label)
     end
 
-    text[:faqs] ||= []
+    text[:faqs] = nil # This temporarily disables all FAQ text.
 
     SendinblueAPI.send_email(:confirmation, {
       subject: I18n.translate('subject', scope: scope, event_name: event.label),
@@ -91,6 +91,12 @@ module SendinblueAPI
         online: event.online? ? true : nil,
         link: event.online? ? event.online_url : event.decorated_venue&.directions_url,
         directions_url: event.decorated_venue&.directions_url,
+        responses: registration.questions.map do |question, answer|
+          {
+            question: I18n.translate(question, scope: 'activerecord.attributes.event.registration_questions'),
+            answer: answer,
+          } if answer.present?
+        end.compact,
         text: text,
       },
     })
