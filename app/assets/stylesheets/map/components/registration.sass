@@ -68,6 +68,9 @@
     margin: auto
 
 // ===== FIELDS ===== //
+.sya-registration__fields
+  padding-bottom: 40px
+
 .sya-registration__description
   margin-bottom: 12px
 
@@ -78,8 +81,8 @@
 .sya-registration__description > p
   margin-bottom: 16px
 
-.sya-registration__input,
-.sya-registration__textarea
+input.sya-registration__input,
+textarea.sya-registration__textarea
   appearance: none
   border-radius: 0
   background: white
@@ -98,10 +101,8 @@
   color: $color-grey-normal
 
   &::placeholder,
-  &::-webkit-input-placeholder,
-  &:-ms-input-placeholder
-    color: $color-grey-normal
-    opacity: 0.6
+  &::-ms-input-placeholder
+    color: $color-grey-light
 
 .sya-registration__notice
   text-align: center
