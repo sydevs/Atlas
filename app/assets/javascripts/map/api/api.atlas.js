@@ -32,7 +32,6 @@ class AtlasAPI {
           registrationQuestions {
             slug
             title
-            rows
           }
           timing {
             duration

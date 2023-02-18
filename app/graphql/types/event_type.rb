@@ -91,13 +91,10 @@ module Types
     end
 
     def registration_questions
-      row_count = { questions: 2, experience: 3, aspirations: 3, referral: 1 }
-
       object.registration_question.map do |question|
         {
           slug: question,
           title: translate_enum_value(Event, :registration_question, question),
-          rows: row_count[question],
         }
       end
     end

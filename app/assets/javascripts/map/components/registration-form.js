@@ -56,16 +56,10 @@ function RegistrationForm() {
           placeholder: Util.translate('registration.form.email'),
         }),
         Object.values(event.registrationQuestions).map(function(question) {
-          // let element = question.rows == 1 ? 'input.sya-registration__input' : 'textarea.sya-registration__textarea'
-          return [
-            m('label', question.title),
-            m('textarea.sya-registration__textarea', {
-              rows: question.rows,
-              //name: `messages[${question.slug}]`,
-              onchange: event => { data.questions[question.slug] = event.currentTarget.value },
-              //placeholder: question.title,
-            })
-          ]
+          return m(RegistrationQuestion, {
+            question: question,
+            onchange: event => { data.questions[question.slug] = event.currentTarget.value },
+          })
         }),
         alert ? m('.sya-registration__message', { class: alert.status }, alert.message) : null,
         m('.sya-registration__notice',
