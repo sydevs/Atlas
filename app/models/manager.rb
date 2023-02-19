@@ -160,7 +160,7 @@ class Manager < ApplicationRecord
   end
 
   def subscribe_to_sendinblue!
-    SendinblueAPI.subscribe(email, :test, sendinblue_attributes)
+    SendinblueAPI.subscribe(email, :managers, sendinblue_attributes)
   end
 
   private
@@ -171,7 +171,7 @@ class Manager < ApplicationRecord
     end
 
     def sendinblue_attributes
-      {
+      attributes = {
         email: email,
         firstname: first_name,
         lastname: last_name,
@@ -187,6 +187,18 @@ class Manager < ApplicationRecord
         areas_managed: areas.pluck(:name).map{ |name| name+';' }.join,
         events_managed: events.joins(:venue).select(:custom_name, :venue_id, :'venues.street').map{ |e| e.label+';' }.join,
       }
+
+      if administrator?
+        attributes.merge!(
+          clients_managed: 'ALL',
+          countries_managed: 'ALL',
+          regions_managed: 'ALL',
+          areas_managed: 'ALL',
+          events_managed: 'ALL',
+        )
+      end
+
+      attributes
     end
 
     def unsubscribe_from_sendinblue!
