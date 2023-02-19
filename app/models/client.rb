@@ -30,9 +30,6 @@ class Client < ApplicationRecord
   scope :enabled, -> { where(enabled: true) }
   scope :disabled, -> { where(enabled: false) }
 
-  # Callbacks
-  after_save :subscribe_to_sendinblue, if: :manager_id_previously_changed?
-
   # Methods
 
   def parent
@@ -46,11 +43,5 @@ class Client < ApplicationRecord
   def locale
     config&.dig(:locale)
   end
-
-  private
-
-    def subscribe_to_sendinblue
-      manager.subscribe_to! :client_managers
-    end
 
 end

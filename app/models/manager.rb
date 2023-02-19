@@ -38,7 +38,9 @@ class Manager < ApplicationRecord
 
   # Callbacks
   before_save :unverify
-  after_save :update_sendinblue, if: :email_previously_changed?
+  after_save :update_sendinblue!, if: :email_previously_changed?
+  after_create :subscribe_to_sendinblue!
+  after_destroy :unsubscribe_from_sendinblue!
 
   # Methods
 
@@ -149,18 +151,16 @@ class Manager < ApplicationRecord
     !contact_by_email?
   end
 
-  def subscribe_to! list_id
-    SendinblueAPI.subscribe(email, list_id, {
-      email: email,
-      firstname: first_name,
-      lastname: last_name,
-      timezone: areas.first&.time_zone,
-      city: areas.first&.name,
-      state_region: regions.first&.name,
-      country: countries.first&.name,
-      how_they_joined: "Sahaj Atlas #{list_id.to_s.titleize}",
-      language: LocalizationHelper.language_name(language_code),
-    })
+  def update_sendinblue! update_management: false
+    if email_previously_was.present?
+      SendinblueAPI.update_contact(email, sendinblue_attributes)
+    elsif update_management
+      SendinblueAPI.update_contact(email, sendinblue_attributes)
+    end
+  end
+
+  def subscribe_to_sendinblue!
+    SendinblueAPI.subscribe(email, :test, sendinblue_attributes)
   end
 
   private
@@ -170,14 +170,27 @@ class Manager < ApplicationRecord
       self[:phone_verified] = false if phone_changed?
     end
 
-    def update_sendinblue
-      return unless email_previously_was.present?
-
-      SendinblueAPI.update_contact(email_previously_was, {
+    def sendinblue_attributes
+      {
         email: email,
         firstname: first_name,
         lastname: last_name,
-      })
+        timezone: areas.first&.time_zone,
+        city: areas.first&.name,
+        state_region: regions.first&.name,
+        country: countries.first&.name,
+        how_they_joined: "Sahaj Atlas Manager",
+        language: LocalizationHelper.language_name(language_code),
+        clients_managed: clients.pluck(:label).map{ |label| label+';' }.join,
+        countries_managed: countries.pluck(:name).map{ |name| name+';' }.join,
+        regions_managed: regions.pluck(:name).map{ |name| name+';' }.join,
+        areas_managed: areas.pluck(:name).map{ |name| name+';' }.join,
+        events_managed: events.joins(:venue).select(:custom_name, :venue_id, :'venues.street').map{ |e| e.label+';' }.join,
+      }
+    end
+
+    def unsubscribe_from_sendinblue!
+      SendinblueAPI.unsubscribe(email, :managers)
     end
 
 end

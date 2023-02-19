@@ -6,9 +6,8 @@ module SendinblueAPI
 
   LISTS = {
     registrations: 13,
-    country_managers: 20,
-    client_managers: 19,
-    test: 5,
+    managers: 19,
+    test: 15,
   }.freeze
 
   TEMPLATES = {
@@ -29,6 +28,18 @@ module SendinblueAPI
     )
   rescue SibApiV3Sdk::ApiError => e
     puts "Exception when calling ContactsApi->create_contact: #{e} #{e.response_body}"
+  end
+
+  def self.unsubscribe email, list_id
+    client = SibApiV3Sdk::ContactsApi.new
+    list_id = SendinblueAPI::LISTS[list_id]
+
+    # Create a contact
+    p client.remove_contact_from_list(list_id, {
+      'emails' => [email],
+    })
+  rescue SibApiV3Sdk::ApiError => e
+    puts "Exception when calling ContactsApi->update_contact: #{e} #{e.response_body}"
   end
 
   def self.update_contact email, attributes

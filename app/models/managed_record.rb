@@ -12,6 +12,7 @@ class ManagedRecord < ApplicationRecord
 
   # Callbacks
   after_create :subscribe_to_sendinblue
+  after_destroy :unsubscribe_from_sendinblue
 
   # Methods
 
@@ -22,9 +23,11 @@ class ManagedRecord < ApplicationRecord
   private
 
     def subscribe_to_sendinblue
-      return unless record.is_a?(Country)
+      manager.update_sendinblue! update_management: true
+    end
 
-      manager.subscribe_to! :country_managers
+    def unsubscribe_from_sendinblue record
+      record.manager.update_sendinblue! update_management: true
     end
 
 end
