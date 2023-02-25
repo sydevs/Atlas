@@ -39,9 +39,9 @@ module Managed
       if existing_manager
         self.manager = existing_manager
         self.manager.update_sendinblue! update_management: true
+        existing_manager.update_sendinblue! update_management: true
       else
         self.manager_id = nil
-        existing_manager.update_sendinblue! update_management: true
       end
     end
 
