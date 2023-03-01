@@ -18,6 +18,8 @@ class Event < ApplicationRecord
   enum category: { dropin: 1, course: 3, single: 2, festival: 4, concert: 5 }, _suffix: true
   enum recurrence: { day: 0, monday: 1, tuesday: 2, wednesday: 3, thursday: 4, friday: 5, saturday: 6, sunday: 7 }
   enum registration_mode: { native: 0, external: 1, meetup: 2, eventbrite: 3, facebook: 4 }, _suffix: true
+  enum registration_notification: { digest: 1, immediate: 2, disabled: 3 }, _suffix: true
+  flag :registration_question, %i[questions experience aspirations referral]
 
   # Associations
   # belongs_to :location, polymorphic: true
@@ -46,6 +48,7 @@ class Event < ApplicationRecord
   validate :validate_end_time
   validate :validate_end_date
   validate :validate_language_code
+  validate :validate_location
   validate :parse_phone_number
 
   # Scopes
@@ -54,7 +57,16 @@ class Event < ApplicationRecord
   scope :publicly_visible, -> { current.manager_verified.publishable.published }
   scope :manager_verified, -> { joins(:manager).where('managers.email_verified = TRUE OR managers.phone_verified = TRUE') }
 
-  scope :ready_for_reminder_email, -> { where("reminder_email_sent_at IS NULL OR reminder_email_sent_at <= ?", 12.hours.ago) }
+  scope :ready_for_registrations_email, -> do
+    case registration_notification
+    when 'immediate'
+      with_new_registrations
+    when 'disabled'
+      none
+    when 'digest'
+      with_new_registrations.where("registrations_email_sent_at IS NULL OR registrations_email_sent_at <= ?", 18.hours.ago)
+    end
+  end
 
   scope :layer, -> (layer) { layer == 'online' ? online : offline }
   scope :online, -> (online=true) { online ? where(type: 'OnlineEvent') : offline }
@@ -190,6 +202,13 @@ class Event < ApplicationRecord
 
   private
 
+    def validate_location
+      return unless venue.present? && venue.latitude.present? && venue.longitude.present?
+      return if area.contains?(venue)
+
+      self.errors.add(:venue, I18n.translate('cms.messages.venue.invalid_location', area: area.name))
+    end
+
     def validate_end_time
       return if end_time.nil? || duration.positive?
       
@@ -197,7 +216,6 @@ class Event < ApplicationRecord
     end
 
     def validate_end_date
-      self.end_date = start_date if recurrence == 'day' && !end_date.present?
       return if end_date.nil?
       
       self.errors.add(:end_date, I18n.translate('cms.messages.event.invalid_end_date')) if end_date < start_date

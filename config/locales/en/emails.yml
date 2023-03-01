@@ -4,6 +4,7 @@ en:
       view_in_browser: "View in browser"
       unsubscribe: "Unsubscribe"
       reason: "You've received this email because you registered for this event."
+      responses: "Your responses:" # TODO: Translate
 
     confirmation:
       offline:
@@ -19,10 +20,11 @@ en:
         subject: :emails.confirmation.offline.subject # Do not translate
         header: :emails.confirmation.offline.subject # Do not translate
         subheader: :emails.confirmation.offline.subject # Do not translate
+        online_url: "Or, use this link to join the event when it starts"
         invite_a_friend: :emails.confirmation.offline.invite_a_friend # Do not translate
+        joining_title: "How do I join?"
+        joining_content: "Use this link to join when the event starts. You will be emailed this link again, 1 hour before the event starts."
         faqs:
-          - title: "How do I join?"
-            content: "A link will be emailed to you approximately 1 hour before the event begins."
 
     reminder:
       offline:

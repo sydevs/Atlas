@@ -2,23 +2,25 @@
 const params = new URLSearchParams(location.search)
 const embed = document.currentScript
 
-const container = document.createElement('div')
-container.id = 'sahaj-atlas'
-embed.replaceWith(container)
+if (embed.id == 'sahaj-atlas' || embed.id == 'sahajatlas') {
+  container = document.createElement('div')
+  container.id = 'sahajatlas'
+  embed.replaceWith(container)
+}
 
 const script = document.createElement('script')
-script.setAttribute('id', 'sahaj-atlas-script')
+script.setAttribute('id', 'sahajatlas-script')
 script.setAttribute('src', '<%= javascript_url "map" %>')
 script.setAttribute('type', 'text/javascript')
 document.head.appendChild(script)
 
 const style = document.createElement('link')
-style.setAttribute('id', 'sahaj-atlas-style')
+style.setAttribute('id', 'sahajatlas-style')
 style.setAttribute('href', '<%= stylesheet_url "map" %>')
 style.setAttribute('type', 'text/css')
 style.setAttribute('rel', 'stylesheet')
 style.setAttribute('media', 'all')
-container.parentNode.appendChild(style)
+document.head.appendChild(style)
 
 window.sya = {}
 window.sya.config = JSON.parse('<%= @config.to_json.html_safe %>'),

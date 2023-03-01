@@ -32,10 +32,11 @@ class CMS::EventsController < CMS::ApplicationController
         :published, :type,
         :custom_name, :description, :room, :category, :language_code,
         :phone_name, :phone_number,
-        :registration_mode, :registration_url, :registration_limit,
+        :registration_mode, :registration_url, :registration_notification, :registration_limit,
         :recurrence, :start_date, :end_date, :start_time, :end_time,
         :online_url,
         :venue_id, :manager_id,
+        registration_question: [],
         venue_attributes: %i[id name place_id latitude longitude street city region_code country_code post_code],
         manager_attributes: %i[id name email phone contact_method language_code]
       )

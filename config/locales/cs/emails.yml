@@ -1,0 +1,39 @@
+cs:
+  emails: # These are translations for email that are sent to the seekers.
+    common:
+      view_in_browser: "Zobrazit v prohlížeči"
+      unsubscribe: "Odhlásit se"
+      reason: "Tento e-mail jste obdrželi, protože jste se zaregistrovali na tuto událost."
+      responses: "Your responses:" # TODO: Translate
+
+    confirmation:
+      offline:
+        subject: "Registrace potvrzena - %{event_name}"
+        header: "Vaše registrace je potvrzena, %{name}"
+        subheader: "Jsme rádi, že jste se rozhodli připojit se k našemu setkání a těšíme se na společnou meditaci!"
+        invite_a_friend: "Pomocí tohoto odkazu pozvěte přátele"
+        get_directions: "Další informace"
+        faqs:
+          - title: "Co si mám s sebou přinést?"
+            content: "Není potřeba žádné speciální vybavení. Přijďte bez očekávání."
+      online:
+        subject: :emails.confirmation.offline.subject # Do not translate
+        header: :emails.confirmation.offline.subject # Do not translate
+        subheader: :emails.confirmation.offline.subject # Do not translate
+        online_url: "Or, use this link to join the event when it starts"
+        invite_a_friend: :emails.confirmation.offline.invite_a_friend # Do not translate
+        joining_title: "Jak se připojím?"
+        joining_content: "Pro připojení použijte tento odkaz. Odkaz vám bude znovu zaslán e-mailem 1 hodinu před začátkem akce."
+        faqs:
+
+    reminder:
+      offline:
+        subject: "Začínáme zítra - %{event_name}"
+        header: "Vaše lekce začíná již zítra, %{name}"
+        subheader: "Jsme rádi, že jste se rozhodli připojit se k naší lekci a těšíme se na společnou meditaci!"
+        action: :emails.confirmation.offline.get_directions
+      online:
+        subject: "Začínáme brzy - %{event_name}"
+        header: "Vaše lekce začíná za 1 hodinu, %{name}"
+        subheader: "Kurz, do kterého jste se zaregistrovali, právě začíná. Zde je odkaz pro připojení."
+        action: "Připojit se k události"

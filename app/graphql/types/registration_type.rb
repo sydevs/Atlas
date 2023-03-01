@@ -6,7 +6,7 @@ module Types
     field :first_name, String, null: false
     field :last_name, String, null: true
     field :email, String, null: false
-    field :comment, String, null: true
+    # field :questions, [RegistrationQuestionType], null: true
     field :time_zone, String, null: true
     field :created_at, GraphQL::Types::ISO8601DateTime, null: false
     field :updated_at, GraphQL::Types::ISO8601DateTime, null: false

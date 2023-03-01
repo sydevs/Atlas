@@ -13,6 +13,7 @@ class AtlasEvent extends AtlasRecord {
     super(attrs)
     this.timing = new EventTiming(attrs)
     this.layer = attrs.online ? AtlasEvent.LAYER.online : AtlasEvent.LAYER.offline
+    this.location = AtlasApp.data.parse(this.location)
   }
 
   get offline() {

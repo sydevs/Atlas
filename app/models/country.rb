@@ -26,7 +26,7 @@ class Country < ApplicationRecord
   validate :validate_language_code
 
   # Scopes
-  default_scope { order(country_code: :desc) }
+  default_scope { order(name: :asc) }
 
   scope :publicly_visible, -> { has_public_events }
   scope :has_public_events, -> { joins(:publicly_visible_events).uniq }

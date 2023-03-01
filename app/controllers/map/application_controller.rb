@@ -25,7 +25,7 @@ class Map::ApplicationController < ActionController::Base
       raise ActionController::RoutingError.new('Not Found') if @client.nil?
 
       headers['X-FRAME-OPTIONS'] = "ALLOW-FROM #{@client.domain}"
-      headers['Access-Control-Allow-Origin'] = @client.domain
+      headers['Access-Control-Allow-Origin'] = "https://#{@client.domain}"
       headers['Access-Control-Allow-Methods'] = 'GET'
       headers['Access-Control-Request-Method'] = '*'
       headers['Access-Control-Allow-Headers'] = 'Origin, X-Requested-With, Content-Type, Accept, Authorization'
@@ -45,6 +45,7 @@ class Map::ApplicationController < ActionController::Base
       @config[:bounds] = location.client_bounds if location.present? && location.bounds.present?
       @config[:center] = coordinates unless @config[:bounds].present?
       @config[:country] = location.country_code if location&.respond_to?(:country_code)
+
       @config.merge!(@client.config).merge!({
         location_type: @client.location_type&.downcase,
         location_id: @client.location_id

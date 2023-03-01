@@ -22,11 +22,13 @@ const General = {
     let $registration_mode = $('.event_registration_mode')
     let $registration_select = $('.event_registration_mode > .ui.selection')
     let $registration_url = $('.event_registration_url')
+    let $registration_config = $('.event_registration_config')
     let onRegistrationModeSelect = (value) => {
       const visible = value != 'native'
       $registration_mode.toggleClass('four', visible)
       $registration_mode.toggleClass('sixteen', !visible)
       $registration_url.toggle(visible)
+      $registration_config.toggle(!visible)
     }
 
     let value = $registration_select.dropdown('get value')

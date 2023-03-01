@@ -43,6 +43,7 @@ ru:
       dashboard: "Панель инструментов для %{user}"
       review: "Все оповещения для %{user}"
       worldwide: "Данные по всему миру"
+      clients: "All Client Applications" # TODO: Translate
       faq: "Часто задаваемые вопросы"
       context: "%{resource} для %{parent}"
       # Tertiary menu
@@ -71,7 +72,7 @@ ru:
       area: # TODO: Translate
         invalid_location: "must have it's center within the borders of %{region} and %{country}"
       venue:
-        out_of_bounds: "Место проведения не может находиться за пределами радиуса %{area}"
+        invalid_location: "не может находиться за пределами радиуса %{area}"
       event:
         verified: "Thank you for confirming your event's accuracy." # TODO: Translate
         invalid_end_time: "не может быть раньше времени начала"
@@ -127,8 +128,10 @@ ru:
         room: "В какой комнате проходит мероприятие?"
         language: "На каком языке проводится это событие, если указано в?"
         registration_mode: "Куда отправлять искателей для регистрации на мероприятие? Мы настоятельно рекомендуем оставить здесь '%{native}.' Регистрация искателей на этом веб-сайте позволит нам отправлять им напоминания и последующие уведомления."
+        registration_notification: "How often do you want to receive notifications about new registrations?" # TODO: Translate
         registration_url: "URL-адрес регистрации будет установлен автоматически, если установлен режим \"%{native}.\""
         registration_limit: "Limit the number of registrations to this amount." # TODO: Translate
+        registration_question: "What questions should seekers be asked when they register for the class." # TODO: Translate
         online: "Установи этот флажок, если программа будет проходить онлайн."
         online_url: "Если программа проходит онлайн, то по этой ссылке искатели смогут присоединиться к классу (например, ссылка на Zoom, YouTube, Google Meet и т.д.)."
         phone_number: "Местный номер телефона, по которому искатели могут позвонить, чтобы задать вопросы." 

@@ -28,9 +28,9 @@ Rails.application.routes.draw do
 
       resources :events, only: %i[] do
         get :status
-        get :reminder
+        get :registrations
         get :status, on: :collection
-        get :reminder, on: :collection
+        get :registrations, on: :collection
       end
 
       resources :countries, :regions, :areas, only: %i[] do
@@ -52,12 +52,12 @@ Rails.application.routes.draw do
     get '(*path)', to: 'application#show'
 
     # For generating helpers
+    get '/event/:event_id', to: 'application#show', as: :event
     scope '(:layer)' do
       get '/country/:country_id', to: 'application#show', as: :country
       get '/region/:region_id', to: 'application#show', as: :region
       get '/area/:area_id', to: 'application#show', as: :area
       get '/venue/:venue_id', to: 'application#show', as: :venue
-      get '/event/:event_id', to: 'application#show', as: :event
     end
   end
 

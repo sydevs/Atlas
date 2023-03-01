@@ -36,13 +36,18 @@ function Search() {
     if (location.west && location.east && location.north && location.south) {
       AtlasApp.map.fitTo(location)
     } else {
-      AtlasApp.map.goTo(location, location.zoom || 11)
+      AtlasApp.map.goTo(location, { zoom: location.zoom || 11 })
     }
 
     selected = location
   }
   
   return {
+    oncreate: function() {
+      if (AtlasApp.config.query) {
+        select(AtlasApp.config.query)
+      }
+    },
     view: function(vnode) {
       let classes = []
       if (focused && results.length > 0) classes.push('sya-search--active')

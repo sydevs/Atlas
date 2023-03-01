@@ -18,18 +18,18 @@ module LocalizationHelper
     end
 
     i18n_key = I18N_KEYS[model] || model.model_name.i18n_key
-    "#{number_with_delimiter(count)} #{translate(i18n_key, scope: %i[activerecord models], count: count, locale: locale)}"
+    "#{number_with_delimiter(count)} #{translate(i18n_key, scope: %i[activerecord models], count: count, locale: I18n.locale)}"
   end
 
   def translate_enum_value model, attr, value = nil
     value ||= model.send(attr)
     i18n_key = I18N_KEYS[model] || model.model_name.i18n_key
-    I18n.translate value, scope: [:activerecord, :attributes, i18n_key, attr.to_s.pluralize], locale: locale
+    I18n.translate value, scope: [:activerecord, :attributes, i18n_key, attr.to_s.pluralize], locale: I18n.locale
   end
 
   def translate_attribute model, attr
     i18n_key = I18N_KEYS[model] || model.model_name.i18n_key
-    I18n.translate attr, scope: [:activerecord, :attributes, i18n_key], locale: locale
+    I18n.translate attr, scope: [:activerecord, :attributes, i18n_key], locale: I18n.locale
   end
 
   def self.language_name language_code, locale: :en

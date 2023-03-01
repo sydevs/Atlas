@@ -18,9 +18,17 @@ class Registration < ApplicationRecord
   scope :since, -> (date) { where('registrations.created_at >= ?', date) }
   scope :group_by_month, -> { reorder(nil).group("DATE_TRUNC('month', registrations.created_at)") }
   scope :group_by_week, -> { reorder(nil).group("DATE_TRUNC('week', registrations.created_at)") }
+  scope :order_with_comments_first, -> do 
+    r = Registration.arel_table
+    reorder(r[:questions].eq({})).order(r[:created_at].asc)
+  end
 
   # Delegations
   alias parent event
+  delegate :immediate_registration_notification?, to: :event
+
+  # Callbacks
+  after_create :send_registrations_notification, if: :immediate_registration_notification?
 
   # Methods
 
@@ -48,8 +56,8 @@ class Registration < ApplicationRecord
       country: event.area&.country&.name,
       how_they_joined: "Sahaj Atlas Registration",
       language: LocalizationHelper.language_name(event.language_code),
-      latitude: event.venue.latitude,
-      longitude: event.venue.longitude,
+      latitude: (event.venue&.latitude || event.area&.latitude),
+      longitude: (event.venue&.longitude || event.area&.longitude),
     })
   end
 
@@ -64,5 +72,11 @@ class Registration < ApplicationRecord
       end
     end
   end
+
+  private
+
+    def send_registrations_notification
+      EventMailer.with(event: event, manager: event.manager).registrations.deliver_later
+    end
 
 end

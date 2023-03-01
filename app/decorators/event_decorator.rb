@@ -74,11 +74,11 @@ module EventDecorator
   end
 
   def map_path
-    Rails.application.routes.url_helpers.map_event_path(self, layer: LAYER[layer.to_sym])
+    Rails.application.routes.url_helpers.map_event_path(self)
   end
 
   def map_url
-    Rails.application.routes.url_helpers.map_event_url(self, layer: LAYER[layer.to_sym], host: canonical_host)
+    Rails.application.routes.url_helpers.map_event_url(self, host: canonical_host)
   end
 
 end

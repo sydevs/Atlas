@@ -13,12 +13,12 @@ namespace :mail do
     Passwordless::Session.where("expires_at < ?", 1.day.ago).delete_all
   end
 
-  desc 'Send event reminder emails.'
+  desc 'Send event registration emails.'
   task events: :environment do
-    events = Event.publicly_visible.ready_for_reminder_email.joins(:manager).includes(:registrations)
-    puts "[MAIL] Attempting to send reminder emails for #{events.count} events"
+    events = Event.publicly_visible.ready_for_registrations_email.joins(:manager).includes(:registrations)
+    puts "[MAIL] Attempting to send registrations emails for #{events.count} events"
     events.in_batches.each_record do |event|
-      EventMailer.with(event: event, manager: event.manager).reminder.deliver_later
+      EventMailer.with(event: event, manager: event.manager).registrations.deliver_later
     end
   end
 

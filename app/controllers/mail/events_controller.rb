@@ -9,9 +9,9 @@ class Mail::EventsController < Mail::ApplicationController
     @subject = I18n.translate(@status, scope: 'mail.event.status.subject')
   end
 
-  def reminder
-    @registrations = @event.registrations.order('RANDOM()')
-    @subject = I18n.translate('mail.event.reminder.subject')
+  def registrations
+    @registrations = @event.registrations.order_with_comments_first
+    @subject = I18n.translate('mail.event.registrations.subject')
   end
 
   private

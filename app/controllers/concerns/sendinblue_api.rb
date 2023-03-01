@@ -6,9 +6,8 @@ module SendinblueAPI
 
   LISTS = {
     registrations: 13,
-    country_managers: 20,
-    client_managers: 19,
-    test: 5,
+    managers: 19,
+    test: 15,
   }.freeze
 
   TEMPLATES = {
@@ -29,6 +28,18 @@ module SendinblueAPI
     )
   rescue SibApiV3Sdk::ApiError => e
     puts "Exception when calling ContactsApi->create_contact: #{e} #{e.response_body}"
+  end
+
+  def self.unsubscribe email, list_id
+    client = SibApiV3Sdk::ContactsApi.new
+    list_id = SendinblueAPI::LISTS[list_id]
+
+    # Create a contact
+    p client.remove_contact_from_list(list_id, {
+      'emails' => [email],
+    })
+  rescue SibApiV3Sdk::ApiError => e
+    puts "Exception when calling ContactsApi->update_contact: #{e} #{e.response_body}"
   end
 
   def self.update_contact email, attributes
@@ -67,12 +78,14 @@ module SendinblueAPI
     scope = "emails.confirmation.#{event.layer}"
 
     text = {
-      header: I18n.translate('header', scope: scope, name: registration.first_name)
+      header: I18n.translate('header', scope: scope, name: registration.first_name, event_name: event.label)
     }
 
-    %i[subheader invite_a_friend get_directions faqs].each do |field|
-      text[field] = I18n.translate(field, scope: scope)
+    %i[subheader invite_a_friend get_directions joining_title joining_content faqs].each do |field|
+      text[field] = I18n.translate(field, scope: scope, event_name: event.label)
     end
+
+    text[:faqs] = nil # This temporarily disables all FAQ text.
 
     SendinblueAPI.send_email(:confirmation, {
       subject: I18n.translate('subject', scope: scope, event_name: event.label),
@@ -82,10 +95,19 @@ module SendinblueAPI
         url: event.map_url,
         label: event.label,
         address: event.address,
+        room: event.room,
         timing: [event.start_time, event.end_time].compact.join(' - '),
         date: registration.starting_date.to_s(:short),
         weekday: registration.starting_at_weekday.upcase,
+        online: event.online? ? true : nil,
+        link: event.online? ? event.online_url : event.decorated_venue&.directions_url,
         directions_url: event.decorated_venue&.directions_url,
+        responses: registration.questions.map do |question, answer|
+          {
+            question: I18n.translate(question, scope: 'activerecord.attributes.event.registration_questions'),
+            answer: answer,
+          } if answer.present?
+        end.compact,
         text: text,
       },
     })
@@ -101,12 +123,12 @@ module SendinblueAPI
     }
 
     %i[subheader action].each do |field|
-      text[field] = I18n.translate(field, scope: scope)
+      text[field] = I18n.translate(field, scope: scope, event_name: event.label)
     end
 
     schedule_at = registration.starting_at - (event.online? ? 1.hour : 1.day)
     schedule_at = 1.minute.from_now if event.online? && schedule_at < Time.now
-    schedule_at = 1.minute.from_now # For development
+    # schedule_at = 1.minute.from_now # For development
     return if schedule_at < Time.now
 
     SendinblueAPI.send_email(:reminder, {
@@ -117,6 +139,7 @@ module SendinblueAPI
         name: registration.first_name,
         label: event.label,
         address: event.address,
+        room: event.room,
         timing: [event.start_time, event.end_time].compact.join(' - '),
         date: registration.starting_date.to_s(:short),
         weekday: registration.starting_at_weekday.upcase,

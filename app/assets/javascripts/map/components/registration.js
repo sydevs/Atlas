@@ -8,9 +8,10 @@ function Registration() {
   return {
     view: function(vnode) {
       const event = vnode.attrs
+      const external = event.registrationMode != 'native'
       let registerable = Boolean(event.timing.nextDateTime)
 
-      return m('form.sya-registration',
+      return m(`form.sya-registration.sya-registration--${external ? 'external' : 'atlas'}`,
         m('#registration'),
         m('.sya-registration__header',
           m('.sya-registration__header__text',
@@ -27,7 +28,7 @@ function Registration() {
               registration: registration,
               ondismiss: () => { registration = null }
             }) :
-            (event.registrationMode != 'native' ? m('.sya-registration__external',
+            (external ? m('.sya-registration__external',
               m('a.sya-registration__external__action', {
                 href: event.registrationUrl,
                 target: '_blank',

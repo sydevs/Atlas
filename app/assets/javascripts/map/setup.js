@@ -11,12 +11,25 @@ class SahajAtlas {
     return this.#config
   }
 
-  constructor() {
-    this.#container = document.getElementById('sahaj-atlas')
+  constructor(container) {
+    this.#container = container
     this.#container.style = `height: calc(100vh - ${this.#container.offsetTop}px)`
     this.#config = window.sya.config
     this.data = new DataCache(this.#config.endpoint, this.#config.locale)
     document.addEventListener('resize', () => m.redraw())
+
+    const params = new Proxy(new URLSearchParams(window.location.search), {
+      get: (searchParams, prop) => searchParams.get(prop),
+    })
+
+    if (params.q && params.latitude && params.longitude) {
+      this.#config.query = {
+        label: params.q,
+        latitude: params.latitude,
+        longitude: params.longitude,
+        type: params.type,
+      }
+    }
   }
 
   setup() {
@@ -56,7 +69,6 @@ class SahajAtlas {
     })
 
     let currentPath = m.route.get().split('#')[0]
-    console.log('PATH', basePath, '-', currentPath)
 
     if (this.config.default_view == 'list' && (currentPath == '' || currentPath == '/')) {
       m.route.set('/:model/:id', {
@@ -68,8 +80,13 @@ class SahajAtlas {
 }
 
 function loadAtlas() {
-  window.AtlasApp = new SahajAtlas()
-  AtlasApp.setup()
+  let container = document.getElementById('sahajatlas')
+  if (container) {
+    window.AtlasApp = new SahajAtlas(container)
+    AtlasApp.setup()
+  } else {
+    console.warn("Could not find #sahajatlas element.")
+  }
 }
 
 if (/complete|interactive|loaded/.test(document.readyState)) {

@@ -7,7 +7,7 @@ class DataCache {
   #cache
   #atlas
   #debug = false
-  #models = [AtlasCountry, AtlasRegion, AtlasArea, AtlasVenue, AtlasEvent]
+  #models = { AtlasCountry, AtlasRegion, AtlasArea, AtlasVenue, AtlasEvent }
 
   constructor(endpoint, locale) {
     this.#atlas = new AtlasAPI(endpoint, locale)
@@ -19,7 +19,7 @@ class DataCache {
       closestfetchVenue: null,
     }
 
-    this.#models.forEach(Model => {
+    Object.values(this.#models).forEach(Model => {
       this.#cache[Model.key] = {}
     })
   }
@@ -136,6 +136,16 @@ class DataCache {
   }
 
   // HELPER METHODS
+
+  parse(data) {
+    ['onlineEventIds', 'offlineEventIds'].forEach(field => {
+      if (typeof data[field] === 'string') {
+        data[field] = JSON.parse(data[field])
+      }
+    })
+
+    return new this.#models[`Atlas${data.type}`](data)
+  }
 
   setCache(key, object) {
     this.#cache[key][object.id] = object

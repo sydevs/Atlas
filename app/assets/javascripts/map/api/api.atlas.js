@@ -26,15 +26,20 @@ class AtlasAPI {
           phoneNumber
           online
           onlineUrl
+          path
           registrationMode
           registrationUrl
-          path
+          registrationQuestions {
+            slug
+            title
+          }
           timing {
             duration
             timeZone
             firstDate
             lastDate
             upcomingDates
+            recurrence
           }
           images {
             url
@@ -46,7 +51,8 @@ class AtlasAPI {
             label
             latitude
             longitude
-            eventIds
+            onlineEventIds
+            offlineEventIds
             parentId
             parentType
             directionsUrl
@@ -57,7 +63,7 @@ class AtlasAPI {
           label
           latitude
           longitude
-          eventIds
+          offlineEventIds
           parentId
         }`,
         area: `on Area {
@@ -75,12 +81,13 @@ class AtlasAPI {
         region: `on Region {
           id
           label
-          bounds
+          onlineEventBounds
+          offlineEventBounds
           onlineEventIds
           offlineEventIds
           areas {
             id
-            label
+            name
             onlineEventIds
             offlineEventIds
           }
@@ -96,7 +103,7 @@ class AtlasAPI {
           offlineEventIds
           regions {
             id
-            label
+            name
             onlineEventIds
             offlineEventIds
           }
@@ -112,11 +119,13 @@ class AtlasAPI {
             }
             properties {
               id
+              type
               label
               latitude
               longitude
               radius
-              eventIds
+              onlineEventIds
+              offlineEventIds
               parentId
               parentType
             }

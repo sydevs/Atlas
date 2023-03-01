@@ -35,14 +35,21 @@ h2.ui.header
         .ui.relaxed.divided.list
           - if current_user.administrator?
             .item
+              i.project.diagram.icon
+              .content
+                a.header href=url_for([:cms, :clients]) = translate('cms.menu.clients')
+            .item
               i.globe.icon
               .content
                 a.header href=url_for([:cms, :countries]) = translate('cms.menu.worldwide')
-          - @resources.each do |resource|
-            .item
-              = model_icon resource.class
-              .content
-                a.header href=url_for([:cms, resource]) = resource.label
+          - @resources.group_by(&:class).each do |type, resources|
+            //h3.ui.tiny.grey.dividing.header = translate_model(type, :plural).upcase
+            //.ui.relaxed.divided.list
+            - resources.each do |resource|
+              .item
+                = model_icon resource.class
+                .content
+                  a.header href=url_for([:cms, resource]) = resource.label
 
     .column
       - if @events_for_review.present? || @events_recently_expired.present?

@@ -1,6 +1,6 @@
 
 .item
-  - if event.finished?
+  - if event.should_finish?
     i.black.check.circle.icon
   - elsif event.archived?
     i.black.times.circle.icon
@@ -22,7 +22,7 @@
       - if @context != event.parent && event.parent
         |  - #{event.parent.label}
     .description
-      - if event.finished?
+      - if event.should_finish?
         em.alert = translate('cms.details.record_finished.title', resource: translate_model(Event))
         '  - 
       - elsif event.archived?

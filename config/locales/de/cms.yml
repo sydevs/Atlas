@@ -43,14 +43,12 @@ de:
       dashboard: "Schaltzentrale für %{user}"
       review: "Alle Benachrichtigungen für %{user}"
       worldwide: "Weltweite Daten"
+      clients: "All Client Applications" # TODO: Translate
       faq: "Häufig gestellte Fragen"
       context: "%{resource} für %{parent}"
       # Tertiary menu
       details: "Info"
       activity: "Aktivität"
-      events:
-        offline: "Vorort Veranstaltungen"
-        online: "Online Veranstaltungen"
       breadcrumbs:
         world: "Welt"
         help: "Hilfe"
@@ -74,7 +72,7 @@ de:
       area: # TODO: Translate
         invalid_location: "must have it's center within the borders of %{region} and %{country}"
       venue:
-        out_of_bounds: "Die veranstaltung darf nicht weiter als %{area} entfernt sein."
+        invalid_location: "darf nicht weiter als %{area} entfernt sein."
       event:
         verified: "Vielen Dank für die Bestätigung der gültigkeit der Veranstaltung."
         invalid_end_time: "darf nicht vor dem beginn zeitpunkt sein"
@@ -130,8 +128,10 @@ de:
         room: "In welchem Raum findet die Veranstaltung statt?"
         language: "Was ist die Hauptsprache, dass dieses Veranstaltung abgehalten wird? "
         registration_mode: "Wo sollten sich Sucher für die Veranstaltung anmelden? Wir empfehlen dringend, dass Sie dies als \"%{nativ} \" zu lassen. Damit wir ihm Erinnerungen und E-Mails zu folgeprogrammen senden können. "
+        registration_notification: "How often do you want to receive notifications about new registrations?" # TODO: Translate
         registration_url: "Die Registrierungs-URL wird automatisch gesetzt, wenn der Modus \"%{nativ}\" gesetzt wird."
         registration_limit: "Setzen Sie das Limit für Anmeldungen."
+        registration_question: "What questions should seekers be asked when they register for the class." # TODO: Translate
         online: "Aktivieren Sie diese Box, wenn dies ein online Programm ist."
         online_url: "Wenn die Klasse online abgehalten wird, geben sie hier den Beitrits Link an (zB. für Zoom, YouTube, Google Meet, etc.)"
         phone_number: "Eine lokale Telefonnummer, die Sucher anrufen können, um Fragen zu stellen."

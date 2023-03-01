@@ -12,11 +12,10 @@ function ShareModal() {
 
   let selection
 
-  // TODO: Implement object sharing
   function formatUrl(template, url) {
     template = template.replace('{url}', encodeURIComponent(url))
-    //template = template.replace('{title}', encodeURIComponent(event.label))
-    //template = template.replace('{text}', encodeURIComponent(event.description))
+    template = template.replace('{title}', selection ? encodeURIComponent(selection.label) : "")
+    template = template.replace('{text}', selection ? encodeURIComponent(selection.description) : "")
     template = template.replace('{provider}', encodeURIComponent(window.location.hostname))
     return template
   }

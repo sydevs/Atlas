@@ -7,7 +7,7 @@ function RegistrationForm() {
     eventId: null,
     name: null,
     email: null,
-    message: null,
+    questions: {},
     startingAt: null,
   }
 
@@ -21,7 +21,8 @@ function RegistrationForm() {
           onsubmit: event => {
             event.preventDefault()
             AtlasApp.data.createRegistration(data).then(response => {
-              console.log('response', response)
+              alert = null
+              
               if (response.status == 'success') {
                 alert = null
                 vnode.attrs.onsubmit(response)
@@ -54,12 +55,11 @@ function RegistrationForm() {
           onchange: event => { data.email = event.currentTarget.value },
           placeholder: Util.translate('registration.form.email'),
         }),
-        m('textarea.sya-registration__textarea', {
-          rows: 3,
-          name: 'message',
-          value: data.message,
-          onchange: event => { data.message = event.currentTarget.value },
-          placeholder: Util.translate('registration.form.message'),
+        Object.values(event.registrationQuestions).map(function(question) {
+          return m(RegistrationQuestion, {
+            question: question,
+            onchange: event => { data.questions[question.slug] = event.currentTarget.value },
+          })
         }),
         alert ? m('.sya-registration__message', { class: alert.status }, alert.message) : null,
         m('.sya-registration__notice',

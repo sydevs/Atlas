@@ -43,6 +43,7 @@ uk:
       dashboard: "Панель інструментів для %{user}"
       review: "Усі сповіщення для %{user}"
       worldwide: "Всесвітні дані"
+      clients: "All Client Applications" # TODO: Translate
       faq: "Часті запитання"
       context: "%{resource} для %{parent}"
       # Tertiary menu
@@ -71,7 +72,7 @@ uk:
       area: # TODO: Translate
         invalid_location: "must have it's center within the borders of %{region} and %{country}"
       venue:
-        out_of_bounds: "Місце проведення не може бути за межами радіусу %{area}"
+        invalid_location: "не може бути за межами радіусу %{area}"
       event:
         verified: "Thank you for confirming your event's accuracy." # TODO: Translate
         invalid_end_time: "не може бути раніше часу початку"
@@ -127,8 +128,10 @@ uk:
         room: "В якому приміщенні будівлі проходить захід?"
         language: "Якою основною мовою подається ця подія?"
         registration_mode: "Куди шукачам звернутися, щоб зареєструватися на подію? Ми наполегливо рекомендуємо вам залишити це значення як \"%{native}\". Якщо шукачі зареєструються на цьому веб-сайті, ми зможемо надсилати їм нагадування та додаткові електронні листи."
+        registration_notification: "How often do you want to receive notifications about new registrations?" # TODO: Translate
         registration_url: "URL-адреса реєстрації буде встановлено автоматично, якщо встановлено режим \"%{native}.\""
         registration_limit: "Limit the number of registrations to this amount." # TODO: Translate
+        registration_question: "What questions should seekers be asked when they register for the class." # TODO: Translate
         online: "Установіть цей прапорець, якщо програма буде проходити онлайн."
         online_url: "Якщо курс онлайн, це посилання є місцем, де шукачі мають приєднатися до класу (наприклад, посилання на Zoom, YouTube, Google Meet тощо)."
         phone_number: "Місцевий номер телефону, за яким шукачі можуть зателефонувати, щоб поставити запитання."

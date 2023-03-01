@@ -10,14 +10,14 @@ function VenueView() {
       const id = m.route.param('id')
       AtlasApp.data.getRecord(AtlasVenue, id).then(response => {
         venue = response
-        AtlasApp.data.getEvents(venue.eventIds).then(events => {
+        AtlasApp.data.getEvents(venue.offlineEventIds).then(events => {
           venue.events = events
           m.redraw()
         })
       })
     },
     view: function() {
-      if (!venue) return null //m('div', "Venue not found")
+      if (!venue) return m(Loader)
 
       return [
         m(NavigationButton, {
@@ -27,9 +27,10 @@ function VenueView() {
           params: { layer: AtlasEvent.LAYER.offline, id: venue.parentId }
         }),
         m('.sya-panel__header', Util.translate('venue.header', { venue: venue.label })),
-        m('.sya-list', venue.events.map(function(event) {
-          return m(EventCard, { key: event.id, class: 'sya-list__item', event: event })
-        }))
+          m('.sya-list', venue.events ? venue.events.map(function(event) {
+            return m(EventCard, { key: event.id, class: 'sya-list__item', event: event })
+          }) : m(Loader)
+        )
       ]
     }
   }

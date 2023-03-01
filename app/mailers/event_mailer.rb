@@ -44,25 +44,25 @@ class EventMailer < ApplicationMailer
     @event.update_column(:status_email_sent_at, Time.now) unless params[:test]
   end
 
-  def reminder
+  def registrations
     setup
     return unless @manager.notifications.event_registrations?
 
     if (params && params[:test]) || (@event.next_occurrence_at && @event.next_occurrence_at <= 1.day.from_now)
-      puts "[MAIL] Sending reminder email for #{@event.label} to #{@manager.name}"
+      puts "[MAIL] Sending registrations email for #{@event.label} to #{@manager.name}"
     else
       puts "[MAIL] Skip sending reminder for #{@event.label}"
       return
     end
 
-    @registrations = @event.registrations.since(@event.reminder_email_sent_at || @event.created_at)
-    @registrations = @event.registrations.limit(10) if params[:test] && @registrations.empty?
+    @registrations = @event.registrations.order_with_comments_first.since(@event.registrations_email_sent_at || @event.created_at)
+    @registrations = @event.registrations.order_with_comments_first.limit(10) if params[:test] && @registrations.empty?
     return if @registrations.empty?
 
     create_session!
-    subject = I18n.translate('mail.event.reminder.subject', event: @event.label)
+    subject = I18n.translate('mail.event.registrations.subject', event: @event.label)
     mail(to: @manager.email, subject: subject)
-    @event.update_column(:reminder_email_sent_at, Time.now) unless params[:test]
+    @event.update_column(:registrations_email_sent_at, Time.now) unless params[:test]
   end
 
   private

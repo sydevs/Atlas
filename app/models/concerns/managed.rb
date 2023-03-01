@@ -38,6 +38,8 @@ module Managed
 
       if existing_manager
         self.manager = existing_manager
+        self.manager.update_sendinblue! update_management: true
+        existing_manager.update_sendinblue! update_management: true
       else
         self.manager_id = nil
       end
@@ -46,6 +48,7 @@ module Managed
     def find_or_create_manager
       return unless manager&.email.present?
 
+      old_manager = manager
       self.new_manager_record = false
       default_language_code = try(:language_code) || try(:locale) || I18n.locale
 
@@ -55,6 +58,8 @@ module Managed
         self.new_manager_record = true
       end
 
+      self.manager.update_sendinblue! update_management: true
+      old_manager.update_sendinblue! update_management: true
       self.manager.update_column(:language_code, default_language_code) if self.manager.language_code.nil?
     end
 

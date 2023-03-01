@@ -1,0 +1,43 @@
+
+tr.registration
+  - if registration.questions.present?
+    th
+      strong = registration.name
+      br
+      = mail_to registration.email, registration.email
+      br
+      = registration.created_at.to_s(:short)
+    td colspan=2
+      - registration.questions.each do |question, answer|
+        p
+          b = translate_enum_value(Event, :registration_questions, question)
+          '  
+          em = "\"#{answer}\""
+  - else 
+    th
+      strong = registration.name
+    td
+      = mail_to registration.email, registration.email
+    td.right-align
+      = registration.created_at.to_s(:short)
+
+/table.registration
+  tr
+    - if registration.comment.present?
+      th
+        strong = registration.name
+        br
+        = mail_to registration.email, registration.email
+        br
+        = registration.created_at.to_s(:short)
+      td
+        u Comment
+        ' : 
+        em = "\"#{registration.comment}\""
+    - else 
+      th
+        strong = registration.name
+      td
+        = mail_to registration.email, registration.email
+      td.right-align
+        = registration.created_at.to_s(:short)

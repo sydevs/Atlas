@@ -43,6 +43,8 @@ en:
       dashboard: "Dashboard for %{user}"
       review: "All Alerts for %{user}"
       worldwide: "Worldwide Data"
+      clients: "All Client Applications" # TODO: Translate
+      clients: "All Client Applications"
       faq: "Frequently Asked Questions"
       context: "%{resource} for %{parent}"
       # Tertiary menu
@@ -71,7 +73,7 @@ en:
       area:
         invalid_location: "must have it's center within the borders of %{region} and %{country}"
       venue:
-        out_of_bounds: "Venue cannot be outside the radius of %{area}"
+        invalid_location: "cannot be outside the radius of %{area}"
       event:
         verified: "Thank you for confirming your event's accuracy."
         invalid_end_time: "cannot be before the start time"
@@ -128,8 +130,10 @@ en:
         room: "Which room in the building is the event in?"
         language: "What is the primary language that this event if given in?"
         registration_mode: "Where should seekers go to register for the event? We strongly recommend that you leave this as '%{native}.' Having seekers register on this website will allow us send them reminder and follow-up emails."
+        registration_notification: "How often do you want to receive notifications about new registrations?"
         registration_url: "The registration URL will be set automatically if the mode is set \"%{native}.\""
         registration_limit: "Limit the number of registrations to this amount."
+        registration_question: "What questions should seekers be asked when they register for the class."
         online: "Check this box if the program will take place online."
         online_url: "If the class is online, this link is where seekers should join the class (eg. a link to Zoom, YouTube, Google Meet, etc)."
         phone_number: "A local phone number that seekers can call to ask questions."

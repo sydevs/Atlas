@@ -8,4 +8,8 @@ class AtlasArea extends AtlasRecord {
     super(attrs)
   }
 
+  getEventIds(layer) {
+    return layer == AtlasEvent.LAYER.online ? this.onlineEventIds : this.offlineEventIds
+  }
+
 }

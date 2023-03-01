@@ -125,7 +125,7 @@ uk:
         last_activity_on: "Остання діяльність"
         summary_email_sent_at: "Лист із підсумками надіслано"
         status_email_sent_at: "Електронний лист зі статусом надіслано"
-        reminder_email_sent_at: "Нагадування надіслано електронною поштою"
+        registrations_email_sent_at: "Нагадування надіслано електронною поштою"
         should_update_status_at: "Наступне оновлення статусу"
         expired_at: "Термін дії закінчився о"
         verified_at: "Перевірено на"
@@ -224,8 +224,19 @@ uk:
           meetup: "Meetup"
           eventbrite: "Eventbrite"
           facebook: "Facebook"
+        registration_notification: "Registration Notifications" # TODO: Translate
+        registration_notifications: # TODO: Translate
+          digest: "One Email per Day"
+          immediate: "Immediately"
+          disabled: "No Notifications"
         registration_url: "Посилання на реєстрацію (URL)"
         registration_limit: "Registration Limit"
+        registration_question: "Registration Questions" # TODO: Translate
+        registration_questions: # TODO: Translate
+          questions: "Do you have any questions about the event?"
+          experience: "Have you experienced Sahaja Yoga meditation before?"
+          aspirations: "What do looking for from meditation?"
+          referral: "How did you hear about us?"
         recurrence: "Повторення"
         recurrences:
           day: "Щодня"
@@ -249,7 +260,7 @@ uk:
         venue_id: :activerecord.models.manager.single # Do not translate
         last_activity_on: :activerecord.attributes.generic.last_activity_on # Do not translate
         status_email_sent_at: :activerecord.attributes.generic.status_email_sent_at # Do not translate
-        reminder_email_sent_at: :activerecord.attributes.generic.reminder_email_sent_at # Do not translate
+        registrations_email_sent_at: :activerecord.attributes.generic.registrations_email_sent_at # Do not translate
         should_update_status_at: :activerecord.attributes.generic.should_update_status_at # Do not translate
         updated_at: :activerecord.attributes.generic.updated_at # Do not translate
         expired_at: :activerecord.attributes.generic.expired_at # Do not translate

@@ -26,7 +26,7 @@ class Region < ApplicationRecord
   validate :validate_geojson
 
   # Scopes
-  # default_scope { order(name: :desc) }
+  default_scope { order(name: :asc) }
   
   scope :publicly_visible, -> { has_public_events }
   scope :has_public_events, -> { joins(:publicly_visible_events).uniq }
@@ -48,6 +48,21 @@ class Region < ApplicationRecord
 
   def publicly_visible?
     true
+  end
+
+  def event_bounds(type = :offline)
+    locations = type == :online ? areas : venues
+    locations = locations.publicly_visible.pluck(:latitude, :longitude)
+    latitudes = locations.map(&:first)
+    longitudes = locations.map(&:last)
+    pad = 0.5
+    
+    [
+      latitudes.min - pad,
+      latitudes.max + pad,
+      longitudes.min - pad,
+      longitudes.max + pad,
+    ]
   end
 
   def fetch_geo_data!

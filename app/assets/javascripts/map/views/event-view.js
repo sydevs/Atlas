@@ -1,6 +1,6 @@
 /* exported EventView */
 
-/* global m, EventInfo, ImageCarousel, Registration, NavigationButton, App */
+/* global m, Loader, EventInfo, ImageCarousel, Registration, NavigationButton, App */
 
 function EventView() {
   let event = null
@@ -14,12 +14,12 @@ function EventView() {
       })
     },
     view: function() {
-      if (!event) return null //m('div', "Event not found")
+      if (!event) return m(Loader)
 
       let href = '/:layer/:model/:id'
       let params = { layer: event.layer }
 
-      if (event.location.eventIds.length > 1) {
+      if (event.location.getEventIds(event.layer).length > 1) {
         params['model'] = event.location.type.toLowerCase()
         params['id'] = event.location.id
       } else if (AtlasApp.config.search) {

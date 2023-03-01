@@ -58,6 +58,7 @@ en:
       edit: "Edit Event"
       update: "Update Event"
       contact: "Send Email"
+      online_address: "Online - from %{city}"
 
       status:
         question: "Is the above information still correct?"
@@ -98,9 +99,9 @@ en:
           event_manager: "This event, which you manage, urgently needs to be checked for accuracy. This is the last reminder you will receive. We've also emailed the managers of the %{place} region to make sure this event isn't removed by mistake."
           super_manager: "You are a manager for %{place}. This warning is being sent to you because this event's manager has not yet responded to our email."
 
-      reminder:
+      registrations:
         subject: "[Reminder] New Event Registrations"
-        title: "New Registrations"
+        title: "New registrations for"
         preview:
           zero: "Your event, \"%{event},\" has no new registrations. Starting %{duration} from now at %{time}."
           one: "Your event, \"%{event},\" has %{count} new registration. Starting %{duration} from now at %{time}."

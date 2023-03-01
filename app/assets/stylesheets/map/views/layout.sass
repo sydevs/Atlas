@@ -12,24 +12,30 @@
     overflow: hidden
 
 .sya-panel
-  overflow-x: hidden
-  overflow-y: auto
+  min-height: 100%
+  overflow: hidden
   background: white
   flex-shrink: 0
   scroll-behavior: smooth
 
+  display: flex
+  flex-direction: column
+
   @include tablet-or-larger
     position: relative
     width: $panel-width-thin
-    height: 100%
     z-index: $z-panel
     box-shadow: $shadow-light
+
+    height: 100%
+    overflow-y: auto
 
   @include desktop-or-larger
     position: absolute
     top: $control-offset-y
     left: $control-offset-x
     height: auto
+    min-height: auto
     max-height: calc(100% - #{$control-offset-y} * 2)
     width: $panel-width
 
@@ -62,6 +68,9 @@
     border-bottom: 1px solid lightgrey
 
 .sya-panel--padded > *
-  max-width: 400px
-  margin: auto
   animation: fade-in 0.4s
+  
+  @include mobile
+    max-width: 400px
+    margin-left: auto
+    margin-right: auto
