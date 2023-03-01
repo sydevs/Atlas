@@ -41,11 +41,11 @@ de:
         other: "Veranstaltungsorte"
       event:
         # Basic pluralization
-        single: "Event"
-        plural: "Ereignisse"
+        single: "Veranstaltug"
+        plural: "Veranstaltungen"
         # Countable
-        one: "Event"
-        other: "Ereignisse"
+        one: "Veranstaltung"
+        other: "Veranstaltungen"
       online_event:
         # Basic pluralization
         single: "Online Veranstaltung"
@@ -55,11 +55,11 @@ de:
         other: "Online Veranstaltungen"
       offline_event:
         # Basic pluralization
-        single: "Veranstaltung"
-        plural: "Veranstaltungen"
+        single: "Vorort Veranstaltung"
+        plural: "Vorort Veranstaltungen"
         # Countable
-        one: "Veranstaltung"
-        other: "Veranstaltungen"
+        one: "Vorort Veranstaltung"
+        other: "Vorort Veranstaltungen"
       registration:
         # Basic pluralization
         single: "Teilnehmer"
