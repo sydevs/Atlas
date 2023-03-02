@@ -48,18 +48,18 @@ de:
         other: "Veranstaltungen"
       online_event:
         # Basic pluralization
-        single: "Online Veranstaltung"
-        plural: "Online Veranstaltungen"
+        single: "online Veranstaltung"
+        plural: "online Veranstaltungen"
         # Countable
-        one: "Online Veranstaltung"
-        other: "Online Veranstaltungen"
+        one: "online Veranstaltung"
+        other: "online Veranstaltungen"
       offline_event:
         # Basic pluralization
-        single: "Vorort Veranstaltung"
-        plural: "Vorort Veranstaltungen"
+        single: "Vor-Ort-Veranstaltung"
+        plural: "Vor-Ort-Veranstaltungen"
         # Countable
-        one: "Vorort Veranstaltung"
-        other: "Vorort Veranstaltungen"
+        one: "Vor-Ort-Veranstaltung"
+        other: "Vor-Ort-Veranstaltungen"
       registration:
         # Basic pluralization
         single: "Teilnehmer"
@@ -226,8 +226,8 @@ de:
         registration_notification: "Anmeldung Benachrichtigungen"
         registration_notifications:
           digest: "Einmal pro Tag"
-          immediate: "sofort"
-          disabled: "keine Benachrichtigungen"
+          immediate: "Sofort"
+          disabled: "Keine Benachrichtigungen"
         registration_url: "Registrierungsverbindung (URL)"
         registration_limit: "Registrierungsbegrenzung"
         registration_question: "Anmelde Fragen"
@@ -315,7 +315,7 @@ de:
         secret_key: "Geheime API-Schlüssel"
         public_key: "Public API-Schlüssel"
         enabled: "Freigegeben"
-        location: "autorisierte Stelle"
+        location: "Autorisierte Stelle"
         bounds: "Grenzen"
         last_accessed_at: "Letzter Zugang"
 

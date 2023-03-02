@@ -99,7 +99,7 @@ de:
         notifications: "Benachrichtigungseinstellungen"
 
     hints:
-      unnamed: "(ohne Name)"
+      unnamed: "(Unbenannt)"
       verified: "Verifiziert"
       not_verified: "Nicht verifiziert"
       not_set: "Nicht gesetzt"
