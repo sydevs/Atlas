@@ -58,7 +58,7 @@ de:
       edit: "Veranstaltung bearbeiten"
       update: "Veranstaltung aktualisieren"
       contact: "E-Mail senden"
-      online_address: "Online - from %{city}" # TODO: Translate
+      online_address: "Online - aus %{city}"
 
       status:
         question: "Ist die obigen Informationen noch korrekt?"
