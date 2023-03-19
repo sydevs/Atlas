@@ -18,7 +18,7 @@ class Event < ApplicationRecord
   enum category: { dropin: 1, course: 3, single: 2, festival: 4, concert: 5 }, _suffix: true
   enum recurrence: { day: 0, monday: 1, tuesday: 2, wednesday: 3, thursday: 4, friday: 5, saturday: 6, sunday: 7 }
   enum registration_mode: { native: 0, external: 1, meetup: 2, eventbrite: 3, facebook: 4 }, _suffix: true
-  enum registration_notification: { digest: 1, immediate: 2, disabled: 3 }, _suffix: true
+  enum registration_notification: { digest: 0, immediate: 1, disabled: 2 }, _suffix: true
   flag :registration_question, %i[questions experience aspirations referral]
 
   # Associations
@@ -56,16 +56,12 @@ class Event < ApplicationRecord
   scope :current, -> { where('events.end_date IS NULL OR events.end_date >= ?', DateTime.now) }
   scope :publicly_visible, -> { current.manager_verified.publishable.published }
   scope :manager_verified, -> { joins(:manager).where('managers.email_verified = TRUE OR managers.phone_verified = TRUE') }
-
   scope :ready_for_registrations_email, -> do
-    case registration_notification
-    when 'immediate'
-      with_new_registrations
-    when 'disabled'
-      none
-    when 'digest'
-      with_new_registrations.where("registrations_email_sent_at IS NULL OR registrations_email_sent_at <= ?", 18.hours.ago)
-    end
+    where(registration_notification: Event.registration_notifications[:immediate])
+      .or(
+        where(registration_notification: Event.registration_notifications[:digest])
+        .where("registrations_email_sent_at IS NULL OR registrations_email_sent_at <= ?", 18.hours.ago)
+      )
   end
 
   scope :layer, -> (layer) { layer == 'online' ? online : offline }
