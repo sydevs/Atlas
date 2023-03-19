@@ -26,14 +26,14 @@ de:
       fallback:
         nearby: "Die nächste Freimachungsklasse bei"
         far: "Es gibt keine Klassen in diesem Bereich, die nächste Freizeitmeditation ist in"
-        online: "There are no classes in this area, consider an" # TODO: Translate
-        online_event: "Online Class" # TODO: Translate
+        online: "Es gibt keine Kurse in dieser Gegend, versuche eine"
+        online_event: "Online Veranstaltung"
 
-    area: # TODO: Translate
-      header: "Events in %{area}"
+    area:
+      header: "Veranstaltungen in %{area}"
 
     venue:
-      header: "Veranstaltungen in  %{venue}"
+      header: "Veranstaltungen in %{venue}"
 
     event:
       register: "Anmelden"

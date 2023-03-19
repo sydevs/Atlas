@@ -23,7 +23,7 @@ de:
         choose: "Wähle  %{resource}"
         verify: "Bestätige %{resource}"
         view: "Zeige %{resource}"
-        reload: "Reload %{resource}" # TODO: Translate
+        reload: "Lade %{resource} neu"
 
       special:
         edit_profile: "Bearbeite mein Profil"
@@ -43,7 +43,7 @@ de:
       dashboard: "Schaltzentrale für %{user}"
       review: "Alle Benachrichtigungen für %{user}"
       worldwide: "Weltweite Daten"
-      clients: "All Client Applications" # TODO: Translate
+      clients: "Alle Client Programme"
       faq: "Häufig gestellte Fragen"
       context: "%{resource} für %{parent}"
       # Tertiary menu
@@ -66,11 +66,11 @@ de:
       not_logged_in: "Du bist nicht eingeloggt!"
       no_comment: "(kein Komentar)"
       temporary_mail_error: "Email server ist gerade beschäftigt, bitte später nochmal versuchen."
-      region: # TODO: Translate
-        invalid_geojson: "must have it's center within the borders of %{country}"
-        invalid_osm_id: "is not within %{country}"
-      area: # TODO: Translate
-        invalid_location: "must have it's center within the borders of %{region} and %{country}"
+      region:
+        invalid_geojson: "Der Mittelpunkt muss in %{country} liegen"
+        invalid_osm_id: "Liegt nicht in %{country}"
+      area:
+        invalid_location: "Der Mittelpunkt muss innerhalb von %{region} und %{country} liegen"
       venue:
         invalid_location: "darf nicht weiter als %{area} entfernt sein."
       event:
@@ -99,14 +99,14 @@ de:
         notifications: "Benachrichtigungseinstellungen"
 
     hints:
-      unnamed: "(Unnamed)" # TODO: Translate
+      unnamed: "(Unbenannt)"
       verified: "Verifiziert"
       not_verified: "Nicht verifiziert"
       not_set: "Nicht gesetzt"
-      not_found: "No Results Found" # TODO: Translate
+      not_found: "Nichts Gefunden"
       unspecified: "Nicht spezifiziert"
       unlimited: "Unbegrenzte"
-      edit_warning: "Do not edit these fields, unless you know what you're doing!" # TODO: Translate
+      edit_warning: "Diese Eingabefelder nur bearbeiten, wenn du weißt, was du tust!"
       never: "Nie"
       geosearch:
         prompt: "Suchen nach Standort"
@@ -116,9 +116,9 @@ de:
         language: "Die Standardsprache, die Veranstaltungen in diesem Land normalerweise abgehalten werden."
         no_default_language: "Kein Standard"
         enable_regions: "Wenn es aktiviert ist, können Sie Regionen (Provinzen, Staaten usw.) in diesem Land an die Regionen ausschalten und zuordnen. Dies ist nützlich für größere Länder (China, USA, Australien, etc.) und unnötig für kleine Länder (Belgien, Litauen, Singapur usw.)."
-        enable_custom_regions: "Allow the creation of custom regions. This is an advanced feature, which should only be used if you understand what you are doing." # TODO: Translate
-      region: # TODO: Translate
-        polygon: "Drag / click on a faded square to add a new corner to the polygon. Click on an existing corner to remove it."
+        enable_custom_regions: "Erlaube das erstellen von angepassten Regionen. Dies ist eine erweiterte Funktion, lass die Finger davon, außer du weist was du tust."
+      region:
+        polygon: "Ziehe / Klicke auf ein verblasstes Quadrat um eine weitere ecke zum polygon hinzuzufügen. Klicke auf eine existierende Ecke um sie zu entfernen."
       area:
         location: "Ein \"spezieller Bereich\" wird via Koordinaten auf der Karte (Breitengrad und Längengrad) und einem Radius definiert, um einen Kreis festzulegen."
       event:
@@ -127,11 +127,11 @@ de:
         description_count: "Zeichen"
         room: "In welchem Raum findet die Veranstaltung statt?"
         language: "Was ist die Hauptsprache, dass dieses Veranstaltung abgehalten wird? "
-        registration_mode: "Wo sollten sich Sucher für die Veranstaltung anmelden? Wir empfehlen dringend, dass Sie dies als \"%{nativ} \" zu lassen. Damit wir ihm Erinnerungen und E-Mails zu folgeprogrammen senden können. "
-        registration_notification: "How often do you want to receive notifications about new registrations?" # TODO: Translate
-        registration_url: "Die Registrierungs-URL wird automatisch gesetzt, wenn der Modus \"%{nativ}\" gesetzt wird."
+        registration_mode: "Wo sollten sich Sucher für die Veranstaltung anmelden? Wir empfehlen dringend, dass Sie dies als \"%{native} \" zu lassen. Damit wir ihm Erinnerungen und E-Mails zu folgeprogrammen senden können. "
+        registration_notification: "Wie oft willst Du Benachrichtigungen zu neuen Anmeldungen erhalten?"
+        registration_url: "Die Registrierungs-URL wird automatisch gesetzt, wenn der Modus \"%{native}\" gesetzt wird."
         registration_limit: "Setzen Sie das Limit für Anmeldungen."
-        registration_question: "What questions should seekers be asked when they register for the class." # TODO: Translate
+        registration_question: "Welche Fragen soll ein Sucher Beantworten, wenn er sich für eine Veranstaltung anmeldet."
         online: "Aktivieren Sie diese Box, wenn dies ein online Programm ist."
         online_url: "Wenn die Klasse online abgehalten wird, geben sie hier den Beitrits Link an (zB. für Zoom, YouTube, Google Meet, etc.)"
         phone_number: "Eine lokale Telefonnummer, die Sucher anrufen können, um Fragen zu stellen."
@@ -190,11 +190,11 @@ de:
       record_has_language: " %{resource} in %{language} angeboten"
       notification_settings: "Benachrichtigungseinstellungen"
       contact_details: "Kontaktinformationen"
-      canonical_domain: "Canonical Website" # TODO: Translate
+      canonical_domain: "Autorisiert Website"
       updated_at: "Letzte Aktualisierung"
       event_coverage:
         title: "Eventberichterstattung"
-        description: "%{events} in %{resource}" # TODO: Translate
+        description: "%{events} in %{resource}"
       record_needs_review:
         title: " %{resource} braucht überprüfung"
         description: "Diese %{resource} wurde vor %{updates_ago} aktualisiert. Diese Veranstaltung wird von der Karte entfernt, es sei denn, es wird innerhalb von %{expires_in} überprüft. Gehe zu der Seite Bearbeiten und drücken Sie Speichern, um zu bestätigen, dass die Ereignisdetails noch korrekt sind."

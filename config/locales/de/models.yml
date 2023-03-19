@@ -23,13 +23,13 @@ de:
         # Countable
         one: "Region"
         other: "Regionen"
-      area: # TODO: Translate
+      area:
         # Basic pluralization
-        single: "City Area"
-        plural: "City Areas"
+        single: "Stadt Gebiet"
+        plural: "Stadt Gebiete"
         # Countable
-        one: "city"
-        other: "cities"
+        one: "Stadt"
+        other: "Städte"
 
       # Events
       venue:
@@ -41,25 +41,25 @@ de:
         other: "Veranstaltungsorte"
       event:
         # Basic pluralization
-        single: "Event"
-        plural: "Ereignisse"
+        single: "Veranstaltug"
+        plural: "Veranstaltungen"
         # Countable
-        one: "Event"
-        other: "Ereignisse"
-      online_event: # TODO: Translate
+        one: "Veranstaltung"
+        other: "Veranstaltungen"
+      online_event:
         # Basic pluralization
-        single: "Online Event"
-        plural: "Online Events"
+        single: "online Veranstaltung"
+        plural: "online Veranstaltungen"
         # Countable
-        one: "online event"
-        other: "online events"
-      offline_event: # TODO: Translate
+        one: "online Veranstaltung"
+        other: "online Veranstaltungen"
+      offline_event:
         # Basic pluralization
-        single: "In-Person Event"
-        plural: "In-Person Events"
+        single: "Vor-Ort-Veranstaltung"
+        plural: "Vor-Ort-Veranstaltungen"
         # Countable
-        one: "in-person event"
-        other: "in-person events"
+        one: "Vor-Ort-Veranstaltung"
+        other: "Vor-Ort-Veranstaltungen"
       registration:
         # Basic pluralization
         single: "Teilnehmer"
@@ -76,13 +76,13 @@ de:
         # Countable
         one: "Manager"
         other: "Manager"
-      managed_record: # TODO: Translate
+      managed_record:
         # Basic pluralization
-        single: "Responsibility"
-        plural: "Responsibilities"
+        single: "Verantwortung"
+        plural: "Verantwortlichkeiten"
         # Countable
-        one: "responsibility"
-        other: "responsibilities"
+        one: "Verantwortung"
+        other: "Verantwortlichkeiten"
       audit:
         # Basic pluralization
         single: "Geschichte"
@@ -133,28 +133,28 @@ de:
         updated_at: "Aktualisiert"
 
       # Places
-      country: # TODO: Translate
+      country:
         manager_id: :activerecord.models.manager.single # Do not translate
         country_code: :activerecord.models.country.single # Do not translate
         default_language_code: "Veranstaltungs Sprache"
         enable_regions: "Regionales Management aktivieren"
-        enable_custom_regions: "Allow Custom Region Creation"
+        enable_custom_regions: "Erlaube das erstellen von angepassten Regionen"
         geo_data: "Geo Data"
         osm_id: "OpenStreetMap ID"
-        bounds: "Viewport"
-        geojson: "Borders"
-        translations: "Translations"
+        bounds: "Ansicht"
+        geojson: "Rahmen"
+        translations: "Übersetzungen"
         last_activity_on: :activerecord.attributes.generic.last_activity_on # Do not translate
         summary_email_sent_at: :activerecord.attributes.generic.summary_email_sent_at # Do not translate
 
       region:
         manager_id: :activerecord.models.manager.single # Do not translate
         country_code: :activerecord.models.country.single # Do not translate
-        geo_data: "Geo Data" # TODO: Translate
-        osm_id: "OpenStreetMap ID" # TODO: Translate
-        bounds: "Viewport" # TODO: Translate
-        geojson: "Borders" # TODO: Translate
-        translations: "Translations" # TODO: Translate
+        geo_data: "Geo Daten"
+        osm_id: "OpenStreetMap ID"
+        bounds: "Ansichtsbereich"
+        geojson: "Rahmen"
+        translations: "Übersetzungen"
         last_activity_on: :activerecord.attributes.generic.last_activity_on # Do not translate
         summary_email_sent_at: :activerecord.attributes.generic.summary_email_sent_at # Do not translate
 
@@ -223,19 +223,19 @@ de:
           meetup: "Meetup"
           eventbrite: "Eventbrite"
           facebook: "Facebook"
-        registration_notification: "Registration Notifications" # TODO: Translate
-        registration_notifications: # TODO: Translate
-          digest: "One Email per Day"
-          immediate: "Immediately"
-          disabled: "No Notifications"
+        registration_notification: "Anmeldung Benachrichtigungen"
+        registration_notifications:
+          digest: "Einmal pro Tag"
+          immediate: "Sofort"
+          disabled: "Keine Benachrichtigungen"
         registration_url: "Registrierungsverbindung (URL)"
         registration_limit: "Registrierungsbegrenzung"
-        registration_question: "Registration Questions" # TODO: Translate
-        registration_questions: # TODO: Translate
-          questions: "Do you have any questions about the event?"
-          experience: "Have you experienced Sahaja Yoga meditation before?"
-          aspirations: "What do looking for from meditation?"
-          referral: "How did you hear about us?"
+        registration_question: "Anmelde Fragen"
+        registration_questions:
+          questions: "Haben Sie Fragen zu Veranstaltung?"
+          experience: "Haben Sie schon Erfahrung mit Sahaja Yoga Meditation?"
+          aspirations: "Was erwarten Sie von der Meditation?"
+          referral: "Wie/Wo haben Sie von uns Erfahren?"
         recurrence: "Wiederholung"
         recurrences:
           day: "Täglich"
@@ -308,21 +308,21 @@ de:
           create: "Erstellt"
           destroy: "Gelöscht"
 
-      client: # TODO: Translate
+      client:
         label: "Label"
         config: "Konfiguration"
         domain: "Domain"
         secret_key: "Geheime API-Schlüssel"
         public_key: "Public API-Schlüssel"
         enabled: "Freigegeben"
-        location: "Canonical Location"
+        location: "Autorisierte Stelle"
         bounds: "Grenzen"
         last_accessed_at: "Letzter Zugang"
 
         locale: :activerecord.attributes.generic.language # Do not translate
         location_id: "Location ID"
         location_type: "Location Type"
-        embed_type: "Embed Method"
+        embed_type: "Einbettungsmethode"
         embed_types:
           iframe: "IFrame (Simple)"
           script: "JavaScript (Advanced)"
