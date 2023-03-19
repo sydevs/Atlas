@@ -19,7 +19,7 @@ table.wide.data
         - @new_events.each do |event|
           .entry
             = link_to event.label, email_login(cms_event_url(event))
-            |  (#{event.venue.city})
+            |  (#{event.area.label})
 
   - if @expiring_events.present?
     tr
@@ -30,7 +30,7 @@ table.wide.data
         - @expiring_events.each do |event|
           .entry
             = link_to event.label, email_login(cms_event_url(event))
-            |  (#{event.venue.city})
+            |  (#{event.area.label})
 
   - if @expired_events.present?
     tr
@@ -41,7 +41,7 @@ table.wide.data
         - @expired_events.each do |event|
           .entry
             = link_to event.label, email_login(cms_event_url(event))
-            |  (#{event.venue.city})
+            |  (#{event.area.label})
 
   - if @inactive_areas.present?
     tr
