@@ -16,7 +16,8 @@ class EventMailer < ApplicationMailer
     create_session!
     subject = I18n.translate(@status, scope: 'mail.event.status.title', event: @event.label)
 
-    if false && @manager.contact_by_email?
+    # TODO: Implement MessageBird support
+    if true || @manager.contact_by_email?
       parameters = { to: @manager.email, subject: subject }
       if @status == :needs_urgent_review
         parameters['Importance'] = 'high'
