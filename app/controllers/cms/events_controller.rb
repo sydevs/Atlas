@@ -23,6 +23,8 @@ class CMS::EventsController < CMS::ApplicationController
     authorize @record, :update?
     @context = @record
     @record.touch
+
+    redirect_to [:cms, @record], flash: { success: translate('cms.messages.event.verified') }
   end
 
   private
