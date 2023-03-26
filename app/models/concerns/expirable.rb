@@ -13,10 +13,10 @@ module Expirable
   else
     TRANSITION_STATE_AFTER = {
       should_verify: 0.weeks,
-      should_need_review: 8.weeks,
-      should_need_urgent_review: 9.weeks,
-      should_expire: 10.weeks,
-      should_archive: 12.weeks,
+      should_need_review: 12.weeks,
+      should_need_urgent_review: 13.weeks,
+      should_expire: 14.weeks,
+      should_archive: 16.weeks,
     }.freeze
   end
 
