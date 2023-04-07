@@ -10,7 +10,7 @@ ru:
         view: "Открыть"
         search: "Поиск"
         searching: "Поиск..."
-        select: "Select" # TODO: Translate
+        select: "Выбрать"
 
       target:
         new: "Добавить %{resource}"
@@ -21,9 +21,9 @@ ru:
         back: "Назад к %{resource}"
         search: "Поиск %{resources}..."
         choose: "Выбрать %{resource}"
-        verify: "Verify %{resource}" # TODO: Translate
-        view: "View %{resource}" # TODO: Translate
-        reload: "Reload %{resource}" # TODO: Translate
+        verify: "Проверить %{resource}"
+        view: "Просмотреть %{resource}"
+        reload: "Перезагрузить %{resource}"
 
       special:
         edit_profile: "Редактировать мой профиль"
@@ -43,7 +43,7 @@ ru:
       dashboard: "Панель инструментов для %{user}"
       review: "Все оповещения для %{user}"
       worldwide: "Данные по всему миру"
-      clients: "All Client Applications" # TODO: Translate
+      clients: "Все приложения"
       faq: "Часто задаваемые вопросы"
       context: "%{resource} для %{parent}"
       # Tertiary menu
@@ -66,15 +66,15 @@ ru:
       not_logged_in: "Ты не авторизован!"
       no_comment: "(Нет комментариев)"
       temporary_mail_error: "Сервер электронной почты временно занят, попробуй ещё раз."
-      region: # TODO: Translate
-        invalid_geojson: "must have it's center within the borders of %{country}"
-        invalid_osm_id: "is not within %{country}"
-      area: # TODO: Translate
-        invalid_location: "must have it's center within the borders of %{region} and %{country}"
+      region:
+        invalid_geojson: "центр должен быть в пределах %{country}"
+        invalid_osm_id: "не в пределах %{country}"
+      area:
+        invalid_location: "центр должен быть в пределах %{region} и %{country}"
       venue:
         invalid_location: "не может находиться за пределами радиуса %{area}"
       event:
-        verified: "Thank you for confirming your event's accuracy." # TODO: Translate
+        verified: "Спасибо за подтверждение данных о твоём событии."
         invalid_end_time: "не может быть раньше времени начала"
         invalid_end_date: "не может быть раньше даты начала"
         passed_end_date: "не может быть раньше сегодня"
@@ -86,7 +86,7 @@ ru:
         phone_verified: "Твой номер телефона теперь подтверждён!"
         email_verification_resent: "E-mail с подтверждением был отправлен на %{name}"
       cannot_create:
-        event: "New events cannot be created here, they must be added directly to a city." # TODO: Translate
+        event: "Новые события не могут быть созданы здесь, они должны быть добавлены напрямую к городу."
 
     forms:
       event:
@@ -99,15 +99,15 @@ ru:
         notifications: "Настройка оповещений"
 
     hints:
-      unnamed: "(Unnamed)" # TODO: Translate
+      unnamed: "(Без имени)"
       verified: "Проверено"
       not_verified: "Не подтверждено"
       not_set: "Не задано"
-      not_found: "No Results Found" # TODO: Translate
+      not_found: "Не найдено"
       unspecified: "Неопределено"
-      unlimited: "Unlimited" # TODO: Translate
+      unlimited: "Не ограничено"
       never: "Никогда"
-      edit_warning: "Do not edit these fields, unless you know what you're doing!" # TODO: Translate
+      edit_warning: "Не изменяй эту информацию, если только не уверен на 100%!"
       geosearch:
         prompt: "Поиск по местонахождению"
         description: "Ты можешь использовать этот поиск для автоматического заполнения полей ниже. Он использует API Google. Если Google заблокирован в вашей стране или поиск не удался, тебе нужно будет ввести данные вручную."
@@ -116,9 +116,9 @@ ru:
         language: "Язык по умолчанию, на котором обычно проводятся мероприятия в этой стране."
         no_default_language: "Отсутствует язык по умолчанию"
         enable_regions: "Если этот параметр включен, ты сможешь просматривать и назначать менеджеров по регионам (провинциям, штатам и т.д.) в этой стране. Это полезно для больших стран (Китай, США, Австралия и т.д.) и необязательно для небольших стран (Бельгия, Литва, Сингапур и т.д.)."
-        enable_custom_regions: "Allow the creation of custom regions. This is an advanced feature, which should only be used if you understand what you are doing." # TODO: Translate
-      region: # TODO: Translate
-        polygon: "Drag / click on a faded square to add a new corner to the polygon. Click on an existing corner to remove it."
+        enable_custom_regions: "Разрешить создание новых регионов. Это расширенная функция, которую следует использовать только в том случае, если ты точно понимаешь, что делаешь."
+      region:
+        polygon: "Перетащи / щелкни по выделенному квадрату, чтобы добавить новый угол. Нажми на существующий угол, чтобы удалить его."
       area:
         location: "Пользовательская область определяется с использованием координат на карте (широта и долгота) и радиуса, чтобы расширить границы региона."
       event:
@@ -126,12 +126,12 @@ ru:
         description: "Сделай описание программы для искателей. Расскажи, что им ожидать от занятия, как найти место или что взять с собой. Это описание должно быть от %{min} до %{max} символов."
         description_count: " символов"
         room: "В какой комнате проходит мероприятие?"
-        language: "На каком языке проводится это событие, если указано в?"
+        language: "На каком языке проводится это событие?"
         registration_mode: "Куда отправлять искателей для регистрации на мероприятие? Мы настоятельно рекомендуем оставить здесь '%{native}.' Регистрация искателей на этом веб-сайте позволит нам отправлять им напоминания и последующие уведомления."
-        registration_notification: "How often do you want to receive notifications about new registrations?" # TODO: Translate
+        registration_notification: "Как часто хочешь получать уведомления о новых регистрациях?"
         registration_url: "URL-адрес регистрации будет установлен автоматически, если установлен режим \"%{native}.\""
-        registration_limit: "Limit the number of registrations to this amount." # TODO: Translate
-        registration_question: "What questions should seekers be asked when they register for the class." # TODO: Translate
+        registration_limit: "Максимальное количество регистраций."
+        registration_question: "Выбери вопросы новичкам при регистрации."
         online: "Установи этот флажок, если программа будет проходить онлайн."
         online_url: "Если программа проходит онлайн, то по этой ссылке искатели смогут присоединиться к классу (например, ссылка на Zoom, YouTube, Google Meet и т.д.)."
         phone_number: "Местный номер телефона, по которому искатели могут позвонить, чтобы задать вопросы." 
@@ -190,11 +190,11 @@ ru:
       record_has_language: "%{resource} предлагается на %{language}"
       notification_settings: "Настройка оповещений"
       contact_details: "Контакты"
-      canonical_domain: "Canonical Website" # TODO: Translate
+      canonical_domain: "Канонический сайт"
       updated_at: "Последнее обновление"
       event_coverage:
         title: "Освещение события" 
-        description: "%{events} in %{resource}" # TODO: Translate
+        description: "%{events} в %{resource}"
       record_needs_review:
         title: "Требуется проверить %{resource}"
         description: "Это %{resource} не обновлялось за %{updated_ago}. Это событие будет удалено с карты, если оно не будет проверено в %{expires_in}. Перейди на страницу редактирования и нажми «Сохранить», чтобы подтвердить правильность сведений о событии."
@@ -417,7 +417,7 @@ ru:
     country_codes:
       gb: UK
       us: USA
-      ru: РУС
+      ru: RU
     
   passwordless:
     sessions:
