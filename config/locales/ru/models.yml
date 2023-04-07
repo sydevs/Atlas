@@ -14,8 +14,8 @@ ru:
         single: "Страна"
         plural: "Страны"
         # Countable
-        one: "Страна"
-        other: "Стран"
+        one: "страна"
+        other: "страны"
       region:
         # Basic pluralization
         single: "Регион"
@@ -23,13 +23,13 @@ ru:
         # Countable
         one: "регион"
         other: "регионов"
-      area: # TODO: Translate
+      area:
         # Basic pluralization
-        single: "City Area"
-        plural: "City Areas"
+        single: "Город"
+        plural: "Города"
         # Countable
-        one: "city"
-        other: "cities"
+        one: "город"
+        other: "города"
 
       # Events
       venue:
@@ -37,29 +37,29 @@ ru:
         single: "Площадка"
         plural: "Площадки"
         # Countable
-        one: "Площадка"
-        other: "Площадок"
+        one: "площадка"
+        other: "площадки"
       event:
         # Basic pluralization
         single: "Событие"
         plural: "События"
         # Countable
-        one: "Событие"
-        other: "Событий"
-      online_event: # TODO: Translate
+        one: "событие"
+        other: "события"
+      online_event:
         # Basic pluralization
-        single: "Online Event"
-        plural: "Online Events"
+        single: "Онлайн Медитация"
+        plural: "Онлайн Медитации"
         # Countable
-        one: "online event"
-        other: "online events"
-      offline_event: # TODO: Translate
+        one: "онлайн медитация"
+        other: "онлайн медитации"
+      offline_event:
         # Basic pluralization
-        single: "In-Person Event"
-        plural: "In-Person Events"
+        single: "Медитация в Центре"
+        plural: "Медитации в Центре"
         # Countable
-        one: "in-person event"
-        other: "in-person events"
+        one: "медитация в центр"
+        other: "медитации в центр"
       registration:
         # Basic pluralization
         single: "Участник"
@@ -76,20 +76,20 @@ ru:
         # Countable
         one: "Менеджер"
         other: "Менеджеров"
-      managed_record: # TODO: Translate
+      managed_record:
         # Basic pluralization
-        single: "Responsibility"
-        plural: "Responsibilities"
+        single: "Зона Ответственности"
+        plural: "Зоны Ответственности"
         # Countable
-        one: "responsibility"
-        other: "responsibilities"
+        one: "Зона ответственности"
+        other: "Зоны ответственности"
       audit:
         # Basic pluralization
         single: "История"
         plural: "Истории"
         # Countable
         one: "Лог"
-        other: "Логов"
+        other: "Логи"
       client:
         # Basic pluralization
         single: "Приложение"
@@ -110,7 +110,7 @@ ru:
         name: "Имя"
         published: "Опубликовано"
         email: "Email"
-        phone: "Phone" # TODO: Translate
+        phone: "Телефон"
         language: "Язык"
         status: "Статус"
         statuses:
@@ -133,28 +133,28 @@ ru:
         updated_at: "Обновлено в"
 
       # Places
-      country: # TODO: Translate
+      country:
         manager_id: :activerecord.models.manager.single # Do not translate
         country_code: :activerecord.models.country.single # Do not translate
         default_language_code: "Язык события по умолчанию"
         enable_regions: "Разрешить региональное управление" 
-        enable_custom_regions: "Allow Custom Region Creation"
-        geo_data: "Geo Data"
+        enable_custom_regions: "Разрешить Создание Нового Региона"
+        geo_data: "Гео Данные"
         osm_id: "OpenStreetMap ID"
-        bounds: "Viewport"
-        geojson: "Borders"
-        translations: "Translations"
+        bounds: "Область видимости"
+        geojson: "Границы"
+        translations: "Переводы"
         last_activity_on: :activerecord.attributes.generic.last_activity_on # Do not translate
         summary_email_sent_at: :activerecord.attributes.generic.summary_email_sent_at # Do not translate
 
       region:
         manager_id: :activerecord.models.manager.single # Do not translate
         country_code: :activerecord.models.country.single # Do not translate
-        geo_data: "Geo Data" # TODO: Translate
-        osm_id: "OpenStreetMap ID" # TODO: Translate
-        bounds: "Viewport" # TODO: Translate
-        geojson: "Borders" # TODO: Translate
-        translations: "Translations" # TODO: Translate
+        geo_data: "Гео Данные"
+        osm_id: "OpenStreetMap ID"
+        bounds: "бласть видимости"
+        geojson: "Границы"
+        translations: "Переводы"
         last_activity_on: :activerecord.attributes.generic.last_activity_on # Do not translate
         summary_email_sent_at: :activerecord.attributes.generic.summary_email_sent_at # Do not translate
 
@@ -194,23 +194,23 @@ ru:
         name: :activerecord.attributes.generic.name # Do not translate
         custom_name: "Название события (Опционально)"
         category: "Категория"
-        categories: # TODO: Translate
-          dropin: "Drop-In Class"
-          single: "One-time Class"
+        categories:
+          dropin: "Медитация для начинающих"
+          single: "Разовое событие"
           course: "Курс"
-          festival: "Stall at Public Event"
+          festival: "Стенд на выставке или фестивале"
           concert: "Медитация и концерт"
-        category_labels: # TODO: Translate
-          dropin: "Drop-In"
-          single: "Meditation"
+        category_labels:
+          dropin: "Медитация"
+          single: "Событие"
           course: "Курс"
-          festival: "Stall"
+          festival: "Стенд"
           concert: "Концерт"
-        category_descriptions: # TODO: Translate
-          dropin: "A standard weekly class, where seekers can join at any time."
-          single: "A one-off class, suitable for a tour or other special event."
-          course: "A fixed-duration course where seekers can only join at the start of the course."
-          festival: "A stand at a public event, where seekers can show up without registering."
+        category_descriptions:
+          dropin: "Стандартное еженедельное занятие, новички могут присоединиться в любое время."
+          single: "Какое-либо разовое событие, например, тур или другое мероприятие."
+          course: "Курс фиксированной продолжительности, регистрация возможна только до начала курса."
+          festival: "Обучение медитации в рамках выставки или фестиваля."
           concert: "Представление, сочетающее медитацию и музыку или танец."
         description: "Описание"
         room: "Помещение"
@@ -223,20 +223,20 @@ ru:
           meetup: "Meetup"
           eventbrite: "Eventbrite"
           facebook: "Facebook"
-        registration_notification: "Registration Notifications" # TODO: Translate
-        registration_notifications: # TODO: Translate
-          digest: "One Email per Day"
-          immediate: "Immediately"
-          disabled: "No Notifications"
+        registration_notification: "Уведомления о регистрациях"
+        registration_notifications:
+          digest: "Один Email в день"
+          immediate: "Email для каждой новой регистрации"
+          disabled: "Отключить уведомления"
         registration_url: "Ссылка для регистрации"
-        registration_limit: "Registration Limit"
-        registration_question: "Registration Questions" # TODO: Translate
-        registration_questions: # TODO: Translate
-          questions: "Do you have any questions about the event?"
-          experience: "Have you experienced Sahaja Yoga meditation before?"
-          aspirations: "What do looking for from meditation?"
-          referral: "How did you hear about us?"
-        recurrence: "Повторение"
+        registration_limit: "Лимит регистраций"
+        registration_question: "Вопросы при регистрации"
+        registration_questions:
+          questions: "Будем рады ответить на любые вопросы:"
+          experience: "Ты уже пробовал медитировать по методу Сахаджа Йоги?"
+          aspirations: "Что ты ожидаешь от медитации?"
+          referral: "Как ты о нас узнал?"
+        recurrence: "День занятия"
         recurrences:
           day: "Ежедневно"
           monday: "По понедельникам"
@@ -273,7 +273,7 @@ ru:
         email: :activerecord.attributes.generic.email # Do not translate
         comment: "Комментарий"
         created_at: "Зарегистрировано в - (местное время)"
-        starting_at: "Первое занятие в"
+        starting_at: "Начало занятий с"
 
       # Other
       manager:
@@ -301,7 +301,7 @@ ru:
           create: "Создано"
           destroy: "Удалено"
 
-      client: # TODO: Translate
+      client:
         label: "Ярлык"
         config: "Конфигурация"
         domain: "Домен"
