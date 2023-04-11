@@ -200,18 +200,21 @@ en:
           course: "Meditation Course"
           festival: "Stall at Public Event"
           concert: "Meditation & Music Concert"
+          inactive: "Inactive Class"
         category_labels:
           dropin: "Drop-In"
           single: "Meditation"
           course: "Meditation Course"
           festival: "Stall"
           concert: "Concert"
+          inactive: "Contact Us"
         category_descriptions:
           dropin: "A standard weekly class, where seekers can join at any time."
           single: "A one-off class, suitable for a tour or other special event."
           course: "A fixed-duration course where seekers can only join at the start of the course."
           festival: "A stand at a public event, where seekers can show up without registering."
           concert: "A performance combining meditation and music or dance."
+          inactive: "A program that runs infrequently or is on pause. Seekers can contact the yogi in charge for more info."
         description: "Description"
         room: "Room"
         building: "Building / Room"
@@ -252,8 +255,14 @@ en:
         end_time: "End Time"
         online: "Online Class"
         online_url: "Online Meeting Link"
-        phone_number: "Contact Number"
-        phone_name: "First Name for Phone Calls"
+        contact_info:
+          email_address: "Contact Email"
+          email_name: "First Name for Emails"
+          phone_number: "Contact Number"
+          phone_name: "First Name for Phone Calls"
+          web_links: "Website Links"
+          facebook: "Facebook Group"
+          meetup: "Meetup Page"
         language: :activerecord.attributes.generic.language # Do not translate
         images: :activerecord.models.picture.plural # Do not translate
         venue_id: :activerecord.models.manager.single # Do not translate

@@ -252,9 +252,15 @@ cs:
         end_time: "Čas konce"
         online: "Online kurz"
         online_url: "Odkaz na online meditační setkání"
-        phone_number: "Kontaktní číslo"
-        phone_name: "Jméno osoby pro telefonické hovory"
         language: "Jazyk"
+        contact_info: # TODO: Translate
+          email_address: "Contact Email"
+          email_name: "First Name for Emails"
+          phone_number: "Kontaktní číslo"
+          phone_name: "Jméno osoby pro telefonické hovory"
+          web_links: "Website Links"
+          facebook: "Facebook Group"
+          meetup: "Meetup Page"
         images: :activerecord.models.picture.plural # Do not translate
         venue_id: :activerecord.models.manager.single # Do not translate
         last_activity_on: :activerecord.attributes.generic.last_activity_on # Do not translate

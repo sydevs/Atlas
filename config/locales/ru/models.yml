@@ -252,8 +252,14 @@ ru:
         end_time: "Время окончания"
         online: "Онлайн-класс"
         online_url: "Ссылка на встречу онлайн"
-        phone_number: "Контактный телефон" 
-        phone_name: "Имя" 
+        contact_info: # TODO: Translate
+          email_address: "Contact Email"
+          email_name: "First Name for Emails"
+          phone_number: "Контактный телефон" 
+          phone_name: "Имя" 
+          web_links: "Website Links"
+          facebook: "Facebook Group"
+          meetup: "Meetup Page"
         language: :activerecord.attributes.generic.language # Do not translate
         images: :activerecord.models.picture.plural # Do not translate
         venue_id: :activerecord.models.manager.single # Do not translate

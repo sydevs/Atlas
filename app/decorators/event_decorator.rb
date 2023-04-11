@@ -48,6 +48,8 @@ module EventDecorator
   end
 
   def recurrence_in_words
+    return nil if inactive_category?
+
     if start_date == end_date || (end_date.nil? && recurrence == 'day')
       start_date.year == Date.today.year ? start_date.to_s(:short) : start_date.to_s(:long)
     elsif recurrence == 'day'

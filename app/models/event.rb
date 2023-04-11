@@ -15,7 +15,7 @@ class Event < ApplicationRecord
     status
   ]
 
-  enum category: { dropin: 1, course: 3, single: 2, festival: 4, concert: 5 }, _suffix: true
+  enum category: { dropin: 1, course: 3, single: 2, festival: 4, concert: 5, inactive: 6 }, _suffix: true
   enum recurrence: { day: 0, monday: 1, tuesday: 2, wednesday: 3, thursday: 4, friday: 5, saturday: 6, sunday: 7 }
   enum registration_mode: { native: 0, external: 1, meetup: 2, eventbrite: 3, facebook: 4 }, _suffix: true
   enum registration_notification: { digest: 0, immediate: 1, disabled: 2 }, _suffix: true
@@ -34,7 +34,8 @@ class Event < ApplicationRecord
   accepts_nested_attributes_for :pictures, :venue
 
   # Validations
-  validates_presence_of :type, :category, :language_code, :manager, :recurrence, :start_date, :start_time
+  validates_presence_of :type, :category, :language_code, :manager
+  validates_presence_of :recurrence, :start_date, :start_time, unless: :inactive_category?
   validates_presence_of :end_date, if: :course_category?
   validates_presence_of :end_time, if: -> { festival_category? || concert_category? }
   validates_presence_of :online_url, if: :online?
@@ -97,7 +98,7 @@ class Event < ApplicationRecord
   end
 
   def should_finish?
-    next_occurrence_at.nil?
+    next_occurrence_at.nil? && !inactive_category?
   end
 
   def duration
@@ -109,6 +110,8 @@ class Event < ApplicationRecord
   end
 
   def next_occurrences_after first_datetime, limit: 10
+    return [] if inactive_category?
+
     first_date = first_datetime.to_date
     return [] if registration_end_time && registration_end_time < first_datetime
 

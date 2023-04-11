@@ -31,11 +31,11 @@ function EventInfo() {
                 'data-tooltip': event.timing.timeZone('long'),
               }, event.timing.timeZone('short'))
           ),
-          event.phoneNumber ? m('a.sya-event__phone',
+          event.contact.phoneNumber ? m('a.sya-event__phone',
             m('span.sya-event__phone__number', {
               'data-prefix': Util.translate('event.tel') + ': ',
-            }, event.phoneNumber),
-            m('span.sya-event__phone__name', event.phoneName)
+            }, event.contact.phoneNumber),
+            m('span.sya-event__phone__name', event.contact.phoneName)
           ) : null
         ),
         m('.sya-event__actions',
