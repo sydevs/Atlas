@@ -1,6 +1,6 @@
 /* exported EventView */
 
-/* global m, Loader, EventInfo, ImageCarousel, Registration, NavigationButton, App */
+/* global m, Loader, EventInfo, ImageCarousel, Registration, NavigationButton, BackNavigationButton, App, Util */
 
 function EventView() {
   let event = null
@@ -31,7 +31,7 @@ function EventView() {
 
       return [
         //m(EventMetadata, { event: event }),
-        m(NavigationButton, {
+        m(BackNavigationButton, {
           float: 'left',
           icon: 'left',
           href: href,
