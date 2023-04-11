@@ -45,6 +45,7 @@ uk:
       tel: "tel" # TODO: Translate
       distance: "%{distance} km away" # TODO: Translate
       upcoming: "Starting soon" # TODO: Translate
+      starting_date: "Starting %{date}" # TODO: Translate
 
     registration:
       header: "Зареєструйтеся зараз"

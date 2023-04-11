@@ -44,6 +44,7 @@ en:
       tel: "tel"
       distance: "%{distance} km away"
       upcoming: "Starting soon"
+      starting_date: "Starting %{date}"
 
     registration:
       header: "Register now"

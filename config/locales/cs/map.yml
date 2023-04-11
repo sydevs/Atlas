@@ -44,6 +44,7 @@ cs:
       tel: "tel"
       distance: "%{distance} km daleko"
       upcoming: "Brzy začíná"
+      starting_date: "Starting %{date}" # TODO: Translate
 
     registration:
       header: "Zaregistrujte se nyní"

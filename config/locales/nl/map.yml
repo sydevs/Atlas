@@ -44,6 +44,7 @@ nl:
       tel: "tel"
       distance: "%{distance} km away" # TODO: Translate
       upcoming: "Starting soon" # TODO: Translate
+      starting_date: "Starting %{date}" # TODO: Translate
 
     registration:
       header: "Registeer nu"
@@ -76,6 +77,7 @@ nl:
       invite: "Nodig een vriend uit"
       share: "Delen"
       copied: "Gekopieerd!"
+    
     weekdays:
       0: "Zondag"
       1: "Maandag"

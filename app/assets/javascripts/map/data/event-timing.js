@@ -62,6 +62,11 @@ class EventTiming {
       this.dateString = Util.translate(`recurrence.${weekday.toLowerCase()}`)
     }
 
+    if (this.#firstDateTime > luxon.DateTime.local()) {
+      let displayDate = firstDateTime.toLocaleString({ month: 'short', day: 'numeric' })
+      this.startingString = Util.translate('event.starting_date', { date: displayDate }).toUpperCase()
+    }
+
     if (event.category == 'course') {
       if (firstDateTime && lastDateTime) {
         const weeksBetween = Math.round((firstDateTime - lastDateTime) / (7 * 24 * 60 * 60 * 1000)) + 1

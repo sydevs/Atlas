@@ -27,7 +27,7 @@ function EventCard() {
             distance ? m('span.sya-card__subtitle__distance', Util.translate('event.distance', { distance: distance })) : null,
           ),
           m('.sya-card__meta',
-            event.languageCode != AtlasApp.config.locale ? m('.sya-pill', language.toUpperCase()) : null,
+            event.timing.startingString ? m('.sya-pill', event.timing.startingString) : null,
             m('.sya-card__meta__day', event.timing.dateString),
             m('.sya-card__meta__time', event.timing.timeString),
             event.online ?
