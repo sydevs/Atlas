@@ -17,11 +17,8 @@ function ImageCarousel() {
         })
       }
     },
-    onremove: function() {
+    onbeforeremove: function() {
       flickity.resize()
-    },
-    onupdate: function(vnode) {
-      console.log("DOM updated")
     },
     view: function(vnode) {
       const images = vnode.attrs.images
