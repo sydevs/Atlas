@@ -90,32 +90,6 @@
   > p
     margin-bottom: 16px
 
-// ===== PHONE NUMBER ===== //
-.sya-event__phone
-  color: $color-grey-normal
-  text-decoration: none
-  font-size: 13px
-  font-weight: $font-light
-  letter-spacing: 0.36px
-  transition: color 0.5s
-
-  > *
-    display: inline-block
-
-  &__number:before
-    content: attr(data-prefix)
-    display: inline
-
-  &__name:before
-    content: ', '
-    display: inline
-
-  &:hover
-    text-decoration: underline
-
-  &:hover > *
-    text-decoration: underline
-
 // ===== ACTIONS ===== //
 .sya-event__actions
   display: flex
@@ -147,7 +121,7 @@
 // ===== SIDEBAR ===== //
 .sya-event__sidebar
   float: right
-  width: 100px
+  width: 102px
   margin-left: 8px
   margin-bottom: 8px
   
@@ -155,18 +129,19 @@
     @include button
     display: block
 
-  &__language
-    font-size: 10px
+  &__bubble
+    font-size: 11px
     line-height: 14px
     letter-spacing: 0.17px
     text-align: center
-    padding: 9px
+    padding: 9px 8px
+    font-weight: $font-semibold
     font-style: italic
 
     border: 1px solid $color-blue
     border-radius: 5px
 
-  &__language-text
+  &__bubble-highlight
     color: $color-blue
     font-size: 11px
     font-weight: $font-bold

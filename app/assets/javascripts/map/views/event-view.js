@@ -45,7 +45,7 @@ function EventView() {
         }),
         m(EventInfo, event),
         event.images.length > 0 ? m(ImageCarousel, { images: event.images }) : null,
-        m(Registration, event),
+        event.category != 'inactive' ? m(Registration, event) : null,
       ]
     }
   }
