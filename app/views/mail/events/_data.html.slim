@@ -22,10 +22,14 @@ table.data cellpadding=0
   tr
     th = translate('mail.event.category')
     td = event.category_name
-  - if event.phone_number?
+  - if event.contact_info['phone_number']
     tr
-      th = translate_attribute(event, :phone_number)
-      td #{event.phone_name} (#{event.phone_number})
+      th = translate_attribute(event, 'contact_info.phone_number')
+      td #{event.contact_info['phone_name']} (#{event.contact_info['phone_number']})
+  - if event.contact_info['email_address']
+    tr
+      th = translate_attribute(event, 'contact_info.email_address')
+      td = event.contact_info['email_address']
   tr
     th = translate('mail.event.manager')
     td
@@ -37,7 +41,7 @@ table.data cellpadding=0
       td
         - creator = event.audits.last.user
         = creator ? mail_to(creator.email, creator.name) : "System"
-  - elsif %i[needs_urgent_review expired].include?(status)
+  - elsif %i[needs_review needs_urgent_review expired].include?(status)
     tr
       th = translate('mail.event.updated_at')
       td = event.updated_at.to_date.to_s(:long)
