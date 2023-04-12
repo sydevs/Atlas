@@ -78,5 +78,47 @@ const Util = {
     } else {
       return url
     }
-  }
+  },
+
+  modifyURLParameters(url, add = [], remove = []) {
+    let path = false
+
+    if (typeof URLSearchParams !== 'undefined') {
+      if (url[0] == "/") {
+        path = url
+        url = window.location.origin + path
+      }
+
+      url = new URL(url)
+      const params = new URLSearchParams(url.search)
+      console.log('modify with', add, remove)
+
+      add.forEach((value) => {
+        parts = value.split('=')
+        console.log('adding', parts[0], parts[1])
+        params.set(parts[0], parts[1])
+      })
+      
+      remove.forEach(key => {
+        console.log('removing', key)
+        params.delete(key)
+      })
+
+      if (path) {
+        return `${url.pathname}?${params.toString()}${url.hash}`
+      } else {
+        return `${url.origin}${url.pathname}?${params.toString()}${url.hash}`
+      }
+    } else {
+      console.log(`Your browser ${navigator.appVersion} does not support URLSearchParams`)
+    }
+  },
+
+  withProtocol(url) {
+    if (!/^https?:\/\//i.test(url)) {
+      return '//' + url
+    } else {
+      return url
+    }
+  },
 }

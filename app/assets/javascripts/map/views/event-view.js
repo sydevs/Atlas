@@ -40,8 +40,7 @@ function EventView() {
         m(NavigationButton, {
           float: 'right',
           icon: 'share',
-          href: `/:layer/event/:id?share=1`,
-          params: { id: event.id, layer: event.layer },
+          href: Util.modifyURLParameters(m.route.get(), ['share=1']),
         }),
         m(EventInfo, event),
         event.images.length > 0 ? m(ImageCarousel, { images: event.images }) : null,

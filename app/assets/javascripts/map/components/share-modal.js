@@ -47,7 +47,7 @@ function ShareModal() {
     view: function(vnode) {
       if (!vnode.attrs.enabled) return
 
-      const backPath = m.route.get().split('?')[0]
+      const backPath = Util.modifyURLParameters(m.route.get(), [], ['share'])
       const select = vnode.attrs.selection || {}
 
       AtlasApp.data.getRecord(select.model, select.id).then(function(record) {
