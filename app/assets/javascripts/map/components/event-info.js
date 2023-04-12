@@ -42,8 +42,6 @@ function EventInfo() {
             }, event.contact.phoneNumber),
             m('span.sya-contact__direct__name', event.contact.phoneName)
           ) : null,
-        ),
-        event.category != 'inactive' ?
           m('.sya-event__actions',
             m('a',
               {
@@ -63,7 +61,8 @@ function EventInfo() {
               m('span.sya-icon.sya-icon--location'),
               m('span', Util.translate('event.directions'))
             ) : null
-          ) : null,
+          ),
+        ),
         m('.sya-event__description', event.description),
       ]
     }
@@ -93,25 +92,26 @@ function InactiveEventInfo() {
           m('.sya-event__subtitle',
             m('.sya-event__subtitle__address', event.address)
           ),
+
+          m('.sya-contact__title', Util.translate('event.contact.title')),
+          event.contact.phoneNumber ? m('a.sya-contact__direct',
+            { href: `tel:${event.contact.phoneNumber}` },
+            m('span.sya-contact__direct__detail', {
+              'data-prefix': Util.translate('event.contact.tel') + ': ',
+            }, event.contact.phoneNumber),
+            m('span.sya-contact__direct__name', event.contact.phoneName)
+          ) : null,
+
+          event.contact.emailAddress ? m('a.sya-contact__direct',
+            { href: `mailto:${event.contact.emailAddress}` },
+            m('span.sya-contact__direct__detail', {
+              'data-prefix': Util.translate('event.contact.email') + ': ',
+            }, event.contact.emailAddress),
+            //m('span.sya-contact__direct__name', event.contact.phoneName)
+          ) : null,
+
+          web_links.length > 0 ? m('.sya-contact__links', web_links) : null,
         ),
-        m('.sya-contact__title', Util.translate('event.contact.title')),
-        event.contact.phoneNumber ? m('a.sya-contact__direct',
-          { href: `tel:${event.contact.phoneNumber}` },
-          m('span.sya-contact__direct__detail', {
-            'data-prefix': Util.translate('event.contact.tel') + ': ',
-          }, event.contact.phoneNumber),
-          m('span.sya-contact__direct__name', event.contact.phoneName)
-        ) : null,
-
-        event.contact.emailAddress ? m('a.sya-contact__direct',
-          { href: `mailto:${event.contact.emailAddress}` },
-          m('span.sya-contact__direct__detail', {
-            'data-prefix': Util.translate('event.contact.email') + ': ',
-          }, event.contact.emailAddress),
-          //m('span.sya-contact__direct__name', event.contact.phoneName)
-        ) : null,
-
-        web_links.length > 0 ? m('.sya-contact__links', web_links) : null,
         m('.sya-event__description', event.description),
       ]
     }
