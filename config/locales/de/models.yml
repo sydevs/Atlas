@@ -200,18 +200,21 @@ de:
           course: "Meditationskurs"
           festival: "Stand im öffentlichen Ereignis"
           concert: "Meditation & Musikkonzert"
+          inactive: "Inactive Class" # TODO: Translate
         category_labels:
           dropin: "Offen"
           single: "Meditation"
           course: "Meditationskurs"
           festival: "Stand"
           concert: "Konzert"
+          inactive: "Beginner meditation class" # TODO: Translate
         category_descriptions:
           dropin: "Eine Standard-wöchentliche Klasse, in der Sucher jederzeit teilnehmen können."
           single: "Eine einmalige Veranstaltung, geeignet für eine Tour oder ein besonderes Ereignis."
           course: "Ein Festgelegter Kurs, in dem sich Sucher nur zum begin anmelden können."
           festival: "Ein Stand auf einer öffentlichen Veranstaltung, in dem Seekern ohne Registrierung teilnehmen können."
           concert: "Eine Veranstaltung, die Meditation und Musik oder Tanz kombiniert."
+          inactive: "A program that runs infrequently or is on pause. Seekers can contact the yogi in charge for more info." # TODO: Translate
         description: "Beschreibung"
         room: "Zimmer"
         building: "Gebäude / Zimmer"

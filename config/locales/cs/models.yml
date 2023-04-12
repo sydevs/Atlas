@@ -200,18 +200,21 @@ cs:
           course: "Kurz meditace"
           public_event: "Stánek na veřejné akci"
           concert: "Meditační a hudební koncert"
+          inactive: "Inactive Class" # TODO: Translate
         category_labels:
           intro: "Úvodní kurz"
           intermediate: "Jdeme hlouběji"
           course: "Meditační kurz"
           public_event: "Stánek"
           concert: "Koncert"
+          inactive: "Beginner meditation class" # TODO: Translate
         category_descriptions:
           intro: "První seznámení s tímto druhem meditace."
           intermediate: "Kurz pro ty, kteří již úvodní hodinu absolvovali."
           course: "Několikatýdenní kurz, který vás provede různými technikami meditace."
           public_event: "Nabíka výuky meditace na veřejné akci zdarma."
           concert: "Představení kombinující meditaci a hudbu nebo tanec"
+          inactive: "A program that runs infrequently or is on pause. Seekers can contact the yogi in charge for more info." # TODO: Translate
         description: "Popis"
         room: "Místnost"
         building: "Budova"
