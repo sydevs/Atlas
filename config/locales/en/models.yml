@@ -207,7 +207,7 @@ en:
           course: "Meditation Course"
           festival: "Stall"
           concert: "Concert"
-          inactive: "Beginner meditation class"
+          inactive: "Beginner class"
         category_descriptions:
           dropin: "A standard weekly class, where seekers can join at any time."
           single: "A one-off class, suitable for a tour or other special event."

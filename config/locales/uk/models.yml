@@ -208,7 +208,7 @@ uk:
           course: "Курс з медитації"
           festival: "Stall"
           concert: "Концерт"
-          inactive: "Beginner meditation class"
+          inactive: "Beginner class"
         category_descriptions: # TODO: Translate
           dropin: "A standard weekly class, where seekers can join at any time."
           single: "A one-off class, suitable for a tour or other special event."

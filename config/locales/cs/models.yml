@@ -207,7 +207,7 @@ cs:
           course: "Meditační kurz"
           public_event: "Stánek"
           concert: "Koncert"
-          inactive: "Beginner meditation class" # TODO: Translate
+          inactive: "Beginner class" # TODO: Translate
         category_descriptions:
           intro: "První seznámení s tímto druhem meditace."
           intermediate: "Kurz pro ty, kteří již úvodní hodinu absolvovali."

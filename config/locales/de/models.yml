@@ -207,7 +207,7 @@ de:
           course: "Meditationskurs"
           festival: "Stand"
           concert: "Konzert"
-          inactive: "Beginner meditation class" # TODO: Translate
+          inactive: "Beginner class" # TODO: Translate
         category_descriptions:
           dropin: "Eine Standard-wöchentliche Klasse, in der Sucher jederzeit teilnehmen können."
           single: "Eine einmalige Veranstaltung, geeignet für eine Tour oder ein besonderes Ereignis."
