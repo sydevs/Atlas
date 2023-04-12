@@ -50,7 +50,7 @@ module KlaviyoAPI
         'room': event.room,
         'address1': location.address,
         # 'address1': venue.street,
-        # 'city': venue.city,
+        'city': event.area.name,
         'region': area.region.name,
         'country': area.country.name,
         # 'postcode': venue.post_code,

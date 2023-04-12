@@ -27,20 +27,34 @@ h1
 h2
   margin: 0
   padding: 15px 10px
-  font-size: 20px
+  font-size: 18px
   font-weight: bold
   text-align: center
 
-  .suptitle
-    text-transform: uppercase
-    font-size: 15px
-    font-weight: normal
-    opacity: 0.8
+h3
+  padding: 15px 10px
+  padding-top: 30px
+  max-width: 380px
+  margin: 22px auto
+  font-size: 22px
+  line-height: 28px
+  font-weight: 400
+  text-align: center
 
   .subtitle
-    font-size: 18px
-    font-weight: normal
-    opacity: 0.8
+    margin-top: 5px
+    font-size: 70%
+
+.suptitle
+  text-transform: uppercase
+  font-size: 75%
+  font-weight: normal
+  opacity: 0.8
+
+.subtitle
+  font-size: 90%
+  font-weight: normal
+  opacity: 0.8
 
 .box
   margin: auto
@@ -80,17 +94,27 @@ a
   text-align: center
   max-width: 400px
   margin: auto
-  margin-top: 40px
+  margin-top: 17.5px
 
   .button
     display: inline-block
-    width: 150px
+    width: 100%
+    max-width: 315px
     margin: 2px
 
-  .or
-    vertical-align: middle
-    font-weight: bold
+    &.positive
+      background: #3B9082
+      border-color: #3B9082
 
+    &.negative
+      background: #CC5E5E
+      border-color: #CC5E5E
+
+  .or
+    font-weight: bold
+    font-size: 15px
+    padding: 6px 0
+  
 .information
   max-width: 360px
   margin: 100px auto

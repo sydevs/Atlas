@@ -160,7 +160,7 @@ class Event < ApplicationRecord
   end
 
   def label
-    custom_name || venue&.street || area&.city || "Event ##{id}"
+    custom_name || venue&.street || area&.name || "Event ##{id}"
   end
 
   def language_code
