@@ -3,4 +3,5 @@ ru:
     distance: "%{distance} км отсюда"
     event:
       label: "%{category} в %{venue}"
+      inactive_label: "%{category} in %{area}" # TODO: Translate
       online_label: "%{category} из %{area}"

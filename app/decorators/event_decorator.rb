@@ -24,6 +24,8 @@ module EventDecorator
   def label
     if custom_name.present?
       custom_name
+    elsif inactive_category?
+      I18n.translate('api.event.inactive_label', category: category_label, area: decorated_area.label)
     elsif online?
       I18n.translate('api.event.online_label', category: category_label, area: decorated_area.label)
     else
@@ -48,6 +50,8 @@ module EventDecorator
   end
 
   def recurrence_in_words
+    return nil if inactive_category?
+
     if start_date == end_date || (end_date.nil? && recurrence == 'day')
       start_date.year == Date.today.year ? start_date.to_s(:short) : start_date.to_s(:long)
     elsif recurrence == 'day'

@@ -3,4 +3,5 @@ nl:
     distance: "%{distance} km afstand"
     event:
       label: "%{category} in %{venue}"
+      inactive_label: "%{category} in %{area}" # TODO: Translate
       online_label: "%{category} uit %{area}"

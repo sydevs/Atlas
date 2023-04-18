@@ -61,14 +61,16 @@ ru:
       online_address: "Онлайн из %{city}"
 
       status:
-        question: "Это информация по-прежнему актуальна?"
-        verify: "Информация актуальна."
+        question: "Информация о программе по-прежнему актуальна?"
+        contact: "Связаться с менеджером."
+        verify: "Да, информация актуальна."
+        edit: "Нет, обновить данные о программе."
         or: "или"
         subject:
           created: "Новое событие создано - %{event}"
-          needs_review: "[Warning] Необходима проверка события - %{event}"
-          needs_urgent_review: "[Alert] Срок события скоро истечёт - %{event}"
-          expired: "Просроченное событие - %{event}"
+          needs_review: "Are your meeting details correct? (Verify in one click)"
+          needs_urgent_review: "Are %{city} meeting details correct?"
+          expired: "Should this event still be running? (Verify in one click)"
           finished: "Событие завершено - %{event}"
         preview:
           created: "Ты менеджер нового события. '%{event}'' созданно в %{place}."
@@ -76,28 +78,33 @@ ru:
           needs_urgent_review: "'%{event}' будет скоро удалено с карты, так как менеджер события не ответил на наш email."
           expired: "'%{event}'' не было обновлено в течение %{duration}, и было удалено с карты. Обнови информацию о событии, чтобы опубликовать его снова."
           finished: "'%{event}' завершено по расписанию. Последнее занятие этого события прошло, событие будет убрано с карты."
-        title:
+        header:
           created: "Новое событие создано"
           needs_review: "Необходима проверка события"
           needs_urgent_review: "Срок события скоро истечёт"
+          escalation: "Менеджер не ответил"
           expired: "Просроченное событие"
           finished: "Событие завершено"
-          escalation: "Менеджер не ответил"
+        title:
+          created: "You are the manager of a new event"
+          needs_review: "Are these details still correct?"
+          needs_urgent_review: "Are these details still correct?"
+          escalation: "Can you check if this event is still running?"
+          expired: "Should this event still be running?"
+          finished: "Is it correct that this event has finished?"
         byline:
           created: "Создано %{date}"
-          needs_review: "Последнее обновление %{date}"
-          needs_urgent_review: "Будет удалено %{date}"
-          expired: "Просрочено %{date}"
+          needs_review: "(Verify in one click)"
+          needs_urgent_review: "(Verify in one click)"
+          escalation: "(Please contact event manager)"
+          expired: "(Verify to restore event)"
           finished: "Завершено %{date}"
         explanation:
-          created: "Ты менеджер нового события, созданного в Сахадж Атласе."
-          needs_review: "Это событие, которым ты управляешь, необходимо проверить на актуальность, иначе оно будет удалено с карты."
-          needs_urgent_review: "Это событие скоро будет удалено с карты, если его актуальность не будет проверена и обновлена."
-          expired: "Это событие было удалено с карты, потому что оно не обновлялось в последнее время. Чтобы добавить его обратно на карту, обнови событие."
-          finished: "Это событие завершено."
-        escalation:
-          event_manager: "Это событие, которым ты управляешь, срочно нужно проверить на актуальность. Это последнее напоминание, которое ты получишь. Мы также отправили email менеджерам региона %{place}, чтобы гарантировать, что это событие не будет удалено по ошибке."
-          super_manager: "Ты являешься менеджером %{place}. Это предупреждение отправлено тебе, потому что менеджер этого события ещё не ответил на наш email."
+          created: "You can login to the Atlas to update your event at any time. You will receive occasional emails to check that your event is still running. 🎉"
+          needs_review: "Verifying programs once is a while keeps an accurate list of Sahaj meetings around the world. 🙏"
+          needs_urgent_review: "This event will be removed from the map soon, unless it's accuracy is checked."
+          expired: "This event has been removed from the map because it has not been updated recently. To add it back to the map, update the event."
+          finished: "This event has concluded, is that correct?"
 
       registrations:
         subject: "[Reminder] регистрация нового события"

@@ -17,10 +17,8 @@ module Types
     field :language_code, String, null: false
     field :address, String, null: false
 
-    field :timing, Types::TimingType, null: false
-
-    field :phone_number, String, null: true
-    field :phone_name, String, null: true
+    field :timing, Types::EventTimingType, null: false
+    field :contact, Types::EventContactType, null: false, method: :contact_info
 
     field :online, Boolean, null: false, method: :online?
     field :online_url, String, null: true

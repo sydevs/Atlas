@@ -136,8 +136,12 @@ cs:
         registration_question: "What questions should seekers be asked when they register for the class." # TODO: Translate
         online: "Zaškrtněte toto políčko, pokud bude program probíhat online."
         online_url: "Pokud je kurz online, tento odkaz je místo, kde by se zájemci měli do kurzu připojit (např. odkaz na Zoom, YouTube, Google Meet atd.)."
-        phone_number: "Místní telefonní číslo, na které mohou zájemci volat a klást otázky."
-        phone_name: "Křestní jméno jogína, který zvedne telefon."
+        contact_info: # TODO: Translate
+          email_address: "An email address which will be published on the website."
+          email_name: "The first name of the yogi who will respond to emails."
+          phone_number: "Místní telefonní číslo, na které mohou zájemci volat a klást otázky."
+          phone_name: "Křestní jméno jogína, který zvedne telefon."
+          web_links: "Websites where seekers can find more information about this potential program."
         venue:
           search: "Hledat adresu"
           view_fields: "Zobrazit pole míst konání"

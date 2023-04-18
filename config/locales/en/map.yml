@@ -41,9 +41,18 @@ en:
       directions: "Get directions"
       online: "Online Class"
       online_from: "Hosted from %{city}"
-      tel: "tel"
       distance: "%{distance} km away"
       upcoming: "Starting soon"
+      starting_date: "Starting %{date}"
+      inactive:
+        dates: "Contact organisers for timings"
+        notice: "This class is held by request"
+      contact:
+        title: "Contact us for timings:"
+        tel: "tel"
+        email: "email"
+        meetup: "Meetup Page"
+        facebook: "Facebook Page"
 
     registration:
       header: "Register now"
