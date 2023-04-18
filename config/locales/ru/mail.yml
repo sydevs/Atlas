@@ -58,14 +58,14 @@ ru:
       edit: "Редактировать событие"
       update: "Обновить событие"
       contact: "Отправить email"
-      online_address: "Online - from %{city}" # TODO: Translate
+      online_address: "Онлайн из %{city}"
 
-      status: # TODO: Translate
-        question: "Are the details of this program correct?"
-        contact: "Contact manager"
-        verify: "Yes, details are correct"
-        edit: "No, edit the program"
-        or: "or"
+      status:
+        question: "Информация о программе по-прежнему актуальна?"
+        contact: "Связаться с менеджером."
+        verify: "Да, информация актуальна."
+        edit: "Нет, обновить данные о программе."
+        or: "или"
         subject:
           created: "Новое событие создано - %{event}"
           needs_review: "Are your meeting details correct? (Verify in one click)"
