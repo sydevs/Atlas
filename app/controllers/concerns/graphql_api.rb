@@ -11,8 +11,6 @@ module GraphqlAPI
     category
     address
     languageCode
-    phoneName
-    phoneNumber
     online
     onlineUrl
     registrationMode
@@ -30,6 +28,14 @@ module GraphqlAPI
       duration
       timeZone
       recurrence
+    }
+    contact {
+      phoneName
+      phoneNumber
+      emailName
+      emailAddress
+      meetup
+      facebook
     }
     images {
       url

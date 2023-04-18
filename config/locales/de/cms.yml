@@ -134,8 +134,12 @@ de:
         registration_question: "Welche Fragen soll ein Sucher Beantworten, wenn er sich für eine Veranstaltung anmeldet."
         online: "Aktivieren Sie diese Box, wenn dies ein online Programm ist."
         online_url: "Wenn die Klasse online abgehalten wird, geben sie hier den Beitrits Link an (zB. für Zoom, YouTube, Google Meet, etc.)"
-        phone_number: "Eine lokale Telefonnummer, die Sucher anrufen können, um Fragen zu stellen."
-        phone_name: "Der Vorname des Yogi, der die obige Telefonnummer beträut."
+        contact_info: # TODO: Translate
+          email_address: "An email address which will be published on the website."
+          email_name: "The first name of the yogi who will respond to emails."
+          phone_number: "Eine lokale Telefonnummer, die Sucher anrufen können, um Fragen zu stellen."
+          phone_name: "Der Vorname des Yogi, der die obige Telefonnummer beträut."
+          web_links: "Websites where seekers can find more information about this potential program."
         manager:
           view_fields: "Manager-Felder ansehen"
           field: "Der Manager sollte auf einen Yogi gesetzt werden, der die Verantwortung für diese Veranstaltung übernimmt. Deiser bekommt jede Woche die Liste neuer anmeldungen und alle paar Monate den bestätigungs link für das Programm."

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_01_30_231544) do
+ActiveRecord::Schema.define(version: 2023_04_11_143447) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -139,6 +139,7 @@ ActiveRecord::Schema.define(version: 2023_01_30_231544) do
     t.bigint "area_id"
     t.integer "registration_notification", default: 0, null: false
     t.integer "registration_question", default: 1, null: false
+    t.jsonb "contact_info", default: {}, null: false
     t.index ["area_id"], name: "index_events_on_area_id"
     t.index ["manager_id"], name: "index_events_on_manager_id"
     t.index ["status"], name: "index_events_on_status"

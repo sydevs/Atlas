@@ -60,15 +60,17 @@ cs:
       contact: "Poslat e-mail"
       online_address: "Online - from %{city}" # TODO: Translate
 
-      status:
-        question: "Jsou výše uvedené informace stále platné?"
-        verify: "Událost je platná"
-        or: "NEBO"
+      status: # TODO: Translate
+        question: "Are the details of this program correct?"
+        contact: "Contact manager"
+        verify: "Yes, details are correct"
+        edit: "No, edit the program"
+        or: "nebo"
         subject:
           created: "Vytvořena nová událost - %{event}"
-          needs_review: "[Warning] Událost potřebuje kontrolu – %{event}"
-          needs_urgent_review: "[Alert] Akce brzy vyprší - %{event}"
-          expired: "Platnost události vypršela - %{event}"
+          needs_review: "Are your meeting details correct? (Verify in one click)"
+          needs_urgent_review: "Are %{city} meeting details correct?"
+          expired: "Should this event still be running? (Verify in one click)"
           finished: "Událost je ukončena - %{event}"
         preview:
           created: "Jste správcem nové události. '%{event}'' byla vytvořena v %{region}."
@@ -76,28 +78,33 @@ cs:
           needs_urgent_review: "'%{event}' bude brzy odstraněn z mapy, protože správce události ještě neodpověděl na náš e-mail."
           expired: "'%{event}'' nebyl aktualizován za %{duration} a byl odstraněn z mapy. Aktualizujte tuto událost, aby byla znovu veřejná."
           finished: "'%{event}' byla uzavřena podle plánu. Poslední kurz pro tuto událost skončil, takže událost bude skryta z mapy."
-        title:
+        header:
           created: "Nová událost vytvořena"
           needs_review: "Událost vyžaduje kontrolu"
           needs_urgent_review: "Akce brzy vyprší"
           expired: "Platnost události vypršela"
           finished: "Událost je ukončena"
           escalation: "Správce neodpověděl"
+        title:
+          created: "You are the manager of a new event"
+          needs_review: "Are these details still correct?"
+          needs_urgent_review: "Are these details still correct?"
+          escalation: "Can you check if this event is still running?"
+          expired: "Should this event still be running?"
+          finished: "Is it correct that this event has finished?"
         byline:
           created: "Vytvořeno %{date}"
-          needs_review: "Naposledy aktualizováno %{date}"
-          needs_urgent_review: "Bude odstraněno %{date}"
-          expired: "Platnost vypršela %{date}"
+          needs_review: "(Verify in one click)"
+          needs_urgent_review: "(Verify in one click)"
+          escalation: "(Please contact event manager)"
+          expired: "(Verify to restore event)"
           finished: "Ukončeno dne %{date}"
         explanation:
-          created: "Jste správcem nové události, která byla vytvořena na Sahadža Atlasu."
-          needs_review: "U této události, kterou spravujete, je třeba zkontrolovat přesnost, jinak bude z mapy odstraněna."
-          needs_urgent_review: "Tato událost bude brzy odstraněna z mapy, pokud nebude zkontrolována a aktualizována její přesnost."
-          expired: "Tato událost byla z mapy odstraněna, protože nebyla v poslední době aktualizována. Chcete-li ji přidat zpět na mapu, aktualizujte událost."
-          finished: "Tato akce skončila."
-        escalation:
-          event_manager: "U této události, kterou spravujete, je naléhavě nutné zkontrolovat přesnost. Toto je poslední připomenutí, které obdržíte. Poslali jsme také e-mail správce oblasti %{region}, abychom se ujistili, že tato událost nebude odstraněna omylem."
-          super_manager: "Jste správcem %{region}. Toto upozornění vám bylo zasláno, protože správce této události ještě neodpověděl na náš e-mail."
+          created: "You can login to the Atlas to update your event at any time. You will receive occasional emails to check that your event is still running. 🎉"
+          needs_review: "Verifying programs once is a while keeps an accurate list of Sahaj meetings around the world. 🙏"
+          needs_urgent_review: "This event will be removed from the map soon, unless it's accuracy is checked."
+          expired: "This event has been removed from the map because it has not been updated recently. To add it back to the map, update the event."
+          finished: "This event has concluded, is that correct?"
 
       registrations:
         subject: "[Připomenutí] Nadcházející události"

@@ -1,6 +1,6 @@
 /* exported EventView */
 
-/* global m, Loader, EventInfo, ImageCarousel, Registration, NavigationButton, App */
+/* global m, Loader, EventInfo, ImageCarousel, Registration, NavigationButton, BackNavigationButton, App, Util */
 
 function EventView() {
   let event = null
@@ -31,7 +31,7 @@ function EventView() {
 
       return [
         //m(EventMetadata, { event: event }),
-        m(NavigationButton, {
+        m(BackNavigationButton, {
           float: 'left',
           icon: 'left',
           href: href,
@@ -40,12 +40,11 @@ function EventView() {
         m(NavigationButton, {
           float: 'right',
           icon: 'share',
-          href: `/:layer/event/:id?share=1`,
-          params: { id: event.id, layer: event.layer },
+          href: Util.modifyURLParameters(m.route.get(), ['share=1']),
         }),
         m(EventInfo, event),
         event.images.length > 0 ? m(ImageCarousel, { images: event.images }) : null,
-        m(Registration, event),
+        event.category != 'inactive' ? m(Registration, event) : null,
       ]
     }
   }

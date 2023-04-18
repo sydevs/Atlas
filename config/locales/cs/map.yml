@@ -41,9 +41,18 @@ cs:
       directions: "Obdržet pokyny"
       online: "Online kurz"
       online_from: "Vysíláno z"
-      tel: "tel"
       distance: "%{distance} km daleko"
       upcoming: "Brzy začíná"
+      starting_date: "Starting %{date}" # TODO: Translate
+      inactive: # TODO: Translate
+        dates: "Contact organisers for timings"
+        notice: "This class is held by request"
+      contact: # TODO: Translate
+        title: "Contact us for timings:"
+        tel: "tel"
+        email: "email"
+        meetup: "Meetup Page"
+        facebook: "Facebook Page"
 
     registration:
       header: "Zaregistrujte se nyní"

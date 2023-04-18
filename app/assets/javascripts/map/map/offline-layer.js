@@ -25,8 +25,12 @@ class OfflineMapLayer extends AbstractMapLayer {
       AtlasApp.data.setCache('venue', venue)
       m.route.set('/:layer/venue/:id', { id: venue.id, layer: AtlasEvent.LAYER.offline })
     } else {
-      m.route.set('/:layer/event/:id', { id: venue.offlineEventIds[0], layer: AtlasEvent.LAYER.offline })
-      console.log('set venue', venue.offlineEventIds[0])
+      let backPath = m.route.get().split('#')[0] + window.location.hash
+      m.route.set('/:layer/event/:id', {
+        id: venue.offlineEventIds[0],
+        layer: AtlasEvent.LAYER.offline,
+        back: backPath,
+      })
     }
   }
 

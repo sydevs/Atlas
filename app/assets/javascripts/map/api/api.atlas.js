@@ -22,8 +22,6 @@ class AtlasAPI {
           category
           address
           languageCode
-          phoneName
-          phoneNumber
           online
           onlineUrl
           path
@@ -40,6 +38,14 @@ class AtlasAPI {
             lastDate
             upcomingDates
             recurrence
+          }
+          contact {
+            phoneName
+            phoneNumber
+            emailName
+            emailAddress
+            meetup
+            facebook
           }
           images {
             url

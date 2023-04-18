@@ -53,11 +53,12 @@ p = simple_format @record.description
     .content
       .header = @record.category_name
       .description = @record.category_description
-  .item
-    i.calendar.icon
-    .content
-      .header = translate('cms.details.dates_and_timing')
-      .description #{@record.formatted_start_end_date}, #{@record.timing_in_words}
+  - unless @record.inactive_category?
+    .item
+      i.calendar.icon
+      .content
+        .header = translate('cms.details.dates_and_timing')
+        .description #{@record.formatted_start_end_date}, #{@record.timing_in_words}
   .item
     i.language.icon
     .content

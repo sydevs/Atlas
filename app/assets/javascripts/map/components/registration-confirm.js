@@ -29,7 +29,7 @@ function RegistrationConfirm() {
           ),
           m(m.route.Link,
             {
-              href: m.route.get() + '?share=1',
+              href: Util.modifyURLParameters(m.route.get(), ['share=1']),
               class: 'sya-registration__confirmation__share',
             },
             m('span.sya-icon.sya-icon--share'),

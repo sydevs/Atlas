@@ -41,9 +41,18 @@ ru:
       directions: "Как нас найти"
       online: "Онлайн-класс"
       online_from: "Транслируется из %{city}"
-      tel: "тел"
       distance: "%{distance} км"
       upcoming: "Скоро начинается"
+      starting_date: "Начинается %{date}"
+      inactive:
+        dates: "Связаться с организатором, чтобы уточнить время"
+        notice: "Это занятие проводится по запросу"
+      contact:
+        title: "Свяжись с нами, чтобы уточнить время:"
+        tel: "тел"
+        email: "email"
+        meetup: "Meetup Page"
+        facebook: "Facebook Page"
 
     registration:
       header: "Записаться сейчас"

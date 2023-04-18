@@ -134,8 +134,12 @@ ru:
         registration_question: "What questions should seekers be asked when they register for the class." # TODO: Translate
         online: "Установи этот флажок, если программа будет проходить онлайн."
         online_url: "Если программа проходит онлайн, то по этой ссылке искатели смогут присоединиться к классу (например, ссылка на Zoom, YouTube, Google Meet и т.д.)."
-        phone_number: "Местный номер телефона, по которому искатели могут позвонить, чтобы задать вопросы." 
-        phone_name: "Имя йога, который отвечает на звонки." 
+        contact_info: # TODO: Translate
+          email_address: "An email address which will be published on the website."
+          email_name: "The first name of the yogi who will respond to emails."
+          phone_number: "Местный номер телефона, по которому искатели могут позвонить, чтобы задать вопросы." 
+          phone_name: "Имя йога, который отвечает на звонки." 
+          web_links: "Websites where seekers can find more information about this potential program."
         manager:
           view_fields: "Просмотреть область ответственности менеджера"
           field: "Менеджером должен быть йог(иня), который(ая) возьмет на себя ответственность за это событие. Каждую неделю менеджеру будет рассылаться список новых регистраций, и каждые несколько месяцев его будут просить подтвердить, что информация о программе по-прежнему верна."

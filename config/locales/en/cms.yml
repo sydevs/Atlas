@@ -136,8 +136,12 @@ en:
         registration_question: "What questions should seekers be asked when they register for the class."
         online: "Check this box if the program will take place online."
         online_url: "If the class is online, this link is where seekers should join the class (eg. a link to Zoom, YouTube, Google Meet, etc)."
-        phone_number: "A local phone number that seekers can call to ask questions."
-        phone_name: "The first name of the yogi who will answer the phone."
+        contact_info:
+          email_address: "An email address which will be published on the website."
+          email_name: "The first name of the yogi who will respond to emails."
+          phone_number: "A local phone number that seekers can call to ask questions."
+          phone_name: "The first name of the yogi who will answer the phone."
+          web_links: "Websites where seekers can find more information about this potential program."
         venue:
           search: "Search for address"
           view_fields: "View location fields"
