@@ -200,18 +200,21 @@ ru:
           course: "Курс"
           festival: "Стенд на выставке или фестивале"
           concert: "Медитация и концерт"
+          inactive: "Нерегулярное занятие"
         category_labels:
           dropin: "Медитация"
-          single: "Событие"
+          single: "Событие"          
           course: "Курс"
           festival: "Стенд"
           concert: "Концерт"
+          inactive: "Нерегулярное занятие"
         category_descriptions:
           dropin: "Стандартное еженедельное занятие, новички могут присоединиться в любое время."
           single: "Какое-либо разовое событие, например, тур или другое мероприятие."
           course: "Курс фиксированной продолжительности, регистрация возможна только до начала курса."
-          festival: "Обучение медитации в рамках выставки или фестиваля."
+          festival: "Обучение медитации в рамках выставки или фестиваля, регистрация не предусмотрена."
           concert: "Представление, сочетающее медитацию и музыку или танец."
+          inactive: "Программа, которая проводится нечасто или приостановлена. Искатели могут связаться с ответственным йогом для получения дополнительной информации."
         description: "Описание"
         room: "Помещение"
         building: "Здание / Hомер"
@@ -252,8 +255,14 @@ ru:
         end_time: "Время окончания"
         online: "Онлайн-класс"
         online_url: "Ссылка на встречу онлайн"
-        phone_number: "Контактный телефон" 
-        phone_name: "Имя" 
+        contact_info: # TODO: Translate
+          email_address: "Contact Email"
+          email_name: "First Name for Emails"
+          phone_number: "Контактный телефон" 
+          phone_name: "Имя" 
+          web_links: "Website Links"
+          facebook: "Facebook Group"
+          meetup: "Meetup Page"
         language: :activerecord.attributes.generic.language # Do not translate
         images: :activerecord.models.picture.plural # Do not translate
         venue_id: :activerecord.models.manager.single # Do not translate

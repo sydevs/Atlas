@@ -38,4 +38,7 @@
         em.alert = translate('cms.details.record_not_published.title')
         '  - 
       
-      | #{event.category.humanize.titleize}, #{event.timing_in_words}
+      - if event.inactive_category?
+        = event.category.humanize.titleize
+      - else
+        | #{event.category.humanize.titleize}, #{event.timing_in_words}

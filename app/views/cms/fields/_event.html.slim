@@ -4,7 +4,7 @@
   = f.input :category, as: :hidden
   = f.input :type, as: :hidden
 
-  = f.input :custom_name, placeholder: @record.category_name, hint: translate('cms.hints.event.custom_name')
+  = f.input :custom_name, placeholder: @record.category_label, hint: translate('cms.hints.event.custom_name')
 
   = f.input :description do 
     .hint = translate('cms.hints.event.description', min: 40, max: 600)
@@ -20,12 +20,15 @@
   - languages = I18nData.languages(I18n.locale).map { |k, v| [v.split(/[,;]/)[0], k] }
   = f.input :language_code, collection: languages, selected: @record.default_language_code.upcase, input_html: { class: 'search' }, hint: translate('cms.hints.event.language')
 
-  = f.input :phone_number do
-    .two.fields
-      = f.input :phone_number, as: :tel, label: false, hint: translate('cms.hints.event.phone_number'), placeholder: translate_attribute(@record, :phone_number)
-      = f.input :phone_name, as: :string, label: false, hint: translate('cms.hints.event.phone_name'), placeholder: translate_attribute(@record, :phone_name)
+  = f.simple_fields_for :contact_info do |ff|
+    .field
+      = ff.label :phone_number, translate_attribute(@record, 'contact_info.phone_number')
+      .two.fields
+        - fields = { phone_number: :tel, phone_name: :string }
+        - fields.each do |field, type|
+          = ff.input field, as: type, label: false, hint: translate("cms.hints.event.contact_info.#{field}"), placeholder: translate_attribute(@record, "contact_info.#{field}"), input_html: { value: @record.contact_info[field.to_s] }
 
-  - unless @record.online?
+  - unless @record.online? || @record.inactive_category?
     .ui.small.dividing.violet.header = translate('cms.forms.event.location')
     = render 'cms/venues/selector', f: f, venue: @record.venue
     = f.input :room, hint: translate('cms.hints.event.room')
@@ -49,7 +52,7 @@
   table.ui.very.basic.table
     tbody
       - Event.categories.each do |category, index|
-        - next if category == 'festival' && @record.online?
+        - next if (category == 'festival' || category == 'inactive') && @record.online?
         tr id="category-#{category}" class=('disabled' if category == 'festival' && @record.online?)
           td.center.aligned
             i.huge.fitted.icon class=event_category_icon(category)

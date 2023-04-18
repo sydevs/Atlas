@@ -15,6 +15,7 @@ module CMS::FieldsHelper
     course: 'calendar alternate',
     festival: 'dumpster',
     concert: 'microphone alternate',
+    inactive: 'hourglass half',
   }.freeze
 
   def contact_types manager
