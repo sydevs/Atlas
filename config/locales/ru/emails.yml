@@ -1,0 +1,39 @@
+ru:
+  emails: # These are translations for email that are sent to the seekers.
+    common:
+      view_in_browser: "Открыть в браузере"
+      unsubscribe: "Отписаться"
+      reason: "Ты получил это письмо, потому что зарегистрировался на занятие."
+      responses: "Твои ответы:"
+
+    confirmation:
+      offline:
+        subject: "Подтверждение регистрации - %{event_name}"
+        header: "Твоя регистрация подтверждена, %{name}"
+        subheader: "Мы рады, что ты с нами и с нетерпением ждём возможности помедитировать вместе!"
+        invite_a_friend: "Пригласить друга"
+        get_directions: "Построить маршрут"
+        faqs:
+          - title: "Что мне взять с собой?"
+            content: "Никакие особые принадлежности не требуются. Просто будь открыт новому опыту."
+      online:
+        subject: :emails.confirmation.offline.subject # Do not translate
+        header: :emails.confirmation.offline.subject # Do not translate
+        subheader: :emails.confirmation.offline.subject # Do not translate
+        online_url: "Или переходи по ссылке, чтобы присоединиться к медитации."
+        invite_a_friend: :emails.confirmation.offline.invite_a_friend # Do not translate
+        joining_title: "Как мне подключиться?"
+        joining_content: "Переходи по этой ссылке, когда начнётся медитация. Мы также пришлём тебе напоминание вместе ссылкой за час до занятия."
+        faqs:
+
+    reminder:
+      offline:
+        subject: "Начинаем завтра - %{event_name}"
+        header: "Занятие по медитации начинается завтра, %{name}"
+        subheader: "Мы рады, что ты с нами и с нетерпением ждём возможности помедитировать вместе!"
+        action: :emails.confirmation.offline.get_directions
+      online:
+        subject: "Скоро начинаем - %{event_name}"
+        header: "Медитация начинается через 1 час, %{name}"
+        subheader: "Занятие по медитации, на которое ты зарегистрировался, начнётся уже скоро. Чтобы подключиться, переходи по этой ссылке."
+        action: "Присоединиться"
