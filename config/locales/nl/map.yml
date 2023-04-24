@@ -63,6 +63,7 @@ nl:
         name: "Naam"
         message: " Vragen / Commentaar "
         submit: "Bevestigen"
+        email_invalid: "Please enter a valid email" # TODO: Translate
       notice:
         text: "Indien je bevestigt ga je akkoord met onze %{link}."
         link: "privacybeleid"

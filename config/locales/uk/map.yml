@@ -64,6 +64,7 @@ uk:
         name: "Ім'я"
         message: "Запитання / Коментарі"
         submit: "Підтвердити"
+        email_invalid: "Please enter a valid email" # TODO: Translate
       notice:
         text: "By submitting you confirm you agree to receive follow up messages about this and similar events, in accordance with our %{link}." # TODO: Translate
         link: "політика конфіденційності"

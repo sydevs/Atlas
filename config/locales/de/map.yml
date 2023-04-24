@@ -63,6 +63,7 @@ de:
         name: "Name"
         message: "Fragen / Kommentare"
         submit: "Bestätigen"
+        email_invalid: "Please enter a valid email" # TODO: Translate
       notice:
         text: "Durch die Anmeldung, stimmen Sie zu, dass Sie Nachrichten über diese und ähnliche Veranstaltungen in übereinstimmung mit unserer %{link} erhalten."
         link: "Datenschutzrichtlinie"
