@@ -3,6 +3,10 @@
 
 function RegistrationForm() {
   let alert = null // { type: 'error', message: "This is a test of the alert message." }
+
+  const regexForEmailValidation = RegExp(/^\w+([\.-]?\w+)@\w+([\.-]?\w+)(\.\w{2,3})+$/);
+  let emailErrorMessage = null;
+  
   let data = {
     eventId: null,
     name: null,
@@ -11,6 +15,8 @@ function RegistrationForm() {
     startingAt: null,
   }
 
+  let validateEmail = () => emailErrorMessage = regexForEmailValidation.test(data.email) ? '' : Util.translate('registration.form.emailInvalidErrorMessage');
+  
   return {
     view: function(vnode) {
       const event = vnode.attrs.event
@@ -52,9 +58,14 @@ function RegistrationForm() {
           type: 'text',
           name: 'email',
           value: data.email,
-          onchange: event => { data.email = event.currentTarget.value },
+          // onchange: event => { data.email = event.currentTarget.value },
+          oninput: e => {
+            data.email = e.currentTarget.value;
+            validateEmail()
+          },
           placeholder: Util.translate('registration.form.email'),
         }),
+        emailErrorMessage && m('div.sya-registration__message.error', emailErrorMessage ),
         Object.values(event.registrationQuestions).map(function(question) {
           return m(RegistrationQuestion, {
             question: question,
