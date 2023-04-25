@@ -76,7 +76,9 @@ function RegistrationForm() {
             link: `<a class="sya-registration__notice-link" href="/${AtlasApp.config.locale}/privacy" target="_blank">${Util.translate('registration.notice.link')}</a>`
           }))
         ),
-        m('button.sya-registration__submit', Util.translate('registration.form.submit'))
+        m('button.sya-registration__submit',{
+          disabled: alert?.message === Util.translate('registration.form.email_invalid') || !data?.name || !data.email
+        }, Util.translate('registration.form.submit'))
       )
     }
   }
