@@ -14,7 +14,7 @@ function RegistrationForm() {
     startingAt: null,
   }
 
-  let validateEmail = () => regexForEmailValidation.test(data.email) ? alert = null : alert = { type: 'error', message: Util.translate('registration.form.email_invalid')};
+  let validateEmail = () => regexForEmailValidation.test(data.email) ? alert = null : alert = { status: 'invalid', message: Util.translate('registration.form.email_invalid'), field: 'email'};
   
   return {
     view: function(vnode) {
@@ -57,7 +57,7 @@ function RegistrationForm() {
           type: 'text',
           name: 'email',
           value: data.email,
-          className: alert?.message === Util.translate('registration.form.email_invalid') && 'error_input',
+          className: alert?.field === 'email' && 'error_input',
           oninput: e => {
             data.email = e.currentTarget.value;
             validateEmail()
@@ -70,14 +70,14 @@ function RegistrationForm() {
             onchange: event => { data.questions[question.slug] = event.currentTarget.value },
           })
         }),
-        alert ? m('.sya-registration__message.error', { class: alert.status }, alert.message) : null,
+        alert ? m('.sya-registration__message', { class: alert.status }, alert.message) : null,
         m('.sya-registration__notice',
           m.trust(Util.translate('registration.notice.text', {
             link: `<a class="sya-registration__notice-link" href="/${AtlasApp.config.locale}/privacy" target="_blank">${Util.translate('registration.notice.link')}</a>`
           }))
         ),
         m('button.sya-registration__submit',{
-          disabled: alert?.message === Util.translate('registration.form.email_invalid') || !data?.name || !data.email
+          disabled: alert?.status === 'invalid' || !data?.name || !data.email
         }, Util.translate('registration.form.submit'))
       )
     }
