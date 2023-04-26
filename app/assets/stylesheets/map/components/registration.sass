@@ -110,6 +110,12 @@ textarea.sya-registration__textarea
   &::-ms-input-placeholder
     color: $color-grey-light
 
+  &.error_input
+    border: 1px solid $color-orange !important
+    -webkit-transition: 0.5s
+    transition: 0.5s
+    outline: none !important
+
 .sya-registration__notice
   text-align: center
   margin-bottom: 20px
@@ -137,6 +143,9 @@ textarea.sya-registration__textarea
     color: $color-orange
 
   &.error
+    color: $color-orange
+
+  &.invalid
     color: $color-orange
 
 .sya-registration__submit

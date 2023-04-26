@@ -63,6 +63,7 @@ en:
         name: "Name"
         message: "Questions / Comments"
         submit: "Confirm"
+        email_invalid: "Please enter a valid email"
       notice:
         text: "By submitting you confirm you agree to receive follow up messages about this and similar events, in accordance with our %{link}."
         link: "privacy policy"

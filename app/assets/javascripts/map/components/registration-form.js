@@ -3,6 +3,9 @@
 
 function RegistrationForm() {
   let alert = null // { type: 'error', message: "This is a test of the alert message." }
+
+  const regexForEmailValidation = RegExp(/^\w+([\.-]?\w+)@\w+([\.-]?\w+)(\.\w{2,3})+$/);
+
   let data = {
     eventId: null,
     name: null,
@@ -11,6 +14,8 @@ function RegistrationForm() {
     startingAt: null,
   }
 
+  let validateEmail = () => regexForEmailValidation.test(data.email) ? alert = null : alert = { status: 'invalid', message: Util.translate('registration.form.email_invalid'), field: 'email'};
+  
   return {
     view: function(vnode) {
       const event = vnode.attrs.event
@@ -52,7 +57,11 @@ function RegistrationForm() {
           type: 'text',
           name: 'email',
           value: data.email,
-          onchange: event => { data.email = event.currentTarget.value },
+          className: alert?.field === 'email' && 'error_input',
+          oninput: e => {
+            data.email = e.currentTarget.value;
+            validateEmail()
+          },
           placeholder: Util.translate('registration.form.email'),
         }),
         Object.values(event.registrationQuestions).map(function(question) {
@@ -67,7 +76,9 @@ function RegistrationForm() {
             link: `<a class="sya-registration__notice-link" href="/${AtlasApp.config.locale}/privacy" target="_blank">${Util.translate('registration.notice.link')}</a>`
           }))
         ),
-        m('button.sya-registration__submit', Util.translate('registration.form.submit'))
+        m('button.sya-registration__submit',{
+          disabled: alert?.status === 'invalid' || !data?.name || !data.email
+        }, Util.translate('registration.form.submit'))
       )
     }
   }
