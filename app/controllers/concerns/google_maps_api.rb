@@ -57,7 +57,7 @@ module GoogleMapsAPI
         latitude: center.lat,
         longitude: center.lng,
         street: street,
-        city: address['locality'],
+        city: address['postal_town'],
         region_code: address['administrative_area_level_1']&.first(3)&.upcase,
         country_code: address['country'],
         post_code: address['postal_code'],
