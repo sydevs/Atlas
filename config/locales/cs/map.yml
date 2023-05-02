@@ -37,6 +37,7 @@ cs:
 
     event:
       register: "Registrovat"
+      online_text: "online"  # TODO: Translate
       language: "Tento kurz je v"
       directions: "Obdržet pokyny"
       online: "Online kurz"
