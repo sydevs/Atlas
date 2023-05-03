@@ -37,6 +37,7 @@ nl:
 
     event:
       register: "Registeren"
+      online_text: "online"  # TODO: Translate
       language: "Deze les is in"
       directions: "Routebeschrijving"
       online: "Online Les"
