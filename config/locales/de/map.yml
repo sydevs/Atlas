@@ -37,7 +37,6 @@ de:
 
     event:
       register: "Anmelden"
-      online_text: "online"  # TODO: Translate
       language: "Diese Klasse ist in"
       directions: "Wegbeschreibung"
       online: "Online-Kurse"

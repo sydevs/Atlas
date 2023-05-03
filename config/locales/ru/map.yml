@@ -37,7 +37,6 @@ ru:
 
     event:
       register: "Записаться"
-      online_text: "online"  # TODO: Translate
       language: "Язык занятия" 
       directions: "Как нас найти"
       online: "Онлайн-класс"

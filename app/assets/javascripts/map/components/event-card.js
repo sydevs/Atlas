@@ -30,9 +30,8 @@ function EventCard() {
             m('.sya-card__meta', Util.translate('event.inactive.dates').toUpperCase()) :
             m('.sya-card__meta',
               event.timing.startingString ? m('.sya-pill', event.timing.startingString) : null,
-              event.online ? m('.sya-pill__event_online',  Util.translate('event.online_text')) : null,
               m('.sya-card__meta__day', event.timing.dateString),
-              m('.sya-card__meta__time', event.timing.startTime),
+              m('.sya-card__meta__time', event.timing.timeString),
               event.online ?
                 null :
                 m('abbr.sya-card__meta__timezone', {

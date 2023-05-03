@@ -38,7 +38,6 @@ uk:
 
     event:
       register: "Реєстрація"
-      online_text: "online"  # TODO: Translate
       language: "Цей клас у"
       directions: "Отримати направлення"
       online: "Онлайн клас"

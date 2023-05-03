@@ -37,7 +37,6 @@ en:
 
     event:
       register: "Register"
-      online_text: "online"
       language: "This class is in"
       directions: "Get directions"
       online: "Online Class"
