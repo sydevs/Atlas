@@ -6,6 +6,12 @@ function MapView() {
   let onlineEventsCount = null
   let offlineEventsCount = null
 
+  const handleOnClickForOnlineClasses = (item) => {
+    return m(m.route.Link, {
+      href: item.href,
+    })
+  };
+
   return {
     oninit: function() {
       AtlasApp.data.getList(AtlasEvent.LAYER.online).then(events => {
@@ -33,8 +39,16 @@ function MapView() {
 
       return [
         m(Search, { floating: true }),
+        Util.isDevice('mobile') && m('.sya-pill.__floating_button', 
+           m(m.route.Link, { style: 'color: #6FA4C3', href: '/n'}, Util.translate('navigation.mobile.online'))
+        ),
         m(Navigation, {
-          items: Object.entries(AtlasEvent.LAYER).map(([key, layer]) => {
+          items: Util.isDevice('mobile') ?
+          [{
+            label: Util.translate('navigation.mobile.offline').toUpperCase(),
+            href: '/f',
+          }] :
+            Object.entries(AtlasEvent.LAYER).map(([key, layer]) => {
             const active = vnode.attrs.layer == layer
             return {
               label: Util.translate(`navigation.desktop.${key}`),

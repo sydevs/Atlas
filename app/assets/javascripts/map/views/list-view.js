@@ -9,23 +9,55 @@ function ListView() {
   let layer = null
 
   function updateEvents() {
-    if (layer == AtlasEvent.LAYER.online) {
-      return AtlasApp.data.getList(AtlasEvent.LAYER.online).then(response => {
-        events = response
-      })
+    if (Util.isDevice('mobile')) {
+      if (layer == AtlasEvent.LAYER.online) {
+        return AtlasApp.data.getList(AtlasEvent.LAYER.online).then(response => {
+          events = response
+        })
+      } else {
+        return AtlasApp.data
+          .getList(AtlasEvent.LAYER.online)
+          .then((response) => {
+            return response;
+          })
+          .then((onlineData) =>
+            AtlasApp.map.getRenderedEventIds().then((ids) => {
+              eventIds = ids;
+              let offlineData =
+                ids.length > 0
+                  ? AtlasApp.data.getList(AtlasEvent.LAYER.offline, ids)
+                  : [];
+              return offlineData;
+            }).then((offlineData) => {
+              return offlineData.concat(onlineData)
+            })
+          )
+          .then((response) => {
+            events = response;
+          })
+          .catch(() => {
+            events = null;
+          });
+      }
     } else {
-      return AtlasApp.map.getRenderedEventIds().then(ids => {
-        if (Util.areArraysEqual(eventIds, ids)) {
-          return events
-        } else {
-          eventIds = ids
-          return ids.length > 0 ? AtlasApp.data.getList(AtlasEvent.LAYER.offline, ids) : []
-        }
-      }).then(response => {
-        events = response
-      }).catch(() => {
-        events = null
-      })
+      if (layer == AtlasEvent.LAYER.online) {
+        return AtlasApp.data.getList(AtlasEvent.LAYER.online).then(response => {
+          events = response
+        })
+      } else {
+        return AtlasApp.map.getRenderedEventIds().then(ids => {
+          if (Util.areArraysEqual(eventIds, ids)) {
+            return events
+          } else {
+            eventIds = ids
+            return ids.length > 0 ? AtlasApp.data.getList(AtlasEvent.LAYER.offline, ids) : []
+          }
+        }).then(response => {
+          events = response
+        }).catch(() => {
+          events = null
+        })
+      }
     }
   }
 
