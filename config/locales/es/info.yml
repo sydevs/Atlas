@@ -1,0 +1,16 @@
+es:
+  sahaj_atlas: "Atlas Sahaja"
+
+  info:
+    index:
+      description: "Atlas Sahaja es un proyecto para ver en un mapa las clases gratuitas de meditación ofrecidas por Sahaja Yoga en todo el mundo."
+      view_map: "Ver mapa"
+      view_statistics: "Estadísticas"
+      view_cms: "Gestionar"
+      sign_in: "Iniciar sesión"
+    
+    about:
+      title: "Acerca de"
+    
+    statistics:
+      title: "Estadísticas"
