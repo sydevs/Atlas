@@ -117,7 +117,7 @@ en:
         must_be_new: "Only countries which haven't already been added are listed below."
         language: "The default language that events in this country are usually in."
         no_default_language: "No default"
-        enable_regions: "If enabled, you will be able to view and assign managers to regions (regions, states, etc) within this country. This is useful for larger countries (China, USA, Australia, etc), and unnessecary for small countries (Belgium, Lithuania, Singapore, etc)."
+        enable_regions: "If enabled, you will be able to view and assign managers to regions (regions, states, etc) within this country. This is useful for larger countries (China, USA, Australia, etc), and unnecessary for small countries (Belgium, Lithuania, Singapore, etc)."
         enable_custom_regions: "Allow the creation of custom regions. This is an advanced feature, which should only be used if you understand what you are doing."
       region:
         polygon: "Drag / click on a faded square to add a new corner to the polygon. Click on an existing corner to remove it."
@@ -133,7 +133,7 @@ en:
         registration_notification: "How often do you want to receive notifications about new registrations?"
         registration_url: "The registration URL will be set automatically if the mode is set \"%{native}.\""
         registration_limit: "Limit the number of registrations to this amount."
-        registration_question: "What questions should seekers be asked when they register for the class."
+        registration_question: "What questions should seekers be asked when they register for the class?"
         online: "Check this box if the program will take place online."
         online_url: "If the class is online, this link is where seekers should join the class (eg. a link to Zoom, YouTube, Google Meet, etc)."
         contact_info:
@@ -288,7 +288,7 @@ en:
           instruction: "You have access to the configuration for your external app."
         none:
           title: "No-Access Manager"
-          description: "This user no events or regions assigned to them. They have no access to manage the atlas."
+          description: "This user has no events or regions assigned to them. They have no access to manage the atlas."
           instruction: "You don't have access to any part of the website. If you believe this is a mistake, please contact the manager for your local area."
       resources:
         title: "My Responsibilities"
@@ -410,7 +410,7 @@ en:
       registration:
         title: "Why should seekers register on Sahaj Atlas?"
         description:
-          introduction: "Even though we support having seeker register on external websites (Meetup, Eventbrite, Facebook, etc), there are everal benefitss to having seekers register directy on the Sahaj Atlas."
+          introduction: "Even though we support having seeker register on external websites (Meetup, Eventbrite, Facebook, etc), there are several benefitss to having seekers register directy on the Sahaj Atlas."
         benefits:
           accessibility:
             icon: universal access # Do not translate

@@ -133,7 +133,7 @@ cs:
         registration_notification: "How often do you want to receive notifications about new registrations?" # TODO: Translate
         registration_url: "Registrační URL bude nastaveno automaticky, pokud je nastaven režim \"%{native}.\""
         registration_limit: "Omezit počet registrací na tuto hodnotu."
-        registration_question: "What questions should seekers be asked when they register for the class." # TODO: Translate
+        registration_question: "What questions should seekers be asked when they register for the class?" # TODO: Translate
         online: "Zaškrtněte toto políčko, pokud bude program probíhat online."
         online_url: "Pokud je kurz online, tento odkaz je místo, kde by se zájemci měli do kurzu připojit (např. odkaz na Zoom, YouTube, Google Meet atd.)."
         contact_info: # TODO: Translate
