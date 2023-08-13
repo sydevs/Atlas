@@ -33,16 +33,24 @@ function MapView() {
 
       return [
         m(Search, { floating: true }),
+        Util.isDevice('mobile') && m('.sya-pill.__floating_button',
+          m(m.route.Link, { style: 'color: #6FA4C3', href: '/n' }, Util.translate('navigation.mobile.online'))
+        ),
         m(Navigation, {
-          items: Object.entries(AtlasEvent.LAYER).map(([key, layer]) => {
-            const active = vnode.attrs.layer == layer
-            return {
-              label: Util.translate(`navigation.desktop.${key}`),
-              href: `/${layer}`,
-              active: active,
-              badge: active ? null : (key == 'online' ? onlineEventsCount : offlineEventsCount),
-            }
-          })
+          items: Util.isDevice('mobile') ?
+            [{
+              label: Util.translate('navigation.mobile.offline').toUpperCase(),
+              href: '/f',
+            }] :
+            Object.entries(AtlasEvent.LAYER).map(([key, layer]) => {
+              const active = vnode.attrs.layer == layer
+              return {
+                label: Util.translate(`navigation.desktop.${key}`),
+                href: `/${layer}`,
+                active: active,
+                badge: active ? null : (key == 'online' ? onlineEventsCount : offlineEventsCount),
+              }
+            })
         }),
       ]
     }
