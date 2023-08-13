@@ -33,7 +33,7 @@ function MapView() {
 
       return [
         m(Search, { floating: true }),
-        Util.isDevice('mobile') && m('.sya-pill.__floating_button',
+        Util.isDevice('mobile') && m('.sya-pill.sya-pill__floating_button',
           m(m.route.Link, { style: 'color: #6FA4C3', href: '/n' }, Util.translate('navigation.mobile.online'))
         ),
         m(Navigation, {
