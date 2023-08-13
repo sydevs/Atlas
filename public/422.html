@@ -3,65 +3,27 @@
 <head>
   <title>The change you wanted was rejected (422)</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <style>
-  .rails-default-error-page {
-    background-color: #EFEFEF;
-    color: #2E2F30;
-    text-align: center;
-    font-family: arial, sans-serif;
-    margin: 0;
-  }
-
-  .rails-default-error-page div.dialog {
-    width: 95%;
-    max-width: 33em;
-    margin: 4em auto 0;
-  }
-
-  .rails-default-error-page div.dialog > div {
-    border: 1px solid #CCC;
-    border-right-color: #999;
-    border-left-color: #999;
-    border-bottom-color: #BBB;
-    border-top: #B00100 solid 4px;
-    border-top-left-radius: 9px;
-    border-top-right-radius: 9px;
-    background-color: white;
-    padding: 7px 12% 0;
-    box-shadow: 0 3px 8px rgba(50, 50, 50, 0.17);
-  }
-
-  .rails-default-error-page h1 {
-    font-size: 100%;
-    color: #730E15;
-    line-height: 1.5em;
-  }
-
-  .rails-default-error-page div.dialog > p {
-    margin: 0 0 1em;
-    padding: 1em;
-    background-color: #F7F7F7;
-    border: 1px solid #CCC;
-    border-right-color: #999;
-    border-left-color: #999;
-    border-bottom-color: #999;
-    border-bottom-left-radius: 4px;
-    border-bottom-right-radius: 4px;
-    border-top-color: #DADADA;
-    color: #666;
-    box-shadow: 0 3px 8px rgba(50, 50, 50, 0.17);
-  }
-  </style>
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/fomantic-ui@2.9.2/dist/semantic.min.css">
 </head>
 
-<body class="rails-default-error-page">
-  <!-- This file lives in public/422.html -->
-  <div class="dialog">
-    <div>
-      <h1>The change you wanted was rejected.</h1>
-      <p>Maybe you tried to change something you didn't have access to.</p>
+<body class="ui text container">
+  <div class="ui hidden section divider"></div>
+  <h2 class="ui center aligned icon header">
+    <img src="/favicon-194x194.png">
+    <br />
+    Sahaj Atlas
+  </h2>
+  <div class="ui hidden section divider"></div>
+  <div class="ui placeholder segment">
+    <div class="ui icon header">
+      <i class="circular shield alternate icon"></i>
+      The change you wanted was rejected.
+      <div class="sub header">Maybe you tried to change something you didn't have access to.<br>If you think this should have worked, contact us.</div>
     </div>
-    <p>If you are the application owner check the logs for more information.</p>
+    <div class="inline">
+      <a class="ui primary button" href="mailto:contact@sydevelopers.com">Contact Us</a>
+    </div>
   </div>
+  <div class="ui hidden section divider"></div>
 </body>
 </html>
