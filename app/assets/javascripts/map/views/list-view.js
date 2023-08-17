@@ -3,86 +3,35 @@
 /* global m, App, Search, List, ListFallback, Navigation, Util */
 
 function ListView() {
-  let onlineEventsCount = null
-  let eventIds = []
+  let offlineEventCount = null
   let events = undefined
-  let layer = AtlasEvent.LAYER.offline
 
-  function updateEvents() {
-    if (Util.isDevice('mobile')) {
-      if (layer == AtlasEvent.LAYER.online) {
-        return AtlasApp.data.getList(AtlasEvent.LAYER.online).then(response => {
-          events = response
-        })
-      } else {
-        return AtlasApp.data
-          .getList(AtlasEvent.LAYER.online)
-          .then((response) => {
-            return response;
-          })
-          .then((onlineData) =>
-            AtlasApp.map.getRenderedEventIds().then((ids) => {
-              eventIds = ids;
-              let offlineData =
-                ids.length > 0
-                  ? AtlasApp.data.getList(AtlasEvent.LAYER.offline, ids)
-                  : [];
-              return offlineData;
-            }).then((offlineData) => {
-              return offlineData.concat(onlineData)
-            })
-          )
-          .then((response) => {
-            events = response;
-          })
-          .catch(() => {
-            events = null;
-          });
-      }
-    } else {
-      if (layer == AtlasEvent.LAYER.online) {
-        return AtlasApp.data.getList(AtlasEvent.LAYER.online).then(response => {
-          events = response
-        })
-      } else {
-        return AtlasApp.map.getRenderedEventIds().then(ids => {
-          if (Util.areArraysEqual(eventIds, ids)) {
-            return events
-          } else {
-            eventIds = ids
-            return ids.length > 0 ? AtlasApp.data.getList(AtlasEvent.LAYER.offline, ids) : []
-          }
-        }).then(response => {
-          events = response
-        }).catch(() => {
-          events = null
-        })
-      }
-    }
-  }
+  function updateEvents(online = null) {
+    let filter = online ? 'online' : 'all'
+    let getEventIds = Promise.resolve(null)
 
-  function updateLayer(newLayer) {
-    if (layer != newLayer) {
-      layer = newLayer
-      updateEvents().finally(() => m.redraw())
+    if (filter != 'online') {
+      getEventIds = AtlasApp.map.getRenderedEventIds()
     }
+
+    getEventIds.then(ids => {
+      offlineEventCount = ids.length
+
+      return AtlasApp.data.getList(filter, ids).then(response => {
+        events = response
+      })
+    }).catch(() => {
+      events = null
+    }).finally(() => {
+      m.redraw()
+    })
   }
 
   return {
-    oninit: function() {
-      AtlasApp.data.getList(AtlasEvent.LAYER.online).then(events => {
-        onlineEventsCount = events.length
-        m.redraw()
-      })
-    },
     oncreate: function(vnode) {
-      layer = m.route.param('layer') || vnode.attrs.layer
       AtlasApp.map.addEventListener('update', () => {
-        updateEvents().finally(() => m.redraw())
+        updateEvents(vnode.attrs.onlineOnly)
       })
-    },
-    onupdate: function(vnode) {
-      updateLayer(m.route.param('layer') || vnode.attrs.layer)
     },
     view: function(vnode) {
       let list = null
@@ -105,6 +54,7 @@ function ListView() {
             href: '/',
           }]
         }),
+        offlineEventCount === 0 && m('p.sya-list-fallback', "No local events available"),
         m('.sya-list', list),
       ]
     }

@@ -2,15 +2,19 @@
 
 /* global AtlasAPI, Util */
 
+let LAST_REQUEST_ID = -1
+
 class DataCache {
 
   #cache
   #atlas
+  #requests
   #debug = false
   #models = { AtlasCountry, AtlasRegion, AtlasArea, AtlasVenue, AtlasEvent }
 
   constructor(endpoint, locale) {
     this.#atlas = new AtlasAPI(endpoint, locale)
+    this.#requests = {}
     this.#cache = {
       geojsons: {},
       lists: {},
@@ -59,42 +63,52 @@ class DataCache {
     })
   }
 
-  getList(layer, ids = null) {
-    let fetchList
-
-    if (layer in this.#cache.sortedLists) {
-      return Promise.resolve(this.#cache.sortedLists[layer])
-    } else if (layer in this.#cache.lists) {
-      fetchList = Promise.resolve(this.#cache.lists[layer])
-    } else if (layer == AtlasEvent.LAYER.online) {
-      fetchList = this.#atlas.fetchOnlineList().then(response => {
-        return response.events.map(event => {
-          event = new AtlasEvent(event)
-          this.#cache.event[event.id] = event
-          return event
-        })
-      })
+  getAllOnlineEvents() {
+    if ('online' in this.#cache.lists) {
+      return Promise.resolve(this.#cache.lists['online'])
     } else {
-      if (this.#debug) console.log('[Data]', 'getting list', layer) // eslint-disable-line no-console
-      fetchList = this.getEvents(ids)
-      let fetchOnlineList = this.#atlas.fetchOnlineList().then(response => {
-        return response.events.map(event => {
+      return this.#atlas.fetchOnlineList().then(response => {
+        this.#cache.lists['online'] = response.events.map(event => {
           event = new AtlasEvent(event)
           this.#cache.event[event.id] = event
           return event
         })
-      })
 
-      fetchList = Promise.all([fetchList, fetchOnlineList]).then(values => {
-        let [offline, online] = values
-        return offline.concat(online)
+        return this.#cache.lists['online']
       })
+    }
+  }
+
+  getList(filter = 'all', ids = null) {
+    let fetchList
+    const request = this.registerRequest('list')
+
+    if (ids == null || ids.length < 1)
+      filter = 'online'
+
+    if (filter in this.#cache.sortedLists) {
+      return Promise.resolve(this.#cache.sortedLists[filter])
+    } else if (filter in this.#cache.lists) {
+      fetchList = Promise.resolve(this.#cache.lists[filter])
+    } else {
+      let lists = []
+      if (filter !== 'online')
+        lists.push(this.getEvents(ids))
+
+      if (filter !== 'offline')
+        lists.push(this.getAllOnlineEvents(ids))
+
+      fetchList = Promise.all(lists).then(values => values.flat())
     }
 
     return fetchList.then(list => {
-      this.#cache.lists[layer] = list
+      if (this.isRequestExpired(request)) {
+        return this.#cache.sortedLists[filter]
+      }
+
+      this.#cache.lists[filter] = list
       list = list.sort((a, b) => a.order - b.order)
-      this.#cache.sortedLists[layer] = list
+      this.#cache.sortedLists[filter] = list
       return list
     })
   }
@@ -162,8 +176,22 @@ class DataCache {
     this.#cache[key][object.id] = object
   }
 
-  clearCache(key) {
-    this.#cache[key] = {}
+  clearCache(key, id = null) {
+    if (id !== null) {
+      delete this.#cache[key][id]
+    } else {
+      this.#cache[key] = {}
+    }
+  }
+
+  registerRequest(key) {
+    LAST_REQUEST_ID += 1
+    this.#requests[key] = LAST_REQUEST_ID
+    return { key: key, id: LAST_REQUEST_ID }
+  }
+
+  isRequestExpired(request) {
+    return this.#requests[request.key] > request.id
   }
 
 }
