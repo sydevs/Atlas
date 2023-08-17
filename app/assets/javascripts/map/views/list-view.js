@@ -35,6 +35,7 @@ function ListView() {
     },
     view: function(vnode) {
       let list = null
+      const online = vnode.attrs.onlineOnly
 
       if (events == undefined) {
         list = m(Loader)
@@ -48,14 +49,22 @@ function ListView() {
 
       return [
         m(Search),
-        Util.isDevice('mobile') && m(Navigation, {
-          items: [{
-            label: Util.translate('navigation.mobile.back'),
-            href: '/',
-          }]
-        }),
-        !vnode.attrs.onlineOnly && offlineEventCount === 0 && m('p.sya-list-fallback', Util.translate('list.fallback.online') + " " + Util.translate('list.fallback.online_event').toLowerCase()),
-        m('.sya-list', list),
+        Util.isDevice('mobile') &&
+          m(Navigation, {
+            items: [{
+              label: Util.translate('navigation.mobile.back'),
+              href: '/',
+            }]
+          }),
+        /*!Util.isDevice('mobile') && online &&
+          m(m.route.Link, {
+            class: 'sya-pill sya-pill__online sya-pill--active',
+            style: 'color: #6FA4C3',
+            href: '/online'
+          }, Util.translate('navigation.mobile.online')),*/
+        !online && offlineEventCount === 0 ?
+          m(ListFallback)
+          : m('.sya-list', list),
       ]
     }
   }

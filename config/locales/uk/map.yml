@@ -27,7 +27,7 @@ uk:
       fallback:
         nearby: "Найближчий безкоштовний урок медитації за адресою"
         far: "У цьому напрямі немає занять, найближче безкоштовне заняття з медитації"
-        online: "There are no classes in this area, consider an" # TODO: Translate
+        online: "Alternatively, try our" # TODO: Translate
         online_event: "Online Class" # TODO: Translate
 
     area: # TODO: Translate

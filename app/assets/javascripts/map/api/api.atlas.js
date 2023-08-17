@@ -169,6 +169,13 @@ class AtlasAPI {
           label
           latitude
           longitude
+          area {
+            id
+            label
+            latitude
+            longitude
+            radius
+          }
         }
       }
     `)

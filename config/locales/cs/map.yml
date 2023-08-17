@@ -26,7 +26,7 @@ cs:
       fallback:
         nearby: "V této oblasti neprobíhají žádné kurzy, nejbližší bezplatný kurz meditace je v"
         far: "Nejbližší bezplatný meditační kurz je v"
-        online: "V této oblasti neprobíhají žádné online kurzy, zvažte"
+        online: "Alternatively, try our" # TODO: Translate
         online_event: "Online kurz"
 
     area:

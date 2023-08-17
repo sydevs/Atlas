@@ -26,7 +26,7 @@ de:
       fallback:
         nearby: "Die nächste Freimachungsklasse bei"
         far: "Es gibt keine Klassen in diesem Bereich, die nächste Freizeitmeditation ist in"
-        online: "Es gibt keine Kurse in dieser Gegend, versuche eine"
+        online: "Alternatively, try our" # TODO: Translate
         online_event: "Online Veranstaltung"
 
     area:

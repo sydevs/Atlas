@@ -10,34 +10,36 @@
   font-size: 13px
   letter-spacing: 0.17px
 
-  position: fixed
-  bottom: 0
-  left: 0
-  right: 0
-
   @include mobile
     order: 3
     background: white
     box-shadow: $shadow-light
     z-index: 1
 
+    position: fixed
+    bottom: 0
+    left: 0
+    right: 0
+
   @include tablet-or-larger
-    --color: #{$color-blue}
+    --color: #{$color-cyan}
     --contrast-color: white
 
     margin: 1.5rem
     margin-bottom: 0.5rem
     line-height: 30px
 
-    border: 1px solid $color-blue
+    border: 1px solid $color-cyan
     border-radius: 5px
 
 .sya-navigation__item
-  color: $color-grey-normal
   font-weight: $font-medium
-  text-decoration: underline !important
   opacity: 0.7
   flex-grow: 1
+  color: inherit
+
+  @include mobile
+    text-decoration: underline !important
 
   @include tablet-or-larger
     font-weight: $font-bold
@@ -63,7 +65,7 @@
 
   &--active[data-badge]::after
     @include tablet-or-larger
-      --contrast-color: #{$color-blue}
+      --contrast-color: #{$color-cyan}
       --color: white
 
 // ===== NAVIGATION BUTTONS ===== //

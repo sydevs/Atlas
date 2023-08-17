@@ -26,7 +26,7 @@ es:
       fallback:
         nearby: "La clase gratuita más cercana está en"
         far: "No hay clases en este área, la clase gratuita más cercana está en"
-        online: "No hay clases en este área, considera una"
+        online: "Alternatively, try our" # TODO: Translate
         online_event: "Clase online"
 
     area:

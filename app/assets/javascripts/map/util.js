@@ -37,6 +37,10 @@ const Util = {
     return text
   },
 
+  distance_between(p1, p2) {
+    return Util.distance(p1.latitude, p1.longitude, p2.latitude, p2.longitude)
+  },
+
   distance(lat1, lon1, lat2, lon2, unit = 'K') {
     if ((lat1 == lat2) && (lon1 == lon2)) {
       return 0

@@ -20,30 +20,36 @@ function ListFallback() {
     view: function() {
       if (!venue.id) return
       const center = AtlasApp.map.getCenter()
-      const distance = Util.distance(venue, center)
-      let mode = 'online'
+      const distance = Util.distance_between(venue, center)
+      let mode = distance < 8 ? 'nearby' : 'far'
 
-      if (distance < 8) {
+      if (mode == 'nearby') {
         mode = 'nearby'
+        link = m(m.route.Link, {
+          href: '/venue/:id',
+          params: { id: venue.id },
+          class: 'sya-list-fallback__link',
+        }, venue.label)
       } else {
         mode = 'far'
+        let area = venue.area
+        link = m(m.route.Link, {
+          href: '/area/:id',
+          params: { id: area.id },
+          class: 'sya-list-fallback__link',
+        }, area.label)
       }
 
-      return m('.sya-list-fallback', 
-        m('.sya-list-fallback__message',
-          Util.translate(`list.fallback.${mode}`)
-        ),
-        mode == 'online' ?
+      return m('.sya-list-fallback', [
+        m('.sya-list-fallback__message', Util.translate(`list.fallback.${mode}`)),
+        link,
+        m('.sya-list-fallback__message', [
+          Util.translate('list.fallback.online') + " ",
           m(m.route.Link, {
             href: '/online',
-            class: 'sya-list-fallback__link',
-          }, Util.translate('list.fallback.online_event')) :
-          m(m.route.Link, {
-            href: '/venue/:id',
-            params: { id: venue.id },
-            class: 'sya-list-fallback__link',
-          }, venue.label)
-      )
+          }, Util.translate('navigation.mobile.online').toLowerCase()),
+        ]),
+      ])
     }
   }
 }
