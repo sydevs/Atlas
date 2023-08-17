@@ -1,5 +1,8 @@
 @import '../_mixins'
 
+.sya-pills
+  padding: $panel-padding-mobile/2 $panel-padding-mobile
+
 .sya-pill
   --color: #{$color-cyan}
 
@@ -15,29 +18,31 @@
   margin-left: 8px
   margin-right: 8px
 
-  &__online
+  &--button
+    background: transparentize(white, 0.02)
+    border-width: 2px
+    border-radius: 5px
+    font-size: 14px
+    line-height: 24px
+    padding: 0 12px
+
+    &:hover
+      color: transparentize(white, 0.2)
+
+  &--online
     --color: #{$color-blue}
     margin-left: 0px
 
-  &__floating_button
-    top: 87px
-    box-sizing: border-box
+  &--active
+    background-color: var(--color)
+    color: white
+
+  &--float
     position: absolute
-    left: $control-offset-x * 0.28
-    background: rgba(255, 255, 255, 0.98)
-    border: 2px solid $color-blue
+    top: 87px
+    left: $control-offset-x * 0.375
     box-shadow: $shadow-subtle
-    border-radius: 5px
-    font-size: 14px
-    line-height: 18px
-    padding: 10px 8px 9px 9px
-    height: 28px
-    width: 131px
-    display: flex
-    justify-content: center
-    align-items: center
-    font: Raleway
-    z-index: 1000
+    z-index: $z-control
 
   &:before
     content: '\A'
@@ -47,3 +52,6 @@
 
   &:last-child
     margin-right: 0
+
+  > .sya-icon
+    margin-left: 4px

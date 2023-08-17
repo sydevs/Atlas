@@ -26,18 +26,12 @@ function MapView() {
 
       return [
         m(Search, { floating: true }),
-        Util.isDevice('mobile') && m('.sya-pill.sya-pill__floating_button',
-          m(m.route.Link, { style: 'color: #6FA4C3', href: '/online' }, Util.translate('navigation.mobile.online'))
-        ),
-        Util.isDevice('mobile') && 
-          offlineEventsCount === 0 ?
-          m(ListFallback)
-          : m(Navigation, {
-            items: [{
-              label: Util.translate('navigation.mobile.offline').toUpperCase(),
-              href: '/events',
-            }]
-          }),
+        Util.isDevice('mobile') &&
+          m('.sya-pill.sya-pill--float.sya-pill--button.sya-pill--online',
+            m(m.route.Link, { href: '/online' }, Util.translate('navigation.mobile.online'))
+          ),
+        Util.isDevice('mobile') && offlineEventsCount === 0 &&
+          m(ListFallback),
       ]
     }
   }

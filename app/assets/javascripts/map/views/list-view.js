@@ -4,11 +4,13 @@
 
 function ListView() {
   let offlineEventCount = null
+  let onlineOnly = false
   let events = undefined
 
-  function updateEvents(online = null) {
-    let filter = online ? 'online' : 'all'
+  function updateEvents() {
+    let filter = onlineOnly ? 'online' : 'all'
     let getEventIds = Promise.resolve(null)
+    console.log('get events', filter)
 
     if (filter != 'online') {
       getEventIds = AtlasApp.map.getRenderedEventIds()
@@ -28,14 +30,12 @@ function ListView() {
   }
 
   return {
-    oncreate: function(vnode) {
-      AtlasApp.map.addEventListener('update', () => {
-        updateEvents(vnode.attrs.onlineOnly)
-      })
+    oncreate: function() {
+      AtlasApp.map.addEventListener('update', updateEvents)
     },
     view: function(vnode) {
       let list = null
-      const online = vnode.attrs.onlineOnly
+      onlineOnly = vnode.attrs.onlineOnly
 
       if (events == undefined) {
         list = m(Loader)
@@ -56,13 +56,17 @@ function ListView() {
               href: '/',
             }]
           }),
-        /*!Util.isDevice('mobile') && online &&
-          m(m.route.Link, {
-            class: 'sya-pill sya-pill__online sya-pill--active',
-            style: 'color: #6FA4C3',
-            href: '/online'
-          }, Util.translate('navigation.mobile.online')),*/
-        !online && offlineEventCount === 0 ?
+        !Util.isDevice('mobile') && onlineOnly &&
+          m('.sya-pills', [
+            m(m.route.Link, {
+              class: 'sya-pill sya-pill--online sya-pill--button sya-pill--active',
+              href: '/events',
+            }, [
+              Util.translate('navigation.mobile.online'),
+              m('i.sya-icon.sya-icon--close'),
+            ]),
+          ]),
+        !onlineOnly && offlineEventCount === 0 ?
           m(ListFallback)
           : m('.sya-list', list),
       ]

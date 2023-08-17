@@ -176,12 +176,10 @@ class MapFrame extends EventTarget {
       }
       
       if (location.bounds || (location.radius && location.radius != 'null')) {
-        console.log('fit to', location)
         this.fitTo(location, Object.assign({
           transition: true
         }, options))
       } else {
-        console.log('go to', location)
         this.goTo(location, Object.assign({
           zoom: this.#currentLayerId == AtlasEvent.LAYER.online ? 7 : 16,
           transition: true,
