@@ -74,7 +74,7 @@ module Types
 
     def geojson(online: false, country: nil, area: nil, language_code: nil, locale: 'en')
       I18n.locale = locale.to_sym
-      events = Event.publicly_visible
+      events = (online ? OnlineEvent : OfflineEvent).publicly_visible
       events = events.with_location(country)
       events = events.where(language_code: language_code.upcase) if language_code.present?
 
