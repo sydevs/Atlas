@@ -9,9 +9,8 @@ function SimpleCard() {
       return m(m.route.Link,
         {
           class: `sya-card sya-card--simple ${vnode.attrs.class}`,
-          href: '/:layer/:model/:id',
+          href: '/:model/:id',
           params: {
-            layer: vnode.attrs.layer,
             model: vnode.attrs.model,
             id: vnode.attrs.id,
           },

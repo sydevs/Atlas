@@ -5,11 +5,15 @@
   --contrast-color: white
 
   text-align: center
-  line-height: 70px
-  flex-shrink: 0
+  text-transform: uppercase
+  line-height: 60px
+  font-size: 13px
+  letter-spacing: 0.17px
 
-  display: flex
-  flex-direction: row
+  position: fixed
+  bottom: 0
+  left: 0
+  right: 0
 
   @include mobile
     order: 3
@@ -24,18 +28,9 @@
     margin: 1.5rem
     margin-bottom: 0.5rem
     line-height: 30px
-    font-size: 14px
-    letter-spacing: 0.17px
 
     border: 1px solid $color-blue
     border-radius: 5px
-
-.sya-navigation--floating
-  position: absolute
-  bottom: 0
-  left: 0
-  right: 0
-  box-shadow: $shadow-light
 
 .sya-navigation__item
   color: $color-grey-normal

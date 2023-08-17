@@ -33,8 +33,8 @@ function CountryView() {
               label: Util.translate(`navigation.desktop.${key}`),
               active: active,
               badge: count,
-              href: '/:layer/country/:id',
-              params: { layer: layer, id: country.id },
+              href: '/country/:id',
+              params: { id: country.id },
             }
           })
         }),

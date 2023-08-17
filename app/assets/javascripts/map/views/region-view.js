@@ -20,8 +20,8 @@ function RegionView() {
         m(NavigationButton, {
           float: 'left',
           icon: 'left',
-          href: '/:layer/country/:id',
-          params: { layer: vnode.attrs.layer, id: region.country.id }
+          href: '/country/:id',
+          params: { id: region.country.id }
         }),
         m('.sya-panel__header', region.label),
         m(Navigation, {
@@ -33,8 +33,8 @@ function RegionView() {
               label: Util.translate(`navigation.desktop.${key}`),
               active: active,
               badge: count,
-              href: '/:layer/region/:id',
-              params: { layer: layer, id: region.id },
+              href: '/region/:id',
+              params: { id: region.id },
             }
           })
         }),

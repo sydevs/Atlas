@@ -6,7 +6,7 @@ function ListView() {
   let onlineEventsCount = null
   let eventIds = []
   let events = undefined
-  let layer = null
+  let layer = AtlasEvent.LAYER.offline
 
   function updateEvents() {
     if (Util.isDevice('mobile')) {
@@ -85,7 +85,6 @@ function ListView() {
       updateLayer(m.route.param('layer') || vnode.attrs.layer)
     },
     view: function(vnode) {
-      let mobile = Util.isDevice('mobile')
       let list = null
 
       if (events == undefined) {
@@ -100,22 +99,11 @@ function ListView() {
 
       return [
         m(Search),
-        m(Navigation, {
-          items: mobile ?
-            [{
-              label: Util.translate('navigation.mobile.back'),
-              href: '/',
-            }] :
-            Object.entries(AtlasEvent.LAYER).map(([key, layer]) => {
-              const active = vnode.attrs.layer == layer
-              return {
-                label: Util.translate(`navigation.desktop.${key}`),
-                active: active,
-                badge: (key == 'online' && !active) ? onlineEventsCount : null,
-                href: '/:layer',
-                params: { layer: layer },
-              }
-            })
+        Util.isDevice('mobile') && m(Navigation, {
+          items: [{
+            label: Util.translate('navigation.mobile.back'),
+            href: '/',
+          }]
         }),
         m('.sya-list', list),
       ]

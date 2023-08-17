@@ -33,10 +33,10 @@ class OnlineMapLayer extends AbstractMapLayer {
   _gotoLocation(area) {
     if (area.onlineEventIds.length > 1) {
       AtlasApp.data.setCache('area', area)
-      m.route.set('/:layer/area/:id', { id: area.id, layer: AtlasEvent.LAYER.online })
+      m.route.set('/area/:id', { id: area.id })
     } else {
       let backPath = m.route.get().split('#')[0] + window.location.hash
-      m.route('/:layer/event/:id', { id: area.eventIds[0], layer: AtlasEvent.LAYER.online, back: backPath })
+      m.route('/event/:id', { id: area.eventIds[0], back: backPath })
     }
   }
 

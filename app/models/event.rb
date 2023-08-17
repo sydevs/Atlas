@@ -57,6 +57,8 @@ class Event < ApplicationRecord
   scope :current, -> { where('events.end_date IS NULL OR events.end_date >= ?', DateTime.now) }
   scope :publicly_visible, -> { current.manager_verified.publishable.published }
   scope :manager_verified, -> { joins(:manager).where('managers.email_verified = TRUE OR managers.phone_verified = TRUE') }
+  scope :with_location, -> (country_code) { joins(:area).where_country(country_code) }
+  scope :where_country, -> (country_code) { where(areas: { country_code: country_code }) if country_code }
   scope :ready_for_registrations_email, -> do
     where(registration_notification: Event.registration_notifications[:immediate])
       .or(

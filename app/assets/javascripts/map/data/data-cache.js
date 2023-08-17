@@ -67,7 +67,6 @@ class DataCache {
     } else if (layer in this.#cache.lists) {
       fetchList = Promise.resolve(this.#cache.lists[layer])
     } else if (layer == AtlasEvent.LAYER.online) {
-      if (this.#debug) console.log('[Data]', 'getting list', layer) // eslint-disable-line no-console
       fetchList = this.#atlas.fetchOnlineList().then(response => {
         return response.events.map(event => {
           event = new AtlasEvent(event)
@@ -78,6 +77,18 @@ class DataCache {
     } else {
       if (this.#debug) console.log('[Data]', 'getting list', layer) // eslint-disable-line no-console
       fetchList = this.getEvents(ids)
+      let fetchOnlineList = this.#atlas.fetchOnlineList().then(response => {
+        return response.events.map(event => {
+          event = new AtlasEvent(event)
+          this.#cache.event[event.id] = event
+          return event
+        })
+      })
+
+      fetchList = Promise.all([fetchList, fetchOnlineList]).then(values => {
+        let [offline, online] = values
+        return offline.concat(online)
+      })
     }
 
     return fetchList.then(list => {

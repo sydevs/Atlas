@@ -19,7 +19,7 @@ function MapView() {
           offlineEventsCount = eventIds.length
 
           if (offlineEventsCount > 0 && !Util.isDevice('mobile')) {
-            m.route.set(`/${AtlasEvent.LAYER.offline}`, {}, { replace: true })
+            m.route.set('/events', {}, { replace: true })
           }
         }, _error => {
           offlineEventsCount = null
@@ -34,23 +34,13 @@ function MapView() {
       return [
         m(Search, { floating: true }),
         Util.isDevice('mobile') && m('.sya-pill.sya-pill__floating_button',
-          m(m.route.Link, { style: 'color: #6FA4C3', href: '/n' }, Util.translate('navigation.mobile.online'))
+          m(m.route.Link, { style: 'color: #6FA4C3', href: '/online' }, Util.translate('navigation.mobile.online'))
         ),
-        m(Navigation, {
-          items: Util.isDevice('mobile') ?
-            [{
-              label: Util.translate('navigation.mobile.offline').toUpperCase(),
-              href: '/f',
-            }] :
-            Object.entries(AtlasEvent.LAYER).map(([key, layer]) => {
-              const active = vnode.attrs.layer == layer
-              return {
-                label: Util.translate(`navigation.desktop.${key}`),
-                href: `/${layer}`,
-                active: active,
-                badge: active ? null : (key == 'online' ? onlineEventsCount : offlineEventsCount),
-              }
-            })
+        Util.isDevice('mobile') && m(Navigation, {
+          items: [{
+            label: Util.translate('navigation.mobile.offline').toUpperCase(),
+            href: '/f',
+          }]
         }),
       ]
     }

@@ -91,16 +91,13 @@ const Util = {
 
       url = new URL(url)
       const params = new URLSearchParams(url.search)
-      console.log('modify with', add, remove)
 
       add.forEach((value) => {
         parts = value.split('=')
-        console.log('adding', parts[0], parts[1])
         params.set(parts[0], parts[1])
       })
       
       remove.forEach(key => {
-        console.log('removing', key)
         params.delete(key)
       })
 
