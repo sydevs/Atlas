@@ -15,7 +15,7 @@ function ListView() {
     }
 
     getEventIds.then(ids => {
-      offlineEventCount = ids.length
+      offlineEventCount = ids && ids.length
 
       return AtlasApp.data.getList(filter, ids).then(response => {
         events = response
@@ -54,7 +54,7 @@ function ListView() {
             href: '/',
           }]
         }),
-        offlineEventCount === 0 && m('p.sya-list-fallback', "No local events available"),
+        !vnode.attrs.onlineOnly && offlineEventCount === 0 && m('p.sya-list-fallback', Util.translate('list.fallback.online') + " " + Util.translate('list.fallback.online_event').toLowerCase()),
         m('.sya-list', list),
       ]
     }

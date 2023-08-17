@@ -18,10 +18,10 @@ function Layout() {
         }),
         m('.sya-panel', {
           class: vnode.attrs.panel ? `sya-panel--${vnode.attrs.panel}` : null
-        }, m(vnode.attrs.view, {
+        }, m(vnode.attrs.view, Object.assign(vnode.attrs, {
           layer: layer,
           model: vnode.attrs.model,
-        }))
+        })))
       )
     }
   }

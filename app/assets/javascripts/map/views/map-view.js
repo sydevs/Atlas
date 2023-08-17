@@ -39,7 +39,7 @@ function MapView() {
         Util.isDevice('mobile') && m(Navigation, {
           items: [{
             label: Util.translate('navigation.mobile.offline').toUpperCase(),
-            href: '/f',
+            href: '/events',
           }]
         }),
       ]
