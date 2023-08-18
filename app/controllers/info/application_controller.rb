@@ -25,7 +25,7 @@ class Info::ApplicationController < ActionController::Base
     registration_data = {}
     Country.order_by_registrations.limit(5).map do |country|
       registrations = country.associated_registrations.since(6.months.ago).group_by_month.count.map { |k, v| [k.strftime("%b"), v] }.to_h
-      sum = registration_data[country.name].values.sum
+      sum = registrations.values.sum
       return unless sum > 0
       registration_data[country.name] = registrations
       registration_data[country.name]['total'] = sum
