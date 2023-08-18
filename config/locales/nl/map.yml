@@ -26,7 +26,7 @@ nl:
       fallback:
         nearby: "De dichtsbijzijnde gratis meditatie les is in"
         far: "Er zijn geen lessen in deze buurt, de dichtsbijzijnde gratis meditatie les is in"
-        online: "Er zijn geen lessen in deze buurt, probeer een"
+        online: "Alternatively, try our" # TODO: Translate
         online_event: "Online Les"
 
     area:

@@ -53,19 +53,14 @@ class SahajAtlas {
 
     m.route(this.#container, '/', {
       '/': layout(MapView, { map: 'fullscreen', panel: 'overflow' }),
+      '/events': layout(ListView, { map: 'hidden' }),
+      '/online': layout(ListView, { map: 'hidden', onlineOnly: true }),
   
       '/country/:id': layout(CountryView, { model: AtlasCountry, map: 'halfscreen' }),
       '/region/:id': layout(RegionView, { model: AtlasRegion, map: 'halfscreen' }),
       '/area/:id': layout(AreaView, { model: AtlasArea, map: 'freeze' }),
       '/venue/:id': layout(VenueView, { model: AtlasVenue, map: 'freeze' }),
       '/event/:id': layout(EventView, { model: AtlasEvent, map: 'freeze', panel: 'padded' }),
-  
-      '/:layer': layout(ListView, { map: 'hidden' }),
-      '/:layer/country/:id': layout(CountryView, { model: AtlasCountry, map: 'halfscreen' }),
-      '/:layer/region/:id': layout(RegionView, { model: AtlasRegion, map: 'halfscreen' }),
-      '/:layer/area/:id': layout(AreaView, { model: AtlasArea, map: 'freeze' }),
-      '/:layer/venue/:id': layout(VenueView, { model: AtlasVenue, map: 'freeze' }),
-      '/:layer/event/:id': layout(EventView, { model: AtlasEvent, map: 'freeze', panel: 'padded' }),
     })
 
     let currentPath = m.route.get().split('#')[0]

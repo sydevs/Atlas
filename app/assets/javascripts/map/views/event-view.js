@@ -16,14 +16,14 @@ function EventView() {
     view: function() {
       if (!event) return m(Loader)
 
-      let href = '/:layer/:model/:id'
-      let params = { layer: event.layer }
+      let href = '/:model/:id'
+      let params = {}
 
       if (event.location.getEventIds(event.layer).length > 1) {
         params['model'] = event.location.type.toLowerCase()
         params['id'] = event.location.id
       } else if (AtlasApp.config.search) {
-        href = '/:layer'
+        href = '/'
       } else {
         params['model'] = event.location.parentType.toLowerCase()
         params['id'] = event.location.parentId

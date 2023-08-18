@@ -48,6 +48,7 @@ module GraphqlAPI
     label
     latitude
     longitude
+    radius
     directionsUrl
   }
 
@@ -56,6 +57,7 @@ module GraphqlAPI
     label
     latitude
     longitude
+    radius
   }
 
   def self.events online: nil

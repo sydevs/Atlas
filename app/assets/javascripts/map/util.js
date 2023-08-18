@@ -37,6 +37,10 @@ const Util = {
     return text
   },
 
+  distance_between(p1, p2) {
+    return Util.distance(p1.latitude, p1.longitude, p2.latitude, p2.longitude)
+  },
+
   distance(lat1, lon1, lat2, lon2, unit = 'K') {
     if ((lat1 == lat2) && (lon1 == lon2)) {
       return 0
@@ -91,16 +95,13 @@ const Util = {
 
       url = new URL(url)
       const params = new URLSearchParams(url.search)
-      console.log('modify with', add, remove)
 
       add.forEach((value) => {
         parts = value.split('=')
-        console.log('adding', parts[0], parts[1])
         params.set(parts[0], parts[1])
       })
       
       remove.forEach(key => {
-        console.log('removing', key)
         params.delete(key)
       })
 

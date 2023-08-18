@@ -3,90 +3,38 @@
 /* global m, App, Search, List, ListFallback, Navigation, Util */
 
 function ListView() {
-  let onlineEventsCount = null
-  let eventIds = []
+  let offlineEventCount = null
+  let onlineOnly = false
   let events = undefined
-  let layer = null
 
   function updateEvents() {
-    if (Util.isDevice('mobile')) {
-      if (layer == AtlasEvent.LAYER.online) {
-        return AtlasApp.data.getList(AtlasEvent.LAYER.online).then(response => {
-          events = response
-        })
-      } else {
-        return AtlasApp.data
-          .getList(AtlasEvent.LAYER.online)
-          .then((response) => {
-            return response;
-          })
-          .then((onlineData) =>
-            AtlasApp.map.getRenderedEventIds().then((ids) => {
-              eventIds = ids;
-              let offlineData =
-                ids.length > 0
-                  ? AtlasApp.data.getList(AtlasEvent.LAYER.offline, ids)
-                  : [];
-              return offlineData;
-            }).then((offlineData) => {
-              return offlineData.concat(onlineData)
-            })
-          )
-          .then((response) => {
-            events = response;
-          })
-          .catch(() => {
-            events = null;
-          });
-      }
-    } else {
-      if (layer == AtlasEvent.LAYER.online) {
-        return AtlasApp.data.getList(AtlasEvent.LAYER.online).then(response => {
-          events = response
-        })
-      } else {
-        return AtlasApp.map.getRenderedEventIds().then(ids => {
-          if (Util.areArraysEqual(eventIds, ids)) {
-            return events
-          } else {
-            eventIds = ids
-            return ids.length > 0 ? AtlasApp.data.getList(AtlasEvent.LAYER.offline, ids) : []
-          }
-        }).then(response => {
-          events = response
-        }).catch(() => {
-          events = null
-        })
-      }
-    }
-  }
+    let filter = onlineOnly ? 'online' : 'all'
+    let getEventIds = Promise.resolve(null)
 
-  function updateLayer(newLayer) {
-    if (layer != newLayer) {
-      layer = newLayer
-      updateEvents().finally(() => m.redraw())
+    if (filter != 'online') {
+      getEventIds = AtlasApp.map.getRenderedEventIds()
     }
+
+    getEventIds.then(ids => {
+      offlineEventCount = ids && ids.length
+
+      return AtlasApp.data.getList(filter, ids).then(response => {
+        events = response
+      })
+    }).catch(() => {
+      events = null
+    }).finally(() => {
+      m.redraw()
+    })
   }
 
   return {
-    oninit: function() {
-      AtlasApp.data.getList(AtlasEvent.LAYER.online).then(events => {
-        onlineEventsCount = events.length
-        m.redraw()
-      })
-    },
-    oncreate: function(vnode) {
-      layer = m.route.param('layer') || vnode.attrs.layer
-      AtlasApp.map.addEventListener('update', () => {
-        updateEvents().finally(() => m.redraw())
-      })
-    },
-    onupdate: function(vnode) {
-      updateLayer(m.route.param('layer') || vnode.attrs.layer)
+    oncreate: function() {
+      AtlasApp.map.addEventListener('update', updateEvents)
     },
     view: function(vnode) {
-      let mobile = Util.isDevice('mobile')
       let list = null
+      onlineOnly = vnode.attrs.onlineOnly
 
       if (events == undefined) {
         list = m(Loader)
@@ -100,24 +48,26 @@ function ListView() {
 
       return [
         m(Search),
-        m(Navigation, {
-          items: mobile ?
-            [{
+        Util.isDevice('mobile') &&
+          m(Navigation, {
+            items: [{
               label: Util.translate('navigation.mobile.back'),
               href: '/',
-            }] :
-            Object.entries(AtlasEvent.LAYER).map(([key, layer]) => {
-              const active = vnode.attrs.layer == layer
-              return {
-                label: Util.translate(`navigation.desktop.${key}`),
-                active: active,
-                badge: (key == 'online' && !active) ? onlineEventsCount : null,
-                href: '/:layer',
-                params: { layer: layer },
-              }
-            })
-        }),
-        m('.sya-list', list),
+            }]
+          }),
+        !Util.isDevice('mobile') && onlineOnly &&
+          m('.sya-pills', [
+            m(m.route.Link, {
+              class: 'sya-pill sya-pill--online sya-pill--button sya-pill--active',
+              href: '/events',
+            }, [
+              Util.translate('navigation.mobile.online'),
+              m('i.sya-icon.sya-icon--close'),
+            ]),
+          ]),
+        !onlineOnly && offlineEventCount === 0 ?
+          m(ListFallback)
+          : m('.sya-list', list),
       ]
     }
   }

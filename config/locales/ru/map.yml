@@ -26,7 +26,7 @@ ru:
       fallback:
         nearby: "Ближайший центр медитации находится в"
         far: "Здесь пока нет занятий, ближайщий центр медитации находится в"
-        online: "В этом регионе нет занятий, попробуй"
+        online: "Alternatively, try our" # TODO: Translate
         online_event: "Онлайн Медитацию"
 
     area:

@@ -57,6 +57,7 @@ class AtlasAPI {
             label
             latitude
             longitude
+            radius
             onlineEventIds
             offlineEventIds
             parentId
@@ -168,6 +169,13 @@ class AtlasAPI {
           label
           latitude
           longitude
+          area {
+            id
+            label
+            latitude
+            longitude
+            radius
+          }
         }
       }
     `)
