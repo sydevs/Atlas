@@ -80,7 +80,7 @@ pt:
         invalid_end_date: "não pode ser antes da data de início"
         passed_end_date: "não pode ser antes de hoje"
       manager:
-        success: "Gerente adicionado com sucesso"
+        success: "Gestor adicionado com sucesso"
         already_added: "%{manager} já é gerente de #{resource}"
         already_exists: "%{name} <%{email}> já existe"
         email_verified: "Seu endereço de email foi verificado!"
@@ -95,7 +95,7 @@ pt:
         timing: "Horário"
         location: "Localização"
         registration: "Inscrição"
-        manager: "Gerente"
+        manager: "Gestor"
       manager:
         contact_methods: "Formas de Contato"
         notifications: "Ajuste de Notificações"
@@ -150,7 +150,7 @@ pt:
           field: "A gerência deve ser dada a um(a) yogi(ni) que será o(a) responsável por este evento. A cada semana, uma lista de novas inscrições serão enviadas aos gerentes e em alguns meses será pedido a eles que confirmem se as informações do programa continuam corretas."
           search: "Preencha o email completo ou o número de telefone da pessoa que você quer adicionar. Se não existe gerente, você pode convidar o gerente por email ou por outra rede social"
           categories:
-            managers: "Gerentes existentes"
+            managers: "Gestores existentes"
             invite: "Convidar"
           short_invitations:
             email: "Por email"
@@ -190,7 +190,7 @@ pt:
       details_for_record: "Detalhes de %{resource}"
       registration_for_record: "Tendência de inscrição"
       management_for_record: "Gerenciamento de  %{resource}"
-      managers_for_record: "Gerentes de %{resource}"
+      managers_for_record: "Gestores de %{resource}"
       location_of_record: "Localização deste %{resource}"
       dates_and_timing: "Dias & Horários"
       map_of_record: "Mapa deste %{resource}"
@@ -235,7 +235,7 @@ pt:
         description: "Este %{resource} está oculto do público, porque não está publicado."
         parent: "Este %{resource} está oculto do público, porque seu %{parent} não está publicado."
       manager_not_verified:
-        title: "Email de Gerente não verificado"
+        title: "Email de Gestor não verificado"
         description: "Eventos associados a este gerente não são publicos, porque o email dele não foi verificado."
         parent: "Este %{resource} está oculto do público, porque o email do gerente não foi verificado."
         action: "Reenviar"
@@ -271,23 +271,23 @@ pt:
           description: "Pode gerenciar todo conteúdo e gerentes do Atlas."
           instruction: "Você tem que acessar todos os aspectos do Atlas CMS (Content Management System - Sistema de Gerenciamento de Conteúdo). É seu trabalho criar novos gerentes de país e ajudá-los a aprender a usar o sistema."
         country:
-          title: "Gerente de País"
+          title: "Gestor de País"
           description: "Pode criar regiões, locais, eventos e nomear gerentes em %{place}"
           instruction: "É sua responsabilidade criar regiões dentro de seu país e nomear gerentes para elas, para que eles criem eventos. Você também pode criar locais e eventos dentro de seu país."
         local:
-          title: "Gerente Local"
+          title: "Gestor Local"
           description: "Pode criar locais e eventos em %{place}"
           instruction: "É sua responsabilidade criar eventos dentro de sua área local. Primeiro você tem que criar um local, antes de poder criar um evento neste local."
         event:
-          title: "Gerente de Evento"
+          title: "Gestor de Evento"
           description: "Podem atualizar os detalhes dos eventos atribuídos a eles."
           instruction: "Sua responsabilidade é manter suas aulas atualizadas. Emails mensais serão enviados para pedir que você confirme se seus eventos estão atualizados. Se o local de suas aulas mudarem, você precisará pedir ao gerente de sua área local para atualizar isso."
         client:
-          title: "Gerente de Aplicativo"
+          title: "Gestor de Aplicativo"
           description: "Pode modificar a configuração de seu aplicativo externo"
           instruction: "Você tem acesso à configuração para seu aplicativo externo."
         none:
-          title: "Gerentes sem acesso"
+          title: "Gestores sem acesso"
           description: "Estes usuários não têm eventos ou regiões atribuídas a eles. Eles não tem acesso para gerenciar algo no Atlas."
           instruction: "Você não tem acesso a qualquer parte do website. Se você acredita que isso é um erro, por favor contacte o gerente de sua área local."
       resources:
