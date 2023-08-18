@@ -78,11 +78,11 @@ pt:
         other: "gestores"
       managed_record:
         # Basic pluralization
-        single: "Responsabilidade"
-        plural: "Responsabilidades"
+        single: "Responsável"
+        plural: "Responsáveis"
         # Countable
-        one: "responsabilidade"
-        other: "responsabilidades"
+        one: "responsável"
+        other: "responsáveis"
       audit:
         # Basic pluralization
         single: "História"

@@ -379,6 +379,9 @@ en:
           concert:
             title: :activerecord.attributes.event.categories.concert
             description: "A large one time cultural event, usually involving music, maybe dance, and realisation."
+          inactive:
+            title: :activerecord.attributes.event.categories.inactive
+            description: "This for cities where a yogi is present, but they don't run regular classes. The seeker can contact the yogi through this listing. This type can also be used for any other type of irregular class that requires the seeker to contact the yogi directly for information."
       expiration:
         title: "Why isn't my event appearing on the map?"
         alt_title: "How does event expiration work?"

@@ -379,6 +379,9 @@ pt:
           concert:
             title: :activerecord.attributes.event.categories.concert
             description: "Um grande evento cultural, usualmente envolvendo música, talvez dança e realização."
+          inactive:
+            title: :activerecord.attributes.event.categories.inactive
+            description: "This for cities where a yogi is present, but they don't run regular classes. The seeker can contact the yogi through this listing. This type can also be used for any other type of irregular class that requires the seeker to contact the yogi directly for information." # TODO: Translate
       expiration:
         title: "Por que meu evento não está aparecendo no mapa?"
         alt_title: "Como ocorre a expiração de um evento?"

@@ -41,8 +41,9 @@ html
           .title = text[:title]
           = text[:description]
           '  
-          - if key == :atlas && defined?(info_about_url)
-            = link_to translate('mail.layout.learn_more'), info_about_url
+          - if key == :atlas
+            /= link_to translate('mail.layout.learn_more'), info_about_url
+            = link_to translate('mail.layout.learn_more'), 'www.sydevelopers.com/atlas'
           - elsif key == :automated
             = mail_to 'contact@sydevelopers.com'
           - elsif key == :unsubscribe && @manager.present?
