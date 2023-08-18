@@ -16,3 +16,9 @@
     h3 Worldwide Registration Trends
   .statistics__chart
     .ct-chart.ct-minor-seventh id='chart-world-registrations' data-registrations=@registrations_data.to_json
+
+  .info__content
+    h3 Worldwide Registration by Country
+    p: em Over the last 6 months
+  .statistics__chart
+    .ct-chart.ct-minor-seventh id='chart-country-registrations' data-registrations=@country_registrations_data.to_json

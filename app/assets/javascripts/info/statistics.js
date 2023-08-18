@@ -11,6 +11,15 @@ const Statistics = {
       },
     })
 
+    this.$pie = $('#chart-country-registrations')
+    let pieData = this.$pie.data('registrations')
+    this.pie = new Chartist.Pie('#chart-country-registrations', pieData, {
+      fullWidth: true,
+      chartPadding: 30,
+      labelOffset: 100,
+      labelDirection: 'explode',
+    })
+
     this.$map = $('#map-world-events')
     const data = this.$map.data('events')
 
@@ -48,7 +57,7 @@ const Statistics = {
       },
       onRegionTipShow: function(e, el, code) {
         if (typeof data[code] !== 'undefined') {
-          el.html(el.html() + ' (' + data[code] + ' Active Events)')
+          el.html(el.html() + ' (' + data[code] + ' Events)')
         }
       }
     })

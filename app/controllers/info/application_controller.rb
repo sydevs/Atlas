@@ -20,16 +20,35 @@ class Info::ApplicationController < ActionController::Base
     recent_month_names = 5.downto(1).collect do |n| 
       Date.parse(Date::MONTHNAMES[n.months.ago.month]).strftime('%b')
     end
+
+    registration_data = {}
+    registration_data["World"] = Registration.since(6.months.ago).group_by_month.count.map { |k, v| [k.strftime("%b"), v] }.to_h
+    Country.order_by_registrations.limit(10).map do |country|
+      registration_data[country.name] = country.associated_registrations.since(6.months.ago).group_by_month.count.map { |k, v| [k.strftime("%b"), v] }.to_h
+      registration_data[country.name]['total'] = registration_data[country.name].values.sum
+    end
     
-    monthly_registrations = Registration.since(6.months.ago).group_by_month.count.map { |k, v| [k.strftime("%b"), v] }.to_h
     @registrations_data = {
       labels: recent_month_names,
-      series: [
+      series: registration_data.map do |name, monthly_registrations|
         {
-          name: 'monthly',
+          name: name,
           data: recent_month_names.map { |m| monthly_registrations[m] || 0 },
         }
-      ],
+      end
+    }
+
+    @country_registrations_data = {
+      labels: registration_data.map { |name, registrations| "#{name} (#{registrations['total']})" if name != "World" }.compact,
+      series: registration_data.map do |name, registrations|
+        print "check", name
+        if name != "World"
+          {
+            name: name,
+            value: registrations['total'],
+          }
+        end
+      end.compact
     }
   end
 
