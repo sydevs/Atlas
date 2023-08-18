@@ -15,6 +15,7 @@ class Info::ApplicationController < ActionController::Base
   end
 
   def statistics
+    # @events_data = Country.order_by_events
     @events_data = Country.joins(:events).select('countries.country_code, count(events.id) as count').group('countries.country_code, countries.name').map { |c| [ c.country_code, c.count ] }.to_h
 
     recent_month_names = 5.downto(1).collect do |n| 
@@ -22,12 +23,13 @@ class Info::ApplicationController < ActionController::Base
     end
 
     registration_data = {}
-    registration_data["World"] = Registration.since(6.months.ago).group_by_month.count.map { |k, v| [k.strftime("%b"), v] }.to_h
-    Country.order_by_registrations.limit(10).map do |country|
+    Country.order_by_registrations.limit(5).map do |country|
       registration_data[country.name] = country.associated_registrations.since(6.months.ago).group_by_month.count.map { |k, v| [k.strftime("%b"), v] }.to_h
       registration_data[country.name]['total'] = registration_data[country.name].values.sum
     end
-    
+
+    registration_data["World"] = Registration.since(6.months.ago).group_by_month.count.map { |k, v| [k.strftime("%b"), v] }.to_h
+
     @registrations_data = {
       labels: recent_month_names,
       series: registration_data.map do |name, monthly_registrations|
@@ -41,7 +43,6 @@ class Info::ApplicationController < ActionController::Base
     @country_registrations_data = {
       labels: registration_data.map { |name, registrations| "#{name} (#{registrations['total']})" if name != "World" }.compact,
       series: registration_data.map do |name, registrations|
-        print "check", name
         if name != "World"
           {
             name: name,
