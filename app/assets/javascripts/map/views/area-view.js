@@ -31,7 +31,7 @@ function AreaView() {
         m(NavigationButton, {
           float: 'left',
           icon: 'left',
-          href: (AtlasApp.config.default_view == 'list' ? '/:layer/region/:id' : '/:layer'),
+          href: (AtlasApp.config.default_view == 'list' ? '/region/:id' : '/events'),
           params: { layer: vnode.attrs.layer, id: area.region.id }
         }),
         m('.sya-panel__header', Util.translate('area.header', { area: area.label })),
@@ -44,8 +44,8 @@ function AreaView() {
               label: Util.translate(`navigation.desktop.${key}`),
               active: active,
               badge: count,
-              href: '/:layer/area/:id',
-              params: { layer: layer, id: area.id },
+              href: '/area/:id',
+              params: { id: area.id },
             }
           })
         }),
