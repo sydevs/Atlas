@@ -6,22 +6,9 @@ function MapView() {
   let offlineEventsCount = null
 
   return {
-    view: function(vnode) {
-      if (AtlasApp.map) {
-        AtlasApp.map.getRenderedEventIds().then(eventIds => {
-          offlineEventsCount = eventIds.length
-
-          if (offlineEventsCount > 0 && !Util.isDevice('mobile')) {
-            m.route.set('/events', {}, { replace: true })
-          }
-        }, _error => {
-          offlineEventsCount = null
-        }).finally(() => m.redraw())
-  
-        /*AtlasApp.map.addEventListener('movestart', () => {
-          offlineEventsCount = null
-          m.redraw()
-        })*/
+    view: function() {
+      if (!Util.isDevice('mobile')) {
+        m.route.set('/events', {}, { replace: true })
       }
 
       return [

@@ -13,7 +13,7 @@ function EventCard() {
       const event = vnode.attrs.event
       let language = Util.translate(`language_codes.${event.languageCode.toLowerCase()}`) || event.languageCode
       let distance = event.offline && AtlasApp.map.userLocation && event.distanceTo(AtlasApp.map.userLocation)
-      
+
       return m(m.route.Link,
         {
           class: `sya-card ${vnode.attrs.class}`,
@@ -29,8 +29,6 @@ function EventCard() {
           event.category == 'inactive' ? 
             m('.sya-card__meta', Util.translate('event.inactive.dates').toUpperCase()) :
             m('.sya-card__meta',
-              event.timing.startingString ? m('.sya-pill', event.timing.startingString) : null,
-              event.online ? m('.sya-pill.sya-pill__online', Util.translate('event.online_text')) : null,
               m('.sya-card__meta__day', event.timing.dateString),
               m('.sya-card__meta__time', event.timing.startTime),
               event.online ?
@@ -38,7 +36,11 @@ function EventCard() {
                 m('abbr.sya-card__meta__timezone', {
                   'data-tooltip': event.timing.timeZone('long'),
                 }, event.timing.timeZone('short')),
-              event.timing.startingSoon ? m('.sya-pill', Util.translate('event.upcoming')) : null,
+            ),
+            m('.sya-card__meta',
+              event.timing.startingString && m('.sya-pill', event.timing.startingString),
+              event.online && m('.sya-pill.sya-pill--online', Util.translate('event.online_text').toUpperCase()),
+              event.timing.startingSoon && m('.sya-pill', Util.translate('event.upcoming')),
             ),
         ),
         m('a.sya-card__action',
