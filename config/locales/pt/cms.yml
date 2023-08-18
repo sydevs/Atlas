@@ -348,12 +348,12 @@ pt:
       categories:
         title: "Para que são as categorias de evento?"
         description:
-          introduction: "Categorias ajuda o sistema entender que tipo de evento foi adicionado. Essa informação tem várias utilidades."
+          introduction: "Categorias ajudam o sistema entender que tipo de evento foi adicionado. Essa informação tem várias utilidades."
         benefits:
           marketing:
             icon: ad # Do not translate
             title: "Marketing"
-            description: "Nós podems recomendar aulas para os buscadores baseado nas categorias dos eventos. Se alguém se inscrever para um concerto, então depois do concerto nós podemos sugerir uma aula de introdução. Quando eles tiverem ido a várias aulas de introdução, podemos sugerir a eles um curso de aprofundamento. Se houver um grande concerto de música, podemos fazer isso aparecer de forma diferente no mapa para atrair mais atenção."
+            description: "Nós podemos recomendar aulas para os buscadores baseado nas categorias dos eventos. Se alguém se inscrever para um concerto, então depois do concerto nós podemos sugerir uma aula de introdução. Quando eles tiverem ido a várias aulas de introdução, podemos sugerir a eles um curso de aprofundamento. Se houver um grande concerto de música, podemos fazer isso aparecer de forma diferente no mapa para atrair mais atenção."
           labeling:
             icon: info circle # Do not translate
             title: "Identificação do Evento"
@@ -366,13 +366,13 @@ pt:
           title: "Categorias Disponíveis"
           dropin:
             title: :activerecord.attributes.event.categories.dropin
-            description: "Uma aula introdutória para buscadores que estão começando na Sahaja Yoga"
+            description: "Uma aula introdutória para buscadores que estão começando na Sahaja Yoga."
           single:
             title: :activerecord.attributes.event.categories.single
             description: "Uma aula para os buscadores darem continuidade na Sahaja Yoga, uma vez que eles já tenham assistido uma aula de introdução."
           course:
             title: :activerecord.attributes.event.categories.course
-            description: "Usualmente um curso semanal que acontece por um tempo limitado, levando o buscador do início ao nível intermediário durante o curso de algumas semanas"
+            description: "Usualmente um curso semanal que acontece por um tempo limitado, levando o buscador do início ao nível intermediário durante o curso de algumas semanas."
           festival:
             title: :activerecord.attributes.event.categories.festival
             description: "Quando a Sahaja Yoga está participando de um evento público existente, como uma tenda em um festival ou uma feira."
@@ -385,8 +385,8 @@ pt:
         description:
           problem: "Não queremos que os buscadores vejam classes que não estão mais funcionando. Muitos websites Sahaja tem informações desatualizadas e mesmo quando os detalhes são atualizados, logo eles ficam desatualizados novamente."
           solution: "Para resolver este problema, criamos um sistema automático que envia emails mensais aos yogis que gerenciam cada programa, perguntando se a informação continua correta. Se eles não respondem, o programa é ocultado do público até que seja checado."
-          review: "Assim que um evento se torna classificado como \"Needs Review\" o gerente do programa receberá um email pedindo para que confirme os detalhes do evento. Se ele não responder dentro de uma semana, o gerente da cidade receberá um email pedindo que cheque os detalhes do evento."
-          expiration: "Se %{duration} passe sem que o evento seja verificado, então ele é ocultado no mapa até que alguém o cheque e atualize."
+          review: "Assim que um evento se torna classificado como \"Necessita Revisão\" o gerente do programa receberá um email pedindo para que confirme os detalhes do evento. Se ele não responder dentro de uma semana, o gerente da cidade receberá um email pedindo que cheque os detalhes do evento."
+          expiration: "Se %{duration} passem sem que o evento seja verificado, então ele é ocultado no mapa até que alguém o cheque e atualize."
         steps:
           verified:
             icon: green check circle # Do not translate
@@ -399,13 +399,13 @@ pt:
             active_label: "Necessita Revisão"
             inactive_label: "Necessitará ser Revisto"
             title: "Necessita Revisão"
-            description: "Se %{duration} passe sem que o evento seja atualizado"
+            description: "Se %{duration} passem sem que o evento seja atualizado"
           should_expire:
             icon: red times circle # Do not translate
             active_label: "Expirado"
             inactive_label: "Expira"
             label: "Expira" # This should be present tense as in the phrase "The event expires on March 3"
-            title: "Expiredo"
+            title: "Expirado"
             description: "Se um evento não foi atualizado em %{duration}"
       registration:
         title: "Por que os buscadores devem se inscrever no Sahaj Atlas?"
