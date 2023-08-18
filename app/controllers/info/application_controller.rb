@@ -15,7 +15,7 @@ class Info::ApplicationController < ActionController::Base
   end
 
   def statistics
-    @events_data = Country.joins(:events).select('countries.country_code, count(events.id) as count').group('countries.country_code').map { |c| [ c.country_code, c.count ] }.to_h
+    @events_data = Country.joins(:events).select('countries.country_code, count(events.id) as count').group('countries.country_code, countries.name').map { |c| [ c.country_code, c.count ] }.to_h
 
     recent_month_names = 5.downto(1).collect do |n| 
       Date.parse(Date::MONTHNAMES[n.months.ago.month]).strftime('%b')
