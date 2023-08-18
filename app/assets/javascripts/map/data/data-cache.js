@@ -185,13 +185,21 @@ class DataCache {
   }
 
   registerRequest(key) {
+    if (!(key in this.#requests)) {
+      this.#requests[key] = -1
+    }
+    
     LAST_REQUEST_ID += 1
-    this.#requests[key] = LAST_REQUEST_ID
     return { key: key, id: LAST_REQUEST_ID }
   }
 
   isRequestExpired(request) {
-    return this.#requests[request.key] > request.id
+    if (this.#requests[request.key] < request.id) {
+      this.#requests[request.key] = request.id
+      return false
+    }
+
+    return true
   }
 
 }

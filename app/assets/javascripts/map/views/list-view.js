@@ -10,7 +10,6 @@ function ListView() {
   function updateEvents() {
     let filter = onlineOnly ? 'online' : 'all'
     let getEventIds = Promise.resolve(null)
-    console.log('get events', filter)
 
     if (filter != 'online') {
       getEventIds = AtlasApp.map.getRenderedEventIds()
