@@ -170,7 +170,7 @@ class Event < ApplicationRecord
   end
 
   def log_status_change
-    return if archived? || new_record?
+    return if archived? || new_record? || !published?
     
     if needs_urgent_review?
       parent_managers.each do |parent_manager|
