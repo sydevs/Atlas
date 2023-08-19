@@ -173,7 +173,7 @@ class Event < ApplicationRecord
     return if archived? || new_record? || !published?
     
     if needs_urgent_review?
-      parent_managers.each do |parent_manager|
+      nearest_parent_managers.each do |parent_manager|
         EventMailer.with(event: self, manager: parent_manager).status.deliver_later
       end
     end

@@ -18,6 +18,18 @@ module Manageable
     @parent_managers ||= (respond_to?(:parent) && parent.present? ? parent.all_managers : [])
   end
 
+  def nearest_parent_managers
+    root = parent
+    result = []
+
+    while root && result.empty?
+      result = root.managers.where.not(id: self.managers.pluck(:id))
+      root = root.try(:parent)
+    end
+
+    result
+  end
+
   def all_managers except: []
     @all_managers ||= begin
       result = managers.where.not(id: except).to_a
