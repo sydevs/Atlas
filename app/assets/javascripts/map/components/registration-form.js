@@ -31,6 +31,11 @@ function RegistrationForm() {
               if (response.status == 'success') {
                 alert = null
                 vnode.attrs.onsubmit(response)
+
+                if (window.fathom) {
+                  fathom.trackGoal('1QZFA0P0', 0)
+                  fathom.trackGoal('MWFMC9XW', 0)
+                }
               } else {
                 alert = {
                   status: response.status,

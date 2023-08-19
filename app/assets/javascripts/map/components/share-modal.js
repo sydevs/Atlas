@@ -33,6 +33,7 @@ function ShareModal() {
         url: url,
       })
   
+      fathom.trackGoal('CHANWZ9M', 0)
       resolve()
     })
   }
@@ -87,6 +88,7 @@ function ShareModal() {
               return m(`a.sya-share__${key}`, {
                 href: formatUrl(template, selection.url),
                 target: '_blank',
+                onclick: () => fathom.trackGoal('CHANWZ9M', 0)
               }, m('.sya-icon', { class: `sya-icon--${key}` }))
             })
           )

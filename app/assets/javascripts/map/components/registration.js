@@ -46,6 +46,12 @@ function Registration() {
           m('a.sya-registration__external__action', {
             href: event.registrationUrl,
             target: '_blank',
+            onclick: () => {
+              if (window.fathom) {
+                fathom.trackGoal('1QZFA0P0', 0)
+                fathom.trackGoal('EPMYGUUI', 0)
+              }
+            },
           }, Util.translate(`registration.button.${event.registrationMode}`))
         ) :
         m(RegistrationForm, {
