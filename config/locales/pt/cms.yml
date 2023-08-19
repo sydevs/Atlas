@@ -431,6 +431,26 @@ pt:
         title: "Eu tenho outras questões ou sugestões"
         description: "Se você precisa de mais ajuda ou se você quer ajudar no desenvolvimento do Sahaj Atlas, por favor escreva pra o email abaixo. Por favor, escreva seu email em inglês."
 
+    region_types:
+      br: :cms.region_labels.state
+      pt: :cms.region_labels.province
+
+    region_labels:
+      province:
+        # Basic pluralization
+        single: "Província"
+        plural: "Províncias"
+        # Countable
+        one: "província"
+        other: "províncias"
+      state:
+        # Basic pluralization
+        single: "Estado"
+        plural: "Estados"
+        # Countable
+        one: "estado"
+        other: "estados"
+
     country_codes:
       gb: "Reino Unido"
       us: "EUA"

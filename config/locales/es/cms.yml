@@ -431,6 +431,27 @@ es:
         title: "Tengo otras preguntas y sugerencias"
         description: "Si necesitas más ayuda, o si quieres ayudar en el desarrollo de Atlas Sahaja, por favor escribe al correo más abajo. Por favor escribe tu mensaje en inglés."
 
+    region_types:
+      es: :cms.region_labels.province
+      ar: :cms.region_labels.province
+      co: :cms.region_labels.departments
+
+    region_labels:
+      province:
+        # Basic pluralization
+        single: "Provincia"
+        plural: "Provincias"
+        # Countable
+        one: "provincia"
+        other: "provincias"
+      departments:
+        # Basic pluralization
+        single: "Departamento"
+        plural: "Departamentos"
+        # Countable
+        one: "departamento"
+        other: "departamentos"
+
     country_codes:
       gb: "UK"
       us: "USA"
