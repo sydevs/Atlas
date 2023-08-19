@@ -421,6 +421,14 @@ ru:
         title: "У меня есть другие вопросы или предложения"
         description: "Если тебе нужна дополнительная помощь или ты хочешь помочь с разработкой Сахадж Атласа, напиши на email, указанный ниже. На английском языке, пожалуйста."
 
+    category_tags: # TODO: Translate
+      dropin: "Drop-In"
+      single: "Single"
+      course: "Course"
+      festival: "Festival"
+      concert: "Concert"
+      inactive: "Inactive"
+
     country_codes:
       gb: UK
       us: USA

@@ -431,10 +431,13 @@ es:
         title: "Tengo otras preguntas y sugerencias"
         description: "Si necesitas más ayuda, o si quieres ayudar en el desarrollo de Atlas Sahaja, por favor escribe al correo más abajo. Por favor escribe tu mensaje en inglés."
 
-    region_types:
-      es: :cms.region_labels.province
-      ar: :cms.region_labels.province
-      co: :cms.region_labels.departments
+    category_tags: # TODO: Translate
+      dropin: "Drop-In"
+      single: "Single"
+      course: "Course"
+      festival: "Festival"
+      concert: "Concert"
+      inactive: "Inactive"
 
     region_labels:
       province:

@@ -426,9 +426,13 @@ de:
         title: "Ich habe andere Fragen oder Vorschläge"
         description: "Wenn Sie weitere Hilfe benötigen oder wenn Sie mit der Entwicklung des Sahaj Atlas helfen möchten, schreiben Sie bitte an die unten angegebene E-Mail. Bitte schreiben Sie Ihre Nachricht in Englisch."
 
-    region_types:
-      de: :cms.region_labels.state
-      at: :cms.region_labels.state
+    category_tags: # TODO: Translate
+      dropin: "Drop-In"
+      single: "Single"
+      course: "Course"
+      festival: "Festival"
+      concert: "Concert"
+      inactive: "Inactive"
 
     region_labels:
       state:

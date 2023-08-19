@@ -39,6 +39,6 @@
         '  - 
       
       - if event.inactive_category?
-        = event.category.humanize.titleize
+        = translate('cms.category_tags.inactive')
       - else
-        | #{event.category.humanize.titleize}, #{event.timing_in_words}
+        | #{translate(event.category, scope: 'cms.category_tags')}, #{event.timing_in_words}

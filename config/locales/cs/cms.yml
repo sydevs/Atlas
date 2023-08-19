@@ -431,6 +431,14 @@ cs:
         title: "Mám další otázky nebo návrhy"
         description: "Pokud potřebujete další pomoc, nebo chcete-li pomoci s vývojem Sahadža atlasu, napište na níže uvedený e-mail. Napište prosím svou zprávu v angličtině."
 
+    category_tags: # TODO: Translate
+      dropin: "Drop-In"
+      single: "Single"
+      course: "Course"
+      festival: "Festival"
+      concert: "Concert"
+      inactive: "Inactive"
+
     country_codes:
       gb: UK
       us: USA

@@ -421,6 +421,14 @@ uk:
         title: "У мене є інші запитання чи пропозиції"
         description: "Якщо вам потрібна додаткова допомога або ви хочете допомогти з розробкою Сахадж Атласу, будь ласка, напишіть на електронну адресу нижче. Будь ласка, напишіть своє повідомлення англійською мовою."
 
+    category_tags: # TODO: Translate
+      dropin: "Drop-In"
+      single: "Single"
+      course: "Course"
+      festival: "Festival"
+      concert: "Concert"
+      inactive: "Inactive"
+
     country_codes: # TODO: Translate
       gb: "UK"
       us: "USA"
