@@ -381,7 +381,7 @@ pt:
             description: "Um grande evento cultural, usualmente envolvendo música, talvez dança e realização."
           inactive:
             title: :activerecord.attributes.event.categories.inactive
-            description: "This for cities where a yogi is present, but they don't run regular classes. The seeker can contact the yogi through this listing. This type can also be used for any other type of irregular class that requires the seeker to contact the yogi directly for information." # TODO: Translate
+            description: "Este é para cidades onde um yogi está presente, mas não há encontros regulares. O buscador pode contactar o yogi por esta informação. Esse tipo pode também ser usado por qualquer outro tipo de classes não periódicas que requerem que o buscador contate diretamente o yogi para se informar." # TODO: Translate
       expiration:
         title: "Por que meu evento não está aparecendo no mapa?"
         alt_title: "Como ocorre a expiração de um evento?"
@@ -431,13 +431,13 @@ pt:
         title: "Eu tenho outras questões ou sugestões"
         description: "Se você precisa de mais ajuda ou se você quer ajudar no desenvolvimento do Sahaj Atlas, por favor escreva pra o email abaixo. Por favor, escreva seu email em inglês."
 
-    category_tags: # TODO: Translate
-      dropin: "Drop-In"
-      single: "Single"
-      course: "Course"
+    category_tags:
+      dropin: "Acesso livre"
+      single: "Única"
+      course: "Curso"
       festival: "Festival"
-      concert: "Concert"
-      inactive: "Inactive"
+      concert: "Concerto"
+      inactive: "Inativo"
 
     region_labels:
       province:
