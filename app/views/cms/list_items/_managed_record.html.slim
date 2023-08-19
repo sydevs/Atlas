@@ -2,15 +2,20 @@
 - allow = @context ? policy(@context) : policy(:dashboard)
 - manager = managed_record.manager
 
-.item
-  - if allow.destroy_association?(:managers) && policy(managed_record).destroy?
-    .right.floated.content
+tr
+  td.collapsing
+    = manager_icon manager
+  
+  td
+    - if policy(manager).show?
+      a href=url_for([:cms, manager]) = manager.label
+    - else
+      = manager.label
+
+  td.center.aligned
+    = manager.email
+
+  td.collapsing
+    - if allow.destroy_association?(:managers) && policy(managed_record).destroy?
       a.ui.basic.circular.icon.label href=url_for([:cms, @context, manager]) data={ method: 'DELETE', confirm: translate('cms.messages.confirm_destroy') }
         i.trash.icon
-  = manager_icon manager
-  .content
-    - if policy(manager).show?
-      a.header href=url_for([:cms, manager]) = manager.label
-    - else
-      .header = manager.label
-    .description = manager.email

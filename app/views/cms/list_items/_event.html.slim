@@ -1,44 +1,29 @@
+- notice = notice_type(event)
 
-.item
-  - if event.should_finish?
-    i.black.check.circle.icon
-  - elsif event.archived?
-    i.black.times.circle.icon
-  - elsif event.expired?
-    i.orange.exclamation.circle.icon
-  - elsif !event.manager_verified?
-    i.orange.question.circle.icon
-  - elsif event.published?
-    i.green.check.circle.icon
-  - else
-    i.grey.dot.circle.icon
-  .content
-    .header
-      - if policy(event).show?
-        a href=url_for([:cms, event]) = event.label || translate('cms.hints.unnamed')
-      - else
-        = event.label || translate('cms.hints.unnamed')
+tr
+  td.collapsing
+    = notice_icon(notice)
+  td.left.marked class=(notice_color(notice) unless %i[published archived finished].include?(notice))
+    - if policy(event).show?
+      a href=url_for([:cms, event]) = event.label || translate('cms.hints.unnamed')
+    - else
+      = event.label || translate('cms.hints.unnamed')
 
-      - if @context != event.parent && event.parent
-        |  - #{event.parent.label}
-    .description
-      - if event.should_finish?
-        em.alert = translate('cms.details.record_finished.title', resource: translate_model(Event))
-        '  - 
-      - elsif event.archived?
-        em.alert = translate('cms.details.record_archived.title', resource: translate_model(Event))
-        '  - 
-      - elsif !event.manager_verified?
-        em.alert = translate('cms.details.manager_not_verified.title', resource: translate_model(Event))
-        '  - 
-      - elsif event.expired?
-        span.orange.alert = translate('cms.details.record_expired.title', resource: translate_model(Event))
-        '  - 
-      - elsif !event.published?
-        em.alert = translate('cms.details.record_not_published.title')
-        '  - 
-      
-      - if event.inactive_category?
-        = translate('cms.category_tags.inactive')
+    - if notice != :published
+      br
+      - if event.expired?
+        span.orange.alert = notice_message(notice)
       - else
-        | #{translate(event.category, scope: 'cms.category_tags')}, #{event.timing_in_words}
+        em.alert = notice_message(notice)
+
+  - if @context != event.parent && event.parent
+    td = event.parent.label
+  
+  td.collapsing
+    = translate(event.category, scope: 'cms.category_tags')
+
+  td.collapsing.right.aligned
+    - unless event.inactive_category?
+      = event.recurrence_in_words
+      br
+      = event.formatted_start_end_time

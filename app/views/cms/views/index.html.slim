@@ -48,8 +48,8 @@
     .ui.fluid.records.accordion data-search=@model_name.route_key
       = render partial: "cms/list_items/#{@model_name.singular_route_key}", collection: @records, cached: true
   - else
-    .ui.relaxed.records.list data-search=@model_name.route_key
-      = render partial: "cms/list_items/#{@records.model_name.singular_route_key}", collection: @records, cached: true, locals: { removable: true }
+    table.ui.very.basic.records.table data-search=@model_name.route_key
+      tbody = render partial: "cms/list_items/#{@records.model_name.singular_route_key}", collection: @records, cached: true, locals: { removable: true }
 
   .pagination-info data-search=@model_name.route_key = page_entries_info @records
   .pagination data-search=@model_name.route_key = paginate @records

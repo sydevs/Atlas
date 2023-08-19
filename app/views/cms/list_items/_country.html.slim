@@ -1,11 +1,12 @@
 
-.item
-  = model_icon Country
-  .content
+tr
+  td.collapsing
+    = model_icon Country
+  td
     - if policy(country).show?
       - url = url_for([:cms, country])
       - if @context.nil?
         - url = country.enable_regions? ? url_for([:cms, country, :regions]) : url_for([:cms, country, :areas])
-      a.header href=url = country.label || translate('cms.hints.unnamed')
+      a href=url = country.label || translate('cms.hints.unnamed')
     - else
-      .header = country.label || translate('cms.hints.unnamed')
+      = country.label || translate('cms.hints.unnamed')
