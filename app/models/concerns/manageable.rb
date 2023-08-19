@@ -18,10 +18,11 @@ module Manageable
     @parent_managers ||= (respond_to?(:parent) && parent.present? ? parent.all_managers : [])
   end
 
-  def all_managers
+  def all_managers except: []
     @all_managers ||= begin
-      result = managers.to_a
-      result += parent.all_managers if respond_to?(:parent) && parent.present?
+      result = managers.where.not(id: except).to_a
+      excluded_ids = result.map(&:id)
+      result += parent.all_managers(except: except + excluded_ids) if respond_to?(:parent) && parent.present?
       result
     end
   end
