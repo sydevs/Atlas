@@ -57,8 +57,8 @@
   - if controller_name == 'managers' && @context.try(:parent_managers)&.present?
     h3.ui.dividing.header = translate('cms.details.managers_for_record', resource: @context.parent.label)
 
-    .ui.relaxed.list
-      = render partial: 'cms/list_items/manager', collection: @context.parent_managers, cached: true
+    table.ui.very.basic.records.table
+      tbody = render partial: 'cms/list_items/manager', collection: @context.parent_managers, cached: true
 
 - if @model == Audit
   .ui.basic.segment
