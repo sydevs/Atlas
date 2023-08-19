@@ -12,6 +12,7 @@ module Types
 
     field :label, String, null: false
     field :description, String, null: true
+    field :description_html, String, null: true, method: :description_html
     field :category, String, null: false
     field :language, String, null: false, method: :language_name
     field :language_code, String, null: false
@@ -50,6 +51,10 @@ module Types
 
     def area
       object.area.extend(AreaDecorator)
+    end
+
+    def description_html
+      ActionController::Base.helpers.simple_format object.description
     end
 
     def timing

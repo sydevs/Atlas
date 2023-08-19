@@ -19,6 +19,7 @@ class AtlasAPI {
           layer
           label
           description
+          descriptionHtml
           category
           address
           languageCode

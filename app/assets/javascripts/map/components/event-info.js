@@ -63,7 +63,7 @@ function EventInfo() {
             ) : null
           ),
         ),
-        m('.sya-event__description', event.description),
+        m('.sya-event__description', m.trust(event.descriptionHtml)),
       ]
     }
   }
@@ -112,7 +112,7 @@ function InactiveEventInfo() {
 
           web_links.length > 0 ? m('.sya-contact__links', web_links) : null,
         ),
-        m('.sya-event__description', event.description),
+        m('.sya-event__description', m.trust(event.descriptionHtml)),
       ]
     }
   }
