@@ -2,9 +2,15 @@ pt:
   datetime:
     distance_in_words:
       soon: "Em alguns minutos"
+      x_minutes: # TODO: Translate
+        one: "%{count} minute"
+        other: "%{count} minutes"
       x_weeks:
         one: "%{count} semana"
         other: "%{count} semanas"
+      x_months: # TODO: Translate
+        one: "%{count} month"
+        other: "%{count} months"
 
   activerecord:
     models:
@@ -255,6 +261,9 @@ pt:
         end_time: "Término"
         online: "Aula Online"
         online_url: "Link da Reunião Online"
+        expiration_period: "Expiration Period" # TODO: Translate
+        verification_streak: "Verification Streak" # TODO: Translate
+        expiration_period: "How long should we wait until we ask you if the program is still accurate?" # TODO: Translate
         contact_info:
           email_address: "Email de contato"
           email_name: "Nome para e-mails"

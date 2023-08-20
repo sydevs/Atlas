@@ -2,9 +2,15 @@ ru:
   datetime:
     distance_in_words:
       soon: "несколько минут"
+      x_minutes: # TODO: Translate
+        one: "%{count} minute"
+        other: "%{count} minutes"
       x_weeks:
         one: "%{count} неделя"
         other: "%{count} недель"
+      x_months: # TODO: Translate
+        one: "%{count} month"
+        other: "%{count} months"
 
   activerecord:
     models:
@@ -255,6 +261,9 @@ ru:
         end_time: "Время окончания"
         online: "Онлайн-класс"
         online_url: "Ссылка на встречу онлайн"
+        expiration_period: "Expiration Period" # TODO: Translate
+        verification_streak: "Verification Streak" # TODO: Translate
+        expiration_period: "How long should we wait until we ask you if the program is still accurate?" # TODO: Translate
         contact_info: # TODO: Translate
           email_address: "Contact Email"
           email_name: "First Name for Emails"

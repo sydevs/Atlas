@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_04_11_143447) do
+ActiveRecord::Schema.define(version: 2023_08_20_100236) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -140,6 +140,8 @@ ActiveRecord::Schema.define(version: 2023_04_11_143447) do
     t.integer "registration_notification", default: 0, null: false
     t.integer "registration_question", default: 1, null: false
     t.jsonb "contact_info", default: {}, null: false
+    t.integer "expiration_period", default: 3, null: false
+    t.integer "verification_streak", default: 0, null: false
     t.index ["area_id"], name: "index_events_on_area_id"
     t.index ["manager_id"], name: "index_events_on_manager_id"
     t.index ["status"], name: "index_events_on_status"

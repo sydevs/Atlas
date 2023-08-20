@@ -136,6 +136,7 @@ cs:
         registration_question: "What questions should seekers be asked when they register for the class?" # TODO: Translate
         online: "Zaškrtněte toto políčko, pokud bude program probíhat online."
         online_url: "Pokud je kurz online, tento odkaz je místo, kde by se zájemci měli do kurzu připojit (např. odkaz na Zoom, YouTube, Google Meet atd.)."
+        expiration_period: "How long should we wait until we ask you if the program is still accurate?" # TODO: Translate
         contact_info: # TODO: Translate
           email_address: "An email address which will be published on the website."
           email_name: "The first name of the yogi who will respond to emails."

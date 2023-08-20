@@ -136,6 +136,7 @@ es:
         registration_question: "¿Qué preguntas se les ha de hacer a los buscadores cuando se registren en las clases?"
         online: "Marca esta casilla si el programa será online."
         online_url: "Si la clase es online, este enlace es donde los buscadores han de unirse (por ejemplo un enlace de Zoom, YouTube, Google Meet, etc)."
+        expiration_period: "How long should we wait until we ask you if the program is still accurate?" # TODO: Translate
         contact_info:
           email_address: "Una dirección de correo que será publicada en el sitio web."
           email_name: "El nombre del yogui que responderá a los correos."

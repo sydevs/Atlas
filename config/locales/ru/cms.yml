@@ -134,6 +134,7 @@ ru:
         registration_question: "Выбери вопросы новичкам при регистрации."
         online: "Установи этот флажок, если программа будет проходить онлайн."
         online_url: "Если программа проходит онлайн, то по этой ссылке искатели смогут присоединиться к классу (например, ссылка на Zoom, YouTube, Google Meet и т.д.)."
+        expiration_period: "How long should we wait until we ask you if the program is still accurate?" # TODO: Translate
         contact_info: # TODO: Translate
           email_address: "An email address which will be published on the website."
           email_name: "The first name of the yogi who will respond to emails."

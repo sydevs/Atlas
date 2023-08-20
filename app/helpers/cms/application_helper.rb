@@ -73,7 +73,7 @@ module CMS::ApplicationHelper
   def expiry_time_in_words status
     return nil unless Expirable::TRANSITION_STATE_AFTER.key?(status)
 
-    duration = Expirable::TRANSITION_STATE_AFTER[status]
+    duration = send(:"#{status}_at")
 
     if ENV['TEST_EMAILS']
       translate('datetime.distance_in_words.x_minutes', count: duration.in_minutes.to_i)

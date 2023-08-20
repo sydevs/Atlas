@@ -4,7 +4,7 @@ module Expirable
 
   if ENV['TEST_EMAILS']
     TRANSITION_STATE_AFTER = {
-      should_verify: 0.minutes,
+      # should_verify: 0.minutes,
       should_need_review: 10.minutes,
       should_need_urgent_review: 19.minutes,
       should_expire: 28.minutes,
@@ -12,7 +12,7 @@ module Expirable
     }.freeze
   else
     TRANSITION_STATE_AFTER = {
-      should_verify: 0.weeks,
+      # should_verify: 0.weeks,
       should_need_review: 12.weeks,
       should_need_urgent_review: 13.weeks,
       should_expire: 14.weeks,
@@ -45,7 +45,7 @@ module Expirable
         transitions from: :verified, to: :needs_review, if: :should_need_review?
         transitions from: :needs_review, to: :needs_urgent_review, if: :should_need_urgent_review?
         transitions from: :needs_urgent_review, to: :expired, if: :should_expire?
-        transitions from: :expired, to: :archived, if: :should_archive?
+        transitions from: :expired, to: :archived, if: :should_archive?, after: Proc.new { update_column(:verification_streak, 0) }
         
         after { try(:log_status_change) }
       end
@@ -53,20 +53,28 @@ module Expirable
       event :reset_status do
         transitions to: :finished, if: :should_finish?
         transitions to: :archived, if: :should_archive?
-        transitions to: :expired, if: :should_expire?
+        transitions to: :expired, if: :should_expire?, after: Proc.new { update_column(:verification_streak, 0) }
         transitions to: :needs_urgent_review, if: :should_need_urgent_review?
         transitions to: :needs_review, if: :should_need_review?
         transitions to: :verified
       end
 
       event :verify do
+        transitions to: :verified, if: :needs_review?, after: Proc.new { increment!(:verification_streak) }
+        transitions to: :verified, if: :needs_urgent_review?, after: Proc.new { increment!(:verification_streak) }
         transitions to: :verified
+      end
+
+      event :expire do
+        transitions to: :expired, after: Proc.new { update_column(:verification_streak, 0) }
       end
     end
 
     TRANSITION_STATE_AFTER.keys.each do |key|
       define_method :"#{key}_at" do
-        result = (updated_at || 1.minute.ago) + TRANSITION_STATE_AFTER[key]
+        expiration_base = self.try(:expiration_base) || TRANSITION_STATE_AFTER[:should_need_review]
+        waiting_period = expiration_base + TRANSITION_STATE_AFTER[key] - TRANSITION_STATE_AFTER[:should_need_review]
+        result = (updated_at || 1.minute.ago) + waiting_period
         ENV['TEST_EMAILS'] ? result : result.beginning_of_hour
       end
 

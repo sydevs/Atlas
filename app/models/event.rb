@@ -197,6 +197,10 @@ class Event < ApplicationRecord
     parent.managers
   end
 
+  def expiration_base
+    expiration_period.months + (expiration_period / 3 * [4, verification_streak].min).weeks
+  end
+
   def self.model_name
     ActiveModel::Name.new(base_class)
   end

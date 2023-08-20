@@ -134,6 +134,7 @@ uk:
         registration_question: "What questions should seekers be asked when they register for the class?" # TODO: Translate
         online: "Установіть цей прапорець, якщо програма буде проходити онлайн."
         online_url: "Якщо курс онлайн, це посилання є місцем, де шукачі мають приєднатися до класу (наприклад, посилання на Zoom, YouTube, Google Meet тощо)."
+        expiration_period: "How long should we wait until we ask you if the program is still accurate?" # TODO: Translate
         contact_info: # TODO: Translate
           email_address: "An email address which will be published on the website."
           email_name: "The first name of the yogi who will respond to emails."

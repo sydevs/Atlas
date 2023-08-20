@@ -2,9 +2,15 @@ en:
   datetime:
     distance_in_words:
       soon: "a few minutes"
+      x_minutes:
+        one: "%{count} minute"
+        other: "%{count} minutes"
       x_weeks:
         one: "%{count} week"
         other: "%{count} weeks"
+      x_months:
+        one: "%{count} month"
+        other: "%{count} months"
 
   activerecord:
     models:
@@ -255,6 +261,9 @@ en:
         end_time: "End Time"
         online: "Online Class"
         online_url: "Online Meeting Link"
+        expiration_period: "Expiration Period"
+        verification_streak: "Verification Streak"
+        expiration_period: "How long should we wait until we ask you if the program is still accurate?"
         contact_info:
           email_address: "Contact Email"
           email_name: "First Name for Emails"

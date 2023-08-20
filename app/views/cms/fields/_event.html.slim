@@ -1,3 +1,4 @@
+- allow = policy(@record)
 
 - if @record.category.present?
   = f.input :published
@@ -35,10 +36,18 @@
 
   = render "cms/fields/categories/#{@record.category}", f: f
 
-  - if policy(@record).set_manager?
-    .ui.small.dividing.violet.header = translate('cms.forms.event.manager')
+  .ui.small.dividing.violet.header = translate('cms.forms.event.manager')
+  - if allow.set_manager?
     = render 'cms/managers/selector', f: f, manager: @record.manager
-
+  - elsif @record.manager.present?
+    .ui.fluid.horizontal.card
+      .content
+        .header = @record.manager.name
+        .meta = [@record.manager.email, @record.manager.phone].compact.join(' • ')
+    
+  - periods = [3, 6, 9].map { |v| [v.months.inspect, v] }
+  = f.input :expiration_period, collection: periods, selected: @record.expiration_period, hint: translate('cms.hints.event.expiration_period')
+    
   .ui.hidden.section.divider
 - else
   .ui.tiny.compact.buttons

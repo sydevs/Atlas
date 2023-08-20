@@ -97,7 +97,7 @@ h3.ui.small.dividing.grey.header = translate('cms.details.management_for_record'
         i.icon class=translate("cms.help.expiration.steps.#{step}.icon") class=('grey disabled' unless active)
         .content
           .title = translate(active ? :active_label : :inactive_label, scope: "cms.help.expiration.steps.#{step}")
-          .description = (@record.try("#{status}_at") || @record.try("#{step}_at")).strftime('%-d %b %Y')
+          .description = (@record.try(:"#{status}_at") || @record.try("#{step}_at")).strftime('%-d %b %Y')
   = help_link :expiration, (translate("cms.help.expiration.alt_title") unless @record.expired?)
 
 .ui.list
@@ -132,6 +132,15 @@ h3.ui.small.dividing.grey.header = translate('cms.details.management_for_record'
     .content
       .header = translate('cms.details.updated_at')
       .description = time_ago_in_words(@record.updated_at)
+  .item
+    i.certificate.icon
+    .content
+      .header = translate_attribute(Event, :expiration_period)
+      .description
+        = distance_of_time_in_words(@record.expiration_base)
+      - if @record.verification_streak > 0
+        em.description
+          |  (#{@record.verification_streak} #{translate_attribute(Event, :verification_streak).downcase})
 
 h3.ui.small.dividing.grey.header = translate('cms.details.location_of_record', resource: translate_model(@model).downcase)
 - if @record.online?

@@ -134,6 +134,7 @@ de:
         registration_question: "Welche Fragen soll ein Sucher Beantworten, wenn er sich für eine Veranstaltung anmeldet."
         online: "Aktivieren Sie diese Box, wenn dies ein online Programm ist."
         online_url: "Wenn die Klasse online abgehalten wird, geben sie hier den Beitrits Link an (zB. für Zoom, YouTube, Google Meet, etc.)"
+        expiration_period: "How long should we wait until we ask you if the program is still accurate?" # TODO: Translate
         contact_info: # TODO: Translate
           email_address: "An email address which will be published on the website."
           email_name: "The first name of the yogi who will respond to emails."

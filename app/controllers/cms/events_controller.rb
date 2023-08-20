@@ -35,7 +35,7 @@ class CMS::EventsController < CMS::ApplicationController
         :custom_name, :description, :room, :category, :language_code,
         :registration_mode, :registration_url, :registration_notification, :registration_limit,
         :recurrence, :start_date, :end_date, :start_time, :end_time,
-        :online_url,
+        :online_url, :expiration_period,
         :venue_id, :manager_id,
         registration_question: [],
         contact_info: {},

@@ -136,6 +136,7 @@ en:
         registration_question: "What questions should seekers be asked when they register for the class?"
         online: "Check this box if the program will take place online."
         online_url: "If the class is online, this link is where seekers should join the class (eg. a link to Zoom, YouTube, Google Meet, etc)."
+        expiration_period: "How long should we wait until we ask you if the program is still accurate?"
         contact_info:
           email_address: "An email address which will be published on the website."
           email_name: "The first name of the yogi who will respond to emails."
