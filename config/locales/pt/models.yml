@@ -263,7 +263,6 @@ pt:
         online_url: "Link da Reunião Online"
         expiration_period: "Expiration Period" # TODO: Translate
         verification_streak: "Verification Streak" # TODO: Translate
-        expiration_period: "How long should we wait until we ask you if the program is still accurate?" # TODO: Translate
         contact_info:
           email_address: "Email de contato"
           email_name: "Nome para e-mails"

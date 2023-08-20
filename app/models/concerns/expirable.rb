@@ -4,7 +4,7 @@ module Expirable
 
   if ENV['TEST_EMAILS']
     TRANSITION_STATE_AFTER = {
-      # should_verify: 0.minutes,
+      should_verify: 0.minutes,
       should_need_review: 10.minutes,
       should_need_urgent_review: 19.minutes,
       should_expire: 28.minutes,
@@ -12,7 +12,7 @@ module Expirable
     }.freeze
   else
     TRANSITION_STATE_AFTER = {
-      # should_verify: 0.weeks,
+      should_verify: 0.weeks,
       should_need_review: 12.weeks,
       should_need_urgent_review: 13.weeks,
       should_expire: 14.weeks,
@@ -62,7 +62,7 @@ module Expirable
       event :verify do
         transitions to: :verified, if: :needs_review?, after: Proc.new { increment!(:verification_streak) }
         transitions to: :verified, if: :needs_urgent_review?, after: Proc.new { increment!(:verification_streak) }
-        transitions to: :verified
+        transitions to: :verified, after: Proc.new { increment!(:verification_streak) }
       end
 
       event :expire do

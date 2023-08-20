@@ -4,13 +4,13 @@ de:
       soon: "Ein paar Minuten"
       x_minutes: # TODO: Translate
         one: "%{count} minute"
-        other: "%{count} minutes"
+        other: "%{count} minuten"
       x_weeks:
-        one: "%{count} Woche"
-        other: "%{count} Wochen"
+        one: "%{count} woche"
+        other: "%{count} wochen"
       x_months: # TODO: Translate
-        one: "%{count} month"
-        other: "%{count} months"
+        one: "%{count} monat"
+        other: "%{count} monate"
 
   activerecord:
     models:
@@ -264,7 +264,6 @@ de:
         language: "Language" # TODO: Translate
         expiration_period: "Expiration Period" # TODO: Translate
         verification_streak: "Verification Streak" # TODO: Translate
-        expiration_period: "How long should we wait until we ask you if the program is still accurate?" # TODO: Translate
         contact_info: # TODO: Translate
           email_address: "Contact Email"
           email_name: "First Name for Emails"

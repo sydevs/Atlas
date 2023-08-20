@@ -198,7 +198,11 @@ class Event < ApplicationRecord
   end
 
   def expiration_base
-    expiration_period.months + (expiration_period / 3 * [4, verification_streak].min).weeks
+    expiration_period.months + expiration_bonus
+  end
+
+  def expiration_bonus
+    (expiration_period / 3 * [4, verification_streak].min).weeks
   end
 
   def self.model_name

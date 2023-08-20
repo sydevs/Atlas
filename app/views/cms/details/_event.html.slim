@@ -137,7 +137,9 @@ h3.ui.small.dividing.grey.header = translate('cms.details.management_for_record'
     .content
       .header = translate_attribute(Event, :expiration_period)
       .description
-        = distance_of_time_in_words(@record.expiration_base)
+        = distance_of_time_in_words(@record.expiration_period.months)
+        - if @record.verification_streak > 0
+          |  + #{distance_of_time_in_words(@record.expiration_bonus)}
       - if @record.verification_streak > 0
         em.description
           |  (#{@record.verification_streak} #{translate_attribute(Event, :verification_streak).downcase})

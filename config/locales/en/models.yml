@@ -263,7 +263,6 @@ en:
         online_url: "Online Meeting Link"
         expiration_period: "Expiration Period"
         verification_streak: "Verification Streak"
-        expiration_period: "How long should we wait until we ask you if the program is still accurate?"
         contact_info:
           email_address: "Contact Email"
           email_name: "First Name for Emails"
