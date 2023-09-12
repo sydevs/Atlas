@@ -64,6 +64,7 @@ ru:
         question: "Is the above information still correct?"
         verify: "Event is Correct"
         or: "OR"
+        expiration: "Event will expire in %{time}."
         subject:
           created: "Новое событие создано - %{event}"
           needs_review: "[Warning] Необходима проверка события - %{event}"

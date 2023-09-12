@@ -1,0 +1,26 @@
+#!/usr/bin/env ruby
+
+require 'bundler/setup'
+require 'graphql/cache'
+require 'logger'
+require 'mini_cache'
+require 'sequel'
+
+# Setup MiniCache for in-memory cache for dev/test
+class CacheStore < MiniCache::Store
+  alias read get
+  alias write set
+  alias clear reset
+end
+
+GraphQL::Cache.configure do |config|
+  config.cache = CacheStore.new
+  config.logger = Logger.new(STDOUT)
+end
+
+# required after GraphQL::Cache initialization because dev
+# schema uses cache and logger objects from it.
+require_relative '../test_schema'
+
+require "pry"
+Pry.start

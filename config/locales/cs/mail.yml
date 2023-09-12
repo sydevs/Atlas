@@ -64,6 +64,7 @@ cs:
         question: "Jsou výše uvedené informace stále platné?"
         verify: "Událost je platná"
         or: "NEBO"
+        expiration: "Event will expire in %{time}." # TODO: Translate
         subject:
           created: "Vytvořena nová událost - %{event}"
           needs_review: "[Warning] Událost potřebuje kontrolu – %{event}"

@@ -1,0 +1,13 @@
+current directory: /Users/siddharthalethbridge/Desktop/sids_work/coding/Sahaj/Atlas/vendor/bundle/ruby/2.7.0/gems/json-2.6.1/ext/json
+/Users/siddharthalethbridge/.rvm/rubies/ruby-2.7.6/bin/ruby -I /Users/siddharthalethbridge/.rvm/rubies/ruby-2.7.6/lib/ruby/2.7.0 -r ./siteconf20230522-13931-12n7d9u.rb extconf.rb
+creating Makefile
+
+current directory: /Users/siddharthalethbridge/Desktop/sids_work/coding/Sahaj/Atlas/vendor/bundle/ruby/2.7.0/gems/json-2.6.1/ext/json
+make "DESTDIR=" clean
+
+current directory: /Users/siddharthalethbridge/Desktop/sids_work/coding/Sahaj/Atlas/vendor/bundle/ruby/2.7.0/gems/json-2.6.1/ext/json
+make "DESTDIR="
+make: Nothing to be done for `all'.
+
+current directory: /Users/siddharthalethbridge/Desktop/sids_work/coding/Sahaj/Atlas/vendor/bundle/ruby/2.7.0/gems/json-2.6.1/ext/json
+make "DESTDIR=" install

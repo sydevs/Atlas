@@ -64,6 +64,7 @@ en:
         question: "Is the above information still correct?"
         verify: "Event is Correct"
         or: "OR"
+        expiration: "Event will expire in %{time}."
         subject:
           created: "New Event Created - %{event}"
           needs_review: "[Warning] Event Needs Review - %{event}"
@@ -98,6 +99,8 @@ en:
         escalation:
           event_manager: "This event, which you manage, urgently needs to be checked for accuracy. This is the last reminder you will receive. We've also emailed the managers of the %{place} region to make sure this event isn't removed by mistake."
           super_manager: "You are a manager for %{place}. This warning is being sent to you because this event's manager has not yet responded to our email."
+        
+
 
       registrations:
         subject: "[Reminder] New Event Registrations"

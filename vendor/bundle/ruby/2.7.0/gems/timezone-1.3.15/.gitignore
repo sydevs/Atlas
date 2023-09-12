@@ -1,0 +1,10 @@
+*.gem
+doc/
+.DS_Store
+.rvmrc
+.bundle
+.idea/*
+Gemfile.lock
+.ruby-version
+pkg/*
+.yardoc/

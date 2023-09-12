@@ -1,0 +1,73 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.tiles.mapbox.com/v4/geocode/mapbox.places-v1/Washington,+DC.json?access_token=pk.eyJ1IjoiZ2Vva2l0IiwiYSI6ImNpbm1md3dvdTB6anB0dG0zbW9zd3hlODQifQ.dyskNcYK8DvxyjCO3i7afA
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/vnd.geo+json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Expose-Headers:
+      - x-rate-limit-interval,x-rate-limit-limit,x-rate-limit-remaining,x-rate-limit-reset
+      Cache-Control:
+      - max-age=604800
+      Date:
+      - Sat, 30 Apr 2016 01:04:42 GMT
+      Etag:
+      - '"306cdd4db6ec8ddb50a1cdf4160311cb"'
+      Last-Modified:
+      - Fri, 29 Apr 2016 17:17:06 GMT
+      X-Powered-By:
+      - Express
+      X-Rate-Limit-Interval:
+      - '60'
+      X-Rate-Limit-Limit:
+      - '600'
+      X-Rate-Limit-Reset:
+      - '1461978342'
+      Age:
+      - '2543'
+      Vary:
+      - Accept-Encoding
+      X-Cache:
+      - Hit from cloudfront
+      Via:
+      - 1.1 817544e5c34b42096d08b4b82dccd904.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - JbJjZpAwjjNP9FrGEgL6-MSnocMhNb3wHcW5QfvsHGZLHJgpWJipnQ==
+    body:
+      encoding: UTF-8
+      string: '{"type":"FeatureCollection","query":["washington","dc"],"features":[{"id":"city.20001","type":"Feature","text":"Washington","place_name":"Washington,
+        20004, District of Columbia, United States","relevance":0.999,"properties":{},"bbox":[-77.1197590084041,38.8031129900659,-76.90939299,38.9955480080759],"center":[-77.0366,38.895],"geometry":{"type":"Point","coordinates":[-77.0366,38.895]},"context":[{"id":"postcode.5938390858952870","text":"20004"},{"id":"province.6884744206035790","text":"District
+        of Columbia"},{"id":"country.12862386938302570","text":"United States","short_code":"us"}]},{"id":"province.6884744206035790","type":"Feature","text":"District
+        of Columbia","place_name":"District of Columbia, United States","relevance":0.49,"properties":{},"bbox":[-77.2081379659453,38.7177026348658,-76.909393,38.995548],"center":[-76.990661,38.89657],"geometry":{"type":"Point","coordinates":[-76.990661,38.89657]},"context":[{"id":"country.12862386938302570","text":"United
+        States","short_code":"us"}]},{"id":"city.39246","type":"Feature","text":"Washington","place_name":"Washington,
+        Sunderland, United Kingdom","relevance":0.49,"properties":{},"bbox":[-1.572074,54.873852,-1.471309,54.935104],"center":[-1.519344,54.904404],"geometry":{"type":"Point","coordinates":[-1.519344,54.904404]},"context":[{"id":"province.7215096038101180","text":"Sunderland"},{"id":"country.15810817285148820","text":"United
+        Kingdom","short_code":"gb"}]},{"id":"city.39247","type":"Feature","text":"Washington","place_name":"Washington,
+        West Sussex, United Kingdom","relevance":0.49,"properties":{},"bbox":[-0.42587,50.864746,-0.353751,50.916752],"center":[-0.393505,50.888378],"geometry":{"type":"Point","coordinates":[-0.393505,50.888378]},"context":[{"id":"province.9813570008215190","text":"West
+        Sussex"},{"id":"country.15810817285148820","text":"United Kingdom","short_code":"gb"}]},{"id":"address.56461051138823","type":"Feature","text":"Washington","place_name":"Washington,
+        Irvine, California 92606, United States","relevance":0.39,"properties":{},"center":[-117.792586,33.71292],"geometry":{"type":"Point","coordinates":[-117.792586,33.71292]},"context":[{"id":"city.92602","text":"Irvine"},{"id":"postcode.13114402634797550","text":"92606"},{"id":"province.6020809690311220","text":"California"},{"id":"country.12862386938302570","text":"United
+        States","short_code":"us"}]}],"attribution":"<a href=''https://www.mapbox.com/about/maps/''
+        target=''_blank''>&copy; Mapbox</a>"}'
+    http_version: 
+  recorded_at: Sat, 30 Apr 2016 01:47:06 GMT
+recorded_with: VCR 3.0.1

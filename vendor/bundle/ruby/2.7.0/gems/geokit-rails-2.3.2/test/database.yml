@@ -1,0 +1,28 @@
+base: &base
+  host: localhost
+  username: tests
+  password: 
+
+mysql:
+  adapter: mysql
+  database: geokit_rails_tests
+  <<: *base
+
+mysql2spatial:
+  adapter: mysql2spatial
+  database: geokit_rails_tests
+
+postgresql:
+  adapter: postgresql
+  database: geokit_rails_tests
+  <<: *base
+
+sqlserver:
+  adapter: sqlserver
+  mode: ODBC
+  dsn: geokit_rails_tests
+  username: tests
+
+sqlite:
+  adapter: sqlite3
+  database: test/test.sqlite3

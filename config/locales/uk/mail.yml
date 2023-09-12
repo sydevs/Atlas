@@ -64,6 +64,7 @@ uk:
         question: "Is the above information still correct?"
         verify: "Event is Correct"
         or: "OR"
+        expiration: "Event will expire in %{time}."
         subject:
           created: "Створено нову подію - %{event}"
           needs_review: "[Попередження] Подія потребує перегляду - %{event}"

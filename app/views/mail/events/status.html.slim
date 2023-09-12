@@ -22,6 +22,10 @@ ruby:
 p.byline
   = translate(@status, scope: 'mail.event.status.byline', date: timestamp.to_date.to_s(:long))
 
+- if @status == :needs_review || @status == :needs_urgent_review
+  p.explanation
+    = translate('mail.event.status.expiration', time: time_from_now_in_words(@event.should_expire_at))
+
 = render 'mail/events/data', event: @event, status: @status
 
 - if @status == :needs_urgent_review
@@ -29,8 +33,10 @@ p.byline
     - type = @event.manager != @manager ? :super_manager : :event_manager
     = translate(type, scope: 'mail.event.status.escalation', place: @event.area.label)
 
-p.explanation
-  = translate(@status, scope: 'mail.event.status.explanation')
+- if @status == :expired
+  p.explanation.expiration = translate(@status, scope: 'mail.event.status.explanation')
+- else
+  p.explanation = translate(@status, scope: 'mail.event.status.explanation')
 
 table.actions
   - if %i[needs_review needs_urgent_review expired].include?(@status)

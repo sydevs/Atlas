@@ -1,0 +1,11 @@
+#!/usr/bin/env ruby
+
+require 'bundler/setup'
+require 'active_flag'
+
+require_relative '../test/load_fixtures'
+
+ActiveRecord::Base.logger = Logger.new(STDOUT)
+
+require 'irb'
+IRB.start

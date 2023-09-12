@@ -1,0 +1,53 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://geo.fcc.gov/api/census/block/find?format=json&latitude=34.05&longitude=-118.25
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 06 Jun 2018 23:16:19 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '318'
+      Connection:
+      - keep-alive
+      Server:
+      - Apache
+      Access-Control-Allow-Origin:
+      - "*"
+      Etag:
+      - W/"1b9-TirplOWInFVSA/jLG2kuS95iDQU"
+      X-Content-Type-Options:
+      - nosniff
+      X-Dns-Prefetch-Control:
+      - 'off'
+      X-Download-Options:
+      - noopen
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+    body:
+      encoding: UTF-8
+      string: '{"messages":["FCC0001: The coordinate lies on the boundary of mulitple
+        blocks, the block contains the clicked location is selected. For a complete
+        list use showall=true to display ''intersection'' element in the Block"],"Block":{"FIPS":"060372073012003","bbox":[-118.250429,34.049521,-118.248017,34.051658]},"County":{"FIPS":"06037","name":"Los
+        Angeles"},"State":{"FIPS":"06","code":"CA","name":"California"},"status":"OK","executionTime":"0"}'
+    http_version: 
+  recorded_at: Wed, 06 Jun 2018 23:16:19 GMT
+recorded_with: VCR 4.0.0

@@ -64,6 +64,7 @@ de:
         question: "Ist die obigen Informationen noch korrekt?"
         verify: "Ereignis details sind Korrekt"
         or: "Oder"
+        expiration: "Event will expire in %{time}." # TODO: Translate
         subject:
           created: "Neues Ereignis erstellt - %{event}"
           needs_review: "[[WARNUNG] Ereignis bedarf Kontrolle - %{event}"

@@ -1,0 +1,95 @@
+have_header: checking for vm_core.h... -------------------- yes
+
+"gcc -o conftest -I/Users/siddharthalethbridge/.rvm/rubies/ruby-2.7.6/include/ruby-2.7.0/x86_64-darwin21 -I/Users/siddharthalethbridge/.rvm/rubies/ruby-2.7.6/include/ruby-2.7.0/ruby/backward -I/Users/siddharthalethbridge/.rvm/rubies/ruby-2.7.6/include/ruby-2.7.0 -I. -I/Users/siddharthalethbridge/.rvm/src/ruby-2.7.6  -I/usr/local/opt/libyaml/include -I/usr/local/opt/libksba/include -I/usr/local/opt/readline/include -I/usr/local/opt/zlib/include -I/usr/local/opt/openssl@1.1/include -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE -D_DARWIN_UNLIMITED_SELECT -D_REENTRANT   -g -O2 -fno-common -pipe conftest.c  -L. -L/Users/siddharthalethbridge/.rvm/rubies/ruby-2.7.6/lib -L/usr/local/opt/libyaml/lib -L/usr/local/opt/libksba/lib -L/usr/local/opt/readline/lib -L/usr/local/opt/zlib/lib -L/usr/local/opt/openssl@1.1/lib -L. -fstack-protector-strong -L/usr/local/lib -L/usr/local/opt/libyaml/lib -L/usr/local/opt/libksba/lib -L/usr/local/opt/readline/lib -L/usr/local/opt/zlib/lib -L/usr/local/opt/openssl@1.1/lib     -lruby.2.7   "
+checked program was:
+/* begin */
+1: #include "ruby.h"
+2: 
+3: int main(int argc, char **argv)
+4: {
+5:   return !!argv[argc];
+6: }
+/* end */
+
+"gcc -E -I/Users/siddharthalethbridge/.rvm/rubies/ruby-2.7.6/include/ruby-2.7.0/x86_64-darwin21 -I/Users/siddharthalethbridge/.rvm/rubies/ruby-2.7.6/include/ruby-2.7.0/ruby/backward -I/Users/siddharthalethbridge/.rvm/rubies/ruby-2.7.6/include/ruby-2.7.0 -I. -I/Users/siddharthalethbridge/.rvm/src/ruby-2.7.6  -I/usr/local/opt/libyaml/include -I/usr/local/opt/libksba/include -I/usr/local/opt/readline/include -I/usr/local/opt/zlib/include -I/usr/local/opt/openssl@1.1/include -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE -D_DARWIN_UNLIMITED_SELECT -D_REENTRANT   -g -O2 -fno-common -pipe  conftest.c -o conftest.i"
+checked program was:
+/* begin */
+1: #include "ruby.h"
+2: 
+3: #include <vm_core.h>
+/* end */
+
+--------------------
+
+have_header: checking for iseq.h... -------------------- yes
+
+"gcc -E -I/Users/siddharthalethbridge/.rvm/rubies/ruby-2.7.6/include/ruby-2.7.0/x86_64-darwin21 -I/Users/siddharthalethbridge/.rvm/rubies/ruby-2.7.6/include/ruby-2.7.0/ruby/backward -I/Users/siddharthalethbridge/.rvm/rubies/ruby-2.7.6/include/ruby-2.7.0 -I. -I/Users/siddharthalethbridge/.rvm/src/ruby-2.7.6  -I/usr/local/opt/libyaml/include -I/usr/local/opt/libksba/include -I/usr/local/opt/readline/include -I/usr/local/opt/zlib/include -I/usr/local/opt/openssl@1.1/include -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE -D_DARWIN_UNLIMITED_SELECT -D_REENTRANT   -g -O2 -fno-common -pipe  conftest.c -o conftest.i"
+checked program was:
+/* begin */
+1: #include "ruby.h"
+2: 
+3: #include <iseq.h>
+/* end */
+
+--------------------
+
+have_header: checking for version.h... -------------------- yes
+
+"gcc -E -I/Users/siddharthalethbridge/.rvm/rubies/ruby-2.7.6/include/ruby-2.7.0/x86_64-darwin21 -I/Users/siddharthalethbridge/.rvm/rubies/ruby-2.7.6/include/ruby-2.7.0/ruby/backward -I/Users/siddharthalethbridge/.rvm/rubies/ruby-2.7.6/include/ruby-2.7.0 -I. -I/Users/siddharthalethbridge/.rvm/src/ruby-2.7.6  -I/usr/local/opt/libyaml/include -I/usr/local/opt/libksba/include -I/usr/local/opt/readline/include -I/usr/local/opt/zlib/include -I/usr/local/opt/openssl@1.1/include -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE -D_DARWIN_UNLIMITED_SELECT -D_REENTRANT   -g -O2 -fno-common -pipe  conftest.c -o conftest.i"
+checked program was:
+/* begin */
+1: #include "ruby.h"
+2: 
+3: #include <version.h>
+/* end */
+
+--------------------
+
+have_header: checking for vm_core.h... -------------------- yes
+
+"gcc -E -I/Users/siddharthalethbridge/.rvm/rubies/ruby-2.7.6/include/ruby-2.7.0/x86_64-darwin21 -I/Users/siddharthalethbridge/.rvm/rubies/ruby-2.7.6/include/ruby-2.7.0/ruby/backward -I/Users/siddharthalethbridge/.rvm/rubies/ruby-2.7.6/include/ruby-2.7.0 -I. -I/Users/siddharthalethbridge/.rvm/src/ruby-2.7.6  -I/usr/local/opt/libyaml/include -I/usr/local/opt/libksba/include -I/usr/local/opt/readline/include -I/usr/local/opt/zlib/include -I/usr/local/opt/openssl@1.1/include -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE -D_DARWIN_UNLIMITED_SELECT -D_REENTRANT   -g -O2 -fno-common -pipe  conftest.c -o conftest.i"
+checked program was:
+/* begin */
+1: #include "ruby.h"
+2: 
+3: #include <vm_core.h>
+/* end */
+
+--------------------
+
+have_header: checking for vm_insnhelper.h... -------------------- yes
+
+"gcc -E -I/Users/siddharthalethbridge/.rvm/rubies/ruby-2.7.6/include/ruby-2.7.0/x86_64-darwin21 -I/Users/siddharthalethbridge/.rvm/rubies/ruby-2.7.6/include/ruby-2.7.0/ruby/backward -I/Users/siddharthalethbridge/.rvm/rubies/ruby-2.7.6/include/ruby-2.7.0 -I. -I/Users/siddharthalethbridge/.rvm/src/ruby-2.7.6  -I/usr/local/opt/libyaml/include -I/usr/local/opt/libksba/include -I/usr/local/opt/readline/include -I/usr/local/opt/zlib/include -I/usr/local/opt/openssl@1.1/include -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE -D_DARWIN_UNLIMITED_SELECT -D_REENTRANT   -g -O2 -fno-common -pipe  conftest.c -o conftest.i"
+checked program was:
+/* begin */
+1: #include "ruby.h"
+2: 
+3: #include <vm_insnhelper.h>
+/* end */
+
+--------------------
+
+have_header: checking for vm_core.h... -------------------- yes
+
+"gcc -E -I/Users/siddharthalethbridge/.rvm/rubies/ruby-2.7.6/include/ruby-2.7.0/x86_64-darwin21 -I/Users/siddharthalethbridge/.rvm/rubies/ruby-2.7.6/include/ruby-2.7.0/ruby/backward -I/Users/siddharthalethbridge/.rvm/rubies/ruby-2.7.6/include/ruby-2.7.0 -I. -I/Users/siddharthalethbridge/.rvm/src/ruby-2.7.6  -I/usr/local/opt/libyaml/include -I/usr/local/opt/libksba/include -I/usr/local/opt/readline/include -I/usr/local/opt/zlib/include -I/usr/local/opt/openssl@1.1/include -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE -D_DARWIN_UNLIMITED_SELECT -D_REENTRANT   -g -O2 -fno-common -pipe  conftest.c -o conftest.i"
+checked program was:
+/* begin */
+1: #include "ruby.h"
+2: 
+3: #include <vm_core.h>
+/* end */
+
+--------------------
+
+have_header: checking for method.h... -------------------- yes
+
+"gcc -E -I/Users/siddharthalethbridge/.rvm/rubies/ruby-2.7.6/include/ruby-2.7.0/x86_64-darwin21 -I/Users/siddharthalethbridge/.rvm/rubies/ruby-2.7.6/include/ruby-2.7.0/ruby/backward -I/Users/siddharthalethbridge/.rvm/rubies/ruby-2.7.6/include/ruby-2.7.0 -I. -I/Users/siddharthalethbridge/.rvm/src/ruby-2.7.6  -I/usr/local/opt/libyaml/include -I/usr/local/opt/libksba/include -I/usr/local/opt/readline/include -I/usr/local/opt/zlib/include -I/usr/local/opt/openssl@1.1/include -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE -D_DARWIN_UNLIMITED_SELECT -D_REENTRANT   -g -O2 -fno-common -pipe  conftest.c -o conftest.i"
+checked program was:
+/* begin */
+1: #include "ruby.h"
+2: 
+3: #include <method.h>
+/* end */
+
+--------------------
+

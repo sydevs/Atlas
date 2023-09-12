@@ -1,0 +1,37 @@
+# Bundler
+# http://yehudakatz.com/2010/12/16/clarifying-the-roles-of-the-gemspec-and-gemfile/
+Gemfile.lock
+
+# Test log files
+test/*-debug.log
+
+# SQLite Test DB
+test/test.sqlite3
+
+# SVN
+.svn
+
+# RVM
+.rvmrc
+
+# TextMate
+*.tmproj
+
+# rcov generated
+coverage
+
+# rdoc generated
+rdoc
+
+# yard generated
+doc
+.yardoc
+
+# bundler
+.bundle
+
+# builds
+*.gem
+
+# For MacOS:
+.DS_Store

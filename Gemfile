@@ -93,3 +93,8 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
+
+# for debugging with sids computer
+gem 'ruby-debug-ide'
+gem 'debase'
+
