@@ -14,7 +14,7 @@ class EventMailer < ApplicationMailer
     end
 
     create_session!
-    subject = I18n.translate(@status, scope: 'mail.event.status.title', event: @event.label)
+    subject = I18n.translate(@status, scope: 'mail.event.status.subject', event: @event.label, city: @event.area.label)
 
     # TODO: Implement MessageBird support
     if true || @manager.contact_by_email?

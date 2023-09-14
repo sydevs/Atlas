@@ -1,0 +1,353 @@
+pt:
+  datetime:
+    distance_in_words:
+      soon: "Em alguns minutos"
+      x_minutes: # TODO: Translate
+        one: "%{count} minute"
+        other: "%{count} minutes"
+      x_weeks:
+        one: "%{count} semana"
+        other: "%{count} semanas"
+      x_months: # TODO: Translate
+        one: "%{count} month"
+        other: "%{count} months"
+
+  activerecord:
+    models:
+      # Places
+      country:
+        # Basic pluralization
+        single: "País"
+        plural: "Países"
+        # Countable
+        one: "país"
+        other: "países"
+      region:
+        # Basic pluralization
+        single: "Região"
+        plural: "Regiões"
+        # Countable
+        one: "região"
+        other: "regiões"
+      area:
+        # Basic pluralization
+        single: "Área da cidade"
+        plural: "Áreas da cidade"
+        # Countable
+        one: "cidade"
+        other: "cidades"
+
+      # Events
+      venue:
+        # Basic pluralization
+        single: "Local"
+        plural: "Locais"
+        # Countable
+        one: "local"
+        other: "locais"
+      event:
+        # Basic pluralization
+        single: "Evento"
+        plural: "Eventos"
+        # Countable
+        one: "evento"
+        other: "eventos"
+      online_event:
+        # Basic pluralization
+        single: "Evento Online"
+        plural: "Eventos Online"
+        # Countable
+        one: "evento online"
+        other: "eventos online"
+      offline_event:
+        # Basic pluralization
+        single: "Evento presencial"
+        plural: "Eventos presenciais"
+        # Countable
+        one: "evento presencial"
+        other: "eventos presenciais"
+      registration:
+        # Basic pluralization
+        single: "Participante"
+        plural: "Participantes"
+        # Countable
+        one: "incrição"
+        other: "inscrições"
+
+      # Other
+      manager:
+        # Basic pluralization
+        single: "Gestor"
+        plural: "Gestores"
+        # Countable
+        one: "gestor"
+        other: "gestores"
+      managed_record:
+        # Basic pluralization
+        single: "Responsável"
+        plural: "Responsáveis"
+        # Countable
+        one: "responsável"
+        other: "responsáveis"
+      audit:
+        # Basic pluralization
+        single: "História"
+        plural: "Histórias"
+        # Countable
+        one: "log"
+        other: "logs"
+      client:
+        # Basic pluralization
+        single: "Aplicativo"
+        plural: "Aplicativos"
+        # Countable
+        one: "aplicativo externo"
+        other: "aplicativos externos"
+      picture:
+        # Basic pluralization
+        single: "Imagem"
+        plural: "Imagens"
+        # Countable
+        one: "imagem"
+        other: "imagens"
+
+    attributes:
+      generic:
+        name: "Nome"
+        published: "Publicados"
+        email: "Endereço de email"
+        phone: "Telefone"
+        language: "Linguagem"
+        status: "Status"
+        statuses:
+          verified: "Verificado"
+          needs_review: "Precisa de revisão"
+          needs_urgent_review: "Precisa de revisão urgente"
+          expired: "Expirado"
+          archived: "Arquivado"
+          finished: "Finalizado"
+        
+        last_activity_on: "Ultima atividade"
+        summary_email_sent_at: "E-mail de resumo enviado"
+        status_email_sent_at: "E-mail de status enviado"
+        registrations_email_sent_at: "E-mail de lembrete enviado"
+        should_update_status_at: "Próxima atualização de status"
+        expired_at: "Expirado em"
+        verified_at: "Verificado em"
+        archived_at: "Arquivado em"
+        finished_at: "Terminado em"
+        updated_at: "Atualizado em"
+
+      # Places
+      country:
+        manager_id: :activerecord.models.manager.single # Do not translate
+        country_code: :activerecord.models.country.single # Do not translate
+        default_language_code: "Idioma padrão do evento"
+        enable_regions: "Ativar gerenciamento regional"
+        enable_custom_regions: "Permitir criação de região personalizada"
+        geo_data: "Dados geográficos"
+        osm_id: "OpenStreetMap ID"
+        bounds: "Janela de exibição"
+        geojson: "Fronteiras"
+        translations: "Traduções"
+        last_activity_on: :activerecord.attributes.generic.last_activity_on # Do not translate
+        summary_email_sent_at: :activerecord.attributes.generic.summary_email_sent_at # Do not translate
+
+      region:
+        manager_id: :activerecord.models.manager.single # Do not translate
+        country_code: :activerecord.models.country.single # Do not translate
+        geo_data: "Dados geográficos"
+        osm_id: "OpenStreetMap ID"
+        bounds: "Janela de exibição"
+        geojson: "Fronteiras"
+        translations: "Traduções"
+        last_activity_on: :activerecord.attributes.generic.last_activity_on # Do not translate
+        summary_email_sent_at: :activerecord.attributes.generic.summary_email_sent_at # Do not translate
+
+      area:
+        manager_id: :activerecord.models.manager.single # Do not translate
+        name: :activerecord.attributes.generic.name # Do not translate
+        country_code: :activerecord.models.country.single # Do not translate
+        coordinates: "Localização"
+        latitude: "Latitude"
+        longitude: "Longitude"
+        radius: "Raio (km)"
+        last_activity_on: :activerecord.attributes.generic.last_activity_on # Do not translate
+        summary_email_sent_at: :activerecord.attributes.generic.summary_email_sent_at # Do not translate
+
+      # Events
+      venue:
+        published: :activerecord.attributes.generic.published # Do not translate
+        name: "Nome do edifício"
+        manager_id: :activerecord.models.manager.single # Do not translate
+        address: "Endereço"
+        street: "Endereço da Rua"
+        city: "Cidade"
+        region_code: :activerecord.models.region.single # Do not translate
+        country_code: :activerecord.models.country.single # Do not translate
+        post_code: "Código postal"
+        coordinates: "Localização"
+        latitude: "Latitude"
+        longitude: "Longitude"
+        place_id: "Google Place ID"
+        last_activity_on: :activerecord.attributes.generic.last_activity_on # Do not translate
+
+      event:
+        status: :activerecord.attributes.generic.status # Do not translate
+        statuses: :activerecord.attributes.generic.statuses # Do not translate
+        published: :activerecord.attributes.generic.published # Do not translate
+        manager_id: :activerecord.models.manager.single # Do not translate
+        name: :activerecord.attributes.generic.name # Do not translate
+        custom_name: "Nome do evento personalizado (opcional)"
+        category: "Categoria"
+        categories:
+          dropin: "Aula aberta"
+          single: "Aula única"
+          course: "Curso de meditação"
+          festival: "Festival ou Evento público"
+          concert: "Meditação & Concerto de música"
+          inactive: "Turma inativa"
+        category_labels:
+          dropin: "Aula aberta"
+          single: "Meditação"
+          course: "Curso de meditação"
+          festival: "Festival"
+          concert: "Concerto"
+          inactive: "Turma iniciante"
+        category_descriptions:
+          dropin: "Uma aula semanal padrão, onde os candidatos podem ingressar a qualquer momento."
+          single: "Uma aula única, adequada para um passeio ou outro evento especial."
+          course: "Um curso de duração fixa em que os candidatos só podem ingressar no início do curso."
+          festival: "Um estande em um evento público, onde os buscadores podem aparecer sem se registrar."
+          concert: "Uma performance que combina meditação e música ou dança."
+          inactive: "Um programa que é executado com pouca frequência ou está em pausa. Os buscadores podem entrar em contato com o iogue responsável para obter mais informações."
+        description: "Descrição"
+        room: "Sala"
+        building: "Prédio / Sala"
+        language_code: :activerecord.attributes.generic.language # Do not translate
+        registration_mode: "Modo de Registro"
+        registration_modes:
+          native: "Sahaj Atlas"
+          external: "Externo"
+          meetup: "Encontro"
+          eventbrite: "Eventbrite"
+          facebook: "Facebook"
+        registration_notification: "Notificações de registro"
+        registration_notifications:
+          digest: "Um e-mail por dia"
+          immediate: "Imediatamente"
+          disabled: "Nenhuma notificação"
+        registration_url: "Link de Cadastro (URL)"
+        registration_limit: "Limite de registro"
+        registration_question: "Perguntas do registro"
+        registration_questions:
+          questions: "Você tem alguma pergunta?"
+          experience: "Você já experimentou esta meditação antes?"
+          aspirations: "O que você está procurando na meditação?"
+          referral: "Como você ficou sabendo sobre nós?"
+        recurrence: "Recorrência"
+        recurrences:
+          day: "Diário"
+          monday: "Segunda"
+          tuesday: "Terça"
+          wednesday: "Quarta"
+          thursday: "Quinta"
+          friday: "Sexta"
+          saturday: "Sábado"
+          sunday: "Domingo"
+        start_date: "Data de início"
+        end_date: "Data final"
+        start_time: "Hora de início"
+        end_time: "Término"
+        online: "Aula Online"
+        online_url: "Link da Reunião Online"
+        expiration_period: "Expiration Period" # TODO: Translate
+        verification_streak: "Verification Streak" # TODO: Translate
+        contact_info:
+          email_address: "Email de contato"
+          email_name: "Nome para e-mails"
+          phone_number: "Número para contato"
+          phone_name: "Primeiro nome para chamadas telefônicas"
+          web_links: "Links de sites"
+          facebook: "Grupo do Facebook"
+          meetup: "Página do encontro"
+        language: :activerecord.attributes.generic.language # Do not translate
+        images: :activerecord.models.picture.plural # Do not translate
+        venue_id: :activerecord.models.manager.single # Do not translate
+        last_activity_on: :activerecord.attributes.generic.last_activity_on # Do not translate
+        status_email_sent_at: :activerecord.attributes.generic.status_email_sent_at # Do not translate
+        registrations_email_sent_at: :activerecord.attributes.generic.registrations_email_sent_at # Do not translate
+        should_update_status_at: :activerecord.attributes.generic.should_update_status_at # Do not translate
+        updated_at: :activerecord.attributes.generic.updated_at # Do not translate
+        expired_at: :activerecord.attributes.generic.expired_at # Do not translate
+        verified_at: :activerecord.attributes.generic.verified_at # Do not translate
+        archived_at: :activerecord.attributes.generic.archived_at # Do not translate
+        finished_at: :activerecord.attributes.generic.finished_at # Do not translate
+
+      registration:
+        manager_id: :activerecord.models.manager.single # Do not translate
+        name: :activerecord.attributes.generic.name # Do not translate
+        email: :activerecord.attributes.generic.email # Do not translate
+        comment: "Comentário"
+        created_at: "Registrado em - hora local"
+        starting_at: "Primeira classe em"
+
+      # Other
+      manager:
+        manager_id: :activerecord.models.manager.single # Do not translate
+        name: "Full Name"
+        email: :activerecord.attributes.generic.email # Do not translate
+        phone: :activerecord.attributes.generic.phone # Do not translate
+        administrator: "Administrador global"
+        language_code: "Língua preferida"
+        contact_method: "Método de Contato Preferido"
+        contact_methods:
+          email: "Email"
+          whatsapp: "WhatsApp"
+          telegram: "Telegram"
+          wechat: "WeChat"
+        types:
+          worldwide: "Administrador global"
+          country: "Gestor Nacional"
+          local: "Gestor Local"
+          event: "Gestor do Evento"
+          client: "Getor do Aplicativo"
+          none: "Gestor sem acesso"
+        last_login_at: "Último Login"
+        email_verification_sent_at: "Última verificação de e-mail enviada"
+        phone_verification_sent_at: "Última verificação de telefone enviada"
+
+      audit:
+        user: :activerecord.models.manager.single # Do not translate
+        action: "Ação"
+        actions:
+          update: "Atualizado"
+          create: "Criado"
+          destroy: "Excluído"
+
+      client:
+        label: "Rótulo"
+        config: "Configuração"
+        domain: "Domínio"
+        secret_key: "Secret API Key"
+        public_key: "Public API Key"
+        enabled: "Habilitado"
+        location: "Localização canônica"
+        bounds: "Janela de exibição"
+        last_accessed_at: "Último acesso"
+
+        locale: :activerecord.attributes.generic.language # Do not translate
+        location_id: "ID do local"
+        location_type: "Tipo de localização"
+        embed_type: "Método Incorporado"
+        embed_types:
+          iframe: "IFrame (Simples)"
+          script: "JavaScript (Avançado)"
+          url: "Link"
+        routing_type: "Método de Roteamento"
+        routing_types:
+          query: "Consulta (Simples)"
+          path: "Caminho (Avançado)"
+        manager_id: :activerecord.models.manager.single # Do not translate
+
+      pictures:

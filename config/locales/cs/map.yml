@@ -26,7 +26,7 @@ cs:
       fallback:
         nearby: "V této oblasti neprobíhají žádné kurzy, nejbližší bezplatný kurz meditace je v"
         far: "Nejbližší bezplatný meditační kurz je v"
-        online: "V této oblasti neprobíhají žádné online kurzy, zvažte"
+        online: "Alternatively, try our" # TODO: Translate
         online_event: "Online kurz"
 
     area:
@@ -37,13 +37,23 @@ cs:
 
     event:
       register: "Registrovat"
+      online_text: "online"  # TODO: Translate
       language: "Tento kurz je v"
       directions: "Obdržet pokyny"
       online: "Online kurz"
       online_from: "Vysíláno z"
-      tel: "tel"
       distance: "%{distance} km daleko"
       upcoming: "Brzy začíná"
+      starting_date: "Starting %{date}" # TODO: Translate
+      inactive: # TODO: Translate
+        dates: "Contact organisers for timings"
+        notice: "This class is held by request"
+      contact: # TODO: Translate
+        title: "Contact us for timings:"
+        tel: "tel"
+        email: "email"
+        meetup: "Meetup Page"
+        facebook: "Facebook Page"
 
     registration:
       header: "Zaregistrujte se nyní"
@@ -54,6 +64,7 @@ cs:
         name: "Jméno"
         message: "Otázky / Komentáře"
         submit: "Potvrdit"
+        email_invalid: "Please enter a valid email" # TODO: Translate
       notice:
         text: "Odesláním potvrzujete svůj souhlas s našími %{link}."
         link: "Zásady ochrany osobních údajů"

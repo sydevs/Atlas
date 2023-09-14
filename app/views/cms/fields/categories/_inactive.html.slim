@@ -1,0 +1,18 @@
+
+= f.simple_fields_for :contact_info do |ff|
+  .field
+    = ff.label :email_address, translate_attribute(@record, 'contact_info.email_address')
+    .two.fields
+      - fields = { email_address: :email, email_name: :string }
+      - fields.each do |field, type|
+        = ff.input field, as: type, label: false, hint: translate("cms.hints.event.contact_info.#{field}"), placeholder: translate_attribute(@record, "contact_info.#{field}"), input_html: { value: @record.contact_info[field.to_s] }
+
+  .field
+    = ff.label :meetup, translate_attribute(@record, 'contact_info.web_links')
+    = ff.hint translate('cms.hints.event.contact_info.web_links')
+    .two.fields
+      - %i[meetup facebook].each do |field|
+        = ff.input field, as: :url, label: false, placeholder: translate_attribute(@record, "contact_info.#{field}"), input_html: { value: @record.contact_info[field.to_s] }
+
+.ui.small.dividing.violet.header = translate('cms.forms.event.location')
+= render 'cms/venues/selector', f: f, venue: @record.venue

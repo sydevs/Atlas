@@ -117,7 +117,7 @@ en:
         must_be_new: "Only countries which haven't already been added are listed below."
         language: "The default language that events in this country are usually in."
         no_default_language: "No default"
-        enable_regions: "If enabled, you will be able to view and assign managers to regions (regions, states, etc) within this country. This is useful for larger countries (China, USA, Australia, etc), and unnessecary for small countries (Belgium, Lithuania, Singapore, etc)."
+        enable_regions: "If enabled, you will be able to view and assign managers to regions (regions, states, etc) within this country. This is useful for larger countries (China, USA, Australia, etc), and unnecessary for small countries (Belgium, Lithuania, Singapore, etc)."
         enable_custom_regions: "Allow the creation of custom regions. This is an advanced feature, which should only be used if you understand what you are doing."
       region:
         polygon: "Drag / click on a faded square to add a new corner to the polygon. Click on an existing corner to remove it."
@@ -133,11 +133,16 @@ en:
         registration_notification: "How often do you want to receive notifications about new registrations?"
         registration_url: "The registration URL will be set automatically if the mode is set \"%{native}.\""
         registration_limit: "Limit the number of registrations to this amount."
-        registration_question: "What questions should seekers be asked when they register for the class."
+        registration_question: "What questions should seekers be asked when they register for the class?"
         online: "Check this box if the program will take place online."
         online_url: "If the class is online, this link is where seekers should join the class (eg. a link to Zoom, YouTube, Google Meet, etc)."
-        phone_number: "A local phone number that seekers can call to ask questions."
-        phone_name: "The first name of the yogi who will answer the phone."
+        expiration_period: "How long should we wait until we ask you if the program is still accurate?"
+        contact_info:
+          email_address: "An email address which will be published on the website."
+          email_name: "The first name of the yogi who will respond to emails."
+          phone_number: "A local phone number that seekers can call to ask questions."
+          phone_name: "The first name of the yogi who will answer the phone."
+          web_links: "Websites where seekers can find more information about this potential program."
         venue:
           search: "Search for address"
           view_fields: "View location fields"
@@ -284,7 +289,7 @@ en:
           instruction: "You have access to the configuration for your external app."
         none:
           title: "No-Access Manager"
-          description: "This user no events or regions assigned to them. They have no access to manage the atlas."
+          description: "This user has no events or regions assigned to them. They have no access to manage the atlas."
           instruction: "You don't have access to any part of the website. If you believe this is a mistake, please contact the manager for your local area."
       resources:
         title: "My Responsibilities"
@@ -375,6 +380,9 @@ en:
           concert:
             title: :activerecord.attributes.event.categories.concert
             description: "A large one time cultural event, usually involving music, maybe dance, and realisation."
+          inactive:
+            title: :activerecord.attributes.event.categories.inactive
+            description: "This for cities where a yogi is present, but they don't run regular classes. The seeker can contact the yogi through this listing. This type can also be used for any other type of irregular class that requires the seeker to contact the yogi directly for information."
       expiration:
         title: "Why isn't my event appearing on the map?"
         alt_title: "How does event expiration work?"
@@ -406,7 +414,7 @@ en:
       registration:
         title: "Why should seekers register on Sahaj Atlas?"
         description:
-          introduction: "Even though we support having seeker register on external websites (Meetup, Eventbrite, Facebook, etc), there are everal benefitss to having seekers register directy on the Sahaj Atlas."
+          introduction: "Even though we support having seeker register on external websites (Meetup, Eventbrite, Facebook, etc), there are several benefitss to having seekers register directy on the Sahaj Atlas."
         benefits:
           accessibility:
             icon: universal access # Do not translate
@@ -423,6 +431,30 @@ en:
       contact:
         title: "I have other questions or suggestions"
         description: "If you need further help, or if you want to help with the development of the Sahaj Atlas, please write to the email below. Please write your message in english."
+
+    category_tags:
+      dropin: "Drop-In"
+      single: "Single"
+      course: "Course"
+      festival: "Festival"
+      concert: "Concert"
+      inactive: "Inactive"
+
+    region_labels:
+      state:
+        # Basic pluralization
+        single: "State"
+        plural: "States"
+        # Countable
+        one: "state"
+        other: "states"
+      province:
+        # Basic pluralization
+        single: "Province"
+        plural: "Provinces"
+        # Countable
+        one: "province"
+        other: "provinces"
 
     country_codes:
       gb: "UK"

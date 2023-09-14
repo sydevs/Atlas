@@ -2,9 +2,15 @@ de:
   datetime:
     distance_in_words:
       soon: "Ein paar Minuten"
+      x_minutes: # TODO: Translate
+        one: "%{count} minute"
+        other: "%{count} minuten"
       x_weeks:
-        one: "%{count} Woche"
-        other: "%{count} Wochen"
+        one: "%{count} woche"
+        other: "%{count} wochen"
+      x_months: # TODO: Translate
+        one: "%{count} monat"
+        other: "%{count} monate"
 
   activerecord:
     models:
@@ -200,18 +206,21 @@ de:
           course: "Meditationskurs"
           festival: "Stand im öffentlichen Ereignis"
           concert: "Meditation & Musikkonzert"
+          inactive: "Inactive Class" # TODO: Translate
         category_labels:
           dropin: "Offen"
           single: "Meditation"
           course: "Meditationskurs"
           festival: "Stand"
           concert: "Konzert"
+          inactive: "Beginner class" # TODO: Translate
         category_descriptions:
           dropin: "Eine Standard-wöchentliche Klasse, in der Sucher jederzeit teilnehmen können."
           single: "Eine einmalige Veranstaltung, geeignet für eine Tour oder ein besonderes Ereignis."
           course: "Ein Festgelegter Kurs, in dem sich Sucher nur zum begin anmelden können."
           festival: "Ein Stand auf einer öffentlichen Veranstaltung, in dem Seekern ohne Registrierung teilnehmen können."
           concert: "Eine Veranstaltung, die Meditation und Musik oder Tanz kombiniert."
+          inactive: "A program that runs infrequently or is on pause. Seekers can contact the yogi in charge for more info." # TODO: Translate
         description: "Beschreibung"
         room: "Zimmer"
         building: "Gebäude / Zimmer"
@@ -252,8 +261,17 @@ de:
         end_time: "Endzeit"
         online: "Online-Klasse"
         online_url: "Online-Treffen Link"
-        phone_number: "Kontaktnummer"
-        phone_name: "Vorname für Telefonanruf"
+        language: "Language" # TODO: Translate
+        expiration_period: "Expiration Period" # TODO: Translate
+        verification_streak: "Verification Streak" # TODO: Translate
+        contact_info: # TODO: Translate
+          email_address: "Contact Email"
+          email_name: "First Name for Emails"
+          phone_number: "Kontaktnummer"
+          phone_name: "Vorname für Telefonanruf"
+          web_links: "Website Links"
+          facebook: "Facebook Group"
+          meetup: "Meetup Page"
         language: :activerecord.attributes.generic.language # Do not translate
         images: :activerecord.models.picture.plural # Do not translate
         venue_id: :activerecord.models.manager.single # Do not translate

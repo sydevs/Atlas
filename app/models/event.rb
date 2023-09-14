@@ -15,7 +15,7 @@ class Event < ApplicationRecord
     status
   ]
 
-  enum category: { dropin: 1, course: 3, single: 2, festival: 4, concert: 5 }, _suffix: true
+  enum category: { dropin: 1, course: 3, single: 2, festival: 4, concert: 5, inactive: 6 }, _suffix: true
   enum recurrence: { day: 0, monday: 1, tuesday: 2, wednesday: 3, thursday: 4, friday: 5, saturday: 6, sunday: 7 }
   enum registration_mode: { native: 0, external: 1, meetup: 2, eventbrite: 3, facebook: 4 }, _suffix: true
   enum registration_notification: { digest: 0, immediate: 1, disabled: 2 }, _suffix: true
@@ -34,7 +34,8 @@ class Event < ApplicationRecord
   accepts_nested_attributes_for :pictures, :venue
 
   # Validations
-  validates_presence_of :type, :category, :language_code, :manager, :recurrence, :start_date, :start_time
+  validates_presence_of :type, :category, :language_code, :manager
+  validates_presence_of :recurrence, :start_date, :start_time, unless: :inactive_category?
   validates_presence_of :end_date, if: :course_category?
   validates_presence_of :end_time, if: -> { festival_category? || concert_category? }
   validates_presence_of :online_url, if: :online?
@@ -56,6 +57,8 @@ class Event < ApplicationRecord
   scope :current, -> { where('events.end_date IS NULL OR events.end_date >= ?', DateTime.now) }
   scope :publicly_visible, -> { current.manager_verified.publishable.published }
   scope :manager_verified, -> { joins(:manager).where('managers.email_verified = TRUE OR managers.phone_verified = TRUE') }
+  scope :with_location, -> (country_code) { joins(:area).where_country(country_code) }
+  scope :where_country, -> (country_code) { where(areas: { country_code: country_code }) if country_code }
   scope :ready_for_registrations_email, -> do
     where(registration_notification: Event.registration_notifications[:immediate])
       .or(
@@ -97,7 +100,7 @@ class Event < ApplicationRecord
   end
 
   def should_finish?
-    next_occurrence_at.nil?
+    next_occurrence_at.nil? && !inactive_category?
   end
 
   def duration
@@ -109,6 +112,8 @@ class Event < ApplicationRecord
   end
 
   def next_occurrences_after first_datetime, limit: 10
+    return [] if inactive_category?
+
     first_date = first_datetime.to_date
     return [] if registration_end_time && registration_end_time < first_datetime
 
@@ -157,7 +162,7 @@ class Event < ApplicationRecord
   end
 
   def label
-    custom_name || venue.street
+    custom_name || venue&.street || area&.name || "Event ##{id}"
   end
 
   def language_code
@@ -165,10 +170,10 @@ class Event < ApplicationRecord
   end
 
   def log_status_change
-    return if archived? || new_record?
+    return if archived? || new_record? || !published?
     
     if needs_urgent_review?
-      parent_managers.each do |parent_manager|
+      nearest_parent_managers.each do |parent_manager|
         EventMailer.with(event: self, manager: parent_manager).status.deliver_later
       end
     end
@@ -190,6 +195,14 @@ class Event < ApplicationRecord
 
   def parent_managers
     parent.managers
+  end
+
+  def expiration_base
+    expiration_period.months + expiration_bonus
+  end
+
+  def expiration_bonus
+    (expiration_period / 3 * [4, verification_streak].min).weeks
   end
 
   def self.model_name

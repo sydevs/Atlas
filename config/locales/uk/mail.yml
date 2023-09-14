@@ -61,15 +61,17 @@ uk:
       online_address: "Online - from %{city}" # TODO: Translate
 
       status: # TODO: Translate
-        question: "Is the above information still correct?"
-        verify: "Event is Correct"
-        or: "OR"
+        question: "Are the details of this program correct?"
+        contact: "Contact manager"
+        verify: "Yes, details are correct"
+        edit: "No, edit the program"
+        or: "or"
         expiration: "Event will expire in %{time}."
         subject:
           created: "Створено нову подію - %{event}"
-          needs_review: "[Попередження] Подія потребує перегляду - %{event}"
-          needs_urgent_review: "[Попередження] Термін дії події скоро закінчиться - %{event}"
-          expired: "Термін дії події закінчився - %{event}"
+          needs_review: "Are your meeting details correct? (Verify in one click)"
+          needs_urgent_review: "Are %{city} meeting details correct?"
+          expired: "Should this event still be running? (Verify in one click)"
           finished: "Подія завершена - %{event}"
         preview:
           created: "Ви – менеджер нової події.'%{event}'' створено в %{place}."
@@ -77,28 +79,33 @@ uk:
           needs_urgent_review: "'%{event}' незабаром буде видалено з карти, оскільки менеджер подій ще не відповів на нашу електронну пошту."
           expired: "'%{event}'' не було оновлено за %{duration}, і було видалено з карти. Оновіть цю подію, щоб знову зробити її загальнодоступною."
           finished: "'%{event}' завершився згідно з графіком. Останній клас цієї події закінчився, тому подія буде прихована з карти."
-        title:
+        header:
           created: "Створено нову подію"
           needs_review: "Захід потребує огляду"
           needs_urgent_review: "Подія скоро закінчиться"
           expired: "Термін дії події закінчився"
           finished: "Подія завершена"
           escalation: "Організатор не відповів"
+        title:
+          created: "You are the manager of a new event"
+          needs_review: "Are these details still correct?"
+          needs_urgent_review: "Are these details still correct?"
+          escalation: "Can you check if this event is still running?"
+          expired: "Should this event still be running?"
+          finished: "Is it correct that this event has finished?"
         byline:
           created: "Створено на %{date}"
-          needs_review: "Востаннє оновлено %{date}"
-          needs_urgent_review: "Буде видалено %{date}"
-          expired: "Термін дії закінчився %{date}"
+          needs_review: "(Verify in one click)"
+          needs_urgent_review: "(Verify in one click)"
+          escalation: "(Please contact event manager)"
+          expired: "(Verify to restore event)"
           finished: "Завершилось %{date}"
         explanation:
-          created: "Ви є менеджером нової події, яка була створена в Сахадж атласі."
-          needs_review: "Цю подію, якою ви керуєте, потрібно перевірити на точність, інакше її буде видалено з карти."
-          needs_urgent_review: "Невдовзі цю подію буде видалено з карти, якщо її точність не буде перевірено та оновлено."
-          expired: "Цю подію було видалено з карти, оскільки вона давно не оновлювалася. Щоб додати її назад до карти, оновіть подію."
-          finished: "Цей захід завершився."
-        escalation:
-          event_manager: "Ця подія, якою ви керуєте, терміново потребує перевірки на точність. Це останнє нагадування, яке ви отримаєте. Ми також надіслали електронний лист менеджерам регіону %{place}, щоб переконатися, що цю подію не видалено помилково."
-          super_manager: "Ви – менеджер %{place}. Це попередження надіслано вам, оскільки менеджер цієї події ще не відповів на нашу електронну пошту."
+          created: "You can login to the Atlas to update your event at any time. You will receive occasional emails to check that your event is still running. 🎉"
+          needs_review: "Verifying programs once is a while keeps an accurate list of Sahaj meetings around the world. 🙏"
+          needs_urgent_review: "This event will be removed from the map soon, unless it's accuracy is checked."
+          expired: "This event has been removed from the map because it has not been updated recently. To add it back to the map, update the event."
+          finished: "This event has concluded, is that correct?"
 
       registrations:
         subject: "[Нагадування] Майбутня подія"

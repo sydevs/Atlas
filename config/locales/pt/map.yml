@@ -1,0 +1,117 @@
+pt:
+  map:
+    meditation_atlas: "Atlas de Meditação"
+
+    search:
+      prompt: "Pesquisar local"
+      all_recurrences: "Todos os horários"
+      all_languages: "Todas as línguas"
+      filter:
+        prefix: "Mostrando resultados em"
+        clear: "Limpar"
+
+    navigation:
+      desktop:
+        offline: "Presencial"
+        online: "Online"
+      mobile:
+        offline: "Mostrar lista"
+        online: "Aulas online"
+        back: "Voltar ao mapa"
+
+    list:
+      search: "Pesquisar local"
+      more_info: "Mais informações"
+      register: "Registro"
+      fallback:
+        nearby: "A aula de meditação gratuita mais próxima é em"
+        far: "Não há aulas nesta área, a aula de meditação gratuita mais próxima é em"
+        online: "Alternatively, try our" # TODO: Translate
+        online_event: "Aula Online"
+
+    area:
+      header: "Eventos em %{area}"
+
+    venue:
+      header: "Eventos em %{venue}"
+
+    event:
+      register: "Registro"
+      online_text: "online"
+      language: "Esta aula está em"
+      directions: "Obter direções"
+      online: "Aulas Online"
+      online_from: "Hospedado em %{city}"
+      distance: "%{distance} km de distância"
+      upcoming: "Começando logo"
+      starting_date: "Iniciando em %{date}"
+      inactive:
+        dates: "Entre em contato com os organizadores para saber os horários"
+        notice: "Esta aula é realizada a pedido"
+      contact:
+        title: "Contacte-nos para horários:"
+        tel: "tel"
+        email: "email"
+        meetup: "Página do encontro"
+        facebook: "Página do Facebook"
+
+    registration:
+      header: "Registrar agora"
+      closed: "Inscrições encerradas"
+      form:
+        timing: "Eu gostaria de começar em"
+        email: "Email"
+        name: "Nome"
+        message: "Perguntas / Comentários"
+        submit: "Confirmar"
+        email_invalid: "Por favor digite um email válido"
+      notice:
+        text: "Ao enviar, você confirma que concorda em receber mensagens de acompanhamento sobre este e eventos semelhantes, de acordo com nosso %{link}."
+        link: "política de Privacidade"
+      feedback:
+        duplicate: "Você já está registrado. Vejo você em breve!"
+        success: "Sucesso! Você receberá um e-mail de confirmação em breve."
+        error: "Erro! Por favor, tente novamente mais tarde."
+      confirmation:
+        title: "Obrigado por se registrar"
+        subtitle: "você receberá um e-mail em breve"
+        dismiss: "Registrar outra pessoa"
+        invite: "Convide um amigo"
+      button:
+        external: "Registro"
+        facebook: "Registre-se no Facebook"
+        eventbrite: "Registre-se no Eventbrite"
+        meetup: "Registre-se no Meetup"
+
+    sharing:
+      header: "Convidar um amigo"
+      share: "Compartilhar"
+      copied: "Copiado!"
+
+    weekdays:
+      0: "Domingo"
+      1: "Segunda"
+      2: "Terça"
+      3: "Quarta"
+      4: "Quinta"
+      5: "Sexta"
+      6: "Sábado"
+
+    recurrence:
+      day: "Diário"
+      monday: "Segunda"
+      tuesday: "Terça"
+      wednesday: "Quarta"
+      thursday: "Quinta"
+      friday: "Sexta"
+      saturday: "Sábado"
+      sunday: "Domingo"
+
+    timing_labels:
+      course_fallback: "Este é um curso semanal"
+      course: "%{weeks} semana de curso"
+      ongoing: "Esta aula está em andamento"
+
+    language_codes:
+      uk: UA #Ukrainian
+    

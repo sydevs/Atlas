@@ -12,15 +12,14 @@ module Types
 
     field :label, String, null: false
     field :description, String, null: true
+    field :description_html, String, null: true, method: :description_html
     field :category, String, null: false
     field :language, String, null: false, method: :language_name
     field :language_code, String, null: false
     field :address, String, null: false
 
-    field :timing, Types::TimingType, null: false
-
-    field :phone_number, String, null: true
-    field :phone_name, String, null: true
+    field :timing, Types::EventTimingType, null: false
+    field :contact, Types::EventContactType, null: false, method: :contact_info
 
     field :online, Boolean, null: false, method: :online?
     field :online_url, String, null: true
@@ -52,6 +51,10 @@ module Types
 
     def area
       object.area.extend(AreaDecorator)
+    end
+
+    def description_html
+      ActionController::Base.helpers.simple_format object.description
     end
 
     def timing

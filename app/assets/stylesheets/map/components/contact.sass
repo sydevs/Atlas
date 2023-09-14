@@ -1,0 +1,64 @@
+@import '../_mixins'
+
+.sya-contact
+  width: 100%
+
+.sya-contact__title
+  color: $color-grey-normal
+  letter-spacing: 0.49px
+  font-weight: $font-medium
+  font-size: 15px
+  line-height: 25px
+  margin-top: 20px
+  margin-bottom: 8px
+
+// ===== DIRECT METHODS ===== //
+.sya-contact__direct
+  color: $color-grey-normal
+  text-decoration: none
+  font-size: 14px
+  font-weight: $font-light
+  letter-spacing: 0.36px
+  transition: color 0.5s
+  display: block
+  margin-bottom: 8px
+
+  > *
+    display: inline-block
+
+  &__detail:before
+    content: attr(data-prefix)
+    display: inline
+
+  &__name:before
+    content: ', '
+    display: inline
+
+  &:hover
+    text-decoration: underline
+
+  &:hover > *
+    text-decoration: underline
+
+
+// ===== WEB LINKS ===== //
+.sya-contact__links
+  margin-top: 10px
+  margin-bottom: 18px
+  font-size: 11px
+
+.sya-contact__link
+  color: $color-cyan
+  font-weight: $font-bold
+  text-transform: uppercase
+  letter-spacing: 0.36px
+
+  &:not(:first-child):before
+    content: '•'
+    display: inline-block
+    color: $color-grey-light
+    font-weight: $font-semibold
+    font-size: 17px
+    padding: 0 8px
+    position: relative
+    top: 2px

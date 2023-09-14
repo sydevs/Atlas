@@ -1,20 +1,25 @@
 
 - allow = @context ? policy(@context) : policy(:dashboard)
 
-.item
-  - if local_assigns[:removable] == true && allow.destroy_association?(:managers)
-    .right.floated.content
+tr
+  td.collapsing
+    = manager.parent ? model_icon(manager.parent.class) : manager_icon(manager)
+  
+  td
+    - if policy(manager).show?
+      a href=url_for([:cms, manager]) = manager.label
+    - else
+      = manager.label
+
+  td.center.aligned
+    = translate_enum_value(manager, :type)
+
+  td
+    - if manager.parent
+      = manager.parent.label
+
+  - if local_assigns[:removable] == true
+    td.collapsing
+      - if allow.destroy_association?(:managers)
       a.ui.basic.circular.icon.label href=url_for([:cms, @context, manager]) data={ method: 'DELETE', confirm: translate('cms.messages.confirm_destroy') }
         i.trash.icon
-  = manager.parent ? model_icon(manager.parent.class) : manager_icon(manager)
-  .content
-    - if policy(manager).show?
-      a.header href=url_for([:cms, manager]) = manager.label
-    - else
-      .header
-        = manager.label
-    .description
-      = translate_enum_value(manager, :type)
-      - if manager.parent
-        '  - 
-        em = manager.parent.label

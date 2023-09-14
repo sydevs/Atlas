@@ -13,7 +13,7 @@ Rails.application.routes.draw do
     get '(:locale)/privacy', to: 'application#privacy'
   end
 
-  if Rails.env.development?
+  if true || Rails.env.development?
     namespace :mail do
       get :summary, to: 'application#summary'
 

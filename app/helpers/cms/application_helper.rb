@@ -1,27 +1,5 @@
 module CMS::ApplicationHelper
 
-  MODEL_ICONS = {
-    countries: 'globe americas',
-    regions: 'map',
-    areas: 'dot circle',
-    venues: 'map marker',
-    events: 'calendar',
-    managers: 'user secret',
-    registrations: 'user',
-    audits: 'clipboard list',
-    clients: 'broadcast tower',
-    pictures: 'image',
-  }.freeze
-
-  MANAGER_ICONS = {
-    worldwide: 'chess queen',
-    country: 'chess bishop',
-    local: 'chess knight',
-    event: 'chess pawn',
-    client: 'chess rook',
-    none: 'minus',
-  }.freeze
-
   ALERT_ICONS = {
     urgent_review: 'red warning sign',
     review: 'orange warning sign',
@@ -55,15 +33,6 @@ module CMS::ApplicationHelper
     else
       content_tag :div, label, class: 'item'
     end
-  end
-
-  def model_icon model
-    content_tag :i, nil, class: "#{MODEL_ICONS[model.table_name.to_sym]} icon"
-  end
-
-  def manager_icon manager_or_type
-    type = manager_or_type.is_a?(Manager) ? manager_or_type.type : manager_or_type
-    content_tag :i, nil, class: "#{MANAGER_ICONS[type]} icon"
   end
 
   def alert_icon type

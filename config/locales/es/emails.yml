@@ -1,0 +1,39 @@
+es:
+  emails: # These are translations for email that are sent to the seekers.
+    common:
+      view_in_browser: "Ver en el navegador"
+      unsubscribe: "Darse de baja"
+      reason: "Has recibido este correo porque te has registrado en este evento."
+      responses: "Tus respuestas:" # TODO: Translate
+
+    confirmation:
+      offline:
+        subject: "Registro confirmado - %{event_name}"
+        header: "Tu registro se ha confirmado, %{name}"
+        subheader: "Nos alegra que hayas decidido unirte a nuestra clase y ¡esperamos poder meditar juntos muy pronto!"
+        invite_a_friend: "Invita a un amigo con este enlace"
+        get_directions: "Obtener direcciones"
+        faqs:
+          - title: "¿Qué debería traer?"
+            content: "No se requiere nada especial. Ven con una actitud abierta y sin expectativas."
+      online:
+        subject: :emails.confirmation.offline.subject # Do not translate
+        header: :emails.confirmation.offline.subject # Do not translate
+        subheader: :emails.confirmation.offline.subject # Do not translate
+        online_url: "O, utiliza este enlace para unirte al evento cuando comience"
+        invite_a_friend: :emails.confirmation.offline.invite_a_friend # Do not translate
+        joining_title: "¿Cómo puedo participar?"
+        joining_content: "Utiliza este elnace para unirte cuando el evento comience. Te enviaremos de nuevo este enlace 1 hora antes de que comience."
+        faqs:
+
+    reminder:
+      offline:
+        subject: "Comienza mañana - %{event_name}"
+        header: "Tu evento comienza mañana, %{name}"
+        subheader: "Nos alegra que hayas decidido unirte a nuestra clase y ¡esperamos poder meditar juntos muy pronto!"
+        action: :emails.confirmation.offline.get_directions
+      online:
+        subject: "Comienza pronto - %{event_name}"
+        header: "Tu clase comienza en 1 hora, %{name}"
+        subheader: "La clase a la que te has registrado está a punto de comenzar. Aquí está un enlace para unirte en cualquier momento."
+        action: "Unirse a la reunión"

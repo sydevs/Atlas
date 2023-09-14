@@ -26,7 +26,7 @@ de:
       fallback:
         nearby: "Die nächste Freimachungsklasse bei"
         far: "Es gibt keine Klassen in diesem Bereich, die nächste Freizeitmeditation ist in"
-        online: "Es gibt keine Kurse in dieser Gegend, versuche eine"
+        online: "Alternatively, try our" # TODO: Translate
         online_event: "Online Veranstaltung"
 
     area:
@@ -37,13 +37,23 @@ de:
 
     event:
       register: "Anmelden"
+      online_text: "online"  # TODO: Translate
       language: "Diese Klasse ist in"
       directions: "Wegbeschreibung"
       online: "Online-Kurse"
       online_from: "Gastgeber aus %{city}"
-      tel: "Tel"
       distance: "%{distance} km entfernt"
       upcoming: "Beginnt bald"
+      starting_date: "Starting %{date}" # TODO: Translate
+      inactive: # TODO: Translate
+        dates: "Contact organisers for timings"
+        notice: "This class is held by request"
+      contact: # TODO: Translate
+        title: "Contact us for timings:"
+        tel: "Tel"
+        email: "email"
+        meetup: "Meetup Page"
+        facebook: "Facebook Page"
 
     registration:
       header: "Jetzt Anmelden"
@@ -54,6 +64,7 @@ de:
         name: "Name"
         message: "Fragen / Kommentare"
         submit: "Bestätigen"
+        email_invalid: "Please enter a valid email" # TODO: Translate
       notice:
         text: "Durch die Anmeldung, stimmen Sie zu, dass Sie Nachrichten über diese und ähnliche Veranstaltungen in übereinstimmung mit unserer %{link} erhalten."
         link: "Datenschutzrichtlinie"

@@ -19,11 +19,10 @@ class AtlasAPI {
           layer
           label
           description
+          descriptionHtml
           category
           address
           languageCode
-          phoneName
-          phoneNumber
           online
           onlineUrl
           path
@@ -41,6 +40,14 @@ class AtlasAPI {
             upcomingDates
             recurrence
           }
+          contact {
+            phoneName
+            phoneNumber
+            emailName
+            emailAddress
+            meetup
+            facebook
+          }
           images {
             url
             thumbnailUrl
@@ -51,6 +58,7 @@ class AtlasAPI {
             label
             latitude
             longitude
+            radius
             onlineEventIds
             offlineEventIds
             parentId
@@ -162,6 +170,13 @@ class AtlasAPI {
           label
           latitude
           longitude
+          area {
+            id
+            label
+            latitude
+            longitude
+            radius
+          }
         }
       }
     `)

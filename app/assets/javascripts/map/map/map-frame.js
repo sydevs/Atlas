@@ -3,7 +3,7 @@
 
 class MapFrame extends EventTarget {
 
-  static EMPTY_STYLE = { version: 8,sources: {},layers: [] }
+  static EMPTY_STYLE = { version: 8, sources: {},layers: [] }
 
   // Private variables
   #mapbox
@@ -83,6 +83,13 @@ class MapFrame extends EventTarget {
     })
   }
 
+  setPositionToAnchor(anchor) {
+    let position = anchor.split('/')
+    if (position.length != 3) return
+
+    this.#mapbox.jumpTo({ zoom: position[0], center: [position[2], position[1]] })
+  }
+
   waitForLoad() {
     if (this.#loading) {
       return new Promise((resolve, reject) => {
@@ -152,7 +159,7 @@ class MapFrame extends EventTarget {
       this.#currentLayer.setSelection(location)
       if (!location) {
         if (this.#hasSelection) {
-          this.#mapbox.easeTo({ zoom: this.#mapbox.getZoom() * 0.75 })
+          //this.#mapbox.easeTo({ zoom: this.#mapbox.getZoom() * 0.75 })
           this.#hasSelection = false
         }
 

@@ -133,11 +133,16 @@ cs:
         registration_notification: "How often do you want to receive notifications about new registrations?" # TODO: Translate
         registration_url: "Registrační URL bude nastaveno automaticky, pokud je nastaven režim \"%{native}.\""
         registration_limit: "Omezit počet registrací na tuto hodnotu."
-        registration_question: "What questions should seekers be asked when they register for the class." # TODO: Translate
+        registration_question: "What questions should seekers be asked when they register for the class?" # TODO: Translate
         online: "Zaškrtněte toto políčko, pokud bude program probíhat online."
         online_url: "Pokud je kurz online, tento odkaz je místo, kde by se zájemci měli do kurzu připojit (např. odkaz na Zoom, YouTube, Google Meet atd.)."
-        phone_number: "Místní telefonní číslo, na které mohou zájemci volat a klást otázky."
-        phone_name: "Křestní jméno jogína, který zvedne telefon."
+        expiration_period: "How long should we wait until we ask you if the program is still accurate?" # TODO: Translate
+        contact_info: # TODO: Translate
+          email_address: "An email address which will be published on the website."
+          email_name: "The first name of the yogi who will respond to emails."
+          phone_number: "Místní telefonní číslo, na které mohou zájemci volat a klást otázky."
+          phone_name: "Křestní jméno jogína, který zvedne telefon."
+          web_links: "Websites where seekers can find more information about this potential program."
         venue:
           search: "Hledat adresu"
           view_fields: "Zobrazit pole míst konání"
@@ -375,6 +380,9 @@ cs:
           concert:
             title: :activerecord.attributes.event.categories.concert
             description: "Velká jednorázová kulturní akce, obvykle zahrnující hudbu, možná tanec a realizaci."
+          inactive:
+            title: :activerecord.attributes.event.categories.inactive
+            description: "This for cities where a yogi is present, but they don't run regular classes. The seeker can contact the yogi through this listing. This type can also be used for any other type of irregular class that requires the seeker to contact the yogi directly for information." # TODO: Translate
       expiration:
         title: "Proč se moje událost nezobrazuje na mapě?"
         alt_title: "Jak funguje vypršení platnosti události?"
@@ -423,6 +431,14 @@ cs:
       contact:
         title: "Mám další otázky nebo návrhy"
         description: "Pokud potřebujete další pomoc, nebo chcete-li pomoci s vývojem Sahadža atlasu, napište na níže uvedený e-mail. Napište prosím svou zprávu v angličtině."
+
+    category_tags: # TODO: Translate
+      dropin: "Drop-In"
+      single: "Single"
+      course: "Course"
+      festival: "Festival"
+      concert: "Concert"
+      inactive: "Inactive"
 
     country_codes:
       gb: UK

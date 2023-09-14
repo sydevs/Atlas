@@ -1,0 +1,220 @@
+pt:
+  mail:
+    layout:
+      sahaj_atlas: "Sahaj Atlas"
+      learn_more: "Saber mais"
+      update_notifications: "Atualizar configurações de notificação"
+      information:
+        atlas:
+          title: "O que é o Sahaj Atlas?"
+          description: "O Sahaj Atlas é um projeto para criar uma lista central de todos os eventos públicos da Sahaja Yoga e para garantir que essa lista de eventos esteja sempre atualizada, para que os buscadores possam sempre encontrar eventos ativos próximos a eles."
+        security:
+          title: "Não encaminhe este e-mail"
+          description: "Os links neste e-mail permitem o acesso para editar o Sahaj Atlas. Encaminhar este e-mail comprometerá a segurança do site."
+        automated:
+          title: "E-mail automatizado"
+          description: "Este é um e-mail automático. Se você não sabe por que recebeu este e-mail ou tem alguma dúvida: escreva para"
+        unsubscribe:
+          title: "Cancelar subscrição"
+          description: "Você pode gerenciar quais notificações você recebe do Sahaj Atlas, editando seu perfil."
+
+    login:
+      title: "Entrar no Sahaj Atlas"
+      preview: "Este link o conectará automaticamente ao CMS do Sahaj Atlas. Não compartilhe este e-mail com mais ninguém, ou eles terão acesso à sua conta."
+      action: "Entrar"
+      explanation: "ou copie esta url para o seu navegador"
+
+    summary:
+      subject: "Resumo Mensal do Sahaj Atlas"
+      title: "Atualização mensal"
+      preview: "Resumo das mudanças no Sahaj Atlas no último mês."
+      view_statistics: "Estatísticas completas"
+      next_week: "Semana que vem"
+      last_week: "Semana passada"
+      stats:
+        new_registrations: "Novos Registros"
+        active_events: "Eventos ativos"
+        active_countries: "Países ativos"
+        active_regions: "Regiões ativas"
+      data:
+        new_countries: "Novos países"
+        new_managers: "Novos gestores"
+        new_clients: "Novos aplicativos"
+        new_events: "Novos Eventos"
+        expiring_events: "Eventos expirando"
+        expired_events: "Recentemente expirado"
+        inactive_regions: "Regiões inativas"
+
+    event:
+      location: "Localização"
+      next_date: "Próxima aula"
+      start_date: "Data de início"
+      timing: "Tempo"
+      category: "Categoria"
+      created_by: "Criado por"
+      updated_at: "Ultima atualização"
+      manager: "Gestor"
+      view: "Ver no mapa"
+      edit: "Editar evento"
+      update: "Atualizar evento"
+      contact: "Enviar email"
+      online_address: "On-line - de %{city}"
+
+      status:
+        question: "Os detalhes deste programa estão corretos?"
+        contact: "Entrar em contato com o gestor"
+        verify: "Sim, os detalhes estão corretos"
+        edit: "Não, alterar o programa"
+        or: "ou"
+        subject:
+          created: "Novo evento criado - %{event}"
+          needs_review: "Os detalhes da sua reunião estão corretos? (Verifique em um clique)"
+          needs_urgent_review: "Os detalhes da reunião em %{city} estão corretos?"
+          expired: "Este evento ainda esta acontecendo? (Verifique em um clique)"
+          finished: "Evento finalizado - %{event}"
+        preview:
+          created: "Você é o gestor de um novo evento. '%{event}'' foi criado em %{place}."
+          needs_review: "'%{event}' precisa ser revisado ou será removido do mapa. Verifique se as informações do evento ainda estão corretas."
+          needs_urgent_review: "'%{event}' em breve será removido do mapa, porque o gestor do evento ainda não respondeu ao nosso e-mail."
+          expired: "'%{event}'' não foi atualizado em %{duration}, e foi removido do mapa. Atualize este evento para torná-lo público novamente."
+          finished: "'%{event}' foi concluído. A aula final deste evento acabou, então o evento ficará oculto no mapa."
+        header:
+          created: "Novo evento criado"
+          needs_review: "Evento precisa ser revisado"
+          needs_urgent_review: "Evento expira em breve"
+          escalation: "Gestor não respondeu"
+          expired: "Evento expirado"
+          finished: "Evento finalizado"
+        title:
+          created: "Você é o gestor de um novo evento"
+          needs_review: "Esses detalhes ainda estão corretos?"
+          needs_urgent_review: "Esses detalhes ainda estão corretos?"
+          escalation: "Você pode verificar se este evento ainda está acontecendo?"
+          expired: "Este evento ainda deveria estar acontecendo?"
+          finished: "É correto que este evento esteja terminado?"
+        byline:
+          created: "Criado em %{date}"
+          needs_review: "(Verifique em um clique)"
+          needs_urgent_review: "(Verifique em um clique)"
+          escalation: "(Entre em contato com o gestor do evento)"
+          expired: "(Verifique para restaurar o evento)"
+          finished: "Terminou em %{date}"
+        explanation:
+          created: "Você pode acessar o Atlas para atualizar seu evento a qualquer momento. Você receberá e-mails ocasionais para verificar se seu evento ainda está acontecendo. 🎉"
+          needs_review: "Verificar os programas de vez em quando mantém uma lista precisa das reuniões da Sahaja Yoga ao redor do mundo. 🙏"
+          needs_urgent_review: "Este evento será removido do mapa em breve, a menos seja avaliado sua acuracidade."
+          expired: "Este evento foi removido do mapa porque não foi atualizado recentemente. Para adicioná-lo de volta ao mapa, atualize o evento."
+          finished: "Este evento foi concluído, correto?"
+
+      registrations:
+        subject: "[Lembrete] Inscrições de novos eventos"
+        title: "Novos registros para"
+        preview:
+          zero: "Seu evento, \"%{event},\" não possui novos registros. Iniciando %{duration} a partir de agora em %{time}."
+          one: "Seu evento, \"%{event},\" tem %{count} novos registros. Iniciando %{duration} a partir de agora em %{time}."
+          other: "Seu evento, \"%{event},\" tem %{count} novos registros. Iniciando %{duration} a partir de agora em %{time}."
+        explanation:
+          one: "Seu evento tem %{count} novos registros."
+          other: "Seu evento tem %{count} novos registros."
+        byline:
+          zero: "Sem novos registros"
+          one: "%{count} Novo registro para %{date}"
+          other: "%{count} Novo registro para %{date}"
+        not_shown:
+          one: "%{count} novo registro não mostrado."
+          other: "%{count} novo registro não mostrado."
+        view_all: "Ver tudo"
+
+    manager:
+      welcome:
+        subject:
+          worldwide: "Bem-vindo! Agora você é um administrador no Sahaj Atlas."
+          country: "Bem-vindo! Agora você é um gestor nacional no Sahaj Atlas."
+          region: "Bem-vindo! Agora você é um gestor local no Sahaj Atlas."
+          area: "Bem-vindo! Agora você é um gestor local no Sahaj Atlas."
+          event: "Bem-vindo! Agora você é um gestor de eventos no Sahaj Atlas."
+          none: "Bem-vindo! Agora você é um gestor no Sahaj Atlas."
+        title: "Bem-vindo ao Sahaj Atlas"
+        preview:
+          worldwide: "Você foi convidado para se tornar um administrador do Sahaj Atlas."
+          country: "Você foi convidado para se tornar um gestor nacional de %{context}."
+          region: "Você foi convidado para se tornar um gestor local de %{context}."
+          area: "Você foi convidado para se tornar um gestor local da area %{context}."
+          event: "Você foi convidado para se tornar um gestor de eventos de \"%{context}\"."
+          none: "Você foi convidado para se tornar um gestor do Sahaj Atlas."
+        login: "Conecte-se"
+        view:
+          country: "Exibir país"
+          region: "Exibir região"
+          area: "Exibir área"
+          event: "Exibir evento"
+        byline:
+          worldwide: "Administrador global"
+          country: "Gestor Nacional de %{context}"
+          region: "Gestor local de %{context}"
+          area: "Gestor local de %{context}"
+          event: "Getor de eventos de \"%{context}\""
+        explanation:
+          worldwide: "Você foi convidado para se tornar um administrador do Sahaj Atlas. Será seu trabalho integrar novos gestores nacionais e ficar de olho na manutenção do atlas."
+          country: "Você foi convidado para se tornar um gestor nacional no Sahaj Atlas. Será sua responsabilidade criar cidades e regiões em seu país e designar gestores para gerenciar eventos nessas regiões."
+          region: "Você foi convidado para se tornar um gestor local no Sahaj Atlas. Será sua responsabilidade criar locais e listar eventos da Sahaja Yoga públicos em sua região."
+          area: "Você foi convidado para se tornar um gestor local no Sahaj Atlas. Será sua responsabilidade criar locais e listar eventos da Sahaja Yoga públicos em sua região."
+          event: "Você foi convidado para se tornar um gestor de eventos no Sahaj Atlas. Será sua responsabilidade manter seu evento atualizado."
+          none: "Você foi convidado para se tornar um gestor no Sahaj Atlas. Você ainda não recebeu nenhuma responsabilidade. Entre em contato conosco se precisar de ajuda."
+        data:
+          events: "Eventos"
+          venues: "Locais"
+      verify:
+        subject: "Seu endereço de e-mail deve ser verificado."
+        title: "Verificação de e-mail"
+        preview: "Para publicar seus eventos, devemos verificar seu endereço de e-mail."
+        verify: "Verificar"
+        byline:
+          changed: "Seu e-mail foi alterado recentemente."
+          event: "Você foi adicionado como gestor de eventos para \"%{event}\""
+        explanation:
+          changed: "Verifique seu e-mail para manter seus eventos publicados."
+          event: "Devemos verificar seu e-mail antes de podermos publicar o evento. Isso nos permitirá entrar em contato com você no futuro para garantir que o evento ainda esteja ativo."
+
+    country:
+      summary:
+        subject: "Atualização quinzenal %{country}"
+        title: "Atualização quinzenal"
+        preview: "Resumo das mudanças no %{country} nas últimas 2 semanas."
+        view: "Ver país"
+
+    place:
+      summary:
+        subject: "Atualização semanal para %{place}"
+        title: "Atualização semanal"
+        preview: "Resumo das mudanças em %{place} na última semana."
+        view: "Exibir região"
+
+    managed_record:
+      created:
+        subject:
+          country: "Agora você é um gestão nacional"
+          region: "Agora você é um gestão local"
+          area: "Agora você é um gestão local"
+          event: "Agora você é um gestor de eventos"
+          client: "Agora você é um gestor de aplicativos"
+        title:
+          country: "Gestor Nacional para %{record}"
+          region: "Gestor local para %{record}"
+          area: "Gestor local para %{record}"
+          event: "Gestor de eventos para %{record}"
+          client: "Gestor de Aplicativos para %{record}"
+        preview: "Você foi definido como gestor de %{record}."
+        byline:
+          country_html: "Você recebeu acesso para gerenciar um país, %{record}."
+          region_html: "Você recebeu acesso para gerenciar a região: %{record}."
+          area_html: "Você recebeu acesso para gerenciar a região: %{record}."
+          event_html: "Você recebeu acesso para gerenciar o evento, %{record}."
+          client_html: "Você recebeu acesso para gerenciar a configuração do aplicativo: %{record}."
+        explanation:
+          country: "Sua responsabilidade é criar regiões em seu país e atribuir gestores a essas regiões para configurar eventos. Você também pode criar espaços e eventos dentro do seu país."
+          region: "Sua responsabilidade é criar locais e eventos em sua região. Você também pode criar áreas personalizadas em sua região para as principais cidades e atribuir gestores a essas regiões."
+          area: "Sua responsabilidade é criar locais e eventos dentro de sua área local. Você também receberá um e-mail se algum evento em sua área estiver prestes a expirar e precisar de alguém para verificar se eles ainda estão corretos."
+          event: "Sua responsabilidade é manter suas aulas atualizadas. Você receberá um e-mail, de tempo em tempo, solicitando que confirme se as informações do evento ainda estão corretas."
+          client: "Agora você tem acesso às chaves de API que permitem incorporar o Sahaj Atlas em seu site ou aplicativo. Você também pode alterar a configuração padrão do mapa em seu site."
+        view: "Visualizar %{model}"

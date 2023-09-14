@@ -26,24 +26,34 @@ ru:
       fallback:
         nearby: "Ближайший центр медитации находится в"
         far: "Здесь пока нет занятий, ближайщий центр медитации находится в"
-        online: "There are no classes in this area, consider an" # TODO: Translate
-        online_event: "Online Class" # TODO: Translate
+        online: "Alternatively, try our" # TODO: Translate
+        online_event: "Онлайн Медитацию"
 
-    area: # TODO: Translate
-      header: "Events in %{area}"
+    area:
+      header: "Медитации в %{area}"
 
-    venue: # TODO: Translate
-      header: "Events at %{venue}"
+    venue:
+      header: "Медитации в %{venue}"
 
     event:
       register: "Записаться"
+      online_text: "online"  # TODO: Translate
       language: "Язык занятия" 
       directions: "Как нас найти"
       online: "Онлайн-класс"
       online_from: "Транслируется из %{city}"
-      tel: "тел"
-      distance: "%{distance} km away" # TODO: Translate
-      upcoming: "Starting soon" # TODO: Translate
+      distance: "%{distance} км"
+      upcoming: "Скоро начинается"
+      starting_date: "Начинается %{date}"
+      inactive:
+        dates: "Связаться с организатором, чтобы уточнить время"
+        notice: "Это занятие проводится по запросу"
+      contact:
+        title: "Свяжись с нами, чтобы уточнить время:"
+        tel: "тел"
+        email: "email"
+        meetup: "Meetup Page"
+        facebook: "Facebook Page"
 
     registration:
       header: "Записаться сейчас"
@@ -54,6 +64,7 @@ ru:
         name: "Имя"
         message: "Вопросы / Комментарии"
         submit: "Отправить"
+        email_invalid: "Please enter a valid email" # TODO: Translate
       notice:
         text: "Регистрируясь, вы соглашаетесь получать сообщения об этом мероприятии и о подобных мероприятиях в соответствии с нашей %{link}"
         link: "политикой конфиденциальности"

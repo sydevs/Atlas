@@ -6,7 +6,7 @@ class Mail::EventsController < Mail::ApplicationController
     @status = params[:status]&.to_sym || @event.status.to_sym || :created
     @status = :created if @status == :verified
     @manager = @event.manager if params[:self]
-    @subject = I18n.translate(@status, scope: 'mail.event.status.subject')
+    @subject = I18n.translate(@status, scope: 'mail.event.status.subject', event: @event.label, city: @event.area.name)
   end
 
   def registrations

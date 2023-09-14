@@ -15,6 +15,8 @@ class Manager < ApplicationRecord
   has_many :areas, through: :managed_records, source: :record, source_type: 'Area', dependent: :destroy
   has_many :area_venues, through: :areas, source: :venues
   has_many :area_regions, through: :areas, source: :region
+  has_many :event_areas, through: :events, source: :areas
+  # has_many :event_regions, through: :event_areas, source: :region
   has_many :venues, through: :events
   has_many :events
   has_many :clients
@@ -62,7 +64,7 @@ class Manager < ApplicationRecord
   def managed_by? manager, super_manager: nil
     return true if self == manager && super_manager != true
     return true if manager.administrator? && super_manager != false
-    return true if parent.managed_by?(manager)
+    return true if parent&.managed_by?(manager)
 
     false
   end
@@ -116,8 +118,8 @@ class Manager < ApplicationRecord
     else
       regions_via_country = Region.where(country_code: countries.select(:country_code).where(enable_regions: true))
       regions_via_area = Region.where(id: area_regions)
-      regions_via_venue = Region.where(id: area_venues)
-      Region.where(id: regions).or(regions_via_country).or(regions_via_area).or(regions_via_venue)
+      # regions_via_event = Region.where(id: event_regions)
+      Region.where(id: regions).or(regions_via_country).or(regions_via_area) # .or(regions_via_event)
     end
   end
 

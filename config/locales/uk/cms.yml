@@ -131,11 +131,16 @@ uk:
         registration_notification: "How often do you want to receive notifications about new registrations?" # TODO: Translate
         registration_url: "URL-адреса реєстрації буде встановлено автоматично, якщо встановлено режим \"%{native}.\""
         registration_limit: "Limit the number of registrations to this amount." # TODO: Translate
-        registration_question: "What questions should seekers be asked when they register for the class." # TODO: Translate
+        registration_question: "What questions should seekers be asked when they register for the class?" # TODO: Translate
         online: "Установіть цей прапорець, якщо програма буде проходити онлайн."
         online_url: "Якщо курс онлайн, це посилання є місцем, де шукачі мають приєднатися до класу (наприклад, посилання на Zoom, YouTube, Google Meet тощо)."
-        phone_number: "Місцевий номер телефону, за яким шукачі можуть зателефонувати, щоб поставити запитання."
-        phone_name: "Ім’я йога, який відповість на телефонний дзвінок."
+        expiration_period: "How long should we wait until we ask you if the program is still accurate?" # TODO: Translate
+        contact_info: # TODO: Translate
+          email_address: "An email address which will be published on the website."
+          email_name: "The first name of the yogi who will respond to emails."
+          phone_number: "Місцевий номер телефону, за яким шукачі можуть зателефонувати, щоб поставити запитання."
+          phone_name: "Ім’я йога, який відповість на телефонний дзвінок."
+          web_links: "Websites where seekers can find more information about this potential program."
         manager: # TODO: Translate
           view_fields: "View manager fields"
           field: "Менеджером повинен бути йог(ні), який візьме на себе відповідальність за цю подію. Щотижня менеджеру буде надсилатися список нових реєстрацій, а кожні кілька місяців він проситиме підтвердити, що інформація про програму все ще правильна."
@@ -365,6 +370,9 @@ uk:
           concert:
             title: :activerecord.attributes.event.categories.concert
             description: "Велика одноразова культурна подія, яка зазвичай включає музику, можливо танці та реалізацію."
+          inactive:
+            title: :activerecord.attributes.event.categories.inactive
+            description: "This for cities where a yogi is present, but they don't run regular classes. The seeker can contact the yogi through this listing. This type can also be used for any other type of irregular class that requires the seeker to contact the yogi directly for information." # TODO: Translate
       expiration:
         title: "Чому моя подія не відображається на карті?"
         alt_title: "Як працює термін дії події?"
@@ -413,6 +421,14 @@ uk:
       contact:
         title: "У мене є інші запитання чи пропозиції"
         description: "Якщо вам потрібна додаткова допомога або ви хочете допомогти з розробкою Сахадж Атласу, будь ласка, напишіть на електронну адресу нижче. Будь ласка, напишіть своє повідомлення англійською мовою."
+
+    category_tags: # TODO: Translate
+      dropin: "Drop-In"
+      single: "Single"
+      course: "Course"
+      festival: "Festival"
+      concert: "Concert"
+      inactive: "Inactive"
 
     country_codes: # TODO: Translate
       gb: "UK"

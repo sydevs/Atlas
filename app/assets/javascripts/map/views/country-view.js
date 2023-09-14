@@ -24,22 +24,8 @@ function CountryView() {
           href: '/',
         }),
         m('.sya-panel__header', country.label),
-        m(Navigation, {
-          optional: true,
-          items: Object.entries(AtlasEvent.LAYER).map(([key, layer]) => {
-            const active = vnode.attrs.layer == layer
-            const count = (key == 'online' ? country.onlineEventIds.length : country.offlineEventIds.length)
-            return {
-              label: Util.translate(`navigation.desktop.${key}`),
-              active: active,
-              badge: count,
-              href: '/:layer/country/:id',
-              params: { layer: layer, id: country.id },
-            }
-          })
-        }),
         m('.sya-list', country.regions.map(function(region) {
-          const count = vnode.attrs.layer == AtlasEvent.LAYER.offline ? region.offlineEventIds.length : region.onlineEventIds.length
+          const count = region.offlineEventIds.length + region.onlineEventIds.length
           if (!count) return
 
           return m(SimpleCard, {

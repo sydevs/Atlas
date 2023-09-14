@@ -33,6 +33,7 @@ function ShareModal() {
         url: url,
       })
   
+      fathom.trackGoal('CHANWZ9M', 0)
       resolve()
     })
   }
@@ -47,7 +48,7 @@ function ShareModal() {
     view: function(vnode) {
       if (!vnode.attrs.enabled) return
 
-      const backPath = m.route.get().split('?')[0]
+      const backPath = Util.modifyURLParameters(m.route.get(), [], ['share'])
       const select = vnode.attrs.selection || {}
 
       AtlasApp.data.getRecord(select.model, select.id).then(function(record) {
@@ -87,6 +88,7 @@ function ShareModal() {
               return m(`a.sya-share__${key}`, {
                 href: formatUrl(template, selection.url),
                 target: '_blank',
+                onclick: () => fathom.trackGoal('CHANWZ9M', 0)
               }, m('.sya-icon', { class: `sya-icon--${key}` }))
             })
           )

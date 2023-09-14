@@ -26,7 +26,7 @@ nl:
       fallback:
         nearby: "De dichtsbijzijnde gratis meditatie les is in"
         far: "Er zijn geen lessen in deze buurt, de dichtsbijzijnde gratis meditatie les is in"
-        online: "Er zijn geen lessen in deze buurt, probeer een"
+        online: "Alternatively, try our" # TODO: Translate
         online_event: "Online Les"
 
     area:
@@ -37,13 +37,23 @@ nl:
 
     event:
       register: "Registeren"
+      online_text: "online"  # TODO: Translate
       language: "Deze les is in"
       directions: "Routebeschrijving"
       online: "Online Les"
       online_from: "Gepresenteerd vanuit %{city}"
-      tel: "tel"
       distance: "%{distance} km away" # TODO: Translate
       upcoming: "Starting soon" # TODO: Translate
+      starting_date: "Starting %{date}" # TODO: Translate
+      inactive: # TODO: Translate
+        dates: "Contact organisers for timings"
+        notice: "This class is held by request"
+      contact: # TODO: Translate
+        title: "Contact us for timings:"
+        tel: "tel"
+        email: "email"
+        meetup: "Meetup Page"
+        facebook: "Facebook Page"
 
     registration:
       header: "Registeer nu"
@@ -54,6 +64,7 @@ nl:
         name: "Naam"
         message: " Vragen / Commentaar "
         submit: "Bevestigen"
+        email_invalid: "Please enter a valid email" # TODO: Translate
       notice:
         text: "Indien je bevestigt ga je akkoord met onze %{link}."
         link: "privacybeleid"
@@ -76,6 +87,7 @@ nl:
       invite: "Nodig een vriend uit"
       share: "Delen"
       copied: "Gekopieerd!"
+    
     weekdays:
       0: "Zondag"
       1: "Maandag"

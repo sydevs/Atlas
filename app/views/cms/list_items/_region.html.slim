@@ -1,9 +1,11 @@
 
-.item
-  = model_icon Region
-  .content
+tr
+  td.collapsing
+    = model_icon Region
+  
+  td
     - if policy(region).show?
       - url = @context == region.parent ? url_for([:cms, region, :areas]) : url_for([:cms, region])
-      a.header href=url = region.short_label || translate('cms.hints.unnamed')
+      a href=url = region.short_label || translate('cms.hints.unnamed')
     - else
-      .header = region.short_label || translate('cms.hints.unnamed')
+      = region.short_label || translate('cms.hints.unnamed')

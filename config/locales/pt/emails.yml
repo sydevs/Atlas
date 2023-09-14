@@ -1,0 +1,39 @@
+pt:
+  emails: # These are translations for email that are sent to the seekers.
+    common:
+      view_in_browser: "Ver no navegador"
+      unsubscribe: "Cancelar subscrição"
+      reason: "Você recebeu este e-mail porque se inscreveu neste evento."
+      responses: "Suas respostas:"
+
+    confirmation:
+      offline:
+        subject: "Registro Confirmado - %{event_name}"
+        header: "Seu cadastro está confirmado, %{name}"
+        subheader: "Estamos felizes que você decidiu participar das aulas estamos ansiosos para meditarmos juntos!"
+        invite_a_friend: "Convide um amigo com este link"
+        get_directions: "Obter direções"
+        faqs:
+          - title: "O que eu devo trazer?"
+            content: "Não há necessidade de roupas especiais ou equipamentos."
+      online:
+        subject: :emails.confirmation.offline.subject # Do not translate
+        header: :emails.confirmation.offline.subject # Do not translate
+        subheader: :emails.confirmation.offline.subject # Do not translate
+        online_url: "Ou use este link para entrar no evento quando ele começar"
+        invite_a_friend: :emails.confirmation.offline.invite_a_friend # Do not translate
+        joining_title: "Como faço para participar?"
+        joining_content: "Use este link para entrar quando o evento começar. Você receberá este link por e-mail novamente uma hora antes do início do evento."
+        faqs:
+
+    reminder:
+      offline:
+        subject: "Começando amanhã - %{event_name}"
+        header: "Seu evento começa amanhã, %{name}"
+        subheader: "Estamos felizes que você decidiu participar das aulas estamos ansiosos para meditarmos juntos!"
+        action: :emails.confirmation.offline.get_directions
+      online:
+        subject: "Começando em breve - %{event_name}"
+        header: "Sua aula começa em uma hora, %{name}"
+        subheader: "A turma em que você se inscreveu está prestes a começar. Aqui está um link para participar no horário de início."
+        action: "Junte-se ao encontro"

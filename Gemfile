@@ -58,6 +58,7 @@ gem 'mini_magick' # Image processing during upload
 ### Internationalization
 gem 'countries' # Adds localized lists of countries and subdivisions
 gem 'i18n_data' # Adds localized lists of countries and languages
+gem 'kaminari-i18n' # Translation for paginations
 
 ### API
 gem 'rack-cors'

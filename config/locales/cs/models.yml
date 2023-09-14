@@ -2,9 +2,15 @@ cs:
   datetime:
     distance_in_words:
       soon: "brzy"
+      x_minutes: # TODO: Translate
+        one: "%{count} minute"
+        other: "%{count} minutes"
       x_weeks:
         one: "%{count} týden"
         other: "%{count} týdny"
+      x_months: # TODO: Translate
+        one: "%{count} month"
+        other: "%{count} months"
 
   activerecord:
     models:
@@ -200,18 +206,21 @@ cs:
           course: "Kurz meditace"
           public_event: "Stánek na veřejné akci"
           concert: "Meditační a hudební koncert"
+          inactive: "Inactive Class" # TODO: Translate
         category_labels:
           intro: "Úvodní kurz"
           intermediate: "Jdeme hlouběji"
           course: "Meditační kurz"
           public_event: "Stánek"
           concert: "Koncert"
+          inactive: "Beginner class" # TODO: Translate
         category_descriptions:
           intro: "První seznámení s tímto druhem meditace."
           intermediate: "Kurz pro ty, kteří již úvodní hodinu absolvovali."
           course: "Několikatýdenní kurz, který vás provede různými technikami meditace."
           public_event: "Nabíka výuky meditace na veřejné akci zdarma."
           concert: "Představení kombinující meditaci a hudbu nebo tanec"
+          inactive: "A program that runs infrequently or is on pause. Seekers can contact the yogi in charge for more info." # TODO: Translate
         description: "Popis"
         room: "Místnost"
         building: "Budova"
@@ -252,9 +261,17 @@ cs:
         end_time: "Čas konce"
         online: "Online kurz"
         online_url: "Odkaz na online meditační setkání"
-        phone_number: "Kontaktní číslo"
-        phone_name: "Jméno osoby pro telefonické hovory"
         language: "Jazyk"
+        expiration_period: "Expiration Period" # TODO: Translate
+        verification_streak: "Verification Streak" # TODO: Translate
+        contact_info: # TODO: Translate
+          email_address: "Contact Email"
+          email_name: "First Name for Emails"
+          phone_number: "Kontaktní číslo"
+          phone_name: "Jméno osoby pro telefonické hovory"
+          web_links: "Website Links"
+          facebook: "Facebook Group"
+          meetup: "Meetup Page"
         images: :activerecord.models.picture.plural # Do not translate
         venue_id: :activerecord.models.manager.single # Do not translate
         last_activity_on: :activerecord.attributes.generic.last_activity_on # Do not translate

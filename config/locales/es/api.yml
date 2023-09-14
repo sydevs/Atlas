@@ -1,0 +1,7 @@
+es:
+  api:
+    distance: "%{distance} km de distancia"
+    event:
+      label: "%{category} en %{venue}"
+      inactive_label: "%{category} en %{area}"
+      online_label: "%{category} de %{area}"

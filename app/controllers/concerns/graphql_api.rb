@@ -11,8 +11,6 @@ module GraphqlAPI
     category
     address
     languageCode
-    phoneName
-    phoneNumber
     online
     onlineUrl
     registrationMode
@@ -31,6 +29,14 @@ module GraphqlAPI
       timeZone
       recurrence
     }
+    contact {
+      phoneName
+      phoneNumber
+      emailName
+      emailAddress
+      meetup
+      facebook
+    }
     images {
       url
       thumbnailUrl
@@ -42,6 +48,7 @@ module GraphqlAPI
     label
     latitude
     longitude
+    radius
     directionsUrl
   }
 
@@ -50,6 +57,7 @@ module GraphqlAPI
     label
     latitude
     longitude
+    radius
   }
 
   def self.events online: nil

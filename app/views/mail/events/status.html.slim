@@ -7,20 +7,20 @@ ruby:
     finished: :end_date
   }[@status])
 
+  translation_key = @status == :needs_urgent_review && @event.manager != @manager ? :escalation : @status
+
 - content_for :preview, translate(@status, scope: 'mail.event.status.preview', event: @event.label, duration: time_ago_in_words(@event.updated_at), place: @event.area.label)
 
 .box
   h2
-    - if @status == :needs_urgent_review && @event.manager != @manager
-      = translate('mail.event.status.title.escalation')
-    - else
-      = translate(@status, scope: 'mail.event.status.title')
+    = translate(translation_key, scope: 'mail.event.status.header')
     .subtitle = @event.label
 
-= email_status_icon(@status)
+//= email_status_icon(@status)
 
-p.byline
-  = translate(@status, scope: 'mail.event.status.byline', date: timestamp.to_date.to_s(:long))
+h3
+  = translate(translation_key, scope: 'mail.event.status.title')
+  .subtitle = translate(translation_key, scope: 'mail.event.status.byline', date: timestamp.to_date.to_s(:long))
 
 - if @status == :needs_review || @status == :needs_urgent_review
   p.explanation
@@ -28,33 +28,27 @@ p.byline
 
 = render 'mail/events/data', event: @event, status: @status
 
-- if @status == :needs_urgent_review
-  p.explanation
-    - type = @event.manager != @manager ? :super_manager : :event_manager
-    = translate(type, scope: 'mail.event.status.escalation', place: @event.area.label)
-
 - if @status == :expired
   p.explanation.expiration = translate(@status, scope: 'mail.event.status.explanation')
 - else
   p.explanation = translate(@status, scope: 'mail.event.status.explanation')
 
-table.actions
-  - if %i[needs_review needs_urgent_review expired].include?(@status)
-    tr
-      td.question colspan=3 = translate('mail.event.status.question')
-  - if @status == :needs_urgent_review && @event.manager != @manager
-    tr
-      td colspan=3
-        a.button href="mailto:#{@event.manager.email}"
-          = translate('mail.event.contact')
-  tr
-    - if %i[needs_review needs_urgent_review expired].include?(@status)
-      td: a.button href=email_login(cms_event_verify_url(@event))
-        = translate('mail.event.status.verify')
-      td.or = translate('mail.event.status.or')
-    - elsif !%i[expired finished].include?(@status)
-      td: a.button href=@event.map_url
-        = translate('mail.event.view')
-    td: a.button href=email_login(cms_event_url(@event))
+- if %i[needs_review needs_urgent_review expired].include?(@status)
+  p.explanation = translate('mail.event.status.question')
+
+.actions
+  - if %i[needs_review needs_urgent_review expired finished].include?(@status)
+    - if @status == :needs_urgent_review
+      a.button href="mailto:#{@event.manager.email}"
+        = translate('mail.event.status.contact')
+      .or = translate('mail.event.status.or')
+    a.positive.button href=email_login(cms_event_verify_url(@event))
+      = translate('mail.event.status.verify')
+    .or = translate('mail.event.status.or')
+    a.negative.button href=email_login(cms_event_verify_url(@event))
+      = translate('mail.event.status.edit')
+  - else
+    a.button href=@event.map_url
+      = translate('mail.event.view')
+    a.button href=email_login(cms_event_url(@event))
       = translate('mail.event.edit')
-    

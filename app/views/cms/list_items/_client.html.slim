@@ -1,12 +1,15 @@
 
 - allow = @context ? policy(@context) : policy(:dashboard)
 
-.item
-  = model_icon Client
-  .content
+tr
+  td.collapsing
+    = model_icon(client.location_type&.constantize || Client)
+  
+  td
     - if policy(client).show?
-      a.header href=url_for([:cms, client]) = client.label
+      a href=url_for([:cms, client]) = client.label
     - else
-      .header = client.label
-    .description
-      = client.domain
+      = client.label
+  
+  td
+    = client.domain

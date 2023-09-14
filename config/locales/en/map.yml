@@ -24,9 +24,9 @@ en:
       more_info: "More Info"
       register: "Register"
       fallback:
-        nearby: "The closest free meditation class is at"
+        nearby: "There is no class in this area, the closest free meditation class is at"
         far: "There are no classes in this area, the closest free meditation class is in"
-        online: "There are no classes in this area, consider an"
+        online: "Alternatively, try our"
         online_event: "Online Class"
 
     area:
@@ -37,13 +37,23 @@ en:
 
     event:
       register: "Register"
+      online_text: "online"
       language: "This class is in"
       directions: "Get directions"
       online: "Online Class"
       online_from: "Hosted from %{city}"
-      tel: "tel"
       distance: "%{distance} km away"
       upcoming: "Starting soon"
+      starting_date: "Starting %{date}"
+      inactive:
+        dates: "Contact organisers for timings"
+        notice: "This class is held by request"
+      contact:
+        title: "Contact us for timings:"
+        tel: "tel"
+        email: "email"
+        meetup: "Meetup Page"
+        facebook: "Facebook Page"
 
     registration:
       header: "Register now"
@@ -54,6 +64,7 @@ en:
         name: "Name"
         message: "Questions / Comments"
         submit: "Confirm"
+        email_invalid: "Please enter a valid email"
       notice:
         text: "By submitting you confirm you agree to receive follow up messages about this and similar events, in accordance with our %{link}."
         link: "privacy policy"

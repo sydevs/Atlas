@@ -37,6 +37,10 @@ const Util = {
     return text
   },
 
+  distance_between(p1, p2) {
+    return Util.distance(p1.latitude, p1.longitude, p2.latitude, p2.longitude)
+  },
+
   distance(lat1, lon1, lat2, lon2, unit = 'K') {
     if ((lat1 == lat2) && (lon1 == lon2)) {
       return 0
@@ -70,5 +74,52 @@ const Util = {
   areArraysEqual(a1, a2) {
     /* WARNING: arrays must not contain {objects} or behavior may be undefined */
     return JSON.stringify(a1) == JSON.stringify(a2)
-  }
+  },
+
+  withProtocol(url) {
+    if (!/^https?:\/\//i.test(url)) {
+      return '//' + url
+    } else {
+      return url
+    }
+  },
+
+  modifyURLParameters(url, add = [], remove = []) {
+    let path = false
+
+    if (typeof URLSearchParams !== 'undefined') {
+      if (url[0] == "/") {
+        path = url
+        url = window.location.origin + path
+      }
+
+      url = new URL(url)
+      const params = new URLSearchParams(url.search)
+
+      add.forEach((value) => {
+        parts = value.split('=')
+        params.set(parts[0], parts[1])
+      })
+      
+      remove.forEach(key => {
+        params.delete(key)
+      })
+
+      if (path) {
+        return `${url.pathname}?${params.toString()}${url.hash}`
+      } else {
+        return `${url.origin}${url.pathname}?${params.toString()}${url.hash}`
+      }
+    } else {
+      console.log(`Your browser ${navigator.appVersion} does not support URLSearchParams`)
+    }
+  },
+
+  withProtocol(url) {
+    if (!/^https?:\/\//i.test(url)) {
+      return '//' + url
+    } else {
+      return url
+    }
+  },
 }

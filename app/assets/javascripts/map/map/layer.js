@@ -183,6 +183,7 @@ class AbstractMapLayer {
     if (!this.visible || this.#loading) return Promise.reject()
 
     const features = this._mapbox.queryRenderedFeatures({ layers: [this._layers.points, this._layers.clusters] })
+    // const features = this._mapbox.querySourceFeatures(this._layers.points)
 
     return Promise.all(features.map(
       feature => this.#getRenderedEventIds(feature))

@@ -1,7 +1,7 @@
 @import '../_mixins'
 
 .sya-registration
-  margin-top: 65px
+  margin-top: 25px
   margin-bottom: 0
   position: relative
 
@@ -14,7 +14,6 @@
 
 .sya-registration__header
   margin: auto
-  margin-top: 50px
   margin-bottom: 20px
   color: $color-grey-dark
   font-size: 18px
@@ -111,6 +110,12 @@ textarea.sya-registration__textarea
   &::-ms-input-placeholder
     color: $color-grey-light
 
+  &.error_input
+    border: 1px solid $color-orange !important
+    -webkit-transition: 0.5s
+    transition: 0.5s
+    outline: none !important
+
 .sya-registration__notice
   text-align: center
   margin-bottom: 20px
@@ -124,7 +129,7 @@ textarea.sya-registration__textarea
   transition: all 0.2s ease
   cursor: pointer
   text-decoration: none
-  color: $color-blue
+  color: $color-cyan
 
   &:hover
     color: $color-grey-dark
@@ -138,6 +143,9 @@ textarea.sya-registration__textarea
     color: $color-orange
 
   &.error
+    color: $color-orange
+
+  &.invalid
     color: $color-orange
 
 .sya-registration__submit
@@ -203,6 +211,8 @@ $circle-size: 360px
     line-height: 1.16667
     letter-spacing: 0.8px
     color: $color-grey-dark
+    max-width: 260px
+    margin: auto
     margin-bottom: 25px
     margin-top: 40px
 
@@ -225,14 +235,15 @@ $circle-size: 360px
     justify-content: space-evenly
 
     width: 400px
-    max-width: 100%
-    margin-top: 20px
+    max-width: 90vw
+    margin-top: 40px
 
     @include desktop-or-larger
       margin-top: 40px
 
     > *
-      color: inherit
+      color: inherit !important
+      margin: 0 10px
 
   &__share
     width: #{80 + 34}px

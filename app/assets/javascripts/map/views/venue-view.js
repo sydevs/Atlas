@@ -23,8 +23,8 @@ function VenueView() {
         m(NavigationButton, {
           float: 'left',
           icon: 'left',
-          href: AtlasApp.config.default_view == 'list' ? '/:layer/area/:id' : '/:layer',
-          params: { layer: AtlasEvent.LAYER.offline, id: venue.parentId }
+          href: AtlasApp.config.default_view == 'list' ? '/area/:id' : '/',
+          params: { id: venue.parentId }
         }),
         m('.sya-panel__header', Util.translate('venue.header', { venue: venue.label })),
           m('.sya-list', venue.events ? venue.events.map(function(event) {

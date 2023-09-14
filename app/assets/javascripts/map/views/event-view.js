@@ -1,6 +1,6 @@
 /* exported EventView */
 
-/* global m, Loader, EventInfo, ImageCarousel, Registration, NavigationButton, App */
+/* global m, Loader, EventInfo, ImageCarousel, Registration, NavigationButton, BackNavigationButton, App, Util */
 
 function EventView() {
   let event = null
@@ -16,14 +16,14 @@ function EventView() {
     view: function() {
       if (!event) return m(Loader)
 
-      let href = '/:layer/:model/:id'
-      let params = { layer: event.layer }
+      let href = '/:model/:id'
+      let params = {}
 
       if (event.location.getEventIds(event.layer).length > 1) {
         params['model'] = event.location.type.toLowerCase()
         params['id'] = event.location.id
       } else if (AtlasApp.config.search) {
-        href = '/:layer'
+        href = '/'
       } else {
         params['model'] = event.location.parentType.toLowerCase()
         params['id'] = event.location.parentId
@@ -31,7 +31,7 @@ function EventView() {
 
       return [
         //m(EventMetadata, { event: event }),
-        m(NavigationButton, {
+        m(BackNavigationButton, {
           float: 'left',
           icon: 'left',
           href: href,
@@ -40,12 +40,11 @@ function EventView() {
         m(NavigationButton, {
           float: 'right',
           icon: 'share',
-          href: `/:layer/event/:id?share=1`,
-          params: { id: event.id, layer: event.layer },
+          href: Util.modifyURLParameters(m.route.get(), ['share=1']),
         }),
         m(EventInfo, event),
         event.images.length > 0 ? m(ImageCarousel, { images: event.images }) : null,
-        m(Registration, event),
+        event.category != 'inactive' ? m(Registration, event) : null,
       ]
     }
   }

@@ -3,9 +3,15 @@ uk:
   datetime:
     distance_in_words:
       soon: "кілька хвилин"
+      x_minutes: # TODO: Translate
+        one: "%{count} minute"
+        other: "%{count} minutes"
       x_weeks:
         one: "%{count} тиждень"
         other: "%{count} тижнів"
+      x_months: # TODO: Translate
+        one: "%{count} month"
+        other: "%{count} months"
 
   activerecord:
     models:
@@ -201,18 +207,21 @@ uk:
           course: "Курс з медитації"
           festival: "Stall at Public Event"
           concert: "Медитація та музичний концерт"
+          inactive: "Inactive Class"
         category_labels: # TODO: Translate
           dropin: "Drop-In"
           single: "Meditation"
           course: "Курс з медитації"
           festival: "Stall"
           concert: "Концерт"
+          inactive: "Beginner class"
         category_descriptions: # TODO: Translate
           dropin: "A standard weekly class, where seekers can join at any time."
           single: "A one-off class, suitable for a tour or other special event."
           course: "A fixed-duration course where seekers can only join at the start of the course."
           festival: "A stand at a public event, where seekers can show up without registering."
           concert: "Вистава, що поєднує медитацію та музику чи танець."
+          inactive: "A program that runs infrequently or is on pause. Seekers can contact the yogi in charge for more info."
         description: "Опис"
         room: "Кімната"
         building: "Будівля / Кімната"
@@ -253,8 +262,16 @@ uk:
         end_time: "Час закінчення"
         online: "Онлайн клас"
         online_url: "Посилання на онлайн-зустріч"
-        phone_number: "Контактний номер"
-        phone_name: "Ім’я для телефонних дзвінків."
+        expiration_period: "Expiration Period" # TODO: Translate
+        verification_streak: "Verification Streak" # TODO: Translate
+        contact_info: # TODO: Translate
+          email_address: "Contact Email"
+          email_name: "First Name for Emails"
+          phone_number: "Контактний номер"
+          phone_name: "Ім’я для телефонних дзвінків."
+          web_links: "Website Links"
+          facebook: "Facebook Group"
+          meetup: "Meetup Page"
         language: :activerecord.attributes.generic.language # Do not translate
         images: :activerecord.models.picture.plural # Do not translate
         venue_id: :activerecord.models.manager.single # Do not translate

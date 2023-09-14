@@ -49,7 +49,8 @@ function MapContainer() {
       })
 
       map.addEventListener('move', () => {
-        AtlasApp.data.clearCache('lists')
+        AtlasApp.data.clearCache('lists', 'all')
+        AtlasApp.data.clearCache('lists', 'offline')
         AtlasApp.data.clearCache('sortedLists')
       })
 

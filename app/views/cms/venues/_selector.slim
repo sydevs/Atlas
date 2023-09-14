@@ -17,7 +17,7 @@
       .header
       .meta
 
-- unless @record.new_record?
+- unless @record.new_record? || @record.venue.nil?
   #map data-latitude=@record.venue.latitude data-longitude=@record.venue.longitude data-circle=[@record.area.latitude, @record.area.longitude, @record.area.radius] data-error=(@record.errors.include?(:venue) ? 'true' : nil)
   = f.error :venue
 
