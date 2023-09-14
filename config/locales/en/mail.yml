@@ -66,6 +66,7 @@ en:
         verify: "Yes, details are correct"
         edit: "No, edit the program"
         or: "or"
+        expiration: "Event will expire in %{time}."
         subject:
           created: "New Event Created - %{event}"
           needs_review: "Are your meeting details correct? (Verify in one click)"
@@ -105,6 +106,9 @@ en:
           needs_urgent_review: "This event will be removed from the map soon, unless it's accuracy is checked."
           expired: "This event has been removed from the map because it has not been updated recently. To add it back to the map, update the event."
           finished: "This event has concluded, is that correct?"
+        escalation:
+          event_manager: "This event, which you manage, urgently needs to be checked for accuracy. This is the last reminder you will receive. We've also emailed the managers of the %{place} region to make sure this event isn't removed by mistake."
+          super_manager: "You are a manager for %{place}. This warning is being sent to you because this event's manager has not yet responded to our email."
 
       registrations:
         subject: "[Reminder] New Event Registrations"

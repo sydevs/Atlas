@@ -1,0 +1,16 @@
+current directory: /Users/siddharthalethbridge/Desktop/sids_work/coding/Sahaj/Atlas/vendor/bundle/ruby/2.7.0/gems/websocket-driver-0.7.5/ext/websocket-driver
+/Users/siddharthalethbridge/.rvm/rubies/ruby-2.7.6/bin/ruby -I /Users/siddharthalethbridge/.rvm/rubies/ruby-2.7.6/lib/ruby/2.7.0 -r ./siteconf20230522-13931-1tbhdez.rb extconf.rb
+creating Makefile
+
+current directory: /Users/siddharthalethbridge/Desktop/sids_work/coding/Sahaj/Atlas/vendor/bundle/ruby/2.7.0/gems/websocket-driver-0.7.5/ext/websocket-driver
+make "DESTDIR=" clean
+
+current directory: /Users/siddharthalethbridge/Desktop/sids_work/coding/Sahaj/Atlas/vendor/bundle/ruby/2.7.0/gems/websocket-driver-0.7.5/ext/websocket-driver
+make "DESTDIR="
+compiling websocket_mask.c
+linking shared-object websocket_mask.bundle
+ld: warning: -undefined dynamic_lookup may not work with chained fixups
+
+current directory: /Users/siddharthalethbridge/Desktop/sids_work/coding/Sahaj/Atlas/vendor/bundle/ruby/2.7.0/gems/websocket-driver-0.7.5/ext/websocket-driver
+make "DESTDIR=" install
+/usr/local/opt/coreutils/bin/ginstall -c -m 0755 websocket_mask.bundle ./.gem.20230522-13931-1c0osjh

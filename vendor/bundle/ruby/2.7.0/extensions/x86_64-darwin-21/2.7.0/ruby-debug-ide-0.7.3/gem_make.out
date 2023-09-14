@@ -1,0 +1,7 @@
+current directory: /Users/siddharthalethbridge/Desktop/sids_work/coding/Sahaj/Atlas/vendor/bundle/ruby/2.7.0/gems/ruby-debug-ide-0.7.3/ext
+/Users/siddharthalethbridge/.rvm/rubies/ruby-2.7.6/bin/ruby mkrf_conf.rb
+Installing base gem
+Building native extensions. This could take a while...
+
+current directory: /Users/siddharthalethbridge/Desktop/sids_work/coding/Sahaj/Atlas/vendor/bundle/ruby/2.7.0/gems/ruby-debug-ide-0.7.3/ext
+/Users/siddharthalethbridge/.rvm/rubies/ruby-2.7.6/bin/ruby -I/Users/siddharthalethbridge/.rvm/rubies/ruby-2.7.6/lib/ruby/2.7.0/rubygems -rrubygems /Users/siddharthalethbridge/Desktop/sids_work/coding/Sahaj/Atlas/vendor/bundle/ruby/2.7.0/gems/rake-13.0.6/exe/rake RUBYARCHDIR\=/Users/siddharthalethbridge/Desktop/sids_work/coding/Sahaj/Atlas/vendor/bundle/ruby/2.7.0/extensions/x86_64-darwin-21/2.7.0/ruby-debug-ide-0.7.3 RUBYLIBDIR\=/Users/siddharthalethbridge/Desktop/sids_work/coding/Sahaj/Atlas/vendor/bundle/ruby/2.7.0/extensions/x86_64-darwin-21/2.7.0/ruby-debug-ide-0.7.3

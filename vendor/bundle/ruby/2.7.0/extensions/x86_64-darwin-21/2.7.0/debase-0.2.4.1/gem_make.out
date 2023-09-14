@@ -1,0 +1,23 @@
+current directory: /Users/siddharthalethbridge/Desktop/sids_work/coding/Sahaj/Atlas/vendor/bundle/ruby/2.7.0/gems/debase-0.2.4.1/ext/attach
+/Users/siddharthalethbridge/.rvm/rubies/ruby-2.7.6/bin/ruby -I /Users/siddharthalethbridge/.rvm/rubies/ruby-2.7.6/lib/ruby/2.7.0 -r ./siteconf20230620-65339-78rhpk.rb extconf.rb
+checking for vm_core.h... yes
+checking for iseq.h... yes
+checking for version.h... yes
+checking for vm_core.h... yes
+checking for vm_insnhelper.h... yes
+checking for vm_core.h... yes
+checking for method.h... yes
+creating Makefile
+
+current directory: /Users/siddharthalethbridge/Desktop/sids_work/coding/Sahaj/Atlas/vendor/bundle/ruby/2.7.0/gems/debase-0.2.4.1/ext/attach
+make "DESTDIR=" clean
+
+current directory: /Users/siddharthalethbridge/Desktop/sids_work/coding/Sahaj/Atlas/vendor/bundle/ruby/2.7.0/gems/debase-0.2.4.1/ext/attach
+make "DESTDIR="
+compiling attach.c
+linking shared-object attach.bundle
+ld: warning: -undefined dynamic_lookup may not work with chained fixups
+
+current directory: /Users/siddharthalethbridge/Desktop/sids_work/coding/Sahaj/Atlas/vendor/bundle/ruby/2.7.0/gems/debase-0.2.4.1/ext/attach
+make "DESTDIR=" install
+/usr/local/opt/coreutils/bin/ginstall -c -m 0755 attach.bundle ./.gem.20230620-65339-10qr0mw

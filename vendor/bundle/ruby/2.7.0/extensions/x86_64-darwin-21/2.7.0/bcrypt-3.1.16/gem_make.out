@@ -1,0 +1,24 @@
+current directory: /Users/siddharthalethbridge/Desktop/sids_work/coding/Sahaj/Atlas/vendor/bundle/ruby/2.7.0/gems/bcrypt-3.1.16/ext/mri
+/Users/siddharthalethbridge/.rvm/rubies/ruby-2.7.6/bin/ruby -I /Users/siddharthalethbridge/.rvm/rubies/ruby-2.7.6/lib/ruby/2.7.0 -r ./siteconf20230522-13931-uw3gf9.rb extconf.rb
+creating Makefile
+
+current directory: /Users/siddharthalethbridge/Desktop/sids_work/coding/Sahaj/Atlas/vendor/bundle/ruby/2.7.0/gems/bcrypt-3.1.16/ext/mri
+make "DESTDIR=" clean
+
+current directory: /Users/siddharthalethbridge/Desktop/sids_work/coding/Sahaj/Atlas/vendor/bundle/ruby/2.7.0/gems/bcrypt-3.1.16/ext/mri
+make "DESTDIR="
+compiling bcrypt_ext.c
+compiling crypt_blowfish.c
+gcc  -D__SKIP_GNU  -I/usr/local/opt/libyaml/include -I/usr/local/opt/libksba/include -I/usr/local/opt/readline/include -I/usr/local/opt/zlib/include -I/usr/local/opt/openssl@1.1/include -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE -D_DARWIN_UNLIMITED_SELECT -D_REENTRANT    -c -o x86.o x86.S
+compiling crypt_gensalt.c
+compiling wrapper.c
+wrapper.c:182:60: warning: declaration of 'struct crypt_data' will not be visible outside of this function [-Wvisibility]
+char *crypt_r(const char *key, const char *setting, struct crypt_data *data)
+                                                           ^
+1 warning generated.
+linking shared-object bcrypt_ext.bundle
+ld: warning: -undefined dynamic_lookup may not work with chained fixups
+
+current directory: /Users/siddharthalethbridge/Desktop/sids_work/coding/Sahaj/Atlas/vendor/bundle/ruby/2.7.0/gems/bcrypt-3.1.16/ext/mri
+make "DESTDIR=" install
+/usr/local/opt/coreutils/bin/ginstall -c -m 0755 bcrypt_ext.bundle ./.gem.20230522-13931-14my5lm

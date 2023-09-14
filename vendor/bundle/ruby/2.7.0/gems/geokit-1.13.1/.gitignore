@@ -1,0 +1,11 @@
+.loadpath
+.project
+pkg
+.idea
+nbproject
+*.swp
+Gemfile.lock
+*.idea
+coverage
+.ruby-gemset
+.ruby-version
