@@ -12,7 +12,7 @@ module Mail::ApplicationHelper
     created: '#21ba45',
     needs_review: '#f2711c',
     needs_urgent_review: '#db2828',
-    expired: '#008080',
+    expired: '#db2828',
     finished: '#1e5b82',
   }.freeze
 
