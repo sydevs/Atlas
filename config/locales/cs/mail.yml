@@ -66,6 +66,7 @@ cs:
         verify: "Yes, details are correct"
         edit: "No, edit the program"
         or: "nebo"
+        expiration: "Event will expire in %{time}."
         subject:
           created: "Vytvořena nová událost - %{event}"
           needs_review: "Are your meeting details correct? (Verify in one click)"

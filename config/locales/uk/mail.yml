@@ -66,6 +66,7 @@ uk:
         verify: "Yes, details are correct"
         edit: "No, edit the program"
         or: "or"
+        expiration: "Event will expire in %{time}."
         subject:
           created: "Створено нову подію - %{event}"
           needs_review: "Are your meeting details correct? (Verify in one click)"

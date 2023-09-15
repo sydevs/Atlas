@@ -66,6 +66,7 @@ es:
         verify: "Sí, los detalles son correctos"
         edit: "No, editar el programa"
         or: "o"
+        expiration: "Event will expire in %{time}."  # TODO: Translate
         subject:
           created: "Nuevo evento creado - %{event}"
           needs_review: "¿Son correctos los detalles de la reunión? (Verificar con un click)"
