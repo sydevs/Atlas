@@ -69,3 +69,10 @@ h3.ui.small.dividing.grey.header = translate('cms.details.management_for_record'
     .content
       .header = translate_attribute(Client, :last_accessed_at)
       .description = @record.last_accessed_at ? time_ago_in_words(@record.last_accessed_at) : translate('cms.hints.never')
+  .item
+    i.palette.icon
+    .content
+      .header = translate('cms.hints.client.colors')
+      .description
+        - %i[primary_color secondary_color tertiary_color].each do |field|
+          .ui.circular.label style="background-color: #{@record.send(field)}"

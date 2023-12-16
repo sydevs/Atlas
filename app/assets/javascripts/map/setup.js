@@ -13,11 +13,22 @@ class SahajAtlas {
 
   constructor(container) {
     this.#container = container
-    this.#container.style = `height: calc(100vh - ${this.#container.offsetTop}px)`
+    let style = `height: calc(100vh - ${this.#container.offsetTop}px)`
+
     this.#config = window.sya.config
     this.data = new DataCache(this.#config.endpoint, this.#config.locale)
     document.addEventListener('resize', () => m.redraw())
 
+    // Setup theme colors
+    const colors = ["primary", "secondary", "tertiary"]
+    colors.forEach(key => {
+      let color = key+'_color'
+      if (color in this.#config) {
+        style += `; --sya-color-${key}: ${this.#config[color]}`
+      }
+    });
+
+    this.#container.style = style
     const params = new Proxy(new URLSearchParams(window.location.search), {
       get: (searchParams, prop) => searchParams.get(prop),
     })

@@ -36,6 +36,12 @@ table.ui.very.basic.table
 
 = f.hint translate('cms.hints.client.advanced')
 
+.ui.small.dividing.violet.header = translate('cms.hints.client.colors')
+.three.fields
+  = f.simple_fields_for :config do |ff|
+    - %i[primary_color secondary_color tertiary_color].each do |field|
+      = f.input field, input_html: { name: "client[config][#{field}]", value: f.object.send(field), style: ("--color: #{f.object.send(field)}" if f.object.send(field).present?) }, placeholder: translate('cms.hints.client.placeholder.color')
+
 - if policy(@record).set_manager?
   .ui.small.dividing.violet.header = translate('cms.forms.client.manager')
 

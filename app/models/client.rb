@@ -10,7 +10,7 @@ class Client < ApplicationRecord
     summary_email_sent_at
   ]
 
-  store_accessor :config, :embed_type, :routing_type, :default_view, :domain, :locale
+  store_accessor :config, :embed_type, :routing_type, :default_view, :domain, :locale, :primary_color, :secondary_color, :tertiary_color
 
   enum embed_type: %i[iframe script url], _suffix: 'embed'
   enum routing_type: %i[query path], _suffix: 'routing'

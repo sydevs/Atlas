@@ -1,0 +1,16 @@
+
+$theme: ("primary": #92bbb8, "secondary": #e08e79, "tertiary": #A1C3D7)
+
+#client_primary_color,
+#client_secondary_color,
+#client_tertiary_color
+  color: var(--color)
+  border: 2px solid var(--color)
+  font-weight: bold
+
+  &::placeholder
+    color: var(--color)
+
+@each $key in primary secondary tertiary
+  #client_#{$key}_color
+    --color: #{map-get($theme, $key)}
