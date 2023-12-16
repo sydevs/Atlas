@@ -22,7 +22,7 @@ module EventDecorator
   end
 
   def label
-    if custom_name.present?
+    if custom_name.present? && language_code == I18n.locale
       custom_name
     elsif inactive_category?
       I18n.translate('api.event.inactive_label', category: category_label, area: decorated_area.label)
