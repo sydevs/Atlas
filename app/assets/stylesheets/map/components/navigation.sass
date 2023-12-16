@@ -22,14 +22,14 @@
     right: 0
 
   @include tablet-or-larger
-    --color: #{$color-cyan}
+    --color: #{$theme-primary}
     --contrast-color: white
 
     margin: 1.5rem
     margin-bottom: 0.5rem
     line-height: 30px
 
-    border: 1px solid $color-cyan
+    border: 1px solid $theme-primary
     border-radius: 5px
 
 .sya-navigation__item
@@ -65,7 +65,7 @@
 
   &--active[data-badge]::after
     @include tablet-or-larger
-      --contrast-color: #{$color-cyan}
+      --contrast-color: #{$theme-primary}
       --color: white
 
 // ===== NAVIGATION BUTTONS ===== //

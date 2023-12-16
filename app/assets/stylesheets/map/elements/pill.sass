@@ -4,7 +4,7 @@
   padding: $panel-padding-mobile/2 $panel-padding-mobile
 
 .sya-pill
-  --color: #{$color-cyan}
+  --color: #{$theme-primary}
 
   display: inline-block
   vertical-align: text-bottom
@@ -18,6 +18,8 @@
   margin-right: 8px
   margin-bottom: 2px
 
+  transition: opacity 0.2s ease
+
   &--button
     background: transparentize(white, 0.02)
     border-width: 2px
@@ -27,10 +29,10 @@
     padding: 0 12px
 
     &:hover
-      color: transparentize(white, 0.2)
+      opacity: 0.8
 
   &--online
-    --color: #{$color-blue}
+    --color: #{$theme-tertiary}
     margin-left: 0px
 
   &--active

@@ -16,16 +16,20 @@ body
   font-family: $font-text
   font-feature-settings: "lnum"
   background: white
+  --sya-color-primary: #{$color-cyan}
+  --sya-color-secondary: #{$color-orange}
+  --sya-color-tertiary: #{$color-blue}
 
   *
     box-sizing: border-box
 
   input, textarea
     &:focus
-      outline: 1px solid $color-cyan
+      outline: 1px solid $theme-primary
 
   a
     text-decoration: none
+    color: inherit
 
 .sya-button
   @include button
