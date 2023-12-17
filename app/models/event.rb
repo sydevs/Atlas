@@ -130,7 +130,9 @@ class Event < ApplicationRecord
         occurrences.push(datetime + 1.day)
       end
     else
-      next_datetime = (datetime + 1.week).beginning_of_week(recurrence.to_sym)
+      next_datetime = datetime
+      # If the start date is not the correct weekday we need to move it to the correct day of the week
+      next_datetime = (datetime + 1.week).beginning_of_week(recurrence.to_sym) unless recurrence.to_sym == datetime.strftime("%A").downcase.to_sym
       next_datetime = next_datetime.change(hour: time[0], min: time[1])
       occurrences.push(next_datetime)
     end
