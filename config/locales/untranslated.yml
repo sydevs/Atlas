@@ -24,12 +24,12 @@ en:
           color: default
 
     region_types:
-      us: :cms.region_labels.state # United States
-      au: :cms.region_labels.state # Australia
+      us: :cms.region_labels.state # United States
+      au: :cms.region_labels.state # Australia
       ca: :cms.region_labels.province # Canada
-      br: :cms.region_labels.state # Brasil
+      br: :cms.region_labels.state # Brasil
       pt: :cms.region_labels.province # Portugal
-      es: :cms.region_labels.province # Spain
+      es: :cms.region_labels.province # Spain
       ar: :cms.region_labels.province # Argentina
       co: :cms.region_labels.departments # Colombia
       de: :cms.region_labels.state # Germany

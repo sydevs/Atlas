@@ -1,0 +1,16 @@
+fr:
+  sahaj_atlas: "Sahaj Atlas"
+
+  info:
+    index:
+      description: "Sahaj Atlas est un projet visant à cartographier les cours de méditation gratuits proposés par Sahaja Yoga à travers le monde."
+      view_map: "Voir la carte"
+      view_statistics: "Stats"
+      view_cms: "Gérer"
+      sign_in: "Connexion"
+    
+    about:
+      title: "A Propos"
+    
+    statistics:
+      title: "Statistiques"

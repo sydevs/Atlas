@@ -3,5 +3,5 @@ cs:
     distance: "%{distance} km daleko"
     event:
       label: "%{category} v %{venue}"
-      inactive_label: "%{category} in %{area}" # TODO: Translate
+      inactive_label: "%{category} in %{area}" # TODO: Translate
       online_label: "%{category} z %{area}"

@@ -136,7 +136,7 @@ pt:
         registration_question: "Quais perguntas devem ser feitas aos buscadores quando eles se inscrevem para a classe?"
         online: "Marque aqui se o programa for online."
         online_url: "Se a classe é online, este link é aquele que os buscadores devem acessar (tipo um link para Zoom, YouTube, Google Meet, Jitsy, etc)."
-        expiration_period: "How long should we wait until we ask you if the program is still accurate?" # TODO: Translate
+        expiration_period: "How long should we wait until we ask you if the program is still accurate?" # TODO: Translate
         contact_info:
           email_address: "Um endereço de email que será publicado no site."
           email_name: "O primeiro nome do(a) yogi(ni) que responderá os emails."

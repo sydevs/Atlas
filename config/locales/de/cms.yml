@@ -427,7 +427,7 @@ de:
         title: "Ich habe andere Fragen oder Vorschläge"
         description: "Wenn Sie weitere Hilfe benötigen oder wenn Sie mit der Entwicklung des Sahaj Atlas helfen möchten, schreiben Sie bitte an die unten angegebene E-Mail. Bitte schreiben Sie Ihre Nachricht in Englisch."
 
-    category_tags: # TODO: Translate
+    category_tags: # TODO: Translate
       dropin: "Drop-In"
       single: "Single"
       course: "Course"

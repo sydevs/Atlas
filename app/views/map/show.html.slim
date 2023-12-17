@@ -5,5 +5,5 @@ script src="https://cdn.usefathom.com/script.js" data-site="QQWCTIUV" defer=true
 javascript:
   window.sya = {}
   window.sya.config = JSON.parse('#{@config.to_json.html_safe}')
-  window.sya.translations = JSON.parse('#{translate('map').to_json.html_safe}')
-  window.sya.translations.languages = JSON.parse('#{I18nData.languages(I18n.locale).to_json.html_safe}')
+  window.sya.translations = JSON.parse('#{translate('map').to_json.gsub("'"){"\\'"}.html_safe}')
+  window.sya.translations.languages = JSON.parse('#{I18nData.languages(I18n.locale).to_json.gsub("'"){"\\'"}.html_safe}')

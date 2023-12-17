@@ -4,5 +4,5 @@ uk:
     distance: "%{distance} км"
     event:
       label: "%{category} біля %{venue}"
-      inactive_label: "%{category} in %{area}" # TODO: Translate
+      inactive_label: "%{category} in %{area}" # TODO: Translate
       online_label: "%{category} з %{area}"

@@ -1,0 +1,39 @@
+fr:
+  emails: # These are translations for email that are sent to the seekers.
+    common:
+      view_in_browser: "Afficher dans le navigateur"
+      unsubscribe: "Désinscription"
+      reason: "Vous avez reçu cet e-mail car vous vous êtes inscrit à cet événement."
+      responses: "Vos réponses :" # TODO: Translate
+
+    confirmation:
+      offline:
+        subject: "Inscription Confirmée - %{event_name}"
+        header: "Votre inscription est confirmée, %{name}"
+        subheader: "Nous sommes heureux que vous ayez décidé de participer à notre cours et avons hâte de méditer ensemble !"
+        invite_a_friend: "Invitez un ami avec ce lien"
+        get_directions: "Obtenir des itinéraires"
+        faqs:
+          - title: "Que dois-je apporter ?"
+            content: "Aucun équipement spécial n'est requis. Venez sans attentes."
+      online:
+        subject: :emails.confirmation.offline.subject # Do not translate
+        header: :emails.confirmation.offline.subject # Do not translate
+        subheader: :emails.confirmation.offline.subject # Do not translate
+        online_url: "Ou utilisez ce lien pour rejoindre l'événement dès qu'il commence"
+        invite_a_friend: :emails.confirmation.offline.invite_a_friend # Do not translate
+        joining_title: "Comment puis-je participer ?"
+        joining_content: "Utilisez ce lien pour participer au début de l'événement. Vous recevrez à nouveau ce lien par e-mail, 1 heure avant le début de l'événement."
+        faqs:
+
+    reminder:
+      offline:
+        subject: "A partir de demain - %{event_name}"
+        header: "Votre événement commence demain, %{name}"
+        subheader: "Nous sommes heureux que vous ayez décidé de participer à notre cours et avons hâte de méditer ensemble !"
+        action: :emails.confirmation.offline.get_directions
+      online:
+        subject: "Commence bientôt - %{event_name}"
+        header: "Votre cours commence dans 1 heure, %{name}"
+        subheader: "Le cours auquel vous vous êtes inscrit est sur le point de commencer. Voici un lien pour participer à l'heure de départ."
+        action: "Rejoindre la réunion"
