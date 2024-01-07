@@ -19,6 +19,13 @@ function MapView() {
           ),
         Util.isDevice('mobile') && offlineEventsCount === 0 &&
           m(ListFallback),
+        Util.isDevice('mobile') && offlineEventsCount >= 0 &&
+          m(Navigation, {
+            items: [{
+              label: Util.translate('navigation.mobile.offline').toUpperCase(),
+              href: '/events',
+            }]
+          }),
       ]
     }
   }
