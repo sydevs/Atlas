@@ -13,11 +13,22 @@ function EventView() {
         m.redraw()
       })
     },
+    onupdate: function() {
+      const id = m.route.param('id')
+      if (id != event.id) {
+        AtlasApp.data.getRecord(AtlasEvent, id).then(response => {
+          event = response
+          m.redraw()
+        })
+      }
+    },
     view: function() {
       if (!event) return m(Loader)
 
       let href = '/:model/:id'
       let params = {}
+
+      console.log('render event', event)
 
       if (event.location.getEventIds(event.layer).length > 1) {
         params['model'] = event.location.type.toLowerCase()

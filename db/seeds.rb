@@ -152,13 +152,15 @@ MANAGERS = Manager.limit(10).to_a
 MANAGERS.count.upto(10).each do
   name = "#{Faker::Name.first_name} #{Faker::Name.last_name}"
   email = "#{name.split(' ').first.parameterize}@example.com"
-  MANAGERS << Manager.create({
+  manager = Manager.create({
     name: name,
     email: email,
     language_code: 'en',
-    email_verified: true,
     email_verification_sent_at: Time.now,
   })
+
+  manager.update_column :email_verified, true
+  MANAGERS << manager
 end
 
 Manager.find_or_create_by(email: "admin@example.com") do |manager|

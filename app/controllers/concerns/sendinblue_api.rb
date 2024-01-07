@@ -16,6 +16,8 @@ module SendinblueAPI
   }.freeze
 
   def self.subscribe email, list_id, attributes
+    return if Rails.env.development?
+
     client = SibApiV3Sdk::ContactsApi.new
     list_id = SendinblueAPI::LISTS[list_id]
 
@@ -31,6 +33,8 @@ module SendinblueAPI
   end
 
   def self.unsubscribe email, list_id
+    return if Rails.env.development?
+    
     client = SibApiV3Sdk::ContactsApi.new
     list_id = SendinblueAPI::LISTS[list_id]
 
@@ -43,6 +47,8 @@ module SendinblueAPI
   end
 
   def self.update_contact email, attributes
+    return if Rails.env.development?
+    
     client = SibApiV3Sdk::ContactsApi.new
     attributes.deep_transform_keys! { |key| key.to_s.upcase }
 
@@ -53,6 +59,8 @@ module SendinblueAPI
   end
 
   def self.send_email template, config
+    return if Rails.env.development?
+    
     config.reverse_merge!({
       templateId: SendinblueAPI::TEMPLATES[template],
       # sender: { name: 'We Meditate', email: 'admin@wemeditate.com' },
@@ -73,6 +81,8 @@ module SendinblueAPI
   end
 
   def self.send_confirmation_email registration
+    return if Rails.env.development?
+    
     registration = registration.extend(RegistrationDecorator)
     event = registration.event.extend(EventDecorator)
     scope = "emails.confirmation.#{event.layer}"
@@ -114,6 +124,8 @@ module SendinblueAPI
   end
 
   def self.schedule_reminder_email registration
+    return if Rails.env.development?
+    
     registration = registration.extend(RegistrationDecorator)
     event = registration.event.extend(EventDecorator)
     scope = "emails.reminder.#{event.layer}"

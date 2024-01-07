@@ -35,7 +35,7 @@ class Map::ApplicationController < ActionController::Base
       I18n.locale = params[:locale]&.to_sym || :en
 
       @config = {
-        token: ENV['MAPBOX_ACCESSTOKEN'],
+        token: ENV.fetch('MAPBOX_ACCESSTOKEN'),
         endpoint: api_graphql_url,
         locale: I18n.locale,
         search: !(params[:path] =~ /region|country/),
