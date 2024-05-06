@@ -11,8 +11,8 @@ class ManagedRecord < ApplicationRecord
   scope :created_since, ->(since) { where('created_at >= ?', since) }
 
   # Callbacks
-  after_create :subscribe_to_sendinblue
-  after_destroy :unsubscribe_from_sendinblue
+  after_create :subscribe_to_sendinblue!
+  after_destroy :unsubscribe_from_sendinblue!
 
   # Methods
 
@@ -22,12 +22,12 @@ class ManagedRecord < ApplicationRecord
 
   private
 
-    def subscribe_to_sendinblue
+    def subscribe_to_sendinblue!
       manager.update_sendinblue! update_management: true
     end
 
-    def unsubscribe_from_sendinblue record
-      record.manager.update_sendinblue! update_management: true
+    def unsubscribe_from_sendinblue!
+      manager.update_sendinblue! update_management: true
     end
 
 end
