@@ -27,9 +27,9 @@ module Types
 
     def area_id
       if self.class == Area
-        id
+        object.id
       else
-        area.id
+        object.area.id
       end
     end
 
