@@ -61,8 +61,12 @@ class AtlasAPI {
             radius
             onlineEventIds
             offlineEventIds
-            areaId
             directionsUrl
+            parentId
+            parentType
+          }
+          area {
+            id
           }
         }`,
         venue: `on Venue {
@@ -71,7 +75,7 @@ class AtlasAPI {
           latitude
           longitude
           offlineEventIds
-          areaId
+          parentId
         }`,
         area: `on Area {
           id
@@ -133,7 +137,8 @@ class AtlasAPI {
               radius
               onlineEventIds
               offlineEventIds
-              areaId
+              parentId
+              parentType
             }
           }
         }`

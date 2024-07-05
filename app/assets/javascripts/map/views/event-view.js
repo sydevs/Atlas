@@ -37,7 +37,7 @@ function EventView() {
         href = '/'
       } else {
         params['model'] = 'area'
-        params['id'] = event.location.areaId
+        params['id'] = event.location.area.id
       }
 
       return [

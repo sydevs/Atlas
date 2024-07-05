@@ -20,17 +20,20 @@ module Types
     field :online_event_ids, [ID], null: false
     field :offline_event_ids, [ID], null: false
 
-    field :area_id, ID, null: false
+    field :parent_id, ID, null: false
+    field :parent_type, String, null: false
 
     field :created_at, GraphQL::Types::ISO8601DateTime, null: false
     field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
 
-    def area_id
-      if self.class == Area
-        object.id
-      else
-        object.area.id
-      end
+    def parent_id
+      # TODO: Warn if there is no parent
+      warn "Couldn't find parent for #{object} ##{object.id}" if object.parent.nil?
+      object.parent&.id
+    end
+
+    def parent_type
+      object.parent.class.model_name
     end
 
     def type
