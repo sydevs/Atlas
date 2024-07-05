@@ -1,10 +1,5 @@
 module EventDecorator
 
-  LAYER = {
-    offline: 'f',
-    online: 'n',
-  }
-
   def decorated_location
     @location ||= (online? ? decorated_area : decorated_venue)
   end

@@ -33,7 +33,9 @@ module Types
     end
 
     def parent_type
-      object.parent.class.model_name
+      # TODO: Warn if there is no parent
+      warn "Couldn't find parent for #{object} ##{object.id}" if object.parent.nil?
+      object.parent&.class&.model_name
     end
 
     def type

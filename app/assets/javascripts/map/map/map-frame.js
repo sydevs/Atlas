@@ -3,7 +3,7 @@
 
 class MapFrame extends EventTarget {
 
-  static EMPTY_STYLE = { version: 8, sources: {},layers: [] }
+  static EMPTY_STYLE = { version: 8, sources: {}, layers: [] }
 
   // Private variables
   #mapbox

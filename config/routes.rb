@@ -53,12 +53,10 @@ Rails.application.routes.draw do
 
     # For generating helpers
     get '/event/:event_id', to: 'application#show', as: :event
-    scope '(:layer)' do
-      get '/country/:country_id', to: 'application#show', as: :country
-      get '/region/:region_id', to: 'application#show', as: :region
-      get '/area/:area_id', to: 'application#show', as: :area
-      get '/venue/:venue_id', to: 'application#show', as: :venue
-    end
+    get '/country/:country_id', to: 'application#show', as: :country
+    get '/region/:region_id', to: 'application#show', as: :region
+    get '/area/:area_id', to: 'application#show', as: :area
+    get '/venue/:venue_id', to: 'application#show', as: :venue
   end
 
   namespace :cms do
