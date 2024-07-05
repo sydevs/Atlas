@@ -36,8 +36,8 @@ function EventView() {
       } else if (AtlasApp.config.search) {
         href = '/'
       } else {
-        params['model'] = event.location.parentType.toLowerCase()
-        params['id'] = event.location.parentId
+        params['model'] = 'area'
+        params['id'] = event.location.areaId
       }
 
       return [

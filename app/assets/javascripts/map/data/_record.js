@@ -13,10 +13,8 @@ class AtlasRecord {
   constructor(attrs) {
     Object.assign(this, attrs)
 
-    if (this.parentType && this.parentId) {
-      this[this.parentType.toLowerCase()] = {
-        id: this.parentId
-      }
+    if (this.areaId) {
+      this.area = { id: this.areaId }
     }
   }
 
