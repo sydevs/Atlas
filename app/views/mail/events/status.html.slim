@@ -40,7 +40,7 @@ p.explanation
     a.positive.button href=email_login(cms_event_verify_url(@event))
       = translate('mail.event.status.verify')
     .or = translate('mail.event.status.or')
-    a.negative.button href=email_login(cms_event_verify_url(@event))
+    a.negative.button href=email_login(edit_cms_event_url(@event))
       = translate('mail.event.status.edit')
   - else
     a.button href=@event.map_url
