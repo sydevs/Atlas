@@ -46,6 +46,7 @@ h2.ui.header
     = menu_item translate_model(Country, :plural), @context, index: 'countries' if allow.index_association?(:countries)
     = menu_item translate_model(Region, :plural), @context, index: 'regions' if allow.index_association?(:regions)
     = menu_item translate_model(Area, :plural), @context, index: 'areas' if allow.index_association?(:areas)
+    = menu_item translate_model(Venue, :plural), @context, index: 'venues' if allow.index_association?(:venues)
     = menu_item translate_model(Event, :plural), @context, index: 'events' if allow.index_association?(:events)
     = menu_item translate_model(Registration, :plural), @context, index: 'registrations' if allow.index_association?(:registrations)
     = menu_item translate_model(Manager, :plural), @context, index: 'managers' if allow.index_association?(:managers)

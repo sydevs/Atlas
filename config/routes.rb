@@ -85,10 +85,11 @@ Rails.application.routes.draw do
       get :geocode, on: :collection
       resources :managers, only: %i[index new create destroy]
       resources :events, only: %i[index new create]
+      resources :venues, only: %i[index]
       resources :audits, only: %i[index]
     end
 
-    resources :venues, only: [] do
+    resources :venues, only: %i[index] do
       get :geosearch, on: :collection
       get :geocode, on: :collection
     end
