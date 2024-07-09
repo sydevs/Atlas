@@ -45,5 +45,5 @@ p.explanation
   - else
     a.button href=@event.map_url
       = translate('mail.event.view')
-    a.button href=email_login(cms_event_url(@event))
+    a.button href=email_login(edit_cms_event_url(@event))
       = translate('mail.event.edit')
