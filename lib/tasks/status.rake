@@ -8,7 +8,7 @@ namespace :status do
       puts "Updating #{events.count} event statuses"
       events.in_batches.each_record(&:update_status!)
     end
-  end  
+  end
 
   desc 'Reset the status of all expirable items'
   task :reset, [:id] => :environment do |_, args|

@@ -60,9 +60,14 @@ module Expirable
       end
 
       event :verify do
-        transitions to: :verified, if: :needs_review?, after: Proc.new { increment!(:verification_streak) }
-        transitions to: :verified, if: :needs_urgent_review?, after: Proc.new { increment!(:verification_streak) }
-        transitions to: :verified, after: Proc.new { increment!(:verification_streak) }
+        after do
+          increment(:verification_streak)
+          touch
+        end
+
+        transitions to: :verified, if: :needs_review?
+        transitions to: :verified, if: :needs_urgent_review?
+        transitions to: :verified
       end
 
       event :expire do
