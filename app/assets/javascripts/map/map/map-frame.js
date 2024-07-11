@@ -1,5 +1,7 @@
-/* exported MapFrame */
+/* exported MapFrame, MapInstance */
 /* global mapboxgl, MapboxLanguage, OnlineMapLayer, OfflineMapLayer, SelectionMapLayer */
+
+let MapInstance = null
 
 class MapFrame extends EventTarget {
 
@@ -34,6 +36,8 @@ class MapFrame extends EventTarget {
 
   constructor(containerId, config) {
     super()
+    
+    MapInstance = this
 
     config = Object.assign({
       onload: () => {},
@@ -152,6 +156,10 @@ class MapFrame extends EventTarget {
     Object.values(this.#layers).forEach(layer => { layer.visible = false })
     this.#currentLayerId = layerId
     this.#mapbox.setStyle(this.#layers[layerId].style)
+  }
+
+  showHighlightMarker(location) {
+    this.#currentLayer.setSelection(location)
   }
 
   async setSelection(location, options = {}) {

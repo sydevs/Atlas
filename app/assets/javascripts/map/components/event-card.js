@@ -2,6 +2,16 @@
 /* global m, Util */
 
 function EventCard() {
+  function onMouseOver(event) {
+    if (MapInstance) {
+      if (event && event.offline) {
+        MapInstance.showHighlightMarker(event.location)
+      } else {
+        MapInstance.showHighlightMarker(null)
+      }
+    }
+  }
+
   return {
     /*onbeforeremove: function(vnode) {
       vnode.dom.classList.add('fadeout')
@@ -11,12 +21,14 @@ function EventCard() {
     },*/
     view: function(vnode) {
       const event = vnode.attrs.event
-      let language = Util.translate(`language_codes.${event.languageCode.toLowerCase()}`) || event.languageCode
+      //let language = Util.translate(`language_codes.${event.languageCode.toLowerCase()}`) || event.languageCode
       let distance = event.offline && AtlasApp.map.userLocation && event.distanceTo(AtlasApp.map.userLocation)
 
       return m(m.route.Link,
         {
           class: `sya-card ${vnode.attrs.class}`,
+          onmouseover: () => { onMouseOver(event) },
+          onmouseout: () => { onMouseOver(null) },
           href: '/event/:id',
           params: { id: event.id },
         },
