@@ -122,26 +122,23 @@ class Manager < ApplicationRecord
       Region.where(id: regions).or(regions_via_country).or(regions_via_area) # .or(regions_via_event)
     end
   end
+  
+  def accessible_areas
+    if administrator?
+      Area.default_scoped
+    else
+      areas_via_country = Area.where(country_code: countries.select(:country_code))
+      areas_via_region = Area.where(region_id: regions.select(:id))
+      Area.where(id: areas).or(areas_via_country).or(areas_via_region)
+    end
+  end
 
   def accessible_events
-    if !administrator?
+    if administrator?
       Event.default_scoped
     else
-=begin
-      # TODO: Fix this
-      events_via_countries = Event.left_outer_joins(:areas).where(locations: { country_code: countries.select(:country_code) })
-      events_via_regions = Event.left_outer_joins(:areas).where(locations: { province_code: regions.select(:province_code) })
-      offline_events_via_areas = Event.left_outer_joins(:areas).where(areas: { id: areas.select(:id) })
-      online_events_via_areas = Event.where(area_id: areas.select(:id))
-      
-      Event.left_outer_joins(:areas)
-        .where(id: events)
-        .or(events_via_countries)
-        .or(events_via_regions)
-        .or(offline_events_via_areas)
-        .or(online_events_via_areas)
-=end
-      Event.default_scoped
+      events_via_area = Event.where(area_id: accessible_areas.select(:id))
+      Event.where(id: events).or(events_via_area)
     end
   end
 
