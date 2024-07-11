@@ -34,6 +34,8 @@ module Types
 
     field :images, [Types::ImageType], null: true
 
+    field :area_id, ID, null: false
+    
     field :venue, Types::VenueType, null: false
     field :area, Types::AreaType, null: false
     field :location, Types::LocationType, null: false

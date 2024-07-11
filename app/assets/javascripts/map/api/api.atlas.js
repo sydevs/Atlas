@@ -52,6 +52,7 @@ class AtlasAPI {
             url
             thumbnailUrl
           }
+          areaId
           location {
             id
             type
@@ -64,9 +65,6 @@ class AtlasAPI {
             directionsUrl
             parentId
             parentType
-          }
-          area {
-            id
           }
         }`,
         venue: `on Venue {

@@ -25,19 +25,17 @@ function EventView() {
     view: function() {
       if (!event) return m(Loader)
 
-      let href = '/:model/:id'
+      let backLink = '/:model/:id'
       let params = {}
-
-      console.log('render event', event)
 
       if (event.location.getEventIds(event.layer).length > 1) {
         params['model'] = event.location.type.toLowerCase()
         params['id'] = event.location.id
-      } else if (AtlasApp.config.search) {
-        href = '/'
+      } else if (AtlasApp.config.search && AtlasApp.config.default_view != 'list') {
+        backLink = '/'
       } else {
         params['model'] = 'area'
-        params['id'] = event.location.area.id
+        params['id'] = event.areaId
       }
 
       return [
@@ -45,7 +43,7 @@ function EventView() {
         m(BackNavigationButton, {
           float: 'left',
           icon: 'left',
-          href: href,
+          href: backLink,
           params: params,
         }),
         m(NavigationButton, {
