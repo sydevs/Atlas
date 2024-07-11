@@ -78,6 +78,7 @@ class AtlasAPI {
         area: `on Area {
           id
           label
+          subtitle
           latitude
           longitude
           radius
@@ -97,6 +98,7 @@ class AtlasAPI {
           areas {
             id
             name
+            subtitle
             onlineEventIds
             offlineEventIds
           }
@@ -174,6 +176,7 @@ class AtlasAPI {
           area {
             id
             label
+            subtitle
             latitude
             longitude
             radius

@@ -168,6 +168,7 @@ en:
         manager_id: :activerecord.models.manager.single # Do not translate
         name: :activerecord.attributes.generic.name # Do not translate
         country_code: :activerecord.models.country.single # Do not translate
+        subtitle: "Subtitle"
         coordinates: "Location"
         latitude: "Latitude"
         longitude: "Longitude"

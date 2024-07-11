@@ -15,6 +15,7 @@ function RegionView() {
     },
     view: function(vnode) {
       if (!region) return m(Loader)
+      console.log("REGION", region)
 
       return [
         m(NavigationButton, {
@@ -32,6 +33,7 @@ function RegionView() {
             class: 'sya-list__item',
             id: area.id,
             label: area.name,
+            sublabel: area.subtitle,
             count: count,
             layer: vnode.attrs.layer,
             model: AtlasArea.key,

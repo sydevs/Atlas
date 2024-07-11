@@ -1,5 +1,6 @@
 module Types
   class AreaType < LocationType
+    field :subtitle, String, null: true
     field :path, String, null: false, method: :map_path
     field :url, String, null: false, method: :map_url
     

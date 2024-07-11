@@ -4,7 +4,7 @@
 function SimpleCard() {
   return {
     view: function(vnode) {
-      const place = vnode.attrs.place
+      console.log("simple card", vnode.attrs)
       
       return m(m.route.Link,
         {
@@ -17,6 +17,7 @@ function SimpleCard() {
         },
         m('.sya-card__content',
           m('.sya-card__title', vnode.attrs.label),
+          vnode.attrs.sublabel ? m('.sya-card__subtitle', vnode.attrs.sublabel) : null,
         ),
         m('a.sya-card__action',
           m('span', vnode.attrs.count),

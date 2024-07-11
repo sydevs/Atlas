@@ -9,6 +9,7 @@
 .ui.small.divider
 
 = f.input :name
+= f.input :subtitle
 
 #map data-changeable='true' data-border=@context.geojson.to_json data-error=(@record.errors[:coordinates].present? ? 'true' : nil)
 .hint = translate('cms.hints.area.location')
