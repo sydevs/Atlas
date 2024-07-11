@@ -61,9 +61,10 @@ module Expirable
 
       event :verify do
         after do
-          return if new_record?
-          increment(:verification_streak)
-          touch
+          unless new_record?
+            increment(:verification_streak)
+            touch
+          end
         end
 
         transitions to: :verified, if: :needs_review?
