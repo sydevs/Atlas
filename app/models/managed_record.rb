@@ -8,6 +8,7 @@ class ManagedRecord < ApplicationRecord
   belongs_to :manager
 
   # Scopes
+  default_scope { order(record_type: :asc) }
   scope :created_since, ->(since) { where('created_at >= ?', since) }
 
   # Callbacks

@@ -5,9 +5,9 @@ class CMS::ManagersController < CMS::ApplicationController
   def index
     if @context
       authorize_association! Manager
-      @scope = @context.managed_records || Manager
+      @scope = @context.managers || Manager
       @records = policy_scope(@scope).page(params[:page]).per(10).search(params[:q])
-      @records = @records.joins(:manager).order('managers.updated_at': :desc)
+      @records = @records.order(updated_at: :desc)
     elsif request.format.json?
       authorize Manager, :index?
       @records = policy_scope(Manager).limit(3).search(params[:q])

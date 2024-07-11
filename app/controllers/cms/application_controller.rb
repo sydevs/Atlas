@@ -225,7 +225,7 @@ class CMS::ApplicationController < ActionController::Base
       key = key.table_name.to_sym if key.is_a?(ActiveRecord.class)
       return if allow.index_association?(key)
 
-      raise Pundit::NotAuthorizedError, "not allowed to index? #{@model} for #{@context || 'Worldwide'}"
+      raise Pundit::NotAuthorizedError, "not allowed to index? #{@model} association for #{@context.inspect || 'Worldwide'}"
     end
 
 end
