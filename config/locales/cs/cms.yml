@@ -121,6 +121,7 @@ cs:
         enable_custom_regions: "Povolit vytváření vlastních území/oblastí. Toto je pokročilá funkce, která by měla být používána pouze pokud dobře víte, co děláte."
       region:
         polygon: "Přesuňte / klikněte na bledý čtverec, abyste přidali nový vrchol mnohoúhelníku. Kliněte na existující vrchol, abyste jej odebrali."
+        name: "Regions will use a translated name for each language, however if no translation is available, this name is used." # TODO: Translate
       area:
         location: "Vlastní oblast je definována pomocí souřadnic na mapě (zeměpisná šířka a délka + poloměr), aby se vytvořila kruhová oblast."
       event:

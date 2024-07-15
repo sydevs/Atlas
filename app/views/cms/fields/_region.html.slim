@@ -2,6 +2,6 @@
 - if (@record.osm_id && @record.geojson && @record.bounds) || @record.custom_geodata?
   = render 'cms/fields/partials/geo_data', f: f
 
-  = f.input :name
+  = f.input :name, hint: translate('cms.hints.region.name')
 - else
   = render 'cms/fields/partials/osm_search', data: { type: 'settlement', country: f.object.country_code, custom: (@context.enable_custom_regions ? 'true' : nil) }

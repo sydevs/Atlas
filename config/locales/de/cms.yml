@@ -119,6 +119,7 @@ de:
         enable_custom_regions: "Erlaube das erstellen von angepassten Regionen. Dies ist eine erweiterte Funktion, lass die Finger davon, außer du weist was du tust."
       region:
         polygon: "Ziehe / Klicke auf ein verblasstes Quadrat um eine weitere ecke zum polygon hinzuzufügen. Klicke auf eine existierende Ecke um sie zu entfernen."
+        name: "Regions will use a translated name for each language, however if no translation is available, this name is used." # TODO: Translate
       area:
         location: "Ein \"spezieller Bereich\" wird via Koordinaten auf der Karte (Breitengrad und Längengrad) und einem Radius definiert, um einen Kreis festzulegen."
       event:

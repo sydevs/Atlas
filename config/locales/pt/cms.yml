@@ -121,6 +121,7 @@ pt:
         enable_custom_regions: "Permitir a criação de regiões customizadas. Essa é uma facilidade avançada, a qual você só deve usar se tiver certeza do que está fazendo."
       region:
         polygon: "Arraste / Clique em um quadrado vazio para adicionar um novo lado ao polígono. Clique em um lado para removê-lo."
+        name: "Regions will use a translated name for each language, however if no translation is available, this name is used." # TODO: Translate
       area:
         location: "Uma área customizada é definida usando as coordenadas no mapa (latitude e longitude) e um raio para fazer uma região circular."
       event:

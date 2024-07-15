@@ -121,6 +121,7 @@ fr:
         enable_custom_regions: "Autoriser la création de régions personnalisées. Il s'agit d'une fonctionnalité avancée qui ne doit être utilisée que si vous comprenez ce que vous faites."
       region:
         polygon: "Faites glisser/cliquez sur un carré estompé pour ajouter un nouveau coin au polygone. Cliquez sur un coin existant pour le supprimer."
+        name: "Regions will use a translated name for each language, however if no translation is available, this name is used." # TODO: Translate
       area:
         location: "Une zone personnalisée est définie à l'aide de coordonnées sur la carte (latitude et longitude) et d'un rayon, pour créer une région circulaire."
       event:

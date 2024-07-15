@@ -121,6 +121,7 @@ es:
         enable_custom_regions: "Permitir la creación de regiones particulares. Esta es una característica avanzada, que sólo ha de usarse si sabes lo que estás haciendo."
       region:
         polygon: "Arrastra y suelta sobre un cuadro sombreado para añadir una nueva esquina al polígono. Haz click en una esquina existente para eliminarla."
+        name: "Regions will use a translated name for each language, however if no translation is available, this name is used." # TODO: Translate
       area:
         location: "Un área particular se define usando coordinadas en el mapa (latitud y longitud) y un radio, para definir una región circular."
       event:
