@@ -41,6 +41,8 @@ module Atlas
     end
 
     config.i18n.load_path += Dir["#{Rails.root}/config/locales/**/*.{rb,yml}"]
+
+    config.active_record.yaml_column_permitted_classes = [Date]
   end
 end
 

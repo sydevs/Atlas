@@ -112,6 +112,7 @@ class CMS::ApplicationController < ActionController::Base
   def edit attributes = {}
     authorize @record
     @record.assign_attributes(attributes)
+    @context = @record
   end
 
   def update attributes

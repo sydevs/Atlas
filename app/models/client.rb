@@ -1,5 +1,7 @@
 class Client < ApplicationRecord
 
+  DEFAULT_COLORS = { primary_color: "#92bbb8", secondary_color: "#e08e79", tertiary_color: "#a1c3d7" }
+
   # Extensions
   include Searchable
   include Managed

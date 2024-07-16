@@ -27,3 +27,5 @@ module Searchable
   end
 
 end
+
+ActiveRecord::Base.extend(Searchable::ActiveRecord)
