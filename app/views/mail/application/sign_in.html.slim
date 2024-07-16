@@ -3,7 +3,9 @@
 
 h2
   = translate('mail.login.title')
-  .subtitle = defined?(@manager) ? @manager.name : @session.authenticatable.name
+
+p.explanation
+  = translate('mail.login.preview')
 
 .actions
   a.button href=@magic_link

@@ -1,0 +1,22 @@
+
+- flash.each do |key, message|
+  - if message == "We've sent you an email with a secret token"
+    .ui.positive.icon.message
+      i.mail.icon
+      .content
+        .header Confirmation Email Sent
+        p Click on the link in your email to be signed in.
+        /p Click on the link in your email, or enter the token from your email below.
+  - else
+    .ui.message class=key
+      = message
+
+a.ui.basic.button href='/'
+  = translate('passwordless.sessions.create.back')
+
+/= simple_form_for @session, url: url_for(action: 'update'), as: 'passwordless', method: 'patch', data: { turbo: false } do |f|
+  .ui.segment
+    h2.ui.header Confirm login
+    = f.input :token, label: t('.token') do
+      = f.text_field :token, required: true, autofocus: true, autocomplete: 'one-time-code'
+  = f.submit t('.confirm'), class: 'ui basic button'

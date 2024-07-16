@@ -7,7 +7,7 @@ Rails.configuration.to_prepare do
     def authenticate_user!
       return if authenticate_by_session(Manager)
       
-      redirect_to managers.sign_in_path, flash: { error: translate('cms.messages.not_logged_in') }
+      redirect_to managers_sign_in_path, flash: { error: translate('cms.messages.not_logged_in') }
     end
   end 
 end

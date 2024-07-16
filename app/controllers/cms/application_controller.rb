@@ -167,7 +167,7 @@ class CMS::ApplicationController < ActionController::Base
       return if current_user
 
       save_passwordless_redirect_location! Manager
-      redirect_to managers.sign_in_path, flash: { error: translate('cms.messages.not_logged_in') }
+      redirect_to managers_sign_in_path, flash: { error: translate('cms.messages.not_logged_in') }
     end
 
     def verify_manager

@@ -86,8 +86,8 @@ end
 group :development do
   gem 'listen'
   gem 'spring' # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem 'spring-watcher-listen', '~> 2.0.0'
-  gem 'web-console', '>= 3.3.0' # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
+  gem 'spring-watcher-listen'
+  gem 'web-console' # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
   gem 'dotenv-rails' # Automatically load environmental variables
   gem 'derailed' # To test memory usage for all the gems
 end
