@@ -10,7 +10,3 @@ $theme: ("primary": #92bbb8, "secondary": #e08e79, "tertiary": #A1C3D7)
 
   &::placeholder
     color: var(--color)
-
-@each $key in primary secondary tertiary
-  #client_#{$key}_color
-    --color: #{map-get($theme, $key)}
