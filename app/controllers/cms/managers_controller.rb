@@ -31,8 +31,10 @@ class CMS::ManagersController < CMS::ApplicationController
     end
 
     new_record = @record.new_record?
-    @record.name = manager_params[:name] if new_record
-    @record.administrator = manager_params[:administrator] if manager_params.key?(:administrator)
+    if new_record
+      @record.assign_attributes(manager_params)
+    end
+    
     success = false
 
     ActiveRecord::Base.transaction do
