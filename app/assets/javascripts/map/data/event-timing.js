@@ -51,7 +51,7 @@ class EventTiming {
 
     if (this.startDate == this.endDate) {
       this.dateString = this.startDate
-    } else if (timing.recurrence == 'day') {
+    } else if (timing.recurrence == 'daily') {
       if (Boolean(this.lastOccurrence)) {
         this.dateString = `${this.startDate} - ${this.endDate}`
       } else {
@@ -59,7 +59,7 @@ class EventTiming {
       }
     } else {
       let weekday = firstDateTime.toLocaleString({ weekday: 'long' })
-      this.dateString = Util.translate(`recurrence.${weekday.toLowerCase()}`)
+      this.dateString = Util.translate(`recurrence.${timing.recurrence}`, { weekday: weekday })
     }
 
     if (this.#firstDateTime > luxon.DateTime.local()) {
@@ -67,17 +67,16 @@ class EventTiming {
       this.startingString = Util.translate('event.starting_date', { date: displayDate }).toUpperCase()
     }
 
-    if (event.category == 'course') {
-      if (firstDateTime && lastDateTime) {
-        const weeksBetween = Math.round((firstDateTime - lastDateTime) / (7 * 24 * 60 * 60 * 1000)) + 1
-        this.description = Util.translate('timing_labels.course', {
-          weeks: Math.abs(weeksBetween)
-        })
+    if (event.category == 'course' && event.timing.recurrenceCount) {
+      if (event.timing.recurrence.startsWith('weekly_')) {
+        this.description = Util.translate('timing_labels.course_weekly', { count: event.timing.recurrenceCount })
+      } else if (event.timing.recurrence.startsWith('monthly_')) {
+        this.description = Util.translate('timing_labels.course_monthly', { count: event.timing.recurrenceCount })
       } else {
         this.description = Util.translate('timing_labels.course_fallback')
       }
     } else if (timing.recurrence != 'day') {
-      return Util.translate('timing_labels.ongoing')
+      this.description = Util.translate('timing_labels.ongoing')
     }
   }
 

@@ -69,7 +69,9 @@ module Expirable
 
         transitions to: :verified, if: :needs_review?
         transitions to: :verified, if: :needs_urgent_review?
-        transitions to: :verified
+        transitions to: :verified, if: :expired?
+        transitions to: :verified, if: :archived?
+        transitions to: :verified, if: Proc.new { finished? && !should_finish? }
       end
 
       event :expire do
@@ -112,10 +114,6 @@ module Expirable
     elsif respond_to?("#{status}_at")
       update_column "#{status}_at", Time.now
     end
-  end
-
-  def should_finish?
-    end_date < DateTime.now
   end
 
   def publishable?

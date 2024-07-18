@@ -26,8 +26,8 @@ function EventInfo() {
               null,
             m('.sya-event__subtitle__address', event.online ? Util.translate('event.online_from', { city: event.address }) : event.address)
           ),
+          m('.sya-event__meta', m('.sya-event__meta__day', event.timing.dateString)),
           m('.sya-event__meta',
-            m('.sya-event__meta__day', event.timing.dateString),
             m('.sya-event__meta__time', event.timing.timeString),
             event.online ?
               null :

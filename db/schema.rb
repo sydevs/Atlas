@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_07_16_191026) do
+ActiveRecord::Schema[7.0].define(version: 2024_07_16_212422) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -107,11 +107,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_07_16_191026) do
     t.string "custom_name"
     t.string "room"
     t.string "description", limit: 600
-    t.date "start_date"
-    t.date "end_date"
-    t.string "start_time"
-    t.string "end_time"
-    t.integer "recurrence", default: 0
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
     t.jsonb "images"
@@ -142,6 +137,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_07_16_191026) do
     t.jsonb "contact_info", default: {}, null: false
     t.integer "expiration_period", default: 3, null: false
     t.integer "verification_streak", default: 0, null: false
+    t.json "recurrence_data", default: {}, null: false
+    t.date "finish_date"
     t.index ["area_id"], name: "index_events_on_area_id"
     t.index ["manager_id"], name: "index_events_on_manager_id"
     t.index ["status"], name: "index_events_on_status"

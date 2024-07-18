@@ -39,6 +39,7 @@ class AtlasAPI {
             lastDate
             upcomingDates
             recurrence
+            recurrenceCount
           }
           contact {
             phoneName

@@ -15,6 +15,9 @@
 
   animation: fade-in 0.4s
 
+  &--online
+    background: color-mix(in srgb, #{$theme-tertiary}, transparent 85%)
+
   &.sya-card--simple
     min-height: 0
     border-bottom: 1px solid transparentize(lightgrey, 0.4)
@@ -70,12 +73,6 @@
     text-transform: uppercase
     letter-spacing: 0.36px
 
-  &__day::after
-    content: ''
-    height: 14px
-    border-left: 1px solid $color-border-light
-    margin: 0 9px
-    vertical-align: text-bottom
 
   &__time
     font-weight: $font-medium

@@ -37,6 +37,7 @@ gem 'passwordless' # For email based user authentication
 gem 'phonelib' # For telephone validation
 gem 'pundit' # Permissions
 gem 'aasm' # State machine for managing expiration status
+gem 'montrose' # For handling recurrences
 gem 'active_flag' # Bitwise flag for storing notification settings
 gem 'after_commit_everywhere', '~> 1.0' # Dependency for aasm
 

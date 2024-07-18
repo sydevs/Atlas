@@ -257,10 +257,12 @@ de:
           friday: "Freitags"
           saturday: "Samstags"
           sunday: "Sonntags"
-        start_date: "Startdatum"
-        end_date: "Enddatum"
-        start_time: "Startzeit"
-        end_time: "Endzeit"
+        recurrence_data: "Recurrence" # TODO: Translate
+        recurrence_type: "Recurrence Type" # TODO: Translate
+        recurrence_start_date: "Startdatum"
+        recurrence_end_date: "Enddatum"
+        recurrence_start_time: "Startzeit"
+        recurrence_end_time: "Endzeit"
         online: "Online-Klasse"
         online_url: "Online-Treffen Link"
         language: "Language" # TODO: Translate
@@ -352,5 +354,25 @@ de:
           query: "Query (Simple)"
           path: "Path (Advanced)"
         manager_id: :accessrecord.models.manager.single # setzen nicht übersetzen
+
+      recurrable: # TODO: Translate
+        types:
+          daily: "Daily"
+          weekly_1: "Weekly"
+          weekly_2: "Bi-Weekly"
+          monthly_1st: "1st Weekday of the Month"
+          monthly_2nd: "2nd Weekday of the Month"
+          monthly_3rd: "3rd Weekday of the Month"
+          monthly_4th: "4th Weekday of the Month"
+          monthly_last: "Last Weekday of the Month"
+        descriptions:
+          daily: "Every Day"
+          weekly_1: "Every %{weekday}"
+          weekly_2: "Every 2nd %{weekday}"
+          monthly_1st: "1st %{weekday} of each month"
+          monthly_2nd: "2nd %{weekday} of each month"
+          monthly_3rd: "3rd %{weekday} of each month"
+          monthly_4th: "4th %{weekday} of each month"
+          monthly_last: "Last %{weekday} of each month"
 
       pictures:

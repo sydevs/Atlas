@@ -93,11 +93,29 @@ SimpleForm.setup do |config|
     b.use :error, wrap_with: { tag: 'div', class: 'ui red pointing above label error' }
   end
 
+  config.wrappers :semantic_checkbox_radio, tag: 'div', class: 'inline field', error_class: 'error', hint_class: 'with_hint' do |b|
+    b.use :html5
+    b.wrapper tag: 'div', class: 'ui radio checkbox' do |input|
+      input.use :input
+      input.use :label
+    end
+    b.use :hint, wrap_with: { tag: 'div', class: 'hint' }
+    b.use :error, wrap_with: { tag: 'div', class: 'ui red pointing above label error' }
+  end
+
   config.wrappers :semantic_select, tag: 'div', class: 'field', error_class: 'error', hint_class: 'with_hint' do |b|
     b.use :html5
     b.use :label
     b.use :hint, wrap_with: { tag: 'div', class: 'hint' }
-    b.use :input, class: 'ui fluid dropdown'
+    b.use :input, class: 'ui fluid selection dropdown'
+    b.use :error, wrap_with: { tag: 'div', class: 'ui red pointing above label error' }
+  end
+
+  config.wrappers :semantic_select_multiple, tag: 'div', class: 'field', error_class: 'error', hint_class: 'with_hint' do |b|
+    b.use :html5
+    b.use :label
+    b.use :hint, wrap_with: { tag: 'div', class: 'hint' }
+    b.use :input, class: 'ui fluid clearable multiple selection dropdown'
     b.use :error, wrap_with: { tag: 'div', class: 'ui red pointing above label error' }
   end
 

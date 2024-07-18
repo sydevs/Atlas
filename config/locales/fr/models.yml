@@ -257,10 +257,12 @@ fr:
           friday: "les Vendredis"
           saturday: "Les Samedis"
           sunday: "Les Dimanches"
-        start_date: "Date de Début"
-        end_date: "Date de Fin"
-        start_time: "Heure de Début"
-        end_time: "Heure de Fin"
+        recurrence_data: "Recurrence" # TODO: Translate
+        recurrence_type: "Recurrence Type" # TODO: Translate
+        recurrence_start_date: "Date de Début"
+        recurrence_end_date: "Date de Fin"
+        recurrence_start_time: "Heure de Début"
+        recurrence_end_time: "Heure de Fin"
         online: "Cours En Ligne"
         online_url: "Lien de Réunion En Ligne"
         expiration_period: "Délai d'Expiration"
@@ -351,5 +353,25 @@ fr:
           query: "Requête (Simple)"
           path: "Chemin (Avancé)"
         manager_id: :activerecord.models.manager.single # Do not translate
+
+      recurrable: # TODO: Translate
+        types:
+          daily: "Daily"
+          weekly_1: "Weekly"
+          weekly_2: "Bi-Weekly"
+          monthly_1st: "1st Weekday of the Month"
+          monthly_2nd: "2nd Weekday of the Month"
+          monthly_3rd: "3rd Weekday of the Month"
+          monthly_4th: "4th Weekday of the Month"
+          monthly_last: "Last Weekday of the Month"
+        descriptions:
+          daily: "Every Day"
+          weekly_1: "Every %{weekday}"
+          weekly_2: "Every 2nd %{weekday}"
+          monthly_1st: "1st %{weekday} of each month"
+          monthly_2nd: "2nd %{weekday} of each month"
+          monthly_3rd: "3rd %{weekday} of each month"
+          monthly_4th: "4th %{weekday} of each month"
+          monthly_last: "Last %{weekday} of each month"
 
       pictures:

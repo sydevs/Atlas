@@ -42,7 +42,7 @@ module Atlas
 
     config.i18n.load_path += Dir["#{Rails.root}/config/locales/**/*.{rb,yml}"]
 
-    config.active_record.yaml_column_permitted_classes = [Date]
+    config.active_record.yaml_column_permitted_classes = [Time, Date, Symbol, ActiveSupport::HashWithIndifferentAccess, ActiveSupport::TimeWithZone, ActiveSupport::TimeZone]
   end
 end
 

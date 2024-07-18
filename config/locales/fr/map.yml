@@ -97,7 +97,7 @@ fr:
       5: "Vendredi"
       6: "Samedi"
 
-    recurrence:
+    recurrence: # TODO: Translate
       day: "Tous les jours"
       monday: "Les lundis"
       tuesday: "Les Mardis"
@@ -106,10 +106,18 @@ fr:
       friday: "Les Vendredis"
       saturday: "Les Samedis"
       sunday: "Les Dimanches"
+      weekly_1: "Every %{weekday}"
+      weekly_2: "Every 2nd %{weekday}"
+      monthly_1st: "1st %{weekday} of Every Month"
+      monthly_2nd: "2nd %{weekday} of Every Month"
+      monthly_3rd: "3rd %{weekday} of Every Month"
+      monthly_4th: "4th %{weekday} of Every Month"
+      monthly_last: "Last %{weekday} of Every Month"
 
     timing_labels:
       course_fallback: "Ceci est un cours hebdomadaire"
-      course: "%{weeks}-cours d'une semaine"
+      course_weekly: "%{count}-cours d'une semaine"
+      course_monthly: "%{count}-session course" # TODO: Translate
       ongoing: "Ce cours se déroule actuellement"
 
     language_codes:

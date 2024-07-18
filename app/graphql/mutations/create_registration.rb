@@ -20,7 +20,7 @@ class Mutations::CreateRegistration < Mutations::BaseMutation
   def resolve(**arguments)
     I18n.locale = arguments[:locale]&.to_sym || :en
     event = Event.find(arguments[:event_id])
-    time = event.start_time.split(':')
+    time = event.recurrence.starts_at.to_s(:time).split(':')
     arguments[:starting_at] = arguments[:starting_at].utc.change(hour: time[0].to_i, min: time[1].to_i)
     arguments[:questions] = arguments[:questions]
     arguments.delete :message

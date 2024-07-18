@@ -56,7 +56,7 @@ module KlaviyoAPI
         # 'postcode': venue.post_code,
         'latitude': location.latitude,
         'longitude': location.longitude,
-        'timing': event.formatted_start_end_time,
+        'timing': event.recurrence_in_words(%i[timing]),
         'weekday': registration.starting_at_weekday,
         'date': registration.starting_at.strftime("%-d %b %Y"),
         'language': event.language_name,

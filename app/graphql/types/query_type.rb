@@ -122,13 +122,12 @@ module Types
       decorate Country.find(id)
     end
 
-    def events(ids: [], online: nil, country: nil, recurrence: nil, language_code: nil, locale: 'en')
+    def events(ids: [], online: nil, country: nil, language_code: nil, locale: 'en')
       I18n.locale = locale.to_sym
       scope = Event
       scope = online ? OnlineEvent : OfflineEvent unless online.nil?
       scope = scope.publicly_visible
       scope = scope.joins(:area).where(areas: { country_code: country }) if country.present?
-      scope = scope.where(recurrence: recurrence) if Event.recurrences.key?(recurrence)
       scope = scope.where(language_code: language_code.upcase) if language_code.present?
       scope = scope.where(id: ids) if ids.present?
       

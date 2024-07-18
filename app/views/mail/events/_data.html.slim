@@ -5,20 +5,17 @@ table.data cellpadding=0
     tr
       th = translate('mail.event.next_date')
       td
-        = event.next_occurrence_at&.to_s(:day)
+        = event.next_recurrence_at&.to_s(:day)
   tr
     th = translate('mail.event.location')
     td = event.address
   tr
     th = translate('mail.event.timing')
-    td
-      = event.recurrence_in_words
-      ' , 
-      = event.formatted_start_end_time
+    td = event.recurrence_in_words
   - if status == :created
     tr
       th = translate('mail.event.start_date')
-      td = event.start_date.to_date.to_s(:long)
+      td = event.recurrence.starts_at.to_date.to_s(:long)
   tr
     th = translate('mail.event.category')
     td = event.category_name

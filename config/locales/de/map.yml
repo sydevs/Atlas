@@ -97,7 +97,7 @@ de:
       5: "Freitag"
       6: "Samstag"
 
-    recurrence:
+    recurrence: # TODO: Translate
       day: "Daily"
       monday: "Montags"
       tuesday: "Dienstags"
@@ -106,10 +106,18 @@ de:
       friday: "Freitags"
       saturday: "Samstags"
       sunday: "Sonntags"
+      weekly_1: "Every %{weekday}"
+      weekly_2: "Every 2nd %{weekday}"
+      monthly_1st: "1st %{weekday} of Every Month"
+      monthly_2nd: "2nd %{weekday} of Every Month"
+      monthly_3rd: "3rd %{weekday} of Every Month"
+      monthly_4th: "4th %{weekday} of Every Month"
+      monthly_last: "Last %{weekday} of Every Month"
 
     timing_labels:
       course_fallback: "Dies ist ein wöchentlicher Kurs"
-      course: "%{weeks}-Wochen Kurs"
+      course_weekly: "%{count}-Wochen Kurs"
+      course_monthly: "%{count}-session course" # TODO: Translate
       ongoing: "Diese Klasse ist fortlaufend"
 
     language_codes:

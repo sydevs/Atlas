@@ -1,0 +1,17 @@
+ruby:
+  excluded = local_assigns[:except] || []
+
+.two.fields
+  = f.input :recurrence_start_time, wrapper_html: { class: 'start' }, input_html: { type: 'time', autocomplete: 'off' }
+  = f.input :recurrence_end_time, required: false, wrapper_html: { class: 'end' }, input_html: { type: 'time', autocomplete: 'off', placeholder: translate('cms.hints.unspecified') }
+
+.two.fields
+  = f.input :recurrence_start_date, as: :string, wrapper: :semantic_date, wrapper_html: { class: 'start' }
+  - unless excluded.include?(:end_date)
+    = f.input :recurrence_end_date, as: :string, wrapper: :semantic_date, required: false, wrapper_html: { class: 'end' }, input_html: { placeholder: translate('cms.hints.never') }
+
+- if excluded.include?(:type)
+  = f.hidden_field :recurrence_type, value: :daily
+- else
+  = f.input :recurrence_type, collection: Recurrable::RECURRENCES.keys.map { |k| [translate_enum_value(Recurrable, :type, k), k] }
+  = f.error :recurrence_type

@@ -49,7 +49,7 @@ class EventMailer < ApplicationMailer
     setup
     return unless @manager.notifications.event_registrations?
 
-    if (params && params[:test]) || (@event.next_occurrence_at && @event.next_occurrence_at <= 1.day.from_now)
+    if (params && params[:test]) || (@event.next_recurrence_at && @event.next_recurrence_at <= 1.day.from_now)
       puts "[MAIL] Sending registrations email for #{@event.label} to #{@manager.name}"
     else
       puts "[MAIL] Skip sending reminder for #{@event.label}"

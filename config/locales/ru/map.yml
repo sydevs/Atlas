@@ -97,7 +97,7 @@ ru:
       5: "Пятница"
       6: "Суббота"
 
-    recurrence:
+    recurrence: # TODO: Translate
       day: "Ежедневно"
       monday: "По понедельникам"
       tuesday: "По вторникам"
@@ -106,10 +106,18 @@ ru:
       friday: "По пятницам"
       saturday: "По субботам"
       sunday: "По воскресеньям"
+      weekly_1: "Every %{weekday}"
+      weekly_2: "Every 2nd %{weekday}"
+      monthly_1st: "1st %{weekday} of Every Month"
+      monthly_2nd: "2nd %{weekday} of Every Month"
+      monthly_3rd: "3rd %{weekday} of Every Month"
+      monthly_4th: "4th %{weekday} of Every Month"
+      monthly_last: "Last %{weekday} of Every Month"
 
     timing_labels:
       course_fallback: "Это еженедельный курс"
-      course: "%{weeks}-недельный курс"
+      course_weekly: "%{count}-недельный курс"
+      course_monthly: "%{count}-session course" # TODO: Translate
       ongoing: "Регулярный класс"
 
     language_codes:

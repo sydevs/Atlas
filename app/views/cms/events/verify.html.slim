@@ -26,7 +26,7 @@
         = @record.category_description
     .item
       i.calendar.icon
-      .content = @record.timing_in_words
+      .content = @record.recurrence_in_words(%i[timing])
     .item
       = model_icon(@record.parent.class)
       .content = @record.parent.try(:address) || @record.parent.label

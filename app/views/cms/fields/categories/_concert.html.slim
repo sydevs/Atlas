@@ -1,12 +1,6 @@
 
 .ui.small.dividing.violet.header = translate('cms.forms.event.timing')
-
-= f.input :start_date, as: :string, wrapper: :semantic_date, wrapper_html: { class: 'start' }
-
-.two.fields
-  = f.input :start_time, wrapper_html: { class: 'start' }, input_html: { type: 'time', autocomplete: 'off' }
-  = f.input :end_time, wrapper_html: { class: 'end' }, input_html: { type: 'time', autocomplete: 'off', placeholder: translate('cms.hints.unspecified') }
+= render 'cms/fields/partials/recurrence', f: f, except: %i[type end_date]
 
 .ui.small.dividing.violet.header = translate('cms.forms.event.registration')
-
 = render 'cms/fields/partials/registration', f: f

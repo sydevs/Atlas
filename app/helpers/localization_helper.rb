@@ -3,6 +3,7 @@ module LocalizationHelper
   I18N_KEYS = {
     OfflineEvent => :offline_event,
     OnlineEvent => :online_event,
+    Recurrable => :recurrable,
   }
 
   def translate_model model, pluralization = :singular, locale: nil

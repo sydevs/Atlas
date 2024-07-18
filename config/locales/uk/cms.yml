@@ -189,7 +189,8 @@ uk:
       management_for_record: "Керування цим %{resource}"
       managers_for_record: "Менеджери для %{resource}"
       location_of_record: "Розташування цього %{resource}"
-      dates_and_timing: "Дати та час"
+      dates: "Дати"
+      timing: "час" # TODO: Translate
       map_of_record: "Карта цього %{resource}"
       area_in_words: "%{radius} км навколо %{latitude}, %{longitude}"
       records_in_recent_days: "%{resources} за останні 30 днів"
