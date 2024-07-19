@@ -21,7 +21,7 @@ class ChangeRecurrenceColumn < ActiveRecord::Migration[7.0]
           })
         end
         dir.down do
-          weekday = event.recurrence.starts_at.strftime("%A").downcase
+          weekday = event.recurrence.starts_at&.strftime("%A")&.downcase
           weekday = %w[sunday monday tuesday wednesday thursday friday saturday].index(weekday)
           event[:recurrence_type] = event.recurrence_type == :day ? :daily : weekday
           event.start_date = event.recurrence_start_date
