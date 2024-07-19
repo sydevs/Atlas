@@ -12,7 +12,7 @@ module MessageBirdAPI
 
   def self.send message, manager, parameters = {}
     puts "MESSAGEBIRD SEND #{message} to #{manager.name} via #{manager.contact_method}"
-    response = HTTParty.post('https://conversations.messagebird.com/v1/conversations/start', {
+    HTTParty.post('https://conversations.messagebird.com/v1/conversations/start', {
       headers: {
         'Authorization' => "AccessKey #{ENV.fetch('MESSAGEBIRD_API_KEY')}",
         'Content-Type' => 'application/json',
