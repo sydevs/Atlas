@@ -28,7 +28,7 @@ class ChangeRecurrenceColumn < ActiveRecord::Migration[7.0]
           event.end_date = event.recurrence_end_date
           event.start_time = event.recurrence_start_time
           event.end_time = event.recurrence_end_time
-          event.save!
+          event.save!(validate: false)
         end
       end
     end
