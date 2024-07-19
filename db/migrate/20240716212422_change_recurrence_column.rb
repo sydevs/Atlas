@@ -7,6 +7,8 @@ class ChangeRecurrenceColumn < ActiveRecord::Migration[7.0]
     reversible do |dir|
       Event.in_batches.each_record do |event|
         dir.up do
+          next if event.inactive_category?
+
           type = event[:recurrence_type] == 0 ? :daily : :weekly_1
           weekday = %i[monday tuesday wednesday thursday friday saturday sunday][event[:recurrence_type] - 1] unless type == :daily
           start_date = weekday ? (event.start_date + 6.days).beginning_of_week(weekday) : event.start_date
@@ -21,6 +23,8 @@ class ChangeRecurrenceColumn < ActiveRecord::Migration[7.0]
           })
         end
         dir.down do
+          next if event.inactive_category?
+          
           weekday = event.recurrence.starts_at&.strftime("%A")&.downcase
           weekday = %w[sunday monday tuesday wednesday thursday friday saturday].index(weekday)
           event[:recurrence_type] = event.recurrence_type == :day ? :daily : weekday
