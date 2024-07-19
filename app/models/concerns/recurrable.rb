@@ -89,7 +89,7 @@ module Recurrable
           data[:until] = data[:starts]
         end
 
-        weekday = Date.parse(data[:starts]).strftime("%A").downcase.to_sym
+        weekday = Date.parse(data[:starts])&.strftime("%A")&.downcase&.to_sym
 
         if Recurrable::RECURRENCE_ORDINAL.key?(type)
           data.merge!(day: { weekday => Recurrable::RECURRENCE_ORDINAL[type] })
