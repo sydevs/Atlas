@@ -70,6 +70,7 @@ gem 'graphiql-rails'
 
 ### Utility
 gem 'inline_svg' # Allows SVGs to be rendered inline
+gem 'rails_autolink' # Automatic URL linking for description fields
 gem 'rails_12factor', group: :production # For heroku support
 gem 'httparty' # For http requests (specifically for Klaviyo)
 gem 'validate_url' # Validate url fields

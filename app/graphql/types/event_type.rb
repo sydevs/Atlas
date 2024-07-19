@@ -1,3 +1,5 @@
+require 'rails_autolink'
+
 module Types
   class EventType < Types::BaseObject
     include LocalizationHelper
@@ -56,7 +58,16 @@ module Types
     end
 
     def description_html
-      ActionController::Base.helpers.simple_format object.description
+      helpers = ActionController::Base.helpers
+      description = helpers.simple_format object.description
+      helpers.auto_link(description, link: :urls, html: { target: '_blank', rel: 'nofollow' }) do |text|
+        text.delete_prefix!("http://")
+        text.delete_prefix!("https://")
+        text.delete_prefix!("www.")
+        text = text.split("/", 2)
+        text[1] = helpers.truncate(text[1], length: 15) if text.count > 1
+        text.join("/")
+      end
     end
 
     def timing
