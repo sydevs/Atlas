@@ -1,29 +1,35 @@
 
 class EventTiming {
 
-  #online
-  #timeZoneDateTime
+  #online = null
+  #timeZoneDateTime = null
 
   // Raw dates
-  #firstDateTime
-  #lastDateTime
-  upcomingDateTimes
+  #firstDateTime = null
+  #lastDateTime = null
+  upcomingDateTimes = []
 
   // Date strings
-  startDate
-  endDate
-  startTime
-  endTime
+  startDate = null
+  endDate = null
+  startTime = null
+  endTime = null
 
-  isUpcoming
+  isUpcoming = null
 
-  dateString
-  timeString
+  dateString = null
+  timeString = null
   description = ''
 
   constructor(event) {
     const timing = event.timing
     const localTimeZone = luxon.DateTime.local().zoneName
+
+    this.#online = event.online
+    this.#timeZoneDateTime = luxon.DateTime.local().setZone(timing.timeZone)
+
+    if (event.type == 'inactive') return
+
     let firstDateTime = luxon.DateTime.fromISO(timing.firstDate, { zone: timing.timeZone })
     let lastDateTime = timing.lastDate ? luxon.DateTime.fromISO(timing.lastDate, { zone: timing.timeZone }) : null
     this.#firstDateTime = firstDateTime
@@ -31,9 +37,6 @@ class EventTiming {
 
     this.upcomingDateTimes = timing.upcomingDates.map(datetime => luxon.DateTime.fromISO(datetime, { zone: event.timing.timeZone }))
     this.isUpcoming = this.upcomingDateTimes.length > 0
-
-    this.#online = event.online
-    this.#timeZoneDateTime = luxon.DateTime.local().setZone(timing.timeZone)
 
     if (event.online) {
       firstDateTime = firstDateTime.setZone(localTimeZone)

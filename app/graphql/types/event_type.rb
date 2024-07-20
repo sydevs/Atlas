@@ -75,10 +75,10 @@ module Types
         first_date: object.first_recurrence_at,
         last_date: object.last_recurrence_at,
         upcoming_dates: object.upcoming_recurrences(limit: 7),
-        recurrence_count: object.recurrence.finite? ? object.recurrence.events.to_a.count : nil,
+        recurrence_count: object.recurrence&.finite? ? object.recurrence.events.to_a.count : nil,
 
-        start_time: object.recurrence.starts_at.to_s(:time),
-        end_time: object.recurrence.ends_at&.to_s(:time),
+        start_time: object.recurrence&.starts_at&.to_s(:time),
+        end_time: object.recurrence&.ends_at&.to_s(:time),
 
         recurrence: object.recurrence_type,
         duration: object.duration,

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_07_16_212422) do
+ActiveRecord::Schema[7.0].define(version: 2024_07_20_154445) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -137,7 +137,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_07_16_212422) do
     t.jsonb "contact_info", default: {}, null: false
     t.integer "expiration_period", default: 3, null: false
     t.integer "verification_streak", default: 0, null: false
-    t.json "recurrence_data", default: {}, null: false
+    t.json "recurrence_data", default: {}
     t.date "finish_date"
     t.index ["area_id"], name: "index_events_on_area_id"
     t.index ["manager_id"], name: "index_events_on_manager_id"

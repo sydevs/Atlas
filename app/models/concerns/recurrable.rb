@@ -32,21 +32,21 @@ module Recurrable
   end
 
   def first_recurrence_at
-    recurrence.first
+    recurrence.first if recurrence.present?
   end
 
   def next_recurrence_at
-    upcoming_recurrences(limit: 1).first
+    upcoming_recurrences(limit: 1).first if recurrence.present?
   end
 
   def last_recurrence_at
-    return nil if recurrence.infinite?
+    return nil unless recurrence&.finite?
 
     recurrence.events.to_a.last
   end
 
   def upcoming_recurrences(limit: 7)
-    return [] if recurrence.later?(Time.now)
+    return [] if recurrence.nil? || recurrence.later?(Time.now)
 
     result = recurrence.fast_forward(Time.now).take(limit + 1)
     if result.first < Time.now
@@ -56,26 +56,10 @@ module Recurrable
     end
   end
 
-  def recurrence_template
-    data = recurrence.to_h
-
-    if data[:every] == :day
-      :daily
-    elsif data[:every] == :week
-      data[:interval] ? :"weekly_#{data[:interval]}" : :weekly
-    elsif data[:every] == :month
-      ordinal = data[:day].values[0][0]
-      Recurrable::RECURRENCE_ORDINAL.key(ordinal)
-    end
-  end
-
-  def recurrence_data= value
-    @recurrence = nil
-    super value
-  end
-
   def recurrence
     @recurrence ||= begin
+      return nil unless recurrence_data && recurrence_data[:type].present? 
+
       rd = recurrence_data
       type = rd[:type].to_sym
       data = RECURRENCES[type].clone
@@ -103,7 +87,7 @@ module Recurrable
   end
 
   def duration
-    return nil unless recurrence_end_time.present?
+    return nil unless recurrence_end_time&.present?
   
     start_time = recurrence_start_time.split(':').map(&:to_f)
     end_time = recurrence_end_time.split(':').map(&:to_f)

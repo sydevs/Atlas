@@ -51,7 +51,7 @@ module EventDecorator
       case key
       when :recurrence
         wday = I18n.translate(recurrence.starts_at.wday, scope: %i[map weekdays])
-        I18n.translate recurrence_template, scope: "activerecord.attributes.recurrable.descriptions", locale: I18n.locale, weekday: wday
+        I18n.translate recurrence_type, scope: "activerecord.attributes.recurrable.descriptions", locale: I18n.locale, weekday: wday
       when :timing
         if short
           recurrence.starts_at.to_s(:time)
