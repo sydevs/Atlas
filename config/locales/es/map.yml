@@ -19,7 +19,9 @@ es:
         online: "Clases online"
         back: "Volver al mapa"
 
-    list:
+    list: # TODO: Translate
+      loading: "Loading..."
+      error: "Connection Error"
       search: "Buscar una localización"
       more_info: "Más información"
       register: "Registro"

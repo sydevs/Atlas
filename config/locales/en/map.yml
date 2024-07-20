@@ -20,6 +20,8 @@ en:
         back: "Back to map"
 
     list:
+      loading: "Loading..."
+      error: "Connection Error"
       search: "Search for location"
       more_info: "More Info"
       register: "Register"

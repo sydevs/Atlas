@@ -20,7 +20,9 @@ uk:
         online: "Online classes"
         back: "Back to map"
 
-    list:
+    list: # TODO: Translate
+      loading: "Loading..."
+      error: "Connection Error"
       search: "Пошук розташування"
       more_info: "Більше інформації"
       register: "Реєстрація"

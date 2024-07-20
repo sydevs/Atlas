@@ -19,7 +19,9 @@ cs:
         online: "Online kurzy"
         back: "Zpět na mapu"
 
-    list:
+    list: # TODO: Translate
+      loading: "Loading..."
+      error: "Connection Error"
       search: "Vyhledat oblast"
       more_info: "Více informací"
       register: "Registrovat se"

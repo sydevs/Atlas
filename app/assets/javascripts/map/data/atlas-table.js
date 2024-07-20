@@ -39,7 +39,7 @@ class AtlasTable {
     // Check if record is already cached
     if (id in this.#cached) {
       if (this.#debug) console.log('[Data]', 'Return Cached', this.#model.LABEL) // eslint-disable-line no-console
-      return Promise.resolve(this.#cached[id])
+      return DataRequest.resolve(this.#cached[id])
     }
 
     // Check if record is already being loaded
@@ -50,7 +50,7 @@ class AtlasTable {
     }
 
     // Create a new request
-    const request = this.#request(`fetch${this.#model.label}`, { id: id }).then(response => {
+    const request = this.#request(`fetch${this.#model.LABEL}`, { id: id }).then(response => {
       const record = response[this.#model.KEY]
       return this.cache([record])[0]
     })
@@ -62,14 +62,13 @@ class AtlasTable {
   fetchAll(ids) {
     try {
       if (this.#debug) this.#logRequest('FETCH ALL', ids)
-      // if (this.#debug) console.log('[Data]', 'FETCH ALL', this.#model.LABELS, ids.join(","), '\r\n\r\nState:', '\r\nCache', JSON.stringify(this.#cached), '\r\nPending', JSON.stringify(this.#loading)) // eslint-disable-line no-console
       let uncachedIds = ids.filter(id => !(id in this.#cached))
       
       // Check for cached records
       if (uncachedIds.length == 0) {
         if (this.#debug) console.log('[Data]', 'Return Cached', this.#model.LABELS) // eslint-disable-line no-console
         const records = ids.map(id => this.#cached[id])
-        return Promise.resolve(records)
+        return DataRequest.resolve(records)
       }
 
       // Check for currently loading records
@@ -84,7 +83,6 @@ class AtlasTable {
 
             // Remove this request from the pending request list
             this.#requests = this.#requests.filter(item => item !== request)
-            if (this.#debug) console.log('[Data] State:', '\r\nCache', this.#cached, '\r\nPending', JSON.stringify(this.#loading)) // eslint-disable-line no-console
           } catch (err) { console.error(err) }
         })
 
@@ -95,8 +93,8 @@ class AtlasTable {
 
       // GATHER ALL OUTSTANDING REQUESTS
       const requests = this.#requests.filter(request => Util.hasIntersection(request.ids, ids))
-      if (this.#debug) console.log('[Data]', this.#model.label, 'Waiting for', requests.length, 'requests', requests) // eslint-disable-line no-console
-      return Promise.all(requests).then(() => {
+      if (this.#debug) console.log('[Data]', this.#model.LABEL, 'Waiting for', requests.length, 'requests', requests) // eslint-disable-line no-console
+      return DataRequest.all(requests).then(() => {
         // Gather all requested events
         return ids.map(id => this.#cached[id])
       })

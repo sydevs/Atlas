@@ -19,7 +19,9 @@ fr:
         online: "Cours en ligne"
         back: "Retour à la carte"
 
-    list:
+    list: # TODO: Translate
+      loading: "Loading..."
+      error: "Connection Error"
       search: "Rechercher un lieu"
       more_info: "Plus d'Info"
       register: "Inscrivez-vous"

@@ -24,14 +24,13 @@ class DataCache {
     }
 
     Object.values(this.#models).forEach(Model => {
-      this.#cache[Model.key] = {}
       this[Model.KEYS] = new AtlasTable(this.#atlas, Model)
     })
   }
 
   getGeojson(layer) {
     if (layer in this.#cache.geojsons) {
-      return Promise.resolve(this.#cache.geojsons[layer])
+      return DataRequest.resolve(this.#cache.geojsons[layer])
     } else {
       if (this.#debug) console.log('[Data]', 'getting geojson', layer) // eslint-disable-line no-console
       return this.#atlas.fetchGeojson({
@@ -56,13 +55,10 @@ class DataCache {
 
   getAllOnlineEvents() {
     if ('online' in this.#cache.lists) {
-      return Promise.resolve(this.#cache.lists['online'])
+      return DataRequest.resolve(this.#cache.lists['online'])
     } else {
       return this.#atlas.fetchOnlineList().then(response => {
-        this.#cache.lists['online'] = response.events.map(event => {
-          return this.events.cache([event])[0]
-        })
-
+        this.#cache.lists['online'] = this.events.cache(response.events)
         return this.#cache.lists['online']
       })
     }
@@ -76,9 +72,9 @@ class DataCache {
       filter = 'online'
 
     if (filter in this.#cache.sortedLists) {
-      return Promise.resolve(this.#cache.sortedLists[filter])
+      return DataRequest.resolve(this.#cache.sortedLists[filter])
     } else if (filter in this.#cache.lists) {
-      fetchList = Promise.resolve(this.#cache.lists[filter])
+      fetchList = DataRequest.resolve(this.#cache.lists[filter])
     } else {
       let lists = []
       if (filter !== 'online')
@@ -87,7 +83,7 @@ class DataCache {
       if (filter !== 'offline')
         lists.push(this.getAllOnlineEvents(ids))
 
-      fetchList = Promise.all(lists).then(values => values.flat())
+      fetchList = DataRequest.all(lists).then(values => values.flat())
     }
 
     return fetchList.then(list => {
@@ -108,7 +104,7 @@ class DataCache {
     if (cache && cacheQuery) {
       const distance = Util.distance(params, cacheQuery)
       if (distance <= 0.5) {
-        return Promise.resolve(cache)
+        return DataRequest.resolve(cache)
       }
     }
     

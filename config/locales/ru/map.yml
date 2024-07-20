@@ -19,7 +19,9 @@ ru:
         online: "Онлайн занятия"
         back: "Вернуться к карте"
 
-    list:
+    list: # TODO: Translate
+      loading: "Loading..."
+      error: "Connection Error"
       search: "Поиск по местоположению"
       more_info: "Подробнее"
       register: "Записаться"

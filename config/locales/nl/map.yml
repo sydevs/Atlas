@@ -19,7 +19,9 @@ nl:
         online: "Online lessen"
         back: "Terug naar de kaart"
 
-    list:
+    list: # TODO: Translate
+      loading: "Loading..."
+      error: "Connection Error"
       search: "Zoek op locatie"
       more_info: "Meer Info"
       register: "Registeren"

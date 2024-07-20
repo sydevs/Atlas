@@ -19,7 +19,9 @@ de:
         online: "Online-Kurse"
         back: "Zurück zur Karte"
 
-    list:
+    list: # TODO: Translate
+      loading: "Loading..."
+      error: "Connection Error"
       search: "Suchen nach Standort"
       more_info: "Mehr Infos"
       register: "Anmelden"

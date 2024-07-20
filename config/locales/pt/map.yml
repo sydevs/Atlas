@@ -19,7 +19,9 @@ pt:
         online: "Aulas online"
         back: "Voltar ao mapa"
 
-    list:
+    list: # TODO: Translate
+      loading: "Loading..."
+      error: "Connection Error"
       search: "Pesquisar local"
       more_info: "Mais informações"
       register: "Registro"
