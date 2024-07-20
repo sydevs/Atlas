@@ -15,7 +15,7 @@ function ListView() {
       getEventIds = AtlasApp.map.getRenderedEventIds()
     }
 
-    getEventIds.then(ids => {
+    pendingRequest = getEventIds.then(ids => {
       offlineEventCount = ids && ids.length
 
       return AtlasApp.data.getList(filter, ids).then(response => {

@@ -4,6 +4,11 @@
 
 class AtlasEvent extends AtlasRecord {
 
+  static LABEL = 'Event'
+  static LABELS = 'Events'
+  static KEY = 'event'
+  static KEYS = 'events'
+
   static LAYER = {
     offline: 'f',
     online: 'n',

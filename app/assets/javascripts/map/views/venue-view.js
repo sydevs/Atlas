@@ -10,7 +10,7 @@ function VenueView() {
       const id = m.route.param('id')
       AtlasApp.data.getRecord(AtlasVenue, id).then(response => {
         venue = response
-        AtlasApp.data.getEvents(venue.offlineEventIds).then(events => {
+        AtlasApp.data.getRecords(AtlasEvent, venue.offlineEventIds).then(events => {
           venue.events = events
           m.redraw()
         })

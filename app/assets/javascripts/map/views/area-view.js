@@ -11,7 +11,7 @@ function AreaView() {
       AtlasApp.data.getRecord(AtlasArea, id).then(response => {
         area = response
         const eventIds = area.offlineEventIds.concat(area.onlineEventIds)
-        AtlasApp.data.getEvents(eventIds).then(events => {
+        AtlasApp.data.getRecords(AtlasEvent, eventIds).then(events => {
           area.events = events
           m.redraw()
         })
@@ -19,7 +19,7 @@ function AreaView() {
     },
     onupdate: function(vnode) {
       const eventIds = area.offlineEventIds.concat(area.onlineEventIds)
-      AtlasApp.data.getEvents(eventIds).then(events => {
+      AtlasApp.data.getRecords(AtlasEvent, eventIds).then(events => {
         area.events = events
         m.redraw()
       })

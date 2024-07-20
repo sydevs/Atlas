@@ -122,4 +122,10 @@ const Util = {
       return url
     }
   },
+  
+  hasIntersection(array1, array2) {
+    const set = new Set(array1)
+    return array2.some(item => set.has(item))
+  },
+
 }

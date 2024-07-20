@@ -148,18 +148,22 @@ class AtlasAPI {
   }
 
   prepareQueries(locale) {
+    let models
     this.fetchGeojson = this.graph.query(`($online: Boolean, $languageCode: String) {
       geojson(online: $online, languageCode: $languageCode, locale: "${locale}") { ...geojson }
     }`)
 
-    this.fetchEvents = this.graph.query(`($ids: [ID!]) {
-      events(ids: $ids, locale: "${locale}") { ...event }
-    }`)
-
-    const models = [AtlasCountry, AtlasRegion, AtlasArea, AtlasVenue, AtlasEvent]
+    models = [AtlasEvent]
     models.forEach(Model => {
-      this[`fetch${Model.label}`] = this.graph.query(`(@autodeclare) {
-        ${Model.key}(id: $id, locale: "${locale}") { ...${Model.key} }
+      this[`fetchAll${Model.LABELS}`] = this.graph.query(`($ids: [ID!]) {
+        ${Model.KEYS}(ids: $ids, locale: "${locale}") { ...${Model.KEY} }
+      }`)
+    })
+
+    models = [AtlasCountry, AtlasRegion, AtlasArea, AtlasVenue, AtlasEvent]
+    models.forEach(Model => {
+      this[`fetch${Model.LABEL}`] = this.graph.query(`(@autodeclare) {
+        ${Model.KEY}(id: $id, locale: "${locale}") { ...${Model.KEY} }
       }`)
     })
 
