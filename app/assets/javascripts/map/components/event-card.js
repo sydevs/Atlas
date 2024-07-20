@@ -44,7 +44,7 @@ function EventCard() {
             m('.sya-card__meta', m('.sya-card__meta__day', event.timing.dateString)),
             m('.sya-card__meta',
               m('.sya-card__meta__time', event.timing.startTime),
-              event.online ?
+              event.offline ?
                 null :
                 m('abbr.sya-card__meta__timezone', {
                   'data-tooltip': event.timing.timeZone('long'),
