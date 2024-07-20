@@ -61,9 +61,7 @@ module Types
       helpers = ActionController::Base.helpers
       description = helpers.simple_format object.description
       helpers.auto_link(description, link: :urls, html: { target: '_blank', rel: 'nofollow' }) do |text|
-        text = text.delete_prefix("http://")
-        text = text.delete_prefix("https://")
-        text = text.delete_prefix("www.")
+        text = text.delete_prefix("http://").delete_prefix("https://").delete_prefix("www.")
         text = text.split("/", 2)
         text[1] = helpers.truncate(text[1], length: 15) if text.count > 1
         text.join("/")
