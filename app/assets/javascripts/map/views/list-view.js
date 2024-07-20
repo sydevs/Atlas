@@ -31,6 +31,7 @@ function ListView() {
       })
     }).catch(() => {
       events = null
+      offlineEventCount = 0
     }).finally(() => {
       m.redraw()
     })

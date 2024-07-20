@@ -137,7 +137,7 @@ class MapFrame extends EventTarget {
 
   _setupHooks() {
     window.addEventListener('resize', _event => this.#updatePadding())
-    this.#mapbox.on('render', _event => this.dispatchEvent(new Event('update')))
+    this.#mapbox.on('move', _event => this.dispatchEvent(new Event('update')))
     this.#mapbox.on('movestart', _event => this.dispatchEvent(new Event('movestart')))
     this.#mapbox.on('move', _event => this.dispatchEvent(new Event('move')))
     this.#mapbox.on('moveend', _event => this.dispatchEvent(new Event('moveend')))
