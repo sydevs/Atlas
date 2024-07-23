@@ -38,7 +38,8 @@ class EventTiming {
     this.upcomingDateTimes = timing.upcomingDates.map(datetime => luxon.DateTime.fromISO(datetime, { zone: event.timing.timeZone }))
     this.isUpcoming = this.upcomingDateTimes.length > 0
 
-    if (event.online) {
+    if (event.offline) {
+      // Enforce local timezone for offline classes
       firstDateTime = firstDateTime.setZone(localTimeZone)
       lastDateTime = lastDateTime ? lastDateTime.setZone(localTimeZone) : null
       this.upcomingDateTimes.map(datetime => datetime.setZone(localTimeZone))
