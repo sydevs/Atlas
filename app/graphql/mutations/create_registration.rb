@@ -38,8 +38,8 @@ class Mutations::CreateRegistration < Mutations::BaseMutation
     elsif registration.save
       registration.subscribe_to! :registrations
       
-      SendinblueAPI.send_confirmation_email(registration)
-      SendinblueAPI.schedule_reminder_email(registration)
+      BrevoAPI.send_confirmation_email(registration)
+      BrevoAPI.schedule_reminder_email(registration)
 
       {
         status: 'success',

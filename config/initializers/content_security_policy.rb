@@ -15,7 +15,7 @@ Rails.application.config.content_security_policy do |policy|
   policy.frame_ancestors nil
   policy.worker_src  :blob
   policy.child_src   :blob
-  policy.connect_src :self, '*.sendinblue.com', '*.tiles.mapbox.com', 'api.mapbox.com', 'events.mapbox.com', 'storage.googleapis.com', 'nominatim.openstreetmap.org'
+  policy.connect_src :self, '*.brevo.com', '*.tiles.mapbox.com', 'api.mapbox.com', 'events.mapbox.com', 'storage.googleapis.com', 'nominatim.openstreetmap.org'
 
   # Specify URI for violation reports
   # policy.report_uri "/csp-violation-report-endpoint"

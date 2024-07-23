@@ -12,8 +12,8 @@ class ManagedRecord < ApplicationRecord
   scope :created_since, ->(since) { where('created_at >= ?', since) }
 
   # Callbacks
-  after_destroy :unsubscribe_from_sendinblue!
-  after_create :subscribe_to_sendinblue!
+  after_destroy :unsubscribe_from_brevo!
+  after_create :subscribe_to_brevo!
   after_create :new_managed_record_notification!
 
   # Methods
@@ -28,12 +28,12 @@ class ManagedRecord < ApplicationRecord
       ManagedRecordMailer.with(managed_record: self).created.deliver_later
     end
 
-    def subscribe_to_sendinblue!
-      manager.update_sendinblue! update_management: true
+    def subscribe_to_brevo!
+      manager.update_brevo! update_management: true
     end
 
-    def unsubscribe_from_sendinblue!
-      manager.update_sendinblue! update_management: true
+    def unsubscribe_from_brevo!
+      manager.update_brevo! update_management: true
     end
 
 end

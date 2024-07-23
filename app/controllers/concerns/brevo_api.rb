@@ -1,8 +1,8 @@
 
-## SENDINBLUE
-# This concern simplifies requests to sendinblue.com
+## BREVO
+# This concern simplifies requests to brevo.com
 
-module SendinblueAPI
+module BrevoAPI
 
   LISTS = {
     registrations: 13,
@@ -19,7 +19,7 @@ module SendinblueAPI
     return if Rails.env.development?
 
     client = SibApiV3Sdk::ContactsApi.new
-    list_id = SendinblueAPI::LISTS[list_id]
+    list_id = BrevoAPI::LISTS[list_id]
 
     # Create a contact
     p client.create_contact(
@@ -36,7 +36,7 @@ module SendinblueAPI
     return if Rails.env.development?
     
     client = SibApiV3Sdk::ContactsApi.new
-    list_id = SendinblueAPI::LISTS[list_id]
+    list_id = BrevoAPI::LISTS[list_id]
 
     # Create a contact
     p client.remove_contact_from_list(list_id, {
@@ -62,7 +62,7 @@ module SendinblueAPI
     return if Rails.env.development?
     
     config.reverse_merge!({
-      templateId: SendinblueAPI::TEMPLATES[template],
+      templateId: BrevoAPI::TEMPLATES[template],
       # sender: { name: 'We Meditate', email: 'admin@wemeditate.com' },
       params: {},
       tags: [],
@@ -97,7 +97,7 @@ module SendinblueAPI
 
     text[:faqs] = nil # This temporarily disables all FAQ text.
 
-    SendinblueAPI.send_email(:confirmation, {
+    BrevoAPI.send_email(:confirmation, {
       subject: I18n.translate('subject', scope: scope, event_name: event.label),
       to: [{ name: registration.name, email: registration.email }],
       params: {
@@ -143,7 +143,7 @@ module SendinblueAPI
     # schedule_at = 1.minute.from_now # For development
     return if schedule_at < Time.now
 
-    SendinblueAPI.send_email(:reminder, {
+    BrevoAPI.send_email(:reminder, {
       scheduledAt: schedule_at.utc.iso8601,
       subject: I18n.translate('subject', scope: scope, event_name: event.label),
       to: [{ name: registration.name, email: registration.email }],

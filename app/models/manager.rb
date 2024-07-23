@@ -40,9 +40,9 @@ class Manager < ApplicationRecord
 
   # Callbacks
   before_save :unverify
-  after_save :update_sendinblue!, if: :email_previously_changed?
-  after_create :subscribe_to_sendinblue!
-  after_destroy :unsubscribe_from_sendinblue!
+  after_save :update_brevo!, if: :email_previously_changed?
+  after_create :subscribe_to_brevo!
+  after_destroy :unsubscribe_from_brevo!
 
   # Methods
 
@@ -150,16 +150,16 @@ class Manager < ApplicationRecord
     !contact_by_email?
   end
 
-  def update_sendinblue! update_management: false
+  def update_brevo! update_management: false
     if email_previously_was.present?
-      SendinblueAPI.update_contact(email, sendinblue_attributes)
+      BrevoAPI.update_contact(email, brevo_attributes)
     elsif update_management
-      SendinblueAPI.update_contact(email, sendinblue_attributes)
+      BrevoAPI.update_contact(email, brevo_attributes)
     end
   end
 
-  def subscribe_to_sendinblue!
-    SendinblueAPI.subscribe(email, :managers, sendinblue_attributes)
+  def subscribe_to_brevo!
+    BrevoAPI.subscribe(email, :managers, brevo_attributes)
   end
 
   private
@@ -169,7 +169,7 @@ class Manager < ApplicationRecord
       self[:phone_verified] = false if phone_changed?
     end
 
-    def sendinblue_attributes
+    def brevo_attributes
       attributes = {
         email: email,
         firstname: first_name,
@@ -200,8 +200,8 @@ class Manager < ApplicationRecord
       attributes
     end
 
-    def unsubscribe_from_sendinblue!
-      SendinblueAPI.unsubscribe(email, :managers)
+    def unsubscribe_from_brevo!
+      BrevoAPI.unsubscribe(email, :managers)
     end
 
 end
