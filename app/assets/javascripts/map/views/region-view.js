@@ -36,7 +36,7 @@ function RegionView() {
             sublabel: area.subtitle,
             count: count,
             layer: vnode.attrs.layer,
-            model: AtlasArea.key,
+            model: AtlasArea.KEY,
           })
         }))
       ]

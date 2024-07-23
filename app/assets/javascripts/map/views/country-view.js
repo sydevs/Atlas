@@ -34,7 +34,7 @@ function CountryView() {
             label: region.name,
             count: count,
             layer: vnode.attrs.layer,
-            model: AtlasRegion.key,
+            model: AtlasRegion.KEY,
           })
         }))
       ]
