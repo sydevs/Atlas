@@ -11,7 +11,7 @@ table.data cellpadding=0
     td = event.address
   tr
     th = translate('mail.event.timing')
-    td = event.recurrence_in_words
+    td = event.recurrence_in_words(short: true)
   - if status == :created
     tr
       th = translate('mail.event.start_date')

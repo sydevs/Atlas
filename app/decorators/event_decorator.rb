@@ -44,7 +44,7 @@ module EventDecorator
     category ? I18n.translate(category, scope: 'activerecord.attributes.event.category_descriptions') : nil
   end
 
-  def recurrence_in_words parts, short: false
+  def recurrence_in_words parts=%i[recurrence timing dates], short: false
     return nil if inactive_category?
 
     parts.map! do |key|
