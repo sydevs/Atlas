@@ -22,8 +22,7 @@ class EventMailer < ApplicationMailer
     expiration_period = helpers.time_ago_in_words(event.should_expire_at)
     title = I18n.translate('title', scope: scope, period: expiration_period)
 
-    puts scope
-    BrevoAPI.send_email(event.status.to_sym, {
+    BrevoAPI.send_email(:status, {
       subject: title,
       to: [{ name: manager.name, email: manager.email }],
       params: {

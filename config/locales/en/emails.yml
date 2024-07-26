@@ -73,7 +73,7 @@ en:
           negative: "No, it needs to be updated"
           tertiary: "No, the event can be canceled"
       finished:
-        title: "Event has finished."
+        title: "Event has finished"
         prelude: "Your public event on the Sahaja Yoga Atlas has reached it's scheduled conclusion."
         flash: "Event Completed"
         action: "Is it correct that this event has completed?"
@@ -81,7 +81,7 @@ en:
           positive: "Yes, the event is finished"
           negative: "No, it needs to be updated"
       checkup:
-        title: "Event manager not responding."
+        title: "Event manager not responding"
         prelude: "An event in the region you manage is expiring, and the manager has not responded to out automated emails. Please contact the manager of this event and help them confirm or update their event."
         flash: "Event expires in %{period}!"
         action: "Are the above details accurate?"
@@ -95,7 +95,7 @@ en:
       prelude: "To increase registration from seekers"
       description:
         title: "Missing description"
-        text: "Add a short description to you description to your event"
+        text: "Add a short description to your event to welcome seekers, and if needed tell them how to find the room."
         action: "Add your description"
       pictures:
         title: "Photos"

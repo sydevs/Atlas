@@ -14,12 +14,7 @@ module BrevoAPI
   TEMPLATES = {
     confirmation: 9,
     reminder: 12,
-    needs_review: 198,
-    needs_urgent_review: 198,
-    needs_immediate_review: 198,
-    expired: 198,
-    finished: 198,
-    archived: 198,
+    status: 198,
   }.freeze
 
   def self.subscribe email, list_id, attributes

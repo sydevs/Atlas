@@ -100,9 +100,9 @@ module EventDecorator
     return {} if expired? || archived? || finished?
 
     result = {}
-    result[:description] = cms_url(:edit_cms_event_url) unless false && description.present?
-    result[:pictures] = cms_url(:cms_event_pictures_url) unless false && pictures.count >= 3
-    result[:registration] = cms_url(:edit_cms_event_url) unless false && native_registration_mode?
+    result[:description] = cms_url(:edit_cms_event_url) unless description.present?
+    result[:pictures] = cms_url(:cms_event_pictures_url) unless pictures.count >= 3
+    result[:registration] = cms_url(:edit_cms_event_url) unless native_registration_mode?
     result
   end
 
