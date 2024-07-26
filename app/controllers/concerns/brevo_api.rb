@@ -63,7 +63,7 @@ module BrevoAPI
   def self.send_email template, config
     puts "[Brevo] Send #{template}"
     if Rails.env.development?
-      pp config
+      puts config.to_json
       return
     end
     
@@ -77,7 +77,6 @@ module BrevoAPI
     config[:tags] << template.to_s
 
     config[:params][:text].reverse_merge!(I18n.translate('emails.common'))
-    pp config
 
     client = SibApiV3Sdk::TransactionalEmailsApi.new
     p client.send_transac_email(config)

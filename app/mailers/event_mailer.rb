@@ -8,7 +8,7 @@ class EventMailer < ApplicationMailer
     manager = params[:manager] || event.manager
     @manager = manager
 
-    if event.status.present? && event.status != :verified
+    if event.status.present? && event.status.to_sym != :verified
       puts "[MAIL] Sending status message (#{event.status}) for #{event.label} to #{manager.name}"
     else
       puts "[MAIL] Skip sending status for #{event.label} (#{event.status})"
@@ -22,6 +22,7 @@ class EventMailer < ApplicationMailer
     expiration_period = helpers.time_ago_in_words(event.should_expire_at)
     title = I18n.translate('title', scope: scope, period: expiration_period)
 
+    print scope
     BrevoAPI.send_email(:status, {
       subject: title,
       to: [{ name: manager.name, email: manager.email }],
@@ -51,7 +52,7 @@ class EventMailer < ApplicationMailer
           puts I18n.translate(key, scope: 'emails.recommendations')
           I18n.translate(key, scope: 'emails.recommendations').merge({
             link: sign_in_link(link),
-            image: helpers.image_url("email/recommendations/#{key}.png", host: 'https://atlas.sydevelopers.com'),
+            image: helpers.image_url("email/recommendations/#{key}.jpeg", host: 'https://atlas.sydevelopers.com'),
           })
         end,
         links: {
