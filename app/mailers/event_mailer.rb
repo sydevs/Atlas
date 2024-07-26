@@ -4,45 +4,70 @@ class EventMailer < ApplicationMailer
   layout 'mail/admin'
 
   def status
-    setup
+    event = params[:event] || params[:record]
+    manager = params[:manager] || event.manager
+    @manager = manager
 
-    if @status.present? && @status != :verified
-      puts "[MAIL] Sending status message (#{@event.status}) for #{@event.label} to #{@manager.name}"
+    if event.status.present? && event.status != :verified
+      puts "[MAIL] Sending status message (#{event.status}) for #{event.label} to #{manager.name}"
     else
-      puts "[MAIL] Skip sending status for #{@event.label} (#{@event.status})"
+      puts "[MAIL] Skip sending status for #{event.label} (#{event.status})"
       return
     end
 
-    create_session!
-    subject = I18n.translate(@status, scope: 'mail.event.status.subject', event: @event.label, city: @event.area.label)
+    helpers = ApplicationController.helpers
 
-    # TODO: Implement MessageBird support
-    if true || @manager.contact_by_email?
-      parameters = { to: @manager.email, subject: subject }
-      if @status == :needs_urgent_review
-        parameters['Importance'] = 'high'
-        parameters['X-Priority'] = '1'
-      end
+    is_checkup = manager != event.manager
+    scope = (is_checkup ? "emails.status.checkup" : "emails.status.#{event.status}")
+    expiration_period = helpers.time_ago_in_words(event.should_expire_at)
+    title = I18n.translate('title', scope: scope, period: expiration_period)
 
-      mail(parameters)
-    else
-      MessageBirdAPI.send(:support, @manager, [
-        { default: 'Roberto Test' },
-        { default: '123' },
-        { default: 'new coffee machine' },
-        { default: 'MessageBird, Trompenburgstraat 2C, 1079TX Amsterdam' }
-      ])
-    end
+    puts scope
+    BrevoAPI.send_email(event.status.to_sym, {
+      subject: title,
+      to: [{ name: manager.name, email: manager.email }],
+      params: {
+        text: I18n.translate(scope).deep_dup.merge!({
+          title: title,
+          flash: I18n.translate('flash', scope: scope, period: expiration_period).upcase,
+          footer: I18n.translate('emails.footer'),
+          recommendation_title: I18n.translate('emails.recommendations.title'),
+          recommendation_prelude: I18n.translate('emails.recommendations.prelude'),
+          # These translations are references to other translations, so we need to call them directly
+          event: I18n.translate('emails.status.event').map do |key, ref|
+            [key, I18n.translate(ref)]
+          end.to_h
+        }),
+        event: {
+          status: event.status,
+          label: event.label,
+          map_url: event.map_url,
+          location: event.address,
+          timing: event.recurrence_in_words(short: true),
+          contact: event.contact_text,
+          category: event.category_label,
+          updated_at: event.updated_at.to_s(:short),
+        },
+        recommendations: event.recommendations.map do |key, link|
+          puts I18n.translate(key, scope: 'emails.recommendations')
+          I18n.translate(key, scope: 'emails.recommendations').merge({
+            link: sign_in_link(link),
+            image: helpers.image_url("email/recommendations/#{key}.png", host: 'https://atlas.sydevelopers.com'),
+          })
+        end,
+        links: {
+          positive: sign_in_link(change_cms_event_url(event, effect: :verify)),
+          negative: sign_in_link(edit_cms_event_url(event)),
+          tertiary: sign_in_link(is_checkup ? "mailto:#{event.manager.email}" : change_cms_event_url(event, effect: :finish)),
+        }
+      },
+    })
 
-    if @status == :needs_urgent_review
-      @event.parent_managers.each do |manager|
-        puts "[MAIL] Sending status email to city manager: #{manager.name}"
-        @manager = manager
-        mail(parameters.merge({ to: manager.email }))
-      end
-    end
+    event.update_column(:status_email_sent_at, Time.now) unless params[:test]
+  end
 
-    @event.update_column(:status_email_sent_at, Time.now) unless params[:test]
+  def checkup
+    
   end
 
   def registrations

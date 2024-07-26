@@ -46,14 +46,28 @@ class ApplicationMailer < ActionMailer::Base
       manager ||= @manager
       session = Passwordless::Session.new({
         authenticatable: manager,
-        user_agent: 'Command Line',
-        remote_addr: 'unknown',
         timeout_at: 1.week.from_now,
       })
 
       session.save!
       @magic_link ||= send(Passwordless.mounted_as).token_sign_in_url(session.token)
       @template_link ||= "#{@magic_link}?destination_path="
+    end
+
+    def sign_in_link(destination)
+      @sign_in_link ||= begin
+        session = Passwordless::Session.create!(authenticatable: @manager, timeout_at: 1.week.from_now)
+    
+        Passwordless.context.url_for(
+          session,
+          action: "confirm",
+          id: session.to_param,
+          token: session.token,
+          **default_url_options
+        )
+      end
+
+      "#{@sign_in_link}?destination_path=#{destination}"
     end
 
     def setup

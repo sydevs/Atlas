@@ -74,7 +74,7 @@ class Event < ApplicationRecord
   # Callbacks
   before_validation -> { self.description = description&.encode(description.encoding, universal_newline: true) || "" }
   before_validation :find_venue, unless: :online?
-  after_save :verify_manager
+  after_create :verify_manager
   before_save :set_finish_date
 
   # Methods
@@ -128,7 +128,7 @@ class Event < ApplicationRecord
       end
     end
 
-    BrevoAPI.send_event_status_email(self)
+    EventMailer.with(event: self, manager: manager).status.deliver_later
   end
 
   def cache_key
