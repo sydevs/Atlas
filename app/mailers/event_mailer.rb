@@ -49,7 +49,6 @@ class EventMailer < ApplicationMailer
           updated_at: event.updated_at.to_s(:short),
         },
         recommendations: event.recommendations.map do |key, link|
-          puts I18n.translate(key, scope: 'emails.recommendations')
           I18n.translate(key, scope: 'emails.recommendations').merge({
             link: sign_in_link(link),
             image: helpers.image_url("email/recommendations/#{key}.png", host: 'https://atlas.sydevelopers.com'),
