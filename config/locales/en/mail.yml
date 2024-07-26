@@ -66,6 +66,7 @@ en:
         verify: "Yes, details are correct"
         edit: "No, edit the program"
         or: "or"
+        expiration: "Event will expire in %{time}."
         subject:
           created: "New Event Created - %{event}"
           needs_review: "Are your meeting details correct? (Verify in one click)"

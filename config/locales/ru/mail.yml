@@ -66,6 +66,7 @@ ru:
         verify: "Да, информация актуальна."
         edit: "Нет, обновить данные о программе."
         or: "или"
+        expiration: "Event will expire in %{time}."  # TODO: Translate
         subject:
           created: "Новое событие создано - %{event}"
           needs_review: "Are your meeting details correct? (Verify in one click)"

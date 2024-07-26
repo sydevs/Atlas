@@ -16,20 +16,25 @@ ruby:
     = translate(translation_key, scope: 'mail.event.status.header')
     .subtitle = @event.label
 
-//= email_status_icon(@status)
+= email_status_icon(@status)
 
 h3
   = translate(translation_key, scope: 'mail.event.status.title')
   .subtitle = translate(translation_key, scope: 'mail.event.status.byline', date: timestamp.to_date.to_s(:long))
 
-
 = render 'mail/events/data', event: @event, status: @status
 
-p.explanation
-  = translate(@status, scope: 'mail.event.status.explanation')
+- if @status == :expired
+  p.explanation.expiration = translate(@status, scope: 'mail.event.status.explanation')
+- else
+  p.explanation = translate(@status, scope: 'mail.event.status.explanation')
 
 - if %i[needs_review needs_urgent_review expired].include?(@status)
   p.explanation = translate('mail.event.status.question')
+
+- if @status == :needs_review || @status == :needs_urgent_review
+  p.explanation
+    = translate('mail.event.status.expiration', time: time_from_now_in_words(@event.should_expire_at))
 
 .actions
   - if %i[needs_review needs_urgent_review expired finished].include?(@status)
