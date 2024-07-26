@@ -3,6 +3,7 @@
 # This concern simplifies requests to brevo.com
 
 module BrevoAPI
+  include Rails.application.routes.url_helpers
 
   LISTS = {
     registrations: 13,
@@ -13,6 +14,12 @@ module BrevoAPI
   TEMPLATES = {
     confirmation: 9,
     reminder: 12,
+    needs_review: 198,
+    needs_urgent_review: 198,
+    needs_immediate_review: 198,
+    expired: 198,
+    finished: 198,
+    archived: 198,
   }.freeze
 
   def self.subscribe email, list_id, attributes
@@ -59,11 +66,14 @@ module BrevoAPI
   end
 
   def self.send_email template, config
-    return if Rails.env.development?
+    puts "[Brevo] Send #{template}"
+    if Rails.env.development?
+      pp config
+      return
+    end
     
     config.reverse_merge!({
       templateId: BrevoAPI::TEMPLATES[template],
-      # sender: { name: 'We Meditate', email: 'admin@wemeditate.com' },
       params: {},
       tags: [],
     })
@@ -131,7 +141,7 @@ module BrevoAPI
     scope = "emails.reminder.#{event.layer}"
 
     text = {
-      header: I18n.translate('header', scope: scope, name: registration.first_name)
+      header: I18n.translate('header', scope: scope, name: registration.first_name),
     }
 
     %i[subheader action].each do |field|
@@ -159,6 +169,78 @@ module BrevoAPI
         text: text,
       },
     })
+  end
+
+  def self.send_event_status_email event
+    return if event.verified?
+
+    helpers = ApplicationController.helpers
+    event = event.extend(EventDecorator)
+    scope = "emails.status.#{event.status}"
+
+    expiration_period = helpers.time_ago_in_words(event.should_expire_at)
+    puts I18n.translate(scope)
+    text = I18n.translate(scope).deep_dup.merge!({
+      title: I18n.translate('title', scope: scope, period: expiration_period),
+      flash: I18n.translate('flash', scope: scope).upcase,
+      footer: I18n.translate('emails.footer'),
+      recommendation_title: I18n.translate('emails.recommendations.title'),
+      recommendation_prelude: I18n.translate('emails.recommendations.prelude'),
+      # These translations are references to other translations, so we need to call them directly
+      event: I18n.translate('emails.status.event').map do |key, ref|
+        [key, I18n.translate(ref)]
+      end.to_h
+    })
+
+    sign_in_link = BrevoAPI.create_sign_in_url!(event.manager)
+    params = {
+      text: text,
+      event: {
+        status: event.status,
+        # status_text: helpers.translate_enum_value(event, :status).upcase,
+        label: event.label,
+        map_url: event.map_url,
+        location: event.address,
+        timing: event.recurrence_in_words(short: true),
+        contact: event.contact_text,
+        category: event.category_label,
+        updated_at: event.updated_at.to_s(:short),
+      },
+      recommendations: event.recommendations.map do |key, link|
+        puts I18n.translate(key, scope: 'emails.recommendations')
+        I18n.translate(key, scope: 'emails.recommendations').merge({
+          link: "#{sign_in_link}?destination_path=#{link}",
+          image: helpers.image_url("email/recommendations/#{key}.png", host: 'https://atlas.sydevelopers.com'),
+        })
+      end,
+      links: {
+        positive: "#{sign_in_link}?destination_path=#{event.cms_url(:change_cms_event_url, effect: :verify)}",
+        negative: "#{sign_in_link}?destination_path=#{event.cms_url(:edit_cms_event_url)}",
+        tertiary: "#{sign_in_link}?destination_path=#{event.cms_url(:change_cms_event_url, effect: :finish)}",
+      }
+    }
+
+    BrevoAPI.send_email(event.status.to_sym, {
+      subject: text[:title],
+      to: [{ name: event.manager.name, email: 'contact@sydevelopers.com' }],
+      params: params,
+    })
+  end
+
+  def self.create_sign_in_url!(manager)
+    session = Passwordless::Session.create!(authenticatable: manager, timeout_at: 1.week.from_now)
+
+    Passwordless.context.url_for(
+      session,
+      action: "confirm",
+      id: session.to_param,
+      token: session.token,
+      **default_url_options
+    )
+  end
+
+  def self.default_url_options
+    Rails.application.config.action_mailer.default_url_options
   end
 
 end

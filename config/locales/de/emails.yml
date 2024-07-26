@@ -1,49 +1,49 @@
-es:
+en: # TODO: Translate
   emails: # These are translations for email that are sent to the seekers.
     common:
-      view_in_browser: "Ver en el navegador"
-      unsubscribe: "Darse de baja"
-      reason: "Has recibido este correo porque te has registrado en este evento."
-      responses: "Tus respuestas:" # TODO: Translate
+      view_in_browser: "View in browser"
+      unsubscribe: "Unsubscribe"
+      reason: "You've received this email because you registered for this event."
+      responses: "Your responses:"
 
-    footer: # TODO: Translate
+    footer:
       prelude: "This project maintains an accurate worldwide listing of public programs for seekers. The Atlas map is embedded on dozens of national and international Sahaj websites."
       cause: "You've received this email because you're a manager for the Sahaja Yoga Atlas. Do not forward this email, the links contained allow access to your account."
       unsubscribe: "Unsubscribe"
 
     confirmation:
       offline:
-        subject: "Registro confirmado - %{event_name}"
-        header: "Tu registro se ha confirmado, %{name}"
-        subheader: "Nos alegra que hayas decidido unirte a nuestra clase y ¡esperamos poder meditar juntos muy pronto!"
-        invite_a_friend: "Invita a un amigo con este enlace"
-        get_directions: "Obtener direcciones"
+        subject: "Registration Confirmed - %{event_name}"
+        header: "Your registration is confirmed, %{name}"
+        subheader: "We're happy you decided to join our class and are looking forward to meditating together!"
+        invite_a_friend: "Invite a friend along with this link"
+        get_directions: "Get directions"
         faqs:
-          - title: "¿Qué debería traer?"
-            content: "No se requiere nada especial. Ven con una actitud abierta y sin expectativas."
+          - title: "What should I bring?"
+            content: "No special equipment is required. Come without expectations."
       online:
         subject: :emails.confirmation.offline.subject # Do not translate
         header: :emails.confirmation.offline.subject # Do not translate
         subheader: :emails.confirmation.offline.subject # Do not translate
-        online_url: "O, utiliza este enlace para unirte al evento cuando comience"
+        online_url: "Or, use this link to join the event when it starts"
         invite_a_friend: :emails.confirmation.offline.invite_a_friend # Do not translate
-        joining_title: "¿Cómo puedo participar?"
-        joining_content: "Utiliza este elnace para unirte cuando el evento comience. Te enviaremos de nuevo este enlace 1 hora antes de que comience."
+        joining_title: "How do I join?"
+        joining_content: "Use this link to join when the event starts. You will be emailed this link again, 1 hour before the event starts."
         faqs:
 
     reminder:
       offline:
-        subject: "Comienza mañana - %{event_name}"
-        header: "Tu evento comienza mañana, %{name}"
-        subheader: "Nos alegra que hayas decidido unirte a nuestra clase y ¡esperamos poder meditar juntos muy pronto!"
+        subject: "Starting Tomorrow - %{event_name}"
+        header: "Your event is starting tomorrow, %{name}"
+        subheader: "We're happy you decided to join our class and are looking forward to meditating together!"
         action: :emails.confirmation.offline.get_directions
       online:
-        subject: "Comienza pronto - %{event_name}"
-        header: "Tu clase comienza en 1 hora, %{name}"
-        subheader: "La clase a la que te has registrado está a punto de comenzar. Aquí está un enlace para unirte en cualquier momento."
-        action: "Unirse a la reunión"
+        subject: "Starting Soon - %{event_name}"
+        header: "Your class is starting in 1 hour, %{name}"
+        subheader: "The class you registered for is about to start. Here is a link to join at the starting time."
+        action: "Join meeting"
 
-    status: # TODO: Translate
+    status:
       event:
         timing: :cms.forms.event.timing # Do not translate
         location: :cms.forms.event.location # Do not translate
@@ -78,7 +78,7 @@ es:
           positive: "Yes, the event is finished"
           negative: "No, it needs to be updated"
 
-    recommendations: # TODO: Translate
+    recommendations:
       title: "Recommendations for Your Event"
       prelude: "To increase registration from seekers"
       description:

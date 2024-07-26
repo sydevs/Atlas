@@ -18,13 +18,33 @@ class CMS::EventsController < CMS::ApplicationController
     @record.touch if super parameters
   end
 
-  def verify
-    @record = Event.find(params[:event_id])
+  def change
+    @record = Event.find(params[:id])
     authorize @record, :update?
     @context = @record
-    @record.verify!
 
-    redirect_to [:cms, @record], flash: { success: translate('cms.messages.event.verified') }
+    case params[:effect]
+    when 'verify'
+      @record.verify!
+      message = { success: translate('cms.messages.event.verified') }
+    when 'finish'
+      unless @record.finished?
+        if @record.finish_date.nil? || @record.recurrence_start_date < Time.now
+          finish_at = 1.minute.ago
+          @record.assign_attributes finish_date: finish_at, recurrence_end_date: finish_at
+        else
+          @record.assign_attributes published: false
+        end
+
+        @record.reset_status
+        @record.save!
+        message = { success: translate('cms.messages.event.finish') }
+      end
+    else
+      raise ActionController::RoutingError.new('Not Found')
+    end
+    
+    redirect_to [:cms, @record], flash: message
   end
 
   private

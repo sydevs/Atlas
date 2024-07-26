@@ -95,11 +95,11 @@ Rails.application.routes.draw do
     end
 
     resources :events do
-      get :verify
       resources :pictures, only: %i[index create destroy]
       resources :managers, only: %i[index new create destroy]
       resources :registrations, only: %i[index]
       resources :audits, only: %i[index]
+      get "/change/:effect", action: :change, as: :change, on: :member
     end
 
     resources :managers do

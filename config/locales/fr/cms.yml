@@ -76,6 +76,7 @@ fr:
         invalid_location: "ne peut pas être en dehors du rayon de %{area}"
       event:
         verified: "Merci d'avoir confirmé l'exactitude de votre événement."
+        finish: "This event is now marked as complete." # TODO: Translate
         invalid_end_time: "ne peut pas être avant l'heure de début"
         invalid_end_date: "ne peut pas être avant la date de début"
         passed_end_date: "ne peut pas être avant aujourd'hui"

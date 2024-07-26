@@ -76,6 +76,7 @@ en:
         invalid_location: "cannot be outside the radius of %{area}"
       event:
         verified: "Thank you for confirming your event's accuracy."
+        finish: "This event is now marked as complete."
         invalid_end_time: "cannot be before the start time"
         invalid_end_date: "cannot be before the start date"
         passed_end_date: "cannot be before today"

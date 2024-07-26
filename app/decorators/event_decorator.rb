@@ -88,16 +88,43 @@ module EventDecorator
     parts.reject(&:nil?).join(", ")
   end
 
+  def contact_text
+    if contact_info['phone_number'].present?
+      "#{contact_info['phone_name']} (#{contact_info['phone_number']})"
+    elsif contact_info['email_address'].present?
+      contact_info['email_address']
+    end
+  end
+
+  def recommendations
+    return {} if expired? || archived? || finished?
+
+    result = {}
+    result[:description] = cms_url(:edit_cms_event_url) unless false && description.present?
+    result[:pictures] = cms_url(:cms_event_pictures_url) unless false && pictures.count >= 3
+    result[:registration] = cms_url(:edit_cms_event_url) unless false && native_registration_mode?
+    result
+  end
+
   def language_name
     LocalizationHelper.language_name(language_code) || translate('cms.hints.unspecified')
   end
 
   def map_path
+    return nil unless publicly_visible?
+    
     Rails.application.routes.url_helpers.map_event_path(self)
   end
 
   def map_url
+    return nil unless publicly_visible?
+
     Rails.application.routes.url_helpers.map_event_url(self, host: canonical_host)
+  end
+
+  def cms_url(url, **url_options)
+    default_url_options = Rails.application.config.action_mailer.default_url_options
+    Rails.application.routes.url_helpers.send(url, self, **url_options, **default_url_options)
   end
 
 end

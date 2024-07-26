@@ -76,6 +76,7 @@ cs:
         invalid_location: "místo konání nemůže být mimo oblast %{local_area}"
       event:
         verified: "Děkujeme za potvrzení správnosti údajů o vaší akci!"
+        finish: "This event is now marked as complete." # TODO: Translate
         invalid_end_time: "nemůže být před časem zahájení"
         invalid_end_date: "nemůže být před datem zahájení"
         passed_end_date: "nemůže být dříve než dnes"

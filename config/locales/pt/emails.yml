@@ -6,6 +6,11 @@ pt:
       reason: "Você recebeu este e-mail porque se inscreveu neste evento."
       responses: "Suas respostas:"
 
+    footer: # TODO: Translate
+      prelude: "This project maintains an accurate worldwide listing of public programs for seekers. The Atlas map is embedded on dozens of national and international Sahaj websites."
+      cause: "You've received this email because you're a manager for the Sahaja Yoga Atlas. Do not forward this email, the links contained allow access to your account."
+      unsubscribe: "Unsubscribe"
+
     confirmation:
       offline:
         subject: "Registro Confirmado - %{event_name}"
@@ -37,3 +42,54 @@ pt:
         header: "Sua aula começa em uma hora, %{name}"
         subheader: "A turma em que você se inscreveu está prestes a começar. Aqui está um link para participar no horário de início."
         action: "Junte-se ao encontro"
+
+    status: # TODO: Translate
+      event:
+        timing: :cms.forms.event.timing # Do not translate
+        location: :cms.forms.event.location # Do not translate
+        updated_at: :activerecord.attributes.event.updated_at # Do not translate
+        category: :activerecord.attributes.event.category # Do not translate
+        contact: :activerecord.attributes.event.contact # Do not translate
+      needs_urgent_review: :emails.needs_review # Do not translate
+      needs_immediate_review: :emails.needs_review # Do not translate
+      archived: :emails.expired # Do not translate
+      needs_review:
+        title: "Event expires in %{period}!"
+        prelude: "Your public event on the Sahaja Yoga Atlas is about to expire. Please check the details of the event below and confirm if they are still accurate"
+        action: "Are the above details accurate?"
+        view_map: "View Event on Map"
+        actions:
+          positive: "Yes, details are correct"
+          negative: "No, it needs to be updated"
+          tertiary: "Cancel this event, it is no longer running"
+      expired:
+        title: "Your event has expired!"
+        prelude: "This event has been hidden from the public because it hasn't be updated in many months. If this program is still running, you need to update or confirm the details."
+        action: "Are the above details accurate?"
+        actions:
+          positive: "Yes, restore the event"
+          negative: "No, it needs to be updated"
+          tertiary: "No, the event can be canceled"
+      finished:
+        title: "Event has finished."
+        prelude: "Your public event on the Sahaja Yoga Atlas has reached it's scheduled conclusion"
+        action: "Is it correct that this event has completed?"
+        actions:
+          positive: "Yes, the event is finished"
+          negative: "No, it needs to be updated"
+
+    recommendations: # TODO: Translate
+      title: "Recommendations for Your Event"
+      prelude: "To increase registration from seekers"
+      description:
+        title: "Missing description"
+        text: "Add a short description to you description to your event"
+        action: "Add your description"
+      pictures:
+        title: "Photos"
+        text: "Your event has very few or no images. Add some photos of the entrance, the hall, yourself, or of seekers meditating. It's important to use high quality photos."
+        action: "Add photos"
+      registration:
+        title: "Registration method"
+        text: "Seekers are currently registering for your event via Meetup. We recommend using registration through the Sahaj Atlas as we will then be able to capture the seeker's email and follow up with them."
+        action: "Change registration"

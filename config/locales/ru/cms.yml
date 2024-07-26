@@ -75,6 +75,7 @@ ru:
         invalid_location: "не может находиться за пределами радиуса %{area}"
       event:
         verified: "Спасибо за подтверждение данных о твоём событии."
+        finish: "This event is now marked as complete." # TODO: Translate
         invalid_end_time: "не может быть раньше времени начала"
         invalid_end_date: "не может быть раньше даты начала"
         passed_end_date: "не может быть раньше сегодня"

@@ -128,7 +128,7 @@ class Event < ApplicationRecord
       end
     end
 
-    EventMailer.with(event: self, manager: self.manager).status.deliver_later
+    BrevoAPI.send_event_status_email(self)
   end
 
   def cache_key

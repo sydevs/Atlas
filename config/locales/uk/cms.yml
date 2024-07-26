@@ -75,6 +75,7 @@ uk:
         invalid_location: "не може бути за межами радіусу %{area}"
       event:
         verified: "Thank you for confirming your event's accuracy." # TODO: Translate
+        finish: "This event is now marked as complete." # TODO: Translate
         invalid_end_time: "не може бути раніше часу початку"
         invalid_end_date: "не може бути раніше дати початку"
         passed_end_date: "не може бути раніше ніж сьогодні"
