@@ -29,7 +29,7 @@ function EventInfo() {
           m('.sya-event__meta', m('.sya-event__meta__day', event.timing.dateString)),
           m('.sya-event__meta',
             m('.sya-event__meta__time', event.timing.timeString),
-            event.online ?
+            event.offline ?
               null :
               m('abbr.sya-card__meta__timezone', {
                 'data-tooltip': event.timing.timeZone('long'),
