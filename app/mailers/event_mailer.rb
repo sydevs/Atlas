@@ -52,7 +52,7 @@ class EventMailer < ApplicationMailer
           puts I18n.translate(key, scope: 'emails.recommendations')
           I18n.translate(key, scope: 'emails.recommendations').merge({
             link: sign_in_link(link),
-            image: helpers.image_url("email/recommendations/#{key}.jpeg", host: 'https://atlas.sydevelopers.com'),
+            image: helpers.image_url("email/recommendations/#{key}.png", host: 'https://atlas.sydevelopers.com'),
           })
         end,
         links: {
