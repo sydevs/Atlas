@@ -4,6 +4,7 @@ class Manager < ApplicationRecord
   passwordless_with :email
   searchable_columns %w[name email phone]
   audited except: %i[last_login_at]
+  acts_as_messageable required: %i[channel topic body], class_name: 'Message'
 
   enum contact_method: { email: 0, whatsapp: 1, telegram: 2, wechat: 3 }, _prefix: :contact_by
   flag :notifications, %i[new_managed_record event_verification event_registrations place_summary country_summary application_summary client_summary]

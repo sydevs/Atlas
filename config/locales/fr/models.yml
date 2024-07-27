@@ -103,6 +103,13 @@ fr:
         # Countable
         one: "application externe"
         other: "applications externes"
+      message: # TODO: Translate
+        # Basic pluralization
+        single: "Email"
+        plural: "Emails"
+        # Countable
+        one: "message"
+        other: "messages"
       picture:
         # Basic pluralization
         single: "Image"

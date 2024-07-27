@@ -104,6 +104,13 @@ uk:
         # Countable
         one: "зовнішній додаток"
         other: "зовнішні додатки"
+      message: # TODO: Translate
+        # Basic pluralization
+        single: "Email"
+        plural: "Emails"
+        # Countable
+        one: "message"
+        other: "messages"
       picture:
         # Basic pluralization
         single: "Зображення"

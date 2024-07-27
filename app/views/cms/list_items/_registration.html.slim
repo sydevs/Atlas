@@ -1,32 +1,18 @@
 
-.title id=registration.id class=("active" if params[:show].to_i == registration.id)
-  - if registration.questions.present?
-    .right.floated.content
-      i.comment.icon
-  i.dropdown.icon
-  = registration.label
-.content class=("active" if params[:show].to_i == registration.id)
-  .ui.list
-    .item
-      i.clock.icon
-      .content
-        .header
-          = Registration.human_attribute_name(:created_at)
-          = " (#{registration.time_zone.name.gsub('_', ' ')})" if registration.time_zone
-        time.description datetime=registration.created_at
-          - if registration.time_zone
-            = registration.time_zone.utc_to_local(registration.created_at).to_s(:short)
-          - else
-            = registration.created_at.to_s(:short)
-    .item
-      i.calendar.alternate.icon
-      .content
-        .header = Registration.human_attribute_name(:starting_at)
-        time.description datetime=registration.starting_at
-          = registration.starting_at.to_s(:short_date)
-    - registration.questions.each do |question, answer|
-      .item
-        i.comment.icon
-        .content
-          .header = translate_enum_value(Event, :registration_questions, question)
-          .description = answer
+
+tr
+  td.collapsing
+    = model_icon Registration
+  
+  td
+    - if policy(registration).show?
+      a href=url_for([:cms, registration]) = registration.label || translate('cms.hints.unnamed')
+    - else
+      = registration.short_label || translate('cms.hints.unnamed')
+
+  td
+    = registration.starting_at.to_s(:short_date)
+
+  td
+    - if registration.questions.present?
+      i.question.circle.icon

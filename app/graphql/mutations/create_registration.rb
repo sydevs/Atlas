@@ -20,13 +20,14 @@ class Mutations::CreateRegistration < Mutations::BaseMutation
   def resolve(**arguments)
     I18n.locale = arguments[:locale]&.to_sym || :en
     event = Event.find(arguments[:event_id])
-    time = event.recurrence.starts_at.to_s(:time).split(':')
+    time = event.recurrence.starts_at.to_fs(:time).split(':')
     arguments[:starting_at] = arguments[:starting_at].utc.change(hour: time[0].to_i, min: time[1].to_i)
     arguments[:questions] = arguments[:questions]
+    arguments[:user_attributes] = { name: arguments[:name], email: arguments[:email] }
     arguments.delete :message
     arguments.delete :locale
 
-    registration = Registration.joins(:event).find_or_initialize_by(arguments)
+    registration = event.registrations.find_or_initialize_by(email: arguments[:email])
 
     if !registration.new_record? && !Rails.env.development?
       {
@@ -35,7 +36,7 @@ class Mutations::CreateRegistration < Mutations::BaseMutation
         created_at: registration.created_at.utc,
         registration: registration,
       }
-    elsif registration.save
+    elsif registration.update(arguments)
       registration.subscribe_to! :registrations
       
       BrevoAPI.send_confirmation_email(registration)

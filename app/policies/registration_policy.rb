@@ -8,4 +8,14 @@ class RegistrationPolicy < DatabasePolicy
     true
   end
 
+  def edit?
+    false
+  end
+
+  def index_association? association = nil
+    return false if association == :messages
+
+    super
+  end
+
 end

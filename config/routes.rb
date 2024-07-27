@@ -13,7 +13,7 @@ Rails.application.routes.draw do
     get '(:locale)/privacy', to: 'application#privacy'
   end
 
-  if true || Rails.env.development?
+  if Rails.env.development?
     namespace :mail do
       get :summary, to: 'application#summary'
 
@@ -98,6 +98,7 @@ Rails.application.routes.draw do
       resources :pictures, only: %i[index create destroy]
       resources :managers, only: %i[index new create destroy]
       resources :registrations, only: %i[index]
+      resources :messages, only: %i[index]
       resources :audits, only: %i[index]
       get "/change/:effect", action: :change, as: :change, on: :member
     end
@@ -118,7 +119,11 @@ Rails.application.routes.draw do
       resources :audits, only: %i[index]
     end
 
-    resources :registrations, only: %i[index]
+    resources :registrations, only: %i[index show] do
+      post :receive, on: :collection
+      resources :messages, only: %i[index]
+    end
+    
     resources :audits, only: %i[index]
   end
 

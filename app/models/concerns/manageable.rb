@@ -30,6 +30,10 @@ module Manageable
     result
   end
 
+  def nearest_parent_manager
+    nearest_parent_managers&.first
+  end
+
   def all_managers except: []
     @all_managers ||= begin
       result = managers.where.not(id: except).to_a

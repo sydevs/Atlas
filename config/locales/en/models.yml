@@ -103,6 +103,13 @@ en:
         # Countable
         one: "external app"
         other: "external apps"
+      message:
+        # Basic pluralization
+        single: "Email"
+        plural: "Emails"
+        # Countable
+        one: "message"
+        other: "messages"
       picture:
         # Basic pluralization
         single: "Image"

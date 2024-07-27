@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_07_20_154445) do
+ActiveRecord::Schema[7.0].define(version: 2024_07_27_120930) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -175,6 +175,31 @@ ActiveRecord::Schema[7.0].define(version: 2024_07_20_154445) do
     t.index ["phone"], name: "index_managers_on_phone", unique: true
   end
 
+  create_table "messages", id: :serial, force: :cascade do |t|
+    t.string "brevo_id"
+    t.string "topic"
+    t.text "body"
+    t.string "channel_type"
+    t.bigint "channel_id"
+    t.string "received_messageable_type"
+    t.bigint "received_messageable_id"
+    t.string "sent_messageable_type"
+    t.bigint "sent_messageable_id"
+    t.boolean "opened", default: false
+    t.boolean "recipient_delete", default: false
+    t.boolean "sender_delete", default: false
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
+    t.string "ancestry"
+    t.boolean "recipient_permanent_delete", default: false
+    t.boolean "sender_permanent_delete", default: false
+    t.datetime "opened_at", precision: nil
+    t.index ["ancestry"], name: "index_messages_on_ancestry"
+    t.index ["received_messageable_id", "received_messageable_type"], name: "acts_as_messageable_received"
+    t.index ["sent_messageable_id", "received_messageable_id"], name: "acts_as_messageable_ids"
+    t.index ["sent_messageable_id", "sent_messageable_type"], name: "acts_as_messageable_sent"
+  end
+
   create_table "passwordless_sessions", force: :cascade do |t|
     t.string "authenticatable_type"
     t.bigint "authenticatable_id"
@@ -215,20 +240,27 @@ ActiveRecord::Schema[7.0].define(version: 2024_07_20_154445) do
 
   create_table "registrations", force: :cascade do |t|
     t.bigint "event_id"
-    t.string "name"
-    t.string "email"
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
     t.datetime "starting_at", precision: nil
     t.string "time_zone"
     t.jsonb "questions", default: {}
+    t.bigint "user_id"
     t.index ["event_id"], name: "index_registrations_on_event_id"
+    t.index ["user_id"], name: "index_registrations_on_user_id"
   end
 
   create_table "stashes", force: :cascade do |t|
     t.string "key"
     t.string "value"
     t.index ["key"], name: "index_stashes_on_key", unique: true
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "email", null: false
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "venues", force: :cascade do |t|

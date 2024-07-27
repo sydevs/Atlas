@@ -1,0 +1,33 @@
+
+h3.ui.small.dividing.grey.header = translate('cms.details.details_for_record', resource: translate_model(Registration))
+.ui.list
+      .item
+        i.clock.icon
+        .content
+          .header
+            = Registration.human_attribute_name(:created_at)
+            = " (#{@record.time_zone.name.gsub('_', ' ')})" if @record.time_zone
+          time.description datetime=@record.created_at
+            - if @record.time_zone
+              = @record.time_zone.utc_to_local(@record.created_at).to_s(:short)
+            - else
+              = @record.created_at.to_s(:short)
+      .item
+        i.calendar.alternate.icon
+        .content
+          .header = Registration.human_attribute_name(:starting_at)
+          time.description datetime=@record.starting_at
+            = @record.starting_at.to_s(:short_date)
+      - @record.questions.each do |question, answer|
+        .item
+          i.comment.icon
+          .content
+            .header = translate_enum_value(Event, :registration_questions, question)
+            .description = answer
+
+h3.ui.small.dividing.grey.header = translate_model(Message, :plural)
+.ui.comments
+  - if @record.messages.present?
+    = render partial: "cms/list_items/#{Message.model_name.singular_route_key}", collection: @record.messages, cached: true
+  - else
+    = translate('cms.messages.no_records_found', resources: translate_model(Message, :plural).downcase)

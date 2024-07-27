@@ -7,6 +7,7 @@ class Event < ApplicationRecord
   include Recurrable
   include ActivityMonitorable
   include Managed
+  include MessageChannel
 
   nilify_blanks
   searchable_columns %w[custom_name description]
@@ -26,6 +27,7 @@ class Event < ApplicationRecord
   belongs_to :venue, optional: true, inverse_of: :events
 
   has_many :registrations, dependent: :delete_all
+  has_many :registration_messages, through: :registrations
   has_many :pictures, as: :parent, dependent: :destroy
 
   accepts_nested_attributes_for :pictures, :venue
@@ -67,7 +69,8 @@ class Event < ApplicationRecord
   scope :offline, -> { where(type: 'OfflineEvent') }
 
   # Delegations
-  delegate :time_zone, :country_code, :canonical_domain, :nearest_parent_managers, to: :area
+  delegate :time_zone, :country_code, :canonical_domain, :nearest_parent_managers, :nearest_parent_manager, to: :area
+  alias default_message_receiver nearest_parent_manager
   alias associated_registrations registrations
   alias parent area
 

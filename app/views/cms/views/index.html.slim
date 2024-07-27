@@ -44,8 +44,8 @@
   - if @model == Audit
     .ui.fluid.styled.records.accordion data-search=@model_name.route_key
       = render partial: "cms/list_items/#{@model_name.singular_route_key}", collection: @records, cached: true
-  - elsif @model == Registration
-    .ui.fluid.records.accordion data-search=@model_name.route_key
+  - elsif @model == Message
+    .ui.comments data-search=@model_name.route_key
       = render partial: "cms/list_items/#{@model_name.singular_route_key}", collection: @records, cached: true
   - else
     table.ui.very.basic.records.table data-search=@model_name.route_key
