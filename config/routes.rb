@@ -64,6 +64,7 @@ Rails.application.routes.draw do
     get :review, to: 'application#review'
     get :worldwide, to: 'application#show'
     get :help, to: 'application#help'
+    post 'messages/receive', to: 'application#inbound'
 
     resources :countries do
       resources :managers, only: %i[index new create destroy]
