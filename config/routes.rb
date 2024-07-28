@@ -99,7 +99,7 @@ Rails.application.routes.draw do
       resources :pictures, only: %i[index create destroy]
       resources :managers, only: %i[index new create destroy]
       resources :registrations, only: %i[index]
-      resources :messages, only: %i[index]
+      resources :activities, only: %i[index]
       resources :audits, only: %i[index]
       get "/change/:effect", action: :change, as: :change, on: :member
     end
@@ -121,10 +121,13 @@ Rails.application.routes.draw do
     end
 
     resources :registrations, only: %i[index show] do
-      post :receive, on: :collection
-      resources :messages, only: %i[index]
+      resources :acitivies, only: %i[index]
     end
     
+    resources :activities, only: %i[index show] do
+      post :receive, on: :collection
+    end
+
     resources :audits, only: %i[index]
   end
 

@@ -45,8 +45,7 @@ gem 'after_commit_everywhere', '~> 1.0' # Dependency for aasm
 gem 'premailer-rails' # Generate inline styles for emails
 gem 'sib-api-v3-sdk' # API for Brevo emailer
 gem 'klaviyo' # For integration with Klaviyo
-gem 'acts-as-messageable', '~> 1.0', '>= 1.0.2' # Record messages between yogis and seekers
-gem 'redcarpet' # Render markdown for messages
+gem 'redcarpet' # Render markdown
 
 ### Geocoding
 gem 'geokit-rails'

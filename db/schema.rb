@@ -10,9 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_07_27_120930) do
+ActiveRecord::Schema[7.0].define(version: 2024_07_28_130916) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "activities", force: :cascade do |t|
+    t.string "brevo_id"
+    t.integer "category", default: 0, null: false
+    t.string "channel_type"
+    t.bigint "channel_id"
+    t.string "account_type"
+    t.bigint "account_id"
+    t.jsonb "data"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_type", "account_id"], name: "index_activities_on_account"
+    t.index ["brevo_id"], name: "index_activities_on_brevo_id"
+    t.index ["category"], name: "index_activities_on_category"
+    t.index ["channel_type", "channel_id"], name: "index_activities_on_channel"
+  end
 
   create_table "area_venues", force: :cascade do |t|
     t.bigint "area_id"
@@ -173,31 +189,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_07_27_120930) do
     t.integer "notifications", default: 2147483647, null: false
     t.index ["email"], name: "index_managers_on_email", unique: true
     t.index ["phone"], name: "index_managers_on_phone", unique: true
-  end
-
-  create_table "messages", id: :serial, force: :cascade do |t|
-    t.string "brevo_id"
-    t.string "topic"
-    t.text "body"
-    t.string "channel_type"
-    t.bigint "channel_id"
-    t.string "received_messageable_type"
-    t.bigint "received_messageable_id"
-    t.string "sent_messageable_type"
-    t.bigint "sent_messageable_id"
-    t.boolean "opened", default: false
-    t.boolean "recipient_delete", default: false
-    t.boolean "sender_delete", default: false
-    t.datetime "created_at", precision: nil
-    t.datetime "updated_at", precision: nil
-    t.string "ancestry"
-    t.boolean "recipient_permanent_delete", default: false
-    t.boolean "sender_permanent_delete", default: false
-    t.datetime "opened_at", precision: nil
-    t.index ["ancestry"], name: "index_messages_on_ancestry"
-    t.index ["received_messageable_id", "received_messageable_type"], name: "acts_as_messageable_received"
-    t.index ["sent_messageable_id", "received_messageable_id"], name: "acts_as_messageable_ids"
-    t.index ["sent_messageable_id", "sent_messageable_type"], name: "acts_as_messageable_sent"
   end
 
   create_table "passwordless_sessions", force: :cascade do |t|

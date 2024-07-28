@@ -4,7 +4,6 @@ class User < ApplicationRecord
 
   # Extensions
   searchable_columns %w[name email]
-  acts_as_messageable required: %i[channel topic body], class_name: 'Message'
 
   # Associations
   has_many :registrations

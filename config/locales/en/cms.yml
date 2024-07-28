@@ -265,6 +265,8 @@ en:
       description: "This is a log of all actions taken by this manager."
       changed_by: "by %{name}"
       changed_to: "changed to"
+      summary:
+        record_updated: "%{account} updated this %{model}"
 
     dashboard:
       role:

@@ -13,7 +13,7 @@ class RegistrationPolicy < DatabasePolicy
   end
 
   def index_association? association = nil
-    return false if association == :messages
+    return false if association == :activities
 
     super
   end

@@ -1,8 +1,8 @@
 require 'redcarpet'
 
-class CMS::MessagesController < CMS::ApplicationController
+class CMS::ActivitiesController < CMS::ApplicationController
 
-  prepend_before_action { @model = Message }
+  prepend_before_action { @model = Activity }
 
   def receive
     puts "RECEIVED INBOUND EMAIL"
@@ -12,8 +12,8 @@ class CMS::MessagesController < CMS::ApplicationController
       brevo_id = item["InReplyTo"]
       if brevo_id.present?
         body = [item["ExtractedMarkdownMessage"], item["ExtractedMarkdownSignature"]].compact.join("\n")
-        message = Message.find_by(brevo_id: brevo_id)
-        message.reply(body)
+        message = Activity.find_by(brevo_id: brevo_id)
+        message.channel.reply(body)
       end
     end
   end

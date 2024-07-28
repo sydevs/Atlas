@@ -7,7 +7,7 @@ class Event < ApplicationRecord
   include Recurrable
   include ActivityMonitorable
   include Managed
-  include MessageChannel
+  include HasActivity
 
   nilify_blanks
   searchable_columns %w[custom_name description]
@@ -27,7 +27,6 @@ class Event < ApplicationRecord
   belongs_to :venue, optional: true, inverse_of: :events
 
   has_many :registrations, dependent: :delete_all
-  has_many :registration_messages, through: :registrations
   has_many :pictures, as: :parent, dependent: :destroy
 
   accepts_nested_attributes_for :pictures, :venue

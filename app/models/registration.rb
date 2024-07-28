@@ -3,7 +3,7 @@ require 'csv'
 class Registration < ApplicationRecord
 
   # Extensions
-  include MessageChannel
+  include HasActivity
 
   # Extensions
   searchable_columns %w[name email]

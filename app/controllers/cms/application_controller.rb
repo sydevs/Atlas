@@ -7,6 +7,7 @@ class CMS::ApplicationController < ActionController::Base
 
   helper_method :current_user, :back_path
 
+  before_action :set_current_user
   before_action :require_login!
   before_action :verify_manager
   before_action :set_locale!
@@ -163,8 +164,9 @@ class CMS::ApplicationController < ActionController::Base
 
   protected
 
+    # <b>DEPRECATED:</b> Please use <tt>Current.user</tt> instead.
     def current_user
-      @current_user ||= authenticate_by_session(Manager)
+      Current.user
     end
 
     def require_login!
@@ -205,7 +207,7 @@ class CMS::ApplicationController < ActionController::Base
         break
       end
 
-      puts "SET CONTEXT #{@context.inspect}"
+      puts "SET CONTEXT #{@context} #{@context&.id}"
     end
 
     def set_scope!
@@ -215,13 +217,13 @@ class CMS::ApplicationController < ActionController::Base
         @scope = current_user.try("accessible_#{@model.table_name}") || @model
       end
       
-      puts "SET SCOPE #{@scope.inspect}"
+      puts "SET SCOPE #{@scope}"
     end
 
     def set_record!
       @record = @scope&.find(params[:id])
       @context ||= @record.parent
-      puts "SET RECORD #{@record.inspect}"
+      puts "SET RECORD #{@record} #{@record&.id}"
     end
 
     def authorize_association! key
@@ -231,6 +233,10 @@ class CMS::ApplicationController < ActionController::Base
       return if allow.index_association?(key)
 
       raise Pundit::NotAuthorizedError, "not allowed to index? #{@model} association for #{@context.inspect || 'Worldwide'}"
+    end
+
+    def set_current_user
+      Current.user ||= authenticate_by_session(Manager)
     end
 
 end
