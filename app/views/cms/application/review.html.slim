@@ -2,7 +2,7 @@
 - content_for :title, translate('cms.menu.breadcrumbs.review')
 
 h2.ui.header
-  = translate('cms.menu.review', user: current_user.label)
+  = translate('cms.menu.review', user: Current.user.label)
 
 - flash.each do |key, message|
   .ui.message class=key

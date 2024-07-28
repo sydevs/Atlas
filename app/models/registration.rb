@@ -3,7 +3,7 @@ require 'csv'
 class Registration < ApplicationRecord
 
   # Extensions
-  include HasActivity
+  include Audited
 
   # Extensions
   searchable_columns %w[name email]

@@ -1,8 +1,8 @@
 module LocalizationHelper
 
   I18N_KEYS = {
-    OfflineEvent => :offline_event,
-    OnlineEvent => :online_event,
+    OfflineEvent => :event,
+    OnlineEvent => :event,
     Recurrable => :recurrable,
   }
 

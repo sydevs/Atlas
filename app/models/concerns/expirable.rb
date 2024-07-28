@@ -39,6 +39,7 @@ module Expirable
       state :finished
 
       after_all_events :update_timestamps
+      after_all_events :record_status_audit!
 
       event :update_status, after_enter: :log_event do
         transitions to: :finished, if: :should_finish?
@@ -56,7 +57,7 @@ module Expirable
         transitions to: :expired, if: :should_expire?, after: Proc.new { update_column(:verification_streak, 0) }
         transitions to: :needs_urgent_review, if: :should_need_urgent_review?
         transitions to: :needs_review, if: :should_need_review?
-        transitions to: :verified
+        transitions to: :verified, unless: :verified?
       end
 
       event :verify do
@@ -67,15 +68,12 @@ module Expirable
           end
         end
 
-        transitions to: :verified, if: :needs_review?
-        transitions to: :verified, if: :needs_urgent_review?
-        transitions to: :verified, if: :expired?
-        transitions to: :verified, if: :archived?
         transitions to: :verified, if: Proc.new { finished? && !should_finish? }
+        transitions to: :verified, unless: Proc.new { finished? || verified? }
       end
 
       event :expire do
-        transitions to: :expired, after: Proc.new { update_column(:verification_streak, 0) }
+        transitions to: :expired, unless: :expired?, after: Proc.new { update_column(:verification_streak, 0) }
       end
     end
 

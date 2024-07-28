@@ -1,0 +1,54 @@
+
+h3.ui.small.dividing.grey.header = translate('cms.details.details_for_record', resource: translate_model(Audit))
+.ui.list
+  .item
+    - if @record.person.present?
+      = model_icon(@record.person.class)
+      .content
+        .header = translate('cms.audits.person', person: translate_model(@record.person.class))
+        = record_link(@record.person, class: 'description')
+    - else
+      i.computer.icon
+      .content
+        .header = translate('cms.audits.person', person: "System")
+  .item
+    = model_icon(@record.parent.class)
+    .content
+      .header = translate('cms.audits.parent', resource: translate_model(@record.parent.class))
+      = record_link(@record.parent, class: 'description')
+  .item
+    i.clock.icon
+    .content
+      .header = translate_attribute(@record, :created_at)
+      .description = @record.created_at.to_fs(:long)
+
+- if @record.changes&.count
+  h3.ui.small.dividing.grey.header = translate_attribute(@record, :changes)
+  - if @record.record_updated?
+    table.ui.very.basic.table
+      tbody
+        - @record.changes.each do |field, change|
+          tr
+            th = translate_attribute(@record.parent.class, field)
+            th
+            th = translate('cms.activity.changed_to').upcase
+          tr
+            td = change[0]
+            td: i.right.arrow.icon
+            td = change[1]
+  - elsif @record.record_created?
+    table.ui.very.basic.table
+      tbody
+        - @record.changes.each do |field, change|
+          tr
+            th = translate_attribute(@record.parent.class, field)
+          tr
+            td = change[1]
+
+  .ui.accordion
+    .ui.title
+      i.dropdown.icon
+      = translate_attribute(Audit, :data)
+    .content
+      pre = @record.category
+      pre = @record.data.pretty_inspect

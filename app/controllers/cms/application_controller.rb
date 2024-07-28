@@ -236,7 +236,7 @@ class CMS::ApplicationController < ActionController::Base
     end
 
     def set_current_user
-      Current.user ||= authenticate_by_session(Manager)
+      Current.user ||= authenticate_by_session(Manager).extend(ManagerDecorator)
     end
 
 end

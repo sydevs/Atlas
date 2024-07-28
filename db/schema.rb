@@ -10,25 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_07_28_130916) do
+ActiveRecord::Schema[7.0].define(version: 2024_07_28_172618) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "activities", force: :cascade do |t|
-    t.string "brevo_id"
-    t.integer "category", default: 0, null: false
-    t.string "channel_type"
-    t.bigint "channel_id"
-    t.string "account_type"
-    t.bigint "account_id"
-    t.jsonb "data"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["account_type", "account_id"], name: "index_activities_on_account"
-    t.index ["brevo_id"], name: "index_activities_on_brevo_id"
-    t.index ["category"], name: "index_activities_on_category"
-    t.index ["channel_type", "channel_id"], name: "index_activities_on_channel"
-  end
 
   create_table "area_venues", force: :cascade do |t|
     t.bigint "area_id"
@@ -57,25 +41,19 @@ ActiveRecord::Schema[7.0].define(version: 2024_07_28_130916) do
   end
 
   create_table "audits", force: :cascade do |t|
-    t.integer "auditable_id"
-    t.string "auditable_type"
-    t.integer "associated_id"
-    t.string "associated_type"
-    t.integer "user_id"
-    t.string "user_type"
-    t.string "username"
-    t.string "action"
-    t.text "audited_changes"
-    t.integer "version", default: 0
-    t.string "comment"
-    t.string "remote_address"
-    t.string "request_uuid"
-    t.datetime "created_at", precision: nil
-    t.index ["associated_type", "associated_id"], name: "associated_index"
-    t.index ["auditable_type", "auditable_id", "version"], name: "auditable_index"
-    t.index ["created_at"], name: "index_audits_on_created_at"
-    t.index ["request_uuid"], name: "index_audits_on_request_uuid"
-    t.index ["user_id", "user_type"], name: "user_index"
+    t.integer "category", default: 0, null: false
+    t.string "parent_type"
+    t.bigint "parent_id"
+    t.string "person_type"
+    t.bigint "person_id"
+    t.string "brevo_id"
+    t.jsonb "data"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["brevo_id"], name: "index_audits_on_brevo_id"
+    t.index ["category"], name: "index_audits_on_category"
+    t.index ["parent_type", "parent_id"], name: "index_audits_on_parent"
+    t.index ["person_type", "person_id"], name: "index_audits_on_person"
   end
 
   create_table "clients", force: :cascade do |t|

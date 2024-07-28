@@ -71,14 +71,12 @@ Rails.application.routes.draw do
       resources :events, only: %i[index]
       resources :regions, only: %i[index new create]
       resources :areas, only: %i[index new create]
-      resources :audits, only: %i[index]
     end
 
     resources :regions, except: %i[index] do
       resources :managers, only: %i[index new create destroy]
       resources :events, only: %i[index]
       resources :areas, only: %i[index new create]
-      resources :audits, only: %i[index]
     end
 
     resources :areas, except: %i[index] do
@@ -87,7 +85,6 @@ Rails.application.routes.draw do
       resources :managers, only: %i[index new create destroy]
       resources :events, only: %i[index new create]
       resources :venues, only: %i[index]
-      resources :audits, only: %i[index]
     end
 
     resources :venues, only: %i[index] do
@@ -99,7 +96,6 @@ Rails.application.routes.draw do
       resources :pictures, only: %i[index create destroy]
       resources :managers, only: %i[index new create destroy]
       resources :registrations, only: %i[index]
-      resources :activities, only: %i[index]
       resources :audits, only: %i[index]
       get "/change/:effect", action: :change, as: :change, on: :member
     end
@@ -111,7 +107,6 @@ Rails.application.routes.draw do
       resources :managed_records, only: %i[index]
       resources :clients, only: %i[index]
       resources :events, only: %i[index]
-      resources :audits, only: %i[index]
     end
 
     resources :managed_records, only: %i[index]
@@ -124,11 +119,9 @@ Rails.application.routes.draw do
       resources :acitivies, only: %i[index]
     end
     
-    resources :activities, only: %i[index show] do
+    resources :audits, only: %i[index show destroy] do
       post :receive, on: :collection
     end
-
-    resources :audits, only: %i[index]
   end
 
   namespace :api do

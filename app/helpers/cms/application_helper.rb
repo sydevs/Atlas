@@ -62,6 +62,14 @@ module CMS::ApplicationHelper
     end
   end
 
+  def record_link record, **kwargs
+    if policy(record).show?
+      tag.a record.label, href: url_for([:cms, record]), **kwargs
+    else
+      tag.span record.label, **kwargs
+    end
+  end
+
   def active_accordion? type
     'active' if params[:q]&.to_sym == type # || (params[:q].nil? && type == :guide)
   end

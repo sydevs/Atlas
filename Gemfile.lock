@@ -77,9 +77,6 @@ GEM
     after_commit_everywhere (1.1.0)
       activerecord (>= 4.2)
       activesupport
-    audited (5.3.3)
-      activerecord (>= 5.0, < 7.1)
-      request_store (~> 1.2)
     autoprefixer-rails (10.4.16.0)
       execjs (~> 2)
     aws-eventstream (1.2.0)
@@ -398,8 +395,6 @@ GEM
       declarative (< 0.1.0)
       trailblazer-option (>= 0.1.1, < 0.2.0)
       uber (< 0.2.0)
-    request_store (1.5.1)
-      rack (>= 1.4)
     retriable (3.1.2)
     rexml (3.2.6)
     ruby-statistics (3.0.0)
@@ -407,16 +402,8 @@ GEM
     rubyzip (2.3.2)
     sass-embedded (1.77.8-arm64-darwin)
       google-protobuf (~> 4.26)
-    sassc (2.4.0)
-      ffi (~> 1.9)
     sassc-embedded (1.77.8)
       sass-embedded (~> 1.77)
-    sassc-rails (2.1.2)
-      railties (>= 4.0.0)
-      sassc (>= 2.0)
-      sprockets (> 3.0)
-      sprockets-rails
-      tilt
     selenium-webdriver (4.1.0)
       childprocess (>= 0.5, < 5.0)
       rexml (~> 3.2, >= 3.2.5)
@@ -494,7 +481,6 @@ DEPENDENCIES
   active_decorator
   active_flag
   after_commit_everywhere (~> 1.0)
-  audited
   autoprefixer-rails
   aws-sdk-s3
   byebug
@@ -502,6 +488,7 @@ DEPENDENCIES
   carrierwave
   carrierwave-google-storage
   countries
+  dartsass-sprockets
   derailed
   dotenv-rails
   faker
@@ -538,8 +525,6 @@ DEPENDENCIES
   rails_12factor
   rails_autolink
   redcarpet
-  sassc
-  sassc-rails
   selenium-webdriver
   sib-api-v3-sdk
   sidekiq

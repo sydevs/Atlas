@@ -1,16 +1,16 @@
-module ActivityDecorator
+module AuditDecorator
 
   def label
-    "Activity #{id}"
+    translate(category, scope: 'cms.audits.title', model: translate_model(parent))
   end
 
   def initials
-    @initials ||= account&.name&.split&.map(&:first)&.join('')&.upcase
+    @initials ||= person&.name&.split&.map(&:first)&.join('')&.upcase
   end
 
   def background_color
     @background_color ||= begin
-      seed = Random.new(account_id || channel_id).rand
+      seed = Random.new(person_id || parent_id).rand
       "#" + "%06x" % (seed * 0xffffff)
     end
   end

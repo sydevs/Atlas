@@ -329,13 +329,10 @@ de:
         email_verification_sent_at: "Letzte E-Mail-Überprüfung gesendet"
         phone_verification_sent_at: "Letzte Telefonverifizierung verschickt"
 
-      audit:
-        user: :activerecord.models.manager.single # Do not translate
-        action: "Aktion"
-        actions:
-          update: "Aktualisiert"
-          create: "Erstellt"
-          destroy: "Gelöscht"
+      audit: # TODO: Translate this
+        data: "Raw Data"
+        created_at: "Occurred At"
+        changes: "Changes"
 
       client:
         label: "Label"

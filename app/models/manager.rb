@@ -3,7 +3,6 @@ class Manager < ApplicationRecord
   # Extensions
   passwordless_with :email
   searchable_columns %w[name email phone]
-  audited except: %i[last_login_at]
 
   enum contact_method: { email: 0, whatsapp: 1, telegram: 2, wechat: 3 }, _prefix: :contact_by
   flag :notifications, %i[new_managed_record event_verification event_registrations place_summary country_summary application_summary client_summary]
@@ -20,7 +19,7 @@ class Manager < ApplicationRecord
   has_many :venues, through: :events
   has_many :events
   has_many :clients
-  has_many :actions, class_name: 'Audit', as: :user
+  has_many :actions, class_name: 'Audit', as: :person
 
   # Validations
   before_validation { self.email = self.email&.downcase }

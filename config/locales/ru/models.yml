@@ -321,13 +321,10 @@ ru:
         email_verification_sent_at: "Последний запрос для подтверждения через email"
         phone_verification_sent_at: "Последний запрос для подтверждения через телефон"
 
-      audit:
-        user: :activerecord.models.manager.single # Do not translate
-        action: "Действие"
-        actions:
-          update: "Обновлено"
-          create: "Создано"
-          destroy: "Удалено"
+      audit: # TODO: Translate this
+        data: "Raw Data"
+        created_at: "Occurred At"
+        changes: "Changes"
 
       client:
         label: "Ярлык"

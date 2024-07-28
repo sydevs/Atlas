@@ -328,13 +328,10 @@ cs:
         email_verification_sent_at: "Poslední ověřovací e-mail zaslán"
         phone_verification_sent_at: "Poslední ověření přes mobilní telefon zasláno"
 
-      audit:
-        user: :activerecord.models.manager.single # Do not translate
-        action: "Akce"
-        actions:
-          update: "Aktualizováno"
-          create: "Vytvořeno"
-          destroy: "Smazáno"
+      audit: # TODO: Translate this
+        data: "Raw Data"
+        created_at: "Occurred At"
+        changes: "Changes"
 
       client:
         label: "Označení"

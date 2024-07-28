@@ -1,6 +1,10 @@
 class AuditPolicy < DatabasePolicy
 
-  def create?
+  def new?
+    false
+  end
+
+  def edit?
     false
   end
 

@@ -148,7 +148,7 @@ h3.ui.small.dividing.grey.header = translate('cms.details.management_for_record'
           |  + #{distance_of_time_in_words(@record.expiration_bonus)}
       - if @record.verification_streak > 0
         em.description
-          |  (#{@record.verification_streak} #{translate_attribute(Event, :verification_streak).downcase})
+          |  (#{@record.verification_streak}x #{translate_attribute(Event, :verification_streak).downcase})
 
 h3.ui.small.dividing.grey.header = translate('cms.details.location_of_record', resource: translate_model(@model).downcase)
 - if @record.online?
@@ -177,3 +177,25 @@ h3.ui.small.dividing.grey.header = translate('cms.details.location_of_record', r
 
 h3.ui.small.dividing.grey.header = translate('cms.details.registration_for_record', resource: @record.label)
 .ct-chart.ct-minor-seventh id='chart' data-plot=@registrations_data.to_json
+
+- if Current.user.administrator?
+  .ui.basic.segment
+    dl
+      - %i[last_activity_on status_email_sent_at registrations_email_sent_at summary_email_sent_at should_update_status_at verified_at expired_at archived_at finished_at].each do |timestamp|
+        - if @context.respond_to?(timestamp)
+          - time = @context.send(timestamp)
+          dt
+            strong = translate_attribute(@context, timestamp)
+          dd
+            - if time
+              - unless timestamp.to_s.ends_with?('_on')
+                = timestamp == :should_update_status_at ? time_from_now_in_words(time) : time_ago_in_words(time)
+                '  - 
+              = time.to_s(:long)
+            - else
+              | -
+      - if @context.respond_to?(:status)
+        dt
+          strong = translate_attribute(@context.class, :status)
+        dd
+          = translate_enum_value(@context, :status)

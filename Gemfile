@@ -12,8 +12,7 @@ gem 'jbuilder' # Build JSON APIs with ease. Read more: https://github.com/rails/
 gem 'pg' # Use postgres as the database for Active Record
 gem 'puma' # Use Puma as the app server
 gem 'rails' # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'sassc' # Use SASS for stylesheets
-gem 'sassc-rails' # Use SASS for stylesheets
+gem 'dartsass-sprockets' # Use SASS for stylesheets
 gem 'slim-rails' # Use Slim for views
 gem 'terser' # Use Uglifier as compressor for JavaScript assets
 gem 'sprockets', '3.7.2'
@@ -30,7 +29,6 @@ gem 'normalize-rails' # To normalize CSS
 
 ### Administration
 gem 'simple_form' # To simplify admin forms
-gem 'audited' # Logs changes to any record
 gem 'kaminari' # Pagination
 gem 'nilify_blanks' # Convert empty string to null in the database
 gem 'passwordless' # For email based user authentication

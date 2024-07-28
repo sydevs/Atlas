@@ -320,12 +320,9 @@ en:
         phone_verification_sent_at: "Last Phone Verification Sent"
 
       audit:
-        user: :activerecord.models.manager.single # Do not translate
-        action: "Action"
-        actions:
-          update: "Updated"
-          create: "Created"
-          destroy: "Deleted"
+        data: "Raw Data"
+        created_at: "Occurred At"
+        changes: "Changes"
 
       client:
         label: "Label"

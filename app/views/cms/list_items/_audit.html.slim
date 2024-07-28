@@ -1,31 +1,67 @@
+ruby:
+  args = {
+    model: translate_model(audit.parent).downcase,
+  }
 
-- return if audit.auditable.nil?
+  if audit.person && policy(audit.person).show?
+    args[:person] = link_to(audit.person.name, url_for([:cms, audit.person]))
+  elsif audit.person.present?
+    args[:person] = audit.name
+  end
 
-.title
-  /= model_icon Audit
-  i.dropdown.icon
-  .floated
-    - if audit.user
-      = translate('cms.activity.changed_by', name: audit.user.label)
-      '  - 
+  if policy(audit.parent).show?
+    args[:resource] = link_to(audit.parent.label, url_for([:cms, audit.parent]))
+  elsif audit.parent.present?
+    args[:resource] = audit.parent.label
+  else
+    args[:resource] = translate_model(audit.parent)
+  end
 
-    = audit.created_at.to_s(:short)
-    
-  | #{translate_enum_value(audit, :action)} - #{audit.auditable.try(:name)} (#{audit.auditable_type})
-.content
-  table.ui.very.basic.table
-    tbody
-      - if audit.action == 'update'
-        - audit.audited_changes.each do |field, change|
-          tr
-            th = translate_attribute(audit.auditable.class, field)
-            td = translate('cms.activity.changed_to')
-          tr
-            td = change[0]
-            td = change[1]
-      - else
-        - audit.audited_changes.each do |field, change|
-          tr
-            th = translate_attribute(audit.auditable.class, field)
-          tr
-            td = change
+  if audit.status.present?
+    args[:status] = status_label(audit.status)
+  end
+
+.event
+  .label
+    - if audit.person.present? && !audit.status_verified?
+      .ui.circular.label style="background: #{audit.background_color}; color: #{audit.text_color}"
+        = audit.initials
+    - else
+      = status_icon audit.status
+  .content
+    .summary
+      - if @context == audit.parent
+        = translate(audit.category, scope: 'cms.audits.contextual_summary', **args).upcase_first.html_safe
+      - else audit.parent
+        = translate(audit.category, scope: 'cms.audits.summary', **args).upcase_first.html_safe
+
+      .date
+        - if audit.created_at > 6.minutes.ago
+          = translate('cms.audits.time_ago', time: time_ago_in_words(audit.created_at))
+        - else
+          = audit.created_at.to_fs(:short)
+        
+        - if Current.user.administrator?
+          '  
+          a href=cms_audit_path(audit)
+            i.grey.right.arrow.icon
+
+    - if audit.email_sent?
+      .extra.text = markdown(audit.body)
+      /.meta
+        a href=cms_audit_path(audit)
+          i.check.icon
+          | Mark as Complete
+    - elsif audit.changes.present?
+      .meta
+        a href=cms_audit_path(audit)
+          - if audit.record_updated?
+            i.edit.icon
+            = translate('cms.audits.changes', count: audit.changes.count)
+          - else
+            i.list.icon
+            = translate('cms.actions.simple.view')
+    - elsif audit.status_verified?
+      .meta
+        = "#{audit.parent.verification_streak} #{translate_attribute(Event, :verification_streak).downcase}!"
+

@@ -266,6 +266,35 @@ fr:
       changed_by: "de %{name}"
       changed_to: "modifié pour"
 
+    audits: # TODO: Translate this
+      time_ago: "%{time} ago"
+      person: "Action by %{person}"
+      parent: "Targets %{resource}"
+      changes:
+        one: "%{count} Change"
+        other: "%{count} Changes"
+      title:
+        record_created: "%{model} Created"
+        record_updated: "%{model} Updated"
+        record_destroyed: "%{model} Deleted"
+        status_verified: "%{model} Verified"
+        status_change: "%{model} Status Changed"
+        email_sent: "%{model} Email"
+      contextual_summary:
+        record_created: "%{person} created this %{model}"
+        record_updated: "%{person} updated this %{model}"
+        record_destroyed: "%{person} deleted a %{model}"
+        status_verified: "%{model} was %{status} by %{person}"
+        status_change: "%{model} changed to %{status}"
+        email_sent: "%{person} sent an email"
+      summary:
+        record_created: "%{person} created %{resource}"
+        record_updated: "%{person} updated %{resource}"
+        record_destroyed: "%{person} deleted %{resource}"
+        status_verified: "%{resource} was %{status} by %{person}"
+        status_change: "%{resource} changed to %{status}"
+        email_sent: "%{person} sent an email for %{resource}"
+
     dashboard:
       role:
         intro: "Vous êtes %{role}"

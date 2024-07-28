@@ -15,7 +15,7 @@
         input name='q' type='text' placeholder=search_placeholder value=(params[:q] || '')
         i.search.icon
 
-  .ui.fluid.styled.records.accordion data-search=@model_name.route_key
+  .ui.feed data-search=@model_name.route_key
     = render partial: "cms/list_items/#{@model_name.singular_route_key}", collection: @records, cached: true
 
   .pagination-info data-search=@model_name.route_key = page_entries_info @records

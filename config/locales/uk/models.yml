@@ -322,13 +322,10 @@ uk:
         email_verification_sent_at: "Останнє підтвердження електронної пошти надіслано"
         phone_verification_sent_at: "Last Phone Verification Sent"
 
-      audit:
-        user: :activerecord.models.manager.single # Do not translate
-        action: "Дія"
-        actions:
-          update: "Оновлено"
-          create: "Створено"
-          destroy: "Видалено"
+      audit: # TODO: Translate this
+        data: "Raw Data"
+        created_at: "Occurred At"
+        changes: "Changes"
 
       client: # TODO: Translate
         label: "Позначка"

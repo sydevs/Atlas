@@ -7,15 +7,10 @@ class Event < ApplicationRecord
   include Recurrable
   include ActivityMonitorable
   include Managed
-  include HasActivity
+  include Audited
 
   nilify_blanks
   searchable_columns %w[custom_name description]
-  audited except: %i[
-    summary_email_sent_at status_email_sent_at latest_registration_at
-    should_update_status_at verified_at expired_at archived_at finished_at
-    status
-  ]
 
   enum category: { dropin: 1, course: 3, single: 2, festival: 4, concert: 5, inactive: 6 }, _suffix: true
   enum registration_mode: { native: 0, external: 1, meetup: 2, eventbrite: 3, facebook: 4 }, _suffix: true
