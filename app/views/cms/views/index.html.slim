@@ -27,7 +27,7 @@
         a.item class=('active' if params[:online] == 'true') href="?online=true"
           = translate_model(OnlineEvent, :plural)
 
-  - if @records.present? || params[:q]
+  - if @model.try(:searchable) && (@records.present? || params[:q])
     = simple_form_for url_for([:cms, @model]), html: { method: 'GET', data: { remote: 'true' }, autocomplete: 'off' }
       - if params[:online].present?
         input name='online' type='hidden' value=params[:online].to_s
