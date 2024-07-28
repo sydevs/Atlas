@@ -146,6 +146,10 @@ class CMS::ApplicationController < ActionController::Base
     render json: result, status: result ? 200 : 404
   end
 
+  def inbound
+    puts "INBOUND EMAIL #{params.pretty_inspect}"
+  end
+
   def back_path
     return cms_root_path if @record == current_user
     return url_for([:cms, @record]) if policy(@record).show?
