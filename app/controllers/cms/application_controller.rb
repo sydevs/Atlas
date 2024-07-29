@@ -147,8 +147,14 @@ class CMS::ApplicationController < ActionController::Base
     render json: result, status: result ? 200 : 404
   end
 
-  def inbound
-    puts "INBOUND EMAIL #{params.pretty_inspect}"
+  # This route handles viewing audits filtered by the messages scope
+  def messages
+    set_context!
+    authorize_association! :messages
+    @records = policy_scope(@context.messages).page(params[:page]).per(30).search(params[:q])
+    @model = Audit
+    set_model_name!
+    render 'cms/views/index'
   end
 
   def back_path
@@ -170,7 +176,7 @@ class CMS::ApplicationController < ActionController::Base
     end
 
     def require_login!
-      return if current_user
+      return if Current.user
 
       save_passwordless_redirect_location! Manager
       redirect_to managers_sign_in_path, flash: { error: translate('cms.messages.not_logged_in') }
@@ -178,17 +184,17 @@ class CMS::ApplicationController < ActionController::Base
 
     def verify_manager
       atts = { last_login_at: DateTime.now }
-      if params[:verify] && current_user.respond_to?("#{params[:verify]}_verified")
+      if params[:verify] && Current.user.respond_to?("#{params[:verify]}_verified")
         atts[:"#{params[:verify]}_verified"] = true
         flash.now[:success] = translate("cms.messages.manager.#{params[:verify]}_verified")
       end
 
-      current_user.assign_attributes(atts)
-      current_user.save!(validate: false)
+      Current.user.assign_attributes(atts)
+      Current.user.save!(validate: false)
     end
 
     def set_locale!
-      I18n.locale = params[:locale]&.to_sym || current_user.language_code&.downcase&.to_sym || :en
+      I18n.locale = params[:locale]&.to_sym || Current.user.language_code&.downcase&.to_sym || :en
     end
 
     def set_model_name!
@@ -196,7 +202,7 @@ class CMS::ApplicationController < ActionController::Base
     end
 
     def set_context!
-      [Registration, Event, Venue, Manager, Area, Region, Country, Client].each do |model|
+      [Registration, Event, Venue, Manager, Area, Region, Country, Client, Audit].each do |model|
         keys = model.model_name
         param_key = "#{keys.param_key}_id"
         next unless params[param_key]

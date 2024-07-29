@@ -48,7 +48,7 @@ module Expirable
         transitions from: :needs_urgent_review, to: :expired, if: :should_expire?
         transitions from: :expired, to: :archived, if: :should_archive?, after: Proc.new { update_column(:verification_streak, 0) }
         
-        after { try(:log_status_change) }
+        after_commit { try(:log_status_change) }
       end
 
       event :reset_status do

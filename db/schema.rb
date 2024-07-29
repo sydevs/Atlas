@@ -46,14 +46,20 @@ ActiveRecord::Schema[7.0].define(version: 2024_07_28_172618) do
     t.bigint "parent_id"
     t.string "person_type"
     t.bigint "person_id"
-    t.string "brevo_id"
+    t.bigint "replies_to_id"
+    t.bigint "replied_by_id"
+    t.string "group_id"
+    t.string "uuid", null: false
     t.jsonb "data"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["brevo_id"], name: "index_audits_on_brevo_id"
     t.index ["category"], name: "index_audits_on_category"
+    t.index ["group_id"], name: "index_audits_on_group_id"
     t.index ["parent_type", "parent_id"], name: "index_audits_on_parent"
     t.index ["person_type", "person_id"], name: "index_audits_on_person"
+    t.index ["replied_by_id"], name: "index_audits_on_replied_by_id"
+    t.index ["replies_to_id"], name: "index_audits_on_replies_to_id"
+    t.index ["uuid"], name: "index_audits_on_uuid"
   end
 
   create_table "clients", force: :cascade do |t|

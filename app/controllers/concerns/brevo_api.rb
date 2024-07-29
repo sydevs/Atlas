@@ -64,7 +64,7 @@ module BrevoAPI
     puts "[Brevo] Send #{template}"
     if Rails.env.development?
       puts config.to_json
-      return
+      return { message_id: nil }
     end
     
     config.reverse_merge!({
@@ -79,7 +79,7 @@ module BrevoAPI
     config[:params][:text].reverse_merge!(I18n.translate('emails.common'))
 
     client = SibApiV3Sdk::TransactionalEmailsApi.new
-    p client.send_transac_email(config)
+    client.send_transac_email(config)
   rescue SibApiV3Sdk::ApiError => e
     puts "Exception when calling TransactionalEmailsApi->send_transac_email: #{e} #{e.response_body}"
   end

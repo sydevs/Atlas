@@ -1,26 +1,52 @@
 
 h3.ui.small.dividing.grey.header = translate('cms.details.details_for_record', resource: translate_model(Audit))
+.ui.three.steps
+  = record_link(@record.replies_to, class: "#{@record.replies_to.present? ? nil : 'disabled'} step") do
+    i.reply.icon
+    .content
+      - if @record.replies_to.present?
+        .title In Reply To
+        .description = @record.replies_to.label
+        .description = relative_time_in_words(@record.replies_to.created_at)
+      - else
+        .title Not a Reply
+  .active.step
+    = model_icon(Audit)
+    .content
+      .title = @record.label
+      .description = relative_time_in_words(@record.created_at)
+  - if @record.email_forwarded? && !@record.replied_by.present?
+    .step
+      i.orange.envelope.outline.icon
+      .title Waiting for Reply
+  - else
+    = record_link(@record.replied_by, class: "#{@record.replied_by.present? ? nil : 'disabled'} step") do
+      i.arrow.right.icon
+      .content
+        - if @record.replied_by.present?
+          .title Replied To By
+          .description = @record.replied_by.label
+          .description = relative_time_in_words(@record.replied_by.created_at)
+        - else
+          .title No Reply
+
 .ui.list
   .item
-    - if @record.person.present?
-      = model_icon(@record.person.class)
+    = model_icon(Audit)
+    .content
+      .header = @record.description(context: @context)
+      .description = @record.created_at.to_fs(:long)
+  - if Current.user.administrator?
+    .item
+      i.tag.icon
       .content
-        .header = translate('cms.audits.person', person: translate_model(@record.person.class))
-        = record_link(@record.person, class: 'description')
-    - else
-      i.computer.icon
-      .content
-        .header = translate('cms.audits.person', person: "System")
-  .item
+        .header = translate_attribute(@record, :uuid)
+        .description = @record.uuid
+  /.item
     = model_icon(@record.parent.class)
     .content
       .header = translate('cms.audits.parent', resource: translate_model(@record.parent.class))
-      = record_link(@record.parent, class: 'description')
-  .item
-    i.clock.icon
-    .content
-      .header = translate_attribute(@record, :created_at)
-      .description = @record.created_at.to_fs(:long)
+      .description = record_link(@record.parent)
 
 - if @record.changes&.count
   h3.ui.small.dividing.grey.header = translate_attribute(@record, :changes)
@@ -45,10 +71,17 @@ h3.ui.small.dividing.grey.header = translate('cms.details.details_for_record', r
           tr
             td = change[1]
 
-  .ui.accordion
-    .ui.title
-      i.dropdown.icon
-      = translate_attribute(Audit, :data)
-    .content
-      pre = @record.category
-      pre = @record.data.pretty_inspect
+- if @record.data[:html].present?
+  h3.ui.small.dividing.grey.header = translate_attribute(@record, :body)
+  .ui.segment
+    iframe srcdoc=@record.data[:html] width='100%' frameborder="0" scrolling="no" onload='this.style.height = this.contentWindow.document.documentElement.scrollHeight + "px";'
+
+- data = @record.data.except(:changes)
+- if data.present?
+  h3.ui.small.dividing.grey.header = translate_attribute(@record, :data)
+  table.ui.definition.table
+    tbody
+      - data.each do |key, value|
+        tr
+          td = key
+          td = value

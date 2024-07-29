@@ -1,6 +1,8 @@
 cs:
   datetime:
-    distance_in_words:
+    distance_in_words: # TODO: Translate
+      time_ago: "%{time} ago"
+      time_from_now: "%{time} from now"
       soon: "brzy"
       x_minutes: # TODO: Translate
         one: "%{count} minute"
@@ -328,10 +330,12 @@ cs:
         email_verification_sent_at: "Poslední ověřovací e-mail zaslán"
         phone_verification_sent_at: "Poslední ověření přes mobilní telefon zasláno"
 
-      audit: # TODO: Translate this
+      audit: # TODO: Translate
+        uuid: "Unique Identifier"
         data: "Raw Data"
         created_at: "Occurred At"
         changes: "Changes"
+        body: "Content"
 
       client:
         label: "Označení"

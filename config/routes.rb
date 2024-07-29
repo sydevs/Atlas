@@ -64,7 +64,6 @@ Rails.application.routes.draw do
     get :review, to: 'application#review'
     get :worldwide, to: 'application#show'
     get :help, to: 'application#help'
-    post 'messages/receive', to: 'application#inbound'
 
     resources :countries do
       resources :managers, only: %i[index new create destroy]
@@ -97,6 +96,7 @@ Rails.application.routes.draw do
       resources :managers, only: %i[index new create destroy]
       resources :registrations, only: %i[index]
       resources :audits, only: %i[index]
+      get :messages
       get "/change/:effect", action: :change, as: :change, on: :member
     end
 
@@ -116,11 +116,13 @@ Rails.application.routes.draw do
     end
 
     resources :registrations, only: %i[index show] do
-      resources :acitivies, only: %i[index]
+      resources :audits, only: %i[index] do
+        get :messages
+      end
     end
     
     resources :audits, only: %i[index show destroy] do
-      post :receive, on: :collection
+      get :messages
     end
   end
 
@@ -131,5 +133,7 @@ Rails.application.routes.draw do
 
     post :graphql, to: "graphql#execute"
     get :graphql, to: "graphql#execute" if Rails.env.development?
+
+    post :inbound, to: 'application#inbound_email'
   end
 end

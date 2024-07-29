@@ -1,6 +1,8 @@
 ru:
   datetime:
-    distance_in_words:
+    distance_in_words: # TODO: Translate
+      time_ago: "%{time} ago"
+      time_from_now: "%{time} from now"
       soon: "несколько минут"
       x_minutes: # TODO: Translate
         one: "%{count} minute"
@@ -321,10 +323,12 @@ ru:
         email_verification_sent_at: "Последний запрос для подтверждения через email"
         phone_verification_sent_at: "Последний запрос для подтверждения через телефон"
 
-      audit: # TODO: Translate this
+      audit: # TODO: Translate
+        uuid: "Unique Identifier"
         data: "Raw Data"
         created_at: "Occurred At"
         changes: "Changes"
+        body: "Content"
 
       client:
         label: "Ярлык"

@@ -8,7 +8,7 @@
 
   p = translate('cms.activity.description')
 
-  - if @records.present? || params[:q]
+  - if @model.try(:searchable) && (@records.present? || params[:q])
     = simple_form_for url_for([:cms, @model]), html: { method: 'GET', data: { remote: 'true' }, autocomplete: 'off' }
       .search.ui.fluid.icon.small.input data-search=@model_name.route_key
         - search_placeholder = translate('cms.actions.target.search', resources: translate_model(@model, :plural).downcase)

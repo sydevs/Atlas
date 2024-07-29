@@ -49,6 +49,7 @@ de:
       # Tertiary menu
       details: "Info"
       activity: "Aktivität"
+      messages: "Conversation" # TODO: Translate
       breadcrumbs:
         world: "Welt"
         help: "Hilfe"
@@ -261,10 +262,12 @@ de:
       changed_by: "von %{name}"
       changed_to: "Geändert auf"
 
-    audits: # TODO: Translate this
+    audits: # TODO: Translate
       time_ago: "%{time} ago"
-      person: "Action by %{person}"
-      parent: "Targets %{resource}"
+      person: "Action taken by %{person}"
+      parent: "Relates to %{resource}"
+      replies_to: "Replies to %{resource}"
+      replied_by: "Replied to by %{resource}"
       changes:
         one: "%{count} Change"
         other: "%{count} Changes"
@@ -274,21 +277,24 @@ de:
         record_destroyed: "%{model} Deleted"
         status_verified: "%{model} Verified"
         status_change: "%{model} Status Changed"
-        email_sent: "%{model} Email"
+        email_forwarded: "%{model} Email"
+        notice_sent: "%{model} Notice Sent"
       contextual_summary:
         record_created: "%{person} created this %{model}"
         record_updated: "%{person} updated this %{model}"
         record_destroyed: "%{person} deleted a %{model}"
         status_verified: "%{model} was %{status} by %{person}"
         status_change: "%{model} changed to %{status}"
-        email_sent: "%{person} sent an email"
+        email_forwarded: "%{person} sent an email"
+        notice_sent: "Notification sent to %{person}"
       summary:
         record_created: "%{person} created %{resource}"
         record_updated: "%{person} updated %{resource}"
         record_destroyed: "%{person} deleted %{resource}"
         status_verified: "%{resource} was %{status} by %{person}"
         status_change: "%{resource} changed to %{status}"
-        email_sent: "%{person} sent an email for %{resource}"
+        email_forwarded: "%{person} sent an email for %{resource}"
+        notice_sent: "Notification sent for %{resource} to %{person}"
 
     dashboard:
       role:

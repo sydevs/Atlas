@@ -1,57 +1,48 @@
-ruby:
-  args = {
-    model: translate_model(audit.parent).downcase,
-  }
-
-  if audit.person && policy(audit.person).show?
-    args[:person] = link_to(audit.person.name, url_for([:cms, audit.person]))
-  elsif audit.person.present?
-    args[:person] = audit.name
-  end
-
-  if policy(audit.parent).show?
-    args[:resource] = link_to(audit.parent.label, url_for([:cms, audit.parent]))
-  elsif audit.parent.present?
-    args[:resource] = audit.parent.label
-  else
-    args[:resource] = translate_model(audit.parent)
-  end
-
-  if audit.status.present?
-    args[:status] = status_label(audit.status)
-  end
 
 .event
   .label
-    - if audit.person.present? && !audit.status_verified?
-      .ui.circular.label style="background: #{audit.background_color}; color: #{audit.text_color}"
+    - if audit.notice_sent?
+      i.bell.icon
+    - elsif audit.record_updated?
+      i.pen.square.icon
+    - elsif audit.record_created?
+      i.plus.square.icon
+    - elsif audit.person.present? && !audit.status_verified?
+      .ui.circular.avatar.label style="background: #{audit.background_color}; color: #{audit.text_color}"
         = audit.initials
-    - else
+    - elsif audit.status
       = status_icon audit.status
+    - else
+      i.circle.icon
   .content
     .summary
-      - if @context == audit.parent
-        = translate(audit.category, scope: 'cms.audits.contextual_summary', **args).upcase_first.html_safe
-      - else audit.parent
-        = translate(audit.category, scope: 'cms.audits.summary', **args).upcase_first.html_safe
+      = audit.description(context: @context)
 
       .date
-        - if audit.created_at > 6.minutes.ago
-          = translate('cms.audits.time_ago', time: time_ago_in_words(audit.created_at))
-        - else
-          = audit.created_at.to_fs(:short)
+        = relative_time_in_words(audit.created_at)
         
         - if Current.user.administrator?
           '  
           a href=cms_audit_path(audit)
             i.grey.right.arrow.icon
 
-    - if audit.email_sent?
-      .extra.text = markdown(audit.body)
-      /.meta
+    - if audit.email_forwarded?
+      .extra.text
+          .ui.segment = markdown(audit.data[:body])
+      - if !@context.is_a?(Audit)
+        .meta
+          /a href=cms_audit_path(audit)
+            i.check.icon
+            | Mark as Complete
+          a href=cms_audit_messages_path(audit)
+            i.comment.alternate.icon
+            | View Conversation
+    - elsif audit.notice_sent?
+      .extra.text = audit.data[:subject]
+      .meta
         a href=cms_audit_path(audit)
-          i.check.icon
-          | Mark as Complete
+          i.list.icon
+          = translate('cms.actions.simple.view')
     - elsif audit.changes.present?
       .meta
         a href=cms_audit_path(audit)
@@ -63,5 +54,5 @@ ruby:
             = translate('cms.actions.simple.view')
     - elsif audit.status_verified?
       .meta
-        = "#{audit.parent.verification_streak} #{translate_attribute(Event, :verification_streak).downcase}!"
+        = "#{audit.data[:verification_streak]} #{translate_attribute(Event, :verification_streak).downcase}!"
 

@@ -26,7 +26,10 @@ class ReplaceAudits < ActiveRecord::Migration[7.0]
       t.integer :category, default: 0, null: false, index: true
       t.references :parent, polymorphic: true
       t.references :person, polymorphic: true
-      t.string :brevo_id, null: true, index: true
+      t.references :replies_to
+      t.references :replied_by
+      t.references :group, type: :string
+      t.string :uuid, null: false, index: true
       t.jsonb :data
 
       t.timestamps

@@ -22,8 +22,7 @@ class EventMailer < ApplicationMailer
     expiration_period = helpers.time_ago_in_words(event.should_expire_at)
     title = I18n.translate('title', scope: scope, period: expiration_period)
 
-    print scope
-    BrevoAPI.send_email(:status, {
+    result = BrevoAPI.send_email(:status, {
       subject: title,
       to: [{ name: manager.name, email: manager.email }],
       params: {
@@ -62,11 +61,20 @@ class EventMailer < ApplicationMailer
       },
     })
 
-    event.update_column(:status_email_sent_at, Time.now) unless params[:test]
-  end
+    event.audits.create!({
+      category: :notice_sent,
+      # replies_to: event.audits.status_change.last, # Doesn't seem to reliably fetch the correct audit, because of async
+      person: manager,
+      data: {
+        sent_to: manager.email,
+        subject: title,
+        status: event.status,
+        updated_at: event.updated_at.to_fs(:long),
+        message_id: result[:message_id]
+      }
+    })
 
-  def checkup
-    
+    event.update_column(:status_email_sent_at, Time.now) unless params[:test]
   end
 
   def registrations

@@ -1,6 +1,8 @@
 de:
   datetime:
-    distance_in_words:
+    distance_in_words: # TODO: Translate
+      time_ago: "%{time} ago"
+      time_from_now: "%{time} from now"
       soon: "Ein paar Minuten"
       x_minutes: # TODO: Translate
         one: "%{count} minute"
@@ -329,10 +331,12 @@ de:
         email_verification_sent_at: "Letzte E-Mail-Überprüfung gesendet"
         phone_verification_sent_at: "Letzte Telefonverifizierung verschickt"
 
-      audit: # TODO: Translate this
+      audit: # TODO: Translate
+        uuid: "Unique Identifier"
         data: "Raw Data"
         created_at: "Occurred At"
         changes: "Changes"
+        body: "Content"
 
       client:
         label: "Label"

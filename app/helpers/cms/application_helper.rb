@@ -63,10 +63,14 @@ module CMS::ApplicationHelper
   end
 
   def record_link record, **kwargs
-    if policy(record).show?
-      tag.a record.label, href: url_for([:cms, record]), **kwargs
+    if record && policy(record).show?
+      tag.a href: url_for([:cms, record]), **kwargs do
+        block_given? ? yield : record.label
+      end
     else
-      tag.span record.label, **kwargs
+      tag.span(**kwargs) do
+        block_given? ? yield : record&.label
+      end
     end
   end
 
@@ -76,6 +80,14 @@ module CMS::ApplicationHelper
 
   def time_from_now_in_words time
     time > Time.now ? time_ago_in_words(time) : translate('datetime.distance_in_words.soon')
+  end
+
+  def relative_time_in_words time
+    if time > Time.now
+      time < 1.hour.from_now ? translate('datetime.distance_in_words.from_now', time: time_ago_in_words(time)) : time.to_fs(:short)
+    else
+      time > 6.minutes.ago ? translate('datetime.distance_in_words.time_ago', time: time_ago_in_words(time)) : time.to_fs(:short)
+    end
   end
 
   def expiry_time_in_words status

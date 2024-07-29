@@ -70,6 +70,10 @@ class Registration < ApplicationRecord
     end
   end
 
+  def audit_conversation_members
+    [user, event.manager]
+  end
+
   private
 
     def find_or_create_user

@@ -152,6 +152,10 @@ class Event < ApplicationRecord
     (expiration_period / 3 * [4, verification_streak].min).weeks
   end
 
+  def audit_conversation_members
+    [manager] + parent_managers
+  end
+
   def self.model_name
     ActiveModel::Name.new(base_class)
   end
