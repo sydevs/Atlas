@@ -21,7 +21,7 @@
       .date
         = relative_time_in_words(audit.created_at)
         
-        - if Current.user.administrator?
+        - if policy(audit).show_technical?
           '  
           a href=cms_audit_path(audit)
             i.grey.right.arrow.icon
@@ -38,11 +38,8 @@
             i.comment.alternate.icon
             | View Conversation
     - elsif audit.notice_sent?
-      .extra.text = audit.data[:subject]
-      .meta
-        a href=cms_audit_path(audit)
-          i.list.icon
-          = translate('cms.actions.simple.view')
+      .extra.text
+        .ui.message = audit.data[:subject]
     - elsif audit.changes.present?
       .meta
         a href=cms_audit_path(audit)
