@@ -151,10 +151,10 @@ class CMS::ApplicationController < ActionController::Base
   def messages
     set_context!
     authorize_association! :messages
-    @records = policy_scope(@context.messages).page(params[:page]).per(30).search(params[:q])
+    @records = policy_scope(@context.messages).reorder(created_at: :desc).group_by(&:group_id)
     @model = Audit
     set_model_name!
-    render 'cms/views/index'
+    render 'cms/views/messages'
   end
 
   def back_path

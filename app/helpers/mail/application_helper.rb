@@ -48,13 +48,13 @@ module Mail::ApplicationHelper
 
   def percent_difference(val, old_val)
     if val == old_val
-      diff = 0
+      0
     elsif val.zero?
-      diff = -100
+      -100
     elsif old_val.zero?
-      diff = +100
+      +100
     else
-      diff = (val.to_f / old_val.to_f * 100).to_i - 100
+      (val.to_f / old_val.to_f * 100).to_i - 100
     end
   end
 

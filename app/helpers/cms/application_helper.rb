@@ -44,6 +44,8 @@ module CMS::ApplicationHelper
       PLACE_MODELS.each do |model|
         return url_for([:cms, ancestor, model]) if policy(ancestor).index_association?(model)
       end
+    elsif @context.is_a?(Audit) && policy(ancestor).index_association?(:audits)
+      url_for([:cms, ancestor, :audits])
     elsif @context.is_a?(Manager) && !ancestor.is_a?(Event)
       url_for([:cms, ancestor, :managers])
     elsif action_name == 'index' && policy(ancestor).index_association?(controller_name.to_sym)
@@ -84,7 +86,7 @@ module CMS::ApplicationHelper
 
   def relative_time_in_words time
     if time > Time.now
-      time < 1.hour.from_now ? translate('datetime.distance_in_words.from_now', time: time_ago_in_words(time)) : time.to_fs(:short)
+      time < 1.hour.from_now ? translate('datetime.distance_in_words.time_from_now', time: time_ago_in_words(time)) : time.to_fs(:short)
     else
       time > 6.minutes.ago ? translate('datetime.distance_in_words.time_ago', time: time_ago_in_words(time)) : time.to_fs(:short)
     end
