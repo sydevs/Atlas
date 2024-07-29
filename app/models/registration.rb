@@ -70,7 +70,7 @@ class Registration < ApplicationRecord
     end
   end
 
-  def audit_conversation_members
+  def conversation_members
     [user, event.manager]
   end
 

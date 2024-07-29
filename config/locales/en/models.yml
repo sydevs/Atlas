@@ -76,6 +76,22 @@ en:
         one: "registration"
         other: "registrations"
 
+      # Tracking
+      audit:
+        # Basic pluralization
+        single: "History"
+        plural: "History"
+        # Countable
+        one: "log"
+        other: "logs"
+      conversation:
+        # Basic pluralization
+        single: "Conversation"
+        plural: "Conversations"
+        # Countable
+        one: "conversation"
+        other: "conversations"
+
       # Other
       manager:
         # Basic pluralization
@@ -91,13 +107,6 @@ en:
         # Countable
         one: "responsibility"
         other: "responsibilities"
-      audit:
-        # Basic pluralization
-        single: "History"
-        plural: "History"
-        # Countable
-        one: "log"
-        other: "logs"
       client:
         # Basic pluralization
         single: "App"
@@ -105,13 +114,6 @@ en:
         # Countable
         one: "external app"
         other: "external apps"
-      message:
-        # Basic pluralization
-        single: "Email"
-        plural: "Emails"
-        # Countable
-        one: "message"
-        other: "messages"
       picture:
         # Basic pluralization
         single: "Image"

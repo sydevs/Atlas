@@ -96,7 +96,7 @@ Rails.application.routes.draw do
       resources :managers, only: %i[index new create destroy]
       resources :registrations, only: %i[index]
       resources :audits, only: %i[index]
-      get :messages
+      resources :conversations, only: %i[index]
       get "/change/:effect", action: :change, as: :change, on: :member
     end
 
@@ -112,18 +112,16 @@ Rails.application.routes.draw do
     resources :managed_records, only: %i[index]
 
     resources :clients do
-      resources :audits, only: %i[index]
+      # resources :audits, only: %i[index]
     end
 
     resources :registrations, only: %i[index show] do
-      resources :audits, only: %i[index] do
-        get :messages
-      end
+      resources :audits, only: %i[index]
+      resources :conversations, only: %i[index]
     end
     
-    resources :audits, only: %i[index show destroy] do
-      get :messages
-    end
+    resources :audits, only: %i[index show destroy]
+    resources :conversations, only: %i[index show destroy]
   end
 
   namespace :api do

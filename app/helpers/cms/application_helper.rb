@@ -105,6 +105,8 @@ module CMS::ApplicationHelper
   end
 
   def markdown content
+    return nil unless content.present?
+    
     @markdown ||= Redcarpet::Markdown.new(Redcarpet::Render::HTML, autolink: true)
     @markdown.render(content).html_safe
   end

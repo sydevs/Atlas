@@ -1,7 +1,25 @@
 module AuditDecorator
 
+  CATEGORY_ICONS = {
+    notice_sent: 'bell',
+    record_updated: 'pen square',
+    record_created: 'plus square',
+  }
+
   def label
     translate(category, scope: 'cms.audits.title', model: translate_model(parent))
+  end
+
+  def icon
+    if CATEGORY_ICONS.key?(category.to_sym)
+      tag.div(tag.i(class: "#{CATEGORY_ICONS[category.to_sym]} icon"), class: 'label')
+    elsif person.present? && !status_verified?
+      tag.div(class: 'label', data: { text: initials }, style: "--background: #{background_color}; --color: #{text_color}")
+    elsif status.present?
+      status_icon(status)
+    else
+      tag.div(tag.i(class: 'circle icon'), class: 'label')
+    end
   end
 
   def description context: nil
@@ -26,7 +44,7 @@ module AuditDecorator
       args[:resource] = translate_model(parent)
     end
 
-    if context == parent || context.is_a?(Audit)
+    if context == parent || context.is_a?(Conversation)
       translate(category, scope: 'cms.audits.contextual_summary', **args).upcase_first.html_safe
     else
       translate(category, scope: 'cms.audits.summary', **args).upcase_first.html_safe

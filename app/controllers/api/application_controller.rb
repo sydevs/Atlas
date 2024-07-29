@@ -18,7 +18,7 @@ class API::ApplicationController < ActionController::Base
           parent: replied_audit.parent,
           person: person,
           replies_to: replied_audit,
-          group_id: replied_audit.group_id,
+          conversation_id: replied_audit.conversation_id,
           created_at: item["SentAtDate"],
           data: {
             spam_score: item["SpamScore"],

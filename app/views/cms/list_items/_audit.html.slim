@@ -1,19 +1,6 @@
 
 .event
-  .label
-    - if audit.notice_sent?
-      i.bell.icon
-    - elsif audit.record_updated?
-      i.pen.square.icon
-    - elsif audit.record_created?
-      i.plus.square.icon
-    - elsif audit.person.present? && !audit.status_verified?
-      .ui.circular.avatar.label style="background: #{audit.background_color}; color: #{audit.text_color}"
-        = audit.initials
-    - elsif audit.status
-      = status_icon audit.status
-    - else
-      i.circle.icon
+  = audit.icon
   .content
     .summary
       = audit.description(context: @context)
@@ -28,15 +15,12 @@
 
     - if audit.email_forwarded?
       .extra.text
-          .ui.segment = markdown(audit.data[:body])
-      - if action_name != 'messages'
+        .ui.segment = markdown(audit.data[:body])
+      - if audit.conversation
         .meta
-          /a href=cms_audit_path(audit)
-            i.check.icon
-            | Mark as Complete
-          a href=cms_audit_messages_path(audit)
-            i.comment.alternate.icon
-            | View Conversation
+          a href=cms_conversation_path(audit.conversation)
+            = model_icon(Conversation)
+            = translate('cms.actions.target.view', resource: translate_model(Conversation))
     - elsif audit.notice_sent?
       .extra.text
         .ui.message = audit.data[:subject]

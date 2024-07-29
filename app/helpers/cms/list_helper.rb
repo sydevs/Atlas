@@ -11,7 +11,7 @@ module CMS::ListHelper
     audits: 'clipboard list',
     clients: 'broadcast tower',
     pictures: 'image',
-    messages: 'comment',
+    conversations: 'comment alternate',
   }.freeze
 
   MANAGER_ICONS = {

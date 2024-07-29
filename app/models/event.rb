@@ -152,7 +152,7 @@ class Event < ApplicationRecord
     (expiration_period / 3 * [4, verification_streak].min).weeks
   end
 
-  def audit_conversation_members
+  def conversation_members
     [manager] + parent_managers
   end
 

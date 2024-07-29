@@ -48,13 +48,13 @@ ActiveRecord::Schema[7.0].define(version: 2024_07_28_172618) do
     t.bigint "person_id"
     t.bigint "replies_to_id"
     t.bigint "replied_by_id"
-    t.string "group_id"
+    t.bigint "conversation_id"
     t.string "uuid", null: false
     t.jsonb "data"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["category"], name: "index_audits_on_category"
-    t.index ["group_id"], name: "index_audits_on_group_id"
+    t.index ["conversation_id"], name: "index_audits_on_conversation_id"
     t.index ["parent_type", "parent_id"], name: "index_audits_on_parent"
     t.index ["person_type", "person_id"], name: "index_audits_on_person"
     t.index ["replied_by_id"], name: "index_audits_on_replied_by_id"
@@ -81,6 +81,19 @@ ActiveRecord::Schema[7.0].define(version: 2024_07_28_172618) do
     t.index ["external_id"], name: "index_clients_on_external_id", unique: true
     t.index ["location_type", "location_id"], name: "index_clients_on_location"
     t.index ["manager_id"], name: "index_clients_on_manager_id"
+  end
+
+  create_table "conversations", force: :cascade do |t|
+    t.datetime "marked_complete_at"
+    t.datetime "last_response_at"
+    t.string "last_responder_type"
+    t.bigint "last_responder_id"
+    t.string "parent_type"
+    t.bigint "parent_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["last_responder_type", "last_responder_id"], name: "index_conversations_on_last_responder"
+    t.index ["parent_type", "parent_id"], name: "index_conversations_on_parent"
   end
 
   create_table "countries", force: :cascade do |t|

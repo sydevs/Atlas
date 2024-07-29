@@ -8,11 +8,10 @@ class Audit < ApplicationRecord
   # Associations
   belongs_to :parent, polymorphic: true
   belongs_to :person, polymorphic: true, optional: true
+  belongs_to :conversation, optional: true
 
   belongs_to :replies_to, class_name: 'Audit', optional: true
   has_one :replied_by, class_name: 'Audit', foreign_key: :replies_to_id
-
-  has_many :group, class_name: 'Audit', foreign_key: :group_id, primary_key: :group_id
 
   # Scopes
   default_scope { order(created_at: :desc) }
@@ -22,24 +21,38 @@ class Audit < ApplicationRecord
 
   # Callbacks
   before_create :set_uuid
+  before_create :update_conversation
   before_create :send_email!, if: :email_forwarded?
 
   # Methods
-  alias messages group
 
   def should_forward_to
-    parent.audit_conversation_members - [person]
+    conversation.members - [person]
   end
 
   def should_reply_to
     "#{uuid}@reply.sydevelopers.com"
   end
 
+  def reply_link
+    subject = self.data[:subject]
+    subject = 'Re: ' + subject unless subject.start_with?('Re:')
+    "mailto:#{should_reply_to}?subject=#{subject}"
+  end
+
   private
 
     def set_uuid
       self.uuid = SecureRandom.hex(6) + Audit.maximum(:id).to_i.next.to_s
-      self.group_id ||= self.uuid
+    end
+
+    def update_conversation
+      if replies_to&.conversation.present?
+        self.conversation = replies_to.conversation
+        self.conversation.update!(last_response_at: created_at, last_responder: person)
+      elsif email_forwarded? || notice_sent?
+        self.conversation = Conversation.create!(last_response_at: created_at, last_responder: person, parent: parent)
+      end
     end
 
     def send_email!

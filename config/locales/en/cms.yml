@@ -50,7 +50,6 @@ en:
       # Tertiary menu
       details: "Info"
       activity: "Activity"
-      messages: "Conversation"
       breadcrumbs:
         world: "World"
         help: "Help"

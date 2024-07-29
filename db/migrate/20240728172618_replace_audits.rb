@@ -22,16 +22,23 @@ class ReplaceAudits < ActiveRecord::Migration[7.0]
       t.index ["user_id", "user_type"], name: "user_index"
     end
 
+    create_table :conversations do |t|
+      t.datetime :marked_complete_at
+      t.datetime :last_response_at
+      t.references :last_responder, polymorphic: true
+      t.references :parent, polymorphic: true
+      t.timestamps
+    end
+
     create_table :audits do |t|
       t.integer :category, default: 0, null: false, index: true
       t.references :parent, polymorphic: true
       t.references :person, polymorphic: true
       t.references :replies_to
       t.references :replied_by
-      t.references :group, type: :string
+      t.references :conversation
       t.string :uuid, null: false, index: true
       t.jsonb :data
-
       t.timestamps
     end
   end
