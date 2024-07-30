@@ -268,6 +268,11 @@ en:
       changed_by: "by %{name}"
       changed_to: "changed to"
 
+    conversations:
+      awaiting_response: "Awaiting Reply"
+      has_answers: "Gave Comments"
+      send_reply: "Send Reply"
+
     audits:
       time_ago: "%{time} ago"
       person: "Action taken by %{person}"

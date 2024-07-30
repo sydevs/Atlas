@@ -13,6 +13,12 @@ tr
   td
     = registration.starting_at.to_s(:short_date)
 
-  td
-    - if registration.questions.present?
-      i.question.circle.icon
+  td.collapsing.right.aligned
+    - if registration.conversations.awaiting_response.present?
+      .ui.orange.basic.label
+        i.warning.icon
+        = translate('cms.conversations.awaiting_response')
+    - elsif registration.questions.present?
+      .ui.basic.label
+        i.comment.icon
+        = translate('cms.conversations.has_answers')

@@ -7,7 +7,7 @@
 - if @record.awaiting_response?
   .ui.orange.label
     i.warning.icon
-    | Awaiting Reply
+    = translate('cms.conversations.awaiting_response')
 
 .ui.connected.feed data-search=@model_name.route_key
   = render partial: "cms/list_items/audit", collection: @record.messages, cached: true

@@ -269,6 +269,11 @@ pt:
       changed_by: "por %{name}"
       changed_to: "alterado para"
 
+    conversations:
+      awaiting_response: "Awaiting Reply"
+      has_answers: "Gave Comments"
+      send_reply: "Send Reply"
+
     audits: # TODO: Translate
       time_ago: "%{time} ago"
       person: "Action taken by %{person}"

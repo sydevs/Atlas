@@ -264,6 +264,11 @@ de:
       changed_by: "von %{name}"
       changed_to: "Geändert auf"
 
+    conversations:
+      awaiting_response: "Awaiting Reply"
+      has_answers: "Gave Comments"
+      send_reply: "Send Reply"
+
     audits: # TODO: Translate
       time_ago: "%{time} ago"
       person: "Action taken by %{person}"

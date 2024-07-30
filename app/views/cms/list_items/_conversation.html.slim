@@ -23,4 +23,4 @@
         - if audit.message? && !audit.notice_sent? && audit.person != Current.user
           a href=audit.reply_link
             i.blue.reply.icon
-            | Send Reply
+            = translate('cms.conversations.send_reply')

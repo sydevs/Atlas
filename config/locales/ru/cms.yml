@@ -259,6 +259,11 @@ ru:
       changed_by: "по %{name}"
       changed_to: "изменено на"
 
+    conversations:
+      awaiting_response: "Awaiting Reply"
+      has_answers: "Gave Comments"
+      send_reply: "Send Reply"
+
     audits: # TODO: Translate
       time_ago: "%{time} ago"
       person: "Action taken by %{person}"
