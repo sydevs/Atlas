@@ -22,7 +22,7 @@ class Audit < ApplicationRecord
   scope :messages_outstanding, -> { messages.where(replied_by_id: nil) }
 
   # Validations
-  validates_presence_of :conversation, if: :message_test?
+  validates_presence_of :conversation, if: :message?
 
   # Callbacks
   before_create :update_conversation, if: :message?
@@ -30,13 +30,7 @@ class Audit < ApplicationRecord
 
   # Methods
   
-  def message_test?
-    puts "MESSAGE TEST? #{category.to_sym.inspect} in? #{MESSAGE_CATEGORIES.inspect} -> #{MESSAGE_CATEGORIES.include?(category.to_sym)}"
-    MESSAGE_CATEGORIES.include?(category.to_sym)
-  end
-  
   def message?
-    puts "MESSAGE? #{category.to_sym.inspect} in? #{MESSAGE_CATEGORIES.inspect} -> #{MESSAGE_CATEGORIES.include?(category.to_sym)}"
     MESSAGE_CATEGORIES.include?(category.to_sym)
   end
 
@@ -53,15 +47,12 @@ class Audit < ApplicationRecord
     def update_conversation
       return if conversation.present?
 
-      puts "UPDATE CONVERSATION"
       if replies_to&.conversation.present?
-        puts "SET CONVERSATION"
         self.conversation = replies_to.conversation
       else
-        puts "CREATE CONVERSATION"
-        self.conversation = Conversation.new(last_response_at: created_at, last_responder: person, parent: parent)
+        # This doesn't seem to work for some reason?
+        self.conversation = parent.conversations.new(last_responder: email_forwarded? ? person : nil)
       end
-      puts "CONVERSATION DONE"
     end
 
     def send_email!

@@ -13,7 +13,8 @@ class RegistrationPolicy < DatabasePolicy
   end
 
   def index_association? association = nil
-    return false if association == :activities
+    return false if association == :audits && !user.administrator?
+    return false if association == :conversations
 
     super
   end

@@ -115,7 +115,7 @@ Rails.application.routes.draw do
       # resources :audits, only: %i[index]
     end
 
-    resources :registrations, only: %i[index show] do
+    resources :registrations, only: %i[index show destroy] do
       resources :audits, only: %i[index]
       resources :conversations, only: %i[index]
     end

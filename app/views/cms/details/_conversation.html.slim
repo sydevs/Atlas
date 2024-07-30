@@ -1,8 +1,13 @@
 
 - if Current.user.administrator?
-  .right.aligned.floating.ui.tag.label
-    i.hashtag.icon
+  a.ui.right.aligned.floating.tag.label href=@record.messages.first.reply_link
+    i.reply.icon
     = @record.uuid
+
+- if @record.awaiting_response?
+  .ui.orange.label
+    i.warning.icon
+    | Awaiting Reply
 
 .ui.connected.feed data-search=@model_name.route_key
   = render partial: "cms/list_items/audit", collection: @record.messages, cached: true

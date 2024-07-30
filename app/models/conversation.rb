@@ -2,7 +2,7 @@ class Conversation < ApplicationRecord
 
   # Associations
   belongs_to :parent, polymorphic: true
-  belongs_to :last_responder, polymorphic: true
+  belongs_to :last_responder, polymorphic: true, optional: true
   has_many :messages, class_name: 'Audit', after_add: :added_message
 
   # Scopes

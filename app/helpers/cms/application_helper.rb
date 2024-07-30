@@ -7,11 +7,8 @@ module CMS::ApplicationHelper
     expired: 'info circle',
   }.freeze
 
-  PLACE_MODELS = %i[
-    countries
-    regions
-    areas
-  ]
+  PLACE_MODELS = %i[countries regions areas]
+  RECORD_MODELS = [Conversation, Audit, Registration]
 
   def floating_action text, icon = nil, url = nil, **args
     klass = %w[ui basic right floated compact tiny button]
@@ -44,8 +41,8 @@ module CMS::ApplicationHelper
       PLACE_MODELS.each do |model|
         return url_for([:cms, ancestor, model]) if policy(ancestor).index_association?(model)
       end
-    elsif @context.is_a?(Audit) && policy(ancestor).index_association?(:audits)
-      url_for([:cms, ancestor, :audits])
+    elsif RECORD_MODELS.include?(@context.class) && policy(ancestor).index_association?(@context.class.model_name.route_key.to_sym)
+      url_for([:cms, ancestor, @context.class.model_name.route_key.to_sym])
     elsif @context.is_a?(Manager) && !ancestor.is_a?(Event)
       url_for([:cms, ancestor, :managers])
     elsif action_name == 'index' && policy(ancestor).index_association?(controller_name.to_sym)

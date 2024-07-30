@@ -24,7 +24,7 @@ class ReplaceAudits < ActiveRecord::Migration[7.0]
 
     create_table :conversations do |t|
       t.datetime :marked_complete_at
-      t.datetime :last_response_at
+      t.datetime :last_response_at, default: -> { 'CURRENT_TIMESTAMP' }
       t.references :last_responder, polymorphic: true
       t.references :parent, polymorphic: true
       t.string :uuid, null: false, index: true

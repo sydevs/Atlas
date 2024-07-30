@@ -25,9 +25,7 @@ h3.ui.small.dividing.grey.header = translate('cms.details.details_for_record', r
             .header = translate_enum_value(Event, :registration_questions, question)
             .description = answer
 
-h3.ui.small.dividing.grey.header = translate_model(Audit, :plural)
-.ui.connected.feed
-  - if @record.activities.present?
-    = render partial: "cms/list_items/#{Audit.model_name.singular_route_key}", collection: @record.messages, cached: true
-  - else
-    = translate('cms.messages.no_records_found', resources: translate_model(Audit, :plural).downcase)
+- if @record.conversations.present?
+  h3.ui.small.dividing.grey.header = translate_model(Conversation, :plural)
+  .ui.divided.large.relaxed.feed
+    = render partial: "cms/list_items/conversation", collection: @record.conversations, cached: true

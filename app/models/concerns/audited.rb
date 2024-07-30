@@ -19,7 +19,10 @@ module Audited
     # scope :message_outstanding, -> { where('events.finish_date IS NULL OR events.finish_date >= ?', DateTime.now) }
     
     after_commit :record_update_audit!
-    after_commit :record_status_audit!, if: :status_previously_changed?
+
+    if self.column_names.include?(:status)
+      after_commit :record_status_audit!, if: :status_previously_changed?  
+    end
   end
 
   def conversation_members

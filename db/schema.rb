@@ -83,7 +83,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_07_30_121948) do
 
   create_table "conversations", force: :cascade do |t|
     t.datetime "marked_complete_at"
-    t.datetime "last_response_at"
+    t.datetime "last_response_at", default: -> { "CURRENT_TIMESTAMP" }
     t.string "last_responder_type"
     t.bigint "last_responder_id"
     t.string "parent_type"

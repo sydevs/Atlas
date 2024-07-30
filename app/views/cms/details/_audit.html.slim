@@ -1,4 +1,9 @@
 
+- if Current.user.administrator? && (@record.message? || @record.conversation.present?)
+  a.ui.right.aligned.floating.tag.label href=@record.reply_link
+    i.reply.icon
+    = @record.conversation&.uuid
+
 h3.ui.small.dividing.grey.header = translate('cms.details.details_for_record', resource: translate_model(Audit))
 - if policy(@record).show_technical?
   .ui.three.steps
