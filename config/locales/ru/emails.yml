@@ -105,3 +105,15 @@ ru:
         title: "Registration method"
         text: "Seekers are currently registering for your event via Meetup. We recommend using registration through the Sahaj Atlas as we will then be able to capture the seeker's email and follow up with them."
         action: "Change registration"
+
+    registrations: # TODO: Translate
+      title:
+        one: "1 new registration for your event"
+        other: "%{count} new registrations for your event"
+      prelude:
+        one: "Your event has a new registration. Each registration is listed below, with any responses to registration questions."
+        other: "Your event has %{count} new registrations. Below "
+      registration:
+        summary: "%{name} registered %{time} ago"
+        reply: "Reply to question"
+        registered_ago: "Will attend on %{date}"

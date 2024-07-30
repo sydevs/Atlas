@@ -33,7 +33,7 @@ class Registration < ApplicationRecord
   alias default_message_receiver manager
 
   # Callbacks
-  after_create :send_registrations_notification, if: :immediate_registration_notification?
+  after_create :send_registration_notification, if: :immediate_registration_notification?
   before_save :find_or_create_user
 
   # Methods
@@ -80,8 +80,8 @@ class Registration < ApplicationRecord
       self.user = User.create_with(name: user.name).find_or_create_by(email: user.email)
     end
 
-    def send_registrations_notification
-      EventMailer.with(event: event, manager: event.manager).registrations.deliver_later
+    def send_registration_notification
+      EventMailer.with(event: event, manager: event.manager, registration: self).registrations.deliver_later
     end
 
 end

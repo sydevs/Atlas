@@ -1,30 +1,28 @@
 class EventMailer < ApplicationMailer
 
-  default template_path: 'mail/events'
-  layout 'mail/admin'
+  before_action -> {
+    @event = params[:event] || params[:record]
+    @manager = params[:manager] || @event.manager
+  }
 
   def status
-    event = params[:event] || params[:record]
-    manager = params[:manager] || event.manager
-    @manager = manager
-
-    if event.status.present? && event.status.to_sym != :verified
-      puts "[MAIL] Sending status message (#{event.status}) for #{event.label} to #{manager.name}"
+    if @event.status.present? && @event.status.to_sym != :verified
+      puts "[MAIL] Sending status message (#{@event.status}) for #{@event.label} to #{@manager.name}"
     else
-      puts "[MAIL] Skip sending status for #{event.label} (#{event.status})"
+      puts "[MAIL] Skip sending status for #{@event.label} (#{@event.status})"
       return
     end
 
     helpers = ApplicationController.helpers
 
-    is_checkup = manager != event.manager
-    scope = (is_checkup ? "emails.status.checkup" : "emails.status.#{event.status}")
-    expiration_period = helpers.time_ago_in_words(event.should_expire_at)
+    is_checkup = @manager != @event.manager
+    scope = (is_checkup ? "emails.status.checkup" : "emails.status.#{@event.status}")
+    expiration_period = helpers.time_ago_in_words(@event.should_expire_at)
     title = I18n.translate('title', scope: scope, period: expiration_period)
 
     result = BrevoAPI.send_email(:status, {
       subject: title,
-      to: [{ name: manager.name, email: manager.email }],
+      to: [{ name: @manager.name, email: @manager.email }],
       params: {
         text: I18n.translate(scope).deep_dup.merge!({
           title: title,
@@ -38,75 +36,99 @@ class EventMailer < ApplicationMailer
           end.to_h
         }),
         event: {
-          status: event.status,
-          label: event.label,
-          map_url: event.map_url,
-          location: event.address,
-          timing: event.recurrence_in_words(short: true),
-          contact: event.contact_text,
-          category: event.category_label,
-          updated_at: event.updated_at.to_s(:short),
+          status: @event.status,
+          label: @event.label,
+          map_url: @event.map_url,
+          location: @event.address,
+          timing: @event.recurrence_in_words(short: true),
+          contact: @event.contact_text,
+          category: @event.category_label,
+          updated_at: @event.updated_at.to_s(:short),
         },
-        recommendations: event.recommendations.map do |key, link|
+        recommendations: @event.recommendations.map do |key, link|
           I18n.translate(key, scope: 'emails.recommendations').merge({
             link: sign_in_link(link),
             image: helpers.image_url("email/recommendations/#{key}.png", host: 'https://atlas.sydevelopers.com'),
           })
         end,
         links: {
-          positive: sign_in_link(change_cms_event_url(event, effect: :verify)),
-          negative: sign_in_link(edit_cms_event_url(event)),
-          tertiary: sign_in_link(is_checkup ? "mailto:#{event.manager.email}" : change_cms_event_url(event, effect: :finish)),
+          positive: sign_in_link(change_cms_event_url(@event, effect: :verify)),
+          negative: sign_in_link(edit_cms_event_url(@event)),
+          tertiary: sign_in_link(is_checkup ? "mailto:#{@event.manager.email}" : change_cms_event_url(@event, effect: :finish)),
         }
       },
     })
 
-    event.audits.create!({
+    @event.audits.create!({
       category: :notice_sent,
-      conversation: event.conversations.new(last_response_at: Time.now),
-      # replies_to: event.audits.status_change.last, # Doesn't seem to reliably fetch the correct audit, because of async
-      person: manager,
+      conversation: @event.conversations.new,
+      # replies_to: @event.audits.status_change.last, # Doesn't seem to reliably fetch the correct audit, because of async
+      person: @manager,
       data: {
-        sent_to: manager.email,
+        sent_to: @manager.email,
         subject: title,
-        status: event.status,
-        updated_at: event.updated_at.to_fs(:long),
+        status: @event.status,
+        updated_at: @event.updated_at.to_fs(:long),
         message_id: result&.message_id,
       }
     })
 
-    event.update_column(:status_email_sent_at, Time.now) unless params[:test]
+    @event.update_column(:status_email_sent_at, Time.now)
   end
 
   def registrations
-    setup
-    return unless @manager.notifications.event_registrations?
-
-    if (params && params[:test]) || (@event.next_recurrence_at && @event.next_recurrence_at <= 1.day.from_now)
-      puts "[MAIL] Sending registrations email for #{@event.label} to #{@manager.name}"
+    if params[:registration].present?
+      registrations = [params[:registration]]
+      puts "[MAIL] Sending single registration email for #{@event.label} to #{@manager.name}"
     else
-      puts "[MAIL] Skip sending reminder for #{@event.label}"
-      return
+      registrations = @event.registrations.order_with_comments_first.since(@event.registrations_email_sent_at || @event.created_at)
+      puts "[MAIL] Sending registrations email for #{@event.label} to #{@manager.name}"
     end
 
-    @registrations = @event.registrations.order_with_comments_first.since(@event.registrations_email_sent_at || @event.created_at)
-    @registrations = @event.registrations.order_with_comments_first.limit(10) if params[:test] && @registrations.empty?
-    return if @registrations.empty?
+    return unless registrations.present?
 
-    create_session!
-    subject = I18n.translate('mail.event.registrations.subject', event: @event.label)
-    mail(to: @manager.email, subject: subject)
-    @event.update_column(:registrations_email_sent_at, Time.now) unless params[:test]
+    helpers = ApplicationController.helpers
+    title = I18n.translate('emails.registrations.title', count: registrations.count)
+    conversation = @event.conversations.new
+    conversation.generate_uuid
+
+    result = BrevoAPI.send_email(:status, {
+      subject: title,
+      to: [{ name: @manager.name, email: @manager.email }],
+      params: {
+        text: {
+          title: title,
+          prelude: I18n.translate('emails.registrations.prelude', count: registrations.count),
+          reply: I18n.translate('emails.registrations.registration.reply'),
+          answers: I18n.translate('activerecord.attributes.event.registration_questions'),
+          footer: I18n.translate('emails.footer'),
+        },
+        event: {
+          questions: @event.registration_question.to_a.join(','),
+        },
+        registrations: registrations.map do |r|
+          {
+            summary: I18n.translate('emails.registrations.registration.summary', name: r.name, time: helpers.time_ago_in_words(r.created_at)),
+            description: I18n.translate('emails.registrations.registration.registered_ago', date: r.starting_at.to_date.strftime('%a, %B %-d')),
+            reply_url: r.questions['questions'].present? ? "mailto:#{conversation.reply_to}?subject=Re: #{r.questions['questions']}" : nil,
+            answers: r.questions,
+          }
+        end,
+      },
+    })
+
+    @event.audits.create!({
+      category: :notice_sent,
+      conversation: conversation,
+      person: @manager,
+      data: {
+        sent_to: @manager.email,
+        subject: title,
+        message_id: result&.message_id,
+      }
+    })
+
+    @event.update_column(:registrations_email_sent_at, Time.now)
   end
-
-  private
-
-    def setup
-      @event = params[:event] || params[:record]
-      @manager = params[:manager] || @event.manager
-      @status = @event.status.to_sym
-      @status = :created if @status == :verified && @event.created_at > 1.week.ago
-      create_session!
-    end
 
 end

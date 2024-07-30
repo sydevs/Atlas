@@ -13,7 +13,7 @@ class Conversation < ApplicationRecord
   scope :awaiting_response, -> { open.where(last_responder_type: 'User') }
 
   # Callbacks
-  before_create :set_uuid
+  before_create :generate_uuid
 
   # Methods
   delegate :managed_by?, to: :parent
@@ -34,13 +34,13 @@ class Conversation < ApplicationRecord
     "#{uuid}@reply.sydevelopers.com"
   end
 
-  private
+  def generate_uuid
+    max_id = Conversation.maximum(:id)
+    next_id = max_id.present? ? max_id.to_i.next : 1
+    self.uuid = SecureRandom.hex(6) + next_id.to_s
+  end
 
-    def set_uuid
-      max_id = Conversation.maximum(:id)
-      next_id = max_id.present? ? max_id.to_i.next : 1
-      self.uuid = SecureRandom.hex(6) + next_id.to_s
-    end
+  private
 
     def added_message(message)
       self.update! last_responder: message.person, last_response_at: message.created_at

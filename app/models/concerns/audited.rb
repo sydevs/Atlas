@@ -18,6 +18,7 @@ module Audited
     # Create a scope which left outer joins with the last message and compare the ID to the manager id
     # scope :message_outstanding, -> { where('events.finish_date IS NULL OR events.finish_date >= ?', DateTime.now) }
     
+    after_create :record_update_audit!
     after_commit :record_update_audit!
 
     if self.column_names.include?(:status)
@@ -51,6 +52,7 @@ module Audited
 
       audits.create!({
         category: id_previously_changed? ? :record_created : :record_updated,
+        # conversation: self.class == Registration ? conversations.new : nil,
         parent: self,
         person: Current.user,
         data: {

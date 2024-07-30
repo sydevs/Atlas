@@ -15,6 +15,7 @@ module BrevoAPI
     confirmation: 9,
     reminder: 12,
     status: 198,
+    registrations: 201,
   }.freeze
 
   def self.subscribe email, list_id, attributes
