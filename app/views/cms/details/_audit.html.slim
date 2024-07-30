@@ -45,12 +45,6 @@ h3.ui.small.dividing.grey.header = translate('cms.details.details_for_record', r
         .description
           = record_link(@record.conversation) do
             = translate_model_count(@record.conversation.messages)
-  - if Current.user.administrator?
-    .item
-      i.tag.icon
-      .content
-        .header = translate_attribute(@record, :uuid)
-        .description = @record.uuid
   /.item
     = model_icon(@record.parent.class)
     .content

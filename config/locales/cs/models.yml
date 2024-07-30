@@ -331,8 +331,10 @@ cs:
         email_verification_sent_at: "Poslední ověřovací e-mail zaslán"
         phone_verification_sent_at: "Poslední ověření přes mobilní telefon zasláno"
 
-      audit: # TODO: Translate
+      conversation: # TODO: Translate
         uuid: "Unique Identifier"
+
+      audit: # TODO: Translate
         data: "Raw Data"
         created_at: "Occurred At"
         changes: "Changes"

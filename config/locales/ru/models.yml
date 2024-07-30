@@ -324,8 +324,10 @@ ru:
         email_verification_sent_at: "Последний запрос для подтверждения через email"
         phone_verification_sent_at: "Последний запрос для подтверждения через телефон"
 
-      audit: # TODO: Translate
+      conversation: # TODO: Translate
         uuid: "Unique Identifier"
+
+      audit: # TODO: Translate
         data: "Raw Data"
         created_at: "Occurred At"
         changes: "Changes"

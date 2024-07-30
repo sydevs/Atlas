@@ -27,6 +27,7 @@ class ReplaceAudits < ActiveRecord::Migration[7.0]
       t.datetime :last_response_at
       t.references :last_responder, polymorphic: true
       t.references :parent, polymorphic: true
+      t.string :uuid, null: false, index: true
       t.timestamps
     end
 
@@ -37,7 +38,6 @@ class ReplaceAudits < ActiveRecord::Migration[7.0]
       t.references :replies_to
       t.references :replied_by
       t.references :conversation
-      t.string :uuid, null: false, index: true
       t.jsonb :data
       t.timestamps
     end

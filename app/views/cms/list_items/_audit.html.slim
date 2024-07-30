@@ -16,7 +16,7 @@
     - if audit.email_forwarded?
       .extra.text
         .ui.segment = markdown(audit.data[:body])
-      - if audit.conversation
+      - if audit.conversation && @context != audit.conversation
         .meta
           a href=cms_conversation_path(audit.conversation)
             = model_icon(Conversation)

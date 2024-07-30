@@ -325,8 +325,10 @@ uk:
         email_verification_sent_at: "Останнє підтвердження електронної пошти надіслано"
         phone_verification_sent_at: "Last Phone Verification Sent"
 
-      audit: # TODO: Translate
+      conversation: # TODO: Translate
         uuid: "Unique Identifier"
+
+      audit: # TODO: Translate
         data: "Raw Data"
         created_at: "Occurred At"
         changes: "Changes"

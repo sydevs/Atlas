@@ -1,4 +1,8 @@
 
-h3.ui.small.dividing.grey.header = translate_model(Conversation)
+- if Current.user.administrator?
+  .right.aligned.floating.ui.tag.label
+    i.hashtag.icon
+    = @record.uuid
+
 .ui.connected.feed data-search=@model_name.route_key
   = render partial: "cms/list_items/audit", collection: @record.messages, cached: true

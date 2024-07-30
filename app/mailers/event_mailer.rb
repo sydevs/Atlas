@@ -63,6 +63,7 @@ class EventMailer < ApplicationMailer
 
     event.audits.create!({
       category: :notice_sent,
+      conversation: event.conversations.new(last_response_at: Time.now, last_responder: manager),
       # replies_to: event.audits.status_change.last, # Doesn't seem to reliably fetch the correct audit, because of async
       person: manager,
       data: {
@@ -70,7 +71,7 @@ class EventMailer < ApplicationMailer
         subject: title,
         status: event.status,
         updated_at: event.updated_at.to_fs(:long),
-        message_id: result[:message_id]
+        message_id: result&.message_id,
       }
     })
 

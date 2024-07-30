@@ -1,5 +1,7 @@
 class Audit < ApplicationRecord
 
+  MESSAGE_CATEGORIES = %i[notice_sent email_forwarded]
+
   # Extensions
   enum category: { status_change: 1, record_updated: 2, record_created: 3, record_destroyed: 4, status_verified: 5, email_forwarded: 6, notice_sent: 7 }
   store :data, accessors: %i[changes status]
@@ -16,53 +18,61 @@ class Audit < ApplicationRecord
   # Scopes
   default_scope { order(created_at: :desc) }
   scope :with_associations, -> { includes(:parent, :person) }
-  scope :messages, -> { where(category: %i[notice_sent email_forwarded]) }
+  scope :messages, -> { where(category: MESSAGE_CATEGORIES) }
   scope :messages_outstanding, -> { messages.where(replied_by_id: nil) }
 
+  # Validations
+  validates_presence_of :conversation, if: :message_test?
+
   # Callbacks
-  before_create :set_uuid
-  before_create :update_conversation
+  before_create :update_conversation, if: :message?
   before_create :send_email!, if: :email_forwarded?
 
   # Methods
-
-  def should_forward_to
-    conversation.members - [person]
+  
+  def message_test?
+    puts "MESSAGE TEST? #{category.to_sym.inspect} in? #{MESSAGE_CATEGORIES.inspect} -> #{MESSAGE_CATEGORIES.include?(category.to_sym)}"
+    MESSAGE_CATEGORIES.include?(category.to_sym)
   end
-
-  def should_reply_to
-    "#{uuid}@reply.sydevelopers.com"
+  
+  def message?
+    puts "MESSAGE? #{category.to_sym.inspect} in? #{MESSAGE_CATEGORIES.inspect} -> #{MESSAGE_CATEGORIES.include?(category.to_sym)}"
+    MESSAGE_CATEGORIES.include?(category.to_sym)
   end
 
   def reply_link
+    return nil unless conversation.present?
+
     subject = self.data[:subject]
     subject = 'Re: ' + subject unless subject.start_with?('Re:')
-    "mailto:#{should_reply_to}?subject=#{subject}"
+    "mailto:#{conversation.reply_to}?subject=#{subject}"
   end
 
   private
 
-    def set_uuid
-      self.uuid = SecureRandom.hex(6) + Audit.maximum(:id).to_i.next.to_s
-    end
-
     def update_conversation
+      return if conversation.present?
+
+      puts "UPDATE CONVERSATION"
       if replies_to&.conversation.present?
+        puts "SET CONVERSATION"
         self.conversation = replies_to.conversation
-        self.conversation.update!(last_response_at: created_at, last_responder: person)
-      elsif email_forwarded? || notice_sent?
-        self.conversation = Conversation.create!(last_response_at: created_at, last_responder: person, parent: parent)
+      else
+        puts "CREATE CONVERSATION"
+        self.conversation = Conversation.new(last_response_at: created_at, last_responder: person, parent: parent)
       end
+      puts "CONVERSATION DONE"
     end
 
     def send_email!
       markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, autolink: true)
-      self[:data][:forwarded_to] = should_forward_to.map { |p| { id: p.id, name: p.name, email: p.email } }
+      forward_to = conversation.members - [person]
+      self[:data][:forwarded_to] = forward_to.map { |p| { id: p.id, name: p.name, email: p.email } }
 
       BrevoAPI.send_email(nil, {
         to: self[:data][:forwarded_to].map { |p| p.except(:id) },
         sender: { name: person.name, email: 'admin@wemeditate.com' },
-        replyTo: { email: should_reply_to },
+        replyTo: { email: conversation.reply_to },
         subject: data[:subject],
         htmlContent: markdown.render(data[:body]),
       })

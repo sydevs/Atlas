@@ -5,20 +5,19 @@ class API::ApplicationController < ActionController::Base
   def inbound_email
     params[:items].each do |item|
       to = item["Recipients"].first
-      replied_audit = Audit.find_by_uuid(to.split('@', 2).first)
-      if replied_audit.present?
+      conversation = Conversation.find_by_uuid(to.split('@', 2).first)
+      if conversation.present?
         from = (item["ReplyTo"] || item["From"])
         person = Manager.find_by_email(from["Address"]) || User.find_by_email(from["Address"])
         next unless person.present?
 
         person.update(name: from["Name"]) if from["Name"].present? && person.is_a?(User)
 
-        Audit.create!({
+        conversation.messages.create!({
           category: :email_forwarded,
-          parent: replied_audit.parent,
+          parent: conversation.parent,
           person: person,
-          replies_to: replied_audit,
-          conversation_id: replied_audit.conversation_id,
+          replies_to: conversation.messages.last,
           created_at: item["SentAtDate"],
           data: {
             spam_score: item["SpamScore"],

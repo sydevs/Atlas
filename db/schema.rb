@@ -49,7 +49,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_07_30_121948) do
     t.bigint "replies_to_id"
     t.bigint "replied_by_id"
     t.bigint "conversation_id"
-    t.string "uuid", null: false
     t.jsonb "data"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -59,7 +58,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_07_30_121948) do
     t.index ["person_type", "person_id"], name: "index_audits_on_person"
     t.index ["replied_by_id"], name: "index_audits_on_replied_by_id"
     t.index ["replies_to_id"], name: "index_audits_on_replies_to_id"
-    t.index ["uuid"], name: "index_audits_on_uuid"
   end
 
   create_table "clients", force: :cascade do |t|
@@ -90,10 +88,12 @@ ActiveRecord::Schema[7.0].define(version: 2024_07_30_121948) do
     t.bigint "last_responder_id"
     t.string "parent_type"
     t.bigint "parent_id"
+    t.string "uuid", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["last_responder_type", "last_responder_id"], name: "index_conversations_on_last_responder"
     t.index ["parent_type", "parent_id"], name: "index_conversations_on_parent"
+    t.index ["uuid"], name: "index_conversations_on_uuid"
   end
 
   create_table "countries", force: :cascade do |t|

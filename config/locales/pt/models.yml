@@ -331,8 +331,10 @@ pt:
         email_verification_sent_at: "Última verificação de e-mail enviada"
         phone_verification_sent_at: "Última verificação de telefone enviada"
 
-      audit: # TODO: Translate
+      conversation: # TODO: Translate
         uuid: "Unique Identifier"
+
+      audit: # TODO: Translate
         data: "Raw Data"
         created_at: "Occurred At"
         changes: "Changes"

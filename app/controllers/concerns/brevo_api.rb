@@ -64,7 +64,7 @@ module BrevoAPI
     puts "[Brevo] Send #{template}"
     if Rails.env.development?
       puts config.to_json
-      return { message_id: nil }
+      return
     end
     
     config.reverse_merge!({
@@ -76,6 +76,7 @@ module BrevoAPI
     config[:tags] << 'atlas'
     config[:tags] << template.to_s
 
+    config[:params][:text] ||= {}
     config[:params][:text].reverse_merge!(I18n.translate('emails.common'))
 
     client = SibApiV3Sdk::TransactionalEmailsApi.new

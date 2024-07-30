@@ -13,7 +13,7 @@ module Audited
 
   included do
     has_many :audits, as: :parent, dependent: :delete_all
-    has_many :conversations, as: :parent, dependent: :delete_all
+    has_many :conversations, -> { active }, as: :parent, dependent: :delete_all
     # has_many :messages, -> { where(category: %i[notice_sent email_forwarded]) }, as: :parent, class_name: 'Audit'
     # Create a scope which left outer joins with the last message and compare the ID to the manager id
     # scope :message_outstanding, -> { where('events.finish_date IS NULL OR events.finish_date >= ?', DateTime.now) }

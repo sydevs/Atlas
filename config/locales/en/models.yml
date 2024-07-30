@@ -324,8 +324,10 @@ en:
         email_verification_sent_at: "Last Email Verification Sent"
         phone_verification_sent_at: "Last Phone Verification Sent"
 
-      audit:
+      conversation:
         uuid: "Unique Identifier"
+
+      audit:
         data: "Raw Data"
         created_at: "Occurred At"
         changes: "Changes"
