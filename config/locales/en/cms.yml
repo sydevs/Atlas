@@ -215,6 +215,8 @@ en:
         action: "Review"
       record_needs_urgent_review:
         title: "%{resource} Needs Urgent Review"
+      record_needs_immediate_review:
+        title: "%{resource} Needs Immediate Review"
       record_finished:
         title: "%{resource} Completed"
         description: "This %{resource} is over. It's last occurence was %{date}."

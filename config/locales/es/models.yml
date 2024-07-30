@@ -132,6 +132,7 @@ es:
           verified: "Verificado"
           needs_review: "Necesita revisión"
           needs_urgent_review: "Necesita revisión urgente"
+          needs_immediate_review: "Needs Immediate Review" # TODO: Translate
           expired: "Caducado"
           archived: "Archivado"
           finished: "Terminado"

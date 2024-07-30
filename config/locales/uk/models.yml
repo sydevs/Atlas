@@ -133,6 +133,7 @@ uk:
           verified: "Перевірено"
           needs_review: "Потребує огляду"
           needs_urgent_review: "Потребує термінового огляду"
+          needs_immediate_review: "Needs Immediate Review" # TODO: Translate
           expired: "Термін дії закінчився"
           archived: "Заархівовано"
           finished: "Готово"

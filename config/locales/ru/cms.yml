@@ -211,6 +211,8 @@ ru:
         action: "Проверить"
       record_needs_urgent_review:
         title: "Требуется срочная проверка %{resource}"
+      record_needs_immediate_review: # TODO: Translate
+        title: "%{resource} Needs Immediate Review"
       record_finished:
         title: "%{resource} завершенно"
         description: "Это %{resource} завершено. В последний раз оно произошло %{date}."

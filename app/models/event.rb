@@ -119,13 +119,13 @@ class Event < ApplicationRecord
   def log_status_change
     return if archived? || new_record? || !published?
     
+    EventMailer.with(event: self, manager: manager).status.deliver_later
+
     if needs_urgent_review?
       nearest_parent_managers.each do |parent_manager|
         EventMailer.with(event: self, manager: parent_manager).status.deliver_later
       end
     end
-
-    EventMailer.with(event: self, manager: manager).status.deliver_later
   end
 
   def cache_key

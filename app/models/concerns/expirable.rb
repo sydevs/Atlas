@@ -7,6 +7,7 @@ module Expirable
       should_verify: 0.minutes,
       should_need_review: 10.minutes,
       should_need_urgent_review: 19.minutes,
+      should_need_immediate_review: 25.minutes,
       should_expire: 28.minutes,
       should_archive: 37.minutes,
     }.freeze
@@ -15,16 +16,21 @@ module Expirable
       should_verify: 0.weeks,
       should_need_review: 12.weeks,
       should_need_urgent_review: 13.weeks,
+      should_need_immediate_review: 14.weeks - 1.day,
       should_expire: 14.weeks,
       should_archive: 16.weeks,
     }.freeze
   end
+
+  REVIEWABLE_STATES = %i[needs_review needs_urgent_review needs_immediate_review expired]
+  PUBLISHABLE_STATES = %i[verified needs_review needs_urgent_review needs_immediate_review]
 
   included do
     enum status: {
       verified: 0,
       needs_review: 1,
       needs_urgent_review: 2,
+      needs_immediate_review: 6,
       expired: 3,
       archived: 4,
       finished: 5,
@@ -34,6 +40,7 @@ module Expirable
       state :verified, initial: true
       state :needs_review
       state :needs_urgent_review
+      state :needs_immediate_review
       state :expired
       state :archived
       state :finished
@@ -45,7 +52,8 @@ module Expirable
         transitions to: :finished, if: :should_finish?
         transitions from: :verified, to: :needs_review, if: :should_need_review?
         transitions from: :needs_review, to: :needs_urgent_review, if: :should_need_urgent_review?
-        transitions from: :needs_urgent_review, to: :expired, if: :should_expire?
+        transitions from: :needs_urgent_review, to: :needs_immediate_review, if: :should_need_immediate_review?
+        transitions from: :needs_immediate_review, to: :expired, if: :should_expire?
         transitions from: :expired, to: :archived, if: :should_archive?, after: Proc.new { update_column(:verification_streak, 0) }
         
         after_commit { try(:log_status_change) }
@@ -56,6 +64,7 @@ module Expirable
         transitions to: :archived, if: :should_archive?
         transitions to: :expired, if: :should_expire?, after: Proc.new { update_column(:verification_streak, 0) }
         transitions to: :needs_urgent_review, if: :should_need_urgent_review?
+        transitions to: :needs_immediate_review, if: :should_need_immediate_review?
         transitions to: :needs_review, if: :should_need_review?
         transitions to: :verified, unless: :verified?
       end
@@ -92,8 +101,9 @@ module Expirable
 
     before_save :verify
 
-    scope :publishable, -> { where(status: %i[verified needs_review needs_urgent_review]) }
-    scope :unpublishable, -> { where(status: %i[expired archived finished]) }
+    scope :needs_review, -> { where(status: REVIEWABLE_STATES) }
+    scope :publishable, -> { where(status: PUBLISHABLE_STATES) }
+    scope :unpublishable, -> { where(status: Event.statuses.keys.map(&:to_sym) - PUBLISHABLE_STATES) }
   end
 
   def update_timestamps
@@ -115,7 +125,11 @@ module Expirable
   end
 
   def publishable?
-    %i[verified needs_review needs_urgent_review].include?(status.to_sym)
+    PUBLISHABLE_STATES.include?(status.to_sym)
+  end
+
+  def reviewable?
+    REVIEWABLE_STATES.include?(status.to_sym)
   end
 
 end

@@ -132,6 +132,7 @@ ru:
           verified: "Проверено"
           needs_review: "Требуется проверка"
           needs_urgent_review: "Требуется срочная проверка"
+          needs_immediate_review: "Needs Immediate Review" # TODO: Translate
           expired: "Истёк срок"
           archived: "Перенесено в архив"
           finished: "Завершено"

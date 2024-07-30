@@ -211,6 +211,8 @@ uk:
         action: "Огляд"
       record_needs_urgent_review:
         title: "%{resource} потребує термінової перевірки"
+      record_needs_immediate_review: # TODO: Translate
+        title: "%{resource} Needs Immediate Review"
       record_finished:
         title: "%{resource} Завершено"
         description: "Цей %{resource} закінчено. Востаннє це було %{date}."

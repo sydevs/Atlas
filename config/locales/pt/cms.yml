@@ -216,6 +216,8 @@ pt:
         action: "Revisar"
       record_needs_urgent_review:
         title: "%{resource} Necessita Revisão Urgente"
+      record_needs_immediate_review: # TODO: Translate
+        title: "%{resource} Needs Immediate Review"
       record_finished:
         title: "%{resource} Completado"
         description: "Este %{resource} acabou. Sua última ocorrência foi em %{date}."

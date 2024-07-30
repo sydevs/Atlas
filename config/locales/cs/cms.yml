@@ -216,6 +216,8 @@ cs:
         action: "Revize"
       record_needs_urgent_review:
         title: "%{resource} Vyžaduje naléhavou kontrolu"
+      record_needs_immediate_review: # TODO: Translate
+        title: "%{resource} Needs Immediate Review"
       record_finished:
         title: "%{resource} Dokončeno"
         description: "Tento %{resource} je ukončen. Poslední výskyt byl %{date}."

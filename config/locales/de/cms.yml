@@ -211,6 +211,8 @@ de:
         action: "Bewertungen!"
       record_needs_urgent_review:
         title: " %{resource} benötigt dringend eine Bewertung"
+      record_needs_immediate_review: # TODO: Translate
+        title: "%{resource} Needs Immediate Review"
       record_finished:
         title: " %{resource} abgeschlossen"
         description: "Diese %{resource} ist vorbei. Das letzte Ereigniss fand am %{date} statt."

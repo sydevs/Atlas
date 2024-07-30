@@ -134,6 +134,7 @@ en:
           verified: "Verified"
           needs_review: "Needs Review"
           needs_urgent_review: "Needs Urgent Review"
+          needs_immediate_review: "Needs Immediate Review"
           expired: "Expired"
           archived: "Archived"
           finished: "Finished"

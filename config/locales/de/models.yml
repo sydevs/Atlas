@@ -132,6 +132,7 @@ de:
           verified: "Verifiziert"
           needs_review: "Überprüfung notwendig"
           needs_urgent_review: "Dringend Überprüfung notwendig"
+          needs_immediate_review: "Needs Immediate Review" # TODO: Translate
           expired: "Abgelaufen"
           archived: "Archiviert"
           finished: "Fertig"

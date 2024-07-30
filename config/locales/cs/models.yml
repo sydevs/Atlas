@@ -132,6 +132,7 @@ cs:
           verified: "Ověřeno"
           needs_review: "Potřebuje revizi"
           needs_urgent_review: "Potřebuje urgentní revizi"
+          needs_immediate_review: "Needs Immediate Review" # TODO: Translate
           expired: "Platnost vypršela"
           archived: "Archivováno"
           finished: "Ukončeno"
