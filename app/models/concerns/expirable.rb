@@ -30,10 +30,10 @@ module Expirable
       verified: 0,
       needs_review: 1,
       needs_urgent_review: 2,
-      needs_immediate_review: 6,
-      expired: 3,
-      archived: 4,
-      finished: 5,
+      needs_immediate_review: 3,
+      expired: 4,
+      archived: 5,
+      finished: 6,
     }, _scopes: false
 
     aasm column: :status, enum: true, skip_validation_on_save: true, whiny_transitions: false do
@@ -63,8 +63,8 @@ module Expirable
         transitions to: :finished, if: :should_finish?
         transitions to: :archived, if: :should_archive?
         transitions to: :expired, if: :should_expire?, after: Proc.new { update_column(:verification_streak, 0) }
-        transitions to: :needs_urgent_review, if: :should_need_urgent_review?
         transitions to: :needs_immediate_review, if: :should_need_immediate_review?
+        transitions to: :needs_urgent_review, if: :should_need_urgent_review?
         transitions to: :needs_review, if: :should_need_review?
         transitions to: :verified, unless: :verified?
       end

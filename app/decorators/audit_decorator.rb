@@ -16,7 +16,7 @@ module AuditDecorator
     elsif person.present? && !status_verified?
       tag.div(class: 'label', data: { text: initials }, style: "--background: #{background_color}; --color: #{text_color}")
     elsif status.present?
-      status_icon(status)
+      tag.div(status_icon(status), class: 'label')
     else
       tag.div(tag.i(class: 'circle icon'), class: 'label')
     end
