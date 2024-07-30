@@ -8,7 +8,7 @@ class Conversation < ApplicationRecord
   # Scopes
   default_scope { order(last_response_at: :desc) }
   # scope :with_associations, -> { includes(:messages, :last_responder) }
-  scope :active, -> { joins(:messages).group('conversations.id').having('count(CASE WHEN audits.category = ? THEN 1 END) > 0', Audit.categories[:email_forwarded]) }
+  scope :active, -> { joins(:messages).group('conversations.id').having("count(CASE WHEN audits.category in (#{Audit::MESSAGE_CATEGORIES.excluding(:notice_sent).map{ |k| Audit.categories[k] }.join(', ')}) THEN 1 END) > 0") }
   scope :open, -> { active.where(marked_complete_at: nil).or('marked_complete_at < last_response_at') }
   scope :awaiting_response, -> { open.where(last_responder_type: 'User') }
 

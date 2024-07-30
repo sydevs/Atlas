@@ -1,9 +1,9 @@
 class Audit < ApplicationRecord
 
-  MESSAGE_CATEGORIES = %i[notice_sent email_forwarded]
+  MESSAGE_CATEGORIES = %i[notice_sent email_forwarded question_asked]
 
   # Extensions
-  enum category: { status_change: 1, record_updated: 2, record_created: 3, record_destroyed: 4, status_verified: 5, email_forwarded: 6, notice_sent: 7 }
+  enum category: { status_change: 1, record_updated: 2, record_created: 3, record_destroyed: 4, status_verified: 5, email_forwarded: 6, notice_sent: 7, question_asked: 8 }
   store :data, accessors: %i[changes status]
   # searchable_columns %w[category]
 
@@ -37,7 +37,7 @@ class Audit < ApplicationRecord
   def reply_link
     return nil unless conversation.present?
 
-    subject = self.data[:subject]
+    subject = self.data[:subject] || self.data[:body].truncate(30)
     subject = 'Re: ' + subject unless subject.start_with?('Re:')
     "mailto:#{conversation.reply_to}?subject=#{subject}"
   end
@@ -51,7 +51,7 @@ class Audit < ApplicationRecord
         self.conversation = replies_to.conversation
       else
         # This doesn't seem to work for some reason?
-        self.conversation = parent.conversations.new(last_responder: email_forwarded? ? person : nil)
+        self.conversation = parent.conversations.new(last_responder: message? && !notice_sent? ? person : nil)
       end
     end
 

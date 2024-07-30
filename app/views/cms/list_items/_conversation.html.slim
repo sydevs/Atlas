@@ -8,19 +8,19 @@
     .summary
       = audit.description(context: @context)
     .extra.text
-      - if audit.email_forwarded?
+      - if audit.notice_sent?
+        .ui.tiny.message = audit.data[:subject]
+      - else
         .ui.segment
           .ui.sub.header = audit.data[:subject]
           = markdown(audit.data[:body])
-      - elsif audit.notice_sent?
-        .ui.tiny.message = audit.data[:subject]
     .meta
       - if policy(conversation).show?
         a href=cms_conversation_path(conversation)
           = model_icon(Conversation)
           = translate('cms.actions.target.view', resource: translate_model(Conversation))
           |  (#{conversation.messages.count})
-        - if audit.email_forwarded? && audit.person != Current.user
+        - if audit.message? && !audit.notice_sent? && audit.person != Current.user
           a href=audit.reply_link
             i.blue.reply.icon
             | Send Reply

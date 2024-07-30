@@ -21,7 +21,7 @@ h3.ui.small.dividing.grey.header = translate('cms.details.details_for_record', r
       .content
         .title = @record.label
         .description = relative_time_in_words(@record.created_at)
-    - if @record.email_forwarded? && !@record.replied_by.present?
+    - if @record.message? && !@record.notice_sent? && !@record.replied_by.present?
       .step
         i.orange.envelope.outline.icon
         .title Waiting for Reply

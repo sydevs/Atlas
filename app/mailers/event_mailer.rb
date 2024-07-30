@@ -28,6 +28,7 @@ class EventMailer < ApplicationMailer
           title: title,
           flash: I18n.translate('flash', scope: scope, period: expiration_period).upcase,
           footer: I18n.translate('emails.footer'),
+          view_map: I18n.translate('emails.common.view_map'),
           recommendation_title: I18n.translate('emails.recommendations.title'),
           recommendation_prelude: I18n.translate('emails.recommendations.prelude'),
           # These translations are references to other translations, so we need to call them directly
@@ -88,11 +89,11 @@ class EventMailer < ApplicationMailer
     return unless registrations.present?
 
     helpers = ApplicationController.helpers
-    title = I18n.translate('emails.registrations.title', count: registrations.count)
+    title = I18n.translate('emails.registrations.title', count: registrations.count, event: event.label)
     conversation = @event.conversations.new
     conversation.generate_uuid
 
-    result = BrevoAPI.send_email(:status, {
+    result = BrevoAPI.send_email(:registrations, {
       subject: title,
       to: [{ name: @manager.name, email: @manager.email }],
       params: {
@@ -100,16 +101,18 @@ class EventMailer < ApplicationMailer
           title: title,
           prelude: I18n.translate('emails.registrations.prelude', count: registrations.count),
           reply: I18n.translate('emails.registrations.registration.reply'),
+          view_map: I18n.translate('emails.common.view_map'),
           answers: I18n.translate('activerecord.attributes.event.registration_questions'),
           footer: I18n.translate('emails.footer'),
         },
         event: {
-          questions: @event.registration_question.to_a.join(','),
+          questions: @event.registration_question.to_a.excluding('questions').join(','),
+          map_url: @registration.event.map_url,
         },
         registrations: registrations.map do |r|
           {
             summary: I18n.translate('emails.registrations.registration.summary', name: r.name, time: helpers.time_ago_in_words(r.created_at)),
-            description: I18n.translate('emails.registrations.registration.registered_ago', date: r.starting_at.to_date.strftime('%a, %B %-d')),
+            description: I18n.translate('emails.registrations.registration.description', date: r.starting_at.to_date.strftime('%a, %B %-d')),
             reply_url: r.questions['questions'].present? ? "mailto:#{conversation.reply_to}?subject=Re: #{r.questions['questions']}" : nil,
             answers: r.questions,
           }

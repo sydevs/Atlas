@@ -5,6 +5,7 @@ uk: # TODO: Translate
       unsubscribe: "Unsubscribe"
       reason: "You've received this email because you registered for this event."
       responses: "Your responses:"
+      view_map: "View Event on Map"
 
     footer:
       prelude: "This project maintains an accurate worldwide listing of public programs for seekers. The Atlas map is embedded on dozens of national and international Sahaj websites."
@@ -56,7 +57,6 @@ uk: # TODO: Translate
       needs_review:
         title: "Event expires in %{period}!"
         prelude: "Your public event on the Sahaja Yoga Atlas is about to expire. Please check the details of the event below and confirm if they are still accurate."
-        view_map: "View Event on Map"
         flash: "Needs Review!"
         action: "Are the above details accurate?"
         actions:
@@ -111,9 +111,16 @@ uk: # TODO: Translate
         one: "1 new registration for your event"
         other: "%{count} new registrations for your event"
       prelude:
-        one: "Your event has a new registration. Each registration is listed below, with any responses to registration questions."
-        other: "Your event has %{count} new registrations. Below "
+        one: "Your event, %{event}, has a new registration. Each registration is listed below, with any responses to registration questions."
+        other: "Your event, %{event}, has %{count} new registrations. Below "
       registration:
         summary: "%{name} registered %{time} ago"
+        description: "Will attend on %{date}"
         reply: "Reply to question"
-        registered_ago: "Will attend on %{date}"
+
+    question:
+      title: "A seeker has a question"
+      prelude: "A seeker has submitted a question when registering for your event, %{event}"
+      summary: "%{name} asked:"
+      description: :datetime.distance_in_words.time_ago # Do not translate
+      reply: :emails.registrations.reply # Do not translate

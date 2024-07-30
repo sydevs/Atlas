@@ -71,7 +71,7 @@ class Registration < ApplicationRecord
   end
 
   def conversation_members
-    [user, event.manager]
+    [user, manager]
   end
 
   private
@@ -81,7 +81,7 @@ class Registration < ApplicationRecord
     end
 
     def send_registration_notification
-      EventMailer.with(event: event, manager: event.manager, registration: self).registrations.deliver_later
+      EventMailer.with(event: event, manager: manager, registration: self).registrations.deliver_later
     end
 
 end

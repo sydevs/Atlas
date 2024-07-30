@@ -13,17 +13,14 @@
           a href=cms_audit_path(audit)
             i.grey.right.arrow.icon
 
-    - if audit.email_forwarded?
+    - if audit.message?
       .extra.text
-        .ui.segment = markdown(audit.data[:body])
+        .ui.segment = audit.data[:body] ? markdown(audit.data[:body]) : audit.data[:subject]
       - if audit.conversation && @context != audit.conversation
         .meta
           a href=cms_conversation_path(audit.conversation)
             = model_icon(Conversation)
             = translate('cms.actions.target.view', resource: translate_model(Conversation))
-    - elsif audit.notice_sent?
-      .extra.text
-        .ui.message = audit.data[:subject]
     - elsif audit.changes.present?
       .meta
         a href=cms_audit_path(audit)
