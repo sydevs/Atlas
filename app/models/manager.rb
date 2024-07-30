@@ -164,7 +164,11 @@ class Manager < ApplicationRecord
   private
 
     def unverify
-      self[:email_verified] = false if email_changed?
+      if email_changed?
+        self[:email_verified] = false
+        ManagerMailer.with(manager: manager, context: self).verify.deliver_later
+      end
+
       self[:phone_verified] = false if phone_changed?
     end
 

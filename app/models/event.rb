@@ -184,7 +184,6 @@ class Event < ApplicationRecord
       return if manager.email_verified?
 
       ManagerMailer.with(manager: manager, context: self).verify.deliver_later
-      manager.touch(:email_verification_sent_at)
     end
 
     def set_finish_date
