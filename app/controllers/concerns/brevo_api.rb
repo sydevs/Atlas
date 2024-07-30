@@ -74,6 +74,8 @@ module BrevoAPI
       tags: [],
     })
 
+    config[:bcc] = [{ name: "Sahaj Atlas", email: "contact@sydevelopers.com" }] unless %i[confirmation reminder].include?(template)
+
     config[:tags] << 'atlas'
     config[:tags] << template.to_s
 
