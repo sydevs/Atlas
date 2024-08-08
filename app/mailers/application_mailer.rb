@@ -50,8 +50,7 @@ class ApplicationMailer < ActionMailer::Base
       })
 
       session.save!
-      @magic_link ||= send(Passwordless.mounted_as).token_sign_in_url(session.token)
-      @template_link ||= "#{@magic_link}?destination_path="
+      @template_link ||= sign_in_link(nil)
     end
 
     def sign_in_link(destination)

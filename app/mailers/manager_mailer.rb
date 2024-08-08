@@ -14,6 +14,7 @@ class ManagerMailer < ApplicationMailer
     setup
     subject = I18n.translate('mail.manager.verify.subject')
     puts "[MAIL] Sending verification email to #{@manager.name} for #{@context}"
+    @manager.touch(:email_verification_sent_at)
     mail(to: @manager.email, subject: subject)
   end
 

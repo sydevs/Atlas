@@ -1,6 +1,8 @@
 ru:
   datetime:
-    distance_in_words:
+    distance_in_words: # TODO: Translate
+      time_ago: "%{time} ago"
+      time_from_now: "%{time} from now"
       soon: "несколько минут"
       x_minutes: # TODO: Translate
         one: "%{count} minute"
@@ -103,6 +105,13 @@ ru:
         # Countable
         one: "внешнее приложение"
         other: "внешних приложений"
+      message: # TODO: Translate
+        # Basic pluralization
+        single: "Email"
+        plural: "Emails"
+        # Countable
+        one: "message"
+        other: "messages"
       picture:
         # Basic pluralization
         single: "Изображение"
@@ -123,6 +132,7 @@ ru:
           verified: "Проверено"
           needs_review: "Требуется проверка"
           needs_urgent_review: "Требуется срочная проверка"
+          needs_immediate_review: "Needs Immediate Review" # TODO: Translate
           expired: "Истёк срок"
           archived: "Перенесено в архив"
           finished: "Завершено"
@@ -314,13 +324,14 @@ ru:
         email_verification_sent_at: "Последний запрос для подтверждения через email"
         phone_verification_sent_at: "Последний запрос для подтверждения через телефон"
 
-      audit:
-        user: :activerecord.models.manager.single # Do not translate
-        action: "Действие"
-        actions:
-          update: "Обновлено"
-          create: "Создано"
-          destroy: "Удалено"
+      conversation: # TODO: Translate
+        uuid: "Unique Identifier"
+
+      audit: # TODO: Translate
+        data: "Raw Data"
+        created_at: "Occurred At"
+        changes: "Changes"
+        body: "Content"
 
       client:
         label: "Ярлык"

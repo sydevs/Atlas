@@ -1,6 +1,8 @@
 pt:
   datetime:
-    distance_in_words:
+    distance_in_words: # TODO: Translate
+      time_ago: "%{time} ago"
+      time_from_now: "%{time} from now"
       soon: "Em alguns minutos"
       x_minutes: # TODO: Translate
         one: "%{count} minute"
@@ -103,6 +105,13 @@ pt:
         # Countable
         one: "aplicativo externo"
         other: "aplicativos externos"
+      message: # TODO: Translate
+        # Basic pluralization
+        single: "Email"
+        plural: "Emails"
+        # Countable
+        one: "message"
+        other: "messages"
       picture:
         # Basic pluralization
         single: "Imagem"
@@ -123,6 +132,7 @@ pt:
           verified: "Verificado"
           needs_review: "Precisa de revisão"
           needs_urgent_review: "Precisa de revisão urgente"
+          needs_immediate_review: "Needs Immediate Review" # TODO: Translate
           expired: "Expirado"
           archived: "Arquivado"
           finished: "Finalizado"
@@ -321,13 +331,14 @@ pt:
         email_verification_sent_at: "Última verificação de e-mail enviada"
         phone_verification_sent_at: "Última verificação de telefone enviada"
 
-      audit:
-        user: :activerecord.models.manager.single # Do not translate
-        action: "Ação"
-        actions:
-          update: "Atualizado"
-          create: "Criado"
-          destroy: "Excluído"
+      conversation: # TODO: Translate
+        uuid: "Unique Identifier"
+
+      audit: # TODO: Translate
+        data: "Raw Data"
+        created_at: "Occurred At"
+        changes: "Changes"
+        body: "Content"
 
       client:
         label: "Rótulo"

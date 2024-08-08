@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_07_20_154445) do
+ActiveRecord::Schema[7.0].define(version: 2024_07_30_121948) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -41,25 +41,23 @@ ActiveRecord::Schema[7.0].define(version: 2024_07_20_154445) do
   end
 
   create_table "audits", force: :cascade do |t|
-    t.integer "auditable_id"
-    t.string "auditable_type"
-    t.integer "associated_id"
-    t.string "associated_type"
-    t.integer "user_id"
-    t.string "user_type"
-    t.string "username"
-    t.string "action"
-    t.text "audited_changes"
-    t.integer "version", default: 0
-    t.string "comment"
-    t.string "remote_address"
-    t.string "request_uuid"
-    t.datetime "created_at", precision: nil
-    t.index ["associated_type", "associated_id"], name: "associated_index"
-    t.index ["auditable_type", "auditable_id", "version"], name: "auditable_index"
-    t.index ["created_at"], name: "index_audits_on_created_at"
-    t.index ["request_uuid"], name: "index_audits_on_request_uuid"
-    t.index ["user_id", "user_type"], name: "user_index"
+    t.integer "category", default: 0, null: false
+    t.string "parent_type"
+    t.bigint "parent_id"
+    t.string "person_type"
+    t.bigint "person_id"
+    t.bigint "replies_to_id"
+    t.bigint "replied_by_id"
+    t.bigint "conversation_id"
+    t.jsonb "data"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["category"], name: "index_audits_on_category"
+    t.index ["conversation_id"], name: "index_audits_on_conversation_id"
+    t.index ["parent_type", "parent_id"], name: "index_audits_on_parent"
+    t.index ["person_type", "person_id"], name: "index_audits_on_person"
+    t.index ["replied_by_id"], name: "index_audits_on_replied_by_id"
+    t.index ["replies_to_id"], name: "index_audits_on_replies_to_id"
   end
 
   create_table "clients", force: :cascade do |t|
@@ -81,6 +79,21 @@ ActiveRecord::Schema[7.0].define(version: 2024_07_20_154445) do
     t.index ["external_id"], name: "index_clients_on_external_id", unique: true
     t.index ["location_type", "location_id"], name: "index_clients_on_location"
     t.index ["manager_id"], name: "index_clients_on_manager_id"
+  end
+
+  create_table "conversations", force: :cascade do |t|
+    t.datetime "marked_complete_at"
+    t.datetime "last_response_at", default: -> { "CURRENT_TIMESTAMP" }
+    t.string "last_responder_type"
+    t.bigint "last_responder_id"
+    t.string "parent_type"
+    t.bigint "parent_id"
+    t.string "uuid", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["last_responder_type", "last_responder_id"], name: "index_conversations_on_last_responder"
+    t.index ["parent_type", "parent_id"], name: "index_conversations_on_parent"
+    t.index ["uuid"], name: "index_conversations_on_uuid"
   end
 
   create_table "countries", force: :cascade do |t|
@@ -215,20 +228,27 @@ ActiveRecord::Schema[7.0].define(version: 2024_07_20_154445) do
 
   create_table "registrations", force: :cascade do |t|
     t.bigint "event_id"
-    t.string "name"
-    t.string "email"
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
     t.datetime "starting_at", precision: nil
     t.string "time_zone"
     t.jsonb "questions", default: {}
+    t.bigint "user_id"
     t.index ["event_id"], name: "index_registrations_on_event_id"
+    t.index ["user_id"], name: "index_registrations_on_user_id"
   end
 
   create_table "stashes", force: :cascade do |t|
     t.string "key"
     t.string "value"
     t.index ["key"], name: "index_stashes_on_key", unique: true
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "email", null: false
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "venues", force: :cascade do |t|

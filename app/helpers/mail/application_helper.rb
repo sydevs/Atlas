@@ -4,6 +4,7 @@ module Mail::ApplicationHelper
     created: 'created',
     needs_review: 'alert',
     needs_urgent_review: 'alert',
+    needs_immediate_review: 'alert',
     expired: 'expired',
     finished: 'verified',
   }.freeze
@@ -12,6 +13,7 @@ module Mail::ApplicationHelper
     created: '#21ba45',
     needs_review: '#f2711c',
     needs_urgent_review: '#db2828',
+    needs_immediate_review: '#db2828',
     expired: '#008080',
     finished: '#1e5b82',
   }.freeze
@@ -48,13 +50,13 @@ module Mail::ApplicationHelper
 
   def percent_difference(val, old_val)
     if val == old_val
-      diff = 0
+      0
     elsif val.zero?
-      diff = -100
+      -100
     elsif old_val.zero?
-      diff = +100
+      +100
     else
-      diff = (val.to_f / old_val.to_f * 100).to_i - 100
+      (val.to_f / old_val.to_f * 100).to_i - 100
     end
   end
 

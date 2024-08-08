@@ -1,0 +1,95 @@
+
+- if Current.user.administrator? && (@record.message? || @record.conversation.present?)
+  a.ui.right.aligned.floating.tag.label href=@record.reply_link
+    i.reply.icon
+    = @record.conversation&.uuid
+
+h3.ui.small.dividing.grey.header = translate('cms.details.details_for_record', resource: translate_model(Audit))
+- if policy(@record).show_technical?
+  .ui.three.steps
+    = record_link(@record.replies_to, class: "#{@record.replies_to.present? ? nil : 'disabled'} step") do
+      i.reply.icon
+      .content
+        - if @record.replies_to.present?
+          .title In Reply To
+          .description = @record.replies_to.label
+          .description = relative_time_in_words(@record.replies_to.created_at)
+        - else
+          .title Not a Reply
+    .active.step
+      = model_icon(Audit)
+      .content
+        .title = @record.label
+        .description = relative_time_in_words(@record.created_at)
+    - if @record.message? && !@record.notice_sent? && !@record.replied_by.present?
+      .step
+        i.orange.envelope.outline.icon
+        .title Waiting for Reply
+    - else
+      = record_link(@record.replied_by, class: "#{@record.replied_by.present? ? nil : 'disabled'} step") do
+        i.arrow.right.icon
+        .content
+          - if @record.replied_by.present?
+            .title Replied To By
+            .description = @record.replied_by.label
+            .description = relative_time_in_words(@record.replied_by.created_at)
+          - else
+            .title No Reply
+
+.ui.list
+  .item
+    = model_icon(Audit)
+    .content
+      .header = @record.description(context: @context)
+      .description = @record.created_at.to_fs(:long)
+  - if @record.conversation.present?
+    .item
+      = model_icon(Conversation)
+      .content
+        .header = translate_model(Conversation)
+        .description
+          = record_link(@record.conversation) do
+            = translate_model_count(@record.conversation.messages)
+  /.item
+    = model_icon(@record.parent.class)
+    .content
+      .header = translate('cms.audits.parent', resource: translate_model(@record.parent.class))
+      .description = record_link(@record.parent)
+
+- if @record.changes&.count
+  h3.ui.small.dividing.grey.header = translate_attribute(@record, :changes)
+  - if @record.record_updated?
+    table.ui.very.basic.table
+      tbody
+        - @record.changes.each do |field, change|
+          tr
+            th = translate_attribute(@record.parent.class, field)
+            th
+            th = translate('cms.activity.changed_to').upcase
+          tr
+            td = change[0]
+            td: i.right.arrow.icon
+            td = change[1]
+  - elsif @record.record_created?
+    table.ui.very.basic.table
+      tbody
+        - @record.changes.each do |field, change|
+          tr
+            th = translate_attribute(@record.parent.class, field)
+          tr
+            td = change[1]
+
+- if @record.data[:html].present?
+  h3.ui.small.dividing.grey.header = translate_attribute(@record, :body)
+  .ui.segment
+    iframe srcdoc=@record.data[:html] width='100%' frameborder="0" scrolling="no" onload='this.style.height = this.contentWindow.document.documentElement.scrollHeight + "px";'
+
+- data = @record.data.except(:changes)
+- if data.present?
+  h3.ui.small.dividing.grey.header = translate_attribute(@record, :data)
+  table.ui.definition.table
+    tbody
+      - data.each do |key, value|
+        tr
+          td = key
+          td = value

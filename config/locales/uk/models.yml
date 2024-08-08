@@ -1,7 +1,9 @@
 
 uk:
   datetime:
-    distance_in_words:
+    distance_in_words: # TODO: Translate
+      time_ago: "%{time} ago"
+      time_from_now: "%{time} from now"
       soon: "кілька хвилин"
       x_minutes: # TODO: Translate
         one: "%{count} minute"
@@ -104,6 +106,13 @@ uk:
         # Countable
         one: "зовнішній додаток"
         other: "зовнішні додатки"
+      message: # TODO: Translate
+        # Basic pluralization
+        single: "Email"
+        plural: "Emails"
+        # Countable
+        one: "message"
+        other: "messages"
       picture:
         # Basic pluralization
         single: "Зображення"
@@ -124,6 +133,7 @@ uk:
           verified: "Перевірено"
           needs_review: "Потребує огляду"
           needs_urgent_review: "Потребує термінового огляду"
+          needs_immediate_review: "Needs Immediate Review" # TODO: Translate
           expired: "Термін дії закінчився"
           archived: "Заархівовано"
           finished: "Готово"
@@ -315,13 +325,14 @@ uk:
         email_verification_sent_at: "Останнє підтвердження електронної пошти надіслано"
         phone_verification_sent_at: "Last Phone Verification Sent"
 
-      audit:
-        user: :activerecord.models.manager.single # Do not translate
-        action: "Дія"
-        actions:
-          update: "Оновлено"
-          create: "Створено"
-          destroy: "Видалено"
+      conversation: # TODO: Translate
+        uuid: "Unique Identifier"
+
+      audit: # TODO: Translate
+        data: "Raw Data"
+        created_at: "Occurred At"
+        changes: "Changes"
+        body: "Content"
 
       client: # TODO: Translate
         label: "Позначка"

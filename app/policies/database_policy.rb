@@ -33,6 +33,8 @@ class DatabasePolicy < ApplicationPolicy
     return false if association == :managed_records
     return false if association == :venues && record.class != Area
     return false if association == :venues && !user.administrator?
+    return false if association == :audits && !manage?(super_manager: true)
+    return false if association == :conversations && !manage?
 
     record.respond_to?(association)
   end

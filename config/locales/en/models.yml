@@ -1,6 +1,8 @@
 en:
   datetime:
-    distance_in_words:
+    distance_in_words: # TODO: Translate
+      time_ago: "%{time} ago"
+      time_from_now: "%{time} from now"
       soon: "a few minutes"
       x_minutes:
         one: "%{count} minute"
@@ -74,6 +76,22 @@ en:
         one: "registration"
         other: "registrations"
 
+      # Tracking
+      audit:
+        # Basic pluralization
+        single: "History"
+        plural: "History"
+        # Countable
+        one: "log"
+        other: "logs"
+      conversation:
+        # Basic pluralization
+        single: "Conversation"
+        plural: "Conversations"
+        # Countable
+        one: "conversation"
+        other: "conversations"
+
       # Other
       manager:
         # Basic pluralization
@@ -89,13 +107,6 @@ en:
         # Countable
         one: "responsibility"
         other: "responsibilities"
-      audit:
-        # Basic pluralization
-        single: "History"
-        plural: "History"
-        # Countable
-        one: "log"
-        other: "logs"
       client:
         # Basic pluralization
         single: "App"
@@ -123,6 +134,7 @@ en:
           verified: "Verified"
           needs_review: "Needs Review"
           needs_urgent_review: "Needs Urgent Review"
+          needs_immediate_review: "Needs Immediate Review"
           expired: "Expired"
           archived: "Archived"
           finished: "Finished"
@@ -312,13 +324,14 @@ en:
         email_verification_sent_at: "Last Email Verification Sent"
         phone_verification_sent_at: "Last Phone Verification Sent"
 
+      conversation:
+        uuid: "Unique Identifier"
+
       audit:
-        user: :activerecord.models.manager.single # Do not translate
-        action: "Action"
-        actions:
-          update: "Updated"
-          create: "Created"
-          destroy: "Deleted"
+        data: "Raw Data"
+        created_at: "Occurred At"
+        changes: "Changes"
+        body: "Content"
 
       client:
         label: "Label"

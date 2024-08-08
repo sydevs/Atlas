@@ -57,7 +57,7 @@ html
               
               i.right.angle.icon.divider
               
-            - @context.ancestors.each do |ancestor|
+            - @context.ancestors.last(4).each do |ancestor|
               - if policy(ancestor).show?
                 a.section href=breadcrumb_url(ancestor)
                   = ancestor.try(:short_label) || ancestor.label
