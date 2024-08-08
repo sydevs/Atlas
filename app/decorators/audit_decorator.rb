@@ -37,7 +37,7 @@ module AuditDecorator
     end
   
     if policy(parent).show?
-      args[:resource] = link_to(parent.label, url_for([:cms, parent]))
+      args[:resource] = link_to(parent.try(:short_label) || parent.label, url_for([:cms, parent]))
     elsif parent.present?
       args[:resource] = parent.label
     else

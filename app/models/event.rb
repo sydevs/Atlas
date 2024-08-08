@@ -152,6 +152,7 @@ class Event < ApplicationRecord
     (expiration_period / 3 * [4, verification_streak].min).weeks
   end
 
+  # Which people should be involved in email conversations about this event.
   def conversation_members
     [manager] + parent_managers
   end

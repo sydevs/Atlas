@@ -28,6 +28,9 @@ class API::ApplicationController < ActionController::Base
             uuid: item["Uuid"][0],
             reply_to: person.email,
             message_id: item["MessageId"],
+            headers: {
+              'In-Reply-To': item["InReplyTo"],
+            },
           }
         })
       else

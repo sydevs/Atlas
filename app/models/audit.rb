@@ -37,9 +37,9 @@ class Audit < ApplicationRecord
   def reply_link
     return nil unless conversation.present?
 
-    subject = self.data[:subject] || self.data[:body].truncate(30)
+    subject = data[:subject] || data[:body].truncate(30)
     subject = 'Re: ' + subject unless subject.start_with?('Re:')
-    "mailto:#{conversation.reply_to}?subject=#{subject}"
+    "mailto:#{conversation.reply_to}?subject=#{subject}&body=#{ERB::Util.url_encode("\n\n>#{person.name} - #{created_at.to_fs(:long)}\n>" + data[:body].gsub(/\R+/, "\n>"))}"
   end
 
   private
@@ -65,6 +65,7 @@ class Audit < ApplicationRecord
         sender: { name: person.name, email: 'admin@wemeditate.com' },
         replyTo: { email: conversation.reply_to },
         subject: data[:subject],
+        headers: data[:headers],
         htmlContent: markdown.render(data[:body]),
       })
     end

@@ -27,7 +27,7 @@ class Registration < ApplicationRecord
   end
 
   # Delegations
-  delegate :immediate_registration_notification?, :manager, to: :event
+  delegate :immediate_registration_notification?, :manager, :managed_by?, to: :event
   delegate :name, :email, :first_name, :last_name, to: :user
   alias parent event
   alias default_message_receiver manager

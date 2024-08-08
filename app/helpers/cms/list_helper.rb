@@ -8,6 +8,7 @@ module CMS::ListHelper
     events: 'calendar',
     managers: 'user secret',
     registrations: 'user',
+    users: 'user',
     audits: 'clipboard list',
     clients: 'broadcast tower',
     pictures: 'image',

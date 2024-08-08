@@ -120,7 +120,7 @@ ru:
 
     question:
       title: "A seeker has a question"
-      prelude: "A seeker has submitted a question when registering for your event, %{event}"
+      prelude: "A seeker has submitted a question when registering for your event:"
       summary: "%{name} asked:"
       description: :datetime.distance_in_words.time_ago # Do not translate
-      reply: :emails.registrations.reply # Do not translate
+      reply: :emails.registrations.registration.reply # Do not translate

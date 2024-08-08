@@ -38,7 +38,7 @@ class Manager < ApplicationRecord
   scope :client_managers, -> { joins(:clients) }
 
   # Callbacks
-  before_save :unverify
+  before_save :unverify, unless: :new_record?
   after_save :update_brevo!, if: :email_previously_changed?
   after_create :subscribe_to_brevo!
   after_destroy :unsubscribe_from_brevo!
@@ -166,7 +166,7 @@ class Manager < ApplicationRecord
     def unverify
       if email_changed?
         self[:email_verified] = false
-        ManagerMailer.with(manager: manager, context: self).verify.deliver_later
+        ManagerMailer.with(manager: self).verify.deliver_later
       end
 
       self[:phone_verified] = false if phone_changed?

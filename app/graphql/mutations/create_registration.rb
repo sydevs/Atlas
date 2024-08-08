@@ -40,7 +40,7 @@ class Mutations::CreateRegistration < Mutations::BaseMutation
       registration.subscribe_to! :registrations
       
       RegistrationMailer.with(registration: registration).confirmation.deliver_later
-      RegistrationMailer.with(registration: registration).question.deliver_later if @registration.questions['questions'].present?
+      RegistrationMailer.with(registration: registration).question.deliver_later if registration.questions['questions'].present?
       BrevoAPI.schedule_reminder_email(registration)
 
       {

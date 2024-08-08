@@ -2,6 +2,12 @@
 h3.ui.small.dividing.grey.header = translate('cms.details.details_for_record', resource: translate_model(Registration))
 .ui.list
   .item
+    = model_icon User
+    .content
+      = record_link(@record.user, class: 'header') do
+        = @record.user.name
+      .description = @record.user.email
+  .item
     i.clock.icon
     .content
       .header

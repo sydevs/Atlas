@@ -20,7 +20,9 @@
           = model_icon(Conversation)
           = translate('cms.actions.target.view', resource: translate_model(Conversation))
           |  (#{conversation.messages.count})
-        - if audit.message? && !audit.notice_sent? && audit.person != Current.user
-          a href=audit.reply_link
-            i.blue.reply.icon
-            = translate('cms.conversations.send_reply')
+
+        - if conversation.awaiting_response?
+          span
+            i.orange.warning.icon
+            = translate('cms.conversations.awaiting_response')
+            
