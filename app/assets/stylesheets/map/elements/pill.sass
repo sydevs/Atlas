@@ -1,7 +1,8 @@
+@use 'sass:math'
 @import '../_mixins'
 
 .sya-pills
-  padding: $panel-padding-mobile/2 $panel-padding-mobile
+  padding: math.div($panel-padding-mobile, 2) $panel-padding-mobile
 
 .sya-pill
   --color: #{$theme-primary}
