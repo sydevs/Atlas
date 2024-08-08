@@ -65,7 +65,6 @@ class RegistrationMailer < ApplicationMailer
   def question
     return unless @registration.questions['questions'].present?
 
-    helpers = ApplicationController.helpers
     title = I18n.translate('emails.question.title')
     conversation = @registration.conversations.create!
 
@@ -90,7 +89,7 @@ class RegistrationMailer < ApplicationMailer
         registrations: [{
           summary: I18n.translate('emails.question.summary', name: @registration.name),
           description: I18n.translate('emails.question.description', time: @registration.created_at.to_fs(:short)),
-          reply_url: "mailto:#{conversation.reply_to}?subject=Re:%20#{@registration.questions['questions']}",
+          reply_url: "mailto:#{conversation.reply_to}?subject=Re:%20#{@registration.questions['questions']}&body=#{ERB::Util.url_encode("\n\n>#{@registration.questions['questions'].gsub(/\R+/, "\n>")}")}",
           answers: { questions: @registration.questions['questions'] },
         }],
       },
