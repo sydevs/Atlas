@@ -165,6 +165,7 @@ GEM
       ruby2_keywords (>= 0.0.4)
     faraday-net_http (3.0.2)
     ffi (1.17.0-arm64-darwin)
+    ffi (1.17.0-x86_64-linux-gnu)
     fomantic-ui-sass (2.9.3.2)
       autoprefixer-rails
       dartsass-sprockets (>= 3.1)
@@ -218,6 +219,9 @@ GEM
       googleauth (>= 0.16.2, < 2.a)
       mini_mime (~> 1.0)
     google-protobuf (4.27.2-arm64-darwin)
+      bigdecimal
+      rake (>= 13)
+    google-protobuf (4.27.2-x86_64-linux)
       bigdecimal
       rake (>= 13)
     googleauth (1.7.0)
@@ -321,6 +325,8 @@ GEM
     nio4r (2.7.3)
     nokogiri (1.16.7-arm64-darwin)
       racc (~> 1.4)
+    nokogiri (1.16.7-x86_64-linux)
+      racc (~> 1.4)
     normalize-rails (8.0.1)
     os (1.1.4)
     passwordless (1.7.0)
@@ -402,6 +408,8 @@ GEM
     rubyzip (2.3.2)
     sass-embedded (1.77.8-arm64-darwin)
       google-protobuf (~> 4.26)
+    sass-embedded (1.77.8-x86_64-linux-gnu)
+      google-protobuf (~> 4.26)
     sassc-embedded (1.77.8)
       sass-embedded (~> 1.77)
     selenium-webdriver (4.1.0)
@@ -475,6 +483,7 @@ GEM
 
 PLATFORMS
   arm64-darwin-23
+  x86_64-linux
 
 DEPENDENCIES
   aasm
