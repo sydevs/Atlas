@@ -22,10 +22,11 @@ class Mutations::CreateRegistration < Mutations::BaseMutation
     I18n.locale = arguments[:locale]&.to_sym || :en
     event = Event.find(arguments[:event_id])
     time = event.recurrence.starts_at.to_fs(:time).split(':')
+    subscribe = arguments[:subscribe]
     arguments[:starting_at] = arguments[:starting_at].utc.change(hour: time[0].to_i, min: time[1].to_i)
     arguments[:questions] = arguments[:questions]
     arguments[:user_attributes] = { name: arguments[:name], email: arguments[:email] }
-    arguments.except! :message, :locale, :name, :email
+    arguments.except! :message, :locale, :name, :email, :subscribe
 
     user = User.find_by_email(arguments[:email])
     registration = event.registrations.find_or_initialize_by(user: user)
@@ -39,11 +40,10 @@ class Mutations::CreateRegistration < Mutations::BaseMutation
       }
     elsif registration.update(arguments)
       registration.subscribe_to! :registrations
-      MailingListAPI.subscribe registration
+      MailingListAPI.subscribe registration if subscribe
       
       RegistrationMailer.with(registration: registration).confirmation.deliver_later
       RegistrationMailer.with(registration: registration).question.deliver_later if registration.questions['questions'].present?
-      BrevoAPI.schedule_reminder_email(registration)
 
       {
         status: 'success',

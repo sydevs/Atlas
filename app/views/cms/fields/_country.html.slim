@@ -22,7 +22,7 @@
   = f.hint :mailing_list_service
 
   = f.input :mailing_list_prompt, placeholder: translate('map.registration.signup')
-  = f.input :mailing_list_invitation, as: :text, placeholder: translate('emails.followup.mailing_list_invitation'), input_html: { rows: 4 }
+  = f.input :mailing_list_invitation, as: :text, placeholder: translate('emails.followup.mailing_list.description'), input_html: { rows: 4 }
 
 - else
   = render 'cms/fields/partials/osm_search', data: { type: 'country' }

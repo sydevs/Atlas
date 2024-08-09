@@ -1,8 +1,6 @@
 es:
   emails: # These are translations for email that are sent to the seekers.
     common:
-      view_in_browser: "Ver en el navegador"
-      unsubscribe: "Darse de baja"
       reason: "Has recibido este correo porque te has registrado en este evento."
       responses: "Tus respuestas:" # TODO: Translate
       view_map: "View Event on Map"
@@ -10,7 +8,8 @@ es:
     footer: # TODO: Translate
       prelude: "This project maintains an accurate worldwide listing of public programs for seekers. The Atlas map is embedded on dozens of national and international Sahaj websites."
       cause: "You've received this email because you're a manager for the Sahaja Yoga Atlas. Do not forward this email, the links contained allow access to your account."
-      unsubscribe: "Unsubscribe"
+      unsubscribe: "Darse de baja"
+      view_in_browser: "Ver en el navegador"
 
     confirmation:
       offline:
@@ -124,3 +123,19 @@ es:
       summary: "%{name} asked:"
       description: :datetime.distance_in_words.time_ago # Do not translate
       reply: :emails.registrations.registration.reply # Do not translate
+
+    followup: # TODO: Translate
+      title: "How was your experience?"
+      prelude: "You recently attended a free meditation event, \"%{event}.\" We hope you're feeling more calm and connected."
+      feedback:
+        header: "Give Us Feedback"
+        description: "Do you have any further question? Was anything unclear?"
+        action: "Send us an email"
+      next_class:
+        header: "Your Next Class"
+        description: "The greatest benefits of meditation come with consistent practice. Should we send you another reminder before next week's class?"
+        action: "Remind me"
+      mailing_list:
+        header: "Local Newsletter"
+        description: "Would you like to receive a newsletter from the local meditation community?"
+        action: "Sign me up"

@@ -11,6 +11,7 @@ class Registration < ApplicationRecord
   # Associations
   belongs_to :event
   belongs_to :user, autosave: true
+  has_one :country, through: :event
   accepts_nested_attributes_for :user
 
   # Validations
@@ -26,6 +27,14 @@ class Registration < ApplicationRecord
     reorder(r[:questions].eq({})).order(r[:created_at].asc)
   end
 
+  scope :needs_reminder_email, -> { where(reminder_sent_at: nil).where('starting_at <= ? AND starting_at >= ?', 1.day.from_now, 1.hour.from_now) }
+  scope :needs_followup_email, -> { where(followup_sent_at: nil).where('starting_at <= ? AND starting_at >= ?', 1.day.ago, 1.week.ago) }
+  scope :needs_reminder_email, -> do 
+    offline_reminder = where(reminder_sent_at: nil, 'events.type': 'OfflineEvent').where('starting_at <= ? AND starting_at >= ?', 1.day.from_now, 1.hour.from_now)
+    online_reminder = where(reminder_sent_at: nil, 'events.type': 'OnlineEvent').where('starting_at <= ? AND starting_at >= ?', 1.hour.from_now, 30.minutes.from_now)
+    offline_reminder.or(online_reminder)
+  end
+
   # Delegations
   delegate :immediate_registration_notification?, :manager, :managed_by?, to: :event
   delegate :name, :email, :first_name, :last_name, to: :user
@@ -37,6 +46,10 @@ class Registration < ApplicationRecord
   before_save :find_or_create_user
 
   # Methods
+
+  def can_subscribe_to_mailing_list?
+    !mailing_list_subscribed_at.present? && country&.mailing_list_service.present?
+  end
 
   def starting_date
     starting_at.to_date

@@ -20,6 +20,7 @@ class Event < ApplicationRecord
   # Associations
   belongs_to :area
   belongs_to :venue, optional: true, inverse_of: :events
+  has_one :country, through: :area
 
   has_many :registrations, dependent: :delete_all
   has_many :pictures, as: :parent, dependent: :destroy

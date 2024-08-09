@@ -12,6 +12,7 @@ function RegistrationForm() {
     email: null,
     questions: {},
     startingAt: null,
+    subscribe: true,
   }
 
   let validateEmail = () => regexForEmailValidation.test(data.email) ? alert = null : alert = { status: 'invalid', message: Util.translate('registration.form.email_invalid'), field: 'email'};
@@ -83,7 +84,8 @@ function RegistrationForm() {
                 type: 'checkbox',
                 name: 'signup',
                 value: 1,
-                checked: true,
+                checked: data.subscribe,
+                onclick: event => { data.subscribe = event.currentTarget.checked },
               }),
               m('span', event.registrationSignup)
             )
