@@ -70,6 +70,7 @@ ru:
       notice:
         text: "Регистрируясь, вы соглашаетесь получать сообщения об этом мероприятии и о подобных мероприятиях в соответствии с нашей %{link}"
         link: "политикой конфиденциальности"
+      signup: "Send me followup emails from the local meditation community." # TODO: Translate
       feedback:
         duplicate: "Твой email уже зарегистрирован."
         success: "Регистрация прошло успешно! Скоро ты получишь email с подтверждением." 

@@ -70,6 +70,7 @@ de:
       notice:
         text: "Durch die Anmeldung, stimmen Sie zu, dass Sie Nachrichten über diese und ähnliche Veranstaltungen in übereinstimmung mit unserer %{link} erhalten."
         link: "Datenschutzrichtlinie"
+      signup: "Send me followup emails from the local meditation community." # TODO: Translate
       feedback:
         duplicate: "Sie sind bereits registriert. Bis bald."
         success: "Erfolg! Sie erhalten in kürze eine Bestätigungs-E-Mail."

@@ -28,6 +28,7 @@ class AtlasAPI {
           path
           registrationMode
           registrationUrl
+          registrationSignup
           registrationQuestions {
             slug
             title

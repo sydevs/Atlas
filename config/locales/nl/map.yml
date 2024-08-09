@@ -70,6 +70,7 @@ nl:
       notice:
         text: "Indien je bevestigt ga je akkoord met onze %{link}."
         link: "privacybeleid"
+      signup: "Send me followup emails from the local meditation community." # TODO: Translate
       feedback:
         duplicate: "Je bent al geregistreerd. Tot snel."
         success: "Success! Je krijgt binnenkort een confirmatie e-mail."

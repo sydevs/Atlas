@@ -70,6 +70,7 @@ pt:
       notice:
         text: "Ao enviar, você confirma que concorda em receber mensagens de acompanhamento sobre este e eventos semelhantes, de acordo com nosso %{link}."
         link: "política de Privacidade"
+      signup: "Send me followup emails from the local meditation community." # TODO: Translate
       feedback:
         duplicate: "Você já está registrado. Vejo você em breve!"
         success: "Sucesso! Você receberá um e-mail de confirmação em breve."

@@ -33,6 +33,7 @@ module Types
     field :registration_count, Integer, null: true
     field :registration_limit, Integer, null: true
     field :registration_questions, [RegistrationQuestionType], null: true
+    field :registration_signup, String, null: true
 
     field :images, [Types::ImageType], null: true
 
@@ -104,6 +105,12 @@ module Types
           title: translate_enum_value(Event, :registration_question, question),
         }
       end
+    end
+
+    def registration_signup
+      return nil unless object.area&.country&.mailing_list_service.present?
+
+      object.area.country.mailing_list_prompt || I18n.translate('map.registration.signup')
     end
   end
 end

@@ -61,7 +61,7 @@ en:
       header: "Register now"
       closed: "Registration Closed"
       form:
-        timing: "I’d like to start on"
+        timing: "I'd like to start on"
         email: "Email"
         name: "Name"
         message: "Questions / Comments"
@@ -70,6 +70,7 @@ en:
       notice:
         text: "By submitting you confirm you agree to receive follow up messages about this and similar events, in accordance with our %{link}."
         link: "privacy policy"
+      signup: "Send me followup emails from the local meditation community."
       feedback:
         duplicate: "You are already registered. See you soon!"
         success: "Success! You will receive a confirmation email shortly."

@@ -5,8 +5,9 @@
 module MailingListAPI
   include Rails.application.routes.url_helpers
 
-  def self.subscribe_registration registration
+  def self.subscribe registration
     country = registration.event.area&.country
+    return if registration.mailing_list_subscribed_at.present?
     return unless country&.mailing_list_service.present?
 
     self.send(:"subscribe_to_#{country.mailing_list_service}",
@@ -26,6 +27,8 @@ module MailingListAPI
         longitude: (event.venue&.longitude || event.area&.longitude),
       },
     )
+
+    registration.touch(:mailing_list_subscribed_at)
   end
 
   def self.subscribe_to_brevo api_key, list_id, attributes

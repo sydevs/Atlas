@@ -70,6 +70,7 @@ fr:
       notice:
         text: "En validant, vous confirmez que vous acceptez de recevoir des messages de suivi à propos de cet événement et d'événements similaires, conformément à nos %{link}."
         link: "politique de confidentialité"
+      signup: "Send me followup emails from the local meditation community." # TODO: Translate
       feedback:
         duplicate: "Vous êtes déjà inscrit. A bientôt !"
         success: "Succès! Vous recevrez prochainement un e-mail de confirmation."

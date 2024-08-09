@@ -10,6 +10,7 @@ class Mutations::CreateRegistration < Mutations::BaseMutation
   argument :starting_at, GraphQL::Types::ISO8601DateTime, required: true
   argument :time_zone, String, required: false
   argument :locale, String, required: false
+  argument :subscribe, Boolean, required: false
 
   field :status, String, null: false
   field :message, String, null: false
@@ -38,6 +39,7 @@ class Mutations::CreateRegistration < Mutations::BaseMutation
       }
     elsif registration.update(arguments)
       registration.subscribe_to! :registrations
+      MailingListAPI.subscribe registration
       
       RegistrationMailer.with(registration: registration).confirmation.deliver_later
       RegistrationMailer.with(registration: registration).question.deliver_later if registration.questions['questions'].present?

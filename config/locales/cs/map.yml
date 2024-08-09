@@ -70,6 +70,7 @@ cs:
       notice:
         text: "Odesláním potvrzujete svůj souhlas s našími %{link}."
         link: "Zásady ochrany osobních údajů"
+      signup: "Send me followup emails from the local meditation community." # TODO: Translate
       feedback:
         duplicate: "Již jste zaregistrováni. Brzy se uvidíme."
         success: "Podařilo se! Brzy obdržíte potvrzovací e-mail."

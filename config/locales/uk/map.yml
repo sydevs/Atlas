@@ -71,6 +71,7 @@ uk:
       notice:
         text: "By submitting you confirm you agree to receive follow up messages about this and similar events, in accordance with our %{link}." # TODO: Translate
         link: "політика конфіденційності"
+      signup: "Send me followup emails from the local meditation community." # TODO: Translate
       feedback:
         duplicate: "Ви зареєструвались. До зустрічі."
         success: "Успішно! Незабаром ви отримаєте підтвердження електронною поштою."

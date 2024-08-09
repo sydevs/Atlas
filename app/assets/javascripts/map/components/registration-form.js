@@ -76,6 +76,19 @@ function RegistrationForm() {
           })
         }),
         alert ? m('.sya-registration__message', { class: alert.status }, alert.message) : null,
+        event.registrationSignup ?
+          m('.sya-registration__signup',
+            m('label', {},
+              m('input.sya-registration__checkbox', {
+                type: 'checkbox',
+                name: 'signup',
+                value: 1,
+                checked: true,
+              }),
+              m('span', event.registrationSignup)
+            )
+          )
+          : null,
         m('.sya-registration__notice',
           m.trust(Util.translate('registration.notice.text', {
             link: `<a class="sya-registration__notice-link" href="/${AtlasApp.config.locale}/privacy" target="_blank">${Util.translate('registration.notice.link')}</a>`
