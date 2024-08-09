@@ -9,17 +9,20 @@
   = f.input :enable_regions, as: :boolean, wrapper: :semantic_checkbox, hint: translate('cms.hints.country.enable_regions')
   = f.input :enable_custom_regions, as: :boolean, wrapper: :semantic_checkbox, hint: translate('cms.hints.country.enable_custom_regions')
 
-  .ui.small.dividing.violet.header = translate('cms.forms.country.mailing_list')
-  p.hint = translate('cms.hints.country.mailing_list')
+  .ui.small.dividing.violet.header = translate('simple_form.headers.country.mailing_list')
+  = f.hint :mailing_list
   .ui.orange.message
     i.warning.sign.icon
     = translate('cms.hints.edit_warning')
     
   .three.fields
-    = f.input :mailing_list_service, collection: Country.mailing_list_services.map { |k, v| [translate_enum_value(Country, :mailing_list_service, k), k] }
+    = f.input :mailing_list_service, collection: Country.mailing_list_services.map { |k, v| [translate_enum_value(Country, :mailing_list_service, k), k] }, hint: false
     = f.input :mailing_list_api_key
     = f.input :mailing_list_list_id
-  p.hint = translate('cms.hints.country.mailing_list_service')
+  = f.hint :mailing_list_service
+
+  = f.input :mailing_list_prompt
+  = f.input :mailing_list_invitation, as: :text
 
 - else
   = render 'cms/fields/partials/osm_search', data: { type: 'country' }

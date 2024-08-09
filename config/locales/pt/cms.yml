@@ -98,8 +98,6 @@ pt:
         location: "Localização"
         registration: "Inscrição"
         manager: "Gestor"
-      country: # TODO: Translate
-        mailing_list: "Mailing List"
       manager:
         contact_methods: "Formas de Contato"
         notifications: "Ajuste de Notificações"
@@ -123,8 +121,6 @@ pt:
         no_default_language: "Nenhum idioma padrão"
         enable_regions: "Se habilitado, você poderá ver e atribuir gerente a regiões (regiões, estados, etc) dentro deste país. Isso é útil para países grandes (China, EUA, Austrália, etc), e desnecessário para países pequenos (Bélgica, Lituânia, Singapura, etc)."
         enable_custom_regions: "Permitir a criação de regiões customizadas. Essa é uma facilidade avançada, a qual você só deve usar se tiver certeza do que está fazendo."
-        mailing_list: "This section allows you to configure a mailing list that seekers in your country will be invited to sign up to."
-        mailing_list_service: "If your mailing service is not in this list, please contact us at contact@sydevelopers.com"
       region:
         polygon: "Arraste / Clique em um quadrado vazio para adicionar um novo lado ao polígono. Clique em um lado para removê-lo."
         name: "Regions will use a translated name for each language, however if no translation is available, this name is used." # TODO: Translate

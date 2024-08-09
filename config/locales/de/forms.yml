@@ -1,0 +1,11 @@
+de:
+  simple_form: # TODO: Translate
+    headers:
+      country:
+        mailing_list: "Mailing List"
+
+    hints:
+      country:
+        mailing_list: "This section allows you to configure a mailing list that seekers in your country will be invited to sign up to. Please contact us at contact@sydevelopers.com for help with setup, or if your Mailing List Service is not in the list."
+        mailing_list_prompt: "When seekers register, this message will be shown to describe the content of the newsletter they can signup for."
+        mailing_list_invitation: "If a seeker has not signed up, then after their first class they will be sent this message as an invitation to signup for the mailing list."
