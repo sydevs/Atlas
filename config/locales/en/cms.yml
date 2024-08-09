@@ -97,6 +97,8 @@ en:
         location: "Location"
         registration: "Registration"
         manager: "Manager"
+      country:
+        mailing_list: "Mailing List"
       manager:
         contact_methods: "Contact Methods"
         notifications: "Notification Settings"
@@ -120,6 +122,8 @@ en:
         no_default_language: "No default"
         enable_regions: "If enabled, you will be able to view and assign managers to regions (regions, states, etc) within this country. This is useful for larger countries (China, USA, Australia, etc), and unnecessary for small countries (Belgium, Lithuania, Singapore, etc)."
         enable_custom_regions: "Allow the creation of custom regions. This is an advanced feature, which should only be used if you understand what you are doing."
+        mailing_list: "This section allows you to configure a mailing list that seekers in your country will be invited to sign up to."
+        mailing_list_service: "If your mailing service is not in this list, please contact us at contact@sydevelopers.com"
       region:
         polygon: "Drag / click on a faded square to add a new corner to the polygon. Click on an existing corner to remove it."
         name: "Regions will use a translated name for each language, however if no translation is available, this name is used." # TODO: Translate

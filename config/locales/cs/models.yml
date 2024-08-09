@@ -17,7 +17,7 @@ cs:
   activerecord:
     models:
       # Places
-      country:
+      country: # TODO: Translate
         # Basic pluralization
         single: "Země"
         plural: "Země"
@@ -149,7 +149,7 @@ cs:
         updated_at: "Aktualizováno v"
 
       # Places
-      country:
+      country: # TODO: Translate
         manager_id: :activerecord.models.manager.single # Do not translate
         country_code: :activerecord.models.country.single # Do not translate
         default_language_code: "Výchozí jazyk události"
@@ -162,6 +162,10 @@ cs:
         translations: "Překlady"
         last_activity_on: :activerecord.attributes.generic.last_activity_on # Do not translate
         summary_email_sent_at: :activerecord.attributes.generic.summary_email_sent_at # Do not translate
+        mailing_list: "Mailing List"
+        mailing_list_service: "Mailing List Service"
+        mailing_list_api_key: "Mailing List API Key"
+        mailing_list_list_id: "Mailing List List ID"
 
       region:
         manager_id: :activerecord.models.manager.single # Do not translate

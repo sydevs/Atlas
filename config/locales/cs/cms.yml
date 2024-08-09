@@ -98,6 +98,8 @@ cs:
         location: "Místo konání"
         registration: "Registrace"
         manager: "Správce"
+      country: # TODO: Translate
+        mailing_list: "Mailing List"
       manager:
         contact_methods: "Možnosti kontaktování"
         notifications: "Upozornění"
@@ -115,12 +117,14 @@ cs:
       geosearch:
         prompt: "Vyhledejte polohu"
         description: "Toto vyhledávání můžete použít k automatickému vyplnění níže uvedených polí. Systém využívá Google API. Pokud je Google ve vaší zemi zablokován nebo pokud vyhledávání selže, budete muset data zadat ručně."
-      country:
+      country: # TODO: Translate
         must_be_new: "Země, které ještě nebyly přidány, jsou uvedeny níže."
         language: "Výchozí jazyk, ve kterém se události v této zemi obvykle konají."
         no_default_language: "Žádné výchozí nastavení"
         enable_regions: "Pokud bude povoleno, budete moci zobrazovat a určovat vedoucí oblastí (oblasti, kraje, atd.) v tomto státě. Je to užitečné pro větší země (Čína, USA, Austrálie, atd.) a není nezbytné pro malé země (Belgie, Lotyško, Singapur, atd.)."
         enable_custom_regions: "Povolit vytváření vlastních území/oblastí. Toto je pokročilá funkce, která by měla být používána pouze pokud dobře víte, co děláte."
+        mailing_list: "This section allows you to configure a mailing list that seekers in your country will be invited to sign up to."
+        mailing_list_service: "If your mailing service is not in this list, please contact us at contact@sydevelopers.com"
       region:
         polygon: "Přesuňte / klikněte na bledý čtverec, abyste přidali nový vrchol mnohoúhelníku. Kliněte na existující vrchol, abyste jej odebrali."
         name: "Regions will use a translated name for each language, however if no translation is available, this name is used." # TODO: Translate

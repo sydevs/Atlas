@@ -37,6 +37,11 @@ en:
 
   activerecord:
     attributes:
+      country:
+        mailing_list_services:
+          brevo: "Brevo"
+          mailchimp: "MailChimp"
+
       client:
         label: "Label"
         config: "Configuration"

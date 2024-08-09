@@ -96,6 +96,8 @@ de:
         timing: "Timing"
         registration: "Anmeldung"
         manager: "Manager"
+      country: # TODO: Translate
+        mailing_list: "Mailing List"
       manager:
         contact_methods: "Kontaktmethoden"
         notifications: "Benachrichtigungseinstellungen"
@@ -113,12 +115,14 @@ de:
       geosearch:
         prompt: "Suchen nach Standort"
         description: "Sie können diese Suche verwenden, um die Felder automatisch auszufüllen. Es verwendet die Google-API. Wenn Google in Ihrem Land blockiert ist oder die Suche ausfällt, müssen Sie die Daten manuell eingeben."
-      country:
+      country: # TODO: Translate
         must_be_new: "Nur Länder, die noch nicht hinzugefügt wurden, sind unten aufgeführt."
         language: "Die Standardsprache, die Veranstaltungen in diesem Land normalerweise abgehalten werden."
         no_default_language: "Kein Standard"
         enable_regions: "Wenn es aktiviert ist, können Sie Regionen (Provinzen, Staaten usw.) in diesem Land an die Regionen ausschalten und zuordnen. Dies ist nützlich für größere Länder (China, USA, Australien, etc.) und unnötig für kleine Länder (Belgien, Litauen, Singapur usw.)."
         enable_custom_regions: "Erlaube das erstellen von angepassten Regionen. Dies ist eine erweiterte Funktion, lass die Finger davon, außer du weist was du tust."
+        mailing_list: "This section allows you to configure a mailing list that seekers in your country will be invited to sign up to."
+        mailing_list_service: "If your mailing service is not in this list, please contact us at contact@sydevelopers.com"
       region:
         polygon: "Ziehe / Klicke auf ein verblasstes Quadrat um eine weitere ecke zum polygon hinzuzufügen. Klicke auf eine existierende Ecke um sie zu entfernen."
         name: "Regions will use a translated name for each language, however if no translation is available, this name is used." # TODO: Translate

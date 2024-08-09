@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_07_30_121948) do
+ActiveRecord::Schema[7.0].define(version: 2024_08_08_161840) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -112,6 +112,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_07_30_121948) do
     t.json "translations", default: {}, null: false
     t.string "bounds", default: [], array: true
     t.string "canonical_domain"
+    t.jsonb "mailing_list", default: {}, null: false
     t.index ["country_code"], name: "index_countries_on_country_code", unique: true
   end
 
@@ -234,6 +235,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_07_30_121948) do
     t.string "time_zone"
     t.jsonb "questions", default: {}
     t.bigint "user_id"
+    t.datetime "mailing_list_subscribed_at"
     t.index ["event_id"], name: "index_registrations_on_event_id"
     t.index ["user_id"], name: "index_registrations_on_user_id"
   end

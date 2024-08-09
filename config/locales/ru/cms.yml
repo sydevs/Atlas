@@ -113,12 +113,14 @@ ru:
       geosearch:
         prompt: "Поиск по местонахождению"
         description: "Ты можешь использовать этот поиск для автоматического заполнения полей ниже. Он использует API Google. Если Google заблокирован в вашей стране или поиск не удался, тебе нужно будет ввести данные вручную."
-      country:
+      country: # TODO: Translate
         must_be_new: "Ниже перечислены страны, которые ещё не были добавлены."
         language: "Язык по умолчанию, на котором обычно проводятся мероприятия в этой стране."
         no_default_language: "Отсутствует язык по умолчанию"
         enable_regions: "Если этот параметр включен, ты сможешь просматривать и назначать менеджеров по регионам (провинциям, штатам и т.д.) в этой стране. Это полезно для больших стран (Китай, США, Австралия и т.д.) и необязательно для небольших стран (Бельгия, Литва, Сингапур и т.д.)."
         enable_custom_regions: "Разрешить создание новых регионов. Это расширенная функция, которую следует использовать только в том случае, если ты точно понимаешь, что делаешь."
+        mailing_list: "This section allows you to configure a mailing list that seekers in your country will be invited to sign up to."
+        mailing_list_service: "If your mailing service is not in this list, please contact us at contact@sydevelopers.com"
       region:
         polygon: "Перетащи / щелкни по выделенному квадрату, чтобы добавить новый угол. Нажми на существующий угол, чтобы удалить его."
         name: "Regions will use a translated name for each language, however if no translation is available, this name is used." # TODO: Translate

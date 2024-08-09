@@ -3,9 +3,23 @@
   - languages = I18nData.languages(I18n.locale).map { |k, v| [v.split(/[,;]/)[0], k] }
 
   = render 'cms/fields/partials/geo_data', f: f
+
   = f.input :name
   = f.input :default_language_code, collection: languages, selected: @record.default_language_code, input_html: { class: 'search' }, hint: translate('cms.hints.country.language'), include_blank: translate('cms.hints.country.no_default_language')
   = f.input :enable_regions, as: :boolean, wrapper: :semantic_checkbox, hint: translate('cms.hints.country.enable_regions')
   = f.input :enable_custom_regions, as: :boolean, wrapper: :semantic_checkbox, hint: translate('cms.hints.country.enable_custom_regions')
+
+  .ui.small.dividing.violet.header = translate('cms.forms.country.mailing_list')
+  p.hint = translate('cms.hints.country.mailing_list')
+  .ui.orange.message
+    i.warning.sign.icon
+    = translate('cms.hints.edit_warning')
+    
+  .three.fields
+    = f.input :mailing_list_service, collection: Country.mailing_list_services.map { |k, v| [translate_enum_value(Country, :mailing_list_service, k), k] }
+    = f.input :mailing_list_api_key
+    = f.input :mailing_list_list_id
+  p.hint = translate('cms.hints.country.mailing_list_service')
+
 - else
   = render 'cms/fields/partials/osm_search', data: { type: 'country' }

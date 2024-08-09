@@ -8,6 +8,8 @@ class Country < ApplicationRecord
 
   nilify_blanks
   searchable_columns %w[name country_code translations]
+  store :mailing_list, accessors: %i[service api_key list_id prompt invitation], prefix: true
+  enum mailing_list_service: { brevo: 1 }
 
   # Associations
   has_many :regions, inverse_of: :country, foreign_key: :country_code, primary_key: :country_code, dependent: :delete_all
@@ -22,6 +24,7 @@ class Country < ApplicationRecord
 
   # Validations
   validates_presence_of :name
+  validates_presence_of :mailing_list_api_key, :mailing_list_list_id, if: :mailing_list_service?
   validate :validate_language_code
 
   # Scopes

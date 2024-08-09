@@ -18,10 +18,10 @@ module BrevoAPI
     registrations: 201,
   }.freeze
 
-  def self.subscribe email, list_id, attributes
+  def self.subscribe email, list_id, attributes, api_key = nil
     return if Rails.env.development?
 
-    client = SibApiV3Sdk::ContactsApi.new
+    client = Brevo::ContactsApi.new
     list_id = BrevoAPI::LISTS[list_id]
 
     # Create a contact
@@ -31,33 +31,33 @@ module BrevoAPI
       'listIds' => [list_id.to_i],
       'updateEnabled' => true
     )
-  rescue SibApiV3Sdk::ApiError => e
+  rescue Brevo::ApiError => e
     puts "Exception when calling ContactsApi->create_contact: #{e} #{e.response_body}"
   end
 
   def self.unsubscribe email, list_id
     return if Rails.env.development?
     
-    client = SibApiV3Sdk::ContactsApi.new
+    client = Brevo::ContactsApi.new
     list_id = BrevoAPI::LISTS[list_id]
 
     # Create a contact
     p client.remove_contact_from_list(list_id, {
       'emails' => [email],
     })
-  rescue SibApiV3Sdk::ApiError => e
+  rescue Brevo::ApiError => e
     puts "Exception when calling ContactsApi->update_contact: #{e} #{e.response_body}"
   end
 
   def self.update_contact email, attributes
     return if Rails.env.development?
     
-    client = SibApiV3Sdk::ContactsApi.new
+    client = Brevo::ContactsApi.new
     attributes.deep_transform_keys! { |key| key.to_s.upcase }
 
     # Update a contact
     p client.update_contact(CGI.escape(email), 'attributes' => attributes)
-  rescue SibApiV3Sdk::ApiError => e
+  rescue Brevo::ApiError => e
     puts "Exception when calling ContactsApi->update_contact: #{e} #{e.response_body}"
   end
 
@@ -82,9 +82,9 @@ module BrevoAPI
     config[:params][:text] ||= {}
     config[:params][:text].reverse_merge!(I18n.translate('emails.common'))
 
-    client = SibApiV3Sdk::TransactionalEmailsApi.new
-    client.send_transac_email(config)
-  rescue SibApiV3Sdk::ApiError => e
+    client = Brevo::TransactionalEmailsApi.new
+    p client.send_transac_email(config)
+  rescue Brevo::ApiError => e
     puts "Exception when calling TransactionalEmailsApi->send_transac_email: #{e} #{e.response_body}"
   end
 
