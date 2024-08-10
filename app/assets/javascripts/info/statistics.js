@@ -4,11 +4,22 @@
 const Statistics = {
   load: function() {
     this.$chart = $('#chart-world-registrations')
-    this.chart = new Chartist.Line('#chart-world-registrations', this.$chart.data('registrations'), {
+    let data = this.$chart.data('registrations')
+    console.log(data, data.series.length, Array.apply(null, Array(data.series.length - 1)) + ['ct-series-world'])
+    this.chart = new Chartist.Line('#chart-world-registrations', data, {
       fullWidth: true,
+      low: 0,
       axisY: {
         onlyInteger: true,
       },
+      series: {
+        'World': {
+          showArea: true,
+        }
+      },
+      plugins: [Chartist.plugins.legend({
+        classNames: Array.from(data.series).map((s) => s.name == 'World' ? 'ct-series-world' : '')
+      })]
     })
 
     this.$pie = $('#chart-country-registrations')
@@ -16,12 +27,14 @@ const Statistics = {
     this.pie = new Chartist.Pie('#chart-country-registrations', pieData, {
       fullWidth: true,
       chartPadding: 30,
+      showLabel: false,
       labelOffset: 100,
       labelDirection: 'explode',
+      plugins: [Chartist.plugins.legend()]
     })
 
     this.$map = $('#map-world-events')
-    const data = this.$map.data('events')
+    data = this.$map.data('events')
 
     this.$map.vectorMap({
       map: 'world_mill',
