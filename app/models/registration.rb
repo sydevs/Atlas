@@ -11,6 +11,7 @@ class Registration < ApplicationRecord
   # Associations
   belongs_to :event
   belongs_to :user, autosave: true
+  has_one :area, through: :event
   has_one :country, through: :event
   accepts_nested_attributes_for :user
 
@@ -20,6 +21,8 @@ class Registration < ApplicationRecord
   # Scopes
   default_scope { order(created_at: :desc) }
   scope :since, -> (date) { where('registrations.created_at >= ?', date) }
+  scope :offline, -> { joins(:event).where('events.type': 'OfflineEvent') }
+  scope :online, -> { joins(:event).where('events.type': 'OnlineEvent') }
   scope :group_by_month, -> { reorder(nil).group("DATE_TRUNC('month', registrations.created_at)") }
   scope :group_by_week, -> { reorder(nil).group("DATE_TRUNC('week', registrations.created_at)") }
   scope :order_with_comments_first, -> do 
@@ -30,8 +33,8 @@ class Registration < ApplicationRecord
   scope :needs_reminder_email, -> { where(reminder_sent_at: nil).where('starting_at <= ? AND starting_at >= ?', 1.day.from_now, 1.hour.from_now) }
   scope :needs_followup_email, -> { where(followup_sent_at: nil).where('starting_at <= ? AND starting_at >= ?', 1.day.ago, 1.week.ago) }
   scope :needs_reminder_email, -> do 
-    offline_reminder = where(reminder_sent_at: nil, 'events.type': 'OfflineEvent').where('starting_at <= ? AND starting_at >= ?', 1.day.from_now, 1.hour.from_now)
-    online_reminder = where(reminder_sent_at: nil, 'events.type': 'OnlineEvent').where('starting_at <= ? AND starting_at >= ?', 1.hour.from_now, 30.minutes.from_now)
+    offline_reminder = offline.where(reminder_sent_at: nil).where('starting_at <= ? AND starting_at >= ?', 1.day.from_now, 1.hour.from_now)
+    online_reminder = online.where(reminder_sent_at: nil).where('starting_at <= ? AND starting_at >= ?', 1.hour.from_now, 30.minutes.from_now)
     offline_reminder.or(online_reminder)
   end
 

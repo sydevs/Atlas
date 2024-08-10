@@ -5,6 +5,7 @@ class Country < ApplicationRecord
   include Manageable
   include HasClient
   include ActivityMonitorable
+  include HasStatistics
 
   nilify_blanks
   searchable_columns %w[name country_code translations]
