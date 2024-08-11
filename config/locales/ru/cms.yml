@@ -49,6 +49,7 @@ ru:
       # Tertiary menu
       details: "Информация"
       activity: "Активность"
+      messages: "Conversation" # TODO: Translate
       breadcrumbs:
         world: "Мир"
         help: "Помощь"
@@ -210,6 +211,8 @@ ru:
         action: "Проверить"
       record_needs_urgent_review:
         title: "Требуется срочная проверка %{resource}"
+      record_needs_immediate_review: # TODO: Translate
+        title: "%{resource} Needs Immediate Review"
       record_finished:
         title: "%{resource} завершенно"
         description: "Это %{resource} завершено. В последний раз оно произошло %{date}."
@@ -255,6 +258,48 @@ ru:
       description: "Это журнал всех действий, предпринятых этим менеджером."
       changed_by: "по %{name}"
       changed_to: "изменено на"
+
+    conversations:
+      awaiting_response: "Awaiting Reply"
+      has_answers: "Gave Comments"
+      send_reply: "Send Reply"
+
+    audits: # TODO: Translate
+      time_ago: "%{time} ago"
+      person: "Action taken by %{person}"
+      parent: "Relates to %{resource}"
+      replies_to: "Replies to %{resource}"
+      replied_by: "Replied to by %{resource}"
+      changes:
+        one: "%{count} Change"
+        other: "%{count} Changes"
+      title:
+        record_created: "%{model} Created"
+        record_updated: "%{model} Updated"
+        record_destroyed: "%{model} Deleted"
+        status_verified: "%{model} Verified"
+        status_change: "%{model} Status Changed"
+        email_forwarded: "%{model} Email"
+        notice_sent: "%{model} Notice Sent"
+        question_asked: "%{model} Question Asked"
+      contextual_summary:
+        record_created: "%{person} created this %{model}"
+        record_updated: "%{person} updated this %{model}"
+        record_destroyed: "%{person} deleted a %{model}"
+        status_verified: "%{model} was %{status} by %{person}"
+        status_change: "%{model} changed to %{status}"
+        email_forwarded: "%{person} sent an email"
+        notice_sent: "Notification sent to %{person}"
+        question_asked: "%{person} asked a question"
+      summary:
+        record_created: "%{person} created %{resource}"
+        record_updated: "%{person} updated %{resource}"
+        record_destroyed: "%{person} deleted %{resource}"
+        status_verified: "%{resource} was %{status} by %{person}"
+        status_change: "%{resource} changed to %{status}"
+        email_forwarded: "%{person} sent an email for %{resource}"
+        notice_sent: "Notification sent for %{resource} to %{person}"
+        question_asked: "%{person} asked a question for %{resource}"
 
     dashboard:
       role:

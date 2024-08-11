@@ -4,7 +4,6 @@ class Venue < ApplicationRecord
   include ActivityMonitorable
   include Location
 
-  # audited
   nilify_blanks
   searchable_columns %w[name street city region_code country_code post_code]
 

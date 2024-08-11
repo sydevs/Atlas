@@ -3,14 +3,17 @@ require 'csv'
 class Registration < ApplicationRecord
 
   # Extensions
+  include Audited
+
+  # Extensions
   searchable_columns %w[name email]
 
   # Associations
   belongs_to :event
+  belongs_to :user, autosave: true
+  accepts_nested_attributes_for :user
 
   # Validations
-  validates :name, presence: true
-  validates :email, presence: true #, format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :starting_at, presence: true
 
   # Scopes
@@ -24,22 +27,16 @@ class Registration < ApplicationRecord
   end
 
   # Delegations
+  delegate :immediate_registration_notification?, :manager, :managed_by?, to: :event
+  delegate :name, :email, :first_name, :last_name, to: :user
   alias parent event
-  delegate :immediate_registration_notification?, to: :event
+  alias default_message_receiver manager
 
   # Callbacks
-  after_create :send_registrations_notification, if: :immediate_registration_notification?
+  after_create :send_registration_notification, if: :immediate_registration_notification?
+  before_save :find_or_create_user
 
   # Methods
-
-  def first_name
-    name.split(' ', 2).first
-  end
-
-  def last_name
-    split = name.split(' ', 2)
-    split.last if split.length > 1
-  end
 
   def starting_date
     starting_at.to_date
@@ -73,10 +70,18 @@ class Registration < ApplicationRecord
     end
   end
 
+  def conversation_members
+    [user, manager]
+  end
+
   private
 
-    def send_registrations_notification
-      EventMailer.with(event: event, manager: event.manager).registrations.deliver_later
+    def find_or_create_user
+      self.user = User.create_with(name: user.name).find_or_create_by(email: user.email)
+    end
+
+    def send_registration_notification
+      EventMailer.with(event: event, manager: manager, registration: self).registrations.deliver_later
     end
 
 end

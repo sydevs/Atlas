@@ -5,12 +5,10 @@ class Client < ApplicationRecord
   # Extensions
   include Searchable
   include Managed
+  include Audited
 
   nilify_blanks
   searchable_columns %w[label domain]
-  audited except: %i[
-    summary_email_sent_at
-  ]
 
   store_accessor :config, :embed_type, :routing_type, :default_view, :domain, :locale, :primary_color, :secondary_color, :tertiary_color
 

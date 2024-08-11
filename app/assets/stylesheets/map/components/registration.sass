@@ -1,3 +1,4 @@
+@use 'sass:math'
 @import '../_mixins'
 
 .sya-registration
@@ -188,7 +189,7 @@ $circle-size: 360px
     height: $circle-size
     min-height: $circle-size
     transition: all 0.5s ease-out
-    transform: translate(-#{$circle-size / 2}, -#{$circle-size / 2})
+    transform: translate(-#{math.div($circle-size, 2)}, -#{math.div($circle-size, 2)})
     align-self: center
 
   &__circle

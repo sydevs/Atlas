@@ -7,14 +7,10 @@ class Event < ApplicationRecord
   include Recurrable
   include ActivityMonitorable
   include Managed
+  include Audited
 
   nilify_blanks
   searchable_columns %w[custom_name description]
-  audited except: %i[
-    summary_email_sent_at status_email_sent_at latest_registration_at
-    should_update_status_at verified_at expired_at archived_at finished_at
-    status
-  ]
 
   enum category: { dropin: 1, course: 3, single: 2, festival: 4, concert: 5, inactive: 6 }, _suffix: true
   enum registration_mode: { native: 0, external: 1, meetup: 2, eventbrite: 3, facebook: 4 }, _suffix: true
@@ -67,7 +63,8 @@ class Event < ApplicationRecord
   scope :offline, -> { where(type: 'OfflineEvent') }
 
   # Delegations
-  delegate :time_zone, :country_code, :canonical_domain, :nearest_parent_managers, to: :area
+  delegate :time_zone, :country_code, :canonical_domain, :nearest_parent_managers, :nearest_parent_manager, to: :area
+  alias default_message_receiver nearest_parent_manager
   alias associated_registrations registrations
   alias parent area
 
@@ -122,13 +119,13 @@ class Event < ApplicationRecord
   def log_status_change
     return if archived? || new_record? || !published?
     
+    EventMailer.with(event: self, manager: manager).status.deliver_later
+
     if needs_urgent_review?
       nearest_parent_managers.each do |parent_manager|
         EventMailer.with(event: self, manager: parent_manager).status.deliver_later
       end
     end
-
-    EventMailer.with(event: self, manager: manager).status.deliver_later
   end
 
   def cache_key
@@ -153,6 +150,11 @@ class Event < ApplicationRecord
 
   def expiration_bonus
     (expiration_period / 3 * [4, verification_streak].min).weeks
+  end
+
+  # Which people should be involved in email conversations about this event.
+  def conversation_members
+    [manager] + parent_managers
   end
 
   def self.model_name
@@ -183,7 +185,6 @@ class Event < ApplicationRecord
       return if manager.email_verified?
 
       ManagerMailer.with(manager: manager, context: self).verify.deliver_later
-      manager.touch(:email_verification_sent_at)
     end
 
     def set_finish_date

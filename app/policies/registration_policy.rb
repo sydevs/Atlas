@@ -8,4 +8,15 @@ class RegistrationPolicy < DatabasePolicy
     true
   end
 
+  def edit?
+    false
+  end
+
+  def index_association? association = nil
+    return false if association == :audits && !user.administrator?
+    return false if association == :conversations
+
+    super
+  end
+
 end

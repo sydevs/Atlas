@@ -14,10 +14,6 @@
       - elsif allow_new
         = floating_action create_action_text, 'plus', url_for([:new, :cms, @context, @model_name.singular_route_key.to_sym, online: params[:online] == 'true'])
 
-    - if @model == Audit && @context.present?
-      - last_activity_on = @context.try(:last_activity_on) || @context.updated_at.to_date
-      = floating_action last_activity_on.to_s(:long), class: 'active teal', data: { tooltip: translate_attribute(@context, :last_activity_on) }
-
     .content
       - if controller_name == 'managers' && @context.try(:parent_managers)&.present?
         = translate('cms.details.managers_for_record', resource: @context.label)
@@ -31,7 +27,7 @@
         a.item class=('active' if params[:online] == 'true') href="?online=true"
           = translate_model(OnlineEvent, :plural)
 
-  - if @records.present? || params[:q]
+  - if @model.try(:searchable) && (@records.present? || params[:q])
     = simple_form_for url_for([:cms, @model]), html: { method: 'GET', data: { remote: 'true' }, autocomplete: 'off' }
       - if params[:online].present?
         input name='online' type='hidden' value=params[:online].to_s
@@ -42,10 +38,10 @@
         i.search.icon
 
   - if @model == Audit
-    .ui.fluid.styled.records.accordion data-search=@model_name.route_key
+    .ui.connected.feed data-search=@model_name.route_key
       = render partial: "cms/list_items/#{@model_name.singular_route_key}", collection: @records, cached: true
-  - elsif @model == Registration
-    .ui.fluid.records.accordion data-search=@model_name.route_key
+  - elsif @model == Conversation
+    .ui.divided.large.relaxed.feed data-search=@model_name.route_key
       = render partial: "cms/list_items/#{@model_name.singular_route_key}", collection: @records, cached: true
   - else
     table.ui.very.basic.records.table data-search=@model_name.route_key
@@ -59,25 +55,3 @@
 
     table.ui.very.basic.records.table
       tbody = render partial: 'cms/list_items/manager', collection: @context.parent_managers, cached: true
-
-- if @model == Audit
-  .ui.basic.segment
-    dl
-      - %i[last_activity_on status_email_sent_at registrations_email_sent_at summary_email_sent_at should_update_status_at verified_at expired_at archived_at finished_at].each do |timestamp|
-        - if @context.respond_to?(timestamp)
-          - time = @context.send(timestamp)
-          dt
-            strong = translate_attribute(@context, timestamp)
-          dd
-            - if time
-              - unless timestamp.to_s.ends_with?('_on')
-                = timestamp == :should_update_status_at ? time_from_now_in_words(time) : time_ago_in_words(time)
-                '  - 
-              = time.to_s(:long)
-            - else
-              | -
-      - if @context.respond_to?(:status)
-        dt
-          strong = translate_attribute(@context.class, :status)
-        dd
-          = translate_enum_value(@context, :status)

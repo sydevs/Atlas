@@ -8,9 +8,11 @@ module CMS::ListHelper
     events: 'calendar',
     managers: 'user secret',
     registrations: 'user',
+    users: 'user',
     audits: 'clipboard list',
     clients: 'broadcast tower',
     pictures: 'image',
+    conversations: 'comment alternate',
   }.freeze
 
   MANAGER_ICONS = {
@@ -47,13 +49,44 @@ module CMS::ListHelper
     unpublished: 'record_not_published',
   }.freeze
 
-  def model_icon model
-    content_tag :i, nil, class: "#{MODEL_ICONS[model.table_name.to_sym]} icon"
+  STATUS_COLORS = {
+    verified: 'green',
+    needs_review: 'yellow',
+    needs_urgent_review: 'orange',
+    needs_immediate_review: 'red',
+    expired: 'red',
+    archived: 'grey',
+    finished: 'blue',
+  }.freeze
+
+  STATUS_ICONS = {
+    verified: 'check circle',
+    needs_review: 'exclamation circle',
+    needs_urgent_review: 'exclamation circle',
+    needs_immediate_review: 'exclamation circle',
+    expired: 'times circle',
+    archived: 'minus circle',
+    finished: 'check circle',
+  }.freeze
+
+  def model_icon model, size: nil
+    content_tag :i, nil, class: "#{size} #{MODEL_ICONS[model.table_name.to_sym]} icon"
   end
 
-  def manager_icon manager_or_type
+  def manager_icon manager_or_type, size: nil
     type = manager_or_type.is_a?(Manager) ? manager_or_type.type : manager_or_type
-    content_tag :i, nil, class: "#{MANAGER_ICONS[type]} icon"
+    content_tag :i, nil, class: "#{size} #{MANAGER_ICONS[type]} icon"
+  end
+
+  def status_icon key, size: nil
+    content_tag :i, nil, class: "#{size} #{STATUS_COLORS[key.to_sym]} #{STATUS_ICONS[key.to_sym]} icon"
+  end
+
+  def status_label status
+    content_tag :div, nil, class: "ui small #{STATUS_COLORS[status.to_sym]} basic label" do
+      # concat tag.i(nil, class: "#{STATUS_ICONS[key.to_sym]} icon")
+      concat translate_enum_value(Event, :status, status).upcase
+    end
   end
 
   def notice_type event

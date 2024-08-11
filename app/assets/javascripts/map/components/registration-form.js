@@ -4,7 +4,7 @@
 function RegistrationForm() {
   let alert = null // { type: 'error', message: "This is a test of the alert message." }
 
-  const regexForEmailValidation = RegExp(/^\w+([\.-]?\w+)@\w+([\.-]?\w+)(\.\w{2,3})+$/);
+  const regexForEmailValidation = RegExp(/^\w+([\.\+-]?\w+)@\w+([\.-]?\w+)(\.\w{2,3})+$/);
 
   let data = {
     eventId: null,

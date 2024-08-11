@@ -5,8 +5,14 @@ module Searchable
   module ActiveRecord
 
     def searchable_columns columns
-      class << self; attr_reader :search_columns_count; end
-      class << self; attr_reader :search_query; end
+      class << self
+        attr_reader :search_columns_count
+        attr_reader :search_query
+
+        def searchable
+          true
+        end
+      end
 
       @search_columns_count = columns.length
       @search_query = columns.map { |c| "(#{c}::text ILIKE ?)" }.join(' OR ')

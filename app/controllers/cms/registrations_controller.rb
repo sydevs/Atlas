@@ -22,7 +22,10 @@ class CMS::RegistrationsController < CMS::ApplicationController
     end
 
     def parameters
-      params.fetch(:registration, {}).permit(:name, :email, :questions, :time_zone)
+      params.fetch(:registration, {}).permit(
+        :questions, :time_zone,
+        user_attributes: %i[name email]
+      )
     end
 
 end
