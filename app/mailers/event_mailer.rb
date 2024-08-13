@@ -49,7 +49,7 @@ class EventMailer < ApplicationMailer
         recommendations: @event.recommendations.map do |key, link|
           I18n.translate(key, scope: 'emails.recommendations').merge({
             link: sign_in_link(link),
-            image: helpers.image_url("email/recommendations/#{key}.png", host: 'https://atlas.sydevelopers.com'),
+            image: "https://atlas.sydevelopers.com/email/recommendations/#{key}.png",
           })
         end,
         links: {

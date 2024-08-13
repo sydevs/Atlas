@@ -140,6 +140,7 @@ class RegistrationMailer < ApplicationMailer
       },
     })
 
+    @registration.touch(:reminder_sent_at)
     @registration.audits.create!({
       category: :notice_sent,
       conversation: conversation,
@@ -157,6 +158,7 @@ class RegistrationMailer < ApplicationMailer
 
     title = I18n.translate('emails.followup.title')
     conversation = @registration.conversations.create!
+    blocks = followup_blocks.map { |b| followup_block(b, conversation) }
 
     result = BrevoAPI.send_email(:followup, {
       subject: title,
@@ -173,29 +175,13 @@ class RegistrationMailer < ApplicationMailer
           label: @registration.event.label,
           map_url: @registration.event.map_url,
         },
-        content: [
-          {
-            header: translate('emails.followup.feedback.header'),
-            description: translate('emails.followup.feedback.description'),
-            action: translate('emails.followup.feedback.action'),
-            action_url: "mailto:#{conversation.reply_to}?subject=Re:%20#{translate('emails.followup.feedback.header')} - #{@registration.starting_date.to_fs(:short)}",
-          },
-          {
-            header: translate('emails.followup.next_class.header'),
-            description: translate('emails.followup.next_class.description'),
-            action: translate('emails.followup.next_class.action'),
-            #action_url: map_remind_registration_url(),
-          },
-          @registration.can_subscribe_to_mailing_list? ? {
-            header: translate('emails.followup.mailing_list.header'),
-            description: @registration.country.mailing_list_invitation || translate('emails.followup.mailing_list.description'),
-            action: translate('emails.followup.mailing_list.action'),
-            #action_url: map_subscribe_registration_url(),
-          } : nil,
-        ].compact,
+        count: blocks.length,
+        blocks: blocks,
+        b: blocks.map { |b| { act: b[:action] } }, # This is a workaround because we need shorter text or else it messes up the button styling.
       },
     })
 
+    @registration.touch(:followup_sent_at)
     @registration.audits.create!({
       category: :notice_sent,
       conversation: conversation,
@@ -207,5 +193,31 @@ class RegistrationMailer < ApplicationMailer
       }
     })
   end
+
+  private
+
+    def followup_blocks
+      blocks = %i[feedback]
+      blocks << :next_class if @registration.event.next_recurrence_at.present?
+      blocks << :mailing_list if @registration.can_subscribe_to_mailing_list?
+      blocks
+    end
+
+    def followup_block key, conversation
+      content = translate("emails.followup.#{key}")
+      content[:image] = "https://atlas.sydevelopers.com/email/followup/#{key}.jpg"
+
+      case key
+      when :feedback
+        content[:action_url] = "mailto:#{conversation.reply_to}?subject=Re:%20#{translate('emails.followup.feedback.header')} - #{@registration.starting_date.to_fs(:short)}"
+      when :next_class
+        # content[:action_url] = map_remind_registration_url
+      when :mailing_list
+        content[:description] = @registration.country.mailing_list_invitation || translate('emails.followup.mailing_list.description')
+        # content[:action_url] = map_subscribe_registration_url
+      end
+
+      content
+    end
 
 end
