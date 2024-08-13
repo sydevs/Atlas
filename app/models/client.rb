@@ -5,7 +5,7 @@ class Client < ApplicationRecord
   # Extensions
   include Searchable
   include Managed
-  include Audited
+  # include Audited
 
   nilify_blanks
   searchable_columns %w[label domain]
