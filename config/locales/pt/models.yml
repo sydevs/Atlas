@@ -75,7 +75,6 @@ pt:
         # Countable
         one: "incrição"
         other: "inscrições"
-        next_reminder_at: "Next Reminder At" # TODO: Translate
 
       # Other
       manager:

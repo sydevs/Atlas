@@ -75,7 +75,6 @@ cs:
         # Countable
         one: "registrace"
         other: "registrace"
-        next_reminder_at: "Next Reminder At" # TODO: Translate
 
       # Other
       manager:
