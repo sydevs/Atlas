@@ -75,6 +75,7 @@ cs:
         # Countable
         one: "registrace"
         other: "registrace"
+        next_reminder_at: "Next Reminder At" # TODO: Translate
 
       # Other
       manager:
@@ -311,6 +312,7 @@ cs:
         comment: "Komentář"
         created_at: "Registrováno na - místní čas"
         starting_at: "První online setkání spuštěno"
+        next_reminder_at: "Next Reminder At" # TODO: Translate
 
       # Other
       manager:

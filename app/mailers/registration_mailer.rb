@@ -211,10 +211,10 @@ class RegistrationMailer < ApplicationMailer
       when :feedback
         content[:action_url] = "mailto:#{conversation.reply_to}?subject=Re:%20#{translate('emails.followup.feedback.header')} - #{@registration.starting_date.to_fs(:short)}"
       when :next_class
-        # content[:action_url] = map_remind_registration_url
+        content[:action_url] = api_registration_remind_url(@registration.uuid)
       when :mailing_list
         content[:description] = @registration.country.mailing_list_invitation || translate('emails.followup.mailing_list.description')
-        # content[:action_url] = map_subscribe_registration_url
+        content[:action_url] = api_registration_subscribe_url(@registration.uuid)
       end
 
       content

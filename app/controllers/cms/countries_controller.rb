@@ -35,6 +35,7 @@ class CMS::CountriesController < CMS::ApplicationController
         :name, :country_code, :osm_id, :geojson, :bounds,
         :translations, :default_language_code, :enable_regions, :enable_custom_regions,
         :mailing_list_service, :mailing_list_api_key, :mailing_list_list_id,
+        :mailing_list_prompt, :mailing_list_invitation,
       )
       GeoData.parse_params(parameters)
     end

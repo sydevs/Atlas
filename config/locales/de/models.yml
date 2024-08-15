@@ -75,6 +75,7 @@ de:
         # Countable
         one: "Anmeldung"
         other: "Anmeldungen"
+        next_reminder_at: "Next Reminder At" # TODO: Translate
 
       # Other
       manager:
@@ -312,6 +313,7 @@ de:
         comment: "Kommentar"
         created_at: "Registered At - Local Time"
         starting_at: "Erste Veranstaltung am"
+        next_reminder_at: "Next Reminder At" # TODO: Translate
 
       # Other
       manager:

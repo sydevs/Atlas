@@ -75,6 +75,7 @@ ru:
         # Countable
         one: "Регистрация"
         other: "Регистраций"
+        next_reminder_at: "Next Reminder At" # TODO: Translate
 
       # Other
       manager:
@@ -311,6 +312,7 @@ ru:
         comment: "Комментарий"
         created_at: "Зарегистрировано в - (местное время)"
         starting_at: "Начало занятий с"
+        next_reminder_at: "Next Reminder At" # TODO: Translate
 
       # Other
       manager:

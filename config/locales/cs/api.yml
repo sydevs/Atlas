@@ -1,7 +1,18 @@
 cs:
   api:
     distance: "%{distance} km daleko"
+    you_may_close: "You may close this window" # TODO: Translate
+
     event:
       label: "%{category} v %{venue}"
       inactive_label: "%{category} in %{area}" # TODO: Translate
       online_label: "%{category} z %{area}"
+
+    registration: # TODO: Translate
+      remind:
+        title: "Reminder Confirmed"
+        description: "You will receive a reminder of your next class at \"%{event}\" on %{date}"
+
+      subscribe:
+        title: "Subscription Confirmed"
+        description: "You can unsubscribe any time at the bottom of each email."

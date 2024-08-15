@@ -1,0 +1,43 @@
+doctype html
+
+html
+  head
+    title = @title
+    meta http-equiv='Content-Type' content='text/html; charset=utf-8'
+    = render 'layouts/favicons'
+    css:
+      .outer {
+        text-align: center;
+        font-size: 16px;
+        margin: auto;
+        width: 400px;
+        max-width: 90%;
+        margin-top: 25vh;
+      }
+
+      .box {
+        border: 2px solid #e08e79;
+        padding: 30px 50px;
+      }
+
+      h1 {
+        font-size: 24px;
+      }
+
+      img {
+        width: 80px;
+        max-width: 80%;
+        border-radius: 10px;
+        margin-bottom: 25px;
+      }
+      
+      .faded {
+        opacity: 0.5;
+      }
+  body
+    .outer
+      img src=image_url('api/wemeditate.png')
+      .box
+        h1 = @title
+        p = @description
+        p.faded = translate('api.you_may_close')

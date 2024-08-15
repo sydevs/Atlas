@@ -75,6 +75,7 @@ pt:
         # Countable
         one: "incrição"
         other: "inscrições"
+        next_reminder_at: "Next Reminder At" # TODO: Translate
 
       # Other
       manager:
@@ -311,6 +312,7 @@ pt:
         comment: "Comentário"
         created_at: "Registrado em - hora local"
         starting_at: "Primeira classe em"
+        next_reminder_at: "Next Reminder At" # TODO: Translate
 
       # Other
       manager:

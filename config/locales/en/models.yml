@@ -91,6 +91,7 @@ en:
         # Countable
         one: "conversation"
         other: "conversations"
+        next_reminder_at: "Next Reminder At" # TODO: Translate
 
       # Other
       manager:
@@ -304,6 +305,7 @@ en:
         comment: "Comment"
         created_at: "Registered At - Local Time"
         starting_at: "First Class On"
+        next_reminder_at: "Next Reminder At"
 
       # Other
       manager:

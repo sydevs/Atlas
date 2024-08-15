@@ -76,6 +76,7 @@ uk:
         # Countable
         one: "реєстрація"
         other: "реєстрацій"
+        next_reminder_at: "Next Reminder At" # TODO: Translate
 
       # Other
       manager:
@@ -312,6 +313,7 @@ uk:
         comment: "Коментар"
         created_at: "Зареєстровано за місцевим часом"
         starting_at: "Перший клас почнеться"
+        next_reminder_at: "Next Reminder At" # TODO: Translate
 
       # Other
       manager: # TODO: Translate

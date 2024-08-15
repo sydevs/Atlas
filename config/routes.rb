@@ -133,5 +133,11 @@ Rails.application.routes.draw do
     get :graphql, to: "graphql#execute" if Rails.env.development?
 
     post :inbound, to: 'application#inbound_email'
+    post :inbound, to: 'application#inbound_email'
+
+    resources :registrations, only: %i[] do
+      get :remind
+      get :subscribe
+    end
   end
 end

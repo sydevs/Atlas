@@ -1,7 +1,18 @@
 en:
   api:
     distance: "%{distance} km away"
+    you_may_close: "You may close this window"
+
     event:
       label: "%{category} at %{venue}"
       inactive_label: "%{category} in %{area}"
       online_label: "%{category} from %{area}"
+    
+    registration:
+      remind:
+        title: "Reminder Confirmed"
+        description: "You will receive a reminder of your next class at \"%{event}\" on %{date}"
+
+      subscribe:
+        title: "Subscription Confirmed"
+        description: "You can unsubscribe any time at the bottom of each email."

@@ -30,13 +30,8 @@ class Registration < ApplicationRecord
     reorder(r[:questions].eq({})).order(r[:created_at].asc)
   end
 
-  scope :needs_reminder_email, -> { where(reminder_sent_at: nil).where('starting_at <= ? AND starting_at >= ?', 1.day.from_now, 1.hour.from_now) }
+  scope :needs_reminder_email, -> { where('reminder_sent_at = null OR (next_reminder_at >= ? AND next_reminder_at <= ?)', 15.minutes.ago, 15.minutes.from_now) }
   scope :needs_followup_email, -> { where(followup_sent_at: nil).where('starting_at <= ? AND starting_at >= ?', 1.day.ago, 1.week.ago) }
-  scope :needs_reminder_email, -> do 
-    offline_reminder = offline.where(reminder_sent_at: nil).where('starting_at <= ? AND starting_at >= ?', 1.day.from_now, 1.hour.from_now)
-    online_reminder = online.where(reminder_sent_at: nil).where('starting_at <= ? AND starting_at >= ?', 1.hour.from_now, 30.minutes.from_now)
-    offline_reminder.or(online_reminder)
-  end
 
   # Delegations
   delegate :immediate_registration_notification?, :manager, :managed_by?, to: :event
@@ -45,6 +40,7 @@ class Registration < ApplicationRecord
   alias default_message_receiver manager
 
   # Callbacks
+  before_create :set_reminder
   after_create :send_registration_notification, if: :immediate_registration_notification?
   before_save :find_or_create_user
 
@@ -56,6 +52,24 @@ class Registration < ApplicationRecord
 
   def starting_date
     starting_at.to_date
+  end
+
+  def set_reminder
+    next_event_at = starting_at < Time.now ? event.next_recurrence_at : starting_at
+    return unless next_event_at.present?
+
+    if event.online?
+      # Online events remind 1 hour before
+      self.next_reminder_at = next_event_at - 1.hour
+    else
+      # Offline events remind 1 day before
+      self.next_reminder_at = next_event_at - 1.day
+    end
+  end
+
+  def set_reminder!
+    set_reminder
+    save!
   end
 
   def subscribe_to! list_id

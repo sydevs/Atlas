@@ -5,7 +5,7 @@
 module MailingListAPI
   include Rails.application.routes.url_helpers
 
-  def self.subscribe registration
+  def self.subscribe! registration
     return unless registration.can_subscribe_to_mailing_list?
 
     event = registration.event

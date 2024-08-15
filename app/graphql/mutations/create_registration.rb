@@ -40,7 +40,7 @@ class Mutations::CreateRegistration < Mutations::BaseMutation
       }
     elsif registration.update(arguments)
       registration.subscribe_to! :registrations
-      MailingListAPI.subscribe registration if subscribe
+      MailingListAPI.subscribe!(registration) if subscribe
       
       RegistrationMailer.with(registration: registration).confirmation.deliver_later
       RegistrationMailer.with(registration: registration).question.deliver_later if registration.questions['questions'].present?

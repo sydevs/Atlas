@@ -24,6 +24,20 @@ h3.ui.small.dividing.grey.header = translate('cms.details.details_for_record', r
       .header = Registration.human_attribute_name(:starting_at)
       time.description datetime=@record.starting_at
         = @record.starting_at.to_s(:short_date)
+  - if @record.next_reminder_at > Time.now
+    .item
+      i.envelope.square.icon
+      .content
+        .header
+          = Registration.human_attribute_name(:next_reminder_at)
+        time.description datetime=@record.created_at
+          = @record.next_reminder_at.to_s(:short)
+
+p: a href=api_registration_remind_url(@record.uuid) target='_blank'
+  | Remind Link
+
+p: a href=api_registration_subscribe_url(@record.uuid) target='_blank'
+  | Subscribe Link
 
 h3.ui.small.dividing.grey.header = translate_attribute(Event, :registration_question)
 .ui.very.relaxed.divided.list

@@ -10,8 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_08_09_121305) do
+ActiveRecord::Schema[7.0].define(version: 2024_08_15_115600) do
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pgcrypto"
   enable_extension "plpgsql"
 
   create_table "area_venues", force: :cascade do |t|
@@ -238,6 +239,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_08_09_121305) do
     t.datetime "mailing_list_subscribed_at"
     t.datetime "reminder_sent_at"
     t.datetime "followup_sent_at"
+    t.uuid "uuid", default: -> { "gen_random_uuid()" }, null: false
+    t.datetime "next_reminder_at", null: false
     t.index ["event_id"], name: "index_registrations_on_event_id"
     t.index ["user_id"], name: "index_registrations_on_user_id"
   end
