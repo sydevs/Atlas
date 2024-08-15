@@ -20,7 +20,10 @@ module BrevoAPI
   }.freeze
 
   def self.subscribe email, list_id, attributes, api_key = nil
-    return if Rails.env.development?
+    if Rails.env.development?
+      puts "SKIPPED BREVO SUBSCRIPTION IN DEVELOPMENT"
+      return
+    end
 
     client = Brevo::ContactsApi.new
     list_id = BrevoAPI::LISTS[list_id]
@@ -37,7 +40,10 @@ module BrevoAPI
   end
 
   def self.unsubscribe email, list_id
-    return if Rails.env.development?
+    if Rails.env.development?
+      puts "SKIPPED BREVO UN-SUBSCRIPTION IN DEVELOPMENT"
+      return
+    end
     
     client = Brevo::ContactsApi.new
     list_id = BrevoAPI::LISTS[list_id]
@@ -65,8 +71,9 @@ module BrevoAPI
   def self.send_email template, config
     puts "[Brevo] Send #{template}"
     if Rails.env.development?
+      puts "SKIPPED SENDING EMAILS IN DEVELOPMENT"
       puts config.to_json
-      #return
+      return
     end
     
     config.reverse_merge!({

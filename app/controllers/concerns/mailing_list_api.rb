@@ -31,7 +31,10 @@ module MailingListAPI
   end
 
   def self.subscribe_to_brevo api_key, list_id, attributes
-    return if Rails.env.development?
+    if Rails.env.development?
+      puts "SKIPPED BREVO SUBSCRIPTION IN DEVELOPMENT"
+      return
+    end
 
     config = Brevo::Configuration.new
     config.api_key['api-key'] = api_key
