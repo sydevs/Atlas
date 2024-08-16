@@ -12,6 +12,9 @@ class Client < ApplicationRecord
 
   store_accessor :config, :embed_type, :routing_type, :default_view, :domain, :locale, :primary_color, :secondary_color, :tertiary_color
 
+  attribute :embed_type, :string
+  attribute :routing_type, :string
+  attribute :default_view, :string
   enum embed_type: %i[iframe script url], _suffix: 'embed'
   enum routing_type: %i[query path], _suffix: 'routing'
   enum default_view: %i[map list], _suffix: 'view'
