@@ -1,56 +1,57 @@
 @import '../_mixins'
 
-.sya-loader
-  width: 100%
-  padding: 10px
-  font-size: 14px
+#sahajatlas
+  .sya-loader
+    width: 100%
+    padding: 10px
+    font-size: 14px
 
-  display: flex
-  justify-content: center
-  align-items: center
-  text-transform: uppercase
-
-  > .sya-spinner
-    border: 3px solid transparentize(black, 0.9)
-    border-radius: 50%
-    border-top-color: transparentize(black, 0.5)
-    animation: spin 1s ease-in-out infinite !important
-
-  &--large
-    margin: 50px auto
-    width: 50px
-    height: 50px
-    font-size: 50px
-    padding: 0
+    display: flex
+    justify-content: center
+    align-items: center
+    text-transform: uppercase
 
     > .sya-spinner
-      width: 100%
-      height: 100%
+      border: 3px solid transparentize(black, 0.9)
+      border-radius: 50%
+      border-top-color: transparentize(black, 0.5)
+      animation: spin 1s ease-in-out infinite !important
 
-  &--small
-    padding-right: 30px
-    background: color-mix(in srgb, #{$theme-primary}, transparent 85%)
+    &--large
+      margin: 50px auto
+      width: 50px
+      height: 50px
+      font-size: 50px
+      padding: 0
 
-    > .sya-spinner
-      display: inline-block
-      width: 1.1em
-      height: 1.1em
-      margin: 0 0.5em
+      > .sya-spinner
+        width: 100%
+        height: 100%
 
-  &--error
-    background: color-mix(in srgb, #{$theme-secondary}, transparent 85%)
+    &--small
+      padding-right: 30px
+      background: color-mix(in srgb, #{$theme-primary}, transparent 85%)
 
-    > .sya-spinner
-      background: #{$theme-secondary}
-      color: white
-      font-weight: 900
-      text-align: center
-      border: none
-      animation: none !important
+      > .sya-spinner
+        display: inline-block
+        width: 1.1em
+        height: 1.1em
+        margin: 0 0.5em
 
-    > .sya-spinner::before
-      content: '!'
+    &--error
+      background: color-mix(in srgb, #{$theme-secondary}, transparent 85%)
 
-@keyframes sya-loader-spin
-  to
-    transform: rotate(360deg)
+      > .sya-spinner
+        background: #{$theme-secondary}
+        color: white
+        font-weight: 900
+        text-align: center
+        border: none
+        animation: none !important
+
+      > .sya-spinner::before
+        content: '!'
+
+  @keyframes sya-loader-spin
+    to
+      transform: rotate(360deg)

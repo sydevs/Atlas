@@ -1,62 +1,157 @@
 @use 'sass:math'
 @import '../_mixins'
 
-.sya-registration
-  margin-top: 25px
-  margin-bottom: 0
-  position: relative
+#sahajatlas
+  .sya-registration
+    margin-top: 25px
+    margin-bottom: 0
+    position: relative
 
-  &--atlas
-    min-height: 500px
+    &--atlas
+      min-height: 500px
 
-// ===== HEADER ===== //
-.sya-registration__closed
-  font-size: 16px !important
+  // ===== HEADER ===== //
+  .sya-registration__closed
+    font-size: 16px !important
 
-.sya-registration__header
-  margin: auto
-  margin-bottom: 20px
-  color: $color-grey-dark
-  font-size: 18px
+  .sya-registration__header
+    margin: auto
+    margin-bottom: 20px
+    color: $color-grey-dark
+    font-size: 18px
 
-  display: flex
-  flex-direction: row
-  justify-content: center
-  text-align: center
-
-  &:before, &:after
-    content: ''
-    background: image-url('map/leaves.svg')
-    width: 2.667em
-    height: 2.944em
-    display: inline-block
-
-  &:before
-    transform: rotate(-90deg)
-
-  &:after
-    transform: rotate(90deg)
-
-  &__text
     display: flex
-    flex-direction: column
+    flex-direction: row
     justify-content: center
-    margin: 0 20px
+    text-align: center
 
-  &__title
-    font-weight: $font-semibold
-    line-height: 1.25
+    &:before, &:after
+      content: ''
+      background: image-url('map/leaves.svg')
+      width: 2.667em
+      height: 2.944em
+      display: inline-block
+
+    &:before
+      transform: rotate(-90deg)
+
+    &:after
+      transform: rotate(90deg)
+
+    &__text
+      display: flex
+      flex-direction: column
+      justify-content: center
+      margin: 0 20px
+
+    &__title
+      font-weight: $font-semibold
+      line-height: 1.25
+      margin-bottom: 6px
+
+    &__subtitle
+      font-style: italic
+      font-size: 0.666em
+      line-height: 1.1667
+      letter-spacing: 0.36px
+
+  // ===== EXTERNAL REGISTRATION ===== //
+  .sya-registration__external
+    &__action
+      @include button
+
+      display: block
+      font-size: 17px
+      letter-spacing: 0.2px
+      color: $color-grey-dark
+      width: 100%
+      max-width: 325px
+      margin: auto
+
+  // ===== FIELDS ===== //
+  .sya-registration__fields
+    padding-bottom: 40px
+
+  .sya-registration__description
+    margin-bottom: 12px
+
+    font-size: 14px
+    line-height: 1.785
+    letter-spacing: 0.39px
+
+  .sya-registration__description > p
+    margin-bottom: 16px
+
+  .sya-registration__fields > label
+    display: block
+    font-size: 14px
+    font-weight: 500
     margin-bottom: 6px
 
-  &__subtitle
-    font-style: italic
-    font-size: 0.666em
-    line-height: 1.1667
+  input.sya-registration__input,
+  textarea.sya-registration__textarea
+    appearance: none
+    border-radius: 0
+    background: white
+    resize: none
+
+    padding: 17px 20px
+    border: 1px solid $color-border-light
+    width: 100%
+    max-width: 100%
+    margin-bottom: 18px
+
+    font-family: inherit
+    font-weight: $font-normal
+    font-size: 14px
+    line-height: 1.45
+    letter-spacing: 0.17px
+    color: $color-grey-normal
+
+    &::placeholder,
+    &::-ms-input-placeholder
+      color: $color-grey-light
+
+    &.error_input
+      border: 1px solid $theme-secondary !important
+      -webkit-transition: 0.5s
+      transition: 0.5s
+      outline: none !important
+
+  .sya-registration__notice
+    text-align: center
+    margin-bottom: 20px
+    padding: 0 30px
+
+    font-size: 12px
+    line-height: 1.25
     letter-spacing: 0.36px
 
-// ===== EXTERNAL REGISTRATION ===== //
-.sya-registration__external
-  &__action
+  .sya-registration__notice-link
+    transition: all 0.2s ease
+    cursor: pointer
+    text-decoration: none
+    color: $theme-primary
+
+    &:hover
+      color: $color-grey-dark
+
+  .sya-registration__message
+    font-size: 14px
+    margin-bottom: 1.5em
+    text-align: center
+
+    &.info
+      color: $theme-secondary
+
+    &.error
+      color: $theme-secondary
+
+    &.invalid
+      color: $theme-secondary
+
+  // Greater specificity is needed to override the Swiss website
+  .sya-registration .sya-registration__submit
     @include button
 
     display: block
@@ -66,204 +161,111 @@
     width: 100%
     max-width: 325px
     margin: auto
+    margin-bottom: 20px
 
-// ===== FIELDS ===== //
-.sya-registration__fields
-  padding-bottom: 40px
+  // ===== CONFIRMATION ===== //
+  $circle-size: 360px
 
-.sya-registration__description
-  margin-bottom: 12px
-
-  font-size: 14px
-  line-height: 1.785
-  letter-spacing: 0.39px
-
-.sya-registration__description > p
-  margin-bottom: 16px
-
-.sya-registration__fields > label
-  display: block
-  font-size: 14px
-  font-weight: 500
-  margin-bottom: 6px
-
-input.sya-registration__input,
-textarea.sya-registration__textarea
-  appearance: none
-  border-radius: 0
-  background: white
-  resize: none
-
-  padding: 17px 20px
-  border: 1px solid $color-border-light
-  width: 100%
-  max-width: 100%
-  margin-bottom: 18px
-
-  font-family: inherit
-  font-weight: $font-normal
-  font-size: 14px
-  line-height: 1.45
-  letter-spacing: 0.17px
-  color: $color-grey-normal
-
-  &::placeholder,
-  &::-ms-input-placeholder
-    color: $color-grey-light
-
-  &.error_input
-    border: 1px solid $theme-secondary !important
-    -webkit-transition: 0.5s
-    transition: 0.5s
-    outline: none !important
-
-.sya-registration__notice
-  text-align: center
-  margin-bottom: 20px
-  padding: 0 30px
-
-  font-size: 12px
-  line-height: 1.25
-  letter-spacing: 0.36px
-
-.sya-registration__notice-link
-  transition: all 0.2s ease
-  cursor: pointer
-  text-decoration: none
-  color: $theme-primary
-
-  &:hover
-    color: $color-grey-dark
-
-.sya-registration__message
-  font-size: 14px
-  margin-bottom: 1.5em
-  text-align: center
-
-  &.info
-    color: $theme-secondary
-
-  &.error
-    color: $theme-secondary
-
-  &.invalid
-    color: $theme-secondary
-
-.sya-registration__submit
-  @include button
-
-  display: block
-  font-size: 17px
-  letter-spacing: 0.2px
-  color: $color-grey-dark
-  width: 100%
-  max-width: 325px
-  margin: auto
-  margin-bottom: 20px
-
-// ===== CONFIRMATION ===== //
-$circle-size: 360px
-
-.sya-registration__confirmation
-  position: absolute
-  width: 100%
-  height: 450px
-
-  display: flex
-  flex-direction: column
-  align-items: center
-  justify-content: center
-
-  animation: fade-in 0.5s
-
-  font-size: 16px
-  text-align: center
-  background: white
-
-  &__circle::before
-    content: image-url('map/circle.svg')
+  .sya-registration__confirmation
     position: absolute
-    top: 50%
-    left: 50%
-    width: $circle-size
-    height: $circle-size
-    min-height: $circle-size
-    transition: all 0.5s ease-out
-    transform: translate(-#{math.div($circle-size, 2)}, -#{math.div($circle-size, 2)})
-    align-self: center
+    width: 100%
+    height: 450px
 
-  &__circle
-    position: relative
-    display: inline-flex
-    flex-direction: column
-    justify-content: center
-    width: $circle-size
-    height: $circle-size
-    padding: 16%
-
-    animation: circle-in 0.5s
-
-    @mixin tablet-or-larger
-      margin-top: 30px
-      margin-bottom: 30px
-
-  &__title
-    font-size: 1.875em
-    line-height: 1.16667
-    letter-spacing: 0.8px
-    color: $color-grey-dark
-    max-width: 260px
-    margin: auto
-    margin-bottom: 25px
-    margin-top: 40px
-
-  &__subtitle
-    font-size: 1em
-    line-height: 1.5625
-    letter-spacing: 0.44px
-    max-width: 180px
-    margin: 0 auto
-
-  &__actions
-    color: $color-grey-dark
-    font-weight: $font-semibold
-    font-size: 13px
-    line-height: 15px
-    text-align: left
-    
     display: flex
-    flex-direction: row
-    justify-content: space-evenly
+    flex-direction: column
+    align-items: center
+    justify-content: center
 
-    width: 400px
-    max-width: 90vw
-    margin-top: 40px
+    animation: fade-in 0.5s
 
-    @include desktop-or-larger
+    font-size: 16px
+    text-align: center
+    background: white
+
+    &__circle::before
+      content: image-url('map/circle.svg')
+      position: absolute
+      top: 50%
+      left: 50%
+      width: $circle-size
+      height: $circle-size
+      min-height: $circle-size
+      transition: all 0.5s ease-out
+      transform: translate(-#{math.div($circle-size, 2)}, -#{math.div($circle-size, 2)})
+      align-self: center
+
+    &__circle
+      position: relative
+      display: inline-flex
+      flex-direction: column
+      justify-content: center
+      width: $circle-size
+      height: $circle-size
+      padding: 16%
+
+      animation: circle-in 0.5s
+
+      @mixin tablet-or-larger
+        margin-top: 30px
+        margin-bottom: 30px
+
+    &__title
+      font-size: 1.875em
+      line-height: 1.16667
+      letter-spacing: 0.8px
+      color: $color-grey-dark
+      max-width: 260px
+      margin: auto
+      margin-bottom: 25px
       margin-top: 40px
 
-    > *
-      color: inherit !important
-      margin: 0 10px
+    &__subtitle
+      font-size: 1em
+      line-height: 1.5625
+      letter-spacing: 0.44px
+      max-width: 180px
+      margin: 0 auto
 
-  &__share
-    width: #{80 + 34}px
+    &__actions
+      color: $color-grey-dark
+      font-weight: $font-semibold
+      font-size: 13px
+      line-height: 15px
+      text-align: left
+      
+      display: flex
+      flex-direction: row
+      justify-content: space-evenly
 
-  &__back
-    width: #{90 + 34}px
+      width: 400px
+      max-width: 90vw
+      margin-top: 40px
 
-  &__share,
-  &__back
-    display: inline-block
-    cursor: pointer
-    opacity: 0.8
-    transition: ease 0.2s
+      @include desktop-or-larger
+        margin-top: 40px
 
-    &:hover
-      opacity: 1
+      > *
+        color: inherit !important
+        margin: 0 10px
 
-    > .sya-icon
-      float: left
-      margin-right: 10px
-      font-size: 24px
-      line-height: 30px
+    &__share
+      width: #{80 + 34}px
+
+    &__back
+      width: #{90 + 34}px
+
+    &__share,
+    &__back
+      display: inline-block
+      cursor: pointer
+      opacity: 0.8
+      transition: ease 0.2s
+
+      &:hover
+        opacity: 1
+
+      > .sya-icon
+        float: left
+        margin-right: 10px
+        font-size: 24px
+        line-height: 30px

@@ -1,77 +1,78 @@
 @import '../_mixins'
 
-.sya-list
-  max-width: 600px
-  width: 100%
-  margin: auto
-
-  flex-grow: 1
-  overflow-y: auto
-
-  @include mobile
-    padding-bottom: 60px
-
-.sya-list__item
-  // Remove link style
-  color: inherit
-  text-decoration: none
-
-  &[href]:hover
-    //background: $color-background
-    background: color-mix(in srgb, #{$theme-tertiary}, transparent 85%)
-    cursor: pointer
-    opacity: 1
-
-.sya-list__item:not(:last-child)::after
-  content: ''
-  position: absolute
-  border-bottom: 1px solid $color-border-light
-  bottom: 0
-  left: $panel-padding-mobile
-  right: $panel-padding-mobile
-
-// ===== LIST NOTICE ===== //
-.sya-list-notice
-  padding: $panel-padding-mobile
-  font-weight: $font-medium
-  font-style: italic
-  letter-spacing: 0.1px
-  
-// ===== LIST FALLBACK ===== //
-.sya-list-fallback
-  padding-top: 35px
-  padding-bottom: 40px
-  max-width: 290px
-  margin: auto
-  text-align: center
-
-  @include mobile
-    max-width: 100%
+#sahajatlas
+  .sya-list
+    max-width: 600px
     width: 100%
-    position: fixed
-    bottom: 0
-    box-shadow: $shadow-light
-    background: white
-    z-index: 10
+    margin: auto
 
-  &__message
+    flex-grow: 1
+    overflow-y: auto
+
+    @include mobile
+      padding-bottom: 60px
+
+  .sya-list__item
+    // Remove link style
+    color: inherit
+    text-decoration: none
+
+    &[href]:hover
+      //background: $color-background
+      background: color-mix(in srgb, #{$theme-tertiary}, transparent 85%)
+      cursor: pointer
+      opacity: 1
+
+  .sya-list__item:not(:last-child)::after
+    content: ''
+    position: absolute
+    border-bottom: 1px solid $color-border-light
+    bottom: 0
+    left: $panel-padding-mobile
+    right: $panel-padding-mobile
+
+  // ===== LIST NOTICE ===== //
+  .sya-list-notice
+    padding: $panel-padding-mobile
+    font-weight: $font-medium
+    font-style: italic
+    letter-spacing: 0.1px
+    
+  // ===== LIST FALLBACK ===== //
+  .sya-list-fallback
+    padding-top: 35px
+    padding-bottom: 40px
     max-width: 290px
     margin: auto
-    font-size: 16px
-    line-height: 1.5625
-    letter-spacing: 0.44px
+    text-align: center
 
-    a
-      color: $theme-tertiary
+    @include mobile
+      max-width: 100%
+      width: 100%
+      position: fixed
+      bottom: 0
+      box-shadow: $shadow-light
+      background: white
+      z-index: 10
+
+    &__message
+      max-width: 290px
+      margin: auto
+      font-size: 16px
+      line-height: 1.5625
+      letter-spacing: 0.44px
+
+      a
+        color: $theme-tertiary
+        font-weight: $font-medium
+        text-decoration: underline !important
+
+    &__link
+      display: inline-block
+      font-size: 17px
+      line-height: 1.4444
+      border-bottom: 1px solid $color-grey-normal
       font-weight: $font-medium
-      text-decoration: underline !important
-
-  &__link
-    display: inline-block
-    font-size: 17px
-    line-height: 1.4444
-    border-bottom: 1px solid $color-grey-normal
-    font-weight: $font-medium
-    color: $color-grey-dark
-    margin: 20px
-    margin-bottom: 28px
+      color: $color-grey-dark
+      margin: 20px
+      margin-bottom: 28px

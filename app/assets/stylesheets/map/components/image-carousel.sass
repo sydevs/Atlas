@@ -1,53 +1,54 @@
 @import '../_mixins'
 
-// ===== IMAGES ===== //
-.sya-image-carousel
+#sahajatlas
+  // ===== IMAGES ===== //
+  .sya-image-carousel
 
-  margin: 35px 0
-  height: 180px
-  
-  img
-    margin-right: 10px
-    border-radius: 0
-    height: 100%
-
-// FLICKITY ADJUSTMENTS
-.sya-image-carousel .flickity
-  &-viewport
+    margin: 35px 0
     height: 180px
-    overflow: visible
+    
+    img
+      margin-right: 10px
+      border-radius: 0
+      height: 100%
 
-  &-button:disabled
-    display: none
+  // FLICKITY ADJUSTMENTS
+  .sya-image-carousel .flickity
+    &-viewport
+      height: 180px
+      overflow: visible
 
-  &-page-dots
-    bottom: -24px
+    &-button:disabled
+      display: none
 
-  &-page-dots > .dot
-    width: 6px
-    height: 6px
-    margin: 0 7.5px
+    &-page-dots
+      bottom: -24px
 
-  &-prev-next-button
-    width: 40px
-    height: 40px
+    &-page-dots > .dot
+      width: 6px
+      height: 6px
+      margin: 0 7.5px
 
-    .flickity-button-icon
-      width: 16px
-      height: 16px
-      left: 12px
-      top: 12px
+    &-prev-next-button
+      width: 40px
+      height: 40px
 
-    &:focus
-      box-shadow: 0 0 0 3px $theme-secondary
+      .flickity-button-icon
+        width: 16px
+        height: 16px
+        left: 12px
+        top: 12px
 
-    @include tablet-or-larger
-      &.next
-        right: -20px
+      &:focus
+        box-shadow: 0 0 0 3px $theme-secondary
 
-      &.previous
-        left: -20px
+      @include tablet-or-larger
+        &.next
+          right: -20px
 
-.sya-image-carousel.flickity-single .flickity
-  &-page-dots
-    display: none
+        &.previous
+          left: -20px
+
+  .sya-image-carousel.flickity-single .flickity
+    &-page-dots
+      display: none

@@ -1,116 +1,117 @@
 @import '../_mixins'
 
-.sya-navigation
-  --color: #{$color-grey-normal}
-  --contrast-color: white
-
-  text-align: center
-  text-transform: uppercase
-  line-height: 60px
-  font-size: 13px
-  letter-spacing: 0.17px
-
-  @include mobile
-    order: 3
-    background: white
-    box-shadow: $shadow-light
-    z-index: 1
-
-    position: fixed
-    bottom: 0
-    left: 0
-    right: 0
-
-  @include tablet-or-larger
-    --color: #{$theme-primary}
+#sahajatlas
+  .sya-navigation
+    --color: #{$color-grey-normal}
     --contrast-color: white
 
-    margin: 1.5rem
-    margin-bottom: 0.5rem
-    line-height: 30px
-
-    border: 1px solid $theme-primary
-    border-radius: 5px
-
-.sya-navigation__item
-  font-weight: $font-medium
-  opacity: 0.7
-  flex-grow: 1
-  color: inherit
-
-  @include mobile
-    text-decoration: underline !important
-
-  @include tablet-or-larger
-    font-weight: $font-bold
-    text-decoration: none
-    padding: 0 6px
-
-  &:not(:last-child)
-    border-right: 1px solid var(--color)
-
-  &[data-badge]::after
-    --color: #{$color-grey-normal}
+    text-align: center
+    text-transform: uppercase
+    line-height: 60px
+    font-size: 13px
+    letter-spacing: 0.17px
 
     @include mobile
-      margin-left: 6px
+      order: 3
+      background: white
+      box-shadow: $shadow-light
+      z-index: 1
 
-  &--active
-    color: var(--color)
-    opacity: 1
+      position: fixed
+      bottom: 0
+      left: 0
+      right: 0
 
     @include tablet-or-larger
-      background: var(--color)
-      color: white
+      --color: #{$theme-primary}
+      --contrast-color: white
 
-  &--active[data-badge]::after
-    @include tablet-or-larger
-      --contrast-color: #{$theme-primary}
-      --color: white
+      margin: 1.5rem
+      margin-bottom: 0.5rem
+      line-height: 30px
 
-// ===== NAVIGATION BUTTONS ===== //
-.sya-navigation-button
-  $size: 33px
+      border: 1px solid $theme-primary
+      border-radius: 5px
 
-  z-index: $z-control
-  position: absolute
-
-  text-decoration: none
-
-  width: $size
-  height: $size
-  border: 1px solid white
-  border-radius: 100%
-  color: $color-border
-  background: white
-  transition: all 0.2s ease
-  cursor: pointer
-
-  @include mobile
-    border-color: rgba(0,0,0,0.2)
-    top: 20px
-
-    &--left
-      left: 22px
-
-    &--right
-      right: 22px
-
-  @include tablet-or-larger
-    position: absolute
-    top: $panel-padding-thin - 5px
-
-    &--left
-      left: 5px
-
-    &--right
-      right: 5px
-
-  .sya-icon
-    height: 100%
-    text-align: center
-    line-height: $size - 2px
-
-  &:hover
+  .sya-navigation__item
+    font-weight: $font-medium
     opacity: 0.7
-    color: black
+    flex-grow: 1
+    color: inherit
+
+    @include mobile
+      text-decoration: underline !important
+
+    @include tablet-or-larger
+      font-weight: $font-bold
+      text-decoration: none
+      padding: 0 6px
+
+    &:not(:last-child)
+      border-right: 1px solid var(--color)
+
+    &[data-badge]::after
+      --color: #{$color-grey-normal}
+
+      @include mobile
+        margin-left: 6px
+
+    &--active
+      color: var(--color)
+      opacity: 1
+
+      @include tablet-or-larger
+        background: var(--color)
+        color: white
+
+    &--active[data-badge]::after
+      @include tablet-or-larger
+        --contrast-color: #{$theme-primary}
+        --color: white
+
+  // ===== NAVIGATION BUTTONS ===== //
+  .sya-navigation-button
+    $size: 33px
+
+    z-index: $z-control
+    position: absolute
+
+    text-decoration: none
+
+    width: $size
+    height: $size
+    border: 1px solid white
+    border-radius: 100%
+    color: $color-border
+    background: white
+    transition: all 0.2s ease
+    cursor: pointer
+
+    @include mobile
+      border-color: rgba(0,0,0,0.2)
+      top: 20px
+
+      &--left
+        left: 22px
+
+      &--right
+        right: 22px
+
+    @include tablet-or-larger
+      position: absolute
+      top: $panel-padding-thin - 5px
+
+      &--left
+        left: 5px
+
+      &--right
+        right: 5px
+
+    .sya-icon
+      height: 100%
+      text-align: center
+      line-height: $size - 2px
+
+    &:hover
+      opacity: 0.7
+      color: black

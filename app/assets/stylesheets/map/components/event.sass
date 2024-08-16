@@ -1,149 +1,150 @@
 @import '../_mixins'
 
-.sya-event
-  width: 100%
-  margin-bottom: 12px
+#sahajatlas
+  .sya-event
+    width: 100%
+    margin-bottom: 12px
 
-.sya-event__label
-  font-weight: $font-semibold
-  font-size: 17px
-  line-height: 20px
-  color: $color-grey-dark
-  margin-bottom: 8px
-  min-height: 22px
-  max-width: 220px
-
-.sya-event__subtitle
-  font-size: 13px
-  line-height: 14px
-  letter-spacing: 0.36px
-  margin-bottom: 4px
-
-  &__online
-    font-weight: bold
-    line-height: 1.25
-
-  &__distance::before
-    content: '• '
-    margin-left: 4px
-
-  &__distance
-    color: $theme-primary
-    white-space: nowrap
-
-.sya-event__meta
-  line-height: 17px
-  font-size: 12px
-
-  > *
-    display: inline-block
-
-  &__day
-    text-transform: uppercase
-    letter-spacing: 0.36px
-
-  &__time
-    font-weight: $font-medium
-    letter-spacing: 0.49px
-
-  &__timezone
-    position: relative
+  .sya-event__label
     font-weight: $font-semibold
-    letter-spacing: 0.36px
-    text-decoration: underline dotted
-    cursor: help
-    margin-left: 3px
+    font-size: 17px
+    line-height: 20px
+    color: $color-grey-dark
+    margin-bottom: 8px
+    min-height: 22px
+    max-width: 220px
 
-  &__timezone::after
-    content: attr(data-title)
-    background: white
-    color: $theme-primary
-    border: 1px solid $theme-primary
-    border-radius: 5px
-    padding: 0 5px
-    box-shadow: $shadow-subtle
-
-    position: absolute
-    bottom: 18px
-    left: 50%
-    transform: translateX(-40%)
-    white-space: nowrap
-    opacity: 0
-    transition: opacity 0.15s ease
-
-  &__timezone:hover::after
-    opacity: 1
-
-.sya-event__description
-  margin-bottom: 12px
-
-  font-size: 14px
-  line-height: 1.785
-  letter-spacing: 0.39px
-
-  > p
-    margin-bottom: 16px
-
-  a[href]
-    color: #{$theme-primary} !important
-
-  a[href]:hover
-    color: #{$theme-secondary} !important
-
-// ===== ACTIONS ===== //
-.sya-event__actions
-  display: flex
-  flex-direction: row
-  gap: 24px
-
-  font-weight: $font-medium
-  font-size: 13px
-  font-style: italic
-  letter-spacing: 0.36px
-  line-height: 22px
-
-  transition: opacity 0.2s ease
-  margin: 20px 0
-
-  > *
-    color: $theme-primary
-    text-decoration: none
-    margin: 15px 0
-
-  .sya-icon
-    font-size: 22px
-    vertical-align: middle
-    margin-right: 7px
-
-  &:hover
-    opacity: 0.8
-
-// ===== SIDEBAR ===== //
-.sya-event__sidebar
-  float: right
-  width: 102px
-  margin-left: 16px
-  margin-bottom: 8px
-  
-  &__button
-    @include button
-    display: block
-
-  &__bubble
-    font-size: 11px
+  .sya-event__subtitle
+    font-size: 13px
     line-height: 14px
-    letter-spacing: 0.17px
-    text-align: center
-    padding: 9px 8px
-    font-weight: $font-semibold
-    font-style: italic
-
-    border: 1px solid $theme-primary
-    border-radius: 5px
-
-  &__bubble-highlight
-    color: $theme-primary
-    font-size: 11px
-    font-weight: $font-bold
-    font-style: normal
     letter-spacing: 0.36px
+    margin-bottom: 4px
+
+    &__online
+      font-weight: bold
+      line-height: 1.25
+
+    &__distance::before
+      content: '• '
+      margin-left: 4px
+
+    &__distance
+      color: $theme-primary
+      white-space: nowrap
+
+  .sya-event__meta
+    line-height: 17px
+    font-size: 12px
+
+    > *
+      display: inline-block
+
+    &__day
+      text-transform: uppercase
+      letter-spacing: 0.36px
+
+    &__time
+      font-weight: $font-medium
+      letter-spacing: 0.49px
+
+    &__timezone
+      position: relative
+      font-weight: $font-semibold
+      letter-spacing: 0.36px
+      text-decoration: underline dotted
+      cursor: help
+      margin-left: 3px
+
+    &__timezone::after
+      content: attr(data-title)
+      background: white
+      color: $theme-primary
+      border: 1px solid $theme-primary
+      border-radius: 5px
+      padding: 0 5px
+      box-shadow: $shadow-subtle
+
+      position: absolute
+      bottom: 18px
+      left: 50%
+      transform: translateX(-40%)
+      white-space: nowrap
+      opacity: 0
+      transition: opacity 0.15s ease
+
+    &__timezone:hover::after
+      opacity: 1
+
+  .sya-event__description
+    margin-bottom: 12px
+
+    font-size: 14px
+    line-height: 1.785
+    letter-spacing: 0.39px
+
+    > p
+      margin-bottom: 16px
+
+    a[href]
+      color: #{$theme-primary} !important
+
+    a[href]:hover
+      color: #{$theme-secondary} !important
+
+  // ===== ACTIONS ===== //
+  .sya-event__actions
+    display: flex
+    flex-direction: row
+    gap: 24px
+
+    font-weight: $font-medium
+    font-size: 13px
+    font-style: italic
+    letter-spacing: 0.36px
+    line-height: 22px
+
+    transition: opacity 0.2s ease
+    margin: 20px 0
+
+    > *
+      color: $theme-primary
+      text-decoration: none
+      margin: 15px 0
+
+    .sya-icon
+      font-size: 22px
+      vertical-align: middle
+      margin-right: 7px
+
+    &:hover
+      opacity: 0.8
+
+  // ===== SIDEBAR ===== //
+  .sya-event__sidebar
+    float: right
+    width: 102px
+    margin-left: 16px
+    margin-bottom: 8px
+    
+    &__button
+      @include button
+      display: block
+
+    &__bubble
+      font-size: 11px
+      line-height: 14px
+      letter-spacing: 0.17px
+      text-align: center
+      padding: 9px 8px
+      font-weight: $font-semibold
+      font-style: italic
+
+      border: 1px solid $theme-primary
+      border-radius: 5px
+
+    &__bubble-highlight
+      color: $theme-primary
+      font-size: 11px
+      font-weight: $font-bold
+      font-style: normal
+      letter-spacing: 0.36px
