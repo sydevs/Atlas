@@ -20,6 +20,8 @@ en:
         back: "Back to map"
 
     list:
+      loading: "Loading..."
+      error: "Connection Error"
       search: "Search for location"
       more_info: "More Info"
       register: "Register"
@@ -97,7 +99,7 @@ en:
       5: "Friday"
       6: "Saturday"
 
-    recurrence:
+    recurrence: # TODO: Translate
       day: "Daily"
       monday: "Mondays"
       tuesday: "Tuesdays"
@@ -106,10 +108,18 @@ en:
       friday: "Fridays"
       saturday: "Saturdays"
       sunday: "Sundays"
+      weekly_1: "Every %{weekday}"
+      weekly_2: "Every 2nd %{weekday}"
+      monthly_1st: "1st %{weekday} of Every Month"
+      monthly_2nd: "2nd %{weekday} of Every Month"
+      monthly_3rd: "3rd %{weekday} of Every Month"
+      monthly_4th: "4th %{weekday} of Every Month"
+      monthly_last: "Last %{weekday} of Every Month"
 
     timing_labels:
       course_fallback: "This is a weekly course"
-      course: "%{weeks}-week course"
+      course_weekly: "%{count}-week course"
+      course_monthly: "%{count}-session course" # TODO: Translate
       ongoing: "This class is on-going"
 
     language_codes:

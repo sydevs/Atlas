@@ -13,7 +13,7 @@ Rails.application.routes.draw do
     get '(:locale)/privacy', to: 'application#privacy'
   end
 
-  if true || Rails.env.development?
+  if Rails.env.development?
     namespace :mail do
       get :summary, to: 'application#summary'
 
@@ -53,12 +53,10 @@ Rails.application.routes.draw do
 
     # For generating helpers
     get '/event/:event_id', to: 'application#show', as: :event
-    scope '(:layer)' do
-      get '/country/:country_id', to: 'application#show', as: :country
-      get '/region/:region_id', to: 'application#show', as: :region
-      get '/area/:area_id', to: 'application#show', as: :area
-      get '/venue/:venue_id', to: 'application#show', as: :venue
-    end
+    get '/country/:country_id', to: 'application#show', as: :country
+    get '/region/:region_id', to: 'application#show', as: :region
+    get '/area/:area_id', to: 'application#show', as: :area
+    get '/venue/:venue_id', to: 'application#show', as: :venue
   end
 
   namespace :cms do
@@ -72,14 +70,12 @@ Rails.application.routes.draw do
       resources :events, only: %i[index]
       resources :regions, only: %i[index new create]
       resources :areas, only: %i[index new create]
-      resources :audits, only: %i[index]
     end
 
     resources :regions, except: %i[index] do
       resources :managers, only: %i[index new create destroy]
       resources :events, only: %i[index]
       resources :areas, only: %i[index new create]
-      resources :audits, only: %i[index]
     end
 
     resources :areas, except: %i[index] do
@@ -87,20 +83,21 @@ Rails.application.routes.draw do
       get :geocode, on: :collection
       resources :managers, only: %i[index new create destroy]
       resources :events, only: %i[index new create]
-      resources :audits, only: %i[index]
+      resources :venues, only: %i[index]
     end
 
-    resources :venues, only: [] do
+    resources :venues, only: %i[index] do
       get :geosearch, on: :collection
       get :geocode, on: :collection
     end
 
     resources :events do
-      get :verify
       resources :pictures, only: %i[index create destroy]
       resources :managers, only: %i[index new create destroy]
       resources :registrations, only: %i[index]
       resources :audits, only: %i[index]
+      resources :conversations, only: %i[index]
+      get "/change/:effect", action: :change, as: :change, on: :member
     end
 
     resources :managers do
@@ -110,17 +107,21 @@ Rails.application.routes.draw do
       resources :managed_records, only: %i[index]
       resources :clients, only: %i[index]
       resources :events, only: %i[index]
-      resources :audits, only: %i[index]
     end
 
     resources :managed_records, only: %i[index]
 
     resources :clients do
-      resources :audits, only: %i[index]
+      # resources :audits, only: %i[index]
     end
 
-    resources :registrations, only: %i[index]
-    resources :audits, only: %i[index]
+    resources :registrations, only: %i[index show destroy] do
+      resources :audits, only: %i[index]
+      resources :conversations, only: %i[index]
+    end
+    
+    resources :audits, only: %i[index show destroy]
+    resources :conversations, only: %i[index show destroy]
   end
 
   namespace :api do
@@ -130,5 +131,7 @@ Rails.application.routes.draw do
 
     post :graphql, to: "graphql#execute"
     get :graphql, to: "graphql#execute" if Rails.env.development?
+
+    post :inbound, to: 'application#inbound_email'
   end
 end

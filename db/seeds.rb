@@ -107,12 +107,14 @@ def load_events count, area, venue = nil
       custom_name: [true, false].sample ? Faker::Address.community : nil,
       description: [true, false].sample ? Faker::Lorem.paragraph : nil,
       room: [true, false, false].sample ? "#{Faker::Address.city_prefix} Room" : nil,
-      start_date: start_date,
-      end_date: Faker::Date.between(from: start_date, to: 6.months.since(start_date)),
-      start_time: "#{start_hour}:#{format '%02d', start_minute}",
-      end_time: "#{start_hour + [0, 1, 1, 2].sample}:#{format '%02d', start_minute + [15, 30, 45].sample}",
       language_code: %w[EN EN EN IT IT DE].sample,
-      recurrence: Event.recurrences.keys.sample,
+      recurrence: {
+        template: Recurrable::RECURRENCES.keys.sample,
+        starts: start_date,
+        until: Faker::Date.between(from: start_date, to: 6.months.since(start_date)),
+        start_time: "#{start_hour}:#{format '%02d', start_minute}",
+        end_time: "#{start_hour + [0, 1, 1, 2].sample}:#{format '%02d', start_minute + [15, 30, 45].sample}",
+      },
       online_url: ("www.example.com" if online),
       category: category,
       venue: venue,
@@ -136,7 +138,7 @@ def load_events count, area, venue = nil
         email: "#{first_name.parameterize}@example.com",
         questions: Event.registration_questions.keys.sample(question_count).map { |q| [q, Faker::Lorem.paragraph] }.to_h,
         created_at: Faker::Time.backward(days: 14),
-        starting_at: event.start_date,
+        starting_at: event.recurrence_start_date,
       })
 
       puts "    |-> Created Registration - #{registration.name} <#{registration.email}>"
@@ -152,13 +154,15 @@ MANAGERS = Manager.limit(10).to_a
 MANAGERS.count.upto(10).each do
   name = "#{Faker::Name.first_name} #{Faker::Name.last_name}"
   email = "#{name.split(' ').first.parameterize}@example.com"
-  MANAGERS << Manager.create({
+  manager = Manager.create({
     name: name,
     email: email,
     language_code: 'en',
-    email_verified: true,
     email_verification_sent_at: Time.now,
   })
+
+  manager.update_column :email_verified, true
+  MANAGERS << manager
 end
 
 Manager.find_or_create_by(email: "admin@example.com") do |manager|

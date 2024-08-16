@@ -3,6 +3,7 @@ ruby:
     created: :created_at,
     needs_review: :updated_at,
     needs_urgent_review: :should_expire_at,
+    needs_immediate_review: :should_expire_at,
     expired: :should_expire_at,
     finished: :end_date
   }[@status])
@@ -28,11 +29,11 @@ h3
 p.explanation
   = translate(@status, scope: 'mail.event.status.explanation')
 
-- if %i[needs_review needs_urgent_review expired].include?(@status)
+- if %i[needs_review needs_urgent_review needs_immediate_review expired].include?(@status)
   p.explanation = translate('mail.event.status.question')
 
 .actions
-  - if %i[needs_review needs_urgent_review expired finished].include?(@status)
+  - if %i[needs_review needs_urgent_review needs_immediate_review expired finished].include?(@status)
     - if @status == :needs_urgent_review
       a.button href="mailto:#{@event.manager.email}"
         = translate('mail.event.status.contact')
@@ -40,10 +41,10 @@ p.explanation
     a.positive.button href=email_login(cms_event_verify_url(@event))
       = translate('mail.event.status.verify')
     .or = translate('mail.event.status.or')
-    a.negative.button href=email_login(cms_event_verify_url(@event))
+    a.negative.button href=email_login(edit_cms_event_url(@event))
       = translate('mail.event.status.edit')
   - else
     a.button href=@event.map_url
       = translate('mail.event.view')
-    a.button href=email_login(cms_event_url(@event))
+    a.button href=email_login(edit_cms_event_url(@event))
       = translate('mail.event.edit')

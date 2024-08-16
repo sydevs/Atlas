@@ -8,9 +8,15 @@ module Types
     field :place_id, String, null: true
 
     field :area, Types::AreaType, null: false
+    field :areas, [Types::AreaType], null: false
+    field :area_id, ID, null: false
 
     def area
       object.areas.first.extend(AreaDecorator)
+    end
+
+    def area_id
+      object.areas.first.id
     end
 
     def region

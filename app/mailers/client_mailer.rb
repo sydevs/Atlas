@@ -1,4 +1,4 @@
-class EventMailer < ApplicationMailer
+class ClientMailer < ApplicationMailer
 
   default template_path: 'mail/events'
   layout 'mail/admin'

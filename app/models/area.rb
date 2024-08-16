@@ -8,7 +8,6 @@ class Area < ApplicationRecord
 
   nilify_blanks
   searchable_columns %w[name]
-  audited except: %i[summary_email_sent_at summary_metadata]
 
   # Associations
   belongs_to :country, foreign_key: :country_code, primary_key: :country_code

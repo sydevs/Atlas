@@ -3,8 +3,8 @@
 - content_for :preview, translate('mail.event.registrations.preview',
                         event: @event.label,
                         count: @registrations.count,
-                        duration: time_from_now_in_words(@event.next_occurrence_at),
-                        time: @event.start_time)
+                        duration: time_from_now_in_words(@event.next_recurrence_at),
+                        time: @event.recurrence.starts_at.to_s(:time))
 
 h2
   .suptitle = translate('mail.event.registrations.title')
@@ -14,23 +14,20 @@ table.data cellpadding=0
   tr
     th = translate('mail.event.next_date')
     td
-      = @event.next_occurrence_at.to_s(:day)
+      = @event.next_recurrence_at.to_s(:day)
   tr
     th = translate('mail.event.location')
     td = @event.online? ? translate('mail.event.online_address', city: @event.address) : @event.address
   tr
     th = translate('mail.event.timing')
-    td
-      = @event.recurrence_in_words
-      ' , 
-      = @event.formatted_start_end_time
+    td = @event.recurrence_in_words
   tr
     th = translate('mail.event.manager')
     td
       - manager = @event.manager
       = mail_to manager.email, manager.name
 
-//.byline = translate('mail.event.registrations.byline', count: @registrations.count, date: @event.next_occurrence_at.to_date.to_s(:short))
+//.byline = translate('mail.event.registrations.byline', count: @registrations.count, date: @event.next_recurrence_at.to_date.to_s(:short))
 
 p.narrow.explanation
   = translate('mail.event.registrations.explanation', count: @registrations.count)

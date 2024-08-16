@@ -13,20 +13,29 @@ function EventView() {
         m.redraw()
       })
     },
+    onupdate: function() {
+      const id = m.route.param('id')
+      if (id != event.id) {
+        AtlasApp.data.getRecord(AtlasEvent, id).then(response => {
+          event = response
+          m.redraw()
+        })
+      }
+    },
     view: function() {
       if (!event) return m(Loader)
 
-      let href = '/:model/:id'
+      let backLink = '/:model/:id'
       let params = {}
 
       if (event.location.getEventIds(event.layer).length > 1) {
         params['model'] = event.location.type.toLowerCase()
         params['id'] = event.location.id
-      } else if (AtlasApp.config.search) {
-        href = '/'
+      } else if (AtlasApp.config.search && AtlasApp.config.default_view != 'list') {
+        backLink = '/'
       } else {
-        params['model'] = event.location.parentType.toLowerCase()
-        params['id'] = event.location.parentId
+        params['model'] = 'area'
+        params['id'] = event.areaId
       }
 
       return [
@@ -34,7 +43,7 @@ function EventView() {
         m(BackNavigationButton, {
           float: 'left',
           icon: 'left',
-          href: href,
+          href: backLink,
           params: params,
         }),
         m(NavigationButton, {

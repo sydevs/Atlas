@@ -20,7 +20,7 @@ class ManagerPolicy < DatabasePolicy
     return false if association == :audits
     return false if %i[clients countries regions areas].include?(association)
     return false if association == :events && record.type == :worldwide
-    return false if association == :managed_records && %i[worldwide event none].include?(record.type)
+    return true if association == :managed_records && manage?
 
     super
   end

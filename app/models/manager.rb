@@ -3,7 +3,6 @@ class Manager < ApplicationRecord
   # Extensions
   passwordless_with :email
   searchable_columns %w[name email phone]
-  audited except: %i[last_login_at]
 
   enum contact_method: { email: 0, whatsapp: 1, telegram: 2, wechat: 3 }, _prefix: :contact_by
   flag :notifications, %i[new_managed_record event_verification event_registrations place_summary country_summary application_summary client_summary]
@@ -20,7 +19,7 @@ class Manager < ApplicationRecord
   has_many :venues, through: :events
   has_many :events
   has_many :clients
-  has_many :actions, class_name: 'Audit', as: :user
+  has_many :actions, class_name: 'Audit', as: :person
 
   # Validations
   before_validation { self.email = self.email&.downcase }
@@ -39,10 +38,10 @@ class Manager < ApplicationRecord
   scope :client_managers, -> { joins(:clients) }
 
   # Callbacks
-  before_save :unverify
-  after_save :update_sendinblue!, if: :email_previously_changed?
-  after_create :subscribe_to_sendinblue!
-  after_destroy :unsubscribe_from_sendinblue!
+  before_save :unverify, unless: :new_record?
+  after_save :update_brevo!, if: :email_previously_changed?
+  after_create :subscribe_to_brevo!
+  after_destroy :unsubscribe_from_brevo!
 
   # Methods
 
@@ -122,26 +121,23 @@ class Manager < ApplicationRecord
       Region.where(id: regions).or(regions_via_country).or(regions_via_area) # .or(regions_via_event)
     end
   end
+  
+  def accessible_areas
+    if administrator?
+      Area.default_scoped
+    else
+      areas_via_country = Area.where(country_code: countries.select(:country_code))
+      areas_via_region = Area.where(region_id: regions.select(:id))
+      Area.where(id: areas).or(areas_via_country).or(areas_via_region)
+    end
+  end
 
   def accessible_events
-    if !administrator?
+    if administrator?
       Event.default_scoped
     else
-=begin
-      # TODO: Fix this
-      events_via_countries = Event.left_outer_joins(:areas).where(locations: { country_code: countries.select(:country_code) })
-      events_via_regions = Event.left_outer_joins(:areas).where(locations: { province_code: regions.select(:province_code) })
-      offline_events_via_areas = Event.left_outer_joins(:areas).where(areas: { id: areas.select(:id) })
-      online_events_via_areas = Event.where(area_id: areas.select(:id))
-      
-      Event.left_outer_joins(:areas)
-        .where(id: events)
-        .or(events_via_countries)
-        .or(events_via_regions)
-        .or(offline_events_via_areas)
-        .or(online_events_via_areas)
-=end
-      Event.default_scoped
+      events_via_area = Event.where(area_id: accessible_areas.select(:id))
+      Event.where(id: events).or(events_via_area)
     end
   end
 
@@ -153,26 +149,30 @@ class Manager < ApplicationRecord
     !contact_by_email?
   end
 
-  def update_sendinblue! update_management: false
+  def update_brevo! update_management: false
     if email_previously_was.present?
-      SendinblueAPI.update_contact(email, sendinblue_attributes)
+      BrevoAPI.update_contact(email, brevo_attributes)
     elsif update_management
-      SendinblueAPI.update_contact(email, sendinblue_attributes)
+      BrevoAPI.update_contact(email, brevo_attributes)
     end
   end
 
-  def subscribe_to_sendinblue!
-    SendinblueAPI.subscribe(email, :managers, sendinblue_attributes)
+  def subscribe_to_brevo!
+    BrevoAPI.subscribe(email, :managers, brevo_attributes)
   end
 
   private
 
     def unverify
-      self[:email_verified] = false if email_changed?
+      if email_changed?
+        self[:email_verified] = false
+        ManagerMailer.with(manager: self).verify.deliver_later
+      end
+
       self[:phone_verified] = false if phone_changed?
     end
 
-    def sendinblue_attributes
+    def brevo_attributes
       attributes = {
         email: email,
         firstname: first_name,
@@ -203,8 +203,8 @@ class Manager < ApplicationRecord
       attributes
     end
 
-    def unsubscribe_from_sendinblue!
-      SendinblueAPI.unsubscribe(email, :managers)
+    def unsubscribe_from_brevo!
+      BrevoAPI.unsubscribe(email, :managers)
     end
 
 end

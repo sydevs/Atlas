@@ -35,7 +35,7 @@ html
           i.bug.icon
           = translate('cms.menu.report_issue')
 
-        a.ui.right.floated.basic.button href=managers.sign_out_path
+        a.ui.right.floated.basic.button href=managers_sign_out_path
           = translate('cms.menu.sign_out')
 
       h1.ui.header
@@ -57,7 +57,7 @@ html
               
               i.right.angle.icon.divider
               
-            - @context.ancestors.each do |ancestor|
+            - @context.ancestors.last(4).each do |ancestor|
               - if policy(ancestor).show?
                 a.section href=breadcrumb_url(ancestor)
                   = ancestor.try(:short_label) || ancestor.label

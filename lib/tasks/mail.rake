@@ -17,7 +17,7 @@ namespace :mail do
   task events: :environment do
     events = Event.publicly_visible.ready_for_registrations_email.joins(:manager).includes(:registrations)
     puts "[MAIL] Attempting to send registrations emails for #{events.count} events"
-    events.in_batches.each_record do |event|
+    events.where(registration_notification: 'digest').where('next_recurrence_at <= ?', 1.day.from_now).in_batches.each_record do |event|
       EventMailer.with(event: event, manager: event.manager).registrations.deliver_later
     end
   end

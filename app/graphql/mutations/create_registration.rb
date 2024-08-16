@@ -20,13 +20,14 @@ class Mutations::CreateRegistration < Mutations::BaseMutation
   def resolve(**arguments)
     I18n.locale = arguments[:locale]&.to_sym || :en
     event = Event.find(arguments[:event_id])
-    time = event.start_time.split(':')
+    time = event.recurrence.starts_at.to_fs(:time).split(':')
     arguments[:starting_at] = arguments[:starting_at].utc.change(hour: time[0].to_i, min: time[1].to_i)
     arguments[:questions] = arguments[:questions]
-    arguments.delete :message
-    arguments.delete :locale
+    arguments[:user_attributes] = { name: arguments[:name], email: arguments[:email] }
+    arguments.except! :message, :locale, :name, :email
 
-    registration = Registration.joins(:event).find_or_initialize_by(arguments)
+    user = User.find_by_email(arguments[:email])
+    registration = event.registrations.find_or_initialize_by(user: user)
 
     if !registration.new_record? && !Rails.env.development?
       {
@@ -35,11 +36,12 @@ class Mutations::CreateRegistration < Mutations::BaseMutation
         created_at: registration.created_at.utc,
         registration: registration,
       }
-    elsif registration.save
+    elsif registration.update(arguments)
       registration.subscribe_to! :registrations
       
-      SendinblueAPI.send_confirmation_email(registration)
-      SendinblueAPI.schedule_reminder_email(registration)
+      RegistrationMailer.with(registration: registration).confirmation.deliver_later
+      RegistrationMailer.with(registration: registration).question.deliver_later if registration.questions['questions'].present?
+      BrevoAPI.schedule_reminder_email(registration)
 
       {
         status: 'success',

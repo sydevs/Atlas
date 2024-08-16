@@ -1,17 +1,20 @@
 class Client < ApplicationRecord
 
+  DEFAULT_COLORS = { primary_color: "#92bbb8", secondary_color: "#e08e79", tertiary_color: "#a1c3d7" }
+
   # Extensions
   include Searchable
   include Managed
+  # include Audited
 
   nilify_blanks
   searchable_columns %w[label domain]
-  audited except: %i[
-    summary_email_sent_at
-  ]
 
-  store_accessor :config, :embed_type, :routing_type, :default_view, :domain, :locale
+  store_accessor :config, :embed_type, :routing_type, :default_view, :domain, :locale, :primary_color, :secondary_color, :tertiary_color
 
+  attribute :embed_type, :string
+  attribute :routing_type, :string
+  attribute :default_view, :string
   enum embed_type: %i[iframe script url], _suffix: 'embed'
   enum routing_type: %i[query path], _suffix: 'routing'
   enum default_view: %i[map list], _suffix: 'view'

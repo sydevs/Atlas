@@ -1,9 +1,11 @@
-/* exported MapFrame */
+/* exported MapFrame, MapInstance */
 /* global mapboxgl, MapboxLanguage, OnlineMapLayer, OfflineMapLayer, SelectionMapLayer */
+
+let MapInstance = null
 
 class MapFrame extends EventTarget {
 
-  static EMPTY_STYLE = { version: 8, sources: {},layers: [] }
+  static EMPTY_STYLE = { version: 8, sources: {}, layers: [] }
 
   // Private variables
   #mapbox
@@ -34,6 +36,8 @@ class MapFrame extends EventTarget {
 
   constructor(containerId, config) {
     super()
+    
+    MapInstance = this
 
     config = Object.assign({
       onload: () => {},
@@ -133,7 +137,7 @@ class MapFrame extends EventTarget {
 
   _setupHooks() {
     window.addEventListener('resize', _event => this.#updatePadding())
-    this.#mapbox.on('render', _event => this.dispatchEvent(new Event('update')))
+    this.#mapbox.on('move', _event => this.dispatchEvent(new Event('update')))
     this.#mapbox.on('movestart', _event => this.dispatchEvent(new Event('movestart')))
     this.#mapbox.on('move', _event => this.dispatchEvent(new Event('move')))
     this.#mapbox.on('moveend', _event => this.dispatchEvent(new Event('moveend')))
@@ -152,6 +156,10 @@ class MapFrame extends EventTarget {
     Object.values(this.#layers).forEach(layer => { layer.visible = false })
     this.#currentLayerId = layerId
     this.#mapbox.setStyle(this.#layers[layerId].style)
+  }
+
+  showHighlightMarker(location) {
+    this.#currentLayer.setSelection(location)
   }
 
   async setSelection(location, options = {}) {

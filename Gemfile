@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby '2.7.6'
+ruby '3.3.4'
 
 git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?('/')
@@ -12,8 +12,7 @@ gem 'jbuilder' # Build JSON APIs with ease. Read more: https://github.com/rails/
 gem 'pg' # Use postgres as the database for Active Record
 gem 'puma' # Use Puma as the app server
 gem 'rails' # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'sassc' # Use SASS for stylesheets
-gem 'sassc-rails' # Use SASS for stylesheets
+gem 'dartsass-sprockets' # Use SASS for stylesheets
 gem 'slim-rails' # Use Slim for views
 gem 'terser' # Use Uglifier as compressor for JavaScript assets
 gem 'sprockets', '3.7.2'
@@ -30,20 +29,21 @@ gem 'normalize-rails' # To normalize CSS
 
 ### Administration
 gem 'simple_form' # To simplify admin forms
-gem 'audited' # Logs changes to any record
 gem 'kaminari' # Pagination
 gem 'nilify_blanks' # Convert empty string to null in the database
 gem 'passwordless' # For email based user authentication
 gem 'phonelib' # For telephone validation
 gem 'pundit' # Permissions
 gem 'aasm' # State machine for managing expiration status
+gem 'montrose' # For handling recurrences
 gem 'active_flag' # Bitwise flag for storing notification settings
 gem 'after_commit_everywhere', '~> 1.0' # Dependency for aasm
 
 ### Communication
 gem 'premailer-rails' # Generate inline styles for emails
-gem 'sib-api-v3-sdk' # API for sendinblue emailer
+gem 'sib-api-v3-sdk' # API for Brevo emailer
 gem 'klaviyo' # For integration with Klaviyo
+gem 'redcarpet' # Render markdown
 
 ### Geocoding
 gem 'geokit-rails'
@@ -69,6 +69,7 @@ gem 'graphiql-rails'
 
 ### Utility
 gem 'inline_svg' # Allows SVGs to be rendered inline
+gem 'rails_autolink' # Automatic URL linking for description fields
 gem 'rails_12factor', group: :production # For heroku support
 gem 'httparty' # For http requests (specifically for Klaviyo)
 gem 'validate_url' # Validate url fields
@@ -84,10 +85,10 @@ group :development, :test do
 end
 
 group :development do
-  gem 'listen', '>= 3.0.5', '< 3.2'
+  gem 'listen'
   gem 'spring' # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem 'spring-watcher-listen', '~> 2.0.0'
-  gem 'web-console', '>= 3.3.0' # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
+  gem 'spring-watcher-listen'
+  gem 'web-console' # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
   gem 'dotenv-rails' # Automatically load environmental variables
   gem 'derailed' # To test memory usage for all the gems
 end

@@ -16,6 +16,7 @@
 /node_modules
 /yarn-error.log
 /public/uploads
+/vendor/bundle/*
 *.sqlite3
 
 .DS_Store

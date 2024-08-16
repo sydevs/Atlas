@@ -1,0 +1,9 @@
+
+tr
+  td.collapsing
+    = model_icon Venue
+  td
+    a target="_blank" href=url_for([:map, venue])
+      = venue.label || translate('cms.hints.unnamed')
+      '  
+      i.external.link.square.alternate.icon

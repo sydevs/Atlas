@@ -76,6 +76,7 @@ en:
         invalid_location: "cannot be outside the radius of %{area}"
       event:
         verified: "Thank you for confirming your event's accuracy."
+        finish: "This event is now marked as complete."
         invalid_end_time: "cannot be before the start time"
         invalid_end_date: "cannot be before the start date"
         passed_end_date: "cannot be before today"
@@ -121,6 +122,7 @@ en:
         enable_custom_regions: "Allow the creation of custom regions. This is an advanced feature, which should only be used if you understand what you are doing."
       region:
         polygon: "Drag / click on a faded square to add a new corner to the polygon. Click on an existing corner to remove it."
+        name: "Regions will use a translated name for each language, however if no translation is available, this name is used." # TODO: Translate
       area:
         location: "A custom area is defined using coordinates on the map (latitude and longitude) and a radius, to make a circular region."
       event:
@@ -193,7 +195,8 @@ en:
       management_for_record: "Management for this %{resource}"
       managers_for_record: "Managers for %{resource}"
       location_of_record: "Location of this %{resource}"
-      dates_and_timing: "Dates & Timing"
+      dates: "Dates"
+      timing: "Timing"
       map_of_record: "Map of this %{resource}"
       area_in_words: "%{radius} km around %{latitude}, %{longitude}"
       records_in_recent_days: "%{resources} in the last 30 days"
@@ -212,6 +215,8 @@ en:
         action: "Review"
       record_needs_urgent_review:
         title: "%{resource} Needs Urgent Review"
+      record_needs_immediate_review:
+        title: "%{resource} Needs Immediate Review"
       record_finished:
         title: "%{resource} Completed"
         description: "This %{resource} is over. It's last occurence was %{date}."
@@ -262,6 +267,48 @@ en:
       description: "This is a log of all actions taken by this manager."
       changed_by: "by %{name}"
       changed_to: "changed to"
+
+    conversations:
+      awaiting_response: "Awaiting Reply"
+      has_answers: "Gave Comments"
+      send_reply: "Send Reply"
+
+    audits:
+      time_ago: "%{time} ago"
+      person: "Action taken by %{person}"
+      parent: "Relates to %{resource}"
+      replies_to: "Replies to %{resource}"
+      replied_by: "Replied to by %{resource}"
+      changes:
+        one: "%{count} Change"
+        other: "%{count} Changes"
+      title:
+        record_created: "%{model} Created"
+        record_updated: "%{model} Updated"
+        record_destroyed: "%{model} Deleted"
+        status_verified: "%{model} Verified"
+        status_change: "%{model} Status Changed"
+        email_forwarded: "%{model} Email"
+        notice_sent: "%{model} Notice Sent"
+        question_asked: "%{model} Question Asked"
+      contextual_summary:
+        record_created: "%{person} created this %{model}"
+        record_updated: "%{person} updated this %{model}"
+        record_destroyed: "%{person} deleted a %{model}"
+        status_verified: "%{model} was %{status} by %{person}"
+        status_change: "%{model} changed to %{status}"
+        email_forwarded: "%{person} sent an email"
+        notice_sent: "Notification sent to %{person}"
+        question_asked: "%{person} asked a question"
+      summary:
+        record_created: "%{person} created %{resource}"
+        record_updated: "%{person} updated %{resource}"
+        record_destroyed: "%{person} deleted %{resource}"
+        status_verified: "%{resource} was %{status} by %{person}"
+        status_change: "%{resource} changed to %{status}"
+        email_forwarded: "%{person} sent an email for %{resource}"
+        notice_sent: "Notification sent for %{resource} to %{person}"
+        question_asked: "%{person} asked a question for %{resource}"
 
     dashboard:
       role:

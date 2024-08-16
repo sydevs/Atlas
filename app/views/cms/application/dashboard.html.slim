@@ -4,7 +4,7 @@
 = floating_action translate('cms.actions.special.edit_profile'), 'edit', url_for([:edit, :cms, current_user])
 
 h2.ui.header
-  = translate('cms.menu.dashboard', user: current_user.label)
+  = translate('cms.menu.dashboard', user: Current.user.label)
 
 .ui.icon.message
   = manager_icon current_user

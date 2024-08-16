@@ -1,34 +1,35 @@
 @import '_mixins'
 
-.sya-icon
-  // Use !important to prevent issues with browser extensions that change fonts
-  font-family: 'syatlas-icons' !important
-  speak: none
-  font-style: normal
-  font-weight: normal
-  font-variant: normal
-  text-transform: none
-  line-height: 1
+#sahajatlas
+  .sya-icon
+    // Use !important to prevent issues with browser extensions that change fonts
+    font-family: 'syatlas-icons' !important
+    speak: none
+    font-style: normal
+    font-weight: normal
+    font-variant: normal
+    text-transform: none
+    line-height: 1
 
-  // Better Font Rendering
-  -webkit-font-smoothing: antialiased
-  -moz-osx-font-smoothing: grayscale
-  vertical-align: middle
+    // Better Font Rendering
+    -webkit-font-smoothing: antialiased
+    -moz-osx-font-smoothing: grayscale
+    vertical-align: middle
 
-@each $name, $code in $icons
-  .sya-icon--#{$name}::before
-    content: $code
+  @each $name, $code in $icons
+    .sya-icon--#{$name}::before
+      content: $code
 
-@each $direction in up down left right
-  .sya-icon--#{$direction}
-    font-size: 2em
+  @each $direction in up down left right
+    .sya-icon--#{$direction}
+      font-size: 2em
 
-.sya-icon--spinner::before
-  display: block
-  animation: spin 2s linear infinite
+  .sya-icon--spinner::before
+    display: block
+    animation: spin 2s linear infinite
 
-+keyframes(spin)
-  0%
-    transform: rotate(0deg)
-  100%
-    transform: rotate(360deg)
+  +keyframes(spin)
+    0%
+      transform: rotate(0deg)
+    100%
+      transform: rotate(360deg)

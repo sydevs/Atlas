@@ -20,7 +20,9 @@ uk:
         online: "Online classes"
         back: "Back to map"
 
-    list:
+    list: # TODO: Translate
+      loading: "Loading..."
+      error: "Connection Error"
       search: "Пошук розташування"
       more_info: "Більше інформації"
       register: "Реєстрація"
@@ -98,7 +100,7 @@ uk:
       5: "П'ятниця"
       6: "Субота"
 
-    recurrence:
+    recurrence: # TODO: Translate
       day: "Щодня"
       monday: "Щопонеділка"
       tuesday: "Щовівторка"
@@ -107,10 +109,18 @@ uk:
       friday: "Щоп'ятниці"
       saturday: "Щосуботи"
       sunday: "Щонеділі"
+      weekly_1: "Every %{weekday}"
+      weekly_2: "Every 2nd %{weekday}"
+      monthly_1st: "1st %{weekday} of Every Month"
+      monthly_2nd: "2nd %{weekday} of Every Month"
+      monthly_3rd: "3rd %{weekday} of Every Month"
+      monthly_4th: "4th %{weekday} of Every Month"
+      monthly_last: "Last %{weekday} of Every Month"
 
     timing_labels:
       course_fallback: "Це тижневий курс"
-      course: "%{weeks}-тижневий курс"
+      course_weekly: "%{count}-тижневий курс"
+      course_monthly: "%{count}-session course" # TODO: Translate
       ongoing: "Цей клас триває"
 
     language_codes:

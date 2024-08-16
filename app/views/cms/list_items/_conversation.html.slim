@@ -1,0 +1,28 @@
+- audit = conversation.messages.first
+
+.event
+  = audit.icon
+  .content
+    .date
+      = relative_time_in_words(audit.created_at)
+    .summary
+      = audit.description(context: @context)
+    .extra.text
+      - if audit.notice_sent?
+        .ui.tiny.message = audit.data[:subject]
+      - else
+        .ui.segment
+          .ui.sub.header = audit.data[:subject]
+          = markdown(audit.data[:body])
+    .meta
+      - if policy(conversation).show?
+        a href=cms_conversation_path(conversation)
+          = model_icon(Conversation)
+          = translate('cms.actions.target.view', resource: translate_model(Conversation))
+          |  (#{conversation.messages.count})
+
+        - if conversation.awaiting_response?
+          span
+            i.orange.warning.icon
+            = translate('cms.conversations.awaiting_response')
+            

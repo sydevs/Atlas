@@ -122,4 +122,23 @@ const Util = {
       return url
     }
   },
+  
+  hasIntersection(array1, array2) {
+    const set = new Set(array1)
+    return array2.some(item => set.has(item))
+  },
+
+  // Source: https://stackoverflow.com/a/51493084
+  throttle(callback, delay) {
+    let timeoutHandler = null
+    return function() {
+      if (timeoutHandler == null) {
+        timeoutHandler = setTimeout(function() {
+          callback()
+          timeoutHandler = null
+        }, delay)
+      }
+    }
+  }
+
 }

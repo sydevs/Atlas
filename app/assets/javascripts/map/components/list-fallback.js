@@ -3,20 +3,19 @@
 
 function ListFallback() {
   let venue = {}
-  let attemptsAllowed = 10
+
+  function getClosestVenue() {
+    AtlasApp.data.getClosestVenue(AtlasApp.map.getCenter()).then(response => {
+      if (venue.id != response.id) {
+        venue = response
+        m.redraw()
+      }
+    })
+  }
 
   return {
-    onupdate: function() {
-      attemptsAllowed -= 1
-      if (attemptsAllowed < 0) return
-
-      AtlasApp.data.getClosestVenue(AtlasApp.map.getCenter()).then(response => {
-        if (venue.id != response.id) {
-          venue = response
-          m.redraw()
-        }
-      })
-    },
+    oncreate: getClosestVenue,
+    onupdate: Util.throttle(getClosestVenue, 500),
     view: function() {
       if (!venue.id) return
       const center = AtlasApp.map.getCenter()

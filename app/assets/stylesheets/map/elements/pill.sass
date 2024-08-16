@@ -1,57 +1,63 @@
+@use 'sass:math'
 @import '../_mixins'
 
-.sya-pills
-  padding: $panel-padding-mobile/2 $panel-padding-mobile
+#sahajatlas
+  .sya-pills
+    padding: math.div($panel-padding-mobile, 2) $panel-padding-mobile
 
-.sya-pill
-  --color: #{$color-cyan}
+  .sya-pill
+    --color: #{$theme-primary}
+    --background-color: white
 
-  display: inline-block
-  vertical-align: text-bottom
-  color: var(--color)
-  border: 1px solid var(--color)
-  border-radius: 5px
-  padding: 0 5px
-
-  font-weight: $font-semibold
-  letter-spacing: 0.36px
-  margin-right: 8px
-  margin-bottom: 2px
-
-  &--button
-    background: transparentize(white, 0.02)
-    border-width: 2px
+    display: inline-block
+    vertical-align: text-bottom
+    color: var(--color)
+    border: 1px solid var(--color)
+    background-color: var(--background-color)
     border-radius: 5px
-    font-size: 14px
-    line-height: 24px
-    padding: 0 12px
+    padding: 0 5px
 
-    &:hover
-      color: transparentize(white, 0.2)
+    font-weight: $font-semibold
+    letter-spacing: 0.36px
+    margin-right: 8px
+    margin-bottom: 2px
 
-  &--online
-    --color: #{$color-blue}
-    margin-left: 0px
+    transition: opacity 0.2s ease
 
-  &--active
-    background-color: var(--color)
-    color: white
+    &--button
+      background: transparentize(white, 0.02)
+      border-width: 2px
+      border-radius: 5px
+      font-size: 14px
+      line-height: 24px
+      padding: 0 12px
 
-  &--float
-    position: absolute
-    top: 87px
-    left: $control-offset-x * 0.375
-    box-shadow: $shadow-subtle
-    z-index: $z-control
+      &:hover
+        opacity: 0.8
 
-  &:before
-    content: '\A'
+    &--online
+      --color: #{$theme-tertiary}
+      margin-left: 0px
 
-  &:first-child
-    margin-left: 0
+    &--active
+      background-color: var(--color)
+      color: white
 
-  &:last-child
-    margin-right: 0
+    &--float
+      position: absolute
+      top: 87px
+      left: $control-offset-x * 0.375
+      box-shadow: $shadow-subtle
+      z-index: $z-control
 
-  > .sya-icon
-    margin-left: 4px
+    &:before
+      content: '\A'
+
+    &:first-child
+      margin-left: 0
+
+    &:last-child
+      margin-right: 0
+
+    > .sya-icon
+      margin-left: 4px

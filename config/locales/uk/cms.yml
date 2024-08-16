@@ -49,6 +49,7 @@ uk:
       # Tertiary menu
       details: "Інформація"
       activity: "Діяльність"
+      messages: "Conversation" # TODO: Translate
       breadcrumbs:
         world: "Світ"
         help: "Допомога"
@@ -75,6 +76,7 @@ uk:
         invalid_location: "не може бути за межами радіусу %{area}"
       event:
         verified: "Thank you for confirming your event's accuracy." # TODO: Translate
+        finish: "This event is now marked as complete." # TODO: Translate
         invalid_end_time: "не може бути раніше часу початку"
         invalid_end_date: "не може бути раніше дати початку"
         passed_end_date: "не може бути раніше ніж сьогодні"
@@ -119,6 +121,7 @@ uk:
         enable_custom_regions: "Allow the creation of custom regions. This is an advanced feature, which should only be used if you understand what you are doing." # TODO: Translate
       region: # TODO: Translate
         polygon: "Drag / click on a faded square to add a new corner to the polygon. Click on an existing corner to remove it."
+        name: "Regions will use a translated name for each language, however if no translation is available, this name is used." # TODO: Translate
       area:
         location: "Спеціальна область визначається за допомогою координат на карті (широта і довгота) і радіус, щоб створити кругову область."
       event:
@@ -188,7 +191,8 @@ uk:
       management_for_record: "Керування цим %{resource}"
       managers_for_record: "Менеджери для %{resource}"
       location_of_record: "Розташування цього %{resource}"
-      dates_and_timing: "Дати та час"
+      dates: "Дати"
+      timing: "час" # TODO: Translate
       map_of_record: "Карта цього %{resource}"
       area_in_words: "%{radius} км навколо %{latitude}, %{longitude}"
       records_in_recent_days: "%{resources} за останні 30 днів"
@@ -207,6 +211,8 @@ uk:
         action: "Огляд"
       record_needs_urgent_review:
         title: "%{resource} потребує термінової перевірки"
+      record_needs_immediate_review: # TODO: Translate
+        title: "%{resource} Needs Immediate Review"
       record_finished:
         title: "%{resource} Завершено"
         description: "Цей %{resource} закінчено. Востаннє це було %{date}."
@@ -252,6 +258,48 @@ uk:
       description: "Це журнал усіх дій, здійснених цим менеджером."
       changed_by: "%{name}"
       changed_to: "змінено на"
+
+    conversations:
+      awaiting_response: "Awaiting Reply"
+      has_answers: "Gave Comments"
+      send_reply: "Send Reply"
+
+    audits: # TODO: Translate
+      time_ago: "%{time} ago"
+      person: "Action taken by %{person}"
+      parent: "Relates to %{resource}"
+      replies_to: "Replies to %{resource}"
+      replied_by: "Replied to by %{resource}"
+      changes:
+        one: "%{count} Change"
+        other: "%{count} Changes"
+      title:
+        record_created: "%{model} Created"
+        record_updated: "%{model} Updated"
+        record_destroyed: "%{model} Deleted"
+        status_verified: "%{model} Verified"
+        status_change: "%{model} Status Changed"
+        email_forwarded: "%{model} Email"
+        notice_sent: "%{model} Notice Sent"
+        question_asked: "%{model} Question Asked"
+      contextual_summary:
+        record_created: "%{person} created this %{model}"
+        record_updated: "%{person} updated this %{model}"
+        record_destroyed: "%{person} deleted a %{model}"
+        status_verified: "%{model} was %{status} by %{person}"
+        status_change: "%{model} changed to %{status}"
+        email_forwarded: "%{person} sent an email"
+        notice_sent: "Notification sent to %{person}"
+        question_asked: "%{person} asked a question"
+      summary:
+        record_created: "%{person} created %{resource}"
+        record_updated: "%{person} updated %{resource}"
+        record_destroyed: "%{person} deleted %{resource}"
+        status_verified: "%{resource} was %{status} by %{person}"
+        status_change: "%{resource} changed to %{status}"
+        email_forwarded: "%{person} sent an email for %{resource}"
+        notice_sent: "Notification sent for %{resource} to %{person}"
+        question_asked: "%{person} asked a question for %{resource}"
 
     dashboard:
       role:
@@ -422,7 +470,7 @@ uk:
         title: "У мене є інші запитання чи пропозиції"
         description: "Якщо вам потрібна додаткова допомога або ви хочете допомогти з розробкою Сахадж Атласу, будь ласка, напишіть на електронну адресу нижче. Будь ласка, напишіть своє повідомлення англійською мовою."
 
-    category_tags: # TODO: Translate
+    category_tags: # TODO: Translate
       dropin: "Drop-In"
       single: "Single"
       course: "Course"

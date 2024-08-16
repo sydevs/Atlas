@@ -9,7 +9,7 @@ class DataCache {
   #cache
   #atlas
   #requests
-  #debug = false
+  #debug = true
   #models = { AtlasCountry, AtlasRegion, AtlasArea, AtlasVenue, AtlasEvent }
 
   constructor(endpoint, locale) {
@@ -24,13 +24,13 @@ class DataCache {
     }
 
     Object.values(this.#models).forEach(Model => {
-      this.#cache[Model.key] = {}
+      this[Model.KEYS] = new AtlasTable(this.#atlas, Model)
     })
   }
 
   getGeojson(layer) {
     if (layer in this.#cache.geojsons) {
-      return Promise.resolve(this.#cache.geojsons[layer])
+      return DataRequest.resolve(this.#cache.geojsons[layer])
     } else {
       if (this.#debug) console.log('[Data]', 'getting geojson', layer) // eslint-disable-line no-console
       return this.#atlas.fetchGeojson({
@@ -43,37 +43,22 @@ class DataCache {
     }
   }
 
-  getEvents(ids) {
-    let uncachedEventIds = ids.filter(id => !(id in this.#cache.event))
-    let fetchEvents
+  getRecord(Model, id) {
+    if (!Model || !id) throw `Invalid model or id (${Model} ${id})`
+    return this[Model.KEYS].fetch(id)
+  }
 
-    if (uncachedEventIds.length > 0) {
-      if (this.#debug) console.log('[Data]', 'getting events', ids, '(' + (1 - uncachedEventIds.length / ids.length) * 100 + '% cached)') // eslint-disable-line no-console
-      fetchEvents = this.#atlas.fetchEvents({ ids: uncachedEventIds }).then(response => {
-        response.events.forEach(event => {
-          this.#cache.event[event.id] = new AtlasEvent(event)
-        })
-      })
-    } else {
-      fetchEvents = Promise.resolve()
-    }
-
-    return fetchEvents.then(() => {
-      return ids.map(id => this.#cache.event[id]).filter(Boolean)
-    })
+  getRecords(Model, ids) {
+    if (!Model || !ids) throw `Invalid model or id (${Model} ${ids})`
+    return this[Model.KEYS].fetchAll(ids)
   }
 
   getAllOnlineEvents() {
     if ('online' in this.#cache.lists) {
-      return Promise.resolve(this.#cache.lists['online'])
+      return DataRequest.resolve(this.#cache.lists['online'])
     } else {
       return this.#atlas.fetchOnlineList().then(response => {
-        this.#cache.lists['online'] = response.events.map(event => {
-          event = new AtlasEvent(event)
-          this.#cache.event[event.id] = event
-          return event
-        })
-
+        this.#cache.lists['online'] = this.events.cache(response.events)
         return this.#cache.lists['online']
       })
     }
@@ -87,18 +72,18 @@ class DataCache {
       filter = 'online'
 
     if (filter in this.#cache.sortedLists) {
-      return Promise.resolve(this.#cache.sortedLists[filter])
+      return DataRequest.resolve(this.#cache.sortedLists[filter])
     } else if (filter in this.#cache.lists) {
-      fetchList = Promise.resolve(this.#cache.lists[filter])
+      fetchList = DataRequest.resolve(this.#cache.lists[filter])
     } else {
       let lists = []
       if (filter !== 'online')
-        lists.push(this.getEvents(ids))
+        lists.push(this.getRecords(AtlasEvent, ids))
 
       if (filter !== 'offline')
         lists.push(this.getAllOnlineEvents(ids))
 
-      fetchList = Promise.all(lists).then(values => values.flat())
+      fetchList = DataRequest.all(lists).then(values => values.flat())
     }
 
     return fetchList.then(list => {
@@ -119,7 +104,7 @@ class DataCache {
     if (cache && cacheQuery) {
       const distance = Util.distance(params, cacheQuery)
       if (distance <= 0.5) {
-        return Promise.resolve(cache)
+        return DataRequest.resolve(cache)
       }
     }
     
@@ -129,25 +114,6 @@ class DataCache {
       this.#cache.closestVenue = data.closestVenue
       return data.closestVenue || {}
     })
-  }
-
-  getRecord(Model, id) {
-    if (!Model || !id) return Promise.resolve(null)
-
-    if (id in this.#cache[Model.key]) {
-      return Promise.resolve(this.#cache[Model.key][id])
-    } else {
-      const fetchRecord = this.#atlas[`fetch${Model.label}`]
-
-      if (!fetchRecord) return Promise.resolve(null)
-      if (this.#debug) console.log('[Data]', 'getting', Model.key, id) // eslint-disable-line no-console
-      
-      return fetchRecord({ id: id }).then(data => {
-        const record = new Model(data[Model.key])
-        this.#cache[Model.key][id] = record
-        return record
-      })
-    }
   }
 
   // MUTATION REQUESTS

@@ -1,78 +1,85 @@
 @import '../_mixins'
 
-.sya-layout
-  height: 100%
-
-  @include tablet
-    display: flex
-    flex-direction: row-reverse
-
-  &.noscroll
+#sahajatlas
+  .sya-layout
     height: 100%
+
+    @include tablet
+      display: flex
+      flex-direction: row-reverse
+
+    &.noscroll
+      height: 100%
+      overflow: hidden
+
+  .sya-panel
+    min-height: 100%
     overflow: hidden
-
-.sya-panel
-  min-height: 100%
-  overflow: hidden
-  background: white
-  flex-shrink: 0
-  scroll-behavior: smooth
-  border-radius: 4px
-
-  display: flex
-  flex-direction: column
-
-  @include tablet-or-larger
-    position: relative
-    width: $panel-width-thin
-    z-index: $z-panel
-    box-shadow: $shadow-light
-
-    height: 100%
-    overflow-y: auto
-
-  @include desktop-or-larger
-    position: absolute
-    top: $control-offset-y
-    left: $control-offset-x
-    height: auto
-    min-height: auto
-    max-height: calc(100% - #{$control-offset-y} * 2)
-    width: $panel-width
-
-.sya-panel--padded
-  padding: $panel-padding-mobile
-  padding-bottom: $panel-padding-mobile * 2
-
-  @include tablet-or-larger
-    padding: $panel-padding-thin $panel-padding
-    padding-bottom: $panel-padding * 2
-
-.sya-panel--overflow
-  overflow: visible
-  min-height: 0
-
-.sya-panel__header
-  padding: 0 24px
-  font-size: 17px
-  line-height: 50px
-  font-weight: 500
-  background: #EEE //#F5F5F5
-
-  white-space: nowrap
-  overflow: hidden
-  text-overflow: ellipsis
-
-  @include tablet-or-larger
-    padding-left: 50px
-    line-height: 82px
     background: white
-    border-bottom: 1px solid lightgrey
+    flex-shrink: 0
+    scroll-behavior: smooth
+    border-radius: 4px
 
-.sya-panel--padded > *
-  animation: fade-in 0.4s
-  
-  @include mobile
-    max-width: 400px
-    margin-left: auto
-    margin-right: auto
+    display: flex
+    flex-direction: column
+
+    @include tablet-or-larger
+      position: relative
+      width: $panel-width-thin
+      z-index: $z-panel
+      box-shadow: $shadow-light
+
+      height: 100%
+      overflow-y: auto
+
+    @include desktop-or-larger
+      position: absolute
+      top: $control-offset-y
+      left: $control-offset-x
+      height: auto
+      min-height: auto
+      max-height: calc(100% - #{$control-offset-y} * 2)
+      width: $panel-width
+
+  .sya-panel--padded
+    padding: $panel-padding-mobile
+    padding-bottom: $panel-padding-mobile * 2
+
+    @include tablet-or-larger
+      padding: $panel-padding-thin $panel-padding
+      padding-bottom: $panel-padding * 2
+
+  .sya-panel--overflow
+    overflow: visible
+    min-height: 0
+
+  .sya-panel__header
+    padding: 0 24px
+    font-size: 17px
+    height: 50px
+    font-weight: 500
+    background: #EEE //#F5F5F5
+
+    display: flex
+    align-items: center
+
+    white-space: nowrap
+    overflow: hidden
+    text-overflow: ellipsis
+
+    @include tablet-or-larger
+      height: 92px
+      background: white
+      border-bottom: 1px solid lightgrey
+
+    @include desktop-or-larger
+      height: 110px
+
+  .sya-panel__header > .sya-navigation-button
+    position: relative
+    left: -10px
+    top: unset
+
+  .sya-panel--padded > *
+    animation: fade-in 0.4s
+

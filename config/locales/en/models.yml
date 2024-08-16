@@ -1,6 +1,8 @@
 en:
   datetime:
-    distance_in_words:
+    distance_in_words: # TODO: Translate
+      time_ago: "%{time} ago"
+      time_from_now: "%{time} from now"
       soon: "a few minutes"
       x_minutes:
         one: "%{count} minute"
@@ -74,6 +76,22 @@ en:
         one: "registration"
         other: "registrations"
 
+      # Tracking
+      audit:
+        # Basic pluralization
+        single: "History"
+        plural: "History"
+        # Countable
+        one: "log"
+        other: "logs"
+      conversation:
+        # Basic pluralization
+        single: "Conversation"
+        plural: "Conversations"
+        # Countable
+        one: "conversation"
+        other: "conversations"
+
       # Other
       manager:
         # Basic pluralization
@@ -89,13 +107,6 @@ en:
         # Countable
         one: "responsibility"
         other: "responsibilities"
-      audit:
-        # Basic pluralization
-        single: "History"
-        plural: "History"
-        # Countable
-        one: "log"
-        other: "logs"
       client:
         # Basic pluralization
         single: "App"
@@ -123,6 +134,7 @@ en:
           verified: "Verified"
           needs_review: "Needs Review"
           needs_urgent_review: "Needs Urgent Review"
+          needs_immediate_review: "Needs Immediate Review"
           expired: "Expired"
           archived: "Archived"
           finished: "Finished"
@@ -156,6 +168,7 @@ en:
       region:
         manager_id: :activerecord.models.manager.single # Do not translate
         country_code: :activerecord.models.country.single # Do not translate
+        name: "Fallback Name" # TODO: Translate
         geo_data: "Geo Data"
         osm_id: "OpenStreetMap ID"
         bounds: "Viewport"
@@ -168,6 +181,7 @@ en:
         manager_id: :activerecord.models.manager.single # Do not translate
         name: :activerecord.attributes.generic.name # Do not translate
         country_code: :activerecord.models.country.single # Do not translate
+        subtitle: "Subtitle"
         coordinates: "Location"
         latitude: "Latitude"
         longitude: "Longitude"
@@ -245,24 +259,17 @@ en:
           experience: "Have you experienced this meditation before?"
           aspirations: "What are you looking for from meditation?"
           referral: "How did you hear about us?"
-        recurrence: "Recurrence"
-        recurrences:
-          day: "Daily"
-          monday: "Mondays"
-          tuesday: "Tuesdays"
-          wednesday: "Wednesdays"
-          thursday: "Thursdays"
-          friday: "Fridays"
-          saturday: "Saturdays"
-          sunday: "Sundays"
-        start_date: "Start Date"
-        end_date: "End Date"
-        start_time: "Start Time"
-        end_time: "End Time"
+        recurrence_data: "Recurrence"
+        recurrence_type: "Recurrence Type"
+        recurrence_start_date: "Start Date"
+        recurrence_end_date: "End Date"
+        recurrence_start_time: "Start Time"
+        recurrence_end_time: "End Time"
         online: "Online Class"
         online_url: "Online Meeting Link"
         expiration_period: "Expiration Period"
         verification_streak: "Verification Streak"
+        contact: "Public Contact"
         contact_info:
           email_address: "Contact Email"
           email_name: "First Name for Emails"
@@ -317,13 +324,14 @@ en:
         email_verification_sent_at: "Last Email Verification Sent"
         phone_verification_sent_at: "Last Phone Verification Sent"
 
+      conversation:
+        uuid: "Unique Identifier"
+
       audit:
-        user: :activerecord.models.manager.single # Do not translate
-        action: "Action"
-        actions:
-          update: "Updated"
-          create: "Created"
-          destroy: "Deleted"
+        data: "Raw Data"
+        created_at: "Occurred At"
+        changes: "Changes"
+        body: "Content"
 
       client:
         label: "Label"
@@ -349,5 +357,33 @@ en:
           query: "Query (Simple)"
           path: "Path (Advanced)"
         manager_id: :activerecord.models.manager.single # Do not translate
+
+      recurrable:
+        types:
+          daily: "Daily"
+          weekly_1: "Weekly"
+          weekly_2: "Bi-Weekly"
+          monthly_1st: "1st Weekday of the Month"
+          monthly_2nd: "2nd Weekday of the Month"
+          monthly_3rd: "3rd Weekday of the Month"
+          monthly_4th: "4th Weekday of the Month"
+          monthly_last: "Last Weekday of the Month"
+        descriptions:
+          daily: "Every Day"
+          weekly_1: "Every %{weekday}"
+          weekly_2: "Every 2nd %{weekday}"
+          monthly_1st: "1st %{weekday} of each month"
+          monthly_2nd: "2nd %{weekday} of each month"
+          monthly_3rd: "3rd %{weekday} of each month"
+          monthly_4th: "4th %{weekday} of each month"
+          monthly_last: "Last %{weekday} of each month"
+        old_weekdays:
+          0: "Sundays"
+          1: "Mondays"
+          2: "Tuesdays"
+          3: "Wednesdays"
+          4: "Thursdays"
+          5: "Fridays"
+          6: "Saturdays"
 
       pictures:

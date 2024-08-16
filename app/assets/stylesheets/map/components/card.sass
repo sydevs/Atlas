@@ -1,112 +1,115 @@
 @import '../_mixins'
 //@import '../general'
 
-// ===== LAYOUT ===== //
-.sya-card
-  display: flex
-  align-items: center
-  justify-content: space-between
+#sahajatlas
+  // ===== LAYOUT ===== //
+  .sya-card
+    display: flex
+    align-items: center
+    justify-content: space-between
 
-  position: relative
-  padding: 20px $panel-padding-mobile
-  background: white
-  transition: background-color 0.25s ease
-  min-height: 140px
-
-  animation: fade-in 0.4s
-
-  &.sya-card--simple
-    min-height: 0
-    border-bottom: 1px solid transparentize(lightgrey, 0.4)
-
-.sya-card__content
-  min-height: 100px
-  display: flex
-  flex-direction: column
-  justify-content: center
-
-  .sya-card--simple &
-    min-height: 0
-
-.sya-card__content > *  > *
-  display: inline-block
-
-// ===== CONTENT ===== //
-.sya-card__title
-  font-weight: $font-semibold
-  font-size: 17px
-  line-height: 20px
-  color: $color-grey-dark
-  margin-bottom: 6px
-  min-height: 22px
-
-  .sya-card--simple &
-    margin-bottom: 0
-
-.sya-card__subtitle
-  font-size: 13px
-  line-height: 14px
-  letter-spacing: 0.36px
-  margin-bottom: 4px
-
-  &__distance::before
-    content: '• '
-    margin-left: 4px
-
-  &__distance
-    color: $color-cyan
-    white-space: nowrap
-
-.sya-card__meta
-  line-height: 17px
-  font-size: 12px
-  margin-bottom: 7px
-
-  &__day
-    text-transform: uppercase
-    letter-spacing: 0.36px
-
-  &__day::after
-    content: ''
-    height: 14px
-    border-left: 1px solid $color-border-light
-    margin: 0 9px
-    vertical-align: text-bottom
-
-  &__time
-    font-weight: $font-medium
-    letter-spacing: 0.49px
-    margin-right: 3px
-
-  &__timezone
     position: relative
-    font-weight: $font-semibold
-    letter-spacing: 0.36px
-    text-decoration: underline dotted
-    cursor: help
-    margin-left: 3px
+    padding: 20px $panel-padding-mobile
+    background: white
+    transition: background-color 0.25s ease
+    min-height: 140px
 
-  &__upcoming::before
-    content: '• '
-    margin-left: 4px
+    animation: fade-in 0.4s
 
-  &__upcoming
-    color: $color-cyan
-    white-space: nowrap
+    &--online
+      background: color-mix(in srgb, lightgrey, transparent 90%)
+      //background: color-mix(in srgb, #{$theme-tertiary}, transparent 85%)
 
-// ===== ACTIONS ===== //
-.sya-card__action
-  padding-left: 10px
-  white-space: nowrap
-  font-weight: $font-semibold
-  font-size: 14px
-  color: inherit
+    &.sya-card--simple
+      min-height: 0
+      border-bottom: 1px solid transparentize(lightgrey, 0.4)
 
-  > *
-    vertical-align: middle
+  .sya-card__content
+    min-height: 100px
+    display: flex
+    flex-direction: column
+    justify-content: center
 
-  .sya-icon
+    .sya-card--simple &
+      min-height: 0
+
+  .sya-card__content > *  > *
     display: inline-block
-    margin-left: -2px
-    margin-bottom: -2px
-    font-size: 24px
+
+  // ===== CONTENT ===== //
+  .sya-card__title
+    font-weight: $font-semibold
+    font-size: 17px
+    line-height: 20px
+    color: $color-grey-dark
+    margin-bottom: 6px
+    min-height: 22px
+
+    .sya-card--simple &
+      margin-bottom: 0
+
+  .sya-card__subtitle
+    font-size: 13px
+    line-height: 14px
+    letter-spacing: 0.36px
+    margin-bottom: 4px
+
+    .sya-card--simple &
+      font-size: 14.5px
+      margin-top: 2px
+
+    &__distance::before
+      content: '• '
+      margin-left: 4px
+
+    &__distance
+      color: $theme-primary
+      white-space: nowrap
+
+  .sya-card__meta
+    line-height: 17px
+    font-size: 12px
+    margin-bottom: 7px
+
+    &__day
+      text-transform: uppercase
+      letter-spacing: 0.36px
+
+
+    &__time
+      font-weight: $font-medium
+      letter-spacing: 0.49px
+      margin-right: 3px
+
+    &__timezone
+      position: relative
+      font-weight: $font-semibold
+      letter-spacing: 0.36px
+      text-decoration: underline dotted
+      cursor: help
+      margin-left: 3px
+
+    &__upcoming::before
+      content: '• '
+      margin-left: 4px
+
+    &__upcoming
+      color: $theme-primary
+      white-space: nowrap
+
+  // ===== ACTIONS ===== //
+  .sya-card__action
+    padding-left: 10px
+    white-space: nowrap
+    font-weight: $font-semibold
+    font-size: 14px
+    color: inherit
+
+    > *
+      vertical-align: middle
+
+    .sya-icon
+      display: inline-block
+      margin-left: -2px
+      margin-bottom: -2px
+      font-size: 24px

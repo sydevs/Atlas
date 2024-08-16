@@ -1,0 +1,17 @@
+
+- content_for :preview, translate('mail.login.preview')
+
+h2
+  = translate('mail.login.title')
+
+p.explanation
+  = translate('mail.login.preview')
+
+.actions
+  a.button href=@magic_link
+    span = translate('mail.login.action')
+
+p.explanation
+  = translate('mail.login.explanation')
+  br
+  = @magic_link

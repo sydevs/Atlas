@@ -9,6 +9,10 @@ class ApplicationRecord < ActiveRecord::Base
     try(:canonical_domain) || wemeditate_host
   end
 
+  def equals? obj
+    obj.class == self.class && obj.id == self.id
+  end
+
   private
 
     def wemeditate_host

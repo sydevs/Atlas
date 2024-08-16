@@ -50,6 +50,7 @@ pt:
       # Tertiary menu
       details: "Informações"
       activity: "Atividade"
+      messages: "Conversation" # TODO: Translate
       breadcrumbs:
         world: "Mundo"
         help: "Ajuda"
@@ -76,6 +77,7 @@ pt:
         invalid_location: "não pode ser fora do raio de %{area}"
       event:
         verified: "Obrigado por confirmar a precisão de seu evento."
+        finish: "This event is now marked as complete." # TODO: Translate
         invalid_end_time: "não pode ser antes do horário de início"
         invalid_end_date: "não pode ser antes da data de início"
         passed_end_date: "não pode ser antes de hoje"
@@ -121,6 +123,7 @@ pt:
         enable_custom_regions: "Permitir a criação de regiões customizadas. Essa é uma facilidade avançada, a qual você só deve usar se tiver certeza do que está fazendo."
       region:
         polygon: "Arraste / Clique em um quadrado vazio para adicionar um novo lado ao polígono. Clique em um lado para removê-lo."
+        name: "Regions will use a translated name for each language, however if no translation is available, this name is used." # TODO: Translate
       area:
         location: "Uma área customizada é definida usando as coordenadas no mapa (latitude e longitude) e um raio para fazer uma região circular."
       event:
@@ -136,7 +139,7 @@ pt:
         registration_question: "Quais perguntas devem ser feitas aos buscadores quando eles se inscrevem para a classe?"
         online: "Marque aqui se o programa for online."
         online_url: "Se a classe é online, este link é aquele que os buscadores devem acessar (tipo um link para Zoom, YouTube, Google Meet, Jitsy, etc)."
-        expiration_period: "How long should we wait until we ask you if the program is still accurate?" # TODO: Translate
+        expiration_period: "How long should we wait until we ask you if the program is still accurate?" # TODO: Translate
         contact_info:
           email_address: "Um endereço de email que será publicado no site."
           email_name: "O primeiro nome do(a) yogi(ni) que responderá os emails."
@@ -193,7 +196,8 @@ pt:
       management_for_record: "Gerenciamento de  %{resource}"
       managers_for_record: "Gestores de %{resource}"
       location_of_record: "Localização deste %{resource}"
-      dates_and_timing: "Dias & Horários"
+      dates: "Dias"
+      timing: "Horários"
       map_of_record: "Mapa deste %{resource}"
       area_in_words: "%{radius} km ao redor de %{latitude}, %{longitude}"
       records_in_recent_days: "%{resources} nos últimos 330 dias"
@@ -212,6 +216,8 @@ pt:
         action: "Revisar"
       record_needs_urgent_review:
         title: "%{resource} Necessita Revisão Urgente"
+      record_needs_immediate_review: # TODO: Translate
+        title: "%{resource} Needs Immediate Review"
       record_finished:
         title: "%{resource} Completado"
         description: "Este %{resource} acabou. Sua última ocorrência foi em %{date}."
@@ -262,6 +268,48 @@ pt:
       description: "Este é um registro de todas ações feitas por este gerente."
       changed_by: "por %{name}"
       changed_to: "alterado para"
+
+    conversations:
+      awaiting_response: "Awaiting Reply"
+      has_answers: "Gave Comments"
+      send_reply: "Send Reply"
+
+    audits: # TODO: Translate
+      time_ago: "%{time} ago"
+      person: "Action taken by %{person}"
+      parent: "Relates to %{resource}"
+      replies_to: "Replies to %{resource}"
+      replied_by: "Replied to by %{resource}"
+      changes:
+        one: "%{count} Change"
+        other: "%{count} Changes"
+      title:
+        record_created: "%{model} Created"
+        record_updated: "%{model} Updated"
+        record_destroyed: "%{model} Deleted"
+        status_verified: "%{model} Verified"
+        status_change: "%{model} Status Changed"
+        email_forwarded: "%{model} Email"
+        notice_sent: "%{model} Notice Sent"
+        question_asked: "%{model} Question Asked"
+      contextual_summary:
+        record_created: "%{person} created this %{model}"
+        record_updated: "%{person} updated this %{model}"
+        record_destroyed: "%{person} deleted a %{model}"
+        status_verified: "%{model} was %{status} by %{person}"
+        status_change: "%{model} changed to %{status}"
+        email_forwarded: "%{person} sent an email"
+        notice_sent: "Notification sent to %{person}"
+        question_asked: "%{person} asked a question"
+      summary:
+        record_created: "%{person} created %{resource}"
+        record_updated: "%{person} updated %{resource}"
+        record_destroyed: "%{person} deleted %{resource}"
+        status_verified: "%{resource} was %{status} by %{person}"
+        status_change: "%{resource} changed to %{status}"
+        email_forwarded: "%{person} sent an email for %{resource}"
+        notice_sent: "Notification sent for %{resource} to %{person}"
+        question_asked: "%{person} asked a question for %{resource}"
 
     dashboard:
       role:

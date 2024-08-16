@@ -11,10 +11,12 @@ function MapContainer() {
     if (!selection || selection.id != id || selection.model != model) {
       selection = { id: id, model: model }
 
-      AtlasApp.data.getRecord(selection.model, selection.id).then(function(record) {
-        if (selection.model == AtlasEvent) record = record.location
-        map.setSelection(record, options)
-      })
+      if (selection.model && selection.id) {
+        AtlasApp.data.getRecord(selection.model, selection.id).then(function(record) {
+          if (selection.model == AtlasEvent) record = record.location
+          map.setSelection(record, options)
+        })
+      }
     }
   }
 

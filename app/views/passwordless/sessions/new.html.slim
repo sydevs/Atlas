@@ -6,12 +6,12 @@
   .ui.message class=key
     = message
 
-= simple_form_for @session, url: send(Passwordless.mounted_as).sign_in_path, html: { novalidate: false } do |f|
+= simple_form_for @session, url: url_for(action: 'new'), data: { turbo: 'false' }, html: { novalidate: false } do |f|
   .ui.segment
     h2.ui.header Request login
     = f.input :email, hint: "All login is managed via email. Enter your email address below, and you will be sent a link to login" do
-      - email_field_name = "passwordless[#{@email_field}]".to_sym
-      = text_field_tag email_field_name, params.fetch(email_field_name, nil), required: true
+      - email_field_name = :"passwordless[#{email_field}]"
+      = text_field_tag email_field_name, params.fetch(email_field_name, nil), required: true, autofocus: true, placeholder: t("passwordless.sessions.new.email.placeholder")
 
   a.ui.basic.button href='/'
     = translate('passwordless.sessions.create.back')

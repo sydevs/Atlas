@@ -14,19 +14,7 @@ class ManagerMailer < ApplicationMailer
     setup
     subject = I18n.translate('mail.manager.verify.subject')
     puts "[MAIL] Sending verification email to #{@manager.name} for #{@context}"
-    mail(to: @manager.email, subject: subject)
-  end
-
-  def new_managed_record
-    managed_record = params[:managed_record]
-    @manager = managed_record&.manager || params[:manager]
-    return unless @manager.notifications.new_managed_record?
-    
-    @record = managed_record&.record || params[:record]
-    create_session!
-
-    subject = I18n.translate('mail.manager.new_managed_record.title', context: @context&.label)
-    puts "[MAIL] Sending new managed record email to #{@manager.name} for #{@context}"
+    @manager.touch(:email_verification_sent_at)
     mail(to: @manager.email, subject: subject)
   end
 

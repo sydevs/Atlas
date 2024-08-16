@@ -6,23 +6,32 @@ function ListView() {
   let offlineEventCount = null
   let onlineOnly = false
   let events = undefined
+  let request = null
 
   function updateEvents() {
     let filter = onlineOnly ? 'online' : 'all'
-    let getEventIds = Promise.resolve(null)
+    let getEventIds
 
     if (filter != 'online') {
       getEventIds = AtlasApp.map.getRenderedEventIds()
+    } else {
+      getEventIds = DataRequest.resolve(null)
     }
 
-    getEventIds.then(ids => {
+    pendingRequest = getEventIds.then(ids => {
       offlineEventCount = ids && ids.length
 
-      return AtlasApp.data.getList(filter, ids).then(response => {
+      let promise = AtlasApp.data.getList(filter, ids)
+      const dataRequest = new DataRequest(promise)
+      request = dataRequest
+      dataRequest.then(response => {
         events = response
+        if (dataRequest === request) request = null
+        m.redraw()
       })
     }).catch(() => {
       events = null
+      offlineEventCount = 0
     }).finally(() => {
       m.redraw()
     })
@@ -30,7 +39,8 @@ function ListView() {
 
   return {
     oncreate: function() {
-      AtlasApp.map.addEventListener('update', updateEvents)
+      updateEvents()
+      AtlasApp.map.addEventListener('update', Util.throttle(updateEvents, 500))
     },
     view: function(vnode) {
       let list = null
@@ -65,6 +75,9 @@ function ListView() {
               m('i.sya-icon.sya-icon--close'),
             ]),
           ]),
+        request ?
+          m(Loader, { type: 'small', error: request.resolved ? Util.translate('list.error') : null })
+          : null,
         !onlineOnly && offlineEventCount === 0 ?
           m(ListFallback)
           : m('.sya-list', list),

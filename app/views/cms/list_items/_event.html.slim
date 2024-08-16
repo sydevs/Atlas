@@ -24,6 +24,6 @@ tr
 
   td.collapsing.right.aligned
     - unless event.inactive_category?
-      = event.recurrence_in_words
+      = event.recurrence_in_words(%i[recurrence timing], short: true)
       br
-      = event.formatted_start_end_time
+      = event.recurrence_in_words(%i[dates], short: true)

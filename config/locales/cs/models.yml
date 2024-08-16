@@ -1,6 +1,8 @@
 cs:
   datetime:
-    distance_in_words:
+    distance_in_words: # TODO: Translate
+      time_ago: "%{time} ago"
+      time_from_now: "%{time} from now"
       soon: "brzy"
       x_minutes: # TODO: Translate
         one: "%{count} minute"
@@ -103,6 +105,13 @@ cs:
         # Countable
         one: "externí aplikace"
         other: "externí aplikace"
+      message: # TODO: Translate
+        # Basic pluralization
+        single: "Email"
+        plural: "Emails"
+        # Countable
+        one: "message"
+        other: "messages"
       picture:
         # Basic pluralization
         single: "Obraz"
@@ -123,6 +132,7 @@ cs:
           verified: "Ověřeno"
           needs_review: "Potřebuje revizi"
           needs_urgent_review: "Potřebuje urgentní revizi"
+          needs_immediate_review: "Needs Immediate Review" # TODO: Translate
           expired: "Platnost vypršela"
           archived: "Archivováno"
           finished: "Ukončeno"
@@ -156,6 +166,7 @@ cs:
       region:
         manager_id: :activerecord.models.manager.single # Do not translate
         country_code: :activerecord.models.country.single # Do not translate
+        name: "Fallback Name" # TODO: Translate
         geo_data: "Geo Data"
         osm_id: "OpenStreetMap ID"
         bounds: "Viewport"
@@ -168,6 +179,7 @@ cs:
         manager_id: :activerecord.models.manager.single # Do not translate
         name: :activerecord.attributes.generic.name # Do not translate
         country_code: :activerecord.models.country.single # Do not translate
+        subtitle: "Subtitle" # TODO: Translate
         coordinates: "Místo"
         latitude: "Zeměpisná šířka"
         longitude: "Zeměpisná délka"
@@ -206,7 +218,7 @@ cs:
           course: "Kurz meditace"
           public_event: "Stánek na veřejné akci"
           concert: "Meditační a hudební koncert"
-          inactive: "Inactive Class" # TODO: Translate
+          inactive: "Inactive Class" # TODO: Translate
         category_labels:
           intro: "Úvodní kurz"
           intermediate: "Jdeme hlouběji"
@@ -220,7 +232,7 @@ cs:
           course: "Několikatýdenní kurz, který vás provede různými technikami meditace."
           public_event: "Nabíka výuky meditace na veřejné akci zdarma."
           concert: "Představení kombinující meditaci a hudbu nebo tanec"
-          inactive: "A program that runs infrequently or is on pause. Seekers can contact the yogi in charge for more info." # TODO: Translate
+          inactive: "A program that runs infrequently or is on pause. Seekers can contact the yogi in charge for more info." # TODO: Translate
         description: "Popis"
         room: "Místnost"
         building: "Budova"
@@ -255,10 +267,12 @@ cs:
           friday: "Každý pátek"
           saturday: "Každou sobotu"
           sunday: "Každou neděli"
-        start_date: "Počáteční datum"
-        end_date: "Datum konce"
-        start_time: "Čas začátku"
-        end_time: "Čas konce"
+        recurrence_data: "Recurrence" # TODO: Translate
+        recurrence_type: "Recurrence Type" # TODO: Translate
+        recurrence_start_date: "Počáteční datum"
+        recurrence_end_date: "Datum konce"
+        recurrence_start_time: "Čas začátku"
+        recurrence_end_time: "Čas konce"
         online: "Online kurz"
         online_url: "Odkaz na online meditační setkání"
         language: "Jazyk"
@@ -317,13 +331,14 @@ cs:
         email_verification_sent_at: "Poslední ověřovací e-mail zaslán"
         phone_verification_sent_at: "Poslední ověření přes mobilní telefon zasláno"
 
-      audit:
-        user: :activerecord.models.manager.single # Do not translate
-        action: "Akce"
-        actions:
-          update: "Aktualizováno"
-          create: "Vytvořeno"
-          destroy: "Smazáno"
+      conversation: # TODO: Translate
+        uuid: "Unique Identifier"
+
+      audit: # TODO: Translate
+        data: "Raw Data"
+        created_at: "Occurred At"
+        changes: "Changes"
+        body: "Content"
 
       client:
         label: "Označení"
@@ -349,5 +364,25 @@ cs:
           query: "Dotaz (jednoduché)"
           path: "Cesta (pokročilé)"
         manager_id: :activerecord.models.manager.single # Do not translate
+
+      recurrable: # TODO: Translate
+        types:
+          daily: "Daily"
+          weekly_1: "Weekly"
+          weekly_2: "Bi-Weekly"
+          monthly_1st: "1st Weekday of the Month"
+          monthly_2nd: "2nd Weekday of the Month"
+          monthly_3rd: "3rd Weekday of the Month"
+          monthly_4th: "4th Weekday of the Month"
+          monthly_last: "Last Weekday of the Month"
+        descriptions:
+          daily: "Every Day"
+          weekly_1: "Every %{weekday}"
+          weekly_2: "Every 2nd %{weekday}"
+          monthly_1st: "1st %{weekday} of each month"
+          monthly_2nd: "2nd %{weekday} of each month"
+          monthly_3rd: "3rd %{weekday} of each month"
+          monthly_4th: "4th %{weekday} of each month"
+          monthly_last: "Last %{weekday} of each month"
 
       pictures:

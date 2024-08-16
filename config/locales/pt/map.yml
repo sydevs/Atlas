@@ -19,7 +19,9 @@ pt:
         online: "Aulas online"
         back: "Voltar ao mapa"
 
-    list:
+    list: # TODO: Translate
+      loading: "Loading..."
+      error: "Connection Error"
       search: "Pesquisar local"
       more_info: "Mais informações"
       register: "Registro"
@@ -97,7 +99,7 @@ pt:
       5: "Sexta"
       6: "Sábado"
 
-    recurrence:
+    recurrence: # TODO: Translate
       day: "Diário"
       monday: "Segunda"
       tuesday: "Terça"
@@ -106,10 +108,18 @@ pt:
       friday: "Sexta"
       saturday: "Sábado"
       sunday: "Domingo"
+      weekly_1: "Every %{weekday}"
+      weekly_2: "Every 2nd %{weekday}"
+      monthly_1st: "1st %{weekday} of Every Month"
+      monthly_2nd: "2nd %{weekday} of Every Month"
+      monthly_3rd: "3rd %{weekday} of Every Month"
+      monthly_4th: "4th %{weekday} of Every Month"
+      monthly_last: "Last %{weekday} of Every Month"
 
     timing_labels:
       course_fallback: "Este é um curso semanal"
-      course: "%{weeks} semana de curso"
+      course_weekly: "%{count} semana de curso"
+      course_monthly: "%{count}-session course" # TODO: Translate
       ongoing: "Esta aula está em andamento"
 
     language_codes:

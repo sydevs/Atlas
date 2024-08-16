@@ -7,7 +7,7 @@
       i.check.circle.icon
       .content
         .header = translate('cms.details.record_finished.title', resource: translate_model(@model))
-        .description = translate('cms.details.record_finished.description', resource: translate_model(@model).downcase, date: @record.end_date.to_s(:long))
+        .description = translate('cms.details.record_finished.description', resource: translate_model(@model).downcase, date: @record.last_recurrence_at.to_s(:long))
   - elsif @record.try(:archived?)
     .ui.small.orange.icon.message
       i.exclamation.icon

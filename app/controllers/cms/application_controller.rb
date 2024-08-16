@@ -7,6 +7,7 @@ class CMS::ApplicationController < ActionController::Base
 
   helper_method :current_user, :back_path
 
+  before_action :set_current_user
   before_action :require_login!
   before_action :verify_manager
   before_action :set_locale!
@@ -112,6 +113,7 @@ class CMS::ApplicationController < ActionController::Base
   def edit attributes = {}
     authorize @record
     @record.assign_attributes(attributes)
+    @context = @record
   end
 
   def update attributes
@@ -145,6 +147,16 @@ class CMS::ApplicationController < ActionController::Base
     render json: result, status: result ? 200 : 404
   end
 
+  # This route handles viewing audits filtered by the messages scope
+  def messages
+    set_context!
+    authorize_association! :messages
+    @records = policy_scope(@context.messages).reorder(created_at: :desc).group_by(&:group_id)
+    @model = Audit
+    set_model_name!
+    render 'cms/views/messages'
+  end
+
   def back_path
     return cms_root_path if @record == current_user
     return url_for([:cms, @record]) if policy(@record).show?
@@ -158,30 +170,31 @@ class CMS::ApplicationController < ActionController::Base
 
   protected
 
+    # <b>DEPRECATED:</b> Please use <tt>Current.user</tt> instead.
     def current_user
-      @current_user ||= authenticate_by_session(Manager)
+      Current.user
     end
 
     def require_login!
-      return if current_user
+      return if Current.user
 
       save_passwordless_redirect_location! Manager
-      redirect_to managers.sign_in_path, flash: { error: translate('cms.messages.not_logged_in') }
+      redirect_to managers_sign_in_path, flash: { error: translate('cms.messages.not_logged_in') }
     end
 
     def verify_manager
       atts = { last_login_at: DateTime.now }
-      if params[:verify] && current_user.respond_to?("#{params[:verify]}_verified")
+      if params[:verify] && Current.user.respond_to?("#{params[:verify]}_verified")
         atts[:"#{params[:verify]}_verified"] = true
         flash.now[:success] = translate("cms.messages.manager.#{params[:verify]}_verified")
       end
 
-      current_user.assign_attributes(atts)
-      current_user.save!(validate: false)
+      Current.user.assign_attributes(atts)
+      Current.user.save!(validate: false)
     end
 
     def set_locale!
-      I18n.locale = params[:locale]&.to_sym || current_user.language_code&.downcase&.to_sym || :en
+      I18n.locale = params[:locale]&.to_sym || Current.user.language_code&.downcase&.to_sym || :en
     end
 
     def set_model_name!
@@ -189,7 +202,7 @@ class CMS::ApplicationController < ActionController::Base
     end
 
     def set_context!
-      [Registration, Event, Venue, Manager, Area, Region, Country, Client].each do |model|
+      [Registration, Event, Venue, Manager, Area, Region, Country, Client, Audit].each do |model|
         keys = model.model_name
         param_key = "#{keys.param_key}_id"
         next unless params[param_key]
@@ -200,7 +213,7 @@ class CMS::ApplicationController < ActionController::Base
         break
       end
 
-      puts "SET CONTEXT #{@context.inspect}"
+      puts "SET CONTEXT #{@context} #{@context&.id}"
     end
 
     def set_scope!
@@ -210,13 +223,13 @@ class CMS::ApplicationController < ActionController::Base
         @scope = current_user.try("accessible_#{@model.table_name}") || @model
       end
       
-      puts "SET SCOPE #{@scope.inspect}"
+      puts "SET SCOPE #{@scope}"
     end
 
     def set_record!
       @record = @scope&.find(params[:id])
       @context ||= @record.parent
-      puts "SET RECORD #{@record.inspect}"
+      puts "SET RECORD #{@record} #{@record&.id}"
     end
 
     def authorize_association! key
@@ -225,7 +238,11 @@ class CMS::ApplicationController < ActionController::Base
       key = key.table_name.to_sym if key.is_a?(ActiveRecord.class)
       return if allow.index_association?(key)
 
-      raise Pundit::NotAuthorizedError, "not allowed to index? #{@model} for #{@context || 'Worldwide'}"
+      raise Pundit::NotAuthorizedError, "not allowed to index? #{@model} association for #{@context.inspect || 'Worldwide'}"
+    end
+
+    def set_current_user
+      Current.user ||= authenticate_by_session(Manager).extend(ManagerDecorator)
     end
 
 end

@@ -39,6 +39,7 @@ class AtlasAPI {
             lastDate
             upcomingDates
             recurrence
+            recurrenceCount
           }
           contact {
             phoneName
@@ -52,6 +53,7 @@ class AtlasAPI {
             url
             thumbnailUrl
           }
+          areaId
           location {
             id
             type
@@ -61,9 +63,9 @@ class AtlasAPI {
             radius
             onlineEventIds
             offlineEventIds
+            directionsUrl
             parentId
             parentType
-            directionsUrl
           }
         }`,
         venue: `on Venue {
@@ -77,6 +79,7 @@ class AtlasAPI {
         area: `on Area {
           id
           label
+          subtitle
           latitude
           longitude
           radius
@@ -96,6 +99,7 @@ class AtlasAPI {
           areas {
             id
             name
+            subtitle
             onlineEventIds
             offlineEventIds
           }
@@ -144,18 +148,22 @@ class AtlasAPI {
   }
 
   prepareQueries(locale) {
+    let models
     this.fetchGeojson = this.graph.query(`($online: Boolean, $languageCode: String) {
       geojson(online: $online, languageCode: $languageCode, locale: "${locale}") { ...geojson }
     }`)
 
-    this.fetchEvents = this.graph.query(`($ids: [ID!]) {
-      events(ids: $ids, locale: "${locale}") { ...event }
-    }`)
-
-    const models = [AtlasCountry, AtlasRegion, AtlasArea, AtlasVenue, AtlasEvent]
+    models = [AtlasEvent]
     models.forEach(Model => {
-      this[`fetch${Model.label}`] = this.graph.query(`(@autodeclare) {
-        ${Model.key}(id: $id, locale: "${locale}") { ...${Model.key} }
+      this[`fetchAll${Model.LABELS}`] = this.graph.query(`($ids: [ID!]) {
+        ${Model.KEYS}(ids: $ids, locale: "${locale}") { ...${Model.KEY} }
+      }`)
+    })
+
+    models = [AtlasCountry, AtlasRegion, AtlasArea, AtlasVenue, AtlasEvent]
+    models.forEach(Model => {
+      this[`fetch${Model.LABEL}`] = this.graph.query(`(@autodeclare) {
+        ${Model.KEY}(id: $id, locale: "${locale}") { ...${Model.KEY} }
       }`)
     })
 
@@ -173,6 +181,7 @@ class AtlasAPI {
           area {
             id
             label
+            subtitle
             latitude
             longitude
             radius

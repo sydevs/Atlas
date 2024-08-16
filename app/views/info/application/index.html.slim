@@ -16,5 +16,5 @@
           a.button href=cms_root_path
             = translate('info.index.view_cms')
         - else
-          a.button href=managers.sign_in_path(locale: params[:locale] || :en)
+          a.button href=managers_sign_in_path(locale: params[:locale] || :en)
             = translate('info.index.sign_in')

@@ -1,0 +1,517 @@
+fr:
+  cms:
+    actions:
+      simple:
+        new: "Ajouter"
+        edit: "Editer"
+        update: "Enregistrer"
+        destroy: "Supprimer"
+        back: "Reculer"
+        view: "Voir"
+        search: "Rechercher"
+        searching: "Recherche en cours..."
+        select: "Sélectionner"
+
+      target:
+        new: "Ajouter %{resource}"
+        create: "Créer %{resource}"
+        edit: "Editer %{resource}"
+        update: "Sauvegarder %{resource}"
+        destroy: "Supprimer %{resource}"
+        back: "Retour %{resource}"
+        search: "Rechercher %{resources}..."
+        choose: "Choisir un %{resource}"
+        verify: "Vérifier %{resource}"
+        view: "Voir %{resource}"
+        reload: "Recharger %{resource}"
+
+      special:
+        edit_profile: "Editer mon profil"
+        view_map: "Voir la Carte"
+
+    menu:
+      home: "Accueil"
+      # Top level menu
+      about: "A propos de Sahaj Atlas"
+      statistics: "Statistiques"
+      map: :cms.actions.special.view_map # Do not translate
+      report_issue: "Signaler un problème"
+      help: "Aide (FAQ)"
+      sign_out: "Déconnexion"
+      sign_in: "Connexion"
+      # Secondary menu
+      dashboard: "Tableau de bord pour %{user}"
+      review: "Toutes les alertes pour %{user}"
+      worldwide: "Données mondiales"
+      clients: "Toutes les applications client" # TODO: Translate
+      clients: "Toutes les applications client"
+      faq: "Questions fréquemment posées"
+      context: "%{resource} for %{parent}"
+      # Tertiary menu
+      details: "Info"
+      activity: "Activité"
+      messages: "Conversation" # TODO: Translate
+      breadcrumbs:
+        world: "Monde"
+        help: "Aide"
+        review: "Alertes de révision"
+        dashboard: "Tableau de bord"
+
+    messages:
+      errors: "Erreurs"
+      no_records_found: "Aucun %{resources} trouvé."
+      confirm_destroy: "Etes-vous sûr de vouloir supprimer ? Ceci ne peut pas être annulé."
+      successfully_created: "Créé %{resource} avec succès."
+      successfully_updated: "Enregistré %{resource} avec succès."
+      successfully_deleted: "%{resource} supprimé avec succès. Ceci ne peut pas être annulé."
+      successfully_removed: "%{resource} supprimé avec succès de ce %{context}."
+      not_logged_in: "Vous nêtes pas connecté !"
+      no_comment: "(Aucun commentaire)"
+      temporary_mail_error: "Le serveur de messagerie est temporairement occupé, veuillez réessayer."
+      region:
+        invalid_geojson: "doit avoir son centre à l'intérieur des frontières de %{country}"
+        invalid_osm_id: "N'est pas en %{country}"
+      area:
+        invalid_location: "doit avoir son centre à l'intérieur des frontières de %{region} and %{country}"
+      venue:
+        invalid_location: "ne peut pas être en dehors du rayon de %{area}"
+      event:
+        verified: "Merci d'avoir confirmé l'exactitude de votre événement."
+        finish: "This event is now marked as complete." # TODO: Translate
+        invalid_end_time: "ne peut pas être avant l'heure de début"
+        invalid_end_date: "ne peut pas être avant la date de début"
+        passed_end_date: "ne peut pas être avant aujourd'hui"
+      manager:
+        success: "Gestionnaire ajouté avec succès"
+        already_added: "%{manager} gère déjà cela #{resource}"
+        already_exists: "%{name} <%{email}> existe déjà"
+        email_verified: "Votre adresse e-mail est maintenant vérifiée !"
+        phone_verified: "Votre numéro de téléphone est maintenant vérifié !"
+        email_verification_resent: "Un e-mail de vérification a été envoyé à %{name}"
+      cannot_create:
+        event: "De nouveaux événements ne peuvent pas être créés ici, ils doivent être ajoutés directement à une ville."
+
+    forms:
+      event:
+        details: "Détails de l'Evènement"
+        timing: "Horaire"
+        location: "Lieu"
+        registration: "Inscription"
+        manager: "Responsable"
+      manager:
+        contact_methods: "Méthodes de Contact"
+        notifications: "Paramètres de Notification"
+
+    hints:
+      unnamed: "(Anonyme)"
+      verified: "Vérifié"
+      not_verified: "Non Vérifié"
+      not_set: "Pas encore Défini"
+      not_found: "Aucun Résultat Trouvé"
+      unspecified: "Non Spécifié"
+      unlimited: "Illimité"
+      never: "Jamais"
+      edit_warning: "Ne modifiez pas ces champs, sauf si vous savez ce que vous faites !"
+      geosearch:
+        prompt: "Rechercher un emplacement"
+        description: "Vous pouvez utiliser cette recherche pour remplir automatiquement les champs ci-dessous. Ceci utilise l'API Google. Si Google est bloqué dans votre pays ou si la recherche échoue, vous devrez saisir les données manuellement."
+      country:
+        must_be_new: "Seuls les pays qui n'ont pas encore été ajoutés sont répertoriés ci-dessous."
+        language: "La langue par défaut dans laquelle se déroulent généralement les événements dans ce pays."
+        no_default_language: "Aucun défaut"
+        enable_regions: "Si cette option est activée, vous pourrez afficher et affecter des responsables aux régions (régions, états, etc.) de ce pays. Ceci est utile pour les grands pays (Chine, États-Unis, Australie, etc.) et inutile pour les petits pays (Belgique, Lituanie, Singapour, etc.)."
+        enable_custom_regions: "Autoriser la création de régions personnalisées. Il s'agit d'une fonctionnalité avancée qui ne doit être utilisée que si vous comprenez ce que vous faites."
+      region:
+        polygon: "Faites glisser/cliquez sur un carré estompé pour ajouter un nouveau coin au polygone. Cliquez sur un coin existant pour le supprimer."
+        name: "Regions will use a translated name for each language, however if no translation is available, this name is used." # TODO: Translate
+      area:
+        location: "Une zone personnalisée est définie à l'aide de coordonnées sur la carte (latitude et longitude) et d'un rayon, pour créer une région circulaire."
+      event:
+        custom_name: "Si vous souhaitez remplacer le nom de l'événement, vous pouvez le faire ici."
+        description: "Fournissez une description du programme pour les demandeurs. Donnez-leur une idée de ce à quoi s'attendre et des instructions spéciales pour trouver l'emplacement ou ce qu'il faut apporter. Cette description doit être comprise entre %{min} et %{max} caractères."
+        description_count: " caractères"
+        room: "Dans quelle salle du bâtiment se déroule l'événement ?"
+        language: "Quelle est la langue principale dans laquelle cet événement est présenté ?"
+        registration_mode: "Où les chercheurs de vérité doivent-ils s'adresser pour s'inscrire à l'événement ? Nous vous recommandons fortement de laisser ceci renseigné comme '%{native}.' Le fait que les chercheurs de vérité s'inscrivent sur ce site nous permettra de leur envoyer des e-mails de rappel et de suivi."
+        registration_notification: "À quelle fréquence souhaitez-vous recevoir des notifications concernant les nouvelles inscriptions ?"
+        registration_url: "L'URL d'enregistrement sera définie automatiquement si le mode est défini comme \"%{native}.\""
+        registration_limit: "Limiter le nombre d'inscriptions à ce nombre."
+        registration_question: "Quelles questions demander aux chercheurs de vérité lors de leur inscription au cours ?"
+        online: "Cochez cette case si le programme se déroulera en ligne."
+        online_url: "Si le cours est en ligne, ce lien est l'endroit où les participants doivent rejoindre le cours (par exemple, un lien vers Zoom, YouTube, Google Meet, etc.)"
+        expiration_period: "Combien de temps devons-nous attendre avant de vous demander si le programme est toujours d'actualité ?"
+        contact_info:
+          email_address: "Une adresse e-mail qui sera publiée sur le site Internet."
+          email_name: "Le prénom du sahaja yogi qui répondra aux e-mails."
+          phone_number: "Un numéro de téléphone local que les chercheurs de vérité peuvent appeler pour poser des questions."
+          phone_name: "Le prénom du sahaja yogi qui répondra au téléphone."
+          web_links: "Sites Web sur lesquels les chercheurs de vérité peuvent trouver plus d'informations sur ce programme potentiel."
+        venue:
+          search: "Rechercher une adresse"
+          view_fields: "Afficher les champs de localisation"
+        manager:
+          view_fields: "Afficher les champs du responsable"
+          field: "Le responsable désigné doit être un sahaja yogi(ni) qui assumera la responsabilité de cet événement. Chaque semaine, une liste des nouvelles inscriptions sera envoyée au responsable et tous les quelques mois, il lui sera demandé de confirmer l'exactitude des informations concernant le programme."
+          search: "Saisissez l'adresse e-mail ou le numéro de téléphone complet de la personne que vous souhaitez ajouter. Si aucun responsable existant n'est trouvé, vous pouvez inviter le responsable par e-mail ou via Messenger."
+          categories:
+            managers: "Responsables existants"
+            invite: "Inviter"
+          short_invitations:
+            email: "Par e-mail"
+            phone: "Via %{messenger}"
+          invitations:
+            email: "Inviter par e-mail"
+            phone: "Inviter via %{messenger}"
+      manager:
+        language: "La langue préférée pour les e-mails et l'interface utilisateur de ce responsable."
+        administrator:
+          title: "Création d'un administrateur global"
+          description: "L'ajout d'un gestionnaire aux données mondiales le créera en tant qu'administrateur. Ils auront un accès complet pour apporter des modifications à l'Atlas Sahaj."
+        contact_method: "Par quel moyen préférez-vous être contacté."
+        contact_settings:
+          hint: "Veuillez sélectionner les types de messages que vous souhaitez recevoir de Sahaj Atlas. Actuellement, certains types ne peuvent être envoyés que par e-mail."
+          options:
+            email: "Par e-mail uniquement"
+            enabled: "Activé"
+            disabled: "Désactivé"
+          categories:
+            new_managed_record: "Nouvel Accès"
+            event_verification: "Vérification d'Evénement"
+            event_registrations: "Inscriptions aux Evénements"
+            place_summary: "Résumé Régional"
+            country_summary: "Résumé Pays"
+            application_summary: "Résumé Sahaj Atlas"
+          hints:
+            new_managed_record: "Envoyé lorsque vous êtes autorisé à gérer un nouvel événement, une région ou une ressource sur l'Atlas."
+            event_verification: "Demander aux organisateurs d'événements et aux responsables municipaux de vérifier l'exactitude de leurs événements. Cet rappel est envoyé tous les 3 mois, pour chaque événement. Cela ne peut pas être désactivé."
+            event_registrations: "Une liste des nouvelles inscriptions pour votre événement. Envoyé environ 24 heures avant chaque événement."
+            place_summary: "Un résumé des changements au sein d'une région que vous gérez. Envoyé tous les %{period}."
+            country_summary: "Un résumé des changements dans un pays que vous gérez. Envoyé tous les %{period}."
+            application_summary: "Un résumé de toutes les modifications apportées à Atlas. Envoyé tous les %{period}."
+        search: "Saisissez un nom, une adresse e-mail ou un numéro de téléphone…"
+
+    details:
+      details_for_record: "Détails pour %{resource}"
+      registration_for_record: "Tendance des inscriptions"
+      management_for_record: "Gestion de %{resource}"
+      managers_for_record: "Responsables pour %{resource}"
+      location_of_record: "Lieu de %{resource}"
+      dates: "Dates"
+      timing: "Horaires"
+      map_of_record: "Carte de %{resource}"
+      area_in_words: "%{radius} km around %{latitude}, %{longitude}"
+      records_in_recent_days: "%{resources} au cours des 30 derniers jours"
+      record_has_language: "%{resource} proposé en %{language}"
+      notification_settings: "Paramètres de notification"
+      contact_details: "Informations de contact"
+      canonical_domain: "Site Web canonique"
+      updated_at: "Dernière mise à jour"
+      event_coverage:
+        title: "Couverture de l'événement"
+        description: "%{events} dans %{resource}"
+      record_needs_review:
+        title: "%{resource} Nécessite révision"
+        description: "Ce(tte) %{resource} n'a pas été mis à jour depuis %{updated_ago}. Cet événement sera supprimé de la carte à moins qu'il ne soit examiné dans %{expires_in}. Accédez à la page de modification et appuyez sur Enregistrer pour confirmer que les détails de l'événement sont toujours corrects."
+        alt_description: "Ce(tte) %{resource} n'a pas été mis à jour depuis %{updated_ago}. Veuillez consulter les détails ci-dessous et appuyer sur Enregistrer pour confirmer que les détails de l'événement sont corrects."
+        action: "Revoir"
+      record_needs_urgent_review:
+        title: "%{resource} Nécessite une révision urgente"
+      record_needs_immediate_review: # TODO: Translate
+        title: "%{resource} Needs Immediate Review"
+      record_finished:
+        title: "%{resource} Terminé"
+        description: "Ce(tte) %{resource} est terminé(e). Sa dernière occurrence était %{date}."
+      record_has_no_events:
+        title: "Aucun Evénement"
+        description: "Ce(tte) %{resource} n'a aucun événement et n'apparaîtra donc pas sur la carte."
+      record_expired:
+        title: "%{resource} Expiré"
+        description: "Ce(tte) %{resource} a été masqué(e) au public car il n'a pas été mis à jour depuis %{updated_ago}. Accédez à la page de modification et appuyez sur Enregistrer pour confirmer que les détails de l'événement sont toujours corrects."
+        alt_description: "Ce(tte) %{resource} a été masqué(e) au public car il n'a pas été mis à jour depuis %{updated_ago}. Veuillez revoir les détails ci-dessous et appuyer sur Enregistrer pour confirmer que les détails de l'événement sont corrects."
+        action: "Revoir"
+      record_archived:
+        title: "%{resource} Archivé"
+        description: "Ce(tte) %{resource} n'a pas été mis à jour depuis longtemps (%{time}). Il ne sera pas affiché sur la carte à moins qu'il ne soit examiné et enregistré."
+        alt_description: "Ce(tte) %{resource} a été masqué(e) au public car il n'a pas été mis à jour depuis longtemps (%{time}). Veuillez revoir les détails ci-dessous et appuyer sur Enregistrer pour confirmer que les détails de l'événement sont corrects"
+        action: "Désarchiver"
+      external_registration:
+        title: "L'Evénement utilise une inscription externe"
+        description: "Cet événement est prévu pour que les chercheurs de vérité s'inscrivent sur %{mode}. Il est préférable d'avoir des chercheurs de vérité inscrits sur l'Atlas Sahaj, car nous pourrons alors leur envoyer des rappels et des emails de confirmation."
+      record_not_published:
+        title: "Non Publié"
+        description: "Ce(tte) %{resource} est actuellement masqué au public car il n'est pas publié."
+        parent: "Ce(tte) %{resource} est actuellement masqué au public car son %{parent} n'est pas publié."
+      manager_not_verified:
+        title: "Adresse e-mail du responsable non vérifiée"
+        description: "Les événements associés à ce responsable ne sont pas publics car l'adresse e-mail du manager n'a pas été vérifiée."
+        parent: "Ce(tte) %{resource} est actuellement masqué au public car l'adresse e-mail du manager n'a pas été vérifiée."
+        action: "Renvoyer"
+      create_event:
+        title: "Vous vous demandez comment créer un événement ?"
+        description: "Cliquez sur \"%{action}\" tab, and press \"Ajouter un Evènement\""
+        action: "Ajouter un Evènement"
+      create_region_manager:
+        title: "Vous vous demandez comment créer un responsable régional ?"
+        description: "Choisissez une région ou un département sur le \"%{action}\" onglet."
+        action: "Allez-y maintenant"
+      create_city_manager:
+        title: "Vous vous demandez comment créer un responsable de ville ?"
+        description: "Choisissez une page de ville sur \"%{action}\" onglet."
+        action: "Allez-y maintenant"
+
+    images:
+      title: "Des images de ceci %{resource}"
+      upload: "Importer des images"
+
+    activity:
+      title: :cms.menu.activity
+      description: "Il s'agit d'un journal de toutes les actions entreprises par ce responsable."
+      changed_by: "de %{name}"
+      changed_to: "modifié pour"
+
+    conversations:
+      awaiting_response: "Awaiting Reply"
+      has_answers: "Gave Comments"
+      send_reply: "Send Reply"
+
+    audits: # TODO: Translate
+      time_ago: "%{time} ago"
+      person: "Action taken by %{person}"
+      parent: "Relates to %{resource}"
+      replies_to: "Replies to %{resource}"
+      replied_by: "Replied to by %{resource}"
+      changes:
+        one: "%{count} Change"
+        other: "%{count} Changes"
+      title:
+        record_created: "%{model} Created"
+        record_updated: "%{model} Updated"
+        record_destroyed: "%{model} Deleted"
+        status_verified: "%{model} Verified"
+        status_change: "%{model} Status Changed"
+        email_forwarded: "%{model} Email"
+        notice_sent: "%{model} Notice Sent"
+        question_asked: "%{model} Question Asked"
+      contextual_summary:
+        record_created: "%{person} created this %{model}"
+        record_updated: "%{person} updated this %{model}"
+        record_destroyed: "%{person} deleted a %{model}"
+        status_verified: "%{model} was %{status} by %{person}"
+        status_change: "%{model} changed to %{status}"
+        email_forwarded: "%{person} sent an email"
+        notice_sent: "Notification sent to %{person}"
+        question_asked: "%{person} asked a question"
+      summary:
+        record_created: "%{person} created %{resource}"
+        record_updated: "%{person} updated %{resource}"
+        record_destroyed: "%{person} deleted %{resource}"
+        status_verified: "%{resource} was %{status} by %{person}"
+        status_change: "%{resource} changed to %{status}"
+        email_forwarded: "%{person} sent an email for %{resource}"
+        notice_sent: "Notification sent for %{resource} to %{person}"
+        question_asked: "%{person} asked a question for %{resource}"
+
+    dashboard:
+      role:
+        intro: "Vous êtes %{role}"
+        learn_more: "En savoir plus."
+        worldwide:
+          title: "Administrateur global"
+          description: "Peut gérer tout le contenu et les responsables de l'atlas."
+          instruction: "Vous avez accès à tous les aspects du CMS (Content Management System) d'Atlas. Votre travail consiste à créer de nouveaux responsables nationaux et de les aider à apprendre à utiliser le système."
+        country:
+          title: "Responsable de Pays"
+          description: "Peut créer des régions, des lieux, des événements et affecter des responsables au sein de %{place}"
+          instruction: "Il est de votre responsabilité de créer des régions dans votre pays et d'affecter des responsables à ces régions pour organiser des événements. Vous pouvez également créer des lieux et des événements dans votre pays."
+        local:
+          title: "Responsable local"
+          description: "Peut créer des lieux et des événements au sein de %{place}"
+          instruction: "Il est de votre responsabilité de créer des événements dans votre région. Vous devrez d'abord créer un lieu avant de pouvoir créer un événement dans ce lieu."
+        event:
+          title: "Responsable d'Evénements"
+          description: "Peut mettre à jour les détails des événements qui leur sont attribués."
+          instruction: "Il est de votre responsabilité de maintenir vos cours à jour. Vous recevrez des e-mails tous les quelques mois vous demandant de confirmer que vos événements sont à jour. Si l'emplacement de votre cours change, vous devrez demander au responsable de votre région de le mettre à jour."
+        client:
+          title: "Gestionnaire d'Application"
+          description: "Peut modifier la configuration de votre application externe"
+          instruction: "Vous avez accès à la configuration de votre application externe."
+        none:
+          title: "Responsable sans accès"
+          description: "Cet utilisateur n'a aucun événement ni aucune région qui lui est attribué. Il n'a pas accès à la gestion de l'Atlas."
+          instruction: "Vous n'avez accès à aucune partie du site Web. Si vous pensez qu'il s'agit d'une erreur, veuillez contacter le responsable de votre région."
+      resources:
+        title: "Mes Responsabilités"
+        subtitle: "Régions ou événements dont vous êtes responsable direct."
+        description: "Ce sont les événements ou les régions dont vous êtes directement responsable."
+      alerts:
+        title: "Événements arrivant à expiration"
+        subtitle: "Ces événements doivent être vérifiés pour s'assurer qu'ils sont toujours exacts."
+        all_good: "Tous les événements sont à jour."
+        empty: "Aucune alerte pour le moment, continuez votre bon travail !"
+        should_expire_at: "Se termine dans %{time}"
+        expired_at: "Terminé %{time} ago"
+        review:
+          title: "Evénements bientôt terminés"
+          description: "Plusieurs événements publiés n'ont pas été mis à jour depuis quelques mois. Veuillez vérifier que les détails de l'événement sont toujours corrects et enregistrez l'événement afin que nous sachions qu'il est toujours exact. Sinon, il sera supprimé de la carte."
+          view_all:
+            one: "Voir %{count} Evénement arrivant à expiration"
+            other: "Voir les %{count} Evénements arrivant à expiration"
+        expired:
+          title: "Evénements terminés"
+          description: "Plusieurs événements publiés sont masqués sur la carte car ils n'ont pas été vérifiés récemment. Veuillez vérifier et réenregistrer ces événements pour les réactiver."
+          other:
+            one: "Il existe %{count} événement expiré plus ancien dans le système."
+            other: "Il existe %{count} événements expirés plus anciens dans le système."
+        archived:
+          title: "Événements archivés"
+          description:
+            one: "%{count} événement est terminé depuis longtemps et a été archivé. Il n'apparaîtra pas sur la carte à moins qu'il ne soit révisé et mis à jour."
+            other: "%{count} événements sont terminés depuis longtemps et ont été archivés. Ils n'apparaîtront pas sur la carte à moins qu'il ne soient révisés et mis à jour."
+          view_all:
+            one: "Voir %{count} événement archivé"
+            other: "Voir %{count} événements archivés"
+
+      help:
+        title: "Comment utiliser ce site ?"
+        description: "Vous consultez actuellement le système de gestion de contenu (CMS) pour l'Atlas Sahaj. Nous avons enregistré un tutoriel vidéo pour vous aider à démarrer. Envoyez-nous un e-mail si vous avez besoin d'aide (contact@sydevelopers.com)."
+        action: "Regarder la vidéo du tutoriel"
+
+    help:
+      learn_more: "En savoir plus"
+      guides:
+        country_manager:
+          title: "Comment gérer votre pays ?"
+          video_id: 570202890
+        local_manager:
+          title: "Comment gérer votre région ?"
+          video_id: 570202890
+        event_manager:
+          title: "Comment gérer votre événement ?"
+          video_id: 570207541
+        general:
+          title: "Qu'est-ce que Sahaj Atlas ?"
+          video_id: 570209591
+        creating_events:
+          title: "Comment créer un événement ?"
+          video_id: 573299436
+      categories:
+        title: "A quoi servent les catégories d'événements ?"
+        description:
+          introduction: "Les catégories aident le système à comprendre quel type d'événement vous avez ajouté. Nous pouvons utiliser ces informations à diverses fins."
+        benefits:
+          marketing:
+            icon: ad # Do not translate
+            title: "Marketing"
+            description: "Nous pouvons recommander des cours de suivi aux chercheurs de la vérité en fonction de la catégorie de l'événement. Si quelqu'un s'inscrit à un concert, nous pouvons proposer après le concert un cours d'introduction. Lorsqu'ils ont suivi de nombreux cours d'introduction, nous pourrions leur suggérer de rejoindre un cours pour approfondir. S'il y a un grand concert de musique, nous pourrions le faire apparaître différemment sur la carte pour attirer davantage l'attention."
+          labeling:
+            icon: info circle # Do not translate
+            title: "Étiquetage des événements"
+            description: "Nous pouvons présenter des informations supplémentaires sur l'événement aux chercheurs. Par exemple : un message recommandant aux chercheurs de s'inscrire à un cours d'introduction, avant d'assister à un cours d'approfondissement."
+          analytics:
+            icon: chart area # Do not translate
+            title: "Analyses Web"
+            description: "Nous pouvons analyser le type d'événements auxquels les chercheurs de vérité s'inscrivent pour améliorer la façon dont nous présentons ces événements."
+        types:
+          title: "Catégories Disponibles"
+          dropin:
+            title: :activerecord.attributes.event.categories.dropin
+            description: "Un cours d'introduction pour les nouveaux débutant Sahaja Yoga."
+          single:
+            title: :activerecord.attributes.event.categories.single
+            description: "Un cours destiné à approfondir Sahaja Yoga pour les participants ayant déjà assisté à un cours d'introduction."
+          course:
+            title: :activerecord.attributes.event.categories.course
+            description: "Il s'agit généralement d'un cours hebdomadaire d'une durée limitée. L'objectif est d'amener un chercheur d'un niveau de débutant à un niveau intermédiaire au cours d'un nombre défini de semaines."
+          festival:
+            title: :activerecord.attributes.event.categories.festival
+            description: "Lorsque Sahaja Yoga participe à un événement public existant. Par exemple avec un stand lors d'un salon, d'une foire ou d'un festival."
+          concert:
+            title: :activerecord.attributes.event.categories.concert
+            description: "Un grand événement culturel ponctuel, impliquant généralement de la musique, peut-être de la danse, et l'expérience de la réalisation."
+          inactive:
+            title: :activerecord.attributes.event.categories.inactive
+            description: "Ceci pour les villes où un sahaja yogi est présent, mais où il n'y a pas de cours réguliers dispensés. Le chercheur peut contacter le sahaja yogi via cette liste. Ce type d'événement peut également être utilisé pour tout autre type de cours irrégulier qui nécessite que le chercheur contacte directement le sahaj yogi pour obtenir des informations."
+      expiration:
+        title: "Pourquoi mon événement n'apparaît-il pas sur la carte ?"
+        alt_title: "Comment fonctionne l'expiration d'un événement ?"
+        description:
+          problem: "Nous ne voulons pas que les chercheurs voient des cours qui ne fonctionnent plus. De nombreux sites Web de Sahaj contiennent des informations sur les programmes obsolètes, mais même lorsque les détails sont mis à jour, ils redeviennent rapidement obsolètes."
+          solution: "Pour résoudre ce problème, nous avons créé un système automatique qui enverra un e-mail aux yogis qui exécutent chaque programme tous les quelques mois pour leur demander si les informations sont toujours correctes. S'ils ne répondent pas, le programme sera caché au public jusqu'à ce qu'il soit vérifié."
+          review: "Dès qu'un événement est classé comme « à réviser », le responsable du programme recevra un e-mail lui demandant de confirmer que les détails de l'événement sont toujours corrects. S'ils ne répondent pas dans un délai d'une semaine, le directeur municipal recevra un e-mail lui demandant de vérifier les détails."
+          expiration: "Si %{duration} s'écoulent sans que l'événement ne soit vérifié, il est alors masqué de la carte jusqu'à ce que quelqu'un le vérifie et le mette à jour."
+        steps:
+          verified:
+            icon: green check circle # Do not translate
+            active_label: "À jour"
+            inactive_label: "Dernière mise à jour"
+            title: "À jour"
+            description: "Lorsqu'un événement est créé ou mis à jour"
+          should_need_review:
+            icon: orange question circle # Do not translate
+            active_label: "Nécessite révision"
+            inactive_label: "Nécessitera révision"
+            title: "Nécessite révision"
+            description: "Si %{duration} sécoulent sans que l'évènement ne soit mis à jour"
+          should_expire:
+            icon: red times circle # Do not translate
+            active_label: "Terminé"
+            inactive_label: "Se termine"
+            label: "se termine" # This should be present tense as in the phrase "The event expires on March 3"
+            title: "Terminé"
+            description: "Si un événement n'a pas été mis à jour depuis %{duration}"
+      registration:
+        title: "Pourquoi les chercheurs de vérité devraient-ils s'inscrire sur Sahaj Atlas ?"
+        description:
+          introduction: "Même si nous soutenons l'inscription des demandeurs sur des sites Web externes (Meetup, Eventbrite, Facebook, etc.), il y a plusieurs avantages à ce que les demandeurs s'inscrivent directement sur le Sahaj Atlas."
+        benefits:
+          accessibility:
+            icon: universal access # Do not translate
+            title: "Accessibilité"
+            description: "De nombreuses personnes n'ont pas de compte Facebook ou Meetup. La popularité de Facebook a fortement diminué auprès des jeunes générations et Meetup est moins populaire auprès des aînés. L'inscription directement sur Sahaj Atlas est plus facile et ne nécessite pas de compte, ce qui rend plus probable l'inscription des chercheurs."
+          reminders:
+            icon: bell # Do not translate
+            title: "Rappels automatiques"
+            description: "Les chercheurs qui s'inscrivent sur Sahaj Atlas recevront un e-mail de confirmation et un e-mail de rappel automatique 1 jour avant leur premier cours. Le yogi(ni) qui gère le programme public recevra également chaque semaine une liste des nouvelles inscriptions par courrier électronique."
+          marketing:
+            icon: envelope # Do not translate
+            title: "Marketing futur"
+            description: "Lorsque les chercheurs s'inscrivent sur Sahaj Atlas, nous pouvons conserver leur adresse e-mail (sans les restrictions de Meetup, Eventbrite ou Facebook). Cela signifie que nous pouvons utiliser ces adresses e-mail pour envoyer du matériel de suivi ou recommander des événements Sahaj spéciaux dans leur région (par exemple des concerts ou des programmes intermédiaires)."
+      contact:
+        title: "J'ai d'autres questions ou suggestions"
+        description: "Si vous avez besoin d'aide supplémentaire ou si vous souhaitez contribuer au développement de l'Atlas Sahaj, veuillez écrire à l'adresse e-mail ci-dessous. Veuillez écrire votre message en anglais."
+
+    category_tags:
+      dropin: "Accueil sans rendez-vous"
+      single: "Unique"
+      course: "Cours"
+      festival: "Festival"
+      concert: "Concert"
+      inactive: "Inactif"
+
+    region_labels:
+      state:
+        # Basic pluralization
+        single: "Etat"
+        plural: "Etats"
+        # Countable
+        one: "état"
+        other: "états"
+      province:
+        # Basic pluralization
+        single: "Province"
+        plural: "Provinces"
+        # Countable
+        one: "province"
+        other: "provinces"
+
+    country_codes:
+      gb: "UK"
+      us: "USA"
+    
+  passwordless:
+    sessions:
+      create:
+        try_again: "Essayez une autre adresse e-mail"
+        back: "Retour"
+      new:
+        back: "Retour"

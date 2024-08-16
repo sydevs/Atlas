@@ -16,19 +16,25 @@ body
   font-family: $font-text
   font-feature-settings: "lnum"
   background: white
+  --sya-color-primary: #{$color-cyan}
+  --sya-color-secondary: #{$color-orange}
+  --sya-color-tertiary: #{$color-blue}
 
   *
     box-sizing: border-box
 
   input, textarea
+    text-transform: none
+
     &:focus
-      outline: 1px solid $color-cyan
+      border: 1px solid $theme-primary
 
   a
     text-decoration: none
+    color: inherit
 
-.sya-button
-  @include button
+  .sya-button
+    @include button
 
-.sya-fadeout
-  animation: fade-out 0.25s
+  .sya-fadeout
+    animation: fade-out 0.25s

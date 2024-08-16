@@ -1,6 +1,8 @@
 ru:
   datetime:
-    distance_in_words:
+    distance_in_words: # TODO: Translate
+      time_ago: "%{time} ago"
+      time_from_now: "%{time} from now"
       soon: "несколько минут"
       x_minutes: # TODO: Translate
         one: "%{count} minute"
@@ -103,6 +105,13 @@ ru:
         # Countable
         one: "внешнее приложение"
         other: "внешних приложений"
+      message: # TODO: Translate
+        # Basic pluralization
+        single: "Email"
+        plural: "Emails"
+        # Countable
+        one: "message"
+        other: "messages"
       picture:
         # Basic pluralization
         single: "Изображение"
@@ -123,6 +132,7 @@ ru:
           verified: "Проверено"
           needs_review: "Требуется проверка"
           needs_urgent_review: "Требуется срочная проверка"
+          needs_immediate_review: "Needs Immediate Review" # TODO: Translate
           expired: "Истёк срок"
           archived: "Перенесено в архив"
           finished: "Завершено"
@@ -156,6 +166,7 @@ ru:
       region:
         manager_id: :activerecord.models.manager.single # Do not translate
         country_code: :activerecord.models.country.single # Do not translate
+        name: "Fallback Name" # TODO: Translate
         geo_data: "Гео Данные"
         osm_id: "OpenStreetMap ID"
         bounds: "бласть видимости"
@@ -168,6 +179,7 @@ ru:
         manager_id: :activerecord.models.manager.single # Do not translate
         name: :activerecord.attributes.generic.name # Do not translate
         country_code: :activerecord.models.country.single # Do not translate
+        subtitle: "Subtitle" # TODO: Translate
         coordinates: "Местонахождение"
         latitude: "Широта"
         longitude: "Долгота"
@@ -255,10 +267,12 @@ ru:
           friday: "По пятницам"
           saturday: "По субботам"
           sunday: "По воскресеньям"
-        start_date: "Дата начала"
-        end_date: "Дата окончания"
-        start_time: "Время начала"
-        end_time: "Время окончания"
+        recurrence_data: "Recurrence" # TODO: Translate
+        recurrence_type: "Recurrence Type" # TODO: Translate
+        recurrence_start_date: "Дата начала"
+        recurrence_end_date: "Дата окончания"
+        recurrence_start_time: "Время начала"
+        recurrence_end_time: "Время окончания"
         online: "Онлайн-класс"
         online_url: "Ссылка на встречу онлайн"
         expiration_period: "Expiration Period" # TODO: Translate
@@ -310,13 +324,14 @@ ru:
         email_verification_sent_at: "Последний запрос для подтверждения через email"
         phone_verification_sent_at: "Последний запрос для подтверждения через телефон"
 
-      audit:
-        user: :activerecord.models.manager.single # Do not translate
-        action: "Действие"
-        actions:
-          update: "Обновлено"
-          create: "Создано"
-          destroy: "Удалено"
+      conversation: # TODO: Translate
+        uuid: "Unique Identifier"
+
+      audit: # TODO: Translate
+        data: "Raw Data"
+        created_at: "Occurred At"
+        changes: "Changes"
+        body: "Content"
 
       client:
         label: "Ярлык"
@@ -341,5 +356,25 @@ ru:
           query: "Query (Simple)"
           path: "Path (Advanced)"
         manager_id: :activerecord.models.manager.single # Do not translate
+
+      recurrable: # TODO: Translate
+        types:
+          daily: "Daily"
+          weekly_1: "Weekly"
+          weekly_2: "Bi-Weekly"
+          monthly_1st: "1st Weekday of the Month"
+          monthly_2nd: "2nd Weekday of the Month"
+          monthly_3rd: "3rd Weekday of the Month"
+          monthly_4th: "4th Weekday of the Month"
+          monthly_last: "Last Weekday of the Month"
+        descriptions:
+          daily: "Every Day"
+          weekly_1: "Every %{weekday}"
+          weekly_2: "Every 2nd %{weekday}"
+          monthly_1st: "1st %{weekday} of each month"
+          monthly_2nd: "2nd %{weekday} of each month"
+          monthly_3rd: "3rd %{weekday} of each month"
+          monthly_4th: "4th %{weekday} of each month"
+          monthly_last: "Last %{weekday} of each month"
 
       pictures:

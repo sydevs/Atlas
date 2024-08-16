@@ -1,31 +1,36 @@
 
-- return if audit.auditable.nil?
+.event
+  = audit.icon
+  .content
+    .summary
+      = audit.description(context: @context)
 
-.title
-  /= model_icon Audit
-  i.dropdown.icon
-  .floated
-    - if audit.user
-      = translate('cms.activity.changed_by', name: audit.user.label)
-      '  - 
+      .date
+        = relative_time_in_words(audit.created_at)
+        
+        - if policy(audit).show_technical?
+          '  
+          a href=cms_audit_path(audit)
+            i.grey.right.arrow.icon
 
-    = audit.created_at.to_s(:short)
-    
-  | #{translate_enum_value(audit, :action)} - #{audit.auditable.try(:name)} (#{audit.auditable_type})
-.content
-  table.ui.very.basic.table
-    tbody
-      - if audit.action == 'update'
-        - audit.audited_changes.each do |field, change|
-          tr
-            th = translate_attribute(audit.auditable.class, field)
-            td = translate('cms.activity.changed_to')
-          tr
-            td = change[0]
-            td = change[1]
-      - else
-        - audit.audited_changes.each do |field, change|
-          tr
-            th = translate_attribute(audit.auditable.class, field)
-          tr
-            td = change
+    - if audit.message?
+      .extra.text
+        .ui.segment = audit.data[:body] ? markdown(audit.data[:body]) : audit.data[:subject]
+      - if audit.conversation && @context != audit.conversation
+        .meta
+          a href=cms_conversation_path(audit.conversation)
+            = model_icon(Conversation)
+            = translate('cms.actions.target.view', resource: translate_model(Conversation))
+    - elsif audit.changes.present?
+      .meta
+        a href=cms_audit_path(audit)
+          - if audit.record_updated?
+            i.edit.icon
+            = translate('cms.audits.changes', count: audit.changes.count)
+          - else
+            i.list.icon
+            = translate('cms.actions.simple.view')
+    - elsif audit.status_verified?
+      .meta
+        = "#{audit.data[:verification_streak]} #{translate_attribute(Event, :verification_streak).downcase}!"
+

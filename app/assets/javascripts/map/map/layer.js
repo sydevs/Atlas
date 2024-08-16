@@ -96,7 +96,7 @@ class AbstractMapLayer {
       data: geojson,
       cluster: true,
       clusterMaxZoom: this.#config.selectionZoom || 12, // Max zoom to cluster points on
-      clusterRadius: 50, // Radius of each cluster when clustering points
+      clusterRadius: 20, // Radius of each cluster when clustering points
     })
 
     this._mapbox.addSource(this._sources.selection, {
@@ -132,7 +132,7 @@ class AbstractMapLayer {
       type: 'symbol',
       source: this._sources.selection,
       layout: this.#config.selection,
-      minzoom: this.#config.selectionZoom || 12,
+      // minzoom: this.#config.selectionZoom || 12,
       paint: {
         'text-color': '#FFFFFF',
       },

@@ -1,89 +1,91 @@
 @import '../_mixins'
 
-// ===== TIMING ===== //
-.sya-registration__timing
-  position: relative
-  padding: 10px 0
-  text-align: center
-  border: 1px solid $color-border-light
-  vertical-align: middle
-  margin-bottom: 15px
-  height: 64px
-
-  &__label
+#sahajatlas
+  // ===== TIMING ===== //
+  .sya-registration__timing
     position: relative
-    bottom: -10px
-    z-index: 1
+    padding: 10px 0
     text-align: center
-    text-transform: uppercase
+    border: 1px solid $color-border-light
+    vertical-align: middle
+    margin-bottom: 15px
+    height: 64px
 
-  &__text
-    display: inline-block
-    padding: 0 8px
-    background: white
+    &__label
+      position: relative
+      bottom: -10px
+      z-index: 1
+      text-align: center
+      text-transform: uppercase
 
-    font-size: 11px
-    line-height: 16px
+    &__text
+      display: inline-block
+      padding: 0 8px
+      background: white
 
-  &__cell
-    width: 100%
-    height: 38px
-    margin-top: 4px
-    
-    > *
-      vertical-align: middle
+      font-size: 11px
+      line-height: 16px
 
-  &__date
-    display: inline-block
-    width: calc(50% - 1px)
-    border-right: 1px solid $color-border-light
-    font-size: 16px
-    line-height: 18px
+    &__cell
+      width: 100%
+      height: 38px
+      margin-top: 4px
+      
+      > *
+        vertical-align: middle
 
-  &__day
-    font-weight: $font-medium
-    text-transform: uppercase
+    &__date
+      display: inline-block
+      width: calc(50% - 1px)
+      border-right: 1px solid $color-border-light
+      font-size: 16px
+      line-height: 18px
 
-  &__month
-    font-size: 11px
-    letter-spacing: 0.36px
+    &__day
+      font-weight: $font-medium
+      text-transform: uppercase
 
-  &__time
-    display: inline-block
-    width: 50%
-    font-weight: $font-medium
-    font-size: 15px
-    letter-spacing: 0.49px
+    &__month
+      font-size: 11px
+      letter-spacing: 0.36px
 
-  &__timezone
-    font-size: 12px
+    &__time
+      display: inline-block
+      width: 50%
+      font-weight: $font-medium
+      font-size: 15px
+      letter-spacing: 0.49px
 
-.sya-registration__timing
-  .flickity-button
-    background: white
+    &__timezone
+      font-size: 12px
 
-  .flickity-prev-next-button
-    width: 24px
-    height: 30px
-    border-radius: 0
+  .sya-registration__timing
+    .flickity-button
+      background: white
 
-    &.previous
-      left: -10px
+    .flickity-prev-next-button
+      width: 30px
+      height: 30px
+      padding: 0
+      border-radius: 100%
 
-    &.next
-      right: -10px
+      &.previous
+        left: -10px
 
-    &:focus
-      box-shadow: 0 0 0 3px $color-orange
+      &.next
+        right: -10px
 
-  .flickity-button-icon
-    fill: $color-border
-    opacity: 1
-    transition: all 0.2s ease
+      &:focus
+        box-shadow: 0 0 0 3px $theme-secondary
 
-    &:hover
+    .flickity-button-icon
+      fill: $color-border
+      opacity: 1
+      transition: all 0.2s ease
+
+    .flickity-prev-next-button:hover .flickity-button-icon
       fill: black
       opacity: 0.8
 
-  .flickity-button:disabled .flickity-button-icon
-    fill: transparent
+    .flickity-button:disabled .flickity-button-icon
+      fill: transparent

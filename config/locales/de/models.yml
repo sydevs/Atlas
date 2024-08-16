@@ -1,6 +1,8 @@
 de:
   datetime:
-    distance_in_words:
+    distance_in_words: # TODO: Translate
+      time_ago: "%{time} ago"
+      time_from_now: "%{time} from now"
       soon: "Ein paar Minuten"
       x_minutes: # TODO: Translate
         one: "%{count} minute"
@@ -103,6 +105,13 @@ de:
         # Countable
         one: "Externe App"
         other: "Externe Apps"
+      message: # TODO: Translate
+        # Basic pluralization
+        single: "Email"
+        plural: "Emails"
+        # Countable
+        one: "message"
+        other: "messages"
       picture:
         # Basic pluralization
         single: "Bild"
@@ -123,6 +132,7 @@ de:
           verified: "Verifiziert"
           needs_review: "Überprüfung notwendig"
           needs_urgent_review: "Dringend Überprüfung notwendig"
+          needs_immediate_review: "Needs Immediate Review" # TODO: Translate
           expired: "Abgelaufen"
           archived: "Archiviert"
           finished: "Fertig"
@@ -156,6 +166,7 @@ de:
       region:
         manager_id: :activerecord.models.manager.single # Do not translate
         country_code: :activerecord.models.country.single # Do not translate
+        name: "Fallback Name" # TODO: Translate
         geo_data: "Geo Daten"
         osm_id: "OpenStreetMap ID"
         bounds: "Ansichtsbereich"
@@ -168,6 +179,7 @@ de:
         manager_id: :activerecord.models.manager.single # Do not translate
         name: :activerecord.attributes.generic.name # Do not translate
         country_code: :activerecord.models.country.single # Do not translate
+        subtitle: "Subtitle" # TODO: Translate
         coordinates: "Lage"
         latitude: "Breite"
         longitude: "Länge"
@@ -206,7 +218,7 @@ de:
           course: "Meditationskurs"
           festival: "Stand im öffentlichen Ereignis"
           concert: "Meditation & Musikkonzert"
-          inactive: "Inactive Class" # TODO: Translate
+          inactive: "Inactive Class" # TODO: Translate
         category_labels:
           dropin: "Offen"
           single: "Meditation"
@@ -220,7 +232,7 @@ de:
           course: "Ein Festgelegter Kurs, in dem sich Sucher nur zum begin anmelden können."
           festival: "Ein Stand auf einer öffentlichen Veranstaltung, in dem Seekern ohne Registrierung teilnehmen können."
           concert: "Eine Veranstaltung, die Meditation und Musik oder Tanz kombiniert."
-          inactive: "A program that runs infrequently or is on pause. Seekers can contact the yogi in charge for more info." # TODO: Translate
+          inactive: "A program that runs infrequently or is on pause. Seekers can contact the yogi in charge for more info." # TODO: Translate
         description: "Beschreibung"
         room: "Zimmer"
         building: "Gebäude / Zimmer"
@@ -255,13 +267,15 @@ de:
           friday: "Freitags"
           saturday: "Samstags"
           sunday: "Sonntags"
-        start_date: "Startdatum"
-        end_date: "Enddatum"
-        start_time: "Startzeit"
-        end_time: "Endzeit"
+        recurrence_data: "Recurrence" # TODO: Translate
+        recurrence_type: "Recurrence Type" # TODO: Translate
+        recurrence_start_date: "Startdatum"
+        recurrence_end_date: "Enddatum"
+        recurrence_start_time: "Startzeit"
+        recurrence_end_time: "Endzeit"
         online: "Online-Klasse"
         online_url: "Online-Treffen Link"
-        language: "Language" # TODO: Translate
+        language: "Language" # TODO: Translate
         expiration_period: "Expiration Period" # TODO: Translate
         verification_streak: "Verification Streak" # TODO: Translate
         contact_info: # TODO: Translate
@@ -318,13 +332,14 @@ de:
         email_verification_sent_at: "Letzte E-Mail-Überprüfung gesendet"
         phone_verification_sent_at: "Letzte Telefonverifizierung verschickt"
 
-      audit:
-        user: :activerecord.models.manager.single # Do not translate
-        action: "Aktion"
-        actions:
-          update: "Aktualisiert"
-          create: "Erstellt"
-          destroy: "Gelöscht"
+      conversation: # TODO: Translate
+        uuid: "Unique Identifier"
+
+      audit: # TODO: Translate
+        data: "Raw Data"
+        created_at: "Occurred At"
+        changes: "Changes"
+        body: "Content"
 
       client:
         label: "Label"
@@ -350,5 +365,25 @@ de:
           query: "Query (Simple)"
           path: "Path (Advanced)"
         manager_id: :accessrecord.models.manager.single # setzen nicht übersetzen
+
+      recurrable: # TODO: Translate
+        types:
+          daily: "Daily"
+          weekly_1: "Weekly"
+          weekly_2: "Bi-Weekly"
+          monthly_1st: "1st Weekday of the Month"
+          monthly_2nd: "2nd Weekday of the Month"
+          monthly_3rd: "3rd Weekday of the Month"
+          monthly_4th: "4th Weekday of the Month"
+          monthly_last: "Last Weekday of the Month"
+        descriptions:
+          daily: "Every Day"
+          weekly_1: "Every %{weekday}"
+          weekly_2: "Every 2nd %{weekday}"
+          monthly_1st: "1st %{weekday} of each month"
+          monthly_2nd: "2nd %{weekday} of each month"
+          monthly_3rd: "3rd %{weekday} of each month"
+          monthly_4th: "4th %{weekday} of each month"
+          monthly_last: "Last %{weekday} of each month"
 
       pictures:

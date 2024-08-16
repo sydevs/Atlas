@@ -4,27 +4,20 @@ class Event < ApplicationRecord
   include Publishable
   include AASM # State machine - required for Expirable
   include Expirable
+  include Recurrable
   include ActivityMonitorable
   include Managed
+  include Audited
 
   nilify_blanks
   searchable_columns %w[custom_name description]
-  audited except: %i[
-    summary_email_sent_at status_email_sent_at latest_registration_at
-    should_update_status_at verified_at expired_at archived_at finished_at
-    status
-  ]
 
   enum category: { dropin: 1, course: 3, single: 2, festival: 4, concert: 5, inactive: 6 }, _suffix: true
-  enum recurrence: { day: 0, monday: 1, tuesday: 2, wednesday: 3, thursday: 4, friday: 5, saturday: 6, sunday: 7 }
   enum registration_mode: { native: 0, external: 1, meetup: 2, eventbrite: 3, facebook: 4 }, _suffix: true
   enum registration_notification: { digest: 0, immediate: 1, disabled: 2 }, _suffix: true
   flag :registration_question, %i[questions experience aspirations referral]
 
   # Associations
-  # belongs_to :location, polymorphic: true
-  # alias venue location
-
   belongs_to :area
   belongs_to :venue, optional: true, inverse_of: :events
 
@@ -35,9 +28,9 @@ class Event < ApplicationRecord
 
   # Validations
   validates_presence_of :type, :category, :language_code, :manager
-  validates_presence_of :recurrence, :start_date, :start_time, unless: :inactive_category?
-  validates_presence_of :end_date, if: :course_category?
-  validates_presence_of :end_time, if: -> { festival_category? || concert_category? }
+  validates_presence_of :recurrence_type, :recurrence_start_date, :recurrence_start_time, unless: :inactive_category?
+  validates_presence_of :recurrence_end_date, if: :course_category?
+  validates_presence_of :recurrence_end_time, if: -> { festival_category? || concert_category? }
   validates_presence_of :online_url, if: :online?
   validates_presence_of :venue, unless: :online?
   validates_length_of :custom_name, maximum: 255
@@ -46,15 +39,13 @@ class Event < ApplicationRecord
   validates :phone_number, phone: { possible: true, allow_blank: true, country_specifier: -> event { event.country_code } }
   validates_numericality_of :registration_limit, greater_than: 0, allow_nil: true
   validates_associated :pictures
-  validate :validate_end_time
-  validate :validate_end_date
   validate :validate_language_code
   validate :validate_location
   validate :parse_phone_number
 
   # Scopes
   scope :with_new_registrations, -> { where('events.latest_registration_at >= events.summary_email_sent_at') }
-  scope :current, -> { where('events.end_date IS NULL OR events.end_date >= ?', DateTime.now) }
+  scope :current, -> { where('events.finish_date IS NULL OR events.finish_date >= ?', DateTime.now) }
   scope :publicly_visible, -> { current.manager_verified.publishable.published }
   scope :manager_verified, -> { joins(:manager).where('managers.email_verified = TRUE OR managers.phone_verified = TRUE') }
   scope :with_location, -> (country_code) { joins(:area).where_country(country_code) }
@@ -72,14 +63,16 @@ class Event < ApplicationRecord
   scope :offline, -> { where(type: 'OfflineEvent') }
 
   # Delegations
-  delegate :time_zone, :country_code, :canonical_domain, to: :area
+  delegate :time_zone, :country_code, :canonical_domain, :nearest_parent_managers, :nearest_parent_manager, to: :area
+  alias default_message_receiver nearest_parent_manager
   alias associated_registrations registrations
   alias parent area
 
   # Callbacks
   before_validation -> { self.description = description&.encode(description.encoding, universal_newline: true) || "" }
   before_validation :find_venue, unless: :online?
-  after_save :verify_manager
+  after_create :verify_manager
+  before_save :set_finish_date
 
   # Methods
 
@@ -100,63 +93,17 @@ class Event < ApplicationRecord
   end
 
   def should_finish?
-    next_occurrence_at.nil? && !inactive_category?
-  end
-
-  def duration
-    return nil if end_time.nil?
-
-    start_time = self.start_time.split(':').map(&:to_f)
-    end_time = self.end_time.split(':').map(&:to_f)
-    (end_time[0] - start_time[0]) + ((end_time[1] - start_time[1]) / 60.0)
-  end
-
-  def next_occurrences_after first_datetime, limit: 10
-    return [] if inactive_category?
-
-    first_date = first_datetime.to_date
-    return [] if registration_end_time && registration_end_time < first_datetime
-
-    occurrences = []
-    
-    date = start_date > first_date ? start_date : first_date
-    time = start_time.split(':').map(&:to_i)
-    datetime = date.to_time(:utc).in_time_zone(time_zone).change(hour: time[0], min: time[1])
-
-    if recurrence == 'day'
-      if datetime > first_datetime
-        occurrences.push(datetime)
-      else
-        occurrences.push(datetime + 1.day)
-      end
-    else
-      next_datetime = (datetime + 1.week).beginning_of_week(recurrence.to_sym)
-      next_datetime = next_datetime.change(hour: time[0], min: time[1])
-      occurrences.push(next_datetime)
-    end
-
-    return occurrences if course_category?
-
-    while occurrences.length < limit
-      next_datetime = occurrences.last + (recurrence == 'day' ? 1.day : 1.week)
-      break if end_date && next_datetime.to_date > end_date
-
-      occurrences.push(next_datetime)
-    end
-
-    occurrences
-  end
-
-  def next_occurrence_at
-    @next_occurrence_at ||= next_occurrences_after(Time.now, limit: 1).first
+    next_recurrence_at.nil? && !inactive_category?
   end
 
   def registration_end_time
     @registration_end_time ||= begin
       if %i[course single concert].include?(category)
-        Time.parse("#{start_date} #{start_time}")
-      elsif end_date?
-        Time.parse("#{end_date} #{start_time}")
+        recurrence.starts_at
+      elsif recurrence.finite?
+        start_time = recurrence.starts_at.to_s(:time)
+        time = start_time.split(":").map(&:to_i)
+        recurrence.ends_at.change(hour: time[0], minute: time[1])
       end
     end
   end
@@ -172,13 +119,13 @@ class Event < ApplicationRecord
   def log_status_change
     return if archived? || new_record? || !published?
     
+    EventMailer.with(event: self, manager: manager).status.deliver_later
+
     if needs_urgent_review?
       nearest_parent_managers.each do |parent_manager|
         EventMailer.with(event: self, manager: parent_manager).status.deliver_later
       end
     end
-
-    EventMailer.with(event: self, manager: self.manager).status.deliver_later
   end
 
   def cache_key
@@ -205,6 +152,11 @@ class Event < ApplicationRecord
     (expiration_period / 3 * [4, verification_streak].min).weeks
   end
 
+  # Which people should be involved in email conversations about this event.
+  def conversation_members
+    [manager] + parent_managers
+  end
+
   def self.model_name
     ActiveModel::Name.new(base_class)
   end
@@ -216,19 +168,6 @@ class Event < ApplicationRecord
       return if area.contains?(venue)
 
       self.errors.add(:venue, I18n.translate('cms.messages.venue.invalid_location', area: area.name))
-    end
-
-    def validate_end_time
-      return if end_time.nil? || duration.positive?
-      
-      self.errors.add(:end_time, I18n.translate('cms.messages.event.invalid_end_time'))
-    end
-
-    def validate_end_date
-      return if end_date.nil?
-      
-      self.errors.add(:end_date, I18n.translate('cms.messages.event.invalid_end_date')) if end_date < start_date
-      # self.errors.add(:end_date, I18n.translate('cms.messages.event.passed_end_date')) if end_date < Date.today
     end
 
     def validate_language_code
@@ -246,7 +185,10 @@ class Event < ApplicationRecord
       return if manager.email_verified?
 
       ManagerMailer.with(manager: manager, context: self).verify.deliver_later
-      manager.touch(:email_verification_sent_at)
+    end
+
+    def set_finish_date
+      self.finish_date = last_recurrence_at
     end
 
     def find_venue

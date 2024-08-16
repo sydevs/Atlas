@@ -8,6 +8,7 @@ en:
 
     hints:
       client:
+        colors: "Theme Colours"
         public_key: "Use this to embed the map."
         secret_key: "Use this to access the API."
         domain: "The domain of your website. Only this domain will be allowed to embed the map using your public key."
@@ -20,14 +21,15 @@ en:
         placeholder:
           domain: www.example.com # Do not translate
           locale: en # Do not translate
+          color: default
 
     region_types:
-      us: :cms.region_labels.state # United States
-      au: :cms.region_labels.state # Australia
+      us: :cms.region_labels.state # United States
+      au: :cms.region_labels.state # Australia
       ca: :cms.region_labels.province # Canada
-      br: :cms.region_labels.state # Brasil
+      br: :cms.region_labels.state # Brasil
       pt: :cms.region_labels.province # Portugal
-      es: :cms.region_labels.province # Spain
+      es: :cms.region_labels.province # Spain
       ar: :cms.region_labels.province # Argentina
       co: :cms.region_labels.departments # Colombia
       de: :cms.region_labels.state # Germany

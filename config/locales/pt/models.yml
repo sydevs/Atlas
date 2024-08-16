@@ -1,6 +1,8 @@
 pt:
   datetime:
-    distance_in_words:
+    distance_in_words: # TODO: Translate
+      time_ago: "%{time} ago"
+      time_from_now: "%{time} from now"
       soon: "Em alguns minutos"
       x_minutes: # TODO: Translate
         one: "%{count} minute"
@@ -103,6 +105,13 @@ pt:
         # Countable
         one: "aplicativo externo"
         other: "aplicativos externos"
+      message: # TODO: Translate
+        # Basic pluralization
+        single: "Email"
+        plural: "Emails"
+        # Countable
+        one: "message"
+        other: "messages"
       picture:
         # Basic pluralization
         single: "Imagem"
@@ -123,6 +132,7 @@ pt:
           verified: "Verificado"
           needs_review: "Precisa de revisão"
           needs_urgent_review: "Precisa de revisão urgente"
+          needs_immediate_review: "Needs Immediate Review" # TODO: Translate
           expired: "Expirado"
           archived: "Arquivado"
           finished: "Finalizado"
@@ -156,6 +166,7 @@ pt:
       region:
         manager_id: :activerecord.models.manager.single # Do not translate
         country_code: :activerecord.models.country.single # Do not translate
+        name: "Fallback Name" # TODO: Translate
         geo_data: "Dados geográficos"
         osm_id: "OpenStreetMap ID"
         bounds: "Janela de exibição"
@@ -168,6 +179,7 @@ pt:
         manager_id: :activerecord.models.manager.single # Do not translate
         name: :activerecord.attributes.generic.name # Do not translate
         country_code: :activerecord.models.country.single # Do not translate
+        subtitle: "Subtitle" # TODO: Translate
         coordinates: "Localização"
         latitude: "Latitude"
         longitude: "Longitude"
@@ -255,10 +267,12 @@ pt:
           friday: "Sexta"
           saturday: "Sábado"
           sunday: "Domingo"
-        start_date: "Data de início"
-        end_date: "Data final"
-        start_time: "Hora de início"
-        end_time: "Término"
+        recurrence_data: "Recurrence" # TODO: Translate
+        recurrence_type: "Recurrence Type" # TODO: Translate
+        recurrence_start_date: "Data de início"
+        recurrence_end_date: "Data final"
+        recurrence_start_time: "Hora de início"
+        recurrence_end_time: "Término"
         online: "Aula Online"
         online_url: "Link da Reunião Online"
         expiration_period: "Expiration Period" # TODO: Translate
@@ -317,13 +331,14 @@ pt:
         email_verification_sent_at: "Última verificação de e-mail enviada"
         phone_verification_sent_at: "Última verificação de telefone enviada"
 
-      audit:
-        user: :activerecord.models.manager.single # Do not translate
-        action: "Ação"
-        actions:
-          update: "Atualizado"
-          create: "Criado"
-          destroy: "Excluído"
+      conversation: # TODO: Translate
+        uuid: "Unique Identifier"
+
+      audit: # TODO: Translate
+        data: "Raw Data"
+        created_at: "Occurred At"
+        changes: "Changes"
+        body: "Content"
 
       client:
         label: "Rótulo"
@@ -349,5 +364,25 @@ pt:
           query: "Consulta (Simples)"
           path: "Caminho (Avançado)"
         manager_id: :activerecord.models.manager.single # Do not translate
+
+      recurrable: # TODO: Translate
+        types:
+          daily: "Daily"
+          weekly_1: "Weekly"
+          weekly_2: "Bi-Weekly"
+          monthly_1st: "1st Weekday of the Month"
+          monthly_2nd: "2nd Weekday of the Month"
+          monthly_3rd: "3rd Weekday of the Month"
+          monthly_4th: "4th Weekday of the Month"
+          monthly_last: "Last Weekday of the Month"
+        descriptions:
+          daily: "Every Day"
+          weekly_1: "Every %{weekday}"
+          weekly_2: "Every 2nd %{weekday}"
+          monthly_1st: "1st %{weekday} of each month"
+          monthly_2nd: "2nd %{weekday} of each month"
+          monthly_3rd: "3rd %{weekday} of each month"
+          monthly_4th: "4th %{weekday} of each month"
+          monthly_last: "Last %{weekday} of each month"
 
       pictures:

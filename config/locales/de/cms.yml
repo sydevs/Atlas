@@ -49,6 +49,7 @@ de:
       # Tertiary menu
       details: "Info"
       activity: "Aktivität"
+      messages: "Conversation" # TODO: Translate
       breadcrumbs:
         world: "Welt"
         help: "Hilfe"
@@ -75,6 +76,7 @@ de:
         invalid_location: "darf nicht weiter als %{area} entfernt sein."
       event:
         verified: "Vielen Dank für die Bestätigung der gültigkeit der Veranstaltung."
+        finish: "This event is now marked as complete." # TODO: Translate
         invalid_end_time: "darf nicht vor dem beginn zeitpunkt sein"
         invalid_end_date: "daft nicht vor dem beginn datum sein"
         passed_end_date: "kann nicht vor dem heutigen tag sein"
@@ -119,6 +121,7 @@ de:
         enable_custom_regions: "Erlaube das erstellen von angepassten Regionen. Dies ist eine erweiterte Funktion, lass die Finger davon, außer du weist was du tust."
       region:
         polygon: "Ziehe / Klicke auf ein verblasstes Quadrat um eine weitere ecke zum polygon hinzuzufügen. Klicke auf eine existierende Ecke um sie zu entfernen."
+        name: "Regions will use a translated name for each language, however if no translation is available, this name is used." # TODO: Translate
       area:
         location: "Ein \"spezieller Bereich\" wird via Koordinaten auf der Karte (Breitengrad und Längengrad) und einem Radius definiert, um einen Kreis festzulegen."
       event:
@@ -188,7 +191,8 @@ de:
       management_for_record: "Management für diese %{resource}"
       managers_for_record: "Manager für %{resource}"
       location_of_record: "Lage dieser %{resource}"
-      dates_and_timing: "Termine & Timing"
+      dates: "Termine"
+      timing: "Timing"
       map_of_record: "Karte dieser %{resource}"
       area_in_words: "%{radius} KM um %{latitude}, %{longitude}"
       records_in_recent_days: " %{resources} in den letzten 30 Tagen"
@@ -207,6 +211,8 @@ de:
         action: "Bewertungen!"
       record_needs_urgent_review:
         title: " %{resource} benötigt dringend eine Bewertung"
+      record_needs_immediate_review: # TODO: Translate
+        title: "%{resource} Needs Immediate Review"
       record_finished:
         title: " %{resource} abgeschlossen"
         description: "Diese %{resource} ist vorbei. Das letzte Ereigniss fand am %{date} statt."
@@ -257,6 +263,48 @@ de:
       description: "Dies ist ein Protokoll aller Aktionen, die von diesem Manager unternommen wurden."
       changed_by: "von %{name}"
       changed_to: "Geändert auf"
+
+    conversations:
+      awaiting_response: "Awaiting Reply"
+      has_answers: "Gave Comments"
+      send_reply: "Send Reply"
+
+    audits: # TODO: Translate
+      time_ago: "%{time} ago"
+      person: "Action taken by %{person}"
+      parent: "Relates to %{resource}"
+      replies_to: "Replies to %{resource}"
+      replied_by: "Replied to by %{resource}"
+      changes:
+        one: "%{count} Change"
+        other: "%{count} Changes"
+      title:
+        record_created: "%{model} Created"
+        record_updated: "%{model} Updated"
+        record_destroyed: "%{model} Deleted"
+        status_verified: "%{model} Verified"
+        status_change: "%{model} Status Changed"
+        email_forwarded: "%{model} Email"
+        notice_sent: "%{model} Notice Sent"
+        question_asked: "%{model} Question Asked"
+      contextual_summary:
+        record_created: "%{person} created this %{model}"
+        record_updated: "%{person} updated this %{model}"
+        record_destroyed: "%{person} deleted a %{model}"
+        status_verified: "%{model} was %{status} by %{person}"
+        status_change: "%{model} changed to %{status}"
+        email_forwarded: "%{person} sent an email"
+        notice_sent: "Notification sent to %{person}"
+        question_asked: "%{person} asked a question"
+      summary:
+        record_created: "%{person} created %{resource}"
+        record_updated: "%{person} updated %{resource}"
+        record_destroyed: "%{person} deleted %{resource}"
+        status_verified: "%{resource} was %{status} by %{person}"
+        status_change: "%{resource} changed to %{status}"
+        email_forwarded: "%{person} sent an email for %{resource}"
+        notice_sent: "Notification sent for %{resource} to %{person}"
+        question_asked: "%{person} asked a question for %{resource}"
 
     dashboard:
       role:
@@ -427,7 +475,7 @@ de:
         title: "Ich habe andere Fragen oder Vorschläge"
         description: "Wenn Sie weitere Hilfe benötigen oder wenn Sie mit der Entwicklung des Sahaj Atlas helfen möchten, schreiben Sie bitte an die unten angegebene E-Mail. Bitte schreiben Sie Ihre Nachricht in Englisch."
 
-    category_tags: # TODO: Translate
+    category_tags: # TODO: Translate
       dropin: "Drop-In"
       single: "Single"
       course: "Course"

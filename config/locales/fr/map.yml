@@ -1,0 +1,127 @@
+fr:
+  map:
+    meditation_atlas: "Atlas de la Méditation"
+
+    search:
+      prompt: "Rechercher un lieu"
+      all_recurrences: "Tous les Horaires"
+      all_languages: "Toutes les Langues"
+      filter:
+        prefix: "Affichage des résultats à"
+        clear: "Clair"
+
+    navigation:
+      desktop:
+        offline: "En présentiel"
+        online: "En ligne"
+      mobile:
+        offline: "Afficher la liste"
+        online: "Cours en ligne"
+        back: "Retour à la carte"
+
+    list: # TODO: Translate
+      loading: "Loading..."
+      error: "Connection Error"
+      search: "Rechercher un lieu"
+      more_info: "Plus d'Info"
+      register: "Inscrivez-vous"
+      fallback:
+        nearby: "Il n'y a pas de cours dans cette zone, le cours de méditation gratuit le plus proche se trouve à"
+        far: "Il n'y a pas de cours dans cette zone, le cours de méditation gratuit le plus proche se trouve à"
+        online: "Vous pouvez également essayer notre"
+        online_event: "Cours en Ligne"
+
+    area:
+      header: "Evénements dans %{area}"
+
+    venue:
+      header: "Evénements à %{venue}"
+
+    event:
+      register: "Inscrivez-vous"
+      online_text: "en ligne"
+      language: "Ce cours est à"
+      directions: "Obtenir un itinéraire"
+      online: "Cours en Ligne"
+      online_from: "Hébergé depuis %{city}"
+      distance: "à %{distance} km"
+      upcoming: "Commence bientôt"
+      starting_date: "Début %{date}"
+      inactive:
+        dates: "Contacter les organisateurs pour les horaires"
+        notice: "Ce cours a lieu sur demande"
+      contact:
+        title: "Contactez nous pour les horaires:"
+        tel: "tél"
+        email: "e-mail"
+        meetup: "Page Meetup"
+        facebook: "Page Facebook"
+
+    registration:
+      header: "Inscrivez-vous maintenant"
+      closed: "Inscription clôturée"
+      form:
+        timing: "J'aimerais commencer le"
+        email: "E-mail"
+        name: "Nom"
+        message: "Questions / Commentaires"
+        submit: "Confirmer"
+        email_invalid: "Veuillez saisir une adresse e-mail valide"
+      notice:
+        text: "En validant, vous confirmez que vous acceptez de recevoir des messages de suivi à propos de cet événement et d'événements similaires, conformément à nos %{link}."
+        link: "politique de confidentialité"
+      feedback:
+        duplicate: "Vous êtes déjà inscrit. A bientôt !"
+        success: "Succès! Vous recevrez prochainement un e-mail de confirmation."
+        error: "Erreur ! Veuillez réessayer plus tard."
+      confirmation:
+        title: "Merci pour votre inscription"
+        subtitle: "Vous allez prochainement recevoir un e-mail"
+        dismiss: "Inscrire quelqu'un d'autre"
+        invite: "Invitez un ami avec vous"
+      button:
+        external: "Inscrivez-vous"
+        facebook: "Inscrivez-vous sur Facebook"
+        eventbrite: "Inscrivez-vous sur Eventbrite"
+        meetup: "Inscrivez-vous sur Meetup"
+
+    sharing:
+      header: "Inviter un ami"
+      share: "Partager"
+      copied: "Copié !"
+
+    weekdays:
+      0: "Dimanche"
+      1: "Lundi"
+      2: "Mardi"
+      3: "Mercredi"
+      4: "Jeudi"
+      5: "Vendredi"
+      6: "Samedi"
+
+    recurrence: # TODO: Translate
+      day: "Tous les jours"
+      monday: "Les lundis"
+      tuesday: "Les Mardis"
+      wednesday: "Les Mercredis"
+      thursday: "Les Jeudis"
+      friday: "Les Vendredis"
+      saturday: "Les Samedis"
+      sunday: "Les Dimanches"
+      weekly_1: "Every %{weekday}"
+      weekly_2: "Every 2nd %{weekday}"
+      monthly_1st: "1st %{weekday} of Every Month"
+      monthly_2nd: "2nd %{weekday} of Every Month"
+      monthly_3rd: "3rd %{weekday} of Every Month"
+      monthly_4th: "4th %{weekday} of Every Month"
+      monthly_last: "Last %{weekday} of Every Month"
+
+    timing_labels:
+      course_fallback: "Ceci est un cours hebdomadaire"
+      course_weekly: "%{count}-cours d'une semaine"
+      course_monthly: "%{count}-session course" # TODO: Translate
+      ongoing: "Ce cours se déroule actuellement"
+
+    language_codes:
+      uk: UA #Ukrainian
+    

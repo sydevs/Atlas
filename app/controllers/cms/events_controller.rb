@@ -18,13 +18,33 @@ class CMS::EventsController < CMS::ApplicationController
     @record.touch if super parameters
   end
 
-  def verify
-    @record = Event.find(params[:event_id])
+  def change
+    @record = Event.find(params[:id])
     authorize @record, :update?
     @context = @record
-    @record.verify!
 
-    redirect_to [:cms, @record], flash: { success: translate('cms.messages.event.verified') }
+    case params[:effect]
+    when 'verify'
+      @record.verify!
+      message = { success: translate('cms.messages.event.verified') }
+    when 'finish'
+      unless @record.finished?
+        if @record.finish_date.nil? || @record.recurrence_start_date < Time.now
+          finish_at = 1.minute.ago
+          @record.assign_attributes finish_date: finish_at, recurrence_end_date: finish_at
+        else
+          @record.assign_attributes published: false
+        end
+
+        @record.reset_status
+        @record.save!
+        message = { success: translate('cms.messages.event.finish') }
+      end
+    else
+      raise ActionController::RoutingError.new('Not Found')
+    end
+    
+    redirect_to [:cms, @record], flash: message
   end
 
   private
@@ -34,9 +54,9 @@ class CMS::EventsController < CMS::ApplicationController
         :published, :type,
         :custom_name, :description, :room, :category, :language_code,
         :registration_mode, :registration_url, :registration_notification, :registration_limit,
-        :recurrence, :start_date, :end_date, :start_time, :end_time,
         :online_url, :expiration_period,
         :venue_id, :manager_id,
+        :recurrence_type, :recurrence_start_date, :recurrence_end_date, :recurrence_start_time, :recurrence_end_time,
         registration_question: [],
         contact_info: {},
         venue_attributes: %i[id name place_id latitude longitude street city region_code country_code post_code],

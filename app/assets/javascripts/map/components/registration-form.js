@@ -4,7 +4,7 @@
 function RegistrationForm() {
   let alert = null // { type: 'error', message: "This is a test of the alert message." }
 
-  const regexForEmailValidation = RegExp(/^\w+([\.-]?\w+)@\w+([\.-]?\w+)(\.\w{2,3})+$/);
+  const regexForEmailValidation = RegExp(/^\w+([\.\+-]?\w+)@\w+([\.-]?\w+)(\.\w{2,3})+$/);
 
   let data = {
     eventId: null,
@@ -78,7 +78,7 @@ function RegistrationForm() {
         alert ? m('.sya-registration__message', { class: alert.status }, alert.message) : null,
         m('.sya-registration__notice',
           m.trust(Util.translate('registration.notice.text', {
-            link: `<a class="sya-registration__notice-link" href="/${AtlasApp.config.locale}/privacy" target="_blank">${Util.translate('registration.notice.link')}</a>`
+            link: `<a class="sya-registration__notice-link" href="https://atlas.sydevelopers.com/${AtlasApp.config.locale}/privacy" target="_blank">${Util.translate('registration.notice.link')}</a>`
           }))
         ),
         m('button.sya-registration__submit',{

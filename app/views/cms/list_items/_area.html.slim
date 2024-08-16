@@ -4,7 +4,8 @@ tr
     = model_icon Area
   td
     - if policy(area).show?
+      - label = @context.equals?(area.parent) || @context.equals?(area.parent.parent) ? area.name : area.label
       /- url = @context == area.parent ? url_for([:cms, area, :events]) : url_for([:cms, area])
-      a href=url_for([:cms, area]) = area.label || translate('cms.hints.unnamed')
+      a href=url_for([:cms, area]) = label || translate('cms.hints.unnamed')
     - else
       = area.label || translate('cms.hints.unnamed')

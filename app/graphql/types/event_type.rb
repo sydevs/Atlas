@@ -1,3 +1,5 @@
+require 'rails_autolink'
+
 module Types
   class EventType < Types::BaseObject
     include LocalizationHelper
@@ -34,6 +36,8 @@ module Types
 
     field :images, [Types::ImageType], null: true
 
+    field :area_id, ID, null: false
+    
     field :venue, Types::VenueType, null: false
     field :area, Types::AreaType, null: false
     field :location, Types::LocationType, null: false
@@ -54,29 +58,29 @@ module Types
     end
 
     def description_html
-      ActionController::Base.helpers.simple_format object.description
+      helpers = ActionController::Base.helpers
+      description = helpers.simple_format object.description
+      helpers.auto_link(description, link: :urls, html: { target: '_blank', rel: 'nofollow' }) do |text|
+        text = text.delete_prefix("http://").delete_prefix("https://").delete_prefix("www.")
+        text = text.split("/", 2)
+        text[1] = helpers.truncate(text[1], length: 15) if text.count > 1
+        text.join("/")
+      end
     end
 
     def timing
       {
-        first_date: object.next_occurrences_after(object.start_date, limit: 1).first,
-        last_date: object.registration_end_time ? object.next_occurrences_after(object.registration_end_time, limit: 1).first : nil,
-        upcoming_dates: object.next_occurrences_after(Time.now, limit: 7),
+        first_date: object.first_recurrence_at,
+        last_date: object.last_recurrence_at,
+        upcoming_dates: object.upcoming_recurrences(limit: 7),
+        recurrence_count: object.recurrence&.finite? ? object.recurrence.events.to_a.count : nil,
 
-        start_time: object.start_time,
-        end_time: object.end_time,
+        start_time: object.recurrence&.starts_at&.to_s(:time),
+        end_time: object.recurrence&.ends_at&.to_s(:time),
 
-        recurrence: object.recurrence,
+        recurrence: object.recurrence_type,
         duration: object.duration,
         time_zone: object.time_zone,
-      }
-    end
-
-    def occurrences
-      {
-        first: object.next_occurrences_after(object.start_date, limit: 1).first,
-        last: object.registration_end_time ? object.next_occurrences_after(object.registration_end_time, limit: 1).first : null,
-        upcoming: object.next_occurrences_after(Time.now, limit: 7),
       }
     end
 

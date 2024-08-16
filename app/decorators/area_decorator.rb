@@ -21,7 +21,7 @@ module AreaDecorator
   end
 
   def map_url
-    Rails.application.routes.url_helpers.map_area_url(self, layer: EventDecorator::LAYER[:offline], host: canonical_host)
+    Rails.application.routes.url_helpers.map_area_url(self, host: canonical_host)
   end
 
 end

@@ -7,11 +7,8 @@ module CMS::ApplicationHelper
     expired: 'info circle',
   }.freeze
 
-  PLACE_MODELS = %i[
-    countries
-    regions
-    areas
-  ]
+  PLACE_MODELS = %i[countries regions areas]
+  RECORD_MODELS = [Conversation, Audit, Registration]
 
   def floating_action text, icon = nil, url = nil, **args
     klass = %w[ui basic right floated compact tiny button]
@@ -44,6 +41,8 @@ module CMS::ApplicationHelper
       PLACE_MODELS.each do |model|
         return url_for([:cms, ancestor, model]) if policy(ancestor).index_association?(model)
       end
+    elsif RECORD_MODELS.include?(@context.class) && policy(ancestor).index_association?(@context.class.model_name.route_key.to_sym)
+      url_for([:cms, ancestor, @context.class.model_name.route_key.to_sym])
     elsif @context.is_a?(Manager) && !ancestor.is_a?(Event)
       url_for([:cms, ancestor, :managers])
     elsif action_name == 'index' && policy(ancestor).index_association?(controller_name.to_sym)
@@ -62,12 +61,32 @@ module CMS::ApplicationHelper
     end
   end
 
+  def record_link record, **kwargs
+    if record && policy(record).show?
+      tag.a href: url_for([:cms, record]), **kwargs do
+        block_given? ? yield : record.label
+      end
+    else
+      tag.span(**kwargs) do
+        block_given? ? yield : record&.label
+      end
+    end
+  end
+
   def active_accordion? type
     'active' if params[:q]&.to_sym == type # || (params[:q].nil? && type == :guide)
   end
 
   def time_from_now_in_words time
     time > Time.now ? time_ago_in_words(time) : translate('datetime.distance_in_words.soon')
+  end
+
+  def relative_time_in_words time
+    if time > Time.now
+      time < 1.hour.from_now ? translate('datetime.distance_in_words.time_from_now', time: time_ago_in_words(time)) : time.to_fs(:short)
+    else
+      time > 6.minutes.ago ? translate('datetime.distance_in_words.time_ago', time: time_ago_in_words(time)) : time.to_fs(:short)
+    end
   end
 
   def expiry_time_in_words status
@@ -80,6 +99,13 @@ module CMS::ApplicationHelper
     else
       translate('datetime.distance_in_words.x_weeks', count: duration.in_weeks.to_i)
     end
+  end
+
+  def markdown content
+    return nil unless content.present?
+    
+    @markdown ||= Redcarpet::Markdown.new(Redcarpet::Render::HTML, autolink: true)
+    @markdown.render(content).html_safe
   end
 
 end
