@@ -18,12 +18,14 @@ function CountryView() {
       if (!country) return m(Loader)
 
       return [
-        m(NavigationButton, {
-          float: 'left',
-          icon: 'left',
-          href: '/',
-        }),
-        m('.sya-panel__header', country.label),
+        m('.sya-panel__header', [
+          m(NavigationButton, {
+            float: 'left',
+            icon: 'left',
+            href: '/',
+          }),
+          country.label,
+        ]),
         m('.sya-list', country.regions.map(function(region) {
           const count = region.offlineEventIds.length + region.onlineEventIds.length
           if (!count) return

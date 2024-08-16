@@ -18,13 +18,15 @@ function RegionView() {
       console.log("REGION", region)
 
       return [
-        m(NavigationButton, {
-          float: 'left',
-          icon: 'left',
-          href: '/country/:id',
-          params: { id: region.country.id }
-        }),
-        m('.sya-panel__header', region.label),
+        m('.sya-panel__header', [
+          m(NavigationButton, {
+            float: 'left',
+            icon: 'left',
+            href: '/country/:id',
+            params: { id: region.country.id }
+          }),
+          region.label,
+        ]),
         m('.sya-list.list--compact', region.areas.map(function(area) {
           const count = area.offlineEventIds.length + area.onlineEventIds.length
           if (!count) return

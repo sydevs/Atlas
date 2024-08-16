@@ -20,14 +20,17 @@ function VenueView() {
       if (!venue) return m(Loader)
 
       return [
-        m(NavigationButton, {
-          float: 'left',
-          icon: 'left',
-          href: AtlasApp.config.default_view == 'list' ? '/area/:id' : '/',
-          params: { id: venue.areaId }
-        }),
-        m('.sya-panel__header', Util.translate('venue.header', { venue: venue.label })),
-          m('.sya-list', venue.events ? venue.events.map(function(event) {
+        m('.sya-panel__header', [
+          m(NavigationButton, {
+            float: 'left',
+            icon: 'left',
+            href: AtlasApp.config.default_view == 'list' ? '/area/:id' : '/',
+            params: { id: venue.areaId }
+          }),
+          Util.translate('venue.header', { venue: venue.label }),
+        ]),
+        m('.sya-list',
+          venue.events ? venue.events.map(function(event) {
             return m(EventCard, { key: event.id, class: 'sya-list__item', event: event })
           }) : m(Loader)
         )

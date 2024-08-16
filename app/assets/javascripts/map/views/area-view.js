@@ -29,13 +29,15 @@ function AreaView() {
       console.log(area)
 
       return [
-        m(NavigationButton, {
-          float: 'left',
-          icon: 'left',
-          href: (AtlasApp.config.default_view == 'list' ? '/region/:id' : '/events'),
-          params: { layer: vnode.attrs.layer, id: area.region.id }
-        }),
-        m('.sya-panel__header', Util.translate('area.header', { area: area.label })),
+        m('.sya-panel__header', [
+          m(NavigationButton, {
+            float: 'left',
+            icon: 'left',
+            href: (AtlasApp.config.default_view == 'list' ? '/region/:id' : '/events'),
+            params: { layer: vnode.attrs.layer, id: area.region.id }
+          }),
+          Util.translate('area.header', { area: area.label }),
+        ]),
         m('.sya-list', area.events.map(function(event) {
           return m(EventCard, { key: event.id, class: 'sya-list__item', event: event })
         }))

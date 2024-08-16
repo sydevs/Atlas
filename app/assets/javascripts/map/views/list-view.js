@@ -39,6 +39,7 @@ function ListView() {
 
   return {
     oncreate: function() {
+      updateEvents()
       AtlasApp.map.addEventListener('update', Util.throttle(updateEvents, 500))
     },
     view: function(vnode) {

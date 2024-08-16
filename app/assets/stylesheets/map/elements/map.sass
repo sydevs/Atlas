@@ -1,43 +1,44 @@
 @import '../_mixins'
 
-.sya-map
-  position: relative !important
-  width: 100%
-  height: 174px
-  user-select: none
-  overflow: hidden
-  
-  @include tablet-or-larger
-    height: 100%
+#sahajatlas
+  .sya-map
+    position: relative !important
+    width: 100%
+    height: 174px
+    user-select: none
+    overflow: hidden
+    
+    @include tablet-or-larger
+      height: 100%
 
-.sya-map--halfscreen
-  @include mobile
-    height: 50%
+  .sya-map--halfscreen
+    @include mobile
+      height: 50%
 
-.sya-map--fullscreen
-  @include mobile
-    height: calc(100% - 60px)
+  .sya-map--fullscreen
+    @include mobile
+      height: calc(100% - 60px)
 
-.sya-map--hidden
-  @include mobile
-    height: 0
+  .sya-map--hidden
+    @include mobile
+      height: 0
 
 
-// ===== CONTROLS ===== //
-.mapboxgl-control-container
-  @include mobile
-    .sya-map:not(.sya-map--fullscreen) &
-      display: none
+  // ===== CONTROLS ===== //
+  .mapboxgl-control-container
+    @include mobile
+      .sya-map:not(.sya-map--fullscreen) &
+        display: none
 
-    .mapboxgl-ctrl
-      &-top-left,
-      &-top-right
-        top: 70px
+      .mapboxgl-ctrl
+        &-top-left,
+        &-top-right
+          top: 70px
 
-      &-top-right,
-      &-bottom-right
-        right: ($control-offset-x * 0.375) - 10
+        &-top-right,
+        &-bottom-right
+          right: ($control-offset-x * 0.375) - 10
 
-      &-top-left,
-      &-bottom-left
-        left: ($control-offset-x * 0.375) - 10
+        &-top-left,
+        &-bottom-left
+          left: ($control-offset-x * 0.375) - 10
