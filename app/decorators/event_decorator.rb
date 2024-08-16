@@ -17,7 +17,7 @@ module EventDecorator
   end
 
   def label
-    if custom_name.present? && language_code == I18n.locale
+    if custom_name.present? && language_code.to_sym == I18n.locale.to_sym
       custom_name
     elsif inactive_category?
       I18n.translate('api.event.inactive_label', category: category_label, area: decorated_area.label)
@@ -107,7 +107,7 @@ module EventDecorator
   end
 
   def language_name
-    LocalizationHelper.language_name(language_code) || translate('cms.hints.unspecified')
+    LocalizationHelper.language_name(language_code.to_s.upcase) || translate('cms.hints.unspecified')
   end
 
   def map_path
