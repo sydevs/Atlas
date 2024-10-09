@@ -19,16 +19,16 @@ pt:
         online: "Aulas online"
         back: "Voltar ao mapa"
 
-    list: # TODO: Translate
-      loading: "Loading..."
-      error: "Connection Error"
+    list:
+      loading: "Carregando..."
+      error: "Erro de conexão"
       search: "Pesquisar local"
       more_info: "Mais informações"
       register: "Registro"
       fallback:
         nearby: "A aula de meditação gratuita mais próxima é em"
         far: "Não há aulas nesta área, a aula de meditação gratuita mais próxima é em"
-        online: "Alternatively, try our" # TODO: Translate
+        online: "Alternativamente, experimente o nosso" # TODO: Translate
         online_event: "Aula Online"
 
     area:
@@ -108,18 +108,18 @@ pt:
       friday: "Sexta"
       saturday: "Sábado"
       sunday: "Domingo"
-      weekly_1: "Every %{weekday}"
-      weekly_2: "Every 2nd %{weekday}"
-      monthly_1st: "1st %{weekday} of Every Month"
-      monthly_2nd: "2nd %{weekday} of Every Month"
-      monthly_3rd: "3rd %{weekday} of Every Month"
-      monthly_4th: "4th %{weekday} of Every Month"
-      monthly_last: "Last %{weekday} of Every Month"
+      weekly_1: "Todos(as) %{weekday}"
+      weekly_2: "Todo(a) 2º %{weekday}"
+      monthly_1st: "1º %{weekday} de cada mês"
+      monthly_2nd: "2º %{weekday} de cada mês"
+      monthly_3rd: "3º %{weekday} de cada mês"
+      monthly_4th: "4º %{weekday} de cada mês"
+      monthly_last: "Último %{weekday} de cada mês"
 
     timing_labels:
       course_fallback: "Este é um curso semanal"
       course_weekly: "%{count} semana de curso"
-      course_monthly: "%{count}-session course" # TODO: Translate
+      course_monthly: "%{count}-curso de sessão" # TODO: Translate
       ongoing: "Esta aula está em andamento"
 
     language_codes:

@@ -43,7 +43,6 @@ en:
       dashboard: "Dashboard for %{user}"
       review: "All Alerts for %{user}"
       worldwide: "Worldwide Data"
-      clients: "All Client Applications" # TODO: Translate
       clients: "All Client Applications"
       faq: "Frequently Asked Questions"
       context: "%{resource} for %{parent}"
@@ -122,7 +121,7 @@ en:
         enable_custom_regions: "Allow the creation of custom regions. This is an advanced feature, which should only be used if you understand what you are doing."
       region:
         polygon: "Drag / click on a faded square to add a new corner to the polygon. Click on an existing corner to remove it."
-        name: "Regions will use a translated name for each language, however if no translation is available, this name is used." # TODO: Translate
+        name: "Regions will use a translated name for each language, however if no translation is available, this name is used."
       area:
         location: "A custom area is defined using coordinates on the map (latitude and longitude) and a radius, to make a circular region."
       event:

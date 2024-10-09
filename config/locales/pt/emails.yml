@@ -5,12 +5,12 @@ pt:
       unsubscribe: "Cancelar subscrição"
       reason: "Você recebeu este e-mail porque se inscreveu neste evento."
       responses: "Suas respostas:"
-      view_map: "View Event on Map"
+      view_map: "Ver evento no mapa"
 
-    footer: # TODO: Translate
-      prelude: "This project maintains an accurate worldwide listing of public programs for seekers. The Atlas map is embedded on dozens of national and international Sahaj websites."
-      cause: "You've received this email because you're a manager for the Sahaja Yoga Atlas. Do not forward this email, the links contained allow access to your account."
-      unsubscribe: "Unsubscribe"
+    footer:
+      prelude: "Este projeto mantém uma listagem mundial de programas públicos para buscadores. O mapa Atlas está incorporado em dezenas de sites nacionais e internacionais da Sahaja Yoga."
+      cause: "Você recebeu este e-mail porque é um gerente do Sahaja Yoga Atlas. Não encaminhe este e-mail, os links contidos permitem acesso à sua conta."
+      unsubscribe: "Cancelar inscrição"
 
     confirmation:
       offline:
@@ -44,7 +44,7 @@ pt:
         subheader: "A turma em que você se inscreveu está prestes a começar. Aqui está um link para participar no horário de início."
         action: "Junte-se ao encontro"
 
-    status: # TODO: Translate
+    status:
       event:
         timing: :cms.forms.event.timing # Do not translate
         location: :cms.forms.event.location # Do not translate
@@ -55,72 +55,72 @@ pt:
       needs_immediate_review: :emails.needs_review # Do not translate
       archived: :emails.expired # Do not translate
       needs_review:
-        title: "Event expires in %{period}!"
-        prelude: "Your public event on the Sahaja Yoga Atlas is about to expire. Please check the details of the event below and confirm if they are still accurate."
-        flash: "Needs Review!"
-        action: "Are the above details accurate?"
+        title: "O evento expira em %{period}!"
+        prelude: "Seu evento público no Sahaja Yoga Atlas está prestes a expirar. Por favor, verifique os detalhes do evento abaixo e confirme se eles ainda estão acontecendo."
+        flash: "Necessita de revisão!"
+        action: "Os detalhes acima estão corretos?"
         actions:
-          positive: "Yes, details are correct"
-          negative: "No, it needs to be updated"
-          tertiary: "Cancel this event, it is no longer running"
+          positive: "Sim, os detalhes estão corretos"
+          negative: "Não, precisa ser atualizado"
+          tertiary: "Cancele este evento, ele não está mais acontecendo"
       expired:
-        title: "Your event has expired!"
-        prelude: "This event has been hidden from the public because it hasn't be updated in many months. If this program is still running, you need to update or confirm the details."
-        flash: "Hidden from Map"
-        action: "Are the above details accurate?"
+        title: "Seu evento expirou!"
+        prelude: "Este evento não está visível para o público porque ele não foi atualizado a alguns meses. Se este programa ainda estiver em ocorrendo, você precisa atualizar ou confirmar os detalhes."
+        flash: "Oculto no mapa"
+        action: "Os detalhes acima estão corretos?"
         actions:
-          positive: "Yes, restore the event"
-          negative: "No, it needs to be updated"
-          tertiary: "No, the event can be canceled"
+          positive: "Sim, restaure o evento"
+          negative: "Não, precisa ser atualizado"
+          tertiary: "Não, o evento pode ser cancelado"
       finished:
-        title: "Event has finished"
-        prelude: "Your public event on the Sahaja Yoga Atlas has reached it's scheduled conclusion."
-        flash: "Event Completed"
-        action: "Is it correct that this event has completed?"
+        title: "O evento terminou"
+        prelude: "Seu evento no Atlas Sahaja Yoga chegou ao fim programado."
+        flash: "Evento Concluído"
+        action: "Este evento já foi concluído?"
         actions:
-          positive: "Yes, the event is finished"
-          negative: "No, it needs to be updated"
+          positive: "Sim, o evento terminou"
+          negative: "Não, precisa ser atualizado"
       checkup:
-        title: "Event manager not responding"
-        prelude: "An event in the region you manage is expiring, and the manager has not responded to out automated emails. Please contact the manager of this event and help them confirm or update their event."
-        flash: "Event expires in %{period}!"
-        action: "Are the above details accurate?"
+        title: "O gestor do evento não está respondendo"
+        prelude: "Um evento na região que você gerencia está expirando, e o gestor não respondeu aos nossos e-mails automatizados. Entre em contato com o gestor deste evento e ajude-o a confirmar ou atualizar seu evento."
+        flash: "O evento expira em %{period}!"
+        action: "Os detalhes acima são precisos?"
         actions:
-          positive: "Yes, details are correct"
-          negative: "No, it needs to be updated"
-          tertiary: "Contact manager"
+          positive: "Sim, os detalhes estão corretos"
+          negative: "Não, precisa ser atualizado"
+          tertiary: "Entrar em contato com o gestor"
 
-    recommendations: # TODO: Translate
-      title: "Recommendations for Your Event"
-      prelude: "To increase registration from seekers"
+    recommendations:
+      title: "Recomendações para o seu evento"
+      prelude: "Para aumentar o número de buscadores"
       description:
-        title: "Missing description"
-        text: "Add a short description to your event to welcome seekers, and if needed tell them how to find the room."
-        action: "Add your description"
+        title: "Descrição ausente"
+        text: "Adicione uma breve descrição ao seu evento para dar boas-vindas aos interessados e, se necessário, diga-lhes como encontrar a sala."
+        action: "Adicione descrição"
       pictures:
-        title: "Photos"
-        text: "Your event has very few or no images. Add some photos of the entrance, the hall, yourself, or of seekers meditating. It's important to use high quality photos."
-        action: "Add photos"
+        title: "Fotos"
+        text: "Seu evento tem muito poucas ou nenhuma imagem. Adicione algumas fotos da entrada, do salão, de você mesmo ou de buscadores meditando. É importante usar fotos de alta qualidade."
+        action: "Adicionar fotos"
       registration:
-        title: "Registration method"
-        text: "Seekers are currently registering for your event via Meetup. We recommend using registration through the Sahaj Atlas as we will then be able to capture the seeker's email and follow up with them."
-        action: "Change registration"
+        title: "Método de registro"
+        text: "Os buscadores estão atualmente se registrando para seu evento via Meetup. Recomendamos usar o registro por meio do Sahaj Atlas, pois então poderemos capturar o e-mail do buscador e fazer o acompanhamento com ele."
+        action: "Alterar registro"
 
-    registrations: # TODO: Translate
+    registrations:
       title:
-        one: "1 new registration for your event"
-        other: "%{count} new registrations for your event"
+        one: "1 novo registro para seu evento"
+        other: "%{count} novas inscrições para seu evento"
       prelude:
-        one: "Your event, %{event}, has a new registration. Each registration is listed below, with any responses to registration questions."
-        other: "Your event, %{event}, has %{count} new registrations. Below "
+        one: "Seu evento, %{event}, tem um novo registro. Cada registro está listado abaixo, com quaisquer respostas às perguntas do registro."
+        other: "Seu evento, %{event}, tem %{count} novos registros. Abaixo "
       registration:
-        summary: "%{name} registered %{time} ago"
-        description: "Will attend on %{date}"
-        reply: "Reply to question"
+        summary: "%{name} registrado(a) %{time} atrás"
+        description: "Participará em %{date}"
+        reply: "Responder à pergunta"
 
     question:
-      title: "A seeker has a question"
-      prelude: "A seeker has submitted a question when registering for your event:"
-      summary: "%{name} asked:"
+      title: "Um buscador tem uma pergunta"
+      prelude: "Um buscador enviou uma pergunta ao se registrar para seu evento:"
+      summary: "%{name} perguntou:"
       description: :datetime.distance_in_words.time_ago # Do not translate
       reply: :emails.registrations.registration.reply # Do not translate

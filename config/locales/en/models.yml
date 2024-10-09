@@ -1,6 +1,6 @@
 en:
   datetime:
-    distance_in_words: # TODO: Translate
+    distance_in_words:
       time_ago: "%{time} ago"
       time_from_now: "%{time} from now"
       soon: "a few minutes"
@@ -168,7 +168,7 @@ en:
       region:
         manager_id: :activerecord.models.manager.single # Do not translate
         country_code: :activerecord.models.country.single # Do not translate
-        name: "Fallback Name" # TODO: Translate
+        name: "Fallback Name"
         geo_data: "Geo Data"
         osm_id: "OpenStreetMap ID"
         bounds: "Viewport"

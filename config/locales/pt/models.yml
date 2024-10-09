@@ -1,18 +1,18 @@
 pt:
   datetime:
-    distance_in_words: # TODO: Translate
-      time_ago: "%{time} ago"
-      time_from_now: "%{time} from now"
+    distance_in_words:
+      time_ago: "%{time} atrás"
+      time_from_now: "%{time} a partir de agora"
       soon: "Em alguns minutos"
-      x_minutes: # TODO: Translate
-        one: "%{count} minute"
-        other: "%{count} minutes"
+      x_minutes:
+        one: "%{count} minuto"
+        other: "%{count} minutos"
       x_weeks:
         one: "%{count} semana"
         other: "%{count} semanas"
-      x_months: # TODO: Translate
-        one: "%{count} month"
-        other: "%{count} months"
+      x_months:
+        one: "%{count} mês"
+        other: "%{count} meses"
 
   activerecord:
     models:
@@ -166,7 +166,7 @@ pt:
       region:
         manager_id: :activerecord.models.manager.single # Do not translate
         country_code: :activerecord.models.country.single # Do not translate
-        name: "Fallback Name" # TODO: Translate
+        name: "Nome de reserva"
         geo_data: "Dados geográficos"
         osm_id: "OpenStreetMap ID"
         bounds: "Janela de exibição"
@@ -179,7 +179,7 @@ pt:
         manager_id: :activerecord.models.manager.single # Do not translate
         name: :activerecord.attributes.generic.name # Do not translate
         country_code: :activerecord.models.country.single # Do not translate
-        subtitle: "Subtitle" # TODO: Translate
+        subtitle: "Legenda"
         coordinates: "Localização"
         latitude: "Latitude"
         longitude: "Longitude"
@@ -309,7 +309,7 @@ pt:
       # Other
       manager:
         manager_id: :activerecord.models.manager.single # Do not translate
-        name: "Full Name"
+        name: "Nome Completo"
         email: :activerecord.attributes.generic.email # Do not translate
         phone: :activerecord.attributes.generic.phone # Do not translate
         administrator: "Administrador global"
@@ -331,14 +331,14 @@ pt:
         email_verification_sent_at: "Última verificação de e-mail enviada"
         phone_verification_sent_at: "Última verificação de telefone enviada"
 
-      conversation: # TODO: Translate
-        uuid: "Unique Identifier"
+      conversation:
+        uuid: "Identificador Único"
 
-      audit: # TODO: Translate
-        data: "Raw Data"
-        created_at: "Occurred At"
-        changes: "Changes"
-        body: "Content"
+      audit:
+        data: "Dados brutos"
+        created_at: "Ocorreu em"
+        changes: "Mudanças"
+        body: "Conteúdo"
 
       client:
         label: "Rótulo"
@@ -365,24 +365,24 @@ pt:
           path: "Caminho (Avançado)"
         manager_id: :activerecord.models.manager.single # Do not translate
 
-      recurrable: # TODO: Translate
+      recurrable:
         types:
-          daily: "Daily"
-          weekly_1: "Weekly"
-          weekly_2: "Bi-Weekly"
-          monthly_1st: "1st Weekday of the Month"
-          monthly_2nd: "2nd Weekday of the Month"
-          monthly_3rd: "3rd Weekday of the Month"
-          monthly_4th: "4th Weekday of the Month"
-          monthly_last: "Last Weekday of the Month"
+          daily: "Diário"
+          weekly_1: "Semanal"
+          weekly_2: "Bi-semanal"
+          monthly_1st: "1º dia da semana do mês"
+          monthly_2nd: "2º dia da semana do mês"
+          monthly_3rd: "3º dia da semana do mês"
+          monthly_4th: "4º dia da semana do mês"
+          monthly_last: "Último dia da semana do mês"
         descriptions:
-          daily: "Every Day"
-          weekly_1: "Every %{weekday}"
-          weekly_2: "Every 2nd %{weekday}"
-          monthly_1st: "1st %{weekday} of each month"
-          monthly_2nd: "2nd %{weekday} of each month"
-          monthly_3rd: "3rd %{weekday} of each month"
-          monthly_4th: "4th %{weekday} of each month"
-          monthly_last: "Last %{weekday} of each month"
+          daily: "Todos os dias"
+          weekly_1: "Todos(as) %{weekday}"
+          weekly_2: "Todo(a) 2º %{weekday}"
+          monthly_1st: "1º %{weekday} de cada mês"
+          monthly_2nd: "2º %{weekday} de cada mês"
+          monthly_3rd: "3º %{weekday} de cada mês"
+          monthly_4th: "4º %{weekday} de cada mês"
+          monthly_last: "Último %{weekday} de cada mês"
 
       pictures:

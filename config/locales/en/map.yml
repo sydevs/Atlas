@@ -99,7 +99,7 @@ en:
       5: "Friday"
       6: "Saturday"
 
-    recurrence: # TODO: Translate
+    recurrence:
       day: "Daily"
       monday: "Mondays"
       tuesday: "Tuesdays"
@@ -119,7 +119,7 @@ en:
     timing_labels:
       course_fallback: "This is a weekly course"
       course_weekly: "%{count}-week course"
-      course_monthly: "%{count}-session course" # TODO: Translate
+      course_monthly: "%{count}-session course"
       ongoing: "This class is on-going"
 
     language_codes:
