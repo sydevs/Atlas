@@ -20,18 +20,11 @@
       background: color-mix(in srgb, lightgrey, transparent 90%)
       //background: color-mix(in srgb, #{$theme-tertiary}, transparent 85%)
 
-    &.sya-card--simple
-      min-height: 0
-      border-bottom: 1px solid transparentize(lightgrey, 0.4)
-
   .sya-card__content
     min-height: 100px
     display: flex
     flex-direction: column
     justify-content: center
-
-    .sya-card--simple &
-      min-height: 0
 
   .sya-card__content > *  > *
     display: inline-block
@@ -45,18 +38,11 @@
     margin-bottom: 6px
     min-height: 22px
 
-    .sya-card--simple &
-      margin-bottom: 0
-
   .sya-card__subtitle
     font-size: 13px
     line-height: 14px
     letter-spacing: 0.36px
     margin-bottom: 4px
-
-    .sya-card--simple &
-      font-size: 14.5px
-      margin-top: 2px
 
     &__distance::before
       content: '• '
@@ -113,3 +99,18 @@
       margin-left: -2px
       margin-bottom: -2px
       font-size: 24px
+
+  // ===== SIMPLE VARIATION ===== //
+  .sya-card--simple
+    min-height: 0
+    border-bottom: 1px solid transparentize(lightgrey, 0.4)
+
+    .sya-card__content
+      min-height: 0
+
+    .sya-card__title
+      margin-bottom: 0
+
+    .sya-card__subtitle
+      font-size: 14.5px
+      margin-top: 2px
