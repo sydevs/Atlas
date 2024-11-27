@@ -76,6 +76,13 @@ gem 'validate_url' # Validate url fields
 gem 'aws-sdk-s3' # For uploading to Mapbox
 # gem 'webpacker' # Needed to build properly
 
+# Error tracking
+group :production do
+  gem "stackprof"
+  gem "sentry-ruby"
+  gem "sentry-rails"
+end
+
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw] # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'capybara', '~> 2.13' # Adds support for Capybara system testing and selenium driver

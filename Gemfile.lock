@@ -418,6 +418,12 @@ GEM
       childprocess (>= 0.5, < 5.0)
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2)
+    sentry-rails (5.21.0)
+      railties (>= 5.0)
+      sentry-ruby (~> 5.21.0)
+    sentry-ruby (5.21.0)
+      bigdecimal
+      concurrent-ruby (~> 1.0, >= 1.0.2)
     sib-api-v3-sdk (9.0.0)
       addressable (~> 2.3, >= 2.3.0)
       json (~> 2.1, >= 2.1.0)
@@ -455,6 +461,7 @@ GEM
       actionpack (>= 6.1)
       activesupport (>= 6.1)
       sprockets (>= 3.0.0)
+    stackprof (0.2.26)
     temple (0.8.2)
     terser (1.1.8)
       execjs (>= 0.3.0, < 3)
@@ -539,6 +546,8 @@ DEPENDENCIES
   rails_autolink
   redcarpet
   selenium-webdriver
+  sentry-rails
+  sentry-ruby
   sib-api-v3-sdk
   sidekiq
   simple_form
@@ -546,6 +555,7 @@ DEPENDENCIES
   spring
   spring-watcher-listen
   sprockets (= 3.7.2)
+  stackprof
   terser
   timezone
   tzinfo-data
