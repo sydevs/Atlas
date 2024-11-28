@@ -139,6 +139,8 @@ class DataCache {
   }
 
   setCache(key, object) {
+    if (!(key in this.#cache)) this.#cache[key] = {}
+
     this.#cache[key][object.id] = object
   }
 
