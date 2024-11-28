@@ -89,7 +89,7 @@ class EventMailer < ApplicationMailer
     return unless registrations.present?
 
     helpers = ApplicationController.helpers
-    title = I18n.translate('emails.registrations.title', count: registrations.count, event: event.label)
+    title = I18n.translate('emails.registrations.title', count: registrations.count, event: @event.label)
     conversation = @event.conversations.create!
 
     result = BrevoAPI.send_email(:registrations, {
