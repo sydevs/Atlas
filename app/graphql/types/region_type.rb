@@ -20,6 +20,9 @@ module Types
     field :areas, [Types::AreaType], null: false
     field :country, Types::CountryType, null: false
 
+    field :parent_id, ID, null: false
+    field :parent_type, String, null: false
+
     field :created_at, GraphQL::Types::ISO8601DateTime, null: false
     field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
 
@@ -61,6 +64,16 @@ module Types
 
     def online_event_bounds
       object.event_bounds(:online)
+    end
+
+    def parent_id
+      # TODO: Warn if there is no parent
+      warn "Couldn't find parent for #{object} ##{object.id}" if object.parent.nil?
+      object.parent&.id
+    end
+
+    def parent_type
+      object.parent.class.model_name
     end
   end
 end
