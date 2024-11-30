@@ -157,10 +157,10 @@ module Types
     def decorate object
       return nil if object.nil?
 
-      klass = object.is_a?(ActiveRecord::Relation) ? object.model : object.class
+      klass = object.is_a?(Enumerable) ? object.first.class : object.class
       klass = Event if klass.base_class == Event
 
-      if object.is_a?(ActiveRecord::Relation)
+      if object.is_a?(Enumerable)
         object.map { |r| r.extend("#{klass}Decorator".constantize) }
       else
         object.extend("#{klass}Decorator".constantize)
