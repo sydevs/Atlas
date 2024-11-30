@@ -37,6 +37,9 @@ module Types
     field :images, [Types::ImageType], null: true
 
     field :area_id, ID, null: false
+
+    field :location_id, ID, null: false
+    field :location_type, String, null: false
     
     field :venue, Types::VenueType, null: false
     field :area, Types::AreaType, null: false
@@ -55,6 +58,14 @@ module Types
 
     def area
       object.area.extend(AreaDecorator)
+    end
+
+    def location_id
+      object.location.id
+    end
+
+    def location_type
+      object.location.class.model_name
     end
 
     def description_html
