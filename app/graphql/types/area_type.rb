@@ -11,6 +11,7 @@ module Types
 
     field :events, [Types::EventType], null: false
     field :event_ids, [ID], null: false
+    field :event_count, Int, null: false
     field :online_event_ids, [ID], null: false
     field :offline_event_ids, [ID], null: false
 
@@ -20,6 +21,10 @@ module Types
 
     def event_ids
       object.events.publicly_visible.pluck(:id)
+    end
+
+    def event_count
+      object.events.count
     end
 
     def online_event_ids
