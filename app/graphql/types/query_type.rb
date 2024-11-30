@@ -22,6 +22,11 @@ module Types
 
     # LIST QUERIES
 
+    field :countries, [CountryType], null: false do
+      description 'Returns all countries'
+      argument :locale, String, required: false
+    end
+
     field :venues, [VenueType], null: false do
       description 'Returns all venues'
       argument :locale, String, required: false
@@ -137,6 +142,11 @@ module Types
     def venues(locale: 'en')
       I18n.locale = locale.to_sym
       decorate Venue.publicly_visible
+    end
+
+    def countries(locale: 'en')
+      I18n.locale = locale.to_sym
+      decorate Country.publicly_visible
     end
 
     def closest_venue(latitude:, longitude:, locale: 'en')
