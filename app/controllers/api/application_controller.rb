@@ -43,6 +43,21 @@ class API::ApplicationController < ActionController::Base
     @venues = Venue.publicly_visible
   end
 
+  protected
+
+    def decorate object
+      return nil if object.nil?
+
+      klass = object.is_a?(Enumerable) ? object.first.class : object.class
+      klass = Event if klass.base_class == Event
+
+      if object.is_a?(Enumerable)
+        object.map { |r| r.extend("#{klass}Decorator".constantize) }
+      else
+        object.extend("#{klass}Decorator".constantize)
+      end
+    end
+
   private
 
     def authenticate_client!

@@ -11,6 +11,7 @@ class Event < ApplicationRecord
 
   nilify_blanks
   searchable_columns %w[custom_name description]
+  acts_as_mappable default_units: :kms, lat_column_name: :latitude, lng_column_name: :longitude
 
   enum category: { dropin: 1, course: 3, single: 2, festival: 4, concert: 5, inactive: 6 }, _suffix: true
   enum registration_mode: { native: 0, external: 1, meetup: 2, eventbrite: 3, facebook: 4 }, _suffix: true
@@ -25,7 +26,7 @@ class Event < ApplicationRecord
   has_many :pictures, as: :parent, dependent: :destroy
 
   accepts_nested_attributes_for :pictures, :venue
-
+  
   # Validations
   validates_presence_of :type, :category, :language_code, :manager
   validates_presence_of :recurrence_type, :recurrence_start_date, :recurrence_start_time, unless: :inactive_category?

@@ -10,8 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_07_30_121948) do
+ActiveRecord::Schema[7.0].define(version: 2024_12_09_024039) do
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pgcrypto"
   enable_extension "plpgsql"
 
   create_table "area_venues", force: :cascade do |t|
@@ -112,6 +113,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_07_30_121948) do
     t.json "translations", default: {}, null: false
     t.string "bounds", default: [], array: true
     t.string "canonical_domain"
+    t.jsonb "mailing_list", default: {}, null: false
     t.index ["country_code"], name: "index_countries_on_country_code", unique: true
   end
 
@@ -152,6 +154,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_07_30_121948) do
     t.integer "verification_streak", default: 0, null: false
     t.json "recurrence_data", default: {}
     t.date "finish_date"
+    t.float "latitude"
+    t.float "longitude"
     t.index ["area_id"], name: "index_events_on_area_id"
     t.index ["manager_id"], name: "index_events_on_manager_id"
     t.index ["status"], name: "index_events_on_status"
@@ -234,6 +238,11 @@ ActiveRecord::Schema[7.0].define(version: 2024_07_30_121948) do
     t.string "time_zone"
     t.jsonb "questions", default: {}
     t.bigint "user_id"
+    t.datetime "mailing_list_subscribed_at"
+    t.datetime "reminder_sent_at"
+    t.datetime "followup_sent_at"
+    t.uuid "uuid", default: -> { "gen_random_uuid()" }, null: false
+    t.datetime "next_reminder_at", null: false
     t.index ["event_id"], name: "index_registrations_on_event_id"
     t.index ["user_id"], name: "index_registrations_on_user_id"
   end
