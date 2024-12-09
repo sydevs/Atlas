@@ -133,5 +133,6 @@ Rails.application.routes.draw do
     get :graphql, to: "graphql#execute" if Rails.env.development?
 
     post :inbound, to: 'application#inbound_email'
+    get :geojson, to: 'application#geojson'
   end
 end

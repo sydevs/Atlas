@@ -39,6 +39,10 @@ class API::ApplicationController < ActionController::Base
     end
   end
 
+  def geojson
+    @venues = Venue.publicly_visible
+  end
+
   private
 
     def authenticate_client!
