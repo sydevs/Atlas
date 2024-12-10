@@ -4,7 +4,7 @@ json.url @event.map_url
 
 json.online @event.online?
 json.locationId @event.location.id
-json.locationType @event.location.class.model_name
+json.locationType @event.location.class.model_name.singular
 json.updatedAt @event.updated_at.iso8601
 
 json.label @event.label
