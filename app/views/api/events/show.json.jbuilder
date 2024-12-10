@@ -57,4 +57,6 @@ json.location do
   json.id @event.location.id
   json.type @event.location.class.model_name.singular
   json.directionsUrl @event.location.try(:directions_url)
+  json.latitude @event.location.latitude
+  json.longitude @event.location.longitude
 end
