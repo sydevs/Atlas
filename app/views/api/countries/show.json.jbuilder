@@ -2,7 +2,7 @@ json.id @country.id
 json.code @country.country_code
 json.label @country.label
 json.children do
-  if @country.enable_custom_regions?
+  if @country.enable_regions?
     json.array! @country.regions do |region|
       json.id region.id
       json.type 'region'
