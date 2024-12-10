@@ -88,6 +88,17 @@ module EventDecorator
     parts.reject(&:nil?).join(", ")
   end
 
+  def description_html
+    helpers = ActionController::Base.helpers
+    description = helpers.simple_format description
+    helpers.auto_link(description, link: :urls, html: { target: '_blank', rel: 'nofollow' }) do |text|
+      text = text.delete_prefix("http://").delete_prefix("https://").delete_prefix("www.")
+      text = text.split("/", 2)
+      text[1] = helpers.truncate(text[1], length: 15) if text.count > 1
+      text.join("/")
+    end
+  end
+
   def contact_text
     if contact_info['phone_number'].present?
       "#{contact_info['phone_name']} (#{contact_info['phone_number']})"

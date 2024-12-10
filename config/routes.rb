@@ -135,6 +135,7 @@ Rails.application.routes.draw do
     post :inbound, to: 'application#inbound_email'
     get :geojson, to: 'application#geojson'
 
-    resources :events, only: %i[index]
+    resources :events, :countries, only: %i[index show]
+    resources :areas, :regions, :venues, only: %i[show]
   end
 end
