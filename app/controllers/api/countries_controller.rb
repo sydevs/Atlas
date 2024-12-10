@@ -5,7 +5,12 @@ class API::CountriesController < API::ApplicationController
   end
 
   def show
-    @country = decorate(Country.find(params[:id]))
+    begin
+      !!Integer(params[:id])
+      @country = decorate(Country.find(params[:id]))
+    rescue ArgumentError, TypeError
+      @country = decorate(Country.find_by_country_code(params[:id]&.upcase))
+    end
   end
 
 end

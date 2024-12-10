@@ -1,4 +1,5 @@
 json.id @country.id
+json.code @country.country_code
 json.label @country.label
 json.areas do
   json.array! @country.regions do |region|
