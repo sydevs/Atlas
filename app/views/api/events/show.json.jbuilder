@@ -3,8 +3,6 @@ json.path @event.map_path
 json.url @event.map_url
 
 json.online @event.online?
-json.locationId @event.location.id
-json.locationType @event.location.class.model_name.singular
 json.updatedAt @event.updated_at.iso8601
 
 json.label @event.label
@@ -53,4 +51,10 @@ json.contact do
   json.phoneNumber @event.contact_info['phone_number']
   json.phoneName @event.contact_info['phone_name']
   json.emailAddress @event.contact_info['email_address']
+end
+
+json.location do
+  json.id @event.location.id
+  json.type @event.location.class.model_name.singular
+  json.directionsUrl @event.location.try(:directions_url)
 end
