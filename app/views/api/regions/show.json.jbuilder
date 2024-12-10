@@ -3,7 +3,7 @@ json.id @region.id
 json.label @region.label
 json.countryCode @region.country_code
 json.parentId @region.country_code
-json.parentType 'Country'
+json.parentType 'country'
 json.areas do
   json.array! @region.areas do |area|
     json.id area.id

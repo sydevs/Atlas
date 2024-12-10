@@ -4,7 +4,7 @@ json.address event.address
 json.online event.online?
 
 json.locationId event.location.id
-json.locationType event.location.class.model_name
+json.locationType event.location.class.model_name.downcase
 json.latitude event.latitude
 json.longitude event.longitude
 json.distance event.venue.distance_in_words(@location) if @location.present? && event.venue.present?
