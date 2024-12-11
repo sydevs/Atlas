@@ -13,9 +13,16 @@ json.features do
       ]
     end
     json.properties do
-      json.id venue.id
-      json.address venue.address
-      json.eventIds venue.events.publicly_visible.pluck(:id)
+      if venue.publicly_visible_events.count == 1
+        json.id venue.id
+        json.type 'venue'
+        json.address venue.address
+      else
+        event = venue.publicly_visible_events.first
+        json.id event.id
+        json.type 'event'
+        json.address venue.address
+      end
     end
   end
 end

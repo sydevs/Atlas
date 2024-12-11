@@ -12,17 +12,17 @@ json.descriptionHtml @event.description_html
 json.category @event.category_name
 json.language @event.language_name
 json.languageCode @event.language_code
-json.address @event.address
 
-json.registrationMode @event.registration_mode
-json.registrationEndTime @event.registration_end_time&.iso8601
-json.registrationUrl @event.registration_url
-json.registrationCount @event.registrations.count
-json.registrationLimit @event.registration_limit
-json.registrationQuestions do
-  json.array! @event.registration_question do |question|
-    json.slug question
-    json.title translate_enum_value(Event, :registration_question, question)
+json.registration do
+  json.mode @event.registration_mode
+  json.externalUrl @event.registration_url if @event.registration_mode != 'native'
+  json.maxParticipants @event.registration_limit
+  json.participantCount @event.registrations.count
+  json.questions do
+    json.array! @event.registration_question do |question|
+      json.slug question
+      json.title translate_enum_value(Event, :registration_question, question)
+    end
   end
 end
 
@@ -56,6 +56,7 @@ end
 json.location do
   json.id @event.location.id
   json.type @event.location.class.model_name.singular
+  json.address @event.address
   json.directionsUrl @event.location.try(:directions_url)
   json.latitude @event.location.latitude
   json.longitude @event.location.longitude
