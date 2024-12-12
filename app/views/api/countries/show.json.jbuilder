@@ -1,6 +1,7 @@
 json.id @country.id
 json.code @country.country_code
 json.label @country.label
+json.eventCount @country.events.publicly_visible.count
 json.children do
   if @country.enable_regions?
     json.array! @country.regions do |region|

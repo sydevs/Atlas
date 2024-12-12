@@ -1,6 +1,6 @@
 json.id event.id
 json.label event.label
-json.address event.address
+json.address event.venue.address
 json.online event.online?
 
 json.locationId event.location.id
