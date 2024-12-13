@@ -13,7 +13,7 @@ json.features do
       ]
     end
     json.properties do
-      if venue.publicly_visible_events.count == 1
+      if venue.publicly_visible_events.count != 1
         json.id venue.id
         json.type 'venue'
         json.address venue.address
