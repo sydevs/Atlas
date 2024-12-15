@@ -34,13 +34,13 @@ json.images do
 end
 
 json.timing do
-  json.firstDate @event.first_recurrence_at
-  json.lastDate @event.last_recurrence_at
+  json.firstDate @event.first_recurrence_at.to_date
+  json.lastDate @event.last_recurrence_at.to_date
   json.upcomingDates @event.upcoming_recurrences(limit: 7)
   json.recurrenceCount @event.recurrence&.finite? ? @event.recurrence.events.to_a.count : nil
 
-  json.startTime @event.recurrence&.starts_at&.to_s(:time)
-  json.endTime @event.recurrence&.ends_at&.to_s(:time)
+  json.localStartTime @event.recurrence&.starts_at&.to_fs(:time)
+  json.localEndTime @event.recurrence&.ends_at&.to_fs(:time)
 
   json.recurrence @event.recurrence_type
   json.duration @event.duration
