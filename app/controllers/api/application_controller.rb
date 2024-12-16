@@ -62,12 +62,11 @@ class API::ApplicationController < ActionController::Base
 
     def authenticate_client!
       return if %w[GET HEAD OPTIONS].include?(request.method)
+      render json: { error: 'Missing api key' }, status: 400 && return unless params[:key].present?
       client = Client.find_by(secret_key: params[:key])
-      render('api/views/error', status: 400) && return unless client.present?
+      render json: { error: 'Invalid api key' }, status: 401 && return unless client.present?
 
       client.touch(:last_accessed_at)
-    rescue ActiveRecord::RecordNotFound => _e
-      render 'api/views/error', status: 401
     end
 
 end
