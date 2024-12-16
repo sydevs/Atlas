@@ -35,7 +35,7 @@ end
 
 json.timing do
   json.firstDate @event.first_recurrence_at.to_date
-  json.lastDate @event.last_recurrence_at.to_date
+  json.lastDate @event.last_recurrence_at&.to_date
   json.upcomingDates @event.upcoming_recurrences(limit: 7)
   json.recurrenceCount @event.recurrence&.finite? ? @event.recurrence.events.to_a.count : nil
 
