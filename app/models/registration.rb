@@ -14,7 +14,7 @@ class Registration < ApplicationRecord
   accepts_nested_attributes_for :user
 
   # Validations
-  validates :starting_at, presence: true
+  validates_presence_of :starting_at, :time_zone
 
   # Scopes
   default_scope { order(created_at: :desc) }
