@@ -1,7 +1,8 @@
 class API::RegistrationsController < API::ApplicationController
 
   def create
-    @registration = Registration.create!(registration_params)
+    @event = Event.find(params[:event_id])
+    @registration = @event.registrations.create!(registration_params)
   end
 
   private
