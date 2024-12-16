@@ -137,5 +137,6 @@ Rails.application.routes.draw do
 
     resources :events, :countries, only: %i[index show]
     resources :areas, :regions, :venues, only: %i[show]
+    resources :registrations, :regions, :venues, only: %i[create]
   end
 end
