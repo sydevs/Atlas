@@ -32,7 +32,7 @@ class Country < ApplicationRecord
   scope :ready_for_summary_email, -> { where("summary_email_sent_at IS NULL OR summary_email_sent_at <= ?", CountryMailer::SUMMARY_PERIOD.ago) }
   scope :order_by_events, -> { left_joins(:events).group(:id).order('COUNT(events.id) DESC') }
   scope :order_by_registrations, -> { left_joins(:associated_registrations).group(:id).order('COUNT(registrations.id) DESC') }
-  scope :order_by_locale, -> { order(Country.arel_table[:default_language_code].eq(I18n.locale.to_s.upcase).desc) }
+  scope :order_by_locale, -> (locale) { order(Country.arel_table[:default_language_code].eq(locale.to_s.upcase).desc) }
 
   # Methods
 
