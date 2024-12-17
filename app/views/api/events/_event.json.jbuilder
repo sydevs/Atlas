@@ -8,7 +8,7 @@ json.locationId event.location.id
 json.locationType event.location.class.model_name.singular
 json.latitude event.latitude
 json.longitude event.longitude
-json.distance event.venue.distance_in_words(@location) if @location.present? && event.venue.present?
+json.distance event.venue.distance(@location) if @location.present? && event.venue.present?
 
 json.timeZone event.time_zone
 json.nextDate event.next_recurrence_at&.iso8601
