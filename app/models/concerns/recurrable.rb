@@ -32,17 +32,17 @@ module Recurrable
   end
 
   def first_recurrence_at
-    recurrence.first if recurrence.present?
+    recurrence.first.utc if recurrence.present?
   end
 
   def next_recurrence_at
-    upcoming_recurrences(limit: 1).first if recurrence.present?
+    upcoming_recurrences(limit: 1).first.utc if recurrence.present?
   end
 
   def last_recurrence_at
     return nil unless recurrence&.finite?
 
-    recurrence.events.to_a.last
+    recurrence.events.to_a.last.utc
   end
 
   def upcoming_recurrences(limit: 7)
@@ -50,9 +50,9 @@ module Recurrable
 
     result = recurrence.fast_forward(Time.now).take(limit + 1)
     if result.first < Time.now
-      result.drop(1)
+      result.drop(1).map(&:utc)
     else
-      result.take(limit)
+      result.take(limit).map(&:utc)
     end
   end
 
@@ -60,20 +60,16 @@ module Recurrable
     @recurrence ||= begin
       return nil unless recurrence_data && recurrence_data[:type].present? 
 
+      Time.zone = time_zone
       rd = recurrence_data
       type = rd[:type].to_sym
       data = RECURRENCES[type].clone
       
       if rd[:start_date].present?
-        data[:starts] = rd[:start_time] ? "#{rd[:start_date]} #{rd[:start_time]}" : rd[:start_date]
-
-        if rd[:end_date].present?
-          data[:until] = rd[:end_time] ? "#{rd[:end_date]} #{rd[:end_time]}" : rd[:end_date]
-        elsif rd[:end_time].nil? && type == :daily
-          data[:until] = data[:starts]
-        end
-
-        weekday = Date.parse(data[:starts])&.strftime("%A")&.downcase&.to_sym
+        data[:starts] = rd[:start_date]
+        data[:until] = rd[:end_date]
+        data[:at] = rd[:start_time]
+        weekday = DateTime.parse(rd[:start_date]).strftime("%A")&.downcase&.to_sym
 
         if Recurrable::RECURRENCE_ORDINAL.key?(type)
           data.merge!(day: { weekday => Recurrable::RECURRENCE_ORDINAL[type] })
@@ -82,6 +78,7 @@ module Recurrable
         end
       end
 
+      Time.zone = Time.zone_default
       Montrose.recurrence(data)
     end
   end

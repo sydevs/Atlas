@@ -61,7 +61,9 @@ class API::ApplicationController < ActionController::Base
   private
 
     def authenticate_client!
+      # TODO: Remove this check once we're ready to launch the REST api
       return if %w[GET HEAD OPTIONS].include?(request.method)
+      
       render json: { error: 'Missing api key' }, status: 400 && return unless params[:key].present?
       client = Client.find_by(secret_key: params[:key])
       render json: { error: 'Invalid api key' }, status: 401 && return unless client.present?

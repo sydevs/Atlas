@@ -34,17 +34,16 @@ json.images do
 end
 
 json.timing do
-  json.firstDate @event.first_recurrence_at.to_date
-  json.lastDate @event.last_recurrence_at&.to_date
-  json.upcomingDates @event.upcoming_recurrences(limit: 7)
-  json.recurrenceCount @event.recurrence&.finite? ? @event.recurrence.events.to_a.count : nil
-
-  json.localStartTime @event.recurrence&.starts_at&.to_fs(:time)
-  json.localEndTime @event.recurrence&.ends_at&.to_fs(:time)
-
-  json.recurrence @event.recurrence_type
+  json.type @event.recurrence_type
+  json.localStartTime @event.recurrence_data[:start_time]
+  json.localEndTime @event.recurrence_data[:end_time]
   json.duration @event.duration
   json.timeZone @event.time_zone
+
+  json.firstDate @event.first_recurrence_at.iso8601
+  json.lastDate @event.last_recurrence_at&.iso8601
+  json.upcomingDates @event.upcoming_recurrences(limit: 7).map(&:iso8601)
+  json.recurrenceCount @event.recurrence&.finite? ? @event.recurrence.events.to_a.count : nil
 end
 
 json.contact do
