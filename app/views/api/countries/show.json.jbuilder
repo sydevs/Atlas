@@ -7,14 +7,14 @@ json.children do
     json.array! @country.regions do |region|
       json.id region.id
       json.type 'region'
-      json.label region.label
+      json.label region.short_label
       json.eventCount region.events.publicly_visible.count
     end
   else
     json.array! @country.areas do |area|
       json.id area.id
       json.type 'area'
-      json.label area.label
+      json.label area.short_label
       json.eventCount area.events.publicly_visible.count
     end
   end

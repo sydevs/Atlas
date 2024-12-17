@@ -89,6 +89,8 @@ module EventDecorator
   end
 
   def description_html
+    return nil unless description.present?
+    
     helpers = ActionController::Base.helpers
     description = helpers.simple_format description
     helpers.auto_link(description, link: :urls, html: { target: '_blank', rel: 'nofollow' }) do |text|

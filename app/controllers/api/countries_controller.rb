@@ -1,7 +1,7 @@
 class API::CountriesController < API::ApplicationController
 
   def index
-    @countries = decorate(Country.publicly_visible)
+    @countries = decorate(Country.order_by_locale.order_by_events.publicly_visible)
   end
 
   def show

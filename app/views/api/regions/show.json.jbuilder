@@ -8,7 +8,7 @@ json.eventCount @region.events.publicly_visible.count
 json.areas do
   json.array! @region.areas do |area|
     json.id area.id
-    json.label area.label
+    json.label area.short_label
     json.eventCount area.events.publicly_visible.count
   end
 end

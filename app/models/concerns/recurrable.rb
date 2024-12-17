@@ -36,13 +36,13 @@ module Recurrable
   end
 
   def next_recurrence_at
-    upcoming_recurrences(limit: 1).first.utc if recurrence.present?
+    upcoming_recurrences(limit: 1).first&.utc if recurrence.present?
   end
 
   def last_recurrence_at
     return nil unless recurrence&.finite?
 
-    recurrence.events.to_a.last.utc
+    recurrence.events.to_a.last&.utc
   end
 
   def upcoming_recurrences(limit: 7)
@@ -60,26 +60,26 @@ module Recurrable
     @recurrence ||= begin
       return nil unless recurrence_data && recurrence_data[:type].present? 
 
-      Time.zone = time_zone
-      rd = recurrence_data
-      type = rd[:type].to_sym
-      data = RECURRENCES[type].clone
-      
-      if rd[:start_date].present?
-        data[:starts] = rd[:start_date]
-        data[:until] = rd[:end_date]
-        data[:at] = rd[:start_time]
-        weekday = DateTime.parse(rd[:start_date]).strftime("%A")&.downcase&.to_sym
+      Time.use_zone(time_zone) do
+        rd = recurrence_data
+        type = rd[:type].to_sym
+        data = RECURRENCES[type].clone
+        
+        if rd[:start_date].present?
+          data[:starts] = rd[:start_date]
+          data[:until] = rd[:end_date]
+          data[:at] = rd[:start_time]
+          weekday = rd[:start_date].to_date.strftime("%A")&.downcase&.to_sym
 
-        if Recurrable::RECURRENCE_ORDINAL.key?(type)
-          data.merge!(day: { weekday => Recurrable::RECURRENCE_ORDINAL[type] })
-        elsif type != :daily
-          data.merge!(on: weekday)
+          if Recurrable::RECURRENCE_ORDINAL.key?(type)
+            data.merge!(day: { weekday => Recurrable::RECURRENCE_ORDINAL[type] })
+          elsif type != :daily
+            data.merge!(on: weekday)
+          end
         end
-      end
 
-      Time.zone = Time.zone_default
-      Montrose.recurrence(data)
+        Montrose.recurrence(data)
+      end
     end
   end
 

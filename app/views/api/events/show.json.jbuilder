@@ -9,8 +9,7 @@ json.label @event.label
 json.description @event.description
 json.descriptionHtml @event.description_html
 
-json.category @event.category_name
-json.language @event.language_name
+json.category @event.category
 json.languageCode @event.language_code
 
 json.registration do
