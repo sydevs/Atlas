@@ -32,7 +32,7 @@ module Recurrable
   end
 
   def first_recurrence_at
-    recurrence.first.utc if recurrence.present?
+    recurrence.first&.utc if recurrence.present?
   end
 
   def next_recurrence_at
