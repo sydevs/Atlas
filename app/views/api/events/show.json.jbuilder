@@ -1,6 +1,6 @@
 json.id @event.id
-json.path @event.map_path
-json.url @event.map_url
+json.path event_path(@event)
+json.url event_url(@event, host: @event.canonical_host)
 
 json.online @event.online?
 json.updatedAt @event.updated_at.iso8601

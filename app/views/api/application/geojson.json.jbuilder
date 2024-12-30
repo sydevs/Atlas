@@ -15,11 +15,13 @@ json.features do
     json.properties do
       if venue.publicly_visible_events.count != 1
         json.id venue.id
+        json.path venue_path(venue)
         json.type 'venue'
         json.address venue.address
       else
         event = venue.publicly_visible_events.first
         json.id event.id
+        json.path event_path(event)
         json.type 'event'
         json.address venue.address
       end

@@ -140,4 +140,10 @@ Rails.application.routes.draw do
       resources :registrations, :regions, :venues, only: %i[create]
     end
   end
+
+  # These routes should mirror the ones used in the React frontend
+  resources :areas, :regions, :venues, only: %i[show]
+  resources :events, :countries, only: %i[index show] do
+    resources :registrations, :regions, :venues, only: %i[create]
+  end
 end

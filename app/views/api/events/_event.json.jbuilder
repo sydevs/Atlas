@@ -1,4 +1,5 @@
 json.id event.id
+json.path event_path(event)
 json.label event.label
 json.address event.location.address
 json.online event.online?
@@ -11,6 +12,7 @@ json.longitude event.longitude
 json.distance event.venue.distance(@location) if @location.present? && event.venue.present?
 
 json.timeZone event.time_zone
+json.firstDate event.first_recurrence_at&.iso8601
 json.nextDate event.next_recurrence_at&.iso8601
 json.duration event.duration
 
