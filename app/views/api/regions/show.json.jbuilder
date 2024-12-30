@@ -17,6 +17,7 @@ json.areas do
     json.id area.id
     json.path area_path(area)
     json.label area.short_label
+    json.subtitle area.subtitle
     json.eventCount area.events.publicly_visible.count
   end
 end
