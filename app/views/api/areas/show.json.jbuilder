@@ -5,8 +5,7 @@ json.url area_url(@area, host: @area.canonical_host)
 
 json.label @area.label
 json.subtitle @area.subtitle
-json.parentId @area.parent.id
-json.parentType @area.parent.class.model_name.singular
+json.parentPath polymorphic_path([@area.parent, nil])
 json.events @area.events, partial: 'api/events/event', as: :event
 
 json.latitude @area.latitude

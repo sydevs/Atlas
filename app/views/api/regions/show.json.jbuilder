@@ -5,8 +5,7 @@ json.url region_url(@region, host: @region.canonical_host)
 
 json.label @region.label
 json.countryCode @region.country_code
-json.parentId @region.country_code
-json.parentType 'country'
+json.parentPath country_path(@region.country_code)
 json.eventCount @region.events.publicly_visible.count
 
 # TODO: Change all source data to use the Mapbox coordinate system

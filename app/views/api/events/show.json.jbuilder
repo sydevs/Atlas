@@ -39,7 +39,7 @@ json.timing do
   json.duration @event.duration
   json.timeZone @event.time_zone
 
-  json.firstDate @event.first_recurrence_at.iso8601
+  json.firstDate @event.first_recurrence_at&.iso8601
   json.lastDate @event.last_recurrence_at&.iso8601
   json.upcomingDates @event.upcoming_recurrences(limit: 7).map(&:iso8601)
   json.recurrenceCount @event.recurrence&.finite? ? @event.recurrence.events.to_a.count : nil
