@@ -92,7 +92,7 @@ module EventDecorator
     return nil unless description.present?
     
     helpers = ActionController::Base.helpers
-    description = helpers.simple_format description
+    description = helpers.simple_format self[:description]
     helpers.auto_link(description, link: :urls, html: { target: '_blank', rel: 'nofollow' }) do |text|
       text = text.delete_prefix("http://").delete_prefix("https://").delete_prefix("www.")
       text = text.split("/", 2)
