@@ -12,7 +12,7 @@ json.descriptionHtml @event.description_html
 json.category @event.category
 json.languageCode @event.language_code
 
-if @event.inactive_category? && @event.next_recurrence_at.present?
+if @event.inactive_category? || !@event.next_recurrence_at.present?
   json.registration nil
 else
   json.registration do
