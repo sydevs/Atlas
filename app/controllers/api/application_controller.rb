@@ -1,6 +1,7 @@
 class API::ApplicationController < ActionController::Base
 
   before_action :authenticate_client!, except: %i[inbound_email]
+  before_action :set_locale!
 
   def inbound_email
     params[:items].each do |item|
@@ -69,6 +70,10 @@ class API::ApplicationController < ActionController::Base
       render json: { error: 'Invalid api key' }, status: 401 && return unless client.present?
 
       client.touch(:last_accessed_at)
+    end
+
+    def set_locale!
+      I18n.locale = params[:locale]&.to_sym || :en
     end
 
 end

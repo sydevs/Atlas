@@ -1,8 +1,6 @@
 class API::RegistrationsController < API::ApplicationController
 
   def create
-    I18n.locale = params[:locale]&.to_sym || :en
-
     # Create registrations
     @event = Event.find(params[:event_id])
     @user = User.find_by_email(params[:email])
