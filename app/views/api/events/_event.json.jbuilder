@@ -1,6 +1,8 @@
 json.id event.id
 json.path event_path(event)
 json.label event.label
+json.category event.category
+
 json.address event.location.address
 json.online event.online?
 json.languageCode event.language_code
@@ -16,4 +18,4 @@ json.firstDate event.first_recurrence_at&.iso8601
 json.nextDate event.next_recurrence_at&.iso8601
 json.duration event.duration
 
-json.recurrence event.recurrence_in_words(%i[recurrence], short: true)
+json.recurrenceType event.recurrence_type

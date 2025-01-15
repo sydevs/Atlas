@@ -1,8 +1,10 @@
 json.id @event.id
 json.path event_path(@event)
 json.url event_url(@event, host: @event.canonical_host)
+json.category @event.category
 
 json.online @event.online?
+
 json.updatedAt @event.updated_at.iso8601
 
 json.label @event.label
@@ -50,6 +52,7 @@ else
     json.lastDate @event.last_recurrence_at&.iso8601
     json.upcomingDates @event.upcoming_recurrences(limit: 7).map(&:iso8601)
     json.recurrenceCount @event.recurrence&.finite? ? @event.recurrence.events.to_a.count : nil
+    json.recurrenceType @event.recurrence_type
   end
 end
 
@@ -62,33 +65,24 @@ else
   json.contact nil
 end
 
-if @event.online?
-  json.location do
-    area = @event.area.extend(AreaDecorator)
-    json.id area.id
-    json.type 'area'
-    # TODO: Fix these hard coded strings
-    json.label "Online Class" # via Zoom"
-    json.subtitle "Hosted from #{area.label}"
-    json.platform "zoom"
-    json.latitude area.latitude
-    json.longitude area.longitude
-  end
-else
-  json.location do
-    venue = @event.venue.extend(VenueDecorator)
-    json.id venue.id
-    json.type 'venue'
-    json.directionsUrl venue.directions_url
-    json.latitude venue.latitude
-    json.longitude venue.longitude
+json.location do
+  json.countryCode @event.country_code
+  json.areaPath area_path(@event.area_id)
+  json.areaName @event.area.name # TODO: Provide translatable area names?
 
-    if venue.name
-      json.label venue.name
-      json.subtitle venue.address
-    else
-      json.label venue.street
-      json.subtitle [venue.city, venue.region_code, venue.country_code].compact.join(', ')
+  if @event.online?
+    json.platform "zoom"
+    json.extract! @event.area, :latitude, :longitude
+    json.venue nil
+  else
+    json.regionCode @event.venue.region_code # TODO: Change this so that region_code is available for online events
+    json.venuePath venue_path(@event.venue_id)
+    json.extract! @event.venue, :latitude, :longitude
+    json.venue do
+      venue = @event.venue
+      json.extract! venue, :name, :street, :city
+      json.directionsUrl venue.directions_url
+      json.address [venue.street, venue.city, venue.region_code, venue.country_code].compact.join(', ')
     end
   end
 end
