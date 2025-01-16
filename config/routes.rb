@@ -47,19 +47,20 @@ Rails.application.routes.draw do
   end
 
   namespace :map do
-    root to: 'application#show'
-    get :embed, to: 'application#embed', constraints: { format: 'js' }
-    get '(*path)', to: 'application#show'
+    # root to: 'application#show'
+    # get :embed, to: 'application#embed', constraints: { format: 'js' }
+    # get '(*path)', to: 'application#show'
+
+    # Redirect to new React atlas
+    get '/country/:country_id', :to => redirect { |params, request| "https://syatlas.pages.dev/countries/#{params[:country_id]}?#{request.params.slice(:key, :locale).to_query}" }
+    get '(*path)', :to => redirect { |params, request| "https://syatlas.pages.dev/#{params[:path]}?#{request.params.slice(:key, :locale).to_query}" }
+    
     # For generating helpers
     get '/event/:event_id', to: 'application#show', as: :event
     get '/country/:country_id', to: 'application#show', as: :country
     get '/region/:region_id', to: 'application#show', as: :region
     get '/area/:area_id', to: 'application#show', as: :area
     get '/venue/:venue_id', to: 'application#show', as: :venue
-
-    # Redirect to new React atlas
-    # get '/country/:country_id', :to => redirect { |params, request| "https://syatlas.pages.dev/countries/#{params[:country_id]}?#{request.params.slice(:key, :locale).to_query}" }
-    # get '(*path)', :to => redirect { |params, request| "https://syatlas.pages.dev/#{params[:path]}?#{request.params.slice(:key, :locale).to_query}" }
   end
 
   namespace :cms do
