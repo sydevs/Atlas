@@ -16,7 +16,7 @@ class API::EventsController < API::ApplicationController
   end
 
   def show
-    event = Event.find(params[:id]).includes(:venue, :area, :pictures)
+    event = Event.includes(:venue, :area, :pictures).find(params[:id])
     @event = decorate(event)
   end
 

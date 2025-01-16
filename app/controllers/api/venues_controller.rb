@@ -1,7 +1,7 @@
 class API::VenuesController < API::ApplicationController
 
   def show
-    venue = Venue.find(params[:id]).includes(:events)
+    venue = Venue.includes(:events).find(params[:id])
     @venue = decorate(venue)
   end
 

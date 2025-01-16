@@ -1,7 +1,7 @@
 class API::RegionsController < API::ApplicationController
 
   def show
-    region = Region.find(params[:id]).includes(:areas)
+    region = Region.includes(:areas).find(params[:id])
     @region = decorate(region)
   end
 
