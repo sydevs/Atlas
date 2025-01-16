@@ -62,18 +62,29 @@ class API::ApplicationController < ActionController::Base
   private
 
     def authenticate_client!
-      # TODO: Remove this check once we're ready to launch the REST api
-      return if %w[GET HEAD OPTIONS].include?(request.method)
-      
-      render json: { error: 'Missing api key' }, status: 400 && return unless params[:key].present?
-      client = Client.find_by(secret_key: params[:key])
-      render json: { error: 'Invalid api key' }, status: 401 && return unless client.present?
+      return render(json: { error: 'Missing api key' }, status: 400) unless bearer_token.present?
+      return true if bearer_token == ENV.fetch('ATLAS_API_KEY') && referrer_domain == ENV.fetch('REACT_DOMAIN', 'localhost')
+
+      client = Client.find_by(public_key: bearer_token)
+      return render(json: { error: 'Invalid api key' }, status: 401) unless client.present?
+      return render(json: { error: 'Invalid referrer' }, status: 401) unless request.referer.present?
 
       client.touch(:last_accessed_at)
     end
 
     def set_locale!
       I18n.locale = params[:locale]&.to_sym || :en
+    end
+
+    def bearer_token
+      @bearer_token ||= begin
+        header = request.headers['Authorization']
+        header ? header.gsub(/^Bearer /, '') : nil
+      end
+    end
+
+    def referrer_domain
+      @referrer_domain ||= request.referer.present? ? URI.parse(request.referer).host : nil
     end
 
 end
