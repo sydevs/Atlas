@@ -18,12 +18,14 @@ json.features do
         json.path venue_path(venue)
         json.type 'venue'
         json.address venue.address
+        json.countryCode venue.country_code
       else
         event = venue.publicly_visible_events.first
         json.id event.id
         json.path event_path(event)
         json.type 'event'
         json.address venue.address
+        json.countryCode venue.country_code
       end
     end
   end

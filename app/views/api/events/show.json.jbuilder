@@ -22,12 +22,7 @@ else
     json.externalUrl @event.registration_url unless @event.native_registration_mode?
     json.maxParticipants @event.registration_limit
     json.participantCount @event.registrations.count
-    json.questions do
-      json.array! @event.registration_question do |question|
-        json.slug question
-        json.title translate_enum_value(Event, :registration_question, question)
-      end
-    end
+    json.questions @event.registration_question
   end
 end
 
