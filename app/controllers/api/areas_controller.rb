@@ -1,7 +1,8 @@
 class API::AreasController < API::ApplicationController
 
   def show
-    @area = decorate(Area.find(params[:id]))
+    area = Area.find(params[:id]).includes(:events)
+    @area = decorate(area)
   end
 
 end

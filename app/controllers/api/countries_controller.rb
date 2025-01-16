@@ -1,7 +1,8 @@
 class API::CountriesController < API::ApplicationController
 
   def index
-    @countries = decorate(Country.order_by_locale(I18n.locale || :en).order_by_events)
+    country = Country.order_by_locale(I18n.locale || :en).order_by_events.includes(:regions, :areas)
+    @countries = decorate(country)
   end
 
   def show
