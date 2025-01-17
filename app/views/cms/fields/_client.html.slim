@@ -18,7 +18,7 @@ table.ui.very.basic.table
     td
 
   = f.simple_fields_for :config do |ff|
-    - %i[locale domain embed_type canonical_url].each do |field|
+    - %i[locale domain canonical_url].each do |field|
       - is_enum = @model.respond_to?(field.to_s.pluralize)
       - collection = @model.send(field.to_s.pluralize).map { |k, v| [translate_enum_value(@model, field, k), k] } if is_enum
       tr

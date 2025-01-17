@@ -10,7 +10,7 @@ class ApplicationRecord < ActiveRecord::Base
   end
 
   def canonical_url
-    "#{try(:canonical_map_url) || wemeditate_map_url}#!#{polymorphic_path([self])}"
+    "#{try(:canonical_map_url) || wemeditate_map_url}/#!#{polymorphic_path([self])}"
   end
 
   def equals? obj

@@ -1,6 +1,6 @@
 json.id @event.id
 json.path event_path(@event)
-json.url event_url(@event, host: @event.canonical_host)
+json.url @event.canonical_url
 json.category @event.category
 
 json.online @event.online?

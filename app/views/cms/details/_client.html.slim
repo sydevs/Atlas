@@ -2,15 +2,18 @@
 h3.ui.small.dividing.grey.header
   = translate_attribute(Client, :embed_type)
   ' : 
-  = translate_enum_value(@record, :embed_type)
+  = translate_enum_value(@record, :embed_type, :iframe)
 .ui.fluid.code.input
-  - case @record.embed_type
-    - when 'script'
-      textarea onclick="this.select()"
-        = "<script src=\"https://atlas.sydevelopers.com/embed.js\" type=\"module\" />\r\n<syatlas-map api-key=\"#{@record.public_key}\" />"
-    - when 'iframe'
-      textarea onclick="this.select()"
-        = "<iframe src=\"#{@record.embed_url}\" width=\"100%\" border=\"0\" frameborder=\"0\" scrolling=\"no\" height=\"600px\"></iframe>"
+  textarea onclick="this.select()" rows="3"
+    = "<iframe src=\"#{@record.embed_url}\" width=\"100%\" border=\"0\" frameborder=\"0\" scrolling=\"no\" height=\"600px\"></iframe>"
+
+h3.ui.small.dividing.grey.header
+  = translate_attribute(Client, :embed_type)
+  ' : 
+  = translate_enum_value(@record, :embed_type, :script)
+.ui.fluid.code.input
+  textarea onclick="this.select()" rows="2"
+    = "<script src=\"#{embed_url(format: :js)}\" type=\"module\" />\r\n<syatlas-map api-key=\"#{@record.public_key}\" />"
 
 h3.ui.small.dividing.grey.header = translate_attribute(Client, :config)
 .ui.list

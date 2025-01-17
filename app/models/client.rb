@@ -24,7 +24,7 @@ class Client < ApplicationRecord
   before_validation -> { self.location_id = nil }, unless: :location_type?
   before_validation -> { self.config.delete_if { |k, v| !v.present? } }
   validates_presence_of :label, :public_key, :secret_key, :domain
-  validates :domain, format: { with: /[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?/ }
+  validates :domain, format: { with: /(localhost|[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?)/ }
 
   # Scopes
   default_scope { order(last_accessed_at: :desc, updated_at: :desc) }
