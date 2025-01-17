@@ -17,11 +17,11 @@ module CountryDecorator
   end
 
   def map_path
-    Rails.application.routes.url_helpers.map_country_path(self)
+    Rails.application.routes.url_helpers.country_path(self)
   end
 
   def map_url
-    Rails.application.routes.url_helpers.map_country_url(self, host: canonical_host)
+    Rails.application.routes.url_helpers.country_url(self, host: ENV.fetch('ATLAS_REACT_HOST'))
   end
 
 end

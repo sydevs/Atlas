@@ -17,7 +17,7 @@ module HasClient
   end
 
   def canonical_map_url
-    client&.url || parent&.canonical_map_url
+    client&.canonical_url || parent&.canonical_map_url
   end
 
 end

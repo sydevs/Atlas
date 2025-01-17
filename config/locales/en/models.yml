@@ -333,31 +333,6 @@ en:
         changes: "Changes"
         body: "Content"
 
-      client:
-        label: "Label"
-        config: "Configuration"
-        domain: "Domain"
-        secret_key: "Secret API Key"
-        public_key: "Public API Key"
-        enabled: "Enabled"
-        location: "Canonical Location"
-        bounds: "Viewport"
-        last_accessed_at: "Last Access"
-
-        locale: :activerecord.attributes.generic.language # Do not translate
-        location_id: "Location ID"
-        location_type: "Location Type"
-        embed_type: "Embed Method"
-        embed_types:
-          iframe: "IFrame (Simple)"
-          script: "JavaScript (Advanced)"
-          url: "Link"
-        routing_type: "Routing Method"
-        routing_types:
-          query: "Query (Simple)"
-          path: "Path (Advanced)"
-        manager_id: :activerecord.models.manager.single # Do not translate
-
       recurrable:
         types:
           daily: "Daily"

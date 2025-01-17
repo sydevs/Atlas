@@ -3,10 +3,7 @@
 = f.input :label
 
 - unless f.object.new_record? && current_user.administrator?
-  .ui.small.dividing.violet.header = translate('cms.forms.client.keys')
-  .two.fields
-    = f.input :secret_key, hint: translate('cms.hints.client.secret_key')
-    = f.input :public_key, hint: translate('cms.hints.client.public_key')
+  = f.input :public_key, hint: translate('cms.hints.client.public_key')
 
 .ui.small.dividing.violet.header = translate_attribute(f.object, :config)
 
@@ -21,7 +18,7 @@ table.ui.very.basic.table
     td
 
   = f.simple_fields_for :config do |ff|
-    - %i[domain locale embed_type routing_type default_view].each do |field|
+    - %i[locale domain embed_type canonical_url].each do |field|
       - is_enum = @model.respond_to?(field.to_s.pluralize)
       - collection = @model.send(field.to_s.pluralize).map { |k, v| [translate_enum_value(@model, field, k), k] } if is_enum
       tr
@@ -39,7 +36,7 @@ table.ui.very.basic.table
 .ui.small.dividing.violet.header = translate('cms.hints.client.colors')
 .three.fields
   = f.simple_fields_for :config do |ff|
-    - %i[primary_color secondary_color tertiary_color].each do |field|
+    - %i[primary_color secondary_color].each do |field|
       = f.input field, input_html: { name: "client[config][#{field}]", value: f.object.send(field), style: "--color: #{f.object.send(field) || Client::DEFAULT_COLORS[field]}" }, placeholder: translate('cms.hints.client.placeholder.color')
 
 - if policy(@record).set_manager?

@@ -59,17 +59,18 @@ class API::ApplicationController < ActionController::Base
       end
     end
 
+  protected
+
+    def client
+      @client ||= Client.find_by(public_key: bearer_token)
+    end
+
   private
 
     def authenticate_client!
       return render(json: { error: 'Missing api key' }, status: 400) unless bearer_token.present?
-      return true if bearer_token == ENV.fetch('ATLAS_API_KEY') && referrer_domain == ENV.fetch('REACT_DOMAIN', 'localhost')
-
-      client = Client.find_by(public_key: bearer_token)
       return render(json: { error: 'Invalid api key' }, status: 401) unless client.present?
       return render(json: { error: 'Invalid referrer' }, status: 401) unless request.referer.present?
-
-      client.touch(:last_accessed_at)
     end
 
     def set_locale!

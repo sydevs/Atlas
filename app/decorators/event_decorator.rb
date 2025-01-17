@@ -126,13 +126,13 @@ module EventDecorator
   def map_path
     return nil unless publicly_visible?
     
-    Rails.application.routes.url_helpers.map_event_path(self)
+    Rails.application.routes.url_helpers.event_path(self)
   end
 
   def map_url
     return nil unless publicly_visible?
-
-    Rails.application.routes.url_helpers.map_event_url(self, host: canonical_host)
+    
+    Rails.application.routes.url_helpers.event_url(self, host: ENV.fetch('ATLAS_REACT_HOST'))
   end
 
   def cms_url(url, **url_options)

@@ -5,6 +5,9 @@ Rails.application.routes.draw do
   passwordless_for :managers
   root to: 'info/application#index'
 
+  # For generating map URLS
+  resources :countries, :regions, :areas, :venues, :events, only: %i[show]
+
   namespace :info, path: '' do
     root to: 'application#index'
     get :about, to: 'application#about'
@@ -139,7 +142,7 @@ Rails.application.routes.draw do
     post :inbound, to: 'application#inbound_email'
     get :geojson, to: 'application#geojson'
 
-    resources :areas, :regions, :venues, only: %i[show]
+    resources :areas, :regions, :venues, :clients, only: %i[show]
     resources :events, :countries, only: %i[index show] do
       resources :registrations, :regions, :venues, only: %i[create]
     end

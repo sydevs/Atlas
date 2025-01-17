@@ -1,6 +1,6 @@
 class Client < ApplicationRecord
 
-  DEFAULT_COLORS = { primary_color: "#92bbb8", secondary_color: "#e08e79", tertiary_color: "#a1c3d7" }
+  DEFAULT_COLORS = { primary_color: "#92bbb8", secondary_color: "#e08e79" }.freeze
 
   # Extensions
   include Searchable
@@ -10,14 +10,12 @@ class Client < ApplicationRecord
   nilify_blanks
   searchable_columns %w[label domain]
 
-  store_accessor :config, :embed_type, :routing_type, :default_view, :domain, :locale, :primary_color, :secondary_color, :tertiary_color
+  store_accessor :config, :embed_type, :domain, :locale, :primary_color, :secondary_color, :canonical_url
 
   attribute :embed_type, :string
   attribute :routing_type, :string
   attribute :default_view, :string
   enum embed_type: %i[iframe script url], _suffix: 'embed'
-  enum routing_type: %i[query path], _suffix: 'routing'
-  enum default_view: %i[map list], _suffix: 'view'
 
   # Associations
   belongs_to :location, polymorphic: true, optional: true

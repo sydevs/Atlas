@@ -15,13 +15,13 @@ en:
         routing_type: "\"Path\" based routing may be better for SEO, but requires special configuration of your site."
         embed_type: "The method you will use to put Sahaj Atlas on your website. A \"JavaScript\" embed enables advanced features (SEO optimisation, shareable urls, etc)"
         location_type: "Your map will focus on this area by default. Events in this area will be associated with your website."
-        default_view: "Whether to use the map view or region-based drilldown by default for your map."
+        canonical_url: "If you are using the JavaScript embed, this URL will be used to generate links to events in your region. This URL must have the map embedded on it, or the links will not work."
         locale: "The language to use for your map. This can also be set by adding '&locale=en' to your embed url."
         advanced: "Please send an email to contact@sydevelopers.com for help with advanced configuration."
         placeholder:
           domain: www.example.com # Do not translate
           locale: en # Do not translate
-          color: default
+          color: "default"
 
     region_types:
       us: :cms.region_labels.state # United States
@@ -55,14 +55,6 @@ en:
         embed_types:
           iframe: "IFrame (Simple)"
           script: "JavaScript (Advanced)"
-          url: "Link"
-        routing_type: "Routing Method"
-        routing_types:
-          query: "Query (Simple)"
-          path: "Path (Advanced)"
-        default_view: "Preferred View"
-        default_views:
-          map: "Map View"
-          list: "List View"
+        canonical_url: "Canonical URL"
 
         manager_id: :activerecord.models.manager.single # Do not translate
