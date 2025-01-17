@@ -7,7 +7,7 @@ Rails.application.routes.draw do
 
   # For generating map URLS
   resources :countries, :regions, :areas, :venues, :events, only: %i[show]
-  get :embed, constraints: { format: 'js' }, :to => redirect { |params, request| "https://syatlas.pages.dev/embed.js" }
+  get :embed, constraints: { format: 'js' }, :to => redirect { |params, request| "https://#{ENV.fetch('ATLAS_REACT_HOST')}/assets/embed.js" }
 
   namespace :info, path: '' do
     root to: 'application#index'

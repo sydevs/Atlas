@@ -15,10 +15,6 @@ class ApplicationController < ActionController::Base
     false
   end
 
-  def embed
-    return redirect_to "//#{ENV.fetch('ATLAS_REACT_HOST')}/embed.js", allow_other_host: true
-  end
-
   private
 
     def set_current_user
