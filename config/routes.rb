@@ -7,7 +7,7 @@ Rails.application.routes.draw do
 
   # For generating map URLS
   resources :countries, :regions, :areas, :venues, :events, only: %i[show]
-  get :embed, to: 'application#embed', constraints: { format: 'js' }
+  get :embed, constraints: { format: 'js' }, :to => redirect { |params, request| "https://syatlas.pages.dev/embed.js" }
 
   namespace :info, path: '' do
     root to: 'application#index'
@@ -51,14 +51,14 @@ Rails.application.routes.draw do
   end
 
   namespace :map do
-    # root to: 'application#show'
     # get :embed, to: 'application#embed', constraints: { format: 'js' }
     # get '(*path)', to: 'application#show'
 
     # Redirect to new React atlas
     get '/country/:country_id', :to => redirect { |params, request| "https://syatlas.pages.dev/countries/#{params[:country_id]}?#{request.params.slice(:key, :locale).to_query}" }
     get '(*path)', :to => redirect { |params, request| "https://syatlas.pages.dev/#{params[:path]}?#{request.params.slice(:key, :locale).to_query}" }
-    
+    root :to => redirect { |params, request| "https://syatlas.pages.dev/#{params[:path]}?#{request.params.slice(:key, :locale).to_query}" }
+
     # For generating helpers
     get '/event/:event_id', to: 'application#show', as: :event
     get '/country/:country_id', to: 'application#show', as: :country
