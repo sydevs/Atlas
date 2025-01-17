@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 
   # For generating map URLS
   resources :countries, :regions, :areas, :venues, :events, only: %i[show]
+  get :embed, to: 'application#embed', constraints: { format: 'js' }
 
   namespace :info, path: '' do
     root to: 'application#index'

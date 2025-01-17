@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
 
   layout 'cms/application'
-  before_action :set_current_user
+  before_action :set_current_user, except: %i[embed]
   before_action :redirect_login, if: :passwordless_controller?
   skip_before_action :redirect_login, except: %i[sign_out]
   
@@ -13,6 +13,10 @@ class ApplicationController < ActionController::Base
 
   def passwordless_controller?
     false
+  end
+
+  def embed
+    return redirect_to "//#{ENV.fetch('ATLAS_REACT_HOST')}/embed.js", allow_other_host: true
   end
 
   private
