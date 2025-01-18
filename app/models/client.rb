@@ -12,6 +12,7 @@ class Client < ApplicationRecord
 
   store_accessor :config, :embed_type, :domain, :locale, :primary_color, :secondary_color, :canonical_url
 
+  attribute :domain, :string
   attribute :embed_type, :string
   attribute :routing_type, :string
   attribute :default_view, :string

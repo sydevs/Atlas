@@ -7,4 +7,4 @@ json.label @venue.label
 json.parentPath polymorphic_path([@venue.parent, nil])
 json.latitude @venue.latitude
 json.longitude @venue.longitude
-json.events @venue.events, partial: 'api/events/event', as: :event
+json.events @venue.events.publicly_visible, partial: 'api/events/event', as: :event
