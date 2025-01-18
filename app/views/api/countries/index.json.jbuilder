@@ -1,7 +1,7 @@
 json.array! @countries do |country|
   json.id country.id
   json.path country_path(country.country_code)
-  json.url @country.canonical_url
+  json.url country.canonical_url
   json.code country.country_code
 
   json.label country.label
