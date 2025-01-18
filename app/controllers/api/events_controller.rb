@@ -1,7 +1,7 @@
 class API::EventsController < API::ApplicationController
 
   def index
-    events = Event.publicly_visible.limit(20)
+    events = Event.limit(20).publicly_visible
 
     if params[:online] == 'true'
       events = events.online
@@ -16,7 +16,7 @@ class API::EventsController < API::ApplicationController
   end
 
   def show
-    event = Event.publicly_visible.includes(:venue, :area, :pictures).find(params[:id])
+    event = Event.includes(:venue, :area, :pictures).find(params[:id])
     @event = decorate(event)
   end
 
