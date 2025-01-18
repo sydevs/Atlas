@@ -70,7 +70,7 @@ class API::ApplicationController < ActionController::Base
     def authenticate_client!
       return render(json: { error: 'Missing api key' }, status: 400) unless bearer_token.present?
       return render(json: { error: 'Invalid api key' }, status: 401) unless client.present?
-      return render(json: { error: 'Invalid referrer' }, status: 401) unless request.referer.present?
+      return render(json: { error: 'Invalid referrer', referer: referer_domain }, status: 401) unless client.domain.match?("^#{referer_domain}$")
     end
 
     def set_locale!
@@ -84,8 +84,8 @@ class API::ApplicationController < ActionController::Base
       end
     end
 
-    def referrer_domain
-      @referrer_domain ||= request.referer.present? ? URI.parse(request.referer).host : nil
+    def referer_domain
+      @referer_domain ||= request.referer.present? ? URI.parse(request.referer).host : nil
     end
 
 end

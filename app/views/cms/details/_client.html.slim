@@ -26,29 +26,23 @@ h3.ui.small.dividing.grey.header = translate_attribute(Client, :config)
           = @record.location.label
           '  
           i.small.right.arrow.icon
-  - if @record.domain
+  - if @record.canonical_url
     .item
       i.linkify.icon
       .content
-        .header = translate_attribute(Client, :domain)
-        a.description href=@record.url target="_blank"
-          = @record.domain
+        .header = translate_attribute(Client, :canonical_url)
+        a.description href=@record.canonical_url target="_blank"
+          = @record.canonical_url
           '  
           i.small.right.arrow.icon
-  ruby: 
-    config = {
-      embed_type: 'vector square',
-      routing_type: 'bezier curve',
-      default_view: 'tablet alternate',
-    }
-  - config.map do |field, icon|
-    - value = @record.send(field)
-    - unless value.nil? || @model.send(field.to_s.pluralize)[value].zero?
-      .item
-        i.icon class=icon
-        .content
-          .header = translate_attribute(Client, field)
-          .description = translate_enum_value(Client, field.to_s.pluralize, value)
+  - if @record.domain
+    .item
+      i.vector.square.icon
+      .content
+        .header = translate_attribute(Client, :domain)
+        .description
+          - @record.domain.split("\n").map do |dom|
+            div = dom
 
 h3.ui.small.dividing.grey.header = translate('cms.details.management_for_record', resource: translate_model(@model).downcase)
 .ui.list

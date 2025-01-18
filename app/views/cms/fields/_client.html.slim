@@ -7,31 +7,25 @@
 
 .ui.small.dividing.violet.header = translate_attribute(f.object, :config)
 
-table.ui.very.basic.table
-  tr
-    th.collapsing = f.label :location_type, translate_attribute(f.object, :location_type), required: false
-    td.five.wide = f.input :location_type, label: false, collection: [Country, Region, Area].map { |k, v| [translate_model(k), k] }, input_html: { class: 'clearable' }, include_blank: 'Worldwide'
-    td = f.hint translate('cms.hints.client.location_type')
-  tr
-    th.collapsing = f.label :location_id, translate_attribute(f.object, :location_id)
-    td.five.wide = f.input :location_id, label: false
-    td
+.ui.small.icon.message
+  i.cog.icon
+  .content
+    .header = translate('cms.hints.client.advanced.title')
+    .description = translate('cms.hints.client.advanced.description')
 
-  = f.simple_fields_for :config do |ff|
-    - %i[locale domain canonical_url].each do |field|
-      - is_enum = @model.respond_to?(field.to_s.pluralize)
-      - collection = @model.send(field.to_s.pluralize).map { |k, v| [translate_enum_value(@model, field, k), k] } if is_enum
-      tr
-        th.collapsing
-          = f.label field, translate_attribute(f.object, field), required: false
-        td.five.wide
-          - if is_enum
-            = f.input field, label: false, collection: collection, selected: f.object.send(field), include_blank: false, input_html: { name: "client[config][#{field}]" }
-          - else
-            = f.input field, label: false, input_html: { name: "client[config][#{field}]", value: f.object.send(field) }, placeholder: translate(field, scope: 'cms.hints.client.placeholder', default: '')
-        td = f.hint translate(field, scope: 'cms.hints.client')
+.field
+  = f.label :location_type, translate_attribute(f.object, :location_type), required: false
+  .two.fields
+    = f.input :location_type, label: false, collection: [Country, Region, Area].map { |k, v| [translate_model(k), k] }, input_html: { class: 'clearable' }, include_blank: 'Worldwide'
+    = f.input :location_id, label: false
+  = f.hint translate('cms.hints.client.location_type')
 
-= f.hint translate('cms.hints.client.advanced')
+= f.simple_fields_for :config do |ff|
+  - languages = I18nData.languages(I18n.locale).map { |k, v| [v.split(/[,;]/)[0], k] }
+  = ff.input :locale, collection: languages, selected: f.object.locale, input_html: { class: 'search' }, hint: translate('cms.hints.client.locale'), include_blank: translate('cms.hints.country.no_default_language')
+
+  = ff.input :domain, as: :text, label: translate_attribute(Client, :domain), hint: translate('cms.hints.client.domain'), input_html: { rows: 4, value: f.object.domain }
+  = ff.input :canonical_url, label: translate_attribute(Client, :canonical_url), hint: translate('cms.hints.client.canonical_url'), input_html: { value: f.object.canonical_url }
 
 .ui.small.dividing.violet.header = translate('cms.hints.client.colors')
 .three.fields
