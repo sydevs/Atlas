@@ -1,6 +1,6 @@
 json.id @country.id
-json.path area_path(@country)
-json.url area_url(@country, host: @country.canonical_host)
+json.path country_path(@country)
+json.url @country.canonical_url
 
 json.code @country.country_code
 json.label @country.label

@@ -1,7 +1,7 @@
 
 json.id @region.id
 json.path region_path(@region)
-json.url region_url(@region, host: @region.canonical_host)
+json.url @region.canonical_url
 
 json.label @region.label
 json.countryCode @region.country_code

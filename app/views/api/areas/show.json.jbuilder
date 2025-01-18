@@ -1,7 +1,7 @@
 
 json.id @area.id
 json.path area_path(@area)
-json.url area_url(@area, host: @area.canonical_host)
+json.url @area.canonical_url
 
 json.label @area.label
 json.subtitle @area.subtitle

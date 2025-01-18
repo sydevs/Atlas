@@ -1,7 +1,7 @@
 
 json.id @venue.id
 json.path venue_path(@venue)
-json.url venue_url(@venue, host: @venue.canonical_host)
+json.url @venue.canonical_url
 
 json.label @venue.label
 json.parentPath polymorphic_path([@venue.parent, nil])
