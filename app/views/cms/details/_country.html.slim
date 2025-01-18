@@ -27,13 +27,13 @@ h3.ui.small.dividing.grey.header = translate('cms.details.details_for_record', r
           = @record.client.label
           '  
           i.small.right.arrow.icon
-  - if @record.canonical_domain.present?
+  - if @record.canonical_map_url.present?
     .item
       i.tv.icon
       .content
         .header = translate('cms.details.canonical_domain')
         a.description href=@record.canonical_map_url target="_blank"
-          = @record.canonical_domain
+          = @record.canonical_map_url
           '  
           i.small.right.arrow.icon
   .item
