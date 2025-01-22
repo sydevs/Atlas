@@ -12,10 +12,6 @@ class Client < ApplicationRecord
 
   store_accessor :config, :embed_type, :domain, :locale, :primary_color, :secondary_color, :canonical_url
 
-  attribute :domain, :string
-  attribute :locale, :string
-  attribute :canonical_url, :string
-
   # Associations
   belongs_to :location, polymorphic: true, optional: true
 
@@ -37,10 +33,6 @@ class Client < ApplicationRecord
 
   def url
     "https://#{domain || "wemeditate.com#{"/" + locale if locale != 'en'}"}/map"
-  end
-
-  def locale
-    config&.dig(:locale)
   end
 
 end

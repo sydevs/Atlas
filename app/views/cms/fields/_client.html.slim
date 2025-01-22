@@ -21,8 +21,8 @@
   = f.hint translate('cms.hints.client.location_type')
 
 = f.simple_fields_for :config do |ff|
-  - languages = I18nData.languages(I18n.locale).map { |k, v| [v.split(/[,;]/)[0], k] }
-  = ff.input :locale, collection: languages, selected: f.object.locale, input_html: { class: 'search' }, hint: translate('cms.hints.client.locale'), include_blank: translate('cms.hints.country.no_default_language')
+  - languages = I18nData.languages(I18n.locale).map { |k, v| [v.split(/[,;]/)[0], k.downcase] }
+  = ff.input :locale, collection: languages, selected: f.object.locale&.downcase, input_html: { class: 'search' }, hint: translate('cms.hints.client.locale'), include_blank: translate('cms.hints.country.no_default_language')
 
   = ff.input :domain, as: :text, label: translate_attribute(Client, :domain), hint: translate('cms.hints.client.domain'), input_html: { rows: 4, value: f.object.domain }
   = ff.input :canonical_url, label: translate_attribute(Client, :canonical_url), hint: translate('cms.hints.client.canonical_url'), input_html: { value: f.object.canonical_url }
