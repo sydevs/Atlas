@@ -55,9 +55,9 @@ Rails.application.routes.draw do
     # get '(*path)', to: 'application#show'
 
     # Redirect to new React atlas
-    get '/country/:country_id', :to => redirect { |params, request| "https://syatlas.pages.dev/countries/#{params[:country_id]}?#{request.params.slice(:key, :locale).to_query}" }
-    get '(*path)', :to => redirect { |params, request| "https://syatlas.pages.dev/#{params[:path]}?#{request.params.slice(:key, :locale).to_query}" }
-    root :to => redirect { |params, request| "https://syatlas.pages.dev/#{params[:path]}?#{request.params.slice(:key, :locale).to_query}" }
+    get '/country/:country_id', :to => redirect { |params, request| "https://atlasreact.sydevelopers.com/countries/#{params[:country_id]}?#{request.params.slice(:key, :locale).to_query}" }
+    get '(*path)', :to => redirect { |params, request| "https://atlasreact.sydevelopers.com/#{params[:path]}?#{request.params.slice(:key, :locale).to_query}" }
+    root :to => redirect { |params, request| "https://atlasreact.sydevelopers.com/#{params[:path]}?#{request.params.slice(:key, :locale).to_query}" }
 
     # For generating helpers
     get '/event/:event_id', to: 'application#show', as: :event
