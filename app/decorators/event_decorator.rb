@@ -54,14 +54,14 @@ module EventDecorator
         I18n.translate recurrence_type, scope: "activerecord.attributes.recurrable.descriptions", locale: I18n.locale, weekday: wday
       when :timing
         if short
-          recurrence.starts_at.to_s(:time)
+          recurrence_data['start_time']
         else
           timing = [
-            recurrence.starts_at.to_s(:time),
-            recurrence.ends_at&.to_s(:time)
+            recurrence_data['start_time'],
+            recurrence_data['end_time']
           ]
 
-          if timing[1] == nil || timing[0] == timing[1]
+          if !timing[1].present? || timing[0] == timing[1]
             timing[0]
           else
             timing.join(" - ")
