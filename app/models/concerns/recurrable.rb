@@ -48,7 +48,15 @@ module Recurrable
   def upcoming_recurrences(limit: 7)
     return [] if recurrence.nil? || recurrence.later?(Time.now)
 
-    result = recurrence.fast_forward(Time.now).take(limit + 1)
+    if recurrence.earlier?(Time.now)
+      # Check if the current time is before the recurrence
+      # then use the recurrence as it is
+      result = recurrence.take(limit + 1)
+    else
+      # otherwise, fast forward the recurrence to the current time
+      result = recurrence.fast_forward(Time.now).take(limit + 1)
+    end
+
     if result.first < Time.now
       result.drop(1).map(&:utc)
     else
