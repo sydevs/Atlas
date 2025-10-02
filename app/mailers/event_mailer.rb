@@ -98,7 +98,7 @@ class EventMailer < ApplicationMailer
       params: {
         text: {
           title: title,
-          prelude: I18n.translate('emails.registrations.prelude', count: registrations.count),
+          prelude: I18n.translate('emails.registrations.prelude', event: @registration.event.label, count: registrations.count),
           reply: I18n.translate('emails.registrations.registration.reply'),
           view_map: I18n.translate('emails.common.view_map'),
           answers: I18n.translate('activerecord.attributes.event.registration_questions'),
