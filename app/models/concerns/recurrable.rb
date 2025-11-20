@@ -57,7 +57,7 @@ module Recurrable
       result = recurrence.fast_forward(Time.now).take(limit + 1)
     end
 
-    if result.first < Time.now
+    if result.first && result.first < Time.now
       result.drop(1).map(&:utc)
     else
       result.take(limit).map(&:utc)
