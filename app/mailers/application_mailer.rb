@@ -11,6 +11,11 @@ class ApplicationMailer < ActionMailer::Base
   default from: 'Sahaj Atlas <contact@sydevelopers.com>'
 
   def summary
+    # TEMPORARILY DISABLED
+    # We need to switch to sending emails via Brevo instead of Google SMTP
+    # To avoid being classified as spam.
+    return
+
     setup
     last_summary_email_sent_at = Stash.get(:summary_email_sent_at) || 1.year.ago
     return unless @manager.notifications.application_summary?

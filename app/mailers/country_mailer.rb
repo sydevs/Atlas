@@ -7,6 +7,11 @@ class CountryMailer < ApplicationMailer
   layout 'mail/admin'
 
   def summary
+    # TEMPORARILY DISABLED
+    # We need to switch to sending emails via Brevo instead of Google SMTP
+    # To avoid being classified as spam.
+    return
+
     setup
     last_summary_email_sent_at = @country.summary_email_sent_at || 1.year.ago
     return unless @manager.notifications.country_summary?
