@@ -14,7 +14,10 @@ module OpenStreetMapsAPI
     return data if data
     
     response = HTTParty.get('https://nominatim.openstreetmap.org/lookup', {
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+        'User-Agent': 'Atlas/1.0 (contact@sydevelopers.com)',
+      },
       query: {
         format: 'json',
         osm_ids: osm_id,
@@ -27,8 +30,15 @@ module OpenStreetMapsAPI
       log_level: :debug
     })
 
-    # TODO: Implement error handling
-    data = JSON.parse(response.body)
+    unless response.success?
+      raise OpenStreetMapsAPI::ResponseError, "API request failed: #{response.body.truncate(100)}"
+    end
+
+    begin
+      data = JSON.parse(response.body)
+    rescue JSON::ParserError
+      raise OpenStreetMapsAPI::ResponseError, "Invalid response from geocoding service"
+    end
     data = data.first&.deep_symbolize_keys
     raise OpenStreetMapsAPI::ResponseError, "No Data Retrieved" unless data.present?
 
