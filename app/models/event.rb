@@ -90,7 +90,13 @@ class Event < ApplicationRecord
   end
 
   def publicly_visible?
-    manager.verified? && published? && publishable?
+    manager.verified? && published? && publishable? && current?
+  end
+
+  # Mirrors the `current` scope, so that asking an event whether it is on the map
+  # gives the same answer as querying for the events that are.
+  def current?
+    finish_date.nil? || finish_date > Date.current
   end
 
   def should_finish?
@@ -189,7 +195,11 @@ class Event < ApplicationRecord
     end
 
     def set_finish_date
-      self.finish_date = last_recurrence_at
+      # An event whose recurrence never produces an occurrence is over before it
+      # begins, and last_recurrence_at has no date to offer for it. Backdate it so
+      # it leaves the `current` scope immediately, rather than staying on the map
+      # until the status task marks it finished up to 12 weeks later.
+      self.finish_date = recurrence.present? && !occurs? ? 1.day.ago : last_recurrence_at
     end
 
     def find_venue

@@ -45,6 +45,12 @@ module Recurrable
     recurrence.events.to_a.last&.utc
   end
 
+  # A finite recurrence can produce no occurrences at all, eg. when its window is
+  # too narrow to contain a day that the rule matches.
+  def occurs?
+    recurrence.present? && recurrence.events.first.present?
+  end
+
   def upcoming_recurrences(limit: 7)
     return [] if recurrence.nil? || recurrence.later?(Time.now)
 
