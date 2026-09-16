@@ -19,21 +19,34 @@ namespace :migrate do
     end
   end
 
-  desc 'Hide events whose recurrence never produces an occurrence'
+  desc 'Recompute finish_date for events whose stored value is out of date'
   task finish_dates: :environment do
     updated = 0
+    skipped = []
 
     # Only events still treated as current can be visible, so they are the only
-    # ones worth rewriting. update_column skips callbacks and validations, which
-    # matters because an event with an unusable recurrence may not be valid.
+    # ones worth rewriting. Reuse the model's own callback rather than repeating
+    # what it does, then write the result with update_column, which skips the
+    # remaining callbacks: saving would also re-run the status machine, and an
+    # event with an unusable recurrence may not even be valid.
     Event.current.in_batches.each_record do |event|
-      next if event.recurrence.nil? || event.occurs?
+      begin
+        event.send(:set_finish_date)
+        next unless event.finish_date_changed?
 
-      event.update_column :finish_date, 1.day.ago
-      updated += 1
-      puts "Hiding event ##{event.id} (#{event.recurrence_start_date} to #{event.recurrence_end_date})"
+        was = event.finish_date_was
+        event.update_column :finish_date, event.finish_date
+        updated += 1
+        puts "Event ##{event.id}: #{was || 'never'} -> #{event.finish_date}"
+      rescue StandardError => e
+        # Eg. an event pointing at an area that no longer exists, which cannot
+        # report a time zone and so cannot resolve its recurrence at all.
+        skipped << event.id
+        puts "Skipped event ##{event.id}: #{e.class}"
+      end
     end
 
-    puts "Hid #{updated} event(s) which never occur"
+    puts "Updated #{updated} event(s)"
+    puts "Skipped #{skipped.count} event(s) which could not be read: #{skipped.inspect}" if skipped.any?
   end
 end
