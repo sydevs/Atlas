@@ -1,6 +1,10 @@
 
 en:
   cms:
+    messages:
+      event:
+        no_occurrences: "does not include any dates when this event happens"
+
     forms:
       client:
         keys: "Access Keys"
