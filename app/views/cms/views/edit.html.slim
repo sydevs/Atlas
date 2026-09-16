@@ -3,11 +3,16 @@
 
 = render 'cms/views/context' do
   - if @record.try(:should_finish?)
+    - finished_at = @record.try(:last_recurrence_at)
     .ui.small.icon.message
       i.check.circle.icon
       .content
-        .header = translate('cms.details.record_finished.title', resource: translate_model(@model))
-        .description = translate('cms.details.record_finished.description', resource: translate_model(@model).downcase, date: @record.last_recurrence_at.to_s(:long))
+        - if finished_at
+          .header = translate('cms.details.record_finished.title', resource: translate_model(@model))
+          .description = translate('cms.details.record_finished.description', resource: translate_model(@model).downcase, date: finished_at.to_s(:long))
+        - else
+          .header = translate('cms.details.record_has_no_events.title')
+          .description = translate('cms.details.record_has_no_events.description', resource: translate_model(@model).downcase)
   - elsif @record.try(:archived?)
     .ui.small.orange.icon.message
       i.exclamation.icon

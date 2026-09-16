@@ -79,12 +79,17 @@ p = simple_format @record.description
 
 h3.ui.small.dividing.grey.header = translate('cms.details.management_for_record', resource: translate_model(@model).downcase)
 - if @record.should_finish?
+  - finished_at = @record.last_recurrence_at
   .ui.one.steps
     .step
       i.blue.check.circle.icon
       .content
-        .title = translate('cms.details.record_finished.title', resource: translate_model(Event))
-        .description = translate('cms.details.record_finished.description', resource: translate_model(Event).downcase, date: @record.recurrence.ends_at.to_s(:long))
+        - if finished_at
+          .title = translate('cms.details.record_finished.title', resource: translate_model(Event))
+          .description = translate('cms.details.record_finished.description', resource: translate_model(Event).downcase, date: finished_at.to_s(:long))
+        - else
+          .title = translate('cms.details.record_has_no_events.title')
+          .description = translate('cms.details.record_has_no_events.description', resource: translate_model(Event).downcase)
 - elsif @record.archived?
   .ui.one.steps
     .step
