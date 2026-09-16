@@ -90,23 +90,29 @@ class Event < ApplicationRecord
   end
 
   def publicly_visible?
-    manager.verified? && published? && publishable?
+    manager.verified? && published? && publishable? && current?
+  end
+
+  # Mirrors the `current` scope, so that asking an event whether it is on the map
+  # gives the same answer as querying for the events that are.
+  def current?
+    finish_date.nil? || finish_date > Date.current
   end
 
   def should_finish?
     next_recurrence_at.nil? && !inactive_category?
   end
 
+  # Registration for a course or a one off event closes when it starts, since there
+  # is nothing left to join afterwards. Anything recurring takes registrations up
+  # until its final session.
   def registration_end_time
-    @registration_end_time ||= begin
-      if %i[course single concert].include?(category)
-        recurrence.starts_at
-      elsif recurrence.finite?
-        start_time = recurrence.starts_at.to_s(:time)
-        time = start_time.split(":").map(&:to_i)
-        recurrence.ends_at.change(hour: time[0], minute: time[1])
+    @registration_end_time ||=
+      if %i[course single concert].include?(category.to_sym)
+        first_recurrence_at
+      else
+        last_recurrence_at
       end
-    end
   end
 
   def label
@@ -189,7 +195,11 @@ class Event < ApplicationRecord
     end
 
     def set_finish_date
-      self.finish_date = last_recurrence_at
+      # An event whose recurrence never produces an occurrence is over before it
+      # begins, and last_recurrence_at has no date to offer for it. Backdate it so
+      # it leaves the `current` scope immediately, rather than staying on the map
+      # until the status task marks it finished up to 12 weeks later.
+      self.finish_date = recurrence.present? && !occurs? ? 1.day.ago : last_recurrence_at
     end
 
     def find_venue

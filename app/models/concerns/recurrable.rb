@@ -29,6 +29,7 @@ module Recurrable
     store :recurrence_data, accessors: FIELDS, prefix: :recurrence
     validate :validate_end_time
     validate :validate_end_date
+    validate :validate_recurrence_occurs
   end
 
   def first_recurrence_at
@@ -43,6 +44,12 @@ module Recurrable
     return nil unless recurrence&.finite?
 
     recurrence.events.to_a.last&.utc
+  end
+
+  # A finite recurrence can produce no occurrences at all, eg. when its window is
+  # too narrow to contain a day that the rule matches.
+  def occurs?
+    recurrence.present? && recurrence.events.first.present?
   end
 
   def upcoming_recurrences(limit: 7)
@@ -75,7 +82,10 @@ module Recurrable
         
         if rd[:start_date].present?
           data[:starts] = rd[:start_date]
-          data[:until] = rd[:end_date]
+          # The start date is inclusive, so the end date has to be too. Montrose
+          # stops at the bare date, ie. midnight, which drops every occurrence on
+          # the end date itself - including the only one of a single day event.
+          data[:until] = rd[:end_date].to_date.end_of_day if rd[:end_date].present?
           data[:at] = rd[:start_time]
           weekday = rd[:start_date].to_date.strftime("%A")&.downcase&.to_sym
 
@@ -113,6 +123,15 @@ module Recurrable
       
       self.errors.add(:end_date, I18n.translate('cms.messages.event.invalid_end_date')) if recurrence.ends_at < recurrence.starts_at
       # self.errors.add(:end_date, I18n.translate('cms.messages.event.passed_end_date')) if end_date < Date.today
+    end
+
+    # A date range can be the right way round and still be too narrow to contain a
+    # day the rule matches, eg. one week of a "last Wednesday of the month" event.
+    # Such a record looks fine but never appears anywhere, so reject it outright.
+    def validate_recurrence_occurs
+      return if recurrence.nil? || errors[:end_date].present? || occurs?
+
+      self.errors.add(:end_date, I18n.translate('cms.messages.event.no_occurrences'))
     end
 
 end
