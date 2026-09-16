@@ -4,9 +4,9 @@ class EventTest < ActiveSupport::TestCase
 
   # Builds an unsaved event with the given recurrence window. time_zone is normally
   # delegated to the area, which we don't need for recurrence calculations.
-  def build_event(start_date:, end_date:, start_time: '18:00', type: 'weekly_1')
+  def build_event(start_date:, end_date:, start_time: '18:00', type: 'weekly_1', category: :dropin)
     event = OfflineEvent.new(
-      category: :dropin,
+      category: category,
       recurrence_data: { type: type, start_date: start_date, end_date: end_date, start_time: start_time },
     )
     event.define_singleton_method(:time_zone) { 'UTC' }
@@ -100,6 +100,30 @@ class EventTest < ActiveSupport::TestCase
     event.send(:validate_recurrence_occurs)
 
     assert_empty event.errors[:end_date]
+  end
+
+  test 'registration for a course or a one off event closes when it starts' do
+    %i[course single concert].each do |category|
+      event = build_event(start_date: '2024-01-03', end_date: '2024-02-28', category: category)
+
+      assert_equal Time.utc(2024, 1, 3, 18, 0), event.registration_end_time, category
+    end
+  end
+
+  test 'registration for a recurring event closes at its final session' do
+    %i[dropin festival].each do |category|
+      event = build_event(start_date: '2024-01-03', end_date: '2024-02-28', category: category)
+
+      assert_equal Time.utc(2024, 2, 28, 18, 0), event.registration_end_time, category
+    end
+  end
+
+  test 'registration has no end time without a final session to close at' do
+    assert_nil build_event(start_date: '2024-01-03', end_date: nil).registration_end_time
+
+    event = OfflineEvent.new(category: :inactive, recurrence_data: {})
+    event.define_singleton_method(:time_zone) { 'UTC' }
+    assert_nil event.registration_end_time
   end
 
 end

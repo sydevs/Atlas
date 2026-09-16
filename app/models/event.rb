@@ -103,16 +103,16 @@ class Event < ApplicationRecord
     next_recurrence_at.nil? && !inactive_category?
   end
 
+  # Registration for a course or a one off event closes when it starts, since there
+  # is nothing left to join afterwards. Anything recurring takes registrations up
+  # until its final session.
   def registration_end_time
-    @registration_end_time ||= begin
-      if %i[course single concert].include?(category)
-        recurrence.starts_at
-      elsif recurrence.finite?
-        start_time = recurrence.starts_at.to_s(:time)
-        time = start_time.split(":").map(&:to_i)
-        recurrence.ends_at.change(hour: time[0], minute: time[1])
+    @registration_end_time ||=
+      if %i[course single concert].include?(category.to_sym)
+        first_recurrence_at
+      else
+        last_recurrence_at
       end
-    end
   end
 
   def label
