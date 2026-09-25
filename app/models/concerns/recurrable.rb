@@ -46,6 +46,17 @@ module Recurrable
     recurrence.events.to_a.last&.utc
   end
 
+  # The start of the session held on the day that the given date or time falls on in
+  # the event's own time zone. A bare date is read as a day in that time zone, and a
+  # full time is converted into it first, so that eg. an evening session in the
+  # Americas isn't moved onto the next day, which is its date in UTC.
+  def recurrence_on(date_or_time)
+    Time.use_zone(time_zone) do
+      date = Time.zone.parse(date_or_time.to_s)&.to_date
+      Time.zone.parse("#{date} #{recurrence_start_time}").utc if date.present?
+    end
+  end
+
   # A finite recurrence can produce no occurrences at all, eg. when its window is
   # too narrow to contain a day that the rule matches.
   def occurs?

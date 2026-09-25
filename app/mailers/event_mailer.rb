@@ -111,7 +111,7 @@ class EventMailer < ApplicationMailer
         registrations: registrations.map do |r|
           {
             summary: I18n.translate('emails.registrations.registration.summary', name: r.name, time: helpers.time_ago_in_words(r.created_at)),
-            description: I18n.translate('emails.registrations.registration.description', date: r.starting_at.to_date.strftime('%a, %B %-d')),
+            description: I18n.translate('emails.registrations.registration.description', date: r.starting_date.strftime('%a, %B %-d')),
             reply_url: r.questions['questions'].present? ? "mailto:#{conversation.reply_to}?subject=Re: #{r.questions['questions']}" : nil,
             answers: r.questions,
           }

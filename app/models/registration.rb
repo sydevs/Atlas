@@ -39,8 +39,14 @@ class Registration < ApplicationRecord
 
   # Methods
 
+  # The session's start in the event's own time zone, which its timing is written in.
+  # Read in UTC, an evening session in the Americas falls on the following day.
+  def local_starting_at
+    starting_at&.in_time_zone(event.time_zone)
+  end
+
   def starting_date
-    starting_at.to_date
+    local_starting_at.to_date
   end
 
   def set_reminder

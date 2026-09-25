@@ -23,7 +23,7 @@ h3.ui.small.dividing.grey.header = translate('cms.details.details_for_record', r
     .content
       .header = Registration.human_attribute_name(:starting_at)
       time.description datetime=@record.starting_at
-        = @record.starting_at.to_s(:short_date)
+        = @record.local_starting_at.to_s(:short_date)
 
 h3.ui.small.dividing.grey.header = translate_attribute(Event, :registration_question)
 .ui.very.relaxed.divided.list

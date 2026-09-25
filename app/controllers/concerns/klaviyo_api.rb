@@ -58,7 +58,7 @@ module KlaviyoAPI
         'longitude': location.longitude,
         'timing': event.recurrence_in_words(%i[timing]),
         'weekday': registration.starting_at_weekday,
-        'date': registration.starting_at.strftime("%-d %b %Y"),
+        'date': registration.starting_date.strftime("%-d %b %Y"),
         'language': event.language_name,
         'directions_url': location.directions_url,
         'url': event.map_url,
