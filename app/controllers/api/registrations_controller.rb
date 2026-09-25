@@ -19,8 +19,7 @@ class API::RegistrationsController < API::ApplicationController
 
     def registration_params(event)
       args = params.permit(:event_id, :questions, :starting_at, :time_zone)
-      time = event.recurrence.starts_at.to_fs(:time).split(':')
-      args[:starting_at] = DateTime.parse(args[:starting_at]).utc.change(hour: time[0].to_i, min: time[1].to_i)
+      args[:starting_at] = event.recurrence_on(args[:starting_at])
       args[:user_attributes] = user_params
       args
     end

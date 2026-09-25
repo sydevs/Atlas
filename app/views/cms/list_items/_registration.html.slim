@@ -11,7 +11,7 @@ tr
       = registration.short_label || translate('cms.hints.unnamed')
 
   td
-    = registration.starting_at.to_s(:short_date)
+    = registration.local_starting_at.to_s(:short_date)
 
   td.collapsing.right.aligned
     - if registration.conversations.awaiting_response.present?

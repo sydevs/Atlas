@@ -7,7 +7,8 @@ class Mutations::CreateRegistration < Mutations::BaseMutation
   argument :name, String, required: true
   argument :email, String, required: true
   argument :questions, GraphQL::Types::JSON, required: false
-  argument :starting_at, GraphQL::Types::ISO8601DateTime, required: true
+  # A string rather than a time, so that a bare date can be read in the event's time zone
+  argument :starting_at, String, required: true
   argument :time_zone, String, required: false
   argument :locale, String, required: false
 
@@ -20,8 +21,7 @@ class Mutations::CreateRegistration < Mutations::BaseMutation
   def resolve(**arguments)
     I18n.locale = arguments[:locale]&.to_sym || :en
     event = Event.find(arguments[:event_id])
-    time = event.recurrence.starts_at.to_fs(:time).split(':')
-    arguments[:starting_at] = arguments[:starting_at].utc.change(hour: time[0].to_i, min: time[1].to_i)
+    arguments[:starting_at] = event.recurrence_on(arguments[:starting_at])
     arguments[:questions] = arguments[:questions]
     arguments[:user_attributes] = { name: arguments[:name], email: arguments[:email] }
     arguments.except! :message, :locale, :name, :email

@@ -4,12 +4,12 @@ class EventTest < ActiveSupport::TestCase
 
   # Builds an unsaved event with the given recurrence window. time_zone is normally
   # delegated to the area, which we don't need for recurrence calculations.
-  def build_event(start_date:, end_date:, start_time: '18:00', type: 'weekly_1', category: :dropin)
+  def build_event(start_date:, end_date:, start_time: '18:00', type: 'weekly_1', category: :dropin, time_zone: 'UTC')
     event = OfflineEvent.new(
       category: category,
       recurrence_data: { type: type, start_date: start_date, end_date: end_date, start_time: start_time },
     )
-    event.define_singleton_method(:time_zone) { 'UTC' }
+    event.define_singleton_method(:time_zone) { time_zone }
     event
   end
 
@@ -124,6 +124,37 @@ class EventTest < ActiveSupport::TestCase
     event = OfflineEvent.new(category: :inactive, recurrence_data: {})
     event.define_singleton_method(:time_zone) { 'UTC' }
     assert_nil event.registration_end_time
+  end
+
+  # A Friday evening class in Vancouver, which is already Saturday in UTC. The map
+  # sends the exact time of the session it lists, so that time must not be read as
+  # its UTC date.
+  test 'recurrence_on keeps an evening session on its local day' do
+    event = build_event(start_date: '2026-07-17', end_date: nil, start_time: '19:00', time_zone: 'America/Vancouver')
+
+    assert_equal Time.utc(2026, 9, 26, 2, 0), event.recurrence_on('2026-09-26T02:00:00.000Z')
+    assert_equal Time.utc(2026, 9, 26, 2, 0), event.recurrence_on('2026-09-25')
+  end
+
+  test 'recurrence_on keeps a morning session on its local day' do
+    event = build_event(start_date: '2026-07-17', end_date: nil, start_time: '07:00', time_zone: 'Asia/Tokyo')
+
+    assert_equal Time.utc(2026, 9, 24, 22, 0), event.recurrence_on('2026-09-24T22:00:00.000Z')
+    assert_equal Time.utc(2026, 9, 24, 22, 0), event.recurrence_on('2026-09-25')
+  end
+
+  test 'recurrence_on follows daylight saving time' do
+    event = build_event(start_date: '2026-07-17', end_date: nil, start_time: '19:00', time_zone: 'America/Los_Angeles')
+
+    assert_equal Time.utc(2026, 9, 26, 2, 0), event.recurrence_on('2026-09-25')
+    assert_equal Time.utc(2026, 12, 5, 3, 0), event.recurrence_on('2026-12-04')
+  end
+
+  test 'recurrence_on returns nil without a date' do
+    event = build_event(start_date: '2026-07-17', end_date: nil)
+
+    assert_nil event.recurrence_on(nil)
+    assert_nil event.recurrence_on('')
   end
 
 end
